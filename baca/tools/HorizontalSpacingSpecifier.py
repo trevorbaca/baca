@@ -34,22 +34,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -63,7 +63,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'16
                                 [
             <BLANKLINE>
@@ -84,7 +84,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -97,14 +97,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 e'2
             <BLANKLINE>
                             }
@@ -141,28 +141,28 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! SPACING:HSS1
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! SPACING:HSS1
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! SPACING:HSS1
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -178,7 +178,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'16
                                 [
             <BLANKLINE>
@@ -199,7 +199,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -212,14 +212,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 e'2
             <BLANKLINE>
                             }
@@ -258,28 +258,28 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! SPACING:HSS1
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! SPACING:HSS1
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! SPACING:HSS1
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -295,7 +295,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'16
                                 [
             <BLANKLINE>
@@ -316,7 +316,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -329,14 +329,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 e'2
             <BLANKLINE>
                             }
@@ -376,28 +376,28 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! SPACING:HSS1
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! SPACING:HSS1
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! SPACING:HSS1
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -413,7 +413,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'16
                                 [
             <BLANKLINE>
@@ -434,7 +434,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -447,14 +447,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 e'2
             <BLANKLINE>
                             }
@@ -495,28 +495,28 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! SPACING:HSS1
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -532,7 +532,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'16
                                 [
             <BLANKLINE>
@@ -553,7 +553,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -566,14 +566,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 e'2
             <BLANKLINE>
                             }
@@ -624,14 +624,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -677,7 +677,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 63/32
                                 [
@@ -726,7 +726,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64
                                 [

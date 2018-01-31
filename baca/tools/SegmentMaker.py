@@ -47,22 +47,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -76,7 +76,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 c'8
                                 [
             <BLANKLINE>
@@ -89,7 +89,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 c'8
                                 [
             <BLANKLINE>
@@ -100,7 +100,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 c'8
                                 [
             <BLANKLINE>
@@ -113,7 +113,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 c'8
                                 [
             <BLANKLINE>
@@ -392,22 +392,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -421,7 +421,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -474,7 +474,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -515,7 +515,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -568,7 +568,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -1417,7 +1417,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
                 if measure_number is None:
                     continue
-                string = f'% {context.name} [measure {measure_number}]'
+                string = f'% [{context.name} measure {measure_number}]'
                 literal = abjad.LilyPondLiteral(string, 'absolute_before')
                 abjad.attach(literal, leaf, site='SM4')
 
@@ -2410,14 +2410,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SPACING:HSS1
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -2435,7 +2435,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 1]                               %! SM4
+                                            % [ViolinMusicVoice measure 1]                               %! SM4
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
                                                     #10                                                  %! DEFAULT_INSTRUMENT:SM8
@@ -2505,7 +2505,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     }
                 <BLANKLINE>
-                                    % ViolinMusicVoice [measure 2]                                       %! SM4
+                                    % [ViolinMusicVoice measure 2]                                       %! SM4
                                     R1 * 3/8
                 <BLANKLINE>
                                 }
@@ -2514,7 +2514,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
-                                    % ViolaMusicVoice [measure 1]                                        %! SM4
+                                    % [ViolaMusicVoice measure 1]                                        %! SM4
                                     \set ViolaMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
                                             #10                                                          %! DEFAULT_INSTRUMENT:SM8
@@ -2565,7 +2565,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                    % ViolaMusicVoice [measure 2]                                        %! SM4
+                                    % [ViolaMusicVoice measure 2]                                        %! SM4
                                     R1 * 3/8
                 <BLANKLINE>
                                 }
@@ -2576,7 +2576,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % CelloMusicVoice [measure 1]                                %! SM4
+                                            % [CelloMusicVoice measure 1]                                %! SM4
                                             \set CelloMusicStaff.instrumentName = \markup {              %! DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
                                                     #10                                                  %! DEFAULT_INSTRUMENT:SM8
@@ -2646,7 +2646,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     }
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 2]                                        %! SM4
+                                    % [CelloMusicVoice measure 2]                                        %! SM4
                                     R1 * 3/8
                 <BLANKLINE>
                                 }
@@ -2721,28 +2721,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 7/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2759,14 +2759,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM4
                                         e'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM4
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2792,14 +2792,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM4
                                         b'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM4
                                         bf'16
                 <BLANKLINE>
                                         g'16
@@ -2885,28 +2885,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 7/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2923,14 +2923,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM4
                                         e'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM4
                                         fs'16
                 <BLANKLINE>
                                         d'16
@@ -2963,14 +2963,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM4
                                         b'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM4
                                         bf'16
                 <BLANKLINE>
                                         g'16
@@ -3059,22 +3059,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3088,7 +3088,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3101,7 +3101,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3112,7 +3112,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3125,7 +3125,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3164,22 +3164,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3193,7 +3193,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3206,7 +3206,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3217,7 +3217,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3230,7 +3230,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3271,22 +3271,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3300,7 +3300,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3313,7 +3313,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3324,7 +3324,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3337,7 +3337,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3380,22 +3380,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3409,7 +3409,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3422,7 +3422,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3433,7 +3433,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3446,7 +3446,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3496,22 +3496,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3525,7 +3525,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3538,7 +3538,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3549,7 +3549,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3562,7 +3562,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3651,22 +3651,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3680,7 +3680,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3693,7 +3693,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3704,7 +3704,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3717,7 +3717,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3756,22 +3756,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3785,7 +3785,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -3822,7 +3822,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -3851,7 +3851,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -3888,7 +3888,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     \once \override Accidental.color = #blue                             %! SM24
                                     \once \override Beam.color = #blue                                   %! SM24
                                     \once \override Dots.color = #blue                                   %! SM24
@@ -3993,26 +3993,26 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -4028,14 +4028,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM4
                                         e'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
                                             fs'16 [                                                      %! ACC1
@@ -4057,14 +4057,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM4
                                         b'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
                                             bf'16 [                                                      %! ACC1
@@ -4151,26 +4151,26 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -4186,7 +4186,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM4
                                         \once \override Accidental.color = #magenta                      %! SM25
                                         \once \override Beam.color = #magenta                            %! SM25
                                         \once \override Dots.color = #magenta                            %! SM25
@@ -4199,7 +4199,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta                  %! SM25
@@ -4263,7 +4263,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM4
                                         \once \override Accidental.color = #magenta                      %! SM25
                                         \once \override Beam.color = #magenta                            %! SM25
                                         \once \override Dots.color = #magenta                            %! SM25
@@ -4276,7 +4276,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoice [measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta                  %! SM25
@@ -4418,23 +4418,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -4447,7 +4447,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 \clef "alto"                                                             %! REAPPLIED_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:SM6
@@ -4455,13 +4455,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 R1 * 1/2
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -4558,7 +4558,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
                         %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -4617,17 +4617,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -4642,7 +4642,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4655,7 +4655,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4666,7 +4666,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4679,7 +4679,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4806,22 +4806,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -4834,16 +4834,16 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 R1 * 1/2
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 R1 * 1/2
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -4871,22 +4871,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -4899,16 +4899,16 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 s1 * 1/2
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 s1 * 3/8
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 s1 * 1/2
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM4
                                 s1 * 3/8
                 <BLANKLINE>
                             }
@@ -4975,22 +4975,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -5004,7 +5004,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -5040,7 +5040,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     fs'8
                                     [
                 <BLANKLINE>
@@ -5051,7 +5051,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     g'8
                                     [
                 <BLANKLINE>
@@ -5064,7 +5064,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     g'8
                                     [
                 <BLANKLINE>
@@ -5109,22 +5109,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -5138,7 +5138,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -5174,7 +5174,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     e'8
                                     [
                 <BLANKLINE>
@@ -5185,7 +5185,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     f'8
                                     [
                 <BLANKLINE>
@@ -5198,7 +5198,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     f'8
                                     [
                 <BLANKLINE>

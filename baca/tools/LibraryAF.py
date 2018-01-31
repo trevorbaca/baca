@@ -769,28 +769,28 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -806,7 +806,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     e'8
                                     [
                 <BLANKLINE>
@@ -819,7 +819,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)                      %! OC
                                     g'8
                                     [
@@ -832,7 +832,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     d''8
                                     [
                 <BLANKLINE>
@@ -845,7 +845,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     f''8
                                     [
                 <BLANKLINE>
@@ -2867,14 +2867,14 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 5/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2893,7 +2893,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 1]                               %! SM4
+                                            % [ViolinMusicVoice measure 1]                               %! SM4
                                             \override Stem.direction = #up                               %! OC
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
@@ -2958,7 +2958,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 2]                               %! SM4
+                                            % [ViolinMusicVoice measure 2]                               %! SM4
                                             ef''8
                 <BLANKLINE>
                                         }
@@ -2971,7 +2971,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolaMusicVoice [measure 1]                                %! SM4
+                                            % [ViolaMusicVoice measure 1]                                %! SM4
                                             \override Stem.direction = #up                               %! OC
                                             \set ViolaMusicStaff.instrumentName = \markup {              %! DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
@@ -3039,7 +3039,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     }
                 <BLANKLINE>
-                                    % ViolaMusicVoice [measure 2]                                        %! SM4
+                                    % [ViolaMusicVoice measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
@@ -3048,7 +3048,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 1]                                        %! SM4
+                                    % [CelloMusicVoice measure 1]                                        %! SM4
                                     \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
                                             #10                                                          %! DEFAULT_INSTRUMENT:SM8
@@ -3099,7 +3099,7 @@ class LibraryAF(abjad.AbjadObject):
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                     \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 2]                                        %! SM4
+                                    % [CelloMusicVoice measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
@@ -3165,14 +3165,14 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 5/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
                             \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3191,7 +3191,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 1]                               %! SM4
+                                            % [ViolinMusicVoice measure 1]                               %! SM4
                                             \override Stem.direction = #up                               %! OC
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
@@ -3256,7 +3256,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 2]                               %! SM4
+                                            % [ViolinMusicVoice measure 2]                               %! SM4
                                             ef''8
                 <BLANKLINE>
                                         }
@@ -3269,7 +3269,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % ViolaMusicVoice [measure 1]                                %! SM4
+                                            % [ViolaMusicVoice measure 1]                                %! SM4
                                             \override Stem.direction = #up                               %! OC
                                             \set ViolaMusicStaff.instrumentName = \markup {              %! DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
@@ -3334,7 +3334,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     }
                 <BLANKLINE>
-                                    % ViolaMusicVoice [measure 2]                                        %! SM4
+                                    % [ViolaMusicVoice measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
@@ -3343,7 +3343,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 1]                                        %! SM4
+                                    % [CelloMusicVoice measure 1]                                        %! SM4
                                     \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
                                             #10                                                          %! DEFAULT_INSTRUMENT:SM8
@@ -3394,7 +3394,7 @@ class LibraryAF(abjad.AbjadObject):
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                     \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 2]                                        %! SM4
+                                    % [CelloMusicVoice measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }

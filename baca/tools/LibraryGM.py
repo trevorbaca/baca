@@ -52,22 +52,22 @@ class LibraryGM(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -81,7 +81,7 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     e'8
                                     \glissando                                                           %! SC
                                     [
@@ -98,7 +98,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     g'8
                                     \glissando                                                           %! SC
                                     [
@@ -112,7 +112,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     d''8
                                     \glissando                                                           %! SC
                                     [
@@ -129,7 +129,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     f''8
                                     \glissando                                                           %! SC
                                     [
@@ -173,22 +173,22 @@ class LibraryGM(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -202,7 +202,7 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
+                                    % [MusicVoice measure 1]                                             %! SM4
                                     e'8
                                     \glissando                                                           %! SC
                                     [
@@ -216,7 +216,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
+                                    % [MusicVoice measure 2]                                             %! SM4
                                     g'8
                                     [
                 <BLANKLINE>
@@ -227,7 +227,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
+                                    % [MusicVoice measure 3]                                             %! SM4
                                     d''8
                                     [
                 <BLANKLINE>
@@ -240,7 +240,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
+                                    % [MusicVoice measure 4]                                             %! SM4
                                     f''8
                                     [
                 <BLANKLINE>
@@ -1190,22 +1190,22 @@ class LibraryGM(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -1220,19 +1220,19 @@ class LibraryGM(abjad.AbjadObject):
                             \tag ViolinI
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'2
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 f'4.
                             }
                             \tag ViolinI.ViolinII
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 e'2
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 f'4.
             <BLANKLINE>
                             }
@@ -1880,22 +1880,22 @@ class LibraryGM(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -1908,7 +1908,7 @@ class LibraryGM(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -1934,13 +1934,13 @@ class LibraryGM(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 f'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 e'2
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM4
                                 f'4.
                 <BLANKLINE>
                             }

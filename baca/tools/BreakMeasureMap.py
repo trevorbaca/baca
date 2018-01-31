@@ -33,7 +33,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \autoPageBreaksOff                                                           %! BREAK:BMM1
                         \noBreak                                                                     %! BREAK:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -41,7 +41,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                         s1 * 1/2
                         \break                                                                       %! BREAK:IC
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
                         \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                         #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! BREAK:IC
@@ -50,19 +50,19 @@ class BreakMeasureMap(abjad.AbjadObject):
                         s1 * 3/8
                         \break                                                                       %! BREAK:IC
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 5]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -79,7 +79,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
                                 {
             <BLANKLINE>
-                                    % ViolinMusicVoice [measure 1]                                   %! SM4
+                                    % [ViolinMusicVoice measure 1]                                   %! SM4
                                     \set ViolinMusicStaff.instrumentName = \markup {                 %! DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                  %! DEFAULT_INSTRUMENT:SM8
                                             #10                                                      %! DEFAULT_INSTRUMENT:SM8
@@ -140,7 +140,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    % ViolinMusicVoice [measure 2]                                   %! SM4
+                                    % [ViolinMusicVoice measure 2]                                   %! SM4
                                     e'8
                                     [
             <BLANKLINE>
@@ -151,7 +151,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    % ViolinMusicVoice [measure 3]                                   %! SM4
+                                    % [ViolinMusicVoice measure 3]                                   %! SM4
                                     e'8
                                     [
             <BLANKLINE>
@@ -164,7 +164,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    % ViolinMusicVoice [measure 4]                                   %! SM4
+                                    % [ViolinMusicVoice measure 4]                                   %! SM4
                                     e'8
                                     [
             <BLANKLINE>
@@ -175,7 +175,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    % ViolinMusicVoice [measure 5]                                   %! SM4
+                                    % [ViolinMusicVoice measure 5]                                   %! SM4
                                     e'8
                                     [
             <BLANKLINE>
@@ -193,7 +193,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                         \context ViolaMusicStaff = "ViolaMusicStaff" {
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
-                                % ViolaMusicVoice [measure 1]                                        %! SM4
+                                % [ViolaMusicVoice measure 1]                                        %! SM4
                                 \set ViolaMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
                                     \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
                                         #10                                                          %! DEFAULT_INSTRUMENT:SM8
@@ -244,16 +244,16 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
             <BLANKLINE>
-                                % ViolaMusicVoice [measure 2]                                        %! SM4
+                                % [ViolaMusicVoice measure 2]                                        %! SM4
                                 R1 * 3/8
             <BLANKLINE>
-                                % ViolaMusicVoice [measure 3]                                        %! SM4
+                                % [ViolaMusicVoice measure 3]                                        %! SM4
                                 R1 * 1/2
             <BLANKLINE>
-                                % ViolaMusicVoice [measure 4]                                        %! SM4
+                                % [ViolaMusicVoice measure 4]                                        %! SM4
                                 R1 * 3/8
             <BLANKLINE>
-                                % ViolaMusicVoice [measure 5]                                        %! SM4
+                                % [ViolaMusicVoice measure 5]                                        %! SM4
                                 R1 * 1/2
             <BLANKLINE>
                             }
@@ -262,7 +262,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                         \context CelloMusicStaff = "CelloMusicStaff" {
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
-                                % CelloMusicVoice [measure 1]                                        %! SM4
+                                % [CelloMusicVoice measure 1]                                        %! SM4
                                 \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
                                     \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
                                         #10                                                          %! DEFAULT_INSTRUMENT:SM8
@@ -313,16 +313,16 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
             <BLANKLINE>
-                                % CelloMusicVoice [measure 2]                                        %! SM4
+                                % [CelloMusicVoice measure 2]                                        %! SM4
                                 R1 * 3/8
             <BLANKLINE>
-                                % CelloMusicVoice [measure 3]                                        %! SM4
+                                % [CelloMusicVoice measure 3]                                        %! SM4
                                 R1 * 1/2
             <BLANKLINE>
-                                % CelloMusicVoice [measure 4]                                        %! SM4
+                                % [CelloMusicVoice measure 4]                                        %! SM4
                                 R1 * 3/8
             <BLANKLINE>
-                                % CelloMusicVoice [measure 5]                                        %! SM4
+                                % [CelloMusicVoice measure 5]                                        %! SM4
                                 R1 * 1/2
             <BLANKLINE>
                             }

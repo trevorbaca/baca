@@ -898,14 +898,14 @@ class ImbricationCommand(Command):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 7/16
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -924,7 +924,7 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoiceOne [measure 1]                                      %! SM4
+                                        % [MusicVoiceOne measure 1]                                      %! SM4
                                         s16
                                         [
                 <BLANKLINE>
@@ -956,7 +956,7 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoiceOne [measure 2]                                      %! SM4
+                                        % [MusicVoiceOne measure 2]                                      %! SM4
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
@@ -981,7 +981,7 @@ class ImbricationCommand(Command):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoiceTwo [measure 1]                                      %! SM4
+                                        % [MusicVoiceTwo measure 1]                                      %! SM4
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -1018,7 +1018,7 @@ class ImbricationCommand(Command):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % MusicVoiceTwo [measure 2]                                      %! SM4
+                                        % [MusicVoiceTwo measure 2]                                      %! SM4
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         g''16

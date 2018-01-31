@@ -35,7 +35,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                     %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
                     %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                     %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -94,12 +94,12 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                     %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
                     %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                     %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -159,7 +159,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \stopTextSpan                                                                %! SM29
                         \startTextSpan                                                               %! SM29
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -174,7 +174,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -187,7 +187,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -197,10 +197,10 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 ]
                             }
             <BLANKLINE>
-                            % MusicVoice [measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM4
                             R1 * 1/2
             <BLANKLINE>
-                            % MusicVoice [measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM4
                             R1 * 3/8
             <BLANKLINE>
                         }

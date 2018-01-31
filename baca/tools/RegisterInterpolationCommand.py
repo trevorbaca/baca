@@ -139,42 +139,42 @@ class RegisterInterpolationCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 5]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 6]                                                    %! SM4
+                        % [GlobalSkips measure 6]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 7]                                                    %! SM4
+                        % [GlobalSkips measure 7]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 8]                                                    %! SM4
+                        % [GlobalSkips measure 8]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -188,7 +188,7 @@ class RegisterInterpolationCommand(Command):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 fs''8
                                 [
             <BLANKLINE>
@@ -201,7 +201,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 a''8
                                 [
             <BLANKLINE>
@@ -212,7 +212,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 b''8
                                 [
             <BLANKLINE>
@@ -225,7 +225,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 d''8
                                 [
             <BLANKLINE>
@@ -236,7 +236,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 5]                                             %! SM4
+                                % [MusicVoice measure 5]                                             %! SM4
                                 ef''8
                                 [
             <BLANKLINE>
@@ -249,7 +249,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 6]                                             %! SM4
+                                % [MusicVoice measure 6]                                             %! SM4
                                 c''8
                                 [
             <BLANKLINE>
@@ -260,7 +260,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 7]                                             %! SM4
+                                % [MusicVoice measure 7]                                             %! SM4
                                 g''8
                                 [
             <BLANKLINE>
@@ -273,7 +273,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 8]                                             %! SM4
+                                % [MusicVoice measure 8]                                             %! SM4
                                 e''8
                                 [
             <BLANKLINE>
@@ -316,42 +316,42 @@ class RegisterInterpolationCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 5]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 6]                                                    %! SM4
+                        % [GlobalSkips measure 6]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 7]                                                    %! SM4
+                        % [GlobalSkips measure 7]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 8]                                                    %! SM4
+                        % [GlobalSkips measure 8]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -365,7 +365,7 @@ class RegisterInterpolationCommand(Command):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 fs''8
                                 [
             <BLANKLINE>
@@ -378,7 +378,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 a''8
                                 [
             <BLANKLINE>
@@ -389,7 +389,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 b'8
                                 [
             <BLANKLINE>
@@ -402,7 +402,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 d''8
                                 [
             <BLANKLINE>
@@ -413,7 +413,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 5]                                             %! SM4
+                                % [MusicVoice measure 5]                                             %! SM4
                                 ef''8
                                 [
             <BLANKLINE>
@@ -426,7 +426,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 6]                                             %! SM4
+                                % [MusicVoice measure 6]                                             %! SM4
                                 c''8
                                 [
             <BLANKLINE>
@@ -437,7 +437,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 7]                                             %! SM4
+                                % [MusicVoice measure 7]                                             %! SM4
                                 g'8
                                 [
             <BLANKLINE>
@@ -450,7 +450,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 8]                                             %! SM4
+                                % [MusicVoice measure 8]                                             %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -493,42 +493,42 @@ class RegisterInterpolationCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 5]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 6]                                                    %! SM4
+                        % [GlobalSkips measure 6]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 7]                                                    %! SM4
+                        % [GlobalSkips measure 7]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 8]                                                    %! SM4
+                        % [GlobalSkips measure 8]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -542,7 +542,7 @@ class RegisterInterpolationCommand(Command):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 fs'8
                                 [
             <BLANKLINE>
@@ -555,7 +555,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 a'8
                                 [
             <BLANKLINE>
@@ -566,7 +566,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 b'8
                                 [
             <BLANKLINE>
@@ -579,7 +579,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 d''8
                                 [
             <BLANKLINE>
@@ -590,7 +590,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 5]                                             %! SM4
+                                % [MusicVoice measure 5]                                             %! SM4
                                 ef''8
                                 [
             <BLANKLINE>
@@ -603,7 +603,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 6]                                             %! SM4
+                                % [MusicVoice measure 6]                                             %! SM4
                                 c''8
                                 [
             <BLANKLINE>
@@ -614,7 +614,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 7]                                             %! SM4
+                                % [MusicVoice measure 7]                                             %! SM4
                                 g''8
                                 [
             <BLANKLINE>
@@ -627,7 +627,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 8]                                             %! SM4
+                                % [MusicVoice measure 8]                                             %! SM4
                                 e''8
                                 [
             <BLANKLINE>
@@ -670,42 +670,42 @@ class RegisterInterpolationCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 5]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 6]                                                    %! SM4
+                        % [GlobalSkips measure 6]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 7]                                                    %! SM4
+                        % [GlobalSkips measure 7]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 8]                                                    %! SM4
+                        % [GlobalSkips measure 8]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -719,7 +719,7 @@ class RegisterInterpolationCommand(Command):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 fs''8
                                 [
             <BLANKLINE>
@@ -732,7 +732,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 a'8
                                 [
             <BLANKLINE>
@@ -743,7 +743,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 b'8
                                 [
             <BLANKLINE>
@@ -756,7 +756,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 d'8
                                 [
             <BLANKLINE>
@@ -767,7 +767,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 5]                                             %! SM4
+                                % [MusicVoice measure 5]                                             %! SM4
                                 ef'8
                                 [
             <BLANKLINE>
@@ -780,7 +780,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 6]                                             %! SM4
+                                % [MusicVoice measure 6]                                             %! SM4
                                 c'8
                                 [
             <BLANKLINE>
@@ -791,7 +791,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 7]                                             %! SM4
+                                % [MusicVoice measure 7]                                             %! SM4
                                 g8
                                 [
             <BLANKLINE>
@@ -804,7 +804,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 8]                                             %! SM4
+                                % [MusicVoice measure 8]                                             %! SM4
                                 e8
                                 [
             <BLANKLINE>
@@ -847,42 +847,42 @@ class RegisterInterpolationCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 5]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 6]                                                    %! SM4
+                        % [GlobalSkips measure 6]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 7]                                                    %! SM4
+                        % [GlobalSkips measure 7]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 8]                                                    %! SM4
+                        % [GlobalSkips measure 8]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -896,7 +896,7 @@ class RegisterInterpolationCommand(Command):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                             %! SM4
+                                % [MusicVoice measure 1]                                             %! SM4
                                 fs8
                                 [
             <BLANKLINE>
@@ -909,7 +909,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                             %! SM4
+                                % [MusicVoice measure 2]                                             %! SM4
                                 a8
                                 [
             <BLANKLINE>
@@ -920,7 +920,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                             %! SM4
+                                % [MusicVoice measure 3]                                             %! SM4
                                 b8
                                 [
             <BLANKLINE>
@@ -933,7 +933,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                             %! SM4
+                                % [MusicVoice measure 4]                                             %! SM4
                                 d'8
                                 [
             <BLANKLINE>
@@ -944,7 +944,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 5]                                             %! SM4
+                                % [MusicVoice measure 5]                                             %! SM4
                                 ef'8
                                 [
             <BLANKLINE>
@@ -957,7 +957,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 6]                                             %! SM4
+                                % [MusicVoice measure 6]                                             %! SM4
                                 c''8
                                 [
             <BLANKLINE>
@@ -968,7 +968,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 7]                                             %! SM4
+                                % [MusicVoice measure 7]                                             %! SM4
                                 g'8
                                 [
             <BLANKLINE>
@@ -981,7 +981,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 8]                                             %! SM4
+                                % [MusicVoice measure 8]                                             %! SM4
                                 e''8
                                 [
             <BLANKLINE>

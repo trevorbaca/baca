@@ -52,7 +52,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -64,7 +64,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -82,7 +82,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:SM8
                                 \clef "treble"                                                           %! DEFAULT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! DEFAULT_CLEF_COLOR:SM6
@@ -90,7 +90,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'violet)                        %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -133,7 +133,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -145,7 +145,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -163,7 +163,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:SM6
@@ -171,7 +171,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -225,7 +225,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -238,7 +238,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -256,7 +256,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
                                 \clef "alto"                                                             %! EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:SM6
@@ -264,7 +264,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -317,7 +317,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -330,7 +330,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -348,7 +348,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 \clef "treble"                                                           %! REAPPLIED_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:SM6
@@ -356,7 +356,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -400,7 +400,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -412,14 +412,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -437,7 +437,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:SM6
@@ -445,7 +445,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:SM8
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:SM6
@@ -453,7 +453,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -508,7 +508,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -521,7 +521,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -539,7 +539,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:SM8
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:SM6
@@ -547,7 +547,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -592,14 +592,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -613,12 +613,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \f                                                                       %! EXPLICIT_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -666,7 +666,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -674,7 +674,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -688,12 +688,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \p                                                                       %! EXPLICIT_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -742,7 +742,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -750,7 +750,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -764,12 +764,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! REAPPLIED_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \f                                                                       %! REAPPLIED_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -807,14 +807,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -828,12 +828,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \f                                                                       %! EXPLICIT_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! REDUNDANT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \f                                                                       %! REDUNDANT_DYNAMIC:SM8
@@ -883,7 +883,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -891,7 +891,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -905,12 +905,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! REDUNDANT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \f                                                                       %! REDUNDANT_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -946,14 +946,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -967,12 +967,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:SM8
@@ -1022,7 +1022,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -1030,7 +1030,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -1044,12 +1044,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:SM8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1119,7 +1119,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -1131,7 +1131,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -1149,7 +1149,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                                 ^ \markup {                                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
@@ -1157,7 +1157,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1182,7 +1182,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1194,7 +1194,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1212,7 +1212,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                             %%% ^ \markup {                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color                  %! DEFAULT_INSTRUMENT_ALERT:SM11
@@ -1220,7 +1220,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)                %! DEFAULT_INSTRUMENT_ALERT:SM11
                             %%%     }                            %! DEFAULT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1242,7 +1242,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1254,7 +1254,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1272,7 +1272,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                                 ^ \markup {                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \with-color                  %! DEFAULT_INSTRUMENT_ALERT:SM11
@@ -1280,7 +1280,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     }                            %! DEFAULT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1319,7 +1319,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -1331,7 +1331,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -1349,7 +1349,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                                 ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -1357,7 +1357,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1382,7 +1382,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1394,7 +1394,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1412,7 +1412,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                             %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -1420,7 +1420,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                             %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1442,7 +1442,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1454,7 +1454,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1472,7 +1472,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                                 ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -1480,7 +1480,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1530,7 +1530,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -1543,7 +1543,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -1561,7 +1561,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                                 ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -1569,7 +1569,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1594,7 +1594,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1607,7 +1607,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1625,7 +1625,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                             %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -1633,7 +1633,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                             %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1655,7 +1655,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1668,7 +1668,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1686,7 +1686,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                                 ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -1694,7 +1694,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1745,7 +1745,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -1758,7 +1758,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -1776,7 +1776,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                                 ^ \markup {                                                              %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! REAPPLIED_INSTRUMENT_ALERT:SM11
@@ -1784,7 +1784,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1809,7 +1809,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1822,7 +1822,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1840,7 +1840,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                             %%% ^ \markup {                  %! REAPPLIED_INSTRUMENT_ALERT:SM11
                             %%%     \with-color              %! REAPPLIED_INSTRUMENT_ALERT:SM11
@@ -1848,7 +1848,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)            %! REAPPLIED_INSTRUMENT_ALERT:SM11
                             %%%     }                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1870,7 +1870,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -1883,7 +1883,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -1901,7 +1901,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                                 ^ \markup {                  %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     \with-color              %! REAPPLIED_INSTRUMENT_ALERT:SM11
@@ -1909,7 +1909,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)            %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     }                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1958,7 +1958,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -1970,14 +1970,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -1995,7 +1995,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'2
                                 ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -2003,7 +2003,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'2
                                 ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
@@ -2011,7 +2011,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -2036,7 +2036,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2048,14 +2048,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3] %! SM4
+                            % [GlobalSkips measure 3] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2073,7 +2073,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'2
                             %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -2081,7 +2081,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                             %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'2
                             %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
@@ -2089,7 +2089,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 3] %! SM4
+                                % [MusicVoice measure 3] %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -2111,7 +2111,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2123,14 +2123,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3] %! SM4
+                            % [GlobalSkips measure 3] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2148,7 +2148,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'2
                                 ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
@@ -2156,7 +2156,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'2
                                 ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
@@ -2164,7 +2164,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 3] %! SM4
+                                % [MusicVoice measure 3] %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -2220,7 +2220,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -2233,7 +2233,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -2251,7 +2251,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                                 ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
@@ -2259,7 +2259,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2284,7 +2284,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2297,7 +2297,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2315,7 +2315,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                             %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
@@ -2323,7 +2323,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2345,7 +2345,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2358,7 +2358,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2376,7 +2376,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 c'4.
                                 ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
@@ -2384,7 +2384,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2446,7 +2446,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -2458,7 +2458,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -2476,7 +2476,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! DEFAULT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_INSTRUMENT_COLOR:SM6
@@ -2502,7 +2502,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2527,7 +2527,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2539,7 +2539,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2557,7 +2557,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! DEFAULT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
@@ -2583,7 +2583,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2605,7 +2605,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2617,7 +2617,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2635,7 +2635,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! DEFAULT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
@@ -2661,7 +2661,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2700,7 +2700,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -2712,7 +2712,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -2730,7 +2730,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -2756,7 +2756,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2781,7 +2781,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2793,7 +2793,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2811,7 +2811,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -2837,7 +2837,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2859,7 +2859,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -2871,7 +2871,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -2889,7 +2889,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -2915,7 +2915,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2965,7 +2965,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -2978,7 +2978,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -2996,7 +2996,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3022,7 +3022,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3047,7 +3047,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3060,7 +3060,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3078,7 +3078,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3104,7 +3104,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3126,7 +3126,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3139,7 +3139,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3157,7 +3157,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3183,7 +3183,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3234,7 +3234,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -3247,7 +3247,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -3265,7 +3265,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REAPPLIED_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_INSTRUMENT_COLOR:SM6
@@ -3291,7 +3291,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3316,7 +3316,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3329,7 +3329,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3347,7 +3347,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR:SM6
@@ -3373,7 +3373,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3395,7 +3395,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3408,7 +3408,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3426,7 +3426,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR:SM6
@@ -3452,7 +3452,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3501,7 +3501,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -3513,14 +3513,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -3538,7 +3538,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3564,7 +3564,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -3590,7 +3590,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -3615,7 +3615,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3627,14 +3627,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3] %! SM4
+                            % [GlobalSkips measure 3] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3652,7 +3652,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3678,7 +3678,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -3704,7 +3704,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3] %! SM4
+                                % [MusicVoice measure 3] %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -3726,7 +3726,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3738,14 +3738,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3] %! SM4
+                            % [GlobalSkips measure 3] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3763,7 +3763,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3789,7 +3789,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -3815,7 +3815,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3] %! SM4
+                                % [MusicVoice measure 3] %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -3871,7 +3871,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -3884,7 +3884,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -3902,7 +3902,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -3928,7 +3928,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3953,7 +3953,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -3966,7 +3966,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -3984,7 +3984,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -4010,7 +4010,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4032,7 +4032,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4045,7 +4045,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4063,7 +4063,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -4089,7 +4089,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4161,7 +4161,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -4173,7 +4173,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -4191,7 +4191,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! DEFAULT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
@@ -4217,7 +4217,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4242,7 +4242,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4254,7 +4254,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4272,7 +4272,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! DEFAULT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
@@ -4298,7 +4298,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4320,7 +4320,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4332,7 +4332,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4350,7 +4350,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! DEFAULT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
@@ -4376,7 +4376,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4415,7 +4415,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -4427,7 +4427,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -4445,7 +4445,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4471,7 +4471,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4496,7 +4496,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4508,7 +4508,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4526,7 +4526,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4552,7 +4552,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4574,7 +4574,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4586,7 +4586,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4604,7 +4604,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4630,7 +4630,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4680,7 +4680,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -4693,7 +4693,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -4711,7 +4711,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { III+IV }                           %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV }                      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4737,7 +4737,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { III+IV }                      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4762,7 +4762,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4775,7 +4775,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4793,7 +4793,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { III+IV }      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4819,7 +4819,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4841,7 +4841,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -4854,7 +4854,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -4872,7 +4872,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { III+IV }      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4898,7 +4898,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4949,7 +4949,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -4962,7 +4962,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -4980,7 +4980,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REAPPLIED_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
@@ -5006,7 +5006,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5031,7 +5031,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -5044,7 +5044,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -5062,7 +5062,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REAPPLIED_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
@@ -5088,7 +5088,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5110,7 +5110,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -5123,7 +5123,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -5141,7 +5141,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REAPPLIED_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
@@ -5167,7 +5167,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5216,7 +5216,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -5228,14 +5228,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -5253,7 +5253,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5279,7 +5279,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -5305,7 +5305,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -5330,7 +5330,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -5342,14 +5342,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3] %! SM4
+                            % [GlobalSkips measure 3] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -5367,7 +5367,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5393,7 +5393,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -5419,7 +5419,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3] %! SM4
+                                % [MusicVoice measure 3] %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -5441,7 +5441,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -5453,14 +5453,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3] %! SM4
+                            % [GlobalSkips measure 3] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -5478,7 +5478,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5504,7 +5504,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -5530,7 +5530,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 3] %! SM4
+                                % [MusicVoice measure 3] %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -5586,7 +5586,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -5599,7 +5599,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -5617,7 +5617,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -5643,7 +5643,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5668,7 +5668,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -5681,7 +5681,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -5699,7 +5699,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -5725,7 +5725,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5747,7 +5747,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1] %! SM4
+                            % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \autoPageBreaksOff %! BREAK:BMM1
@@ -5760,7 +5760,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak %! BREAK:IC
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2] %! SM4
+                            % [GlobalSkips measure 2] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
                             \noBreak %! BREAK:BMM2
@@ -5778,7 +5778,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1] %! SM4
+                                % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -5804,7 +5804,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2] %! SM4
+                                % [MusicVoice measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5857,7 +5857,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -5869,7 +5869,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \pageBreak                                                                   %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -5879,7 +5879,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \break                                                                       %! BREAK:IC
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -5894,7 +5894,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
                             %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
@@ -5950,10 +5950,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                             %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'2
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
                 <BLANKLINE>
                             }
@@ -6009,7 +6009,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -6075,7 +6075,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -6091,10 +6091,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6148,7 +6148,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \override TextSpanner.staff-padding = #4                                     %! OC
@@ -6216,7 +6216,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -6233,10 +6233,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6291,7 +6291,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \override TextSpanner.staff-padding = #4                                     %! OC
@@ -6359,7 +6359,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -6376,10 +6376,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6422,7 +6422,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -6540,7 +6540,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -6559,10 +6559,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6616,7 +6616,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \override TextSpanner.staff-padding = #4                                     %! OC
@@ -6684,7 +6684,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
@@ -6701,10 +6701,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6748,14 +6748,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -6769,14 +6769,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:SM8
                                 \once \override MusicStaff.StaffSymbol.line-count = 5                    %! EXPLICIT_STAFF_LINES:SM8
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6824,7 +6824,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6832,7 +6832,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -6846,14 +6846,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:SM8
                                 \once \override MusicStaff.StaffSymbol.line-count = 1                    %! EXPLICIT_STAFF_LINES:SM8
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6902,7 +6902,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6910,7 +6910,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -6924,14 +6924,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! REAPPLIED_STAFF_LINES:SM8
                                 \once \override MusicStaff.StaffSymbol.line-count = 5                    %! REAPPLIED_STAFF_LINES:SM8
                                 \startStaff                                                              %! REAPPLIED_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! REAPPLIED_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6969,14 +6969,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -6990,14 +6990,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:SM8
                                 \once \override MusicStaff.StaffSymbol.line-count = 5                    %! EXPLICIT_STAFF_LINES:SM8
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:SM8
                                 \once \override MusicStaff.StaffSymbol.line-count = 5                    %! REDUNDANT_STAFF_LINES:SM8
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:SM8
@@ -7049,7 +7049,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7057,7 +7057,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -7071,14 +7071,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:SM8
                                 \once \override MusicStaff.StaffSymbol.line-count = 5                    %! REDUNDANT_STAFF_LINES:SM8
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }

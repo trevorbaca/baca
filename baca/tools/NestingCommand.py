@@ -138,14 +138,14 @@ class NestingCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                         \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -166,7 +166,7 @@ class NestingCommand(Command):
                                 \times 8/7 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % MusicVoice [measure 1]                                     %! SM4
+                                        % [MusicVoice measure 1]                                     %! SM4
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -203,7 +203,7 @@ class NestingCommand(Command):
                             {
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % MusicVoice [measure 2]                                         %! SM4
+                                    % [MusicVoice measure 2]                                         %! SM4
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     g''16

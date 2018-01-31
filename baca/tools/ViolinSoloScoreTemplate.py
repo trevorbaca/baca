@@ -23,22 +23,22 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -52,7 +52,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     \context ViolinMusicStaff = "ViolinMusicStaff" {
                         \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
-                            % ViolinMusicVoice [measure 1]                                           %! SM4
+                            % [ViolinMusicVoice measure 1]                                           %! SM4
                             \set ViolinMusicStaff.instrumentName = \markup {                         %! DEFAULT_INSTRUMENT:SM8
                                 \hcenter-in                                                          %! DEFAULT_INSTRUMENT:SM8
                                     #16                                                              %! DEFAULT_INSTRUMENT:SM8
@@ -103,13 +103,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet)   %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! DEFAULT_CLEF_REDRAW_COLOR:SM6
             <BLANKLINE>
-                            % ViolinMusicVoice [measure 2]                                           %! SM4
+                            % [ViolinMusicVoice measure 2]                                           %! SM4
                             R1 * 3/8
             <BLANKLINE>
-                            % ViolinMusicVoice [measure 3]                                           %! SM4
+                            % [ViolinMusicVoice measure 3]                                           %! SM4
                             R1 * 1/2
             <BLANKLINE>
-                            % ViolinMusicVoice [measure 4]                                           %! SM4
+                            % [ViolinMusicVoice measure 4]                                           %! SM4
                             R1 * 3/8
             <BLANKLINE>
                         }
