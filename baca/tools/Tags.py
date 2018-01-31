@@ -762,10 +762,9 @@ class Tags(abjad.Tags):
     def match_reapplied_margin_markup_tags(self, tags) -> bool:
         r'''Matches reapplied margin markup tags.
         '''
-        import baca
         tags_ = (
-            baca.tools.Tags.REAPPLIED_MARGIN_MARKUP,
-            baca.tools.Tags.REDRAWN_REAPPLIED_MARGIN_MARKUP,
+            self.REAPPLIED_MARGIN_MARKUP,
+            self.REDRAWN_REAPPLIED_MARGIN_MARKUP,
             )
         return bool(set(tags) & set(tags_))
 
