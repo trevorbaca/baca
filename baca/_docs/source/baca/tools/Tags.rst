@@ -39,6 +39,13 @@ Bases
       ~Tags.margin_markup_color_expression_match
       ~Tags.margin_markup_color_suppression_match
       ~Tags.margin_markup_color_tags
+      ~Tags.match_broken_spanner_expression_tags
+      ~Tags.match_broken_spanner_suppression_tags
+      ~Tags.match_document_specific_tags
+      ~Tags.match_persistent_indicator_color_expression
+      ~Tags.match_persistent_indicator_color_suppression
+      ~Tags.match_reapplied_margin_markup_tags
+      ~Tags.match_score_annotation_tags
       ~Tags.metronome_mark_color_expression_match
       ~Tags.metronome_mark_color_suppression_match
       ~Tags.metronome_mark_color_tags
@@ -53,6 +60,27 @@ Bases
       ~Tags.__getattr__
       ~Tags.__hash__
       ~Tags.__repr__
+
+Methods
+-------
+
+.. automethod:: Tags.match_broken_spanner_expression_tags
+
+.. automethod:: Tags.match_broken_spanner_suppression_tags
+
+.. automethod:: Tags.match_document_specific_tags
+
+.. automethod:: Tags.match_persistent_indicator_color_expression
+
+.. automethod:: Tags.match_persistent_indicator_color_suppression
+
+.. automethod:: Tags.match_reapplied_margin_markup_tags
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Tags.match_score_annotation_tags
 
 Class & static methods
 ----------------------

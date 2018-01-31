@@ -171,9 +171,9 @@ class Tags(abjad.Tags):
         if tag in abjad.Tags._known_tags:
             raise Exception(f'tag already exists in abjad.Tags: {tag!r}.')
 
-    _known_tags:tuple = abjad.Tags._known_tags + _my_known_tags
+    _known_tags: tuple = abjad.Tags._known_tags + _my_known_tags
 
-    ### PUBLIC PROPERTIES ###
+    ### PUBLIC METHODS ###
 
     @staticmethod
     def all_broken_spanner_tags():
@@ -718,6 +718,56 @@ class Tags(abjad.Tags):
             baca.tags.REDUNDANT_MARGIN_MARKUP_COLOR,
             baca.tags.REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR,
             ]
+
+    @abjad.Match('broken spanner expression')
+    def match_broken_spanner_expression_tags(self, tags) -> bool:
+        r'''Matches broken spanner expression tags.
+        '''
+        tags_ = Tags.all_broken_spanner_tags()['activate']
+        return bool(set(tags) & set(tags_))
+
+    @abjad.Match('broken spanner suppression')
+    def match_broken_spanner_suppression_tags(self, tags) -> bool:
+        r'''Matches broken spanner suppression tags.
+        '''
+        tags_ = Tags.all_broken_spanner_tags()['deactivate']
+        return bool(set(tags) & set(tags_))
+
+    @abjad.Match('document-specific (+)')
+    def match_document_specific_tags(self, tags) -> bool:
+        r'''Matches document-specific tags (any tag beginning in +).
+
+        Returns true or false.
+        '''
+        for tag in tags:
+            if tag.startswith('+'):
+                return True
+        return False
+
+    @abjad.Match('persistent indicator color expression')
+    def match_persistent_indicator_color_expression(self, tags) -> bool:
+        r'''Matches persistent indicator color expression tags.
+        '''
+        tags_ = Tags.all_persistent_indicator_color_tags()['activate']
+        return bool(set(tags) & set(tags_))
+
+    @abjad.Match('persistent indicator color suppression')
+    def match_persistent_indicator_color_suppression(self, tags) -> bool:
+        r'''Matches persistent indicator color suppression tags.
+        '''
+        tags_ = Tags.all_persistent_indicator_color_tags()['deactivate']
+        return bool(set(tags) & set(tags_))
+
+    @abjad.Match('reapplied margin markup')
+    def match_reapplied_margin_markup_tags(self, tags) -> bool:
+        r'''Matches reapplied margin markup tags.
+        '''
+        import baca
+        tags_ = (
+            baca.tags.REAPPLIED_MARGIN_MARKUP,
+            baca.tags.REDRAWN_REAPPLIED_MARGIN_MARKUP,
+            )
+        return bool(set(tags) & set(tags_))
 
     @staticmethod
     def metronome_mark_color_expression_match(tags):
