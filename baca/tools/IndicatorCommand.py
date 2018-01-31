@@ -289,7 +289,6 @@ class IndicatorCommand(Command):
             return
         if abjad.inspect(leaf).get_timespan().start_offset != 0:
             return
-        tags_to_remove = []
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument
         else:
@@ -297,20 +296,24 @@ class IndicatorCommand(Command):
         wrappers = abjad.inspect(leaf).wrappers(prototype)
         if not wrappers:
             return
-        if wrappers:
-            assert len(wrappers) == 1, repr(wrappers)
-        wrapper = wrappers[0]
-        if not wrapper.tag:
-            return
-        if not (wrapper.tag.startswith('REAPPLIED') or
-            wrapper.tag.startswith('DEFAULT')):
-            return
-        reapplied_indicator = wrapper.indicator
-        reapplied_substring = '_'.join(wrapper.tag.split('_')[:2])
-        for wrapper in abjad.inspect(leaf).wrappers():
-            if wrapper.tag and reapplied_substring in wrapper.tag:
-                abjad.detach(wrapper.indicator, leaf)
-        return reapplied_indicator
+        for wrapper in wrappers:
+            if not wrapper.tag:
+                continue
+            if not (baca.tags.has_reapplied_tag(wrapper.tag) or
+                baca.tags.has_default_tag(wrapper.tag)):
+                continue
+            reapplied_indicator = wrapper.indicator
+            reapplied_tags = [
+                _ for _ in wrapper.tag.split(':')
+                if _.startswith('REAPPLIED') or _.startswith('DEFAULT')
+                ]
+            assert len(reapplied_tags) == 1, repr(wrapper.tag)
+            reapplied_tag = reapplied_tags[0]
+            reapplied_substring = '_'.join(reapplied_tag.split('_')[:2])
+            for wrapper_ in abjad.inspect(leaf).wrappers():
+                if bool(wrapper_.tag) and reapplied_substring in wrapper_.tag:
+                    abjad.detach(wrapper_.indicator, leaf)
+            return reapplied_indicator
 
     @staticmethod
     def _token_to_indicators(token):

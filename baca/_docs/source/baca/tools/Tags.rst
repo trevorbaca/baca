@@ -32,7 +32,9 @@ Bases
       ~Tags.document
       ~Tags.dynamic_color_match
       ~Tags.dynamic_color_tags
+      ~Tags.has_default_tag
       ~Tags.has_persistence_label
+      ~Tags.has_reapplied_tag
       ~Tags.instrument_color_tags
       ~Tags.margin_markup_color_expression_match
       ~Tags.margin_markup_color_suppression_match
@@ -81,7 +83,11 @@ Class & static methods
 
 .. automethod:: Tags.dynamic_color_tags
 
+.. automethod:: Tags.has_default_tag
+
 .. automethod:: Tags.has_persistence_label
+
+.. automethod:: Tags.has_reapplied_tag
 
 .. automethod:: Tags.instrument_color_tags
 

@@ -537,6 +537,34 @@ class Tags(abjad.Tags):
             ]
 
     @staticmethod
+    def has_default_tag(string):
+        r'''Is true when ``string`` has default tag.
+
+        ..  container:: example
+
+            >>> baca.tags.has_persistence_label('')
+            False
+
+            >>> baca.tags.has_persistence_label('FOO')
+            False
+
+            >>> baca.tags.has_persistence_label('FOO:DEFAULT_CLEF')
+            True
+
+            >>> baca.tags.has_persistence_label('DEFAULT_CLEF')
+            True
+
+        Returns true or false.
+        '''
+        if not isinstance(string, str):
+            return False
+        words = string.split(':')
+        for word in words:
+            if word.startswith('DEFAULT'):
+                return True
+        return False
+
+    @staticmethod
     def has_persistence_label(string):
         r'''Is true when ``string`` has persistence label.
 
@@ -562,6 +590,34 @@ class Tags(abjad.Tags):
         words = string.split(':')
         for word in words:
             if word in all_persistence_labels:
+                return True
+        return False
+
+    @staticmethod
+    def has_reapplied_tag(string):
+        r'''Is true when ``string`` has reapplied tag.
+
+        ..  container:: example
+
+            >>> baca.tags.has_persistence_label('')
+            False
+
+            >>> baca.tags.has_persistence_label('FOO')
+            False
+
+            >>> baca.tags.has_persistence_label('FOO:REAPPLIED_CLEF')
+            True
+
+            >>> baca.tags.has_persistence_label('REAPPLIED_CLEF')
+            True
+
+        Returns true or false.
+        '''
+        if not isinstance(string, str):
+            return False
+        words = string.split(':')
+        for word in words:
+            if word.startswith('REAPPLIED'):
                 return True
         return False
 
