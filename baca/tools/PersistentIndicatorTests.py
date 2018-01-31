@@ -5841,6 +5841,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...         baca.margin_markup(margin_markup['III+IV']),
             ...         deactivate=True,
             ...         ),
+            ...     baca.tag(
+            ...         '+PARTS_VIOLA',
+            ...         baca.margin_markup(margin_markup['III+IV']),
+            ...         deactivate=True,
+            ...         ),
             ...     baca.make_notes(),
             ...     )
 
@@ -5899,8 +5904,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
                             %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
                             %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
                                 ^ \markup {
                                     \column
@@ -5941,14 +5949,35 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         %@%                     }                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%             }                                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%     }                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@% \line                                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%     {                                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%         \with-color                                          %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             #(x11-color 'blue)                               %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             {                                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                 \vcenter                                     %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     [“III+IV”                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                 \vcenter                                     %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     III+IV                                   %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                 \concat                                      %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     {                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                         \vcenter                             %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                             III+IV                           %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                         \vcenter                             %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                             ]                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     }                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             }                                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%     }                                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         }
                                     }
                                 \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLA:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! +PARTS_VIOLA:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                             %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +PARTS_VIOLA:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'2

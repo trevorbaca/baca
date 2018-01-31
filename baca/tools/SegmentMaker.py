@@ -1069,7 +1069,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 existing_tag=existing_tag,
                 stem='CLEF',
                 )
-        abjad.detach(indicator, leaf)
+        by_id = False
+        if isinstance(indicator, abjad.MarginMarkup):
+            by_id = True
+        abjad.detach(indicator, leaf, by_id=by_id)
         SegmentMaker._tag_persistent_indicator(
             context,
             leaf,
@@ -1110,7 +1113,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in  abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, 'persistent', False):
                     continue
-                if baca.tags.has_persistence_label(wrapper.tag):
+                if baca.tags.has_persistence_tag(wrapper.tag):
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument

@@ -208,12 +208,12 @@ class Tags(abjad.Tags):
             }
 
     @staticmethod
-    def all_persistence_labels():
+    def all_persistence_tags():
         r'''Gets all persistence labels.
 
         ..  container:: example
 
-            >>> for string in baca.tags.all_persistence_labels():
+            >>> for string in baca.tags.all_persistence_tags():
             ...     string
             ...
             'DEFAULT_CLEF'
@@ -542,16 +542,16 @@ class Tags(abjad.Tags):
 
         ..  container:: example
 
-            >>> baca.tags.has_persistence_label('')
+            >>> baca.tags.has_persistence_tag('')
             False
 
-            >>> baca.tags.has_persistence_label('FOO')
+            >>> baca.tags.has_persistence_tag('FOO')
             False
 
-            >>> baca.tags.has_persistence_label('FOO:DEFAULT_CLEF')
+            >>> baca.tags.has_persistence_tag('FOO:DEFAULT_CLEF')
             True
 
-            >>> baca.tags.has_persistence_label('DEFAULT_CLEF')
+            >>> baca.tags.has_persistence_tag('DEFAULT_CLEF')
             True
 
         Returns true or false.
@@ -565,31 +565,31 @@ class Tags(abjad.Tags):
         return False
 
     @staticmethod
-    def has_persistence_label(string):
+    def has_persistence_tag(string):
         r'''Is true when ``string`` has persistence label.
 
         ..  container:: example
 
-            >>> baca.tags.has_persistence_label('')
+            >>> baca.tags.has_persistence_tag('')
             False
 
-            >>> baca.tags.has_persistence_label('FOO')
+            >>> baca.tags.has_persistence_tag('FOO')
             False
 
-            >>> baca.tags.has_persistence_label('FOO:DEFAULT_CLEF')
+            >>> baca.tags.has_persistence_tag('FOO:DEFAULT_CLEF')
             True
 
-            >>> baca.tags.has_persistence_label('DEFAULT_CLEF')
+            >>> baca.tags.has_persistence_tag('DEFAULT_CLEF')
             True
 
         Returns true or false.
         '''
         if not isinstance(string, str):
             return False
-        all_persistence_labels = Tags.all_persistence_labels()
+        all_persistence_tags = Tags.all_persistence_tags()
         words = string.split(':')
         for word in words:
-            if word in all_persistence_labels:
+            if word in all_persistence_tags:
                 return True
         return False
 
@@ -599,16 +599,16 @@ class Tags(abjad.Tags):
 
         ..  container:: example
 
-            >>> baca.tags.has_persistence_label('')
+            >>> baca.tags.has_persistence_tag('')
             False
 
-            >>> baca.tags.has_persistence_label('FOO')
+            >>> baca.tags.has_persistence_tag('FOO')
             False
 
-            >>> baca.tags.has_persistence_label('FOO:REAPPLIED_CLEF')
+            >>> baca.tags.has_persistence_tag('FOO:REAPPLIED_CLEF')
             True
 
-            >>> baca.tags.has_persistence_label('REAPPLIED_CLEF')
+            >>> baca.tags.has_persistence_tag('REAPPLIED_CLEF')
             True
 
         Returns true or false.
