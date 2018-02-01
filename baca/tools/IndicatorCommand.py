@@ -299,8 +299,8 @@ class IndicatorCommand(Command):
         for wrapper in wrappers:
             if not wrapper.tag:
                 continue
-            if not (baca.tags.has_reapplied_tag(wrapper.tag) or
-                baca.tags.has_default_tag(wrapper.tag)):
+            if not (abjad.tags.has_reapplied_tag(wrapper.tag) or
+                abjad.tags.has_default_tag(wrapper.tag)):
                 continue
             reapplied_indicator = wrapper.indicator
             reapplied_tags = [

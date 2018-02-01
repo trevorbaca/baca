@@ -1168,7 +1168,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1228,7 +1228,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1368,7 +1368,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1428,7 +1428,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1580,7 +1580,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1641,7 +1641,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1795,7 +1795,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -1856,7 +1856,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2022,7 +2022,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2097,7 +2097,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2270,7 +2270,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2331,7 +2331,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2513,7 +2513,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2591,7 +2591,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2767,7 +2767,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2845,7 +2845,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3033,7 +3033,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3112,7 +3112,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3302,7 +3302,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3381,7 +3381,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3601,7 +3601,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3712,7 +3712,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3939,7 +3939,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4018,7 +4018,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4228,7 +4228,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4306,7 +4306,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4482,7 +4482,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4560,7 +4560,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4748,7 +4748,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4827,7 +4827,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5017,7 +5017,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5096,7 +5096,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5316,7 +5316,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5427,7 +5427,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5654,7 +5654,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond:strict')
             >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.deactivate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5733,7 +5733,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
-            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
             >>> text, count = abjad.activate(text, match)
             >>> lines = [_.strip('\n') for _ in text.split('\n')]

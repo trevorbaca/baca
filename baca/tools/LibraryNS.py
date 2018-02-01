@@ -3008,7 +3008,7 @@ class LibraryNS(abjad.AbjadObject):
                 baca.clef_extra_offset((extra_offset_x, 0)),
                 ],
             )
-        baca.tag(baca.tags.SHIFTED_CLEF, command, tag_measure_number=True)
+        baca.tag(abjad.tags.SHIFTED_CLEF, command, tag_measure_number=True)
         return command
 
     @staticmethod

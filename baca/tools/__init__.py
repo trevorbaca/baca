@@ -1,8 +1,6 @@
 # singletons
 from .SchemeManifest import SchemeManifest
-from .Tags import Tags
 scheme = SchemeManifest()
-tags = Tags()
 
 # everything else
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier

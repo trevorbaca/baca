@@ -88,7 +88,7 @@ class StaffPositionCommand(Command):
             if self.repeats:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
-                    abjad.attach(baca.tags.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
 
     ### PUBLIC PROPERTIES ###
 

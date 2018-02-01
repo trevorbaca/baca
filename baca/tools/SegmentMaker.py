@@ -863,7 +863,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
         tag = f'{status.upper()}_{stem}_ALERT'
-        tag = getattr(baca.tags, tag)
+        tag = getattr(abjad.tags, tag)
         if existing_tag:
             tag = existing_tag + ':' + tag
         abjad.attach(
@@ -1113,7 +1113,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in  abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, 'persistent', False):
                     continue
-                if baca.tags.has_persistence_tag(wrapper.tag):
+                if abjad.tags.has_persistence_tag(wrapper.tag):
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
@@ -1649,7 +1649,7 @@ class SegmentMaker(abjad.SegmentMaker):
             name = f'{status.upper()}_{stem}'
         if prefix is not None:
             name = f'{prefix.upper()}_{name}'
-        tag = getattr(baca.tags, name)
+        tag = getattr(abjad.tags, name)
         return tag
 
     def _handle_mutator(self, command):
@@ -1809,7 +1809,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = int(seconds)
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
-        tag = baca.tags.CLOCK_TIME_MARKUP
+        tag = abjad.tags.CLOCK_TIME_MARKUP
         label = abjad.label(skips, deactivate=True, site='SM28', tag=tag)
         segment_stop_duration = label.with_start_offsets(
             brackets=True,
@@ -1838,7 +1838,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 deactivate=True,
                 site='SM31',
-                tag=baca.tags.MEASURE_NUMBER_MARKUP,
+                tag=abjad.tags.MEASURE_NUMBER_MARKUP,
                 )
             markup = abjad.Markup(f'<{measure_index}>')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
@@ -1849,7 +1849,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 deactivate=True,
                 site='SM32',
-                tag=baca.tags.MEASURE_INDEX_MARKUP,
+                tag=abjad.tags.MEASURE_INDEX_MARKUP,
                 )
 
     def _label_stage_numbers(self):
@@ -1873,7 +1873,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 deactivate=True,
                 site='SM3',
-                tag=baca.tags.STAGE_NUMBER_MARKUP,
+                tag=abjad.tags.STAGE_NUMBER_MARKUP,
                 )
 
     def _make_global_skips(self):
@@ -1894,7 +1894,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal,
             first_skip,
             site='SM2',
-            tag=f'+{baca.tags.SEGMENT}:{baca.tags.EMPTY_START_BAR}',
+            tag=f'+{abjad.tags.SEGMENT}:{abjad.tags.EMPTY_START_BAR}',
             )
 
     def _make_lilypond_file(self):
@@ -2053,12 +2053,12 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(tags, (tuple, list)), repr(tags)
         if self._environment == 'docs':
             remove_documentation_tags = (
-                baca.tags.CLOCK_TIME_MARKUP,
-                baca.tags.FIGURE_NAME_MARKUP,
-                baca.tags.MEASURE_INDEX_MARKUP,
-                baca.tags.MEASURE_NUMBER_MARKUP,
-                baca.tags.SPACING_MARKUP,
-                baca.tags.STAGE_NUMBER_MARKUP,
+                abjad.tags.CLOCK_TIME_MARKUP,
+                abjad.tags.FIGURE_NAME_MARKUP,
+                abjad.tags.MEASURE_INDEX_MARKUP,
+                abjad.tags.MEASURE_NUMBER_MARKUP,
+                abjad.tags.SPACING_MARKUP,
+                abjad.tags.STAGE_NUMBER_MARKUP,
                 )
             tags += remove_documentation_tags
         for leaf in abjad.iterate(self.score).leaves():
@@ -2126,7 +2126,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
                 if wrapper is None or not wrapper.tag:
                     continue
-                if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
+                if abjad.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
                     continue
                 measure_number = self._offset_to_measure_number.get(
                     start_offset,
@@ -2234,7 +2234,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     strings.append(string)
                 if strings:
                     literal = abjad.LilyPondLiteral(strings, 'after')
-                    tag = baca.tags.EOL_FERMATA
+                    tag = abjad.tags.EOL_FERMATA
                     measure_number_tag = self._get_measure_number_tag(leaf)
                     if measure_number_tag is not None:
                         tag = f'{tag}:{measure_number_tag}'
@@ -2278,7 +2278,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(spanner, abjad.MetronomeMarkSpanner):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
-                tag = getattr(baca.tags, tag)
+                tag = getattr(abjad.tags, tag)
                 if existing_tag:
                     tag = existing_tag + ':' + tag
                 alternate = (color, 'SM15', tag)
@@ -2305,7 +2305,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.transpose_score:
             return
         for pleaf in baca.select(self.score).pleaves():
-            if abjad.inspect(pleaf).has_indicator(baca.tags.DO_NOT_TRANSPOSE):
+            if abjad.inspect(pleaf).has_indicator(abjad.tags.DO_NOT_TRANSPOSE):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
 

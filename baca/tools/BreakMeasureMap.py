@@ -351,8 +351,8 @@ class BreakMeasureMap(abjad.AbjadObject):
     def __init__(self, commands=None, deactivate=None, tags=None):
         tags = tags or []
         assert baca.Command._are_valid_tags(tags), repr(tags)
-        if baca.tags.BREAK not in tags:
-            tags.append(baca.tags.BREAK)
+        if abjad.tags.BREAK not in tags:
+            tags.append(abjad.tags.BREAK)
         self._tags = tags
         self._bol_measure_numbers = []
         self._deactivate = deactivate

@@ -205,7 +205,6 @@ baca.tools
    StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
-   Tags
    TimeSignatureGroups
    TimeSignatureMaker
    TimelineScope
@@ -260,7 +259,6 @@ baca.tools
    ~baca.tools.StaffLines.StaffLines
    ~baca.tools.StageMeasureMap.StageMeasureMap
    ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate
-   ~baca.tools.Tags.Tags
    ~baca.tools.TimeSignatureGroups.TimeSignatureGroups
    ~baca.tools.TimeSignatureMaker.TimeSignatureMaker
    ~baca.tools.TimelineScope.TimelineScope
