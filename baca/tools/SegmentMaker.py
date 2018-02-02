@@ -680,7 +680,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'redundant'
             else:
                 status = 'redundant'
-        return leaf, previous_indicator, status
+        return leaf, previous_indicator, status, momento.document
 
     def _annotate_sounds_during(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -831,6 +831,7 @@ class SegmentMaker(abjad.SegmentMaker):
         indicator,
         status,
         manifests,
+        document=None,
         existing_deactivate=None,
         existing_tag=None,
         ):
@@ -866,6 +867,8 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = getattr(abjad.tags, tag)
         if existing_tag:
             tag = existing_tag + ':' + tag
+        if document and abjad.tags.get_document_tag(tag) is None:
+            tag = document + ':' + tag
         abjad.attach(
             markup,
             leaf,
@@ -1020,6 +1023,7 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf,
         indicator,
         status,
+        document=None,
         existing_deactivate=None,
         existing_tag=None,
         spanner=None,
@@ -1034,6 +1038,7 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf,
             indicator,
             status,
+            document=document,
             existing_deactivate=existing_deactivate,
             existing_tag=existing_tag,
             )
@@ -1043,6 +1048,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 indicator,
                 status,
                 manifests,
+                document=document,
                 existing_deactivate=existing_deactivate,
                 existing_tag=existing_tag,
                 )
@@ -1053,6 +1059,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 indicator,
                 status,
+                document=document,
                 existing_deactivate=existing_deactivate,
                 existing_tag=existing_tag,
                 uncolor=True,
@@ -1065,6 +1072,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 literal,
                 status,
+                document=document,
                 existing_deactivate=existing_deactivate,
                 existing_tag=existing_tag,
                 stem='CLEF',
@@ -1078,6 +1086,7 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf,
             indicator,
             status,
+            document=document,
             existing_deactivate=existing_deactivate,
             existing_tag=existing_tag,
             spanner=spanner,
@@ -1089,6 +1098,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 indicator,
                 status,
+                document=document,
                 existing_deactivate=existing_deactivate,
                 existing_tag=existing_tag,
                 redraw=True,
@@ -1102,6 +1112,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     leaf,
                     literal,
                     status,
+                    document=document,
                     existing_deactivate=existing_deactivate,
                     existing_tag=existing_tag,
                     redraw=True,
@@ -1131,12 +1142,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     status = 'redundant'
                 context = wrapper._find_correct_effective_context()
+                document = abjad.tags.get_document_tag(wrapper.tag)
                 self._categorize_persistent_indicator(
                     self.manifests,
                     context,
                     leaf,
                     wrapper.indicator,
                     status,
+                    document=document,
                     existing_deactivate=wrapper.deactivate,
                     existing_tag=wrapper.tag,
                     spanner=wrapper.spanner,
@@ -1251,8 +1264,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     prototype = type(indicator)
                     prototype = self._prototype_string(prototype)
+                if wrapper.tag:
+                    document = abjad.tags.get_document_tag(wrapper.tag)
                 momento = abjad.Momento(
                     context=first_context.name,
+                    document=document,
                     prototype=prototype,
                     value=value,
                     )
@@ -1292,6 +1308,7 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf,
         indicator,
         status,
+        document=None,
         existing_deactivate=None,
         existing_tag=None,
         redraw=False,
@@ -1342,6 +1359,8 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix, suffix=suffix)
         if existing_tag:
             tag = existing_tag + ':' + tag
+        if document and abjad.tags.get_document_tag(tag) is None:
+            tag = document + ':' + tag
         if uncolor is True:
             abjad.attach(
                 literal,
@@ -2018,7 +2037,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 result = self._analyze_momento(context, momento)
                 if result is None:
                     continue
-                leaf, previous_indicator, status = result
+                leaf, previous_indicator, status, document = result
                 if isinstance(previous_indicator, abjad.MetronomeMark):
                     spanner = abjad.inspect(leaf).get_spanner(
                         abjad.MetronomeMarkSpanner
@@ -2032,6 +2051,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     leaf,
                     previous_indicator,
                     status,
+                    document=document,
                     spanner=spanner,
                     )
 
@@ -2252,6 +2272,7 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf,
         indicator,
         status,
+        document=None,
         existing_deactivate=None,
         existing_tag=None,
         redraw=None,
@@ -2267,6 +2288,8 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         if existing_tag:
             tag = existing_tag + ':' + tag
+        if document and abjad.tags.get_document_tag(tag) is None:
+            tag = document + ':' + tag
         if spanner is not None:
             spanner.attach(
                 indicator,
@@ -2281,6 +2304,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag = getattr(abjad.tags, tag)
                 if existing_tag:
                     tag = existing_tag + ':' + tag
+                if document and abjad.tags.get_document_tag(tag) is None:
+                    tag = document + ':' + tag
                 alternate = (color, 'SM15', tag)
                 found_wrapper = False
                 for wrapper in abjad.inspect(leaf).wrappers():
