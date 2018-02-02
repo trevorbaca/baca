@@ -595,3 +595,23 @@ triangleNoteHead = #(
     $music
     #}
     )
+
+%%% COLORING %%%
+
+makeBlue = {
+    \once \override Accidental.color = #blue
+    \once \override Beam.color = #blue
+    \once \override Dots.color = #blue
+    \once \override Flag.color = #blue
+    \once \override NoteHead.color = #blue
+    \once \override Stem.color = #blue
+    }
+
+makeMagenta = {
+    \once \override Accidental.color = #magenta
+    \once \override Beam.color = #magenta
+    \once \override Dots.color = #magenta
+    \once \override Flag.color = #magenta
+    \once \override NoteHead.color = #magenta
+    \once \override Stem.color = #magenta
+    }

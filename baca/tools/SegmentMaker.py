@@ -422,12 +422,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -435,36 +430,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                             0
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             1
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             2
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -475,12 +455,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -488,24 +463,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                             4
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             5
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -516,12 +481,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -529,36 +489,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                             7
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             8
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             9
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -569,12 +514,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -582,24 +522,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                             11
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             12
                                         }
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -1391,39 +1321,21 @@ class SegmentMaker(abjad.SegmentMaker):
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
             return
-        color = 'blue'
         tag = abjad.tags.NOT_YET_PITCHED
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
-            strings = [
-                rf'\once \override Accidental.color = #{color}',
-                rf'\once \override Beam.color = #{color}',
-                rf'\once \override Dots.color = #{color}',
-                rf'\once \override Flag.color = #{color}',
-                rf'\once \override NoteHead.color = #{color}',
-                rf'\once \override Stem.color = #{color}',
-                ]
-            literal = abjad.LilyPondLiteral(strings)
+            literal = abjad.LilyPondLiteral(r'\makeBlue')
             abjad.attach(literal, pleaf, site='SM24')
 
     def _color_unregistered_pitches(self):
         if self.ignore_unregistered_pitches:
             return
-        color = 'magenta'
         tag = abjad.tags.NOT_YET_REGISTERED
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
-            strings = [
-                rf'\once \override Accidental.color = #{color}',
-                rf'\once \override Beam.color = #{color}',
-                rf'\once \override Dots.color = #{color}',
-                rf'\once \override Flag.color = #{color}',
-                rf'\once \override NoteHead.color = #{color}',
-                rf'\once \override Stem.color = #{color}',
-                ]
-            literal = abjad.LilyPondLiteral(strings)
+            literal = abjad.LilyPondLiteral(r'\makeMagenta')
             abjad.attach(literal, pleaf, site='SM25')
 
     def _comment_measure_numbers(self):
@@ -1439,7 +1351,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
                 if measure_number is None:
                     continue
-                string = f'% [{context.name} measure {measure_number}]'
+                if self.segment_name :
+                    name = self.segment_name + ' '
+                else:
+                    name = ''
+                string = f'% [{name}{context.name} measure {measure_number}]'
                 literal = abjad.LilyPondLiteral(string, 'absolute_before')
                 abjad.attach(literal, leaf, site='SM4')
 
@@ -3814,132 +3730,62 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Accidental.color = #blue                             %! SM24
-                                    \once \override Beam.color = #blue                                   %! SM24
-                                    \once \override Dots.color = #blue                                   %! SM24
-                                    \once \override Flag.color = #blue                                   %! SM24
-                                    \once \override NoteHead.color = #blue                               %! SM24
-                                    \once \override Stem.color = #blue                                   %! SM24
+                                    \makeBlue                                                            %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>
@@ -4215,12 +4061,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 1]                                         %! SM4
-                                        \once \override Accidental.color = #magenta                      %! SM25
-                                        \once \override Beam.color = #magenta                            %! SM25
-                                        \once \override Dots.color = #magenta                            %! SM25
-                                        \once \override Flag.color = #magenta                            %! SM25
-                                        \once \override NoteHead.color = #magenta                        %! SM25
-                                        \once \override Stem.color = #magenta                            %! SM25
+                                        \makeMagenta                                                     %! SM25
                                         e'8.
                                     }
                                 }
@@ -4230,61 +4071,26 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 2]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             fs'16 [                                                      %! ACC1
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             d'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             ef'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             f'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             a'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             af'16 ]                                                      %! ACC1
                 <BLANKLINE>
                                         }
-                                        \once \override Accidental.color = #magenta                      %! SM25
-                                        \once \override Beam.color = #magenta                            %! SM25
-                                        \once \override Dots.color = #magenta                            %! SM25
-                                        \once \override Flag.color = #magenta                            %! SM25
-                                        \once \override NoteHead.color = #magenta                        %! SM25
-                                        \once \override Stem.color = #magenta                            %! SM25
+                                        \makeMagenta                                                     %! SM25
                                         c'8.
                                     }
                                 }
@@ -4292,12 +4098,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 3]                                         %! SM4
-                                        \once \override Accidental.color = #magenta                      %! SM25
-                                        \once \override Beam.color = #magenta                            %! SM25
-                                        \once \override Dots.color = #magenta                            %! SM25
-                                        \once \override Flag.color = #magenta                            %! SM25
-                                        \once \override NoteHead.color = #magenta                        %! SM25
-                                        \once \override Stem.color = #magenta                            %! SM25
+                                        \makeMagenta                                                     %! SM25
                                         b'8.
                                     }
                                 }
@@ -4307,53 +4108,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 4]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             bf'16 [                                                      %! ACC1
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             g'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             a'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             af'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta                  %! SM25
-                                            \once \override Beam.color = #magenta                        %! SM25
-                                            \once \override Dots.color = #magenta                        %! SM25
-                                            \once \override Flag.color = #magenta                        %! SM25
-                                            \once \override NoteHead.color = #magenta                    %! SM25
-                                            \once \override Stem.color = #magenta                        %! SM25
+                                            \makeMagenta                                                 %! SM25
                                             c'16 ]                                                       %! ACC1
                 <BLANKLINE>
                                         }
-                                        \once \override Accidental.color = #magenta                      %! SM25
-                                        \once \override Beam.color = #magenta                            %! SM25
-                                        \once \override Dots.color = #magenta                            %! SM25
-                                        \once \override Flag.color = #magenta                            %! SM25
-                                        \once \override NoteHead.color = #magenta                        %! SM25
-                                        \once \override Stem.color = #magenta                            %! SM25
+                                        \makeMagenta                                                     %! SM25
                                         f'8.
                 <BLANKLINE>
                                     }
