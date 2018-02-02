@@ -584,6 +584,21 @@ class SegmentMaker(abjad.SegmentMaker):
             extra_offset=self.final_markup_extra_offset,
             )
 
+    def _add_parse_handles(self):
+        if self._environment == 'docs':
+            return
+        segment_name = self.segment_name or ''
+        segment_name = segment_name.replace('_', 'i')
+        contexts = []
+        for context in self.score['GlobalContext']:
+            contexts.append(context)
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            contexts.append(voice)
+        for context in contexts:
+            variable_name = segment_name + context.name
+            bracket_comment = f'%*% {variable_name}'
+            context.bracket_comment = bracket_comment
+
     def _analyze_momento(self, context, momento):
         previous_indicator = self._momento_to_indicator(momento)
         if previous_indicator is None:
@@ -5123,5 +5138,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shift_clefs_into_fermata_measures()
         self._deactivate_tags(deactivate or [])
         self._remove_tags(remove)
+        self._add_parse_handles()
         self._collect_metadata()
         return self._lilypond_file
