@@ -1163,7 +1163,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def lilypond_tag(
-        tag: str,
+        bracket_comment: str,
         selector: Selector = 'baca.leaves()',
         ) -> LilyPondTagCommand:
         r'''Attaches LilyPond tag to container-grouped output of `selector`.
@@ -1186,9 +1186,12 @@ class LibraryGM(abjad.AbjadObject):
             >>> lilypond_file = maker.run(environment='docs')
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -1214,20 +1217,21 @@ class LibraryGM(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
-                    \context Staff = "MusicStaff" {
-                        \context Voice = "MusicVoice" {
-                            \tag ViolinI
-                            {
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+                            {   %*% ViolinI
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
                                 e'2
             <BLANKLINE>
                                 % [MusicVoice measure 2]                                             %! SM4
                                 f'4.
-                            }
-                            \tag ViolinI.ViolinII
-                            {
+                            }   %*% ViolinI
+                            {   %*% ViolinI.ViolinII
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
                                 e'2
@@ -1235,14 +1239,19 @@ class LibraryGM(abjad.AbjadObject):
                                 % [MusicVoice measure 4]                                             %! SM4
                                 f'4.
             <BLANKLINE>
-                            }
+                            }   %*% ViolinI.ViolinII
                         }
                     }
                 >>
             >>
 
         '''
-        return LilyPondTagCommand(selector=selector, tag=tag)
+        if not bracket_comment.startswith('%*%'):
+            bracket_comment = f'%*% {bracket_comment}'
+        return LilyPondTagCommand(
+            bracket_comment=bracket_comment,
+            selector=selector,
+            )
 
     @staticmethod
     def line_break(selector='baca.leaf(-1)'):

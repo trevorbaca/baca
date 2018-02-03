@@ -1,6 +1,7 @@
 import abjad
 import baca
 from .Command import Command
+from .Typing import Selector
 
 
 class LilyPondTagCommand(Command):
@@ -29,9 +30,12 @@ class LilyPondTagCommand(Command):
         >>> lilypond_file = maker.run(environment='docs')
 
         >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-        \context Score = "Score" <<
-            \context GlobalContext = "GlobalContext" <<
-                \context GlobalSkips = "GlobalSkips" {
+        \context Score = "Score"
+        <<
+            \context GlobalContext = "GlobalContext"
+            <<
+                \context GlobalSkips = "GlobalSkips"
+                {
         <BLANKLINE>
                     % [GlobalSkips measure 1]                                                    %! SM4
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -57,20 +61,21 @@ class LilyPondTagCommand(Command):
         <BLANKLINE>
                 }
             >>
-            \context MusicContext = "MusicContext" <<
-                \context Staff = "MusicStaff" {
-                    \context Voice = "MusicVoice" {
-                        \tag ViolinI
-                        {
+            \context MusicContext = "MusicContext"
+            <<
+                \context Staff = "MusicStaff"
+                {
+                    \context Voice = "MusicVoice"
+                    {
+                        {   %*% ViolinI
         <BLANKLINE>
                             % [MusicVoice measure 1]                                             %! SM4
                             e'2
         <BLANKLINE>
                             % [MusicVoice measure 2]                                             %! SM4
                             f'4.
-                        }
-                        \tag ViolinI.ViolinII
-                        {
+                        }   %*% ViolinI
+                        {   %*% ViolinI.ViolinII
         <BLANKLINE>
                             % [MusicVoice measure 3]                                             %! SM4
                             e'2
@@ -78,7 +83,7 @@ class LilyPondTagCommand(Command):
                             % [MusicVoice measure 4]                                             %! SM4
                             f'4.
         <BLANKLINE>
-                        }
+                        }   %*% ViolinI.ViolinII
                     }
                 }
             >>
@@ -89,16 +94,18 @@ class LilyPondTagCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_tag',
+        '_bracket_comment',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, selector='baca.leaves()', tag=None):
+    def __init__(
+        self,
+        bracket_comment: str = None,
+        selector: Selector = 'baca.leaves()',
+        ):
         Command.__init__(self, selector=selector)
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+        self._bracket_comment = bracket_comment
 
     ### SPECIAL METHODS ###
 
@@ -111,19 +118,14 @@ class LilyPondTagCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        container = abjad.Container()
+        container = abjad.Container(bracket_comment=self.bracket_comment)
         components = baca.select(argument).leaves().top()
         abjad.mutate(components).wrap(container)
-        string = rf'\tag {self.tag}'
-        literal = abjad.LilyPondLiteral(string, 'before')
-        abjad.attach(literal, container)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def tag(self):
-        r'''Gets tag.
-
-        Returns string.
+    def bracket_comment(self) -> str:
+        r'''Gets bracket comment.
         '''
-        return self._tag
+        return self._bracket_comment

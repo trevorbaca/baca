@@ -21,6 +21,7 @@ Bases
 
    .. autosummary::
 
+      ~LilyPondTagCommand.bracket_comment
       ~LilyPondTagCommand.deactivate
       ~LilyPondTagCommand.get_tag
       ~LilyPondTagCommand.manifests
@@ -36,6 +37,8 @@ Bases
 Read-only properties
 --------------------
 
+.. autoattribute:: LilyPondTagCommand.bracket_comment
+
 .. only:: html
 
    .. container:: inherited
@@ -48,7 +51,11 @@ Read-only properties
 
       .. autoattribute:: LilyPondTagCommand.selector
 
-.. autoattribute:: LilyPondTagCommand.tag
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: LilyPondTagCommand.tag
 
 .. only:: html
 
