@@ -589,6 +589,15 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         segment_name = self.segment_name or ''
         segment_name = segment_name.replace('_', 'i')
+        words = []
+        for word in abjad.String(segment_name).delimit_words():
+            if word.isdigit():
+                number = int(word)
+                assert 0 < number, repr(number)
+                index = number - 1
+                word = self._base_26(index)
+            words.append(word)
+        segment_name = ''.join(words)
         contexts = []
         for context in self.score['GlobalContext']:
             contexts.append(context)
@@ -854,8 +863,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         pairs = self.score_template.attach_defaults(self.score)
         for leaf, indicator in pairs:
-            #if getattr(indicator, 'hide', False) is True:
-            #    continue
             wrapper = abjad.inspect(leaf).wrapper(indicator)
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
@@ -867,6 +874,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper.indicator,
                 'default',
                 )
+
+    @staticmethod
+    def _base_26(n: int):
+        digits = abjad.mathtools.integer_to_base_k_tuple(n, 26)
+        letters = []
+        for digit in digits:
+            letter = chr(ord('a') + digit)
+            letters.append(letter)
+        return ''.join(letters)
 
     def _cache_leaves(self):
         stage_timespans = []
