@@ -139,13 +139,25 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.rehearsal_mark
 
-.. autoattribute:: SegmentMaker.score
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SegmentMaker.score
 
 .. autoattribute:: SegmentMaker.score_template
 
-.. autoattribute:: SegmentMaker.segment_directory
+.. only:: html
 
-.. autoattribute:: SegmentMaker.segment_name
+   .. container:: inherited
+
+      .. autoattribute:: SegmentMaker.segment_directory
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SegmentMaker.segment_name
 
 .. autoattribute:: SegmentMaker.skip_wellformedness_checks
 

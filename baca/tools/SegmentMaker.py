@@ -584,30 +584,6 @@ class SegmentMaker(abjad.SegmentMaker):
             extra_offset=self.final_markup_extra_offset,
             )
 
-    def _add_parse_handles(self):
-        if self._environment == 'docs':
-            return
-        segment_name = self.segment_name or ''
-        segment_name = segment_name.replace('_', 'i')
-        words = []
-        for word in abjad.String(segment_name).delimit_words():
-            if word.isdigit():
-                number = int(word)
-                assert 0 < number, repr(number)
-                index = number - 1
-                word = self._base_26(index)
-            words.append(word)
-        segment_name = ''.join(words)
-        contexts = []
-        for context in self.score['GlobalContext']:
-            contexts.append(context)
-        for voice in abjad.iterate(self.score).components(abjad.Voice):
-            contexts.append(voice)
-        for context in contexts:
-            variable_name = segment_name + context.name
-            bracket_comment = f'%*% {variable_name}'
-            context.bracket_comment = bracket_comment
-
     def _analyze_momento(self, context, momento):
         previous_indicator = self._momento_to_indicator(momento)
         if previous_indicator is None:
@@ -874,15 +850,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper.indicator,
                 'default',
                 )
-
-    @staticmethod
-    def _base_26(n: int):
-        digits = abjad.mathtools.integer_to_base_k_tuple(n, 26)
-        letters = []
-        for digit in digits:
-            letter = chr(ord('a') + digit)
-            letters.append(letter)
-        return ''.join(letters)
 
     def _cache_leaves(self):
         stage_timespans = []
@@ -4570,12 +4537,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._rehearsal_mark
 
     @property
-    def score(self) -> Optional[abjad.Score]:
-        r'''Gets score.
-        '''
-        return self._score
-
-    @property
     def score_template(self) -> Optional[abjad.ScoreTemplate]:
         r'''Gets score template.
 
@@ -4592,20 +4553,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         return self._score_template
-
-    @property
-    def segment_directory(self) -> Optional[abjad.Path]:
-        r'''Gets segment directory.
-        '''
-        return self._segment_directory
-
-    @property
-    def segment_name(self) -> Optional[str]:
-        r'''Gets segment name.
-        '''
-        if bool(self.segment_directory):
-            return self.segment_directory.name
-        return None
 
     @property
     def skip_wellformedness_checks(self) -> Optional[bool]:
