@@ -64,6 +64,7 @@ Bases
       ~LibraryAF.dynamics_down
       ~LibraryAF.dynamics_up
       ~LibraryAF.effort_dynamic
+      ~LibraryAF.extern
       ~LibraryAF.fermata
       ~LibraryAF.flageolets
       ~LibraryAF.flags
@@ -163,6 +164,8 @@ Class & static methods
 .. automethod:: LibraryAF.dynamics_up
 
 .. automethod:: LibraryAF.effort_dynamic
+
+.. automethod:: LibraryAF.extern
 
 .. automethod:: LibraryAF.fermata
 

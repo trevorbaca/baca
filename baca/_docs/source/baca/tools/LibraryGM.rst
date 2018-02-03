@@ -29,7 +29,6 @@ Bases
       ~LibraryGM.label
       ~LibraryGM.laissez_vibrer
       ~LibraryGM.lbsd
-      ~LibraryGM.lilypond_tag
       ~LibraryGM.line_break
       ~LibraryGM.literal
       ~LibraryGM.long_fermata
@@ -76,8 +75,6 @@ Class & static methods
 .. automethod:: LibraryGM.laissez_vibrer
 
 .. automethod:: LibraryGM.lbsd
-
-.. automethod:: LibraryGM.lilypond_tag
 
 .. automethod:: LibraryGM.line_break
 

@@ -27,6 +27,7 @@ from .DivisionSequence import DivisionSequence
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .Expression import Expression
 from .ExpressionGallery import ExpressionGallery
+from .ExternCommand import ExternCommand
 from .FlattenDivisionCallback import FlattenDivisionCallback
 from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
 from .HairpinCommand import HairpinCommand
@@ -37,7 +38,6 @@ from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
-from .LilyPondTagCommand import LilyPondTagCommand
 from .Loop import Loop
 from .MapCommand import MapCommand
 from .MarkupLibrary import MarkupLibrary

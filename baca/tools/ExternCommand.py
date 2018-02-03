@@ -4,13 +4,13 @@ from .Command import Command
 from .Typing import Selector
 
 
-class LilyPondTagCommand(Command):
-    r'''LilyPond tag command.
+class ExternCommand(Command):
+    r'''Extern command.
 
     ..  container:: example
 
-        >>> baca.LilyPondTagCommand()
-        LilyPondTagCommand(selector=baca.leaves())
+        >>> baca.ExternCommand()
+        ExternCommand(selector=baca.leaves())
 
     ..  container:: example
 
@@ -22,8 +22,8 @@ class LilyPondTagCommand(Command):
         >>> maker(
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.lilypond_tag('ViolinI', baca.leaves()[:2]),
-        ...     baca.lilypond_tag('ViolinI.ViolinII', baca.leaves()[2:]),
+        ...     baca.extern('ViolinI', baca.leaves()[:2]),
+        ...     baca.extern('ViolinI.ViolinII', baca.leaves()[2:]),
         ...     baca.pitches('E4 F4'),
         ...     )
 
@@ -94,38 +94,40 @@ class LilyPondTagCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_bracket_comment',
+        '_string',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        bracket_comment: str = None,
         selector: Selector = 'baca.leaves()',
-        ):
+        string: str = None,
+        ) -> None:
         Command.__init__(self, selector=selector)
-        self._bracket_comment = bracket_comment
+        self._string: str = string
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Applies command to result of selector called on `argument`.
-
-        Returns none.
+    def __call__(self, argument=None) -> None:
+        r'''Attaches extern string to container-grouped output of ``selector``.
         '''
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        container = abjad.Container(bracket_comment=self.bracket_comment)
+        if self.string.startswith('%*%'):
+            string = self.string
+        else:
+            string = f'%*% {self.string}'
+        container = abjad.Container(bracket_comment=string)
         components = baca.select(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bracket_comment(self) -> str:
-        r'''Gets bracket comment.
+    def string(self) -> str:
+        r'''Gets string.
         '''
-        return self._bracket_comment
+        return self._string

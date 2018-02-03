@@ -96,11 +96,11 @@ baca.tools
    Command
    CommandWrapper
    DiatonicClusterCommand
+   ExternCommand
    HairpinCommand
    ImbricationCommand
    IndicatorCommand
    LabelCommand
-   LilyPondTagCommand
    MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
@@ -130,11 +130,11 @@ baca.tools
    ~baca.tools.Command.Command
    ~baca.tools.CommandWrapper.CommandWrapper
    ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand
+   ~baca.tools.ExternCommand.ExternCommand
    ~baca.tools.HairpinCommand.HairpinCommand
    ~baca.tools.ImbricationCommand.ImbricationCommand
    ~baca.tools.IndicatorCommand.IndicatorCommand
    ~baca.tools.LabelCommand.LabelCommand
-   ~baca.tools.LilyPondTagCommand.LilyPondTagCommand
    ~baca.tools.MapCommand.MapCommand
    ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand
    ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand
