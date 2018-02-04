@@ -4,8 +4,13 @@ Vim macros
 To renumber lists:
 
     @i:     qigg/^\d<return>cw1<esc>"nyw/\.<return>dwi.<tab><esc>q
+    "i      gg/^\d^Mcw1^["nyw/\.^Mdwi.^I^[
+
     @j:     qj/^\d<return>cw<ctrl>rn<esc><ctrl>a0"nyw/\.<return>dwi.<tab><esc>q
-    @r:     q@i:g/^\d/ normal @j<return>@iq
+    "j      /^\d^Mcw^Rn^[^A0"nyw/\.^Mdwi.^I^[
+
+    @r:     qr@i:g/^\d/ normal @j<return>@iq
+    "r      @i:g/^\d/ normal @j^M@i
 
     Macro @i sets the first left-edge-adjacent number to 1.
     Macro @j increments the next left-edge-adjacent number.

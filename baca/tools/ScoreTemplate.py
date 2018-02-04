@@ -65,23 +65,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
         abjad.attach(literal, context, site='ST4')
 
-    def _make_global_context(self):
-        global_rests = abjad.Context(
-            lilypond_type='GlobalRests',
-            name='GlobalRests',
-            )
-        global_skips = abjad.Context(
-            lilypond_type='GlobalSkips',
-            name='GlobalSkips',
-            )
-        global_context = abjad.Context(
-            [global_rests, global_skips ],
-            lilypond_type='GlobalContext',
-            is_simultaneous=True,
-            name='GlobalContext',
-            )
-        return global_context
-
     @staticmethod
     def _set_square_delimiter(staff_group):
         abjad.setting(staff_group).system_start_delimiter = 'SystemStartSquare'

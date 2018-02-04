@@ -2313,21 +2313,7 @@ class LibraryNS(abjad.AbjadObject):
         Returns horizontal spacing specifier with overrides.
         '''
         path = abjad.Path(path)
-
-        # TODO: move to abjad.Path.get_measure_count()
-        if path.parent.is_segment():
-            string = 'first_measure_number'
-            first_measure_number = path.parent.get_metadatum(string)
-            time_signatures = path.parent.get_metadatum('time_signatures')
-            measure_count = len(time_signatures)
-        else:
-            first_measure_number = 1
-            dictionary = path.contents.get_metadatum('time_signatures')
-            dictionary = dictionary or abjad.OrderedDict()
-            measure_count = 0
-            for segment, time_signatures in dictionary.items():
-                measure_count += len(time_signatures)
-
+        first_measure_number, measure_count = path.get_measure_count_pair()
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
         overrides = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1
