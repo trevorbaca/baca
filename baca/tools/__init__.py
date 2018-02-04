@@ -17,6 +17,7 @@ from .Command import Command
 from .CommandWrapper import CommandWrapper
 from .Constellation import Constellation
 from .ConstellationCircuit import ConstellationCircuit
+from .ContainerCommand import ContainerCommand
 from .Counter import Counter
 from .Cursor import Cursor
 from .DesignMaker import DesignMaker
@@ -27,7 +28,6 @@ from .DivisionSequence import DivisionSequence
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .Expression import Expression
 from .ExpressionGallery import ExpressionGallery
-from .ExternCommand import ExternCommand
 from .FlattenDivisionCallback import FlattenDivisionCallback
 from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
 from .HairpinCommand import HairpinCommand

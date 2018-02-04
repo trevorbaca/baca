@@ -4,13 +4,13 @@ from .Command import Command
 from .Typing import Selector
 
 
-class ExternCommand(Command):
-    r'''Extern command.
+class ContainerCommand(Command):
+    r'''Container command.
 
     ..  container:: example
 
-        >>> baca.ExternCommand()
-        ExternCommand(selector=baca.leaves())
+        >>> baca.ContainerCommand()
+        ContainerCommand(selector=baca.leaves())
 
     ..  container:: example
 
@@ -22,8 +22,8 @@ class ExternCommand(Command):
         >>> maker(
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.extern('ViolinI', baca.leaves()[:2]),
-        ...     baca.extern('ViolinI.ViolinII', baca.leaves()[2:]),
+        ...     baca.container('ViolinI', baca.leaves()[:2]),
+        ...     baca.container('ViolinII', baca.leaves()[2:]),
         ...     baca.pitches('E4 F4'),
         ...     )
 
@@ -75,7 +75,7 @@ class ExternCommand(Command):
                             % [MusicVoice measure 2]                                             %! SM4
                             f'4.
                         }   %*% ViolinI
-                        {   %*% ViolinI.ViolinII
+                        {   %*% ViolinII
         <BLANKLINE>
                             % [MusicVoice measure 3]                                             %! SM4
                             e'2
@@ -83,7 +83,7 @@ class ExternCommand(Command):
                             % [MusicVoice measure 4]                                             %! SM4
                             f'4.
         <BLANKLINE>
-                        }   %*% ViolinI.ViolinII
+                        }   %*% ViolinII
                     }
                 }
             >>
@@ -94,40 +94,41 @@ class ExternCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_string',
+        '_identifier',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
+        identifier: str = None,
         selector: Selector = 'baca.leaves()',
-        string: str = None,
         ) -> None:
         Command.__init__(self, selector=selector)
-        self._string: str = string
+        assert abjad.String(identifier).is_lilypond_identifier()
+        self._identifier: str = identifier
 
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Attaches extern string to container-grouped output of ``selector``.
+        r'''Inserts ``selector`` output in container.
         '''
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if self.string.startswith('%*%'):
-            string = self.string
+        if self.identifier.startswith('%*%'):
+            identifier = self.identifier
         else:
-            string = f'%*% {self.string}'
-        container = abjad.Container(bracket_comment=string)
+            identifier = f'%*% {self.identifier}'
+        container = abjad.Container(identifier=identifier)
         components = baca.select(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def string(self) -> str:
-        r'''Gets string.
+    def identifier(self) -> str:
+        r'''Gets identifier.
         '''
-        return self._string
+        return self._identifier

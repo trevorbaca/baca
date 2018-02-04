@@ -95,8 +95,8 @@ baca.tools
    ColorFingeringCommand
    Command
    CommandWrapper
+   ContainerCommand
    DiatonicClusterCommand
-   ExternCommand
    HairpinCommand
    ImbricationCommand
    IndicatorCommand
@@ -129,8 +129,8 @@ baca.tools
    ~baca.tools.ColorFingeringCommand.ColorFingeringCommand
    ~baca.tools.Command.Command
    ~baca.tools.CommandWrapper.CommandWrapper
+   ~baca.tools.ContainerCommand.ContainerCommand
    ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand
-   ~baca.tools.ExternCommand.ExternCommand
    ~baca.tools.HairpinCommand.HairpinCommand
    ~baca.tools.ImbricationCommand.ImbricationCommand
    ~baca.tools.IndicatorCommand.IndicatorCommand

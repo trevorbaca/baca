@@ -6,7 +6,7 @@ from typing import Union
 from abjad import rhythmmakertools as rhythmos
 from .AnchorSpecifier import AnchorSpecifier
 from .ClusterCommand import ClusterCommand
-from .ExternCommand import ExternCommand
+from .ContainerCommand import ContainerCommand
 from .IndicatorCommand import IndicatorCommand
 from .OverrideCommand import OverrideCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
@@ -2736,6 +2736,97 @@ class LibraryAF(abjad.AbjadObject):
         return expression
 
     @staticmethod
+    def container(
+        identifier: str,
+        selector: Selector = 'baca.leaves()',
+        ) -> ContainerCommand:
+        r'''Inserts `selector` output in container.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.container('ViolinI', baca.leaves()[:2]),
+            ...     baca.container('ViolinII', baca.leaves()[2:]),
+            ...     baca.make_notes(repeat_ties=True),
+            ...     baca.pitches('E4 F4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+                            {   %*% ViolinI
+            <BLANKLINE>
+                                % [MusicVoice measure 1]                                             %! SM4
+                                e'2
+            <BLANKLINE>
+                                % [MusicVoice measure 2]                                             %! SM4
+                                f'4.
+                            }   %*% ViolinI
+                            {   %*% ViolinII
+            <BLANKLINE>
+                                % [MusicVoice measure 3]                                             %! SM4
+                                e'2
+            <BLANKLINE>
+                                % [MusicVoice measure 4]                                             %! SM4
+                                f'4.
+            <BLANKLINE>
+                            }   %*% ViolinII
+                        }
+                    }
+                >>
+            >>
+
+        '''
+        assert abjad.String(identifier).is_lilypond_identifier()
+        return ContainerCommand(
+            selector=selector,
+            identifier=identifier,
+            )
+
+    @staticmethod
     def cross_note_heads(selector='baca.tleaves()'):
         r'''Overrides note-head style on pitched leaves.
 
@@ -5300,97 +5391,6 @@ class LibraryAF(abjad.AbjadObject):
         return baca.tools.IndicatorCommand(
             indicators=[indicator],
             selector=selector,
-            )
-
-    @staticmethod
-    def extern(
-        string: str,
-        selector: Selector = 'baca.leaves()',
-        ) -> ExternCommand:
-        r'''Attaches extern comment tag to container-grouped output of
-        `selector`.
-
-        ..  container:: example
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.extern('ViolinI', baca.leaves()[:2]),
-            ...     baca.extern('ViolinI.ViolinII', baca.leaves()[2:]),
-            ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitches('E4 F4'),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-                            {   %*% ViolinI
-            <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'2
-            <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                f'4.
-                            }   %*% ViolinI
-                            {   %*% ViolinI.ViolinII
-            <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'2
-            <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                f'4.
-            <BLANKLINE>
-                            }   %*% ViolinI.ViolinII
-                        }
-                    }
-                >>
-            >>
-
-        '''
-        return ExternCommand(
-            selector=selector,
-            string=string,
             )
 
     @staticmethod

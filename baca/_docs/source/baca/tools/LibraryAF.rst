@@ -43,6 +43,7 @@ Bases
       ~LibraryAF.color
       ~LibraryAF.color_fingerings
       ~LibraryAF.compound_quarter_divisions
+      ~LibraryAF.container
       ~LibraryAF.cross_note_heads
       ~LibraryAF.cross_staff
       ~LibraryAF.dashed_arrow
@@ -64,7 +65,6 @@ Bases
       ~LibraryAF.dynamics_down
       ~LibraryAF.dynamics_up
       ~LibraryAF.effort_dynamic
-      ~LibraryAF.extern
       ~LibraryAF.fermata
       ~LibraryAF.flageolets
       ~LibraryAF.flags
@@ -123,6 +123,8 @@ Class & static methods
 
 .. automethod:: LibraryAF.compound_quarter_divisions
 
+.. automethod:: LibraryAF.container
+
 .. automethod:: LibraryAF.cross_note_heads
 
 .. automethod:: LibraryAF.cross_staff
@@ -164,8 +166,6 @@ Class & static methods
 .. automethod:: LibraryAF.dynamics_up
 
 .. automethod:: LibraryAF.effort_dynamic
-
-.. automethod:: LibraryAF.extern
 
 .. automethod:: LibraryAF.fermata
 
