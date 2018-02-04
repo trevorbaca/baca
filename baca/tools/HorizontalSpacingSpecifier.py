@@ -824,7 +824,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         Returns none.
         '''
-        score = segment_maker._score
+        score = segment_maker.score
         context = score['GlobalSkips']
         skips = baca.select(context).skips()
         self._interrogate_fermata_score()
@@ -921,7 +921,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         if not self.fermata_score:
             return
         path = abjad.Path(self.fermata_score)
-        dictionary = path.get_metadatum('fermata_measure_numbers', {})
+        dictionary = path.get_metadatum(
+            'fermata_measure_numbers',
+            abjad.OrderedDict(),
+            )
         for path, fermata_measure_numbers in dictionary.items():
             self._fermata_measure_numbers.extend(fermata_measure_numbers)
 
