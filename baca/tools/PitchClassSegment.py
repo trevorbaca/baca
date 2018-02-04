@@ -20,7 +20,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -41,7 +42,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -116,7 +118,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                     >>> lilypond_file = segment.__illustrate__()
                     >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                    \new Voice {
+                    \new Voice
+                    {
                         b'8
                         bqs'8
                         g'8
@@ -141,7 +144,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                     >>> lilypond_file = segment.__illustrate__()
                     >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                    \new Voice {
+                    \new Voice
+                    {
                         b'8
                         bqs'8
                         g'8
@@ -168,7 +172,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                     >>> lilypond_file = segment.__illustrate__()
                     >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                    \new Voice {
+                    \new Voice
+                    {
                         bf'8
                         bqf'8
                         fs'8
@@ -204,7 +209,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     ...     figure_name=markup,
                     ...     )
                     >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                    \new Voice {
+                    \new Voice
+                    {
                         bf'8
                         ^ \markup {
                             \concat
@@ -275,8 +281,10 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.arpeggiate_down().__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \context Staff = "Treble Staff" {
+                \new PianoStaff
+                <<
+                    \context Staff = "Treble Staff"
+                    {
                         \clef "treble"
                         fs''''1 * 1/8
                         c''''1 * 1/8
@@ -284,7 +292,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         f''1 * 1/8
                         af'1 * 1/8
                     }
-                    \context Staff = "Bass Staff" {
+                    \context Staff = "Bass Staff"
+                    {
                         \clef "bass"
                         r1 * 1/8
                         r1 * 1/8
@@ -319,8 +328,10 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.arpeggiate_up().__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \context Staff = "Treble Staff" {
+                \new PianoStaff
+                <<
+                    \context Staff = "Treble Staff"
+                    {
                         \clef "treble"
                         fs'1 * 1/8
                         c''1 * 1/8
@@ -328,7 +339,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         f''1 * 1/8
                         af''1 * 1/8
                     }
-                    \context Staff = "Bass Staff" {
+                    \context Staff = "Bass Staff"
+                    {
                         \clef "bass"
                         r1 * 1/8
                         r1 * 1/8
@@ -363,7 +375,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.chord().__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     <fs' g' bf' bqf'>1
                 }
 
@@ -860,7 +873,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -882,7 +896,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -913,7 +928,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -937,7 +953,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -971,7 +988,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     b'8
                     f'8
@@ -1000,7 +1018,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     b'8
                     f'8
@@ -1020,15 +1039,20 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override Rest.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             g''1 * 1/8
                             f''1 * 1/8
@@ -1036,7 +1060,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                             bf'1 * 1/8
                             fs'1 * 1/8
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             r1 * 1/8
                             r1 * 1/8
@@ -1074,7 +1099,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     b'8
                     f'8
@@ -1094,15 +1120,20 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override Rest.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             fs'1 * 1/8
                             bf'1 * 1/8
@@ -1110,7 +1141,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                             f''1 * 1/8
                             g''1 * 1/8
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             r1 * 1/8
                             r1 * 1/8

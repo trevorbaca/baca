@@ -55,8 +55,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -118,8 +120,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -191,8 +195,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -267,8 +273,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -340,8 +348,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -431,8 +441,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -540,8 +552,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -605,8 +619,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -679,8 +695,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -737,8 +755,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -795,8 +815,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -872,8 +894,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -932,8 +956,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1025,8 +1051,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1086,8 +1114,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1222,8 +1252,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1295,8 +1327,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1373,8 +1407,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1439,8 +1475,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1517,8 +1555,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1583,8 +1623,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1659,8 +1701,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1722,8 +1766,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1793,8 +1839,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1859,8 +1907,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1927,8 +1977,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1996,8 +2048,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2059,8 +2113,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2133,8 +2189,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2196,8 +2254,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2359,8 +2419,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2432,8 +2494,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2517,8 +2581,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2592,8 +2658,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2689,8 +2757,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2762,8 +2832,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2847,8 +2919,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2920,8 +2994,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3055,8 +3131,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3119,8 +3197,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3200,8 +3280,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3305,8 +3387,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3422,8 +3506,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3489,8 +3575,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3558,8 +3646,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3629,8 +3719,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3695,8 +3787,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3774,8 +3868,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3845,8 +3941,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3930,8 +4028,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4007,8 +4107,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4090,8 +4192,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -4208,8 +4312,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -4326,8 +4432,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -4465,8 +4573,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4535,8 +4645,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4611,8 +4723,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4681,8 +4795,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4799,8 +4915,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4862,8 +4980,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4938,8 +5058,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5010,8 +5132,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5087,8 +5211,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5151,8 +5277,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5228,8 +5356,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 2" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 2"
+                    {
                         \voiceTwo
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5292,8 +5422,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 2" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 2"
+                    {
                         \voiceTwo
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5369,8 +5501,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5495,8 +5629,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5562,8 +5698,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5632,8 +5770,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5702,8 +5842,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5772,8 +5914,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5839,8 +5983,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5915,8 +6061,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5991,8 +6139,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -6081,8 +6231,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -6157,8 +6309,10 @@ class LibraryNS(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text

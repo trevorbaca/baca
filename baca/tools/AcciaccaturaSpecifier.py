@@ -39,8 +39,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff {
-                { % measure
+            \new Staff
+            {
+                {   % measure
                     \time 3/4
                     \scaleDurations #'(1 . 1) {
                         c'8
@@ -85,7 +86,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         bf'8
                     }
-                } % measure
+                }   % measure
             }
 
     '''
@@ -204,8 +205,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/4
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -250,7 +252,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -287,8 +289,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/4
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -333,7 +336,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to none.
@@ -380,8 +383,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/4
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -426,7 +430,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    } % measure
+                    }   % measure
                 }
 
 
@@ -468,8 +472,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/2
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -520,7 +525,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             bf'8
                             ]
                         }
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -561,8 +566,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/2
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -613,7 +619,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             bf'8
                             ]
                         }
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -656,8 +662,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 9/8
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -712,7 +719,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             bf'8
                             ]
                         }
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -751,8 +758,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 11/8
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -805,7 +813,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             bf'8
                             ]
                         }
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to none.
@@ -852,8 +860,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/4
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -898,7 +907,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -935,8 +944,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 2/1
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -981,7 +991,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -1018,8 +1028,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 3/2
                         \scaleDurations #'(1 . 1) {
                             c'8
@@ -1064,7 +1075,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to none.

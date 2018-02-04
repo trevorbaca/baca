@@ -33,8 +33,10 @@ class NestingCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff <<
-                \context Voice = "Voice 1" {
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
                     \voiceOne
                     {
                         \tweak text #tuplet-number::calc-fraction-text
@@ -134,9 +136,12 @@ class NestingCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! SPACING:HSS1
@@ -156,11 +161,16 @@ class NestingCommand(Command):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
-                    \context Staff = "MusicStaff" \with {
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    \with
+                    {
                         \override Beam.positions = #'(-5.5 . -5.5)
-                    } {
-                        \context Voice = "MusicVoice" {
+                    }
+                    {
+                        \context Voice = "MusicVoice"
+                        {
                             {
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
@@ -287,8 +297,10 @@ class NestingCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text

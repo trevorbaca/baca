@@ -65,10 +65,15 @@ class TimeSignatureGroups(abjad.AbjadObject):
 
             >>> lilypond_file = groups.__illustrate__()
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 proportionalNotationDuration = #(ly:make-moment 1 8)
-            } <<
-                \new Staff \with {
+            }
+            <<
+                \new Staff
+                \with
+                {
                     \consists Horizontal_bracket_engraver
                     \override Clef.stencil = ##f
                     \override HorizontalBracket.bracket-flare = #'(0 . 0)
@@ -78,8 +83,9 @@ class TimeSignatureGroups(abjad.AbjadObject):
                     \override Rest.transparent = ##t
                     \override TextScript.extra-offset = #'(-4 . 0)
                     \override TextScript.staff-padding = #4.5
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 3/8
                         r1 * 3/8
                         \startGroup
@@ -88,17 +94,17 @@ class TimeSignatureGroups(abjad.AbjadObject):
                                 \smaller
                                     0
                             }
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 3/16
                         r1 * 3/16
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 3/16
                         r1 * 3/16
                         \stopGroup
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 5/8
                         r1 * 5/8
                         \startGroup
@@ -107,20 +113,20 @@ class TimeSignatureGroups(abjad.AbjadObject):
                                 \smaller
                                     1
                             }
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 5/16
                         r1 * 5/16
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 5/16
                         r1 * 5/16
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 5/16
                         r1 * 5/16
                         \stopGroup
-                    } % measure
+                    }   % measure
                 }
             >>
 

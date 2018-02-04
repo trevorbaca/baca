@@ -30,10 +30,14 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff \with {
+            \new Staff
+            \with
+            {
                 \override TupletBracket.staff-padding = #4
-            } <<
-                \context Voice = "Voice 1" {
+            }
+            <<
+                \context Voice = "Voice 1"
+                {
                     \voiceOne
                     {
                         \tweak text #tuplet-number::calc-fraction-text
@@ -88,10 +92,14 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff \with {
+            \new Staff
+            \with
+            {
                 \override TupletBracket.staff-padding = #4
-            } <<
-                \context Voice = "Voice 1" {
+            }
+            <<
+                \context Voice = "Voice 1"
+                {
                     \voiceOne
                     {
                         \tweak text #tuplet-number::calc-fraction-text
@@ -194,8 +202,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -265,8 +275,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -319,8 +331,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -362,8 +376,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -419,8 +435,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -483,8 +501,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -551,8 +571,10 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {

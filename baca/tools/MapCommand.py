@@ -32,8 +32,10 @@ class MapCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff <<
-                \context Voice = "Voice 1" {
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
                     \voiceOne
                     {
                         \tweak text #tuplet-number::calc-fraction-text

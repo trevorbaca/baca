@@ -125,8 +125,10 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -171,8 +173,10 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {

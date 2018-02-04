@@ -39,7 +39,8 @@ class Sequence(abjad.Sequence):
 
                 >>> lilypond_file = collection.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     bf'8
                     bqf'8
                     fs'8
@@ -89,7 +90,8 @@ class Sequence(abjad.Sequence):
 
                 >>> lilypond_file = collection.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     b'8
                     bqs'8
                     g'8
@@ -130,7 +132,8 @@ class Sequence(abjad.Sequence):
                 ...     figure_name=markup,
                 ...     )
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     b'8
                     ^ \markup {
                         \concat

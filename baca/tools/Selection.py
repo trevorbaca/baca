@@ -64,11 +64,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -104,7 +107,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -166,11 +169,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -231,7 +237,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -304,12 +310,15 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TextScript.staff-padding = #6
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -472,7 +481,7 @@ class Selection(abjad.Selection):
                                         *
                                 }
                         }
-                    } % measure
+                    }   % measure
                 }
 
         Returns new selection (or expression).
@@ -521,9 +530,12 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     autoBeaming = ##f
-                } {
+                }
+                {
                     \once \override Accidental.color = #green
                     \once \override Beam.color = #green
                     \once \override Dots.color = #green
@@ -634,9 +646,12 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     autoBeaming = ##f
-                } {
+                }
+                {
                     \once \override Accidental.color = #red
                     \once \override Beam.color = #red
                     \once \override Dots.color = #red
@@ -743,11 +758,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -810,7 +828,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -860,11 +878,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -905,7 +926,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -955,11 +976,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1000,7 +1024,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1062,11 +1086,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1172,7 +1199,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #blue
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1227,11 +1254,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1287,7 +1317,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1343,11 +1373,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1453,7 +1486,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #red
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1534,11 +1567,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1650,7 +1686,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #red
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1706,11 +1742,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1816,7 +1855,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #red
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1866,11 +1905,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -1906,7 +1948,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -1980,11 +2022,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2075,7 +2120,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2125,11 +2170,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2165,7 +2213,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2245,11 +2293,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2355,7 +2406,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #red
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2408,11 +2459,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2453,7 +2507,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2527,11 +2581,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2637,7 +2694,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #blue
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2687,11 +2744,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2727,7 +2787,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2801,11 +2861,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2896,7 +2959,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #blue
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -2946,11 +3009,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -2986,7 +3052,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3054,11 +3120,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -3134,7 +3203,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3188,11 +3257,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -3233,7 +3305,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #green
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3295,11 +3367,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -3405,7 +3480,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #blue
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3456,9 +3531,12 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     autoBeaming = ##f
-                } {
+                }
+                {
                     \once \override Accidental.color = #red
                     \once \override Beam.color = #red
                     \once \override Dots.color = #red
@@ -3565,11 +3643,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -3629,7 +3710,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3679,11 +3760,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -3741,7 +3825,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3797,11 +3881,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -3911,7 +3998,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #red
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -3955,9 +4042,12 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     autoBeaming = ##f
-                } {
+                }
+                {
                     \time 2/8
                     c'8
                     s8
@@ -4017,9 +4107,12 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     autoBeaming = ##f
-                } {
+                }
+                {
                     \time 2/8
                     c'8
                     % red
@@ -4117,11 +4210,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -4231,7 +4327,7 @@ class Selection(abjad.Selection):
                             \once \override Stem.color = #red
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''
@@ -4297,11 +4393,14 @@ class Selection(abjad.Selection):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
-                } {
-                    { % measure
+                }
+                {
+                    {   % measure
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
@@ -4366,7 +4465,7 @@ class Selection(abjad.Selection):
                             ~
                             <fs' gs'>16
                         }
-                    } % measure
+                    }   % measure
                 }
 
         '''

@@ -23,8 +23,10 @@ class MusicMaker(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff <<
-                \context Voice = "Voice 1" {
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
@@ -155,8 +157,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -200,8 +204,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -245,8 +251,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -290,8 +298,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -337,8 +347,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -370,8 +382,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -401,8 +415,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -437,8 +453,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -468,8 +486,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -504,8 +524,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -560,8 +582,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1087,8 +1111,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1142,8 +1168,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1199,8 +1227,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1259,8 +1289,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1317,8 +1349,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1358,8 +1392,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1407,10 +1443,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override DynamicLineSpanner.staff-padding = #4.5
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1468,10 +1508,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override DynamicLineSpanner.staff-padding = #4.5
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1526,10 +1570,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override DynamicLineSpanner.staff-padding = #4.5
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1584,10 +1632,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override DynamicLineSpanner.staff-padding = #6
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1645,10 +1697,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Stem.direction = #down
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1702,10 +1758,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Stem.direction = #down
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1765,10 +1825,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Stem.direction = #down
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1828,10 +1892,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Stem.direction = #down
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1891,10 +1959,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Beam.positions = #'(-6 . -6)
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1964,8 +2036,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2016,10 +2090,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Beam.positions = #'(-5.5 . -5.5)
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2100,10 +2178,14 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff \with {
+                \new Staff
+                \with
+                {
                     \override Beam.positions = #'(-5.5 . -5.5)
-                } <<
-                    \context Voice = "Voice 1" {
+                }
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2186,8 +2268,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2245,8 +2329,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2305,8 +2391,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2366,8 +2454,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2427,8 +2517,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \times 2/3 {
@@ -2484,8 +2576,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2526,8 +2620,10 @@ class MusicMaker(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {

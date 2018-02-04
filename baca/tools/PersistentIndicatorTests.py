@@ -48,9 +48,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -78,9 +81,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:SM8
@@ -129,9 +135,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -159,9 +168,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
@@ -221,9 +233,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -252,9 +267,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
@@ -313,9 +331,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -344,9 +365,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
@@ -396,9 +420,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -433,9 +460,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
@@ -504,9 +534,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -535,9 +568,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:SM8
@@ -588,9 +624,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -609,9 +648,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
@@ -662,9 +704,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -684,9 +729,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
@@ -738,9 +786,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -760,9 +811,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! REAPPLIED_DYNAMIC_COLOR:SM6
@@ -803,9 +857,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -824,9 +881,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
@@ -879,9 +939,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -901,9 +964,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! REDUNDANT_DYNAMIC_COLOR:SM6
@@ -942,9 +1008,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -963,9 +1032,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
@@ -1018,9 +1090,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -1040,9 +1115,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
@@ -1115,9 +1193,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -1145,9 +1226,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
@@ -1178,9 +1262,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1208,9 +1295,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1238,9 +1328,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1268,9 +1361,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1315,9 +1411,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -1345,9 +1444,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
@@ -1378,9 +1480,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1408,9 +1513,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1438,9 +1546,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1468,9 +1579,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1526,9 +1640,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -1557,9 +1674,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
@@ -1590,9 +1710,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1621,9 +1744,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1651,9 +1777,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1682,9 +1811,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1741,9 +1873,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -1772,9 +1907,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
@@ -1805,9 +1943,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1836,9 +1977,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1866,9 +2010,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -1897,9 +2044,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -1954,9 +2104,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -1991,9 +2144,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'2
@@ -2032,9 +2188,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2069,9 +2228,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'2
@@ -2107,9 +2269,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2144,9 +2309,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'2
@@ -2216,9 +2384,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2247,9 +2418,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
@@ -2280,9 +2454,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2311,9 +2488,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -2341,9 +2521,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2372,9 +2555,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
@@ -2442,9 +2628,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2472,9 +2661,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! DEFAULT_INSTRUMENT:SM8
@@ -2523,9 +2715,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2553,9 +2748,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! DEFAULT_INSTRUMENT:SM8
@@ -2601,9 +2799,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2631,9 +2832,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! DEFAULT_INSTRUMENT:SM8
@@ -2696,9 +2900,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2726,9 +2933,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_INSTRUMENT:SM8
@@ -2777,9 +2987,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2807,9 +3020,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
@@ -2855,9 +3071,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -2885,9 +3104,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
@@ -2961,9 +3183,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2992,9 +3217,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_INSTRUMENT:SM8
@@ -3043,9 +3271,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3074,9 +3305,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
@@ -3122,9 +3356,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3153,9 +3390,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
@@ -3230,9 +3470,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3261,9 +3504,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! REAPPLIED_INSTRUMENT:SM8
@@ -3312,9 +3558,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3343,9 +3592,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REAPPLIED_INSTRUMENT:SM8
@@ -3391,9 +3643,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3422,9 +3677,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REAPPLIED_INSTRUMENT:SM8
@@ -3497,9 +3755,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3534,9 +3795,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_INSTRUMENT:SM8
@@ -3611,9 +3875,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3648,9 +3915,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
@@ -3722,9 +3992,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3759,9 +4032,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! EXPLICIT_INSTRUMENT:SM8
@@ -3867,9 +4143,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3898,9 +4177,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_INSTRUMENT:SM8
@@ -3949,9 +4231,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -3980,9 +4265,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
@@ -4028,9 +4316,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4059,9 +4350,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
@@ -4157,9 +4451,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4187,9 +4484,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! DEFAULT_MARGIN_MARKUP:SM8
@@ -4238,9 +4538,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4268,9 +4571,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
@@ -4316,9 +4622,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4346,9 +4655,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
@@ -4411,9 +4723,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4441,9 +4756,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -4492,9 +4810,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4522,9 +4843,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -4570,9 +4894,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4600,9 +4927,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -4676,9 +5006,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4707,9 +5040,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { III+IV }                           %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -4758,9 +5094,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4789,9 +5128,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { III+IV }      %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -4837,9 +5179,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -4868,9 +5213,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { III+IV }      %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -4945,9 +5293,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4976,9 +5327,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! REAPPLIED_MARGIN_MARKUP:SM8
@@ -5027,9 +5381,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -5058,9 +5415,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REAPPLIED_MARGIN_MARKUP:SM8
@@ -5106,9 +5466,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -5137,9 +5500,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REAPPLIED_MARGIN_MARKUP:SM8
@@ -5212,9 +5578,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -5249,9 +5618,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -5326,9 +5698,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -5363,9 +5738,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -5437,9 +5815,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -5474,9 +5855,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
@@ -5582,9 +5966,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -5613,9 +6000,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_MARGIN_MARKUP:SM8
@@ -5664,9 +6054,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -5695,9 +6088,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
@@ -5743,9 +6139,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> print(text)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
                             \newSpacingSection                                               %! SPACING:HSS1
@@ -5774,9 +6173,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
@@ -5858,9 +6260,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -5895,9 +6300,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
@@ -6803,9 +7211,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6824,9 +7235,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:SM8
@@ -6879,9 +7293,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6901,9 +7318,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:SM8
@@ -6957,9 +7377,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6979,9 +7402,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! REAPPLIED_STAFF_LINES:SM8
@@ -7024,9 +7450,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7045,9 +7474,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:SM8
@@ -7104,9 +7536,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7126,9 +7561,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:SM8

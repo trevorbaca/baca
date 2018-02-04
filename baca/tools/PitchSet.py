@@ -18,15 +18,21 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new PianoStaff <<
-                        \new Staff {
-                            \new Voice {
+                \new Score
+                <<
+                    \new PianoStaff
+                    <<
+                        \new Staff
+                        {
+                            \new Voice
+                            {
                                 <fs' g'>1
                             }
                         }
-                        \new Staff {
-                            \new Voice {
+                        \new Staff
+                        {
+                            \new Voice
+                            {
                                 <bf bqf>1
                             }
                         }
@@ -85,14 +91,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -108,14 +119,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <c' a' bf' d''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -132,14 +148,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -155,14 +176,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <d' a' bf' c''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -199,14 +225,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -222,14 +253,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <c' d' a' bf'>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -246,14 +282,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }
@@ -269,14 +310,19 @@ class PitchSet(abjad.PitchSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
-                \new PianoStaff <<
-                    \new Staff {
-                        \new Voice {
+                \new PianoStaff
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             <d' a' bf' c''>1
                         }
                     }
-                    \new Staff {
-                        \new Voice {
+                    \new Staff
+                    {
+                        \new Voice
+                        {
                             s1
                         }
                     }

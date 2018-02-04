@@ -33,25 +33,26 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff {
-                { % measure
+            \new RhythmicStaff
+            {
+                {   % measure
                     \time 7/8
                     c'4
                     c'4
                     c'4
                     c'8
-                } % measure
-                { % measure
+                }   % measure
+                {   % measure
                     c'4
                     c'4
                     c'4
                     c'8
-                } % measure
-                { % measure
+                }   % measure
+                {   % measure
                     \time 7/16
                     c'4
                     c'8.
-                } % measure
+                }   % measure
             }
 
     ..  container:: example
@@ -81,25 +82,26 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff {
-                { % measure
+            \new RhythmicStaff
+            {
+                {   % measure
                     \time 7/8
                     c'8
                     c'4
                     c'4
                     c'4
-                } % measure
-                { % measure
+                }   % measure
+                {   % measure
                     c'8
                     c'4
                     c'4
                     c'4
-                } % measure
-                { % measure
+                }   % measure
+                {   % measure
                     \time 7/16
                     c'8.
                     c'4
-                } % measure
+                }   % measure
             }
 
     Object model of a partially evaluated function that accepts a (possibly
@@ -186,13 +188,14 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'4
                         c'4
                         c'4
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -219,14 +222,15 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/8
                         c'4
                         c'4
                         c'4
                         c'8
-                    } % measure
+                    }   % measure
                 }
 
             Positions remainder at right of output because divison-maker
@@ -258,18 +262,19 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 2/4
                         c'4
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 3/4
                         c'4
                         c'4
                         c'4
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -294,11 +299,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 6/32
                         c'8.
-                    } % measure
+                    }   % measure
                 }
 
             Returns input division unchanged.
@@ -496,19 +502,20 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'4
                         c'4
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 6/8
                         c'4
                         c'4
                         c'4
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -538,18 +545,19 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'4
                         c'4
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 6/8
                         c'4.
                         c'4.
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to ``1``.
@@ -594,25 +602,26 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/8
                         c'4
                         c'4
                         c'4
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'4
                         c'4
                         c'4
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 7/16
                         c'4
                         c'8.
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -642,25 +651,26 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/8
                         c'4
                         c'2
                         ~
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'4
                         c'2
                         ~
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 7/16
                         c'4
                         c'8.
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to true.
@@ -699,18 +709,19 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/8
                         c'2..
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'2..
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 7/16
                         c'4..
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -739,25 +750,26 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/8
                         c'4
                         c'4
                         c'4
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'4
                         c'4
                         c'4
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         \time 7/16
                         c'4
                         c'8.
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to none.
@@ -799,23 +811,24 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/16
                         c'16
                         c'8
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'16
                         c'8
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'16
                         c'8
                         c'4
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -847,23 +860,24 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/16
                         c'16
                         c'8
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'8
                         c'4
                         c'16
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'4
                         c'16
                         c'8
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -895,23 +909,24 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 7/16
                         c'16
                         c'8
                         c'4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'4
                         c'16
                         c'8
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         c'8
                         c'4
                         c'16
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to 0.
@@ -951,13 +966,14 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'4
                         c'16
                         c'4..
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -984,15 +1000,16 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'4
                         c'16
                         c'4
                         c'16
                         c'8
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -1021,13 +1038,14 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'4..
                         c'4
                         c'16
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -1056,15 +1074,16 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 3/4
                         c'8
                         c'4
                         c'16
                         c'4
                         c'16
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to right.
@@ -1104,13 +1123,14 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 5/8
                         c'4
                         c'4
                         c'8
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -1138,12 +1158,13 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 5/8
                         c'4
                         c'4.
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -1173,13 +1194,14 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 5/8
                         c'8
                         c'4
                         c'4
-                    } % measure
+                    }   % measure
                 }
 
         ..  container:: example
@@ -1209,12 +1231,13 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff {
-                    { % measure
+                \new RhythmicStaff
+                {
+                    {   % measure
                         \time 5/8
                         c'4.
                         c'4
-                    } % measure
+                    }   % measure
                 }
 
         Defaults to none.

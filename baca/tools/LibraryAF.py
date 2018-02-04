@@ -50,8 +50,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -120,8 +122,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -202,8 +206,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -272,8 +278,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -345,8 +353,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -466,8 +476,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -531,8 +543,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -603,8 +617,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -672,8 +688,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -767,9 +785,12 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -803,9 +824,12 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -900,8 +924,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1018,8 +1044,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1136,8 +1164,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1234,8 +1264,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1280,8 +1312,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1348,8 +1382,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1410,8 +1446,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1474,8 +1512,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1535,8 +1575,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \times 4/5 {
@@ -1584,8 +1626,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \times 4/5 {
@@ -1647,8 +1691,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1730,8 +1776,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1852,8 +1900,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -1970,8 +2020,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2088,8 +2140,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -2190,8 +2244,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2255,8 +2311,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2370,8 +2428,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \times 4/5 {
@@ -2400,7 +2460,8 @@ class LibraryAF(abjad.AbjadObject):
                             }
                         }
                     }
-                    \context Voice = "Voice 2" {
+                    \context Voice = "Voice 2"
+                    {
                         \voiceTwo
                         {
                             \override TupletBracket.stencil = ##f
@@ -2459,8 +2520,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2578,8 +2641,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2694,8 +2759,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2757,8 +2824,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2865,9 +2934,12 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2887,11 +2959,15 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context StringSectionStaffGroup = "String Section Staff Group" <<
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context StringSectionStaffGroup = "String Section Staff Group"
+                        <<
                             \tag Violin                                                                  %! ST4
-                            \context ViolinMusicStaff = "ViolinMusicStaff" {
-                                \context ViolinMusicVoice = "ViolinMusicVoice" {
+                            \context ViolinMusicStaff = "ViolinMusicStaff"
+                            {
+                                \context ViolinMusicVoice = "ViolinMusicVoice"
+                                {
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -2968,8 +3044,10 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag Viola                                                                   %! ST4
-                            \context ViolaMusicStaff = "ViolaMusicStaff" {
-                                \context ViolaMusicVoice = "ViolaMusicVoice" {
+                            \context ViolaMusicStaff = "ViolaMusicStaff"
+                            {
+                                \context ViolaMusicVoice = "ViolaMusicVoice"
+                                {
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -3047,8 +3125,10 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag Cello                                                                   %! ST4
-                            \context CelloMusicStaff = "CelloMusicStaff" {
-                                \context CelloMusicVoice = "CelloMusicVoice" {
+                            \context CelloMusicStaff = "CelloMusicStaff"
+                            {
+                                \context CelloMusicVoice = "CelloMusicVoice"
+                                {
                 <BLANKLINE>
                                     % [CelloMusicVoice measure 1]                                        %! SM4
                                     \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
@@ -3163,9 +3243,12 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3185,11 +3268,15 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context StringSectionStaffGroup = "String Section Staff Group" <<
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context StringSectionStaffGroup = "String Section Staff Group"
+                        <<
                             \tag Violin                                                                  %! ST4
-                            \context ViolinMusicStaff = "ViolinMusicStaff" {
-                                \context ViolinMusicVoice = "ViolinMusicVoice" {
+                            \context ViolinMusicStaff = "ViolinMusicStaff"
+                            {
+                                \context ViolinMusicVoice = "ViolinMusicVoice"
+                                {
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -3266,8 +3353,10 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag Viola                                                                   %! ST4
-                            \context ViolaMusicStaff = "ViolaMusicStaff" {
-                                \context ViolaMusicVoice = "ViolaMusicVoice" {
+                            \context ViolaMusicStaff = "ViolaMusicStaff"
+                            {
+                                \context ViolaMusicVoice = "ViolaMusicVoice"
+                                {
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -3342,8 +3431,10 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag Cello                                                                   %! ST4
-                            \context CelloMusicStaff = "CelloMusicStaff" {
-                                \context CelloMusicVoice = "CelloMusicVoice" {
+                            \context CelloMusicStaff = "CelloMusicStaff"
+                            {
+                                \context CelloMusicVoice = "CelloMusicVoice"
+                                {
                 <BLANKLINE>
                                     % [CelloMusicVoice measure 1]                                        %! SM4
                                     \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
@@ -3470,8 +3561,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3533,8 +3626,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -3581,8 +3676,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3664,8 +3761,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3736,8 +3835,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3810,8 +3911,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -3882,8 +3985,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
@@ -3964,8 +4069,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4036,8 +4143,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4112,8 +4221,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4174,8 +4285,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4276,8 +4389,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4347,8 +4462,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4430,8 +4547,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4501,8 +4620,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4585,8 +4706,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4655,8 +4778,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4768,8 +4893,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4834,8 +4961,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4910,8 +5039,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -4976,8 +5107,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5050,8 +5183,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5115,8 +5250,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5280,8 +5417,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5342,8 +5481,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5414,8 +5555,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5484,8 +5627,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -5560,8 +5705,10 @@ class LibraryAF(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \tweak text #tuplet-number::calc-fraction-text

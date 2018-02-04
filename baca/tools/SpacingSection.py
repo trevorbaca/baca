@@ -13,7 +13,8 @@ class SpacingSection(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(staff)
-            \new Staff {
+            \new Staff
+            {
                 \newSpacingSection
                 \set Score.proportionalNotationDuration = #(ly:make-moment 2 24)
                 c'4

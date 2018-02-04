@@ -133,35 +133,39 @@ class PitchArrayList(abjad.TypedList):
             ..  docs::
 
                 >>> abjad.f(score, strict=89)
-                \new Score <<
-                    \new StaffGroup <<
-                        \new Staff {
-                            { % measure
+                \new Score
+                <<
+                    \new StaffGroup
+                    <<
+                        \new Staff
+                        {
+                            {   % measure
                                 \time 4/8
                                 r8
                                 d'8
                                 <bf bqf>4
-                            } % measure
-                            { % measure
+                            }   % measure
+                            {   % measure
                                 \time 3/8
                                 r8
                                 r8
                                 r8
-                            } % measure
+                            }   % measure
                         }
-                        \new Staff {
-                            { % measure
+                        \new Staff
+                        {
+                            {   % measure
                                 \time 4/8
                                 g'4
                                 fs'8
                                 r8
-                            } % measure
-                            { % measure
+                            }   % measure
+                            {   % measure
                                 \time 3/8
                                 r8
                                 r8
                                 r8
-                            } % measure
+                            }   % measure
                         }
                     >>
                 >>

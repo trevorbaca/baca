@@ -29,9 +29,12 @@ class BreakMeasureMap(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \autoPageBreaksOff                                                           %! BREAK:BMM1
@@ -72,11 +75,15 @@ class BreakMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
-                    \context StringSectionStaffGroup = "String Section Staff Group" <<
+                \context MusicContext = "MusicContext"
+                <<
+                    \context StringSectionStaffGroup = "String Section Staff Group"
+                    <<
                         \tag Violin                                                                  %! ST4
-                        \context ViolinMusicStaff = "ViolinMusicStaff" {
-                            \context ViolinMusicVoice = "ViolinMusicVoice" {
+                        \context ViolinMusicStaff = "ViolinMusicStaff"
+                        {
+                            \context ViolinMusicVoice = "ViolinMusicVoice"
+                            {
                                 {
             <BLANKLINE>
                                     % [ViolinMusicVoice measure 1]                                   %! SM4
@@ -190,8 +197,10 @@ class BreakMeasureMap(abjad.AbjadObject):
                             }
                         }
                         \tag Viola                                                                   %! ST4
-                        \context ViolaMusicStaff = "ViolaMusicStaff" {
-                            \context ViolaMusicVoice = "ViolaMusicVoice" {
+                        \context ViolaMusicStaff = "ViolaMusicStaff"
+                        {
+                            \context ViolaMusicVoice = "ViolaMusicVoice"
+                            {
             <BLANKLINE>
                                 % [ViolaMusicVoice measure 1]                                        %! SM4
                                 \set ViolaMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
@@ -259,8 +268,10 @@ class BreakMeasureMap(abjad.AbjadObject):
                             }
                         }
                         \tag Cello                                                                   %! ST4
-                        \context CelloMusicStaff = "CelloMusicStaff" {
-                            \context CelloMusicVoice = "CelloMusicVoice" {
+                        \context CelloMusicStaff = "CelloMusicStaff"
+                        {
+                            \context CelloMusicVoice = "CelloMusicVoice"
+                            {
             <BLANKLINE>
                                 % [CelloMusicVoice measure 1]                                        %! SM4
                                 \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8

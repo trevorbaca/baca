@@ -395,7 +395,9 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
                 >>> lilypond_file = collections.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -409,11 +411,16 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             c''8
                             \startGroup

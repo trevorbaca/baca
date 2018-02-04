@@ -18,9 +18,12 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -46,9 +49,12 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
-                    \context MusicStaff = "MusicStaff" <<
-                        \context MusicVoiceOne = "MusicVoiceOne" {
+                \context MusicContext = "MusicContext"
+                <<
+                    \context MusicStaff = "MusicStaff"
+                    <<
+                        \context MusicVoiceOne = "MusicVoiceOne"
+                        {
             <BLANKLINE>
                             % [MusicVoiceOne measure 1]                                              %! SM4
                             R1 * 1/2
@@ -63,7 +69,8 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                             R1 * 3/8
             <BLANKLINE>
                         }
-                        \context MusicVoiceTwo = "MusicVoiceTwo" {
+                        \context MusicVoiceTwo = "MusicVoiceTwo"
+                        {
             <BLANKLINE>
                             % [MusicVoiceTwo measure 1]                                              %! SM4
                             R1 * 1/2

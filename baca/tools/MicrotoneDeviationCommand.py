@@ -30,9 +30,12 @@ class MicrotoneDeviationCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -58,9 +61,12 @@ class MicrotoneDeviationCommand(Command):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
-                    \context Staff = "MusicStaff" {
-                        \context Voice = "MusicVoice" {
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4

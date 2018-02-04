@@ -239,16 +239,21 @@ class ConstellationCircuit(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TextScript.staff-padding = #10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             <
                                 \tweak color #red
@@ -427,7 +432,8 @@ class ConstellationCircuit(abjad.AbjadObject):
                                 cs''''
                             >4
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             <
                                 \tweak color #red
@@ -487,16 +493,21 @@ class ConstellationCircuit(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TextScript.staff-padding = #10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             <
                                 \tweak color #red
@@ -683,7 +694,8 @@ class ConstellationCircuit(abjad.AbjadObject):
                             >4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             <
                                 \tweak color #red
@@ -753,16 +765,21 @@ class ConstellationCircuit(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TextScript.staff-padding = #10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
@@ -773,7 +790,8 @@ class ConstellationCircuit(abjad.AbjadObject):
                             <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             <c d bf>4
                             <c d bf>4
@@ -802,16 +820,21 @@ class ConstellationCircuit(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TextScript.staff-padding = #10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
@@ -830,7 +853,8 @@ class ConstellationCircuit(abjad.AbjadObject):
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             <c d bf>4
                             <c d bf>4
@@ -869,16 +893,21 @@ class ConstellationCircuit(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TextScript.staff-padding = #10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "Treble Staff" {
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
                             \clef "treble"
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
@@ -889,7 +918,8 @@ class ConstellationCircuit(abjad.AbjadObject):
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
-                        \context Staff = "Bass Staff" {
+                        \context Staff = "Bass Staff"
+                        {
                             \clef "bass"
                             <c d bf>4
                             e4

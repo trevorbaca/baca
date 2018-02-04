@@ -565,18 +565,22 @@ class PitchArray(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(score, strict=89)
-                \new Score <<
-                    \new Staff {
+                \new Score
+                <<
+                    \new Staff
+                    {
                         c'8
                         d'8
                         e'8
                         f'8
                     }
-                    \new Staff {
+                    \new Staff
+                    {
                         c'4
                         d'4
                     }
-                    \new Staff {
+                    \new Staff
+                    {
                         \times 2/3 {
                             c'8
                             d'8
@@ -613,18 +617,22 @@ class PitchArray(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(score, strict=89)
-                \new Score <<
-                    \new Staff {
+                \new Score
+                <<
+                    \new Staff
+                    {
                         c'8
                         d'8
                         e'8
                         f'8
                     }
-                    \new Staff {
+                    \new Staff
+                    {
                         c'4
                         d'4
                     }
-                    \new Staff {
+                    \new Staff
+                    {
                         \times 2/3 {
                             c'8
                             d'8
@@ -827,18 +835,19 @@ class PitchArray(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(staff, strict=89)
-                \new Staff {
-                    { % measure
+                \new Staff
+                {
+                    {   % measure
                         \time 4/8
                         r8
                         d'8
                         <bf bqf>4
-                    } % measure
-                    { % measure
+                    }   % measure
+                    {   % measure
                         g'4
                         fs'8
                         r8
-                    } % measure
+                    }   % measure
                 }
 
         Returns list of measures.

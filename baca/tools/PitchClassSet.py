@@ -19,7 +19,8 @@ class PitchClassSet(abjad.PitchClassSet):
 
                 >>> lilypond_file = setting.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
-                \new Voice {
+                \new Voice
+                {
                     <fs' g' bf' bqf'>1
                 }
 

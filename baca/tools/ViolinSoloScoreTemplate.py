@@ -19,9 +19,12 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -47,10 +50,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
+                \context MusicContext = "MusicContext"
+                <<
                     \tag Violin                                                                      %! ST4
-                    \context ViolinMusicStaff = "ViolinMusicStaff" {
-                        \context ViolinMusicVoice = "ViolinMusicVoice" {
+                    \context ViolinMusicStaff = "ViolinMusicStaff"
+                    {
+                        \context ViolinMusicVoice = "ViolinMusicVoice"
+                        {
             <BLANKLINE>
                             % [ViolinMusicVoice measure 1]                                           %! SM4
                             \set ViolinMusicStaff.instrumentName = \markup {                         %! DEFAULT_INSTRUMENT:SM8

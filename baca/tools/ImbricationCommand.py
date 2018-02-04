@@ -39,15 +39,19 @@ class ImbricationCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score <<
-                \new GlobalContext {
-                    { % measure
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    {   % measure
                         \time 15/16
                         s1 * 15/16
-                    } % measure
+                    }   % measure
                 }
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \override TupletBracket.stencil = ##f
@@ -81,7 +85,8 @@ class ImbricationCommand(Command):
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Voice 2" {
+                    \context Voice = "Voice 2"
+                    {
                         \voiceTwo
                         {
                             \scaleDurations #'(1 . 1) {
@@ -179,15 +184,19 @@ class ImbricationCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score <<
-                \new GlobalContext {
-                    { % measure
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    {   % measure
                         \time 15/16
                         s1 * 15/16
-                    } % measure
+                    }   % measure
                 }
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \override TupletBracket.stencil = ##f
@@ -228,7 +237,8 @@ class ImbricationCommand(Command):
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Voice 2" {
+                    \context Voice = "Voice 2"
+                    {
                         \voiceTwo
                         {
                             \scaleDurations #'(1 . 1) {
@@ -286,7 +296,8 @@ class ImbricationCommand(Command):
                             }
                         }
                     }
-                    \context Voice = "Voice 3" {
+                    \context Voice = "Voice 3"
+                    {
                         \voiceThree
                         {
                             \override TupletBracket.stencil = ##f
@@ -372,15 +383,19 @@ class ImbricationCommand(Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score <<
-                \new GlobalContext {
-                    { % measure
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    {   % measure
                         \time 9/8
                         s1 * 9/8
-                    } % measure
+                    }   % measure
                 }
-                \new Staff <<
-                    \context Voice = "Voice 1" {
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
                         \voiceOne
                         {
                             \override TupletBracket.stencil = ##f
@@ -430,7 +445,8 @@ class ImbricationCommand(Command):
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Voice 2" {
+                    \context Voice = "Voice 2"
+                    {
                         \voiceTwo
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -609,15 +625,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 27/16
                             s1 * 27/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -655,7 +675,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -714,15 +735,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 9/8
                             s1 * 9/8
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -768,7 +793,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -894,9 +920,12 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -916,9 +945,12 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context MusicStaff = "MusicStaff" <<
-                            \context MusicVoiceOne = "MusicVoiceOne" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context MusicStaff = "MusicStaff"
+                        <<
+                            \context MusicVoiceOne = "MusicVoiceOne"
+                            {
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
@@ -977,7 +1009,8 @@ class ImbricationCommand(Command):
                                     \revert TupletNumber.stencil
                                 }
                             }
-                            \context MusicVoiceTwo = "MusicVoiceTwo" {
+                            \context MusicVoiceTwo = "MusicVoiceTwo"
+                            {
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -1073,15 +1106,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 11/16
                             s1 * 11/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -1111,7 +1148,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -1190,15 +1228,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 19/16
                             s1 * 19/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -1234,7 +1276,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -1478,15 +1521,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 5/8
                             s1 * 5/8
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -1520,7 +1567,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -1680,15 +1728,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 15/16
                             s1 * 15/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -1735,7 +1787,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -1855,15 +1908,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 9/8
                             s1 * 9/8
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -1912,7 +1969,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -2052,15 +2110,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 15/16
                             s1 * 15/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2090,7 +2152,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -2183,15 +2246,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 15/16
                             s1 * 15/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2237,7 +2304,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -2328,15 +2396,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 15/16
                             s1 * 15/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2378,7 +2450,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -2471,15 +2544,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 15/16
                             s1 * 15/16
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2515,7 +2592,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
@@ -2616,15 +2694,19 @@ class ImbricationCommand(Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score <<
-                    \new GlobalContext {
-                        { % measure
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        {   % measure
                             \time 45/32
                             s1 * 45/32
-                        } % measure
+                        }   % measure
                     }
-                    \new Staff <<
-                        \context Voice = "Voice 1" {
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
                             \voiceOne
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2669,7 +2751,8 @@ class ImbricationCommand(Command):
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Voice 2" {
+                        \context Voice = "Voice 2"
+                        {
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {

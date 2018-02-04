@@ -18,7 +18,9 @@ class PitchTree(Tree):
 
             >>> lilypond_file = tree.__illustrate__()
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -32,11 +34,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         e''8
                         \startGroup
@@ -88,7 +95,9 @@ class PitchTree(Tree):
 
             >>> lilypond_file = tree.__illustrate__()
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -102,11 +111,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         e''8
                         \startGroup
@@ -154,7 +168,9 @@ class PitchTree(Tree):
 
             >>> lilypond_file = tree.__illustrate__()
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -168,11 +184,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         e'8
                         \startGroup
@@ -224,7 +245,9 @@ class PitchTree(Tree):
 
             >>> lilypond_file = tree.__illustrate__()
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -238,11 +261,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         e'8
                         \startGroup
@@ -293,7 +321,9 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -307,11 +337,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         e'8
                         \startGroup
@@ -358,7 +393,9 @@ class PitchTree(Tree):
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -372,11 +409,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         bf'8
                         \startGroup
@@ -488,7 +530,9 @@ class PitchTree(Tree):
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score \with {
+            \new Score
+            \with
+            {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
@@ -502,11 +546,16 @@ class PitchTree(Tree):
                 \override TextScript.staff-padding = #2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
-            } <<
-                \new Staff {
-                    \new Voice \with {
+            }
+            <<
+                \new Staff
+                {
+                    \new Voice
+                    \with
+                    {
                         \consists Horizontal_bracket_engraver
-                    } {
+                    }
+                    {
                         \time 1/8
                         f'8
                         \startGroup
@@ -735,7 +784,9 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -749,11 +800,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e'8
                             \startGroup
@@ -801,7 +857,9 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -815,11 +873,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e'8
                             \startGroup
@@ -896,7 +959,9 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -910,11 +975,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             f'8
                             \startGroup
@@ -1184,7 +1254,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1198,11 +1270,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1280,7 +1357,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1294,11 +1373,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e'8
                             \startGroup
@@ -1354,7 +1438,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1368,11 +1454,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup
@@ -1416,7 +1507,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1430,11 +1523,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup
@@ -1478,7 +1576,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1492,11 +1592,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             af,8
                             \startGroup
@@ -1540,7 +1645,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1554,11 +1661,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             bf'8
                             \startGroup
@@ -1620,7 +1732,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1634,11 +1748,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup
@@ -1682,7 +1801,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = retrograde.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1696,11 +1817,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             c'8
                             \startGroup
@@ -1761,7 +1887,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1775,11 +1903,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup
@@ -1823,7 +1956,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1837,11 +1972,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             c'8
                             \startGroup
@@ -1885,7 +2025,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1899,11 +2041,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             a'8
                             \startGroup
@@ -1947,7 +2094,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -1961,11 +2110,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup
@@ -2027,7 +2181,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -2041,11 +2197,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup
@@ -2089,7 +2250,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -2103,11 +2266,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             f'''8
                             \startGroup
@@ -2151,7 +2319,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -2165,11 +2335,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             ef'8
                             \startGroup
@@ -2213,7 +2388,9 @@ class PitchTree(Tree):
 
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score \with {
+                \new Score
+                \with
+                {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
@@ -2227,11 +2404,16 @@ class PitchTree(Tree):
                     \override TextScript.staff-padding = #2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
+                }
+                <<
+                    \new Staff
+                    {
+                        \new Voice
+                        \with
+                        {
                             \consists Horizontal_bracket_engraver
-                        } {
+                        }
+                        {
                             \time 1/8
                             e''8
                             \startGroup

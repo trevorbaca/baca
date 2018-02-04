@@ -43,9 +43,12 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -71,9 +74,12 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "MusicContext" <<
-                    \context Staff = "MusicStaff" {
-                        \context Voice = "MusicVoice" {
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
@@ -388,9 +394,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -416,9 +425,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -2352,11 +2364,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" \with {
+                \context Score = "Score"
+                \with
+                {
                     autoBeaming = ##f
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                }
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2375,11 +2392,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context StringSectionStaffGroup = "String Section Staff Group" <<
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context StringSectionStaffGroup = "String Section Staff Group"
+                        <<
                             \tag Violin                                                                  %! ST4
-                            \context ViolinMusicStaff = "ViolinMusicStaff" {
-                                \context ViolinMusicVoice = "ViolinMusicVoice" {
+                            \context ViolinMusicStaff = "ViolinMusicStaff"
+                            {
+                                \context ViolinMusicVoice = "ViolinMusicVoice"
+                                {
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -2459,8 +2480,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                             }
                             \tag Viola                                                                   %! ST4
-                            \context ViolaMusicStaff = "ViolaMusicStaff" {
-                                \context ViolaMusicVoice = "ViolaMusicVoice" {
+                            \context ViolaMusicStaff = "ViolaMusicStaff"
+                            {
+                                \context ViolaMusicVoice = "ViolaMusicVoice"
+                                {
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 1]                                        %! SM4
                                     \set ViolaMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
@@ -2519,8 +2542,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                             }
                             \tag Cello                                                                   %! ST4
-                            \context CelloMusicStaff = "CelloMusicStaff" {
-                                \context CelloMusicVoice = "CelloMusicVoice" {
+                            \context CelloMusicStaff = "CelloMusicStaff"
+                            {
+                                \context CelloMusicVoice = "CelloMusicVoice"
+                                {
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -2663,11 +2688,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" \with {
+                \context Score = "Score"
+                \with
+                {
                     autoBeaming = ##f
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                }
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2701,9 +2731,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -2827,11 +2860,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" \with {
+                \context Score = "Score"
+                \with
+                {
                     autoBeaming = ##f
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                }
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2865,9 +2903,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -3003,9 +3044,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3031,9 +3075,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3108,9 +3155,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3136,9 +3186,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3215,9 +3268,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3243,9 +3299,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3324,9 +3383,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3352,9 +3414,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3440,9 +3505,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3468,9 +3536,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3595,9 +3666,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3623,9 +3697,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3700,9 +3777,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3728,9 +3808,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -3864,12 +3947,17 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" \with {
+                \context Score = "Score"
+                \with
+                {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                }
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3900,9 +3988,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -4022,12 +4113,17 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" \with {
+                \context Score = "Score"
+                \with
+                {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                }
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4058,9 +4154,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -4217,9 +4316,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4246,9 +4348,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
@@ -4588,9 +4693,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4616,9 +4724,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 R1 * 1/2
@@ -4653,9 +4764,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4681,9 +4795,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 s1 * 1/2
@@ -4757,9 +4874,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4785,9 +4905,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
@@ -4891,9 +5014,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4919,9 +5045,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
