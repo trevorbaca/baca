@@ -1100,6 +1100,22 @@ class SegmentMaker(abjad.SegmentMaker):
                     spanner=wrapper.spanner,
                     )
 
+    def _check_all_music_in_part_containers(self):
+        name = 'all_music_in_part_containers'
+        if getattr(self.score_template, name, None) is not True:
+            return
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            for component in voice:
+                if isinstance(component, abjad.Skip):
+                    continue
+                if (type(component) is abjad.Container and
+                    component.identifier and
+                    component.identifier.startswith('%*% ')):
+                    continue
+                message = f'{voice.name} contains {component!r}'
+                message += ' outside part container.'
+                raise Exception(message)
+
     def _check_persistent_indicators(self):
         if self.do_not_check_persistence:
             return
@@ -1169,6 +1185,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _collect_metadata(self):
         result = {}
+        result['container_to_part'] = self._container_to_part
         result['duration'] = self._duration
         result['fermata_measure_numbers'] = self._fermata_measure_numbers
         result['first_measure_number'] = self._get_first_measure_number()
@@ -5240,5 +5257,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._deactivate_tags(deactivate or [])
         self._remove_tags(remove)
         self._add_parse_handles()
+        self._check_all_music_in_part_containers()
         self._collect_metadata()
         return self._lilypond_file
