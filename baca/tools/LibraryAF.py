@@ -2820,7 +2820,6 @@ class LibraryAF(abjad.AbjadObject):
             >>
 
         '''
-        assert abjad.String(identifier).is_lilypond_identifier()
         return ContainerCommand(
             selector=selector,
             identifier=identifier,

@@ -105,7 +105,6 @@ class ContainerCommand(Command):
         selector: Selector = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
-        assert abjad.String(identifier).is_lilypond_identifier()
         self._identifier: str = identifier
 
     ### SPECIAL METHODS ###
