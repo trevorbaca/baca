@@ -706,7 +706,13 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(message)
 
     def _attach_fermatas(self):
-        if not self.metronome_mark_measure_map:
+        always_make_global_rests = getattr(
+            self.score_template,
+            'always_make_global_rests',
+            False,
+            )
+        if (not self.metronome_mark_measure_map and
+            not always_make_global_rests):
             del(self.score['GlobalRests'])
             return
         has_fermata = False
@@ -714,12 +720,14 @@ class SegmentMaker(abjad.SegmentMaker):
             for entry in self.metronome_mark_measure_map:
                 if isinstance(entry[1], abjad.Fermata):
                     has_fermata = True
-        if not has_fermata:
+        if not has_fermata and not always_make_global_rests:
             del(self.score['GlobalRests'])
             return
         context = self.score['GlobalRests']
         rests = self._make_multimeasure_rests()
         context.extend(rests)
+        if not self.metronome_mark_measure_map:
+            return
         directive_prototype = (
             abjad.BreathMark,
             abjad.Fermata,
