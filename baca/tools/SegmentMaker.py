@@ -874,6 +874,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf, 
                 wrapper.indicator,
                 'default',
+                existing_deactivate=wrapper.deactivate,
+                existing_tag=wrapper.tag,
                 )
 
     def _cache_leaves(self):

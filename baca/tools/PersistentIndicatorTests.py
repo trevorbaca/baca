@@ -4492,30 +4492,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! DEFAULT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! +SEGMENT:DEFAULT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {                                                              %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DarkViolet)                                         %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                ^ \markup {                                                              %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DarkViolet)                                         %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -4579,30 +4579,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! DEFAULT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! +SEGMENT:DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! +SEGMENT:DEFAULT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! +SEGMENT:DEFAULT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                      %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color                  %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”          %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat              %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                            %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                            %%% ^ \markup {                      %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color                  %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'DarkViolet) %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”          %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat              %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                            %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4663,30 +4663,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! DEFAULT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! +SEGMENT:DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! +SEGMENT:DEFAULT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! +SEGMENT:DEFAULT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {                      %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                  %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        {                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”          %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat              %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                {                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                }                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        }                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    }                            %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                ^ \markup {                      %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                  %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DarkViolet) %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        {                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”          %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II             %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat              %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                {                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter     %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                }                %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        }                        %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    }                            %! +SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! +SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
