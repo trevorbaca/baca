@@ -1,13 +1,16 @@
 import abjad
 import baca
 import collections
+from typing import List
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
 from .OverrideCommand import OverrideCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
+from .SuiteCommand import SuiteCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .VoltaCommand import VoltaCommand
@@ -33,19 +36,26 @@ class LibraryTZ(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def tag(tags, command, deactivate=None, tag_measure_number=None):
-        r'''Appends each tag in `tags` to `command`.
+    def tag(
+        tags: Union[str, List[str]],
+        command: Command,
+        deactivate: bool = None,
+        tag_measure_number: bool = None,
+        ) -> Command:
+        r'''Appends each tag in ``tags`` to ``command``.
 
-        Sorts `comand` tags.
+        Sorts ``command`` tags.
 
-        Returns `command` for in-place definition file application.
+        Returns ``command`` for in-place definition file application.
         '''
         if isinstance(tags, str):
             tags = [tags]
-        assert baca.Command._are_valid_tags(tags), repr(tags)
-        if isinstance(command, baca.SuiteCommand):
+        if not isinstance(tags, list):
+            raise Exception(f'string or list of strings only: {tags!r}.')
+        assert Command._are_valid_tags(tags), repr(tags)
+        if isinstance(command, SuiteCommand):
             for command_ in command.commands:
-                baca.tag(
+                LibraryTZ.tag(
                     tags,
                     command_,
                     deactivate=deactivate,

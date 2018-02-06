@@ -17,6 +17,7 @@ class Command(abjad.AbjadObject):
         '_offset_to_measure_number',
         '_selector',
         '_tag_measure_number',
+        '_tags',
         )
 
     _publish_storage_format = True
@@ -36,6 +37,7 @@ class Command(abjad.AbjadObject):
             prototype = (abjad.Expression, baca.MapCommand)
             assert isinstance(selector, prototype), repr(selector)
         self._selector = selector
+        self._tags = None
         self.manifests = None
         self.offset_to_measure_number = None
         self.tag_measure_number = tag_measure_number
