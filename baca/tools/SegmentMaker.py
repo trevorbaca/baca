@@ -859,6 +859,32 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self.score['GlobalSkips']).skip(0)
         abjad.attach(rehearsal_mark, skip, site='SM9')
 
+    def _attach_first_staff_score_template_defaults(self):
+        if self.first_segment:
+            return
+        prototype = (abjad.Staff, abjad.StaffGroup)
+        pairs = []
+        dictionary = self.previous_metadata['persistent_indicators']
+        for staff in abjad.iterate(self.score).components(prototype):
+            if staff.name in dictionary:
+                continue
+            pairs_ = self.score_template.attach_defaults(staff)
+            pairs.extend(pairs_)
+        for leaf, indicator in pairs:
+            wrapper = abjad.inspect(leaf).wrapper(indicator)
+            assert wrapper is not None
+            assert getattr(wrapper.indicator, 'persistent', False)
+            context = wrapper._find_correct_effective_context()
+            self._categorize_persistent_indicator(
+                self.manifests,
+                context,
+                leaf, 
+                wrapper.indicator,
+                'default',
+                existing_deactivate=wrapper.deactivate,
+                existing_tag=wrapper.tag,
+                )
+
     def _attach_score_template_defaults(self):
         if not self.first_segment:
             return
@@ -1116,7 +1142,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for component in voice:
-                if isinstance(component, abjad.Skip):
+                if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
                     continue
                 if (type(component) is abjad.Container and
                     component.identifier and
@@ -5242,6 +5268,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._annotate_sounds_during()
         self._attach_score_template_defaults()
         self._reapply_persistent_indicators()
+        self._attach_first_staff_score_template_defaults()
         self._apply_spacing()
         self._call_commands()
         self._shorten_long_repeat_ties()
