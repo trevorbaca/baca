@@ -596,6 +596,11 @@ class SegmentMaker(abjad.SegmentMaker):
             extra_offset=self.final_markup_extra_offset,
             )
 
+    def _alive_during_previous_segment(self, context) -> bool:
+        assert isinstance(context, abjad.Context), repr(context)
+        names: List = self.previous_metadata.get('alive_during_segment', [])
+        return context.name in names
+
     def _analyze_momento(self, context, momento):
         previous_indicator = self._momento_to_indicator(momento)
         if previous_indicator is None:
@@ -904,6 +909,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 existing_tag=wrapper.tag,
                 )
 
+    def _born_this_segment(self, component):
+        prototype = (abjad.Staff, abjad.StaffGroup)
+        assert isinstance(component, prototype), repr(component)
+        return not self._alive_during_previous_segment(component)
+
     def _cache_leaves(self):
         stage_timespans = []
         for stage_index in range(self.stage_count):
@@ -1183,11 +1193,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if clef is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing clef.'
             raise Exception(message)
-#        if isinstance(leaf, (abjad.Chord, abjad.Note)):
-#            dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
-#            if dynamic is None:
-#                message = f'{voice} leaf {i} ({leaf!s}) missing dynamic.'
-#                raise Exception(message)
 
     def _check_range(self):
         if not self.range_checker:
@@ -1219,8 +1224,15 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
+    def _collect_alive_during_segment(self):
+        result = []
+        for context in abjad.iterate(self.score).components(abjad.Context):
+            result.append(context.name)
+        return result
+
     def _collect_metadata(self):
         result = {}
+        result['alive_during_segment'] = self._collect_alive_during_segment()
         result['container_to_part'] = self._container_to_part
         result['duration'] = self._duration
         result['fermata_measure_numbers'] = self._fermata_measure_numbers
@@ -1900,6 +1912,21 @@ class SegmentMaker(abjad.SegmentMaker):
             site='SM2',
             tag=f'+{abjad.tags.SEGMENT}:{abjad.tags.EMPTY_START_BAR}',
             )
+
+    def _make_lilypond_align_above_context_settings(self):
+        if self.first_segment:
+            return
+        top_level = list(self.score['MusicContext'])
+        for i, staff_or_group in enumerate(top_level):
+            assert isinstance(staff_or_group, (abjad.Staff, abjad.StaffGroup))
+            if not self._born_this_segment(staff_or_group):
+                continue
+            below = top_level[i + 1:]
+            for staff in abjad.iterate(below).components(abjad.Staff):
+                if self._alive_during_previous_segment(staff):
+                    value = abjad.Scheme(staff.name, force_quotes=True)
+                    abjad.setting(staff_or_group).align_above_context = value
+                    break
 
     def _make_lilypond_file(self):
         includes = self._get_stylesheets()
@@ -4433,6 +4460,17 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(maker.metadata, strict=89)
             abjad.OrderedDict(
                 [
+                    (
+                        'alive_during_segment',
+                        [
+                            'Score',
+                            'GlobalContext',
+                            'GlobalSkips',
+                            'MusicContext',
+                            'MusicStaff',
+                            'MusicVoice',
+                            ],
+                        ),
                     ('first_measure_number', 1),
                     ('last_measure_number', 4),
                     (
@@ -5295,5 +5333,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_tags(remove)
         self._add_parse_handles()
         self._check_all_music_in_part_containers()
+        self._make_lilypond_align_above_context_settings()
         self._collect_metadata()
         return self._lilypond_file
