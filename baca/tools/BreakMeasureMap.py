@@ -39,8 +39,8 @@ class BreakMeasureMap(abjad.AbjadObject):
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \autoPageBreaksOff                                                           %! BREAK:BMM1
                         \noBreak                                                                     %! BREAK:BMM2
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \break                                                                       %! BREAK:IC
             <BLANKLINE>
@@ -48,27 +48,27 @@ class BreakMeasureMap(abjad.AbjadObject):
                         \noBreak                                                                     %! BREAK:BMM2
                         \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                         #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! BREAK:IC
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
                         \break                                                                       %! BREAK:IC
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 5]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
