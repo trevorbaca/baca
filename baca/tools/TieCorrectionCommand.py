@@ -125,7 +125,7 @@ class TieCorrectionCommand(Command):
             new_leaves,
             left_broken=left_broken,
             right_broken=right_broken,
-            site='TCC',
+            tag='TCC',
             )
 
     def _sever_tie(self, current_leaf):

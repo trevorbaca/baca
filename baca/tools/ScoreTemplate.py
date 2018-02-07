@@ -63,7 +63,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if part_names and tag_ not in part_names:
                 raise Exception(f'not listed in parts manifest: {tag_!r}.')
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
-        abjad.attach(literal, context, site='ST4')
+        abjad.attach(literal, context, tag='ST4')
 
     @staticmethod
     def _set_square_delimiter(staff_group):

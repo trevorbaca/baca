@@ -4957,19 +4957,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! EXPLICIT_INSTRUMENT_COLOR:SM6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
                                     fs'8
                                     [
-                                    ^ \markup {                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        \with-color                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            #(x11-color 'blue)                                           %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            (“clarinet”)                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
+                                    ^ \markup {                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        \with-color                                                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            #(x11-color 'blue)                                           %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            (“clarinet”)                                                 %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -5085,19 +5085,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! EXPLICIT_INSTRUMENT:SM8
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! EXPLICIT_INSTRUMENT_COLOR:SM6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
                                     e'8
                                     [
-                                    ^ \markup {                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        \with-color                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            #(x11-color 'blue)                                           %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            (“clarinet”)                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
+                                    ^ \markup {                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        \with-color                                                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            #(x11-color 'blue)                                           %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            (“clarinet”)                                                 %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>

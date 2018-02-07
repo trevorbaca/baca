@@ -265,13 +265,16 @@ class IndicatorCommand(Command):
                     leaf,
                     indicator,
                     )
+                if self.tag:
+                    tag = self.tag + ':' + 'IC'
+                else:
+                    tag = 'IC'
                 abjad.attach(
                     indicator,
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
-                    site='IC',
-                    tag=self.tag,
+                    tag=tag,
                     )
                 if indicator == reapplied_indicator:
                     if (isinstance(indicator, abjad.Dynamic) and

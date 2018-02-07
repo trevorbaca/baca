@@ -1874,18 +1874,18 @@ class LibraryGM(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! IC:EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 e'2
-                                ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [MarginMarkup]                                                   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                ^ \markup {                                                              %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [MarginMarkup]                                                   %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { Flute }                            %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 f'4.

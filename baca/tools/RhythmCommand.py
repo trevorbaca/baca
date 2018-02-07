@@ -144,7 +144,7 @@ class RhythmCommand(Command):
                 message = f'rhythm-makers make only notes and rests: {leaf!r}.'
                 raise Exception(message)
             elif isinstance(leaf, abjad.Note):
-                abjad.attach(abjad.tags.NOT_YET_PITCHED, leaf, site='')
+                abjad.attach(abjad.tags.NOT_YET_PITCHED, leaf, tag='')
             elif isinstance(leaf, rest_prototype):
                 pass
             else:

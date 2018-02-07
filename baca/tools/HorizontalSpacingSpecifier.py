@@ -907,7 +907,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 eol_adjusted = True
             spacing_section = baca.SpacingSection(duration)
             tag = abjad.tags.SPACING
-            abjad.attach(spacing_section, skip, site='HSS1', tag=tag)
+            abjad.attach(spacing_section, skip, tag=tag + ':' + 'HSS1')
             if eol_adjusted:
                 markup = abjad.Markup(f'[[{duration!s}]]')
             else:
@@ -921,7 +921,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             markup = markup.with_color(color)
             markup = abjad.new(markup, direction=abjad.Up)
             tag = abjad.tags.SPACING_MARKUP
-            abjad.attach(markup, skip, deactivate=True, site='HSS2', tag=tag)
+            abjad.attach(markup, skip, deactivate=True, tag=tag + ':' + 'HSS2')
 
     ### PRIVATE METHODS ###
 

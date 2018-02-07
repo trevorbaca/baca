@@ -701,7 +701,7 @@ class MusicMaker(abjad.AbjadObject):
     def _annotate_collection_list(container, collections):
         for leaf in abjad.iterate(container).leaves():
             collections_ = copy.deepcopy(collections)
-            abjad.attach(collections_, leaf, site='')
+            abjad.attach(collections_, leaf, tag='')
 
     def _annotate_deployment(
         self,
@@ -916,7 +916,7 @@ class MusicMaker(abjad.AbjadObject):
         if not color_unregistered_pitches:
             return
         for pleaf in abjad.iterate(argument).leaves(pitched=True):
-            abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, site='')
+            abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, tag='')
 
     @staticmethod
     def _exactly_double(selections):

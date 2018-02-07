@@ -347,8 +347,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             literal,
             skips[0],
             deactivate=self.deactivate,
-            site='BMM1',
-            tag=self.tag,
+            tag=self.tag + ':' + 'BMM1',
             )
         for skip in skips:
             if not abjad.inspect(skip).has_indicator(baca.LBSD):
@@ -357,8 +356,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     literal,
                     skip,
                     deactivate=self.deactivate,
-                    site='BMM2',
-                    tag=self.tag,
+                    tag=self.tag + ':' + 'BMM2',
                     )
         for command in self.commands:
             command(context)

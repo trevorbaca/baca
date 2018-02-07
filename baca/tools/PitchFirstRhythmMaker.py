@@ -690,7 +690,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 abjad.attach(
                     grace_container,
                     logical_tie.head,
-                    site='PFRM1',
+                    tag='PFRM1',
                     )
         if tuplet.trivial():
             tuplet.hide = True
