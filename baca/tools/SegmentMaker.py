@@ -799,36 +799,42 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             key = type(indicator).__name__
         if isinstance(indicator, abjad.Instrument):
+            if status == 'default':
+                tag = abjad.tags.DEFAULT_INSTRUMENT_ALERT
+            elif status == 'explicit':
+                tag = abjad.tags.EXPLICIT_INSTRUMENT_ALERT
+            elif status == 'reapplied':
+                tag = abjad.tags.REAPPLIED_INSTRUMENT_ALERT
+            else:
+                assert status == 'redundant', repr(status)
+                tag = abjad.tags.REDUNDANT_INSTRUMENT_ALERT
             left, right = '(', ')'
-        elif isinstance(indicator, abjad.MarginMarkup):
+        else:
+            assert isinstance(indicator, abjad.MarginMarkup)
+            if status == 'default':
+                tag = abjad.tags.DEFAULT_MARGIN_MARKUP_ALERT
+            elif status == 'explicit':
+                tag = abjad.tags.EXPLICIT_MARGIN_MARKUP_ALERT
+            elif status == 'reapplied':
+                tag = abjad.tags.REAPPLIED_MARGIN_MARKUP_ALERT
+            else:
+                assert status == 'redundant', repr(status)
+                tag = abjad.tags.REDUNDANT_MARGIN_MARKUP_ALERT
             left, right = '[', ']'
-        else:
-            raise TypeError(indicator)
-        if getattr(indicator, 'hide', False):
-            markup = abjad.Markup.from_literal(f'{left}{key}{right}')
-        else:
-            items = [abjad.Markup.from_literal(f'{left}{key}').vcenter()]
-            items.append(indicator.markup.vcenter())
-            item = indicator.short_markup.vcenter()
-            item = abjad.Markup.concat([item, abjad.Markup(right).vcenter()])
-            items.append(item)
-            markup = abjad.Markup(items)
+        markup = abjad.Markup.from_literal(f'{left}{key}{right}')
         markup = abjad.new(markup, direction=abjad.Up)
-        stem = SegmentMaker._indicator_to_stem(indicator)
         color = SegmentMaker._status_to_color[status]
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
-        tag = f'{status.upper()}_{stem}_ALERT'
-        tag = getattr(abjad.tags, tag)
         if existing_tag:
             tag = existing_tag + ':' + tag
         if document and abjad.tags.get_document_tag(tag) is None:
             tag = document + ':' + tag
+        tag = tag + ':' + 'SM11'
         abjad.attach(
             markup,
             leaf,
             deactivate=existing_deactivate,
-            site='SM11',
             tag=tag,
             )
 
@@ -2504,23 +2510,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                     #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            (Violin                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Violin                                   %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        Vn.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Violin)                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2585,23 +2575,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         \with-color                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             #(x11-color 'DarkViolet)                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            {                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    (Viola                                               %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \hcenter-in                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        #10                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        Viola                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \concat                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Va.                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            )                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            }                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            (Viola)                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \set ViolaMusicStaff.instrumentName = \markup {                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2649,23 +2623,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                     #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            (Cello                                       %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Cello                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        Vc.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Cello)                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set CelloMusicStaff.instrumentName = \markup {              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -5013,19 +4971,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         \with-color                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                             #(x11-color 'blue)                                           %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            {                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    (“clarinet”                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    "Clarinet in B-flat"                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                \concat                                                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                            "Cl. in B-flat"                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                            )                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            }                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            (“clarinet”)                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
@@ -5153,19 +5099,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         \with-color                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                             #(x11-color 'blue)                                           %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            {                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    (“clarinet”                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    "Clarinet in B-flat"                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                \concat                                                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                            "Cl. in B-flat"                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                            )                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            }                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            (“clarinet”)                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8

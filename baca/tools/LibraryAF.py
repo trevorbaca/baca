@@ -3082,23 +3082,7 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                     #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            (Violin                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Violin                                   %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        Vn.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Violin)                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3163,23 +3147,7 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                     #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            (Viola                                       %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Viola                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        Va.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Viola)                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set ViolaMusicStaff.instrumentName = \markup {              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3240,23 +3208,7 @@ class LibraryAF(abjad.AbjadObject):
                                     ^ \markup {                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         \with-color                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             #(x11-color 'DarkViolet)                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            {                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    (Cello                                               %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \hcenter-in                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        #10                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        Cello                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \concat                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Vc.                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            )                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            }                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            (Cello)                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \set CelloMusicStaff.instrumentName = \markup {                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3391,23 +3343,7 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                     #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            (Violin                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Violin                                   %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        Vn.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Violin)                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3471,23 +3407,7 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                     #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            (Viola                                       %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Viola                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                        Va.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Viola)                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set ViolaMusicStaff.instrumentName = \markup {              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3546,23 +3466,7 @@ class LibraryAF(abjad.AbjadObject):
                                     ^ \markup {                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         \with-color                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             #(x11-color 'DarkViolet)                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            {                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    (Cello                                               %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \hcenter-in                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        #10                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        Cello                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \concat                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                                Vc.                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                            )                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            }                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            (Cello)                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \set CelloMusicStaff.instrumentName = \markup {                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8

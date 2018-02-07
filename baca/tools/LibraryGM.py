@@ -1881,19 +1881,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [MarginMarkup                                            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                Flute                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        Fl.                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [MarginMarkup]                                                   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8

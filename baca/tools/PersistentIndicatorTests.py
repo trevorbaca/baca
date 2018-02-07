@@ -2676,19 +2676,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'DarkViolet)                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2763,19 +2751,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                             %%%         #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%         {                        %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%             \concat              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                 {                %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                         )        %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%                 }                %! DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%         }                        %! DEFAULT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)                %! DEFAULT_INSTRUMENT_ALERT:SM11
                             %%%     }                            %! DEFAULT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2847,19 +2823,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                      %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \with-color                  %! DEFAULT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                        {                        %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \vcenter             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”         %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \vcenter             %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                Flute            %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \concat              %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                {                %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        Fl.      %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter     %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                        )        %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                                }                %! DEFAULT_INSTRUMENT_ALERT:SM11
-                                        }                        %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     }                            %! DEFAULT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2948,19 +2912,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
@@ -3032,23 +2984,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue)   %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         {                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \concat          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 {            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                         )    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 }            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         }                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3116,23 +3056,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)   %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        {                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                Flute        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \concat          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                {            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        Fl.  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        )    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                }            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3232,19 +3160,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
@@ -3317,23 +3233,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue)   %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         {                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \concat          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 {            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                         )    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 }            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         }                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3402,23 +3306,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)   %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        {                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                Flute        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \concat          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                {            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        Fl.  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        )    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                }            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3519,19 +3411,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'green4)                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
@@ -3607,19 +3487,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                  %! REAPPLIED_INSTRUMENT_ALERT:SM11
                             %%%     \with-color              %! REAPPLIED_INSTRUMENT_ALERT:SM11
                             %%%         #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%         {                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”     %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute        %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%             \concat          %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                 {            %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.  %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                         )    %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%                 }            %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%         }                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)            %! REAPPLIED_INSTRUMENT_ALERT:SM11
                             %%%     }                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
@@ -3692,19 +3560,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                  %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     \with-color              %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        {                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                (“Flute”     %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                Flute        %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                            \concat          %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                {            %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                        Fl.  %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                        )    %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                                }            %! REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        }                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)            %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                     }                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
@@ -3810,19 +3666,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
@@ -3836,19 +3680,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
@@ -3927,23 +3759,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'2
-                            %%% ^ \markup {                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue)   %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         {                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%             \concat          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 {            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                         )    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%                 }            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         }                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -3956,19 +3776,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         {                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute           %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%             \concat             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 {               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                         )       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 }               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         }                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
@@ -4044,23 +3852,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'2
-                                ^ \markup {                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color              %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)   %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        {                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”     %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                Flute        %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            \concat          %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                {            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        Fl.  %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                        )    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                                }            %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -4073,19 +3869,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        {                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                Flute           %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \concat             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                {               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        Fl.     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        )       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                }               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        }                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
@@ -4192,19 +3976,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        {                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”                                                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                Flute                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \concat                                                      %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        Fl.                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        )                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
@@ -4280,19 +4052,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         {                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 (“Flute”        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 Flute           %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%             \concat             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 {               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                         Fl.     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                         )       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%                 }               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         }                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                             %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
@@ -4365,19 +4125,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        {                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                (“Flute”        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                Flute           %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                            \concat             %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                {               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        Fl.     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                        )       %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                                }               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        }                       %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
@@ -4499,19 +4247,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'DarkViolet)                                         %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! +SCORE:+SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! +SCORE:+SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
@@ -4586,19 +4322,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                      %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                             %%%     \with-color                  %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                             %%%         #(x11-color 'DarkViolet) %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”          %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat              %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]                 %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                             %%%     }                            %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! +SCORE:+SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! +SCORE:+SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
@@ -4670,19 +4394,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                      %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                  %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'DarkViolet) %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        {                        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”          %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II             %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat              %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                {                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter     %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                                }                %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        }                        %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                 %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                     }                            %! +SCORE:+SEGMENT:DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! +SCORE:+SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! +SCORE:+SEGMENT:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
@@ -4771,19 +4483,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
@@ -4855,23 +4555,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%% ^ \markup {                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -4939,23 +4627,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                ^ \markup {                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5055,19 +4731,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [“III+IV”                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                III+IV                                                   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        III+IV                                           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [“III+IV”]                                                       %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { III+IV }                           %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV }                      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
@@ -5140,23 +4804,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'blue)     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“III+IV”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 III+IV         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%% ^ \markup {                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“III+IV”]         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { III+IV }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5225,23 +4877,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [“III+IV”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                III+IV         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                ^ \markup {                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [“III+IV”]         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { III+IV }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5342,19 +4982,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'green4)                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
@@ -5430,19 +5058,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                  %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                             %%%     \with-color              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                             %%%         #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”      %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                             %%%     }                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
@@ -5515,19 +5131,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                  %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                     \with-color              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        {                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”      %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                I+II         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                            \concat          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                {            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                        ]    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                                }            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        }                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                     }                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
@@ -5633,19 +5237,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
@@ -5659,19 +5251,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'DeepPink1)                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
@@ -5750,23 +5330,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
-                            %%% ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%% ^ \markup {                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5779,19 +5347,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                             %%%     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                             %%%         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                             %%%     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
@@ -5867,23 +5423,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
-                                ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                ^ \markup {                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -5896,19 +5440,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
@@ -6015,19 +5547,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'DeepPink1)                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        {                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”                                                  %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat                                                      %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        }                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
@@ -6103,19 +5623,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%% ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                             %%%     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                             %%%         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%             \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                         ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%                 }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                             %%%     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
@@ -6188,19 +5696,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                            \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                        ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                                }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
@@ -6325,55 +5821,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                 {                                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                                     \with-color                                          %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                                         #(x11-color 'blue)                               %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        {                                                %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                            \vcenter                                     %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                [“I+II”                                  %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                            \vcenter                                     %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                I+II                                     %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                            \concat                                      %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                {                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                    \vcenter                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                        I+II                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                    \vcenter                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                        ]                                %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                                }                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        }                                                %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        [“I+II”]                                         %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                                 }                                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@% \line                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%     {                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%         \with-color                                          %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%             #(x11-color 'blue)                               %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             {                                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                 \vcenter                                     %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     [“III+IV”                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                 \vcenter                                     %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     III+IV                                   %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                 \concat                                      %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     {                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                         \vcenter                             %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                             III+IV                           %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                         \vcenter                             %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                             ]                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     }                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             }                                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             [“III+IV”]                                       %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%     }                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@% \line                                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%     {                                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%         \with-color                                          %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%             #(x11-color 'blue)                               %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             {                                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                 \vcenter                                     %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     [“III+IV”                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                 \vcenter                                     %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     III+IV                                   %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                 \concat                                      %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     {                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                         \vcenter                             %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                             III+IV                           %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                         \vcenter                             %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                             ]                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%                     }                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             }                                                %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             [“III+IV”]                                       %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         %@%     }                                                        %! +PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         }
                                     }
