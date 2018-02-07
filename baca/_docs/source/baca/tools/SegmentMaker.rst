@@ -41,7 +41,7 @@ Bases
       ~SegmentMaker.instruments
       ~SegmentMaker.last_segment
       ~SegmentMaker.manifests
-      ~SegmentMaker.margin_markup
+      ~SegmentMaker.margin_markups
       ~SegmentMaker.measure_count
       ~SegmentMaker.measures_per_stage
       ~SegmentMaker.metadata
@@ -115,7 +115,7 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.manifests
 
-.. autoattribute:: SegmentMaker.margin_markup
+.. autoattribute:: SegmentMaker.margin_markups
 
 .. autoattribute:: SegmentMaker.measure_count
 

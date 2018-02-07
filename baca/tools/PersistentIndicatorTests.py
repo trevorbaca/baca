@@ -4143,19 +4143,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
         pass
 
     @property
-    def margin_markup(self) -> None:
-        r'''Margin markup.
+    def margin_markups(self) -> None:
+        r'''Margin markups.
 
         ..  container:: example
 
             Margin markup for examples:
 
-            >>> margin_markup = abjad.OrderedDict()
-            >>> margin_markup['I+II'] = abjad.MarginMarkup(
+            >>> margin_markups = abjad.OrderedDict()
+            >>> margin_markups['I+II'] = abjad.MarginMarkup(
             ...     markup=abjad.Markup('I+II'),
             ...     short_markup=abjad.Markup('I+II'),
             ...     )
-            >>> margin_markup['III+IV'] = abjad.MarginMarkup(
+            >>> margin_markups['III+IV'] = abjad.MarginMarkup(
             ...     markup=abjad.Markup('III+IV'),
             ...     short_markup=abjad.Markup('III+IV'),
             ...     )
@@ -4174,13 +4174,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> triple = (
             ...     'MusicStaff',
             ...     'default_margin_markup',
-            ...     margin_markup['I+II'],
+            ...     margin_markups['I+II'],
             ...     )
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -4415,14 +4415,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.margin_markup(margin_markup['I+II']),
+            ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.make_notes(),
             ...     )
 
@@ -4649,14 +4649,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.margin_markup(margin_markup['III+IV']),
+            ...     baca.margin_markup(margin_markups['III+IV']),
             ...     baca.make_notes(),
             ...     )
 
@@ -4901,7 +4901,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5158,16 +5158,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.margin_markup(margin_markup['I+II']),
+            ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.map(
-            ...         baca.margin_markup(margin_markup['I+II']),
+            ...         baca.margin_markup(margin_markups['I+II']),
             ...         baca.leaves()[1],
             ...         ),
             ...     baca.make_notes(),
@@ -5465,14 +5465,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.margin_markup(margin_markup['I+II']),
+            ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.make_notes(),
             ...     )
 
@@ -5723,7 +5723,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
-            ...     margin_markup=margin_markup,
+            ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -5732,16 +5732,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     baca.scope('MusicVoice', 1),
             ...     baca.tag(
             ...         '+SEGMENT',
-            ...         baca.margin_markup(margin_markup['I+II']),
+            ...         baca.margin_markup(margin_markups['I+II']),
             ...         ),
             ...     baca.tag(
             ...         '+PARTS_VIOLIN',
-            ...         baca.margin_markup(margin_markup['III+IV']),
+            ...         baca.margin_markup(margin_markups['III+IV']),
             ...         deactivate=True,
             ...         ),
             ...     baca.tag(
             ...         '+PARTS_VIOLA',
-            ...         baca.margin_markup(margin_markup['III+IV']),
+            ...         baca.margin_markup(margin_markups['III+IV']),
             ...         deactivate=True,
             ...         ),
             ...     baca.make_notes(),

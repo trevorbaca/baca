@@ -166,7 +166,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_instruments',
         '_last_measure_is_fermata',
         '_last_segment',
-        '_margin_markup',
+        '_margin_markups',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
         '_metronome_mark_stem_height',
@@ -220,7 +220,7 @@ class SegmentMaker(abjad.SegmentMaker):
     _prototype_to_manifest_name = {
         'abjad.Instrument': 'instruments',
         'abjad.MetronomeMark': 'metronome_marks',
-        'abjad.MarginMarkup': 'margin_markup',
+        'abjad.MarginMarkup': 'margin_markups',
         }
 
     _extend_beam_tag = 'extend beam'
@@ -290,7 +290,7 @@ class SegmentMaker(abjad.SegmentMaker):
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
         breaks: BreakMeasureMap = None,
-        margin_markup: abjad.OrderedDict = None,
+        margin_markups: abjad.OrderedDict = None,
         measures_per_stage: List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
         metronome_mark_stem_height: Optional[Number] = 1.5,
@@ -338,7 +338,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._last_measure_is_fermata = False
         self._last_segment: bool = last_segment
         self._breaks: BreakMeasureMap = breaks
-        self._margin_markup: abjad.OrderedDict = margin_markup
+        self._margin_markups: abjad.OrderedDict = margin_markups
         if measures_per_stage is True:
             measures_per_stage = len(time_signatures) * [1]
         self._measures_per_stage: List[int] = measures_per_stage
@@ -1801,7 +1801,7 @@ class SegmentMaker(abjad.SegmentMaker):
         elif prototype is abjad.Instrument:
             indicator = self.instruments.get(key)
         elif prototype is abjad.MarginMarkup:
-            indicator = self.margin_markup.get(key)
+            indicator = self.margin_markups.get(key)
         elif prototype is abjad.MetronomeMark:
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
@@ -4290,15 +4290,15 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         manifests = abjad.OrderedDict()
         manifests['abjad.Instrument'] = self.instruments
-        manifests['abjad.MarginMarkup'] = self.margin_markup
+        manifests['abjad.MarginMarkup'] = self.margin_markups
         manifests['abjad.MetronomeMark'] = self.metronome_marks
         return manifests
 
     @property
-    def margin_markup(self) -> Optional[abjad.OrderedDict]:
-        r'''Gets margin markup.
+    def margin_markups(self) -> Optional[abjad.OrderedDict]:
+        r'''Gets margin markups.
         '''
-        return self._margin_markup
+        return self._margin_markups
 
     @property
     def measure_count(self) -> int:

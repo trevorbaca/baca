@@ -23,7 +23,7 @@ Bases
       ~PersistentIndicatorTests.dynamics
       ~PersistentIndicatorTests.hidden_instruments
       ~PersistentIndicatorTests.instruments
-      ~PersistentIndicatorTests.margin_markup
+      ~PersistentIndicatorTests.margin_markups
       ~PersistentIndicatorTests.metronome_marks
       ~PersistentIndicatorTests.staff_lines
       ~PersistentIndicatorTests.__format__
@@ -40,7 +40,7 @@ Read-only properties
 
 .. autoattribute:: PersistentIndicatorTests.instruments
 
-.. autoattribute:: PersistentIndicatorTests.margin_markup
+.. autoattribute:: PersistentIndicatorTests.margin_markups
 
 .. autoattribute:: PersistentIndicatorTests.metronome_marks
 
