@@ -607,7 +607,11 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if isinstance(previous_indicator, baca.SpacingSection):
             return
-        momento_context = self.score[momento.context]
+        if momento.context in self.score:
+            momento_context = self.score[momento.context]
+        else:
+            # context alive in previous segment doesn't exist in this segment
+            return
         leaf = abjad.inspect(momento_context).get_leaf(0)
         if isinstance(previous_indicator, abjad.Instrument):
             prototype = abjad.Instrument
