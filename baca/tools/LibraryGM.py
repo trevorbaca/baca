@@ -1545,6 +1545,20 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def make_repeat_tied_notes():
+        r'''Makes repeat-tied notes; rewrites meter.
+        '''
+        return baca.RhythmCommand(
+            rewrite_meter=True,
+            rhythm_maker=rhythmos.NoteRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
+                    tie_across_divisions=True,
+                    repeat_ties=True,
+                    ),
+                ),
+            )
+
+    @staticmethod
     def make_repeated_durations(durations):
         r'''Makes repeated durations.
         '''

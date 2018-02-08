@@ -1673,11 +1673,11 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tie_repeat_pitches(repeat=None):
+    def tie_repeat_pitches() -> MapCommand:
         r'''Ties repeat pitches.
         '''
         return baca.map(
-            LibraryTZ.tie(repeat=repeat),
+            LibraryTZ.tie(repeat=False),
             baca.ltqruns().nontrivial(),
             )
 

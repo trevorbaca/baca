@@ -28,6 +28,7 @@ class CommandWrapper(abjad.AbjadObject):
                         abjad.NamedPitch("b'"),
                         ]
                     ),
+                selector=baca.pleaves(),
                 ),
             scope=baca.Scope(
                 voice_name='ViolinMusicVoice',
@@ -61,6 +62,7 @@ class CommandWrapper(abjad.AbjadObject):
                         abjad.NamedPitch("b'"),
                         ]
                     ),
+                selector=baca.pleaves(),
                 ),
             scope=baca.TimelineScope(
                 scopes=(
@@ -126,6 +128,7 @@ class CommandWrapper(abjad.AbjadObject):
                         abjad.NamedPitch("b'"),
                         ]
                     ),
+                selector=baca.pleaves(),
                 )
 
         Defaults to none.

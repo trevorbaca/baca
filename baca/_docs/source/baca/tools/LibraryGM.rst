@@ -37,6 +37,7 @@ Bases
       ~LibraryGM.make_fused_tuplet_monads
       ~LibraryGM.make_multimeasure_rests
       ~LibraryGM.make_notes
+      ~LibraryGM.make_repeat_tied_notes
       ~LibraryGM.make_repeated_durations
       ~LibraryGM.make_rests
       ~LibraryGM.make_rhythm
@@ -91,6 +92,8 @@ Class & static methods
 .. automethod:: LibraryGM.make_multimeasure_rests
 
 .. automethod:: LibraryGM.make_notes
+
+.. automethod:: LibraryGM.make_repeat_tied_notes
 
 .. automethod:: LibraryGM.make_repeated_durations
 

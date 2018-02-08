@@ -36,6 +36,7 @@ Bases
       ~LibraryNS.rehearsal_mark
       ~LibraryNS.rehearsal_mark_extra_offset
       ~LibraryNS.reiterated_dynamic
+      ~LibraryNS.repeat_tie_repeat_pitches
       ~LibraryNS.repeat_ties_down
       ~LibraryNS.repeat_ties_up
       ~LibraryNS.rest_position
@@ -127,6 +128,8 @@ Class & static methods
 .. automethod:: LibraryNS.rehearsal_mark_extra_offset
 
 .. automethod:: LibraryNS.reiterated_dynamic
+
+.. automethod:: LibraryNS.repeat_tie_repeat_pitches
 
 .. automethod:: LibraryNS.repeat_ties_down
 

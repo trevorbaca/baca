@@ -54,6 +54,7 @@ class Loop(abjad.CyclicTuple):
                     [1]
                     ),
                 ),
+            selector=baca.pleaves(),
             )
 
     '''

@@ -1,9 +1,13 @@
 import abjad
 import baca
 import collections
+from typing import List
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
 from .IndicatorCommand import IndicatorCommand
+from .MapCommand import MapCommand
+from .PitchCommand import PitchCommand
+from .SpannerCommand import SpannerCommand
 from .Typing import Selector
 
 
@@ -505,18 +509,27 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def pitch(pitch):
-        r'''Sets pitch.
+    def pitch(
+        pitch,
+        selector: Selector = 'baca.pleaves()',
+        ) -> PitchCommand:
+        r'''Sets pitch on ``selector`` output..
         '''
         return baca.PitchCommand(
             allow_repeat_pitches=True,
             cyclic=True,
             pitches=[pitch],
+            selector=selector,
             )
 
     @staticmethod
-    def pitches(pitches, exact=None, repeats=None):
-        r'''Sets pitches.
+    def pitches(
+        pitches: List,
+        exact: bool = None,
+        repeats: bool = None,
+        selector: Selector = 'baca.pleaves()',
+        ) -> PitchCommand:
+        r'''Sets pitches on ``selector`` output..
         '''
         if bool(exact):
             cyclic = False
@@ -526,6 +539,7 @@ class LibraryNS(abjad.AbjadObject):
             allow_repeat_pitches=repeats,
             cyclic=cyclic,
             pitches=pitches,
+            selector=selector,
             )
 
     @staticmethod
@@ -1379,6 +1393,18 @@ class LibraryNS(abjad.AbjadObject):
         return baca.tools.IndicatorCommand(
             indicators=[abjad.Dynamic(dynamic)],
             selector=selector,
+            )
+
+    @staticmethod
+    def repeat_tie_repeat_pitches() -> MapCommand:
+        r'''Repeat-ties repeat pitches.
+        '''
+        return baca.map(
+            SpannerCommand(
+                selector='baca.qrun(0)',
+                spanner=abjad.Tie(repeat=True),
+                ),
+            baca.ltqruns().nontrivial(),
             )
 
     @staticmethod
@@ -5596,10 +5622,24 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def suite(commands, selector=None):
         r'''Makes suite.
+
+        ..  container:: example
+
+            Raises exception on noncommand:
+
+            >>> baca.suite(['Allegro'])
+            Traceback (most recent call last):
+            ...
+            Exception: must be command:
+            <BLANKLINE>
+            Allegro
+
         '''
-        prototype = (baca.Command, collections.Iterable)
-        if not isinstance(commands, prototype):
-            raise Exception(f'must be command(s):\n\n{commands}')
+        if not isinstance(commands, list):
+            raise Exception(f'must be command list:\n\n{commands}')
+        for command in commands:
+            if not isinstance(command, baca.Command):
+                raise Exception(f'must be command:\n\n{command}')
         if not isinstance(selector, (abjad.Expression, type(None))):
             raise Exception(f'must be selector or none:\n\n{selector}')
         return baca.SuiteCommand(commands=commands, selector=selector)

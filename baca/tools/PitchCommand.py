@@ -415,6 +415,10 @@ class PitchCommand(Command):
             return
         if not self.pitches:
             return
+        if self.selector:
+            argument = self.selector(argument)
+        if not argument:
+            return
         plts = []
         for pleaf in baca.select(argument).pleaves():
             plt = abjad.inspect(pleaf).get_logical_tie()
