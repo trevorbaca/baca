@@ -26,6 +26,7 @@ Bases
       ~ScoreTemplate.attach_defaults
       ~ScoreTemplate.defaults
       ~ScoreTemplate.group_families
+      ~ScoreTemplate.instrument_keys
       ~ScoreTemplate.make_music_context
       ~ScoreTemplate.make_piano_staff
       ~ScoreTemplate.make_square_staff_group
@@ -61,6 +62,12 @@ Methods
       .. automethod:: ScoreTemplate.attach_defaults
 
 .. automethod:: ScoreTemplate.group_families
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.instrument_keys
 
 .. automethod:: ScoreTemplate.make_music_context
 

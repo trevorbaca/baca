@@ -28,6 +28,7 @@ Bases
       ~SingleStaffScoreTemplate.attach_defaults
       ~SingleStaffScoreTemplate.defaults
       ~SingleStaffScoreTemplate.group_families
+      ~SingleStaffScoreTemplate.instrument_keys
       ~SingleStaffScoreTemplate.make_music_context
       ~SingleStaffScoreTemplate.make_piano_staff
       ~SingleStaffScoreTemplate.make_square_staff_group
@@ -71,6 +72,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: SingleStaffScoreTemplate.group_families
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.instrument_keys
 
 .. only:: html
 
