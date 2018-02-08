@@ -1325,17 +1325,20 @@ class LibraryGM(abjad.AbjadObject):
 
         '''
         return baca.tools.IndicatorCommand(
-            #indicators=[abjad.LineBreak()],
             indicators=[abjad.LilyPondLiteral(r'\break', 'after')],
             selector=selector,
             )
 
     @staticmethod
-    def literal(string, selector='baca.leaf(0)'):
-        r'''Makes LilyPond literal.
+    def literal(
+        string: str,
+        format_slot: str = 'before',
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes LilyPond literal..
         '''
-        literal = abjad.LilyPondLiteral(string)
-        return baca.tools.IndicatorCommand(
+        literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
+        return IndicatorCommand(
             indicators=[literal],
             selector=selector,
             )
