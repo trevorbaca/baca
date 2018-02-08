@@ -55,6 +55,10 @@ Bases
       ~LibraryTZ.up_arpeggios
       ~LibraryTZ.up_bows
       ~LibraryTZ.very_long_fermata
+      ~LibraryTZ.voice_four
+      ~LibraryTZ.voice_one
+      ~LibraryTZ.voice_three
+      ~LibraryTZ.voice_two
       ~LibraryTZ.volta
       ~LibraryTZ.__format__
       ~LibraryTZ.__repr__
@@ -133,6 +137,14 @@ Class & static methods
 .. automethod:: LibraryTZ.up_bows
 
 .. automethod:: LibraryTZ.very_long_fermata
+
+.. automethod:: LibraryTZ.voice_four
+
+.. automethod:: LibraryTZ.voice_one
+
+.. automethod:: LibraryTZ.voice_three
+
+.. automethod:: LibraryTZ.voice_two
 
 .. automethod:: LibraryTZ.volta
 

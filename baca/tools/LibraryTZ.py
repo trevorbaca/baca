@@ -4520,6 +4520,54 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def voice_four(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes LilyPond ``\voiceFour`` command.
+        '''
+        literal = abjad.LilyPondLiteral(r'\voiceFour')
+        return IndicatorCommand(
+            indicators=[literal],
+            selector=selector,
+            )
+
+    @staticmethod
+    def voice_one(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes LilyPond ``\voiceOne`` command.
+        '''
+        literal = abjad.LilyPondLiteral(r'\voiceOne')
+        return IndicatorCommand(
+            indicators=[literal],
+            selector=selector,
+            )
+
+    @staticmethod
+    def voice_two(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes LilyPond ``\voiceTwo`` command.
+        '''
+        literal = abjad.LilyPondLiteral(r'\voiceTwo')
+        return IndicatorCommand(
+            indicators=[literal],
+            selector=selector,
+            )
+
+    @staticmethod
+    def voice_three(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes LilyPond ``\voiceThree`` command.
+        '''
+        literal = abjad.LilyPondLiteral(r'\voiceThree')
+        return IndicatorCommand(
+            indicators=[literal],
+            selector=selector,
+            )
+
+    @staticmethod
     def volta(
         selector: Selector = 'baca.leaves()',
         ) -> VoltaCommand:

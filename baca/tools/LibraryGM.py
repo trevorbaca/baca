@@ -1335,7 +1335,7 @@ class LibraryGM(abjad.AbjadObject):
         format_slot: str = 'before',
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Makes LilyPond literal..
+        r'''Makes LilyPond literal.
         '''
         literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
         return IndicatorCommand(
