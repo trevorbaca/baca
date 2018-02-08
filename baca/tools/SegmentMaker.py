@@ -1219,15 +1219,14 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_wellformedness(self):
         if self.skip_wellformedness_checks:
             return
-        score = self._lilypond_file['Score']
         if (self.color_octaves or
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
             return
         manager = baca.WellformednessManager()
-        if not manager.is_well_formed(score):
-            message = manager.tabulate_wellformedness(score)
-            raise Exception(message)
+        if not manager.is_well_formed(self.score):
+            message = manager.tabulate_wellformedness(self.score)
+            raise Exception('\n' + message)
 
     def _collect_alive_during_segment(self):
         result = []
@@ -1236,7 +1235,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _collect_metadata(self):
-        result = {}
+        result = abjad.OrderedDict()
         result['alive_during_segment'] = self._collect_alive_during_segment()
         result['container_to_part'] = self._container_to_part
         result['duration'] = self._duration

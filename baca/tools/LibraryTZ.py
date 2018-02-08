@@ -5,6 +5,7 @@ from typing import List
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
+from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
 from .OverrideCommand import OverrideCommand
@@ -1678,7 +1679,7 @@ class LibraryTZ(abjad.AbjadObject):
         '''
         return baca.map(
             LibraryTZ.tie(repeat=False),
-            baca.ltqruns().nontrivial(),
+            baca.select().ltqruns().nontrivial(),
             )
 
     @staticmethod

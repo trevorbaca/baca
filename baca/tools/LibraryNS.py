@@ -515,7 +515,7 @@ class LibraryNS(abjad.AbjadObject):
         ) -> PitchCommand:
         r'''Sets pitch on ``selector`` output..
         '''
-        return baca.PitchCommand(
+        return PitchCommand(
             allow_repeat_pitches=True,
             cyclic=True,
             pitches=[pitch],
@@ -535,7 +535,7 @@ class LibraryNS(abjad.AbjadObject):
             cyclic = False
         else:
             cyclic = True
-        return baca.PitchCommand(
+        return PitchCommand(
             allow_repeat_pitches=repeats,
             cyclic=cyclic,
             pitches=pitches,
@@ -1404,7 +1404,7 @@ class LibraryNS(abjad.AbjadObject):
                 selector='baca.qrun(0)',
                 spanner=abjad.Tie(repeat=True),
                 ),
-            baca.ltqruns().nontrivial(),
+            baca.select().ltqruns().nontrivial(),
             )
 
     @staticmethod

@@ -5,7 +5,7 @@ from typing import Tuple
 from typing import Union
 
 
-class WellformednessManager(abjad.AbjadObject):
+class WellformednessManager(abjad.WellformednessManager):
     r'''Wellformedness manager.
 
     ..  container:: example
@@ -39,9 +39,94 @@ class WellformednessManager(abjad.AbjadObject):
             ...     print(total)
             ...     print(violators)
             ...     print()
+            check_beamed_long_notes
+            4
+            []
+            <BLANKLINE>
+            check_discontiguous_spanners
+            0
+            []
+            <BLANKLINE>
+            check_duplicate_ids
+            5
+            []
+            <BLANKLINE>
+            check_empty_containers
+            1
+            []
+            <BLANKLINE>
+            check_intermarked_hairpins
+            0
+            []
+            <BLANKLINE>
+            check_misdurated_measures
+            0
+            []
+            <BLANKLINE>
+            check_misfilled_measures
+            0
+            []
+            <BLANKLINE>
+            check_mismatched_enchained_hairpins
+            0
+            []
+            <BLANKLINE>
+            check_mispitched_ties
+            0
+            []
+            <BLANKLINE>
+            check_misrepresented_flags
+            4
+            []
+            <BLANKLINE>
+            check_missing_parents
+            5
+            []
+            <BLANKLINE>
+            check_nested_measures
+            0
+            []
+            <BLANKLINE>
+            check_notes_on_wrong_clef
+            4
+            []
+            <BLANKLINE>
+            check_out_of_range_notes
+            4
+            []
+            <BLANKLINE>
+            check_overlapping_beams
+            0
+            []
+            <BLANKLINE>
+            check_overlapping_glissandi
+            0
+            set()
+            <BLANKLINE>
+            check_overlapping_hairpins
+            0
+            set()
+            <BLANKLINE>
+            check_overlapping_octavation_spanners
+            0
+            []
+            <BLANKLINE>
+            check_overlapping_ties
+            0
+            []
+            <BLANKLINE>
+            check_overlapping_trill_spanners
+            0
+            set()
+            <BLANKLINE>
             check_repeat_pitch_classes
             4
             [LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])]
+            <BLANKLINE>
+            check_tied_rests
+            0
+            []
+            <BLANKLINE>
 
         Returns (violators, total, check) triples.
         '''
@@ -168,7 +253,28 @@ class WellformednessManager(abjad.AbjadObject):
             >>> manager = baca.WellformednessManager()
             >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
+            0 /	4 beamed long notes
+            0 /	0 discontiguous spanners
+            0 /	5 duplicate ids
+            0 /	1 empty containers
+            0 /	0 intermarked hairpins
+            0 /	0 misdurated measures
+            0 /	0 misfilled measures
+            0 /	0 mismatched enchained hairpins
+            0 /	0 mispitched ties
+            0 /	4 misrepresented flags
+            0 /	5 missing parents
+            0 /	0 nested measures
+            0 /	4 notes on wrong clef
+            0 /	4 out of range notes
+            0 /	0 overlapping beams
+            0 /	0 overlapping glissandi
+            0 /	0 overlapping hairpins
+            0 /	0 overlapping octavation spanners
+            0 /	0 overlapping ties
+            0 /	0 overlapping trill spanners
             0 /	4 repeat pitch classes
+            0 /	0 tied rests
 
         ..  container:: example
 
@@ -178,7 +284,28 @@ class WellformednessManager(abjad.AbjadObject):
             >>> manager = baca.WellformednessManager()
             >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
+            0 /	4 beamed long notes
+            0 /	0 discontiguous spanners
+            0 /	5 duplicate ids
+            0 /	1 empty containers
+            0 /	0 intermarked hairpins
+            0 /	0 misdurated measures
+            0 /	0 misfilled measures
+            0 /	0 mismatched enchained hairpins
+            0 /	0 mispitched ties
+            0 /	4 misrepresented flags
+            0 /	5 missing parents
+            0 /	0 nested measures
+            0 /	4 notes on wrong clef
+            0 /	4 out of range notes
+            0 /	0 overlapping beams
+            0 /	0 overlapping glissandi
+            0 /	0 overlapping hairpins
+            0 /	0 overlapping octavation spanners
+            0 /	0 overlapping ties
+            0 /	0 overlapping trill spanners
             4 /	4 repeat pitch classes
+            0 /	0 tied rests
 
         Returns string.
         '''
