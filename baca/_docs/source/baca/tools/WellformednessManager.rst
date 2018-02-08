@@ -26,7 +26,6 @@ Bases
       ~WellformednessManager.check_discontiguous_spanners
       ~WellformednessManager.check_duplicate_ids
       ~WellformednessManager.check_empty_containers
-      ~WellformednessManager.check_intermarked_hairpins
       ~WellformednessManager.check_misdurated_measures
       ~WellformednessManager.check_misfilled_measures
       ~WellformednessManager.check_mismatched_enchained_hairpins
@@ -85,12 +84,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: WellformednessManager.check_empty_containers
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: WellformednessManager.check_intermarked_hairpins
 
 .. only:: html
 

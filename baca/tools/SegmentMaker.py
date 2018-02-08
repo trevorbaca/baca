@@ -1227,7 +1227,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
             return
-        manager = baca.WellformednessManager()
+        manager = baca.WellformednessManager(allow_percussion_clef=True)
         if not manager.is_well_formed(self.score):
             message = manager.tabulate_wellformedness(self.score)
             raise Exception('\n' + message)

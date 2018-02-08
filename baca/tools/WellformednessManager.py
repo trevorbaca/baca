@@ -19,6 +19,14 @@ class WellformednessManager(abjad.WellformednessManager):
 
     __documentation_section__ = '(5) Utilities'
 
+    ### INITIALIZER ###
+
+    def __init__(self, allow_percussion_clef=None):
+        abjad.WellformednessManager.__init__(
+            self,
+            allow_percussion_clef=allow_percussion_clef,
+            )
+
     ### SPECIAL METHODS ###
 
     def __call__(
@@ -53,10 +61,6 @@ class WellformednessManager(abjad.WellformednessManager):
             <BLANKLINE>
             check_empty_containers
             1
-            []
-            <BLANKLINE>
-            check_intermarked_hairpins
-            0
             []
             <BLANKLINE>
             check_misdurated_measures
@@ -257,7 +261,6 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	0 discontiguous spanners
             0 /	5 duplicate ids
             0 /	1 empty containers
-            0 /	0 intermarked hairpins
             0 /	0 misdurated measures
             0 /	0 misfilled measures
             0 /	0 mismatched enchained hairpins
@@ -288,7 +291,6 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	0 discontiguous spanners
             0 /	5 duplicate ids
             0 /	1 empty containers
-            0 /	0 intermarked hairpins
             0 /	0 misdurated measures
             0 /	0 misfilled measures
             0 /	0 mismatched enchained hairpins
