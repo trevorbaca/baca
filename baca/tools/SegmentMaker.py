@@ -1592,13 +1592,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 result[key] = value
         return result
 
-    def _get_segment_identifier(self):
-        segment_name = self._metadata.get('segment_name')
-        if segment_name is not None:
-            return segment_name
-        segment_number = self._get_segment_number()
-        return segment_number
-
     def _get_segment_measure_numbers(self):
         first_measure_number = self._get_first_measure_number()
         last_measure_number = self._get_last_measure_number()
@@ -5262,7 +5255,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shift_clefs_into_fermata_measures()
         self._deactivate_tags(deactivate or [])
         self._remove_tags(remove)
-        self._add_parse_handles()
+        self._add_container_identifiers()
         self._check_all_music_in_part_containers()
         self._make_lilypond_align_above_context_settings()
         self._collect_metadata()
