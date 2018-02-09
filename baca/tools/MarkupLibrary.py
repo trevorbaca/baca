@@ -429,6 +429,20 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def divisi_1_plus_3(selector='baca.pleaf(0)'):
+        return baca.markup(
+            '1 + 3',
+            selector=selector,
+            )
+
+    @staticmethod
+    def divisi_2_plus_4(selector='baca.pleaf(0)'):
+        return baca.markup(
+            '2 + 4',
+            selector=selector,
+            )
+
+    @staticmethod
     def estr_sul_pont(selector='baca.pleaf(0)'):
         return baca.markup(
             'estr. sul pont.',

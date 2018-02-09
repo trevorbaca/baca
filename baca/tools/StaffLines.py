@@ -70,13 +70,13 @@ class StaffLines(abjad.AbjadObject):
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
-            assert isinstance(context.name, str), repr(context)
-            context = context.name
+            assert isinstance(context.lilypond_type, str), repr(context)
+            lilypond_type = context.lilypond_type
         else:
-            context = self.context
+            lilypond_type = self.context
         strings = []
         strings.append(r'\stopStaff')
-        string = rf'\once \override {context}.StaffSymbol.line-count ='
+        string = rf'\once \override {lilypond_type}.StaffSymbol.line-count ='
         string += f' {self.line_count}'
         strings.append(string)
         strings.append(r'\startStaff')
