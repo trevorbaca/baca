@@ -8,6 +8,7 @@ from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
 from .PitchCommand import PitchCommand
 from .SpannerCommand import SpannerCommand
+from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Selector
 
 
@@ -1392,6 +1393,201 @@ class LibraryNS(abjad.AbjadObject):
         '''
         return baca.tools.IndicatorCommand(
             indicators=[abjad.Dynamic(dynamic)],
+            selector=selector,
+            )
+
+    @staticmethod
+    def repeat_tie_from(
+        selector: Selector = 'baca.pleaf(-1)',
+        ) -> TieCorrectionCommand:
+        r'''Repeat-ties from leaf.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.repeat_tie_from(baca.leaf(1)),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'2
+                                \repeatTie                                                               %! TCC
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        return TieCorrectionCommand(
+            repeat=True,
+            selector=selector,
+            )
+
+    @staticmethod
+    def repeat_tie_to(
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> TieCorrectionCommand:
+        r'''Repeat-ties to leaf.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.repeat_tie_to(baca.leaf(2)),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'2
+                                \repeatTie                                                               %! TCC
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        return TieCorrectionCommand(
+            direction=abjad.Left,
+            repeat=True,
             selector=selector,
             )
 
@@ -4885,6 +5081,17 @@ class LibraryNS(abjad.AbjadObject):
             indicators=[baca.StaffLines(line_count=n)],
             selector=selector,
             )
+
+    @staticmethod
+    def staff_position(number, selector='baca.plts()'):
+        r'''Makes staff position command.
+        '''
+        assert isinstance(number, int), repr(number)
+        return baca.StaffPositionCommand(
+            numbers=[number],
+            repeats=True,
+            selector=selector,
+            ) 
 
     @staticmethod
     def staff_positions(numbers, repeats=None, selector='baca.plts()'):

@@ -1583,7 +1583,6 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_from(
         selector: Selector = 'baca.pleaf(-1)',
-        repeat: bool = None,
         ) -> TieCorrectionCommand:
         r'''Ties from leaf.
 
@@ -1598,8 +1597,6 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(),
-            ...     baca.tie(repeat=True, selector=baca.leaves()[:2]),
-            ...     baca.tie(repeat=True, selector=baca.leaves()[-2:]),
             ...     baca.tie_from(baca.leaf(1)),
             ...     )
 
@@ -1652,15 +1649,13 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
-                                \repeatTie                                                               %! TCC
+                                ~                                                                        %! TCC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
-                                \repeatTie                                                               %! TCC
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 c'4.
-                                \repeatTie                                                               %! TCC
                 <BLANKLINE>
                             }
                         }
@@ -1669,7 +1664,7 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return TieCorrectionCommand(
-            repeat=repeat,
+            repeat=False,
             selector=selector,
             )
 
@@ -1685,7 +1680,6 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_to(
         selector: Selector = 'baca.pleaf(0)',
-        repeat: bool = None,
         ) -> TieCorrectionCommand:
         r'''Ties to leaf.
 
@@ -1700,9 +1694,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(),
-            ...     baca.tie(repeat=True, selector=baca.leaves()[:2]),
-            ...     baca.tie(repeat=True, selector=baca.leaves()[-2:]),
-            ...     baca.tie_to(baca.leaf(2)),
+            ...     baca.tie_to(baca.leaf(1)),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -1751,29 +1743,26 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'2
+                                ~                                                                        %! TCC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
-                                \repeatTie                                                               %! TCC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
-                                \repeatTie                                                               %! TCC
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 c'4.
-                                \repeatTie                                                               %! TCC
                 <BLANKLINE>
                             }
                         }
                     >>
                 >>
 
-
         '''
         return TieCorrectionCommand(
             direction=abjad.Left,
-            repeat=repeat,
+            repeat=False,
             selector=selector,
             )
 

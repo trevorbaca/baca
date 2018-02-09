@@ -65,6 +65,8 @@ Bases
       ~MarkupLibrary.delicatissimo
       ~MarkupLibrary.directly_on_bridge_bow_diagonally
       ~MarkupLibrary.directly_on_bridge_very_slow_bow
+      ~MarkupLibrary.divisi_1_plus_3
+      ~MarkupLibrary.divisi_2_plus_4
       ~MarkupLibrary.estr_sul_pont
       ~MarkupLibrary.final_markup
       ~MarkupLibrary.fluttertongue
@@ -263,6 +265,10 @@ Class & static methods
 .. automethod:: MarkupLibrary.directly_on_bridge_bow_diagonally
 
 .. automethod:: MarkupLibrary.directly_on_bridge_very_slow_bow
+
+.. automethod:: MarkupLibrary.divisi_1_plus_3
+
+.. automethod:: MarkupLibrary.divisi_2_plus_4
 
 .. automethod:: MarkupLibrary.estr_sul_pont
 

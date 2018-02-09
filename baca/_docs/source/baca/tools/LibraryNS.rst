@@ -36,7 +36,9 @@ Bases
       ~LibraryNS.rehearsal_mark
       ~LibraryNS.rehearsal_mark_extra_offset
       ~LibraryNS.reiterated_dynamic
+      ~LibraryNS.repeat_tie_from
       ~LibraryNS.repeat_tie_repeat_pitches
+      ~LibraryNS.repeat_tie_to
       ~LibraryNS.repeat_ties_down
       ~LibraryNS.repeat_ties_up
       ~LibraryNS.rest_position
@@ -72,6 +74,7 @@ Bases
       ~LibraryNS.staccati
       ~LibraryNS.staccatissimi
       ~LibraryNS.staff_lines
+      ~LibraryNS.staff_position
       ~LibraryNS.staff_positions
       ~LibraryNS.staff_symbol_extra_offset
       ~LibraryNS.stem_color
@@ -129,7 +132,11 @@ Class & static methods
 
 .. automethod:: LibraryNS.reiterated_dynamic
 
+.. automethod:: LibraryNS.repeat_tie_from
+
 .. automethod:: LibraryNS.repeat_tie_repeat_pitches
+
+.. automethod:: LibraryNS.repeat_tie_to
 
 .. automethod:: LibraryNS.repeat_ties_down
 
@@ -198,6 +205,8 @@ Class & static methods
 .. automethod:: LibraryNS.staccatissimi
 
 .. automethod:: LibraryNS.staff_lines
+
+.. automethod:: LibraryNS.staff_position
 
 .. automethod:: LibraryNS.staff_positions
 

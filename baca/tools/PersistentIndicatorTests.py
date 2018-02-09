@@ -6704,7 +6704,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override MusicStaff.StaffSymbol.line-count = 5                    %! IC:EXPLICIT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:EXPLICIT_STAFF_LINES:SM8
                                 \startStaff                                                              %! IC:EXPLICIT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! IC:EXPLICIT_STAFF_LINES_COLOR:SM6
                                 c'4.
@@ -6787,7 +6787,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override MusicStaff.StaffSymbol.line-count = 1                    %! IC:EXPLICIT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! IC:EXPLICIT_STAFF_LINES:SM8
                                 \startStaff                                                              %! IC:EXPLICIT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! IC:EXPLICIT_STAFF_LINES_COLOR:SM6
                                 c'4.
@@ -6871,7 +6871,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! REAPPLIED_STAFF_LINES:SM8
-                                \once \override MusicStaff.StaffSymbol.line-count = 5                    %! REAPPLIED_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! REAPPLIED_STAFF_LINES:SM8
                                 \startStaff                                                              %! REAPPLIED_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! REAPPLIED_STAFF_LINES_COLOR:SM6
                                 c'4.
@@ -6943,14 +6943,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override MusicStaff.StaffSymbol.line-count = 5                    %! IC:EXPLICIT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:EXPLICIT_STAFF_LINES:SM8
                                 \startStaff                                                              %! IC:EXPLICIT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! IC:EXPLICIT_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 \stopStaff                                                               %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \once \override MusicStaff.StaffSymbol.line-count = 5                    %! IC:REDUNDANT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:REDUNDANT_STAFF_LINES:SM8
                                 \startStaff                                                              %! IC:REDUNDANT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_STAFF_LINES_COLOR:SM6
                                 c'4.
@@ -7030,7 +7030,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:SM8
-                                \once \override MusicStaff.StaffSymbol.line-count = 5                    %! REDUNDANT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:SM8
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:SM8
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:SM6
                                 c'4.
