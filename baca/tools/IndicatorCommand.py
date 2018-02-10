@@ -310,12 +310,12 @@ class IndicatorCommand(Command):
         for wrapper in wrappers:
             if not wrapper.tag:
                 continue
-            if not (abjad.tags.has_reapplied_tag(wrapper.tag) or
-                abjad.tags.has_default_tag(wrapper.tag)):
+            if not (abjad.Tag(wrapper.tag).has_reapplied_tag() or
+                abjad.Tag(wrapper.tag).has_default_tag()):
                 continue
             reapplied_indicator = wrapper.indicator
             reapplied_tags = [
-                _ for _ in wrapper.tag.split(':')
+                _ for _ in abjad.Tag(wrapper.tag)
                 if _.startswith('REAPPLIED') or _.startswith('DEFAULT')
                 ]
             assert len(reapplied_tags) == 1, repr(wrapper.tag)

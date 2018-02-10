@@ -882,7 +882,7 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = markup.with_color(color)
         if existing_tag:
             tag = abjad.Tag(existing_tag).append(tag)
-        if document and abjad.tags.get_document_tag(tag) is None:
+        if document:
             tag = abjad.Tag(document).append(tag)
         tag = abjad.Tag(tag)
         abjad.attach(
@@ -1123,10 +1123,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _categorize_uncategorized_persistent_indicators(self):
         for leaf in abjad.iterate(self.score).leaves():
-            for wrapper in  abjad.inspect(leaf).wrappers():
+            for wrapper in abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, 'persistent', False):
                     continue
-                if abjad.tags.has_persistence_tag(wrapper.tag):
+                if abjad.Tag(wrapper.tag).has_persistence_tag():
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
@@ -1144,7 +1144,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     status = 'redundant'
                 context = wrapper._find_correct_effective_context()
-                document = abjad.tags.get_document_tag(wrapper.tag)
+                document = abjad.Tag(wrapper.tag).get_document_tag()
                 self._categorize_persistent_indicator(
                     self.manifests,
                     context,
@@ -1286,7 +1286,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype = type(indicator)
                     prototype = self._prototype_string(prototype)
                 if wrapper.tag:
-                    document = abjad.tags.get_document_tag(wrapper.tag)
+                    document = abjad.Tag(wrapper.tag).get_document_tag()
+                    if document is not None:
+                        document = str(document)
                 momento = abjad.Momento(
                     context=first_context.name,
                     document=document,
@@ -1380,7 +1382,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix, suffix=suffix)
         if existing_tag:
             tag = abjad.Tag(existing_tag).append(tag)
-        if document and abjad.tags.get_document_tag(tag) is None:
+        if document:
             tag = abjad.Tag(document).append(tag)
         tag = abjad.Tag(tag)
         if uncolor is True:
@@ -1456,10 +1458,10 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in abjad.inspect(leaf).wrappers():
                 if wrapper.tag is None:
                     continue
-                index = wrapper.tag.rfind(':')
-                tag = wrapper.tag[:index]
-                if tag in tags:
-                    wrapper._deactivate = True
+                for tag in tags:
+                    if tag in abjad.Tag(wrapper.tag):
+                        wrapper._deactivate = True
+                        break
 
     @staticmethod
     def _extend_beam(leaf):
@@ -1509,7 +1511,7 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves = abjad.select(all_leaves)
         assert abjad.inspect(all_leaves).get_duration() == sum(durations)
         beam = abjad.DuratedComplexBeam(beam_rests=True, durations=durations)
-        abjad.attach(beam, all_leaves, tag='')
+        abjad.attach(beam, all_leaves, tag=None)
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -1903,7 +1905,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for time_signature in self.time_signatures:
             skip = abjad.Skip(1)
             multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, skip, tag='')
+            abjad.attach(multiplier, skip, tag=None)
             abjad.attach(time_signature, skip, context='Score', tag='SM1')
             context.append(skip)
         if self.first_segment:
@@ -1989,7 +1991,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 silence = abjad.Skip(1)
             else:
                 silence = abjad.MultimeasureRest(1)
-            abjad.attach(multiplier, silence, tag='')
+            abjad.attach(multiplier, silence, tag=None)
             silences.append(silence)
         return silences
 
@@ -1998,7 +2000,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for time_signature in self.time_signatures:
             rest = abjad.MultimeasureRest(abjad.Duration(1))
             multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, rest, tag='')
+            abjad.attach(multiplier, rest, tag=None)
             rests.append(rest)
         return rests
 
@@ -2107,7 +2109,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in abjad.inspect(leaf).wrappers():
                 if wrapper.tag is None:
                     continue
-                for word in wrapper.tag.split(':'):
+                for word in abjad.Tag(wrapper.tag):
                     if word in tags:
                         abjad.detach(wrapper, leaf)
                         break
@@ -2170,7 +2172,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
                 if wrapper is None or not wrapper.tag:
                     continue
-                if abjad.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
+                if abjad.tags.EXPLICIT_CLEF not in abjad.Tag(wrapper.tag):
                     continue
                 measure_number = self._offset_to_measure_number.get(
                     start_offset,
@@ -2312,7 +2314,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = abjad.Tag(tag)
         if existing_tag:
             tag = abjad.Tag(existing_tag).append(tag)
-        if document and abjad.tags.get_document_tag(tag) is None:
+        if document:
             tag = abjad.Tag(document).append(tag)
         if spanner is not None:
             spanner.attach(
@@ -2327,7 +2329,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag = getattr(abjad.tags, tag)
                 if existing_tag:
                     tag = abjad.Tag(existing_tag).append(tag)
-                if document and abjad.tags.get_document_tag(tag) is None:
+                if document:
                     tag = abjad.Tag(document).append(tag)
                 tag = abjad.Tag(tag)
                 alternate = (color, str(tag.append('SM15')))
@@ -2392,10 +2394,10 @@ class SegmentMaker(abjad.SegmentMaker):
     def _whitespace_leaves(self):
         for leaf in abjad.iterate(self.score).leaves():
             literal = abjad.LilyPondLiteral('', 'absolute_before')
-            abjad.attach(literal, leaf, tag='')
+            abjad.attach(literal, leaf, tag=None)
             if abjad.inspect(leaf).get_leaf(1) is None:
                 literal = abjad.LilyPondLiteral('', 'absolute_after')
-                abjad.attach(literal, leaf, tag='')
+                abjad.attach(literal, leaf, tag=None)
 
     ### PUBLIC PROPERTIES ###
 
