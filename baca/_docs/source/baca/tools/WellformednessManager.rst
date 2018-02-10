@@ -29,7 +29,6 @@ Bases
       ~WellformednessManager.check_misdurated_measures
       ~WellformednessManager.check_misfilled_measures
       ~WellformednessManager.check_mismatched_enchained_hairpins
-      ~WellformednessManager.check_mispitched_ties
       ~WellformednessManager.check_misrepresented_flags
       ~WellformednessManager.check_missing_parents
       ~WellformednessManager.check_nested_measures
@@ -102,12 +101,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: WellformednessManager.check_mismatched_enchained_hairpins
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: WellformednessManager.check_mispitched_ties
 
 .. only:: html
 
