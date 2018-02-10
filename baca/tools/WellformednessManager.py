@@ -75,6 +75,10 @@ class WellformednessManager(abjad.WellformednessManager):
             0
             []
             <BLANKLINE>
+            check_mispitched_ties
+            0
+            []
+            <BLANKLINE>
             check_misrepresented_flags
             4
             []
@@ -260,6 +264,7 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	0 misdurated measures
             0 /	0 misfilled measures
             0 /	0 mismatched enchained hairpins
+            0 /	0 mispitched ties
             0 /	4 misrepresented flags
             0 /	5 missing parents
             0 /	0 nested measures
@@ -289,6 +294,7 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	0 misdurated measures
             0 /	0 misfilled measures
             0 /	0 mismatched enchained hairpins
+            0 /	0 mispitched ties
             0 /	4 misrepresented flags
             0 /	5 missing parents
             0 /	0 nested measures
