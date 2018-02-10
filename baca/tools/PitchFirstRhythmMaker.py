@@ -307,7 +307,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             total_collections=total_collections,
             )
         selections = self._apply_specifiers(selections)
-        self._check_wellformedness(selections)
+        #self._check_wellformedness(selections)
         state = self._make_state()
         return selections, state
 
