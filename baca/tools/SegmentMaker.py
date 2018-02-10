@@ -896,7 +896,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper.indicator,
                 'default',
                 existing_deactivate=wrapper.deactivate,
-                existing_tag=wrapper.tag,
+                # segment only:
+                existing_tag=wrapper.tag + ':' + '-PARTS' + ':' + '-SCORE',
                 )
 
     def _attach_score_template_defaults(self):
