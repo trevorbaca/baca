@@ -116,13 +116,11 @@ class Command(abjad.AbjadObject):
         return self._selector
 
     @property
-    def tag(self):
-        r'''Gets colon-delimited tag.
-
-        Returns string or none.
+    def tag(self) -> abjad.Tag:
+        r'''Gets tag.
         '''
         if self.tags:
-            return ':'.join(self.tags)
+            return abjad.Tag.from_words(self.tags)
 
     @property
     def tag_measure_number(self):
@@ -150,10 +148,8 @@ class Command(abjad.AbjadObject):
 
     ### PUBLIC METHODS ###
 
-    def get_tag(self, leaf=None):
+    def get_tag(self, leaf: abjad.Leaf = None) -> abjad.Tag:
         r'''Gets tag for `leaf`.
-
-        Returns colon-delimited string.
         '''
         tags = self.tags[:]
         if self._tag_measure_number:
@@ -164,4 +160,4 @@ class Command(abjad.AbjadObject):
                 tags.append(tag)
         if tags:
             tags.sort()
-            return ':'.join(tags)
+            return abjad.Tag.from_words(tags)

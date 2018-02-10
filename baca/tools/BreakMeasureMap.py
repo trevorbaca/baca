@@ -1,5 +1,6 @@
 import abjad
 import baca
+from typing import List
 
 
 class BreakMeasureMap(abjad.AbjadObject):
@@ -22,7 +23,6 @@ class BreakMeasureMap(abjad.AbjadObject):
         ...     baca.make_even_runs(),
         ...     baca.pitches('E4', repeats=True),
         ...     )
-
         >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -347,7 +347,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             literal,
             skips[0],
             deactivate=self.deactivate,
-            tag=self.tag + ':' + 'BMM1',
+            tag=self.tag.append('BMM1').string,
             )
         for skip in skips:
             if not abjad.inspect(skip).has_indicator(baca.LBSD):
@@ -356,7 +356,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     literal,
                     skip,
                     deactivate=self.deactivate,
-                    tag=self.tag + ':' + 'BMM2',
+                    tag=self.tag.append('BMM2').string,
                     )
         for command in self.commands:
             command(context)
@@ -409,16 +409,14 @@ class BreakMeasureMap(abjad.AbjadObject):
         return self._deactivate
 
     @property
-    def tag(self):
-        r'''Gets colon-delimited tag.
-
-        Returns string.
+    def tag(self) -> abjad.Tag:
+        r'''Gets tag.
         '''
         if self.tags:
-            return ':'.join(self.tags)
+            return abjad.Tag.from_words(self.tags)
 
     @property
-    def tags(self):
+    def tags(self) -> List[str]:
         r'''Gets tags.
 
         Returns (copied) list of strings.

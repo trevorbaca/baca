@@ -906,8 +906,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration *= self._magic_lilypond_eol_adjustment
                 eol_adjusted = True
             spacing_section = baca.SpacingSection(duration)
-            tag = abjad.tags.SPACING
-            abjad.attach(spacing_section, skip, tag=tag + ':' + 'HSS1')
+            tag = abjad.Tag(abjad.tags.SPACING).append('HSS1')
+            abjad.attach(spacing_section, skip, tag=str(tag))
             if eol_adjusted:
                 markup = abjad.Markup(f'[[{duration!s}]]')
             else:
@@ -920,8 +920,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             color = abjad.SchemeColor(color)
             markup = markup.with_color(color)
             markup = abjad.new(markup, direction=abjad.Up)
-            tag = abjad.tags.SPACING_MARKUP
-            abjad.attach(markup, skip, deactivate=True, tag=tag + ':' + 'HSS2')
+            tag = abjad.Tag(abjad.tags.SPACING_MARKUP).append('HSS2')
+            abjad.attach(markup, skip, deactivate=True, tag=str(tag))
 
     ### PRIVATE METHODS ###
 

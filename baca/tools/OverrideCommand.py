@@ -267,14 +267,14 @@ class OverrideCommand(Command):
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag = self.get_tag(leaves[0])
         if tag:
-            tag = tag + ':' + 'OC'
+            tag = tag.append('OC')
         else:
-            tag = 'OC'
+            tag = abjad.Tag('OC')
         abjad.attach(
             literal,
             leaves[0],
             deactivate=self.deactivate,
-            tag=tag,
+            tag=str(tag),
             )
         if once:
             return
@@ -285,14 +285,14 @@ class OverrideCommand(Command):
             )
         literal = abjad.LilyPondLiteral(string, 'after')
         if self.tag:
-            tag = self.tag + ':' + 'OC'
+            tag = self.tag.append('OC')
         else:
-            tag = 'OC'
+            tag = abjad.Tag('OC')
         abjad.attach(
             literal,
             leaves[-1],
             deactivate=self.deactivate,
-            tag=tag,
+            tag=str(tag),
             )
 
     ### PUBLIC PROPERTIES ###

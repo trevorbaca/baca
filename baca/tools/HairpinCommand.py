@@ -64,14 +64,14 @@ class HairpinCommand(Command):
                 self.start,
                 )
             if self.tag:
-                tag = self.tag + ':' + 'HC'
+                tag = self.tag.append('HC')
             else:
-                tag = 'HC'
+                tag = abjad.Tag('HC')
             spanner.attach(
                 self.start,
                 spanner[0],
                 deactivate=self.deactivate,
-                tag=tag,
+                tag=str(tag),
                 )
             if self.start == reapplied:
                 wrapper = abjad.inspect(spanner[0]).wrapper(self.start)
@@ -90,14 +90,14 @@ class HairpinCommand(Command):
                 self.stop,
                 )
             if self.tag:
-                tag = self.tag + ':' + 'HC'
+                tag = self.tag.append('HC')
             else:
-                tag = 'HC'
+                tag = abjad.Tag('HC')
             spanner.attach(
                 self.stop,
                 spanner[-1],
                 deactivate=self.deactivate,
-                tag=tag,
+                tag=str(tag),
                 )
             if self.stop == reapplied:
                 wrapper = abjad.inspect(spanner[-1]).wrapper(self.stop)
