@@ -1494,6 +1494,18 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def repeat_tie_repeat_pitches() -> MapCommand:
+        r'''Repeat-ties repeat pitches.
+        '''
+        return baca.map(
+            SpannerCommand(
+                selector='baca.qrun(0)',
+                spanner=abjad.Tie(repeat=True),
+                ),
+            baca.select().ltqruns().nontrivial(),
+            )
+
+    @staticmethod
     def repeat_tie_to(
         selector: Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:
@@ -1589,18 +1601,6 @@ class LibraryNS(abjad.AbjadObject):
             direction=abjad.Left,
             repeat=True,
             selector=selector,
-            )
-
-    @staticmethod
-    def repeat_tie_repeat_pitches() -> MapCommand:
-        r'''Repeat-ties repeat pitches.
-        '''
-        return baca.map(
-            SpannerCommand(
-                selector='baca.qrun(0)',
-                spanner=abjad.Tie(repeat=True),
-                ),
-            baca.select().ltqruns().nontrivial(),
             )
 
     @staticmethod

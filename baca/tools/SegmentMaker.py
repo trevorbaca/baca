@@ -778,12 +778,61 @@ class SegmentMaker(abjad.SegmentMaker):
             strings.append(string)
             literal = abjad.LilyPondLiteral(strings)
             abjad.attach(literal, rest, tag='SM19')
-            # TODO: replace 'fermata measure' with abjad.tags.FERMATA_MEASURE
-            abjad.attach('fermata measure', rest, tag='')
+            abjad.attach(
+                abjad.tags.FERMATA_MEASURE,
+                rest,
+                tag=abjad.tags.FERMATA_MEASURE,
+                )
             timespan = abjad.inspect(rest).get_timespan()
             self._fermata_start_offsets.append(timespan.start_offset)
             self._fermata_stop_offsets.append(timespan.stop_offset)
             self._fermata_measure_numbers.append(measure_number)
+
+    def _attach_first_appearance_score_template_defaults(self):
+        if self.first_segment:
+            return
+        prototype = (abjad.Staff, abjad.StaffGroup)
+        pairs = []
+        dictionary = self.previous_metadata['persistent_indicators']
+        for staff in abjad.iterate(self.score).components(prototype):
+            if staff.name in dictionary:
+                continue
+            pairs_ = self.score_template.attach_defaults(staff)
+            pairs.extend(pairs_)
+        for leaf, indicator in pairs:
+            wrapper = abjad.inspect(leaf).wrapper(indicator)
+            assert wrapper is not None
+            assert getattr(wrapper.indicator, 'persistent', False)
+            context = wrapper._find_correct_effective_context()
+            self._categorize_persistent_indicator(
+                self.manifests,
+                context,
+                leaf, 
+                wrapper.indicator,
+                'default',
+                existing_deactivate=wrapper.deactivate,
+                existing_tag=abjad.Tag(
+                    wrapper.tag).extend(['-PARTS', '-SCORE']).string,
+                )
+
+    def _attach_first_segment_score_template_defaults(self):
+        if not self.first_segment:
+            return
+        pairs = self.score_template.attach_defaults(self.score)
+        for leaf, indicator in pairs:
+            wrapper = abjad.inspect(leaf).wrapper(indicator)
+            assert wrapper is not None
+            assert getattr(wrapper.indicator, 'persistent', False)
+            context = wrapper._find_correct_effective_context()
+            self._categorize_persistent_indicator(
+                self.manifests,
+                context,
+                leaf, 
+                wrapper.indicator,
+                'default',
+                existing_deactivate=wrapper.deactivate,
+                existing_tag=wrapper.tag,
+                )
 
     @staticmethod
     def _attach_latent_indicator_alert(
@@ -832,14 +881,14 @@ class SegmentMaker(abjad.SegmentMaker):
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
         if existing_tag:
-            tag = existing_tag + ':' + tag
+            tag = abjad.Tag(existing_tag).append(tag).string
         if document and abjad.tags.get_document_tag(tag) is None:
-            tag = document + ':' + tag
+            tag = abjad.Tag(document).append(tag).string
         abjad.attach(
             markup,
             leaf,
             deactivate=existing_deactivate,
-            tag=tag + ':' + 'SM11',
+            tag=abjad.Tag(tag).append('SM11').string,
             )
 
     def _attach_metronome_marks(self):
@@ -856,7 +905,8 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(
             spanner,
             skips,
-            tag=abjad.tags.METRONOME_MARK_SPANNER + ':' + 'SM29',
+            tag=abjad.Tag(
+                abjad.tags.METRONOME_MARK_SPANNER).append('SM29').string,
             )
         if not self.metronome_mark_measure_map:
             return
@@ -872,52 +922,6 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_mark = abjad.RehearsalMark.from_string(self.rehearsal_mark)
         skip = baca.select(self.score['GlobalSkips']).skip(0)
         abjad.attach(rehearsal_mark, skip, tag='SM9')
-
-    def _attach_first_staff_score_template_defaults(self):
-        if self.first_segment:
-            return
-        prototype = (abjad.Staff, abjad.StaffGroup)
-        pairs = []
-        dictionary = self.previous_metadata['persistent_indicators']
-        for staff in abjad.iterate(self.score).components(prototype):
-            if staff.name in dictionary:
-                continue
-            pairs_ = self.score_template.attach_defaults(staff)
-            pairs.extend(pairs_)
-        for leaf, indicator in pairs:
-            wrapper = abjad.inspect(leaf).wrapper(indicator)
-            assert wrapper is not None
-            assert getattr(wrapper.indicator, 'persistent', False)
-            context = wrapper._find_correct_effective_context()
-            self._categorize_persistent_indicator(
-                self.manifests,
-                context,
-                leaf, 
-                wrapper.indicator,
-                'default',
-                existing_deactivate=wrapper.deactivate,
-                # segment only:
-                existing_tag=wrapper.tag + ':' + '-PARTS' + ':' + '-SCORE',
-                )
-
-    def _attach_score_template_defaults(self):
-        if not self.first_segment:
-            return
-        pairs = self.score_template.attach_defaults(self.score)
-        for leaf, indicator in pairs:
-            wrapper = abjad.inspect(leaf).wrapper(indicator)
-            assert wrapper is not None
-            assert getattr(wrapper.indicator, 'persistent', False)
-            context = wrapper._find_correct_effective_context()
-            self._categorize_persistent_indicator(
-                self.manifests,
-                context,
-                leaf, 
-                wrapper.indicator,
-                'default',
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=wrapper.tag,
-                )
 
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
@@ -1378,22 +1382,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 suffix = 'color'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix, suffix=suffix)
         if existing_tag:
-            tag = existing_tag + ':' + tag
+            tag = abjad.Tag(existing_tag).append(tag).string
         if document and abjad.tags.get_document_tag(tag) is None:
-            tag = document + ':' + tag
+            tag = abjad.Tag(document).append(tag).string
         if uncolor is True:
             abjad.attach(
                 literal,
                 leaf,
                 deactivate=True,
-                tag=tag + ':' + 'SM7',
+                tag=abjad.Tag(tag).append('SM7').string,
                 )
         else:
             abjad.attach(
                 literal,
                 leaf,
                 deactivate=existing_deactivate,
-                tag=tag + ':' + 'SM6',
+                tag=abjad.Tag(tag).append('SM6').string,
                 )
 
     def _color_repeat_pitch_classes_(self):
@@ -1826,7 +1830,11 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
         tag = abjad.tags.CLOCK_TIME_MARKUP
-        label = abjad.label(skips, deactivate=True, tag=tag + ':' + 'SM28')
+        label = abjad.label(
+            skips,
+            deactivate=True,
+            tag=abjad.Tag(tag).append('SM28').string,
+            )
         segment_stop_duration = label.with_start_offsets(
             brackets=True,
             clock_time=True,
@@ -1853,7 +1861,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=abjad.tags.MEASURE_NUMBER_MARKUP + ':' + 'SM31',
+                tag=abjad.Tag(
+                    abjad.tags.MEASURE_NUMBER_MARKUP).append('SM31').string,
                 )
             markup = abjad.Markup(f'<{measure_index}>')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
@@ -1863,7 +1872,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=abjad.tags.MEASURE_INDEX_MARKUP + ':' + 'SM32',
+                tag=abjad.Tag(
+                    abjad.tags.MEASURE_INDEX_MARKUP).append('SM32').string,
                 )
 
     def _label_stage_numbers(self):
@@ -1886,7 +1896,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=abjad.tags.STAGE_NUMBER_MARKUP + ':' + 'SM3',
+                tag=abjad.Tag(
+                    abjad.tags.STAGE_NUMBER_MARKUP).append('SM3').string,
                 )
 
     def _make_global_skips(self):
@@ -1906,7 +1917,8 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(
             literal,
             first_skip,
-            tag=f'+{abjad.tags.SEGMENT}:{abjad.tags.EMPTY_START_BAR}:SM2',
+            tag=abjad.Tag('+SEGMENT').extend([
+                abjad.tags.EMPTY_START_BAR, 'SM2']).string,
             )
 
     def _make_lilypond_align_above_context_settings(self):
@@ -2269,11 +2281,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag = abjad.tags.EOL_FERMATA
                     measure_number_tag = self._get_measure_number_tag(leaf)
                     if measure_number_tag is not None:
-                        tag = f'{tag}:{measure_number_tag}'
+                        #tag = f'{tag}:{measure_number_tag}'
+                        tag = abjad.Tag(tag).append(measure_number_tag).string
                     abjad.attach(
                         literal,
                         leaf,
-                        tag=tag + ':' + 'SM22',
+                        tag=abjad.Tag(tag).append('SM22').string,
                         )
                 bar_lines_already_styled.append(start_offset)
 
@@ -2298,25 +2311,25 @@ class SegmentMaker(abjad.SegmentMaker):
             prefix = 'redrawn'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         if existing_tag:
-            tag = existing_tag + ':' + tag
+            tag = abjad.Tag(existing_tag).append(tag).string
         if document and abjad.tags.get_document_tag(tag) is None:
-            tag = document + ':' + tag
+            tag = abjad.Tag(document).append(tag).string
         if spanner is not None:
             spanner.attach(
                 indicator,
                 leaf,
                 deactivate=True,
-                tag=tag + ':' + 'SM27',
+                tag=abjad.Tag(tag).append('SM27').string,
                 )
             if isinstance(spanner, abjad.MetronomeMarkSpanner):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
                 tag = getattr(abjad.tags, tag)
                 if existing_tag:
-                    tag = existing_tag + ':' + tag
+                    tag = abjad.Tag(existing_tag).append(tag).string
                 if document and abjad.tags.get_document_tag(tag) is None:
-                    tag = document + ':' + tag
-                alternate = (color, tag + ':' + 'SM15')
+                    tag = abjad.Tag(document).append(tag).string
+                alternate = (color, abjad.Tag(tag).append('SM15').string)
                 found_wrapper = False
                 for wrapper in abjad.inspect(leaf).wrappers():
                     if wrapper.indicator is indicator:
@@ -2332,7 +2345,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 context=context.lilypond_type,
                 deactivate=existing_deactivate,
-                tag=tag + ':' + 'SM8',
+                tag=abjad.Tag(tag).append('SM8').string,
                 )
 
     def _transpose_score_(self):
@@ -5229,9 +5242,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._populate_offset_to_measure_number()
         self._extend_beams()
         self._annotate_sounds_during()
-        self._attach_score_template_defaults()
+        self._attach_first_segment_score_template_defaults()
         self._reapply_persistent_indicators()
-        self._attach_first_staff_score_template_defaults()
+        self._attach_first_appearance_score_template_defaults()
         self._apply_spacing()
         self._call_commands()
         self._shorten_long_repeat_ties()
