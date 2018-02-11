@@ -797,11 +797,13 @@ class SegmentMaker(abjad.SegmentMaker):
             if staff.name in dictionary:
                 continue
             for wrapper in self.score_template.attach_defaults(staff):
+                tag = abjad.Tag(wrapper.tag)
+                tag = tag.extend(['-PARTS', '-SCORE'])
+                wrapper._tag = str(tag)
                 self._categorize_persistent_wrapper(
                     self.manifests,
                     wrapper,
                     'default',
-                    tag_append='-PARTS:-SCORE',
                     )
 
     def _attach_first_segment_score_template_defaults(self):
@@ -1068,7 +1070,6 @@ class SegmentMaker(abjad.SegmentMaker):
         wrapper,
         status,
         document_tag=None,
-        tag_append=None,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         assert bool(wrapper.indicator.persistent), repr(wrapper)
@@ -1083,11 +1084,6 @@ class SegmentMaker(abjad.SegmentMaker):
         existing_tag = wrapper.tag
         if existing_tag is not None:
             existing_tag = abjad.Tag(existing_tag)
-        if tag_append is not None:
-            if existing_tag is not None:
-                existing_tag = existing_tag.append(tag_append)
-            else:
-                existing_tag = abjad.Tag(tag_append)
         if wrapper.spanner and wrapper.spanner._is_trending(wrapper.component):
             status = 'explicit'
         SegmentMaker._color_persistent_wrapper(
