@@ -103,7 +103,7 @@ class PiecewiseCommand(Command):
                     )
                 wrapper = spanner.attach(argument_, leaf, wrapper=True)
                 if argument_ == reapplied:
-                    baca.SegmentMaker._categorize_persistent_indicator(
+                    baca.SegmentMaker._categorize_persistent_wrapper(
                         self._manifests,
                         wrapper,
                         'redundant',

@@ -72,7 +72,7 @@ class MetronomeMarkCommand(Command):
             wrapper=True,
             )
         if metronome_mark == reapplied:
-            baca.SegmentMaker._categorize_persistent_indicator(
+            baca.SegmentMaker._categorize_persistent_wrapper(
                 self._manifests,
                 wrapper,
                 'redundant',
