@@ -1374,23 +1374,19 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         if getattr(wrapper.indicator, 'hide', False) is True:
             return
-        leaf = wrapper.component
-        indicator = wrapper.indicator
-        context = wrapper._find_correct_effective_context()
+        if not getattr(wrapper.indicator, 'persistent', False):
+            return
+        if wrapper.indicator.persistent == 'abjad.MetronomeMark':
+            return
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        stem = abjad.String.to_indicator_stem(indicator)
-        if stem == 'METRONOME_MARK':
-            return
-        grob = SegmentMaker._indicator_to_grob(indicator)
-        if context is not None:
-            string = rf'\override {context.lilypond_type}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
+        stem = abjad.String.to_indicator_stem(wrapper.indicator)
+        grob = SegmentMaker._indicator_to_grob(wrapper.indicator)
+        context = wrapper._find_correct_effective_context()
+        assert isinstance(context, abjad.Context), repr(context)
+        string = rf'\override {context.lilypond_type}.{grob}.color ='
         if uncolor is True:
             string += ' ##f'
         elif redraw is True:
@@ -1404,7 +1400,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal = abjad.LilyPondLiteral(string, 'after')
         else:
             literal = abjad.LilyPondLiteral(string)
-        if getattr(indicator, 'latent', False):
+        if getattr(wrapper.indicator, 'latent', False):
             if redraw:
                 prefix = 'redrawn'
             else:
@@ -1429,14 +1425,14 @@ class SegmentMaker(abjad.SegmentMaker):
         if uncolor is True:
             abjad.attach(
                 literal,
-                leaf,
+                wrapper.component,
                 deactivate=True,
                 tag=str(tag.append('SM7')),
                 )
         else:
             abjad.attach(
                 literal,
-                leaf,
+                wrapper.component,
                 deactivate=existing_deactivate,
                 tag=str(tag.append('SM6')),
                 )
