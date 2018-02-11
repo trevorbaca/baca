@@ -823,6 +823,8 @@ class SegmentMaker(abjad.SegmentMaker):
         existing_deactivate=None,
         existing_tag=None,
         ):
+        if not getattr(wrapper.indicator, 'latent', False):
+            return
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         if existing_tag is not None:
@@ -1069,13 +1071,13 @@ class SegmentMaker(abjad.SegmentMaker):
         tag_append=None,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+        assert bool(wrapper.indicator.persistent), repr(wrapper)
         assert isinstance(status, str), repr(status)
         context = wrapper._find_correct_effective_context()
         assert isinstance(context, abjad.Context), repr(wrapper)
         leaf = wrapper.component
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
-        assert getattr(indicator, 'persistent', None), repr(indicator)
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         existing_tag = wrapper.tag
@@ -1086,9 +1088,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 existing_tag = existing_tag.append(tag_append)
             else:
                 existing_tag = abjad.Tag(tag_append)
-        existing_deactivate = wrapper.deactivate
-        spanner = wrapper.spanner
-        if SegmentMaker._is_trending(spanner, leaf):
+        if SegmentMaker._is_trending(wrapper.spanner, leaf):
             status = 'explicit'
         SegmentMaker._color_persistent_wrapper(
             wrapper,
@@ -1097,25 +1097,21 @@ class SegmentMaker(abjad.SegmentMaker):
             existing_deactivate=wrapper.deactivate,
             existing_tag=existing_tag,
             )
-        if getattr(indicator, 'latent', False):
-            SegmentMaker._attach_latent_indicator_alert(
-                manifests,
-                wrapper,
-                status,
-                document_tag=document_tag,
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=existing_tag,
-                )
-        elif (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'hide', False)):
-            SegmentMaker._color_persistent_wrapper(
-                wrapper,
-                status,
-                document_tag=document_tag,
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=existing_tag,
-                uncolor=True,
-                )
+        SegmentMaker._attach_latent_indicator_alert(
+            manifests,
+            wrapper,
+            status,
+            document_tag=document_tag,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
+        SegmentMaker._uncolor_persistent_wrapper(
+            wrapper,
+            status,
+            document_tag=document_tag,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
         if isinstance(indicator, abjad.Clef):
             string = rf'\set {context.lilypond_type}.forceClef = ##t'
             literal = abjad.LilyPondLiteral(string)
@@ -1125,7 +1121,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 literal,
                 status,
                 document_tag=document_tag,
-                existing_deactivate=existing_deactivate,
+                existing_deactivate=wrapper.deactivate,
                 existing_tag=existing_tag,
                 stem='CLEF',
                 )
@@ -1139,35 +1135,33 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator,
             status,
             document_tag=document_tag,
-            existing_deactivate=existing_deactivate,
+            existing_deactivate=wrapper.deactivate,
             existing_tag=existing_tag,
-            spanner=spanner,
+            spanner=wrapper.spanner,
             )
-        if (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'hide', False)):
-            SegmentMaker._color_persistent_wrapper(
-                wrapper,
+        SegmentMaker._color_persistent_wrapper_redraw(
+            wrapper,
+            status,
+            document_tag=document_tag,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
+        if (isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)) and
+            not getattr(indicator, 'hide', False)):
+            strings = indicator._get_lilypond_format(context=context)
+            literal = abjad.LilyPondLiteral(strings, 'after')
+            stem = SegmentMaker._indicator_to_stem(indicator)
+            SegmentMaker._attach_with_status_tag(
+                context,
+                leaf,
+                literal,
                 status,
                 document_tag=document_tag,
-                existing_deactivate=existing_deactivate,
+                existing_deactivate=wrapper.deactivate,
                 existing_tag=existing_tag,
                 redraw=True,
+                stem=stem,
                 )
-            if isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)):
-                strings = indicator._get_lilypond_format(context=context)
-                literal = abjad.LilyPondLiteral(strings, 'after')
-                stem = SegmentMaker._indicator_to_stem(indicator)
-                SegmentMaker._attach_with_status_tag(
-                    context,
-                    leaf,
-                    literal,
-                    status,
-                    document_tag=document_tag,
-                    existing_deactivate=existing_deactivate,
-                    existing_tag=existing_tag,
-                    redraw=True,
-                    stem=stem,
-                    )
 
     def _categorize_uncategorized_persistent_wrappers(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -1378,6 +1372,8 @@ class SegmentMaker(abjad.SegmentMaker):
         uncolor=False,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+        if getattr(wrapper.indicator, 'hide', False) is True:
+            return
         leaf = wrapper.component
         indicator = wrapper.indicator
         context = wrapper._find_correct_effective_context()
@@ -1385,8 +1381,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
-        if getattr(indicator, 'hide', False) is True:
-            return
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
         stem = SegmentMaker._indicator_to_stem(indicator)
@@ -1446,6 +1440,27 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=existing_deactivate,
                 tag=str(tag.append('SM6')),
                 )
+
+    @staticmethod
+    def _color_persistent_wrapper_redraw(
+        wrapper,
+        status,
+        document_tag=None,
+        existing_deactivate=None,
+        existing_tag=None,
+        ):
+        if not getattr(wrapper.indicator, 'redraw', False):
+            return
+        if getattr(wrapper.indicator, 'hide', False):
+            return
+        SegmentMaker._color_persistent_wrapper(
+            wrapper,
+            status,
+            document_tag=document_tag,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            redraw=True,
+            )
 
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
@@ -2365,6 +2380,29 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(pleaf).has_indicator(abjad.tags.DO_NOT_TRANSPOSE):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
+
+    @staticmethod
+    def _uncolor_persistent_wrapper(
+        wrapper,
+        status,
+        document_tag=None,
+        existing_deactivate=None,
+        existing_tag=None,
+        ):
+        if getattr(wrapper.indicator, 'latent', False):
+            return
+        if getattr(wrapper.indicator, 'hide', False):
+            return
+        if not getattr(wrapper.indicator, 'redraw', False):
+            return
+        SegmentMaker._color_persistent_wrapper(
+            wrapper,
+            status,
+            document_tag=document_tag,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            uncolor=True,
+            )
 
     def _validate_measure_count_(self):
         if not self.validate_measure_count:
