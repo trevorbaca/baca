@@ -1088,7 +1088,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 existing_tag = existing_tag.append(tag_append)
             else:
                 existing_tag = abjad.Tag(tag_append)
-        if SegmentMaker._is_trending(wrapper.spanner, leaf):
+        if wrapper.spanner and wrapper.spanner._is_trending(wrapper.component):
             status = 'explicit'
         SegmentMaker._color_persistent_wrapper(
             wrapper,
@@ -1815,30 +1815,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             result.extend(silences)
         return result
-
-    @staticmethod
-    def _is_trending(spanner, leaf):
-        if spanner is None:
-            return False
-        if leaf not in spanner:
-            return False
-        if isinstance(spanner, abjad.Hairpin):
-            return True
-        if isinstance(spanner, abjad.MetronomeMarkSpanner):
-            prototype = (abjad.Accelerando, abjad.Ritardando)
-            if abjad.inspect(leaf).has_indicator(prototype):
-                return True
-            previous_wrapper = abjad.inspect(leaf).get_effective(
-                abjad.MetronomeMark,
-                n=-1,
-                unwrap=False,
-                )
-            if previous_wrapper is None:
-                return False
-            previous_leaf = previous_wrapper.component
-            if abjad.inspect(previous_leaf).has_indicator(prototype):
-                return True
-        return False
 
     def _key_to_indicator(self, key, prototype):
         assert isinstance(key, (int, str)), repr(key)
