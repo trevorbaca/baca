@@ -802,13 +802,14 @@ class SegmentMaker(abjad.SegmentMaker):
         for wrapper in wrappers:
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
-            existing_tag = abjad.Tag(wrapper.tag).extend(['-PARTS', '-SCORE'])
+            #existing_tag = abjad.Tag(wrapper.tag).extend(['-PARTS', '-SCORE'])
             self._categorize_persistent_indicator(
                 self.manifests,
                 wrapper,
                 'default',
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=existing_tag,
+                #existing_deactivate=wrapper.deactivate,
+                #existing_tag=existing_tag,
+                tag_append='-PARTS:-SCORE',
                 )
 
     def _attach_first_segment_score_template_defaults(self):
@@ -822,8 +823,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 self.manifests,
                 wrapper,
                 'default',
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=abjad.Tag(wrapper.tag),
+                #existing_deactivate=wrapper.deactivate,
+                #existing_tag=abjad.Tag(wrapper.tag),
                 )
 
     @staticmethod
@@ -1083,8 +1084,9 @@ class SegmentMaker(abjad.SegmentMaker):
         wrapper,
         status,
         document_tag=None,
-        existing_deactivate=None,
-        existing_tag=None,
+        #existing_deactivate=None,
+        #existing_tag=None,
+        tag_append=None,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         context = wrapper._find_correct_effective_context()
@@ -1095,8 +1097,17 @@ class SegmentMaker(abjad.SegmentMaker):
         assert getattr(indicator, 'persistent', None), repr(indicator)
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
+#        if existing_tag is not None:
+#            assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
+        existing_tag = wrapper.tag
         if existing_tag is not None:
-            assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
+            existing_tag = abjad.Tag(existing_tag)
+        if tag_append is not None:
+            if existing_tag is not None:
+                existing_tag = existing_tag.append(tag_append)
+            else:
+                existing_tag = abjad.Tag(tag_append)
+        existing_deactivate = wrapper.deactivate
         if status is None:
             return
         spanner = wrapper.spanner
@@ -1216,8 +1227,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper,
                     status,
                     document_tag=document_tag,
-                    existing_deactivate=wrapper.deactivate,
-                    existing_tag=abjad.Tag(wrapper.tag),
+                    #existing_deactivate=wrapper.deactivate,
+                    #existing_tag=abjad.Tag(wrapper.tag),
                     )
 
     def _check_all_music_in_part_containers(self):

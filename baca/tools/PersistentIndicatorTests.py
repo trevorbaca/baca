@@ -576,12 +576,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:SM8
-                                \clef "treble"                                                           %! REDUNDANT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! IC:REDUNDANT_CLEF:SM8
+                                \clef "treble"                                                           %! IC:REDUNDANT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! IC:REDUNDANT_CLEF_COLOR:SM6
+                            %@% \override Staff.Clef.color = ##f                                         %! IC:REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! IC:REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -972,9 +972,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! REDUNDANT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_DYNAMIC_COLOR:SM6
                                 c'4.
-                                \f                                                                       %! REDUNDANT_DYNAMIC:SM8
+                                \f                                                                       %! IC:REDUNDANT_DYNAMIC:SM8
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1123,9 +1123,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
                                 c'4.
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:SM8
+                                \sfz                                                                     %! IC:EXPLICIT_DYNAMIC:SM8
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -2427,11 +2427,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -2497,11 +2497,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                            %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2564,11 +2564,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                                ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3969,18 +3969,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! IC:REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDUNDANT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
+                                ^ \markup {                                                              %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                \set Staff.instrumentName = \markup { Flute }                            %! IC:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -4045,18 +4045,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDUNDANT_INSTRUMENT:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
+                            %%% ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4118,18 +4118,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDUNDANT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \set Staff.instrumentName = \markup { Flute }    %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
+                                ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5540,18 +5540,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! IC:REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:REDUNDANT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {                                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                ^ \markup {                                                              %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                                                         %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }                             %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -5616,18 +5616,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                            %%% ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                            %%% ^ \markup {                     %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color                 %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         [“I+II”]                %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                           %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5689,18 +5689,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDUNDANT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                ^ \markup {                     %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                 %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        [“I+II”]                %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    }                           %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -7029,10 +7029,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \stopStaff                                                               %! REDUNDANT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:SM8
-                                \startStaff                                                              %! REDUNDANT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! IC:REDUNDANT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:REDUNDANT_STAFF_LINES:SM8
+                                \startStaff                                                              %! IC:REDUNDANT_STAFF_LINES:SM8
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_STAFF_LINES_COLOR:SM6
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
