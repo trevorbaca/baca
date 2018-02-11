@@ -802,12 +802,10 @@ class SegmentMaker(abjad.SegmentMaker):
         for wrapper in wrappers:
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
-            context = wrapper._find_correct_effective_context()
             existing_tag = abjad.Tag(wrapper.tag).extend(['-PARTS', '-SCORE'])
             self._categorize_persistent_indicator(
                 self.manifests,
                 wrapper,
-                context,
                 'default',
                 existing_deactivate=wrapper.deactivate,
                 existing_tag=existing_tag,
@@ -820,11 +818,9 @@ class SegmentMaker(abjad.SegmentMaker):
         for wrapper in wrappers:
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
-            context = wrapper._find_correct_effective_context()
             self._categorize_persistent_indicator(
                 self.manifests,
                 wrapper,
-                context,
                 'default',
                 existing_deactivate=wrapper.deactivate,
                 existing_tag=abjad.Tag(wrapper.tag),
@@ -1085,14 +1081,14 @@ class SegmentMaker(abjad.SegmentMaker):
     def _categorize_persistent_indicator(
         manifests,
         wrapper,
-        context,
         status,
         document_tag=None,
         existing_deactivate=None,
         existing_tag=None,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        assert isinstance(context, abjad.Context), repr(context)
+        context = wrapper._find_correct_effective_context()
+        assert isinstance(context, abjad.Context), repr(wrapper)
         leaf = wrapper.component
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
@@ -1214,12 +1210,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'explicit'
                 else:
                     status = 'redundant'
-                context = wrapper._find_correct_effective_context()
                 document_tag = abjad.Tag(wrapper.tag).get_document_tag()
                 self._categorize_persistent_indicator(
                     self.manifests,
                     wrapper,
-                    context,
                     status,
                     document_tag=document_tag,
                     existing_deactivate=wrapper.deactivate,
@@ -2150,9 +2144,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             wrapper=True,
                             )
                     else:
+                        if isinstance(previous_indicator, abjad.TimeSignature):
+                            context_ = 'Score'
+                        else:
+                            context_ = None
                         wrapper = abjad.attach(
                             previous_indicator,
                             leaf,
+                            context=context_,
                             wrapper=True,
                             )
                     attached = True
@@ -2162,7 +2161,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     self._categorize_persistent_indicator(
                         self.manifests,
                         wrapper,
-                        context,
                         status,
                         document_tag=document_tag,
                         )

@@ -75,11 +75,9 @@ class HairpinCommand(Command):
                 wrapper=True,
                 )
             if self.start == reapplied:
-                context = wrapper._find_correct_effective_context()
                 baca.SegmentMaker._categorize_persistent_indicator(
                     self._manifests,
                     wrapper,
-                    context,
                     'redundant',
                     )
         if self.stop and 1 < len(spanner):
@@ -99,11 +97,9 @@ class HairpinCommand(Command):
                 wrapper=True,
                 )
             if self.stop == reapplied:
-                context = wrapper._find_correct_effective_context()
                 baca.SegmentMaker._categorize_persistent_indicator(
                     self._manifests,
                     wrapper,
-                    context,
                     'redundant',
                     )
 

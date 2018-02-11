@@ -72,11 +72,9 @@ class MetronomeMarkCommand(Command):
             wrapper=True,
             )
         if metronome_mark == reapplied_mark:
-            score = abjad.inspect(leaf).get_parentage().get_first(abjad.Score)
             baca.SegmentMaker._categorize_persistent_indicator(
                 self._manifests,
                 wrapper,
-                score,
                 'redundant',
                 )
 
