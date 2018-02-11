@@ -60,7 +60,7 @@ class MetronomeMarkCommand(Command):
         spanner = abjad.inspect(leaf).get_spanner(abjad.MetronomeMarkSpanner)
         if spanner is None:
             raise Exception('can not find metronome mark spanner.')
-        reapplied_mark = baca.IndicatorCommand._remove_reapplied_indicator(
+        reapplied = baca.IndicatorCommand._remove_reapplied_indicator(
             leaf,
             metronome_mark,
             )
@@ -71,7 +71,7 @@ class MetronomeMarkCommand(Command):
             tag=self.tag,
             wrapper=True,
             )
-        if metronome_mark == reapplied_mark:
+        if metronome_mark == reapplied:
             baca.SegmentMaker._categorize_persistent_indicator(
                 self._manifests,
                 wrapper,

@@ -261,10 +261,7 @@ class IndicatorCommand(Command):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
-                reapplied_indicator = self._remove_reapplied_indicator(
-                    leaf,
-                    indicator,
-                    )
+                reapplied = self._remove_reapplied_indicator(leaf, indicator)
                 if self.tag:
                     tag = self.tag.append('IC')
                 else:
@@ -277,7 +274,7 @@ class IndicatorCommand(Command):
                     tag=str(tag),
                     wrapper=True,
                     )
-                if indicator == reapplied_indicator:
+                if indicator == reapplied:
                     if (isinstance(indicator, abjad.Dynamic) and
                         indicator.sforzando):
                         status = 'explicit'
@@ -291,6 +288,7 @@ class IndicatorCommand(Command):
 
     ### PRIVATE METHODS ###
 
+    # TODO: change name to _remove_reapplied_wrappers
     @staticmethod
     def _remove_reapplied_indicator(leaf, indicator):
         if not getattr(indicator, 'persistent', False):
@@ -301,27 +299,34 @@ class IndicatorCommand(Command):
             prototype = abjad.Instrument
         else:
             prototype = type(indicator)
-        wrappers = abjad.inspect(leaf).wrappers(prototype)
-        if not wrappers:
-            return
-        for wrapper in wrappers:
+        stem = abjad.String(prototype.__name__).to_shout_case()
+        assert stem in (
+            'CLEF',
+            'DYNAMIC',
+            'INSTRUMENT',
+            'MARGIN_MARKUP',
+            'METRONOME_MARK',
+            'STAFF_LINES',
+            ), repr(stem)
+        reapplied_wrappers = []
+        reapplied_indicators = []
+        for wrapper in abjad.inspect(leaf).wrappers():
             if not wrapper.tag:
                 continue
-            if not (abjad.Tag(wrapper.tag).has_reapplied_tag() or
-                abjad.Tag(wrapper.tag).has_default_tag()):
+            assert wrapper.component is leaf, repr(wrapper)
+            is_reapplied_wrapper = False
+            for word in abjad.Tag(wrapper.tag):
+                if f'REAPPLIED_{stem}' in word or f'DEFAULT_{stem}' in word:
+                    is_reapplied_wrapper = True
+            if not is_reapplied_wrapper:
                 continue
-            reapplied_indicator = wrapper.indicator
-            reapplied_tags = [
-                _ for _ in abjad.Tag(wrapper.tag)
-                if _.startswith('REAPPLIED') or _.startswith('DEFAULT')
-                ]
-            assert len(reapplied_tags) == 1, repr(wrapper.tag)
-            reapplied_tag = reapplied_tags[0]
-            reapplied_substring = '_'.join(reapplied_tag.split('_')[:2])
-            for wrapper_ in abjad.inspect(leaf).wrappers():
-                if bool(wrapper_.tag) and reapplied_substring in wrapper_.tag:
-                    abjad.detach(wrapper_.indicator, leaf)
-            return reapplied_indicator
+            reapplied_wrappers.append(wrapper)
+            if isinstance(wrapper.indicator, prototype):
+                reapplied_indicators.append(wrapper.indicator)
+            abjad.detach(wrapper, wrapper.component)
+        if reapplied_wrappers:
+            assert len(reapplied_indicators) == 1, repr(reapplied_wrappers)
+            return reapplied_indicators[0]
 
     @staticmethod
     def _token_to_indicators(token):
