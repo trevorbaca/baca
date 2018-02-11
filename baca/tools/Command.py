@@ -71,7 +71,7 @@ class Command(abjad.AbjadObject):
             prototype = abjad.Instrument
         else:
             prototype = type(indicator)
-        stem = abjad.String(prototype.__name__).to_shout_case()
+        stem = abjad.String.to_indicator_stem(indicator)
         assert stem in (
             'CLEF',
             'DYNAMIC',

@@ -925,7 +925,7 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
-        stem = stem or SegmentMaker._indicator_to_stem(indicator)
+        stem = stem or abjad.String.to_indicator_stem(indicator)
         prefix = None
         if redraw is True:
             prefix = 'redrawn'
@@ -1112,7 +1112,7 @@ class SegmentMaker(abjad.SegmentMaker):
             existing_deactivate=wrapper.deactivate,
             existing_tag=existing_tag,
             )
-        if isinstance(indicator, abjad.Clef):
+        if isinstance(wrapper.indicator, abjad.Clef):
             string = rf'\set {context.lilypond_type}.forceClef = ##t'
             literal = abjad.LilyPondLiteral(string)
             SegmentMaker._attach_with_status_tag(
@@ -1150,7 +1150,7 @@ class SegmentMaker(abjad.SegmentMaker):
             not getattr(indicator, 'hide', False)):
             strings = indicator._get_lilypond_format(context=context)
             literal = abjad.LilyPondLiteral(strings, 'after')
-            stem = SegmentMaker._indicator_to_stem(indicator)
+            stem = abjad.String.to_indicator_stem(indicator)
             SegmentMaker._attach_with_status_tag(
                 context,
                 leaf,
@@ -1383,7 +1383,7 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
-        stem = SegmentMaker._indicator_to_stem(indicator)
+        stem = abjad.String.to_indicator_stem(indicator)
         if stem == 'METRONOME_MARK':
             return
         grob = SegmentMaker._indicator_to_grob(indicator)
@@ -1777,17 +1777,6 @@ class SegmentMaker(abjad.SegmentMaker):
         elif isinstance(indicator, baca.StaffLines):
             return indicator.line_count
         return str(indicator)
-
-    @staticmethod
-    def _indicator_to_stem(indicator):
-        if isinstance(indicator.persistent, str):
-            stem = indicator.persistent
-            stem = stem.lstrip('abjad.')
-        else:
-            stem = type(indicator).__name__
-        stem = abjad.String(stem).delimit_words()
-        stem = '_'.join([_.upper() for _ in stem])
-        return stem
 
     def _initialize_time_signatures(self, time_signatures):
         time_signatures = time_signatures or ()
