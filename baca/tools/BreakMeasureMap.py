@@ -97,11 +97,11 @@ class BreakMeasureMap(abjad.AbjadObject):
                                             #10                                                      %! ST1:DEFAULT_INSTRUMENT:SM8
                                             Vn.                                                      %! ST1:DEFAULT_INSTRUMENT:SM8
                                         }                                                            %! ST1:DEFAULT_INSTRUMENT:SM8
-                                    \set ViolinMusicStaff.forceClef = ##t                            %! ST3:DEFAULT_CLEF:SM8
                                     \clef "treble"                                                   %! ST3:DEFAULT_CLEF:SM8
                                     \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                                     \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
                                 %@% \override ViolinMusicStaff.Clef.color = ##f                      %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                    \set ViolinMusicStaff.forceClef = ##t                            %! ST3:DEFAULT_CLEF:SM8
                                     e'8
                                     [
                                     ^ \markup {                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
@@ -197,11 +197,11 @@ class BreakMeasureMap(abjad.AbjadObject):
                                         #10                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
                                         Va.                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
                                     }                                                                %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \set ViolaMusicStaff.forceClef = ##t                                 %! ST3:DEFAULT_CLEF:SM8
                                 \clef "alto"                                                         %! ST3:DEFAULT_CLEF:SM8
                                 \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
                             %@% \override ViolaMusicStaff.Clef.color = ##f                           %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                \set ViolaMusicStaff.forceClef = ##t                                 %! ST3:DEFAULT_CLEF:SM8
                                 R1 * 1/2
                                 ^ \markup {                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
@@ -252,11 +252,11 @@ class BreakMeasureMap(abjad.AbjadObject):
                                         #10                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
                                         Vc.                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
                                     }                                                                %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \set CelloMusicStaff.forceClef = ##t                                 %! ST3:DEFAULT_CLEF:SM8
                                 \clef "bass"                                                         %! ST3:DEFAULT_CLEF:SM8
                                 \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                \set CelloMusicStaff.forceClef = ##t                                 %! ST3:DEFAULT_CLEF:SM8
                                 R1 * 1/2
                                 ^ \markup {                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                     \with-color                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11

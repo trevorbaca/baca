@@ -69,11 +69,11 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #10                                                              %! ST1:DEFAULT_INSTRUMENT:SM8
                                     Vn.                                                              %! ST1:DEFAULT_INSTRUMENT:SM8
                                 }                                                                    %! ST1:DEFAULT_INSTRUMENT:SM8
-                            \set ViolinMusicStaff.forceClef = ##t                                    %! ST3:DEFAULT_CLEF:SM8
                             \clef "treble"                                                           %! ST3:DEFAULT_CLEF:SM8
                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! ST3:DEFAULT_CLEF_COLOR:SM6
                         %@% \override ViolinMusicStaff.Clef.color = ##f                              %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                            \set ViolinMusicStaff.forceClef = ##t                                    %! ST3:DEFAULT_CLEF:SM8
                             R1 * 1/2
                             ^ \markup {                                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                 \with-color                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11

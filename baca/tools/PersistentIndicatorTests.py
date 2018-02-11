@@ -89,10 +89,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! ST3:DEFAULT_CLEF:SM8
                                 \clef "treble"                                                           %! ST3:DEFAULT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! ST3:DEFAULT_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! ST3:DEFAULT_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'violet)                        %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
@@ -176,10 +176,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! IC:EXPLICIT_CLEF:SM8
                                 \clef "treble"                                                           %! IC:EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! IC:EXPLICIT_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! IC:EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! IC:EXPLICIT_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! IC:EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
@@ -275,10 +275,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! IC:EXPLICIT_CLEF:SM8
                                 \clef "alto"                                                             %! IC:EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! IC:EXPLICIT_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! IC:EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! IC:EXPLICIT_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! IC:EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
@@ -373,10 +373,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 \clef "treble"                                                           %! REAPPLIED_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! REAPPLIED_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
@@ -468,18 +468,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! IC:EXPLICIT_CLEF:SM8
                                 \clef "treble"                                                           %! IC:EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! IC:EXPLICIT_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! IC:EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! IC:EXPLICIT_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! IC:EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! IC:REDUNDANT_CLEF:SM8
                                 \clef "treble"                                                           %! IC:REDUNDANT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! IC:REDUNDANT_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! IC:REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! IC:REDUNDANT_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! IC:REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
@@ -576,10 +576,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! IC:REDUNDANT_CLEF:SM8
                                 \clef "treble"                                                           %! IC:REDUNDANT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! IC:REDUNDANT_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! IC:REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! IC:REDUNDANT_CLEF:SM8
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! IC:REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>

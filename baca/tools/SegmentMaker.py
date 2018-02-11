@@ -1086,6 +1086,53 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         return wrapper
 
+    @staticmethod
+    def _set_status_tag(
+        #context,
+        #leaf,
+        #indicator,
+        wrapper,
+        status,
+        document_tag=None,
+        #existing_deactivate=None,
+        #existing_tag=None,
+        redraw=None,
+        #spanner=None,
+        stem=None,
+        ):
+        assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+        if document_tag is not None:
+            assert isinstance(document_tag, abjad.Tag), repr(document_tag)
+        stem = stem or abjad.String.to_indicator_stem(wrapper.indicator)
+        prefix = None
+        if redraw is True:
+            prefix = 'redrawn'
+        tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
+        #if existing_tag:
+        if wrapper.tag:
+            tag = abjad.Tag(wrapper.tag).append(tag)
+        if document_tag:
+            tag = document_tag.append(tag)
+        if wrapper.spanner is not None:
+            tag = tag.append('SM27')
+            wrapper._deactivate = True
+            wrapper._tag = str(tag)
+            if isinstance(spanner, abjad.MetronomeMarkSpanner):
+                color = SegmentMaker._status_to_color[status]
+                tag = f'{status.upper()}_{stem}_WITH_COLOR'
+                tag = getattr(abjad.tags, tag)
+                tag = abjad.Tag(tag)
+                #if existing_tag:
+                if wrapper.tag:
+                    tag = abjad.Tag(wrapper.tag).append(tag)
+                if document_tag:
+                    tag = document_tag.append(tag)
+                alternate = (color, str(tag.append('SM15')))
+                wrapper._alternate = alternate
+        else:
+            tag = tag.append('SM8')
+            wrapper._tag = str(tag)
+
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
         assert isinstance(component, prototype), repr(component)
@@ -1231,14 +1278,26 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(wrapper.indicator, abjad.Clef):
             string = rf'\set {context.lilypond_type}.forceClef = ##t'
             literal = abjad.LilyPondLiteral(string)
-            SegmentMaker._attach_with_status_tag(
-                context,
-                leaf,
+#            SegmentMaker._attach_with_status_tag(
+#                context,
+#                leaf,
+#                literal,
+#                status,
+#                document_tag=document_tag,
+#                existing_deactivate=wrapper.deactivate,
+#                existing_tag=existing_tag,
+#                stem='CLEF',
+#                )
+            wrapper = abjad.attach(
                 literal,
+                wrapper.component,
+                tag=wrapper.tag,
+                wrapper=True,
+                )
+            SegmentMaker._set_status_tag(
+                wrapper,
                 status,
                 document_tag=document_tag,
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=existing_tag,
                 stem='CLEF',
                 )
         by_id = False
@@ -2510,11 +2569,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #10                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
                                                     Vn.                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
                                                 }                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.forceClef = ##t                        %! ST3:DEFAULT_CLEF:SM8
                                             \clef "treble"                                               %! ST3:DEFAULT_CLEF:SM8
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
                                         %@% \override ViolinMusicStaff.Clef.color = ##f                  %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! ST3:DEFAULT_CLEF:SM8
                                             d'16
                                             ^ \markup {                                                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
@@ -2575,11 +2634,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #10                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
                                             Va.                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
                                         }                                                                %! ST1:DEFAULT_INSTRUMENT:SM8
-                                    \set ViolaMusicStaff.forceClef = ##t                                 %! ST3:DEFAULT_CLEF:SM8
                                     \clef "alto"                                                         %! ST3:DEFAULT_CLEF:SM8
                                     \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                    \set ViolaMusicStaff.forceClef = ##t                                 %! ST3:DEFAULT_CLEF:SM8
                                     R1 * 3/8
                                     ^ \markup {                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                         \with-color                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
@@ -2623,11 +2682,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #10                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
                                                     Vc.                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
                                                 }                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            \set CelloMusicStaff.forceClef = ##t                         %! ST3:DEFAULT_CLEF:SM8
                                             \clef "bass"                                                 %! ST3:DEFAULT_CLEF:SM8
                                             \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
                                         %@% \override CelloMusicStaff.Clef.color = ##f                   %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                            \set CelloMusicStaff.forceClef = ##t                         %! ST3:DEFAULT_CLEF:SM8
                                             a16
                                             ^ \markup {                                                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                                 \with-color                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
@@ -4403,10 +4462,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 \clef "alto"                                                             %! REAPPLIED_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:SM6
                             %@% \override Staff.Clef.color = ##f                                         %! REAPPLIED_CLEF_COLOR_CANCELLATION:SM7
+                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
