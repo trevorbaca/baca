@@ -97,7 +97,7 @@ class PiecewiseCommand(Command):
                 for indicator in argument_.indicators:
                     spanner.attach(indicator, leaf)
             else:
-                reapplied = baca.IndicatorCommand._remove_reapplied_indicator(
+                reapplied = baca.IndicatorCommand._remove_reapplied_wrappers(
                     leaf,
                     argument_,
                     )

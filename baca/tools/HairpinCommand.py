@@ -59,7 +59,7 @@ class HairpinCommand(Command):
         spanner = abjad.Hairpin(context='Voice')
         abjad.attach(spanner, leaves)
         if self.start:
-            reapplied = baca.IndicatorCommand._remove_reapplied_indicator(
+            reapplied = baca.IndicatorCommand._remove_reapplied_wrappers(
                 spanner[0],
                 self.start,
                 )
@@ -81,7 +81,7 @@ class HairpinCommand(Command):
                     'redundant',
                     )
         if self.stop and 1 < len(spanner):
-            reapplied = baca.IndicatorCommand._remove_reapplied_indicator(
+            reapplied = baca.IndicatorCommand._remove_reapplied_wrappers(
                 spanner[-1],
                 self.stop,
                 )

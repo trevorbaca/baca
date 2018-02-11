@@ -261,7 +261,7 @@ class IndicatorCommand(Command):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
-                reapplied = self._remove_reapplied_indicator(leaf, indicator)
+                reapplied = self._remove_reapplied_wrappers(leaf, indicator)
                 if self.tag:
                     tag = self.tag.append('IC')
                 else:
@@ -287,46 +287,6 @@ class IndicatorCommand(Command):
                         )
 
     ### PRIVATE METHODS ###
-
-    # TODO: change name to _remove_reapplied_wrappers
-    @staticmethod
-    def _remove_reapplied_indicator(leaf, indicator):
-        if not getattr(indicator, 'persistent', False):
-            return
-        if abjad.inspect(leaf).get_timespan().start_offset != 0:
-            return
-        if isinstance(indicator, abjad.Instrument):
-            prototype = abjad.Instrument
-        else:
-            prototype = type(indicator)
-        stem = abjad.String(prototype.__name__).to_shout_case()
-        assert stem in (
-            'CLEF',
-            'DYNAMIC',
-            'INSTRUMENT',
-            'MARGIN_MARKUP',
-            'METRONOME_MARK',
-            'STAFF_LINES',
-            ), repr(stem)
-        reapplied_wrappers = []
-        reapplied_indicators = []
-        for wrapper in abjad.inspect(leaf).wrappers():
-            if not wrapper.tag:
-                continue
-            assert wrapper.component is leaf, repr(wrapper)
-            is_reapplied_wrapper = False
-            for word in abjad.Tag(wrapper.tag):
-                if f'REAPPLIED_{stem}' in word or f'DEFAULT_{stem}' in word:
-                    is_reapplied_wrapper = True
-            if not is_reapplied_wrapper:
-                continue
-            reapplied_wrappers.append(wrapper)
-            if isinstance(wrapper.indicator, prototype):
-                reapplied_indicators.append(wrapper.indicator)
-            abjad.detach(wrapper, wrapper.component)
-        if reapplied_wrappers:
-            assert len(reapplied_indicators) == 1, repr(reapplied_wrappers)
-            return reapplied_indicators[0]
 
     @staticmethod
     def _token_to_indicators(token):
