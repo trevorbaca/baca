@@ -75,14 +75,9 @@ class MetronomeMarkCommand(Command):
             score = abjad.inspect(leaf).get_parentage().get_first(abjad.Score)
             baca.SegmentMaker._categorize_persistent_indicator(
                 self._manifests,
+                wrapper,
                 score,
-                #leaf,
-                #metronome_mark,
-                wrapper.component,
-                wrapper.indicator,
                 'redundant',
-                spanner=spanner,
-                wrapper=wrapper,
                 )
 
     ### PUBLIC PROPERTIES ###

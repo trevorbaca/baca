@@ -283,17 +283,12 @@ class IndicatorCommand(Command):
                         status = 'explicit'
                     else:
                         status = 'redundant'
-                    #wrapper = abjad.inspect(leaf).wrapper(type(indicator))
                     context = wrapper._find_correct_effective_context()
                     baca.SegmentMaker._categorize_persistent_indicator(
                         self._manifests,
+                        wrapper,
                         context,
-                        #leaf,
-                        #indicator,
-                        wrapper.component,
-                        wrapper.indicator,
                         status,
-                        wrapper=wrapper,
                         )
 
     ### PRIVATE METHODS ###

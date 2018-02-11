@@ -806,14 +806,11 @@ class SegmentMaker(abjad.SegmentMaker):
             existing_tag = abjad.Tag(wrapper.tag).extend(['-PARTS', '-SCORE'])
             self._categorize_persistent_indicator(
                 self.manifests,
+                wrapper,
                 context,
-                #leaf,
-                wrapper.component,
-                wrapper.indicator,
                 'default',
                 existing_deactivate=wrapper.deactivate,
                 existing_tag=existing_tag,
-                wrapper=wrapper,
                 )
 
     def _attach_first_segment_score_template_defaults(self):
@@ -826,14 +823,11 @@ class SegmentMaker(abjad.SegmentMaker):
             context = wrapper._find_correct_effective_context()
             self._categorize_persistent_indicator(
                 self.manifests,
+                wrapper,
                 context,
-                #leaf,
-                wrapper.component,
-                wrapper.indicator,
                 'default',
                 existing_deactivate=wrapper.deactivate,
                 existing_tag=abjad.Tag(wrapper.tag),
-                wrapper=wrapper,
                 )
 
     @staticmethod
@@ -1090,28 +1084,26 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _categorize_persistent_indicator(
         manifests,
+        wrapper,
         context,
-        leaf,
-        indicator,
         status,
         document_tag=None,
         existing_deactivate=None,
         existing_tag=None,
-        spanner=None,
-        wrapper=None,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         assert isinstance(context, abjad.Context), repr(context)
-        assert leaf is wrapper.component, repr(leaf, wrapper)
-        assert indicator is wrapper.indicator, repr(indicator, wrapper)
+        leaf = wrapper.component
+        assert isinstance(leaf, abjad.Leaf), repr(wrapper)
+        indicator = wrapper.indicator
+        assert getattr(indicator, 'persistent', None), repr(indicator)
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
         if status is None:
             return
-        if spanner is not None:
-            assert spanner is wrapper.spanner
+        spanner = wrapper.spanner
         if SegmentMaker._is_trending(spanner, leaf):
             status = 'explicit'
         SegmentMaker._color_persistent_indicator(
@@ -1226,16 +1218,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 document_tag = abjad.Tag(wrapper.tag).get_document_tag()
                 self._categorize_persistent_indicator(
                     self.manifests,
+                    wrapper,
                     context,
-                    #leaf,
-                    wrapper.component,
-                    wrapper.indicator,
                     status,
                     document_tag=document_tag,
                     existing_deactivate=wrapper.deactivate,
                     existing_tag=abjad.Tag(wrapper.tag),
-                    spanner=wrapper.spanner,
-                    wrapper=wrapper,
                     )
 
     def _check_all_music_in_part_containers(self):
@@ -2173,15 +2161,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if attached:
                     self._categorize_persistent_indicator(
                         self.manifests,
+                        wrapper,
                         context,
-                        #leaf,
-                        #previous_indicator,
-                        wrapper.component,
-                        wrapper.indicator,
                         status,
                         document_tag=document_tag,
-                        spanner=spanner,
-                        wrapper=wrapper,
                         )
 
     def _remove_redundant_time_signatures(self):

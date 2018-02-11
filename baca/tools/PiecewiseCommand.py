@@ -103,18 +103,12 @@ class PiecewiseCommand(Command):
                     )
                 wrapper = spanner.attach(argument_, leaf, wrapper=True)
                 if argument_ == reapplied:
-                    #wrapper = abjad.inspect(leaf).wrapper(type(argument_))
                     context = wrapper._find_correct_effective_context()
                     baca.SegmentMaker._categorize_persistent_indicator(
                         self._manifests,
+                        wrapper,
                         context,
-                        #leaf,
-                        #argument_,
-                        wrapper.component,
-                        wrapper.indicator,
                         'redundant',
-                        spanner=spanner,
-                        wrapper=wrapper,
                         )
 
     ### PUBLIC PROPERTIES ###
