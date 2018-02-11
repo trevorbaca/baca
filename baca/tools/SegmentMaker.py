@@ -816,10 +816,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _attach_latent_indicator_alert(
-        leaf,
-        indicator,
-        status,
         manifests,
+        wrapper,
+        status,
         document_tag=None,
         existing_deactivate=None,
         existing_tag=None,
@@ -828,6 +827,8 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
+        leaf = wrapper.component
+        indicator = wrapper.indicator
         assert indicator.latent, repr(indicator)
         if isinstance(indicator, abjad.Clef):
             return
@@ -1098,12 +1099,11 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         if getattr(indicator, 'latent', False):
             SegmentMaker._attach_latent_indicator_alert(
-                leaf,
-                indicator,
-                status,
                 manifests,
+                wrapper,
+                status,
                 document_tag=document_tag,
-                existing_deactivate=existing_deactivate,
+                existing_deactivate=wrapper.deactivate,
                 existing_tag=existing_tag,
                 )
         elif (getattr(indicator, 'redraw', False)
