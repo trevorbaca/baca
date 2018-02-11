@@ -67,22 +67,25 @@ class HairpinCommand(Command):
                 tag = self.tag.append('HC')
             else:
                 tag = abjad.Tag('HC')
-            spanner.attach(
+            wrapper = spanner.attach(
                 self.start,
                 spanner[0],
                 deactivate=self.deactivate,
                 tag=str(tag),
+                wrapper=True,
                 )
             if self.start == reapplied:
-                wrapper = abjad.inspect(spanner[0]).wrapper(self.start)
+                #wrapper = abjad.inspect(spanner[0]).wrapper(self.start)
                 context = wrapper._find_correct_effective_context()
                 baca.SegmentMaker._categorize_persistent_indicator(
                     self._manifests,
                     context,
-                    spanner[0],
+                    #spanner[0],
+                    wrapper.component,
                     wrapper.indicator,
                     'redundant',
                     spanner=spanner,
+                    wrapper=wrapper,
                     )
         if self.stop and 1 < len(spanner):
             reapplied = baca.IndicatorCommand._remove_reapplied_indicator(
@@ -93,22 +96,25 @@ class HairpinCommand(Command):
                 tag = self.tag.append('HC')
             else:
                 tag = abjad.Tag('HC')
-            spanner.attach(
+            wrapper = spanner.attach(
                 self.stop,
                 spanner[-1],
                 deactivate=self.deactivate,
                 tag=str(tag),
+                wrapper=True,
                 )
             if self.stop == reapplied:
-                wrapper = abjad.inspect(spanner[-1]).wrapper(self.stop)
+                #wrapper = abjad.inspect(spanner[-1]).wrapper(self.stop)
                 context = wrapper._find_correct_effective_context()
                 baca.SegmentMaker._categorize_persistent_indicator(
                     self._manifests,
                     context,
-                    spanner[-1],
+                    #spanner[-1],
+                    wrapper.component,
                     wrapper.indicator,
                     'redundant',
                     spanner=spanner,
+                    wrapper=wrapper,
                     )
 
     ### PUBLIC PROPERTIES ###

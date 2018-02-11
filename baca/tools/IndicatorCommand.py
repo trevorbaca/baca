@@ -269,12 +269,13 @@ class IndicatorCommand(Command):
                     tag = self.tag.append('IC')
                 else:
                     tag = abjad.Tag('IC')
-                abjad.attach(
+                wrapper = abjad.attach(
                     indicator,
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
                     tag=str(tag),
+                    wrapper=True,
                     )
                 if indicator == reapplied_indicator:
                     if (isinstance(indicator, abjad.Dynamic) and
@@ -282,14 +283,17 @@ class IndicatorCommand(Command):
                         status = 'explicit'
                     else:
                         status = 'redundant'
-                    wrapper = abjad.inspect(leaf).wrapper(type(indicator))
+                    #wrapper = abjad.inspect(leaf).wrapper(type(indicator))
                     context = wrapper._find_correct_effective_context()
                     baca.SegmentMaker._categorize_persistent_indicator(
                         self._manifests,
                         context,
-                        leaf,
-                        indicator,
+                        #leaf,
+                        #indicator,
+                        wrapper.component,
+                        wrapper.indicator,
                         status,
+                        wrapper=wrapper,
                         )
 
     ### PRIVATE METHODS ###

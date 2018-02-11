@@ -64,21 +64,25 @@ class MetronomeMarkCommand(Command):
             leaf,
             metronome_mark,
             )
-        spanner.attach(
+        wrapper = spanner.attach(
             metronome_mark,
             leaf,
             deactivate=self.deactivate,
             tag=self.tag,
+            wrapper=True,
             )
         if metronome_mark == reapplied_mark:
             score = abjad.inspect(leaf).get_parentage().get_first(abjad.Score)
             baca.SegmentMaker._categorize_persistent_indicator(
                 self._manifests,
                 score,
-                leaf,
-                metronome_mark,
+                #leaf,
+                #metronome_mark,
+                wrapper.component,
+                wrapper.indicator,
                 'redundant',
                 spanner=spanner,
+                wrapper=wrapper,
                 )
 
     ### PUBLIC PROPERTIES ###
