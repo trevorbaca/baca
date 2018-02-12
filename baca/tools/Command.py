@@ -83,10 +83,18 @@ class Command(abjad.AbjadObject):
             ), repr(stem)
         reapplied_wrappers = []
         reapplied_indicators = []
-        for wrapper in abjad.inspect(leaf).wrappers():
+        wrappers = list(abjad.inspect(leaf).wrappers())
+        effective_wrapper = abjad.inspect(leaf).effective_wrapper(prototype)
+        if effective_wrapper and effective_wrapper not in wrappers:
+            component = effective_wrapper.component
+            start_1 = abjad.inspect(leaf).get_timespan().start_offset
+            start_2 = abjad.inspect(component).get_timespan().start_offset
+            if start_1 == start_2:
+                wrappers_ = abjad.inspect(component).wrappers()
+                wrappers.extend(wrappers_)
+        for wrapper in wrappers:
             if not wrapper.tag:
                 continue
-            assert wrapper.component is leaf, repr(wrapper)
             is_reapplied_wrapper = False
             for word in abjad.Tag(wrapper.tag):
                 if f'REAPPLIED_{stem}' in word or f'DEFAULT_{stem}' in word:
