@@ -15,6 +15,7 @@ from .Typing import List
 from .Typing import Optional
 from .Typing import Number
 from .Typing import NumberPair
+from .Typing import Set
 from .Typing import Tuple
 from .Typing import Union as U
 
@@ -1052,7 +1053,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _cache_previously_alive_contexts(self) -> None:
         if self.segment_directory is None:
             return
-        contexts = set()
+        contexts: Set[str] = set()
         string = 'alive_during_segment'
         for segment in self.segment_directory.parent.list_paths():
             if segment == self.segment_directory:
