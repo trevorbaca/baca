@@ -1900,9 +1900,9 @@ class LibraryGM(abjad.AbjadObject):
                                         #(x11-color 'blue)                                               %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                         [MarginMarkup]                                                   %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 \set Staff.instrumentName = \markup { Flute }                            %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 f'4.

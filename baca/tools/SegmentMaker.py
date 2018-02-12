@@ -1086,53 +1086,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         return wrapper
 
-    @staticmethod
-    def _set_status_tag(
-        #context,
-        #leaf,
-        #indicator,
-        wrapper,
-        status,
-        document_tag=None,
-        #existing_deactivate=None,
-        #existing_tag=None,
-        redraw=None,
-        #spanner=None,
-        stem=None,
-        ):
-        assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        if document_tag is not None:
-            assert isinstance(document_tag, abjad.Tag), repr(document_tag)
-        stem = stem or abjad.String.to_indicator_stem(wrapper.indicator)
-        prefix = None
-        if redraw is True:
-            prefix = 'redrawn'
-        tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
-        #if existing_tag:
-        if wrapper.tag:
-            tag = abjad.Tag(wrapper.tag).append(tag)
-        if document_tag:
-            tag = document_tag.append(tag)
-        if wrapper.spanner is not None:
-            tag = tag.append('SM27')
-            wrapper._deactivate = True
-            wrapper._tag = str(tag)
-            if isinstance(spanner, abjad.MetronomeMarkSpanner):
-                color = SegmentMaker._status_to_color[status]
-                tag = f'{status.upper()}_{stem}_WITH_COLOR'
-                tag = getattr(abjad.tags, tag)
-                tag = abjad.Tag(tag)
-                #if existing_tag:
-                if wrapper.tag:
-                    tag = abjad.Tag(wrapper.tag).append(tag)
-                if document_tag:
-                    tag = document_tag.append(tag)
-                alternate = (color, str(tag.append('SM15')))
-                wrapper._alternate = alternate
-        else:
-            tag = tag.append('SM8')
-            wrapper._tag = str(tag)
-
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
         assert isinstance(component, prototype), repr(component)
@@ -1278,24 +1231,14 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(wrapper.indicator, abjad.Clef):
             string = rf'\set {context.lilypond_type}.forceClef = ##t'
             literal = abjad.LilyPondLiteral(string)
-#            SegmentMaker._attach_with_status_tag(
-#                context,
-#                leaf,
-#                literal,
-#                status,
-#                document_tag=document_tag,
-#                existing_deactivate=wrapper.deactivate,
-#                existing_tag=existing_tag,
-#                stem='CLEF',
-#                )
-            wrapper = abjad.attach(
+            wrapper_ = abjad.attach(
                 literal,
                 wrapper.component,
                 tag=wrapper.tag,
                 wrapper=True,
                 )
             SegmentMaker._set_status_tag(
-                wrapper,
+                wrapper_,
                 status,
                 document_tag=document_tag,
                 stem='CLEF',
@@ -1304,7 +1247,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(indicator, abjad.MarginMarkup):
             by_id = True
         abjad.detach(indicator, leaf, by_id=by_id)
-        wrapper = SegmentMaker._attach_with_status_tag(
+        wrapper_ = SegmentMaker._attach_with_status_tag(
             context,
             leaf,
             indicator,
@@ -1315,7 +1258,7 @@ class SegmentMaker(abjad.SegmentMaker):
             spanner=wrapper.spanner,
             )
         SegmentMaker._attach_color_redraw_literal(
-            wrapper,
+            wrapper_,
             status,
             document_tag=document_tag,
             existing_deactivate=wrapper.deactivate,
@@ -1326,14 +1269,31 @@ class SegmentMaker(abjad.SegmentMaker):
             strings = indicator._get_lilypond_format(context=context)
             literal = abjad.LilyPondLiteral(strings, 'after')
             stem = abjad.String.to_indicator_stem(indicator)
-            SegmentMaker._attach_with_status_tag(
-                context,
-                leaf,
+
+#            SegmentMaker._attach_with_status_tag(
+#                context,
+#                wrapper_.component,
+#                literal,
+#                status,
+#                document_tag=document_tag,
+#                existing_deactivate=wrapper.deactivate,
+#                existing_tag=existing_tag,
+#                redraw=True,
+#                stem=stem,
+#                )
+
+            if existing_tag is not None:
+                existing_tag = str(existing_tag)
+            wrapper = abjad.attach(
                 literal,
+                leaf,
+                tag=existing_tag,
+                wrapper=True,
+                )
+            SegmentMaker._set_status_tag(
+                wrapper,
                 status,
                 document_tag=document_tag,
-                existing_deactivate=wrapper.deactivate,
-                existing_tag=existing_tag,
                 redraw=True,
                 stem=stem,
                 )
@@ -2279,6 +2239,44 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
 
+    def _set_status_tag(
+        wrapper,
+        status,
+        document_tag=None,
+        redraw=None,
+        stem=None,
+        ):
+        assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+        if document_tag is not None:
+            assert isinstance(document_tag, abjad.Tag), repr(document_tag)
+        stem = stem or abjad.String.to_indicator_stem(wrapper.indicator)
+        prefix = None
+        if redraw is True:
+            prefix = 'redrawn'
+        tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
+        if wrapper.tag:
+            tag = abjad.Tag(wrapper.tag).append(tag)
+        if document_tag:
+            tag = document_tag.append(tag)
+        if wrapper.spanner is not None:
+            tag = tag.append('SM27')
+            wrapper._deactivate = True
+            wrapper._tag = str(tag)
+            if isinstance(spanner, abjad.MetronomeMarkSpanner):
+                color = SegmentMaker._status_to_color[status]
+                tag = f'{status.upper()}_{stem}_WITH_COLOR'
+                tag = getattr(abjad.tags, tag)
+                tag = abjad.Tag(tag)
+                if wrapper.tag:
+                    tag = abjad.Tag(wrapper.tag).append(tag)
+                if document_tag:
+                    tag = document_tag.append(tag)
+                alternate = (color, str(tag.append('SM15')))
+                wrapper._alternate = alternate
+        else:
+            tag = tag.append('SM8')
+            wrapper._tag = str(tag)
+
     def _shift_clefs_into_fermata_measures(self):
         fermata_stop_offsets = self._fermata_stop_offsets[:]
         if self.previous_metadata.get('last_measure_is_fermata') is True:
@@ -2580,6 +2578,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #(x11-color 'DarkViolet)                             %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                                     (Violin)                                             %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                     #10                                                  %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2590,7 +2589,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #10                                                  %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                     Vn.                                                  %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 }                                                        %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                             e'16
@@ -2645,6 +2643,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #(x11-color 'DarkViolet)                                     %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                             (Viola)                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                     \set ViolaMusicStaff.instrumentName = \markup {                      %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                             #10                                                          %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2655,7 +2654,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #10                                                          %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                             Va.                                                          %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                         }                                                                %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 2]                                        %! SM4
@@ -2693,6 +2691,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #(x11-color 'DarkViolet)                             %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                                     (Cello)                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                                 }                                                        %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                             \set CelloMusicStaff.instrumentName = \markup {              %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                     #10                                                  %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -2703,7 +2702,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #10                                                  %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                     Vc.                                                  %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 }                                                        %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                             g16
@@ -5041,9 +5039,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #(x11-color 'blue)                                           %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
                                             (“clarinet”)                                                 %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -5169,9 +5167,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #(x11-color 'blue)                                           %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
                                             (“clarinet”)                                                 %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
                                         }                                                                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>

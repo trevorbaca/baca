@@ -80,6 +80,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #(x11-color 'DarkViolet)                                         %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                     (Violin)                                                         %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
                                 }                                                                    %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet)   %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                             \set ViolinMusicStaff.instrumentName = \markup {                         %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \hcenter-in                                                          %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                     #16                                                              %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -90,7 +91,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #10                                                              %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                     Vn.                                                              %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 }                                                                    %! ST1:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet)   %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
             <BLANKLINE>
                             % [ViolinMusicVoice measure 2]                                           %! SM4
