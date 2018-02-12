@@ -803,14 +803,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 literal,
                 wrapper.component,
                 deactivate=True,
-                tag=str(tag.append('SM7')),
+                tag=tag.append('SM7'),
                 )
         else:
             abjad.attach(
                 literal,
                 wrapper.component,
                 deactivate=existing_deactivate,
-                tag=str(tag.append('SM6')),
+                tag=tag.append('SM6'),
                 )
 
     @staticmethod
@@ -917,9 +917,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if staff.name in dictionary:
                 continue
             for wrapper in self.score_template.attach_defaults(staff):
-                tag = abjad.Tag(wrapper.tag)
-                tag = tag.extend(['-PARTS', '-SCORE'])
-                wrapper._tag = str(tag)
+                tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
+                wrapper._tag = tag
                 self._categorize_persistent_wrapper(
                     self.manifests,
                     wrapper,
@@ -998,7 +997,7 @@ class SegmentMaker(abjad.SegmentMaker):
             markup,
             leaf,
             deactivate=existing_deactivate,
-            tag=str(tag.append('SM11')),
+            tag=tag.append('SM11'),
             )
 
     def _attach_metronome_marks(self):
@@ -1013,7 +1012,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stem_height=self.metronome_mark_stem_height,
             )
         tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER).append('SM29')
-        abjad.attach(spanner, skips, tag=str(tag))
+        abjad.attach(spanner, skips, tag=tag)
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -1145,8 +1144,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         existing_tag = wrapper.tag
-        if existing_tag is not None:
-            existing_tag = abjad.Tag(existing_tag)
         if wrapper.spanner and wrapper.spanner._is_trending(wrapper.component):
             status = 'explicit'
         SegmentMaker._attach_color_literal(
@@ -1224,7 +1221,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, 'persistent', False):
                     continue
-                if abjad.Tag(wrapper.tag).has_persistence_tag():
+                if wrapper.tag and wrapper.tag.has_persistence_tag():
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
@@ -1241,7 +1238,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'explicit'
                 else:
                     status = 'redundant'
-                document_tag = abjad.Tag(wrapper.tag).get_document_tag()
+                if wrapper.tag:
+                    document_tag = wrapper.tag.get_document_tag()
+                else:
+                    document_tag = None
                 self._categorize_persistent_wrapper(
                     self.manifests,
                     wrapper,
@@ -1378,7 +1378,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype = type(indicator)
                     prototype = self._prototype_string(prototype)
                 if wrapper.tag:
-                    document_tag = abjad.Tag(wrapper.tag).get_document_tag()
+                    document_tag = wrapper.tag.get_document_tag()
                     if document_tag is not None:
                         document_tag = str(document_tag)
                 momento = abjad.Momento(
@@ -1476,7 +1476,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if wrapper.tag is None:
                     continue
                 for tag in tags:
-                    if tag in abjad.Tag(wrapper.tag):
+                    if tag in wrapper.tag:
                         wrapper._deactivate = True
                         break
 
@@ -1815,7 +1815,7 @@ class SegmentMaker(abjad.SegmentMaker):
         label = abjad.label(
             skips,
             deactivate=True,
-            tag=str(tag.append('SM28')),
+            tag=tag.append('SM28'),
             )
         segment_stop_duration = label.with_start_offsets(
             brackets=True,
@@ -1844,7 +1844,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=str(tag.append('SM31')),
+                tag=tag.append('SM31'),
                 )
             markup = abjad.Markup(f'<{measure_index}>')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
@@ -1855,7 +1855,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=str(tag.append('SM32')),
+                tag=tag.append('SM32'),
                 )
 
     def _label_stage_numbers(self):
@@ -1879,7 +1879,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=str(tag.append('SM3')),
+                tag=tag.append('SM3'),
                 )
 
     def _make_global_skips(self):
@@ -1904,7 +1904,7 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(
             literal,
             first_skip,
-            tag=str(tag),
+            tag=tag,
             )
 
     def _make_lilypond_align_above_context_settings(self):
@@ -2133,7 +2133,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in abjad.inspect(leaf).wrappers():
                 if wrapper.tag is None:
                     continue
-                for word in abjad.Tag(wrapper.tag):
+                for word in wrapper.tag:
                     if word in tags:
                         abjad.detach(wrapper, leaf)
                         break
@@ -2190,10 +2190,7 @@ class SegmentMaker(abjad.SegmentMaker):
         stem=None,
         ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        if wrapper.tag:
-            existing_tag = abjad.Tag(wrapper.tag)
-        else:
-            existing_tag = None
+        existing_tag = wrapper.tag
         if document_tag is not None:
             assert isinstance(document_tag, abjad.Tag), repr(document_tag)
         stem = stem or abjad.String.to_indicator_stem(wrapper.indicator)
@@ -2202,13 +2199,13 @@ class SegmentMaker(abjad.SegmentMaker):
             prefix = 'redrawn'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         if wrapper.tag:
-            tag = abjad.Tag(wrapper.tag).append(tag)
+            tag = wrapper.tag.append(tag)
         if document_tag:
             tag = document_tag.append(tag)
         if wrapper.spanner is not None:
             tag = tag.append('SM27')
             wrapper._deactivate = True
-            wrapper._tag = str(tag)
+            wrapper._tag = tag
             if isinstance(wrapper.spanner, abjad.MetronomeMarkSpanner):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
@@ -2218,11 +2215,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag = existing_tag.append(tag)
                 if document_tag:
                     tag = document_tag.append(tag)
-                alternate = (color, str(tag.append('SM15')))
+                alternate = (color, tag.append('SM15'))
                 wrapper._alternate = alternate
         else:
             tag = tag.append('SM8')
-            wrapper._tag = str(tag)
+            wrapper._tag = tag
 
     def _shift_clefs_into_fermata_measures(self):
         fermata_stop_offsets = self._fermata_stop_offsets[:]
@@ -2238,7 +2235,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
                 if wrapper is None or not wrapper.tag:
                     continue
-                if abjad.tags.EXPLICIT_CLEF not in abjad.Tag(wrapper.tag):
+                if abjad.tags.EXPLICIT_CLEF not in wrapper.tag:
                     continue
                 measure_number = self._offset_to_measure_number.get(
                     start_offset,
@@ -2353,7 +2350,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         leaf,
-                        tag=str(tag.append('SM22')),
+                        tag=tag.append('SM22'),
                         )
                 bar_lines_already_styled.append(start_offset)
 
