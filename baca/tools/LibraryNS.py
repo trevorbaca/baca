@@ -68,9 +68,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override NoteHead.style = #'harmonic                                    %! OC
+                                \override NoteHead.style = #'harmonic                                    %! OC1
                                 c'16
                                 [
                                 d'16
@@ -97,9 +97,9 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \revert NoteHead.style                                                   %! OC
+                                \revert NoteHead.style                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -133,7 +133,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -146,7 +146,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override NoteHead.style = #'harmonic                                    %! OC
+                                \override NoteHead.style = #'harmonic                                    %! OC1
                                 fs''16
                                 [
                                 e''16
@@ -159,12 +159,12 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \revert NoteHead.style                                                   %! OC
+                                \revert NoteHead.style                                                   %! OC2
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -210,7 +210,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 13/11 {
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 9/10 {
-                                    \override TupletBracket.staff-padding = #5                           %! OC
+                                    \override TupletBracket.staff-padding = #5                           %! OC1
                                     r8
                                     c'16
                                     [
@@ -239,7 +239,7 @@ class LibraryNS(abjad.AbjadObject):
                                 \times 4/5 {
                                     a'16
                                     r4
-                                    \revert TupletBracket.staff-padding                                  %! OC
+                                    \revert TupletBracket.staff-padding                                  %! OC2
                                 }
                             }
                         }
@@ -286,7 +286,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 \ottava #1                                                               %! SC
                                 c'16
@@ -317,7 +317,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 \ottava #0                                                               %! SC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -361,7 +361,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 \ottava #-1                                                              %! SC
                                 c'16
@@ -392,7 +392,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 \ottava #0                                                               %! SC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -454,7 +454,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -484,7 +484,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 r4
                                 \pageBreak                                                               %! IC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -575,7 +575,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 \ff_poss                                                                 %! IC
@@ -605,7 +605,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -642,7 +642,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -672,7 +672,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -718,7 +718,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                                 r8
                                 c'16
@@ -748,7 +748,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -778,7 +778,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                                 r8
                                 c'16
@@ -808,7 +808,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -838,7 +838,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                                 r8
                                 c'16
@@ -868,7 +868,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -917,7 +917,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -946,7 +946,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -979,7 +979,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -1040,7 +1040,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1074,7 +1074,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -1103,7 +1103,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a''16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1137,7 +1137,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -1198,7 +1198,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1275,7 +1275,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 \f                                                                       %! IC
@@ -1313,7 +1313,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 \f                                                                       %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1350,7 +1350,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -1384,7 +1384,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1431,29 +1431,29 @@ class LibraryNS(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -1540,29 +1540,29 @@ class LibraryNS(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \newSpacingSection                                                           %! SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SPACING:HSS1
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -1637,10 +1637,10 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override RepeatTie.direction = #down                                    %! OC
-                                \override Stem.direction = #up                                           %! OC
+                                \override RepeatTie.direction = #down                                    %! OC1
+                                \override Stem.direction = #up                                           %! OC1
                                 b'16
                                 [
                                 b'16
@@ -1666,10 +1666,10 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 b'16
-                                \revert RepeatTie.direction                                              %! OC
-                                \revert Stem.direction                                                   %! OC
+                                \revert RepeatTie.direction                                              %! OC2
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1705,9 +1705,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.direction = #up                                           %! OC
+                                \override Stem.direction = #up                                           %! OC1
                                 b'16
                                 [
                                 b'16
@@ -1720,7 +1720,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                \override RepeatTie.direction = #down                                    %! OC
+                                \override RepeatTie.direction = #down                                    %! OC1
                                 b'16
                                 [
                                 b'16
@@ -1730,14 +1730,14 @@ class LibraryNS(abjad.AbjadObject):
                                 \repeatTie                                                               %! SC
                                 b'16
                                 \repeatTie                                                               %! SC
-                                \revert RepeatTie.direction                                              %! OC
+                                \revert RepeatTie.direction                                              %! OC2
                                 r16
                             }
                             \times 4/5 {
                                 b'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1785,10 +1785,10 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override RepeatTie.direction = #up                                      %! OC
-                                \override Stem.direction = #down                                         %! OC
+                                \override RepeatTie.direction = #up                                      %! OC1
+                                \override Stem.direction = #down                                         %! OC1
                                 b'16
                                 [
                                 b'16
@@ -1814,10 +1814,10 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 b'16
-                                \revert RepeatTie.direction                                              %! OC
-                                \revert Stem.direction                                                   %! OC
+                                \revert RepeatTie.direction                                              %! OC2
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1853,9 +1853,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.direction = #down                                         %! OC
+                                \override Stem.direction = #down                                         %! OC1
                                 b'16
                                 [
                                 b'16
@@ -1868,7 +1868,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                \override RepeatTie.direction = #up                                      %! OC
+                                \override RepeatTie.direction = #up                                      %! OC1
                                 b'16
                                 [
                                 b'16
@@ -1878,14 +1878,14 @@ class LibraryNS(abjad.AbjadObject):
                                 \repeatTie                                                               %! SC
                                 b'16
                                 \repeatTie                                                               %! SC
-                                \revert RepeatTie.direction                                              %! OC
+                                \revert RepeatTie.direction                                              %! OC2
                                 r16
                             }
                             \times 4/5 {
                                 b'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1931,8 +1931,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Rest.staff-position = #-6                                      %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Rest.staff-position = #-6                                      %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -1961,8 +1961,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Rest.staff-position                                              %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Rest.staff-position                                              %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -1996,7 +1996,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2016,7 +2016,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ef''4
                                 ~
                                 ef''16
-                                \once \override Rest.staff-position = #-6                                %! OC
+                                \once \override Rest.staff-position = #-6                                %! OC1
                                 r16
                                 af''16
                                 [
@@ -2026,7 +2026,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2069,7 +2069,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 c'16
                                 [
                                 d'16
@@ -2097,7 +2097,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 2/3 {
                                 a'16
                                 r8
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2137,7 +2137,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2166,7 +2166,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 2/3 {
                                 a'16
                                 r8
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2207,7 +2207,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2235,7 +2235,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'16
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2278,8 +2278,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Rest.direction = #down                                         %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Rest.direction = #down                                         %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2308,8 +2308,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Rest.direction                                                   %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Rest.direction                                                   %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2343,7 +2343,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2363,7 +2363,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ef''4
                                 ~
                                 ef''16
-                                \once \override Rest.direction = #down                                   %! OC
+                                \once \override Rest.direction = #down                                   %! OC1
                                 r16
                                 af''16
                                 [
@@ -2373,7 +2373,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2419,8 +2419,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Rest.direction = #up                                           %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Rest.direction = #up                                           %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2449,8 +2449,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Rest.direction                                                   %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Rest.direction                                                   %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2484,7 +2484,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -2504,7 +2504,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ef''4
                                 ~
                                 ef''16
-                                \once \override Rest.direction = #up                                     %! OC
+                                \once \override Rest.direction = #up                                     %! OC1
                                 r16
                                 af''16
                                 [
@@ -2514,7 +2514,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2649,8 +2649,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.color = #red                                            %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Script.color = #red                                            %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -2688,8 +2688,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert Script.color                                                     %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Script.color                                                     %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2724,7 +2724,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -2740,7 +2740,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.color = #red                                            %! OC
+                                \override Script.color = #red                                            %! OC1
                                 fs''16
                                 -\accent                                                                 %! IC
                                 [
@@ -2758,13 +2758,13 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 -\accent                                                                 %! IC
                                 ]
-                                \revert Script.color                                                     %! OC
+                                \revert Script.color                                                     %! OC2
                             }
                             \times 4/5 {
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2811,9 +2811,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OC
+                                \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OC1
                                 c'16
                                 -\accent                                                                 %! IC
                                 [
@@ -2850,7 +2850,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2888,7 +2888,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -2904,7 +2904,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OC
+                                \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OC1
                                 fs''16
                                 -\accent                                                                 %! IC
                                 [
@@ -2927,7 +2927,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -2987,8 +2987,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.direction = #down                                       %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Script.direction = #down                                       %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -3026,8 +3026,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert Script.direction                                                 %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Script.direction                                                 %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3062,7 +3062,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -3078,7 +3078,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.direction = #down                                       %! OC
+                                \override Script.direction = #down                                       %! OC1
                                 fs''16
                                 -\accent                                                                 %! IC
                                 [
@@ -3096,13 +3096,13 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 -\accent                                                                 %! IC
                                 ]
-                                \revert Script.direction                                                 %! OC
+                                \revert Script.direction                                                 %! OC2
                             }
                             \times 4/5 {
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3149,8 +3149,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.direction = #up                                         %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Script.direction = #up                                         %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -3188,8 +3188,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert Script.direction                                                 %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Script.direction                                                 %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3224,7 +3224,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\accent                                                                 %! IC
@@ -3240,7 +3240,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.direction = #up                                         %! OC
+                                \override Script.direction = #up                                         %! OC1
                                 fs''16
                                 -\accent                                                                 %! IC
                                 [
@@ -3258,13 +3258,13 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 -\accent                                                                 %! IC
                                 ]
-                                \revert Script.direction                                                 %! OC
+                                \revert Script.direction                                                 %! OC2
                             }
                             \times 4/5 {
                                 a'16
                                 -\accent                                                                 %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3361,7 +3361,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 -\shortfermata                                                           %! IC
                                 c'16
@@ -3391,7 +3391,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3427,7 +3427,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -3457,7 +3457,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3510,9 +3510,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TextSpanner.staff-padding = #6                                 %! OC
-                                \override TextScript.staff-padding = #6                                  %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TextSpanner.staff-padding = #6                                 %! OC1
+                                \override TextScript.staff-padding = #6                                  %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 \once \override TextSpanner.Y-extent = ##f                               %! PCW1
                                 \once \override TextSpanner.arrow-width = 0.25                           %! PCW1
@@ -3575,9 +3575,9 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 \stopTextSpan                                                            %! PCW1
                                 r4
-                                \revert TextSpanner.staff-padding                                        %! OC
-                                \revert TextScript.staff-padding                                         %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                                \revert TextScript.staff-padding                                         %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3617,9 +3617,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TextSpanner.staff-padding = #6                                 %! OC
-                                \override TextScript.staff-padding = #6                                  %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TextSpanner.staff-padding = #6                                 %! OC1
+                                \override TextScript.staff-padding = #6                                  %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -3682,9 +3682,9 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TextSpanner.staff-padding                                        %! OC
-                                \revert TextScript.staff-padding                                         %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                                \revert TextScript.staff-padding                                         %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3736,7 +3736,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 c'16
                                 [
                                 d'16
@@ -3764,7 +3764,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 2/3 {
                                 a'16
                                 s8
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3805,7 +3805,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 s8
                                 c'16
                                 [
@@ -3834,7 +3834,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 2/3 {
                                 a'16
                                 s8
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3876,7 +3876,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 s8
                                 c'16
                                 [
@@ -3904,7 +3904,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'16
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -3949,8 +3949,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Slur.direction = #down                                         %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Slur.direction = #down                                         %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -3981,8 +3981,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 )                                                                        %! SC
                                 r4
-                                \revert Slur.direction                                                   %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Slur.direction                                                   %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -4017,8 +4017,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Slur.direction = #down                                         %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Slur.direction = #down                                         %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -4049,8 +4049,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Slur.direction                                                   %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Slur.direction                                                   %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -4098,8 +4098,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Slur.direction = #down                                         %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Slur.direction = #down                                         %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -4132,8 +4132,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Slur.direction                                                   %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Slur.direction                                                   %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -4171,7 +4171,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -4186,7 +4186,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Slur.direction = #down                                         %! OC
+                                \override Slur.direction = #down                                         %! OC1
                                 fs''16
                                 [
                                 (                                                                        %! SC
@@ -4201,12 +4201,12 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 ]
                                 )                                                                        %! SC
-                                \revert Slur.direction                                                   %! OC
+                                \revert Slur.direction                                                   %! OC2
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -4258,11 +4258,11 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Slur.direction = #up                                           %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
-                                \override TupletBracket.direction = #down                                %! OC
+                                \override Slur.direction = #up                                           %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                \override TupletBracket.direction = #down                                %! OC1
                                 r8
-                                \override Stem.direction = #down                                         %! OC
+                                \override Stem.direction = #down                                         %! OC1
                                 c'16
                                 [
                                 (                                                                        %! SC
@@ -4293,11 +4293,11 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert Slur.direction                                                   %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
-                                \revert TupletBracket.direction                                          %! OC
+                                \revert Slur.direction                                                   %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                                \revert TupletBracket.direction                                          %! OC2
                             }
                         }
                     }
@@ -4337,10 +4337,10 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
-                                \override TupletBracket.direction = #down                                %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                \override TupletBracket.direction = #down                                %! OC1
                                 r8
-                                \override Stem.direction = #down                                         %! OC
+                                \override Stem.direction = #down                                         %! OC1
                                 c'16
                                 [
                                 (                                                                        %! SC
@@ -4354,7 +4354,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Slur.direction = #up                                           %! OC
+                                \override Slur.direction = #up                                           %! OC1
                                 fs''16
                                 [
                                 (                                                                        %! SC
@@ -4369,14 +4369,14 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 ]
                                 )                                                                        %! SC
-                                \revert Slur.direction                                                   %! OC
+                                \revert Slur.direction                                                   %! OC2
                             }
                             \times 4/5 {
                                 a'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
-                                \revert TupletBracket.direction                                          %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                                \revert TupletBracket.direction                                          %! OC2
                             }
                         }
                     }
@@ -4803,7 +4803,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\staccato                                                               %! IC
@@ -4841,7 +4841,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\staccato                                                               %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -4875,7 +4875,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -4909,7 +4909,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -4953,7 +4953,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 -\staccatissimo                                                          %! IC
@@ -4991,7 +4991,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 -\staccatissimo                                                          %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5025,7 +5025,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -5059,7 +5059,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5156,9 +5156,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.color = #red                                              %! OC
+                                \override Stem.color = #red                                              %! OC1
                                 c'16
                                 [
                                 d'16
@@ -5185,9 +5185,9 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \revert Stem.color                                                       %! OC
+                                \revert Stem.color                                                       %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5221,7 +5221,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -5234,7 +5234,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.color = #red                                              %! OC
+                                \override Stem.color = #red                                              %! OC1
                                 fs''16
                                 [
                                 e''16
@@ -5247,12 +5247,12 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \revert Stem.color                                                       %! OC
+                                \revert Stem.color                                                       %! OC2
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5299,7 +5299,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 :32                                                                      %! IC
@@ -5339,7 +5339,7 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 :32                                                                      %! IC
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5373,7 +5373,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -5408,7 +5408,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5452,9 +5452,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.direction = #down                                         %! OC
+                                \override Stem.direction = #down                                         %! OC1
                                 c'16
                                 [
                                 d'16
@@ -5481,9 +5481,9 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5518,9 +5518,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.direction = #up                                           %! OC
+                                \override Stem.direction = #up                                           %! OC1
                                 c'16
                                 [
                                 d'16
@@ -5532,7 +5532,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down                                         %! OC
+                                \override Stem.direction = #down                                         %! OC1
                                 fs''16
                                 [
                                 e''16
@@ -5545,13 +5545,13 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                             }
                             \times 4/5 {
                                 a'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5597,9 +5597,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.direction = #up                                           %! OC
+                                \override Stem.direction = #up                                           %! OC1
                                 c'16
                                 [
                                 d'16
@@ -5626,9 +5626,9 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5663,9 +5663,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \override Stem.direction = #down                                         %! OC
+                                \override Stem.direction = #down                                         %! OC1
                                 c'16
                                 [
                                 d'16
@@ -5677,7 +5677,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up                                           %! OC
+                                \override Stem.direction = #up                                           %! OC1
                                 fs''16
                                 [
                                 e''16
@@ -5690,13 +5690,13 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                             }
                             \times 4/5 {
                                 bf'16
-                                \revert Stem.direction                                                   %! OC
+                                \revert Stem.direction                                                   %! OC2
                                 r4
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5742,8 +5742,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Score.SpacingSpanner.strict-note-spacing = ##f                 %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Score.SpacingSpanner.strict-note-spacing = ##f                 %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -5772,8 +5772,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Score.SpacingSpanner.strict-note-spacing                         %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Score.SpacingSpanner.strict-note-spacing                         %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5884,8 +5884,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
                                 \sustainOn                                                               %! SC
@@ -5917,8 +5917,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 r4
                                 \sustainOff                                                              %! SC
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -5953,8 +5953,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -5986,8 +5986,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6025,8 +6025,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -6058,8 +6058,8 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6097,8 +6097,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -6130,8 +6130,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 \sustainOff                                                              %! SC
                                 r4
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6169,8 +6169,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
                                 [
@@ -6202,8 +6202,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 \sustainOff                                                              %! SC
                                 r4
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6238,8 +6238,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
                                 \sustainOn                                                               %! SC
@@ -6277,8 +6277,8 @@ class LibraryNS(abjad.AbjadObject):
                                 \sustainOn                                                               %! SC
                                 r4
                                 \sustainOff                                                              %! SC
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6316,8 +6316,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
                                 \sustainOn                                                               %! SC
@@ -6355,8 +6355,8 @@ class LibraryNS(abjad.AbjadObject):
                                 a'16
                                 r4
                                 \sustainOff                                                              %! SC
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6394,8 +6394,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
                                 \sustainOn                                                               %! SC
@@ -6433,8 +6433,8 @@ class LibraryNS(abjad.AbjadObject):
                                 \sustainOn                                                               %! SC
                                 r4
                                 \sustainOff                                                              %! SC
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6486,8 +6486,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
                                 \sustainOn                                                               %! SC
@@ -6525,8 +6525,8 @@ class LibraryNS(abjad.AbjadObject):
                                 \sustainOn                                                               %! SC
                                 r4
                                 \sustainOff                                                              %! SC
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }
@@ -6564,7 +6564,7 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC
+                                \override TupletBracket.staff-padding = #5                               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
                                 \sustainOn                                                               %! SC
@@ -6580,7 +6580,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
+                                \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
                                 [
@@ -6596,7 +6596,7 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 ]
                                 \sustainOff                                                              %! SC
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
+                                \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
                             }
                             \times 4/5 {
                                 \set Staff.pedalSustainStyle = #'bracket                                 %! SC
@@ -6604,7 +6604,7 @@ class LibraryNS(abjad.AbjadObject):
                                 \sustainOn                                                               %! SC
                                 r4
                                 \sustainOff                                                              %! SC
-                                \revert TupletBracket.staff-padding                                      %! OC
+                                \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
                     }

@@ -229,17 +229,13 @@ class SpannerCommand(Command):
             left_broken = True
         if self.broken in (abjad.Right, abjad.Both):
             right_broken = True
-        if self.tag:
-            tag = self.tag.append('SC')
-        else:
-            tag = abjad.Tag('SC')
         abjad.attach(
             spanner,
             leaves,
             deactivate=self.deactivate,
             left_broken=left_broken,
             right_broken=right_broken,
-            tag=tag,
+            tag=self.tag.prepend('SC'),
             )
         return spanner
 

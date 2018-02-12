@@ -32,8 +32,8 @@ class OverrideCommand(Command):
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \override Beam.positions = #'(6 . 6)                                     %! OC
-                            \override Stem.direction = #up                                           %! OC
+                            \override Beam.positions = #'(6 . 6)                                     %! OC1
+                            \override Stem.direction = #up                                           %! OC1
                             c'16
                             [
                             d'16
@@ -51,8 +51,8 @@ class OverrideCommand(Command):
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
-                            \revert Beam.positions                                                   %! OC
-                            \revert Stem.direction                                                   %! OC
+                            \revert Beam.positions                                                   %! OC2
+                            \revert Stem.direction                                                   %! OC2
                         }
                     }
                 }
@@ -128,8 +128,8 @@ class OverrideCommand(Command):
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
-                            \override Beam.positions = #'(6 . 6)                                     %! OC
-                            \override Stem.direction = #up                                           %! OC
+                            \override Beam.positions = #'(6 . 6)                                     %! OC1
+                            \override Stem.direction = #up                                           %! OC1
                             e'8
                             [
             <BLANKLINE>
@@ -138,7 +138,7 @@ class OverrideCommand(Command):
                             f'8
                             ]
             <BLANKLINE>
-                            \override Rest.direction = #up                                           %! OC
+                            \override Rest.direction = #up                                           %! OC1
                             r8
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
@@ -163,15 +163,15 @@ class OverrideCommand(Command):
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
                             r8
-                            \revert Rest.direction                                                   %! OC
+                            \revert Rest.direction                                                   %! OC2
             <BLANKLINE>
                             e''8
                             [
             <BLANKLINE>
                             g'8
                             ]
-                            \revert Beam.positions                                                   %! OC
-                            \revert Stem.direction                                                   %! OC
+                            \revert Beam.positions                                                   %! OC2
+                            \revert Stem.direction                                                   %! OC2
             <BLANKLINE>
                         }
                     }
@@ -266,15 +266,11 @@ class OverrideCommand(Command):
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag = self.get_tag(leaves[0])
-        if tag:
-            tag = tag.append('OC')
-        else:
-            tag = abjad.Tag('OC')
         abjad.attach(
             literal,
             leaves[0],
             deactivate=self.deactivate,
-            tag=tag,
+            tag=self.tag.prepend('OC1'),
             )
         if once:
             return
@@ -284,15 +280,11 @@ class OverrideCommand(Command):
             context=context,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
-        if self.tag:
-            tag = self.tag.append('OC')
-        else:
-            tag = abjad.Tag('OC')
         abjad.attach(
             literal,
             leaves[-1],
             deactivate=self.deactivate,
-            tag=tag,
+            tag=self.tag.prepend('OC2'),
             )
 
     ### PUBLIC PROPERTIES ###

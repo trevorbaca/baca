@@ -157,9 +157,7 @@ class Command(abjad.AbjadObject):
     def tag(self) -> Optional[abjad.Tag]:
         r'''Gets tag.
         '''
-        if self.tags:
-            return abjad.Tag.from_words(self.tags)
-        return None
+        return abjad.Tag.from_words(self.tags)
 
     @property
     def tag_measure_number(self):

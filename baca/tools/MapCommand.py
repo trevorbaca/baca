@@ -40,7 +40,7 @@ class MapCommand(Command):
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC
+                            \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
                             [
@@ -74,7 +74,7 @@ class MapCommand(Command):
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
                 }

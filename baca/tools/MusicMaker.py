@@ -691,7 +691,7 @@ class MusicMaker(abjad.AbjadObject):
     def _annotate_collection_list(container, collections):
         for leaf in abjad.iterate(container).leaves():
             collections_ = copy.deepcopy(collections)
-            abjad.attach(collections_, leaf, tag='')
+            abjad.attach(collections_, leaf, tag=None)
 
     def _annotate_deployment(
         self,

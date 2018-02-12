@@ -101,8 +101,7 @@ class PiecewiseCommand(Command):
                 wrapper = spanner.attach(
                     argument_,
                     leaf,
-                    # TODO: tagging causes multiple piecewise indicators error:
-                    #tag='PWC3',
+                    tag='PWC3',
                     wrapper=True,
                     )
                 if argument_ == reapplied:

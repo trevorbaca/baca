@@ -57,18 +57,14 @@ class HairpinCommand(Command):
             return
         leaves = abjad.select(argument).leaves()
         spanner = abjad.Hairpin(context='Voice')
-        abjad.attach(spanner, leaves, tag='HC1')
+        abjad.attach(spanner, leaves, tag=self.tag.prepend('HC1'))
         if self.start:
             reapplied = self._remove_reapplied_wrappers(spanner[0], self.start)
-            if self.tag:
-                tag = self.tag.append('HC2')
-            else:
-                tag = abjad.Tag('HC2')
             wrapper = spanner.attach(
                 self.start,
                 spanner[0],
                 deactivate=self.deactivate,
-                tag=tag,
+                tag=self.tag.prepend('HC2'),
                 wrapper=True,
                 )
             if self.start == reapplied:
@@ -79,15 +75,11 @@ class HairpinCommand(Command):
                     )
         if self.stop and 1 < len(spanner):
             reapplied = self._remove_reapplied_wrappers(spanner[-1], self.stop)
-            if self.tag:
-                tag = self.tag.append('HC3')
-            else:
-                tag = abjad.Tag('HC3')
             wrapper = spanner.attach(
                 self.stop,
                 spanner[-1],
                 deactivate=self.deactivate,
-                tag=tag,
+                tag=self.tag.prepend('HC3'),
                 wrapper=True,
                 )
             if self.stop == reapplied:

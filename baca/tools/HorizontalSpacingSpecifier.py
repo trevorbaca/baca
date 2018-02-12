@@ -151,29 +151,29 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 8/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! HSS1:SPACING
                         \time 2/4                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! HSS1:SPACING
                         \time 1/2                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -274,29 +274,29 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 8/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! HSS1:SPACING
                         \time 2/4                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! HSS1:SPACING
                         \time 1/2                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -398,29 +398,29 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! HSS1:SPACING
                         \time 8/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 2/4                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! HSS1:SPACING
                         \time 1/2                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -523,29 +523,29 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! HSS1:SPACING
                         \time 8/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 2/4                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 1/2                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -658,15 +658,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! SPACING:HSS1
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
@@ -906,8 +906,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration *= self._magic_lilypond_eol_adjustment
                 eol_adjusted = True
             spacing_section = baca.SpacingSection(duration)
-            tag = abjad.Tag(abjad.tags.SPACING).append('HSS1')
-            abjad.attach(spacing_section, skip, tag=tag)
+            tag = abjad.Tag(abjad.tags.SPACING)
+            abjad.attach(spacing_section, skip, tag=tag.prepend('HSS1'))
             if eol_adjusted:
                 markup = abjad.Markup(f'[[{duration!s}]]')
             else:
@@ -920,7 +920,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             color = abjad.SchemeColor(color)
             markup = markup.with_color(color)
             markup = abjad.new(markup, direction=abjad.Up)
-            tag = abjad.Tag(abjad.tags.SPACING_MARKUP).append('HSS2')
+            tag = abjad.Tag(abjad.tags.SPACING_MARKUP).prepend('HSS2')
             abjad.attach(markup, skip, deactivate=True, tag=tag)
 
     ### PRIVATE METHODS ###

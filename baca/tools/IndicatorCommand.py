@@ -262,16 +262,12 @@ class IndicatorCommand(Command):
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
                 reapplied = self._remove_reapplied_wrappers(leaf, indicator)
-                if self.tag:
-                    tag = self.tag.append('IC')
-                else:
-                    tag = abjad.Tag('IC')
                 wrapper = abjad.attach(
                     indicator,
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
-                    tag=tag,
+                    tag=self.tag.prepend('IC'),
                     wrapper=True,
                     )
                 if indicator == reapplied:
