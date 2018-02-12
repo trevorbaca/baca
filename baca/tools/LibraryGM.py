@@ -377,8 +377,8 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                \<
-                                \p
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
                                 [
                                 d'16
                                 ]
@@ -404,7 +404,7 @@ class LibraryGM(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \f
+                                \f                                                                       %! HC1
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -454,8 +454,8 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \<
-                                \p
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
                                 [
                                 e''16
                                 ]
@@ -466,7 +466,7 @@ class LibraryGM(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
-                                \f
+                                \f                                                                       %! HC1
                                 ]
                             }
                             \times 4/5 {
@@ -509,22 +509,22 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                \<
-                                \p
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
                                 [
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                \f
+                                \f                                                                       %! HC1
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \<
-                                \p
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
                                 [
                                 e''16
                                 ]
@@ -535,12 +535,12 @@ class LibraryGM(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
-                                \f
+                                \f                                                                       %! HC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                \p
+                                \p                                                                       %! HC1
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -1901,8 +1901,8 @@ class LibraryGM(abjad.AbjadObject):
                                         [MarginMarkup]                                                   %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                     }                                                                    %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.instrumentName = \markup { Flute }                            %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 f'4.

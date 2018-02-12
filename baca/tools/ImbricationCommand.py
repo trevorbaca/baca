@@ -956,15 +956,15 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         % [MusicVoiceOne measure 1]                                      %! SM4
                                         s16
-                                        [
+                                        [                                                                %! SM35
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                       %! SM35
+                                        \set stemRightBeamCount = 2                                      %! SM35
                                         d'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                       %! SM35
+                                        \set stemRightBeamCount = 2                                      %! SM35
                                         bf'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
@@ -989,18 +989,18 @@ class ImbricationCommand(Command):
                                         % [MusicVoiceOne measure 2]                                      %! SM4
                                         s16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                       %! SM35
+                                        \set stemRightBeamCount = 2                                      %! SM35
                                         cs''16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                       %! SM35
+                                        \set stemRightBeamCount = 2                                      %! SM35
                                         a'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
                                         s16
-                                        ]
+                                        ]                                                                %! SM35
                 <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil

@@ -177,35 +177,35 @@ class NestingCommand(Command):
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [MusicVoice measure 1]                                     %! SM4
-                                        \set stemLeftBeamCount = 0
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 0                                   %! SM35
+                                        \set stemRightBeamCount = 2                                  %! SM35
                                         c'16
-                                        [
+                                        [                                                            %! SM35
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                   %! SM35
+                                        \set stemRightBeamCount = 2                                  %! SM35
                                         d'16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                   %! SM35
+                                        \set stemRightBeamCount = 2                                  %! SM35
                                         bf'16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
+                                        \set stemLeftBeamCount = 2                                   %! SM35
+                                        \set stemRightBeamCount = 1                                  %! SM35
                                         fs''16
                                     }
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 1                                   %! SM35
+                                        \set stemRightBeamCount = 2                                  %! SM35
                                         e''16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemLeftBeamCount = 2                                   %! SM35
+                                        \set stemRightBeamCount = 2                                  %! SM35
                                         ef''16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
+                                        \set stemLeftBeamCount = 2                                   %! SM35
+                                        \set stemRightBeamCount = 1                                  %! SM35
                                         b''16
                                     }
                                 }
@@ -214,22 +214,22 @@ class NestingCommand(Command):
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [MusicVoice measure 2]                                         %! SM4
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
+                                    \set stemLeftBeamCount = 1                                       %! SM35
+                                    \set stemRightBeamCount = 2                                      %! SM35
                                     g''16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
+                                    \set stemLeftBeamCount = 2                                       %! SM35
+                                    \set stemRightBeamCount = 2                                      %! SM35
                                     cs''16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
+                                    \set stemLeftBeamCount = 2                                       %! SM35
+                                    \set stemRightBeamCount = 2                                      %! SM35
                                     a'16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
+                                    \set stemLeftBeamCount = 2                                       %! SM35
+                                    \set stemRightBeamCount = 0                                      %! SM35
                                     af'16
-                                    ]
+                                    ]                                                                %! SM35
             <BLANKLINE>
                                 }
                             }

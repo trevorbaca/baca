@@ -57,16 +57,13 @@ class HairpinCommand(Command):
             return
         leaves = abjad.select(argument).leaves()
         spanner = abjad.Hairpin(context='Voice')
-        abjad.attach(spanner, leaves)
+        abjad.attach(spanner, leaves, tag='HC1')
         if self.start:
-            reapplied = baca.IndicatorCommand._remove_reapplied_wrappers(
-                spanner[0],
-                self.start,
-                )
+            reapplied = self._remove_reapplied_wrappers(spanner[0], self.start)
             if self.tag:
-                tag = self.tag.append('HC')
+                tag = self.tag.append('HC2')
             else:
-                tag = abjad.Tag('HC')
+                tag = abjad.Tag('HC2')
             wrapper = spanner.attach(
                 self.start,
                 spanner[0],
@@ -81,14 +78,11 @@ class HairpinCommand(Command):
                     'redundant',
                     )
         if self.stop and 1 < len(spanner):
-            reapplied = baca.IndicatorCommand._remove_reapplied_wrappers(
-                spanner[-1],
-                self.stop,
-                )
+            reapplied = self._remove_reapplied_wrappers(spanner[-1], self.stop)
             if self.tag:
-                tag = self.tag.append('HC')
+                tag = self.tag.append('HC3')
             else:
-                tag = abjad.Tag('HC')
+                tag = abjad.Tag('HC3')
             wrapper = spanner.attach(
                 self.stop,
                 spanner[-1],

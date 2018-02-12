@@ -65,7 +65,7 @@ class PiecewiseCommand(Command):
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
             leaves = abjad.select(preprocessed_argument).leaves()
-            abjad.attach(spanner, leaves)
+            abjad.attach(spanner, leaves, tag='PCW1')
         else:
             spanner = self.spanner(preprocessed_argument)
         if self.selector is not None:
@@ -95,13 +95,16 @@ class PiecewiseCommand(Command):
                 pass
             elif isinstance(argument_, baca.IndicatorCommand):
                 for indicator in argument_.indicators:
-                    spanner.attach(indicator, leaf)
+                    spanner.attach(indicator, leaf, tag='PWC2')
             else:
-                reapplied = baca.IndicatorCommand._remove_reapplied_wrappers(
-                    leaf,
+                reapplied = Command._remove_reapplied_wrappers(leaf, argument_)
+                wrapper = spanner.attach(
                     argument_,
+                    leaf,
+                    # TODO: tagging causes multiple piecewise indicators error:
+                    #tag='PWC3',
+                    wrapper=True,
                     )
-                wrapper = spanner.attach(argument_, leaf, wrapper=True)
                 if argument_ == reapplied:
                     baca.SegmentMaker._categorize_persistent_wrapper(
                         self._manifests,

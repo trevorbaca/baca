@@ -1185,10 +1185,10 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.staff-padding = #6                                  %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
-                                \once \override TextSpanner.Y-extent = ##f
-                                \once \override TextSpanner.arrow-width = 0.25
-                                \once \override TextSpanner.bound-details.left-broken.text = ##f
-                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
+                                \once \override TextSpanner.Y-extent = ##f                               %! PCW1
+                                \once \override TextSpanner.arrow-width = 0.25                           %! PCW1
+                                \once \override TextSpanner.bound-details.left-broken.text = ##f         %! PCW1
+                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
                                 \once \override TextSpanner.bound-details.left.text = \markup {
                                     \concat
                                         {
@@ -1198,13 +1198,13 @@ class LibraryTZ(abjad.AbjadObject):
                                             \hspace
                                                 #0.5
                                         }
-                                    }
-                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
-                                \once \override TextSpanner.bound-details.right-broken.padding = 0
-                                \once \override TextSpanner.bound-details.right-broken.text = ##f
-                                \once \override TextSpanner.bound-details.right.arrow = ##t
-                                \once \override TextSpanner.bound-details.right.padding = 0.5
-                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                    }                                                                    %! PCW1
+                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f       %! PCW1
+                                \once \override TextSpanner.bound-details.right-broken.padding = 0       %! PCW1
+                                \once \override TextSpanner.bound-details.right-broken.text = ##f        %! PCW1
+                                \once \override TextSpanner.bound-details.right.arrow = ##t              %! PCW1
+                                \once \override TextSpanner.bound-details.right.padding = 0.5            %! PCW1
+                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
                                 \once \override TextSpanner.bound-details.right.text = \markup {
                                     \concat
                                         {
@@ -1214,12 +1214,12 @@ class LibraryTZ(abjad.AbjadObject):
                                                 \upright
                                                     ord.
                                         }
-                                    }
-                                \once \override TextSpanner.dash-fraction = 0.25
-                                \once \override TextSpanner.dash-period = 1.5
+                                    }                                                                    %! PCW1
+                                \once \override TextSpanner.dash-fraction = 0.25                         %! PCW1
+                                \once \override TextSpanner.dash-period = 1.5                            %! PCW1
                                 c'16
                                 [
-                                \startTextSpan
+                                \startTextSpan                                                           %! PCW1
                                 d'16
                                 ]
                                 bf'4
@@ -1244,7 +1244,7 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \stopTextSpan
+                                \stopTextSpan                                                            %! PCW1
                                 r4
                                 \revert TextSpanner.staff-padding                                        %! OC
                                 \revert TextScript.staff-padding                                         %! OC
@@ -1306,10 +1306,10 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextSpanner.staff-padding = #6                                 %! OC
-                                \once \override TextSpanner.Y-extent = ##f
-                                \once \override TextSpanner.arrow-width = 0.25
-                                \once \override TextSpanner.bound-details.left-broken.text = ##f
-                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
+                                \once \override TextSpanner.Y-extent = ##f                               %! PCW1
+                                \once \override TextSpanner.arrow-width = 0.25                           %! PCW1
+                                \once \override TextSpanner.bound-details.left-broken.text = ##f         %! PCW1
+                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
                                 \once \override TextSpanner.bound-details.left.text = \markup {
                                     \concat
                                         {
@@ -1319,13 +1319,13 @@ class LibraryTZ(abjad.AbjadObject):
                                             \hspace
                                                 #0.5
                                         }
-                                    }
-                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
-                                \once \override TextSpanner.bound-details.right-broken.padding = 0
-                                \once \override TextSpanner.bound-details.right-broken.text = ##f
-                                \once \override TextSpanner.bound-details.right.arrow = ##t
-                                \once \override TextSpanner.bound-details.right.padding = 0.5
-                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                    }                                                                    %! PCW1
+                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f       %! PCW1
+                                \once \override TextSpanner.bound-details.right-broken.padding = 0       %! PCW1
+                                \once \override TextSpanner.bound-details.right-broken.text = ##f        %! PCW1
+                                \once \override TextSpanner.bound-details.right.arrow = ##t              %! PCW1
+                                \once \override TextSpanner.bound-details.right.padding = 0.5            %! PCW1
+                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
                                 \once \override TextSpanner.bound-details.right.text = \markup {
                                     \concat
                                         {
@@ -1335,12 +1335,12 @@ class LibraryTZ(abjad.AbjadObject):
                                                 \upright
                                                     ord.
                                         }
-                                    }
-                                \once \override TextSpanner.dash-fraction = 0.25
-                                \once \override TextSpanner.dash-period = 1.5
+                                    }                                                                    %! PCW1
+                                \once \override TextSpanner.dash-fraction = 0.25                         %! PCW1
+                                \once \override TextSpanner.dash-period = 1.5                            %! PCW1
                                 fs''16
                                 [
-                                \startTextSpan
+                                \startTextSpan                                                           %! PCW1
                                 e''16
                                 ]
                                 ef''4
@@ -1351,7 +1351,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \stopTextSpan
+                                \stopTextSpan                                                            %! PCW1
                                 \revert TextSpanner.staff-padding                                        %! OC
                             }
                             \times 4/5 {
