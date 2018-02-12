@@ -173,6 +173,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_metronome_marks',
         '_midi',
         '_offset_to_measure_number',
+        '_previously_alive_contexts',
         '_print_timings',
         '_range_checker',
         '_rehearsal_mark',
@@ -347,6 +348,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._metronome_marks: abjad.OrderedDict = metronome_marks
         self._midi: bool = None
         self._offset_to_measure_number: Dict[abjad.Offset, int] = {}
+        self._previously_alive_contexts: List[str] = []
         self._print_timings: bool = print_timings
         self._range_checker: abjad.PitchRange = range_checker
         self._rehearsal_mark: str = rehearsal_mark
@@ -593,6 +595,12 @@ class SegmentMaker(abjad.SegmentMaker):
             command.indicators[0],
             extra_offset=self.final_markup_extra_offset,
             )
+
+    def _alive_during_any_previous_segment(self, context) -> bool:
+        assert isinstance(context, abjad.Context), repr(context)
+        # HERE
+        names: List = self.previous_metadata.get('alive_during_segment', [])
+        return context.name in names
 
     def _alive_during_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
@@ -1040,6 +1048,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     if leaf_timespan.starts_during_timespan(stage_timespan):
                         leaves_by_stage_number[stage_number].append(leaf)
 
+
+    def _cache_previously_alive_contexts(self) -> None:
+        if self.segment_directory is None:
+            return
+        contexts = set()
+        string = 'alive_during_segment'
+        for segment in self.segment_directory.parent.list_paths():
+            if segment == self.segment_directory:
+                break
+            contexts_ = segment.get_metadatum(string)
+            contexts.update(contexts_)
+        self._previously_alive_contexts.extend(sorted(contexts))
+
     def _call_commands(self):
         start_time = time.time()
         for wrapper in self.wrappers:
@@ -1299,12 +1320,33 @@ class SegmentMaker(abjad.SegmentMaker):
             result.append(context.name)
         return result
 
+    def _collect_first_appearance_margin_markup(self):
+        if self.first_segment:
+            return
+        if not self.margin_markups:
+            return
+        self._cache_previously_alive_contexts()
+        dictionary = abjad.OrderedDict()
+        prototype = abjad.MarginMarkup
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            if staff.name in self._previously_alive_contexts:
+                continue
+            for leaf in abjad.iterate(staff).leaves():
+                margin_markup = abjad.inspect(leaf).get_effective(prototype)
+                if margin_markup is not None:
+                    key = self._indicator_to_key(margin_markup, self.manifests)
+                    dictionary[staff.name] = key
+                    break
+        return dictionary
+
     def _collect_metadata(self):
         result = abjad.OrderedDict()
         result['alive_during_segment'] = self._collect_alive_during_segment()
         result['container_to_part'] = self._container_to_part
         result['duration'] = self._duration
         result['fermata_measure_numbers'] = self._fermata_measure_numbers
+        dictionary = self._collect_first_appearance_margin_markup()
+        result['first_appearance_margin_markup'] = dictionary
         result['first_measure_number'] = self._get_first_measure_number()
         result['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
