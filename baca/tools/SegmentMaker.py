@@ -223,8 +223,6 @@ class SegmentMaker(abjad.SegmentMaker):
         'abjad.MarginMarkup': 'margin_markups',
         }
 
-    _extend_beam_tag = 'extend beam'
-
     _publish_storage_format = True
 
     _status_to_color = {
@@ -918,7 +916,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             for wrapper in self.score_template.attach_defaults(staff):
                 tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
-                wrapper._tag = tag
+                wrapper.tag = tag
                 self._categorize_persistent_wrapper(
                     self.manifests,
                     wrapper,
@@ -1477,7 +1475,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 for tag in tags:
                     if tag in wrapper.tag:
-                        wrapper._deactivate = True
+                        wrapper.deactivate = True
                         break
 
     @staticmethod
@@ -1532,7 +1530,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
-            if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
+            if abjad.inspect(leaf).get_indicator(abjad.tags.RIGHT_BROKEN_BEAM):
                 self._extend_beam(leaf)
 
     def _get_first_measure_number(self):
@@ -1661,12 +1659,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_stylesheets(self):
         if self._environment == 'docs':
-            if abjad.inspect(self.score).get_indicator('two-voice'):
+            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
                 return [self._relative_two_voice_staff_stylesheet_path]
             else:
                 return [self._relative_string_trio_stylesheet_path]
         elif self._environment == 'external':
-            if abjad.inspect(self.score).get_indicator('two-voice'):
+            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
                 return [self._absolute_two_voice_staff_stylesheet_path]
             else:
                 return [self._absolute_string_trio_stylesheet_path]
@@ -2204,8 +2202,8 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = document_tag.append(tag)
         if wrapper.spanner is not None:
             tag = tag.append('SM27')
-            wrapper._deactivate = True
-            wrapper._tag = tag
+            wrapper.deactivate = True
+            wrapper.tag = tag
             if isinstance(wrapper.spanner, abjad.MetronomeMarkSpanner):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
@@ -2219,7 +2217,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper._alternate = alternate
         else:
             tag = tag.append('SM8')
-            wrapper._tag = tag
+            wrapper.tag = tag
 
     def _shift_clefs_into_fermata_measures(self):
         fermata_stop_offsets = self._fermata_stop_offsets[:]

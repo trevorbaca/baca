@@ -71,7 +71,7 @@ class HairpinCommand(Command):
                 self.start,
                 spanner[0],
                 deactivate=self.deactivate,
-                tag=str(tag),
+                tag=tag,
                 wrapper=True,
                 )
             if self.start == reapplied:
@@ -93,7 +93,7 @@ class HairpinCommand(Command):
                 self.stop,
                 spanner[-1],
                 deactivate=self.deactivate,
-                tag=str(tag),
+                tag=tag,
                 wrapper=True,
                 )
             if self.stop == reapplied:

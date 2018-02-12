@@ -271,7 +271,7 @@ class IndicatorCommand(Command):
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
-                    tag=str(tag),
+                    tag=tag,
                     wrapper=True,
                     )
                 if indicator == reapplied:

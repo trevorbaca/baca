@@ -541,8 +541,6 @@ class ImbricationCommand(Command):
         '_voice_name',
         )
 
-    _extend_beam_tag = 'extend beam'
-
     ### INITIALIZER ###
 
     def __init__(
@@ -1414,7 +1412,7 @@ class ImbricationCommand(Command):
         if self.extend_beam:
             leaves = list(abjad.iterate(container).leaves())
             last_leaf = leaves[-1]
-            abjad.attach(self._extend_beam_tag, last_leaf)
+            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
         selection = abjad.select(container)
         return {self.voice_name: selection}
 

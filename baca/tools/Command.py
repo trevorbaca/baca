@@ -1,6 +1,7 @@
 import abc
 import abjad
 import baca
+from typing import Optional
 
 
 class Command(abjad.AbjadObject):
@@ -103,10 +104,8 @@ class Command(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def deactivate(self):
+    def deactivate(self) -> Optional[bool]:
         r'''Is true when tag should write deactivated.
-
-        Returns true, false or none.
         '''
         return self._deactivate
 
@@ -155,11 +154,12 @@ class Command(abjad.AbjadObject):
         return self._selector
 
     @property
-    def tag(self) -> abjad.Tag:
+    def tag(self) -> Optional[abjad.Tag]:
         r'''Gets tag.
         '''
         if self.tags:
             return abjad.Tag.from_words(self.tags)
+        return None
 
     @property
     def tag_measure_number(self):
@@ -187,7 +187,7 @@ class Command(abjad.AbjadObject):
 
     ### PUBLIC METHODS ###
 
-    def get_tag(self, leaf: abjad.Leaf = None) -> abjad.Tag:
+    def get_tag(self, leaf: abjad.Leaf = None) -> Optional[abjad.Tag]:
         r'''Gets tag for `leaf`.
         '''
         tags = self.tags[:]
@@ -200,3 +200,4 @@ class Command(abjad.AbjadObject):
         if tags:
             tags.sort()
             return abjad.Tag.from_words(tags)
+        return None

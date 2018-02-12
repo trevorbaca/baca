@@ -1,6 +1,8 @@
 import abjad
 import baca
 from typing import List
+from typing import Optional
+from .Command import Command
 
 
 class BreakMeasureMap(abjad.AbjadObject):
@@ -347,7 +349,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             literal,
             skips[0],
             deactivate=self.deactivate,
-            tag=self.tag.append('BMM1').string,
+            tag=self.tag.append('BMM1'),
             )
         for skip in skips:
             if not abjad.inspect(skip).has_indicator(baca.LBSD):
@@ -356,7 +358,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     literal,
                     skip,
                     deactivate=self.deactivate,
-                    tag=self.tag.append('BMM2').string,
+                    tag=self.tag.append('BMM2'),
                     )
         for command in self.commands:
             command(context)
@@ -409,17 +411,16 @@ class BreakMeasureMap(abjad.AbjadObject):
         return self._deactivate
 
     @property
-    def tag(self) -> abjad.Tag:
+    def tag(self) -> Optional[abjad.Tag]:
         r'''Gets tag.
         '''
         if self.tags:
             return abjad.Tag.from_words(self.tags)
+        return None
 
     @property
     def tags(self) -> List[str]:
         r'''Gets tags.
-
-        Returns (copied) list of strings.
         '''
-        assert baca.Command._are_valid_tags(self._tags), repr(self._tags)
+        assert Command._are_valid_tags(self._tags), repr(self._tags)
         return self._tags[:]

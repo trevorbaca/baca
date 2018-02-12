@@ -239,7 +239,7 @@ class SpannerCommand(Command):
             deactivate=self.deactivate,
             left_broken=left_broken,
             right_broken=right_broken,
-            tag=str(tag),
+            tag=tag,
             )
         return spanner
 

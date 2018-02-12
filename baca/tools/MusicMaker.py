@@ -68,17 +68,7 @@ class MusicMaker(abjad.AbjadObject):
         '_voice_names',
         )
 
-    _extend_beam_tag = 'extend beam'
-
-    _foreshadow_tag = 'foreshadow'
-
-    _incomplete_tag = 'incomplete'
-
     _publish_storage_format = True
-
-    _recollection_tag = 'recollection'
-
-    _repeat_pitch_allowed_string = abjad.tags.ALLOW_REPEAT_PITCH
 
     _state_variables = (
         '_next_figure',
@@ -714,17 +704,17 @@ class MusicMaker(abjad.AbjadObject):
             return
         for leaf in abjad.iterate(argument).leaves():
             if is_foreshadow:
-                abjad.attach(self._foreshadow_tag, leaf)
+                abjad.attach(abjad.tags.FORESHADOW, leaf)
             if is_incomplete:
-                abjad.attach(self._incomplete_tag, leaf)
+                abjad.attach(abjad.tags.INCOMPLETE, leaf)
             if is_recollection:
-                abjad.attach(self._recollection_tag, leaf)
+                abjad.attach(abjad.tags.RECOLLECTION, leaf)
 
     def _annotate_repeat_pitches(self, container):
         if not self.allow_repeat_pitches:
             return
         for leaf in abjad.iterate(container).leaves(pitched=True):
-            abjad.attach(self._repeat_pitch_allowed_string, leaf)
+            abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
 
     def _apply_pitch_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
@@ -939,7 +929,7 @@ class MusicMaker(abjad.AbjadObject):
             return
         leaves = list(abjad.iterate(selections).leaves())
         last_leaf = leaves[-1]
-        abjad.attach(self._extend_beam_tag, last_leaf)
+        abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
 
     @staticmethod
     def _get_anchor_specifier(specifiers):

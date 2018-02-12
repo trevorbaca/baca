@@ -132,6 +132,5 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             [global_context, music_context],
             name='Score',
             )
-        # TODO: replace 'two-voice' string with abjad.Tags tag
-        abjad.attach('two-voice', score, tag='')
+        abjad.attach(abjad.tags.TWO_VOICE, score, tag=None)
         return score

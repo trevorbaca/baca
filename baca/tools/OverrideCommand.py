@@ -274,7 +274,7 @@ class OverrideCommand(Command):
             literal,
             leaves[0],
             deactivate=self.deactivate,
-            tag=str(tag),
+            tag=tag,
             )
         if once:
             return
@@ -292,7 +292,7 @@ class OverrideCommand(Command):
             literal,
             leaves[-1],
             deactivate=self.deactivate,
-            tag=str(tag),
+            tag=tag,
             )
 
     ### PUBLIC PROPERTIES ###
