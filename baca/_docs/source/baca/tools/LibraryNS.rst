@@ -27,6 +27,7 @@ Bases
       ~LibraryNS.ottava_bracket_staff_padding
       ~LibraryNS.page
       ~LibraryNS.page_break
+      ~LibraryNS.parts
       ~LibraryNS.piecewise
       ~LibraryNS.pitch
       ~LibraryNS.pitches
@@ -52,6 +53,7 @@ Bases
       ~LibraryNS.rhythm
       ~LibraryNS.scope
       ~LibraryNS.scopes
+      ~LibraryNS.score
       ~LibraryNS.scorewide_spacing
       ~LibraryNS.script_color
       ~LibraryNS.script_extra_offset
@@ -114,6 +116,8 @@ Class & static methods
 
 .. automethod:: LibraryNS.page_break
 
+.. automethod:: LibraryNS.parts
+
 .. automethod:: LibraryNS.piecewise
 
 .. automethod:: LibraryNS.pitch
@@ -163,6 +167,8 @@ Class & static methods
 .. automethod:: LibraryNS.scope
 
 .. automethod:: LibraryNS.scopes
+
+.. automethod:: LibraryNS.score
 
 .. automethod:: LibraryNS.scorewide_spacing
 

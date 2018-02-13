@@ -10,6 +10,7 @@ from .ContainerCommand import ContainerCommand
 from .IndicatorCommand import IndicatorCommand
 from .OverrideCommand import OverrideCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
+from .SuiteCommand import SuiteCommand
 from .Typing import Selector
 
 
@@ -894,6 +895,21 @@ class LibraryAF(abjad.AbjadObject):
             value=pair,
             context='Staff',
             grob='bar_line',
+            selector=selector,
+            )
+
+    @staticmethod
+    def bar_extent_zero(
+        selector: Selector = 'baca.leaves()',
+        ) -> SuiteCommand:
+        r'''Makes bar-extent zero suite.
+        '''
+        import baca
+        return SuiteCommand(
+            [
+                baca.bar_extent((0, 0), after=True, selector=baca.leaves()), 
+                baca.bar_extent((0, 0), after=True, selector=baca.leaf(-1)), 
+                ],
             selector=selector,
             )
 

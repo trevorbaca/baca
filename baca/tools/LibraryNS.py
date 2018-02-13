@@ -4,6 +4,7 @@ import collections
 from typing import List
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
 from .PitchCommand import PitchCommand
@@ -494,6 +495,18 @@ class LibraryNS(abjad.AbjadObject):
         return baca.tools.IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\pageBreak', 'after')],
             selector=selector,
+            )
+
+    @staticmethod
+    def parts(command: Command) -> Command:
+        r'''Tags ``command`` with ``+PARTS``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '+PARTS',
+            command,
             )
 
     @staticmethod
@@ -2582,6 +2595,18 @@ class LibraryNS(abjad.AbjadObject):
                 scope = baca.Scope(*argument)
             scopes.append(scope)
         return scopes
+
+    @staticmethod
+    def score(command: Command) -> Command:
+        r'''Tags ``command`` with ``-PARTS``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '-PARTS',
+            command,
+            )
 
     @staticmethod
     def scorewide_spacing(

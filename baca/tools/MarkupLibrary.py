@@ -443,6 +443,17 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def edition(score, parts):
+        r'''Makes score / parts markup suite.
+        '''
+        import baca
+        score = baca.markup(score)
+        score = baca.score(score)
+        parts = baca.markup(parts)
+        parts = baca.parts(parts)
+        return baca.suite([score, parts])
+
+    @staticmethod
     def estr_sul_pont(selector='baca.pleaf(0)'):
         return baca.markup(
             'estr. sul pont.',

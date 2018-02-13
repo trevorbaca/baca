@@ -638,7 +638,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'redundant'
             else:
                 status = 'redundant'
-        return leaf, previous_indicator, status, abjad.Tag(momento.document)
+        edition = momento.edition or abjad.Tag()
+        return leaf, previous_indicator, status, edition
 
     def _annotate_sounds_during(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -1387,13 +1388,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     prototype = type(indicator)
                     prototype = self._prototype_string(prototype)
-                if wrapper.tag:
-                    document_tag = wrapper.tag.get_document_tag()
-                    if document_tag is not None:
-                        document_tag = str(document_tag)
                 momento = abjad.Momento(
                     context=first_context.name,
-                    document=document_tag,
+                    edition=wrapper.tag.edition(),
                     prototype=prototype,
                     value=value,
                     )
@@ -2052,13 +2049,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 result = self._analyze_momento(context, momento)
                 if result is None:
                     continue
-                leaf, previous_indicator, status, document_tag = result
+                leaf, previous_indicator, status, edition = result
                 if isinstance(previous_indicator, abjad.TimeSignature):
                     if status is None:
                         continue
                     assert status == 'reapplied', repr(status)
                     wrapper = abjad.inspect(leaf).wrapper(abjad.TimeSignature)
-                    wrapper.tag = wrapper.tag.prepend(document_tag)
+                    wrapper.tag = wrapper.tag.prepend(edition)
                     self._categorize_persistent_wrapper(
                         self.manifests,
                         wrapper,
@@ -2073,7 +2070,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         wrapper = spanner.attach(
                             previous_indicator,
                             leaf,
-                            tag=document_tag.append('SM36'),
+                            tag=edition.append('SM36'),
                             wrapper=True,
                             )
                         self._categorize_persistent_wrapper(
@@ -2087,7 +2084,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             status = 'explicit'
                         prototype = abjad.MetronomeMark
                         wrapper = abjad.inspect(leaf).wrapper(prototype)
-                        wrapper.tag = wrapper.tag.prepend(document_tag)
+                        wrapper.tag = wrapper.tag.prepend(edition)
                         self._categorize_persistent_wrapper(
                             self.manifests,
                             wrapper,
@@ -2099,7 +2096,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper = abjad.attach(
                         previous_indicator,
                         leaf,
-                        tag=document_tag.append('SM37'),
+                        tag=edition.append('SM37'),
                         wrapper=True,
                         )
                     attached = True
