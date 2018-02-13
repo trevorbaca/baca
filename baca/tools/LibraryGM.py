@@ -1978,28 +1978,6 @@ class LibraryGM(abjad.AbjadObject):
             return command
 
     @staticmethod
-    def metadata(path: str) -> abjad.OrderedDict:
-        r'''Gets metadata for previous segment before segment `path`.
-        '''
-        # reproduces abjad.Path.get_previous_path()
-        # because Travis isn't configured for scores-directory calculations
-        definition_py = abjad.Path(path)
-        segment = abjad.Path(definition_py).parent
-        assert segment.is_segment(), repr(segment)
-        segments = segment.parent
-        assert segments.is_segments(), repr(segments)
-        paths = segments.list_paths()
-        paths = [_ for _ in paths if not _.name.startswith('.')]
-        assert all(_.is_dir() for _ in paths), repr(paths)
-        index = paths.index(segment)
-        if index == 0:
-            return None
-        previous_index = index - 1
-        previous_segment = paths[previous_index]
-        previous_metadata = previous_segment.get_metadata()
-        return previous_metadata
-
-    @staticmethod
     def metronome_mark(key, selector='baca.leaf(0)'):
         r'''Attaches metronome mark with `key`.
 

@@ -2720,7 +2720,8 @@ class LibraryTZ(abjad.AbjadObject):
     def trill(
         string: str = None,
         harmonic: bool = None,
-        broken: abjad.OrdinalConstant = None,
+        left_broken: bool = None,
+        right_broken: bool = None,
         selector: Selector = 'baca.tleaves().with_next_leaf()',
         ) -> SpannerCommand:
         r'''Attaches trill to trimmed leaves (leaked to the right).
@@ -3203,7 +3204,8 @@ class LibraryTZ(abjad.AbjadObject):
                 interval = abjad.NamedInterval(string)
                 pitch = None
         return SpannerCommand(
-            broken=broken,
+            left_broken=left_broken,
+            right_broken=right_broken,
             spanner=abjad.TrillSpanner(
                 interval=interval,
                 is_harmonic=harmonic,

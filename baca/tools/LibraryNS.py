@@ -700,6 +700,28 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def previous_metadata(path: str) -> abjad.OrderedDict:
+        r'''Gets previous segment metadata before ``path``.
+        '''
+        # reproduces abjad.Path.get_previous_path()
+        # because Travis isn't configured for scores-directory calculations
+        definition_py = abjad.Path(path)
+        segment = abjad.Path(definition_py).parent
+        assert segment.is_segment(), repr(segment)
+        segments = segment.parent
+        assert segments.is_segments(), repr(segments)
+        paths = segments.list_paths()
+        paths = [_ for _ in paths if not _.name.startswith('.')]
+        assert all(_.is_dir() for _ in paths), repr(paths)
+        index = paths.index(segment)
+        if index == 0:
+            return None
+        previous_index = index - 1
+        previous_segment = paths[previous_index]
+        previous_metadata = previous_segment.get_metadata()
+        return previous_metadata
+
+    @staticmethod
     def proportional_notation_duration(duration, selector='baca.leaf(0)'):
         r'''Sets proportional notation duration.
 
@@ -2621,6 +2643,7 @@ class LibraryNS(abjad.AbjadObject):
         '''
         path = abjad.Path(path)
         first_measure_number, measure_count = path.get_measure_count_pair()
+        first_measure_number = first_measure_number or 1
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
         overrides = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1

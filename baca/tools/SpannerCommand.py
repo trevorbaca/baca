@@ -187,7 +187,8 @@ class SpannerCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_broken',
+        '_left_broken',
+        '_right_broken',
         '_spanner',
         '_tags',
         )
@@ -197,13 +198,19 @@ class SpannerCommand(Command):
     def __init__(
         self,
         deactivate: bool = None,
-        broken: abjad.OrdinalConstant = None,
+        left_broken: bool = None,
+        right_broken: bool = None,
         selector: Selector = 'baca.tleaves()',
         spanner: abjad.Spanner = None,
         tags: List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
-        self._broken: abjad.OrdinalConstant = broken
+        if left_broken is not None:
+            left_broken = bool(left_broken)
+        self._left_broken: bool = left_broken
+        if right_broken is not None:
+            right_broken = bool(right_broken)
+        self._right_broken: bool = right_broken
         self._spanner: abjad.Spanner = spanner
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
@@ -224,17 +231,12 @@ class SpannerCommand(Command):
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
-        left_broken, right_broken = None, None
-        if self.broken in (abjad.Left, abjad.Both):
-            left_broken = True
-        if self.broken in (abjad.Right, abjad.Both):
-            right_broken = True
         abjad.attach(
             spanner,
             leaves,
             deactivate=self.deactivate,
-            left_broken=left_broken,
-            right_broken=right_broken,
+            left_broken=self.left_broken,
+            right_broken=self.right_broken,
             tag=self.tag.prepend('SC'),
             )
         return spanner
@@ -242,10 +244,16 @@ class SpannerCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def broken(self) -> Optional[abjad.OrdinalConstant]:
-        r'''Gets the direction-to-which spanner is broken, if any.
+    def left_broken(self) -> Optional[bool]:
+        r'''Is true when spanner is left-broken.
         '''
-        return self._broken
+        return self._left_broken
+
+    @property
+    def right_broken(self) -> Optional[bool]:
+        r'''Is true when spanner is right-broken.
+        '''
+        return self._right_broken
 
     @property
     def selector(self) -> Optional[Selector]:

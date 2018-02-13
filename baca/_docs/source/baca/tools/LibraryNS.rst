@@ -32,6 +32,7 @@ Bases
       ~LibraryNS.pitch
       ~LibraryNS.pitches
       ~LibraryNS.possibile_dynamic
+      ~LibraryNS.previous_metadata
       ~LibraryNS.proportional_notation_duration
       ~LibraryNS.register
       ~LibraryNS.rehearsal_mark
@@ -125,6 +126,8 @@ Class & static methods
 .. automethod:: LibraryNS.pitches
 
 .. automethod:: LibraryNS.possibile_dynamic
+
+.. automethod:: LibraryNS.previous_metadata
 
 .. automethod:: LibraryNS.proportional_notation_duration
 
