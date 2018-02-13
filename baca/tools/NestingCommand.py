@@ -146,15 +146,15 @@ class NestingCommand(Command):
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                        \time 1/2                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                        \time 1/4                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/4
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5

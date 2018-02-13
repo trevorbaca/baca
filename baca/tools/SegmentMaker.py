@@ -52,23 +52,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -403,23 +403,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -798,20 +798,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 suffix = 'color'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix, suffix=suffix)
         if existing_tag:
-            tag = existing_tag.append(tag)
+            tag = existing_tag.prepend(tag)
         if cancelation is True:
             abjad.attach(
                 literal,
                 wrapper.component,
                 deactivate=True,
-                tag=tag.append('SM7'),
+                tag=tag.prepend('SM7'),
                 )
         else:
             abjad.attach(
                 literal,
                 wrapper.component,
                 deactivate=existing_deactivate,
-                tag=tag.append('SM6'),
+                tag=tag.prepend('SM6'),
                 )
 
     @staticmethod
@@ -986,12 +986,12 @@ class SegmentMaker(abjad.SegmentMaker):
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
         if existing_tag:
-            tag = existing_tag.append(tag)
+            tag = existing_tag.prepend(tag)
         abjad.attach(
             markup,
             leaf,
             deactivate=existing_deactivate,
-            tag=tag.append('SM11'),
+            tag=tag.prepend('SM11'),
             )
 
     def _attach_metronome_marks(self):
@@ -1006,7 +1006,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stem_height=self.metronome_mark_stem_height,
             )
         tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER)
-        abjad.attach(spanner, skips, tag=tag.append('SM29'))
+        abjad.attach(spanner, skips, tag=tag.prepend('SM29'))
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -1175,7 +1175,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper_ = abjad.attach(
                 literal,
                 wrapper.component,
-                tag=wrapper.tag.append('SM33'),
+                tag=wrapper.tag.prepend('SM33'),
                 wrapper=True,
                 )
             SegmentMaker._set_status_tag(
@@ -1201,7 +1201,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper_ = abjad.attach(
                 literal,
                 leaf,
-                tag=existing_tag.append('SM34'),
+                tag=existing_tag.prepend('SM34'),
                 wrapper=True,
                 )
             SegmentMaker._set_status_tag(
@@ -1822,7 +1822,7 @@ class SegmentMaker(abjad.SegmentMaker):
         label = abjad.label(
             skips,
             deactivate=True,
-            tag=tag.append('SM28'),
+            tag=tag.prepend('SM28'),
             )
         segment_stop_duration = label.with_start_offsets(
             brackets=True,
@@ -1851,7 +1851,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=tag.append('SM31'),
+                tag=tag.prepend('SM31'),
                 )
             markup = abjad.Markup(f'<{measure_index}>')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
@@ -1862,7 +1862,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=tag.append('SM32'),
+                tag=tag.prepend('SM32'),
                 )
 
     def _label_stage_numbers(self):
@@ -1886,7 +1886,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 deactivate=True,
-                tag=tag.append('SM3'),
+                tag=tag.prepend('SM3'),
                 )
 
     def _make_global_skips(self):
@@ -1910,7 +1910,7 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(
             literal,
             first_skip,
-            tag=tag.append('SM2'),
+            tag=tag.prepend('SM2'),
             )
 
     def _make_lilypond_align_above_context_settings(self):
@@ -2055,6 +2055,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         continue
                     assert status == 'reapplied', repr(status)
                     wrapper = abjad.inspect(leaf).wrapper(abjad.TimeSignature)
+                    edition = edition.prepend('SM38')
                     wrapper.tag = wrapper.tag.prepend(edition)
                     self._categorize_persistent_wrapper(
                         self.manifests,
@@ -2202,9 +2203,9 @@ class SegmentMaker(abjad.SegmentMaker):
             prefix = 'redrawn'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         if wrapper.tag:
-            tag = wrapper.tag.append(tag)
+            tag = wrapper.tag.prepend(tag)
         if wrapper.spanner is not None:
-            tag = tag.append('SM27')
+            tag = tag.prepend('SM27')
             wrapper.deactivate = True
             wrapper.tag = tag
             if isinstance(wrapper.spanner, abjad.MetronomeMarkSpanner):
@@ -2213,11 +2214,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag = getattr(abjad.tags, tag)
                 tag = abjad.Tag(tag)
                 if existing_tag:
-                    tag = existing_tag.append(tag)
-                alternate = (color, tag.append('SM15'))
+                    tag = existing_tag.prepend(tag)
+                alternate = (color, tag.prepend('SM15'))
                 wrapper._alternate = alternate
         else:
-            tag = tag.append('SM8')
+            tag = tag.prepend('SM8')
             wrapper.tag = tag
 
     def _shift_clefs_into_fermata_measures(self):
@@ -2349,7 +2350,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         leaf,
-                        tag=tag.append('SM22'),
+                        tag=tag.prepend('SM22'),
                         )
                 bar_lines_already_styled.append(start_offset)
 
@@ -2473,14 +2474,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! HSS1:SPACING
-                            \time 6/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 6/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -2500,39 +2501,39 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % [ViolinMusicVoice measure 1]                               %! SM4
-                                            \set ViolinMusicStaff.instrumentName = \markup {             %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    Violin                                               %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    Vn.                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            \clef "treble"                                               %! ST3:DEFAULT_CLEF:SM8
-                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
-                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
-                                        %@% \override ViolinMusicStaff.Clef.color = ##f                  %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
-                                            \set ViolinMusicStaff.forceClef = ##t                        %! ST3:SM33:DEFAULT_CLEF:SM8
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                \hcenter-in                                              %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    #10                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    Violin                                               %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                }                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                \hcenter-in                                              %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    #10                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    Vn.                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                }                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST3
+                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                        %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST3
                                             d'16
-                                            ^ \markup {                                                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \with-color                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    #(x11-color 'DarkViolet)                             %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    (Violin)                                             %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
-                                            \set ViolinMusicStaff.instrumentName = \markup {             %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    Violin                                               %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    Vn.                                                  %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
+                                            ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                    #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                    (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                \hcenter-in                                              %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    #10                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    Violin                                               %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                }                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                \hcenter-in                                              %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    #10                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    Vn.                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                }                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -2565,39 +2566,39 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 1]                                        %! SM4
-                                    \set ViolaMusicStaff.instrumentName = \markup {                      %! ST1:DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                                      %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            #10                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            Viola                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                        }                                                                %! ST1:DEFAULT_INSTRUMENT:SM8
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! ST1:DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                                      %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            #10                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            Va.                                                          %! ST1:DEFAULT_INSTRUMENT:SM8
-                                        }                                                                %! ST1:DEFAULT_INSTRUMENT:SM8
-                                    \clef "alto"                                                         %! ST3:DEFAULT_CLEF:SM8
-                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
-                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
-                                %@% \override ViolaMusicStaff.Clef.color = ##f                           %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
-                                    \set ViolaMusicStaff.forceClef = ##t                                 %! ST3:SM33:DEFAULT_CLEF:SM8
+                                    \set ViolaMusicStaff.instrumentName = \markup {                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        \hcenter-in                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            #10                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            Viola                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        }                                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        \hcenter-in                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            #10                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            Va.                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        }                                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST3
+                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
+                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                    \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
                                     R1 * 3/8
-                                    ^ \markup {                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        \with-color                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                            #(x11-color 'DarkViolet)                                     %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                            (Viola)                                                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
-                                    \set ViolaMusicStaff.instrumentName = \markup {                      %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                                      %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            #10                                                          %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            Viola                                                        %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                        }                                                                %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                                      %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            #10                                                          %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            Va.                                                          %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                        }                                                                %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
+                                    ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                    \set ViolaMusicStaff.instrumentName = \markup {                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        \hcenter-in                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            #10                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            Viola                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        }                                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        \hcenter-in                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            #10                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            Va.                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        }                                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 2]                                        %! SM4
                                     R1 * 3/8
@@ -2613,39 +2614,39 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % [CelloMusicVoice measure 1]                                %! SM4
-                                            \set CelloMusicStaff.instrumentName = \markup {              %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    Cello                                                %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            \set CelloMusicStaff.shortInstrumentName = \markup {         %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                    Vc.                                                  %! ST1:DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:DEFAULT_INSTRUMENT:SM8
-                                            \clef "bass"                                                 %! ST3:DEFAULT_CLEF:SM8
-                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
-                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ST3:DEFAULT_CLEF_COLOR:SM6
-                                        %@% \override CelloMusicStaff.Clef.color = ##f                   %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
-                                            \set CelloMusicStaff.forceClef = ##t                         %! ST3:SM33:DEFAULT_CLEF:SM8
+                                            \set CelloMusicStaff.instrumentName = \markup {              %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                \hcenter-in                                              %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    #10                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    Cello                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                }                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            \set CelloMusicStaff.shortInstrumentName = \markup {         %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                \hcenter-in                                              %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    #10                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                    Vc.                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                                }                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            \clef "bass"                                                 %! SM8:DEFAULT_CLEF:ST3
+                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
+                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                        %@% \override CelloMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                            \set CelloMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST3
                                             a16
-                                            ^ \markup {                                                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                \with-color                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    #(x11-color 'DarkViolet)                             %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                    (Cello)                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                                }                                                        %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
-                                            \set CelloMusicStaff.instrumentName = \markup {              %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    Cello                                                %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            \set CelloMusicStaff.shortInstrumentName = \markup {         %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    #10                                                  %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                    Vc.                                                  %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                                }                                                        %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
+                                            ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                    #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                    (Cello)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                            \set CelloMusicStaff.instrumentName = \markup {              %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                \hcenter-in                                              %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    #10                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    Cello                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                }                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            \set CelloMusicStaff.shortInstrumentName = \markup {         %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                \hcenter-in                                              %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    #10                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                    Vc.                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                                }                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -2749,29 +2750,29 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/16
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 7/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 7/16
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/16
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -2921,29 +2922,29 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/16
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 7/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 7/16
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/16
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -3099,23 +3100,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -3210,23 +3211,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "||"                                                                    %! SM5
@@ -3323,23 +3324,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|."                                                                    %! SM5
@@ -3438,23 +3439,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "||"                                                                    %! SM5
@@ -3560,23 +3561,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|."                                                                    %! SM5
@@ -3721,23 +3722,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -3832,23 +3833,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4009,26 +4010,26 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4175,26 +4176,26 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/16                                                                   %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4371,24 +4372,24 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4403,12 +4404,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "alto"                                                             %! SM37:REAPPLIED_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'green4)                  %! SM37:REAPPLIED_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! SM37:REAPPLIED_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! SM37:SM33:REAPPLIED_CLEF:SM8
+                                \clef "alto"                                                             %! SM8:REAPPLIED_CLEF:SM37
+                                \once \override Staff.Clef.color = #(x11-color 'green4)                  %! SM6:REAPPLIED_CLEF_COLOR:SM37
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REAPPLIED_CLEF_COLOR_CANCELLATION:SM37
+                                \set Staff.forceClef = ##t                                               %! SM8:REAPPLIED_CLEF:SM33:SM37
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! SM37:REAPPLIED_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! SM6:REAPPLIED_CLEF_REDRAW_COLOR:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -4525,79 +4526,79 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \fontsize                                                                %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #-6                                                                  %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%         \general-align                                                       %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #Y                                                               %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #DOWN                                                            %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%             \note-by-number                                                  %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #2                                                           %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #0                                                           %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #1.5                                                         %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \upright                                                                 %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%             =                                                                %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%             90                                                               %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \hspace                                                                  %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #1                                                                   %! SM30:EXPLICIT_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! SM30:EXPLICIT_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.Y-extent = ##f                                   %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! METRONOME_MARK_SPANNER:SM29
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%         #-6                                                                  %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%         \general-align                                                       %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%             #Y                                                               %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%             #DOWN                                                            %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%             90                                                               %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%         }                                                                    %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'blue)                                                   %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    {                                                                    %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \fontsize                                                        %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #-6                                                          %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \general-align                                               %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #Y                                                       %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #DOWN                                                    %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                \note-by-number                                          %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #2                                                   %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #0                                                   %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1.5                                                 %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \upright                                                         %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            {                                                            %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                =                                                        %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                90                                                       %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            }                                                            %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \hspace                                                          %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #1                                                           %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    }                                                                    %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! SM30:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.dash-period = 0                                  %! METRONOME_MARK_SPANNER:SM29
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                        \fontsize                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                            #-6                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                            \general-align                                               %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                #Y                                                       %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                #DOWN                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                    #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                    #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                        \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                            {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                90                                                       %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                            }                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29:METRONOME_MARK_SPANNER
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
-                            \startTextSpan                                                               %! METRONOME_MARK_SPANNER:SM29
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! METRONOME_MARK_SPANNER:SM29
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4759,23 +4760,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4830,23 +4831,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4940,23 +4941,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4972,19 +4973,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                     fs'8
                                     [
-                                    ^ \markup {                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        \with-color                                                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            #(x11-color 'blue)                                           %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            (“clarinet”)                                                 %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    ^ \markup {                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        \with-color                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                            #(x11-color 'blue)                                           %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                            (“clarinet”)                                                 %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        }                                                                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -5068,23 +5069,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5100,19 +5101,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                     e'8
                                     [
-                                    ^ \markup {                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        \with-color                                                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            #(x11-color 'blue)                                           %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                            (“clarinet”)                                                 %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        }                                                                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    ^ \markup {                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        \with-color                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                            #(x11-color 'blue)                                           %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                            (“clarinet”)                                                 %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        }                                                                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>

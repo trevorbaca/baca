@@ -62,8 +62,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -73,7 +73,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -89,12 +89,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "treble"                                                           %! ST3:DEFAULT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! ST3:DEFAULT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! ST3:DEFAULT_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! ST3:SM33:DEFAULT_CLEF:SM8
+                                \clef "treble"                                                           %! SM8:DEFAULT_CLEF:ST3
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! SM6:DEFAULT_CLEF_COLOR:ST3
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                \set Staff.forceClef = ##t                                               %! SM8:DEFAULT_CLEF:SM33:ST3
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'violet)                        %! ST3:DEFAULT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'violet)                        %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -149,8 +149,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -160,7 +160,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -176,12 +176,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "treble"                                                           %! IC:EXPLICIT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! IC:EXPLICIT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! IC:EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! IC:SM33:EXPLICIT_CLEF:SM8
+                                \clef "treble"                                                           %! SM8:EXPLICIT_CLEF:IC
+                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! SM6:EXPLICIT_CLEF_COLOR:IC
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:EXPLICIT_CLEF_COLOR_CANCELLATION:IC
+                                \set Staff.forceClef = ##t                                               %! SM8:EXPLICIT_CLEF:SM33:IC
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! IC:EXPLICIT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -247,9 +247,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -259,7 +259,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -275,12 +275,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "alto"                                                             %! IC:EXPLICIT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! IC:EXPLICIT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! IC:EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! IC:SM33:EXPLICIT_CLEF:SM8
+                                \clef "alto"                                                             %! SM8:EXPLICIT_CLEF:IC
+                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! SM6:EXPLICIT_CLEF_COLOR:IC
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:EXPLICIT_CLEF_COLOR_CANCELLATION:IC
+                                \set Staff.forceClef = ##t                                               %! SM8:EXPLICIT_CLEF:SM33:IC
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! IC:EXPLICIT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -345,9 +345,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -357,7 +357,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -373,12 +373,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "treble"                                                           %! SM37:REAPPLIED_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'green4)                  %! SM37:REAPPLIED_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! SM37:REAPPLIED_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! SM37:SM33:REAPPLIED_CLEF:SM8
+                                \clef "treble"                                                           %! SM8:REAPPLIED_CLEF:SM37
+                                \once \override Staff.Clef.color = #(x11-color 'green4)                  %! SM6:REAPPLIED_CLEF_COLOR:SM37
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REAPPLIED_CLEF_COLOR_CANCELLATION:SM37
+                                \set Staff.forceClef = ##t                                               %! SM8:REAPPLIED_CLEF:SM33:SM37
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! SM37:REAPPLIED_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! SM6:REAPPLIED_CLEF_REDRAW_COLOR:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -434,8 +434,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -443,7 +443,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -452,7 +452,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -468,20 +468,20 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "treble"                                                           %! IC:EXPLICIT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! IC:EXPLICIT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! IC:EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! IC:SM33:EXPLICIT_CLEF:SM8
+                                \clef "treble"                                                           %! SM8:EXPLICIT_CLEF:IC
+                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! SM6:EXPLICIT_CLEF_COLOR:IC
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:EXPLICIT_CLEF_COLOR_CANCELLATION:IC
+                                \set Staff.forceClef = ##t                                               %! SM8:EXPLICIT_CLEF:SM33:IC
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! IC:EXPLICIT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \clef "treble"                                                           %! IC:REDUNDANT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! IC:REDUNDANT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! IC:REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! IC:SM33:REDUNDANT_CLEF:SM8
+                                \clef "treble"                                                           %! SM8:REDUNDANT_CLEF:IC
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! SM6:REDUNDANT_CLEF_COLOR:IC
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REDUNDANT_CLEF_COLOR_CANCELLATION:IC
+                                \set Staff.forceClef = ##t                                               %! SM8:REDUNDANT_CLEF:SM33:IC
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! IC:REDUNDANT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! SM6:REDUNDANT_CLEF_REDRAW_COLOR:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 R1 * 3/8
@@ -548,9 +548,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -560,7 +560,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -576,12 +576,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \clef "treble"                                                           %! IC:REDUNDANT_CLEF:SM8
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! IC:REDUNDANT_CLEF_COLOR:SM6
-                            %@% \override Staff.Clef.color = ##f                                         %! IC:REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
-                                \set Staff.forceClef = ##t                                               %! IC:SM33:REDUNDANT_CLEF:SM8
+                                \clef "treble"                                                           %! SM8:REDUNDANT_CLEF:IC
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! SM6:REDUNDANT_CLEF_COLOR:IC
+                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REDUNDANT_CLEF_COLOR_CANCELLATION:IC
+                                \set Staff.forceClef = ##t                                               %! SM8:REDUNDANT_CLEF:SM33:IC
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! IC:REDUNDANT_CLEF_REDRAW_COLOR:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! SM6:REDUNDANT_CLEF_REDRAW_COLOR:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -634,14 +634,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -656,9 +656,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \f                                                                       %! IC:EXPLICIT_DYNAMIC:SM8
+                                \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -714,15 +714,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -737,9 +737,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \p                                                                       %! IC:EXPLICIT_DYNAMIC:SM8
+                                \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -796,15 +796,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -819,9 +819,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! SM37:REAPPLIED_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! SM6:REAPPLIED_DYNAMIC_COLOR:SM37
                                 c'4.
-                                \f                                                                       %! SM37:REAPPLIED_DYNAMIC:SM8
+                                \f                                                                       %! SM8:REAPPLIED_DYNAMIC:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -867,14 +867,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -889,14 +889,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \f                                                                       %! IC:EXPLICIT_DYNAMIC:SM8
+                                \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \f                                                                       %! IC:REDUNDANT_DYNAMIC:SM8
+                                \f                                                                       %! SM8:REDUNDANT_DYNAMIC:IC
                 <BLANKLINE>
                             }
                         }
@@ -949,15 +949,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -972,9 +972,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \f                                                                       %! IC:REDUNDANT_DYNAMIC:SM8
+                                \f                                                                       %! SM8:REDUNDANT_DYNAMIC:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1018,14 +1018,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1040,14 +1040,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \sfz                                                                     %! IC:EXPLICIT_DYNAMIC:SM8
+                                \sfz                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \sfz                                                                     %! IC:EXPLICIT_DYNAMIC:SM8
+                                \sfz                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
                 <BLANKLINE>
                             }
                         }
@@ -1100,15 +1100,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1123,9 +1123,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! IC:EXPLICIT_DYNAMIC_COLOR:SM6
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                                 c'4.
-                                \sfz                                                                     %! IC:EXPLICIT_DYNAMIC:SM8
+                                \sfz                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1207,8 +1207,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1218,7 +1218,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1235,11 +1235,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {                                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DarkViolet)                                         %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet)                                         %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (“Flute”)                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                                                                    %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1276,8 +1276,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1287,7 +1287,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1304,11 +1304,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                            %%% ^ \markup {                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)                %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%     }                            %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%     \with-color                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%         #(x11-color 'DarkViolet) %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%         (“Flute”)                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%     }                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -1342,8 +1342,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1353,7 +1353,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1370,11 +1370,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                                ^ \markup {                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    \with-color                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    }                            %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet) %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (“Flute”)                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -1425,8 +1425,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1436,7 +1436,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1453,11 +1453,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {                                                              %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1494,8 +1494,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1505,7 +1505,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1522,11 +1522,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                            %%% ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -1560,8 +1560,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1571,7 +1571,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1588,11 +1588,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                                ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -1654,9 +1654,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1666,7 +1666,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1683,11 +1683,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {                                                              %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1724,9 +1724,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1736,7 +1736,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1753,11 +1753,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                            %%% ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -1791,9 +1791,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1803,7 +1803,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1820,11 +1820,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                                ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -1887,9 +1887,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1899,7 +1899,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1916,11 +1916,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {                                                              %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'green4)                                             %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    \with-color                                                          %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        #(x11-color 'green4)                                             %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        (“Flute”)                                                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    }                                                                    %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -1957,9 +1957,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1969,7 +1969,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1986,11 +1986,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                            %%% ^ \markup {                  %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color              %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'green4) %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)            %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%     }                        %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                  %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%     \with-color              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%         #(x11-color 'green4) %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%         (“Flute”)            %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%     }                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2024,9 +2024,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2036,7 +2036,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2053,11 +2053,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                                ^ \markup {                  %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    \with-color              %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'green4) %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)            %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    }                        %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                  %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    \with-color              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        #(x11-color 'green4) %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        (“Flute”)            %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    }                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2118,8 +2118,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -2127,7 +2127,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -2136,7 +2136,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2153,19 +2153,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'2
-                                ^ \markup {                                                              %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'2
-                                ^ \markup {                                                              %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
@@ -2202,8 +2202,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 4/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -2211,7 +2211,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -2220,7 +2220,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2237,19 +2237,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'2
-                            %%% ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'2
-                            %%% ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! SM4
                                 c'2
@@ -2283,8 +2283,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 4/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -2292,7 +2292,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -2301,7 +2301,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2318,19 +2318,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'2
-                                ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'2
-                                ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! SM4
                                 c'2
@@ -2398,9 +2398,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2410,7 +2410,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2427,11 +2427,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {                                                              %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -2468,9 +2468,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2480,7 +2480,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2497,11 +2497,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                            %%% ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2535,9 +2535,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2547,7 +2547,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2564,11 +2564,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
                                 c'4.
-                                ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
+                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2642,8 +2642,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2653,7 +2653,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2669,18 +2669,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
                                 c'4.
-                                ^ \markup {                                                              %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DarkViolet)                                         %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet)                                         %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (“Flute”)                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                                                                    %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -2717,8 +2717,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2728,7 +2728,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2744,18 +2744,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! ST1:DEFAULT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:DEFAULT_INSTRUMENT:ST1
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
                                 c'4.
-                            %%% ^ \markup {                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)                %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%%     }                            %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
+                            %%% ^ \markup {                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%     \with-color                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%         #(x11-color 'DarkViolet) %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%         (“Flute”)                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%%     }                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2789,8 +2789,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2800,7 +2800,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2816,18 +2816,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! ST1:DEFAULT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
                                 c'4.
-                                ^ \markup {                      %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    \with-color                  %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DarkViolet) %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                    }                            %! ST1:DEFAULT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! ST1:REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! ST1:SM34:REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                ^ \markup {                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet) %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (“Flute”)                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -2878,8 +2878,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2889,7 +2889,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2905,18 +2905,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'4.
-                                ^ \markup {                                                              %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -2953,8 +2953,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2964,7 +2964,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2980,18 +2980,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:EXPLICIT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:EXPLICIT_INSTRUMENT:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'4.
-                            %%% ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3025,8 +3025,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3036,7 +3036,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3052,18 +3052,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'4.
-                                ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3125,9 +3125,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3137,7 +3137,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3153,18 +3153,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'4.
-                                ^ \markup {                                                              %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -3201,9 +3201,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3213,7 +3213,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3229,18 +3229,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:EXPLICIT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:EXPLICIT_INSTRUMENT:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'4.
-                            %%% ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3274,9 +3274,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3286,7 +3286,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3302,18 +3302,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'4.
-                                ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3376,9 +3376,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3388,7 +3388,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3404,18 +3404,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! SM37:REAPPLIED_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM37:REAPPLIED_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM37:REAPPLIED_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REAPPLIED_INSTRUMENT:SM37
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REAPPLIED_INSTRUMENT:SM37
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM6:REAPPLIED_INSTRUMENT_COLOR:SM37
                                 c'4.
-                                ^ \markup {                                                              %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'green4)                                             %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM37:REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! SM37:SM34:REDRAWN_REAPPLIED_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM37:SM34:REDRAWN_REAPPLIED_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    \with-color                                                          %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        #(x11-color 'green4)                                             %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        (“Flute”)                                                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    }                                                                    %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM6:REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM37
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_REAPPLIED_INSTRUMENT:SM34:SM37
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_REAPPLIED_INSTRUMENT:SM34:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -3452,9 +3452,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3464,7 +3464,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3480,18 +3480,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! SM37:REAPPLIED_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM37:REAPPLIED_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM37:REAPPLIED_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REAPPLIED_INSTRUMENT:SM37
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REAPPLIED_INSTRUMENT:SM37
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_INSTRUMENT_COLOR:SM37
                                 c'4.
-                            %%% ^ \markup {                  %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color              %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'green4) %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)            %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%%     }                        %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM37:REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! SM37:SM34:REDRAWN_REAPPLIED_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM37:SM34:REDRAWN_REAPPLIED_INSTRUMENT:SM8
+                            %%% ^ \markup {                  %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%     \with-color              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%         #(x11-color 'green4) %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%         (“Flute”)            %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%%     }                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM37
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_REAPPLIED_INSTRUMENT:SM34:SM37
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_REAPPLIED_INSTRUMENT:SM34:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3525,9 +3525,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3537,7 +3537,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3553,18 +3553,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! SM37:REAPPLIED_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM37:REAPPLIED_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM37:REAPPLIED_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REAPPLIED_INSTRUMENT:SM37
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REAPPLIED_INSTRUMENT:SM37
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_INSTRUMENT_COLOR:SM37
                                 c'4.
-                                ^ \markup {                  %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    \with-color              %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'green4) %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)            %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                    }                        %! SM37:REAPPLIED_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM37:REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! SM37:SM34:REDRAWN_REAPPLIED_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM37:SM34:REDRAWN_REAPPLIED_INSTRUMENT:SM8
+                                ^ \markup {                  %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    \with-color              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        #(x11-color 'green4) %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                        (“Flute”)            %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                    }                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM37
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_REAPPLIED_INSTRUMENT:SM34:SM37
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_REAPPLIED_INSTRUMENT:SM34:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -3625,8 +3625,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -3634,7 +3634,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -3643,7 +3643,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3659,32 +3659,32 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'2
-                                ^ \markup {                                                              %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! SM6:REDUNDANT_INSTRUMENT_COLOR:IC
                                 c'2
-                                ^ \markup {                                                              %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! SM6:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
@@ -3721,8 +3721,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 4/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -3730,7 +3730,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -3739,7 +3739,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3755,32 +3755,32 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:EXPLICIT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:EXPLICIT_INSTRUMENT:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'2
-                            %%% ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDUNDANT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDUNDANT_INSTRUMENT:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_INSTRUMENT_COLOR:IC
                                 c'2
-                            %%% ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! SM4
                                 c'2
@@ -3814,8 +3814,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 4/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -3823,7 +3823,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -3832,7 +3832,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3848,32 +3848,32 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:EXPLICIT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 c'2
-                                ^ \markup {                %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)          %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_INSTRUMENT_COLOR:IC
                                 c'2
-                                ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! SM4
                                 c'2
@@ -3941,9 +3941,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3953,7 +3953,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3969,18 +3969,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! SM6:REDUNDANT_INSTRUMENT_COLOR:IC
                                 c'4.
-                                ^ \markup {                                                              %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)                                                        %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                                                                    %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }                            %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! SM6:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -4017,9 +4017,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4029,7 +4029,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4045,18 +4045,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDUNDANT_INSTRUMENT:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDUNDANT_INSTRUMENT:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_INSTRUMENT_COLOR:IC
                                 c'4.
-                            %%% ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%         (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%%     }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4090,9 +4090,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4102,7 +4102,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4118,18 +4118,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:REDUNDANT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDUNDANT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_INSTRUMENT_COLOR:IC
                                 c'4.
-                                ^ \markup {                     %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    \with-color                 %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                        (“Flute”)               %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                    }                           %! IC:REDUNDANT_INSTRUMENT_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
-                                \set Staff.instrumentName = \markup { Flute }    %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! IC:SM34:REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { Flute }    %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! SM8:REDRAWN_REDUNDANT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4213,8 +4213,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4224,7 +4224,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4240,18 +4240,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:DEFAULT_MARGIN_MARKUP:+SCORE:+SEGMENT:ST2
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:DEFAULT_MARGIN_MARKUP:+SCORE:+SEGMENT:ST2
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! SM6:DEFAULT_MARGIN_MARKUP_COLOR:+SCORE:+SEGMENT:ST2
                                 c'4.
-                                ^ \markup {                                                              %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DarkViolet)                                         %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! +SCORE:+SEGMENT:ST2:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! +SCORE:+SEGMENT:ST2:SM34:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! +SCORE:+SEGMENT:ST2:SM34:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                    \with-color                                                          %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                        #(x11-color 'DarkViolet)                                         %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                        [“I+II”]                                                         %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                    }                                                                    %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! SM6:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:+SCORE:+SEGMENT:ST2
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:+SCORE:+SEGMENT:ST2
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:+SCORE:+SEGMENT:ST2
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -4288,8 +4288,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4299,7 +4299,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4315,18 +4315,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:DEFAULT_MARGIN_MARKUP:+SCORE:+SEGMENT:ST2
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:DEFAULT_MARGIN_MARKUP:+SCORE:+SEGMENT:ST2
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_MARGIN_MARKUP_COLOR:+SCORE:+SEGMENT:ST2
                                 c'4.
-                            %%% ^ \markup {                      %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color                  %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'DarkViolet) %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]                 %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                            %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! +SCORE:+SEGMENT:ST2:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! +SCORE:+SEGMENT:ST2:SM34:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! +SCORE:+SEGMENT:ST2:SM34:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                      %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                            %%%     \with-color                  %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                            %%%         #(x11-color 'DarkViolet) %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                            %%%         [“I+II”]                 %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                            %%%     }                            %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:+SCORE:+SEGMENT:ST2
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:+SCORE:+SEGMENT:ST2
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:+SCORE:+SEGMENT:ST2
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4360,8 +4360,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4371,7 +4371,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4387,18 +4387,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:DEFAULT_MARGIN_MARKUP:+SCORE:+SEGMENT:ST2
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:DEFAULT_MARGIN_MARKUP:+SCORE:+SEGMENT:ST2
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_MARGIN_MARKUP_COLOR:+SCORE:+SEGMENT:ST2
                                 c'4.
-                                ^ \markup {                      %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                  %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DarkViolet) %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                 %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                    }                            %! +SCORE:+SEGMENT:ST2:DEFAULT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! +SCORE:+SEGMENT:ST2:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! +SCORE:+SEGMENT:ST2:SM34:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! +SCORE:+SEGMENT:ST2:SM34:REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                ^ \markup {                      %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                    \with-color                  %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                        #(x11-color 'DarkViolet) %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                        [“I+II”]                 %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                    }                            %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:+SCORE:+SEGMENT:ST2
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:+SCORE:+SEGMENT:ST2
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:+SCORE:+SEGMENT:ST2
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:+SCORE:+SEGMENT:ST2
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4449,8 +4449,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4460,7 +4460,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4476,18 +4476,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                                ^ \markup {                                                              %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -4524,8 +4524,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4535,7 +4535,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4551,18 +4551,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                            %%% ^ \markup {                %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]           %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%         [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4596,8 +4596,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4607,7 +4607,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4623,18 +4623,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                                ^ \markup {                %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]           %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4696,9 +4696,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4708,7 +4708,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4724,18 +4724,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { III+IV }                           %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { III+IV }                           %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                                ^ \markup {                                                              %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [“III+IV”]                                                       %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { III+IV }                           %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        [“III+IV”]                                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { III+IV }                           %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -4772,9 +4772,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4784,7 +4784,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4800,18 +4800,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { III+IV }      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV } %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { III+IV }      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                            %%% ^ \markup {                %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“III+IV”]         %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { III+IV }      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV } %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%         [“III+IV”]         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { III+IV }      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4845,9 +4845,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4857,7 +4857,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4873,18 +4873,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { III+IV }      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV } %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { III+IV }      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                                ^ \markup {                %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [“III+IV”]         %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { III+IV }      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV } %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        [“III+IV”]         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { III+IV }      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -4947,9 +4947,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4959,7 +4959,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4975,18 +4975,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! SM37:REAPPLIED_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM37:REAPPLIED_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM37:REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37
                                 c'4.
-                                ^ \markup {                                                              %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'green4)                                             %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM37:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! SM37:SM34:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM37:SM34:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                    \with-color                                                          %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                        #(x11-color 'green4)                                             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                        [“I+II”]                                                         %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                    }                                                                    %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -5023,9 +5023,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -5035,7 +5035,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5051,18 +5051,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! SM37:REAPPLIED_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! SM37:REAPPLIED_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM37:REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37
                                 c'4.
-                            %%% ^ \markup {                  %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color              %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'green4) %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]             %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                        %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM37:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! SM37:SM34:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! SM37:SM34:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                            %%%     \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                            %%%         #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                            %%%         [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                            %%%     }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5096,9 +5096,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -5108,7 +5108,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5124,18 +5124,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! SM37:REAPPLIED_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! SM37:REAPPLIED_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM37:REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37
                                 c'4.
-                                ^ \markup {                  %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color              %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'green4) %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]             %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                    }                        %! SM37:REAPPLIED_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM37:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! SM37:SM34:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! SM37:SM34:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                    \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                        #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                        [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                    }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5196,8 +5196,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -5205,7 +5205,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -5214,7 +5214,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5230,32 +5230,32 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'2
-                                ^ \markup {                                                              %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue)                                               %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
                                 c'2
-                                ^ \markup {                                                              %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]                                                         %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    }                                                                    %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 c'2
@@ -5292,8 +5292,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 4/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -5301,7 +5301,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -5310,7 +5310,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5326,32 +5326,32 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'2
-                            %%% ^ \markup {                %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color            %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]           %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                      %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%         [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
                                 c'2
-                            %%% ^ \markup {                     %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color                 %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]                %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                           %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%     \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%         [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%     }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! SM4
                                 c'2
@@ -5385,8 +5385,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 4/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -5394,7 +5394,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -5403,7 +5403,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5419,32 +5419,32 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 c'2
-                                ^ \markup {                %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color            %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'blue) %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]           %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                    }                      %! IC:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! IC:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
                                 c'2
-                                ^ \markup {                     %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                 %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    }                           %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! SM4
                                 c'2
@@ -5512,9 +5512,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -5524,7 +5524,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5540,18 +5540,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                                ^ \markup {                                                              %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                                                          %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DeepPink1)                                          %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                                                         %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    }                                                                    %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                ^ \markup {                                                              %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]                                                         %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    }                                                                    %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -5588,9 +5588,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -5600,7 +5600,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5616,18 +5616,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                            %%% ^ \markup {                     %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     \with-color                 %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%         [“I+II”]                %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%%     }                           %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%     \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%         [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%%     }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5661,9 +5661,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
-                            \time 3/8 %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -5673,7 +5673,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5689,18 +5689,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:REDUNDANT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDUNDANT_MARGIN_MARKUP:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
                                 c'4.
-                                ^ \markup {                     %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    \with-color                 %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        #(x11-color 'DeepPink1) %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                        [“I+II”]                %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                    }                           %! IC:REDUNDANT_MARGIN_MARKUP_ALERT:SM11
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! IC:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }      %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II } %! IC:SM34:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                        [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                    }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                \set Staff.instrumentName = \markup { I+II }      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { I+II } %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5770,8 +5770,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
-                            \time 4/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -5781,7 +5781,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -5789,7 +5789,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5804,48 +5804,48 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
-                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
-                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
-                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP:SM8
-                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:EXPLICIT_MARGIN_MARKUP:IC:+SEGMENT
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:EXPLICIT_MARGIN_MARKUP:IC:+SEGMENT
+                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! SM8:EXPLICIT_MARGIN_MARKUP:IC:+PARTS_VIOLIN
+                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! SM8:EXPLICIT_MARGIN_MARKUP:IC:+PARTS_VIOLIN
+                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! SM8:EXPLICIT_MARGIN_MARKUP:IC:+PARTS_VIOLA
+                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! SM8:EXPLICIT_MARGIN_MARKUP:IC:+PARTS_VIOLA
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:+SEGMENT
+                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:+PARTS_VIOLIN
+                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:+PARTS_VIOLA
                                 c'2
                                 ^ \markup {
                                     \column
                                         {
-                                            \line                                                        %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                {                                                        %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                    \with-color                                          %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        #(x11-color 'blue)                               %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                        [“I+II”]                                         %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                                }                                                        %! IC:+SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@% \line                                                        %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%     {                                                        %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%         \with-color                                          %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             #(x11-color 'blue)                               %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             [“III+IV”]                                       %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%     }                                                        %! IC:+PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@% \line                                                        %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%     {                                                        %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%         \with-color                                          %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             #(x11-color 'blue)                               %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%             [“III+IV”]                                       %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
-                                        %@%     }                                                        %! IC:+PARTS_VIOLA:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \line                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+SEGMENT
+                                                {                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+SEGMENT
+                                                    \with-color                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+SEGMENT
+                                                        #(x11-color 'blue)                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+SEGMENT
+                                                        [“I+II”]                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+SEGMENT
+                                                }                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+SEGMENT
+                                        %@% \line                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLIN
+                                        %@%     {                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLIN
+                                        %@%         \with-color                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLIN
+                                        %@%             #(x11-color 'blue)                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLIN
+                                        %@%             [“III+IV”]                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLIN
+                                        %@%     }                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLIN
+                                        %@% \line                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLA
+                                        %@%     {                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLA
+                                        %@%         \with-color                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLA
+                                        %@%             #(x11-color 'blue)                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLA
+                                        %@%             [“III+IV”]                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLA
+                                        %@%     }                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:+PARTS_VIOLA
                                         }
                                     }
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:+SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { I+II }                             %! IC:+SEGMENT:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! IC:+SEGMENT:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:+PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { III+IV }                           %! IC:+PARTS_VIOLIN:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! IC:+PARTS_VIOLIN:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! IC:+PARTS_VIOLA:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
-                                \set Staff.instrumentName = \markup { III+IV }                           %! IC:+PARTS_VIOLA:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! IC:+PARTS_VIOLA:SM34:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:+SEGMENT
+                                \set Staff.instrumentName = \markup { I+II }                             %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:+SEGMENT
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:+SEGMENT
+                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:+PARTS_VIOLIN
+                                \set Staff.instrumentName = \markup { III+IV }                           %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:+PARTS_VIOLIN
+                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:+PARTS_VIOLIN
+                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:+PARTS_VIOLA
+                                \set Staff.instrumentName = \markup { III+IV }                           %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:+PARTS_VIOLA
+                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:+PARTS_VIOLA
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'2
@@ -5916,72 +5916,72 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.Y-extent = ##f                                   %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! METRONOME_MARK_SPANNER:SM29
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #-6                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \general-align                                                       %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             #Y                                                               %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             #DOWN                                                            %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             112                                                              %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         }                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.dash-period = 0                                  %! METRONOME_MARK_SPANNER:SM29
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \fontsize                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #-6                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \general-align                                               %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #Y                                                       %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #DOWN                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                112                                                      %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            }                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \startTextSpan                                                               %! METRONOME_MARK_SPANNER:SM29
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! METRONOME_MARK_SPANNER:SM29
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6062,73 +6062,73 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.Y-extent = ##f                                   %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! METRONOME_MARK_SPANNER:SM29
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #-6                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \general-align                                                       %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             #Y                                                               %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             #DOWN                                                            %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             112                                                              %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         }                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.dash-period = 0                                  %! METRONOME_MARK_SPANNER:SM29
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \fontsize                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #-6                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \general-align                                               %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #Y                                                       %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #DOWN                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                112                                                      %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            }                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \startTextSpan                                                               %! METRONOME_MARK_SPANNER:SM29
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! METRONOME_MARK_SPANNER:SM29
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6211,73 +6211,73 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%     \fontsize                                                                %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%         #-6                                                                  %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%         \general-align                                                       %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%             #Y                                                               %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%             #DOWN                                                            %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%             \note-by-number                                                  %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%                 #2                                                           %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%                 #0                                                           %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%                 #1.5                                                         %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%     \upright                                                                 %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%             =                                                                %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%             90                                                               %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%     \hspace                                                                  %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%         #1                                                                   %! SM36:REAPPLIED_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! SM36:REAPPLIED_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.Y-extent = ##f                                   %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! METRONOME_MARK_SPANNER:SM29
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@% \markup {                                                                    %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%     \fontsize                                                                %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%         #-6                                                                  %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%         \general-align                                                       %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%             #Y                                                               %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%             #DOWN                                                            %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%             \note-by-number                                                  %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%                 #2                                                           %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%                 #0                                                           %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%                 #1.5                                                         %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%     \upright                                                                 %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%         {                                                                    %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%             =                                                                %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%             90                                                               %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%         }                                                                    %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%     \hspace                                                                  %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%         #1                                                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%     }                                                                        %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'green4)                                                 %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                    {                                                                    %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                        \fontsize                                                        %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                            #-6                                                          %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                            \general-align                                               %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                #Y                                                       %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                #DOWN                                                    %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                \note-by-number                                          %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #2                                                   %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #0                                                   %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1.5                                                 %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                        \upright                                                         %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                            {                                                            %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                =                                                        %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                90                                                       %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                            }                                                            %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                        \hspace                                                          %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                            #1                                                           %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                    }                                                                    %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! SM36:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.dash-period = 0                                  %! METRONOME_MARK_SPANNER:SM29
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                            \markup {                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                \with-color                                                              %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                    #(x11-color 'green4)                                                 %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                    {                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                        \fontsize                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                            #-6                                                          %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                            \general-align                                               %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                #Y                                                       %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                #DOWN                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                \note-by-number                                          %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                    #2                                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                    #0                                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                    #1.5                                                 %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                        \upright                                                         %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                            {                                                            %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                =                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                90                                                       %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                            }                                                            %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                        \hspace                                                          %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                            #1                                                           %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                    }                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                }                                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \startTextSpan                                                               %! METRONOME_MARK_SPANNER:SM29
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! METRONOME_MARK_SPANNER:SM29
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6347,116 +6347,116 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                        %@% \once \override TextSpanner.bound-details.right.text =                       %! REDUNDANT_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%     \concat                                                                  %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             \hspace                                                          %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                 #-0.5                                                        %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             \line                                                            %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                 {                                                            %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                     \fontsize                                                %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                         #-6                                                  %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                         \general-align                                       %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                             #Y                                               %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                             #DOWN                                            %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                             \note-by-number                                  %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                                 #2                                           %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                                 #0                                           %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                                 #1.5                                         %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                     \upright                                                 %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                         {                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                             =                                                %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                             112                                              %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                         }                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                 }                                                            %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! REDUNDANT_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.Y-extent = ##f                                   %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! METRONOME_MARK_SPANNER:SM29
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #-6                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \general-align                                                       %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             #Y                                                               %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             #DOWN                                                            %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             112                                                              %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         }                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                        %@% \once \override TextSpanner.bound-details.right.text =                       %! SM27:REDUNDANT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%     \concat                                                                  %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         {                                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             \hspace                                                          %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 #-0.5                                                        %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             \line                                                            %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 {                                                            %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                     \fontsize                                                %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                         #-6                                                  %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                         \general-align                                       %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                             #Y                                               %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                             #DOWN                                            %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                             \note-by-number                                  %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                                 #2                                           %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                                 #0                                           %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                                 #1.5                                         %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                     \upright                                                 %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                         {                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                             =                                                %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                             112                                              %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                         }                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 }                                                            %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         }                                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.text =                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                    \concat                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                        {                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \hspace                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #-0.5                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \line                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                {                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    \fontsize                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                        #-6                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                        \general-align                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                            #Y                                           %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                            #DOWN                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                            \note-by-number                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                                #2                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                                #0                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                                #1.5                                     %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    \upright                                             %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                        {                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                            =                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                            112                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                        }                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                }                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                        }                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.dash-period = 0                                  %! METRONOME_MARK_SPANNER:SM29
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \fontsize                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #-6                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \general-align                                               %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #Y                                                       %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #DOWN                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                112                                                      %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            }                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.text =                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'DeepPink1)                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                    \concat                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                        {                                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            \hspace                                                      %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                #-0.5                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            \line                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                {                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                    \fontsize                                            %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                        #-6                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                        \general-align                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                            #Y                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                            #DOWN                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                            \note-by-number                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                                #2                                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                                #0                                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                                #1.5                                     %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                    \upright                                             %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                        {                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                            =                                            %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                            112                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                        }                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                }                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                        }                                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \startTextSpan                                                               %! METRONOME_MARK_SPANNER:SM29
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
@@ -6464,10 +6464,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! METRONOME_MARK_SPANNER:SM29
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6548,73 +6548,73 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! REDUNDANT_METRONOME_MARK:SM27
-                        %@% \markup {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%     \fontsize                                                                %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         #-6                                                                  %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         \general-align                                                       %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             #Y                                                               %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             #DOWN                                                            %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             \note-by-number                                                  %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                 #2                                                           %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                 #0                                                           %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%                 #1.5                                                         %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%     \upright                                                                 %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             =                                                                %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%             112                                                              %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         }                                                                    %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%     \hspace                                                                  %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%         #1                                                                   %! REDUNDANT_METRONOME_MARK:SM27
-                        %@%     }                                                                        %! REDUNDANT_METRONOME_MARK:SM27 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.Y-extent = ##f                                   %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! METRONOME_MARK_SPANNER:SM29
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:REDUNDANT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%     \fontsize                                                                %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         #-6                                                                  %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         \general-align                                                       %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             #Y                                                               %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             #DOWN                                                            %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             \note-by-number                                                  %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 #2                                                           %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 #0                                                           %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 #1.5                                                         %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%     \upright                                                                 %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         {                                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             =                                                                %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%             112                                                              %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         }                                                                    %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
-                                }                                                                        %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.left.text =                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                            \markup {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                \with-color                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                    #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                    {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \fontsize                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #-6                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            \general-align                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #Y                                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #DOWN                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                \note-by-number                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #2                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #0                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1.5                                                 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \upright                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            {                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                =                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                112                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            }                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                        \hspace                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                            #1                                                           %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                    }                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! METRONOME_MARK_SPANNER:SM29
-                            \once \override TextSpanner.dash-period = 0                                  %! METRONOME_MARK_SPANNER:SM29
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'DeepPink1)                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                        \fontsize                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            #-6                                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            \general-align                                               %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                #Y                                                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                #DOWN                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                \note-by-number                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                    #2                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                    #0                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                    #1.5                                                 %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                        \upright                                                         %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            {                                                            %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                =                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                112                                                      %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            }                                                            %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \startTextSpan                                                               %! METRONOME_MARK_SPANNER:SM29
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! METRONOME_MARK_SPANNER:SM29
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6681,14 +6681,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6703,10 +6703,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \stopStaff                                                               %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \startStaff                                                              %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! IC:EXPLICIT_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
@@ -6763,15 +6763,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6786,10 +6786,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \stopStaff                                                               %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \startStaff                                                              %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! IC:EXPLICIT_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
@@ -6847,15 +6847,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6870,10 +6870,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \stopStaff                                                               %! SM37:REAPPLIED_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM37:REAPPLIED_STAFF_LINES:SM8
-                                \startStaff                                                              %! SM37:REAPPLIED_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! SM37:REAPPLIED_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! SM8:REAPPLIED_STAFF_LINES:SM37
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REAPPLIED_STAFF_LINES:SM37
+                                \startStaff                                                              %! SM8:REAPPLIED_STAFF_LINES:SM37
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! SM6:REAPPLIED_STAFF_LINES_COLOR:SM37
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
@@ -6920,14 +6920,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6942,17 +6942,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \stopStaff                                                               %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \startStaff                                                              %! IC:EXPLICIT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! IC:EXPLICIT_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \stopStaff                                                               %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \startStaff                                                              %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! SM8:REDUNDANT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REDUNDANT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:REDUNDANT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_STAFF_LINES_COLOR:IC
                                 c'4.
                 <BLANKLINE>
                             }
@@ -7006,15 +7006,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM1:EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM1:EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM1:REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7029,10 +7029,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \stopStaff                                                               %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \startStaff                                                              %! IC:REDUNDANT_STAFF_LINES:SM8
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! IC:REDUNDANT_STAFF_LINES_COLOR:SM6
+                                \stopStaff                                                               %! SM8:REDUNDANT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REDUNDANT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:REDUNDANT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_STAFF_LINES_COLOR:IC
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
