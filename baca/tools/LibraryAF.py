@@ -904,11 +904,18 @@ class LibraryAF(abjad.AbjadObject):
         ) -> SuiteCommand:
         r'''Makes bar-extent zero suite.
         '''
-        import baca
         return SuiteCommand(
             [
-                baca.bar_extent((0, 0), after=True, selector=baca.leaves()), 
-                baca.bar_extent((0, 0), after=True, selector=baca.leaf(-1)), 
+                LibraryAF.bar_extent(
+                    (0, 0),
+                    after=True,
+                    selector='baca.leaves()',
+                    ),
+                LibraryAF.bar_extent(
+                    (0, 0),
+                    after=True,
+                    selector='baca.leaf(-1)',
+                    ),
                 ],
             selector=selector,
             )

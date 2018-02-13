@@ -1,6 +1,7 @@
 import abjad
 import baca
 from abjad import rhythmmakertools as rhythmos
+from .HairpinCommand import HairpinCommand
 from .IndicatorCommand import IndicatorCommand
 from .RhythmCommand import RhythmCommand
 from .SuiteCommand import SuiteCommand
@@ -343,8 +344,13 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def hairpin(hairpin=None, selector='baca.tleaves()'):
-        r'''Attaches hairpin to trimmed leaves.
+    def hairpin(
+        string: str = None,
+        selector: Selector = 'baca.tleaves()',
+        left_broken: bool = None,
+        right_broken: bool = None,
+        ) -> HairpinCommand:
+        r'''Makes hairpin from ``string`` and attaches hairpin trimmed leaves.
 
         ..  container:: example
 
@@ -549,8 +555,24 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        hairpin = abjad.Hairpin(hairpin)
-        return baca.HairpinCommand(
+        hairpin = abjad.Hairpin(string)
+        if left_broken is not None:
+            assert isinstance(left_broken, bool), repr(left_broken)
+        if right_broken is not None:
+            assert isinstance(right_broken, bool), repr(right_broken)
+        if left_broken and hairpin.start_dynamic is not None:
+            raise Exception(f'no start dynamic with left broken: {string!r}.')
+        if right_broken and hairpin.stop_dynamic is not None:
+            raise Exception(f'no stop dynamic with right broken: {string!r}.')
+        left_broken_shape_string = None
+        if left_broken is True:
+            left_broken_shape_string = hairpin.shape_string
+        right_broken_shape_string = None
+        if right_broken is True:
+            right_broken_shape_string = hairpin.shape_string
+        return HairpinCommand(
+            left_broken=left_broken_shape_string,
+            right_broken=right_broken_shape_string,
             selector=selector,
             start=hairpin.start_dynamic,
             stop=hairpin.stop_dynamic,

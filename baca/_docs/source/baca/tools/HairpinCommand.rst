@@ -23,8 +23,10 @@ Bases
 
       ~HairpinCommand.deactivate
       ~HairpinCommand.get_tag
+      ~HairpinCommand.left_broken
       ~HairpinCommand.manifests
       ~HairpinCommand.offset_to_measure_number
+      ~HairpinCommand.right_broken
       ~HairpinCommand.selector
       ~HairpinCommand.start
       ~HairpinCommand.stop
@@ -43,6 +45,10 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: HairpinCommand.deactivate
+
+.. autoattribute:: HairpinCommand.left_broken
+
+.. autoattribute:: HairpinCommand.right_broken
 
 .. only:: html
 

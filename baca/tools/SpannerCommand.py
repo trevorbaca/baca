@@ -1,9 +1,9 @@
 import abjad
 import baca
 from .Command import Command
+from .Typing import List
 from .Typing import Optional
 from .Typing import Selector
-from .Typing import U
 
 
 class SpannerCommand(Command):
@@ -200,14 +200,14 @@ class SpannerCommand(Command):
         broken: abjad.OrdinalConstant = None,
         selector: Selector = 'baca.tleaves()',
         spanner: abjad.Spanner = None,
-        tags=None,
+        tags: List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
-        self._broken = broken
-        self._spanner = spanner
+        self._broken: abjad.OrdinalConstant = broken
+        self._spanner: abjad.Spanner = spanner
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
-        self._tags = tags
+        self._tags: List[abjad.Tag] = tags
 
     ### SPECIAL METHODS ###
 
