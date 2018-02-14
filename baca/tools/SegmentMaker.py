@@ -170,6 +170,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_margin_markups',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
+        '_metronome_mark_spanner_right_broken',
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
@@ -293,6 +294,7 @@ class SegmentMaker(abjad.SegmentMaker):
         margin_markups: abjad.OrderedDict = None,
         measures_per_stage: List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
+        metronome_mark_spanner_right_broken: bool = None,
         metronome_mark_stem_height: Optional[Number] = 1.5,
         metronome_marks: abjad.OrderedDict = None,
         print_timings: bool = None,
@@ -344,6 +346,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._measures_per_stage: List[int] = measures_per_stage
         self._metronome_mark_measure_map: MetronomeMarkMeasureMap = \
             metronome_mark_measure_map
+        self._metronome_mark_spanner_right_broken: bool = \
+            metronome_mark_spanner_right_broken
         self._metronome_mark_stem_height: Optional[Number] = \
             metronome_mark_stem_height
         self._metronome_marks: abjad.OrderedDict = metronome_marks
@@ -1006,7 +1010,25 @@ class SegmentMaker(abjad.SegmentMaker):
             stem_height=self.metronome_mark_stem_height,
             )
         tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER)
-        abjad.attach(spanner, skips, tag=tag.prepend('SM29'))
+        string = 'metronome_mark_spanner_right_broken'
+        left_broken = self.previous_metadata.get(string)
+        abjad.attach(
+            spanner,
+            skips,
+            left_broken=left_broken,
+            right_broken=self.metronome_mark_spanner_right_broken,
+            tag=tag.prepend('SM29'),
+            )
+        if left_broken:
+            literal = abjad.LilyPondLiteral(
+                r'\stopTextSpan',
+                format_slot='closing',
+                )
+            abjad.attach(
+                literal,
+                skips[0],
+                tag=abjad.Tag('-SEGMENT').prepend('SM39'),
+                )
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -1148,8 +1170,13 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         existing_tag = wrapper.tag
-        if wrapper.spanner and wrapper.spanner._is_trending(wrapper.component):
-            status = 'explicit'
+        if wrapper.spanner:
+            prototype = (abjad.Accelerando, abjad.Ritardando)
+            if (status == 'reapplied' and
+                isinstance(wrapper.indicator, prototype)):
+                pass
+            elif wrapper.spanner._is_trending(wrapper.component):
+                status = 'explicit'
         SegmentMaker._attach_color_literal(
             wrapper,
             status,
@@ -1267,9 +1294,13 @@ class SegmentMaker(abjad.SegmentMaker):
             for i, leaf in enumerate(abjad.iterate(voice).leaves()):
                 self._check_persistent_indicators_for_leaf(voice.name, leaf, i)
 
-    @staticmethod
-    def _check_persistent_indicators_for_leaf(voice, leaf, i):
-        mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
+    def _check_persistent_indicators_for_leaf(self, voice, leaf, i):
+        prototype = (
+            abjad.Accelerando,
+            abjad.MetronomeMark,
+            abjad.Ritardando,
+            )
+        mark = abjad.inspect(leaf).get_effective(prototype)
         if mark is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing metronome mark.'
             raise Exception(message)
@@ -1353,6 +1384,8 @@ class SegmentMaker(abjad.SegmentMaker):
         result['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
             result['last_measure_is_fermata'] = True
+        result['metronome_mark_spanner_right_broken'] = \
+            self.metronome_mark_spanner_right_broken
         result['persistent_indicators'] = self._collect_persistent_indicators()
         result['segment_name'] = self.segment_name
         result['segment_number'] = self._get_segment_number()
@@ -1738,6 +1771,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         elif isinstance(indicator, baca.StaffLines):
             return indicator.line_count
+        elif isinstance(indicator, (abjad.Accelerando, abjad.Ritardando)):
+            return f'abjad.{repr(indicator)}'
         return str(indicator)
 
     def _initialize_time_signatures(self, time_signatures):
@@ -2002,6 +2037,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def _momento_to_indicator(self, momento):
         if momento.value is None:
             return
+        if momento.value in ('abjad.Accelerando()', 'abjad.Ritardando()'):
+            indicator = eval(momento.value)
+            return indicator
         if momento.prototype in self._prototype_to_manifest_name:
             name = self._prototype_to_manifest_name.get(momento.prototype)
             dictionary = getattr(self, name)
@@ -2063,7 +2101,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         status,
                         )
                     continue
-                if isinstance(previous_indicator, abjad.MetronomeMark):
+                prototype = (
+                    #abjad.Accelerando,
+                    abjad.MetronomeMark,
+                    #abjad.Ritardando,
+                    )
+                if isinstance(previous_indicator, prototype):
                     spanner = abjad.inspect(leaf).get_spanner(
                         abjad.MetronomeMarkSpanner
                         )
@@ -2079,11 +2122,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             wrapper,
                             status,
                             )
+                        #if isinstance(previous_indicator, abjad.Ritardando):
+                        #    print(wrapper)
+                        #    raise Exception('RRR', status)
                     else:
                         assert status in ('redundant', None), repr(status)
                         if status is None or spanner._is_trending(leaf):
                             status = 'explicit'
-                        prototype = abjad.MetronomeMark
+                        #prototype = abjad.MetronomeMark
                         wrapper = abjad.inspect(leaf).wrapper(prototype)
                         wrapper.tag = wrapper.tag.prepend(edition)
                         self._categorize_persistent_wrapper(
@@ -4666,6 +4712,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         return self._metronome_mark_measure_map
+
+    @property
+    def metronome_mark_spanner_right_broken(self) -> Optional[bool]:
+        r'''Is true when metronome mark spanner is right-broken.
+        '''
+        return self._metronome_mark_spanner_right_broken
 
     @property
     def metronome_mark_stem_height(self) -> Optional[Number]:

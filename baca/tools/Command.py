@@ -76,6 +76,12 @@ class Command(abjad.AbjadObject):
             return
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument
+        elif isinstance(indicator, abjad.MetronomeMark):
+            prototype = (
+                abjad.Accelerando,
+                abjad.MetronomeMark,
+                abjad.Ritardando,
+                )
         else:
             prototype = type(indicator)
         stem = abjad.String.to_indicator_stem(indicator)
@@ -203,7 +209,7 @@ class Command(abjad.AbjadObject):
                 tag = abjad.Tag(f'MEASURE_{measure_number}')
                 tags.append(tag)
         if tags:
-            tags.sort()
             words = [str(_) for _ in tags]
+            words.sort()
             return abjad.Tag.from_words(words)
         return None
