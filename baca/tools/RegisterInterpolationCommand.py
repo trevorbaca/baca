@@ -1,10 +1,20 @@
 import abjad
 import baca
 from .Command import Command
+from .Typing import Number
+from .Typing import Optional
+from .Typing import Selector
+from .Typing import Union
 
 
 class RegisterInterpolationCommand(Command):
     r"""Register interpolation command.
+
+    :param selector: command selector.
+
+    :param start_pitch: interpolation start pitch.
+
+    :param stop_pitch: interpolation stop pitch.
 
     ..  container:: example
 
@@ -1045,26 +1055,22 @@ class RegisterInterpolationCommand(Command):
 
     def __init__(
         self,
-        selector='baca.plts()',
-        start_pitch=None,
-        stop_pitch=None,
-        ):
+        selector: Selector = 'baca.plts()',
+        start_pitch: Union[Number, abjad.NumberedPitch] = 0,
+        stop_pitch: Union[Number, abjad.NumberedPitch] = 0,
+        ) -> None:
         Command.__init__(self, selector=selector)
         start_pitch = abjad.NumberedPitch(start_pitch)
-        self._start_pitch = start_pitch
+        self._start_pitch: abjad.NumberedPitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
-        self._stop_pitch = stop_pitch
+        self._stop_pitch: abjad.NumberedPitch = stop_pitch
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         r'''Calls command on `argument`.
-
-        Returns none.
         '''
         if argument is None:
-            return
-        if self.start_pitch is None or self.stop_pitch is None:
             return
         if self.selector:
             argument = self.selector(argument)
@@ -1098,7 +1104,7 @@ class RegisterInterpolationCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def selector(self):
+    def selector(self) -> Optional[abjad.Expression]:
         r"""Gets selector.
 
         ..  container:: example
@@ -1524,26 +1530,17 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
 
-        Set to selector or none.
         """
         return self._selector
 
     @property
-    def start_pitch(self):
+    def start_pitch(self) -> abjad.NumberedPitch:
         r'''Gets start pitch.
-
-        Set to pitch.
-
-        Returns pitch.
         '''
         return self._start_pitch
 
     @property
-    def stop_pitch(self):
+    def stop_pitch(self) -> abjad.NumberedPitch:
         r'''Gets stop pitch.
-
-        Set to pitch.
-
-        Returns pitch.
         '''
         return self._stop_pitch

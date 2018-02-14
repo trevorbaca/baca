@@ -63,12 +63,9 @@ class LibraryTZ(abjad.AbjadObject):
                     tag_measure_number=tag_measure_number,
                     )
         else:
-            if (not hasattr(command, '_deactivate') or
-                not hasattr(command, '_tag_measure_number') or
-                not hasattr(command, '_tags')):
-                raise Exception(f'does not implement tag protocol: {command}.')
-            command._tags.extend(tags)
-            command._tags.sort()
+            tags.sort()
+            tags_ = [abjad.Tag(_) for _ in tags]
+            command._tags.extend(tags_)
             command._deactivate = deactivate
             command._tag_measure_number = tag_measure_number
         return command

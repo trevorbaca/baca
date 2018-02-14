@@ -1,7 +1,10 @@
 import abc
 import abjad
 import baca
-from typing import Optional
+from .Typing import List
+from .Typing import Optional
+from .Typing import Selector
+from .Typing import Union
 
 
 class Command(abjad.AbjadObject):
@@ -27,18 +30,21 @@ class Command(abjad.AbjadObject):
 
     def __init__(
         self,
-        deactivate=None,
-        selector=None,
-        tag_measure_number=None,
-        ):
-        self._deactivate = deactivate
+        deactivate: bool = None,
+        selector: Selector = None,
+        tag_measure_number: bool = None,
+        ) -> None:
+        from baca.tools.MapCommand import MapCommand
+        self._deactivate: bool = deactivate
         if isinstance(selector, str):
-            selector = eval(selector)
-        if selector is not None:
-            prototype = (abjad.Expression, baca.MapCommand)
-            assert isinstance(selector, prototype), repr(selector)
-        self._selector = selector
-        self._tags = None
+            selector_ = eval(selector)
+        else:
+            selector_ = selector
+        if selector_ is not None:
+            prototype = (abjad.Expression, MapCommand)
+            assert isinstance(selector_, prototype), repr(selector_)
+        self._selector: Optional[abjad.Expression] = selector_
+        self._tags: List[abjad.Tag] = None
         self.manifests = None
         self.offset_to_measure_number = None
         self.tag_measure_number = tag_measure_number
@@ -113,15 +119,13 @@ class Command(abjad.AbjadObject):
 
     @property
     def deactivate(self) -> Optional[bool]:
-        r'''Is true when tag should write deactivated.
+        r'''Is true when command deactivates tag.
         '''
         return self._deactivate
 
     @property
-    def manifests(self):
+    def manifests(self) -> Optional[abjad.OrderedDict]:
         r'''Gets segment-maker manifests.
-
-        Returns dictionary.
         '''
         return self._manifests
 
@@ -134,10 +138,8 @@ class Command(abjad.AbjadObject):
             command._manifests = dictionary
 
     @property
-    def offset_to_measure_number(self):
-        r'''Gets segment-maker offset_to_measure_number dictionary.
-
-        Returns dictionary.
+    def offset_to_measure_number(self) -> Optional[abjad.OrderedDict]:
+        r'''Gets segment-maker offset-to-measure-number dictionary.
         '''
         return self._offset_to_measure_number
 
@@ -150,14 +152,8 @@ class Command(abjad.AbjadObject):
             command._offset_to_measure_number = dictionary
 
     @property
-    def selector(self):
+    def selector(self) -> Optional[abjad.Expression]:
         r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
         '''
         return self._selector
 
@@ -165,17 +161,16 @@ class Command(abjad.AbjadObject):
     def tag(self) -> Optional[abjad.Tag]:
         r'''Gets tag.
         '''
-        return abjad.Tag.from_words(self.tags)
+        words = [str(_) for _ in self.tags]
+        return abjad.Tag.from_words(words)
 
     @property
-    def tag_measure_number(self):
-        r'''Is true when command should tag measure number at format-time.
-
-        Returns true, false or none.
+    def tag_measure_number(self) -> Optional[bool]:
+        r'''Is true when command tags measure number.
         '''
         return self._tag_measure_number
 
-    @manifests.setter
+    @tag_measure_number.setter
     def tag_measure_number(self, argument):
         assert argument in (True, False, None), repr(argument)
         self._tag_measure_number = argument
@@ -183,10 +178,8 @@ class Command(abjad.AbjadObject):
             command._tag_measure_number = argument
 
     @property
-    def tags(self):
+    def tags(self) -> List[abjad.Tag]:
         r'''Gets tags.
-
-        Returns list of strings.
         '''
         assert self._are_valid_tags(self._tags)
         return self._tags[:]
@@ -201,9 +194,10 @@ class Command(abjad.AbjadObject):
             start_offset = abjad.inspect(leaf).get_timespan().start_offset
             measure_number = self._offset_to_measure_number.get(start_offset)
             if measure_number is not None:
-                tag = f'MEASURE_{measure_number}'
+                tag = abjad.Tag(f'MEASURE_{measure_number}')
                 tags.append(tag)
         if tags:
             tags.sort()
-            return abjad.Tag.from_words(tags)
+            words = [str(_) for _ in tags]
+            return abjad.Tag.from_words(words)
         return None

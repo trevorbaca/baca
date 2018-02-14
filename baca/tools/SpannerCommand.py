@@ -256,7 +256,7 @@ class SpannerCommand(Command):
         return self._right_broken
 
     @property
-    def selector(self) -> Optional[Selector]:
+    def selector(self) -> Optional[abjad.Expression]:
         r'''Gets selector.
 
         ..  container:: example
