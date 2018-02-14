@@ -112,7 +112,13 @@ class Command(abjad.AbjadObject):
                 reapplied_indicators.append(wrapper.indicator)
             abjad.detach(wrapper, wrapper.component)
         if reapplied_wrappers:
-            assert len(reapplied_indicators) == 1, repr(reapplied_wrappers)
+            count = len(reapplied_indicators)
+            if count != 1:
+                for reapplied_wrapper in reapplied_wrappers:
+                    print(reapplied_wrapper)
+                message = f'found {count} reapplied indicator(s);'
+                message += ' expecting 1.\n\n'
+                raise Exception(message)
             return reapplied_indicators[0]
 
     ### PUBLIC PROPERTIES ###

@@ -94,6 +94,8 @@ from .SplitByRoundedRatiosDivisionCallback import \
     SplitByRoundedRatiosDivisionCallback
 from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
+from .StaffPositionInterpolationCommand import \
+    StaffPositionInterpolationCommand
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SuiteCommand import SuiteCommand

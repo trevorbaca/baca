@@ -72,8 +72,15 @@ class TieCorrectionCommand(Command):
             next_leaf = abjad.inspect(current_leaf).get_leaf(1)
             if next_leaf is None:
                 right_broken = True
-                new_leaves = list(current_tie.leaves)
-                new_tie = abjad.new(current_tie)
+                if current_tie is not None:
+                    new_leaves = list(current_tie.leaves)
+                    new_tie = abjad.new(current_tie)
+                else:
+                    new_leaves = [current_leaf]
+                    if self.repeat:
+                        new_tie = abjad.Tie(repeat=True)
+                    else:
+                        new_tie = abjad.Tie()
             else:
                 next_tie = abjad.inspect(next_leaf).get_spanner(abjad.Tie)
                 if current_tie is not None and next_tie is not None:
@@ -96,8 +103,15 @@ class TieCorrectionCommand(Command):
             previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
             if previous_leaf is None:
                 left_broken = True
-                new_leaves = list(current_tie.leaves)
-                new_tie = abjad.new(current_tie)
+                if current_tie is not None:
+                    new_leaves = list(current_tie.leaves)
+                    new_tie = abjad.new(current_tie)
+                else:
+                    new_leaves = [current_leaf]
+                    if self.repeat:
+                        new_tie = abjad.Tie(repeat=True)
+                    else:
+                        new_tie = abjad.Tie()
             else:
                 previous_tie = abjad.inspect(previous_leaf).get_spanner(
                     abjad.Tie)

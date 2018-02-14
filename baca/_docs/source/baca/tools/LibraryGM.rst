@@ -20,11 +20,13 @@ Bases
    .. autosummary::
 
       ~LibraryGM.glissando
+      ~LibraryGM.glissando_thickness
       ~LibraryGM.hairpin
       ~LibraryGM.hairpin_shorten_pair
       ~LibraryGM.helianthate
       ~LibraryGM.imbricate
       ~LibraryGM.instrument
+      ~LibraryGM.interpolate_staff_positions
       ~LibraryGM.invisible_line_segment
       ~LibraryGM.label
       ~LibraryGM.laissez_vibrer
@@ -58,6 +60,8 @@ Class & static methods
 
 .. automethod:: LibraryGM.glissando
 
+.. automethod:: LibraryGM.glissando_thickness
+
 .. automethod:: LibraryGM.hairpin
 
 .. automethod:: LibraryGM.hairpin_shorten_pair
@@ -67,6 +71,8 @@ Class & static methods
 .. automethod:: LibraryGM.imbricate
 
 .. automethod:: LibraryGM.instrument
+
+.. automethod:: LibraryGM.interpolate_staff_positions
 
 .. automethod:: LibraryGM.invisible_line_segment
 

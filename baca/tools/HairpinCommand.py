@@ -95,7 +95,7 @@ class HairpinCommand(Command):
                 )
             if self.start == reapplied:
                 baca.SegmentMaker._categorize_persistent_wrapper(
-                    self._manifests,
+                    self.manifests,
                     wrapper,
                     'redundant',
                     )
@@ -110,7 +110,7 @@ class HairpinCommand(Command):
                 )
             if self.stop == reapplied:
                 baca.SegmentMaker._categorize_persistent_wrapper(
-                    self._manifests,
+                    self.manifests,
                     wrapper,
                     'redundant',
                     )

@@ -1,6 +1,10 @@
 import abjad
 import baca
 from .Command import Command
+from .Typing import List
+from .Typing import Optional
+from .Typing import Selector
+from .Typing import Union
 
 
 class MetronomeMarkCommand(Command):
@@ -24,14 +28,14 @@ class MetronomeMarkCommand(Command):
 
     def __init__(
         self,
-        deactivate=None,
-        key=None,
-        selector='baca.leaf(0)', 
-        tags=None,
-        ):
+        deactivate: bool = None,
+        key: Union[str, abjad.Accelerando, abjad.Ritardando] = None,
+        selector: Selector = 'baca.leaf(0)',
+        tags: List[abjad.Tag] = None,
+        ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if key is not None:
-            assert isinstance(key, str)
+            assert isinstance(key, (str, abjad.Accelerando, abjad.Ritardando))
         self._key = key
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
@@ -48,10 +52,13 @@ class MetronomeMarkCommand(Command):
             return
         if self.key is None:
             return
-        metronome_marks = self._manifests['abjad.MetronomeMark']
-        metronome_mark = metronome_marks.get(self.key)
-        if metronome_mark is None:
-            raise Exception(f'can not find metronome mark {key!r}.')
+        if isinstance(self.key, str):
+            metronome_marks = self.manifests['abjad.MetronomeMark']
+            metronome_mark = metronome_marks.get(self.key)
+            if metronome_mark is None:
+                raise Exception(f'can not find metronome mark {key!r}.')
+        else:
+            metronome_mark = self.key
         if self.selector is not None:
             argument = self.selector(argument)
         if not argument:
@@ -60,7 +67,8 @@ class MetronomeMarkCommand(Command):
         spanner = abjad.inspect(leaf).get_spanner(abjad.MetronomeMarkSpanner)
         if spanner is None:
             raise Exception('can not find metronome mark spanner.')
-        reapplied = self._remove_reapplied_wrappers(leaf, metronome_mark)
+        if isinstance(metronome_mark, abjad.MetronomeMark):
+            reapplied = self._remove_reapplied_wrappers(leaf, metronome_mark)
         wrapper = spanner.attach(
             metronome_mark,
             leaf,
@@ -68,19 +76,18 @@ class MetronomeMarkCommand(Command):
             tag=self.tag,
             wrapper=True,
             )
-        if metronome_mark == reapplied:
-            baca.SegmentMaker._categorize_persistent_wrapper(
-                self._manifests,
-                wrapper,
-                'redundant',
-                )
+        if isinstance(metronome_mark, abjad.MetronomeMark):
+            if metronome_mark == reapplied:
+                baca.SegmentMaker._categorize_persistent_wrapper(
+                    self.manifests,
+                    wrapper,
+                    'redundant',
+                    )
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def key(self):
+    def key(self) -> Optional[Union[str, abjad.Accelerando, abjad.Ritardando]]:
         r'''Gets metronome mark key.
-
-        Returns string or none.
         '''
         return self._key

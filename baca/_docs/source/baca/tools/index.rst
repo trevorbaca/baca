@@ -117,6 +117,7 @@ baca.tools
    SettingCommand
    SpannerCommand
    StaffPositionCommand
+   StaffPositionInterpolationCommand
    SuiteCommand
    TieCorrectionCommand
    VoltaCommand
@@ -151,6 +152,7 @@ baca.tools
    ~baca.tools.SettingCommand.SettingCommand
    ~baca.tools.SpannerCommand.SpannerCommand
    ~baca.tools.StaffPositionCommand.StaffPositionCommand
+   ~baca.tools.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
    ~baca.tools.SuiteCommand.SuiteCommand
    ~baca.tools.TieCorrectionCommand.TieCorrectionCommand
    ~baca.tools.VoltaCommand.VoltaCommand

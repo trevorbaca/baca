@@ -780,13 +780,29 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def articulation(
+        articulation: str,
+        selector: Selector = 'baca.phead(0)',
+        ) -> IndicatorCommand:
+        r'''Attaches articulation to ``selector`` output.
+        '''
+        articulation_ = abjad.Articulation(articulation)
+        return IndicatorCommand(
+            indicators=[articulation_],
+            selector=selector,
+            )
+
+    @staticmethod
     def articulations(
-        articulations: list,
+        articulations: List,
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         r'''Attaches articulations.
         '''
-        return IndicatorCommand(indicators=articulations)
+        return IndicatorCommand(
+            indicators=articulations,
+            selector=selector,
+            )
 
     @staticmethod
     def bar_extent(

@@ -3,9 +3,14 @@ import baca
 from abjad import rhythmmakertools as rhythmos
 from .HairpinCommand import HairpinCommand
 from .IndicatorCommand import IndicatorCommand
+from .MetronomeMarkCommand import MetronomeMarkCommand
+from .OverrideCommand import OverrideCommand
 from .RhythmCommand import RhythmCommand
 from .SpannerCommand import SpannerCommand
+from .StaffPositionInterpolationCommand import \
+    StaffPositionInterpolationCommand
 from .SuiteCommand import SuiteCommand
+from .Typing import Number
 from .Typing import Selector
 from .Typing import Union
 
@@ -29,6 +34,7 @@ class LibraryGM(abjad.AbjadObject):
         allow_repeats: bool = None,
         right_broken: bool = None,
         stems: bool = None,
+        style: str = None,
         ) -> SpannerCommand:
         r'''Attaches glissando to trimmed leaves.
 
@@ -347,11 +353,26 @@ class LibraryGM(abjad.AbjadObject):
         glissando = abjad.Glissando(
             allow_repeat_pitches=allow_repeats,
             stems=stems,
+            style=style,
             )
         return SpannerCommand(
             right_broken=right_broken,
             selector=selector,
             spanner=glissando,
+            )
+
+    @staticmethod
+    def glissando_thickness(
+        n: Number,
+        selector: Selector = 'baca.tleaves()',
+        ) -> OverrideCommand:
+        r'''Attaches glissando to trimmed leaves.
+        '''
+        return OverrideCommand(
+            attribute='thickness',
+            value=str(n),
+            grob='glissando',
+            selector=selector,
             )
 
     @staticmethod
@@ -832,6 +853,21 @@ class LibraryGM(abjad.AbjadObject):
         assert isinstance(instrument, abjad.Instrument)
         return baca.tools.IndicatorCommand(
             indicators=[instrument],
+            selector=selector,
+            )
+
+    @staticmethod
+    def interpolate_staff_positions(
+        start_pitch: Union[str, abjad.NamedPitch],
+        stop_pitch: Union[str, abjad.NamedPitch],
+        selector: Selector = 'baca.plts()',
+        ):
+        r'''Interpolates from staff position of ``start_pitch`` to staff
+        position of ``stop_pitch``.
+        '''
+        return StaffPositionInterpolationCommand(
+            start_pitch=start_pitch,
+            stop_pitch=stop_pitch,
             selector=selector,
             )
 
@@ -1989,12 +2025,13 @@ class LibraryGM(abjad.AbjadObject):
             return command
 
     @staticmethod
-    def metronome_mark(key, selector='baca.leaf(0)'):
+    def metronome_mark(
+        key,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> MetronomeMarkCommand:
         r'''Attaches metronome mark with `key`.
-
-        Returns metronome mark command.
         '''
-        return baca.MetronomeMarkCommand(
+        return MetronomeMarkCommand(
             key=key,
             selector=selector,
             )

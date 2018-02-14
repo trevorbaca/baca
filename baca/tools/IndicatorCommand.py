@@ -277,7 +277,7 @@ class IndicatorCommand(Command):
                     else:
                         status = 'redundant'
                     baca.SegmentMaker._categorize_persistent_wrapper(
-                        self._manifests,
+                        self.manifests,
                         wrapper,
                         status,
                         )

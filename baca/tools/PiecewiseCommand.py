@@ -106,7 +106,7 @@ class PiecewiseCommand(Command):
                     )
                 if argument_ == reapplied:
                     baca.SegmentMaker._categorize_persistent_wrapper(
-                        self._manifests,
+                        self.manifests,
                         wrapper,
                         'redundant',
                         )

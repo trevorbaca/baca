@@ -26,6 +26,7 @@ Bases
       ~LibraryAF.anchor_to_figure
       ~LibraryAF.ancora_dynamic
       ~LibraryAF.arpeggios
+      ~LibraryAF.articulation
       ~LibraryAF.articulations
       ~LibraryAF.bar_extent
       ~LibraryAF.bar_extent_zero
@@ -90,6 +91,8 @@ Class & static methods
 .. automethod:: LibraryAF.ancora_dynamic
 
 .. automethod:: LibraryAF.arpeggios
+
+.. automethod:: LibraryAF.articulation
 
 .. automethod:: LibraryAF.articulations
 
