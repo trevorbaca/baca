@@ -9,6 +9,7 @@ from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
 from .PitchCommand import PitchCommand
 from .SpannerCommand import SpannerCommand
+from .StaffPositionCommand import StaffPositionCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Selector
 
@@ -527,8 +528,10 @@ class LibraryNS(abjad.AbjadObject):
         pitch,
         selector: Selector = 'baca.pleaves()',
         ) -> PitchCommand:
-        r'''Sets pitch on ``selector`` output..
+        r'''Sets pitch on ``selector`` output.
         '''
+        if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
+            raise Exception(f'one-note chord {pitch!r}?')
         return PitchCommand(
             allow_repeat_pitches=True,
             cyclic=True,
@@ -5131,46 +5134,36 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def staff_position(number, selector='baca.plts()'):
+    def staff_position(
+        number: int,
+        selector: Selector = 'baca.plts()',
+        ) -> StaffPositionCommand:
         r'''Makes staff position command.
         '''
         assert isinstance(number, int), repr(number)
-        return baca.StaffPositionCommand(
+        return StaffPositionCommand(
             numbers=[number],
             repeats=True,
             selector=selector,
             ) 
 
     @staticmethod
-    def staff_positions(numbers, repeats=None, selector='baca.plts()'):
+    def staff_positions(
+        numbers,
+        exact: bool = None,
+        repeats: bool = None,
+        selector: Selector = 'baca.plts()',
+        ) -> StaffPositionCommand:
         r'''Makes staff position command.
         '''
         if repeats is None and len(numbers) == 1:
             repeats = True
-        return baca.StaffPositionCommand(
+        return StaffPositionCommand(
+            exact=exact,
             numbers=numbers,
             repeats=repeats,
             selector=selector,
             ) 
-
-    @staticmethod
-    def staff_symbol_extra_offset(
-        pair,
-        selector='baca.leaf(0)',
-        after=False,
-        tag=None,
-        ):
-        r'''Overrides staff symbol extra offset.
-        '''
-        return baca.tools.OverrideCommand(
-            after=after,
-            attribute='extra_offset',
-            value=pair,
-            context='Staff',
-            grob='staff_symbol',
-            selector=selector,
-            tag=tag,
-            )
 
     @staticmethod
     def stem_color(color='red', context=None, selector='baca.tleaves()'):
@@ -5755,6 +5748,28 @@ class LibraryNS(abjad.AbjadObject):
             attribute='direction',
             value=abjad.Up,
             grob='stem',
+            selector=selector,
+            )
+
+    @staticmethod
+    def stop_trill(selector='baca.leaf(0)') -> IndicatorCommand:
+        r'''Makes stop trill command in leaf's closing format slot.
+
+        The closing format slot is important because LilyPond fails to compile
+        when ``\stopTrillSpan`` appears after ``\set instrumentName`` commands
+        (and probably other ``\set`` commands). Setting format slot to closing
+        here positions ``\stopTrillSpan`` after the leaf in question (which is
+        required) and also draws ``\stopTrillSpan`` closer to the leaf in
+        question, prior to ``\set instrumetName`` and other commands positioned
+        in the after slot.
+
+        Eventually it will probably be necessary to model ``\stopTrillSpan``
+        with a dedicated format slot.
+        '''
+        from baca.tools.LibraryGM import LibraryGM
+        return LibraryGM.literal(
+            r'\stopTrillSpan',
+            format_slot='closing',
             selector=selector,
             )
 

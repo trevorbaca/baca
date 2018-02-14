@@ -22,6 +22,7 @@ Bases
    .. autosummary::
 
       ~StaffPositionCommand.deactivate
+      ~StaffPositionCommand.exact
       ~StaffPositionCommand.get_tag
       ~StaffPositionCommand.manifests
       ~StaffPositionCommand.numbers
@@ -43,6 +44,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.deactivate
+
+.. autoattribute:: StaffPositionCommand.exact
 
 .. autoattribute:: StaffPositionCommand.numbers
 

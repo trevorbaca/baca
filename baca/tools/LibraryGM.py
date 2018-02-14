@@ -4,6 +4,7 @@ from abjad import rhythmmakertools as rhythmos
 from .HairpinCommand import HairpinCommand
 from .IndicatorCommand import IndicatorCommand
 from .RhythmCommand import RhythmCommand
+from .SpannerCommand import SpannerCommand
 from .SuiteCommand import SuiteCommand
 from .Typing import Selector
 from .Typing import Union
@@ -23,7 +24,12 @@ class LibraryGM(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def glissando(selector='baca.tleaves()'):
+    def glissando(
+        selector: Selector = 'baca.tleaves()',
+        allow_repeats: bool = None,
+        right_broken: bool = None,
+        stems: bool = None,
+        ) -> SpannerCommand:
         r'''Attaches glissando to trimmed leaves.
 
         ..  container:: example
@@ -338,9 +344,14 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.SpannerCommand(
+        glissando = abjad.Glissando(
+            allow_repeat_pitches=allow_repeats,
+            stems=stems,
+            )
+        return SpannerCommand(
+            right_broken=right_broken,
             selector=selector,
-            spanner=abjad.Glissando(),
+            spanner=glissando,
             )
 
     @staticmethod

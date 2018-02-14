@@ -6,6 +6,7 @@ from typing import Union
 from abjad import rhythmmakertools as rhythmos
 from .AnchorSpecifier import AnchorSpecifier
 from .ClusterCommand import ClusterCommand
+from .Command import Command
 from .ContainerCommand import ContainerCommand
 from .IndicatorCommand import IndicatorCommand
 from .OverrideCommand import OverrideCommand
@@ -1895,6 +1896,16 @@ class LibraryAF(abjad.AbjadObject):
         breaks = baca.BreakMeasureMap(commands=commands)
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
+
+    @staticmethod
+    def build(command: Command) -> Command:
+        r'''Tags ``command`` with ``-SEGMENT``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '-SEGMENT',
+            command,
+            )
 
     @staticmethod
     def center_to_octave(

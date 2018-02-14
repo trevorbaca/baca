@@ -79,11 +79,11 @@ Bases
       ~LibraryNS.staff_lines
       ~LibraryNS.staff_position
       ~LibraryNS.staff_positions
-      ~LibraryNS.staff_symbol_extra_offset
       ~LibraryNS.stem_color
       ~LibraryNS.stem_tremolo
       ~LibraryNS.stems_down
       ~LibraryNS.stems_up
+      ~LibraryNS.stop_trill
       ~LibraryNS.strict_note_spacing_off
       ~LibraryNS.strict_quarter_divisions
       ~LibraryNS.subito_dynamic
@@ -219,8 +219,6 @@ Class & static methods
 
 .. automethod:: LibraryNS.staff_positions
 
-.. automethod:: LibraryNS.staff_symbol_extra_offset
-
 .. automethod:: LibraryNS.stem_color
 
 .. automethod:: LibraryNS.stem_tremolo
@@ -228,6 +226,8 @@ Class & static methods
 .. automethod:: LibraryNS.stems_down
 
 .. automethod:: LibraryNS.stems_up
+
+.. automethod:: LibraryNS.stop_trill
 
 .. automethod:: LibraryNS.strict_note_spacing_off
 
