@@ -1,18 +1,28 @@
 import abjad
 import baca
-from typing import List
-from typing import Tuple
-from typing import Union
 from abjad import rhythmmakertools as rhythmos
 from .AnchorSpecifier import AnchorSpecifier
+from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
+from .Coat import Coat
+from .ColorCommand import ColorCommand
+from .ColorFingeringCommand import ColorFingeringCommand
 from .Command import Command
 from .ContainerCommand import ContainerCommand
+from .DiatonicClusterCommand import DiatonicClusterCommand
+from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
+from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
+from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SuiteCommand import SuiteCommand
+from .Typing import List
+from .Typing import Number
+from .Typing import NumberPair
 from .Typing import Selector
+from .Typing import Tuple
+from .Typing import Union
 
 
 class LibraryAF(abjad.AbjadObject):
@@ -29,7 +39,9 @@ class LibraryAF(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def accents(selector='baca.pheads()') -> IndicatorCommand:
+    def accents(
+        selector: Selector = 'baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches accents to pitched heads.
 
         ..  container:: example
@@ -181,7 +193,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def alternate_bow_strokes(
         downbow_first: bool = True,
-        selector='baca.pheads()',
+        selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         r'''Attaches alternate bow strokes.
 
@@ -417,10 +429,18 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def anchor(
         remote_voice_name: str,
-        remote_selector=None,
-        local_selector=None,
+        remote_selector: Selector = None,
+        local_selector: Selector = None,
         ) -> AnchorSpecifier:
-        r'''Anchors music to start of remote selection.
+        r'''Anchors music in this figure (filtered by ``local_selector``) to
+        start offset of ``remote_voice_name`` (filtered by
+        ``remote_selector``).
+
+        :param remote_voice_name: name of voice to which this music anchors.
+
+        :param remote_seelctor: selector applied to remote voice.
+
+        :param local_selector: selector applied to this music.
         '''
         return AnchorSpecifier(
             local_selector=local_selector,
@@ -431,10 +451,17 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def anchor_after(
         remote_voice_name: str,
-        remote_selector=None,
-        local_selector=None,
+        remote_selector: Selector = None,
+        local_selector: Selector = None,
         ) -> AnchorSpecifier:
-        r'''Anchors music to stop of remote selection.
+        r'''Anchors music in this figure (filtered by ``local_selector``) to
+        stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
+
+        :param remote_voice_name: name of voice to which this music anchors.
+
+        :param remote_selector: selector applied to remote voice.
+
+        :param local_selector: selector applied to this music.
         '''
         return AnchorSpecifier(
             local_selector=local_selector,
@@ -445,7 +472,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
-        r'''Anchors music to start of figure.
+        r'''Anchors music in this figure to start of ``figure_name``.
+
+        :param figure_name: figure name.
         '''
         return AnchorSpecifier(
             figure_name=figure_name,
@@ -454,7 +483,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def ancora_dynamic(
         dynamic: str,
-        selector='baca.phead(0)',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches ancora dynamic pitched head 0.
 
@@ -598,7 +627,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def arpeggios(selector='baca.cheads()') -> IndicatorCommand:
+    def arpeggios(
+        selector: Selector = 'baca.cheads()',
+        ) -> IndicatorCommand:
         r"""Attaches arpeggios.
 
         ..  container:: example
@@ -751,7 +782,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def articulations(
         articulations: list,
-        selector='baca.pheads()',
+        selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         r'''Attaches articulations.
         '''
@@ -759,10 +790,10 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bar_extent(
-        pair: Tuple[Union[int, float], Union[int, float]],
-        selector='baca.leaf(0)',
+        pair: NumberPair,
+        selector: Selector = 'baca.leaf(0)',
         after: bool = False,
-        ):
+        ) -> OverrideCommand:
         r'''Overrides bar line bar extent.
 
         ..  container:: example
@@ -924,7 +955,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def bass_to_octave(
         n: int,
-        selector='baca.plts()',
+        selector: Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""Octave-transposes music.
 
@@ -1267,7 +1298,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_divisions(
-        stemlets: Union[None, int, float] = None,
+        stemlets: Number = None,
         ) -> rhythmos.BeamSpecifier:
         r'''Beams divisions.
 
@@ -1385,7 +1416,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def beam_everything(
         hide_nibs: bool = False,
-        stemlets: Union[int, float, None] = None,
+        stemlets: Number = None,
         ) -> rhythmos.BeamSpecifier:
         r'''Beams everything.
 
@@ -1576,8 +1607,8 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_positions(
-        n: Union[int, float],
-        selector='baca.leaves()',
+        n: Number,
+        selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides beam positions.
 
@@ -1871,7 +1902,7 @@ class LibraryAF(abjad.AbjadObject):
         '''
         commands = []
         if not pages:
-            return baca.BreakMeasureMap(commands=commands)
+            return BreakMeasureMap(commands=commands)
         first_measure_number = pages[0].items[0][0]
         bol_measure_numbers = []
         for page in pages:
@@ -1893,7 +1924,7 @@ class LibraryAF(abjad.AbjadObject):
                 commands.append(command)
                 lbsd = baca.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
-        breaks = baca.BreakMeasureMap(commands=commands)
+        breaks = BreakMeasureMap(commands=commands)
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 
@@ -1910,7 +1941,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def center_to_octave(
         n: int,
-        selector='baca.plts()',
+        selector: Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""Octave-transposes music.
 
@@ -2254,7 +2285,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def clef(
         clef: str = 'treble',
-        selector='baca.leaf(0)',
+        selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r'''Attaches clef to leaf 0.
 
@@ -2398,8 +2429,8 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def clef_extra_offset(
-        pair: Tuple[Union[int, float], Union[int, float]],
-        selector='baca.leaf(0)',
+        pair: NumberPair,
+        selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r'''Overrides clef extra offset.
         '''
@@ -2412,7 +2443,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def clef_x_extent_false(selector='baca.leaf(0)') -> OverrideCommand:
+    def clef_x_extent_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides clef x-extent.
         '''
         return OverrideCommand(
@@ -2426,8 +2459,8 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def clusters(
         widths: List[int],
-        selector='baca.plts()',
-        start_pitch=None,
+        selector: Selector = 'baca.plts()',
+        start_pitch: Union[int, str, abjad.NamedPitch] = None,
         ) -> ClusterCommand:
         r'''Makes clusters.
         '''
@@ -2438,7 +2471,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def coat(pitch):
+    def coat(pitch) -> Coat:
         r'''Coats `pitch`.
 
         ..  container:: example
@@ -2527,10 +2560,10 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.Coat(pitch)
+        return Coat(pitch)
 
     @staticmethod
-    def color(selector='baca.leaves()'):
+    def color(selector: Selector = 'baca.leaves()') -> ColorCommand:
         r'''Colors leaves.
 
         ..  container:: example
@@ -2745,23 +2778,24 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.ColorCommand(selector=selector)
+        return ColorCommand(selector=selector)
 
     @staticmethod
-    def color_fingerings(numbers, selector='baca.pheads()'):
+    def color_fingerings(
+        numbers: List[Number],
+        selector: Selector = 'baca.pheads()',
+        ) -> ColorFingeringCommand:
         r'''Color fingerings.
 
         Returns color fingering command.
         '''
-        return baca.ColorFingeringCommand(numbers=numbers, selector=selector)
+        return ColorFingeringCommand(numbers=numbers, selector=selector)
 
     @staticmethod
-    def compound_quarter_divisions():
+    def compound_quarter_divisions() -> DivisionSequenceExpression:
         r'''Makes compound quarter divisions.
-
-        Returns division sequence expression.
         '''
-        expression = baca.DivisionSequenceExpression()
+        expression = DivisionSequenceExpression()
         expression = expression.split_by_durations(
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
             durations=[abjad.Duration(1, 4)],
@@ -2860,7 +2894,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def cross_note_heads(selector='baca.tleaves()'):
+    def cross_note_heads(
+        selector: Selector = 'baca.tleaves()',
+        ) -> OverrideCommand:
         r'''Overrides note-head style on pitched leaves.
 
         ..  container:: example
@@ -3002,7 +3038,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def cross_staff(selector='baca.pheads()'):
+    def cross_staff(
+        selector: Selector = 'baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches cross-staff command to leaves.
 
         ..  container:: example
@@ -3525,16 +3563,14 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
             selector=selector,
             )
 
     @staticmethod
-    def dashed_arrow():
+    def dashed_arrow() -> abjad.ArrowLineSegment:
         r'''Makes dashed arrow line segment.
-
-        Returns arrow line segment.
         '''
         return abjad.ArrowLineSegment(
             dash_fraction=0.25,
@@ -3548,25 +3584,34 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def deviation(deviations, selector='baca.plts()'):
+    def deviation(
+        deviations: List[Number],
+        selector: Selector = 'baca.plts()',
+        ) -> MicrotoneDeviationCommand:
         r''''Makes microtone deviation.
         '''
-        return baca.MicrotoneDeviationCommand(
+        return MicrotoneDeviationCommand(
             deviations=deviations,
             selector=selector,
             )
 
     @staticmethod
-    def diatonic_clusters(widths, selector='baca.plts()'):
+    def diatonic_clusters(
+        widths: List[int],
+        selector: Selector = 'baca.plts()',
+        ) -> DiatonicClusterCommand:
         r'''Makes diatonic clusters.
         '''
-        return baca.DiatonicClusterCommand(
+        return DiatonicClusterCommand(
             selector=selector,
             widths=widths,
             )
 
     @staticmethod
-    def displacement(displacements, selector='baca.plts()'):
+    def displacement(
+        displacements: List[int],
+        selector: Selector = 'baca.plts()',
+        ) -> OctaveDisplacementCommand:
         r'''Octave-displaces PLTs.
 
         ..  container:: example
@@ -3752,21 +3797,28 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OctaveDisplacementCommand(
+        return OctaveDisplacementCommand(
             displacements=displacements,
             selector=selector,
             )
 
     @staticmethod
-    def dls_sp(n, selector='baca.leaves()'):
+    def dls_sp(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides dynamic line spanner staff padding.
-        
-        Returns override command.
         '''
-        return baca.dynamic_line_spanner_staff_padding(n, selector=selector)
+        from baca.tools.LibraryAF import LibraryAF
+        return LibraryAF.dynamic_line_spanner_staff_padding(
+            n,
+            selector=selector,
+            )
 
     @staticmethod
-    def double_tonguing(selector='baca.pheads()'):
+    def double_tonguing(
+        selector: Selector = 'baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches double-staccati to pitched heads.
 
         ..  container:: example
@@ -3918,7 +3970,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def down_arpeggios(selector='baca.cheads()'):
+    def down_arpeggios(
+        selector: Selector = 'baca.cheads()',
+        ) -> IndicatorCommand:
         r"""Attaches down-arpeggios to chord heads.
 
         ..  container:: example
@@ -4068,13 +4122,15 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
             )
 
     @staticmethod
-    def down_bows(selector='baca.pheads()'):
+    def down_bows(
+        selector: Selector = 'baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches down-bows to pitched heads.
 
         ..  container:: example
@@ -4220,13 +4276,16 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('downbow')],
             selector=selector,
             )
 
     @staticmethod
-    def dynamic(dynamic: str, selector='baca.phead(0)'):
+    def dynamic(
+        dynamic: str,
+        selector: Selector = 'baca.phead(0)',
+        ) -> IndicatorCommand:
         r'''Attaches dynamic to pitched head 0.
 
         ..  container:: example
@@ -4373,19 +4432,20 @@ class LibraryAF(abjad.AbjadObject):
                 )
         else:
             indicator = abjad.Dynamic(dynamic)
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             context='Voice',
             indicators=[indicator],
             selector=selector,
             )
 
     @staticmethod
-    def dynamic_line_spanner_padding(n, selector='baca.leaves()'):
+    def dynamic_line_spanner_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides dynamic line spanner padding on leaves.
-
-        Returns override command.
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='padding',
             value=str(n),
             grob='dynamic_line_spanner',
@@ -4393,7 +4453,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_line_spanner_staff_padding(n, selector='baca.leaves()'):
+    def dynamic_line_spanner_staff_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides dynamic line spanner staff padding on leaves.
 
         ..  container:: example
@@ -4543,7 +4606,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='staff_padding',
             value=str(n),
             grob='dynamic_line_spanner',
@@ -4551,7 +4614,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_line_spanner_up(selector='baca.leaves()'):
+    def dynamic_line_spanner_up(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
         r'''Up-overrides dynamic line spanner direction.
 
         ..  container:: example
@@ -4701,7 +4766,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='dynamic_line_spanner',
@@ -4709,7 +4774,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_text_extra_offset(pair, selector='baca.pleaf(0)'):
+    def dynamic_text_extra_offset(
+        pair: NumberPair,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides dynamic text extra offset.
 
         ..  container:: example
@@ -4853,7 +4921,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='dynamic_text',
@@ -4861,10 +4929,12 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_text_x_extent_zero(selector='baca.pleaf(0)'):
+    def dynamic_text_x_extent_zero(
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides dynamic text X-extent.
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='X_extent',
             value=(0, 0),
             grob='dynamic_text',
@@ -4872,10 +4942,13 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_text_x_offset(n:Union[int, float], selector='baca.pleaf(0)'):
+    def dynamic_text_x_offset(
+        n: Number,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides dynamic text X-extent.
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='X_offset',
             value=n,
             grob='dynamic_text',
@@ -4883,7 +4956,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamics(string):
+    def dynamics(string: str) -> List[abjad.Dynamic]:
         r'''Makes dynamics from `string`.
 
         ..  container::
@@ -4891,12 +4964,13 @@ class LibraryAF(abjad.AbjadObject):
             >>> baca.dynamics('ff p f pp')
             [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
 
-        Returns list of dynamics.
         '''
         return [abjad.Dynamic(_) for _ in string.split()]
 
     @staticmethod
-    def dynamics_down(selector='baca.leaf(0)'):
+    def dynamics_down(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Attaches dynamic-down command to leaf 0.
 
         ..  container:: example
@@ -5036,13 +5110,15 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
             selector=selector,
             )
 
     @staticmethod
-    def dynamics_up(selector='baca.leaf(0)'):
+    def dynamics_up(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Attaches dynamic-up command to leaf 0.
 
         ..  container:: example
@@ -5182,13 +5258,16 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
             selector=selector,
             )
 
     @staticmethod
-    def effort_dynamic(dynamic: str, selector='baca.phead(0)'):
+    def effort_dynamic(
+        dynamic: str,
+        selector: Selector = 'baca.phead(0)',
+        ) -> IndicatorCommand:
         r'''Attaches effort dynamic to pitched head 0.
 
         ..  container:: example
@@ -5325,13 +5404,15 @@ class LibraryAF(abjad.AbjadObject):
         '''
         command = rf'\effort_{dynamic}'
         indicator = abjad.Dynamic(f'{dynamic}', command=command)
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[indicator],
             selector=selector,
             )
 
     @staticmethod
-    def fermata(selector='baca.leaf(0)'):
+    def fermata(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Attaches fermata to leaf.
 
         ..  container:: example
@@ -5463,13 +5544,15 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('fermata')],
             selector=selector,
             )
 
     @staticmethod
-    def flageolets(selector='baca.pheads()'):
+    def flageolets(
+        selector: Selector = 'baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches flageolets to pitched heads.
 
         ..  container:: example
@@ -5613,13 +5696,13 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('flageolet')],
             selector=selector,
             )
 
     @staticmethod
-    def flags():
+    def flags() -> rhythmos.BeamSpecifier:
         r'''Flags music.
 
         ..  container:: example
@@ -5686,7 +5769,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def fuse_compound_quarter_divisions(counts):
+    def fuse_compound_quarter_divisions(counts) -> DivisionSequenceExpression:
         r'''Fuses compound quarter divisions.
 
         ..  container:: example
@@ -5727,11 +5810,10 @@ class LibraryAF(abjad.AbjadObject):
             Division((3, 8))
             Division((3, 8))
 
-        Returns division sequence expression.
         '''
         if not all(isinstance(_, int) for _ in counts):
             raise Exception(counts)
-        expression = baca.DivisionSequenceExpression()
+        expression = DivisionSequenceExpression()
         expression = expression.division_sequence()
         expression = expression.split_by_durations(
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
