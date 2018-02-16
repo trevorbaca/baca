@@ -1000,11 +1000,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_metronome_marks(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
-        left_broken_text = abjad.Markup().null()
-        left_broken_text = abjad.new(left_broken_text, direction=None)
         spanner = abjad.MetronomeMarkSpanner(
             left_broken_padding=0,
-            left_broken_text=left_broken_text,
+            left_broken_text=False,
             parenthesize=False,
             right_padding=0,
             stem_height=self.metronome_mark_stem_height,
@@ -4592,10 +4590,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK:SM30
                         %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30

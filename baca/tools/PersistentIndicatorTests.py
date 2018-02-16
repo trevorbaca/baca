@@ -5936,10 +5936,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6083,10 +6079,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6233,10 +6225,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%         #1                                                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%     }                                                                        %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.text =                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
@@ -6395,10 +6383,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%         }                                                                    %! SM27:REDUNDANT_METRONOME_MARK
                         %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6466,10 +6450,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -6573,10 +6554,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%         #1                                                                   %! SM27:REDUNDANT_METRONOME_MARK
                         %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text =
-                            \markup {
-                                \null
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.text =                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
