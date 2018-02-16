@@ -74,14 +74,15 @@ class Command(abjad.AbjadObject):
             return
         if abjad.inspect(leaf).get_timespan().start_offset != 0:
             return
+        tempo_prototype = (
+            abjad.Accelerando,
+            abjad.MetronomeMark,
+            abjad.Ritardando,
+            )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument
-        elif isinstance(indicator, abjad.MetronomeMark):
-            prototype = (
-                abjad.Accelerando,
-                abjad.MetronomeMark,
-                abjad.Ritardando,
-                )
+        elif isinstance(indicator, tempo_prototype):
+            prototype = tempo_prototype
         else:
             prototype = type(indicator)
         stem = abjad.String.to_indicator_stem(indicator)

@@ -2089,14 +2089,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                     continue
                 prototype = (
-                    #abjad.Accelerando,
+                    abjad.Accelerando,
                     abjad.MetronomeMark,
-                    #abjad.Ritardando,
+                    abjad.Ritardando,
                     )
                 if isinstance(previous_indicator, prototype):
-                    spanner = abjad.inspect(leaf).get_spanner(
-                        abjad.MetronomeMarkSpanner
-                        )
+                    spanner = abjad.MetronomeMarkSpanner
+                    spanner = abjad.inspect(leaf).get_spanner(spanner)
                     if status == 'reapplied':
                         wrapper = spanner.attach(
                             previous_indicator,
@@ -2109,14 +2108,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             wrapper,
                             status,
                             )
-                        #if isinstance(previous_indicator, abjad.Ritardando):
-                        #    print(wrapper)
-                        #    raise Exception('RRR', status)
                     else:
                         assert status in ('redundant', None), repr(status)
                         if status is None or spanner._is_trending(leaf):
                             status = 'explicit'
-                        #prototype = abjad.MetronomeMark
                         wrapper = abjad.inspect(leaf).wrapper(prototype)
                         wrapper.tag = wrapper.tag.prepend(edition)
                         self._categorize_persistent_wrapper(

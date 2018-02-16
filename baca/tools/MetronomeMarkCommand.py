@@ -53,11 +53,11 @@ class MetronomeMarkCommand(Command):
             return
         if isinstance(self.key, str):
             metronome_marks = self.manifests['abjad.MetronomeMark']
-            metronome_mark = metronome_marks.get(self.key)
-            if metronome_mark is None:
+            indicator = metronome_marks.get(self.key)
+            if indicator is None:
                 raise Exception(f'can not find metronome mark {self.key!r}.')
         else:
-            metronome_mark = self.key
+            indicator = self.key
         if self.selector is not None:
             argument = self.selector(argument)
         if not argument:
@@ -66,22 +66,20 @@ class MetronomeMarkCommand(Command):
         spanner = abjad.inspect(leaf).get_spanner(abjad.MetronomeMarkSpanner)
         if spanner is None:
             raise Exception('can not find metronome mark spanner.')
-        if isinstance(metronome_mark, abjad.MetronomeMark):
-            reapplied = self._remove_reapplied_wrappers(leaf, metronome_mark)
+        reapplied = self._remove_reapplied_wrappers(leaf, indicator)
         wrapper = spanner.attach(
-            metronome_mark,
+            indicator,
             leaf,
             deactivate=self.deactivate,
             tag=self.tag,
             wrapper=True,
             )
-        if isinstance(metronome_mark, abjad.MetronomeMark):
-            if metronome_mark == reapplied:
-                SegmentMaker._categorize_persistent_wrapper(
-                    self.manifests,
-                    wrapper,
-                    'redundant',
-                    )
+        if indicator == reapplied:
+            SegmentMaker._categorize_persistent_wrapper(
+                self.manifests,
+                wrapper,
+                'redundant',
+                )
 
     ### PUBLIC PROPERTIES ###
 
