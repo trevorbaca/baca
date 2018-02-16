@@ -75,7 +75,7 @@ class MetronomeMarkCommand(Command):
             wrapper=True,
             )
         if indicator == reapplied:
-            SegmentMaker._categorize_persistent_wrapper(
+            SegmentMaker._treat_persistent_wrapper(
                 self.manifests,
                 wrapper,
                 'redundant',

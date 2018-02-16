@@ -922,7 +922,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in self.score_template.attach_defaults(staff):
                 tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
                 wrapper.tag = tag
-                self._categorize_persistent_wrapper(
+                self._treat_persistent_wrapper(
                     self.manifests,
                     wrapper,
                     'default',
@@ -932,7 +932,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.first_segment:
             return
         for wrapper in self.score_template.attach_defaults(self.score):
-            self._categorize_persistent_wrapper(
+            self._treat_persistent_wrapper(
                 self.manifests,
                 wrapper,
                 'default',
@@ -1152,106 +1152,6 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms = self._intercalate_silences(rhythms)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
-
-    @staticmethod
-    def _categorize_persistent_wrapper(manifests, wrapper, status):
-        assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        assert bool(wrapper.indicator.persistent), repr(wrapper)
-        assert isinstance(status, str), repr(status)
-        context = wrapper._find_correct_effective_context()
-        assert isinstance(context, abjad.Context), repr(wrapper)
-        leaf = wrapper.component
-        assert isinstance(leaf, abjad.Leaf), repr(wrapper)
-        indicator = wrapper.indicator
-        existing_tag = wrapper.tag
-        if wrapper.spanner:
-            prototype = (abjad.Accelerando, abjad.Ritardando)
-            if (status == 'reapplied' and
-                isinstance(wrapper.indicator, prototype)):
-                pass
-            elif wrapper.spanner._is_trending(wrapper.component):
-                status = 'explicit'
-        SegmentMaker._attach_color_literal(
-            wrapper,
-            status,
-            existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
-            )
-        SegmentMaker._attach_latent_indicator_alert(
-            manifests,
-            wrapper,
-            status,
-            existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
-            )
-        SegmentMaker._attach_color_cancelation_literal(
-            wrapper,
-            status,
-            existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
-            )
-        if isinstance(wrapper.indicator, abjad.Clef):
-            string = rf'\set {context.lilypond_type}.forceClef = ##t'
-            literal = abjad.LilyPondLiteral(string)
-            wrapper_ = abjad.attach(
-                literal,
-                wrapper.component,
-                tag=wrapper.tag.prepend('SM33'),
-                wrapper=True,
-                )
-            SegmentMaker._set_status_tag(wrapper_, status, stem='CLEF')
-        SegmentMaker._set_status_tag(wrapper, status)
-        SegmentMaker._attach_color_redraw_literal(
-            wrapper,
-            status,
-            existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
-            )
-        if (isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)) and
-            not getattr(indicator, 'hide', False)):
-            strings = indicator._get_lilypond_format(context=context)
-            literal = abjad.LilyPondLiteral(strings, 'after')
-            stem = abjad.String.to_indicator_stem(indicator)
-            wrapper_ = abjad.attach(
-                literal,
-                leaf,
-                tag=existing_tag.prepend('SM34'),
-                wrapper=True,
-                )
-            SegmentMaker._set_status_tag(
-                wrapper_,
-                status,
-                redraw=True,
-                stem=stem,
-                )
-
-    def _categorize_uncategorized_persistent_wrappers(self):
-        for leaf in abjad.iterate(self.score).leaves():
-            for wrapper in abjad.inspect(leaf).wrappers():
-                if not getattr(wrapper.indicator, 'persistent', False):
-                    continue
-                if wrapper.tag and wrapper.tag.has_persistence_tag():
-                    continue
-                if isinstance(wrapper.indicator, abjad.Instrument):
-                    prototype = abjad.Instrument
-                else:
-                    prototype = type(wrapper.indicator)
-                previous_indicator = abjad.inspect(leaf).get_effective(
-                    prototype,
-                    n=-1,
-                    )
-                if previous_indicator != wrapper.indicator:
-                    status = 'explicit'
-                elif (isinstance(previous_indicator, abjad.Dynamic) and
-                    previous_indicator.sforzando):
-                    status = 'explicit'
-                else:
-                    status = 'redundant'
-                self._categorize_persistent_wrapper(
-                    self.manifests,
-                    wrapper,
-                    status,
-                    )
 
     def _check_all_music_in_part_containers(self):
         name = 'all_music_in_part_containers'
@@ -2082,7 +1982,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper = abjad.inspect(leaf).wrapper(abjad.TimeSignature)
                     edition = edition.prepend('SM38')
                     wrapper.tag = wrapper.tag.prepend(edition)
-                    self._categorize_persistent_wrapper(
+                    self._treat_persistent_wrapper(
                         self.manifests,
                         wrapper,
                         status,
@@ -2103,7 +2003,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             tag=edition.append('SM36'),
                             wrapper=True,
                             )
-                        self._categorize_persistent_wrapper(
+                        self._treat_persistent_wrapper(
                             self.manifests,
                             wrapper,
                             status,
@@ -2114,7 +2014,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             status = 'explicit'
                         wrapper = abjad.inspect(leaf).wrapper(prototype)
                         wrapper.tag = wrapper.tag.prepend(edition)
-                        self._categorize_persistent_wrapper(
+                        self._treat_persistent_wrapper(
                             self.manifests,
                             wrapper,
                             status,
@@ -2132,7 +2032,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 except abjad.PersistentIndicatorError:
                     pass
                 if attached:
-                    self._categorize_persistent_wrapper(
+                    self._treat_persistent_wrapper(
                         self.manifests,
                         wrapper,
                         status,
@@ -2384,6 +2284,111 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(pleaf).has_indicator(abjad.tags.DO_NOT_TRANSPOSE):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
+
+    @staticmethod
+    def _treat_persistent_wrapper(manifests, wrapper, status):
+        assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+        assert bool(wrapper.indicator.persistent), repr(wrapper)
+        assert isinstance(status, str), repr(status)
+        context = wrapper._find_correct_effective_context()
+        assert isinstance(context, abjad.Context), repr(wrapper)
+        leaf = wrapper.component
+        assert isinstance(leaf, abjad.Leaf), repr(wrapper)
+        indicator = wrapper.indicator
+        existing_tag = wrapper.tag
+        tempo_trend = (abjad.Accelerando, abjad.Ritardando)
+        if (wrapper.spanner and
+            wrapper.spanner._is_trending(wrapper.component) and
+            not isinstance(wrapper.indicator, tempo_trend)):
+            status = 'explicit'
+        SegmentMaker._attach_color_literal(
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
+        SegmentMaker._attach_latent_indicator_alert(
+            manifests,
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
+        SegmentMaker._attach_color_cancelation_literal(
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
+        if isinstance(wrapper.indicator, abjad.Clef):
+            string = rf'\set {context.lilypond_type}.forceClef = ##t'
+            literal = abjad.LilyPondLiteral(string)
+            wrapper_ = abjad.attach(
+                literal,
+                wrapper.component,
+                tag=wrapper.tag.prepend('SM33'),
+                wrapper=True,
+                )
+            SegmentMaker._set_status_tag(wrapper_, status, stem='CLEF')
+        SegmentMaker._set_status_tag(wrapper, status)
+        SegmentMaker._attach_color_redraw_literal(
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+            )
+        if (isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)) and
+            not getattr(indicator, 'hide', False)):
+            strings = indicator._get_lilypond_format(context=context)
+            literal = abjad.LilyPondLiteral(strings, 'after')
+            stem = abjad.String.to_indicator_stem(indicator)
+            wrapper_ = abjad.attach(
+                literal,
+                leaf,
+                tag=existing_tag.prepend('SM34'),
+                wrapper=True,
+                )
+            SegmentMaker._set_status_tag(
+                wrapper_,
+                status,
+                redraw=True,
+                stem=stem,
+                )
+
+    def _treat_untreatd_persistent_wrappers(self):
+        tempo_prototype = (
+            abjad.Accelerando,
+            abjad.MetronomeMark,
+            abjad.Ritardando,
+            )
+        for leaf in abjad.iterate(self.score).leaves():
+            for wrapper in abjad.inspect(leaf).wrappers():
+                if not getattr(wrapper.indicator, 'persistent', False):
+                    continue
+                if wrapper.tag and wrapper.tag.has_persistence_tag():
+                    continue
+                if isinstance(wrapper.indicator, abjad.Instrument):
+                    prototype = abjad.Instrument
+                elif isinstance(wrapper.indicator, tempo_prototype):
+                    prototype = tempo_prototype
+                else:
+                    prototype = type(wrapper.indicator)
+                previous_indicator = abjad.inspect(leaf).get_effective(
+                    prototype,
+                    n=-1,
+                    )
+                if previous_indicator != wrapper.indicator:
+                    status = 'explicit'
+                elif (isinstance(previous_indicator, abjad.Dynamic) and
+                    previous_indicator.sforzando):
+                    status = 'explicit'
+                else:
+                    status = 'redundant'
+                self._treat_persistent_wrapper(
+                    self.manifests,
+                    wrapper,
+                    status,
+                    )
 
     def _validate_measure_count_(self):
         if not self.validate_measure_count:
@@ -5280,7 +5285,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_spacing()
         self._call_commands()
         self._shorten_long_repeat_ties()
-        self._categorize_uncategorized_persistent_wrappers()
+        self._treat_untreatd_persistent_wrappers()
         self._label_clock_time()
         self._transpose_score_()
         self._attach_rehearsal_mark()
