@@ -19,6 +19,7 @@ Bases
 
    .. autosummary::
 
+      ~PersistentIndicatorTests.accelerandi
       ~PersistentIndicatorTests.clefs
       ~PersistentIndicatorTests.dynamics
       ~PersistentIndicatorTests.hidden_instruments
@@ -31,6 +32,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: PersistentIndicatorTests.accelerandi
 
 .. autoattribute:: PersistentIndicatorTests.clefs
 
