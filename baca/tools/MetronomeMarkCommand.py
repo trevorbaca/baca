@@ -43,11 +43,10 @@ class MetronomeMarkCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         r'''Applies command to result of selector called on `argument`.
-
-        Returns none.
         '''
+        from baca.tools.SegmentMaker import SegmentMaker
         if argument is None:
             return
         if self.key is None:
@@ -56,7 +55,7 @@ class MetronomeMarkCommand(Command):
             metronome_marks = self.manifests['abjad.MetronomeMark']
             metronome_mark = metronome_marks.get(self.key)
             if metronome_mark is None:
-                raise Exception(f'can not find metronome mark {key!r}.')
+                raise Exception(f'can not find metronome mark {self.key!r}.')
         else:
             metronome_mark = self.key
         if self.selector is not None:
@@ -78,7 +77,7 @@ class MetronomeMarkCommand(Command):
             )
         if isinstance(metronome_mark, abjad.MetronomeMark):
             if metronome_mark == reapplied:
-                baca.SegmentMaker._categorize_persistent_wrapper(
+                SegmentMaker._categorize_persistent_wrapper(
                     self.manifests,
                     wrapper,
                     'redundant',

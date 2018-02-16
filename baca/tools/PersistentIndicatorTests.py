@@ -69,18 +69,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =
-                            \markup {
-                                \large
-                                    \upright
-                                        accel.
-                                \hspace
-                                    #1
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
@@ -182,18 +194,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =
-                            \markup {
-                                \large
-                                    \upright
-                                        accel.
-                                \hspace
-                                    #1
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
@@ -354,7 +378,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
@@ -389,18 +413,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =
-                            \markup {
-                                \large
-                                    \upright
-                                        accel.
-                                \hspace
-                                    #1
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
@@ -419,7 +455,47 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -439,6 +515,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -503,18 +582,30 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =
-                            \markup {
-                                \large
-                                    \upright
-                                        accel.
-                                \hspace
-                                    #1
-                                }                                                                        %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER

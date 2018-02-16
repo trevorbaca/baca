@@ -1154,11 +1154,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._apply_first_and_last_ties(voice)
 
     @staticmethod
-    def _categorize_persistent_wrapper(
-        manifests,
-        wrapper,
-        status,
-        ):
+    def _categorize_persistent_wrapper(manifests, wrapper, status):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         assert bool(wrapper.indicator.persistent), repr(wrapper)
         assert isinstance(status, str), repr(status)
@@ -1203,15 +1199,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=wrapper.tag.prepend('SM33'),
                 wrapper=True,
                 )
-            SegmentMaker._set_status_tag(
-                wrapper_,
-                status,
-                stem='CLEF',
-                )
-        SegmentMaker._set_status_tag(
-            wrapper,
-            status,
-            )
+            SegmentMaker._set_status_tag(wrapper_, status, stem='CLEF')
+        SegmentMaker._set_status_tag(wrapper, status)
         SegmentMaker._attach_color_redraw_literal(
             wrapper,
             status,
@@ -2233,12 +2222,7 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
 
-    def _set_status_tag(
-        wrapper,
-        status,
-        redraw=None,
-        stem=None,
-        ):
+    def _set_status_tag(wrapper, status, redraw=None, stem=None):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         existing_tag = wrapper.tag
         stem = stem or abjad.String.to_indicator_stem(wrapper.indicator)
