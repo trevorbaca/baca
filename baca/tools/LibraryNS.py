@@ -7,10 +7,12 @@ from abjad import rhythmmakertools as rhythmos
 from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
+from .OverrideCommand import OverrideCommand
 from .PitchCommand import PitchCommand
 from .SpannerCommand import SpannerCommand
 from .StaffPositionCommand import StaffPositionCommand
 from .TieCorrectionCommand import TieCorrectionCommand
+from .Typing import NumberPair
 from .Typing import Selector
 
 
@@ -1268,12 +1270,13 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def rehearsal_mark_extra_offset(pair, selector='baca.leaf(0)'):
+    def rehearsal_mark_extra_offset(
+        pair: NumberPair,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides rehearsal mark extra offset.
-
-        Returns override command.
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             context='GlobalContext',
