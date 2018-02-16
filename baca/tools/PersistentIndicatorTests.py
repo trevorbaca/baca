@@ -6422,7 +6422,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> breaks = baca.breaks(baca.page([1, 0, (8,)]))
+            >>> breaks = baca.breaks(baca.page([1, 4, (8,)]))
             >>> metronome_marks = abjad.MetronomeMarkDictionary()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
@@ -6470,7 +6470,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
                         %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK
@@ -6613,7 +6613,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
                         %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK
@@ -6759,7 +6759,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@% \markup {                                                                    %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%     \fontsize                                                                %! SM27:REAPPLIED_METRONOME_MARK:SM36
@@ -6892,7 +6892,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
                         %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     \fontsize                                                                %! SM27:EXPLICIT_METRONOME_MARK
@@ -7088,7 +7088,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:REDUNDANT_METRONOME_MARK
                         %@% \markup {                                                                    %! SM27:REDUNDANT_METRONOME_MARK
                         %@%     \fontsize                                                                %! SM27:REDUNDANT_METRONOME_MARK
