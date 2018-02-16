@@ -19,7 +19,6 @@ Bases
 
    .. autosummary::
 
-      ~PersistentIndicatorTests.accelerandi
       ~PersistentIndicatorTests.clefs
       ~PersistentIndicatorTests.dynamics
       ~PersistentIndicatorTests.hidden_instruments
@@ -27,13 +26,12 @@ Bases
       ~PersistentIndicatorTests.margin_markups
       ~PersistentIndicatorTests.metronome_marks
       ~PersistentIndicatorTests.staff_lines
+      ~PersistentIndicatorTests.tempo_trends
       ~PersistentIndicatorTests.__format__
       ~PersistentIndicatorTests.__repr__
 
 Read-only properties
 --------------------
-
-.. autoattribute:: PersistentIndicatorTests.accelerandi
 
 .. autoattribute:: PersistentIndicatorTests.clefs
 
@@ -48,6 +46,8 @@ Read-only properties
 .. autoattribute:: PersistentIndicatorTests.metronome_marks
 
 .. autoattribute:: PersistentIndicatorTests.staff_lines
+
+.. autoattribute:: PersistentIndicatorTests.tempo_trends
 
 Special methods
 ---------------

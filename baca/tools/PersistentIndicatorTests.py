@@ -15,652 +15,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def accelerandi(self) -> None:
-        r'''Accelerandi.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(baca.page([1, 0, (8,)]))
-            >>> metronome_marks = abjad.MetronomeMarkDictionary()
-            >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
-            >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
-
-        ..  container:: example
-
-            Explicit accelerandi color blue and redraw dull blue:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     breaks=breaks,
-            ...     metronome_marks=metronome_marks,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 25)),
-            ...     time_signatures=[(3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(abjad.Accelerando()),
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
-                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-            Even after a previous ritardando:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     breaks=breaks,
-            ...     metronome_marks=metronome_marks,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(abjad.Accelerando()),
-            ...     baca.text_spanner_staff_padding(4),
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     )
-
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
-            ...     abjad.Momento(
-            ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
-            ...         value='abjad.Ritardando()',
-            ...         )
-            ...     ]
-            >>> metadata['segment_number'] = 1
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     previous_metadata=metadata,
-            ...     )
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
-                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
-                            ^ \markup {                                                                  %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                \large                                                                   %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                    \upright                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                        rit.                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                }                                                                        %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Reapplied accelerandi color green and redraw dull green:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     breaks=breaks,
-            ...     metronome_marks=metronome_marks,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     )
-            >>> maker(
-            ...     baca.scope('GlobalSkips', 1),
-            ...     baca.text_spanner_staff_padding(4),
-            ...     )
-
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
-            ...     abjad.Momento(
-            ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
-            ...         value='abjad.Accelerando()',
-            ...         )
-            ...     ]
-            >>> metadata['segment_number'] = 1
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     previous_metadata=metadata,
-            ...     )
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
-                            ^ \markup {                                                                  %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                \large                                                                   %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                    \upright                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                        accel.                                                           %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                }                                                                        %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-                
-        ..  container:: example
-
-            Redundant accelerandi color pink and redraw dull pink:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     breaks=breaks,
-            ...     metronome_marks=metronome_marks,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(abjad.Accelerando()),
-            ...     baca.metronome_mark(abjad.Accelerando(), baca.leaf(1)),
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
-                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
-                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-            Even at the beginning of a segment:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     breaks=breaks,
-            ...     metronome_marks=metronome_marks,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(abjad.Accelerando()),
-            ...     baca.text_spanner_staff_padding(4),
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     )
-
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
-            ...     abjad.Momento(
-            ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
-            ...         value='abjad.Accelerando()',
-            ...         )
-            ...     ]
-            >>> metadata['segment_number'] = 1
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     previous_metadata=metadata,
-            ...     )
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
-                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
-                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
-                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
-                            ^ \markup {                                                                  %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                \large                                                                   %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                    \upright                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                        accel.                                                           %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                                }                                                                        %! SM8:REAPPLIED_METRONOME_MARK:SM37
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                c'4.
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        '''
-        pass
-
-    @property
     def clefs(self) -> None:
         r'''Clefs.
 
@@ -6520,7 +5874,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
         ..  container:: example
 
-            Explicit metronome marks color blue and redraw dull blue:
+            Explicit metronome marks color blue:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
@@ -6795,7 +6149,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
         ..  container:: example
 
-            Reapplied metronome marks color green and redraw dull green:
+            Reapplied metronome marks color green:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
@@ -6941,7 +6295,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
         ..  container:: example
 
-            Redundant metronome marks color pink and redraw dull pink:
+            Redundant metronome marks color pink:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
@@ -7662,6 +7016,652 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REDUNDANT_STAFF_LINES:IC
                                 \startStaff                                                              %! SM8:REDUNDANT_STAFF_LINES:IC
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_STAFF_LINES_COLOR:IC
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        pass
+
+    @property
+    def tempo_trends(self) -> None:
+        r'''Tempo trends.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(baca.page([1, 0, (8,)]))
+            >>> metronome_marks = abjad.MetronomeMarkDictionary()
+            >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
+            >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
+
+        ..  container:: example
+
+            Explicit tempo trends color blue:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     breaks=breaks,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 25)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
+                            \autoPageBreaksOff                                                           %! BMM1:BREAK
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \pageBreak                                                                   %! IC:BREAK
+                            s1 * 3/8
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even after a previous tempo trend:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     breaks=breaks,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.text_spanner_staff_padding(4),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['Score'] = [
+            ...     abjad.Momento(
+            ...         context='GlobalSkips',
+            ...         prototype='abjad.MetronomeMark',
+            ...         value='abjad.Ritardando()',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \autoPageBreaksOff                                                           %! BMM1:BREAK
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \pageBreak                                                                   %! IC:BREAK
+                            s1 * 3/8
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            ^ \markup {                                                                  %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                \large                                                                   %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                    \upright                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                        rit.                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                }                                                                        %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \revert TextSpanner.staff-padding                                            %! OC2
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Reapplied tempo trends color green:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     breaks=breaks,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.text_spanner_staff_padding(4),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['Score'] = [
+            ...     abjad.Momento(
+            ...         context='GlobalSkips',
+            ...         prototype='abjad.MetronomeMark',
+            ...         value='abjad.Accelerando()',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \autoPageBreaksOff                                                           %! BMM1:BREAK
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \pageBreak                                                                   %! IC:BREAK
+                            s1 * 3/8
+                            ^ \markup {                                                                  %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                \large                                                                   %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                    \upright                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                        accel.                                                           %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                }                                                                        %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \revert TextSpanner.staff-padding                                            %! OC2
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+                
+        ..  container:: example
+
+            Redundant tempo trends color pink:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     breaks=breaks,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.metronome_mark(abjad.Accelerando(), baca.leaf(1)),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \autoPageBreaksOff                                                           %! BMM1:BREAK
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \pageBreak                                                                   %! IC:BREAK
+                            s1 * 3/8
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even at the beginning of a segment:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     breaks=breaks,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.text_spanner_staff_padding(4),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['Score'] = [
+            ...     abjad.Momento(
+            ...         context='GlobalSkips',
+            ...         prototype='abjad.MetronomeMark',
+            ...         value='abjad.Accelerando()',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \autoPageBreaksOff                                                           %! BMM1:BREAK
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! IC:BREAK
+                        %@% \once \override TextSpanner.bound-details.left.text =                        %! SM27:EXPLICIT_METRONOME_MARK
+                        %@% \markup {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.arrow-width = 0.25                               %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.left.text =                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            \markup {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.arrow = ##t                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-fraction = 0.25                             %! SM29:METRONOME_MARK_SPANNER
+                            \once \override TextSpanner.dash-period = 1.5                                %! SM29:METRONOME_MARK_SPANNER
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \pageBreak                                                                   %! IC:BREAK
+                            s1 * 3/8
+                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            ^ \markup {                                                                  %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                \large                                                                   %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                    \upright                                                             %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                        accel.                                                           %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                                }                                                                        %! SM8:REAPPLIED_METRONOME_MARK:SM37
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \noBreak                                                                     %! BMM2:BREAK
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \revert TextSpanner.staff-padding                                            %! OC2
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
