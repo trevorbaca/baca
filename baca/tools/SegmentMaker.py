@@ -2014,7 +2014,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         assert status in ('redundant', None), repr(status)
                         if status is None or spanner._is_trending(leaf):
                             status = 'explicit'
-                        wrapper = abjad.inspect(leaf).wrapper(prototype)
+                        wrappers = abjad.inspect(leaf).wrappers(prototype)
+                        # lone metronome mark or lone tempo trend:
+                        if len(wrappers) == 1:
+                            wrapper = wrappers[0]
+                        # metronome mark + tempo trend:
+                        else:
+                            assert 1 < len(wrappers), repr(wrappers)
+                            prototype = abjad.MetronomeMark
+                            wrapper = abjad.inspect(leaf).wrapper(prototype)
                         wrapper.tag = wrapper.tag.prepend(edition)
                         self._treat_persistent_wrapper(
                             self.manifests,
