@@ -1681,11 +1681,7 @@ class LibraryGM(abjad.AbjadObject):
         scopes = []
         for voice in voices:
             for item in stages:
-                if isinstance(item, int):
-                    scope = baca.scope(voice, item)
-                else:
-                    assert isinstance(item, tuple), repr(item)
-                    scope = baca.scope(voice, *item)
+                scope = baca.scope(voice, item)
                 scopes.append(scope)
         return scopes
 

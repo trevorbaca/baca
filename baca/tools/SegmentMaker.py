@@ -1579,6 +1579,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if stop_stage is None:
             time_signatures = stages[start_index]
         else:
+            if stop_stage == abjad.Infinity:
+                stop_stage = self.stage_count
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
             time_signatures = baca.sequence(stages).flatten(depth=-1)

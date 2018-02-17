@@ -2598,6 +2598,8 @@ class LibraryNS(abjad.AbjadObject):
     def scope(voice, start, stop=None) -> Scope:
         r'''Scopes `voice` from `start` to `stop`.
         '''
+        if start == 'all':
+            start = (1, abjad.Infinity)
         if isinstance(start, tuple):
             assert len(start) == 2
             assert stop is None
