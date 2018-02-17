@@ -60,6 +60,7 @@ class HairpinCommand(Command):
     def __call__(self, argument=None) -> None:
         r'''Applies command to result of selector called on `argument`.
         '''
+        from baca.tools.SegmentMaker import SegmentMaker
         if argument is None:
             return
         if self.selector is not None:
@@ -92,7 +93,7 @@ class HairpinCommand(Command):
                 wrapper=True,
                 )
             if self.start == reapplied:
-                baca.SegmentMaker._treat_persistent_wrapper(
+                SegmentMaker._treat_persistent_wrapper(
                     self.manifests,
                     wrapper,
                     'redundant',
@@ -107,7 +108,7 @@ class HairpinCommand(Command):
                 wrapper=True,
                 )
             if self.stop == reapplied:
-                baca.SegmentMaker._treat_persistent_wrapper(
+                SegmentMaker._treat_persistent_wrapper(
                     self.manifests,
                     wrapper,
                     'redundant',

@@ -379,8 +379,8 @@ class LibraryGM(abjad.AbjadObject):
     def hairpin(
         string: str = None,
         selector: Selector = 'baca.tleaves()',
-        left_broken: bool = None,
-        right_broken: bool = None,
+        left_broken: str = None,
+        right_broken: str = None,
         ) -> HairpinCommand:
         r'''Makes hairpin from ``string`` and attaches hairpin trimmed leaves.
 
