@@ -590,25 +590,24 @@ class LibraryGM(abjad.AbjadObject):
         hairpin = abjad.Hairpin(string)
         if left_broken is not None:
             assert isinstance(left_broken, bool), repr(left_broken)
-        if right_broken is not None:
+        if right_broken not in ('niente', None):
             assert isinstance(right_broken, bool), repr(right_broken)
         if left_broken and hairpin.start_dynamic is not None:
             raise Exception(f'no start dynamic with left broken: {string!r}.')
         if right_broken and hairpin.stop_dynamic is not None:
             raise Exception(f'no stop dynamic with right broken: {string!r}.')
-        left_broken_shape_string = None
         if left_broken is True:
-            left_broken_shape_string = hairpin.shape_string
-        right_broken_shape_string = None
+            left_broken = hairpin.shape_string
         if right_broken is True:
-            right_broken_shape_string = hairpin.shape_string
-        return HairpinCommand(
-            left_broken=left_broken_shape_string,
-            right_broken=right_broken_shape_string,
+            right_broken = hairpin.shape_string
+        command = HairpinCommand(
+            left_broken=left_broken,
+            right_broken=right_broken,
             selector=selector,
             start=hairpin.start_dynamic,
             stop=hairpin.stop_dynamic,
             )
+        return command
 
     @staticmethod
     def hairpin_shorten_pair(pair:tuple, selector='baca.leaf(0)'):

@@ -40,10 +40,10 @@ class HairpinCommand(Command):
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if left_broken is not None:
-            assert left_broken in ('<', '>'), repr(left_broken)
+            assert left_broken in ('<', '>', 'niente'), repr(left_broken)
         self._left_broken: str = left_broken
         if right_broken is not None:
-            assert right_broken in ('<', '>'), repr(right_broken)
+            assert right_broken in ('<', '>', 'niente'), repr(right_broken)
         self._right_broken: str = right_broken
         if start is not None:
             assert isinstance(start, abjad.Dynamic), repr(start)
@@ -57,10 +57,8 @@ class HairpinCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         r'''Applies command to result of selector called on `argument`.
-
-        Returns none.
         '''
         if argument is None:
             return
@@ -79,10 +77,10 @@ class HairpinCommand(Command):
             )
         dummy = abjad.Dynamic('f')
         if self.left_broken:
-            assert self.start is None
+            assert self.start is None, repr(self.start)
             reapplied = self._remove_reapplied_wrappers(spanner[0], dummy)
         if self.right_broken:
-            assert self.stop is None
+            assert self.stop is None, repr(self.stop)
             reapplied = self._remove_reapplied_wrappers(spanner[-1], dummy)
         if self.start:
             reapplied = self._remove_reapplied_wrappers(spanner[0], self.start)
@@ -99,7 +97,7 @@ class HairpinCommand(Command):
                     wrapper,
                     'redundant',
                     )
-        if self.stop and 1 < len(spanner):
+        if self.stop and (1 < len(spanner) or self.left_broken):
             reapplied = self._remove_reapplied_wrappers(spanner[-1], self.stop)
             wrapper = spanner.attach(
                 self.stop,
