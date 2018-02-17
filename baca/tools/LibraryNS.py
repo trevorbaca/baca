@@ -9,6 +9,7 @@ from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
 from .OverrideCommand import OverrideCommand
 from .PitchCommand import PitchCommand
+from .Scope import Scope
 from .SpannerCommand import SpannerCommand
 from .StaffPositionCommand import StaffPositionCommand
 from .TieCorrectionCommand import TieCorrectionCommand
@@ -2594,17 +2595,24 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def scope(voice, start, stop=None):
+    def scope(voice, start, stop=None) -> Scope:
         r'''Scopes `voice` from `start` to `stop`.
-
-        Returns simple scope.
         '''
+        if isinstance(start, tuple):
+            assert len(start) == 2
+            assert stop is None
+            start, stop = start
         assert isinstance(start, int), repr(start)
+        if stop == 'end':
+            stop = abjad.Infinity
         if stop is None:
             stages = (start, start)
         else:
             stages = (start, stop)
-        return baca.Scope(
+        assert isinstance(stages[0], int), repr(stages)
+        if stop != abjad.Infinity:
+            assert isinstance(stages[1], int), repr(stages)
+        return Scope(
             voice_name=voice,
             stages=stages,
             )
