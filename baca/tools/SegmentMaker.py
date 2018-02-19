@@ -920,6 +920,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if staff.name in dictionary:
                 continue
             for wrapper in self.score_template.attach_defaults(staff):
+                # UNCOMMENT:
                 tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
                 wrapper.tag = tag
                 self._treat_persistent_wrapper(
@@ -927,6 +928,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper,
                     'default',
                     )
+                #tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
+                #wrapper.tag = tag
 
     def _attach_first_segment_score_template_defaults(self):
         if not self.first_segment:
@@ -1827,10 +1830,8 @@ class SegmentMaker(abjad.SegmentMaker):
         # at start of nonfirst segments
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        tag = abjad.Tag.from_words([
-            '+SEGMENT',
-            abjad.tags.EMPTY_START_BAR,
-            ])
+        tag = abjad.Tag(abjad.tags.EMPTY_START_BAR)
+        tag = tag.prepend('+SEGMENT')
         abjad.attach(
             literal,
             first_skip,
