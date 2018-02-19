@@ -443,15 +443,22 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def edition(score, parts):
+    def edition(score, parts, selector='baca.pleaf(0)'):
         r'''Makes score / parts markup suite.
         '''
         import baca
-        score = baca.markup(score)
+        if isinstance(score, str):
+            score = baca.markup(score)
+        assert isinstance(score, baca.IndicatorCommand)
         score = baca.score(score)
-        parts = baca.markup(parts)
+        if isinstance(parts, str):
+            parts = baca.markup(parts)
+        assert isinstance(parts, baca.IndicatorCommand)
         parts = baca.parts(parts)
-        return baca.suite([score, parts])
+        return baca.suite(
+            [score, parts],
+            selector=selector,
+            )
 
     @staticmethod
     def estr_sul_pont(selector='baca.pleaf(0)'):
@@ -1084,6 +1091,13 @@ class MarkupLibrary(abjad.AbjadObject):
     def pT_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'pT + XFB flaut.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def pres_de_la_table(selector='baca.pleaf(0)'):
+        return MarkupLibrary.boxed(
+            'près de la table',
             selector=selector,
             )
 

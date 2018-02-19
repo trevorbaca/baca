@@ -379,6 +379,7 @@ class PitchCommand(Command):
     __slots__ = (
         '_allow_repeat_pitches',
         '_cyclic',
+        '_do_not_transpose',
         '_mutated_score',
         '_pitches',
         )
@@ -389,6 +390,7 @@ class PitchCommand(Command):
         self,
         allow_repeat_pitches=None,
         cyclic=None,
+        do_not_transpose=None,
         pitches=None,
         selector=None,
         ):
@@ -399,6 +401,9 @@ class PitchCommand(Command):
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
+        if do_not_transpose is not None:
+            do_not_transpose = bool(do_not_transpose)
+        self._do_not_transpose = do_not_transpose
         self._mutated_score = None
         if pitches is not None:
             pitches = self._coerce_pitches(pitches)
@@ -437,6 +442,9 @@ class PitchCommand(Command):
             if self.allow_repeat_pitches:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
+            if self.do_not_transpose is True:
+                for pleaf in plt:
+                    abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
 
     ### PRIVATE METHODS ###
 
@@ -558,6 +566,12 @@ class PitchCommand(Command):
         Returns true, false or none.
         '''
         return self._cyclic
+
+    @property
+    def do_not_transpose(self):
+        r'''Is true when pitch escapes transposition.
+        '''
+        return self._do_not_transpose
 
     @property
     def pitches(self):

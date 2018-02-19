@@ -85,6 +85,7 @@ Bases
       ~LibraryNS.stems_down
       ~LibraryNS.stems_up
       ~LibraryNS.stop_trill
+      ~LibraryNS.stopped
       ~LibraryNS.strict_note_spacing_off
       ~LibraryNS.strict_quarter_divisions
       ~LibraryNS.subito_dynamic
@@ -231,6 +232,8 @@ Class & static methods
 .. automethod:: LibraryNS.stems_up
 
 .. automethod:: LibraryNS.stop_trill
+
+.. automethod:: LibraryNS.stopped
 
 .. automethod:: LibraryNS.strict_note_spacing_off
 

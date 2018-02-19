@@ -24,6 +24,7 @@ Bases
       ~PitchCommand.allow_repeat_pitches
       ~PitchCommand.cyclic
       ~PitchCommand.deactivate
+      ~PitchCommand.do_not_transpose
       ~PitchCommand.get_tag
       ~PitchCommand.manifests
       ~PitchCommand.offset_to_measure_number
@@ -48,6 +49,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.deactivate
+
+.. autoattribute:: PitchCommand.do_not_transpose
 
 .. autoattribute:: PitchCommand.pitches
 

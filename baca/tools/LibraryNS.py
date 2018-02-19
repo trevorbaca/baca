@@ -532,6 +532,7 @@ class LibraryNS(abjad.AbjadObject):
     def pitch(
         pitch,
         selector: Selector = 'baca.pleaves()',
+        do_not_transpose: bool = None,
         ) -> PitchCommand:
         r'''Sets pitch on ``selector`` output.
         '''
@@ -540,6 +541,7 @@ class LibraryNS(abjad.AbjadObject):
         return PitchCommand(
             allow_repeat_pitches=True,
             cyclic=True,
+            do_not_transpose=do_not_transpose,
             pitches=[pitch],
             selector=selector,
             )
@@ -5825,6 +5827,88 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def stopped(selector='baca.pheads()'):
+        r'''Attaches stopped + signs to pitched heads.
+
+        ..  container:: example
+
+            Attaches stopped + signs to all pitched heads:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.stopped(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                -\stopped                                                                %! IC
+                                [
+                                d'16
+                                -\stopped                                                                %! IC
+                                ]
+                                bf'4
+                                -\stopped                                                                %! IC
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                -\stopped                                                                %! IC
+                                [
+                                e''16
+                                -\stopped                                                                %! IC
+                                ]
+                                ef''4
+                                -\stopped                                                                %! IC
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                -\stopped                                                                %! IC
+                                [
+                                g''16
+                                -\stopped                                                                %! IC
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                -\stopped                                                                %! IC
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.tools.IndicatorCommand(
+            indicators=[abjad.Articulation('stopped')],
+            selector=selector,
+            )
+
+    @staticmethod
     def strict_note_spacing_off(selector='baca.leaves()'):
         r'''Turns strict note spacing off.
 
@@ -5961,8 +6045,8 @@ class LibraryNS(abjad.AbjadObject):
         for command in commands:
             if not isinstance(command, baca.Command):
                 raise Exception(f'must be command:\n\n{command}')
-        if not isinstance(selector, (abjad.Expression, type(None))):
-            raise Exception(f'must be selector or none:\n\n{selector}')
+        if not isinstance(selector, (str, abjad.Expression, type(None))):
+            raise Exception(f'must be selector, string or none:\n\n{selector}')
         return baca.SuiteCommand(commands=commands, selector=selector)
 
     @staticmethod

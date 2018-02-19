@@ -124,6 +124,7 @@ Bases
       ~MarkupLibrary.pos_ord_poco_scratch
       ~MarkupLibrary.pos_ord_senza_vib
       ~MarkupLibrary.pos_ord_vib_poco
+      ~MarkupLibrary.pres_de_la_table
       ~MarkupLibrary.put_reed_back_in
       ~MarkupLibrary.remove_reed
       ~MarkupLibrary.remove_staple
@@ -384,6 +385,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.pos_ord_senza_vib
 
 .. automethod:: MarkupLibrary.pos_ord_vib_poco
+
+.. automethod:: MarkupLibrary.pres_de_la_table
 
 .. automethod:: MarkupLibrary.put_reed_back_in
 
