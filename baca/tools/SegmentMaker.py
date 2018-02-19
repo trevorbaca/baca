@@ -1838,21 +1838,6 @@ class SegmentMaker(abjad.SegmentMaker):
             tag=tag.prepend('SM2'),
             )
 
-    def _make_lilypond_align_above_context_settings(self):
-        if self.first_segment:
-            return
-        top_level = list(self.score['MusicContext'])
-        for i, staff_or_group in enumerate(top_level):
-            assert isinstance(staff_or_group, (abjad.Staff, abjad.StaffGroup))
-            if not self._born_this_segment(staff_or_group):
-                continue
-            below = top_level[i + 1:]
-            for staff in abjad.iterate(below).components(abjad.Staff):
-                if self._alive_during_previous_segment(staff):
-                    value = abjad.Scheme(staff.name, force_quotes=True)
-                    abjad.setting(staff_or_group).align_above_context = value
-                    break
-
     def _make_lilypond_file(self):
         includes = self._get_stylesheets()
         if self._environment == 'external':
@@ -5319,6 +5304,5 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_tags(remove)
         self._add_container_identifiers()
         self._check_all_music_in_part_containers()
-        self._make_lilypond_align_above_context_settings()
         self._collect_metadata()
         return self._lilypond_file
