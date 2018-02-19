@@ -79,6 +79,7 @@ Bases
       ~LibraryNS.staff_lines
       ~LibraryNS.staff_position
       ~LibraryNS.staff_positions
+      ~LibraryNS.start_markup
       ~LibraryNS.stem_color
       ~LibraryNS.stem_tremolo
       ~LibraryNS.stems_down
@@ -218,6 +219,8 @@ Class & static methods
 .. automethod:: LibraryNS.staff_position
 
 .. automethod:: LibraryNS.staff_positions
+
+.. automethod:: LibraryNS.start_markup
 
 .. automethod:: LibraryNS.stem_color
 

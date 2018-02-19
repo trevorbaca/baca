@@ -7,12 +7,14 @@ from abjad import rhythmmakertools as rhythmos
 from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
+from .MarkupLibrary import MarkupLibrary
 from .OverrideCommand import OverrideCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .SpannerCommand import SpannerCommand
 from .StaffPositionCommand import StaffPositionCommand
 from .TieCorrectionCommand import TieCorrectionCommand
+from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
 
@@ -5177,6 +5179,42 @@ class LibraryNS(abjad.AbjadObject):
             repeats=repeats,
             selector=selector,
             ) 
+
+    @staticmethod
+    def start_markup(
+        argument: str,
+        context: str = 'Staff',
+        hcenter_in: Number = None,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Sets start markup on each leaf in ``selector`` output.
+        '''
+        if isinstance(argument, str):
+            markup = MarkupLibrary.instrument(argument, hcenter_in=hcenter_in)
+            start_markup = abjad.StartMarkup(
+                context=context,
+                markup=markup,
+                )
+        elif isinstance(argument, abjad.Markup):
+            markup = abjad.Markup(argument)
+            start_markup = abjad.StartMarkup(
+                context=context,
+                markup=markup,
+                )
+        elif isinstance(argument, abjad.StartMarkup):
+            start_markup = abjad.new(
+                argument,
+                context=context,
+                )
+        else:
+            raise TypeError(argument)
+        assert isinstance(start_markup, abjad.StartMarkup)
+        command = IndicatorCommand(
+            indicators=[start_markup],
+            selector=selector,
+            tags=['STMK'],
+            )
+        return command
 
     @staticmethod
     def stem_color(color='red', context=None, selector='baca.tleaves()'):
