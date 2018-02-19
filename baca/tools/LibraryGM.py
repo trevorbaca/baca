@@ -1906,7 +1906,7 @@ class LibraryGM(abjad.AbjadObject):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.margin_markup(('Flute', 'Fl.')),
+            ...     baca.margin_markup('Fl.'),
             ...     baca.pitches('E4 F4'),
             ...     )
 
@@ -1955,8 +1955,10 @@ class LibraryGM(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                                \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
                                 e'2
                                 ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
@@ -1965,8 +1967,10 @@ class LibraryGM(abjad.AbjadObject):
                                         [MarginMarkup]                                                   %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
                                     }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName = \markup { Flute }                            %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 f'4.
@@ -1983,23 +1987,11 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        if isinstance(argument, tuple):
-            assert len(argument) == 2, repr(argument)
-            assert all(isinstance(_, str) for _ in argument)
-            markup = abjad.Markup(argument[0])
-            short_markup = abjad.Markup(argument[1])
-            margin_markup = abjad.MarginMarkup(
-                context=context,
-                markup=markup,
-                short_markup=short_markup,
-                )
-        elif isinstance(argument, (str, abjad.Markup)):
+        if isinstance(argument, (str, abjad.Markup)):
             markup = abjad.Markup(argument)
-            short_markup = abjad.Markup(argument)
             margin_markup = abjad.MarginMarkup(
                 context=context,
                 markup=markup,
-                short_markup=short_markup,
                 )
         elif isinstance(argument, abjad.MarginMarkup):
             margin_markup = abjad.new(
