@@ -1272,7 +1272,7 @@ class LibraryNS(abjad.AbjadObject):
             mark = abjad.RehearsalMark.from_string(argument)
         else:
             assert isinstance(argument, int)
-            mark = abjad.RehearsalMark(number=number)
+            mark = abjad.RehearsalMark(number=argument)
         return IndicatorCommand(
             indicators=[mark],
             selector=selector,
