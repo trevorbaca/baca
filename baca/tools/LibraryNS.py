@@ -1263,14 +1263,18 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rehearsal_mark(
-        number: int,
-        selector='baca.leaf(0)',
+        argument: Union[int, str],
+        selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Attaches rehearsal mark with `number`.
+        r'''Attaches rehearsal mark with integer or string ``argument``.
         '''
-        indicator = abjad.RehearsalMark(number=number)
+        if isinstance(argument, str):
+            mark = abjad.RehearsalMark.from_string(argument)
+        else:
+            assert isinstance(argument, int)
+            mark = abjad.RehearsalMark(number=number)
         return IndicatorCommand(
-            indicators=[indicator],
+            indicators=[mark],
             selector=selector,
             )
 
