@@ -603,7 +603,7 @@ class ClusterCommand(Command):
 
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.pitches('E4'),
+            ...     baca.pitch('E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
             ...     )
@@ -1303,7 +1303,7 @@ class ClusterCommand(Command):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitches('E4', repeats=True),
+            ...     baca.pitch('E4'),
             ...     baca.clusters([]),
             ...     )
 

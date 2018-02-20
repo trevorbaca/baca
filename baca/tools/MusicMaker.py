@@ -59,7 +59,7 @@ class MusicMaker(abjad.AbjadObject):
     __documentation_section__ = '(2) Makers'
 
     __slots__ = (
-        '_allow_repeat_pitches',
+        '_allow_repeats',
         '_color_unregistered_pitches',
         '_denominator',
         '_next_figure',
@@ -79,15 +79,15 @@ class MusicMaker(abjad.AbjadObject):
     def __init__(
         self,
         *specifiers,
-        allow_repeat_pitches=None,
+        allow_repeats=None,
         color_unregistered_pitches=None,
         denominator=None,
         thread=None,
         voice_names=None
         ):
-        if allow_repeat_pitches is not None:
-            allow_repeat_pitches = bool(allow_repeat_pitches)
-        self._allow_repeat_pitches = allow_repeat_pitches
+        if allow_repeats is not None:
+            allow_repeats = bool(allow_repeats)
+        self._allow_repeats = allow_repeats
         if color_unregistered_pitches is not None:
             color_unregistered_pitches = bool(color_unregistered_pitches)
         self._color_unregistered_pitches = color_unregistered_pitches
@@ -110,7 +110,7 @@ class MusicMaker(abjad.AbjadObject):
         voice_name,
         collections,
         *specifiers,
-        allow_repeat_pitches=None,
+        allow_repeats=None,
         color_unregistered_pitches=None,
         counts=None,
         division_masks=None,
@@ -711,7 +711,7 @@ class MusicMaker(abjad.AbjadObject):
                 abjad.attach(abjad.tags.RECOLLECTION, leaf)
 
     def _annotate_repeat_pitches(self, container):
-        if not self.allow_repeat_pitches:
+        if not self.allow_repeats:
             return
         for leaf in abjad.iterate(container).leaves(pitched=True):
             abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
@@ -1056,7 +1056,7 @@ class MusicMaker(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_repeat_pitches(self):
+    def allow_repeats(self):
         r'''Is true when music-maker allows repeat pitches.
 
         Defaults to none.
@@ -1065,7 +1065,7 @@ class MusicMaker(abjad.AbjadObject):
 
         Returns true, false or none.
         '''
-        return self._allow_repeat_pitches
+        return self._allow_repeats
 
     @property
     def color_unregistered_pitches(self):

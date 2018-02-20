@@ -243,7 +243,7 @@ class PitchCommand(Command):
         >>> maker(
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
-        ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', repeats=True)
+        ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', allow_repeats=True)
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -377,7 +377,7 @@ class PitchCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_allow_repeat_pitches',
+        '_allow_repeats',
         '_cyclic',
         '_do_not_transpose',
         '_mutated_score',
@@ -388,16 +388,16 @@ class PitchCommand(Command):
 
     def __init__(
         self,
-        allow_repeat_pitches=None,
+        allow_repeats=None,
         cyclic=None,
         do_not_transpose=None,
         pitches=None,
         selector=None,
         ):
         Command.__init__(self, selector=selector)
-        if allow_repeat_pitches is not None:
-            allow_repeat_pitches = bool(allow_repeat_pitches)
-        self._allow_repeat_pitches = allow_repeat_pitches
+        if allow_repeats is not None:
+            allow_repeats = bool(allow_repeats)
+        self._allow_repeats = allow_repeats
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -439,7 +439,7 @@ class PitchCommand(Command):
             if new_plt is not None:
                 self._mutated_score = True
                 plt = new_plt
-            if self.allow_repeat_pitches:
+            if self.allow_repeats:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
             if self.do_not_transpose is True:
@@ -544,7 +544,7 @@ class PitchCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_repeat_pitches(self):
+    def allow_repeats(self):
         r'''Is true when command allows repeat pitches.
 
         Defaults to none.
@@ -553,7 +553,7 @@ class PitchCommand(Command):
 
         Returns true, false or none.
         '''
-        return self._allow_repeat_pitches
+        return self._allow_repeats
 
     @property
     def cyclic(self):

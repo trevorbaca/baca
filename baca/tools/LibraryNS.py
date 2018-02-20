@@ -539,7 +539,7 @@ class LibraryNS(abjad.AbjadObject):
         if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
             raise Exception(f'one-note chord {pitch!r}?')
         return PitchCommand(
-            allow_repeat_pitches=True,
+            allow_repeats=True,
             cyclic=True,
             do_not_transpose=do_not_transpose,
             pitches=[pitch],
@@ -549,8 +549,8 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def pitches(
         pitches: List,
+        allow_repeats: bool = None,
         exact: bool = None,
-        repeats: bool = None,
         selector: Selector = 'baca.pleaves()',
         ) -> PitchCommand:
         r'''Sets pitches on ``selector`` output..
@@ -560,7 +560,7 @@ class LibraryNS(abjad.AbjadObject):
         else:
             cyclic = True
         return PitchCommand(
-            allow_repeat_pitches=repeats,
+            allow_repeats=allow_repeats,
             cyclic=cyclic,
             pitches=pitches,
             selector=selector,
@@ -5163,26 +5163,26 @@ class LibraryNS(abjad.AbjadObject):
         '''
         assert isinstance(number, int), repr(number)
         return StaffPositionCommand(
+            allow_repeats=True,
             numbers=[number],
-            repeats=True,
             selector=selector,
             ) 
 
     @staticmethod
     def staff_positions(
         numbers,
+        allow_repeats: bool = None,
         exact: bool = None,
-        repeats: bool = None,
         selector: Selector = 'baca.plts()',
         ) -> StaffPositionCommand:
         r'''Makes staff position command.
         '''
-        if repeats is None and len(numbers) == 1:
-            repeats = True
+        if allow_repeats is None and len(numbers) == 1:
+            allow_repeats = True
         return StaffPositionCommand(
+            allow_repeats=allow_repeats,
             exact=exact,
             numbers=numbers,
-            repeats=repeats,
             selector=selector,
             ) 
 

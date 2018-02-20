@@ -351,7 +351,7 @@ class LibraryGM(abjad.AbjadObject):
 
         '''
         glissando = abjad.Glissando(
-            allow_repeat_pitches=allow_repeats,
+            allow_repeats=allow_repeats,
             stems=stems,
             style=style,
             )

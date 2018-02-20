@@ -21,13 +21,13 @@ Bases
 
    .. autosummary::
 
+      ~StaffPositionCommand.allow_repeats
       ~StaffPositionCommand.deactivate
       ~StaffPositionCommand.exact
       ~StaffPositionCommand.get_tag
       ~StaffPositionCommand.manifests
       ~StaffPositionCommand.numbers
       ~StaffPositionCommand.offset_to_measure_number
-      ~StaffPositionCommand.repeats
       ~StaffPositionCommand.selector
       ~StaffPositionCommand.tag
       ~StaffPositionCommand.tag_measure_number
@@ -39,6 +39,8 @@ Bases
 Read-only properties
 --------------------
 
+.. autoattribute:: StaffPositionCommand.allow_repeats
+
 .. only:: html
 
    .. container:: inherited
@@ -48,8 +50,6 @@ Read-only properties
 .. autoattribute:: StaffPositionCommand.exact
 
 .. autoattribute:: StaffPositionCommand.numbers
-
-.. autoattribute:: StaffPositionCommand.repeats
 
 .. only:: html
 

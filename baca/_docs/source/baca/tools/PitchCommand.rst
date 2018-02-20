@@ -21,7 +21,7 @@ Bases
 
    .. autosummary::
 
-      ~PitchCommand.allow_repeat_pitches
+      ~PitchCommand.allow_repeats
       ~PitchCommand.cyclic
       ~PitchCommand.deactivate
       ~PitchCommand.do_not_transpose
@@ -40,7 +40,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: PitchCommand.allow_repeat_pitches
+.. autoattribute:: PitchCommand.allow_repeats
 
 .. autoattribute:: PitchCommand.cyclic
 

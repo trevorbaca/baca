@@ -53,9 +53,9 @@ class StaffPositionCommand(Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
+        '_allow_repeats',
         '_exact',
         '_numbers',
-        '_repeats',
         )
 
     ### INITIALIZER ###
@@ -63,8 +63,8 @@ class StaffPositionCommand(Command):
     def __init__(
         self,
         numbers,
+        allow_repeats: bool = None,
         exact: bool = None, 
-        repeats: bool = None,
         selector: Selector = 'baca.plts()',
         ) -> None:
         Command.__init__(self, selector=selector)
@@ -75,9 +75,9 @@ class StaffPositionCommand(Command):
             assert all(isinstance(_, int) for _ in numbers), repr(numbers)
             numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
-        if repeats is not None:
-            repeats = bool(repeats)
-        self._repeats = repeats
+        if allow_repeats is not None:
+            allow_repeats = bool(allow_repeats)
+        self._allow_repeats = allow_repeats
 
     ### SPECIAL METHODS ###
 
@@ -103,7 +103,7 @@ class StaffPositionCommand(Command):
             pitch = position.to_pitch(clef)
             baca.PitchCommand._set_lt_pitch(plt, pitch)
             plt_count += 1
-            if self.repeats:
+            if self.allow_repeats:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
                     abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
@@ -113,6 +113,12 @@ class StaffPositionCommand(Command):
             raise Exception(message)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_repeats(self) -> Optional[bool]:
+        r'''Is true when repeat staff positions are allowed.
+        '''
+        return self._allow_repeats
 
     @property
     def exact(self) -> Optional[bool]:
@@ -126,9 +132,3 @@ class StaffPositionCommand(Command):
         r'''Gets numbers.
         '''
         return self._numbers
-
-    @property
-    def repeats(self) -> Optional[bool]:
-        r'''Is true when repeat staff positions are allowed.
-        '''
-        return self._repeats

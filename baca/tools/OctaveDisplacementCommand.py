@@ -19,7 +19,7 @@ class OctaveDisplacementCommand(Command):
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.suite([
-        ...         baca.pitches('G4', repeats=True),
+        ...         baca.pitch('G4'),
         ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
         ...         ]),
         ...     )

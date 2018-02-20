@@ -19,7 +19,7 @@ Bases
 
    .. autosummary::
 
-      ~MusicMaker.allow_repeat_pitches
+      ~MusicMaker.allow_repeats
       ~MusicMaker.color_unregistered_pitches
       ~MusicMaker.denominator
       ~MusicMaker.show
@@ -33,7 +33,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: MusicMaker.allow_repeat_pitches
+.. autoattribute:: MusicMaker.allow_repeats
 
 .. autoattribute:: MusicMaker.color_unregistered_pitches
 

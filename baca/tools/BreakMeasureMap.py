@@ -23,7 +23,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('ViolinMusicVoice', 1),
         ...     baca.make_even_runs(),
-        ...     baca.pitches('E4', repeats=True),
+        ...     baca.pitch('E4'),
         ...     )
         >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
