@@ -40,7 +40,7 @@ Bases
       ~LibraryGM.make_multimeasure_rests
       ~LibraryGM.make_notes
       ~LibraryGM.make_repeat_tied_notes
-      ~LibraryGM.make_repeated_durations
+      ~LibraryGM.make_repeated_duration_notes
       ~LibraryGM.make_rests
       ~LibraryGM.make_rhythm
       ~LibraryGM.make_scopes
@@ -100,7 +100,7 @@ Class & static methods
 
 .. automethod:: LibraryGM.make_repeat_tied_notes
 
-.. automethod:: LibraryGM.make_repeated_durations
+.. automethod:: LibraryGM.make_repeated_duration_notes
 
 .. automethod:: LibraryGM.make_rests
 

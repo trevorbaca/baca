@@ -1630,8 +1630,8 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_repeated_durations(durations):
-        r'''Makes repeated durations.
+    def make_repeated_duration_notes(durations):
+        r'''Makes repeated-dduration notes.
         '''
         if isinstance(durations, abjad.Duration):
             durations = [durations]
@@ -1730,7 +1730,7 @@ class LibraryGM(abjad.AbjadObject):
     def make_tied_repeated_durations(durations):
         r'''Makes tied repeated durations.
         '''
-        command = baca.make_repeated_durations(durations)
+        command = baca.make_repeated_duration_notes(durations)
         return abjad.new(
             command,
             rewrite_meter=False,

@@ -2714,7 +2714,7 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def trill(
+    def trill_spanner(
         string: str = None,
         harmonic: bool = None,
         left_broken: bool = None,
@@ -2732,7 +2732,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.trill(),
+            ...     baca.trill_spanner(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2797,7 +2797,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill(), baca.qruns()),
+            ...     baca.map(baca.trill_spanner(), baca.qruns()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2879,7 +2879,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill(), baca.runs()),
+            ...     baca.map(baca.trill_spanner(), baca.runs()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2950,7 +2950,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.trill('Eb4'), baca.qrun(0)),
+            ...     baca.map(baca.trill_spanner('Eb4'), baca.qrun(0)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3016,7 +3016,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill('Eb4'), baca.qruns()),
+            ...     baca.map(baca.trill_spanner('Eb4'), baca.qruns()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3107,7 +3107,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill('M2'), baca.qruns()),
+            ...     baca.map(baca.trill_spanner('M2'), baca.qruns()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

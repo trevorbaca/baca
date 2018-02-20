@@ -43,7 +43,7 @@ Bases
       ~LibraryTZ.transparent_span_bars
       ~LibraryTZ.transparent_time_signatures
       ~LibraryTZ.tremolo_down
-      ~LibraryTZ.trill
+      ~LibraryTZ.trill_spanner
       ~LibraryTZ.trill_spanner_staff_padding
       ~LibraryTZ.tuplet_bracket_extra_offset
       ~LibraryTZ.tuplet_bracket_padding
@@ -114,7 +114,7 @@ Class & static methods
 
 .. automethod:: LibraryTZ.tremolo_down
 
-.. automethod:: LibraryTZ.trill
+.. automethod:: LibraryTZ.trill_spanner
 
 .. automethod:: LibraryTZ.trill_spanner_staff_padding
 
