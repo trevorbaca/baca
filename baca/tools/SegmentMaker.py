@@ -914,13 +914,12 @@ class SegmentMaker(abjad.SegmentMaker):
     def _attach_first_appearance_score_template_defaults(self):
         if self.first_segment:
             return
-        staff_or_group = (abjad.Staff, abjad.StaffGroup)
+        staff__group = (abjad.Staff, abjad.StaffGroup)
         dictionary = self.previous_metadata['persistent_indicators']
-        for staff in abjad.iterate(self.score).components(staff_or_group):
-            if staff.name in dictionary:
+        for staff__group in abjad.iterate(self.score).components(staff__group):
+            if staff__group.name in dictionary:
                 continue
-            for wrapper in self.score_template.attach_defaults(staff):
-                # UNCOMMENT:
+            for wrapper in self.score_template.attach_defaults(staff__group):
                 tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
                 wrapper.tag = tag
                 self._treat_persistent_wrapper(
@@ -928,8 +927,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper,
                     'default',
                     )
-                #tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
-                #wrapper.tag = tag
 
     def _attach_first_segment_score_template_defaults(self):
         if not self.first_segment:
