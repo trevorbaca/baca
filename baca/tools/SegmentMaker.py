@@ -1129,13 +1129,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
-                previous_voice_metadata = self._get_previous_voice_metadata(
-                    voice,
-                    command.voice_metadata_pairs,
-                    )
+                name = command.state_dictionary_name
+                state = self._get_previous_state(voice, name)
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
-                command._previous_voice_metadata = previous_voice_metadata
+                command._previous_state = state
                 try:
                     rhythm = command(start_offset, time_signatures)
                 except:
@@ -1524,22 +1522,17 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.previous_metadata:
             return self.previous_metadata.get('stop_clock_time')
 
-    def _get_previous_voice_metadata(self, voice, voice_metadata_pairs):
-        if not bool(self.previous_metadata) or not bool(voice_metadata_pairs):
+    def _get_previous_state(self, voice, state_dictionary_name):
+        if not bool(self.previous_metadata):
             return
-        voice_metadata = self.previous_metadata.get('voice_metadata')
-        if not bool(voice_metadata):
+        dictionary = self.previous_metadata.get('voice_metadata')
+        if not bool(dictionary):
             return
-        this_voice_metadata = voice_metadata.get(voice.name)
-        if not bool(this_voice_metadata):
+        dictionary = dictionary.get(voice.name)
+        if not bool(dictionary):
             return
-        result = abjad.OrderedDict()
-        for name, keys in voice_metadata_pairs:
-            key_value_pairs = this_voice_metadata.get(name)
-            assert isinstance(key_value_pairs, list)
-            for key, value in key_value_pairs:
-                result[key] = value
-        return result
+        previous_state = dictionary.get(state_dictionary_name)
+        return previous_state
 
     def _get_segment_measure_numbers(self):
         first_measure_number = self._get_first_measure_number()

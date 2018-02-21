@@ -1,10 +1,8 @@
 import abjad
 import baca
+import typing
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
-from .Typing import List
-from .Typing import Optional
-from .Typing import Union as U
 
 
 class RhythmCommand(Command):
@@ -32,7 +30,7 @@ class RhythmCommand(Command):
     __slots__ = (
         '_division_maker',
         '_division_expression',
-        '_previous_voice_metadata',
+        '_previous_state',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
@@ -40,10 +38,10 @@ class RhythmCommand(Command):
         '_split_at_measure_boundaries',
         '_stages',
         '_state',
+        '_state_dictionary_name',
         '_tie_first',
         '_tie_last',
         '_voice_metadata',
-        '_voice_metadata_pairs',
         )
 
     _publish_storage_format = True
@@ -60,9 +58,9 @@ class RhythmCommand(Command):
         rhythm_overwrites=None,
         split_at_measure_boundaries: bool = None,
         stages=None,
+        state_dictionary_name: str = None,
         tie_first: bool = None,
         tie_last: bool = None,
-        voice_metadata_pairs: Optional[List[tuple]] = None,
         ) -> None:
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
@@ -70,26 +68,25 @@ class RhythmCommand(Command):
             raise Exception(message)
         self._division_maker = division_maker
         self._division_expression: abjad.Expression = division_expression
-        self._previous_voice_metadata: abjad.OrderedDict = None
+        self._previous_state: abjad.OrderedDict = None
         self._reference_meters = reference_meters
         self._rewrite_meter: bool = rewrite_meter
         self._rhythm_maker = rhythm_maker
         self._rhythm_overwrites = rhythm_overwrites
         self._split_at_measure_boundaries: bool = split_at_measure_boundaries
         self._stages = stages
-        self._state: Optional[abjad.OrderedDict] = None
+        self._state: typing.Optional[abjad.OrderedDict] = None
+        self._state_dictionary_name: str = state_dictionary_name
         self._tie_first: bool = tie_first
         self._tie_last: bool = tie_last
-        self._voice_metadata: Optional[abjad.OrderedDict] = None
-        self._voice_metadata_pairs: Optional[
-            List[tuple]] = voice_metadata_pairs
+        self._voice_metadata: typing.Optional[abjad.OrderedDict] = None
 
     ### SPECIAL METHODS ###
 
     def __call__(
         self,
         start_offset: abjad.Offset = None,
-        time_signatures: List[abjad.TimeSignature] = None,
+        time_signatures: typing.List[abjad.TimeSignature] = None,
         ) -> abjad.AnnotatedTimespan:
         r'''Calls command on `start_offset` and `time_signatures`.
         '''
@@ -186,7 +183,9 @@ class RhythmCommand(Command):
         elif not isinstance(rhythm_maker, rhythmos.RhythmMaker):
             raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
         else:
-            state = self._previous_voice_metadata or abjad.OrderedDict()
+            state = self._previous_state or abjad.OrderedDict()
+            #pairs = state.get(self.state_dictionary_name, [])
+            #state = abjad.OrderedDict(pairs)
             division_maker = self.division_maker
             if division_maker is None:
                 division_maker = self._default_division_maker
@@ -250,19 +249,16 @@ class RhythmCommand(Command):
         return selections, start_offset
 
     def _make_voice_metadata(self, state: abjad.OrderedDict):
-        if not self.voice_metadata_pairs:
+        if not self.state_dictionary_name:
             return
         voice_metadata = abjad.OrderedDict()
-        for name, keys in self.voice_metadata_pairs:
-            voice_metadata[name] = []
-            key_value_pairs = voice_metadata[name]
-            for key in keys:
-                value = state.get(key)
-                key_value_pair = (key, value)
-                key_value_pairs.append(key_value_pair)
-        self._voice_metadata: Optional[abjad.OrderedDict] = voice_metadata
+        voice_metadata[self.state_dictionary_name] = state
+        self._voice_metadata = voice_metadata
 
-    def _transform_divisions(self, divisions) -> Optional[abjad.Sequence]:
+    def _transform_divisions(
+        self,
+        divisions,
+        ) -> typing.Optional[abjad.Sequence]:
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
             assert isinstance(divisions, abjad.Sequence), repr(divisions)
@@ -375,6 +371,12 @@ class RhythmCommand(Command):
         return self._state
 
     @property
+    def state_dictionary_name(self) -> typing.Optional[str]:
+        '''Gets state dictionary name.
+        '''
+        return self._state_dictionary_name
+
+    @property
     def stop_stage(self):
         r'''Gets stop stage.
 
@@ -405,13 +407,7 @@ class RhythmCommand(Command):
         return self._tie_last
 
     @property
-    def voice_metadata(self) -> Optional[abjad.OrderedDict]:
+    def voice_metadata(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets voice metadata.
         '''
         return self._voice_metadata
-
-    @property
-    def voice_metadata_pairs(self) -> U[List[tuple], None]:
-        r'''Gets voice metadata templates.
-        '''
-        return self._voice_metadata_pairs
