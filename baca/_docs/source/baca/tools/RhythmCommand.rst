@@ -27,6 +27,7 @@ Bases
       ~RhythmCommand.get_tag
       ~RhythmCommand.manifests
       ~RhythmCommand.offset_to_measure_number
+      ~RhythmCommand.persist
       ~RhythmCommand.reference_meters
       ~RhythmCommand.repeat_ties
       ~RhythmCommand.rewrite_meter
@@ -37,14 +38,12 @@ Bases
       ~RhythmCommand.stages
       ~RhythmCommand.start_stage
       ~RhythmCommand.state
-      ~RhythmCommand.state_dictionary_name
       ~RhythmCommand.stop_stage
       ~RhythmCommand.tag
       ~RhythmCommand.tag_measure_number
       ~RhythmCommand.tags
       ~RhythmCommand.tie_first
       ~RhythmCommand.tie_last
-      ~RhythmCommand.voice_metadata
       ~RhythmCommand.__call__
       ~RhythmCommand.__format__
       ~RhythmCommand.__repr__
@@ -61,6 +60,8 @@ Read-only properties
 .. autoattribute:: RhythmCommand.division_expression
 
 .. autoattribute:: RhythmCommand.division_maker
+
+.. autoattribute:: RhythmCommand.persist
 
 .. autoattribute:: RhythmCommand.reference_meters
 
@@ -86,8 +87,6 @@ Read-only properties
 
 .. autoattribute:: RhythmCommand.state
 
-.. autoattribute:: RhythmCommand.state_dictionary_name
-
 .. autoattribute:: RhythmCommand.stop_stage
 
 .. only:: html
@@ -105,8 +104,6 @@ Read-only properties
 .. autoattribute:: RhythmCommand.tie_first
 
 .. autoattribute:: RhythmCommand.tie_last
-
-.. autoattribute:: RhythmCommand.voice_metadata
 
 Read/write properties
 ---------------------

@@ -1111,8 +1111,10 @@ class SegmentMaker(abjad.SegmentMaker):
         self._attach_fermatas()
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             assert not len(voice), repr(voice)
-            voice_metadata = self._voice_metadata.get(voice.name)
-            voice_metadata = voice_metadata or abjad.OrderedDict()
+            voice_metadata = self._voice_metadata.get(
+                voice.name,
+                abjad.OrderedDict(),
+                )
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
@@ -1129,8 +1131,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
-                name = command.state_dictionary_name
-                state = self._get_previous_state(voice, name)
+                state = self._get_previous_state(voice, command.persist)
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
                 command._previous_state = state
@@ -1139,10 +1140,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 except:
                     raise Exception(f'\n\n{format(wrapper)}')
                 rhythms.append(rhythm)
-                command_voice_metadata = command.voice_metadata
-                if bool(command_voice_metadata):
-                    for key, value in command_voice_metadata.items():
-                        voice_metadata[key] = value
+                if command.persist and command.state:
+                    voice_metadata[command.persist] = command.state
             if bool(voice_metadata):
                 self._voice_metadata[voice.name] = voice_metadata
             rhythms.sort()
@@ -1522,8 +1521,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.previous_metadata:
             return self.previous_metadata.get('stop_clock_time')
 
-    def _get_previous_state(self, voice, state_dictionary_name):
-        if not bool(self.previous_metadata):
+    def _get_previous_state(self, voice, command_persist):
+        if not self.previous_metadata:
+            return
+        if not command_persist:
             return
         dictionary = self.previous_metadata.get('voice_metadata')
         if not bool(dictionary):
@@ -1531,7 +1532,7 @@ class SegmentMaker(abjad.SegmentMaker):
         dictionary = dictionary.get(voice.name)
         if not bool(dictionary):
             return
-        previous_state = dictionary.get(state_dictionary_name)
+        previous_state = dictionary.get(command_persist)
         return previous_state
 
     def _get_segment_measure_numbers(self):

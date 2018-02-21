@@ -30,6 +30,7 @@ class RhythmCommand(Command):
     __slots__ = (
         '_division_maker',
         '_division_expression',
+        '_persist',
         '_previous_state',
         '_reference_meters',
         '_rewrite_meter',
@@ -38,10 +39,8 @@ class RhythmCommand(Command):
         '_split_at_measure_boundaries',
         '_stages',
         '_state',
-        '_state_dictionary_name',
         '_tie_first',
         '_tie_last',
-        '_voice_metadata',
         )
 
     _publish_storage_format = True
@@ -52,13 +51,13 @@ class RhythmCommand(Command):
         self,
         division_maker=None,
         division_expression=None,
+        persist: str = None,
         reference_meters=None,
         rewrite_meter: bool = None,
         rhythm_maker=None,
         rhythm_overwrites=None,
         split_at_measure_boundaries: bool = None,
         stages=None,
-        state_dictionary_name: str = None,
         tie_first: bool = None,
         tie_last: bool = None,
         ) -> None:
@@ -68,6 +67,9 @@ class RhythmCommand(Command):
             raise Exception(message)
         self._division_maker = division_maker
         self._division_expression: abjad.Expression = division_expression
+        if persist is not None:
+            assert isinstance(persist, str), repr(persist)
+        self._persist: str = persist
         self._previous_state: abjad.OrderedDict = None
         self._reference_meters = reference_meters
         self._rewrite_meter: bool = rewrite_meter
@@ -75,11 +77,9 @@ class RhythmCommand(Command):
         self._rhythm_overwrites = rhythm_overwrites
         self._split_at_measure_boundaries: bool = split_at_measure_boundaries
         self._stages = stages
-        self._state: typing.Optional[abjad.OrderedDict] = None
-        self._state_dictionary_name: str = state_dictionary_name
+        self._state: abjad.OrderedDict = None
         self._tie_first: bool = tie_first
         self._tie_last: bool = tie_last
-        self._voice_metadata: typing.Optional[abjad.OrderedDict] = None
 
     ### SPECIAL METHODS ###
 
@@ -184,8 +184,6 @@ class RhythmCommand(Command):
             raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
         else:
             state = self._previous_state or abjad.OrderedDict()
-            #pairs = state.get(self.state_dictionary_name, [])
-            #state = abjad.OrderedDict(pairs)
             division_maker = self.division_maker
             if division_maker is None:
                 division_maker = self._default_division_maker
@@ -200,7 +198,7 @@ class RhythmCommand(Command):
             selections = rhythm_maker(divisions, state=state)
             self._annotate_unpitched_notes(selections)
         if hasattr(rhythm_maker, 'state'):
-            self._make_voice_metadata(rhythm_maker.state)
+            self._state = rhythm_maker.state
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
             specifier = rhythmos.DurationSpecifier
@@ -248,13 +246,6 @@ class RhythmCommand(Command):
         selections = [abjad.select(_) for _ in music]
         return selections, start_offset
 
-    def _make_voice_metadata(self, state: abjad.OrderedDict):
-        if not self.state_dictionary_name:
-            return
-        voice_metadata = abjad.OrderedDict()
-        voice_metadata[self.state_dictionary_name] = state
-        self._voice_metadata = voice_metadata
-
     def _transform_divisions(
         self,
         divisions,
@@ -285,6 +276,12 @@ class RhythmCommand(Command):
         Returns none or division-maker.
         '''
         return self._division_maker
+
+    @property
+    def persist(self) -> typing.Optional[str]:
+        '''Gets name for command persistence.
+        '''
+        return self._persist
 
     @property
     def reference_meters(self):
@@ -371,12 +368,6 @@ class RhythmCommand(Command):
         return self._state
 
     @property
-    def state_dictionary_name(self) -> typing.Optional[str]:
-        '''Gets state dictionary name.
-        '''
-        return self._state_dictionary_name
-
-    @property
     def stop_stage(self):
         r'''Gets stop stage.
 
@@ -405,9 +396,3 @@ class RhythmCommand(Command):
         Returns true, false or none.
         '''
         return self._tie_last
-
-    @property
-    def voice_metadata(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets voice metadata.
-        '''
-        return self._voice_metadata
