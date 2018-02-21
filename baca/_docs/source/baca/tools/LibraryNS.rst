@@ -95,11 +95,6 @@ Bases
       ~LibraryNS.__format__
       ~LibraryNS.__repr__
 
-Methods
--------
-
-.. automethod:: LibraryNS.single_segment_transition
-
 Class & static methods
 ----------------------
 
@@ -194,6 +189,8 @@ Class & static methods
 .. automethod:: LibraryNS.shift_hairpin_start
 
 .. automethod:: LibraryNS.short_fermata
+
+.. automethod:: LibraryNS.single_segment_transition
 
 .. automethod:: LibraryNS.skips_after
 

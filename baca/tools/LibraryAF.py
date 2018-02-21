@@ -1,5 +1,6 @@
 import abjad
 import baca
+import typing
 from abjad import rhythmmakertools as rhythmos
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
@@ -1899,7 +1900,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def breaks(*pages):
+    def breaks(*pages: typing.Any) -> BreakMeasureMap:
         r'''Makes breaks.
 
         ..  container:: example
@@ -1914,9 +1915,10 @@ class LibraryAF(abjad.AbjadObject):
             ...         ),
             ...     )
 
-        Returns break measure map.
         '''
-        commands = []
+        from baca.tools.LibraryGM import LibraryGM
+        from baca.tools.LibraryNS import LibraryNS
+        commands: typing.List = []
         if not pages:
             return BreakMeasureMap(commands=commands)
         first_measure_number = pages[0].items[0][0]
@@ -1928,17 +1930,17 @@ class LibraryAF(abjad.AbjadObject):
                 skip_index = measure_number - first_measure_number
                 y_offset = item[1]
                 alignment_distances = item[2]
-                selector = baca.skip(skip_index)
+                selector = f'baca.skip({skip_index})'
                 if i == 0:
                     break_ = abjad.LilyPondLiteral(r'\pageBreak')
                 else:
                     break_ = abjad.LilyPondLiteral(r'\break')
-                command = baca.tools.IndicatorCommand(
+                command = IndicatorCommand(
                     indicators=[break_],
                     selector=selector,
                     )
                 commands.append(command)
-                lbsd = baca.lbsd(y_offset, alignment_distances, selector)
+                lbsd = LibraryGM.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
         breaks = BreakMeasureMap(commands=commands)
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
@@ -2487,7 +2489,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def coat(pitch) -> Coat:
+    def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         r'''Coats `pitch`.
 
         ..  container:: example
@@ -2802,8 +2804,6 @@ class LibraryAF(abjad.AbjadObject):
         selector: Selector = 'baca.pheads()',
         ) -> ColorFingeringCommand:
         r'''Color fingerings.
-
-        Returns color fingering command.
         '''
         return ColorFingeringCommand(numbers=numbers, selector=selector)
 
@@ -5785,7 +5785,9 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def fuse_compound_quarter_divisions(counts) -> DivisionSequenceExpression:
+    def fuse_compound_quarter_divisions(
+        counts: typing.List[int],
+        ) -> DivisionSequenceExpression:
         r'''Fuses compound quarter divisions.
 
         ..  container:: example

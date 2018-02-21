@@ -2145,12 +2145,11 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def timeline(scopes):
+    def timeline(scopes) -> TimelineScope:
         r'''Makes timeline scope.
-
-        Returns timeline scope.
         '''
-        scopes = [baca.scope(*_) for _ in scopes]
+        from baca.tools.LibraryNS import LibraryNS
+        scopes = [LibraryNS.scope(*_) for _ in scopes]
         return TimelineScope(scopes)
 
     @staticmethod

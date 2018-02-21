@@ -1,16 +1,25 @@
 import abjad
 import baca
+import typing
 from abjad import rhythmmakertools as rhythmos
 from .HairpinCommand import HairpinCommand
+from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
+from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
+from .LabelCommand import LabelCommand
+from .LBSD import LBSD
+from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .OverrideCommand import OverrideCommand
+from .PitchCommand import PitchCommand
 from .RhythmCommand import RhythmCommand
+from .Scope import Scope
 from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
+from .Typing import NumberPair
 from .Typing import Selector
 from .Typing import Union
 
@@ -610,10 +619,11 @@ class LibraryGM(abjad.AbjadObject):
         return command
 
     @staticmethod
-    def hairpin_shorten_pair(pair:tuple, selector='baca.leaf(0)'):
+    def hairpin_shorten_pair(
+        pair: NumberPair,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides hairpin shorten pair.
-
-        Returns override command.
         '''
         return baca.tools.OverrideCommand(
             attribute='shorten_pair',
@@ -622,8 +632,13 @@ class LibraryGM(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: deprecate in favor of baca.sequence()
     @staticmethod
-    def helianthate(sequence, n=0, m=0):
+    def helianthate(
+        sequence: typing.Sequence,
+        n: int = 0,
+        m: int = 0,
+        ) -> typing.Sequence:
         '''Helianthates `sequence` by outer index of rotation `n` and inner
         index of rotation `m`.
 
@@ -692,7 +707,7 @@ class LibraryGM(abjad.AbjadObject):
             >>> baca.helianthate(sequence)
             [[1, 2, 3], [4, 5], [6, 7, 8]]
 
-        Returns new object with type equal to that of `sequence`.
+        Returns new object with type equal to that of ``sequence``.
         '''
         sequence_type = type(sequence)
         start = list(sequence[:])
@@ -716,20 +731,20 @@ class LibraryGM(abjad.AbjadObject):
             result.extend(candidate)
             n += original_n
             m += original_m
-        result = sequence_type(result)
-        return result
+        result_ = sequence_type(result) # type: ignore
+        return result_
 
     @staticmethod
     def imbricate(
-        voice_name,
-        segment,
-        *specifiers,
-        allow_unused_pitches=None,
-        by_pitch_class=None,
-        extend_beam=None,
-        hocket=None,
-        selector=None,
-        truncate_ties=None
+        voice_name: str,
+        segment: typing.List,
+        *specifiers: typing.Any,
+        allow_unused_pitches: bool = None,
+        by_pitch_class: bool = None,
+        extend_beam: bool = None,
+        hocket: bool = None,
+        selector: Selector = None,
+        truncate_ties: bool = None
         ):
         r'''Imbricates `segment` in `voice_name`.
 
@@ -833,7 +848,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.ImbricationCommand(
+        return ImbricationCommand(
             voice_name,
             segment,
             *specifiers,
@@ -846,11 +861,14 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def instrument(instrument, selector='baca.leaf(0)'):
+    def instrument(
+        instrument: abjad.Instrument,
+        selector: Selector =  'baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Attaches instrument.
         '''
         assert isinstance(instrument, abjad.Instrument)
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[instrument],
             selector=selector,
             )
@@ -860,7 +878,7 @@ class LibraryGM(abjad.AbjadObject):
         start_pitch: Union[str, abjad.NamedPitch],
         stop_pitch: Union[str, abjad.NamedPitch],
         selector: Selector = 'baca.plts()',
-        ):
+        ) -> StaffPositionInterpolationCommand:
         r'''Interpolates from staff position of ``start_pitch`` to staff
         position of ``stop_pitch``.
         '''
@@ -871,7 +889,7 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def invisible_line_segment():
+    def invisible_line_segment() -> abjad.LineSegment:
         r'''Makes invisible line segment.
 
         ..  container:: example
@@ -888,7 +906,6 @@ class LibraryGM(abjad.AbjadObject):
                 right_stencil_align_direction_y=Center,
                 )
 
-        Returns line segment.
         '''
         return abjad.LineSegment(
             dash_period=0,
@@ -902,7 +919,10 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def label(expression, selector='baca.leaves()'):
+    def label(
+        expression: abjad.Expression,
+        selector: Selector = 'baca.leaves()',
+        ) -> LabelCommand:
         r'''Labels selections with label `expression`.
 
         ..  container:: example
@@ -1091,10 +1111,12 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.LabelCommand(expression=expression, selector=selector)
+        return LabelCommand(expression=expression, selector=selector)
 
     @staticmethod
-    def laissez_vibrer(selector='baca.ptails()'):
+    def laissez_vibrer(
+        selector: Selector  = 'baca.ptails()',
+        ) -> IndicatorCommand:
         r'''Attaches laissez vibrer to PLT tails.
 
         ..  container:: example
@@ -1238,29 +1260,33 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('laissezVibrer')],
             selector=selector,
             )
 
     @staticmethod
-    def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)'):
+    def lbsd(
+        y_offset: int,
+        alignment_distances: typing.Sequence,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Makes line-break system details.
-
-        Returns indicator command.
         '''
         alignment_distances = baca.sequence(alignment_distances).flatten()
-        lbsd = baca.LBSD(
+        lbsd = LBSD(
             alignment_distances=alignment_distances,
             y_offset=y_offset,
             )
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[lbsd],
             selector=selector,
             )
 
     @staticmethod
-    def line_break(selector='baca.leaf(-1)'):
+    def line_break(
+        selector: Selector = 'baca.leaf(-1)',
+        ) -> IndicatorCommand:
         r'''Attaches line break after last leaf.
 
         ..  container:: example
@@ -1392,7 +1418,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\break', 'after')],
             selector=selector,
             )
@@ -1412,7 +1438,9 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def long_fermata(selector='baca.leaf(0)'):
+    def long_fermata(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Attaches long fermata to leaf.
 
         ..  container:: example
@@ -1544,37 +1572,42 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('longfermata')],
             selector=selector,
             )
 
     @staticmethod
-    def loop(pitches, intervals):
+    def loop(
+        pitches: typing.Iterable,
+        intervals: typing.Iterable,
+        ) -> PitchCommand:
         r'''Loops `pitches` at `intervals`.
-
-        Returns loop.
         '''
-        loop = baca.Loop(items=pitches, intervals=intervals)
-        return baca.pitches(loop)
+        from baca.tools.LibraryNS import LibraryNS
+        loop = Loop(items=pitches, intervals=intervals)
+        return LibraryNS.pitches(loop)
 
     @staticmethod
-    def make_even_runs():
+    def make_even_runs() -> RhythmCommand:
         r'''Makes even runs.
         '''
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rhythm_maker=rhythmos.EvenRunRhythmMaker()
             )
 
     @staticmethod
-    def make_fused_tuplet_monads(tuplet_ratio=None):
+    def make_fused_tuplet_monads(
+        tuplet_ratio: typing.Tuple[int] = None,
+        ) -> RhythmCommand:
         r'''Makes fused tuplet monads.
         '''
+        tuplet_ratios = []
         if tuplet_ratio is None:
-            tuplet_ratios = [(1,)]
+            tuplet_ratios.append((1,))
         else:
-            tuplet_ratios = [tuplet_ratio]
-        return baca.RhythmCommand(
+            tuplet_ratios.append(tuplet_ratio)
+        return RhythmCommand(
             division_expression=abjad.sequence()
                 .sum()
                 .sequence(),
@@ -1587,28 +1620,28 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_multimeasure_rests():
+    def make_multimeasure_rests() -> RhythmCommand:
         r'''Makes multimeasure rests.
         '''
         mask = rhythmos.SilenceMask(
             pattern=abjad.index_all(),
             use_multimeasure_rests=True,
             )
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
             )
 
     @staticmethod
-    def make_notes(repeat_ties=False):
+    def make_notes(repeat_ties: bool = False) -> RhythmCommand:
         r'''Makes notes; rewrites meter.
         '''
         if repeat_ties:
             tie_specifier = rhythmos.TieSpecifier(repeat_ties=True)
         else:
             tie_specifier = None
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=tie_specifier,
@@ -1616,10 +1649,10 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_repeat_tied_notes():
+    def make_repeat_tied_notes() -> RhythmCommand:
         r'''Makes repeat-tied notes; rewrites meter.
         '''
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=rhythmos.TieSpecifier(
@@ -1630,16 +1663,20 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_repeated_duration_notes(durations):
-        r'''Makes repeated-dduration notes.
+    def make_repeated_duration_notes(
+        durations: typing.Iterable,
+        ) -> RhythmCommand:
+        r'''Makes repeated-duration notes.
         '''
+        from baca.tools.LibraryNS import LibraryNS
         if isinstance(durations, abjad.Duration):
             durations = [durations]
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
-        return baca.RhythmCommand(
-            division_expression=baca.split_by_durations(durations=durations),
+        return RhythmCommand(
+            division_expression=LibraryNS.split_by_durations(
+                durations=durations),
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=rhythmos.TieSpecifier(
@@ -1649,44 +1686,41 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_rests():
+    def make_rests() -> RhythmCommand:
         r'''Makes rests.
         '''
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[abjad.silence([0], 1)],
                 ),
             )
     
     @staticmethod
-    def make_rhythm(selection):
+    def make_rhythm(selection: abjad.Selection) -> RhythmCommand:
         r'''Set rhythm to `selection`.
-
-        Return rhythm command.
         '''
         assert isinstance(selection, abjad.Selection), repr(selection)
         assert all(isinstance(_,  abjad.Component) for _ in selection)
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rhythm_maker=selection,
             )
 
     @staticmethod
-    def make_scopes(voices, stages):
+    def make_scopes(voices, stages) -> typing.List[Scope]:
         r'''Makes scope crossproduct of `voices` against `stages`.
-
-        Returns list of scopes.
         '''
+        from baca.tools.LibraryNS import LibraryNS
         assert isinstance(voices, list), repr(voices)
         assert isinstance(stages, list), repr(stages)
         scopes = []
         for voice in voices:
             for item in stages:
-                scope = baca.scope(voice, item)
+                scope = LibraryNS.scope(voice, item)
                 scopes.append(scope)
         return scopes
 
     @staticmethod
-    def make_single_attack(duration):
+    def make_single_attack(duration) -> RhythmCommand:
         r'''Makes single attacks with `duration`.
         '''
         duration = abjad.Duration(duration)
@@ -1700,7 +1734,7 @@ class LibraryGM(abjad.AbjadObject):
                 talea_denominator=denominator,
                 ),
             )
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rhythm_maker=rhythm_maker,
             )
 
@@ -1712,11 +1746,12 @@ class LibraryGM(abjad.AbjadObject):
             rhythm_maker=rhythmos.SkipRhythmMaker()
             )
 
+    # TODO: remove repeat_ties keyword; use make_repeat_tied_notes instead
     @staticmethod
-    def make_tied_notes(repeat_ties=False):
+    def make_tied_notes(repeat_ties: bool = False) -> RhythmCommand:
         r'''Makes tied notes; rewrites meter.
         '''
-        return baca.RhythmCommand(
+        return RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=rhythmos.TieSpecifier(
@@ -1727,10 +1762,12 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_tied_repeated_durations(durations):
+    def make_tied_repeated_durations(
+        durations: typing.Iterable,
+        ) -> RhythmCommand:
         r'''Makes tied repeated durations.
         '''
-        command = baca.make_repeated_duration_notes(durations)
+        command = LibraryGM.make_repeated_duration_notes(durations)
         return abjad.new(
             command,
             rewrite_meter=False,
@@ -1738,7 +1775,9 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def marcati(selector='baca.pheads()'):
+    def marcati(
+        selector: Selector = 'baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches marcati to pitched heads.
 
         ..  container:: example
@@ -1882,7 +1921,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('marcato')],
             selector=selector,
             )
@@ -2013,7 +2052,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def metronome_mark(
-        key,
+        key: str,
         selector: Selector = 'baca.leaf(0)',
         ) -> MetronomeMarkCommand:
         r'''Attaches metronome mark with `key`.
@@ -2024,9 +2063,11 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def minimum_width(duration):
+    def minimum_width(
+        duration: typing.Union[tuple, abjad.Duration],
+        ) -> HorizontalSpacingSpecifier:
         r'''Makes horizontal spacing specifier with `duration` minimum width.
         '''
-        return baca.HorizontalSpacingSpecifier(
+        return HorizontalSpacingSpecifier(
             minimum_width=duration,
             )
