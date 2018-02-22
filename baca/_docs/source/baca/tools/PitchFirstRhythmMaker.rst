@@ -28,6 +28,7 @@ Bases
       ~PitchFirstRhythmMaker.division_masks
       ~PitchFirstRhythmMaker.duration_specifier
       ~PitchFirstRhythmMaker.logical_tie_masks
+      ~PitchFirstRhythmMaker.previous_state
       ~PitchFirstRhythmMaker.show
       ~PitchFirstRhythmMaker.state
       ~PitchFirstRhythmMaker.talea
@@ -54,6 +55,12 @@ Read-only properties
 .. autoattribute:: PitchFirstRhythmMaker.duration_specifier
 
 .. autoattribute:: PitchFirstRhythmMaker.logical_tie_masks
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.previous_state
 
 .. only:: html
 

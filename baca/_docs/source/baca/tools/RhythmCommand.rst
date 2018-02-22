@@ -25,14 +25,17 @@ Bases
       ~RhythmCommand.division_expression
       ~RhythmCommand.division_maker
       ~RhythmCommand.get_tag
+      ~RhythmCommand.left_broken
       ~RhythmCommand.manifests
       ~RhythmCommand.offset_to_measure_number
       ~RhythmCommand.persist
+      ~RhythmCommand.previous_state
       ~RhythmCommand.reference_meters
       ~RhythmCommand.repeat_ties
       ~RhythmCommand.rewrite_meter
       ~RhythmCommand.rhythm_maker
       ~RhythmCommand.rhythm_overwrites
+      ~RhythmCommand.right_broken
       ~RhythmCommand.selector
       ~RhythmCommand.split_at_measure_boundaries
       ~RhythmCommand.stages
@@ -61,7 +64,11 @@ Read-only properties
 
 .. autoattribute:: RhythmCommand.division_maker
 
+.. autoattribute:: RhythmCommand.left_broken
+
 .. autoattribute:: RhythmCommand.persist
+
+.. autoattribute:: RhythmCommand.previous_state
 
 .. autoattribute:: RhythmCommand.reference_meters
 
@@ -72,6 +79,8 @@ Read-only properties
 .. autoattribute:: RhythmCommand.rhythm_maker
 
 .. autoattribute:: RhythmCommand.rhythm_overwrites
+
+.. autoattribute:: RhythmCommand.right_broken
 
 .. only:: html
 

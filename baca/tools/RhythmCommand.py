@@ -3,6 +3,7 @@ import baca
 import typing
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
+from .DivisionMaker import DivisionMaker
 
 
 class RhythmCommand(Command):
@@ -30,12 +31,14 @@ class RhythmCommand(Command):
     __slots__ = (
         '_division_maker',
         '_division_expression',
+        '_left_broken',
         '_persist',
         '_previous_state',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
         '_rhythm_overwrites',
+        '_right_broken',
         '_split_at_measure_boundaries',
         '_stages',
         '_state',
@@ -49,15 +52,18 @@ class RhythmCommand(Command):
 
     def __init__(
         self,
-        division_maker=None,
-        division_expression=None,
+        division_maker: DivisionMaker = None,
+        division_expression: abjad.Expression = None,
+        left_broken: bool = None,
         persist: str = None,
-        reference_meters=None,
+        reference_meters: typing.List = None,
         rewrite_meter: bool = None,
-        rhythm_maker=None,
+        rhythm_maker: typing.Union[
+            rhythmos.RhythmMaker, abjad.Selection] = None,
         rhythm_overwrites=None,
+        right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
-        stages=None,
+        stages: typing.Tuple[int, int] = None,
         tie_first: bool = None,
         tie_last: bool = None,
         ) -> None:
@@ -65,18 +71,25 @@ class RhythmCommand(Command):
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
             raise Exception(message)
-        self._division_maker = division_maker
+        self._division_maker: DivisionMaker = division_maker
         self._division_expression: abjad.Expression = division_expression
+        if left_broken is not None:
+            left_broken = bool(left_broken)
+        self._left_broken: bool = left_broken
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist: str = persist
         self._previous_state: abjad.OrderedDict = None
-        self._reference_meters = reference_meters
+        self._reference_meters: typing.List = reference_meters
         self._rewrite_meter: bool = rewrite_meter
-        self._rhythm_maker = rhythm_maker
+        self._rhythm_maker: typing.Union[
+            rhythmos.RhythmMaker, abjad.Selection] = rhythm_maker
         self._rhythm_overwrites = rhythm_overwrites
+        if right_broken is not None:
+            right_broken = bool(right_broken)
+        self._right_broken: bool = right_broken
         self._split_at_measure_boundaries: bool = split_at_measure_boundaries
-        self._stages = stages
+        self._stages: typing.Tuple[int, int] = stages
         self._state: abjad.OrderedDict = None
         self._tie_first: bool = tie_first
         self._tie_last: bool = tie_last
@@ -88,7 +101,7 @@ class RhythmCommand(Command):
         start_offset: abjad.Offset = None,
         time_signatures: typing.List[abjad.TimeSignature] = None,
         ) -> abjad.AnnotatedTimespan:
-        r'''Calls command on `start_offset` and `time_signatures`.
+        r'''Calls command on ``start_offset`` and ``time_signatures``.
         '''
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
@@ -176,49 +189,9 @@ class RhythmCommand(Command):
             keyword_argument_names=keyword_argument_names,
             )
 
-    def _make_rhythm(self, start_offset, time_signatures):
-        rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
-        if isinstance(rhythm_maker, abjad.Selection):
-            selections = [rhythm_maker]
-        elif not isinstance(rhythm_maker, rhythmos.RhythmMaker):
-            raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
-        else:
-            state = self._previous_state or abjad.OrderedDict()
-            division_maker = self.division_maker
-            if division_maker is None:
-                division_maker = self._default_division_maker
-            divisions = self._durations_to_divisions(
-                time_signatures,
-                start_offset,
-                )
-            divisions = division_maker(divisions)
-            divisions = baca.sequence(divisions).flatten(depth=-1)
-            divisions = self._transform_divisions(divisions)
-            start_offset = divisions[0].start_offset
-            selections = rhythm_maker(divisions, state=state)
-            self._annotate_unpitched_notes(selections)
-        if hasattr(rhythm_maker, 'state'):
-            self._state = rhythm_maker.state
-        assert self._all_are_selections(selections), repr(selections)
-        if self.split_at_measure_boundaries:
-            specifier = rhythmos.DurationSpecifier
-            selections = specifier._split_at_measure_boundaries(
-                selections,
-                time_signatures,
-                repeat_ties=self.repeat_ties,
-                )
-            assert self._all_are_selections(selections), repr(selections)
-        if self.rewrite_meter:
-            specifier = rhythmos.DurationSpecifier
-            selections = specifier._rewrite_meter_(
-                selections,
-                time_signatures,
-                reference_meters=self.reference_meters,
-                rewrite_tuplets=False,
-                repeat_ties=self.repeat_ties,
-                )
+    def _handle_rhythm_overwrites(self, time_signatures, selections):
         if not self.rhythm_overwrites:
-            return selections, start_offset
+            selections
         maker = abjad.MeasureMaker()
         dummy_measures = maker(time_signatures)
         dummy_time_signature_voice = abjad.Voice(dummy_measures)
@@ -244,7 +217,75 @@ class RhythmCommand(Command):
         dummy_music_voice[start_index:stop_index] = new_selection
         music = dummy_music_voice[:]
         selections = [abjad.select(_) for _ in music]
+        return selections
+
+    def _make_rhythm(self, start_offset, time_signatures):
+        rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
+        if isinstance(rhythm_maker, abjad.Selection):
+            selections = [rhythm_maker]
+        else:
+            if not isinstance(rhythm_maker, rhythmos.RhythmMaker):
+                message = f'rhythm-maker or selection: {rhythm_maker!r}.'
+                raise TypeError(message)
+            division_maker = self.division_maker
+            if division_maker is None:
+                division_maker = self._default_division_maker
+            divisions = self._durations_to_divisions(
+                time_signatures,
+                start_offset,
+                )
+            divisions = division_maker(divisions)
+            divisions = baca.sequence(divisions).flatten(depth=-1)
+            divisions = self._transform_divisions(divisions)
+            start_offset = divisions[0].start_offset
+            selections = rhythm_maker(
+                divisions,
+                previous_state=self.previous_state,
+                )
+            self._annotate_unpitched_notes(selections)
+            self._state = rhythm_maker.state
+        assert self._all_are_selections(selections), repr(selections)
+        if self.split_at_measure_boundaries:
+            specifier = rhythmos.DurationSpecifier
+            selections = specifier._split_at_measure_boundaries(
+                selections,
+                time_signatures,
+                repeat_ties=self.repeat_ties,
+                )
+            assert self._all_are_selections(selections), repr(selections)
+        if self.rewrite_meter:
+            selections = rhythmos.DurationSpecifier._rewrite_meter_(
+                selections,
+                time_signatures,
+                reference_meters=self.reference_meters,
+                rewrite_tuplets=False,
+                repeat_ties=self.repeat_ties,
+                )
+        if self.rhythm_overwrites:
+            selections = self._handle_rhythm_overwrites(
+                time_signatures,
+                selections,
+                )
+        self._tag_broken_ties(selections)
         return selections, start_offset
+
+    def _tag_broken_ties(self, selections):
+        if not isinstance(self.rhythm_maker, rhythmos.RhythmMaker):
+            return
+        if (self.left_broken and
+            self.rhythm_maker.previous_state.get('incomplete_last_count')):
+            if not self.repeat_ties:
+                raise Exception('left-broken ties must be repeat ties.')
+            first_leaf = abjad.select(selections).leaf(0)
+            if isinstance(first_leaf, abjad.Note):
+                abjad.attach(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
+        if (self.right_broken and
+            self.rhythm_maker.state.get('incomplete_last_count')):
+            if self.repeat_ties:
+                raise Exception('right-broken ties must be conventional.')
+            last_leaf = abjad.select(selections).leaf(-1)
+            if isinstance(last_leaf, abjad.Note):
+                abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, last_leaf)
 
     def _transform_divisions(
         self,
@@ -258,24 +299,22 @@ class RhythmCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def division_expression(self):
+    def division_expression(self) -> typing.Optional[abjad.Expression]:
         r'''Gets division expression.
-
-        Set to none or division expresion.
-
-        Returns none or division expression.
         '''
         return self._division_expression
 
     @property
-    def division_maker(self):
+    def division_maker(self) -> typing.Optional[DivisionMaker]:
         r'''Gets division-maker.
-
-        Set to none or division-maker.
-
-        Returns none or division-maker.
         '''
         return self._division_maker
+
+    @property
+    def left_broken(self) -> bool:
+        r'''Is true when rhythm is left-broken.
+        '''
+        return self._left_broken
 
     @property
     def persist(self) -> typing.Optional[str]:
@@ -284,78 +323,69 @@ class RhythmCommand(Command):
         return self._persist
 
     @property
-    def reference_meters(self):
+    def previous_state(self) -> typing.Optional[abjad.OrderedDict]:
+        r'''Gets previous state.
+        '''
+        return self._previous_state
+
+    @property
+    def reference_meters(self) -> typing.List:
         r'''Gets reference meters.
 
         Only used to rewrite meters.
 
         Set to list of meters or none.
-
-        Defaults to none.
-
-        Returns list of meters or none.
         '''
         return self._reference_meters
 
     @property
-    def repeat_ties(self):
-        if self.rhythm_maker.tie_specifier is None:
+    def repeat_ties(self) -> bool:
+        tie_specifier = getattr(self.rhythm_maker, 'tie_specifier', None)
+        if tie_specifier is None:
             return False
-        return self.rhythm_maker.tie_specifier.repeat_ties
+        return tie_specifier.repeat_ties
 
     @property
-    def rewrite_meter(self):
+    def rewrite_meter(self) -> bool:
         r'''Is true when command rewrites meter.
-
-        Set to true or false.
-
-        Returns true or false.
         '''
         return self._rewrite_meter
 
     @property
-    def rhythm_maker(self):
-        r'''Gets rhythm-maker.
-
-        Set to rhythm-maker, music or none.
-
-        Returns rhythm-maker or music.
+    def rhythm_maker(self) -> typing.Optional[
+        typing.Union[rhythmos.RhythmMaker, abjad.Selection]
+        ]:
+        r'''Gets rhythm-maker (or selection).
         '''
         return self._rhythm_maker
 
     @property
-    def rhythm_overwrites(self):
+    def rhythm_overwrites(self) -> typing.List:
         r'''Gets rhythm overwrites.
-
-        Returns list.
         '''
         return self._rhythm_overwrites
 
     @property
-    def split_at_measure_boundaries(self):
+    def right_broken(self) -> bool:
+        r'''Is true when rhythm is right-broken.
+        '''
+        return self._right_broken
+
+    @property
+    def split_at_measure_boundaries(self) -> bool:
         r'''Is true when command splits at measure boundaries.
-
-        Set to true, false or none.
-
-        Defaults to none.
-
-        Returns true, false or none.
         '''
         return self._split_at_measure_boundaries
 
     @property
-    def stages(self):
+    def stages(self) -> typing.Tuple[int, int]:
         r'''Gets stages.
-
-        Returns pair of positive integers.
         '''
         return self._stages
 
     @property
-    def start_stage(self):
+    def start_stage(self) -> int:
         r'''Gets start stage.
-
-        Returns positive integer.
         '''
         return self.stages[0]
 
@@ -368,31 +398,19 @@ class RhythmCommand(Command):
         return self._state
 
     @property
-    def stop_stage(self):
+    def stop_stage(self) -> int:
         r'''Gets stop stage.
-
-        Returns positive integer.
         '''
         return self.stages[-1]
 
     @property
-    def tie_first(self):
+    def tie_first(self) -> bool:
         r'''Is true when command ties into first note or chord.
-        Otherwise false.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._tie_first
 
     @property
-    def tie_last(self):
+    def tie_last(self) -> bool:
         r'''Is true when command ties into last note or chord.
-        Otherwise false.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._tie_last

@@ -131,7 +131,6 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         '_acciaccatura_specifiers',
         '_next_attack',
         '_next_segment',
-        '_state',
         '_talea',
         '_time_treatments',
         )
@@ -171,7 +170,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         self._acciaccatura_specifiers = acciaccatura_specifiers
         self._next_attack = 0
         self._next_segment = 0
-        self._state = collections.OrderedDict()
+        self._state = abjad.OrderedDict()
         talea = talea or rhythmos.Talea()
         if not isinstance(talea, rhythmos.Talea):
             raise TypeError(f'must be talea: {talea!r}.')
@@ -187,8 +186,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
     def __call__(
         self,
         collections,
-        rest_affix_specifier=None,
         collection_index=None,
+        rest_affix_specifier=None,
         state=None,
         total_collections=None,
         ):
@@ -299,7 +298,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Returns selections together with state manifest.
         '''
         self._state = state or abjad.OrderedDict()
-        self._apply_state(state)
+        self._apply_state(state=state)
         selections = self._make_music(
             collections,
             rest_affix_specifier=rest_affix_specifier,

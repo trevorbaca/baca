@@ -658,8 +658,24 @@ class SegmentMaker(abjad.SegmentMaker):
         self.breaks(self.score['GlobalSkips'])
 
     def _apply_first_and_last_ties(self, voice):
+        from baca.tools.TieCorrectionCommand import TieCorrectionCommand
         dummy_tie = abjad.Tie()
         for current_leaf in abjad.iterate(voice).leaves():
+            inspection = abjad.inspect(current_leaf)
+            if inspection.has_indicator(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO):
+                TieCorrectionCommand._add_tie(
+                    current_leaf,
+                    direction=abjad.Left,
+                    repeat=True,
+                    )
+                continue
+            elif inspection.has_indicator(abjad.tags.RIGHT_BROKEN_TIE_FROM):
+                TieCorrectionCommand._add_tie(
+                    current_leaf,
+                    direction=abjad.Right,
+                    repeat=False,
+                    )
+                continue
             if not dummy_tie._attachment_test(current_leaf):
                 continue
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_TO):
