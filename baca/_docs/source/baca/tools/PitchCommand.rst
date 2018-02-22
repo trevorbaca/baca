@@ -32,7 +32,6 @@ Bases
       ~PitchCommand.persist
       ~PitchCommand.pitches
       ~PitchCommand.previous_segment_voice_metadata
-      ~PitchCommand.previous_state
       ~PitchCommand.selector
       ~PitchCommand.state
       ~PitchCommand.tag
@@ -62,8 +61,6 @@ Read-only properties
 .. autoattribute:: PitchCommand.persist
 
 .. autoattribute:: PitchCommand.pitches
-
-.. autoattribute:: PitchCommand.previous_state
 
 .. only:: html
 

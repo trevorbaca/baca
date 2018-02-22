@@ -637,12 +637,6 @@ class PitchCommand(Command):
         return self._pitches
 
     @property
-    def previous_state(self) -> abjad.OrderedDict:
-        r'''Gets previous state dictionary.
-        '''
-        return self._previous_state
-
-    @property
     def state(self) -> abjad.OrderedDict:
         r'''Gets state dictionary.
         '''
