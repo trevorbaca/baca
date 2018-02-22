@@ -25,6 +25,7 @@ Bases
       ~VoltaCommand.get_tag
       ~VoltaCommand.manifests
       ~VoltaCommand.offset_to_measure_number
+      ~VoltaCommand.previous_segment_voice_metadata
       ~VoltaCommand.selector
       ~VoltaCommand.tag
       ~VoltaCommand.tag_measure_number
@@ -74,6 +75,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: VoltaCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.previous_segment_voice_metadata
 
 .. only:: html
 

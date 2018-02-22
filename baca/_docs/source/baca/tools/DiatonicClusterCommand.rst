@@ -25,6 +25,7 @@ Bases
       ~DiatonicClusterCommand.get_tag
       ~DiatonicClusterCommand.manifests
       ~DiatonicClusterCommand.offset_to_measure_number
+      ~DiatonicClusterCommand.previous_segment_voice_metadata
       ~DiatonicClusterCommand.selector
       ~DiatonicClusterCommand.tag
       ~DiatonicClusterCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: DiatonicClusterCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.previous_segment_voice_metadata
 
 .. only:: html
 

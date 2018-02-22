@@ -25,6 +25,7 @@ Bases
       ~RegisterCommand.get_tag
       ~RegisterCommand.manifests
       ~RegisterCommand.offset_to_measure_number
+      ~RegisterCommand.previous_segment_voice_metadata
       ~RegisterCommand.registration
       ~RegisterCommand.selector
       ~RegisterCommand.tag
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RegisterCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.previous_segment_voice_metadata
 
 .. only:: html
 

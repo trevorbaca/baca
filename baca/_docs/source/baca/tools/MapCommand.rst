@@ -26,6 +26,7 @@ Bases
       ~MapCommand.get_tag
       ~MapCommand.manifests
       ~MapCommand.offset_to_measure_number
+      ~MapCommand.previous_segment_voice_metadata
       ~MapCommand.selector
       ~MapCommand.tag
       ~MapCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: MapCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.previous_segment_voice_metadata
 
 .. only:: html
 

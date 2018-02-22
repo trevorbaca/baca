@@ -26,6 +26,7 @@ Bases
       ~TieCorrectionCommand.get_tag
       ~TieCorrectionCommand.manifests
       ~TieCorrectionCommand.offset_to_measure_number
+      ~TieCorrectionCommand.previous_segment_voice_metadata
       ~TieCorrectionCommand.repeat
       ~TieCorrectionCommand.selector
       ~TieCorrectionCommand.tag
@@ -83,6 +84,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: TieCorrectionCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.previous_segment_voice_metadata
 
 .. only:: html
 

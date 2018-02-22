@@ -1110,24 +1110,21 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper.command.manifests = self.manifests
             dictionary = self._offset_to_measure_number
             wrapper.command.offset_to_measure_number = dictionary
-            persist = getattr(wrapper.command, 'persist', None)
-            if persist:
-                voice_name = wrapper.scope.voice_name
-                previous_state = self._get_previous_state(voice_name, persist)
-                wrapper.command._previous_state = previous_state
+            voice_name = wrapper.scope.voice_name
+            previous_segment_voice_metadata = \
+                self._get_previous_segment_voice_metadata(voice_name)
+            wrapper.command.previous_segment_voice_metadata = \
+                previous_segment_voice_metadata
             try:
                 wrapper.command(selection)
             except:
                 traceback.print_exc()
                 raise Exception(f'can not interpret ...\n\n{format(wrapper)}')
             self._handle_mutator(wrapper)
-            if persist:
-                voice_metadata = self._voice_metadata.get(
-                    voice_name,
-                    abjad.OrderedDict(),
-                    )
-                voice_metadata[persist] = wrapper.command.state
-                self._voice_metadata[voice_name] = voice_metadata
+            if getattr(wrapper.command, 'persist', None):
+                key = wrapper.command.key
+                state = wrapper.command.state
+                self.voice_metadata[voice_name][key] = state
         stop_time = time.time()
         count = int(stop_time - start_time)
         counter = abjad.String('second').pluralize(count)
@@ -1143,6 +1140,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice.name,
                 abjad.OrderedDict(),
                 )
+            previous_segment_voice_metadata = \
+                self._get_previous_segment_voice_metadata(voice.name)
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
@@ -1159,17 +1158,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
-                state = self._get_previous_state(voice.name, command.persist)
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
-                command._previous_state = state
+#                state = self._get_previous_state(voice.name, command.persist)
+#                command._previous_state = state
+                command.previous_segment_voice_metadata = \
+                    previous_segment_voice_metadata
                 try:
                     rhythm = command(start_offset, time_signatures)
                 except:
                     raise Exception(f'\n\n{format(wrapper)}')
                 rhythms.append(rhythm)
                 if command.persist and command.state:
-                    voice_metadata[command.persist] = command.state
+                    voice_metadata[command.key] = command.state
             if bool(voice_metadata):
                 self._voice_metadata[voice.name] = voice_metadata
             rhythms.sort()
@@ -1562,6 +1563,14 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         previous_state = dictionary.get(command_persist)
         return previous_state
+
+    def _get_previous_segment_voice_metadata(self, voice_name):
+        if not self.previous_metadata:
+            return
+        voice_metadata = self.previous_metadata.get('voice_metadata')
+        if not voice_metadata:
+            return
+        return voice_metadata.get(voice_name, abjad.OrderedDict())
 
     def _get_segment_measure_numbers(self):
         first_measure_number = self._get_first_measure_number()
@@ -5223,6 +5232,12 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Gets validate stage count.
         '''
         return self._validate_stage_count
+
+    @property
+    def voice_metadata(self) -> abjad.OrderedDict:
+        r'''Gets voice metadata.
+        '''
+        return self._voice_metadata
 
     @property
     def wrappers(self) -> List[CommandWrapper]:

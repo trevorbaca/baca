@@ -26,6 +26,7 @@ Bases
       ~HairpinCommand.left_broken
       ~HairpinCommand.manifests
       ~HairpinCommand.offset_to_measure_number
+      ~HairpinCommand.previous_segment_voice_metadata
       ~HairpinCommand.right_broken
       ~HairpinCommand.selector
       ~HairpinCommand.start
@@ -86,6 +87,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: HairpinCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.previous_segment_voice_metadata
 
 .. only:: html
 

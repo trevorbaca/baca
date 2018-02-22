@@ -1,8 +1,8 @@
 import abc
 import abjad
 import baca
+import typing
 from .Typing import List
-from .Typing import Optional
 from .Typing import Selector
 from .Typing import Union
 
@@ -22,6 +22,7 @@ class Command(abjad.AbjadObject):
         '_selector',
         '_tag_measure_number',
         '_tags',
+        '_previous_segment_voice_metadata',
         )
 
     _publish_storage_format = True
@@ -43,8 +44,9 @@ class Command(abjad.AbjadObject):
         if selector_ is not None:
             prototype = (abjad.Expression, MapCommand)
             assert isinstance(selector_, prototype), repr(selector_)
-        self._selector: Optional[abjad.Expression] = selector_
+        self._selector: typing.Optional[abjad.Expression] = selector_
         self._tags: List[abjad.Tag] = None
+        self.previous_segment_voice_metadata = None
         self.manifests = None
         self.offset_to_measure_number = None
         self.tag_measure_number = tag_measure_number
@@ -131,27 +133,28 @@ class Command(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def deactivate(self) -> Optional[bool]:
+    def deactivate(self) -> typing.Optional[bool]:
         r'''Is true when command deactivates tag.
         '''
         return self._deactivate
 
     @property
-    def manifests(self) -> Optional[abjad.OrderedDict]:
+    def manifests(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets segment-maker manifests.
         '''
         return self._manifests
 
     @manifests.setter
-    def manifests(self, dictionary):
+    def manifests(self, argument):
         prototype = (abjad.OrderedDict, type(None))
-        assert isinstance(dictionary, prototype), repr(dictionary)
-        self._manifests = dictionary
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._manifests = argument
         for command in getattr(self, 'commands', []):
-            command._manifests = dictionary
+            command._manifests = argument
 
     @property
-    def offset_to_measure_number(self) -> Optional[abjad.OrderedDict]:
+    def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets segment-maker offset-to-measure-number dictionary.
         '''
         return self._offset_to_measure_number
@@ -165,20 +168,20 @@ class Command(abjad.AbjadObject):
             command._offset_to_measure_number = dictionary
 
     @property
-    def selector(self) -> Optional[abjad.Expression]:
+    def selector(self) -> typing.Optional[abjad.Expression]:
         r'''Gets selector.
         '''
         return self._selector
 
     @property
-    def tag(self) -> Optional[abjad.Tag]:
+    def tag(self) -> typing.Optional[abjad.Tag]:
         r'''Gets tag.
         '''
         words = [str(_) for _ in self.tags]
         return abjad.Tag.from_words(words)
 
     @property
-    def tag_measure_number(self) -> Optional[bool]:
+    def tag_measure_number(self) -> typing.Optional[bool]:
         r'''Is true when command tags measure number.
         '''
         return self._tag_measure_number
@@ -197,9 +200,24 @@ class Command(abjad.AbjadObject):
         assert self._are_valid_tags(self._tags)
         return self._tags[:]
 
+    @property
+    def previous_segment_voice_metadata(self) -> typing.Optional[
+        abjad.OrderedDict]:
+        r'''Gets previous segment voice metadata.
+        '''
+        return self._previous_segment_voice_metadata
+
+    @previous_segment_voice_metadata.setter
+    def previous_segment_voice_metadata(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._previous_segment_voice_metadata = argument
+        for command in getattr(self, 'commands', []):
+            command._previous_segment_voice_metadata = argument
+
     ### PUBLIC METHODS ###
 
-    def get_tag(self, leaf: abjad.Leaf = None) -> Optional[abjad.Tag]:
+    def get_tag(self, leaf: abjad.Leaf = None) -> typing.Optional[abjad.Tag]:
         r'''Gets tag for `leaf`.
         '''
         tags = self.tags[:]

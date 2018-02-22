@@ -25,6 +25,7 @@ Bases
       ~RegisterInterpolationCommand.get_tag
       ~RegisterInterpolationCommand.manifests
       ~RegisterInterpolationCommand.offset_to_measure_number
+      ~RegisterInterpolationCommand.previous_segment_voice_metadata
       ~RegisterInterpolationCommand.selector
       ~RegisterInterpolationCommand.start_pitch
       ~RegisterInterpolationCommand.stop_pitch
@@ -76,6 +77,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RegisterInterpolationCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.previous_segment_voice_metadata
 
 .. only:: html
 

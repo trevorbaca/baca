@@ -26,6 +26,7 @@ Bases
       ~LabelCommand.get_tag
       ~LabelCommand.manifests
       ~LabelCommand.offset_to_measure_number
+      ~LabelCommand.previous_segment_voice_metadata
       ~LabelCommand.selector
       ~LabelCommand.tag
       ~LabelCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: LabelCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.previous_segment_voice_metadata
 
 .. only:: html
 

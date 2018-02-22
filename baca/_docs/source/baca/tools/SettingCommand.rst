@@ -26,6 +26,7 @@ Bases
       ~SettingCommand.get_tag
       ~SettingCommand.manifests
       ~SettingCommand.offset_to_measure_number
+      ~SettingCommand.previous_segment_voice_metadata
       ~SettingCommand.selector
       ~SettingCommand.setting
       ~SettingCommand.tag
@@ -83,6 +84,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: SettingCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.previous_segment_voice_metadata
 
 .. only:: html
 

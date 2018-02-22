@@ -28,6 +28,7 @@ Bases
       ~PiecewiseCommand.manifests
       ~PiecewiseCommand.offset_to_measure_number
       ~PiecewiseCommand.preamble
+      ~PiecewiseCommand.previous_segment_voice_metadata
       ~PiecewiseCommand.selector
       ~PiecewiseCommand.spanner
       ~PiecewiseCommand.tag
@@ -82,6 +83,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PiecewiseCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.previous_segment_voice_metadata
 
 .. only:: html
 

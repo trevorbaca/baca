@@ -27,6 +27,7 @@ Bases
       ~IndicatorCommand.indicators
       ~IndicatorCommand.manifests
       ~IndicatorCommand.offset_to_measure_number
+      ~IndicatorCommand.previous_segment_voice_metadata
       ~IndicatorCommand.selector
       ~IndicatorCommand.tag
       ~IndicatorCommand.tag_measure_number
@@ -80,6 +81,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: IndicatorCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.previous_segment_voice_metadata
 
 .. only:: html
 

@@ -26,6 +26,7 @@ Bases
       ~SuiteCommand.get_tag
       ~SuiteCommand.manifests
       ~SuiteCommand.offset_to_measure_number
+      ~SuiteCommand.previous_segment_voice_metadata
       ~SuiteCommand.selector
       ~SuiteCommand.tag
       ~SuiteCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: SuiteCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.previous_segment_voice_metadata
 
 .. only:: html
 

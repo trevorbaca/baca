@@ -29,6 +29,7 @@ Bases
       ~OverrideCommand.grob
       ~OverrideCommand.manifests
       ~OverrideCommand.offset_to_measure_number
+      ~OverrideCommand.previous_segment_voice_metadata
       ~OverrideCommand.selector
       ~OverrideCommand.tag
       ~OverrideCommand.tag_measure_number
@@ -89,6 +90,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: OverrideCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.previous_segment_voice_metadata
 
 .. only:: html
 

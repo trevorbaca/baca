@@ -26,6 +26,7 @@ Bases
       ~PitchFirstRhythmCommand.manifests
       ~PitchFirstRhythmCommand.offset_to_measure_number
       ~PitchFirstRhythmCommand.pattern
+      ~PitchFirstRhythmCommand.previous_segment_voice_metadata
       ~PitchFirstRhythmCommand.rhythm_maker
       ~PitchFirstRhythmCommand.selector
       ~PitchFirstRhythmCommand.tag
@@ -80,6 +81,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.previous_segment_voice_metadata
 
 .. only:: html
 

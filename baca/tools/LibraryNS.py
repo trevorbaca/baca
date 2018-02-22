@@ -574,7 +574,7 @@ class LibraryNS(abjad.AbjadObject):
         pitch,
         selector: Selector = 'baca.pleaves()',
         do_not_transpose: bool = None,
-        persist: str = None,
+        persist: bool = None,
         ) -> PitchCommand:
         r'''Sets pitch on ``selector`` output.
         '''
@@ -594,7 +594,7 @@ class LibraryNS(abjad.AbjadObject):
         pitches: typing.Iterable,
         allow_repeats: bool = None,
         exact: bool = None,
-        persist: str = None,
+        persist: bool = None,
         selector: Selector = 'baca.pleaves()',
         ) -> PitchCommand:
         r'''Sets pitches on ``selector`` output.

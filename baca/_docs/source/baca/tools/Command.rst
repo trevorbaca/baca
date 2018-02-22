@@ -23,6 +23,7 @@ Bases
       ~Command.get_tag
       ~Command.manifests
       ~Command.offset_to_measure_number
+      ~Command.previous_segment_voice_metadata
       ~Command.selector
       ~Command.tag
       ~Command.tag_measure_number
@@ -48,6 +49,8 @@ Read/write properties
 .. autoattribute:: Command.manifests
 
 .. autoattribute:: Command.offset_to_measure_number
+
+.. autoattribute:: Command.previous_segment_voice_metadata
 
 .. autoattribute:: Command.tag_measure_number
 

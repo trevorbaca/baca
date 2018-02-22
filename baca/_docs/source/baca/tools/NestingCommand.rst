@@ -26,6 +26,7 @@ Bases
       ~NestingCommand.lmr_specifier
       ~NestingCommand.manifests
       ~NestingCommand.offset_to_measure_number
+      ~NestingCommand.previous_segment_voice_metadata
       ~NestingCommand.selector
       ~NestingCommand.tag
       ~NestingCommand.tag_measure_number
@@ -80,6 +81,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: NestingCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.previous_segment_voice_metadata
 
 .. only:: html
 

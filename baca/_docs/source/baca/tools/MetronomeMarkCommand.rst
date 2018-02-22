@@ -26,6 +26,7 @@ Bases
       ~MetronomeMarkCommand.key
       ~MetronomeMarkCommand.manifests
       ~MetronomeMarkCommand.offset_to_measure_number
+      ~MetronomeMarkCommand.previous_segment_voice_metadata
       ~MetronomeMarkCommand.selector
       ~MetronomeMarkCommand.tag
       ~MetronomeMarkCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: MetronomeMarkCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.previous_segment_voice_metadata
 
 .. only:: html
 

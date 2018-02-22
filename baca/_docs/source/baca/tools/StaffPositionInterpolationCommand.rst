@@ -25,6 +25,7 @@ Bases
       ~StaffPositionInterpolationCommand.get_tag
       ~StaffPositionInterpolationCommand.manifests
       ~StaffPositionInterpolationCommand.offset_to_measure_number
+      ~StaffPositionInterpolationCommand.previous_segment_voice_metadata
       ~StaffPositionInterpolationCommand.selector
       ~StaffPositionInterpolationCommand.start_pitch
       ~StaffPositionInterpolationCommand.stop_pitch
@@ -80,6 +81,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.previous_segment_voice_metadata
 
 .. only:: html
 

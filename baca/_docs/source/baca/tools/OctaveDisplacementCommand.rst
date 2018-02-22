@@ -26,6 +26,7 @@ Bases
       ~OctaveDisplacementCommand.get_tag
       ~OctaveDisplacementCommand.manifests
       ~OctaveDisplacementCommand.offset_to_measure_number
+      ~OctaveDisplacementCommand.previous_segment_voice_metadata
       ~OctaveDisplacementCommand.selector
       ~OctaveDisplacementCommand.tag
       ~OctaveDisplacementCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: OctaveDisplacementCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.previous_segment_voice_metadata
 
 .. only:: html
 

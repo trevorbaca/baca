@@ -27,6 +27,7 @@ Bases
       ~RegisterToOctaveCommand.manifests
       ~RegisterToOctaveCommand.octave_number
       ~RegisterToOctaveCommand.offset_to_measure_number
+      ~RegisterToOctaveCommand.previous_segment_voice_metadata
       ~RegisterToOctaveCommand.selector
       ~RegisterToOctaveCommand.tag
       ~RegisterToOctaveCommand.tag_measure_number
@@ -80,6 +81,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RegisterToOctaveCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.previous_segment_voice_metadata
 
 .. only:: html
 

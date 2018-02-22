@@ -26,6 +26,7 @@ Bases
       ~ContainerCommand.identifier
       ~ContainerCommand.manifests
       ~ContainerCommand.offset_to_measure_number
+      ~ContainerCommand.previous_segment_voice_metadata
       ~ContainerCommand.selector
       ~ContainerCommand.tag
       ~ContainerCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ContainerCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.previous_segment_voice_metadata
 
 .. only:: html
 

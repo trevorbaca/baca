@@ -26,6 +26,7 @@ Bases
       ~MicrotoneDeviationCommand.get_tag
       ~MicrotoneDeviationCommand.manifests
       ~MicrotoneDeviationCommand.offset_to_measure_number
+      ~MicrotoneDeviationCommand.previous_segment_voice_metadata
       ~MicrotoneDeviationCommand.selector
       ~MicrotoneDeviationCommand.tag
       ~MicrotoneDeviationCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: MicrotoneDeviationCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.previous_segment_voice_metadata
 
 .. only:: html
 

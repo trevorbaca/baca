@@ -67,6 +67,7 @@ Bases
       ~SegmentMaker.transpose_score
       ~SegmentMaker.validate_measure_count
       ~SegmentMaker.validate_stage_count
+      ~SegmentMaker.voice_metadata
       ~SegmentMaker.wrappers
       ~SegmentMaker.__call__
       ~SegmentMaker.__eq__
@@ -177,6 +178,8 @@ Read-only properties
 .. autoattribute:: SegmentMaker.validate_measure_count
 
 .. autoattribute:: SegmentMaker.validate_stage_count
+
+.. autoattribute:: SegmentMaker.voice_metadata
 
 .. autoattribute:: SegmentMaker.wrappers
 

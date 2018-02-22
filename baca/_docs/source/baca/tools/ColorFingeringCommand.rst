@@ -26,6 +26,7 @@ Bases
       ~ColorFingeringCommand.manifests
       ~ColorFingeringCommand.numbers
       ~ColorFingeringCommand.offset_to_measure_number
+      ~ColorFingeringCommand.previous_segment_voice_metadata
       ~ColorFingeringCommand.selector
       ~ColorFingeringCommand.tag
       ~ColorFingeringCommand.tag_measure_number
@@ -77,6 +78,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ColorFingeringCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.previous_segment_voice_metadata
 
 .. only:: html
 

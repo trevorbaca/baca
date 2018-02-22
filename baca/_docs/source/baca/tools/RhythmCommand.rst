@@ -25,11 +25,12 @@ Bases
       ~RhythmCommand.division_expression
       ~RhythmCommand.division_maker
       ~RhythmCommand.get_tag
+      ~RhythmCommand.key
       ~RhythmCommand.left_broken
       ~RhythmCommand.manifests
       ~RhythmCommand.offset_to_measure_number
       ~RhythmCommand.persist
-      ~RhythmCommand.previous_state
+      ~RhythmCommand.previous_segment_voice_metadata
       ~RhythmCommand.reference_meters
       ~RhythmCommand.repeat_ties
       ~RhythmCommand.rewrite_meter
@@ -64,11 +65,11 @@ Read-only properties
 
 .. autoattribute:: RhythmCommand.division_maker
 
+.. autoattribute:: RhythmCommand.key
+
 .. autoattribute:: RhythmCommand.left_broken
 
 .. autoattribute:: RhythmCommand.persist
-
-.. autoattribute:: RhythmCommand.previous_state
 
 .. autoattribute:: RhythmCommand.reference_meters
 
@@ -128,6 +129,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.previous_segment_voice_metadata
 
 .. only:: html
 

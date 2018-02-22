@@ -33,7 +33,6 @@ class RhythmCommand(Command):
         '_division_expression',
         '_left_broken',
         '_persist',
-        '_previous_state',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
@@ -55,7 +54,7 @@ class RhythmCommand(Command):
         division_maker: DivisionMaker = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
-        persist: str = None,
+        persist: bool = None,
         reference_meters: typing.List = None,
         rewrite_meter: bool = None,
         rhythm_maker: typing.Union[
@@ -77,9 +76,8 @@ class RhythmCommand(Command):
             left_broken = bool(left_broken)
         self._left_broken: bool = left_broken
         if persist is not None:
-            assert isinstance(persist, str), repr(persist)
-        self._persist: str = persist
-        self._previous_state: abjad.OrderedDict = None
+            persist = bool(persist)
+        self._persist: bool = persist
         self._reference_meters: typing.List = reference_meters
         self._rewrite_meter: bool = rewrite_meter
         self._rhythm_maker: typing.Union[
@@ -238,10 +236,11 @@ class RhythmCommand(Command):
             divisions = baca.sequence(divisions).flatten(depth=-1)
             divisions = self._transform_divisions(divisions)
             start_offset = divisions[0].start_offset
-            selections = rhythm_maker(
-                divisions,
-                previous_state=self.previous_state,
-                )
+            previous_state = None
+            dictionary = self.previous_segment_voice_metadata
+            if dictionary:
+                previous_state = dictionary.get(abjad.tags.RHYTHM)
+            selections = rhythm_maker(divisions, previous_state=previous_state)
             self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
         assert self._all_are_selections(selections), repr(selections)
@@ -273,14 +272,14 @@ class RhythmCommand(Command):
         if not isinstance(self.rhythm_maker, rhythmos.RhythmMaker):
             return
         if (self.left_broken and
-            self.rhythm_maker.previous_state.get('incomplete_last_count')):
+            self.rhythm_maker.previous_state.get('incomplete_last_note')):
             if not self.repeat_ties:
                 raise Exception('left-broken ties must be repeat ties.')
             first_leaf = abjad.select(selections).leaf(0)
             if isinstance(first_leaf, abjad.Note):
                 abjad.attach(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
         if (self.right_broken and
-            self.rhythm_maker.state.get('incomplete_last_count')):
+            self.rhythm_maker.state.get('incomplete_last_note')):
             if self.repeat_ties:
                 raise Exception('right-broken ties must be conventional.')
             last_leaf = abjad.select(selections).leaf(-1)
@@ -311,22 +310,28 @@ class RhythmCommand(Command):
         return self._division_maker
 
     @property
+    def key(self) -> str:
+        r'''Gets persistence key.
+
+        ..  container:: example
+
+            >>> baca.RhythmCommand().key
+            'RHYTHM'
+
+        '''
+        return abjad.tags.RHYTHM
+
+    @property
     def left_broken(self) -> bool:
         r'''Is true when rhythm is left-broken.
         '''
         return self._left_broken
 
     @property
-    def persist(self) -> typing.Optional[str]:
-        '''Gets persist key.
+    def persist(self) -> typing.Optional[bool]:
+        '''Is true when command state persists after call.
         '''
         return self._persist
-
-    @property
-    def previous_state(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets previous state.
-        '''
-        return self._previous_state
 
     @property
     def reference_meters(self) -> typing.List:

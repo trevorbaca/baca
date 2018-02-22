@@ -26,10 +26,12 @@ Bases
       ~PitchCommand.deactivate
       ~PitchCommand.do_not_transpose
       ~PitchCommand.get_tag
+      ~PitchCommand.key
       ~PitchCommand.manifests
       ~PitchCommand.offset_to_measure_number
       ~PitchCommand.persist
       ~PitchCommand.pitches
+      ~PitchCommand.previous_segment_voice_metadata
       ~PitchCommand.previous_state
       ~PitchCommand.selector
       ~PitchCommand.state
@@ -54,6 +56,8 @@ Read-only properties
       .. autoattribute:: PitchCommand.deactivate
 
 .. autoattribute:: PitchCommand.do_not_transpose
+
+.. autoattribute:: PitchCommand.key
 
 .. autoattribute:: PitchCommand.persist
 
@@ -95,6 +99,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.previous_segment_voice_metadata
 
 .. only:: html
 

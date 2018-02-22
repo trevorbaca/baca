@@ -385,7 +385,6 @@ class PitchCommand(Command):
         '_mutated_score',
         '_persist',
         '_pitches',
-        '_previous_state',
         '_state',
         )
 
@@ -396,7 +395,7 @@ class PitchCommand(Command):
         allow_repeats: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
-        persist: str = None,
+        persist: bool = None,
         pitches: typing.Iterable = None,
         selector: Selector = None,
         ) -> None:
@@ -412,17 +411,15 @@ class PitchCommand(Command):
         self._do_not_transpose = do_not_transpose
         self._mutated_score = None
         if persist is not None:
-            assert isinstance(persist, str), repr(persist)
+            persist = bool(persist)
         self._persist = persist
         if pitches is not None:
             pitches = self._coerce_pitches(pitches)
         self._pitches = pitches
-        self._previous_state: abjad.OrderedDict = None
         self._state: abjad.OrderedDict = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
 
-    #def __call__(self, argument=None, previous_state=None) -> None:
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
         '''
@@ -443,11 +440,7 @@ class PitchCommand(Command):
         pitches = self.pitches
         if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
             pitches = abjad.CyclicTuple(pitches)
-        if self.previous_state:
-            string = 'pitches_consumed'
-            previous_pitches_consumed = self.previous_state.get(string, 0)
-        else:
-            previous_pitches_consumed = 0
+        previous_pitches_consumed = self._previous_pitches_consumed()
         if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
             pitches = abjad.CyclicTuple(pitches)
         pitches_consumed = 0
@@ -501,6 +494,24 @@ class PitchCommand(Command):
         else:
             pitches = abjad.CyclicTuple(items)
         return pitches
+
+    def _previous_pitches_consumed(self):
+        dictionary = self.previous_segment_voice_metadata
+        if not dictionary:
+            return 0
+        dictionary = dictionary.get(abjad.tags.PITCH, None)
+        if not dictionary:
+            return 0
+        pitches_consumed = dictionary.get('pitches_consumed', None)
+        if not pitches_consumed:
+            return 0
+        assert 1 <= pitches_consumed
+        dictionary = self.previous_segment_voice_metadata
+        dictionary = dictionary.get(abjad.tags.RHYTHM, None)
+        if dictionary:
+            if dictionary.get('incomplete_last_note', False):
+                pitches_consumed -= 1
+        return pitches_consumed
 
     def _mutates_score(self):
         pitches = self.pitches or []
@@ -584,8 +595,20 @@ class PitchCommand(Command):
         return self._do_not_transpose
 
     @property
-    def persist(self) -> typing.Optional[str]:
-        r'''Gets persist key.
+    def key(self) -> str:
+        r'''Gets persistence key.
+
+        ..  container:: example
+
+            >>> baca.PitchCommand().key
+            'PITCH'
+
+        '''
+        return abjad.tags.PITCH
+        
+    @property
+    def persist(self) -> typing.Optional[bool]:
+        r'''Is true when command state persists after call.
         '''
         return self._persist
 

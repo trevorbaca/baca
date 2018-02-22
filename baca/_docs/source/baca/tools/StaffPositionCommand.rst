@@ -28,6 +28,7 @@ Bases
       ~StaffPositionCommand.manifests
       ~StaffPositionCommand.numbers
       ~StaffPositionCommand.offset_to_measure_number
+      ~StaffPositionCommand.previous_segment_voice_metadata
       ~StaffPositionCommand.selector
       ~StaffPositionCommand.tag
       ~StaffPositionCommand.tag_measure_number
@@ -83,6 +84,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.previous_segment_voice_metadata
 
 .. only:: html
 

@@ -26,6 +26,7 @@ Bases
       ~SpannerCommand.left_broken
       ~SpannerCommand.manifests
       ~SpannerCommand.offset_to_measure_number
+      ~SpannerCommand.previous_segment_voice_metadata
       ~SpannerCommand.right_broken
       ~SpannerCommand.selector
       ~SpannerCommand.spanner
@@ -79,6 +80,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: SpannerCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.previous_segment_voice_metadata
 
 .. only:: html
 

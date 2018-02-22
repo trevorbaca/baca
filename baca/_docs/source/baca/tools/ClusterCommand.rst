@@ -26,6 +26,7 @@ Bases
       ~ClusterCommand.hide_flat_markup
       ~ClusterCommand.manifests
       ~ClusterCommand.offset_to_measure_number
+      ~ClusterCommand.previous_segment_voice_metadata
       ~ClusterCommand.selector
       ~ClusterCommand.start_pitch
       ~ClusterCommand.tag
@@ -79,6 +80,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ClusterCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.previous_segment_voice_metadata
 
 .. only:: html
 

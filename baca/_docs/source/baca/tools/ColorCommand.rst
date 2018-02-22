@@ -25,6 +25,7 @@ Bases
       ~ColorCommand.get_tag
       ~ColorCommand.manifests
       ~ColorCommand.offset_to_measure_number
+      ~ColorCommand.previous_segment_voice_metadata
       ~ColorCommand.selector
       ~ColorCommand.tag
       ~ColorCommand.tag_measure_number
@@ -74,6 +75,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ColorCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.previous_segment_voice_metadata
 
 .. only:: html
 
