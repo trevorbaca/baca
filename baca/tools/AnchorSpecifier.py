@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class AnchorSpecifier(abjad.AbjadValueObject):
@@ -38,10 +39,14 @@ class AnchorSpecifier(abjad.AbjadValueObject):
         if figure_name is not None:
             assert isinstance(figure_name, str), repr(figure_name)
         self._figure_name = figure_name
+        if isinstance(local_selector, str):
+            local_selector = eval(local_selector)
         if (local_selector is not None and
             not isinstance(local_selector, abjad.Expression)):
             raise TypeError(f'must be selector: {local_selector!r}.')
         self._local_selector = local_selector
+        if isinstance(remote_selector, str):
+            remote_selector = eval(remote_selector)
         if (remote_selector is not None and
             not isinstance(remote_selector, abjad.Expression)):
             raise TypeError(f'must be selector: {remote_selector!r}.')
