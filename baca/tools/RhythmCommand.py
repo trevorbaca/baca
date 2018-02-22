@@ -318,7 +318,7 @@ class RhythmCommand(Command):
 
     @property
     def persist(self) -> typing.Optional[str]:
-        '''Gets name for command persistence.
+        '''Gets persist key.
         '''
         return self._persist
 

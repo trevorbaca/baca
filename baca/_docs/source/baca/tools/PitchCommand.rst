@@ -28,8 +28,11 @@ Bases
       ~PitchCommand.get_tag
       ~PitchCommand.manifests
       ~PitchCommand.offset_to_measure_number
+      ~PitchCommand.persist
       ~PitchCommand.pitches
+      ~PitchCommand.previous_state
       ~PitchCommand.selector
+      ~PitchCommand.state
       ~PitchCommand.tag
       ~PitchCommand.tag_measure_number
       ~PitchCommand.tags
@@ -52,13 +55,19 @@ Read-only properties
 
 .. autoattribute:: PitchCommand.do_not_transpose
 
+.. autoattribute:: PitchCommand.persist
+
 .. autoattribute:: PitchCommand.pitches
+
+.. autoattribute:: PitchCommand.previous_state
 
 .. only:: html
 
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.selector
+
+.. autoattribute:: PitchCommand.state
 
 .. only:: html
 

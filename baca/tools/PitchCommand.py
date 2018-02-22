@@ -1,7 +1,9 @@
 import abjad
 import baca
 import collections
+import typing
 from .Command import Command
+from .Typing import Selector
 
 
 class PitchCommand(Command):
@@ -381,19 +383,23 @@ class PitchCommand(Command):
         '_cyclic',
         '_do_not_transpose',
         '_mutated_score',
+        '_persist',
         '_pitches',
+        '_previous_state',
+        '_state',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        allow_repeats=None,
-        cyclic=None,
-        do_not_transpose=None,
-        pitches=None,
-        selector=None,
-        ):
+        allow_repeats: bool = None,
+        cyclic: bool = None,
+        do_not_transpose: bool = None,
+        persist: str = None,
+        pitches: typing.Iterable = None,
+        selector: Selector = None,
+        ) -> None:
         Command.__init__(self, selector=selector)
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
@@ -405,16 +411,20 @@ class PitchCommand(Command):
             do_not_transpose = bool(do_not_transpose)
         self._do_not_transpose = do_not_transpose
         self._mutated_score = None
+        if persist is not None:
+            assert isinstance(persist, str), repr(persist)
+        self._persist = persist
         if pitches is not None:
             pitches = self._coerce_pitches(pitches)
         self._pitches = pitches
+        self._previous_state: abjad.OrderedDict = None
+        self._state: abjad.OrderedDict = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
 
+    #def __call__(self, argument=None, previous_state=None) -> None:
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
-
-        Returns none.
         '''
         if argument is None:
             return
@@ -433,8 +443,16 @@ class PitchCommand(Command):
         pitches = self.pitches
         if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
             pitches = abjad.CyclicTuple(pitches)
+        if self.previous_state:
+            string = 'pitches_consumed'
+            previous_pitches_consumed = self.previous_state.get(string, 0)
+        else:
+            previous_pitches_consumed = 0
+        if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
+            pitches = abjad.CyclicTuple(pitches)
+        pitches_consumed = 0
         for i, plt in enumerate(plts):
-            pitch = pitches[i]
+            pitch = pitches[i + previous_pitches_consumed]
             new_plt = self._set_lt_pitch(plt, pitch)
             if new_plt is not None:
                 self._mutated_score = True
@@ -445,6 +463,10 @@ class PitchCommand(Command):
             if self.do_not_transpose is True:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
+            pitches_consumed += 1
+        self._state = abjad.OrderedDict()
+        pitches_consumed += previous_pitches_consumed
+        self.state['pitches_consumed'] = pitches_consumed
 
     ### PRIVATE METHODS ###
 
@@ -544,37 +566,31 @@ class PitchCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_repeats(self):
+    def allow_repeats(self) -> bool:
         r'''Is true when command allows repeat pitches.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._allow_repeats
 
     @property
-    def cyclic(self):
+    def cyclic(self) -> bool:
         r'''Is true when command reads pitches cyclically.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._cyclic
 
     @property
-    def do_not_transpose(self):
+    def do_not_transpose(self) -> bool:
         r'''Is true when pitch escapes transposition.
         '''
         return self._do_not_transpose
 
     @property
-    def pitches(self):
+    def persist(self) -> typing.Optional[str]:
+        r'''Gets persist key.
+        '''
+        return self._persist
+
+    @property
+    def pitches(self) -> typing.Iterable:
         r'''Gets pitches.
 
         ..  container:: example
@@ -594,10 +610,17 @@ class PitchCommand(Command):
             NamedPitch("f''")
             NamedPitch("b''")
 
-        Defaults to none.
-
-        Set to pitches or none.
-
-        Returns pitches or none.
         '''
         return self._pitches
+
+    @property
+    def previous_state(self) -> abjad.OrderedDict:
+        r'''Gets previous state dictionary.
+        '''
+        return self._previous_state
+
+    @property
+    def state(self) -> abjad.OrderedDict:
+        r'''Gets state dictionary.
+        '''
+        return self._state

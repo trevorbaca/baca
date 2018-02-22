@@ -1110,12 +1110,24 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper.command.manifests = self.manifests
             dictionary = self._offset_to_measure_number
             wrapper.command.offset_to_measure_number = dictionary
+            persist = getattr(wrapper.command, 'persist', None)
+            if persist:
+                voice_name = wrapper.scope.voice_name
+                previous_state = self._get_previous_state(voice_name, persist)
+                wrapper.command._previous_state = previous_state
             try:
                 wrapper.command(selection)
             except:
                 traceback.print_exc()
                 raise Exception(f'can not interpret ...\n\n{format(wrapper)}')
             self._handle_mutator(wrapper)
+            if persist:
+                voice_metadata = self._voice_metadata.get(
+                    voice_name,
+                    abjad.OrderedDict(),
+                    )
+                voice_metadata[persist] = wrapper.command.state
+                self._voice_metadata[voice_name] = voice_metadata
         stop_time = time.time()
         count = int(stop_time - start_time)
         counter = abjad.String('second').pluralize(count)
@@ -1147,7 +1159,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
-                state = self._get_previous_state(voice, command.persist)
+                state = self._get_previous_state(voice.name, command.persist)
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
                 command._previous_state = state
@@ -1537,7 +1549,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.previous_metadata:
             return self.previous_metadata.get('stop_clock_time')
 
-    def _get_previous_state(self, voice, command_persist):
+    def _get_previous_state(self, voice_name, command_persist):
         if not self.previous_metadata:
             return
         if not command_persist:
@@ -1545,7 +1557,7 @@ class SegmentMaker(abjad.SegmentMaker):
         dictionary = self.previous_metadata.get('voice_metadata')
         if not bool(dictionary):
             return
-        dictionary = dictionary.get(voice.name)
+        dictionary = dictionary.get(voice_name)
         if not bool(dictionary):
             return
         previous_state = dictionary.get(command_persist)
