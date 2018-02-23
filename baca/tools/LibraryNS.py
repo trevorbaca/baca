@@ -300,6 +300,30 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def not_score(command: Command) -> Command:
+        r'''Tags ``command`` with ``-SCORE``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '-SCORE',
+            command,
+            )
+
+    @staticmethod
+    def not_segment(command: Command) -> Command:
+        r'''Tags ``command`` with ``-SEGMENT``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '-SEGMENT',
+            command,
+            )
+
+    @staticmethod
     def note_column_shift(
         n: Number,
         selector='baca.leaf(0)',
@@ -2763,6 +2787,18 @@ class LibraryNS(abjad.AbjadObject):
         return scopes
 
     @staticmethod
+    def score_only(command: Command) -> Command:
+        r'''Tags ``command`` with ``+SCORE``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '+SCORE',
+            command,
+            )
+
+    @staticmethod
     def scorewide_spacing(
         path: abjad.Path,
         fallback_duration: Union[tuple, abjad.Duration],
@@ -3466,6 +3502,18 @@ class LibraryNS(abjad.AbjadObject):
             value=abjad.Up,
             grob='script',
             selector=selector,
+            )
+
+    @staticmethod
+    def segment_only(command: Command) -> Command:
+        r'''Tags ``command`` with ``+SEGMENT``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '+SEGMENT',
+            command,
             )
 
     @staticmethod

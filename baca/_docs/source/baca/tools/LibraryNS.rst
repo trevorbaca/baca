@@ -23,6 +23,8 @@ Bases
       ~LibraryNS.natural_harmonics
       ~LibraryNS.nest
       ~LibraryNS.not_parts
+      ~LibraryNS.not_score
+      ~LibraryNS.not_segment
       ~LibraryNS.note_column_shift
       ~LibraryNS.ottava
       ~LibraryNS.ottava_bassa
@@ -56,12 +58,14 @@ Bases
       ~LibraryNS.rhythm
       ~LibraryNS.scope
       ~LibraryNS.scopes
+      ~LibraryNS.score_only
       ~LibraryNS.scorewide_spacing
       ~LibraryNS.script_color
       ~LibraryNS.script_extra_offset
       ~LibraryNS.script_staff_padding
       ~LibraryNS.scripts_down
       ~LibraryNS.scripts_up
+      ~LibraryNS.segment_only
       ~LibraryNS.shift_clef
       ~LibraryNS.shift_dynamic
       ~LibraryNS.shift_hairpin_start
@@ -106,6 +110,10 @@ Class & static methods
 .. automethod:: LibraryNS.nest
 
 .. automethod:: LibraryNS.not_parts
+
+.. automethod:: LibraryNS.not_score
+
+.. automethod:: LibraryNS.not_segment
 
 .. automethod:: LibraryNS.note_column_shift
 
@@ -173,6 +181,8 @@ Class & static methods
 
 .. automethod:: LibraryNS.scopes
 
+.. automethod:: LibraryNS.score_only
+
 .. automethod:: LibraryNS.scorewide_spacing
 
 .. automethod:: LibraryNS.script_color
@@ -184,6 +194,8 @@ Class & static methods
 .. automethod:: LibraryNS.scripts_down
 
 .. automethod:: LibraryNS.scripts_up
+
+.. automethod:: LibraryNS.segment_only
 
 .. automethod:: LibraryNS.shift_clef
 

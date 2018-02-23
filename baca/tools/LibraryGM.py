@@ -2071,3 +2071,72 @@ class LibraryGM(abjad.AbjadObject):
         return HorizontalSpacingSpecifier(
             minimum_width=duration,
             )
+
+    @staticmethod
+    def mmrest_text_color(
+        color: str = 'red',
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides multimeasure rest text color.
+        '''
+        return OverrideCommand(
+            attribute='color',
+            value=color,
+            grob='multi_measure_rest_text',
+            selector=selector,
+            )
+
+    @staticmethod
+    def mmrest_text_extra_offset(
+        pair: NumberPair,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides multimeasure rest text extra offset.
+        '''
+        return OverrideCommand(
+            attribute='extra_offset',
+            value=pair,
+            grob='multi_measure_rest_text',
+            selector=selector,
+            )
+
+    @staticmethod
+    def mmrest_text_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides multimeasure rest text padding.
+        '''
+        return OverrideCommand(
+            attribute='padding',
+            value=n,
+            grob='multi_measure_rest_text',
+            selector=selector,
+            )
+
+    @staticmethod
+    def mmrest_text_parent_center(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides multimeasure rest text parent alignment X to center.
+        '''
+        return OverrideCommand(
+            attribute='parent_alignment_X',
+            value=0,
+            grob='multi_measure_rest_text',
+            selector=selector,
+            )
+
+    @staticmethod
+    def mmrest_text_staff_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides multimeasure rest text staff padding.
+        '''
+        return OverrideCommand(
+            attribute='staff_padding',
+            value=n,
+            grob='multi_measure_rest_text',
+            selector=selector,
+            )
