@@ -1123,13 +1123,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise
             self._handle_mutator(wrapper)
             if getattr(wrapper.command, 'persist', None):
-                key = wrapper.command.key
+                parameter = wrapper.command.parameter
                 state = wrapper.command.state
                 assert 'name' not in state
                 state['name'] = wrapper.command.persist
                 if voice_name not in self.voice_metadata:
                     self.voice_metadata[voice_name] = abjad.OrderedDict()
-                self.voice_metadata[voice_name][key] = state
+                self.voice_metadata[voice_name][parameter] = state
         stop_time = time.time()
         count = int(stop_time - start_time)
         counter = abjad.String('second').pluralize(count)
@@ -1177,7 +1177,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     state = command.state
                     assert 'name' not in state
                     state['name'] = command.persist
-                    voice_metadata[command.key] = command.state
+                    voice_metadata[command.parameter] = command.state
             if bool(voice_metadata):
                 self._voice_metadata[voice.name] = voice_metadata
             rhythms.sort()

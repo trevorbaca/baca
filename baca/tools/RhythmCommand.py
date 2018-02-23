@@ -309,19 +309,6 @@ class RhythmCommand(Command):
         '''
         return self._division_maker
 
-    # TODO: change to self.parameter
-    @property
-    def key(self) -> str:
-        r'''Gets persistence key.
-
-        ..  container:: example
-
-            >>> baca.RhythmCommand().key
-            'RHYTHM'
-
-        '''
-        return abjad.tags.RHYTHM
-
     @property
     def left_broken(self) -> bool:
         r'''Is true when rhythm is left-broken.
@@ -329,8 +316,20 @@ class RhythmCommand(Command):
         return self._left_broken
 
     @property
+    def parameter(self) -> str:
+        r'''Gets persistence parameter.
+
+        ..  container:: example
+
+            >>> baca.RhythmCommand().parameter
+            'RHYTHM'
+
+        '''
+        return abjad.tags.RHYTHM
+
+    @property
     def persist(self) -> typing.Optional[str]:
-        '''Gets persistence key.
+        '''Gets persist name.
         '''
         return self._persist
 

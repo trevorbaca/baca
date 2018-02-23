@@ -594,14 +594,13 @@ class PitchCommand(Command):
         '''
         return self._do_not_transpose
 
-    # TODO: change to self.parameter
     @property
-    def key(self) -> str:
-        r'''Gets persistence key.
+    def parameter(self) -> str:
+        r'''Gets persistence parameter.
 
         ..  container:: example
 
-            >>> baca.PitchCommand().key
+            >>> baca.PitchCommand().parameter
             'PITCH'
 
         '''
@@ -609,7 +608,7 @@ class PitchCommand(Command):
         
     @property
     def persist(self) -> typing.Optional[str]:
-        r'''Gets persistence key.
+        r'''Gets persist name.
         '''
         return self._persist
 

@@ -25,10 +25,10 @@ Bases
       ~RhythmCommand.division_expression
       ~RhythmCommand.division_maker
       ~RhythmCommand.get_tag
-      ~RhythmCommand.key
       ~RhythmCommand.left_broken
       ~RhythmCommand.manifests
       ~RhythmCommand.offset_to_measure_number
+      ~RhythmCommand.parameter
       ~RhythmCommand.persist
       ~RhythmCommand.previous_segment_voice_metadata
       ~RhythmCommand.reference_meters
@@ -65,9 +65,9 @@ Read-only properties
 
 .. autoattribute:: RhythmCommand.division_maker
 
-.. autoattribute:: RhythmCommand.key
-
 .. autoattribute:: RhythmCommand.left_broken
+
+.. autoattribute:: RhythmCommand.parameter
 
 .. autoattribute:: RhythmCommand.persist
 

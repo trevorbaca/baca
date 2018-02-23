@@ -26,9 +26,9 @@ Bases
       ~PitchCommand.deactivate
       ~PitchCommand.do_not_transpose
       ~PitchCommand.get_tag
-      ~PitchCommand.key
       ~PitchCommand.manifests
       ~PitchCommand.offset_to_measure_number
+      ~PitchCommand.parameter
       ~PitchCommand.persist
       ~PitchCommand.pitches
       ~PitchCommand.previous_segment_voice_metadata
@@ -56,7 +56,7 @@ Read-only properties
 
 .. autoattribute:: PitchCommand.do_not_transpose
 
-.. autoattribute:: PitchCommand.key
+.. autoattribute:: PitchCommand.parameter
 
 .. autoattribute:: PitchCommand.persist
 
