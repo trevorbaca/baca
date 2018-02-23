@@ -382,6 +382,7 @@ class PitchCommand(Command):
         '_allow_repeats',
         '_cyclic',
         '_do_not_transpose',
+        '_ignore_incomplete',
         '_mutated_score',
         '_persist',
         '_pitches',
@@ -395,6 +396,7 @@ class PitchCommand(Command):
         allow_repeats: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
+        ignore_incomplete: bool = None,
         persist: str = None,
         pitches: typing.Iterable = None,
         selector: Selector = None,
@@ -409,6 +411,9 @@ class PitchCommand(Command):
         if do_not_transpose is not None:
             do_not_transpose = bool(do_not_transpose)
         self._do_not_transpose = do_not_transpose
+        if ignore_incomplete is not None:
+            ignore_incomplete = bool(ignore_incomplete)
+        self._ignore_incomplete = ignore_incomplete
         self._mutated_score = None
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
@@ -502,10 +507,14 @@ class PitchCommand(Command):
         dictionary = dictionary.get(abjad.tags.PITCH, None)
         if not dictionary:
             return 0
+        if dictionary.get('name') != self.persist:
+            return 0
         pitches_consumed = dictionary.get('pitches_consumed', None)
         if not pitches_consumed:
             return 0
         assert 1 <= pitches_consumed
+        if self.ignore_incomplete:
+            return pitches_consumed
         dictionary = self.previous_segment_voice_metadata
         dictionary = dictionary.get(abjad.tags.RHYTHM, None)
         if dictionary:
@@ -593,6 +602,13 @@ class PitchCommand(Command):
         r'''Is true when pitch escapes transposition.
         '''
         return self._do_not_transpose
+
+    @property
+    def ignore_incomplete(self) -> bool:
+        r'''Is true when persistent pitch command ignores previous segment
+        incomplete last note.
+        '''
+        return self._ignore_incomplete
 
     @property
     def parameter(self) -> str:

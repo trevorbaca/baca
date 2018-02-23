@@ -574,12 +574,17 @@ class LibraryNS(abjad.AbjadObject):
         pitch,
         selector: Selector = 'baca.pleaves()',
         do_not_transpose: bool = None,
-        persist: bool = None,
+        persist: str = None,
         ) -> PitchCommand:
         r'''Sets pitch on ``selector`` output.
         '''
         if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
             raise Exception(f'one-note chord {pitch!r}?')
+        if do_not_transpose not in (None, True, False):
+            raise Exception('do_not_transpose must be boolean'
+                f' (not {do_not_transpose!r}).')
+        if persist is not None and not isinstance(persist, str):
+            raise Exception(f'persist name must be string (not {persist!r}).')
         return PitchCommand(
             allow_repeats=True,
             cyclic=True,
@@ -593,19 +598,34 @@ class LibraryNS(abjad.AbjadObject):
     def pitches(
         pitches: typing.Iterable,
         allow_repeats: bool = None,
+        do_not_transpose: bool = None,
         exact: bool = None,
-        persist: bool = None,
+        ignore_incomplete: bool = None,
+        persist: str = None,
         selector: Selector = 'baca.pleaves()',
         ) -> PitchCommand:
         r'''Sets pitches on ``selector`` output.
         '''
+        if do_not_transpose not in (None, True, False):
+            raise Exception('do_not_transpose must be boolean'
+                f' (not {do_not_transpose!r}).')
         if bool(exact):
             cyclic = False
         else:
             cyclic = True
+        if ignore_incomplete not in (None, True, False):
+            raise Exception('ignore_incomplete must be boolean'
+                f' (not {ignore_incomplete!r}).')
+        if ignore_incomplete is True and not persist:
+            raise Exception(f'ignore_incomplete is ignored'
+                ' when persist is not set.')
+        if persist is not None and not isinstance(persist, str):
+            raise Exception(f'persist name must be string (not {persist!r}).')
         return PitchCommand(
             allow_repeats=allow_repeats,
             cyclic=cyclic,
+            do_not_transpose=do_not_transpose,
+            ignore_incomplete=ignore_incomplete,
             persist=persist,
             pitches=pitches,
             selector=selector,

@@ -26,6 +26,7 @@ Bases
       ~PitchCommand.deactivate
       ~PitchCommand.do_not_transpose
       ~PitchCommand.get_tag
+      ~PitchCommand.ignore_incomplete
       ~PitchCommand.manifests
       ~PitchCommand.offset_to_measure_number
       ~PitchCommand.parameter
@@ -55,6 +56,8 @@ Read-only properties
       .. autoattribute:: PitchCommand.deactivate
 
 .. autoattribute:: PitchCommand.do_not_transpose
+
+.. autoattribute:: PitchCommand.ignore_incomplete
 
 .. autoattribute:: PitchCommand.parameter
 

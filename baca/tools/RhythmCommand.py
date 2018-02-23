@@ -240,6 +240,8 @@ class RhythmCommand(Command):
             dictionary = self.previous_segment_voice_metadata
             if dictionary:
                 previous_state = dictionary.get(abjad.tags.RHYTHM)
+                if previous_state.get('name') != self.persist:
+                    previous_state = None
             selections = rhythm_maker(divisions, previous_state=previous_state)
             self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
