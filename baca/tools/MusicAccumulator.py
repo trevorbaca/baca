@@ -217,8 +217,6 @@ class MusicAccumulator(abjad.AbjadObject):
             first_start_offset = floating_selections[0].start_offset
         except:
             raise Exception(floating_selections, voice_name)
-        #timespans = [_.timespan for _ in floating_selections]
-        #timespans = abjad.TimespanList(timespans)
         timespans = abjad.TimespanList(floating_selections)
         gaps = ~timespans
         if 0 < first_start_offset:

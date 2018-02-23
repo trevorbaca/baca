@@ -45,6 +45,7 @@ Bases
       ~RangeDictionary.pop
       ~RangeDictionary.popitem
       ~RangeDictionary.setdefault
+      ~RangeDictionary.sort
       ~RangeDictionary.update
       ~RangeDictionary.values
       ~RangeDictionary.__cmp__
@@ -130,6 +131,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: RangeDictionary.setdefault
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: RangeDictionary.sort
 
 .. only:: html
 

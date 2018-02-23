@@ -54,7 +54,7 @@ class RhythmCommand(Command):
         division_maker: DivisionMaker = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
-        persist: bool = None,
+        persist: str = None,
         reference_meters: typing.List = None,
         rewrite_meter: bool = None,
         rhythm_maker: typing.Union[
@@ -76,8 +76,8 @@ class RhythmCommand(Command):
             left_broken = bool(left_broken)
         self._left_broken: bool = left_broken
         if persist is not None:
-            persist = bool(persist)
-        self._persist: bool = persist
+            assert isinstance(persist, str), repr(persist)
+        self._persist: str = persist
         self._reference_meters: typing.List = reference_meters
         self._rewrite_meter: bool = rewrite_meter
         self._rhythm_maker: typing.Union[
@@ -309,6 +309,7 @@ class RhythmCommand(Command):
         '''
         return self._division_maker
 
+    # TODO: change to self.parameter
     @property
     def key(self) -> str:
         r'''Gets persistence key.
@@ -328,8 +329,8 @@ class RhythmCommand(Command):
         return self._left_broken
 
     @property
-    def persist(self) -> typing.Optional[bool]:
-        '''Is true when command state persists after call.
+    def persist(self) -> typing.Optional[str]:
+        '''Gets persistence key.
         '''
         return self._persist
 

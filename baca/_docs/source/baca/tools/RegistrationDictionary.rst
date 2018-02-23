@@ -45,6 +45,7 @@ Bases
       ~RegistrationDictionary.pop
       ~RegistrationDictionary.popitem
       ~RegistrationDictionary.setdefault
+      ~RegistrationDictionary.sort
       ~RegistrationDictionary.update
       ~RegistrationDictionary.values
       ~RegistrationDictionary.__cmp__
@@ -129,6 +130,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: RegistrationDictionary.setdefault
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: RegistrationDictionary.sort
 
 .. only:: html
 

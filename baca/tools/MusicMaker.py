@@ -1029,13 +1029,6 @@ class MusicMaker(abjad.AbjadObject):
         time_signature = abjad.TimeSignature(duration)
         return time_signature
 
-    def _print_state_manifest(self):
-        state_manifest = self._make_state_manifest()
-        for key in sorted(state_manifest):
-            value = state_manifest[key]
-            message = f'{key}: {value}'
-            print(message)
-
     @staticmethod
     def _to_pitch_item_class(item_class):
         if item_class in (abjad.NamedPitch, abjad.NumberedPitch):

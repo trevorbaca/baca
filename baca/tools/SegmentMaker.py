@@ -1125,6 +1125,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if getattr(wrapper.command, 'persist', None):
                 key = wrapper.command.key
                 state = wrapper.command.state
+                assert 'name' not in state
+                state['name'] = wrapper.command.persist
                 if voice_name not in self.voice_metadata:
                     self.voice_metadata[voice_name] = abjad.OrderedDict()
                 self.voice_metadata[voice_name][key] = state
@@ -1172,6 +1174,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     raise
                 rhythms.append(rhythm)
                 if command.persist and command.state:
+                    state = command.state
+                    assert 'name' not in state
+                    state['name'] = command.persist
                     voice_metadata[command.key] = command.state
             if bool(voice_metadata):
                 self._voice_metadata[voice.name] = voice_metadata
@@ -1288,34 +1293,42 @@ class SegmentMaker(abjad.SegmentMaker):
         return dictionary
 
     def _collect_metadata(self):
-        result = abjad.OrderedDict()
-        result['alive_during_segment'] = self._collect_alive_during_segment()
-        result['container_to_part'] = self._container_to_part
-        result['duration'] = self._duration
-        result['fermata_measure_numbers'] = self._fermata_measure_numbers
+        metadata = abjad.OrderedDict()
+        metadata['alive_during_segment'] = self._collect_alive_during_segment()
+        if self._container_to_part:
+            metadata['container_to_part'] = self._container_to_part
+        if self._duration is not None:
+            metadata['duration'] = self._duration
+        if self._fermata_measure_numbers:
+            metadata['fermata_measure_numbers'] = self._fermata_measure_numbers
         dictionary = self._collect_first_appearance_margin_markup()
-        result['first_appearance_margin_markup'] = dictionary
-        result['first_measure_number'] = self._get_first_measure_number()
-        result['last_measure_number'] = self._get_last_measure_number()
+        if dictionary:
+            metadata['first_appearance_margin_markup'] = dictionary
+        metadata['first_measure_number'] = self._get_first_measure_number()
+        metadata['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
-            result['last_measure_is_fermata'] = True
-        result['metronome_mark_spanner_right_broken'] = \
-            self.metronome_mark_spanner_right_broken
-        result['persistent_indicators'] = self._collect_persistent_indicators()
-        result['segment_name'] = self.segment_name
-        result['segment_number'] = self._get_segment_number()
-        result['sounds_during_segment'] = self._sounds_during_segment
-        result['start_clock_time'] = self._start_clock_time
-        result['stop_clock_time'] = self._stop_clock_time
-        result['time_signatures'] = self._cached_time_signatures
-        result['voice_metadata'] = self._voice_metadata
-        items = sorted(result.items())
-        metadata = abjad.OrderedDict(items)
+            metadata['last_measure_is_fermata'] = True
+        if self.metronome_mark_spanner_right_broken:
+            metadata['metronome_mark_spanner_right_broken'] = \
+                self.metronome_mark_spanner_right_broken
+        metadata['persistent_indicators'] = \
+            self._collect_persistent_indicators()
+        if self.segment_name is not None:
+            metadata['segment_name'] = self.segment_name
+        metadata['segment_number'] = self._get_segment_number()
+        metadata['sounds_during_segment'] = self._sounds_during_segment
+        if self._start_clock_time is not None:
+            metadata['start_clock_time'] = self._start_clock_time
+        if self._stop_clock_time is not None:
+            metadata['stop_clock_time'] = self._stop_clock_time
+        metadata['time_signatures'] = self._cached_time_signatures
+        if self.voice_metadata:
+            metadata['voice_metadata'] = self.voice_metadata
         self.metadata.update(metadata)
-        items = list(self.metadata.items())
-        for key, value in items:
+        self.metadata.sort(recurse=True)
+        for key, value in self.metadata.items():
             if not bool(value):
-                del(self.metadata[key])
+                raise Exception(key, value)
 
     def _collect_persistent_indicators(self):
         result = abjad.OrderedDict()

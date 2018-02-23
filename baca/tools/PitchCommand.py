@@ -395,7 +395,7 @@ class PitchCommand(Command):
         allow_repeats: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
-        persist: bool = None,
+        persist: str = None,
         pitches: typing.Iterable = None,
         selector: Selector = None,
         ) -> None:
@@ -411,7 +411,7 @@ class PitchCommand(Command):
         self._do_not_transpose = do_not_transpose
         self._mutated_score = None
         if persist is not None:
-            persist = bool(persist)
+            assert isinstance(persist, str), repr(persist)
         self._persist = persist
         if pitches is not None:
             pitches = self._coerce_pitches(pitches)
@@ -594,6 +594,7 @@ class PitchCommand(Command):
         '''
         return self._do_not_transpose
 
+    # TODO: change to self.parameter
     @property
     def key(self) -> str:
         r'''Gets persistence key.
@@ -607,8 +608,8 @@ class PitchCommand(Command):
         return abjad.tags.PITCH
         
     @property
-    def persist(self) -> typing.Optional[bool]:
-        r'''Is true when command state persists after call.
+    def persist(self) -> typing.Optional[str]:
+        r'''Gets persistence key.
         '''
         return self._persist
 

@@ -238,9 +238,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     }   % measure
                 }
 
-            >>> rhythm_maker._print_state()
-            _next_attack: 9
-            _next_segment: 3
+            >>> abjad.f(rhythm_maker._make_state())
+            abjad.OrderedDict(
+                [
+                    ('_next_attack', 9),
+                    ('_next_segment', 3),
+                    ]
+                )
 
         ..  container:: example
 
@@ -291,9 +295,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     }   % measure
                 }
 
-            >>> rhythm_maker._print_state()
-            _next_attack: 11
-            _next_segment: 3
+            >>> abjad.f(rhythm_maker._make_state())
+            abjad.OrderedDict(
+                [
+                    ('_next_attack', 11),
+                    ('_next_segment', 3),
+                    ]
+                )
 
         Returns selections together with state manifest.
         '''
@@ -697,8 +705,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         return selection
 
     def _make_state(self):
-        state = {}
-        for name in self._state_variables:
+        state = abjad.OrderedDict()
+        for name in sorted(self._state_variables):
             value = getattr(self, name)
             state[name] = value
         return state
@@ -738,13 +746,6 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         while abjad.Multiplier(2) <= multiplier:
             multiplier /= 2
         return multiplier
-
-    def _print_state(self):
-        state = self._make_state()
-        for key in sorted(state):
-            value = state[key]
-            message = f'{key}: {value}'
-            print(message)
 
     ### PUBLIC PROPERTIES ###
 
