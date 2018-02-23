@@ -1118,8 +1118,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 previous_segment_voice_metadata
             try:
                 wrapper.command(selection)
-            except Exception as exception:
-                print(f'Can not interpret ...\n\n{format(wrapper)}\n')
+            except:
+                print(f'Interpreting ...\n\n{format(wrapper)}\n')
                 raise
             self._handle_mutator(wrapper)
             if getattr(wrapper.command, 'persist', None):
@@ -1163,14 +1163,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 command = wrapper.command
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
-#                state = self._get_previous_state(voice.name, command.persist)
-#                command._previous_state = state
                 command.previous_segment_voice_metadata = \
                     previous_segment_voice_metadata
                 try:
                     rhythm = command(start_offset, time_signatures)
                 except:
-                    raise Exception(f'\n\n{format(wrapper)}')
+                    print(f'Interpreting ...\n\n{format(wrapper)}\n')
+                    raise
                 rhythms.append(rhythm)
                 if command.persist and command.state:
                     voice_metadata[command.key] = command.state
@@ -2131,8 +2130,8 @@ class SegmentMaker(abjad.SegmentMaker):
             try:
                 leaves_by_stage_number = self._cache[scope.voice_name]
             except KeyError:
-                message = f'unknown voice {scope.voice_name!r}.'
-                raise Exception(message)
+                print(f'Unknown voice {scope.voice_name} ...\n')
+                raise
             start = scope.stages[0]
             if (scope.stages[1] == abjad.Infinity or
                 scope.stages[1] is abjad.Infinity):
