@@ -2,6 +2,7 @@ import abjad
 import baca
 import os
 import pathlib
+import sys
 import time
 import traceback
 from abjad import rhythmmakertools as rhythmos
@@ -569,7 +570,7 @@ class SegmentMaker(abjad.SegmentMaker):
             assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
         for command in commands:
             if not isinstance(command, baca.Command):
-                raise Exception(f'commands only:\n\n{format(command)}')
+                raise Exception(f'\n\nNot a command:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
                 wrapper = baca.CommandWrapper(command=command, scope=scope)
@@ -732,7 +733,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for rhythm in rhythms:
             start_offset = rhythm.start_offset
             if start_offset < previous_stop_offset:
-                raise Exception(f'{voice!r} has overlapping rhythms.')
+                raise Exception(f'{voice} has overlapping rhythms.')
             duration = abjad.inspect(rhythm.annotation).get_duration()
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
@@ -1117,13 +1118,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 previous_segment_voice_metadata
             try:
                 wrapper.command(selection)
-            except:
-                traceback.print_exc()
-                raise Exception(f'can not interpret ...\n\n{format(wrapper)}')
+            except Exception as exception:
+                print(f'Can not interpret ...\n\n{format(wrapper)}\n')
+                raise
             self._handle_mutator(wrapper)
             if getattr(wrapper.command, 'persist', None):
                 key = wrapper.command.key
                 state = wrapper.command.state
+                if voice_name not in self.voice_metadata:
+                    self.voice_metadata[voice_name] = abjad.OrderedDict()
                 self.voice_metadata[voice_name][key] = state
         stop_time = time.time()
         count = int(stop_time - start_time)
