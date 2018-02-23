@@ -22,12 +22,14 @@ Bases
       ~LibraryNS.natural_clusters
       ~LibraryNS.natural_harmonics
       ~LibraryNS.nest
+      ~LibraryNS.not_parts
+      ~LibraryNS.note_column_shift
       ~LibraryNS.ottava
       ~LibraryNS.ottava_bassa
       ~LibraryNS.ottava_bracket_staff_padding
       ~LibraryNS.page
       ~LibraryNS.page_break
-      ~LibraryNS.parts
+      ~LibraryNS.parts_only
       ~LibraryNS.piecewise
       ~LibraryNS.pitch
       ~LibraryNS.pitches
@@ -54,7 +56,6 @@ Bases
       ~LibraryNS.rhythm
       ~LibraryNS.scope
       ~LibraryNS.scopes
-      ~LibraryNS.score
       ~LibraryNS.scorewide_spacing
       ~LibraryNS.script_color
       ~LibraryNS.script_extra_offset
@@ -104,6 +105,10 @@ Class & static methods
 
 .. automethod:: LibraryNS.nest
 
+.. automethod:: LibraryNS.not_parts
+
+.. automethod:: LibraryNS.note_column_shift
+
 .. automethod:: LibraryNS.ottava
 
 .. automethod:: LibraryNS.ottava_bassa
@@ -114,7 +119,7 @@ Class & static methods
 
 .. automethod:: LibraryNS.page_break
 
-.. automethod:: LibraryNS.parts
+.. automethod:: LibraryNS.parts_only
 
 .. automethod:: LibraryNS.piecewise
 
@@ -167,8 +172,6 @@ Class & static methods
 .. automethod:: LibraryNS.scope
 
 .. automethod:: LibraryNS.scopes
-
-.. automethod:: LibraryNS.score
 
 .. automethod:: LibraryNS.scorewide_spacing
 

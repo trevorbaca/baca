@@ -71,6 +71,7 @@ Bases
       ~LibraryAF.fermata
       ~LibraryAF.flageolets
       ~LibraryAF.flags
+      ~LibraryAF.force_accidentals
       ~LibraryAF.fuse_compound_quarter_divisions
       ~LibraryAF.__format__
       ~LibraryAF.__repr__
@@ -181,6 +182,8 @@ Class & static methods
 .. automethod:: LibraryAF.flageolets
 
 .. automethod:: LibraryAF.flags
+
+.. automethod:: LibraryAF.force_accidentals
 
 .. automethod:: LibraryAF.fuse_compound_quarter_divisions
 

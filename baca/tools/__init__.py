@@ -4,6 +4,7 @@ scheme = SchemeManifest()
 
 # everything else
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
+from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
 from .BreakMeasureMap import BreakMeasureMap

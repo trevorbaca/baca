@@ -90,6 +90,7 @@ baca.tools
 .. toctree::
    :hidden:
 
+   AccidentalAdjustmentCommand
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
@@ -125,6 +126,7 @@ baca.tools
 .. autosummary::
    :nosignatures:
 
+   ~baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
    ~baca.tools.ClusterCommand.ClusterCommand
    ~baca.tools.ColorCommand.ColorCommand
    ~baca.tools.ColorFingeringCommand.ColorFingeringCommand

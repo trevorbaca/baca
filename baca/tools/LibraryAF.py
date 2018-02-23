@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from abjad import rhythmmakertools as rhythmos
+from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
@@ -938,7 +939,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             after=after,
             attribute='bar_extent',
             value=pair,
@@ -3046,7 +3047,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='style',
             value='cross',
             grob='note_head',
@@ -3980,7 +3981,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.tools.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('tongue #2')],
             selector=selector,
             )
@@ -5782,6 +5783,17 @@ class LibraryAF(abjad.AbjadObject):
         return rhythmos.BeamSpecifier(
             beam_divisions_together=False,
             beam_each_division=False,
+            )
+
+    @staticmethod
+    def force_accidentals(
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> AccidentalAdjustmentCommand:
+        r'''Forces accidentals.
+        '''
+        return AccidentalAdjustmentCommand(
+            forced=True,
+            selector=selector,
             )
 
     @staticmethod

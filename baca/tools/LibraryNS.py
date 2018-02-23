@@ -288,6 +288,32 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def not_parts(command: Command) -> Command:
+        r'''Tags ``command`` with ``-PARTS``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '-PARTS',
+            command,
+            )
+
+    @staticmethod
+    def note_column_shift(
+        n: Number,
+        selector='baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides note column force hshift.
+        '''
+        return OverrideCommand(
+            attribute='force_hshift',
+            value=n,
+            grob='note_column',
+            selector=selector,
+            )
+
+    @staticmethod
     def ottava(
         selector: Selector = 'baca.tleaves()',
         ) -> SpannerCommand:
@@ -539,7 +565,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def parts(command: Command) -> Command:
+    def parts_only(command: Command) -> Command:
         r'''Tags ``command`` with ``+PARTS``.
 
         Returns ``command``.
@@ -2735,18 +2761,6 @@ class LibraryNS(abjad.AbjadObject):
                 scope = Scope(*argument)
             scopes.append(scope)
         return scopes
-
-    @staticmethod
-    def score(command: Command) -> Command:
-        r'''Tags ``command`` with ``-PARTS``.
-
-        Returns ``command``.
-        '''
-        from baca.tools.LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
-            '-PARTS',
-            command,
-            )
 
     @staticmethod
     def scorewide_spacing(

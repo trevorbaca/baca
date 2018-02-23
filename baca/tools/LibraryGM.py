@@ -625,7 +625,7 @@ class LibraryGM(abjad.AbjadObject):
         ) -> OverrideCommand:
         r'''Overrides hairpin shorten pair.
         '''
-        return baca.tools.OverrideCommand(
+        return OverrideCommand(
             attribute='shorten_pair',
             value=pair,
             grob='hairpin',

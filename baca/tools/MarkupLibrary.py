@@ -443,20 +443,20 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def edition(score, parts, selector='baca.pleaf(0)'):
-        r'''Makes score / parts markup suite.
+    def edition(not_parts, parts_only, selector='baca.pleaf(0)'):
+        r'''Makes not-parts / parts-only markup suite.
         '''
         import baca
-        if isinstance(score, str):
-            score = baca.markup(score)
-        assert isinstance(score, baca.IndicatorCommand)
-        score = baca.score(score)
-        if isinstance(parts, str):
-            parts = baca.markup(parts)
-        assert isinstance(parts, baca.IndicatorCommand)
-        parts = baca.parts(parts)
+        if isinstance(not_parts, str):
+            not_parts = baca.markup(not_parts)
+        assert isinstance(not_parts, baca.IndicatorCommand)
+        not_parts = baca.not_parts(not_parts)
+        if isinstance(parts_only, str):
+            parts_only = baca.markup(parts_only)
+        assert isinstance(parts_only, baca.IndicatorCommand)
+        parts_only = baca.parts_only(parts_only)
         return baca.suite(
-            [score, parts],
+            [not_parts, parts_only],
             selector=selector,
             )
 
