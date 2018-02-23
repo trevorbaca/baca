@@ -116,6 +116,7 @@ class AccidentalAdjustmentCommand(Command):
         if parenthesized is not None:
             parenthesized = bool(parenthesized)
         self._parenthesized = parenthesized
+        self._tags = []
 
     ### SPECIAL METHODS ###
 
@@ -126,6 +127,11 @@ class AccidentalAdjustmentCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
+        if self.tag:
+            if not self.tag.edition_specific():
+                raise Exception(f'tag must be edition-specific: {self.tag!r}.')
+            alternative_tag = self.tag.prepend('AJC')
+            primary_tag = alternative_tag.invert_edition_specific()
         for pleaf in baca.select(argument).pleaves():
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]
@@ -133,12 +139,26 @@ class AccidentalAdjustmentCommand(Command):
                 assert isinstance(pleaf, abjad.Chord)
                 note_heads = pleaf.note_heads
             for note_head in note_heads:
-                if self.cautionary:
-                    note_head.is_cautionary = True
-                if self.forced:
-                    note_head.is_forced = True
-                if self.parenthesized:
-                    note_head.is_parenthesized = True
+                if not self.tag:
+                    if self.cautionary:
+                        note_head.is_cautionary = True
+                    if self.forced:
+                        note_head.is_forced = True
+                    if self.parenthesized:
+                        note_head.is_parenthesized = True
+                else:
+                    alternative = abjad.new(note_head)
+                    if self.cautionary:
+                        alternative.is_cautionary = True
+                    if self.forced:
+                        alternative.is_forced = True
+                    if self.parenthesized:
+                        alternative.is_parenthesized = True
+                    note_head.alternative = (
+                        alternative,
+                        str(alternative_tag),
+                        str(primary_tag),
+                        )
 
     ### PUBLIC PROPERTIES ###
 

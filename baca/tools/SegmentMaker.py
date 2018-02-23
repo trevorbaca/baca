@@ -1351,7 +1351,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype = self._prototype_string(prototype)
                 momento = abjad.Momento(
                     context=first_context.name,
-                    edition=wrapper.tag.edition(),
+                    edition=wrapper.tag.edition_only(),
                     prototype=prototype,
                     value=value,
                     )
