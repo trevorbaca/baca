@@ -31,8 +31,8 @@ class CommandWrapper(abjad.AbjadObject):
                 selector=baca.pleaves(),
                 ),
             scope=baca.Scope(
-                voice_name='ViolinMusicVoice',
                 stages=(1, 4),
+                voice_name='ViolinMusicVoice',
                 ),
             )
 
@@ -67,12 +67,12 @@ class CommandWrapper(abjad.AbjadObject):
             scope=baca.TimelineScope(
                 scopes=(
                     baca.Scope(
-                        voice_name='ViolinMusicVoice',
                         stages=(1, 4),
+                        voice_name='ViolinMusicVoice',
                         ),
                     baca.Scope(
-                        voice_name='ViolaMusicVoice',
                         stages=(1, 4),
+                        voice_name='ViolaMusicVoice',
                         ),
                     ),
                 ),
@@ -154,8 +154,8 @@ class CommandWrapper(abjad.AbjadObject):
 
             >>> abjad.f(command.scope, strict=89)
             baca.Scope(
-                voice_name='ViolinMusicVoice',
                 stages=(1, 4),
+                voice_name='ViolinMusicVoice',
                 )
 
         Defaults to none.

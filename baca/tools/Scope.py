@@ -1,5 +1,6 @@
 import abjad
 import baca
+import typing
 
 
 class Scope(abjad.AbjadObject):
@@ -8,14 +9,14 @@ class Scope(abjad.AbjadObject):
     ..  container:: example
 
         >>> scope = baca.Scope(
-        ...     voice_name='ViolinMusicVoice',
         ...     stages=(1, 9),
+        ...     voice_name='ViolinMusicVoice',
         ...     )
 
         >>> abjad.f(scope, strict=89)
         baca.Scope(
-            voice_name='ViolinMusicVoice',
             stages=(1, 9),
+            voice_name='ViolinMusicVoice',
             )
 
     '''
@@ -25,8 +26,8 @@ class Scope(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
-        '_voice_name',
         '_stages',
+        '_voice_name',
         )
 
     _publish_storage_format = True
@@ -35,34 +36,30 @@ class Scope(abjad.AbjadObject):
 
     def __init__(
         self,
-        voice_name=None,
-        stages=None,
-        ):
+        stages: typing.Tuple[int, typing.Union[int, str]] = None,
+        voice_name: str = None,
+        ) -> None:
+        assert isinstance(stages, tuple), repr(stages)
+        assert len(stages) == 2, repr(stages)
+        start, stop = stages
+        assert isinstance(start, int), repr(start)
+        if not isinstance(stop, int):
+            assert stop == 'end', repr(stop)
+        self._stages = stages
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
-        if isinstance(stages, int):
-            stages = (stages, stages)
-        elif isinstance(stages, tuple):
-            assert len(stages) == 2, repr(stages)
-        else:
-            raise TypeError(stages)
-        self._stages = stages
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def stages(self):
+    def stages(self) -> typing.Tuple[int, typing.Union[int, str]]:
         r'''Gets stages.
-
-        Returns stage expression.
         '''
         return self._stages
 
     @property
-    def voice_name(self):
+    def voice_name(self) -> str:
         r'''Gets voice name.
-
-        Returns string.
         '''
         return self._voice_name

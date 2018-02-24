@@ -52,6 +52,11 @@ Bases
       ~LibraryGM.margin_markup
       ~LibraryGM.metronome_mark
       ~LibraryGM.minimum_width
+      ~LibraryGM.mmrest_text_color
+      ~LibraryGM.mmrest_text_extra_offset
+      ~LibraryGM.mmrest_text_padding
+      ~LibraryGM.mmrest_text_parent_center
+      ~LibraryGM.mmrest_text_staff_padding
       ~LibraryGM.__format__
       ~LibraryGM.__repr__
 
@@ -123,6 +128,16 @@ Class & static methods
 .. automethod:: LibraryGM.metronome_mark
 
 .. automethod:: LibraryGM.minimum_width
+
+.. automethod:: LibraryGM.mmrest_text_color
+
+.. automethod:: LibraryGM.mmrest_text_extra_offset
+
+.. automethod:: LibraryGM.mmrest_text_padding
+
+.. automethod:: LibraryGM.mmrest_text_parent_center
+
+.. automethod:: LibraryGM.mmrest_text_staff_padding
 
 Special methods
 ---------------

@@ -2746,43 +2746,51 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def scope(
-        voice: str,
+        voice_name: str,
         start: Union[int, str],
-        stop: Union[int, str, abjad.mathtools.Infinity] = None,
+        stop: Union[int, str] = None,
         ) -> Scope:
-        r'''Scopes `voice` from `start` to `stop`.
+        r'''Scopes `voice_name` from `start` to `stop`.
         '''
         if start == 'all':
             start = 1
-            stop = abjad.Infinity
+            stop = 'end'
         if isinstance(start, tuple):
             assert len(start) == 2
             assert stop is None
             start, stop = start
         assert isinstance(start, int), repr(start)
-        if stop == 'end':
-            stop = abjad.Infinity
         if stop is None:
             stop = start
         stages = (start, stop)
         assert isinstance(stages[0], int), repr(stages)
-        if stop != abjad.Infinity:
+        if stop != 'end':
             assert isinstance(stages[1], int), repr(stages)
         return Scope(
-            voice_name=voice,
             stages=stages,
+            voice_name=voice_name,
             )
 
     @staticmethod
-    def scopes(*arguments: typing.Any) -> typing.List[Scope]:
-        r'''Makes scopes from `arguments`.
+    def scopes(*pairs: typing.Any) -> typing.List[Scope]:
+        r'''Makes scopes from `pairs`.
         '''
         scopes = []
-        for argument in arguments:
-            if isinstance(argument, tuple) and len(argument) == 3:
-                scope = Scope(argument[0], argument[1:])
+        for pair in pairs:
+            assert isinstance(pair, tuple), repr(pair)
+            assert len(pair) == 2, repr(pair)
+            voice_name, token = pair
+            if isinstance(token, int):
+                start = stop = token
+            elif token == 'all':
+                start, stop = 1, 'end'
             else:
-                scope = Scope(*argument)
+                start, stop = token
+            assert isinstance(start, int), repr(start)
+            if not isinstance(stop, int):
+                assert stop == 'end', repr(stop)
+            stages = (start, stop)
+            scope = Scope(stages=stages, voice_name=voice_name)
             scopes.append(scope)
         return scopes
 

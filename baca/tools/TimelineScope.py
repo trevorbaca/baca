@@ -1,6 +1,8 @@
 import abjad
 import baca
 import functools
+import typing
+from .Scope import Scope
 
 
 class TimelineScope(abjad.AbjadObject):
@@ -19,20 +21,20 @@ class TimelineScope(abjad.AbjadObject):
         baca.TimelineScope(
             scopes=(
                 baca.Scope(
-                    voice_name='PianoMusicVoice',
                     stages=(5, 9),
+                    voice_name='PianoMusicVoice',
                     ),
                 baca.Scope(
-                    voice_name='ClarinetMusicVoice',
                     stages=(7, 12),
+                    voice_name='ClarinetMusicVoice',
                     ),
                 baca.Scope(
-                    voice_name='ViolinMusicVoice',
                     stages=(8, 12),
+                    voice_name='ViolinMusicVoice',
                     ),
                 baca.Scope(
-                    voice_name='OboeMusicVoice',
                     stages=(9, 12),
+                    voice_name='OboeMusicVoice',
                     ),
                 ),
             )
@@ -94,9 +96,13 @@ class TimelineScope(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def scopes(self):
+    def scopes(self) -> typing.Tuple[Scope]:
         r'''Gets scopes.
-
-        Returns tuple.
         '''
         return self._scopes
+
+    @property
+    def voice_name(self) -> str:
+        r'''Returns ``'TimelineScope'``.
+        '''
+        return 'TimelineScope'

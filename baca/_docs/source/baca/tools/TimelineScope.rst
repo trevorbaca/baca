@@ -20,6 +20,7 @@ Bases
    .. autosummary::
 
       ~TimelineScope.scopes
+      ~TimelineScope.voice_name
       ~TimelineScope.__format__
       ~TimelineScope.__repr__
 
@@ -27,6 +28,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: TimelineScope.scopes
+
+.. autoattribute:: TimelineScope.voice_name
 
 Special methods
 ---------------
