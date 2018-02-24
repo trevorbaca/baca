@@ -11,10 +11,10 @@ class TimelineScope(abjad.AbjadObject):
     ..  container:: example
 
         >>> scope = baca.timeline([
-        ...     ('PianoMusicVoice', 5, 9),
-        ...     ('ClarinetMusicVoice', 7, 12),
-        ...     ('ViolinMusicVoice', 8, 12),
-        ...     ('OboeMusicVoice', 9, 12),
+        ...     ('PianoMusicVoice', (5, 9)),
+        ...     ('ClarinetMusicVoice', (7, 12)),
+        ...     ('ViolinMusicVoice', (8, 12)),
+        ...     ('OboeMusicVoice', (9, 12)),
         ...     ])
 
         >>> abjad.f(scope, strict=89)

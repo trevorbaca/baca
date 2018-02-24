@@ -11,7 +11,7 @@ class CommandWrapper(abjad.AbjadObject):
 
         >>> command = baca.CommandWrapper(
         ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-        ...     baca.scope('ViolinMusicVoice', 1, 4),
+        ...     baca.scope('ViolinMusicVoice', (1, 4)),
         ...     )
 
         >>> abjad.f(command, strict=89)
@@ -43,8 +43,8 @@ class CommandWrapper(abjad.AbjadObject):
         >>> command = baca.CommandWrapper(
         ...     baca.pitches([7, 1, 3, 4, 5, 11]),
         ...     baca.timeline([
-        ...         ('ViolinMusicVoice', 1, 4),
-        ...         ('ViolaMusicVoice', 1, 4),
+        ...         ('ViolinMusicVoice', (1, 4)),
+        ...         ('ViolaMusicVoice', (1, 4)),
         ...         ]),
         ...     )
 
@@ -112,7 +112,7 @@ class CommandWrapper(abjad.AbjadObject):
 
             >>> command = baca.CommandWrapper(
             ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-            ...     baca.scope('ViolinMusicVoice', 1, 4),
+            ...     baca.scope('ViolinMusicVoice', (1, 4)),
             ...     )
 
             >>> abjad.f(command.command, strict=89)
@@ -149,7 +149,7 @@ class CommandWrapper(abjad.AbjadObject):
 
             >>> command = baca.CommandWrapper(
             ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-            ...     baca.scope('ViolinMusicVoice', 1, 4),
+            ...     baca.scope('ViolinMusicVoice', (1, 4)),
             ...     )
 
             >>> abjad.f(command.scope, strict=89)

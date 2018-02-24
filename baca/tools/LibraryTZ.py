@@ -4690,7 +4690,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1, 3),
+            ...     baca.scope('MusicVoice', (1, 3)),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(

@@ -2747,25 +2747,48 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def scope(
         voice_name: str,
-        start: Union[int, str],
-        stop: Union[int, str] = None,
+        stages: typing.Union[
+            int,
+            'str',
+            typing.Tuple[int, typing.Union[int, str]],
+            ],
         ) -> Scope:
-        r'''Scopes `voice_name` from `start` to `stop`.
+        r'''Scopes `voice_name` for `stages`.
+
+        ..  container:: example
+
+            >>> baca.scope('HornVoiceI', 1)
+            Scope(stages=(1, 1), voice_name='HornVoiceI')
+
+            >>> baca.scope('HornVoiceI', (1, 8))
+            Scope(stages=(1, 8), voice_name='HornVoiceI')
+
+            >>> baca.scope('HornVoiceI', (4, 'end'))
+            Scope(stages=(4, 'end'), voice_name='HornVoiceI')
+
+            >>> baca.scope('HornVoiceI', 'all')
+            Scope(stages=(1, 'end'), voice_name='HornVoiceI')
+
         '''
-        if start == 'all':
-            start = 1
-            stop = 'end'
-        if isinstance(start, tuple):
-            assert len(start) == 2
-            assert stop is None
-            start, stop = start
+        stop: typing.Union[int, str]
+        if isinstance(stages, str):
+            assert stages == 'all', repr(stages)
+            start, stop = 1, 'end'
+        elif isinstance(stages, int):
+            assert 0 < stages, repr(stages)
+            start, stop = stages, stages
+        else:
+            assert isinstance(stages, tuple), repr(stages)
+            assert len(stages) == 2, repr(stages)
+            start, stop = stages
         assert isinstance(start, int), repr(start)
-        if stop is None:
-            stop = start
+        assert 0 < start, repr(start)
+        if isinstance(stop, int):
+            assert 0 < stop, repr(stop)
+            assert start <= stop, repr(stop)
+        else:
+            assert stop == 'end', repr(stop)
         stages = (start, stop)
-        assert isinstance(stages[0], int), repr(stages)
-        if stop != 'end':
-            assert isinstance(stages[1], int), repr(stages)
         return Scope(
             stages=stages,
             voice_name=voice_name,
@@ -2774,20 +2797,80 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def scopes(*pairs: typing.Any) -> typing.List[Scope]:
         r'''Makes scopes from `pairs`.
+
+        ..  container:: example
+
+            >>> for scope in baca.scopes(
+            ...     ('HornVoiceI', 1),
+            ...     ('HornVoiceII', 1),
+            ...     ('HornVoiceIII', 1),
+            ...     ('HornVoiceIV', 1),
+            ...     ):
+            ...     scope
+            ...
+            Scope(stages=(1, 1), voice_name='HornVoiceI')
+            Scope(stages=(1, 1), voice_name='HornVoiceII')
+            Scope(stages=(1, 1), voice_name='HornVoiceIII')
+            Scope(stages=(1, 1), voice_name='HornVoiceIV')
+
+            >>> for scope in baca.scopes(
+            ...     ('HornVoiceI', (1, 8)),
+            ...     ('HornVoiceII', (1, 8)),
+            ...     ('HornVoiceIII', (1, 8)),
+            ...     ('HornVoiceIV', (1, 8)),
+            ...     ):
+            ...     scope
+            ...
+            Scope(stages=(1, 8), voice_name='HornVoiceI')
+            Scope(stages=(1, 8), voice_name='HornVoiceII')
+            Scope(stages=(1, 8), voice_name='HornVoiceIII')
+            Scope(stages=(1, 8), voice_name='HornVoiceIV')
+
+            >>> for scope in baca.scopes(
+            ...     ('HornVoiceI', (4, 'end')),
+            ...     ('HornVoiceII', (4, 'end')),
+            ...     ('HornVoiceIII', (4, 'end')),
+            ...     ('HornVoiceIV', (4, 'end')),
+            ...     ):
+            ...     scope
+            ...
+            Scope(stages=(4, 'end'), voice_name='HornVoiceI')
+            Scope(stages=(4, 'end'), voice_name='HornVoiceII')
+            Scope(stages=(4, 'end'), voice_name='HornVoiceIII')
+            Scope(stages=(4, 'end'), voice_name='HornVoiceIV')
+
+            >>> for scope in baca.scopes(
+            ...     ('HornVoiceI', 'all'),
+            ...     ('HornVoiceII', 'all'),
+            ...     ('HornVoiceIII', 'all'),
+            ...     ('HornVoiceIV', 'all'),
+            ...     ):
+            ...     scope
+            ...
+            Scope(stages=(1, 'end'), voice_name='HornVoiceI')
+            Scope(stages=(1, 'end'), voice_name='HornVoiceII')
+            Scope(stages=(1, 'end'), voice_name='HornVoiceIII')
+            Scope(stages=(1, 'end'), voice_name='HornVoiceIV')
+
         '''
         scopes = []
         for pair in pairs:
             assert isinstance(pair, tuple), repr(pair)
             assert len(pair) == 2, repr(pair)
-            voice_name, token = pair
-            if isinstance(token, int):
-                start = stop = token
-            elif token == 'all':
+            voice_name, stages = pair
+            stop: typing.Union[int, str]
+            if isinstance(stages, int):
+                start, stop = stages, stages
+            elif stages == 'all':
                 start, stop = 1, 'end'
             else:
-                start, stop = token
+                start, stop = stages
             assert isinstance(start, int), repr(start)
-            if not isinstance(stop, int):
+            assert 0 < start, repr(start)
+            if isinstance(stop, int):
+                assert 0 < stop, repr(stop)
+                assert start <= stop, repr((start, stop))
+            else:
                 assert stop == 'end', repr(stop)
             stages = (start, stop)
             scope = Scope(stages=stages, voice_name=voice_name)
