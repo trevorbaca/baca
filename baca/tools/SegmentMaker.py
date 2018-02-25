@@ -1073,6 +1073,8 @@ class SegmentMaker(abjad.SegmentMaker):
             stage_timespans.append(stage_timespan)
         self._cache = abjad.OrderedDict()
         contexts = [self.score['GlobalSkips']]
+        if 'GlobalRests' in self.score:
+            contexts.append(self.score['GlobalRests'])
         contexts.extend(abjad.select(self.score).components(abjad.Voice))
         for context in contexts:
             leaves_by_stage_number = abjad.OrderedDict()
