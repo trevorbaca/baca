@@ -820,6 +820,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
