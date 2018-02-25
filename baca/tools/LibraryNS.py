@@ -338,6 +338,42 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def only_parts(command: Command) -> Command:
+        r'''Tags ``command`` with ``+PARTS``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '+PARTS',
+            command,
+            )
+
+    @staticmethod
+    def only_score(command: Command) -> Command:
+        r'''Tags ``command`` with ``+SCORE``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '+SCORE',
+            command,
+            )
+
+    @staticmethod
+    def only_segment(command: Command) -> Command:
+        r'''Tags ``command`` with ``+SEGMENT``.
+
+        Returns ``command``.
+        '''
+        from baca.tools.LibraryTZ import LibraryTZ
+        return LibraryTZ.tag(
+            '+SEGMENT',
+            command,
+            )
+
+    @staticmethod
     def ottava(
         selector: Selector = 'baca.tleaves()',
         ) -> SpannerCommand:
@@ -586,18 +622,6 @@ class LibraryNS(abjad.AbjadObject):
         return IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\pageBreak', 'after')],
             selector=selector,
-            )
-
-    @staticmethod
-    def parts_only(command: Command) -> Command:
-        r'''Tags ``command`` with ``+PARTS``.
-
-        Returns ``command``.
-        '''
-        from baca.tools.LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
-            '+PARTS',
-            command,
             )
 
     @staticmethod
@@ -2855,8 +2879,16 @@ class LibraryNS(abjad.AbjadObject):
         '''
         scopes = []
         for pair in pairs:
-            assert isinstance(pair, tuple), repr(pair)
-            assert len(pair) == 2, repr(pair)
+            if not isinstance(pair, tuple):
+                raise Exception(
+                    'each argument to baca.scopes() must be pair:'
+                    f'\n\n  {pair!r}\n\n'
+                    )
+            if not len(pair) == 2:
+                raise Exception(
+                    f'each argument to baca.scopes() must have length 2:'
+                    f'\n\n  {pair!r}\n\n'
+                    )
             voice_name, stages = pair
             stop: typing.Union[int, str]
             if isinstance(stages, int):
@@ -2876,18 +2908,6 @@ class LibraryNS(abjad.AbjadObject):
             scope = Scope(stages=stages, voice_name=voice_name)
             scopes.append(scope)
         return scopes
-
-    @staticmethod
-    def score_only(command: Command) -> Command:
-        r'''Tags ``command`` with ``+SCORE``.
-
-        Returns ``command``.
-        '''
-        from baca.tools.LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
-            '+SCORE',
-            command,
-            )
 
     @staticmethod
     def scorewide_spacing(
@@ -3593,18 +3613,6 @@ class LibraryNS(abjad.AbjadObject):
             value=abjad.Up,
             grob='script',
             selector=selector,
-            )
-
-    @staticmethod
-    def segment_only(command: Command) -> Command:
-        r'''Tags ``command`` with ``+SEGMENT``.
-
-        Returns ``command``.
-        '''
-        from baca.tools.LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
-            '+SEGMENT',
-            command,
             )
 
     @staticmethod

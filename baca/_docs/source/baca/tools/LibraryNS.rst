@@ -26,12 +26,14 @@ Bases
       ~LibraryNS.not_score
       ~LibraryNS.not_segment
       ~LibraryNS.note_column_shift
+      ~LibraryNS.only_parts
+      ~LibraryNS.only_score
+      ~LibraryNS.only_segment
       ~LibraryNS.ottava
       ~LibraryNS.ottava_bassa
       ~LibraryNS.ottava_bracket_staff_padding
       ~LibraryNS.page
       ~LibraryNS.page_break
-      ~LibraryNS.parts_only
       ~LibraryNS.piecewise
       ~LibraryNS.pitch
       ~LibraryNS.pitches
@@ -58,14 +60,12 @@ Bases
       ~LibraryNS.rhythm
       ~LibraryNS.scope
       ~LibraryNS.scopes
-      ~LibraryNS.score_only
       ~LibraryNS.scorewide_spacing
       ~LibraryNS.script_color
       ~LibraryNS.script_extra_offset
       ~LibraryNS.script_staff_padding
       ~LibraryNS.scripts_down
       ~LibraryNS.scripts_up
-      ~LibraryNS.segment_only
       ~LibraryNS.shift_clef
       ~LibraryNS.shift_dynamic
       ~LibraryNS.shift_hairpin_start
@@ -117,6 +117,12 @@ Class & static methods
 
 .. automethod:: LibraryNS.note_column_shift
 
+.. automethod:: LibraryNS.only_parts
+
+.. automethod:: LibraryNS.only_score
+
+.. automethod:: LibraryNS.only_segment
+
 .. automethod:: LibraryNS.ottava
 
 .. automethod:: LibraryNS.ottava_bassa
@@ -126,8 +132,6 @@ Class & static methods
 .. automethod:: LibraryNS.page
 
 .. automethod:: LibraryNS.page_break
-
-.. automethod:: LibraryNS.parts_only
 
 .. automethod:: LibraryNS.piecewise
 
@@ -181,8 +185,6 @@ Class & static methods
 
 .. automethod:: LibraryNS.scopes
 
-.. automethod:: LibraryNS.score_only
-
 .. automethod:: LibraryNS.scorewide_spacing
 
 .. automethod:: LibraryNS.script_color
@@ -194,8 +196,6 @@ Class & static methods
 .. automethod:: LibraryNS.scripts_down
 
 .. automethod:: LibraryNS.scripts_up
-
-.. automethod:: LibraryNS.segment_only
 
 .. automethod:: LibraryNS.shift_clef
 
