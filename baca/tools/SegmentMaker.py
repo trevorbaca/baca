@@ -937,7 +937,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if staff__group.name in dictionary:
                 continue
             for wrapper in self.score_template.attach_defaults(staff__group):
-                tag = wrapper.tag.extend(['-PARTS', '-SCORE'])
+                tag = wrapper.tag.append('+SEGMENT')
                 wrapper.tag = tag
                 self._treat_persistent_wrapper(
                     self.manifests,
