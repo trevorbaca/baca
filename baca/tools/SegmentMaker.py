@@ -1965,6 +1965,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if momento.prototype in self._prototype_to_manifest_name:
             name = self._prototype_to_manifest_name.get(momento.prototype)
             dictionary = getattr(self, name)
+            if dictionary is None:
+                raise Exception(f'can not find {name!r} manifest.')
             return dictionary.get(momento.value)
         class_ = eval(momento.prototype)
         if hasattr(class_, 'from_string'):
