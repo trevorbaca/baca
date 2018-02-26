@@ -99,6 +99,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         families_ = []
         for family in families:
             if family is not None:
+                assert isinstance(family, tuple), repr(family)
                 if any(_ for _ in family[1:] if _ is not None):
                     families_.append(family)
         families = tuple(families_)
@@ -155,15 +156,15 @@ class ScoreTemplate(abjad.ScoreTemplate):
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = tuple(_ for _ in contexts if _ is not None)
+        result = None
         if len(contexts) == 1:
-            return contexts[0]
+            result = contexts[0]
         elif 1 < len(contexts):
             name = f'{stem}SquareStaffGroup'
             staff_group = abjad.StaffGroup(contexts, name=name)
             self._set_square_delimiter(staff_group)
-            return staff_group
-        else:
-            return None
+            result = staff_group
+        return result
 
     def make_staff_group(
         self,
