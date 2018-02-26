@@ -1361,6 +1361,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if momentos:
                 momentos.sort(key=lambda _: _.prototype)
                 result[context.name] = momentos
+        dictionary = self.previous_metadata.get('persistent_indicators')
+        if dictionary:
+            for context_name, momentos in dictionary.items():
+                if context_name not  in result:
+                    result[context_name] = momentos
         return result
 
     def _color_octaves_(self):
