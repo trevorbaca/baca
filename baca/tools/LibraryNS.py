@@ -2913,7 +2913,7 @@ class LibraryNS(abjad.AbjadObject):
         path: typing.Union[abjad.Path, typing.Tuple[int, int]],
         fallback_duration: typing.Tuple[int, int],
         breaks: BreakMeasureMap = None,
-        fermata_measure_duration: typing.Union[int, int] = None,
+        fermata_measure_duration: typing.Tuple[int, int] = None,
         ) -> HorizontalSpacingSpecifier:
         r'''Makes scorewide spacing.
 
@@ -2970,18 +2970,20 @@ class LibraryNS(abjad.AbjadObject):
             first_measure_number, measure_count = path.get_measure_count_pair()
             first_measure_number = first_measure_number or 1
             fermata_score = path.contents.name
-        fallback_duration = abjad.NonreducedFraction(fallback_duration)
+        fallback_fraction = abjad.NonreducedFraction(fallback_duration)
         measures = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1
         for n in range(first_measure_number, last_measure_number + 1):
-            measures[n] = fallback_duration
+            measures[n] = fallback_fraction
         if fermata_measure_duration is not None:
-            fermata_measure_duration = abjad.NonreducedFraction(
+            fermata_measure_width = abjad.NonreducedFraction(
                 fermata_measure_duration
                 )
+        else:
+            fermata_measure_width = None
         specifier = HorizontalSpacingSpecifier(
             breaks=breaks,
-            fermata_measure_width=fermata_measure_duration,
+            fermata_measure_width=fermata_measure_width,
             fermata_score=fermata_score,
             first_measure_number=first_measure_number,
             measure_count=measure_count,

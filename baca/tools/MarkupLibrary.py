@@ -1,5 +1,8 @@
 import abjad
 import baca
+import typing
+from .IndicatorCommand import IndicatorCommand
+from .Typing import Selector
 
 
 class MarkupLibrary(abjad.AbjadObject):
@@ -14,13 +17,13 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def __call__(
-        argument,
-        selector='baca.phead(0)',
-        direction=abjad.Up,
-        is_new=True,
-        upright=True,
-        whiteout=True,
-        ):
+        argument: typing.Union[str, abjad.Markup],
+        selector: Selector = 'baca.phead(0)',
+        direction: abjad.OrdinalConstant = abjad.Up,
+        is_new: bool = True,
+        upright: bool = True,
+        whiteout: bool = True,
+        ) -> IndicatorCommand:
         r'''Makes markup and inserts into indicator command.
 
         ..  container:: example
@@ -247,20 +250,28 @@ class MarkupLibrary(abjad.AbjadObject):
                     }
                 >>
 
-        Returns indicator command.
         '''
-        selector = selector or baca.phead(0)
+        if direction not in (abjad.Down, abjad.Up):
+            message = f'direction must be up or down (not {direction!r}).'
+            raise Exception(message)
         if isinstance(argument, str):
             if not is_new:
                 argument = f'({argument})'
             markup = abjad.Markup(argument, direction=direction)
-        elif isinstance(argument, abjad.Markup):
+        else:
+            assert isinstance(argument, abjad.Markup), repr(argument)
             markup = abjad.new(argument, direction=direction)
+        prototype = (str, abjad.Expression)
+        if selector is not None and not isinstance(selector, prototype):
+            message = f'selector must be string or expression'
+            message += f' (not {selector!r}).'
+            raise Exception(message)
+        selector = selector or 'baca.phead(0)'
         if upright:
             markup = markup.upright()
         if whiteout:
             markup = markup.whiteout()
-        return baca.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[markup],
             selector=selector,
             )
@@ -348,11 +359,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def boxed(string, selector='baca.leaf(0)'):
-        markup = abjad.Markup(string, direction=abjad.Up)
+    def boxed(string, selector='baca.leaf(0)', direction=abjad.Up):
+        r'''Makes boxed markup.
+        '''
+        markup = abjad.Markup(string)
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
             markup,
+            direction=direction,
             selector=selector,
             )
 
@@ -363,21 +377,27 @@ class MarkupLibrary(abjad.AbjadObject):
         selector='baca.leaf(0)',
         ):
         assert isinstance(strings, list), repr(strings)
-        markup = abjad.MarkupList(strings).column(direction=direction)
+        markup = abjad.MarkupList(strings).column()
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
             markup,
+            direction=direction,
             selector=selector,
             )
 
     @staticmethod
-    def boxed_repeat_count(count, selector='baca.leaf(0)'):
+    def boxed_repeat_count(
+        count,
+        direction=abjad.Up,
+        selector='baca.leaf(0)',
+        ):
         string = f'x{count}'
-        markup = abjad.Markup(string, direction=abjad.Up)
+        markup = abjad.Markup(string)
         markup = markup.sans().bold().fontsize(6)
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
             markup,
+            direction=direction,
             selector=selector,
             )
 
@@ -640,9 +660,10 @@ class MarkupLibrary(abjad.AbjadObject):
     @staticmethod
     def lines(strings, direction=abjad.Up, selector='baca.leaf(0)'):
         assert isinstance(strings, list), repr(strings)
-        markup = abjad.MarkupList(strings).column(direction=direction)
+        markup = abjad.MarkupList(strings).column()
         return baca.markup(
             markup,
+            direction=direction,
             selector=selector,
             )
 
@@ -1222,8 +1243,7 @@ class MarkupLibrary(abjad.AbjadObject):
             'sparse, individual clicks with extremely slow bow')
         first_line = first_line.line()
         second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
-        markup = abjad.Markup.column(
-            [first_line, second_line], direction=abjad.Up)
+        markup = abjad.Markup.column([first_line, second_line])
         return baca.markup(
             markup,
             selector=selector,
