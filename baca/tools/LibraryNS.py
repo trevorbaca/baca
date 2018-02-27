@@ -2957,7 +2957,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> spacing.measure_count
             18
 
-            >>> len(spacing.overrides)
+            >>> len(spacing.measures)
             18
 
         '''
@@ -2971,10 +2971,10 @@ class LibraryNS(abjad.AbjadObject):
             first_measure_number = first_measure_number or 1
             fermata_score = path.contents.name
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
-        overrides = abjad.OrderedDict()
+        measures = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1
         for n in range(first_measure_number, last_measure_number + 1):
-            overrides[n] = fallback_duration
+            measures[n] = fallback_duration
         if fermata_measure_duration is not None:
             fermata_measure_duration = abjad.NonreducedFraction(
                 fermata_measure_duration
@@ -2985,7 +2985,7 @@ class LibraryNS(abjad.AbjadObject):
             fermata_score=fermata_score,
             first_measure_number=first_measure_number,
             measure_count=measure_count,
-            overrides=overrides,
+            measures=measures,
             )
         specifier._forbid_segment_maker_adjustments = True
         return specifier

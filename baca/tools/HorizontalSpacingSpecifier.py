@@ -816,9 +816,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '_first_measure_number',
         '_forbid_segment_maker_adjustments',
         '_measure_count',
+        '_measures',
         '_minimum_width',
         '_multiplier',
-        '_overrides',
         )
 
     _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
@@ -834,9 +834,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         fermata_score=None,
         first_measure_number=None,
         measure_count=None,
+        measures=None,
         minimum_width=None,
         multiplier=None,
-        overrides=None,
         ):
         if breaks is not None:
             prototype = BreakMeasureMap
@@ -865,10 +865,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         if multiplier is not None:
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
-        if overrides is not None:
+        if measures is not None:
             prototype = abjad.OrderedDict
-            assert isinstance(overrides, prototype), repr(overrides)
-        self._overrides = overrides
+            assert isinstance(measures, prototype), repr(measures)
+        self._measures = measures
 
     ### SPECIAL METHODS ###
 
@@ -879,7 +879,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         skips = baca.select(score['GlobalSkips']).skips()
         self._populate_fermata_measure_numbers()
         programmatic = True
-        if self.overrides and len(self.overrides) == len(skips):
+        if self.measures and len(self.measures) == len(skips):
             programmatic = False
         if programmatic:
             leaves = abjad.iterate(score).leaves(grace_notes=False)
@@ -893,8 +893,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             if (self.fermata_measure_width is not None and
                 self._is_fermata_measure(measure_number, skip)):
                 duration = self.fermata_measure_width
-            elif self.overrides and measure_number in self.overrides:
-                duration = self.overrides[measure_number]
+            elif self.measures and measure_number in self.measures:
+                duration = self.measures[measure_number]
                 duration = abjad.NonreducedFraction(duration)
             else:
                 duration = minimum_durations_by_measure[measure_index]
@@ -928,6 +928,20 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             abjad.attach(markup, skip, deactivate=True, tag=tag)
 
     ### PRIVATE METHODS ###
+
+    def _coerce_measure_number(self, measure_number):
+        if measure_number == 'end':
+            return self.last_measure_number
+        if measure_number == 0:
+            raise Exception(f'zero-valued measure number not allowed.')
+        if measure_number < 0:
+            measure_number = self.last_measure_number - abs(measure_number) + 1
+        if measure_number < self.first_measure_number:
+            measure_number += self.first_measure_number - 1
+        if self.last_measure_number < measure_number:
+            raise Exception(f'measure number {measure_number} greater than'
+                f' last measure number ({self.last_measure_number}).')
+        return measure_number
 
     def _get_minimum_durations_by_measure(self, skips, leaves):
         measure_timespans = []
@@ -1158,6 +1172,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._measure_count
 
     @property
+    def measures(self) -> typing.Optional[abjad.OrderedDict]:
+        r'''Gets measure overrides.
+        '''
+        return self._measures
+
+    @property
     def minimum_width(self) -> typing.Optional[abjad.NonreducedFraction]:
         r'''Gets minimum width.
 
@@ -1171,26 +1191,278 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '''
         return self._multiplier
 
-    @property
-    def overrides(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets overrides.
-        '''
-        return self._overrides
-
     ### PUBLIC METHODS ###
 
-    def override(self, measures, duration) -> None:
-        r'''Overrides `measures` with `duration`.
+    def override(
+        self,
+        measures: typing.Union[int, tuple, list],
+        pair: typing.Union[typing.Tuple[int, int], str],
+        ) -> None:
+        r'''Overrides `measures` with spacing `pair`.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)]),
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 5),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 20),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 20),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 20),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 20),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 20),
+                        ),
+                    ]
+                )
+
+            Works with ``'all'``:
+
+            >>> spacing.override('all', (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    ]
+                )
+
+            Works with measure number:
+
+            >>> spacing.override('all', (1, 16))
+            >>> spacing.override(95, (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    ]
+                )
+
+            Works with range of measure numbers:
+
+            >>> spacing.override('all', (1, 16))
+            >>> spacing.override((95, 97), (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    ]
+                )
+
+            Works with list of measure numbers:
+
+            >>> spacing.override('all', (1, 16))
+            >>> spacing.override([95, 97, 99], (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    ]
+                )
+
+            Works with negative indices:
+
+            >>> spacing.override('all', (1, 16))
+            >>> spacing.override([-3, -1], (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    ]
+                )
+
+            Works with ``'end'``:
+
+            >>> spacing.override('all', (1, 16))
+            >>> spacing.override('end', (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    ]
+                )
+                
+            Works with ``'end'`` range:
+
+            >>> spacing.override('all', (1, 16))
+            >>> spacing.override((3, 'end'), (1, 24))
+            >>> abjad.f(spacing.measures)
+            abjad.OrderedDict(
+                [
+                    (
+                        95,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        96,
+                        abjad.NonreducedFraction(1, 16),
+                        ),
+                    (
+                        97,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        98,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    (
+                        99,
+                        abjad.NonreducedFraction(1, 24),
+                        ),
+                    ]
+                )
+
         '''
-        duration = abjad.NonreducedFraction(duration)
-        if isinstance(measures, int):
-            self.overrides[measures] = duration
+        if measures == 'all':
+            measures = (1, 'end')
+        duration = abjad.NonreducedFraction(pair)
+        if isinstance(measures, (int, str)):
+            number = self._coerce_measure_number(measures)
+            self.measures[number] = duration
         elif isinstance(measures, tuple):
             start_measure, stop_measure = measures
-            for measure in range(start_measure, stop_measure + 1):
-                self.overrides[measure] = duration
+            start_measure = self._coerce_measure_number(start_measure)
+            stop_measure = self._coerce_measure_number(stop_measure)
+            for number in range(start_measure, stop_measure + 1):
+                self.measures[number] = duration
         elif isinstance(measures, list):
             for measure in measures:
-                self.overrides[measure] = duration
+                number = self._coerce_measure_number(measure)
+                self.measures[number] = duration
         else:
-            raise TypeError(measures)
+            message = f'measures must be int, pair or list (not {measures!r})'
+            raise TypeError(message)

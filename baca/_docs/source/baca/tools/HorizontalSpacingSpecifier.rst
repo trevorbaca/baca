@@ -28,10 +28,10 @@ Bases
       ~HorizontalSpacingSpecifier.first_measure_number
       ~HorizontalSpacingSpecifier.last_measure_number
       ~HorizontalSpacingSpecifier.measure_count
+      ~HorizontalSpacingSpecifier.measures
       ~HorizontalSpacingSpecifier.minimum_width
       ~HorizontalSpacingSpecifier.multiplier
       ~HorizontalSpacingSpecifier.override
-      ~HorizontalSpacingSpecifier.overrides
       ~HorizontalSpacingSpecifier.__call__
       ~HorizontalSpacingSpecifier.__format__
       ~HorizontalSpacingSpecifier.__repr__
@@ -57,11 +57,11 @@ Read-only properties
 
 .. autoattribute:: HorizontalSpacingSpecifier.measure_count
 
+.. autoattribute:: HorizontalSpacingSpecifier.measures
+
 .. autoattribute:: HorizontalSpacingSpecifier.minimum_width
 
 .. autoattribute:: HorizontalSpacingSpecifier.multiplier
-
-.. autoattribute:: HorizontalSpacingSpecifier.overrides
 
 Methods
 -------
