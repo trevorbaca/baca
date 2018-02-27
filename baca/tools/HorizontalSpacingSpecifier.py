@@ -1021,7 +1021,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     @property
     def fermata_measure_width(self) -> typing.Optional[
-        abjad.mathtools.NonreducedFraction
+        abjad.NonreducedFraction
         ]:
         r'''Gets fermata measure width.
 
@@ -1061,9 +1061,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._measure_count
 
     @property
-    def minimum_width(self) -> typing.Optional[
-        abjad.mathtools.NonreducedFraction
-        ]:
+    def minimum_width(self) -> typing.Optional[abjad.NonreducedFraction]:
         r'''Gets minimum width.
 
         Defaults to none and interprets none equal to ``1/8``.
@@ -1087,7 +1085,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     def override(self, measures, duration) -> None:
         r'''Overrides `measures` with `duration`.
         '''
-        duration = abjad.mathtools.NonreducedFraction(duration)
+        duration = abjad.NonreducedFraction(duration)
         if isinstance(measures, int):
             self.overrides[measures] = duration
         elif isinstance(measures, tuple):

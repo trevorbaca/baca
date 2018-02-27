@@ -1,8 +1,7 @@
 import abjad
-from abjad.tools.mathtools.NonreducedFraction import NonreducedFraction
 
 
-class Division(NonreducedFraction):
+class Division(abjad.NonreducedFraction):
     r'''Division.
 
     >>> from abjad import rhythmmakertools as rhythmos
@@ -229,6 +228,11 @@ class Division(NonreducedFraction):
             start_offset = abjad.Offset(start_offset)
         self._start_offset = start_offset
         return self
+
+    def __init__(self, *arguments, **keywords):
+        r'''Dummy initializer to satisfy mypy.
+        '''
+        pass
 
     ### SPECIAL METHODS###
 

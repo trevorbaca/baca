@@ -34,7 +34,6 @@ from .Typing import List
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
-from .Typing import Union
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -630,7 +629,7 @@ class LibraryNS(abjad.AbjadObject):
         indicators: typing.Iterable,
         selector: Selector,
         bookend: bool = False,
-        preamble: Union[str, abjad.Expression, MapCommand] = None,
+        preamble: typing.Union[str, abjad.Expression, MapCommand] = None,
         ):
         r'''Makes piecewise command from `spanner` command, `indicators` and
         indicator `selector`.
@@ -875,7 +874,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def proportional_notation_duration(
-        duration: Union[tuple, abjad.Duration],
+        duration: typing.Union[tuple, abjad.Duration],
         selector: Selector = 'baca.leaf(0)',
         ) -> SettingCommand:
         r'''Sets proportional notation duration.
@@ -1080,7 +1079,7 @@ class LibraryNS(abjad.AbjadObject):
         start: int,
         stop: int = None,
         selector: Selector = 'baca.plts()',
-        ) -> Union[RegisterCommand, RegisterInterpolationCommand]:
+        ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
         r'''Octave-transposes PLTs.
 
         ..  container:: example
@@ -1412,7 +1411,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rehearsal_mark(
-        argument: Union[int, str],
+        argument: typing.Union[int, str],
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r'''Attaches rehearsal mark with integer or string ``argument``.
@@ -2912,23 +2911,24 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def scorewide_spacing(
         path: abjad.Path,
-        fallback_duration: Union[tuple, abjad.Duration],
+        fallback_duration: typing.Union[
+            tuple, abjad.Duration, abjad.NonreducedFraction],
         breaks: BreakMeasureMap = None,
-        fermata_measure_duration: Union[tuple, abjad.Duration] = None,
+        fermata_measure_duration: typing.Union[
+            tuple, abjad.Duration, abjad.NonreducedFraction] = None,
         ) -> HorizontalSpacingSpecifier:
         r'''Makes scorewide spacing.
         '''
         path = abjad.Path(path)
         first_measure_number, measure_count = path.get_measure_count_pair()
         first_measure_number = first_measure_number or 1
-        fallback_duration = abjad.mathtools.NonreducedFraction(
-            fallback_duration)
+        fallback_duration = abjad.NonreducedFraction(fallback_duration)
         overrides = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1
         for n in range(first_measure_number, last_measure_number + 1):
             overrides[n] = fallback_duration
         if fermata_measure_duration is not None:
-            fermata_measure_duration = abjad.mathtools.NonreducedFraction(
+            fermata_measure_duration = abjad.NonreducedFraction(
                 fermata_measure_duration
                 )
         specifier = HorizontalSpacingSpecifier(
@@ -3617,7 +3617,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def shift_clef(
-        clef: Union[str, abjad.Clef],
+        clef: typing.Union[str, abjad.Clef],
         selector: Selector = 'baca.leaf(0)',
         ) -> SuiteCommand:
         r'''Shifts clef to left by width of clef.
@@ -3645,7 +3645,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def shift_dynamic(
-        dynamic: Union[str, abjad.Dynamic],
+        dynamic: typing.Union[str, abjad.Dynamic],
         selector: Selector = 'baca.leaf(0)',
         ) -> SuiteCommand:
         r'''Shifts dynamic to left by width of dynamic.
@@ -3661,7 +3661,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def shift_hairpin_start(
-        dynamic: Union[str, abjad.Dynamic],
+        dynamic: typing.Union[str, abjad.Dynamic],
         selector: Selector = 'baca.leaf(0)',
         ) -> SuiteCommand:
         r'''Shifts hairpin start dynamic to left by width of dynamic.
@@ -3822,8 +3822,8 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def single_segment_transition(
-        start: Union[abjad.Markup, IndicatorCommand] = None,
-        stop: Union[abjad.Markup, IndicatorCommand] = None,
+        start: typing.Union[abjad.Markup, IndicatorCommand] = None,
+        stop: typing.Union[abjad.Markup, IndicatorCommand] = None,
         selector: Selector = 'baca.tleaves().group()',
         ) -> PiecewiseCommand:
         r'''Makes single-segment transition spanner.
