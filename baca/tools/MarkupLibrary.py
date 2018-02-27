@@ -1088,16 +1088,16 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def pT_XFB_flaut(selector='baca.pleaf(0)'):
-        return baca.markup(
-            'pT + XFB flaut.',
+    def pres_de_la_table(selector='baca.pleaf(0)'):
+        return MarkupLibrary.boxed(
+            'près de la table',
             selector=selector,
             )
 
     @staticmethod
-    def pres_de_la_table(selector='baca.pleaf(0)'):
-        return MarkupLibrary.boxed(
-            'près de la table',
+    def pT_XFB_flaut(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'pT + XFB flaut.',
             selector=selector,
             )
 

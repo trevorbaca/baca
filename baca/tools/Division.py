@@ -203,6 +203,11 @@ class Division(abjad.NonreducedFraction):
 
     ### INITIALIZER ###
 
+    def __init__(self, *arguments, **keywords):
+        r'''Dummy initializer to satisfy mypy.
+        '''
+        pass
+
     def __new__(
         class_,
         argument=None,
@@ -228,11 +233,6 @@ class Division(abjad.NonreducedFraction):
             start_offset = abjad.Offset(start_offset)
         self._start_offset = start_offset
         return self
-
-    def __init__(self, *arguments, **keywords):
-        r'''Dummy initializer to satisfy mypy.
-        '''
-        pass
 
     ### SPECIAL METHODS###
 

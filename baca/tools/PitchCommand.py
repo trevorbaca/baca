@@ -500,28 +500,6 @@ class PitchCommand(Command):
             pitches = abjad.CyclicTuple(items)
         return pitches
 
-    def _previous_pitches_consumed(self):
-        dictionary = self.previous_segment_voice_metadata
-        if not dictionary:
-            return 0
-        dictionary = dictionary.get(abjad.tags.PITCH, None)
-        if not dictionary:
-            return 0
-        if dictionary.get('name') != self.persist:
-            return 0
-        pitches_consumed = dictionary.get('pitches_consumed', None)
-        if not pitches_consumed:
-            return 0
-        assert 1 <= pitches_consumed
-        if self.ignore_incomplete:
-            return pitches_consumed
-        dictionary = self.previous_segment_voice_metadata
-        dictionary = dictionary.get(abjad.tags.RHYTHM, None)
-        if dictionary:
-            if dictionary.get('incomplete_last_note', False):
-                pitches_consumed -= 1
-        return pitches_consumed
-
     def _mutates_score(self):
         pitches = self.pitches or []
         if any(isinstance(_, collections.Iterable) for _ in pitches):
@@ -547,6 +525,28 @@ class PitchCommand(Command):
                 items.append(part)
         assert not current_chord, repr(current_chord)
         return items
+
+    def _previous_pitches_consumed(self):
+        dictionary = self.previous_segment_voice_metadata
+        if not dictionary:
+            return 0
+        dictionary = dictionary.get(abjad.tags.PITCH, None)
+        if not dictionary:
+            return 0
+        if dictionary.get('name') != self.persist:
+            return 0
+        pitches_consumed = dictionary.get('pitches_consumed', None)
+        if not pitches_consumed:
+            return 0
+        assert 1 <= pitches_consumed
+        if self.ignore_incomplete:
+            return pitches_consumed
+        dictionary = self.previous_segment_voice_metadata
+        dictionary = dictionary.get(abjad.tags.RHYTHM, None)
+        if dictionary:
+            if dictionary.get('incomplete_last_note', False):
+                pitches_consumed -= 1
+        return pitches_consumed
 
     @staticmethod
     def _set_lt_pitch(lt, pitch):

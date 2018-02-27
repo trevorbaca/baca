@@ -128,10 +128,10 @@ class AccidentalAdjustmentCommand(Command):
         if self.selector is not None:
             argument = self.selector(argument)
         if self.tag:
-            if not self.tag.edition_specific():
-                raise Exception(f'tag must be edition-specific: {self.tag!r}.')
+            if not self.tag.only_edition() and not self.tag.not_editions():
+                raise Exception(f'tag must have edition: {self.tag!r}.')
             alternative_tag = self.tag.prepend('AJC')
-            primary_tag = alternative_tag.invert_edition_specific()
+            primary_tag = alternative_tag.invert_edition_tags()
         for pleaf in baca.select(argument).pleaves():
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]

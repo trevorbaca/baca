@@ -1357,7 +1357,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype = self._prototype_string(prototype)
                 momento = abjad.Momento(
                     context=first_context.name,
-                    edition=wrapper.tag.edition_only(),
+                    edition=wrapper.tag.only_edition(),
                     prototype=prototype,
                     value=value,
                     )
@@ -1572,9 +1572,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 indicator = self._key_to_indicator(momento.value, prototype)
                 return (indicator, momento.context)
 
-    def _get_previous_stop_clock_time(self):
-        if self.previous_metadata:
-            return self.previous_metadata.get('stop_clock_time')
+    def _get_previous_segment_voice_metadata(self, voice_name):
+        if not self.previous_metadata:
+            return
+        voice_metadata = self.previous_metadata.get('voice_metadata')
+        if not voice_metadata:
+            return
+        return voice_metadata.get(voice_name, abjad.OrderedDict())
 
     def _get_previous_state(self, voice_name, command_persist):
         if not self.previous_metadata:
@@ -1590,13 +1594,9 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_state = dictionary.get(command_persist)
         return previous_state
 
-    def _get_previous_segment_voice_metadata(self, voice_name):
-        if not self.previous_metadata:
-            return
-        voice_metadata = self.previous_metadata.get('voice_metadata')
-        if not voice_metadata:
-            return
-        return voice_metadata.get(voice_name, abjad.OrderedDict())
+    def _get_previous_stop_clock_time(self):
+        if self.previous_metadata:
+            return self.previous_metadata.get('stop_clock_time')
 
     def _get_segment_measure_numbers(self):
         first_measure_number = self._get_first_measure_number()

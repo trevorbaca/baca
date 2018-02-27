@@ -168,6 +168,21 @@ class Command(abjad.AbjadObject):
             command._offset_to_measure_number = dictionary
 
     @property
+    def previous_segment_voice_metadata(self) -> typing.Optional[
+        abjad.OrderedDict]:
+        r'''Gets previous segment voice metadata.
+        '''
+        return self._previous_segment_voice_metadata
+
+    @previous_segment_voice_metadata.setter
+    def previous_segment_voice_metadata(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._previous_segment_voice_metadata = argument
+        for command in getattr(self, 'commands', []):
+            command._previous_segment_voice_metadata = argument
+
+    @property
     def selector(self) -> typing.Optional[abjad.Expression]:
         r'''Gets selector.
         '''
@@ -199,21 +214,6 @@ class Command(abjad.AbjadObject):
         '''
         assert self._are_valid_tags(self._tags)
         return self._tags[:]
-
-    @property
-    def previous_segment_voice_metadata(self) -> typing.Optional[
-        abjad.OrderedDict]:
-        r'''Gets previous segment voice metadata.
-        '''
-        return self._previous_segment_voice_metadata
-
-    @previous_segment_voice_metadata.setter
-    def previous_segment_voice_metadata(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._previous_segment_voice_metadata = argument
-        for command in getattr(self, 'commands', []):
-            command._previous_segment_voice_metadata = argument
 
     ### PUBLIC METHODS ###
 
