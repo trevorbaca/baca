@@ -1,7 +1,6 @@
 import abjad
 import baca
-from typing import List
-from typing import Optional
+import typing
 from .Command import Command
 
 
@@ -366,7 +365,7 @@ class BreakMeasureMap(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self):
+    def commands(self) -> typing.List[Command]:
         r'''Gets commands.
 
         ..  container:: example
@@ -398,20 +397,17 @@ class BreakMeasureMap(abjad.AbjadObject):
                 tags=['BREAK'],
                 )
 
-        Returns commands.
         '''
         return self._commands
 
     @property
-    def deactivate(self):
+    def deactivate(self) -> typing.Optional[bool]:
         r'''Is true when tags should write deactivated.
-
-        Returns true, false or none.
         '''
         return self._deactivate
 
     @property
-    def tag(self) -> Optional[abjad.Tag]:
+    def tag(self) -> typing.Optional[abjad.Tag]:
         r'''Gets tag.
         '''
         if self.tags:
@@ -419,7 +415,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         return None
 
     @property
-    def tags(self) -> List[str]:
+    def tags(self) -> typing.List[str]:
         r'''Gets tags.
         '''
         assert Command._are_valid_tags(self._tags), repr(self._tags)

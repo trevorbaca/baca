@@ -1,5 +1,7 @@
 import abjad
 import baca
+import typing
+from .BreakMeasureMap import BreakMeasureMap
 
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
@@ -836,7 +838,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         overrides=None,
         ):
         if breaks is not None:
-            prototype = baca.BreakMeasureMap
+            prototype = BreakMeasureMap
             assert isinstance(breaks, prototype), repr(breaks)
         self._breaks = breaks
         self._fermata_measure_numbers = []
@@ -905,13 +907,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     duration = duration / self.multiplier
             eol_adjusted = False
             if measure_number in self.eol_measure_numbers:
+                duration_ = duration
                 duration *= self._magic_lilypond_eol_adjustment
                 eol_adjusted = True
             spacing_section = baca.SpacingSection(duration)
             tag = abjad.Tag(abjad.tags.SPACING)
             abjad.attach(spacing_section, skip, tag=tag.prepend('HSS1'))
             if eol_adjusted:
-                markup = abjad.Markup(f'[[{duration!s}]]')
+                multiplier = self._magic_lilypond_eol_adjustment
+                markup = abjad.Markup(f'[[{duration_!s} * {multiplier!s}]]')
             else:
                 markup = abjad.Markup(f'[{duration!s}]')
             markup = markup.fontsize(3)
@@ -988,7 +992,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def breaks(self):
+    def breaks(self) -> typing.Optional[BreakMeasureMap]:
         r'''Gets break measure map.
 
         Returns break measure map or none.
@@ -996,10 +1000,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._breaks
 
     @property
-    def eol_measure_numbers(self):
+    def eol_measure_numbers(self) -> typing.List[int]:
         r'''Gets EOL measure numbers.
-
-        Returns list.
         '''
         eol_measure_numbers = []
         if self.breaks and self.breaks._bol_measure_numbers:
@@ -1012,54 +1014,36 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return eol_measure_numbers
 
     @property
-    def fermata_measure_numbers(self):
+    def fermata_measure_numbers(self) -> typing.List[int]:
         r'''Gets fermata measure numbers.
-
-        Defaults to none.
-
-        Set to list or none.
-
-        Returns list or none.
         '''
         return self._fermata_measure_numbers
 
     @property
-    def fermata_measure_width(self):
+    def fermata_measure_width(self) -> typing.Optional[
+        abjad.mathtools.NonreducedFraction
+        ]:
         r'''Gets fermata measure width.
 
         Sets fermata measures to exactly this width when set; ignores minimum
         width and multiplier.
-
-        Defaults to none.
-
-        Set to duration or none.
-
-        Returns duration or none.
         '''
         return self._fermata_measure_width
 
     @property
-    def fermata_score(self):
+    def fermata_score(self) -> typing.Optional[str]:
         r'''Gets name score package with fermata measures.
-
-        Defaults to none.
-
-        Set to string or none.
-
-        Returns string or none.
         '''
         return self._fermata_score
 
     @property
-    def first_measure_number(self):
+    def first_measure_number(self) -> int:
         r'''Gets first measure number.
-
-        Returns positive integer or none.
         '''
         return self._first_measure_number
 
     @property
-    def last_measure_number(self):
+    def last_measure_number(self) -> typing.Optional[int]:
         r'''Gets last measure number.
 
         First measure number and measure count must be defined.
@@ -1067,59 +1051,43 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         if (self.first_measure_number is not None and
             self.measure_count is not None):
             return self.first_measure_number + self.measure_count - 1
+        else:
+            return None
 
     @property
-    def measure_count(self):
+    def measure_count(self) -> int:
         r'''Gets measure count.
-
-        Returns nonnegative integer or none.
         '''
         return self._measure_count
 
     @property
-    def minimum_width(self):
+    def minimum_width(self) -> typing.Optional[
+        abjad.mathtools.NonreducedFraction
+        ]:
         r'''Gets minimum width.
 
         Defaults to none and interprets none equal to ``1/8``.
-
-        Set to duration or none.
-
-        Returns duration or none.
         '''
         return self._minimum_width
 
     @property
-    def multiplier(self):
+    def multiplier(self) -> typing.Optional[abjad.Multiplier]:
         r'''Gets multiplier.
-
-        Defaults to none.
-
-        Set to multiplier or none.
-
-        Returns multiplier or none.
         '''
         return self._multiplier
 
     @property
-    def overrides(self):
+    def overrides(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets overrides.
-
-        Defaults to none.
-
-        Set to tuple or none.
-
-        Returns tuple or none.
         '''
         return self._overrides
 
     ### PUBLIC METHODS ###
 
-    def override(self, measures, duration):
+    def override(self, measures, duration) -> None:
         r'''Overrides `measures` with `duration`.
-
-        Returns none.
         '''
-        duration = abjad.NonreducedFraction(duration)
+        duration = abjad.mathtools.NonreducedFraction(duration)
         if isinstance(measures, int):
             self.overrides[measures] = duration
         elif isinstance(measures, tuple):
