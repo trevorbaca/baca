@@ -19,6 +19,7 @@ Bases
 
    .. autosummary::
 
+      ~HorizontalSpacingSpecifier.bol_measure_numbers
       ~HorizontalSpacingSpecifier.breaks
       ~HorizontalSpacingSpecifier.eol_measure_numbers
       ~HorizontalSpacingSpecifier.fermata_measure_numbers
@@ -37,6 +38,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: HorizontalSpacingSpecifier.bol_measure_numbers
 
 .. autoattribute:: HorizontalSpacingSpecifier.breaks
 

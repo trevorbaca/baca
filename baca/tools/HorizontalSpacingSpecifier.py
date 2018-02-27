@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from .BreakMeasureMap import BreakMeasureMap
+from .SpacingSection import SpacingSection
 
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
@@ -871,15 +872,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_maker=None):
+    def __call__(self, segment_maker=None) -> None:
         r'''Calls command on `segment_maker`.
-
-        Returns none.
         '''
         score = segment_maker.score
-        context = score['GlobalSkips']
-        skips = baca.select(context).skips()
-        self._interrogate_fermata_score()
+        skips = baca.select(score['GlobalSkips']).skips()
+        self._populate_fermata_measure_numbers()
         programmatic = True
         if self.overrides and len(self.overrides) == len(skips):
             programmatic = False
@@ -910,7 +908,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration_ = duration
                 duration *= self._magic_lilypond_eol_adjustment
                 eol_adjusted = True
-            spacing_section = baca.SpacingSection(duration)
+            spacing_section = SpacingSection(duration)
             tag = abjad.Tag(abjad.tags.SPACING)
             abjad.attach(spacing_section, skip, tag=tag.prepend('HSS1'))
             if eol_adjusted:
@@ -923,8 +921,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 color = 'DarkCyan'
             else:
                 color = 'ForestGreen'
-            color = abjad.SchemeColor(color)
-            markup = markup.with_color(color)
+            scheme_color = abjad.SchemeColor(color)
+            markup = markup.with_color(scheme_color)
             markup = abjad.new(markup, direction=abjad.Up)
             tag = abjad.Tag(abjad.tags.SPACING_MARKUP).prepend('HSS2')
             abjad.attach(markup, skip, deactivate=True, tag=tag)
@@ -971,17 +969,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         minimum_durations_by_measure = [min(_) for _ in durations_by_measure]
         return minimum_durations_by_measure
 
-    def _interrogate_fermata_score(self):
-        if not self.fermata_score:
-            return
-        path = abjad.Path(self.fermata_score)
-        dictionary = path.get_metadatum(
-            'fermata_measure_numbers',
-            abjad.OrderedDict(),
-            )
-        for path, fermata_measure_numbers in dictionary.items():
-            self._fermata_measure_numbers.extend(fermata_measure_numbers)
-
     def _is_fermata_measure(self, measure_number, skip):
         if (self.fermata_measure_numbers and
             measure_number in self.fermata_measure_numbers):
@@ -989,25 +976,74 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         measure_timespan = abjad.inspect(skip).get_timespan()
         return measure_timespan.start_offset in self._fermata_start_offsets
 
+    def _populate_fermata_measure_numbers(self):
+        if not self.fermata_score:
+            return
+        path = abjad.Path(self.fermata_score)
+        string = 'fermata_measure_numbers'
+        dictionary = path.get_metadatum(string, abjad.OrderedDict())
+        for path, fermata_measure_numbers in dictionary.items():
+            self._fermata_measure_numbers.extend(fermata_measure_numbers)
+
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def bol_measure_numbers(self) -> typing.List[int]:
+        r'''Gets beginning-of-line measure numbers.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.bol_measure_numbers
+            [95, 103]
+
+        '''
+        bol_measure_numbers = []
+        if self.breaks and self.breaks.bol_measure_numbers:
+            first_breaks_measure_number = self.breaks.bol_measure_numbers[0]
+            for bol_measure_number in self.breaks.bol_measure_numbers:
+                offset = bol_measure_number - first_breaks_measure_number
+                bol_measure_number = self.first_measure_number + offset
+                bol_measure_numbers.append(bol_measure_number)
+        return bol_measure_numbers
 
     @property
     def breaks(self) -> typing.Optional[BreakMeasureMap]:
         r'''Gets break measure map.
-
-        Returns break measure map or none.
         '''
         return self._breaks
 
     @property
     def eol_measure_numbers(self) -> typing.List[int]:
-        r'''Gets EOL measure numbers.
+        r'''Gets end-of-line measure numbers.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.eol_measure_numbers
+            [102, 112]
+
         '''
         eol_measure_numbers = []
-        if self.breaks and self.breaks._bol_measure_numbers:
-            for measure_number in self.breaks._bol_measure_numbers[1:]:
-                eol_measure_number = measure_number - 1
-                eol_measure_numbers.append(eol_measure_number)
+        for bol_measure_number in self.bol_measure_numbers[1:]:
+            eol_measure_number = bol_measure_number - 1
+            eol_measure_numbers.append(eol_measure_number)
         if (self.last_measure_number and
             self.last_measure_number not in eol_measure_numbers):
             eol_measure_numbers.append(self.last_measure_number)
@@ -1016,6 +1052,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     @property
     def fermata_measure_numbers(self) -> typing.List[int]:
         r'''Gets fermata measure numbers.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.fermata_measure_numbers
+            []
+
         '''
         return self._fermata_measure_numbers
 
@@ -1039,6 +1090,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     @property
     def first_measure_number(self) -> int:
         r'''Gets first measure number.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.first_measure_number
+            95
+
         '''
         return self._first_measure_number
 
@@ -1046,7 +1112,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     def last_measure_number(self) -> typing.Optional[int]:
         r'''Gets last measure number.
 
-        First measure number and measure count must be defined.
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.last_measure_number
+            112
+
+        Returns none when first measure number is not defined.
+
+        Returns none when measure count is not defined.
         '''
         if (self.first_measure_number is not None and
             self.measure_count is not None):
@@ -1057,6 +1139,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     @property
     def measure_count(self) -> int:
         r'''Gets measure count.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.measure_count
+            18
+
         '''
         return self._measure_count
 

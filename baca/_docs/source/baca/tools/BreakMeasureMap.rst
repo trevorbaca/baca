@@ -19,6 +19,7 @@ Bases
 
    .. autosummary::
 
+      ~BreakMeasureMap.bol_measure_numbers
       ~BreakMeasureMap.commands
       ~BreakMeasureMap.deactivate
       ~BreakMeasureMap.tag
@@ -29,6 +30,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: BreakMeasureMap.bol_measure_numbers
 
 .. autoattribute:: BreakMeasureMap.commands
 

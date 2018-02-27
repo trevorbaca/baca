@@ -365,6 +365,14 @@ class BreakMeasureMap(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def bol_measure_numbers(self) -> typing.List[int]:
+        r'''Gets beginning-of-line measure numbers.
+
+        Populated during ``baca.breaks()`` initialization.
+        '''
+        return  self._bol_measure_numbers
+
+    @property
     def commands(self) -> typing.List[Command]:
         r'''Gets commands.
 
