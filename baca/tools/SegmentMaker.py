@@ -5,6 +5,7 @@ import pathlib
 import sys
 import time
 import traceback
+import typing
 from abjad import rhythmmakertools as rhythmos
 from .BreakMeasureMap import BreakMeasureMap
 from .CommandWrapper import CommandWrapper
@@ -147,6 +148,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_breaks',
         '_cache',
         '_cached_time_signatures',
+        '_clock_time_override',
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
@@ -276,6 +278,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def __init__(
         self,
         allow_empty_selections: bool = None,
+        clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = None,
         color_repeat_pitch_classes: bool = None,
@@ -312,6 +315,9 @@ class SegmentMaker(abjad.SegmentMaker):
         ) -> None:
         super(SegmentMaker, self).__init__()
         self._allow_empty_selections: bool = allow_empty_selections
+        if clock_time_override is not None:
+            assert isinstance(clock_time_override, abjad.MetronomeMark)
+        self._clock_time_override = clock_time_override
         self._color_octaves: bool = color_octaves
         self._color_out_of_range_pitches: bool = \
             color_out_of_range_pitches
@@ -1781,6 +1787,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_clock_time(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
+        if self.clock_time_override:
+            metronome_mark = self.clock_time_override
+            abjad.attach(metronome_mark, skips[0])
         if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
             return
         start_clock_time = self._get_previous_stop_clock_time()
@@ -1813,6 +1822,9 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_stop_offset - segment_start_offset
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
+        if self.clock_time_override:
+            metronome_mark = self.clock_time_override
+            abjad.detach(metronome_mark, skips[0])
 
     def _label_measure_indices(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
@@ -2484,7 +2496,7 @@ class SegmentMaker(abjad.SegmentMaker):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_empty_selections(self) -> Optional[bool]:
+    def allow_empty_selections(self) -> typing.Optional[bool]:
         r'''Is true when segment allows empty selectors.
 
         Otherwise segment raises exception on empty selectors.
@@ -2492,13 +2504,19 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._allow_empty_selections
 
     @property
-    def breaks(self) -> Optional[BreakMeasureMap]:
+    def breaks(self) -> typing.Optional[BreakMeasureMap]:
         r'''Gets breaks.
         '''
         return self._breaks
 
     @property
-    def color_octaves(self) -> Optional[bool]:
+    def clock_time_override(self) -> typing.Optional[abjad.MetronomeMark]:
+        r'''Gets clock time override.
+        '''
+        return self._clock_time_override
+
+    @property
+    def color_octaves(self) -> typing.Optional[bool]:
         r'''Is true when segment-maker colors octaves.
 
         ..  container:: example
@@ -2765,7 +2783,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_octaves
 
     @property
-    def color_out_of_range_pitches(self) -> Optional[bool]:
+    def color_out_of_range_pitches(self) -> typing.Optional[bool]:
         r'''Is true when segment-maker colors out-of-range pitches.
 
         ..  container:: example
@@ -2937,7 +2955,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_out_of_range_pitches
 
     @property
-    def color_repeat_pitch_classes(self) -> Optional[bool]:
+    def color_repeat_pitch_classes(self) -> typing.Optional[bool]:
         r'''Is true when segment-maker colors repeat pitch-classes.
 
         ..  container:: example
@@ -3130,19 +3148,19 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_repeat_pitch_classes
 
     @property
-    def do_not_check_persistence(self) -> Optional[bool]:
+    def do_not_check_persistence(self) -> typing.Optional[bool]:
         r'''Is true when segment-maker does not check persistent indicators.
         '''
         return self._do_not_check_persistence
 
     @property
-    def do_not_include_layout_ly(self) -> Optional[bool]:
+    def do_not_include_layout_ly(self) -> typing.Optional[bool]:
         r'''Is true when segment-maker does not include layout.ly.
         '''
         return self._do_not_include_layout_ly
 
     @property
-    def fermata_measure_staff_line_count(self) -> Optional[int]:
+    def fermata_measure_staff_line_count(self) -> typing.Optional[int]:
         r'''Gets fermata measure staff lines.
         '''
         return self._fermata_measure_staff_line_count
@@ -3606,7 +3624,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._final_bar_line
 
     @property
-    def final_markup(self) -> Optional[tuple]:
+    def final_markup(self) -> typing.Optional[tuple]:
         r'''Gets final markup.
 
         ..  container:: example
@@ -3746,13 +3764,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._final_markup
 
     @property
-    def final_markup_extra_offset(self) -> Optional[NumberPair]:
+    def final_markup_extra_offset(self) -> typing.Optional[NumberPair]:
         r'''Gets final markup extra offset.
         '''
         return self._final_markup_extra_offset
 
     @property
-    def first_measure_number(self) -> Optional[int]:
+    def first_measure_number(self) -> typing.Optional[int]:
         r'''Gets user-defined first measure number.
         '''
         return self._first_measure_number
@@ -3764,13 +3782,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._get_segment_number() == 1
 
     @property
-    def ignore_repeat_pitch_classes(self) -> Optional[bool]:
+    def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
         r'''Is true when segment ignores repeat pitch-classes.
         '''
         return self._ignore_repeat_pitch_classes
 
     @property
-    def ignore_unpitched_notes(self) -> Optional[bool]:
+    def ignore_unpitched_notes(self) -> typing.Optional[bool]:
         r'''Is true when segment ignores unpitched notes.
 
         ..  container:: example
@@ -4014,7 +4032,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._ignore_unpitched_notes
 
     @property
-    def ignore_unregistered_pitches(self) -> Optional[bool]:
+    def ignore_unregistered_pitches(self) -> typing.Optional[bool]:
         r'''Is true when segment ignores unregistered pitches.
 
         ..  container:: example
@@ -4369,13 +4387,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._ignore_unregistered_pitches
 
     @property
-    def instruments(self) -> Optional[abjad.OrderedDict]:
+    def instruments(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets instruments.
         '''
         return self._instruments
 
     @property
-    def last_segment(self) -> Optional[bool]:
+    def last_segment(self) -> typing.Optional[bool]:
         r'''Is true when composer declares segment to be last in score.
         '''
         return self._last_segment
@@ -4391,7 +4409,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return manifests
 
     @property
-    def margin_markups(self) -> Optional[abjad.OrderedDict]:
+    def margin_markups(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets margin markups.
         '''
         return self._margin_markups
@@ -4568,7 +4586,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metadata
 
     @property
-    def metronome_mark_measure_map(self) -> Optional[MetronomeMarkMeasureMap]:
+    def metronome_mark_measure_map(self) -> typing.Optional[
+        MetronomeMarkMeasureMap]:
         r'''Gets metronome mark measure map.
 
         ..  container:: example
@@ -4745,13 +4764,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metronome_mark_measure_map
 
     @property
-    def metronome_mark_spanner_right_broken(self) -> Optional[bool]:
+    def metronome_mark_spanner_right_broken(self) -> typing.Optional[bool]:
         r'''Is true when metronome mark spanner is right-broken.
         '''
         return self._metronome_mark_spanner_right_broken
 
     @property
-    def metronome_mark_stem_height(self) -> Optional[Number]:
+    def metronome_mark_stem_height(self) -> typing.Optional[Number]:
         r'''Gets metronome mark stem height.
         '''
         return self._metronome_mark_stem_height
@@ -4763,7 +4782,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metronome_marks
 
     @property
-    def midi(self) -> Optional[bool]:
+    def midi(self) -> typing.Optional[bool]:
         r'''Is true when segment-maker outputs MIDI.
         '''
         return self._midi
@@ -4775,25 +4794,25 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._previous_metadata
 
     @property
-    def print_timings(self) -> Optional[bool]:
+    def print_timings(self) -> typing.Optional[bool]:
         r'''Is true when segment prints interpreter timings.
         '''
         return self._print_timings
 
     @property
-    def range_checker(self) -> Optional[abjad.PitchRange]:
+    def range_checker(self) -> typing.Optional[abjad.PitchRange]:
         r'''Gets range checker.
         '''
         return self._range_checker
 
     @property
-    def rehearsal_mark(self) -> Optional[str]:
+    def rehearsal_mark(self) -> typing.Optional[str]:
         r'''Gets rehearsal mark.
         '''
         return self._rehearsal_mark
 
     @property
-    def score_template(self) -> Optional[abjad.ScoreTemplate]:
+    def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
         r'''Gets score template.
 
         ..  container:: example
@@ -4811,13 +4830,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._score_template
 
     @property
-    def skip_wellformedness_checks(self) -> Optional[bool]:
+    def skip_wellformedness_checks(self) -> typing.Optional[bool]:
         r'''Is true when segment skips wellformedness checks.
         '''
         return self._skip_wellformedness_checks
 
     @property
-    def skips_instead_of_rests(self) -> Optional[bool]:
+    def skips_instead_of_rests(self) -> typing.Optional[bool]:
         r'''Is true when segment fills empty measures with skips.
 
         ..  container:: example
@@ -4965,7 +4984,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._skips_instead_of_rests
 
     @property
-    def spacing(self) -> Optional[HorizontalSpacingSpecifier]:
+    def spacing(self) -> typing.Optional[HorizontalSpacingSpecifier]:
         r'''Gets spacing.
         '''
         return self._spacing
@@ -4987,7 +5006,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._time_signatures
 
     @property
-    def transpose_score(self) -> Optional[bool]:
+    def transpose_score(self) -> typing.Optional[bool]:
         r'''Is true when segment transposes score.
 
         ..  container:: example
@@ -5250,13 +5269,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._transpose_score
 
     @property
-    def validate_measure_count(self) -> Optional[int]:
+    def validate_measure_count(self) -> typing.Optional[int]:
         r'''Gets validate measure count.
         '''
         return self._validate_measure_count
     
     @property
-    def validate_stage_count(self) -> Optional[int]:
+    def validate_stage_count(self) -> typing.Optional[int]:
         r'''Gets validate stage count.
         '''
         return self._validate_stage_count

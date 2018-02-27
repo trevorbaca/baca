@@ -23,6 +23,7 @@ Bases
 
       ~SegmentMaker.allow_empty_selections
       ~SegmentMaker.breaks
+      ~SegmentMaker.clock_time_override
       ~SegmentMaker.color_octaves
       ~SegmentMaker.color_out_of_range_pitches
       ~SegmentMaker.color_repeat_pitch_classes
@@ -82,6 +83,8 @@ Read-only properties
 .. autoattribute:: SegmentMaker.allow_empty_selections
 
 .. autoattribute:: SegmentMaker.breaks
+
+.. autoattribute:: SegmentMaker.clock_time_override
 
 .. autoattribute:: SegmentMaker.color_octaves
 
