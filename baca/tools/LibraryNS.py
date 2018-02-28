@@ -636,7 +636,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def part(assignment: abjad.PartAssignment) -> ContainerCommand:
+    def parts(assignment: abjad.PartAssignment) -> ContainerCommand:
         r'''Inserts ``selector`` output in container and sets part assignment.
 
         ..  container:: example
@@ -649,7 +649,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(),
-            ...     baca.part(abjad.PartAssignment('Violin')),
+            ...     baca.parts(abjad.PartAssignment('Violin')),
             ...     baca.pitch('E4'),
             ...     )
 
@@ -730,14 +730,14 @@ class LibraryNS(abjad.AbjadObject):
             >>> maker(
             ...     baca.scope('ViolinMusicVoice', 1),
             ...     baca.make_notes(),
-            ...     baca.part(part_assignment),
+            ...     baca.parts(part_assignment),
             ...     baca.pitches('E4 F4'),
             ...     )
 
             >>> maker(
             ...     baca.scope('ViolaMusicVoice', 1),
             ...     baca.make_notes(),
-            ...     baca.part(part_assignment),
+            ...     baca.parts(part_assignment),
             ...     baca.pitches('E4 F4'),
             ...     )
 
