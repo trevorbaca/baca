@@ -389,9 +389,30 @@ class LibraryTZ(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_script_color('red'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='color',
+            blacklist=(abjad.MultimeasureRest,),
             value=color,
             grob='text_script',
             selector=selector,
@@ -403,9 +424,31 @@ class LibraryTZ(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides text script extra offset.
+
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_script_extra_offset((0, 2)),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='extra_offset',
+            blacklist=(abjad.MultimeasureRest,),
             value=pair,
             grob='text_script',
             selector=selector,
@@ -421,7 +464,6 @@ class LibraryTZ(abjad.AbjadObject):
         ..  container:: example
 
             Overrides text script padding on leaves:
-
 
                 >>> music_maker = baca.MusicMaker()
                 >>> contribution = music_maker(
@@ -579,9 +621,30 @@ class LibraryTZ(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_script_padding(2),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='padding',
+            blacklist=(abjad.MultimeasureRest,),
             value=n,
             grob='text_script',
             selector=selector,
@@ -592,9 +655,31 @@ class LibraryTZ(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides text script parent alignment X to center.
+
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_script_parent_center()
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='parent_alignment_X',
+            blacklist=(abjad.MultimeasureRest,),
             value=0,
             grob='text_script',
             selector=selector,
@@ -770,9 +855,30 @@ class LibraryTZ(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_script_staff_padding(2)
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='staff_padding',
+            blacklist=(abjad.MultimeasureRest,),
             value=n,
             grob='text_script',
             selector=selector,
@@ -944,9 +1050,30 @@ class LibraryTZ(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_scripts_down()
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='direction',
+            blacklist=(abjad.MultimeasureRest,),
             value=abjad.Down,
             grob='text_script',
             selector=selector,
@@ -1118,9 +1245,30 @@ class LibraryTZ(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_scripts_up()
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
         '''
         return OverrideCommand(
             attribute='direction',
+            blacklist=(abjad.MultimeasureRest,),
             value=abjad.Up,
             grob='text_script',
             selector=selector,

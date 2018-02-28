@@ -481,12 +481,12 @@ class Cursor(abjad.AbjadObject):
 
             >>> cursor.next()
             Traceback (most recent call last):
-            ...
+                ...
             Exception: cursor only 4.
 
             >>> cursor.next()
             Traceback (most recent call last):
-            ...
+                ...
             Exception: cursor only 4.
 
         ..  container:: example
@@ -679,7 +679,7 @@ class Cursor(abjad.AbjadObject):
 
             >>> cursor.next(count=99)
             Traceback (most recent call last):
-            ...
+                ...
             Exception: cursor only 4.
 
         Returns tuple.

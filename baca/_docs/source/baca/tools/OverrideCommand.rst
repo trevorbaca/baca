@@ -23,6 +23,7 @@ Bases
 
       ~OverrideCommand.after
       ~OverrideCommand.attribute
+      ~OverrideCommand.blacklist
       ~OverrideCommand.context
       ~OverrideCommand.deactivate
       ~OverrideCommand.get_tag
@@ -35,6 +36,7 @@ Bases
       ~OverrideCommand.tag_measure_number
       ~OverrideCommand.tags
       ~OverrideCommand.value
+      ~OverrideCommand.whitelist
       ~OverrideCommand.__call__
       ~OverrideCommand.__format__
       ~OverrideCommand.__repr__
@@ -45,6 +47,8 @@ Read-only properties
 .. autoattribute:: OverrideCommand.after
 
 .. autoattribute:: OverrideCommand.attribute
+
+.. autoattribute:: OverrideCommand.blacklist
 
 .. autoattribute:: OverrideCommand.context
 
@@ -75,6 +79,8 @@ Read-only properties
       .. autoattribute:: OverrideCommand.tags
 
 .. autoattribute:: OverrideCommand.value
+
+.. autoattribute:: OverrideCommand.whitelist
 
 Read/write properties
 ---------------------

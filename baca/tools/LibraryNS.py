@@ -6408,7 +6408,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> baca.suite(['Allegro'])
             Traceback (most recent call last):
-            ...
+                ...
             Exception: must be command:
             <BLANKLINE>
             Allegro

@@ -467,12 +467,12 @@ class Division(abjad.NonreducedFraction):
 
             >>> division_1 - division_2
             Traceback (most recent call last):
-            ...
+                ...
             Exception: both divisions must have (or not have) start offsets.
 
             >>> division_2 - division_1
             Traceback (most recent call last):
-            ...
+                ...
             Exception: both divisions must have (or not have) start offsets.
 
         Uses timespan arithmetic when both divisions have a start offset.

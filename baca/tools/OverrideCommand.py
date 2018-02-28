@@ -1,6 +1,8 @@
 import abjad
 import baca
+import typing
 from .Command import Command
+from .Typing import Selector
 
 
 class OverrideCommand(Command):
@@ -190,25 +192,29 @@ class OverrideCommand(Command):
     __slots__ = (
         '_after',
         '_attribute',
+        '_blacklist',
         '_context',
         '_grob',
         '_tags',
         '_value',
+        '_whitelist',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        after=None,
-        attribute=None,
-        context=None,
-        deactivate=None,
-        grob=None,
-        selector='baca.leaves()',
-        tags=None,
-        value=None,
-        ):
+        after: bool = None,
+        attribute: str = None,
+        blacklist: typing.Tuple[type] = None,
+        context: str = None,
+        deactivate: bool = None,
+        grob: str = None,
+        selector: Selector = 'baca.leaves()',
+        tags: typing.List = None,
+        value: typing.Any = None,
+        whitelist: typing.Tuple[type] = None,
+        ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if after is not None:
             after = bool(after)
@@ -216,6 +222,10 @@ class OverrideCommand(Command):
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
+        if blacklist is not None:
+            assert isinstance(blacklist, tuple), repr(blacklist)
+            assert all(issubclass(_, abjad.Leaf) for _ in blacklist)
+        self._blacklist = blacklist
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -226,13 +236,15 @@ class OverrideCommand(Command):
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
         self._value = value
+        if whitelist is not None:
+            assert isinstance(whitelist, tuple), repr(whitelist)
+            assert all(issubclass(_, abjad.Leaf) for _ in whitelist)
+        self._whitelist = whitelist
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         r'''Calls command on `argument`.
-
-        Returns none.
         '''
         if argument is None:
             return
@@ -241,15 +253,28 @@ class OverrideCommand(Command):
         if not argument:
             return
         leaves = abjad.select(argument).leaves(grace_notes=False)
-        context = self.context
-        assert isinstance(context, (str, type(None))), repr(context)
-        if context in dir(abjad):
-            context = getattr(abjad, context)
+        if self.blacklist:
+            for leaf in leaves:
+                if isinstance(leaf, self.blacklist):
+                    message = f'{type(leaf).__name__} is forbidden.'
+                    raise Exception(message)
+        if self.whitelist:
+            for leaf in leaves:
+                if not isinstance(leaf, self.whitelist):
+                    names = ','.join(_.__name__ for _ in self.whitelist)
+                    violator = type(leaf).__name__
+                    message = f'only {names} (not {violator}) allowed.'
+                    raise Exception(message)
+        lilypond_type = self.context
+        if lilypond_type is not None:
+            assert isinstance(lilypond_type, (str)), repr(lilypond_type)
+        if lilypond_type in dir(abjad):
+            context = getattr(abjad, lilypond_type)
             assert issubclass(context, abjad.Context), repr(context)
             parentage = abjad.inspect(leaves[0]).get_parentage()
             context = parentage.get_first(context) or context()
-            context = context.lilypond_type
-            assert isinstance(context, str), repr(context)
+            lilypond_type = context.lilypond_type
+            assert isinstance(lilypond_type, str), repr(lilypond_type)
         grob = self.grob
         attribute = self.attribute
         value = self.value
@@ -258,7 +283,7 @@ class OverrideCommand(Command):
             grob,
             attribute,
             value,
-            context=context,
+            context=lilypond_type,
             once=once,
             )
         format_slot = 'before'
@@ -277,7 +302,7 @@ class OverrideCommand(Command):
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
             grob,
             attribute,
-            context=context,
+            context=lilypond_type,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
         abjad.attach(
@@ -290,45 +315,44 @@ class OverrideCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def after(self):
+    def after(self) -> typing.Optional[bool]:
         r'''Is true if command positions LilyPond command after selection.
-
-        Returns true, false or none.
         '''
         return self._after 
 
     @property
-    def attribute(self):
+    def attribute(self) -> str:
         r'''Gets attribute name.
-
-        Set to string or none.
         '''
         return self._attribute
 
     @property
-    def context(self):
+    def blacklist(self) -> typing.Tuple[type]:
+        r'''Gets blacklist leaves.
+        '''
+        return self._blacklist
+
+    @property
+    def context(self) -> str:
         r'''Gets context name.
-
-        Defaults to none.
-
-        Set to string or none.
-
-        Returns string or none.
         '''
         return self._context
 
     @property
-    def grob(self):
+    def grob(self) -> str:
         r'''Gets grob name.
-
-        Set to string or none.
         '''
         return self._grob
 
     @property
-    def value(self):
+    def value(self) -> typing.Any:
         r'''Gets attribute value.
-
-        Set to string or none.
         '''
         return self._value
+
+    @property
+    def whitelist(self) -> typing.Tuple[type]:
+        r'''Gets whitelist leaves.
+        '''
+        return self._whitelist
+

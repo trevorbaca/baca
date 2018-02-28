@@ -2078,12 +2078,121 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides multimeasure rest text color.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.mmrest_text_color('red'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override MultiMeasureRestText.color = #red                              %! OC1
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                R1 * 3/8
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            \override                                                    %! IC
+                                                #'(box-padding . 0.5)                                    %! IC
+                                                \box                                                     %! IC
+                                                    still                                                %! IC
+                                    }                                                                    %! IC
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                R1 * 3/8
+                                \revert MultiMeasureRestText.color                                       %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Raises exception when called on leaves other than multimeasure
+            rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.mmrest_text_color('red'),
+            ...     baca.pitches([2, 4]),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: only MultimeasureRest (not Note) allowed.
+
         '''
         return OverrideCommand(
             attribute='color',
             value=color,
             grob='multi_measure_rest_text',
             selector=selector,
+            whitelist=(abjad.MultimeasureRest,),
             )
 
     @staticmethod
@@ -2092,12 +2201,98 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides multimeasure rest text extra offset.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.mmrest_text_extra_offset((0, 2)),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OC1
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                R1 * 3/8
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            \override                                                    %! IC
+                                                #'(box-padding . 0.5)                                    %! IC
+                                                \box                                                     %! IC
+                                                    still                                                %! IC
+                                    }                                                                    %! IC
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                R1 * 3/8
+                                \revert MultiMeasureRestText.extra-offset                                %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         '''
         return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='multi_measure_rest_text',
             selector=selector,
+            whitelist=(abjad.MultimeasureRest,),
             )
 
     @staticmethod
@@ -2106,12 +2301,98 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides multimeasure rest text padding.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.mmrest_text_padding(2),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override MultiMeasureRestText.padding = #2                              %! OC1
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                R1 * 3/8
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            \override                                                    %! IC
+                                                #'(box-padding . 0.5)                                    %! IC
+                                                \box                                                     %! IC
+                                                    still                                                %! IC
+                                    }                                                                    %! IC
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                R1 * 3/8
+                                \revert MultiMeasureRestText.padding                                     %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         '''
         return OverrideCommand(
             attribute='padding',
             value=n,
             grob='multi_measure_rest_text',
             selector=selector,
+            whitelist=(abjad.MultimeasureRest,),
             )
 
     @staticmethod
@@ -2119,12 +2400,98 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides multimeasure rest text parent alignment X to center.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.mmrest_text_parent_center(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override MultiMeasureRestText.parent-alignment-X = #0                   %! OC1
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                R1 * 3/8
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            \override                                                    %! IC
+                                                #'(box-padding . 0.5)                                    %! IC
+                                                \box                                                     %! IC
+                                                    still                                                %! IC
+                                    }                                                                    %! IC
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                R1 * 3/8
+                                \revert MultiMeasureRestText.parent-alignment-X                          %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         '''
         return OverrideCommand(
             attribute='parent_alignment_X',
             value=0,
             grob='multi_measure_rest_text',
             selector=selector,
+            whitelist=(abjad.MultimeasureRest,),
             )
 
     @staticmethod
@@ -2133,10 +2500,96 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides multimeasure rest text staff padding.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.mmrest_text_staff_padding(2),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override MultiMeasureRestText.staff-padding = #2                        %! OC1
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                R1 * 3/8
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            \override                                                    %! IC
+                                                #'(box-padding . 0.5)                                    %! IC
+                                                \box                                                     %! IC
+                                                    still                                                %! IC
+                                    }                                                                    %! IC
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                R1 * 1/2
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                R1 * 3/8
+                                \revert MultiMeasureRestText.staff-padding                               %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         '''
         return OverrideCommand(
             attribute='staff_padding',
             value=n,
             grob='multi_measure_rest_text',
             selector=selector,
+            whitelist=(abjad.MultimeasureRest,),
             )
