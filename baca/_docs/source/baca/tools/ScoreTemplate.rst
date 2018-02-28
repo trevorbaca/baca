@@ -31,7 +31,6 @@ Bases
       ~ScoreTemplate.make_square_staff_group
       ~ScoreTemplate.make_staff_group
       ~ScoreTemplate.part_manifest
-      ~ScoreTemplate.part_names
       ~ScoreTemplate.__call__
       ~ScoreTemplate.__copy__
       ~ScoreTemplate.__eq__
@@ -69,12 +68,6 @@ Methods
 .. automethod:: ScoreTemplate.make_square_staff_group
 
 .. automethod:: ScoreTemplate.make_staff_group
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: ScoreTemplate.part_names
 
 Special methods
 ---------------

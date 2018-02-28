@@ -59,7 +59,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         for tag_ in tag.split('.'):
             if not abjad.String(tag_).is_lilypond_identifier():
                 raise Exception(f'invalid LilyPond identifier: {tag_!r}.')
-            part_names = self.part_names()
+            part_names = self.part_manifest.names
             if part_names and tag_ not in part_names:
                 raise Exception(f'not listed in parts manifest: {tag_!r}.')
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')

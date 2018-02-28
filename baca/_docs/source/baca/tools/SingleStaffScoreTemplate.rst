@@ -33,7 +33,6 @@ Bases
       ~SingleStaffScoreTemplate.make_square_staff_group
       ~SingleStaffScoreTemplate.make_staff_group
       ~SingleStaffScoreTemplate.part_manifest
-      ~SingleStaffScoreTemplate.part_names
       ~SingleStaffScoreTemplate.__call__
       ~SingleStaffScoreTemplate.__copy__
       ~SingleStaffScoreTemplate.__eq__
@@ -95,12 +94,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: SingleStaffScoreTemplate.make_staff_group
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: SingleStaffScoreTemplate.part_names
 
 Special methods
 ---------------

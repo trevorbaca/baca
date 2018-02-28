@@ -33,7 +33,6 @@ Bases
       ~ViolinSoloScoreTemplate.make_square_staff_group
       ~ViolinSoloScoreTemplate.make_staff_group
       ~ViolinSoloScoreTemplate.part_manifest
-      ~ViolinSoloScoreTemplate.part_names
       ~ViolinSoloScoreTemplate.__call__
       ~ViolinSoloScoreTemplate.__copy__
       ~ViolinSoloScoreTemplate.__eq__
@@ -95,12 +94,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: ViolinSoloScoreTemplate.make_staff_group
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: ViolinSoloScoreTemplate.part_names
 
 Special methods
 ---------------

@@ -33,7 +33,6 @@ Bases
       ~StringTrioScoreTemplate.make_square_staff_group
       ~StringTrioScoreTemplate.make_staff_group
       ~StringTrioScoreTemplate.part_manifest
-      ~StringTrioScoreTemplate.part_names
       ~StringTrioScoreTemplate.__call__
       ~StringTrioScoreTemplate.__copy__
       ~StringTrioScoreTemplate.__eq__
@@ -95,12 +94,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: StringTrioScoreTemplate.make_staff_group
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: StringTrioScoreTemplate.part_names
 
 Special methods
 ---------------
