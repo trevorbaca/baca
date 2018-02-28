@@ -5326,27 +5326,42 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        deactivate: List[str] = None,
+        deactivate: typing.List[str] = None,
         environment: str = None,
         metadata: abjad.OrderedDict = None,
         midi: bool = None,
         previous_metadata: abjad.OrderedDict = None,
-        remove: List[str] = None,
+        remove: typing.List[str] = None,
         segment_directory: abjad.Path = None,
         ) -> abjad.LilyPondFile:
         r'''Runs segment-maker.
 
-        :param environment: leave set to none to render segments in real score.
-            Set to `'docs'` for API examples.
-            Set to `'external'` to debug API examples in an external file.
+        :param deactivate: tags to deactivate in LilyPond file output.
+
+        :param environment: stylesheet path control parameter. Leave set to
+            none to render segments in real score.
+            Set to ``'docs'`` for API examples.
+            Set to ``'external'`` to debug API examples in a separate file.
+
+        :param metadata: metadata found in current segment directory.
+
+        :param midi: set to true to generate MIDI output.
+
+        :param previous_metadata: metadata found in previous segment directory.
+
+        :param remove: tags to remove in LilyPond file output.
+
+        :param segment_directory: path providing access to current segment
+            directory.
 
         '''
-        self._environment: Optional[str] = environment
+        self._environment: typing.Optional[str] = environment
         self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
-        self._midi: Optional[bool] = midi
-        self._previous_metadata: Optional[
-            abjad.OrderedDict] = abjad.OrderedDict(previous_metadata)
-        self._segment_directory: Optional[abjad.Path] = segment_directory
+        self._midi: typing.Optional[bool] = midi
+        self._previous_metadata: abjad.OrderedDict = \
+            abjad.OrderedDict(previous_metadata)
+        self._segment_directory: typing.Optional[
+            abjad.Path] = segment_directory
         self._make_score()
         self._make_lilypond_file()
         self._make_global_skips()
@@ -5385,5 +5400,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_tags(remove)
         self._add_container_identifiers()
         self._check_all_music_in_part_containers()
+        self._check_duplicate_part_assignments()
         self._collect_metadata()
         return self._lilypond_file
