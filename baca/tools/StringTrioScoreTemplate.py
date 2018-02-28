@@ -220,6 +220,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     __documentation_section__ = '(5) Utilities'
 
+    _part_manifest = abjad.PartManifest(
+        ('Violin', 'VN'),
+        ('Viola', 'VA'),
+        ('Cello', 'VC'),
+        )
+
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:

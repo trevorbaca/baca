@@ -193,6 +193,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_spacing',
         '_start_clock_time',
         '_stop_clock_time',
+        '_test_container_identifiers',
         '_time_signatures',
         '_transpose_score',
         '_validate_measure_count',
@@ -308,6 +309,7 @@ class SegmentMaker(abjad.SegmentMaker):
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
         spacing: HorizontalSpacingSpecifier = None,
+        test_container_identifiers: bool = None,
         time_signatures: List[tuple] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
@@ -373,6 +375,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._start_clock_time: str = None
         self._stop_clock_time: str = None
+        if test_container_identifiers is not None:
+            test_container_identifiers = bool(test_container_identifiers)
+        self._test_container_identifiers = test_container_identifiers
         self._transpose_score: bool = transpose_score
         self._validate_measure_count: int = validate_measure_count
         self._validate_stage_count: int = validate_stage_count
@@ -1211,7 +1216,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_persistent_indicators(self):
         if self.do_not_check_persistence:
             return
-        if self._environment == 'docs':
+        if self.environment == 'docs':
             return
         tag = abjad.tags.SOUNDS_DURING_SEGMENT
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -1649,12 +1654,12 @@ class SegmentMaker(abjad.SegmentMaker):
         return start_offset, time_signatures
 
     def _get_stylesheets(self):
-        if self._environment == 'docs':
+        if self.environment == 'docs':
             if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
                 return [self._relative_two_voice_staff_stylesheet_path]
             else:
                 return [self._relative_string_trio_stylesheet_path]
-        elif self._environment == 'external':
+        elif self.environment == 'external':
             if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
                 return [self._absolute_two_voice_staff_stylesheet_path]
             else:
@@ -1903,7 +1908,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_lilypond_file(self):
         includes = self._get_stylesheets()
-        if self._environment == 'external':
+        if self.environment == 'external':
             use_relative_includes = False
         else:
             use_relative_includes = True
@@ -1923,7 +1928,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for item in lilypond_file.items[:]:
             if getattr(item, 'name', None) == 'header':
                 lilypond_file.items.remove(item)
-        if self._environment != 'docs' and not self.do_not_include_layout_ly:
+        if self.environment != 'docs' and not self.do_not_include_layout_ly:
             assert len(lilypond_file.score_block.items) == 1
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
@@ -2115,7 +2120,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _remove_tags(self, tags):
         tags = tags or ()
         assert isinstance(tags, (tuple, list)), repr(tags)
-        if self._environment == 'docs':
+        if self.environment == 'docs':
             remove_documentation_tags = (
                 abjad.tags.CLOCK_TIME_MARKUP,
                 abjad.tags.FIGURE_NAME_MARKUP,
@@ -4999,6 +5004,13 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.measures_per_stage is None:
             return 1
         return len(self.measures_per_stage)
+
+    @property
+    def test_container_identifiers(self) -> typing.Optional[bool]:
+        r'''Is true when segment-maker adds container identifiers in docs
+        environment.
+        '''
+        return self._test_container_identifiers
 
     @property
     def time_signatures(self) -> List[abjad.TimeSignature]:

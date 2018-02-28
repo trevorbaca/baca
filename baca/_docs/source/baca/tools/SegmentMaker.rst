@@ -30,6 +30,7 @@ Bases
       ~SegmentMaker.copy_rhythm
       ~SegmentMaker.do_not_check_persistence
       ~SegmentMaker.do_not_include_layout_ly
+      ~SegmentMaker.environment
       ~SegmentMaker.fermata_measure_staff_line_count
       ~SegmentMaker.final_bar_line
       ~SegmentMaker.final_markup
@@ -64,6 +65,7 @@ Bases
       ~SegmentMaker.skips_instead_of_rests
       ~SegmentMaker.spacing
       ~SegmentMaker.stage_count
+      ~SegmentMaker.test_container_identifiers
       ~SegmentMaker.time_signatures
       ~SegmentMaker.transpose_score
       ~SegmentMaker.validate_measure_count
@@ -95,6 +97,12 @@ Read-only properties
 .. autoattribute:: SegmentMaker.do_not_check_persistence
 
 .. autoattribute:: SegmentMaker.do_not_include_layout_ly
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SegmentMaker.environment
 
 .. autoattribute:: SegmentMaker.fermata_measure_staff_line_count
 
@@ -173,6 +181,8 @@ Read-only properties
 .. autoattribute:: SegmentMaker.spacing
 
 .. autoattribute:: SegmentMaker.stage_count
+
+.. autoattribute:: SegmentMaker.test_container_identifiers
 
 .. autoattribute:: SegmentMaker.time_signatures
 

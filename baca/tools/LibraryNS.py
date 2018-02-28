@@ -7,6 +7,7 @@ from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Command import Command
+from .ContainerCommand import ContainerCommand
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .IndicatorCommand import IndicatorCommand
@@ -30,7 +31,6 @@ from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
 from .SuiteCommand import SuiteCommand
 from .TieCorrectionCommand import TieCorrectionCommand
-from .Typing import List
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
@@ -634,6 +634,134 @@ class LibraryNS(abjad.AbjadObject):
             indicators=[abjad.LilyPondLiteral(r'\pageBreak', 'after')],
             selector=selector,
             )
+
+    @staticmethod
+    def part(assignment: abjad.PartAssignment) -> ContainerCommand:
+        r'''Inserts ``selector`` output in container and sets part assignment.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.part(abjad.PartAssignment('Violin')),
+            ...     baca.pitch('E4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+                            {   %*% PartAssignment('Violin')
+            <BLANKLINE>
+                                % [MusicVoice measure 1]                                             %! SM4
+                                e'2
+            <BLANKLINE>
+                                % [MusicVoice measure 2]                                             %! SM4
+                                e'4.
+            <BLANKLINE>
+                                % [MusicVoice measure 3]                                             %! SM4
+                                e'2
+            <BLANKLINE>
+                                % [MusicVoice measure 4]                                             %! SM4
+                                e'4.
+            <BLANKLINE>
+                            }   %*% PartAssignment('Violin')
+                        }
+                    }
+                >>
+            >>
+
+        ..  container:: example
+
+            Raises exception when part is assigned to overlapping containers:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.StringTrioScoreTemplate(),
+            ...     test_container_identifiers=True,
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> part_assignment = abjad.PartAssignment('Violin')
+
+            >>> maker(
+            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.part(part_assignment),
+            ...     baca.pitches('E4 F4'),
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('ViolaMusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.part(part_assignment),
+            ...     baca.pitches('E4 F4'),
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('CelloMusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     baca.pitches('E4 F4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception:
+              Part 'Violin' is assigned to overlapping containers ...
+
+        '''
+        from baca.tools.LibraryAF import LibraryAF
+        if not isinstance(assignment, abjad.PartAssignment):
+            message = 'assignment must be part assignment'
+            message += f' (not {assignment!r}).'
+            raise Exception(message)
+        identifier = str(assignment)
+        command = LibraryAF.container(identifier=identifier)
+        return command
 
     @staticmethod
     def piecewise(
