@@ -27,10 +27,12 @@ Bases
       ~OctaveDisplacementCommand.manifests
       ~OctaveDisplacementCommand.offset_to_measure_number
       ~OctaveDisplacementCommand.previous_segment_voice_metadata
+      ~OctaveDisplacementCommand.score_template
       ~OctaveDisplacementCommand.selector
       ~OctaveDisplacementCommand.tag
       ~OctaveDisplacementCommand.tag_measure_number
       ~OctaveDisplacementCommand.tags
+      ~OctaveDisplacementCommand.voice_name
       ~OctaveDisplacementCommand.__call__
       ~OctaveDisplacementCommand.__format__
       ~OctaveDisplacementCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: OctaveDisplacementCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.voice_name
 
 Methods
 -------

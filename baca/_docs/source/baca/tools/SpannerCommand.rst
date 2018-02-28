@@ -28,11 +28,13 @@ Bases
       ~SpannerCommand.offset_to_measure_number
       ~SpannerCommand.previous_segment_voice_metadata
       ~SpannerCommand.right_broken
+      ~SpannerCommand.score_template
       ~SpannerCommand.selector
       ~SpannerCommand.spanner
       ~SpannerCommand.tag
       ~SpannerCommand.tag_measure_number
       ~SpannerCommand.tags
+      ~SpannerCommand.voice_name
       ~SpannerCommand.__call__
       ~SpannerCommand.__format__
       ~SpannerCommand.__repr__
@@ -91,7 +93,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: SpannerCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: SpannerCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.voice_name
 
 Methods
 -------

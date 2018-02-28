@@ -16,6 +16,7 @@ from .MarkupLibrary import MarkupLibrary
 from .NestingCommand import NestingCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
+from .PartAssignmentCommand import PartAssignmentCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .RegisterCommand import RegisterCommand
@@ -636,18 +637,21 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def parts(assignment: abjad.PartAssignment) -> ContainerCommand:
+    def parts(
+        part_assignment: abjad.PartAssignment,
+        selector: Selector = 'baca.leaves()',
+        ) -> PartAssignmentCommand:
         r'''Inserts ``selector`` output in container and sets part assignment.
 
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.StringTrioScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('ViolinMusicVoice', 1),
             ...     baca.make_notes(),
             ...     baca.parts(abjad.PartAssignment('Violin')),
             ...     baca.pitch('E4'),
@@ -655,7 +659,6 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score"
@@ -691,33 +694,173 @@ class LibraryNS(abjad.AbjadObject):
                 >>
                 \context MusicContext = "MusicContext"
                 <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
+                    \context StringSectionStaffGroup = "String Section Staff Group"
+                    <<
+                        \tag Violin                                                                  %! ST4
+                        \context ViolinMusicStaff = "ViolinMusicStaff"
                         {
-                            {   %*% PartAssignment('Violin')
+                            \context ViolinMusicVoice = "ViolinMusicVoice"
+                            {
+                                {   %*% PartAssignment('Violin')
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'2
+                                    % [ViolinMusicVoice measure 1]                                   %! SM4
+                                    \set ViolinMusicStaff.instrumentName = \markup {                 %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        \hcenter-in                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            #10                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            Violin                                                   %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        }                                                            %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup {            %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        \hcenter-in                                                  %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            #10                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                            Vn.                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        }                                                            %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \clef "treble"                                                   %! SM8:DEFAULT_CLEF:ST3
+                                    \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
+                                    \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                %@% \override ViolinMusicStaff.Clef.color = ##f                      %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                    \set ViolinMusicStaff.forceClef = ##t                            %! SM8:DEFAULT_CLEF:SM33:ST3
+                                    e'2
+                                    ^ \markup {                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        \with-color                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            #(x11-color 'DarkViolet)                                 %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            (Violin)                                                 %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        }                                                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                    \set ViolinMusicStaff.instrumentName = \markup {                 %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        \hcenter-in                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            #10                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            Violin                                                   %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        }                                                            %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup {            %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        \hcenter-in                                                  %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            #10                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                            Vn.                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        }                                                            %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'4.
+                                    % [ViolinMusicVoice measure 2]                                   %! SM4
+                                    e'4.
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'2
+                                    % [ViolinMusicVoice measure 3]                                   %! SM4
+                                    e'2
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                e'4.
+                                    % [ViolinMusicVoice measure 4]                                   %! SM4
+                                    e'4.
             <BLANKLINE>
-                            }   %*% PartAssignment('Violin')
+                                }   %*% PartAssignment('Violin')
+                            }
                         }
-                    }
+                        \tag Viola                                                                   %! ST4
+                        \context ViolaMusicStaff = "ViolaMusicStaff"
+                        {
+                            \context ViolaMusicVoice = "ViolaMusicVoice"
+                            {
+            <BLANKLINE>
+                                % [ViolaMusicVoice measure 1]                                        %! SM4
+                                \set ViolaMusicStaff.instrumentName = \markup {                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \hcenter-in                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        #10                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        Viola                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    }                                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \hcenter-in                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        #10                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        Va.                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    }                                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST3
+                                \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
+                                \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                            %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                R1 * 1/2
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                \set ViolaMusicStaff.instrumentName = \markup {                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \hcenter-in                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        #10                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        Viola                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    }                                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \hcenter-in                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        #10                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        Va.                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    }                                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                % [ViolaMusicVoice measure 2]                                        %! SM4
+                                R1 * 3/8
+            <BLANKLINE>
+                                % [ViolaMusicVoice measure 3]                                        %! SM4
+                                R1 * 1/2
+            <BLANKLINE>
+                                % [ViolaMusicVoice measure 4]                                        %! SM4
+                                R1 * 3/8
+            <BLANKLINE>
+                            }
+                        }
+                        \tag Cello                                                                   %! ST4
+                        \context CelloMusicStaff = "CelloMusicStaff"
+                        {
+                            \context CelloMusicVoice = "CelloMusicVoice"
+                            {
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 1]                                        %! SM4
+                                \set CelloMusicStaff.instrumentName = \markup {                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \hcenter-in                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        #10                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        Cello                                                        %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    }                                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \set CelloMusicStaff.shortInstrumentName = \markup {                 %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    \hcenter-in                                                      %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        #10                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                        Vc.                                                          %! SM8:DEFAULT_INSTRUMENT:ST1
+                                    }                                                                %! SM8:DEFAULT_INSTRUMENT:ST1
+                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST3
+                                \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_INSTRUMENT_COLOR:ST1
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                R1 * 1/2
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_INSTRUMENT_COLOR:ST1
+                                \set CelloMusicStaff.instrumentName = \markup {                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \hcenter-in                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        #10                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        Cello                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    }                                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \set CelloMusicStaff.shortInstrumentName = \markup {                 %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    \hcenter-in                                                      %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        #10                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                        Vc.                                                          %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                    }                                                                %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 2]                                        %! SM4
+                                R1 * 3/8
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 3]                                        %! SM4
+                                R1 * 1/2
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 4]                                        %! SM4
+                                R1 * 3/8
+            <BLANKLINE>
+                            }
+                        }
+                    >>
                 >>
             >>
 
         ..  container:: example
 
-            Raises exception when part is assigned to overlapping containers:
+            Raises exception when voice does not allow part assignment:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.StringTrioScoreTemplate(),
@@ -725,7 +868,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> part_assignment = abjad.PartAssignment('Violin')
+            >>> part_assignment = abjad.PartAssignment('Flute')
 
             >>> maker(
             ...     baca.scope('ViolinMusicVoice', 1),
@@ -734,34 +877,20 @@ class LibraryNS(abjad.AbjadObject):
             ...     baca.pitches('E4 F4'),
             ...     )
 
-            >>> maker(
-            ...     baca.scope('ViolaMusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     baca.parts(part_assignment),
-            ...     baca.pitches('E4 F4'),
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('CelloMusicVoice', 1),
-            ...     baca.make_notes(),
-            ...     baca.pitches('E4 F4'),
-            ...     )
-
             >>> lilypond_file = maker.run(environment='docs')
             Traceback (most recent call last):
                 ...
-            Exception:
-              Part 'Violin' is assigned to overlapping containers ...
+            Exception: ViolinMusicVoice does not allow part assignment:
+              abjad.PartAssignment('Flute')
 
         '''
-        from baca.tools.LibraryAF import LibraryAF
-        if not isinstance(assignment, abjad.PartAssignment):
-            message = 'assignment must be part assignment'
-            message += f' (not {assignment!r}).'
+        if not isinstance(part_assignment, abjad.PartAssignment):
+            message = 'part_assignment must be part assignment'
+            message += f' (not {part_assignment!r}).'
             raise Exception(message)
-        identifier = str(assignment)
-        command = LibraryAF.container(identifier=identifier)
-        return command
+        return PartAssignmentCommand(
+            part_assignment=part_assignment,
+            )
 
     @staticmethod
     def piecewise(

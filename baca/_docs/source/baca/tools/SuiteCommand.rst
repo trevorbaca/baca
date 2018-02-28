@@ -27,10 +27,12 @@ Bases
       ~SuiteCommand.manifests
       ~SuiteCommand.offset_to_measure_number
       ~SuiteCommand.previous_segment_voice_metadata
+      ~SuiteCommand.score_template
       ~SuiteCommand.selector
       ~SuiteCommand.tag
       ~SuiteCommand.tag_measure_number
       ~SuiteCommand.tags
+      ~SuiteCommand.voice_name
       ~SuiteCommand.__call__
       ~SuiteCommand.__format__
       ~SuiteCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: SuiteCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: SuiteCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.voice_name
 
 Methods
 -------

@@ -27,12 +27,14 @@ Bases
       ~SettingCommand.manifests
       ~SettingCommand.offset_to_measure_number
       ~SettingCommand.previous_segment_voice_metadata
+      ~SettingCommand.score_template
       ~SettingCommand.selector
       ~SettingCommand.setting
       ~SettingCommand.tag
       ~SettingCommand.tag_measure_number
       ~SettingCommand.tags
       ~SettingCommand.value
+      ~SettingCommand.voice_name
       ~SettingCommand.__call__
       ~SettingCommand.__format__
       ~SettingCommand.__repr__
@@ -95,7 +97,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: SettingCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: SettingCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.voice_name
 
 Methods
 -------

@@ -29,11 +29,13 @@ Bases
       ~PiecewiseCommand.offset_to_measure_number
       ~PiecewiseCommand.preamble
       ~PiecewiseCommand.previous_segment_voice_metadata
+      ~PiecewiseCommand.score_template
       ~PiecewiseCommand.selector
       ~PiecewiseCommand.spanner
       ~PiecewiseCommand.tag
       ~PiecewiseCommand.tag_measure_number
       ~PiecewiseCommand.tags
+      ~PiecewiseCommand.voice_name
       ~PiecewiseCommand.__call__
       ~PiecewiseCommand.__format__
       ~PiecewiseCommand.__repr__
@@ -94,7 +96,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: PiecewiseCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: PiecewiseCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.voice_name
 
 Methods
 -------

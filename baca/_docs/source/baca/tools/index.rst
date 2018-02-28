@@ -108,6 +108,7 @@ baca.tools
    NestingCommand
    OctaveDisplacementCommand
    OverrideCommand
+   PartAssignmentCommand
    PiecewiseCommand
    PitchCommand
    PitchFirstRhythmCommand
@@ -144,6 +145,7 @@ baca.tools
    ~baca.tools.NestingCommand.NestingCommand
    ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand
    ~baca.tools.OverrideCommand.OverrideCommand
+   ~baca.tools.PartAssignmentCommand.PartAssignmentCommand
    ~baca.tools.PiecewiseCommand.PiecewiseCommand
    ~baca.tools.PitchCommand.PitchCommand
    ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand

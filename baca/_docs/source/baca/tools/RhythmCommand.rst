@@ -37,6 +37,7 @@ Bases
       ~RhythmCommand.rhythm_maker
       ~RhythmCommand.rhythm_overwrites
       ~RhythmCommand.right_broken
+      ~RhythmCommand.score_template
       ~RhythmCommand.selector
       ~RhythmCommand.split_at_measure_boundaries
       ~RhythmCommand.stages
@@ -48,6 +49,7 @@ Bases
       ~RhythmCommand.tags
       ~RhythmCommand.tie_first
       ~RhythmCommand.tie_last
+      ~RhythmCommand.voice_name
       ~RhythmCommand.__call__
       ~RhythmCommand.__format__
       ~RhythmCommand.__repr__
@@ -140,7 +142,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: RhythmCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: RhythmCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.voice_name
 
 Methods
 -------

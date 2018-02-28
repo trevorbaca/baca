@@ -27,11 +27,13 @@ Bases
       ~ClusterCommand.manifests
       ~ClusterCommand.offset_to_measure_number
       ~ClusterCommand.previous_segment_voice_metadata
+      ~ClusterCommand.score_template
       ~ClusterCommand.selector
       ~ClusterCommand.start_pitch
       ~ClusterCommand.tag
       ~ClusterCommand.tag_measure_number
       ~ClusterCommand.tags
+      ~ClusterCommand.voice_name
       ~ClusterCommand.widths
       ~ClusterCommand.__call__
       ~ClusterCommand.__format__
@@ -91,7 +93,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: ClusterCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: ClusterCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.voice_name
 
 Methods
 -------

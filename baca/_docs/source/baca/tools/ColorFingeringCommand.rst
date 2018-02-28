@@ -27,10 +27,12 @@ Bases
       ~ColorFingeringCommand.numbers
       ~ColorFingeringCommand.offset_to_measure_number
       ~ColorFingeringCommand.previous_segment_voice_metadata
+      ~ColorFingeringCommand.score_template
       ~ColorFingeringCommand.selector
       ~ColorFingeringCommand.tag
       ~ColorFingeringCommand.tag_measure_number
       ~ColorFingeringCommand.tags
+      ~ColorFingeringCommand.voice_name
       ~ColorFingeringCommand.__call__
       ~ColorFingeringCommand.__format__
       ~ColorFingeringCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: ColorFingeringCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: ColorFingeringCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.voice_name
 
 Methods
 -------

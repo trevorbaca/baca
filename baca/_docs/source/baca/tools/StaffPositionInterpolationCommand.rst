@@ -26,12 +26,14 @@ Bases
       ~StaffPositionInterpolationCommand.manifests
       ~StaffPositionInterpolationCommand.offset_to_measure_number
       ~StaffPositionInterpolationCommand.previous_segment_voice_metadata
+      ~StaffPositionInterpolationCommand.score_template
       ~StaffPositionInterpolationCommand.selector
       ~StaffPositionInterpolationCommand.start_pitch
       ~StaffPositionInterpolationCommand.stop_pitch
       ~StaffPositionInterpolationCommand.tag
       ~StaffPositionInterpolationCommand.tag_measure_number
       ~StaffPositionInterpolationCommand.tags
+      ~StaffPositionInterpolationCommand.voice_name
       ~StaffPositionInterpolationCommand.__call__
       ~StaffPositionInterpolationCommand.__format__
       ~StaffPositionInterpolationCommand.__repr__
@@ -92,7 +94,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionInterpolationCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionInterpolationCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.voice_name
 
 Methods
 -------

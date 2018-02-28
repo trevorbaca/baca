@@ -26,10 +26,12 @@ Bases
       ~DiatonicClusterCommand.manifests
       ~DiatonicClusterCommand.offset_to_measure_number
       ~DiatonicClusterCommand.previous_segment_voice_metadata
+      ~DiatonicClusterCommand.score_template
       ~DiatonicClusterCommand.selector
       ~DiatonicClusterCommand.tag
       ~DiatonicClusterCommand.tag_measure_number
       ~DiatonicClusterCommand.tags
+      ~DiatonicClusterCommand.voice_name
       ~DiatonicClusterCommand.widths
       ~DiatonicClusterCommand.__call__
       ~DiatonicClusterCommand.__format__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: DiatonicClusterCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: DiatonicClusterCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.voice_name
 
 Methods
 -------

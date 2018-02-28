@@ -19,10 +19,12 @@ class Command(abjad.AbjadObject):
         '_deactivate',
         '_manifests',
         '_offset_to_measure_number',
+        '_score_template',
         '_selector',
         '_tag_measure_number',
         '_tags',
         '_previous_segment_voice_metadata',
+        '_voice_name',
         )
 
     _publish_storage_format = True
@@ -46,10 +48,12 @@ class Command(abjad.AbjadObject):
             assert isinstance(selector_, prototype), repr(selector_)
         self._selector: typing.Optional[abjad.Expression] = selector_
         self._tags: List[abjad.Tag] = None
-        self.previous_segment_voice_metadata = None
         self.manifests = None
         self.offset_to_measure_number = None
+        self.score_template = None
+        self.previous_segment_voice_metadata = None
         self.tag_measure_number = tag_measure_number
+        self.voice_name = None
 
     ### SPECIAL METHODS ###
 
@@ -183,6 +187,20 @@ class Command(abjad.AbjadObject):
             command._previous_segment_voice_metadata = argument
 
     @property
+    def score_template(self) -> abjad.ScoreTemplate:
+        r'''Gets score template.
+        '''
+        return self._score_template
+
+    @score_template.setter
+    def score_template(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.ScoreTemplate), repr(argument)
+        self._score_template = argument
+        for command in getattr(self, 'commands', []):
+            command._score_template = argument
+
+    @property
     def selector(self) -> typing.Optional[abjad.Expression]:
         r'''Gets selector.
         '''
@@ -214,6 +232,20 @@ class Command(abjad.AbjadObject):
         '''
         assert self._are_valid_tags(self._tags)
         return self._tags[:]
+
+    @property
+    def voice_name(self) -> str:
+        r'''Gets voice_name.
+        '''
+        return self._voice_name
+
+    @voice_name.setter
+    def voice_name(self, argument):
+        if argument is not None:
+            assert isinstance(argument, str), repr(argument)
+        self._voice_name = argument
+        for command in getattr(self, 'commands', []):
+            command._voice_name = argument
 
     ### PUBLIC METHODS ###
 

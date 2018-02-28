@@ -28,11 +28,13 @@ Bases
       ~TieCorrectionCommand.offset_to_measure_number
       ~TieCorrectionCommand.previous_segment_voice_metadata
       ~TieCorrectionCommand.repeat
+      ~TieCorrectionCommand.score_template
       ~TieCorrectionCommand.selector
       ~TieCorrectionCommand.tag
       ~TieCorrectionCommand.tag_measure_number
       ~TieCorrectionCommand.tags
       ~TieCorrectionCommand.untie
+      ~TieCorrectionCommand.voice_name
       ~TieCorrectionCommand.__call__
       ~TieCorrectionCommand.__format__
       ~TieCorrectionCommand.__repr__
@@ -95,7 +97,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: TieCorrectionCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: TieCorrectionCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.voice_name
 
 Methods
 -------

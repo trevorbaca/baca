@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~StringTrioScoreTemplate.allows_part_assignment
       ~StringTrioScoreTemplate.attach_defaults
       ~StringTrioScoreTemplate.defaults
       ~StringTrioScoreTemplate.group_families
@@ -58,6 +59,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.allows_part_assignment
 
 .. only:: html
 

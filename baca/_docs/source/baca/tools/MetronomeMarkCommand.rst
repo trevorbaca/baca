@@ -27,10 +27,12 @@ Bases
       ~MetronomeMarkCommand.manifests
       ~MetronomeMarkCommand.offset_to_measure_number
       ~MetronomeMarkCommand.previous_segment_voice_metadata
+      ~MetronomeMarkCommand.score_template
       ~MetronomeMarkCommand.selector
       ~MetronomeMarkCommand.tag
       ~MetronomeMarkCommand.tag_measure_number
       ~MetronomeMarkCommand.tags
+      ~MetronomeMarkCommand.voice_name
       ~MetronomeMarkCommand.__call__
       ~MetronomeMarkCommand.__format__
       ~MetronomeMarkCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: MetronomeMarkCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: MetronomeMarkCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.voice_name
 
 Methods
 -------

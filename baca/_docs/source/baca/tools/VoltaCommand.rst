@@ -26,10 +26,12 @@ Bases
       ~VoltaCommand.manifests
       ~VoltaCommand.offset_to_measure_number
       ~VoltaCommand.previous_segment_voice_metadata
+      ~VoltaCommand.score_template
       ~VoltaCommand.selector
       ~VoltaCommand.tag
       ~VoltaCommand.tag_measure_number
       ~VoltaCommand.tags
+      ~VoltaCommand.voice_name
       ~VoltaCommand.__call__
       ~VoltaCommand.__format__
       ~VoltaCommand.__repr__
@@ -86,7 +88,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: VoltaCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: VoltaCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.voice_name
 
 Methods
 -------

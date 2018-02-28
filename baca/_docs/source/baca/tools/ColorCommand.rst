@@ -26,10 +26,12 @@ Bases
       ~ColorCommand.manifests
       ~ColorCommand.offset_to_measure_number
       ~ColorCommand.previous_segment_voice_metadata
+      ~ColorCommand.score_template
       ~ColorCommand.selector
       ~ColorCommand.tag
       ~ColorCommand.tag_measure_number
       ~ColorCommand.tags
+      ~ColorCommand.voice_name
       ~ColorCommand.__call__
       ~ColorCommand.__format__
       ~ColorCommand.__repr__
@@ -86,7 +88,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: ColorCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: ColorCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.voice_name
 
 Methods
 -------

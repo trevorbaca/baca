@@ -27,10 +27,12 @@ Bases
       ~MapCommand.manifests
       ~MapCommand.offset_to_measure_number
       ~MapCommand.previous_segment_voice_metadata
+      ~MapCommand.score_template
       ~MapCommand.selector
       ~MapCommand.tag
       ~MapCommand.tag_measure_number
       ~MapCommand.tags
+      ~MapCommand.voice_name
       ~MapCommand.__call__
       ~MapCommand.__format__
       ~MapCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: MapCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: MapCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.voice_name
 
 Methods
 -------

@@ -24,10 +24,12 @@ Bases
       ~Command.manifests
       ~Command.offset_to_measure_number
       ~Command.previous_segment_voice_metadata
+      ~Command.score_template
       ~Command.selector
       ~Command.tag
       ~Command.tag_measure_number
       ~Command.tags
+      ~Command.voice_name
       ~Command.__call__
       ~Command.__format__
       ~Command.__repr__
@@ -52,7 +54,11 @@ Read/write properties
 
 .. autoattribute:: Command.previous_segment_voice_metadata
 
+.. autoattribute:: Command.score_template
+
 .. autoattribute:: Command.tag_measure_number
+
+.. autoattribute:: Command.voice_name
 
 Methods
 -------

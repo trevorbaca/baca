@@ -30,6 +30,7 @@ Bases
       ~ImbricationCommand.manifests
       ~ImbricationCommand.offset_to_measure_number
       ~ImbricationCommand.previous_segment_voice_metadata
+      ~ImbricationCommand.score_template
       ~ImbricationCommand.segment
       ~ImbricationCommand.selector
       ~ImbricationCommand.specifiers
@@ -101,6 +102,12 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ImbricationCommand.previous_segment_voice_metadata
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.score_template
 
 .. only:: html
 

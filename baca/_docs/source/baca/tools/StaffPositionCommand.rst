@@ -29,10 +29,12 @@ Bases
       ~StaffPositionCommand.numbers
       ~StaffPositionCommand.offset_to_measure_number
       ~StaffPositionCommand.previous_segment_voice_metadata
+      ~StaffPositionCommand.score_template
       ~StaffPositionCommand.selector
       ~StaffPositionCommand.tag
       ~StaffPositionCommand.tag_measure_number
       ~StaffPositionCommand.tags
+      ~StaffPositionCommand.voice_name
       ~StaffPositionCommand.__call__
       ~StaffPositionCommand.__format__
       ~StaffPositionCommand.__repr__
@@ -95,7 +97,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.voice_name
 
 Methods
 -------

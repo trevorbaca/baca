@@ -1127,6 +1127,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._get_previous_segment_voice_metadata(voice_name)
             wrapper.command.previous_segment_voice_metadata = \
                 previous_segment_voice_metadata
+            wrapper.command.score_template = self.score_template
+            wrapper.command.voice_name = voice_name
             try:
                 wrapper.command(selection)
             except:

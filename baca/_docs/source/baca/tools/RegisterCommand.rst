@@ -27,10 +27,12 @@ Bases
       ~RegisterCommand.offset_to_measure_number
       ~RegisterCommand.previous_segment_voice_metadata
       ~RegisterCommand.registration
+      ~RegisterCommand.score_template
       ~RegisterCommand.selector
       ~RegisterCommand.tag
       ~RegisterCommand.tag_measure_number
       ~RegisterCommand.tags
+      ~RegisterCommand.voice_name
       ~RegisterCommand.__call__
       ~RegisterCommand.__format__
       ~RegisterCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.voice_name
 
 Methods
 -------

@@ -26,12 +26,14 @@ Bases
       ~RegisterInterpolationCommand.manifests
       ~RegisterInterpolationCommand.offset_to_measure_number
       ~RegisterInterpolationCommand.previous_segment_voice_metadata
+      ~RegisterInterpolationCommand.score_template
       ~RegisterInterpolationCommand.selector
       ~RegisterInterpolationCommand.start_pitch
       ~RegisterInterpolationCommand.stop_pitch
       ~RegisterInterpolationCommand.tag
       ~RegisterInterpolationCommand.tag_measure_number
       ~RegisterInterpolationCommand.tags
+      ~RegisterInterpolationCommand.voice_name
       ~RegisterInterpolationCommand.__call__
       ~RegisterInterpolationCommand.__format__
       ~RegisterInterpolationCommand.__repr__
@@ -88,7 +90,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterInterpolationCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.voice_name
 
 Methods
 -------

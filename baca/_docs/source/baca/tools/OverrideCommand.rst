@@ -31,11 +31,13 @@ Bases
       ~OverrideCommand.manifests
       ~OverrideCommand.offset_to_measure_number
       ~OverrideCommand.previous_segment_voice_metadata
+      ~OverrideCommand.score_template
       ~OverrideCommand.selector
       ~OverrideCommand.tag
       ~OverrideCommand.tag_measure_number
       ~OverrideCommand.tags
       ~OverrideCommand.value
+      ~OverrideCommand.voice_name
       ~OverrideCommand.whitelist
       ~OverrideCommand.__call__
       ~OverrideCommand.__format__
@@ -107,7 +109,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.voice_name
 
 Methods
 -------

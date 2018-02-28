@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~SingleStaffScoreTemplate.allows_part_assignment
       ~SingleStaffScoreTemplate.attach_defaults
       ~SingleStaffScoreTemplate.defaults
       ~SingleStaffScoreTemplate.group_families
@@ -58,6 +59,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.allows_part_assignment
 
 .. only:: html
 

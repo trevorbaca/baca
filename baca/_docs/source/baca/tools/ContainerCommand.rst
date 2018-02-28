@@ -27,10 +27,12 @@ Bases
       ~ContainerCommand.manifests
       ~ContainerCommand.offset_to_measure_number
       ~ContainerCommand.previous_segment_voice_metadata
+      ~ContainerCommand.score_template
       ~ContainerCommand.selector
       ~ContainerCommand.tag
       ~ContainerCommand.tag_measure_number
       ~ContainerCommand.tags
+      ~ContainerCommand.voice_name
       ~ContainerCommand.__call__
       ~ContainerCommand.__format__
       ~ContainerCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: ContainerCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: ContainerCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.voice_name
 
 Methods
 -------

@@ -28,12 +28,14 @@ Bases
       ~HairpinCommand.offset_to_measure_number
       ~HairpinCommand.previous_segment_voice_metadata
       ~HairpinCommand.right_broken
+      ~HairpinCommand.score_template
       ~HairpinCommand.selector
       ~HairpinCommand.start
       ~HairpinCommand.stop
       ~HairpinCommand.tag
       ~HairpinCommand.tag_measure_number
       ~HairpinCommand.tags
+      ~HairpinCommand.voice_name
       ~HairpinCommand.__call__
       ~HairpinCommand.__format__
       ~HairpinCommand.__repr__
@@ -98,7 +100,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: HairpinCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: HairpinCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.voice_name
 
 Methods
 -------

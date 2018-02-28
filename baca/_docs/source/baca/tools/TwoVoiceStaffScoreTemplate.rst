@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~TwoVoiceStaffScoreTemplate.allows_part_assignment
       ~TwoVoiceStaffScoreTemplate.attach_defaults
       ~TwoVoiceStaffScoreTemplate.defaults
       ~TwoVoiceStaffScoreTemplate.group_families
@@ -58,6 +59,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.allows_part_assignment
 
 .. only:: html
 

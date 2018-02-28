@@ -27,10 +27,12 @@ Bases
       ~MicrotoneDeviationCommand.manifests
       ~MicrotoneDeviationCommand.offset_to_measure_number
       ~MicrotoneDeviationCommand.previous_segment_voice_metadata
+      ~MicrotoneDeviationCommand.score_template
       ~MicrotoneDeviationCommand.selector
       ~MicrotoneDeviationCommand.tag
       ~MicrotoneDeviationCommand.tag_measure_number
       ~MicrotoneDeviationCommand.tags
+      ~MicrotoneDeviationCommand.voice_name
       ~MicrotoneDeviationCommand.__call__
       ~MicrotoneDeviationCommand.__format__
       ~MicrotoneDeviationCommand.__repr__
@@ -89,7 +91,19 @@ Read/write properties
 
    .. container:: inherited
 
+      .. autoattribute:: MicrotoneDeviationCommand.score_template
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.voice_name
 
 Methods
 -------
