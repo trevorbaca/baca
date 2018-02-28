@@ -26,6 +26,7 @@ Bases
       ~LibraryNS.not_score
       ~LibraryNS.not_segment
       ~LibraryNS.note_column_shift
+      ~LibraryNS.one_voice
       ~LibraryNS.only_parts
       ~LibraryNS.only_score
       ~LibraryNS.only_segment
@@ -116,6 +117,8 @@ Class & static methods
 .. automethod:: LibraryNS.not_segment
 
 .. automethod:: LibraryNS.note_column_shift
+
+.. automethod:: LibraryNS.one_voice
 
 .. automethod:: LibraryNS.only_parts
 

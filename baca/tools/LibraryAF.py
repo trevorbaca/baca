@@ -2822,7 +2822,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def container(
-        identifier: str,
+        identifier: str = None,
         selector: Selector = 'baca.leaves()',
         ) -> ContainerCommand:
         r'''Inserts `selector` output in container.
@@ -2905,9 +2905,13 @@ class LibraryAF(abjad.AbjadObject):
             >>
 
         '''
+        if identifier is not None:
+            if not isinstance(identifier, str):
+                message = f'identifier must be string (not {identifier!r}).'
+                raise Exception(message)
         return ContainerCommand(
-            selector=selector,
             identifier=identifier,
+            selector=selector,
             )
 
     @staticmethod

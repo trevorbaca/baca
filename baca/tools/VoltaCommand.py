@@ -20,10 +20,8 @@ class VoltaCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         r'''Applies command to result of selector called on `argument`.
-
-        Returns none.
         '''
         if argument is None:
             return

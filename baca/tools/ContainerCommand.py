@@ -1,5 +1,6 @@
 import abjad
 import baca
+import typing
 from .Command import Command
 from .Typing import Selector
 
@@ -105,7 +106,12 @@ class ContainerCommand(Command):
         selector: Selector = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
+        if identifier is not None:
+            if not isinstance(identifier, str):
+                message = f'identifier must be string (not {identifier!r}).'
+                raise Exception(message)
         self._identifier: str = identifier
+        self._tags = []
 
     ### SPECIAL METHODS ###
 
@@ -116,7 +122,9 @@ class ContainerCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if self.identifier.startswith('%*%'):
+        if not self.identifier:
+            identifier = None
+        elif self.identifier.startswith('%*%'):
             identifier = self.identifier
         else:
             identifier = f'%*% {self.identifier}'
@@ -127,7 +135,7 @@ class ContainerCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def identifier(self) -> str:
+    def identifier(self) -> typing.Optional[str]:
         r'''Gets identifier.
         '''
         return self._identifier

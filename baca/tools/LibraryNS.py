@@ -337,6 +337,18 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def one_voice(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes LilyPond ``\oneVoice`` command.
+        '''
+        literal = abjad.LilyPondLiteral(r'\oneVoice')
+        return IndicatorCommand(
+            indicators=[literal],
+            selector=selector,
+            )
+
+    @staticmethod
     def only_parts(command: Command) -> Command:
         r'''Tags ``command`` with ``+PARTS``.
 
