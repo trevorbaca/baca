@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~ScoreTemplate.allows_instrument
       ~ScoreTemplate.allows_part_assignment
       ~ScoreTemplate.attach_defaults
       ~ScoreTemplate.defaults
@@ -53,6 +54,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.allows_instrument
 
 .. only:: html
 

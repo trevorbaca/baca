@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~ViolinSoloScoreTemplate.allows_instrument
       ~ViolinSoloScoreTemplate.allows_part_assignment
       ~ViolinSoloScoreTemplate.attach_defaults
       ~ViolinSoloScoreTemplate.defaults
@@ -59,6 +60,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.allows_instrument
 
 .. only:: html
 

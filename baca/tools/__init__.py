@@ -35,6 +35,7 @@ from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
+from .InstrumentChangeCommand import InstrumentChangeCommand
 from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier

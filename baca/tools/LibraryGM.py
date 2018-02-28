@@ -6,6 +6,7 @@ from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
+from .InstrumentChangeCommand import InstrumentChangeCommand
 from .LabelCommand import LabelCommand
 from .LBSD import LBSD
 from .Loop import Loop
@@ -863,12 +864,14 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def instrument(
         instrument: abjad.Instrument,
-        selector: Selector =  'baca.leaf(0)',
-        ) -> IndicatorCommand:
-        r'''Attaches instrument.
+        selector: Selector = 'baca.leaf(0)',
+        ) -> InstrumentChangeCommand:
+        r'''Makes instrument change command.
         '''
-        assert isinstance(instrument, abjad.Instrument)
-        return IndicatorCommand(
+        if not isinstance(instrument, abjad.Instrument):
+            message = f'instrument must be instrument (not {instrument!r}).'
+            raise Exception(message)
+        return InstrumentChangeCommand(
             indicators=[instrument],
             selector=selector,
             )

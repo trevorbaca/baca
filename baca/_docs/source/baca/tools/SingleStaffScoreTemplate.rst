@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~SingleStaffScoreTemplate.allows_instrument
       ~SingleStaffScoreTemplate.allows_part_assignment
       ~SingleStaffScoreTemplate.attach_defaults
       ~SingleStaffScoreTemplate.defaults
@@ -59,6 +60,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.allows_instrument
 
 .. only:: html
 

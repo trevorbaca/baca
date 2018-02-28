@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~TwoVoiceStaffScoreTemplate.allows_instrument
       ~TwoVoiceStaffScoreTemplate.allows_part_assignment
       ~TwoVoiceStaffScoreTemplate.attach_defaults
       ~TwoVoiceStaffScoreTemplate.defaults
@@ -59,6 +60,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.allows_instrument
 
 .. only:: html
 

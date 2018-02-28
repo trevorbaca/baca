@@ -25,6 +25,7 @@ Bases
 
    .. autosummary::
 
+      ~StringTrioScoreTemplate.allows_instrument
       ~StringTrioScoreTemplate.allows_part_assignment
       ~StringTrioScoreTemplate.attach_defaults
       ~StringTrioScoreTemplate.defaults
@@ -59,6 +60,12 @@ Read-only properties
 
 Methods
 -------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.allows_instrument
 
 .. only:: html
 

@@ -101,6 +101,7 @@ baca.tools
    HairpinCommand
    ImbricationCommand
    IndicatorCommand
+   InstrumentChangeCommand
    LabelCommand
    MapCommand
    MetronomeMarkCommand
@@ -138,6 +139,7 @@ baca.tools
    ~baca.tools.HairpinCommand.HairpinCommand
    ~baca.tools.ImbricationCommand.ImbricationCommand
    ~baca.tools.IndicatorCommand.IndicatorCommand
+   ~baca.tools.InstrumentChangeCommand.InstrumentChangeCommand
    ~baca.tools.LabelCommand.LabelCommand
    ~baca.tools.MapCommand.MapCommand
    ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand
