@@ -28,7 +28,6 @@ Bases
       ~ViolinSoloScoreTemplate.attach_defaults
       ~ViolinSoloScoreTemplate.defaults
       ~ViolinSoloScoreTemplate.group_families
-      ~ViolinSoloScoreTemplate.instrument_keys
       ~ViolinSoloScoreTemplate.make_music_context
       ~ViolinSoloScoreTemplate.make_piano_staff
       ~ViolinSoloScoreTemplate.make_square_staff_group
@@ -72,12 +71,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: ViolinSoloScoreTemplate.group_families
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: ViolinSoloScoreTemplate.instrument_keys
 
 .. only:: html
 

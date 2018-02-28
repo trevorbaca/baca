@@ -28,7 +28,6 @@ Bases
       ~TwoVoiceStaffScoreTemplate.attach_defaults
       ~TwoVoiceStaffScoreTemplate.defaults
       ~TwoVoiceStaffScoreTemplate.group_families
-      ~TwoVoiceStaffScoreTemplate.instrument_keys
       ~TwoVoiceStaffScoreTemplate.make_music_context
       ~TwoVoiceStaffScoreTemplate.make_piano_staff
       ~TwoVoiceStaffScoreTemplate.make_square_staff_group
@@ -72,12 +71,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: TwoVoiceStaffScoreTemplate.group_families
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: TwoVoiceStaffScoreTemplate.instrument_keys
 
 .. only:: html
 

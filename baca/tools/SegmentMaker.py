@@ -1301,8 +1301,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def _collect_metadata(self):
         metadata = abjad.OrderedDict()
         metadata['alive_during_segment'] = self._collect_alive_during_segment()
-        if self._container_to_part:
-            metadata['container_to_part'] = self._container_to_part
+        if self._container_to_part_assignment:
+            metadata['container_to_part_assignment'] = \
+                self._container_to_part_assignment
         if self._duration is not None:
             metadata['duration'] = self._duration
         if self._fermata_measure_numbers:

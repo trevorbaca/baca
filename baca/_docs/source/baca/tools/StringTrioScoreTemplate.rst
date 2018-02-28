@@ -28,7 +28,6 @@ Bases
       ~StringTrioScoreTemplate.attach_defaults
       ~StringTrioScoreTemplate.defaults
       ~StringTrioScoreTemplate.group_families
-      ~StringTrioScoreTemplate.instrument_keys
       ~StringTrioScoreTemplate.make_music_context
       ~StringTrioScoreTemplate.make_piano_staff
       ~StringTrioScoreTemplate.make_square_staff_group
@@ -72,12 +71,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: StringTrioScoreTemplate.group_families
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: StringTrioScoreTemplate.instrument_keys
 
 .. only:: html
 
