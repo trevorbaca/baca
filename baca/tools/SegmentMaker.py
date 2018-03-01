@@ -1995,13 +1995,13 @@ class SegmentMaker(abjad.SegmentMaker):
             if dictionary is None:
                 raise Exception(f'can not find {name!r} manifest.')
             return dictionary.get(momento.value)
-        if momento.prototype == 'baca.PersistentIndicator':
-            return momento.value
         class_ = eval(momento.prototype)
         if hasattr(class_, 'from_string'):
             indicator =  class_.from_string(momento.value)
         elif class_ is abjad.Dynamic and momento.value.startswith('\\'):
             indicator = class_(name='', command=momento.value)
+        elif isinstance(momento.value, class_):
+            indicator = momento.value
         else:
             indicator = class_(momento.value)
         return indicator
