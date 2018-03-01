@@ -1707,29 +1707,33 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _indicator_to_key(indicator, manifests):
         if isinstance(indicator, abjad.Clef):
-            return indicator.name
-        if isinstance(indicator, abjad.Dynamic):
-            return indicator.command or indicator.name
-        if isinstance(indicator, abjad.Instrument):
-            return SegmentMaker._get_key(
+            key = indicator.name
+        elif isinstance(indicator, abjad.Dynamic):
+            key = indicator.command or indicator.name
+        elif isinstance(indicator, abjad.Instrument):
+            key = SegmentMaker._get_key(
                 manifests['abjad.Instrument'],
                 indicator,
                 )
         elif isinstance(indicator, abjad.MetronomeMark):
-            return SegmentMaker._get_key(
+            key = SegmentMaker._get_key(
                 manifests['abjad.MetronomeMark'],
                 indicator,
                 )
         elif isinstance(indicator, abjad.MarginMarkup):
-            return SegmentMaker._get_key(
+           key = SegmentMaker._get_key(
                 manifests['abjad.MarginMarkup'],
                 indicator,
                 )
+        elif isinstance(indicator, baca.PersistentOverride):
+            key = indicator
         elif isinstance(indicator, baca.StaffLines):
-            return indicator.line_count
+            key = indicator.line_count
         elif isinstance(indicator, (abjad.Accelerando, abjad.Ritardando)):
-            return f'abjad.{repr(indicator)}'
-        return str(indicator)
+            key = f'abjad.{repr(indicator)}'
+        else:
+            key = str(indicator)
+        return key
 
     def _initialize_time_signatures(self, time_signatures):
         time_signatures = time_signatures or ()
@@ -1991,12 +1995,16 @@ class SegmentMaker(abjad.SegmentMaker):
             if dictionary is None:
                 raise Exception(f'can not find {name!r} manifest.')
             return dictionary.get(momento.value)
+        if momento.prototype == 'baca.PersistentIndicator':
+            return momento.value
         class_ = eval(momento.prototype)
         if hasattr(class_, 'from_string'):
-            return class_.from_string(momento.value)
-        if class_ is abjad.Dynamic and momento.value.startswith('\\'):
-            return class_(name='', command=momento.value)
-        return class_(momento.value)
+            indicator =  class_.from_string(momento.value)
+        elif class_ is abjad.Dynamic and momento.value.startswith('\\'):
+            indicator = class_(name='', command=momento.value)
+        else:
+            indicator = class_(momento.value)
+        return indicator
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()

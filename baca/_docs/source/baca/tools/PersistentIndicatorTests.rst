@@ -25,6 +25,7 @@ Bases
       ~PersistentIndicatorTests.instruments
       ~PersistentIndicatorTests.margin_markups
       ~PersistentIndicatorTests.metronome_marks
+      ~PersistentIndicatorTests.persistent_overrides
       ~PersistentIndicatorTests.staff_lines
       ~PersistentIndicatorTests.tempo_trends
       ~PersistentIndicatorTests.__format__
@@ -44,6 +45,8 @@ Read-only properties
 .. autoattribute:: PersistentIndicatorTests.margin_markups
 
 .. autoattribute:: PersistentIndicatorTests.metronome_marks
+
+.. autoattribute:: PersistentIndicatorTests.persistent_overrides
 
 .. autoattribute:: PersistentIndicatorTests.staff_lines
 

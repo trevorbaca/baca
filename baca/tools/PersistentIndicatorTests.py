@@ -6704,6 +6704,378 @@ class PersistentIndicatorTests(abjad.AbjadObject):
         pass
 
     @property
+    def persistent_overrides(self) -> None:
+        r'''Persistent overrides.
+
+        ..  container:: example
+
+            Explicit persistent overrides work but do not color:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.bar_extent_persistent((0, 0)),
+            ...     baca.make_notes(),
+            ...     baca.staff_lines(1),
+            ...     baca.staff_position(0),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
+                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                b'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                b'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Persistent overrides also appear in segment metadata:
+
+            >>> abjad.f(maker.metadata['persistent_indicators'])
+            abjad.OrderedDict(
+                [
+                    (
+                        'MusicStaff',
+                        [
+                            abjad.Momento(
+                                context='MusicVoice',
+                                prototype='baca.PersistentOverride',
+                                value=baca.PersistentOverride(
+                                    after=True,
+                                    attribute='bar_extent',
+                                    context='Staff',
+                                    grob='bar_line',
+                                    value=(0, 0),
+                                    ),
+                                ),
+                            abjad.Momento(
+                                context='MusicVoice',
+                                prototype='baca.StaffLines',
+                                value=1,
+                                ),
+                            ],
+                        ),
+                    (
+                        'Score',
+                        [
+                            abjad.Momento(
+                                context='GlobalSkips',
+                                prototype='abjad.TimeSignature',
+                                value='3/8',
+                                ),
+                            ],
+                        ),
+                    ]
+                )
+
+
+        ..  container:: example
+
+            Reapplied persistent overrides work but do not color:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicVoice'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='baca.PersistentIndicator',
+            ...         value=baca.PersistentOverride(
+            ...             after=True,
+            ...             attribute='bar_extent',
+            ...             context='Staff',
+            ...             grob='bar_line',
+            ...             value=(0, 0),
+            ...             ),
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:REAPPLIED_PERSISTENT_OVERRIDE:SM37
+                                \makeBlue                                                                %! SM24
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \makeBlue                                                                %! SM24
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Redundant persistent overrides work but currently provide no
+            warning:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.bar_extent_persistent((0, 0)),
+            ...     baca.bar_extent_persistent((0, 0), baca.leaf(1)),
+            ...     baca.make_notes(),
+            ...     baca.staff_lines(1),
+            ...     baca.staff_position(0),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
+                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                b'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:REDUNDANT_PERSISTENT_OVERRIDE:IC
+                                b'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even at the beginning of a segment:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.bar_extent_persistent((0, 0)),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicVoice'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='baca.PersistentIndicator',
+            ...         value=baca.PersistentOverride(
+            ...             after=True,
+            ...             attribute='bar_extent',
+            ...             context='Staff',
+            ...             grob='bar_line',
+            ...             value=(0, 0),
+            ...             ),
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:REDUNDANT_PERSISTENT_OVERRIDE:IC
+                                \makeBlue                                                                %! SM24
+                                c'4.
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \makeBlue                                                                %! SM24
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        pass
+
+    @property
     def staff_lines(self) -> None:
         r'''Staff lines.
 
