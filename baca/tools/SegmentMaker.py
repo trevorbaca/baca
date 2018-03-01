@@ -790,7 +790,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if wrapper.indicator.persistent == 'abjad.MetronomeMark':
             return
-        if isinstance(wrapper.indicator, baca.PersistentOverride):
+        if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
@@ -1725,7 +1725,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 manifests['abjad.MarginMarkup'],
                 indicator,
                 )
-        elif isinstance(indicator, baca.PersistentOverride):
+        elif isinstance(indicator, abjad.PersistentOverride):
             key = indicator
         elif isinstance(indicator, baca.StaffLines):
             key = indicator.line_count

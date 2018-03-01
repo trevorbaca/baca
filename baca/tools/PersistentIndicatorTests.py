@@ -6790,8 +6790,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         [
                             abjad.Momento(
                                 context='MusicVoice',
-                                prototype='baca.PersistentOverride',
-                                value=baca.PersistentOverride(
+                                prototype='abjad.PersistentOverride',
+                                value=abjad.PersistentOverride(
                                     after=True,
                                     attribute='bar_extent',
                                     context='Staff',
@@ -6839,8 +6839,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicVoice'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='baca.PersistentOverride',
-            ...         value=baca.PersistentOverride(
+            ...         prototype='abjad.PersistentOverride',
+            ...         value=abjad.PersistentOverride(
             ...             after=True,
             ...             attribute='bar_extent',
             ...             context='Staff',
@@ -7003,8 +7003,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicVoice'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='baca.PersistentOverride',
-            ...         value=baca.PersistentOverride(
+            ...         prototype='abjad.PersistentOverride',
+            ...         value=abjad.PersistentOverride(
             ...             after=True,
             ...             attribute='bar_extent',
             ...             context='Staff',

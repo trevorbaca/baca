@@ -17,7 +17,6 @@ from .IndicatorCommand import IndicatorCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
-from .PersistentOverride import PersistentOverride
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
@@ -1102,7 +1101,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        override = PersistentOverride(
+        override = abjad.PersistentOverride(
             after=True,
             attribute='bar_extent',
             context='Staff',
