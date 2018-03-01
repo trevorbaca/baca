@@ -1749,9 +1749,8 @@ class LibraryGM(abjad.AbjadObject):
             rhythm_maker=rhythmos.SkipRhythmMaker()
             )
 
-    # TODO: remove repeat_ties keyword; use make_repeat_tied_notes instead
     @staticmethod
-    def make_tied_notes(repeat_ties: bool = False) -> RhythmCommand:
+    def make_tied_notes() -> RhythmCommand:
         r'''Makes tied notes; rewrites meter.
         '''
         return RhythmCommand(
@@ -1759,7 +1758,6 @@ class LibraryGM(abjad.AbjadObject):
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=rhythmos.TieSpecifier(
                     tie_across_divisions=True,
-                    repeat_ties=repeat_ties,
                     ),
                 ),
             )
