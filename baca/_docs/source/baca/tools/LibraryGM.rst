@@ -23,6 +23,7 @@ Bases
       ~LibraryGM.glissando_thickness
       ~LibraryGM.hairpin
       ~LibraryGM.hairpin_shorten_pair
+      ~LibraryGM.hairpin_transparent
       ~LibraryGM.helianthate
       ~LibraryGM.imbricate
       ~LibraryGM.instrument
@@ -70,6 +71,8 @@ Class & static methods
 .. automethod:: LibraryGM.hairpin
 
 .. automethod:: LibraryGM.hairpin_shorten_pair
+
+.. automethod:: LibraryGM.hairpin_transparent
 
 .. automethod:: LibraryGM.helianthate
 

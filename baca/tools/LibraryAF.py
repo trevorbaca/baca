@@ -3967,19 +3967,6 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dls_sp(
-        n: Number,
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Overrides dynamic line spanner staff padding.
-        '''
-        from baca.tools.LibraryAF import LibraryAF
-        return LibraryAF.dynamic_line_spanner_staff_padding(
-            n,
-            selector=selector,
-            )
-
-    @staticmethod
     def double_tonguing(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
@@ -4603,7 +4590,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_line_spanner_padding(
+    def dls_padding(
         n: Number,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
@@ -4617,7 +4604,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_line_spanner_staff_padding(
+    def dls_staff_padding(
         n: Number,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
@@ -4631,7 +4618,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic_line_spanner_staff_padding(4),
+            ...     baca.dls_staff_padding(4),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4704,7 +4691,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic_line_spanner_staff_padding(4, baca.tuplet(1)),
+            ...     baca.dls_staff_padding(4, baca.tuplet(1)),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4778,7 +4765,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_line_spanner_up(
+    def dls_up(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Up-overrides dynamic line spanner direction.
@@ -4791,7 +4778,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic_line_spanner_up(),
+            ...     baca.dls_up(),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4864,7 +4851,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic_line_spanner_up(baca.tuplet(1)),
+            ...     baca.dls_up(baca.tuplet(1)),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5088,6 +5075,19 @@ class LibraryAF(abjad.AbjadObject):
         return OverrideCommand(
             attribute='extra_offset',
             value=pair,
+            grob='dynamic_text',
+            selector=selector,
+            )
+
+    @staticmethod
+    def dynamic_text_transparent(
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides dynamic text transparent.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
             grob='dynamic_text',
             selector=selector,
             )

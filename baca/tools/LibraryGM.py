@@ -633,6 +633,19 @@ class LibraryGM(abjad.AbjadObject):
             selector=selector,
             )
 
+    @staticmethod
+    def hairpin_transparent(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides hairpin transparent.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='hairpin',
+            selector=selector,
+            )
+
     # TODO: deprecate in favor of baca.sequence()
     @staticmethod
     def helianthate(

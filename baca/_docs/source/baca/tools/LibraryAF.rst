@@ -54,15 +54,15 @@ Bases
       ~LibraryAF.deviation
       ~LibraryAF.diatonic_clusters
       ~LibraryAF.displacement
-      ~LibraryAF.dls_sp
+      ~LibraryAF.dls_padding
+      ~LibraryAF.dls_staff_padding
+      ~LibraryAF.dls_up
       ~LibraryAF.double_tonguing
       ~LibraryAF.down_arpeggios
       ~LibraryAF.down_bows
       ~LibraryAF.dynamic
-      ~LibraryAF.dynamic_line_spanner_padding
-      ~LibraryAF.dynamic_line_spanner_staff_padding
-      ~LibraryAF.dynamic_line_spanner_up
       ~LibraryAF.dynamic_text_extra_offset
+      ~LibraryAF.dynamic_text_transparent
       ~LibraryAF.dynamic_text_x_extent_zero
       ~LibraryAF.dynamic_text_x_offset
       ~LibraryAF.dynamics
@@ -150,7 +150,11 @@ Class & static methods
 
 .. automethod:: LibraryAF.displacement
 
-.. automethod:: LibraryAF.dls_sp
+.. automethod:: LibraryAF.dls_padding
+
+.. automethod:: LibraryAF.dls_staff_padding
+
+.. automethod:: LibraryAF.dls_up
 
 .. automethod:: LibraryAF.double_tonguing
 
@@ -160,13 +164,9 @@ Class & static methods
 
 .. automethod:: LibraryAF.dynamic
 
-.. automethod:: LibraryAF.dynamic_line_spanner_padding
-
-.. automethod:: LibraryAF.dynamic_line_spanner_staff_padding
-
-.. automethod:: LibraryAF.dynamic_line_spanner_up
-
 .. automethod:: LibraryAF.dynamic_text_extra_offset
+
+.. automethod:: LibraryAF.dynamic_text_transparent
 
 .. automethod:: LibraryAF.dynamic_text_x_extent_zero
 
