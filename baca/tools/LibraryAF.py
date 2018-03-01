@@ -942,10 +942,10 @@ class LibraryAF(abjad.AbjadObject):
         return OverrideCommand(
             after=after,
             attribute='bar_extent',
-            value=pair,
             context='Staff',
             grob='bar_line',
             selector=selector,
+            value=pair,
             )
 
     @staticmethod

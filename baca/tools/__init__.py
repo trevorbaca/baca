@@ -57,6 +57,7 @@ from .PageSpecifier import PageSpecifier
 from .PartAssignmentCommand import PartAssignmentCommand
 from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PersistentIndicatorTests import PersistentIndicatorTests
+from .PersistentOverride import PersistentOverride
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchArray import PitchArray
 from .PitchArrayCell import PitchArrayCell

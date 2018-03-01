@@ -355,4 +355,3 @@ class OverrideCommand(Command):
         r'''Gets whitelist leaves.
         '''
         return self._whitelist
-
