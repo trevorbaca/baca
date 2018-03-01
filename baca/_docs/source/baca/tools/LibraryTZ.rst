@@ -30,6 +30,7 @@ Bases
       ~LibraryTZ.text_scripts_up
       ~LibraryTZ.text_spanner
       ~LibraryTZ.text_spanner_staff_padding
+      ~LibraryTZ.text_spanner_transparent
       ~LibraryTZ.tie
       ~LibraryTZ.tie_from
       ~LibraryTZ.tie_repeat_pitches
@@ -87,6 +88,8 @@ Class & static methods
 .. automethod:: LibraryTZ.text_spanner
 
 .. automethod:: LibraryTZ.text_spanner_staff_padding
+
+.. automethod:: LibraryTZ.text_spanner_transparent
 
 .. automethod:: LibraryTZ.tie
 

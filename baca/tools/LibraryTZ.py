@@ -1553,6 +1553,19 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_spanner_transparent(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides text spanner transparent.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='text_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def tie(
         repeat: bool = False,
         selector: Selector = 'baca.qrun(0)',
