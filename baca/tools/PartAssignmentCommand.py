@@ -49,7 +49,8 @@ class PartAssignmentCommand(Command):
                 voice.name,
                 self.part_assignment,
                 ):
-                message = f'{voice.name} does not allow part assignment:'
+                message = f'{voice.name} does not allow'
+                message += f' {self.part_assignment.section} part assignment:'
                 message += f'\n  {self.part_assignment}'
                 raise Exception(message)
         identifier = f'%*% {self.part_assignment!s}'

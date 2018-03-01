@@ -880,7 +880,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> lilypond_file = maker.run(environment='docs')
             Traceback (most recent call last):
                 ...
-            Exception: ViolinMusicVoice does not allow part assignment:
+            Exception: ViolinMusicVoice does not allow Flute part assignment:
               abjad.PartAssignment('Flute')
 
         '''
