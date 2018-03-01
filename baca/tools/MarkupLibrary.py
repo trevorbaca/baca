@@ -366,30 +366,30 @@ class MarkupLibrary(abjad.AbjadObject):
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
             markup,
-            direction=direction,
             selector=selector,
+            direction=direction,
             )
 
     @staticmethod
     def boxed_lines(
         strings,
-        direction=abjad.Up,
         selector='baca.leaf(0)',
+        direction=abjad.Up,
         ):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column()
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
             markup,
-            direction=direction,
             selector=selector,
+            direction=direction,
             )
 
     @staticmethod
     def boxed_repeat_count(
         count,
-        direction=abjad.Up,
         selector='baca.leaf(0)',
+        direction=abjad.Up,
         ):
         string = f'x{count}'
         markup = abjad.Markup(string)
@@ -397,8 +397,8 @@ class MarkupLibrary(abjad.AbjadObject):
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
             markup,
-            direction=direction,
             selector=selector,
+            direction=direction,
             )
 
     @staticmethod
@@ -513,8 +513,8 @@ class MarkupLibrary(abjad.AbjadObject):
         markup = markup.with_color('black')
         return baca.markup(
             markup,
-            direction=abjad.Down,
             selector=selector,
+            direction=abjad.Down,
             )
 
     @staticmethod
@@ -658,13 +658,13 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def lines(strings, direction=abjad.Up, selector='baca.leaf(0)'):
+    def lines(strings, selector='baca.leaf(0)', direction=abjad.Up):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column()
         return baca.markup(
             markup,
-            direction=direction,
             selector=selector,
+            direction=direction,
             )
 
     @staticmethod
@@ -1289,8 +1289,8 @@ class MarkupLibrary(abjad.AbjadObject):
         string_number = to_roman_numeral[n]
         return baca.markup(
             string_number,
-            direction=abjad.Down,
             selector=selector,
+            direction=abjad.Down,
             )
 
     @staticmethod
@@ -1305,8 +1305,8 @@ class MarkupLibrary(abjad.AbjadObject):
         string_numbers = '+'.join(string_numbers)
         return baca.markup(
             string_numbers,
-            direction=abjad.Down,
             selector=selector,
+            direction=abjad.Down,
             )
 
     @staticmethod
