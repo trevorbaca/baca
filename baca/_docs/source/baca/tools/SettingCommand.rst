@@ -34,7 +34,6 @@ Bases
       ~SettingCommand.tag_measure_number
       ~SettingCommand.tags
       ~SettingCommand.value
-      ~SettingCommand.voice_name
       ~SettingCommand.__call__
       ~SettingCommand.__format__
       ~SettingCommand.__repr__
@@ -104,12 +103,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: SettingCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: SettingCommand.voice_name
 
 Methods
 -------

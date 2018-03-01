@@ -39,7 +39,6 @@ Bases
       ~PitchCommand.tag
       ~PitchCommand.tag_measure_number
       ~PitchCommand.tags
-      ~PitchCommand.voice_name
       ~PitchCommand.__call__
       ~PitchCommand.__format__
       ~PitchCommand.__repr__
@@ -119,12 +118,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.voice_name
 
 Methods
 -------

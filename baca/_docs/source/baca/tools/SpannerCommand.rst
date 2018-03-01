@@ -34,7 +34,6 @@ Bases
       ~SpannerCommand.tag
       ~SpannerCommand.tag_measure_number
       ~SpannerCommand.tags
-      ~SpannerCommand.voice_name
       ~SpannerCommand.__call__
       ~SpannerCommand.__format__
       ~SpannerCommand.__repr__
@@ -100,12 +99,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: SpannerCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.voice_name
 
 Methods
 -------

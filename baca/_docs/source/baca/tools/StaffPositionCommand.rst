@@ -34,7 +34,6 @@ Bases
       ~StaffPositionCommand.tag
       ~StaffPositionCommand.tag_measure_number
       ~StaffPositionCommand.tags
-      ~StaffPositionCommand.voice_name
       ~StaffPositionCommand.__call__
       ~StaffPositionCommand.__format__
       ~StaffPositionCommand.__repr__
@@ -104,12 +103,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.voice_name
 
 Methods
 -------

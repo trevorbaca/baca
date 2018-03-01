@@ -33,7 +33,6 @@ Bases
       ~NestingCommand.tag_measure_number
       ~NestingCommand.tags
       ~NestingCommand.time_treatments
-      ~NestingCommand.voice_name
       ~NestingCommand.__call__
       ~NestingCommand.__format__
       ~NestingCommand.__repr__
@@ -101,12 +100,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: NestingCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.voice_name
 
 Methods
 -------

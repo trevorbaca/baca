@@ -31,7 +31,6 @@ Bases
       ~ColorCommand.tag
       ~ColorCommand.tag_measure_number
       ~ColorCommand.tags
-      ~ColorCommand.voice_name
       ~ColorCommand.__call__
       ~ColorCommand.__format__
       ~ColorCommand.__repr__
@@ -95,12 +94,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ColorCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorCommand.voice_name
 
 Methods
 -------

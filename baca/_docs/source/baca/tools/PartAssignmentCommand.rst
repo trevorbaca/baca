@@ -32,7 +32,6 @@ Bases
       ~PartAssignmentCommand.tag
       ~PartAssignmentCommand.tag_measure_number
       ~PartAssignmentCommand.tags
-      ~PartAssignmentCommand.voice_name
       ~PartAssignmentCommand.__call__
       ~PartAssignmentCommand.__format__
       ~PartAssignmentCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PartAssignmentCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: PartAssignmentCommand.voice_name
 
 Methods
 -------

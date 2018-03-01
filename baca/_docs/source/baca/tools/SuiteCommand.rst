@@ -32,7 +32,6 @@ Bases
       ~SuiteCommand.tag
       ~SuiteCommand.tag_measure_number
       ~SuiteCommand.tags
-      ~SuiteCommand.voice_name
       ~SuiteCommand.__call__
       ~SuiteCommand.__format__
       ~SuiteCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: SuiteCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: SuiteCommand.voice_name
 
 Methods
 -------

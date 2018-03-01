@@ -49,7 +49,6 @@ Bases
       ~RhythmCommand.tags
       ~RhythmCommand.tie_first
       ~RhythmCommand.tie_last
-      ~RhythmCommand.voice_name
       ~RhythmCommand.__call__
       ~RhythmCommand.__format__
       ~RhythmCommand.__repr__
@@ -149,12 +148,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.voice_name
 
 Methods
 -------

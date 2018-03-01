@@ -33,7 +33,6 @@ Bases
       ~RegisterToOctaveCommand.tag
       ~RegisterToOctaveCommand.tag_measure_number
       ~RegisterToOctaveCommand.tags
-      ~RegisterToOctaveCommand.voice_name
       ~RegisterToOctaveCommand.__call__
       ~RegisterToOctaveCommand.__format__
       ~RegisterToOctaveCommand.__repr__
@@ -101,12 +100,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RegisterToOctaveCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.voice_name
 
 Methods
 -------

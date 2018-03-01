@@ -32,7 +32,6 @@ Bases
       ~MetronomeMarkCommand.tag
       ~MetronomeMarkCommand.tag_measure_number
       ~MetronomeMarkCommand.tags
-      ~MetronomeMarkCommand.voice_name
       ~MetronomeMarkCommand.__call__
       ~MetronomeMarkCommand.__format__
       ~MetronomeMarkCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: MetronomeMarkCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: MetronomeMarkCommand.voice_name
 
 Methods
 -------

@@ -32,7 +32,6 @@ Bases
       ~LabelCommand.tag
       ~LabelCommand.tag_measure_number
       ~LabelCommand.tags
-      ~LabelCommand.voice_name
       ~LabelCommand.__call__
       ~LabelCommand.__format__
       ~LabelCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: LabelCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: LabelCommand.voice_name
 
 Methods
 -------

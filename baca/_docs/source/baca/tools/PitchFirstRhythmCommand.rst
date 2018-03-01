@@ -33,7 +33,6 @@ Bases
       ~PitchFirstRhythmCommand.tag
       ~PitchFirstRhythmCommand.tag_measure_number
       ~PitchFirstRhythmCommand.tags
-      ~PitchFirstRhythmCommand.voice_name
       ~PitchFirstRhythmCommand.__call__
       ~PitchFirstRhythmCommand.__format__
       ~PitchFirstRhythmCommand.__repr__
@@ -101,12 +100,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.voice_name
 
 Methods
 -------

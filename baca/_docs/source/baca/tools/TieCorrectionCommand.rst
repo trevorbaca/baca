@@ -34,7 +34,6 @@ Bases
       ~TieCorrectionCommand.tag_measure_number
       ~TieCorrectionCommand.tags
       ~TieCorrectionCommand.untie
-      ~TieCorrectionCommand.voice_name
       ~TieCorrectionCommand.__call__
       ~TieCorrectionCommand.__format__
       ~TieCorrectionCommand.__repr__
@@ -104,12 +103,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: TieCorrectionCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.voice_name
 
 Methods
 -------

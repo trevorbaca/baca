@@ -32,7 +32,6 @@ Bases
       ~MapCommand.tag
       ~MapCommand.tag_measure_number
       ~MapCommand.tags
-      ~MapCommand.voice_name
       ~MapCommand.__call__
       ~MapCommand.__format__
       ~MapCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: MapCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: MapCommand.voice_name
 
 Methods
 -------

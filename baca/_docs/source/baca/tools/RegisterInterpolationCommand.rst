@@ -33,7 +33,6 @@ Bases
       ~RegisterInterpolationCommand.tag
       ~RegisterInterpolationCommand.tag_measure_number
       ~RegisterInterpolationCommand.tags
-      ~RegisterInterpolationCommand.voice_name
       ~RegisterInterpolationCommand.__call__
       ~RegisterInterpolationCommand.__format__
       ~RegisterInterpolationCommand.__repr__
@@ -97,12 +96,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.voice_name
 
 Methods
 -------

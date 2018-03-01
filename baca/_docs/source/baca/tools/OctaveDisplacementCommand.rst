@@ -32,7 +32,6 @@ Bases
       ~OctaveDisplacementCommand.tag
       ~OctaveDisplacementCommand.tag_measure_number
       ~OctaveDisplacementCommand.tags
-      ~OctaveDisplacementCommand.voice_name
       ~OctaveDisplacementCommand.__call__
       ~OctaveDisplacementCommand.__format__
       ~OctaveDisplacementCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.voice_name
 
 Methods
 -------

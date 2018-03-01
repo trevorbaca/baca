@@ -35,7 +35,6 @@ Bases
       ~InstrumentChangeCommand.tag
       ~InstrumentChangeCommand.tag_measure_number
       ~InstrumentChangeCommand.tags
-      ~InstrumentChangeCommand.voice_name
       ~InstrumentChangeCommand.__call__
       ~InstrumentChangeCommand.__format__
       ~InstrumentChangeCommand.__repr__
@@ -111,12 +110,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: InstrumentChangeCommand.voice_name
 
 Methods
 -------

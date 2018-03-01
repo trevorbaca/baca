@@ -35,7 +35,6 @@ Bases
       ~PiecewiseCommand.tag
       ~PiecewiseCommand.tag_measure_number
       ~PiecewiseCommand.tags
-      ~PiecewiseCommand.voice_name
       ~PiecewiseCommand.__call__
       ~PiecewiseCommand.__format__
       ~PiecewiseCommand.__repr__
@@ -103,12 +102,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: PiecewiseCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.voice_name
 
 Methods
 -------

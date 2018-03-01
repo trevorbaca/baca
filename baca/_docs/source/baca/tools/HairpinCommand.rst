@@ -35,7 +35,6 @@ Bases
       ~HairpinCommand.tag
       ~HairpinCommand.tag_measure_number
       ~HairpinCommand.tags
-      ~HairpinCommand.voice_name
       ~HairpinCommand.__call__
       ~HairpinCommand.__format__
       ~HairpinCommand.__repr__
@@ -107,12 +106,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: HairpinCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: HairpinCommand.voice_name
 
 Methods
 -------

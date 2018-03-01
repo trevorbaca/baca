@@ -31,7 +31,6 @@ Bases
       ~DiatonicClusterCommand.tag
       ~DiatonicClusterCommand.tag_measure_number
       ~DiatonicClusterCommand.tags
-      ~DiatonicClusterCommand.voice_name
       ~DiatonicClusterCommand.widths
       ~DiatonicClusterCommand.__call__
       ~DiatonicClusterCommand.__format__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: DiatonicClusterCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.voice_name
 
 Methods
 -------

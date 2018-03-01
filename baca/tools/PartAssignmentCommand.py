@@ -39,13 +39,19 @@ class PartAssignmentCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if not self.score_template.allows_part_assignment(
-            self.voice_name,
-            self.part_assignment,
-            ):
-            message = f'{self.voice_name} does not allow part assignment:\n'
-            message += f'  {self.part_assignment}'
-            raise Exception(message)
+        first_leaf = abjad.inspect(argument).get_leaf(0)
+        if first_leaf is None:
+            return
+        parentage = abjad.inspect(first_leaf).get_parentage()
+        voice = parentage.get_first(abjad.Voice)
+        if voice is not None:
+            if not self.score_template.allows_part_assignment(
+                voice.name,
+                self.part_assignment,
+                ):
+                message = f'{voice.name} does not allow part assignment:'
+                message += f'\n  {self.part_assignment}'
+                raise Exception(message)
         identifier = f'%*% {self.part_assignment!s}'
         container = abjad.Container(identifier=identifier)
         components = baca.select(argument).leaves().top()

@@ -32,7 +32,6 @@ Bases
       ~MicrotoneDeviationCommand.tag
       ~MicrotoneDeviationCommand.tag_measure_number
       ~MicrotoneDeviationCommand.tags
-      ~MicrotoneDeviationCommand.voice_name
       ~MicrotoneDeviationCommand.__call__
       ~MicrotoneDeviationCommand.__format__
       ~MicrotoneDeviationCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.voice_name
 
 Methods
 -------

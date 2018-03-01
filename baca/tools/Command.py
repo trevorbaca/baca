@@ -24,7 +24,6 @@ class Command(abjad.AbjadObject):
         '_tag_measure_number',
         '_tags',
         '_previous_segment_voice_metadata',
-        '_voice_name',
         )
 
     _publish_storage_format = True
@@ -53,7 +52,6 @@ class Command(abjad.AbjadObject):
         self.score_template = None
         self.previous_segment_voice_metadata = None
         self.tag_measure_number = tag_measure_number
-        self.voice_name = None
 
     ### SPECIAL METHODS ###
 
@@ -232,20 +230,6 @@ class Command(abjad.AbjadObject):
         '''
         assert self._are_valid_tags(self._tags)
         return self._tags[:]
-
-    @property
-    def voice_name(self) -> str:
-        r'''Gets voice_name.
-        '''
-        return self._voice_name
-
-    @voice_name.setter
-    def voice_name(self, argument):
-        if argument is not None:
-            assert isinstance(argument, str), repr(argument)
-        self._voice_name = argument
-        for command in getattr(self, 'commands', []):
-            command._voice_name = argument
 
     ### PUBLIC METHODS ###
 

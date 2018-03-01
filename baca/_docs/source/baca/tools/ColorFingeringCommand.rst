@@ -32,7 +32,6 @@ Bases
       ~ColorFingeringCommand.tag
       ~ColorFingeringCommand.tag_measure_number
       ~ColorFingeringCommand.tags
-      ~ColorFingeringCommand.voice_name
       ~ColorFingeringCommand.__call__
       ~ColorFingeringCommand.__format__
       ~ColorFingeringCommand.__repr__
@@ -98,12 +97,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ColorFingeringCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.voice_name
 
 Methods
 -------

@@ -33,7 +33,6 @@ Bases
       ~ClusterCommand.tag
       ~ClusterCommand.tag_measure_number
       ~ClusterCommand.tags
-      ~ClusterCommand.voice_name
       ~ClusterCommand.widths
       ~ClusterCommand.__call__
       ~ClusterCommand.__format__
@@ -100,12 +99,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: ClusterCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.voice_name
 
 Methods
 -------

@@ -33,7 +33,6 @@ Bases
       ~IndicatorCommand.tag
       ~IndicatorCommand.tag_measure_number
       ~IndicatorCommand.tags
-      ~IndicatorCommand.voice_name
       ~IndicatorCommand.__call__
       ~IndicatorCommand.__format__
       ~IndicatorCommand.__repr__
@@ -101,12 +100,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: IndicatorCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: IndicatorCommand.voice_name
 
 Methods
 -------

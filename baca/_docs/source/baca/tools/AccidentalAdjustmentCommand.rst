@@ -34,7 +34,6 @@ Bases
       ~AccidentalAdjustmentCommand.tag
       ~AccidentalAdjustmentCommand.tag_measure_number
       ~AccidentalAdjustmentCommand.tags
-      ~AccidentalAdjustmentCommand.voice_name
       ~AccidentalAdjustmentCommand.__call__
       ~AccidentalAdjustmentCommand.__format__
       ~AccidentalAdjustmentCommand.__repr__
@@ -104,12 +103,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: AccidentalAdjustmentCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.voice_name
 
 Methods
 -------

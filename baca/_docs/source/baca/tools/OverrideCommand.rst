@@ -37,7 +37,6 @@ Bases
       ~OverrideCommand.tag_measure_number
       ~OverrideCommand.tags
       ~OverrideCommand.value
-      ~OverrideCommand.voice_name
       ~OverrideCommand.whitelist
       ~OverrideCommand.__call__
       ~OverrideCommand.__format__
@@ -116,12 +115,6 @@ Read/write properties
    .. container:: inherited
 
       .. autoattribute:: OverrideCommand.tag_measure_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.voice_name
 
 Methods
 -------

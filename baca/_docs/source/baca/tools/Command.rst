@@ -29,7 +29,6 @@ Bases
       ~Command.tag
       ~Command.tag_measure_number
       ~Command.tags
-      ~Command.voice_name
       ~Command.__call__
       ~Command.__format__
       ~Command.__repr__
@@ -57,8 +56,6 @@ Read/write properties
 .. autoattribute:: Command.score_template
 
 .. autoattribute:: Command.tag_measure_number
-
-.. autoattribute:: Command.voice_name
 
 Methods
 -------
