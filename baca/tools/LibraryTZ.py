@@ -226,6 +226,7 @@ class LibraryTZ(abjad.AbjadObject):
     def text_script_color(
         color: str = 'red',
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Overrides text script color.
 
@@ -410,9 +411,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='color',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=color,
             grob='text_script',
             selector=selector,
@@ -422,6 +427,7 @@ class LibraryTZ(abjad.AbjadObject):
     def text_script_extra_offset(
         pair: NumberPair,
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Overrides text script extra offset.
 
@@ -446,9 +452,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='extra_offset',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=pair,
             grob='text_script',
             selector=selector,
@@ -458,6 +468,7 @@ class LibraryTZ(abjad.AbjadObject):
     def text_script_padding(
         n: Number,
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Overrides text script padding.
 
@@ -642,9 +653,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='padding',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=n,
             grob='text_script',
             selector=selector,
@@ -653,6 +668,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_parent_center(
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Overrides text script parent alignment X to center.
 
@@ -677,9 +693,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='parent_alignment_X',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=0,
             grob='text_script',
             selector=selector,
@@ -689,6 +709,7 @@ class LibraryTZ(abjad.AbjadObject):
     def text_script_staff_padding(
         n: Number,
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Overrides text script staff padding.
 
@@ -876,9 +897,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='staff_padding',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=n,
             grob='text_script',
             selector=selector,
@@ -887,6 +912,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_scripts_down(
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Down-overrides text script.
 
@@ -1071,9 +1097,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='direction',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=abjad.Down,
             grob='text_script',
             selector=selector,
@@ -1082,6 +1112,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_scripts_up(
         selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r'''Up-overrides text script direction.
 
@@ -1266,9 +1297,13 @@ class LibraryTZ(abjad.AbjadObject):
             Exception: MultimeasureRest is forbidden.
 
         '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
         return OverrideCommand(
             attribute='direction',
-            blacklist=(abjad.MultimeasureRest,),
+            blacklist=blacklist,
             value=abjad.Up,
             grob='text_script',
             selector=selector,
