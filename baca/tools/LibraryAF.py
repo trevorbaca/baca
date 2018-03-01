@@ -17,14 +17,12 @@ from .IndicatorCommand import IndicatorCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
+from .PersistentOverride import PersistentOverride
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SuiteCommand import SuiteCommand
-from .Typing import List
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
-from .Typing import Tuple
-from .Typing import Union
 
 
 class LibraryAF(abjad.AbjadObject):
@@ -796,7 +794,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def articulations(
-        articulations: List,
+        articulations: typing.List,
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         r'''Attaches articulations.
@@ -967,6 +965,152 @@ class LibraryAF(abjad.AbjadObject):
                     selector='baca.leaf(-1)',
                     ),
                 ],
+            selector=selector,
+            )
+
+    @staticmethod
+    def bar_extent_persistent(
+        pair: NumberPair = None,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Makes persistent bar-extent override.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.bar_extent_persistent((0, 0)),
+            ...     baca.make_even_runs(),
+            ...     baca.staff_lines(1),
+            ...     baca.staff_position(0),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 1]                                             %! SM4
+                                    \override Staff.BarLine.bar-extent = #'(0 . 0)                       %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
+                                    \stopStaff                                                           %! SM8:EXPLICIT_STAFF_LINES:IC
+                                    \once \override Staff.StaffSymbol.line-count = 1                     %! SM8:EXPLICIT_STAFF_LINES:IC
+                                    \startStaff                                                          %! SM8:EXPLICIT_STAFF_LINES:IC
+                                    \once \override Staff.StaffSymbol.color = #(x11-color 'blue)         %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                    b'8
+                                    [
+                <BLANKLINE>
+                                    b'8
+                <BLANKLINE>
+                                    b'8
+                <BLANKLINE>
+                                    b'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 2]                                             %! SM4
+                                    b'8
+                                    [
+                <BLANKLINE>
+                                    b'8
+                <BLANKLINE>
+                                    b'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 3]                                             %! SM4
+                                    b'8
+                                    [
+                <BLANKLINE>
+                                    b'8
+                <BLANKLINE>
+                                    b'8
+                <BLANKLINE>
+                                    b'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 4]                                             %! SM4
+                                    b'8
+                                    [
+                <BLANKLINE>
+                                    b'8
+                <BLANKLINE>
+                                    b'8
+                                    ]
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        override = PersistentOverride(
+            after=True,
+            attribute='bar_extent',
+            context='Staff',
+            grob='bar_line',
+            value=pair,
+            )
+        return IndicatorCommand(
+            indicators=[override],
             selector=selector,
             )
 
@@ -2477,9 +2621,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def clusters(
-        widths: List[int],
+        widths: typing.List[int],
         selector: Selector = 'baca.plts()',
-        start_pitch: Union[int, str, abjad.NamedPitch] = None,
+        start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
         ) -> ClusterCommand:
         r'''Makes clusters.
         '''
@@ -2801,7 +2945,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def color_fingerings(
-        numbers: List[Number],
+        numbers: typing.List[Number],
         selector: Selector = 'baca.pheads()',
         ) -> ColorFingeringCommand:
         r'''Color fingerings.
@@ -3606,7 +3750,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def deviation(
-        deviations: List[Number],
+        deviations: typing.List[Number],
         selector: Selector = 'baca.plts()',
         ) -> MicrotoneDeviationCommand:
         r''''Makes microtone deviation.
@@ -3618,7 +3762,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def diatonic_clusters(
-        widths: List[int],
+        widths: typing.List[int],
         selector: Selector = 'baca.plts()',
         ) -> DiatonicClusterCommand:
         r'''Makes diatonic clusters.
@@ -3630,7 +3774,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def displacement(
-        displacements: List[int],
+        displacements: typing.List[int],
         selector: Selector = 'baca.plts()',
         ) -> OctaveDisplacementCommand:
         r'''Octave-displaces PLTs.
@@ -4977,7 +5121,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamics(string: str) -> List[abjad.Dynamic]:
+    def dynamics(string: str) -> typing.List[abjad.Dynamic]:
         r'''Makes dynamics from `string`.
 
         ..  container::

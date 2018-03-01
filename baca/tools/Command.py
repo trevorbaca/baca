@@ -96,6 +96,7 @@ class Command(abjad.AbjadObject):
             'INSTRUMENT',
             'MARGIN_MARKUP',
             'METRONOME_MARK',
+            'PERSISTENT_OVERRIDE',
             'STAFF_LINES',
             ), repr(stem)
         reapplied_wrappers = []

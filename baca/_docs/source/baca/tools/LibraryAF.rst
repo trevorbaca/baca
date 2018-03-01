@@ -29,6 +29,7 @@ Bases
       ~LibraryAF.articulation
       ~LibraryAF.articulations
       ~LibraryAF.bar_extent
+      ~LibraryAF.bar_extent_persistent
       ~LibraryAF.bar_extent_zero
       ~LibraryAF.bass_to_octave
       ~LibraryAF.beam_divisions
@@ -98,6 +99,8 @@ Class & static methods
 .. automethod:: LibraryAF.articulations
 
 .. automethod:: LibraryAF.bar_extent
+
+.. automethod:: LibraryAF.bar_extent_persistent
 
 .. automethod:: LibraryAF.bar_extent_zero
 

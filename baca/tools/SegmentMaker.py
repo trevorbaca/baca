@@ -12,14 +12,8 @@ from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .ScoreTemplate import ScoreTemplate
-from .Typing import Dict
-from .Typing import List
-from .Typing import Optional
 from .Typing import Number
 from .Typing import NumberPair
-from .Typing import Set
-from .Typing import Tuple
-from .Typing import Union as U
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -286,10 +280,10 @@ class SegmentMaker(abjad.SegmentMaker):
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
-        final_bar_line: U[bool, str, None] = None,
-        final_markup: U[tuple, None] = None,
-        final_markup_extra_offset: U[NumberPair, None] = None,
-        first_measure_number: U[int, None] = None,
+        final_bar_line: typing.Union[bool, str, None] = None,
+        final_markup: typing.Union[tuple, None] = None,
+        final_markup_extra_offset: typing.Union[NumberPair, None] = None,
+        first_measure_number: typing.Union[int, None] = None,
         ignore_repeat_pitch_classes: bool = None,
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
@@ -297,10 +291,10 @@ class SegmentMaker(abjad.SegmentMaker):
         last_segment: bool = None,
         breaks: BreakMeasureMap = None,
         margin_markups: abjad.OrderedDict = None,
-        measures_per_stage: List[int] = None,
+        measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
         metronome_mark_spanner_right_broken: bool = None,
-        metronome_mark_stem_height: Optional[Number] = 1.5,
+        metronome_mark_stem_height: typing.Optional[Number] = 1.5,
         metronome_marks: abjad.OrderedDict = None,
         print_timings: bool = None,
         range_checker: abjad.PitchRange = None,
@@ -310,7 +304,7 @@ class SegmentMaker(abjad.SegmentMaker):
         skips_instead_of_rests: bool = None,
         spacing: HorizontalSpacingSpecifier = None,
         test_container_identifiers: bool = None,
-        time_signatures: List[tuple] = None,
+        time_signatures: typing.List[tuple] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
         validate_stage_count: int = None,
@@ -326,16 +320,16 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes: bool = \
             color_repeat_pitch_classes
         self._cache = None
-        self._cached_time_signatures: List[abjad.TimeSignature] = []
+        self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
         self._do_not_check_persistence: bool = do_not_check_persistence
         self._do_not_include_layout_ly: bool = do_not_include_layout_ly
         self._duration: abjad.Duration = None
-        self._fermata_measure_numbers: list = []
+        self._fermata_measure_numbers: typing.List = []
         self._fermata_measure_staff_line_count: int = \
             fermata_measure_staff_line_count
-        self._fermata_start_offsets: List[abjad.Offset] = []
-        self._fermata_stop_offsets: List[abjad.Offset] = []
-        self._final_bar_line: U[bool, str, None] = final_bar_line
+        self._fermata_start_offsets: typing.List[abjad.Offset] = []
+        self._fermata_stop_offsets: typing.List[abjad.Offset] = []
+        self._final_bar_line: typing.Union[bool, str, None] = final_bar_line
         self._final_markup: tuple = final_markup
         self._final_markup_extra_offset: NumberPair = \
             final_markup_extra_offset
@@ -352,22 +346,22 @@ class SegmentMaker(abjad.SegmentMaker):
         self._margin_markups: abjad.OrderedDict = margin_markups
         if measures_per_stage is True:
             measures_per_stage = len(time_signatures) * [1]
-        self._measures_per_stage: List[int] = measures_per_stage
+        self._measures_per_stage: typing.List[int] = measures_per_stage
         self._metronome_mark_measure_map: MetronomeMarkMeasureMap = \
             metronome_mark_measure_map
         self._metronome_mark_spanner_right_broken: bool = \
             metronome_mark_spanner_right_broken
-        self._metronome_mark_stem_height: Optional[Number] = \
+        self._metronome_mark_stem_height: typing.Optional[Number] = \
             metronome_mark_stem_height
         self._metronome_marks: abjad.OrderedDict = metronome_marks
         self._midi: bool = None
-        self._offset_to_measure_number: Dict[abjad.Offset, int] = {}
-        self._previously_alive_contexts: List[str] = []
+        self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
+        self._previously_alive_contexts: typing.List[str] = []
         self._print_timings: bool = print_timings
         self._range_checker: abjad.PitchRange = range_checker
         self._rehearsal_mark: str = rehearsal_mark
         self._score_template: ScoreTemplate = score_template
-        self._segment_bol_measure_numbers: List[int] = []
+        self._segment_bol_measure_numbers: typing.List[int] = []
         self._segment_duration: abjad.Duration = None
         self._skip_wellformedness_checks: bool = skip_wellformedness_checks
         self._skips_instead_of_rests: bool = skips_instead_of_rests
@@ -382,7 +376,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._validate_measure_count: int = validate_measure_count
         self._validate_stage_count: int = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
-        self._wrappers: List[CommandWrapper] = []
+        self._wrappers: typing.List[CommandWrapper] = []
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
         self._validate_measures_per_stage()
@@ -615,13 +609,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _alive_during_any_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
-        # HERE
-        names: List = self.previous_metadata.get('alive_during_segment', [])
+        names: typing.List = self.previous_metadata.get(
+            'alive_during_segment',
+            [],
+            )
         return context.name in names
 
     def _alive_during_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
-        names: List = self.previous_metadata.get('alive_during_segment', [])
+        names: typing.List = self.previous_metadata.get(
+            'alive_during_segment',
+            [],
+            )
         return context.name in names
 
     def _analyze_momento(self, context, momento):
@@ -790,6 +789,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if not getattr(wrapper.indicator, 'persistent', False):
             return
         if wrapper.indicator.persistent == 'abjad.MetronomeMark':
+            return
+        if isinstance(wrapper.indicator, baca.PersistentOverride):
             return
         if existing_tag is not None:
             assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
@@ -1102,7 +1103,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _cache_previously_alive_contexts(self) -> None:
         if self.segment_directory is None:
             return
-        contexts: Set[str] = set()
+        contexts: typing.Set[str] = set()
         string = 'alive_during_segment'
         for segment in self.segment_directory.parent.list_paths():
             if segment == self.segment_directory:
@@ -2426,7 +2427,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 stem=stem,
                 )
 
-    def _treat_untreatd_persistent_wrappers(self):
+    def _treat_untreated_persistent_wrappers(self):
         tempo_prototype = (
             abjad.Accelerando,
             abjad.MetronomeMark,
@@ -3173,7 +3174,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._fermata_measure_staff_line_count
 
     @property
-    def final_bar_line(self) -> U[bool, str, None]:
+    def final_bar_line(self) -> typing.Union[bool, str, None]:
         r'''Gets final bar line.
 
         ..  container:: example
@@ -4430,7 +4431,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return 0
 
     @property
-    def measures_per_stage(self) -> List[int]:
+    def measures_per_stage(self) -> typing.List[int]:
         r'''Gets measures per stage.
         '''
         if self._measures_per_stage is None:
@@ -5014,7 +5015,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._test_container_identifiers
 
     @property
-    def time_signatures(self) -> List[abjad.TimeSignature]:
+    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
         r'''Gets time signatures.
         '''
         return self._time_signatures
@@ -5301,7 +5302,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._voice_metadata
 
     @property
-    def wrappers(self) -> List[CommandWrapper]:
+    def wrappers(self) -> typing.List[CommandWrapper]:
         r'''Gets wrappers.
         '''
         return self._wrappers
@@ -5391,7 +5392,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_spacing()
         self._call_commands()
         self._shorten_long_repeat_ties()
-        self._treat_untreatd_persistent_wrappers()
+        self._treat_untreated_persistent_wrappers()
         self._label_clock_time()
         self._transpose_score_()
         self._attach_rehearsal_mark()

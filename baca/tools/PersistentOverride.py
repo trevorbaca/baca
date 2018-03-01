@@ -29,6 +29,7 @@ class PersistentOverride(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_after',
         '_attribute',
         '_context',
         '_grob',
@@ -44,12 +45,16 @@ class PersistentOverride(abjad.AbjadObject):
 
     def __init__(
         self,
+        after: bool = None,
         attribute: str = None,
         context: str = None,
         grob: str = None,
         hide: bool = None,
         value: typing.Any = None,
         ) -> None:
+        if after is not None:
+            after = bool(after)
+        self._after = after
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
@@ -152,6 +157,25 @@ class PersistentOverride(abjad.AbjadObject):
         return bundle
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def after(self) -> bool:
+        r'''Ist true when override formats after leaf.
+
+        ..  container:: example
+
+            >>> override = baca.PersistentOverride(
+            ...     attribute='bar_extent',
+            ...     context='Staff',
+            ...     grob='bar_line',
+            ...     value=(-2, 0),
+            ...     )
+
+            >>> override.after is None
+            True
+
+        '''
+        return self._after
 
     @property
     def attribute(self) -> str:

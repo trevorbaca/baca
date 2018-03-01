@@ -19,6 +19,7 @@ Bases
 
    .. autosummary::
 
+      ~PersistentOverride.after
       ~PersistentOverride.attribute
       ~PersistentOverride.context
       ~PersistentOverride.grob
@@ -31,6 +32,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: PersistentOverride.after
 
 .. autoattribute:: PersistentOverride.attribute
 
