@@ -5817,7 +5817,7 @@ class LibraryNS(abjad.AbjadObject):
         ) -> IndicatorCommand:
         r'''Sets start markup on each leaf in ``selector`` output.
         '''
-        if isinstance(argument, str):
+        if isinstance(argument, (list, str)):
             markup = MarkupLibrary.instrument(argument, hcenter_in=hcenter_in)
             start_markup = abjad.StartMarkup(
                 context=context,
