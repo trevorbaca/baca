@@ -69,6 +69,7 @@ Bases
       ~LibraryAF.dynamics_down
       ~LibraryAF.dynamics_up
       ~LibraryAF.effort_dynamic
+      ~LibraryAF.enchained_hairpin
       ~LibraryAF.enchained_transition
       ~LibraryAF.fermata
       ~LibraryAF.flageolets
@@ -180,6 +181,8 @@ Class & static methods
 .. automethod:: LibraryAF.dynamics_up
 
 .. automethod:: LibraryAF.effort_dynamic
+
+.. automethod:: LibraryAF.enchained_hairpin
 
 .. automethod:: LibraryAF.enchained_transition
 
