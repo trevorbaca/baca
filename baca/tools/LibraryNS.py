@@ -3075,6 +3075,8 @@ class LibraryNS(abjad.AbjadObject):
             start, stop = stages
         assert isinstance(start, int), repr(start)
         assert 0 < start, repr(start)
+        if stop == -1:
+            stop = 'end'
         if isinstance(stop, int):
             assert 0 < stop, repr(stop)
             assert start <= stop, repr(stop)
