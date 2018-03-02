@@ -45,6 +45,7 @@ class PiecewiseCommand(Command):
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, baca.SpannerCommand))
         self._spanner = spanner
+        self._tags = []
 
     ### SPECIAL METHODS ###
 
@@ -65,7 +66,11 @@ class PiecewiseCommand(Command):
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
             leaves = abjad.select(preprocessed_argument).leaves()
-            abjad.attach(spanner, leaves, tag='PCW1')
+            abjad.attach(
+                spanner,
+                leaves,
+                tag=self.tag.prepend('PCW1'),
+                )
         else:
             spanner = self.spanner(preprocessed_argument)
         if self.selector is not None:
@@ -86,8 +91,7 @@ class PiecewiseCommand(Command):
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _attach_indicators(spanner, argument, leaf):
+    def _attach_indicators(self, spanner, argument, leaf):
         if not isinstance(argument, tuple):
             argument = (argument,)
         for argument_ in argument:
@@ -95,13 +99,17 @@ class PiecewiseCommand(Command):
                 pass
             elif isinstance(argument_, baca.IndicatorCommand):
                 for indicator in argument_.indicators:
-                    spanner.attach(indicator, leaf, tag='PWC2')
+                    spanner.attach(
+                        indicator,
+                        leaf,
+                        tag=self.tag.prepend('PWC2'),
+                        )
             else:
                 reapplied = Command._remove_reapplied_wrappers(leaf, argument_)
                 wrapper = spanner.attach(
                     argument_,
                     leaf,
-                    tag='PWC3',
+                    tag=self.tag.prepend('PWC3'),
                     wrapper=True,
                     )
                 if argument_ == reapplied:
