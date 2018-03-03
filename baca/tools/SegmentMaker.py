@@ -1692,6 +1692,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if (hasattr(command.command, '_mutates_score') and
             command.command._mutates_score()):
             self._cache = None
+            is_forbidden_to_update = self.score._is_forbidden_to_update
+            self.score._is_forbidden_to_update = False
+            self.score._update_now(offsets=True)
+            self.score._is_forbidden_to_update = is_forbidden_to_update
 
     @staticmethod
     def _indicator_to_grob(indicator):
