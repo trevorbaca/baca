@@ -3,7 +3,6 @@ import baca
 import os
 import pathlib
 import sys
-import time
 import traceback
 import typing
 from abjad import rhythmmakertools as rhythmos
@@ -725,17 +724,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
     def _apply_spacing(self):
-        start_time = time.time()
         if self.spacing is None:
             return
-        self.spacing(self)
-        stop_time = time.time()
-        total_time = int(stop_time - start_time)
+        with abjad.Timer() as timer:
+            self.spacing(self)
         if self.print_timings:
-            print(f'spacing time {total_time} seconds ...')
+            print(f'spacing time {timer.elapsed_time} seconds ...')
         if os.getenv('TRAVIS'):
             return
-        if 3 < total_time:
+        if 3 < timer.elapsed_time:
             raise Exception(f'spacing time {total_time} seconds!')
 
     def _assert_nonoverlapping_rhythms(self, rhythms, voice):
@@ -1113,41 +1110,40 @@ class SegmentMaker(abjad.SegmentMaker):
         self._previously_alive_contexts.extend(sorted(contexts))
 
     def _call_commands(self):
-        start_time = time.time()
-        for wrapper in self.wrappers:
-            assert isinstance(wrapper, baca.CommandWrapper)
-            assert isinstance(wrapper.command, baca.Command)
-            if isinstance(wrapper.command, baca.RhythmCommand):
-                continue
-            selection = self._scope_to_leaf_selection(wrapper)
-            wrapper.command.manifests = self.manifests
-            dictionary = self._offset_to_measure_number
-            wrapper.command.offset_to_measure_number = dictionary
-            voice_name = wrapper.scope.voice_name
-            previous_segment_voice_metadata = \
-                self._get_previous_segment_voice_metadata(voice_name)
-            wrapper.command.previous_segment_voice_metadata = \
-                previous_segment_voice_metadata
-            wrapper.command.score_template = self.score_template
-            try:
-                wrapper.command(selection)
-            except:
-                print(f'Interpreting ...\n\n{format(wrapper)}\n')
-                raise
-            self._handle_mutator(wrapper)
-            if getattr(wrapper.command, 'persist', None):
-                parameter = wrapper.command.parameter
-                state = wrapper.command.state
-                assert 'name' not in state
-                state['name'] = wrapper.command.persist
-                if voice_name not in self.voice_metadata:
-                    self.voice_metadata[voice_name] = abjad.OrderedDict()
-                self.voice_metadata[voice_name][parameter] = state
-        stop_time = time.time()
-        count = int(stop_time - start_time)
-        counter = abjad.String('second').pluralize(count)
+        with abjad.Timer() as timer:
+            for wrapper in self.wrappers:
+                assert isinstance(wrapper, baca.CommandWrapper)
+                assert isinstance(wrapper.command, baca.Command)
+                if isinstance(wrapper.command, baca.RhythmCommand):
+                    continue
+                selection = self._scope_to_leaf_selection(wrapper)
+                wrapper.command.manifests = self.manifests
+                dictionary = self._offset_to_measure_number
+                wrapper.command.offset_to_measure_number = dictionary
+                voice_name = wrapper.scope.voice_name
+                previous_segment_voice_metadata = \
+                    self._get_previous_segment_voice_metadata(voice_name)
+                wrapper.command.previous_segment_voice_metadata = \
+                    previous_segment_voice_metadata
+                wrapper.command.score_template = self.score_template
+                try:
+                    wrapper.command(selection)
+                except:
+                    print(f'Interpreting ...\n\n{format(wrapper)}\n')
+                    raise
+                self._handle_mutator(wrapper)
+                if getattr(wrapper.command, 'persist', None):
+                    parameter = wrapper.command.parameter
+                    state = wrapper.command.state
+                    assert 'name' not in state
+                    state['name'] = wrapper.command.persist
+                    if voice_name not in self.voice_metadata:
+                        self.voice_metadata[voice_name] = abjad.OrderedDict()
+                    self.voice_metadata[voice_name][parameter] = state
         if self.print_timings:
-            print(f'command interpretation {count} {counter} ...')
+            count = int(timer.elapsed_time)
+            seconds = abjad.String('second').pluralize(count)
+            print(f'command interpretation {count} {seconds} ...')
 
     def _call_rhythm_commands(self):
         self._attach_metronome_marks()
