@@ -728,12 +728,14 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         with abjad.Timer() as timer:
             self.spacing(self)
-        if self.print_timings:
-            print(f'spacing time {timer.elapsed_time} seconds ...')
         if os.getenv('TRAVIS'):
             return
+        if self.print_timings:
+            count = int(timer.elapsed_time)
+            seconds = abjad.String('second').pluralize(count)
+            print(f'Spacing application {count} {seconds} ...')
         if 3 < timer.elapsed_time:
-            raise Exception(f'spacing time {total_time} seconds!')
+            raise Exception(f'spacing application {count} {seconds}!')
 
     def _assert_nonoverlapping_rhythms(self, rhythms, voice):
         previous_stop_offset = 0
@@ -1110,40 +1112,40 @@ class SegmentMaker(abjad.SegmentMaker):
         self._previously_alive_contexts.extend(sorted(contexts))
 
     def _call_commands(self):
-        with abjad.Timer() as timer:
-            for wrapper in self.wrappers:
-                assert isinstance(wrapper, baca.CommandWrapper)
-                assert isinstance(wrapper.command, baca.Command)
-                if isinstance(wrapper.command, baca.RhythmCommand):
-                    continue
-                selection = self._scope_to_leaf_selection(wrapper)
-                wrapper.command.manifests = self.manifests
-                dictionary = self._offset_to_measure_number
-                wrapper.command.offset_to_measure_number = dictionary
-                voice_name = wrapper.scope.voice_name
-                previous_segment_voice_metadata = \
-                    self._get_previous_segment_voice_metadata(voice_name)
-                wrapper.command.previous_segment_voice_metadata = \
-                    previous_segment_voice_metadata
-                wrapper.command.score_template = self.score_template
-                try:
-                    wrapper.command(selection)
-                except:
-                    print(f'Interpreting ...\n\n{format(wrapper)}\n')
-                    raise
-                self._handle_mutator(wrapper)
-                if getattr(wrapper.command, 'persist', None):
-                    parameter = wrapper.command.parameter
-                    state = wrapper.command.state
-                    assert 'name' not in state
-                    state['name'] = wrapper.command.persist
-                    if voice_name not in self.voice_metadata:
-                        self.voice_metadata[voice_name] = abjad.OrderedDict()
-                    self.voice_metadata[voice_name][parameter] = state
+        command_count = 0
+        for wrapper in self.wrappers:
+            assert isinstance(wrapper, baca.CommandWrapper)
+            assert isinstance(wrapper.command, baca.Command)
+            if isinstance(wrapper.command, baca.RhythmCommand):
+                continue
+            command_count += 1
+            selection = self._scope_to_leaf_selection(wrapper)
+            wrapper.command.manifests = self.manifests
+            dictionary = self._offset_to_measure_number
+            wrapper.command.offset_to_measure_number = dictionary
+            voice_name = wrapper.scope.voice_name
+            previous_segment_voice_metadata = \
+                self._get_previous_segment_voice_metadata(voice_name)
+            wrapper.command.previous_segment_voice_metadata = \
+                previous_segment_voice_metadata
+            wrapper.command.score_template = self.score_template
+            try:
+                wrapper.command(selection)
+            except:
+                print(f'Interpreting ...\n\n{format(wrapper)}\n')
+                raise
+            self._handle_mutator(wrapper)
+            if getattr(wrapper.command, 'persist', None):
+                parameter = wrapper.command.parameter
+                state = wrapper.command.state
+                assert 'name' not in state
+                state['name'] = wrapper.command.persist
+                if voice_name not in self.voice_metadata:
+                    self.voice_metadata[voice_name] = abjad.OrderedDict()
+                self.voice_metadata[voice_name][parameter] = state
+        commands = abjad.String('command').pluralize(command_count)
         if self.print_timings:
-            count = int(timer.elapsed_time)
-            seconds = abjad.String('second').pluralize(count)
-            print(f'command interpretation {count} {seconds} ...')
+            print(f'{command_count} total {commands} ...')
 
     def _call_rhythm_commands(self):
         self._attach_metronome_marks()
@@ -1161,7 +1163,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 if self.skips_instead_of_rests:
                     maker = rhythmos.SkipRhythmMaker()
                 else:
-                    mask = abjad.silence([0], 1, use_multimeasure_rests=True)
+                    mask = abjad.silence(
+                        [0],
+                        1,
+                        use_multimeasure_rests=True,
+                        )
                     maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
@@ -1172,7 +1178,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
-                result = self._get_stage_time_signatures(*wrapper.scope.stages)
+                result = self._get_stage_time_signatures(
+                    *wrapper.scope.stages)
                 start_offset, time_signatures = result
                 command.previous_segment_voice_metadata = \
                     previous_segment_voice_metadata
@@ -5386,7 +5393,16 @@ class SegmentMaker(abjad.SegmentMaker):
         self._make_global_skips()
         self._label_measure_indices()
         self._label_stage_numbers()
-        self._call_rhythm_commands()
+
+        with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+        #if True:
+            with abjad.Timer() as timer:
+                self._call_rhythm_commands()
+        if self.print_timings:
+            count = int(timer.elapsed_time)
+            seconds = abjad.String('second').pluralize(count)
+            print(f'Rhythm interpretation {count} {seconds} ...')
+
         self._populate_offset_to_measure_number()
         self._extend_beams()
         self._annotate_sounds_during()
@@ -5394,7 +5410,16 @@ class SegmentMaker(abjad.SegmentMaker):
         self._reapply_persistent_indicators()
         self._attach_first_appearance_score_template_defaults()
         self._apply_spacing()
-        self._call_commands()
+
+        with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+        #if True:
+            with abjad.Timer() as timer:
+                self._call_commands()
+        if self.print_timings:
+            count = int(timer.elapsed_time)
+            seconds = abjad.String('second').pluralize(count)
+            print(f'Command interpretation {count} {seconds} ...')
+
         self._shorten_long_repeat_ties()
         self._treat_untreated_persistent_wrappers()
         self._label_clock_time()
