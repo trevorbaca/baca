@@ -1692,10 +1692,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if (hasattr(command.command, '_mutates_score') and
             command.command._mutates_score()):
             self._cache = None
-            is_forbidden_to_update = self.score._is_forbidden_to_update
-            self.score._is_forbidden_to_update = False
-            self.score._update_now(offsets=True)
-            self.score._is_forbidden_to_update = is_forbidden_to_update
+            self._update_score_one_time()
 
     @staticmethod
     def _indicator_to_grob(indicator):
@@ -2476,6 +2473,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper,
                     status,
                     )
+
+    def _update_score_one_time(self):
+        is_forbidden_to_update = self.score._is_forbidden_to_update
+        self.score._is_forbidden_to_update = False
+        self.score._update_now(offsets=True)
+        self.score._is_forbidden_to_update = is_forbidden_to_update
 
     def _validate_measure_count_(self):
         if not self.validate_measure_count:
