@@ -488,6 +488,13 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def ext_pont(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'ext. pont.',
+            selector=selector,
+            )
+
+    @staticmethod
     def FB(selector='baca.pleaf(0)'):
         return baca.markup(
             'FB',

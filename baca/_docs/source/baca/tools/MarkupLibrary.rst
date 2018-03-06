@@ -69,6 +69,7 @@ Bases
       ~MarkupLibrary.divisi_2_plus_4
       ~MarkupLibrary.edition
       ~MarkupLibrary.estr_sul_pont
+      ~MarkupLibrary.ext_pont
       ~MarkupLibrary.final_markup
       ~MarkupLibrary.fluttertongue
       ~MarkupLibrary.fractional_OB
@@ -275,6 +276,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.edition
 
 .. automethod:: MarkupLibrary.estr_sul_pont
+
+.. automethod:: MarkupLibrary.ext_pont
 
 .. automethod:: MarkupLibrary.final_markup
 
