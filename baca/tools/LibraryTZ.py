@@ -52,7 +52,9 @@ class LibraryTZ(abjad.AbjadObject):
         if isinstance(tags, str):
             tags = [tags]
         if not isinstance(tags, list):
-            raise Exception(f'string or list of strings only: {tags!r}.')
+            message = f'tags must be string or list of strings'
+            message += ' (not {tags!r}).'
+            raise Exception(message)
         assert Command._are_valid_tags(tags), repr(tags)
         if isinstance(command, SuiteCommand):
             for command_ in command.commands:
@@ -67,7 +69,7 @@ class LibraryTZ(abjad.AbjadObject):
             tags_ = [abjad.Tag(_) for _ in tags]
             command._tags.extend(tags_)
             command._deactivate = deactivate
-            command._tag_measure_number = tag_measure_number
+            command.tag_measure_number = tag_measure_number
         return command
 
     @staticmethod

@@ -2,9 +2,7 @@ import abc
 import abjad
 import baca
 import typing
-from .Typing import List
 from .Typing import Selector
-from .Typing import Union
 
 
 class Command(abjad.AbjadObject):
@@ -46,7 +44,7 @@ class Command(abjad.AbjadObject):
             prototype = (abjad.Expression, MapCommand)
             assert isinstance(selector_, prototype), repr(selector_)
         self._selector: typing.Optional[abjad.Expression] = selector_
-        self._tags: List[abjad.Tag] = None
+        self._tags: typing.List[abjad.Tag] = None
         self.manifests = None
         self.offset_to_measure_number = None
         self.score_template = None
@@ -205,10 +203,14 @@ class Command(abjad.AbjadObject):
         '''
         return self._selector
 
+    # TODO: reimplement as method with leaf argument
+    # TODO: supply with all self.get_tag(leaf) functionality
+    # TODO: always return tag (never none) for in-place prepend
     @property
     def tag(self) -> typing.Optional[abjad.Tag]:
         r'''Gets tag.
         '''
+        # TODO: replace self.get_tag() functionality
         words = [str(_) for _ in self.tags]
         return abjad.Tag.from_words(words)
 
@@ -226,7 +228,7 @@ class Command(abjad.AbjadObject):
             command._tag_measure_number = argument
 
     @property
-    def tags(self) -> List[abjad.Tag]:
+    def tags(self) -> typing.List[abjad.Tag]:
         r'''Gets tags.
         '''
         assert self._are_valid_tags(self._tags)
@@ -234,11 +236,12 @@ class Command(abjad.AbjadObject):
 
     ### PUBLIC METHODS ###
 
+    # TODO: replace in favor of self.tag(leaf)
     def get_tag(self, leaf: abjad.Leaf = None) -> typing.Optional[abjad.Tag]:
         r'''Gets tag for `leaf`.
         '''
         tags = self.tags[:]
-        if self._tag_measure_number:
+        if self.tag_measure_number:
             start_offset = abjad.inspect(leaf).get_timespan().start_offset
             measure_number = self._offset_to_measure_number.get(start_offset)
             if measure_number is not None:
@@ -247,5 +250,7 @@ class Command(abjad.AbjadObject):
         if tags:
             words = [str(_) for _ in tags]
             words.sort()
-            return abjad.Tag.from_words(words)
+            tag = abjad.Tag.from_words(words)
+            return tag
+        # TODO: return empty tag (instead of none)
         return None

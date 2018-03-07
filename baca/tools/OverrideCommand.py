@@ -211,11 +211,17 @@ class OverrideCommand(Command):
         deactivate: bool = None,
         grob: str = None,
         selector: Selector = 'baca.leaves()',
+        tag_measure_number: bool = None,
         tags: typing.List = None,
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
         ) -> None:
-        Command.__init__(self, deactivate=deactivate, selector=selector)
+        Command.__init__(
+            self,
+            deactivate=deactivate,
+            selector=selector,
+            tag_measure_number=tag_measure_number,
+            )
         if after is not None:
             after = bool(after)
         self._after = after
@@ -291,11 +297,15 @@ class OverrideCommand(Command):
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag = self.get_tag(leaves[0])
+        if tag:
+            tag = tag.prepend('OC1')
+        else:
+            tag = abjad.Tag('OC1')
         abjad.attach(
             literal,
             leaves[0],
             deactivate=self.deactivate,
-            tag=self.tag.prepend('OC1'),
+            tag=tag,
             )
         if once:
             return
@@ -305,11 +315,16 @@ class OverrideCommand(Command):
             context=lilypond_type,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
+        tag = self.get_tag(leaves[-1])
+        if tag:
+            tag = tag.prepend('OC2')
+        else:
+            tag = abjad.Tag('OC2')
         abjad.attach(
             literal,
             leaves[-1],
             deactivate=self.deactivate,
-            tag=self.tag.prepend('OC2'),
+            tag=tag,
             )
 
     ### PUBLIC PROPERTIES ###
