@@ -6004,7 +6004,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK
                         %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK
                         %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #1                                                           %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK
                         %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
                         %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK
@@ -6029,7 +6029,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                 \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                     #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                     #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #1                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                         \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                 =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6147,7 +6147,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK
                         %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK
                         %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #1                                                           %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK
                         %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
                         %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK
@@ -6172,7 +6172,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                 \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                     #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                     #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #1                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                         \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                 =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6293,7 +6293,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%             \note-by-number                                                  %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%                 #2                                                           %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%                 #0                                                           %! SM27:REAPPLIED_METRONOME_MARK:SM36
-                        %@%                 #1.5                                                         %! SM27:REAPPLIED_METRONOME_MARK:SM36
+                        %@%                 #1                                                           %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%     \upright                                                                 %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%         {                                                                    %! SM27:REAPPLIED_METRONOME_MARK:SM36
                         %@%             =                                                                %! SM27:REAPPLIED_METRONOME_MARK:SM36
@@ -6318,7 +6318,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                 \note-by-number                                          %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
                                                     #2                                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
                                                     #0                                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
-                                                    #1.5                                                 %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
+                                                    #1                                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
                                         \upright                                                         %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
                                             {                                                            %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
                                                 =                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36
@@ -6426,7 +6426,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK
                         %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK
                         %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK
-                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK
+                        %@%                 #1                                                           %! SM27:EXPLICIT_METRONOME_MARK
                         %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK
                         %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK
                         %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK
@@ -6451,7 +6451,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                             \note-by-number                                  %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                                 #2                                           %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                                 #0                                           %! SM27:REDUNDANT_METRONOME_MARK
-                        %@%                                 #1.5                                         %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                                 #1                                           %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                     \upright                                                 %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                         {                                                    %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                             =                                                %! SM27:REDUNDANT_METRONOME_MARK
@@ -6476,7 +6476,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                 \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                     #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                     #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #1                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                         \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                 =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6508,7 +6508,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                             \note-by-number                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                                 #2                                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                                 #0                                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
-                                                                #1.5                                     %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                                #1                                       %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                     \upright                                             %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                         {                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                             =                                            %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
@@ -6622,7 +6622,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%             \note-by-number                                                  %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                 #2                                                           %! SM27:REDUNDANT_METRONOME_MARK
                         %@%                 #0                                                           %! SM27:REDUNDANT_METRONOME_MARK
-                        %@%                 #1.5                                                         %! SM27:REDUNDANT_METRONOME_MARK
+                        %@%                 #1                                                           %! SM27:REDUNDANT_METRONOME_MARK
                         %@%     \upright                                                                 %! SM27:REDUNDANT_METRONOME_MARK
                         %@%         {                                                                    %! SM27:REDUNDANT_METRONOME_MARK
                         %@%             =                                                                %! SM27:REDUNDANT_METRONOME_MARK
@@ -6647,7 +6647,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                                 \note-by-number                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                     #2                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                     #0                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
-                                                    #1.5                                                 %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
+                                                    #1                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                         \upright                                                         %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                             {                                                            %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR
                                                 =                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR

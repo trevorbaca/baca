@@ -293,7 +293,7 @@ class SegmentMaker(abjad.SegmentMaker):
         measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
         metronome_mark_spanner_right_broken: bool = None,
-        metronome_mark_stem_height: typing.Optional[Number] = 1.5,
+        metronome_mark_stem_height: typing.Optional[Number] = 1,
         metronome_marks: abjad.OrderedDict = None,
         print_timings: bool = None,
         range_checker: abjad.PitchRange = None,
@@ -4661,7 +4661,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%             \note-by-number                                                  %! SM27:EXPLICIT_METRONOME_MARK:SM30
                         %@%                 #2                                                           %! SM27:EXPLICIT_METRONOME_MARK:SM30
                         %@%                 #0                                                           %! SM27:EXPLICIT_METRONOME_MARK:SM30
-                        %@%                 #1.5                                                         %! SM27:EXPLICIT_METRONOME_MARK:SM30
+                        %@%                 #1                                                           %! SM27:EXPLICIT_METRONOME_MARK:SM30
                         %@%     \upright                                                                 %! SM27:EXPLICIT_METRONOME_MARK:SM30
                         %@%         {                                                                    %! SM27:EXPLICIT_METRONOME_MARK:SM30
                         %@%             =                                                                %! SM27:EXPLICIT_METRONOME_MARK:SM30
@@ -4686,7 +4686,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
                                                     #2                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
                                                     #0                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
-                                                    #1.5                                                 %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
+                                                    #1                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
                                         \upright                                                         %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
                                             {                                                            %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
                                                 =                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30
