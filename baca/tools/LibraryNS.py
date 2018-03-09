@@ -1711,6 +1711,21 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def rehearsal_mark_y_offset(
+        n: Number,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides rehearsal mark Y offset by ``n``.
+        '''
+        return OverrideCommand(
+            attribute='Y_offset',
+            value=n,
+            context='GlobalContext',
+            grob='rehearsal_mark',
+            selector=selector,
+            )
+
+    @staticmethod
     def reiterated_dynamic(
         dynamic: str,
         selector: Selector = 'baca.pheads()',
