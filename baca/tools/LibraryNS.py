@@ -31,6 +31,7 @@ from .SpannerCommand import SpannerCommand
 from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
 from .SuiteCommand import SuiteCommand
+from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number
 from .Typing import NumberPair
@@ -578,8 +579,9 @@ class LibraryNS(abjad.AbjadObject):
             systems_ = None
         else:
             systems_ = []
+            prototype = (list, SystemSpecifier)
             for system in systems:
-                assert isinstance(system, list), repr(system)
+                assert isinstance(system, prototype), repr(system)
                 systems_.append(system)
         return PageSpecifier(number=number, systems=systems_)
 
@@ -8012,4 +8014,19 @@ class LibraryNS(abjad.AbjadObject):
             context=context,
             grob='sustain_pedal_line_spanner',
             selector=selector,
+            )
+
+    @staticmethod
+    def system(
+        *distances: typing.Any,
+        measure: int = None,
+        y_offset: Number = None
+        ) -> PageSpecifier:
+        r'''Makes system specifier.
+        '''
+        distances_ = baca.sequence(distances).flatten()
+        return SystemSpecifier(
+            distances=distances_,
+            measure=measure,
+            y_offset=y_offset,
             )

@@ -100,6 +100,7 @@ Bases
       ~LibraryNS.suite
       ~LibraryNS.sustain_pedal
       ~LibraryNS.sustain_pedal_staff_padding
+      ~LibraryNS.system
       ~LibraryNS.__format__
       ~LibraryNS.__repr__
 
@@ -267,6 +268,8 @@ Class & static methods
 .. automethod:: LibraryNS.sustain_pedal
 
 .. automethod:: LibraryNS.sustain_pedal_staff_padding
+
+.. automethod:: LibraryNS.system
 
 Special methods
 ---------------

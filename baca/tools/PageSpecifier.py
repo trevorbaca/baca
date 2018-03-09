@@ -29,7 +29,10 @@ class PageSpecifier(abjad.AbjadObject):
         if systems is not None:
             y_offsets: list = []
             for system in systems:
-                y_offset = system[1]
+                if hasattr(system, 'y_offset'):
+                    y_offset = system.y_offset
+                else:
+                    y_offset = system[1]
                 if y_offset in y_offsets:
                     message = f'systems overlap at Y-offset {y_offset}.'
                     raise Exception(message)

@@ -2105,7 +2105,11 @@ class LibraryAF(abjad.AbjadObject):
         commands = abjad.OrderedDict()
         if not page_specifiers:
             return BreakMeasureMap(commands=commands)
-        first_measure_number = page_specifiers[0].systems[0][0]
+        first_system = page_specifiers[0].systems[0]
+        if hasattr(first_system, 'measure'):
+            first_measure_number = first_system.measure
+        else:
+            first_measure_number = first_system[0]
         bol_measure_numbers = []
         for i, page_specifier in enumerate(page_specifiers):
             page_number = i + 1
@@ -2115,11 +2119,20 @@ class LibraryAF(abjad.AbjadObject):
                     message += f' is not {page_number}.'
                     raise Exception(message)
             for j, system in enumerate(page_specifier.systems):
-                measure_number = system[0]
+                if hasattr(system, 'measure'):
+                    measure_number = system.measure
+                else:
+                    measure_number = system[0]
                 bol_measure_numbers.append(measure_number)
                 skip_index = measure_number - first_measure_number
-                y_offset = system[1]
-                alignment_distances = system[2]
+                if hasattr(system, 'y_offset'):
+                    y_offset = system.y_offset
+                else:
+                    y_offset = system[1]
+                if hasattr(system, 'distances'):
+                    alignment_distances = system.distances
+                else:
+                    alignment_distances = system[2]
                 selector = f'baca.skip({skip_index})'
                 if j == 0:
                     break_ = abjad.LilyPondLiteral(r'\pageBreak')
