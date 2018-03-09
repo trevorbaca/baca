@@ -19,12 +19,15 @@ Bases
 
    .. autosummary::
 
+      ~PageSpecifier.number
       ~PageSpecifier.systems
       ~PageSpecifier.__format__
       ~PageSpecifier.__repr__
 
 Read-only properties
 --------------------
+
+.. autoattribute:: PageSpecifier.number
 
 .. autoattribute:: PageSpecifier.systems
 

@@ -2045,7 +2045,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def breaks(*pages: typing.Any) -> BreakMeasureMap:
+    def breaks(*page_specifiers: typing.Any) -> BreakMeasureMap:
         r'''Makes breaks.
 
         ..  container:: example
@@ -2059,6 +2059,25 @@ class LibraryAF(abjad.AbjadObject):
             ...         [23, 20, [15, 20, 20]],
             ...         ),
             ...     )
+
+        ..  container:: example
+
+            Raises exception on misnumbered pages:
+
+            >>> breaks = baca.breaks(
+            ...     baca.page(
+            ...         [1, 20, [15, 20, 20]], 
+            ...         [13, 140, [15, 20, 20]], 
+            ...         number=1,
+            ...         ),
+            ...     baca.page(
+            ...         [23, 20, [15, 20, 20]],
+            ...         number=9,
+            ...         ),
+            ...     )
+            Traceback (most recent call last):
+                ... 
+            Exception: page number (9) is not 2.
 
         ..  container:: example
 
@@ -2084,19 +2103,25 @@ class LibraryAF(abjad.AbjadObject):
         from baca.tools.LibraryGM import LibraryGM
         from baca.tools.LibraryNS import LibraryNS
         commands = abjad.OrderedDict()
-        if not pages:
+        if not page_specifiers:
             return BreakMeasureMap(commands=commands)
-        first_measure_number = pages[0].systems[0][0]
+        first_measure_number = page_specifiers[0].systems[0][0]
         bol_measure_numbers = []
-        for page in pages:
-            for i, system in enumerate(page.systems):
+        for i, page_specifier in enumerate(page_specifiers):
+            page_number = i + 1
+            if page_specifier.number is not None:
+                if page_specifier.number != page_number:
+                    message = f'page number ({page_specifier.number})'
+                    message += f' is not {page_number}.'
+                    raise Exception(message)
+            for j, system in enumerate(page_specifier.systems):
                 measure_number = system[0]
                 bol_measure_numbers.append(measure_number)
                 skip_index = measure_number - first_measure_number
                 y_offset = system[1]
                 alignment_distances = system[2]
                 selector = f'baca.skip({skip_index})'
-                if i == 0:
+                if j == 0:
                     break_ = abjad.LilyPondLiteral(r'\pageBreak')
                 else:
                     break_ = abjad.LilyPondLiteral(r'\break')

@@ -555,7 +555,10 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def page(*systems: typing.Any) -> PageSpecifier:
+    def page(
+        *systems: typing.Any,
+        number: int = None
+        ) -> PageSpecifier:
         r'''Makes page specifier.
 
         ..  container:: example
@@ -578,7 +581,7 @@ class LibraryNS(abjad.AbjadObject):
             for system in systems:
                 assert isinstance(system, list), repr(system)
                 systems_.append(system)
-        return PageSpecifier(systems=systems_)
+        return PageSpecifier(number=number, systems=systems_)
 
     @staticmethod
     def page_break(
