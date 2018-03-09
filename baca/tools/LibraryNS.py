@@ -555,10 +555,30 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def page(*arguments: typing.Any) -> PageSpecifier:
+    def page(*systems: typing.Any) -> PageSpecifier:
         r'''Makes page specifier.
+
+        ..  container:: example
+            
+            Raises exception when systems overlap at Y-offset:
+
+            >>> baca.page(
+            ...     [1, 60, (20, 20,)],
+            ...     [4, 60, (20, 20,)],
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception: systems overlap at Y-offset 60.
+
         '''
-        return PageSpecifier(items=arguments)
+        if systems is None:
+            systems_ = None
+        else:
+            systems_ = []
+            for system in systems:
+                assert isinstance(system, list), repr(system)
+                systems_.append(system)
+        return PageSpecifier(systems=systems_)
 
     @staticmethod
     def page_break(

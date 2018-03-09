@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from .Command import Command
+from .LBSD import LBSD
 
 
 class BreakMeasureMap(abjad.AbjadObject):
@@ -12,11 +13,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-        ...     breaks=baca.BreakMeasureMap([
-        ...         baca.line_break(baca.skip(0)),
-        ...         baca.lbsd(100, [30, 30], baca.skip(1)),
-        ...         baca.line_break(baca.skip(1)),
-        ...         ]),
+        ...     breaks=baca.breaks(baca.page([1, 0, (10, 20,)])),
         ...     )
 
         >>> maker(
@@ -40,19 +37,18 @@ class BreakMeasureMap(abjad.AbjadObject):
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \autoPageBreaksOff                                                           %! BMM1:BREAK
                         \noBreak                                                                     %! BMM2:BREAK
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
+                        #'((Y-offset . 0) (alignment-distances . (10 20)))                           %! IC:BREAK
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \pageBreak                                                                   %! IC:BREAK
                         s1 * 1/2
-                        \break                                                                       %! IC:BREAK
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \noBreak                                                                     %! BMM2:BREAK
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! IC:BREAK
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
-                        \break                                                                       %! IC:BREAK
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \noBreak                                                                     %! BMM2:BREAK
@@ -321,28 +317,28 @@ class BreakMeasureMap(abjad.AbjadObject):
         self._bol_measure_numbers = []
         self._deactivate = deactivate
         if commands is not None:
-            commands_ = []
-            for command in commands:
-                command_ = abjad.new(
-                    command,
-                    deactivate=self.deactivate,
-                    tags=self.tags,
-                    )
-                commands_.append(command_)
+            commands_ = abjad.OrderedDict()
+            for measure_number, list_ in commands.items():
+                commands_[measure_number] = []
+                for command in list_:
+                    command_ = abjad.new(
+                        command,
+                        deactivate=self.deactivate,
+                        tags=self.tags,
+                        )
+                    commands_[measure_number].append(command_)
             commands = commands_
-            commands = tuple(commands)
         self._commands = commands
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, context=None):
+    def __call__(self, context=None) -> None:
         r'''Calls map on `context`.
-
-        Returns none.
         '''
         if context is None:
             return
         skips = baca.select(context).skips()
+        measure_count = len(skips)
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
         abjad.attach(
             literal,
@@ -351,7 +347,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             tag=self.tag.prepend('BMM1'),
             )
         for skip in skips:
-            if not abjad.inspect(skip).has_indicator(baca.LBSD):
+            if not abjad.inspect(skip).has_indicator(LBSD):
                 literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
                 abjad.attach(
                     literal,
@@ -359,8 +355,13 @@ class BreakMeasureMap(abjad.AbjadObject):
                     deactivate=self.deactivate,
                     tag=self.tag.prepend('BMM2'),
                     )
-        for command in self.commands:
-            command(context)
+        for measure_number, commands in self.commands.items():
+            if measure_count < measure_number:
+                message = f'score contains only {measure_count} measures'
+                message += f' (not {measure_number}).'
+                raise Exception(message)
+            for command in commands:
+                command(context)
 
     ### PUBLIC PROPERTIES ###
 
@@ -373,38 +374,8 @@ class BreakMeasureMap(abjad.AbjadObject):
         return  self._bol_measure_numbers
 
     @property
-    def commands(self) -> typing.List[Command]:
+    def commands(self) -> abjad.OrderedDict:
         r'''Gets commands.
-
-        ..  container:: example
-
-            >>> breaks = baca.BreakMeasureMap([
-            ...     baca.line_break(baca.skip(0)),
-            ...     baca.page_break(baca.skip(1)),
-            ...     ])
-
-            >>> for command in breaks.commands:
-            ...     abjad.f(command)
-            ...
-            baca.IndicatorCommand(
-                indicators=abjad.CyclicTuple(
-                    [
-                        abjad.LilyPondLiteral('\\break', format_slot='after', ),
-                        ]
-                    ),
-                selector=baca.skip(0),
-                tags=['BREAK'],
-                )
-            baca.IndicatorCommand(
-                indicators=abjad.CyclicTuple(
-                    [
-                        abjad.LilyPondLiteral('\\pageBreak', format_slot='after', ),
-                        ]
-                    ),
-                selector=baca.skip(1),
-                tags=['BREAK'],
-                )
-
         '''
         return self._commands
 

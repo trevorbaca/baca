@@ -1138,7 +1138,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self.voice_metadata[voice_name][parameter] = state
         commands = abjad.String('command').pluralize(command_count)
         if self.environment != 'docs':
-            print(f' Found {command_count} nonrhythm {commands} ...')
+            print(f'  Found {command_count} nonrhythm {commands} ...')
 
     def _call_rhythm_commands(self):
         self._attach_metronome_marks()
@@ -1198,7 +1198,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._apply_first_and_last_ties(voice)
         commands = abjad.String('command').pluralize(command_count)
         if self.environment != 'docs':
-            print(f' Found {command_count} rhythm {commands} ...')
+            print(f'  Found {command_count} rhythm {commands} ...')
 
     def _check_all_music_in_part_containers(self):
         name = 'all_music_in_part_containers'
@@ -1343,7 +1343,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self.metadata.sort(recurse=True)
         for key, value in self.metadata.items():
             if not bool(value):
-                raise Exception(key, value)
+                message = f'{key} metadata should be nonempty'
+                message += f' (not {value!r}).'
+                raise Exception(message)
 
     def _collect_persistent_indicators(self):
         result = abjad.OrderedDict()
@@ -5400,7 +5402,7 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if self.environment != 'docs':
-            print(f' Rhythm command time {count} {seconds} ...')
+            print(f'  Rhythm command time {count} {seconds} ...')
 
         self._populate_offset_to_measure_number()
         self._extend_beams()
@@ -5417,7 +5419,7 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if self.environment != 'docs':
-            print(f' Nonrhythm command time {count} {seconds} ...')
+            print(f'  Nonrhythm command time {count} {seconds} ...')
 
         self._shorten_long_repeat_ties()
         self._treat_untreated_persistent_wrappers()

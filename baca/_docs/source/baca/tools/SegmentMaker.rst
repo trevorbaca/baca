@@ -53,7 +53,6 @@ Bases
       ~SegmentMaker.metronome_marks
       ~SegmentMaker.midi
       ~SegmentMaker.previous_metadata
-      ~SegmentMaker.print_timings
       ~SegmentMaker.range_checker
       ~SegmentMaker.rehearsal_mark
       ~SegmentMaker.run
@@ -147,8 +146,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.midi
 
 .. autoattribute:: SegmentMaker.previous_metadata
-
-.. autoattribute:: SegmentMaker.print_timings
 
 .. autoattribute:: SegmentMaker.range_checker
 

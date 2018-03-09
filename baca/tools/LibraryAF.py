@@ -2060,21 +2060,41 @@ class LibraryAF(abjad.AbjadObject):
             ...         ),
             ...     )
 
+        ..  container:: example
+
+            Raises exception on too few measures:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.StringTrioScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
+            ...     breaks=baca.breaks(baca.page([99, 0, (10, 20,)])),
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.make_even_runs(),
+            ...     baca.pitch('E4'),
+            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: score contains only 5 measures (not 99).
+
         '''
         from baca.tools.LibraryGM import LibraryGM
         from baca.tools.LibraryNS import LibraryNS
-        commands: typing.List = []
+        commands = abjad.OrderedDict()
         if not pages:
             return BreakMeasureMap(commands=commands)
-        first_measure_number = pages[0].items[0][0]
+        first_measure_number = pages[0].systems[0][0]
         bol_measure_numbers = []
         for page in pages:
-            for i, item in enumerate(page.items):
-                measure_number = item[0]
+            for i, system in enumerate(page.systems):
+                measure_number = system[0]
                 bol_measure_numbers.append(measure_number)
                 skip_index = measure_number - first_measure_number
-                y_offset = item[1]
-                alignment_distances = item[2]
+                y_offset = system[1]
+                alignment_distances = system[2]
                 selector = f'baca.skip({skip_index})'
                 if i == 0:
                     break_ = abjad.LilyPondLiteral(r'\pageBreak')
@@ -2084,13 +2104,13 @@ class LibraryAF(abjad.AbjadObject):
                     indicators=[break_],
                     selector=selector,
                     )
-                commands.append(command)
                 lbsd = LibraryGM.lbsd(y_offset, alignment_distances, selector)
-                commands.append(lbsd)
+                commands[measure_number] = [command, lbsd]
         breaks = BreakMeasureMap(commands=commands)
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 
+    # TODO: remove in favor of baca.not_segment()
     @staticmethod
     def build(command: Command) -> Command:
         r'''Tags ``command`` with ``-SEGMENT``.
