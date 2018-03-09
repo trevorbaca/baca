@@ -1145,11 +1145,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 self.voice_metadata[voice_name][parameter] = state
         commands = abjad.String('command').pluralize(command_count)
         if self.print_timings:
-            print(f'{command_count} total {commands} ...')
+            print(f'Found {command_count} nonrhythm {commands} ...')
 
     def _call_rhythm_commands(self):
         self._attach_metronome_marks()
         self._attach_fermatas()
+        command_count = 0
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             assert not len(voice), repr(voice)
             voice_metadata = self._voice_metadata.get(
@@ -1194,6 +1195,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     assert 'name' not in state
                     state['name'] = command.persist
                     voice_metadata[command.parameter] = command.state
+                command_count += 1
             if bool(voice_metadata):
                 self._voice_metadata[voice.name] = voice_metadata
             rhythms.sort()
@@ -1201,6 +1203,9 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms = self._intercalate_silences(rhythms)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
+        commands = abjad.String('command').pluralize(command_count)
+        if self.print_timings:
+            print(f'Found {command_count} rhythm {commands} ...')
 
     def _check_all_music_in_part_containers(self):
         name = 'all_music_in_part_containers'
@@ -5408,7 +5413,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.print_timings:
             count = int(timer.elapsed_time)
             seconds = abjad.String('second').pluralize(count)
-            print(f'Rhythm interpretation {count} {seconds} ...')
+            print(f'Rhythm command time {count} {seconds} ...')
 
         self._populate_offset_to_measure_number()
         self._extend_beams()
@@ -5425,7 +5430,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.print_timings:
             count = int(timer.elapsed_time)
             seconds = abjad.String('second').pluralize(count)
-            print(f'Command interpretation {count} {seconds} ...')
+            print(f'Nonrhythm command time {count} {seconds} ...')
 
         self._shorten_long_repeat_ties()
         self._treat_untreated_persistent_wrappers()
