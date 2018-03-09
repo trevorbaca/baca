@@ -45,6 +45,7 @@ Bases
       ~LibraryNS.register
       ~LibraryNS.rehearsal_mark
       ~LibraryNS.rehearsal_mark_extra_offset
+      ~LibraryNS.rehearsal_mark_y_offset
       ~LibraryNS.reiterated_dynamic
       ~LibraryNS.repeat_tie_from
       ~LibraryNS.repeat_tie_repeat_pitches
@@ -156,6 +157,8 @@ Class & static methods
 .. automethod:: LibraryNS.rehearsal_mark
 
 .. automethod:: LibraryNS.rehearsal_mark_extra_offset
+
+.. automethod:: LibraryNS.rehearsal_mark_y_offset
 
 .. automethod:: LibraryNS.reiterated_dynamic
 

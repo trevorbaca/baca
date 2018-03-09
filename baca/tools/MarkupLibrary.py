@@ -281,7 +281,7 @@ class MarkupLibrary(abjad.AbjadObject):
     @staticmethod
     def _make_instrument_name_markup(string, space, column=True):
         if isinstance(string, str):
-            parts = string.split()
+            parts = [string]
         elif isinstance(string, list):
             parts = string
         else:
@@ -586,11 +586,7 @@ class MarkupLibrary(abjad.AbjadObject):
                 \markup {
                     \hcenter-in
                         #16
-                        \center-column
-                            {
-                                Eng.
-                                horn
-                            }
+                        "Eng. horn"
                     }
 
         ..  container:: example
@@ -610,11 +606,7 @@ class MarkupLibrary(abjad.AbjadObject):
                 \markup {
                     \hcenter-in
                         #16
-                        \line
-                            {
-                                Violin
-                                1
-                            }
+                        "Violin 1"
                     }
 
         Centers markup horizontally in 16 spaces.
@@ -1203,11 +1195,7 @@ class MarkupLibrary(abjad.AbjadObject):
                 \markup {
                     \hcenter-in
                         #10
-                        \center-column
-                            {
-                                Eng.
-                                hn.
-                            }
+                        "Eng. hn."
                     }
 
         ..  container:: example
@@ -1227,11 +1215,7 @@ class MarkupLibrary(abjad.AbjadObject):
                 \markup {
                     \hcenter-in
                         #10
-                        \line
-                            {
-                                Vn.
-                                1
-                            }
+                        "Vn. 1"
                     }
 
         Centers markup horizontally in 10 spaces.
