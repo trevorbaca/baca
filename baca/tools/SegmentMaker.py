@@ -172,7 +172,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_midi',
         '_offset_to_measure_number',
         '_previously_alive_contexts',
-        '_print_timings',
         '_range_checker',
         '_rehearsal_mark',
         '_score',
@@ -295,7 +294,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_mark_spanner_right_broken: bool = None,
         metronome_mark_stem_height: typing.Optional[Number] = 1,
         metronome_marks: abjad.OrderedDict = None,
-        print_timings: bool = None,
         range_checker: abjad.PitchRange = None,
         rehearsal_mark: str = None,
         score_template: ScoreTemplate = None,
@@ -356,7 +354,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._midi: bool = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
-        self._print_timings: bool = print_timings
         self._range_checker: abjad.PitchRange = range_checker
         self._rehearsal_mark: str = rehearsal_mark
         self._score_template: ScoreTemplate = score_template
@@ -730,10 +727,6 @@ class SegmentMaker(abjad.SegmentMaker):
             self.spacing(self)
         if os.getenv('TRAVIS'):
             return
-        if self.print_timings:
-            count = int(timer.elapsed_time)
-            seconds = abjad.String('second').pluralize(count)
-            print(f'Spacing application {count} {seconds} ...')
         if 3 < timer.elapsed_time:
             raise Exception(f'spacing application {count} {seconds}!')
 
@@ -1144,8 +1137,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     self.voice_metadata[voice_name] = abjad.OrderedDict()
                 self.voice_metadata[voice_name][parameter] = state
         commands = abjad.String('command').pluralize(command_count)
-        if self.print_timings:
-            print(f'Found {command_count} nonrhythm {commands} ...')
+        if self.environment != 'docs':
+            print(f' Found {command_count} nonrhythm {commands} ...')
 
     def _call_rhythm_commands(self):
         self._attach_metronome_marks()
@@ -1204,8 +1197,8 @@ class SegmentMaker(abjad.SegmentMaker):
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
         commands = abjad.String('command').pluralize(command_count)
-        if self.print_timings:
-            print(f'Found {command_count} rhythm {commands} ...')
+        if self.environment != 'docs':
+            print(f' Found {command_count} rhythm {commands} ...')
 
     def _check_all_music_in_part_containers(self):
         name = 'all_music_in_part_containers'
@@ -4825,12 +4818,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._previous_metadata
 
     @property
-    def print_timings(self) -> typing.Optional[bool]:
-        r'''Is true when segment prints interpreter timings.
-        '''
-        return self._print_timings
-
-    @property
     def range_checker(self) -> typing.Optional[abjad.PitchRange]:
         r'''Gets range checker.
         '''
@@ -5410,10 +5397,10 @@ class SegmentMaker(abjad.SegmentMaker):
         #if True:
             with abjad.Timer() as timer:
                 self._call_rhythm_commands()
-        if self.print_timings:
-            count = int(timer.elapsed_time)
-            seconds = abjad.String('second').pluralize(count)
-            print(f'Rhythm command time {count} {seconds} ...')
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            print(f' Rhythm command time {count} {seconds} ...')
 
         self._populate_offset_to_measure_number()
         self._extend_beams()
@@ -5427,10 +5414,10 @@ class SegmentMaker(abjad.SegmentMaker):
         #if True:
             with abjad.Timer() as timer:
                 self._call_commands()
-        if self.print_timings:
-            count = int(timer.elapsed_time)
-            seconds = abjad.String('second').pluralize(count)
-            print(f'Nonrhythm command time {count} {seconds} ...')
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            print(f' Nonrhythm command time {count} {seconds} ...')
 
         self._shorten_long_repeat_ties()
         self._treat_untreated_persistent_wrappers()
