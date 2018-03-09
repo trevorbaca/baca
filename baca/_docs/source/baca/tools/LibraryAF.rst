@@ -37,7 +37,6 @@ Bases
       ~LibraryAF.beam_positions
       ~LibraryAF.beam_runs
       ~LibraryAF.breaks
-      ~LibraryAF.build
       ~LibraryAF.center_to_octave
       ~LibraryAF.clef
       ~LibraryAF.clef_extra_offset
@@ -117,8 +116,6 @@ Class & static methods
 .. automethod:: LibraryAF.beam_runs
 
 .. automethod:: LibraryAF.breaks
-
-.. automethod:: LibraryAF.build
 
 .. automethod:: LibraryAF.center_to_octave
 

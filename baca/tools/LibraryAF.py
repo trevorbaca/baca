@@ -2110,17 +2110,6 @@ class LibraryAF(abjad.AbjadObject):
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 
-    # TODO: remove in favor of baca.not_segment()
-    @staticmethod
-    def build(command: Command) -> Command:
-        r'''Tags ``command`` with ``-SEGMENT``.
-        '''
-        from baca.tools.LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
-            '-SEGMENT',
-            command,
-            )
-
     @staticmethod
     def center_to_octave(
         n: int,
