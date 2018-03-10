@@ -1596,6 +1596,20 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_spanner_y_offset(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides text spanner Y-offset.
+        '''
+        return OverrideCommand(
+            attribute='Y_offset',
+            value=n,
+            grob='text_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def tie(
         repeat: bool = False,
         selector: Selector = 'baca.qrun(0)',
