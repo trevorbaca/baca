@@ -947,28 +947,6 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def bar_extent_zero(
-        selector: Selector = 'baca.leaves()',
-        ) -> SuiteCommand:
-        r'''Makes bar-extent zero suite.
-        '''
-        return SuiteCommand(
-            [
-                LibraryAF.bar_extent(
-                    (0, 0),
-                    after=True,
-                    selector='baca.leaves()',
-                    ),
-                LibraryAF.bar_extent(
-                    (0, 0),
-                    after=True,
-                    selector='baca.leaf(-1)',
-                    ),
-                ],
-            selector=selector,
-            )
-
-    @staticmethod
     def bar_extent_persistent(
         pair: NumberPair = None,
         selector: Selector = 'baca.leaf(0)',
@@ -1111,6 +1089,28 @@ class LibraryAF(abjad.AbjadObject):
             )
         return IndicatorCommand(
             indicators=[override],
+            selector=selector,
+            )
+
+    @staticmethod
+    def bar_extent_zero(
+        selector: Selector = 'baca.leaves()',
+        ) -> SuiteCommand:
+        r'''Makes bar-extent zero suite.
+        '''
+        return SuiteCommand(
+            [
+                LibraryAF.bar_extent(
+                    (0, 0),
+                    after=True,
+                    selector='baca.leaves()',
+                    ),
+                LibraryAF.bar_extent(
+                    (0, 0),
+                    after=True,
+                    selector='baca.leaf(-1)',
+                    ),
+                ],
             selector=selector,
             )
 
@@ -4015,6 +4015,341 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dls_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides dynamic line spanner padding on leaves.
+        '''
+        return OverrideCommand(
+            attribute='padding',
+            value=str(n),
+            grob='dynamic_line_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
+    def dls_staff_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides dynamic line spanner staff padding on leaves.
+
+        ..  container:: example
+
+            Overrides dynamic line spanner staff padding on all leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dls_staff_padding(4),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f                                                                       %! HC1
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                \f                                                                       %! HC1
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                \p                                                                       %! HC1
+                                r4
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Overrides dynamic line spanner staff padding on leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dls_staff_padding(4, baca.tuplet(1)),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f                                                                       %! HC1
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
+                                fs''16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                \f                                                                       %! HC1
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            }
+                            \times 4/5 {
+                                a'16
+                                \p                                                                       %! HC1
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return OverrideCommand(
+            attribute='staff_padding',
+            value=str(n),
+            grob='dynamic_line_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
+    def dls_up(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Up-overrides dynamic line spanner direction.
+
+        ..  container:: example
+
+            Up-overrides dynamic line spanner direction on all leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dls_up(),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override DynamicLineSpanner.direction = #up                             %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f                                                                       %! HC1
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                \f                                                                       %! HC1
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                \p                                                                       %! HC1
+                                r4
+                                \revert DynamicLineSpanner.direction                                     %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Up-overrides dynamic line spanner direction on leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dls_up(baca.tuplet(1)),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f                                                                       %! HC1
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override DynamicLineSpanner.direction = #up                             %! OC1
+                                fs''16
+                                \<                                                                       %! HC1
+                                \p                                                                       %! HC1
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                \f                                                                       %! HC1
+                                ]
+                                \revert DynamicLineSpanner.direction                                     %! OC2
+                            }
+                            \times 4/5 {
+                                a'16
+                                \p                                                                       %! HC1
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return OverrideCommand(
+            attribute='direction',
+            value=abjad.Up,
+            grob='dynamic_line_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def double_tonguing(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
@@ -4634,341 +4969,6 @@ class LibraryAF(abjad.AbjadObject):
         return IndicatorCommand(
             context='Voice',
             indicators=[indicator],
-            selector=selector,
-            )
-
-    @staticmethod
-    def dls_padding(
-        n: Number,
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Overrides dynamic line spanner padding on leaves.
-        '''
-        return OverrideCommand(
-            attribute='padding',
-            value=str(n),
-            grob='dynamic_line_spanner',
-            selector=selector,
-            )
-
-    @staticmethod
-    def dls_staff_padding(
-        n: Number,
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Overrides dynamic line spanner staff padding on leaves.
-
-        ..  container:: example
-
-            Overrides dynamic line spanner staff padding on all leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dls_staff_padding(4),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                \f                                                                       %! HC1
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                \f                                                                       %! HC1
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                \p                                                                       %! HC1
-                                r4
-                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Overrides dynamic line spanner staff padding on leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dls_staff_padding(4, baca.tuplet(1)),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                \f                                                                       %! HC1
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
-                                fs''16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                \f                                                                       %! HC1
-                                ]
-                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            }
-                            \times 4/5 {
-                                a'16
-                                \p                                                                       %! HC1
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='staff_padding',
-            value=str(n),
-            grob='dynamic_line_spanner',
-            selector=selector,
-            )
-
-    @staticmethod
-    def dls_up(
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Up-overrides dynamic line spanner direction.
-
-        ..  container:: example
-
-            Up-overrides dynamic line spanner direction on all leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dls_up(),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override DynamicLineSpanner.direction = #up                             %! OC1
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                \f                                                                       %! HC1
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                \f                                                                       %! HC1
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                \p                                                                       %! HC1
-                                r4
-                                \revert DynamicLineSpanner.direction                                     %! OC2
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Up-overrides dynamic line spanner direction on leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dls_up(baca.tuplet(1)),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                \f                                                                       %! HC1
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override DynamicLineSpanner.direction = #up                             %! OC1
-                                fs''16
-                                \<                                                                       %! HC1
-                                \p                                                                       %! HC1
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                \f                                                                       %! HC1
-                                ]
-                                \revert DynamicLineSpanner.direction                                     %! OC2
-                            }
-                            \times 4/5 {
-                                a'16
-                                \p                                                                       %! HC1
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='direction',
-            value=abjad.Up,
-            grob='dynamic_line_spanner',
             selector=selector,
             )
 

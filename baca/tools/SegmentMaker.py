@@ -166,7 +166,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '_margin_markups',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
-        '_metronome_mark_spanner_right_broken',
+        '_mmspanner_right_broken',
+        '_mmspanner_right_padding',
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
@@ -291,9 +292,12 @@ class SegmentMaker(abjad.SegmentMaker):
         margin_markups: abjad.OrderedDict = None,
         measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
-        metronome_mark_spanner_right_broken: bool = None,
         metronome_mark_stem_height: typing.Optional[Number] = 1,
         metronome_marks: abjad.OrderedDict = None,
+        mmspanner_right_broken: bool = None,
+        mmspanner_right_padding: typing.Union[
+            Number, typing.Tuple[Number, abjad.Tag]
+            ] = 0,
         range_checker: abjad.PitchRange = None,
         rehearsal_mark: str = None,
         score_template: ScoreTemplate = None,
@@ -346,12 +350,14 @@ class SegmentMaker(abjad.SegmentMaker):
         self._measures_per_stage: typing.List[int] = measures_per_stage
         self._metronome_mark_measure_map: MetronomeMarkMeasureMap = \
             metronome_mark_measure_map
-        self._metronome_mark_spanner_right_broken: bool = \
-            metronome_mark_spanner_right_broken
         self._metronome_mark_stem_height: typing.Optional[Number] = \
             metronome_mark_stem_height
         self._metronome_marks: abjad.OrderedDict = metronome_marks
         self._midi: bool = None
+        self._mmspanner_right_broken: bool = mmspanner_right_broken
+        self._mmspanner_right_padding: typing.Union[
+            Number, typing.Tuple[Number, abjad.Tag]
+            ] = mmspanner_right_padding
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
         self._range_checker: abjad.PitchRange = range_checker
@@ -1019,21 +1025,39 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_metronome_marks(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
+        if isinstance(self.mmspanner_right_padding, tuple):
+            right_padding, tag = self.mmspanner_right_padding
+        else:
+            right_padding, tag, = self.mmspanner_right_padding, None
+        if right_padding is not None:
+            assert isinstance(right_padding, (int, float)), repr(right_padding)
+        if tag is not None:
+            tag = abjad.Tag(tag).prepend('SM40')
+            string = r'\once \override'
+            string += ' TextSpanner.bound-details.right.padding'
+            string += rf' = {right_padding}'
+            literal = abjad.LilyPondLiteral(string)
+            abjad.attach(
+                literal,
+                skips[0],
+                tag=tag,
+                )
+            right_padding = None
         spanner = abjad.MetronomeMarkSpanner(
             left_broken_padding=0,
             left_broken_text=False,
             parenthesize=False,
-            right_padding=0,
+            right_padding=right_padding,
             stem_height=self.metronome_mark_stem_height,
             )
         tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER)
-        string = 'metronome_mark_spanner_right_broken'
+        string = 'mmspanner_right_broken'
         left_broken = self.previous_metadata.get(string)
         abjad.attach(
             spanner,
             skips,
             left_broken=left_broken,
-            right_broken=self.metronome_mark_spanner_right_broken,
+            right_broken=self.mmspanner_right_broken,
             tag=tag.prepend('SM29'),
             )
         if left_broken:
@@ -1323,9 +1347,9 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
             metadata['last_measure_is_fermata'] = True
-        if self.metronome_mark_spanner_right_broken:
-            metadata['metronome_mark_spanner_right_broken'] = \
-                self.metronome_mark_spanner_right_broken
+        if self.mmspanner_right_broken:
+            metadata['mmspanner_right_broken'] = \
+                self.mmspanner_right_broken
         metadata['persistent_indicators'] = \
             self._collect_persistent_indicators()
         if self.segment_name is not None:
@@ -4790,12 +4814,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metronome_mark_measure_map
 
     @property
-    def metronome_mark_spanner_right_broken(self) -> typing.Optional[bool]:
-        r'''Is true when metronome mark spanner is right-broken.
-        '''
-        return self._metronome_mark_spanner_right_broken
-
-    @property
     def metronome_mark_stem_height(self) -> typing.Optional[Number]:
         r'''Gets metronome mark stem height.
         '''
@@ -4812,6 +4830,22 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Is true when segment-maker outputs MIDI.
         '''
         return self._midi
+
+    @property
+    def mmspanner_right_broken(self) -> typing.Optional[bool]:
+        r'''Is true when metronome mark spanner is right-broken.
+        '''
+        return self._mmspanner_right_broken
+
+    @property
+    def mmspanner_right_padding(
+        self
+        ) -> typing.Union[
+        Number, typing.Tuple[Number, abjad.Tag],
+        ]:
+        r'''Gets metronome mark spanner right padding.
+        '''
+        return self._mmspanner_right_padding
 
     @property
     def previous_metadata(self) -> abjad.OrderedDict:

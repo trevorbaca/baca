@@ -48,10 +48,11 @@ Bases
       ~SegmentMaker.measures_per_stage
       ~SegmentMaker.metadata
       ~SegmentMaker.metronome_mark_measure_map
-      ~SegmentMaker.metronome_mark_spanner_right_broken
       ~SegmentMaker.metronome_mark_stem_height
       ~SegmentMaker.metronome_marks
       ~SegmentMaker.midi
+      ~SegmentMaker.mmspanner_right_broken
+      ~SegmentMaker.mmspanner_right_padding
       ~SegmentMaker.previous_metadata
       ~SegmentMaker.range_checker
       ~SegmentMaker.rehearsal_mark
@@ -137,13 +138,15 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.metronome_mark_measure_map
 
-.. autoattribute:: SegmentMaker.metronome_mark_spanner_right_broken
-
 .. autoattribute:: SegmentMaker.metronome_mark_stem_height
 
 .. autoattribute:: SegmentMaker.metronome_marks
 
 .. autoattribute:: SegmentMaker.midi
+
+.. autoattribute:: SegmentMaker.mmspanner_right_broken
+
+.. autoattribute:: SegmentMaker.mmspanner_right_padding
 
 .. autoattribute:: SegmentMaker.previous_metadata
 

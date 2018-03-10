@@ -1337,6 +1337,20 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_spanner_right_padding(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides text spanner right padding.
+        '''
+        return OverrideCommand(
+            attribute='bound_details__right__padding',
+            value=n,
+            grob='text_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_spanner_staff_padding(
         n: Number,
         selector: Selector = 'baca.leaves()',

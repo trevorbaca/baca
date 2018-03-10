@@ -30,6 +30,7 @@ Bases
       ~LibraryTZ.text_scripts_up
       ~LibraryTZ.text_spanner
       ~LibraryTZ.text_spanner_left_padding
+      ~LibraryTZ.text_spanner_right_padding
       ~LibraryTZ.text_spanner_staff_padding
       ~LibraryTZ.text_spanner_transparent
       ~LibraryTZ.tie
@@ -89,6 +90,8 @@ Class & static methods
 .. automethod:: LibraryTZ.text_spanner
 
 .. automethod:: LibraryTZ.text_spanner_left_padding
+
+.. automethod:: LibraryTZ.text_spanner_right_padding
 
 .. automethod:: LibraryTZ.text_spanner_staff_padding
 
