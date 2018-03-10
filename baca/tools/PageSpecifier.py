@@ -1,5 +1,6 @@
 import abjad
 import typing
+from .SystemSpecifier import SystemSpecifier
 
 
 class PageSpecifier(abjad.AbjadObject):
@@ -20,7 +21,7 @@ class PageSpecifier(abjad.AbjadObject):
     def __init__(
         self,
         number: int = None,
-        systems: typing.List[list] = None,
+        systems: typing.List[typing.Union[list, SystemSpecifier]] = None,
         ) -> None:
         if number is not None:
             assert isinstance(number, int), repr(number)
@@ -29,9 +30,9 @@ class PageSpecifier(abjad.AbjadObject):
         if systems is not None:
             y_offsets: list = []
             for system in systems:
-                if hasattr(system, 'y_offset'):
+                if isinstance(system, SystemSpecifier):
                     y_offset = system.y_offset
-                else:
+                elif isinstance(system, list):
                     y_offset = system[1]
                 if y_offset in y_offsets:
                     message = f'systems overlap at Y-offset {y_offset}.'
@@ -49,7 +50,7 @@ class PageSpecifier(abjad.AbjadObject):
         return self._number
 
     @property
-    def systems(self) -> typing.List[list]:
+    def systems(self) -> typing.List[typing.Union[list, SystemSpecifier]]:
         r'''Gets systems.
         '''
         return self._systems

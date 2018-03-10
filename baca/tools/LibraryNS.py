@@ -8021,7 +8021,7 @@ class LibraryNS(abjad.AbjadObject):
         *distances: typing.Any,
         measure: int = None,
         y_offset: Number = None
-        ) -> PageSpecifier:
+        ) -> SystemSpecifier:
         r'''Makes system specifier.
         '''
         distances_ = baca.sequence(distances).flatten()

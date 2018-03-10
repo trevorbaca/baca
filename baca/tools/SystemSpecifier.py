@@ -30,7 +30,10 @@ class SystemSpecifier(abjad.AbjadObject):
             assert isinstance(distances, collections.Iterable), repr(distances)
             for distance in distances:
                 assert isinstance(distance, (int, float)), repr(distance)
-        self._distances = distances
+            distances_ = list(distances)
+        else:
+            distances_ = None
+        self._distances = distances_
         if measure is not None:
             assert isinstance(measure, int), repr(measure)
         self._measure = measure

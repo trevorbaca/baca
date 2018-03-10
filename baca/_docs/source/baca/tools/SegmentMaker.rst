@@ -42,6 +42,7 @@ Bases
       ~SegmentMaker.ignore_unregistered_pitches
       ~SegmentMaker.instruments
       ~SegmentMaker.last_segment
+      ~SegmentMaker.magnify_staves
       ~SegmentMaker.manifests
       ~SegmentMaker.margin_markups
       ~SegmentMaker.measure_count
@@ -125,6 +126,8 @@ Read-only properties
 .. autoattribute:: SegmentMaker.instruments
 
 .. autoattribute:: SegmentMaker.last_segment
+
+.. autoattribute:: SegmentMaker.magnify_staves
 
 .. autoattribute:: SegmentMaker.manifests
 

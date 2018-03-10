@@ -163,6 +163,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_instruments',
         '_last_measure_is_fermata',
         '_last_segment',
+        '_magnify_staves',
         '_margin_markups',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
@@ -289,6 +290,10 @@ class SegmentMaker(abjad.SegmentMaker):
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
         breaks: BreakMeasureMap = None,
+        magnify_staves: typing.Union[
+            abjad.Multiplier,
+            typing.Tuple[abjad.Multiplier, abjad.Tag],
+            ] = None,
         margin_markups: abjad.OrderedDict = None,
         measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
@@ -296,7 +301,8 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_marks: abjad.OrderedDict = None,
         mmspanner_right_broken: bool = None,
         mmspanner_right_padding: typing.Union[
-            Number, typing.Tuple[Number, abjad.Tag]
+            Number,
+            typing.Tuple[Number, abjad.Tag]
             ] = 0,
         range_checker: abjad.PitchRange = None,
         rehearsal_mark: str = None,
@@ -344,6 +350,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._last_measure_is_fermata = False
         self._last_segment: bool = last_segment
         self._breaks: BreakMeasureMap = breaks
+        self._magnify_staves = magnify_staves
         self._margin_markups: abjad.OrderedDict = margin_markups
         if measures_per_stage is True:
             measures_per_stage = len(time_signatures) * [1]
@@ -1916,6 +1923,27 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 deactivate=True,
                 tag=tag.prepend('SM3'),
+                )
+
+    def _magnify_staves_(self):
+        if self.magnify_staves is None:
+            return
+        if isinstance(self.magnify_staves, tuple):
+            multiplier, tag = self.magnify_staves
+        else:
+            multiplier, tag = self.magnify_staves, None
+        multiplier = abjad.Multiplier(multiplier)
+        numerator, denominator = multiplier.pair
+        string = rf'\magnifyStaff #{numerator}/{denominator}'
+        tag = abjad.Tag(tag).prepend('SM41')
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            first_leaf = abjad.inspect(staff).get_leaf(0)
+            assert first_leaf is not None
+            literal = abjad.LilyPondLiteral(string)
+            abjad.attach(
+                literal,
+                first_leaf,
+                tag=tag,
                 )
 
     def _make_global_skips(self):
@@ -4449,6 +4477,15 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._last_segment
 
     @property
+    def magnify_staves(self) -> typing.Union[
+        abjad.Multiplier,
+        typing.Tuple[abjad.Multiplier, abjad.Tag],
+        ]:
+        r'''Gets staff magnification.
+        '''
+        return self._magnify_staves
+
+    @property
     def manifests(self) -> abjad.OrderedDict:
         r'''Gets manifests.
         '''
@@ -5470,6 +5507,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
         self._remove_redundant_time_signatures()
+        self._magnify_staves_()
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_breaks()
