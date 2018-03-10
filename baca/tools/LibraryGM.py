@@ -634,6 +634,19 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def hairpin_stencil_false(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides hairpin stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            value=False,
+            grob='hairpin',
+            selector=selector,
+            )
+
+    @staticmethod
     def hairpin_transparent(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:

@@ -5128,6 +5128,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dynamic_text_stencil_false(
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides dynamic text stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            value=False,
+            grob='dynamic_text',
+            selector=selector,
+            )
+
+    @staticmethod
     def dynamic_text_transparent(
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:

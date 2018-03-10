@@ -32,7 +32,9 @@ Bases
       ~LibraryTZ.text_spanner_left_padding
       ~LibraryTZ.text_spanner_right_padding
       ~LibraryTZ.text_spanner_staff_padding
+      ~LibraryTZ.text_spanner_stencil_false
       ~LibraryTZ.text_spanner_transparent
+      ~LibraryTZ.text_spanner_y_offset
       ~LibraryTZ.tie
       ~LibraryTZ.tie_from
       ~LibraryTZ.tie_repeat_pitches
@@ -95,7 +97,11 @@ Class & static methods
 
 .. automethod:: LibraryTZ.text_spanner_staff_padding
 
+.. automethod:: LibraryTZ.text_spanner_stencil_false
+
 .. automethod:: LibraryTZ.text_spanner_transparent
+
+.. automethod:: LibraryTZ.text_spanner_y_offset
 
 .. automethod:: LibraryTZ.tie
 

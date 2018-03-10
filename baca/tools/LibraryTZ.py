@@ -1583,6 +1583,19 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_spanner_stencil_false(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides text spanner stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            value=False,
+            grob='text_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_spanner_transparent(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:

@@ -61,6 +61,7 @@ Bases
       ~LibraryAF.down_bows
       ~LibraryAF.dynamic
       ~LibraryAF.dynamic_text_extra_offset
+      ~LibraryAF.dynamic_text_stencil_false
       ~LibraryAF.dynamic_text_transparent
       ~LibraryAF.dynamic_text_x_extent_zero
       ~LibraryAF.dynamic_text_x_offset
@@ -164,6 +165,8 @@ Class & static methods
 .. automethod:: LibraryAF.dynamic
 
 .. automethod:: LibraryAF.dynamic_text_extra_offset
+
+.. automethod:: LibraryAF.dynamic_text_stencil_false
 
 .. automethod:: LibraryAF.dynamic_text_transparent
 
