@@ -14,10 +14,11 @@ before_install:
     - git clone https://github.com/Abjad/abjad.git;
     - cd abjad; git checkout trevor/dev; pip install -e .[development]
     - echo `git branch`
+    - cd ..
     - pip install --upgrade pip
     - MYPYPATH=`pwd`
     - export MYPYPATH
-    - echo MYPYPATH $MYPYPATH
+    - echo $MYPYPATH
 
 install:
     - pip install coverage
