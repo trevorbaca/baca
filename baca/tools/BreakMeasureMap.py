@@ -339,6 +339,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             return
         skips = baca.select(context).skips()
         measure_count = len(skips)
+        last_measure_number = self.first_measure_number + measure_count - 1
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
         abjad.attach(
             literal,
@@ -356,8 +357,8 @@ class BreakMeasureMap(abjad.AbjadObject):
                     tag=self.tag.prepend('BMM2'),
                     )
         for measure_number, commands in self.commands.items():
-            if measure_count < measure_number:
-                message = f'score contains only {measure_count} measures'
+            if last_measure_number < measure_number:
+                message = f'score ends at measure {last_measure_number}'
                 message += f' (not {measure_number}).'
                 raise Exception(message)
             for command in commands:
@@ -384,6 +385,12 @@ class BreakMeasureMap(abjad.AbjadObject):
         r'''Is true when tags should write deactivated.
         '''
         return self._deactivate
+
+    @property
+    def first_measure_number(self) -> int:
+        r'''Gets first measure number.
+        '''
+        return self.bol_measure_numbers[0]
 
     @property
     def tag(self) -> typing.Optional[abjad.Tag]:

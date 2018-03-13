@@ -2086,7 +2086,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.StringTrioScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-            ...     breaks=baca.breaks(baca.page([99, 0, (10, 20,)])),
+            ...     breaks=baca.breaks(
+            ...         baca.page([99, 0, (10, 20,)]),
+            ...         baca.page([109, 0, (10, 20,)]),
+            ...         ),
             ...     )
 
             >>> maker(
@@ -2097,7 +2100,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> lilypond_file = maker.run(environment='docs')
             Traceback (most recent call last):
                 ...
-            Exception: score contains only 5 measures (not 99).
+            Exception: score ends at measure 103 (not 109).
 
         '''
         from baca.tools.LibraryGM import LibraryGM

@@ -22,6 +22,7 @@ Bases
       ~BreakMeasureMap.bol_measure_numbers
       ~BreakMeasureMap.commands
       ~BreakMeasureMap.deactivate
+      ~BreakMeasureMap.first_measure_number
       ~BreakMeasureMap.tag
       ~BreakMeasureMap.tags
       ~BreakMeasureMap.__call__
@@ -36,6 +37,8 @@ Read-only properties
 .. autoattribute:: BreakMeasureMap.commands
 
 .. autoattribute:: BreakMeasureMap.deactivate
+
+.. autoattribute:: BreakMeasureMap.first_measure_number
 
 .. autoattribute:: BreakMeasureMap.tag
 
