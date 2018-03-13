@@ -16,7 +16,7 @@ before_install:
     - echo `git branch`
     - cd ..
     - pip install --upgrade pip
-    - MYPYPATH=`pwd`:`pwd`/abjad
+    - MYPYPATH=`pwd`/abjad
     - export MYPYPATH
     - echo $MYPYPATH
 
