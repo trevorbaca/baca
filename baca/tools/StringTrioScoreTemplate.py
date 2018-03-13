@@ -221,9 +221,9 @@ class StringTrioScoreTemplate(ScoreTemplate):
     __documentation_section__ = '(5) Utilities'
 
     _part_manifest = abjad.PartManifest(
-        abjad.Part('Violin', abbreviation='VN'),
-        abjad.Part('Viola', abbreviation='VA'),
-        abjad.Part('Cello', abbreviation='VC'),
+        abjad.Part(section='Violin', abbreviation='VN'),
+        abjad.Part(section='Viola', abbreviation='VA'),
+        abjad.Part(section='Cello', abbreviation='VC'),
         )
 
     ### SPECIAL METHODS ###
