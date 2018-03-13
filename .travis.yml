@@ -6,22 +6,18 @@ python:
     - 3.6
 
 before_install:
-    - pwd
-    - MYPYPATH=$MYPYPATH:`pwd`:`pwd`/abjad
-    - export MYPYPATH
-    - echo MYPYPATH $MYPYPATH
     - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
     - LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
     - wget -q $LILYPOND_URL
     - sh $LILYPOND_SCRIPT --batch
-    - ls
     - git clone https://github.com/Abjad/abjad.git;
-    - ls
     - cd abjad; git checkout trevor/dev; pip install -e .[development]
     - echo `git branch`
-    - cd ..
     - pip install --upgrade pip
+    - MYPYPATH=`pwd`
+    - export MYPYPATH
+    - echo MYPYPATH $MYPYPATH
 
 install:
     - pip install coverage
@@ -29,13 +25,8 @@ install:
     - pip install -e . 
 
 script:
-    - pwd
-    - ls
-    - echo $MYPYPATH
-    - mypy baca
     - coverage run -a `which ajv` doctest --external-modules=baca ./baca
-    # package contains only doctests!
-    #- coverage run -a `which py.test` -rf ./baca
+    - mypy baca
 
 after_success:
     - pip install coveralls
