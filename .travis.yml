@@ -6,6 +6,12 @@ python:
     - 3.6
 
 before_install:
+    - echo pwd `pwd`
+    - echo TRAVIS_PYTHON_VERSION $TRAVIS_PYTHON_VERSION
+    - echo PYTHONPATH $PYTHONPATH
+    - echo MYPYPATH $MYPYPATH
+    - MYPATH=$MYPATH:`pwd`:`pwd`/abjad
+    - echo MYPYPATH $MYPYPATH
     - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
     - LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
