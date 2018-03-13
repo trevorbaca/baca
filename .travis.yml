@@ -8,7 +8,8 @@ python:
 before_install:
     - echo pwd `pwd`
     - echo TRAVIS_PYTHON_VERSION $TRAVIS_PYTHON_VERSION
-    - MYPATH=$MYPATH:`pwd`:`pwd`/abjad
+    - echo $MYPYPATH
+    - MYPYPATH=$MYPYPATH:`pwd`:`pwd`/abjad
     - export MYPYPATH
     - echo MYPYPATH $MYPYPATH
     - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
