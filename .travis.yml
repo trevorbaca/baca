@@ -6,9 +6,7 @@ python:
     - 3.6
 
 before_install:
-    - echo pwd `pwd`
-    - echo TRAVIS_PYTHON_VERSION $TRAVIS_PYTHON_VERSION
-    - echo $MYPYPATH
+    - pwd
     - MYPYPATH=$MYPYPATH:`pwd`:`pwd`/abjad
     - export MYPYPATH
     - echo MYPYPATH $MYPYPATH
@@ -17,7 +15,9 @@ before_install:
     - LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
     - wget -q $LILYPOND_URL
     - sh $LILYPOND_SCRIPT --batch
+    - ls
     - git clone https://github.com/Abjad/abjad.git;
+    - ls
     - cd abjad; git checkout trevor/dev; pip install -e .[development]
     - echo `git branch`
     - cd ..
@@ -29,8 +29,11 @@ install:
     - pip install -e . 
 
 script:
-    - coverage run -a `which ajv` doctest --external-modules=baca ./baca
+    - pwd
+    - ls
+    - echo $MYPYPATH
     - mypy baca
+    - coverage run -a `which ajv` doctest --external-modules=baca ./baca
     # package contains only doctests!
     #- coverage run -a `which py.test` -rf ./baca
 
