@@ -1,8 +1,3 @@
-# Commented out because the Travis config file currently clones Abjad
-#   and checks out the trevor/dev branch.
-# Uncomment when the Travis config file no longer clones Abjad:
+# keep commented out when checking out trevor/dev:
 #-e git://github.com/Abjad/abjad.git#egg=abjad [development]
-
-#funcsigs
-#inflect
 roman
