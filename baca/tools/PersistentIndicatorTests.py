@@ -5009,22 +5009,22 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName =                                              %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \markup { I+II }                                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \set Staff.shortInstrumentName =                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \markup { I+II }                                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37
+                                \set Staff.instrumentName =                                              %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
                                 c'4.
-                                ^ \markup {                                                              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                    \with-color                                                          %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                        #(x11-color 'green4)                                             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                        [“I+II”]                                                         %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                    }                                                                    %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
+                                ^ \markup {                                                              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                    \with-color                                                          %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                        #(x11-color 'green4)                                             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                        [“I+II”]                                                         %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                    }                                                                    %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 c'4.
@@ -5089,22 +5089,22 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName =      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \set Staff.shortInstrumentName = %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37
+                                \set Staff.instrumentName =      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
                                 c'4.
-                            %%% ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                            %%%     \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                            %%%         #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                            %%%         [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                            %%%     }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
+                            %%% ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                            %%%     \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                            %%%         #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                            %%%         [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                            %%%     }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                \set Staff.instrumentName =      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.
@@ -5166,22 +5166,22 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! SM4
-                                \set Staff.instrumentName =      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \set Staff.shortInstrumentName = %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37
+                                \set Staff.instrumentName =      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
                                 c'4.
-                                ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                    \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                        #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                        [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                    }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37
+                                ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                    \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                        #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                        [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                    }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                \set Staff.instrumentName =      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! SM4
                                 c'4.

@@ -2153,11 +2153,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             )
                     continue
                 attached = False
+                tag = edition.append('SM37')
+                if isinstance(previous_indicator, abjad.MarginMarkup):
+                    tag = tag.append('-PARTS')
                 try:
                     wrapper = abjad.attach(
                         previous_indicator,
                         leaf,
-                        tag=edition.append('SM37'),
+                        tag=tag,
                         wrapper=True,
                         )
                     attached = True
