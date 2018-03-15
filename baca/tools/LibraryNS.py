@@ -6392,7 +6392,7 @@ class LibraryNS(abjad.AbjadObject):
         command = IndicatorCommand(
             indicators=[start_markup],
             selector=selector,
-            tags=['STMK'],
+            tags=['STMK', '-PARTS'],
             )
         return command
 
