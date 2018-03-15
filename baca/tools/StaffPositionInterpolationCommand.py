@@ -109,6 +109,7 @@ class StaffPositionInterpolationCommand(Command):
                             \glissando                                                               %! SC
                             [
                             \hide NoteHead                                                           %! SC
+                            \override Accidental.stencil = ##f                                       %! SC
                             \override NoteColumn.glissando-skip = ##t                                %! SC
                             \override NoteHead.no-ledgers = ##t                                      %! SC
                             e'16
@@ -159,6 +160,7 @@ class StaffPositionInterpolationCommand(Command):
                             \glissando                                                               %! SC
                             f''16
                             \glissando                                                               %! SC
+                            \revert Accidental.stencil                                               %! SC
                             \revert NoteColumn.glissando-skip                                        %! SC
                             \revert NoteHead.no-ledgers                                              %! SC
                             \undo \hide NoteHead                                                     %! SC

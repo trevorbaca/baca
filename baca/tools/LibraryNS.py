@@ -3107,14 +3107,12 @@ class LibraryNS(abjad.AbjadObject):
             assert stages == 'all', repr(stages)
             start, stop = 1, 'end'
         elif isinstance(stages, int):
-            assert 0 < stages, repr(stages)
             start, stop = stages, stages
         else:
             assert isinstance(stages, tuple), repr(stages)
             assert len(stages) == 2, repr(stages)
             start, stop = stages
         assert isinstance(start, int), repr(start)
-        assert 0 < start, repr(start)
         if stop == -1:
             stop = 'end'
         if isinstance(stop, int):
@@ -3207,6 +3205,8 @@ class LibraryNS(abjad.AbjadObject):
                 start, stop = 1, 'end'
             else:
                 start, stop = stages
+            if stop == -1:
+                stop = 'end'
             assert isinstance(start, int), repr(start)
             assert 0 < start, repr(start)
             if isinstance(stop, int):

@@ -2249,6 +2249,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 stop = self.stage_count + 1
             else:
                 stop = scope.stages[1] + 1
+            if start < 0:
+                start = self.stage_count - abs(start) + 1
+            if stop < 0:
+                stop = self.stage_count - abs(stop) + 1
             for stage_number in range(start, stop):
                 leaves.extend(leaves_by_stage_number[stage_number])
             leaf_selections.append(abjad.select(leaves))
