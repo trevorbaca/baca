@@ -26,6 +26,7 @@ Bases
       ~LibraryTZ.text_script_padding
       ~LibraryTZ.text_script_parent_center
       ~LibraryTZ.text_script_staff_padding
+      ~LibraryTZ.text_script_x_offset
       ~LibraryTZ.text_scripts_down
       ~LibraryTZ.text_scripts_up
       ~LibraryTZ.text_spanner
@@ -84,6 +85,8 @@ Class & static methods
 .. automethod:: LibraryTZ.text_script_parent_center
 
 .. automethod:: LibraryTZ.text_script_staff_padding
+
+.. automethod:: LibraryTZ.text_script_x_offset
 
 .. automethod:: LibraryTZ.text_scripts_down
 

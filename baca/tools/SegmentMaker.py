@@ -1397,9 +1397,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     prototype = type(indicator)
                     prototype = self._prototype_string(prototype)
+                editions = wrapper.tag.editions()
+                if editions:
+                    words = [str(_) for _ in editions]
+                    editions = abjad.Tag.from_words(words)
+                else:
+                    editions = None
                 momento = abjad.Momento(
                     context=first_context.name,
-                    edition=wrapper.tag.only_edition(),
+                    edition=editions,
                     prototype=prototype,
                     value=value,
                     )

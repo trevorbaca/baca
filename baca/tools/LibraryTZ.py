@@ -912,6 +912,26 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_script_x_offset(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
+        ) -> OverrideCommand:
+        r'''Overrides text script X-offset.
+        '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
+        return OverrideCommand(
+            attribute='X_offset',
+            blacklist=blacklist,
+            value=n,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_scripts_down(
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
