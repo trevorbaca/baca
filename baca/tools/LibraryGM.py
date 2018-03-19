@@ -395,6 +395,7 @@ class LibraryGM(abjad.AbjadObject):
         '''
         return GlobalFermataCommand(
             description=description,
+            selector=selector,
             )
 
     @staticmethod
