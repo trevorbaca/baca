@@ -77,7 +77,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         time_signatures = baca.sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
-        items = []
+        items: typing.List[StageMeasureMap.item_type] = []
         for item in self.stage_measure_map.items:
             if isinstance(item, abjad.Fermata):
                 item = abjad.TimeSignature((1, 4))
