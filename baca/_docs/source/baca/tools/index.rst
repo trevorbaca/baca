@@ -98,6 +98,7 @@ baca.tools
    CommandWrapper
    ContainerCommand
    DiatonicClusterCommand
+   GlobalFermataCommand
    HairpinCommand
    ImbricationCommand
    IndicatorCommand
@@ -136,6 +137,7 @@ baca.tools
    ~baca.tools.CommandWrapper.CommandWrapper
    ~baca.tools.ContainerCommand.ContainerCommand
    ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand
+   ~baca.tools.GlobalFermataCommand.GlobalFermataCommand
    ~baca.tools.HairpinCommand.HairpinCommand
    ~baca.tools.ImbricationCommand.ImbricationCommand
    ~baca.tools.IndicatorCommand.IndicatorCommand

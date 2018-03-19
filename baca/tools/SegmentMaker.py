@@ -151,7 +151,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_environment',
         '_fermata_measure_numbers',
         '_fermata_measure_staff_line_count',
-        '_fermata_measures',
         '_fermata_start_offsets',
         '_fermata_stop_offsets',
         '_final_bar_line',
@@ -281,7 +280,6 @@ class SegmentMaker(abjad.SegmentMaker):
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
-        fermata_measures: typing.List[int] = None,
         final_bar_line: typing.Union[bool, str, None] = None,
         final_markup: typing.Union[tuple, None] = None,
         final_markup_extra_offset: typing.Union[NumberPair, None] = None,
@@ -333,9 +331,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_check_persistence: bool = do_not_check_persistence
         self._do_not_include_layout_ly: bool = do_not_include_layout_ly
         self._duration: abjad.Duration = None
-        if fermata_measures is not None:
-            assert all(isinstance(_, int) for _ in fermata_measures)
-        self._fermata_measures = fermata_measures
         self._fermata_measure_numbers: typing.List = []
         self._fermata_measure_staff_line_count: int = \
             fermata_measure_staff_line_count
@@ -945,10 +940,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 rest,
                 tag=abjad.tags.FERMATA_MEASURE,
                 )
-            timespan = abjad.inspect(rest).get_timespan()
-            self._fermata_start_offsets.append(timespan.start_offset)
-            self._fermata_stop_offsets.append(timespan.stop_offset)
-            self._fermata_measure_numbers.append(measure_number)
 
     def _attach_first_appearance_score_template_defaults(self):
         if self.first_segment:
@@ -1101,6 +1092,25 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (abjad.Staff, abjad.StaffGroup)
         assert isinstance(component, prototype), repr(component)
         return not self._alive_during_previous_segment(component)
+
+    def _cache_fermata_measure_numbers(self):
+        if 'GlobalRests' not in self.score:
+            return
+        context = self.score['GlobalRests']
+        mm_rests = abjad.select(context).leaves(abjad.MultimeasureRest)
+        last_measure_index = len(mm_rests) - 1
+        first_measure_number = self._get_first_measure_number()
+        tag = abjad.tags.FERMATA_MEASURE
+        for measure_index, mm_rest in enumerate(mm_rests):
+            if not abjad.inspect(mm_rest).has_indicator(tag):
+                continue
+            if measure_index == last_measure_index:
+                self._last_measure_is_fermata = True
+            measure_number = first_measure_number + measure_index
+            timespan = abjad.inspect(mm_rest).get_timespan()
+            self._fermata_start_offsets.append(timespan.start_offset)
+            self._fermata_stop_offsets.append(timespan.stop_offset)
+            self._fermata_measure_numbers.append(measure_number)
 
     def _cache_leaves(self):
         stage_timespans = []
@@ -3260,12 +3270,6 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Gets fermata measure staff lines.
         '''
         return self._fermata_measure_staff_line_count
-
-    @property
-    def fermata_measures(self) -> typing.List[int]:
-        r'''Gets (user-provided) fermata measures.
-        '''
-        return self._fermata_measures
 
     @property
     def final_bar_line(self) -> typing.Union[bool, str, None]:
@@ -5516,6 +5520,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.environment != 'docs':
             print(f'  Nonrhythm command time {count} {seconds} ...')
 
+        self._cache_fermata_measure_numbers()
         self._shorten_long_repeat_ties()
         self._treat_untreated_persistent_wrappers()
         self._label_clock_time()

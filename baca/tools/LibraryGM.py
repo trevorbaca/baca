@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from abjad import rhythmmakertools as rhythmos
+from .GlobalFermataCommand import GlobalFermataCommand
 from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .ImbricationCommand import ImbricationCommand
@@ -383,6 +384,17 @@ class LibraryGM(abjad.AbjadObject):
             value=str(n),
             grob='glissando',
             selector=selector,
+            )
+
+    @staticmethod
+    def global_fermata(
+        description: str = None,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> GlobalFermataCommand:
+        r'''Attaches global fermata to leaves.
+        '''
+        return GlobalFermataCommand(
+            description=description,
             )
 
     @staticmethod

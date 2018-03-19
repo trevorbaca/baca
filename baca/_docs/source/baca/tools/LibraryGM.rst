@@ -21,6 +21,7 @@ Bases
 
       ~LibraryGM.glissando
       ~LibraryGM.glissando_thickness
+      ~LibraryGM.global_fermata
       ~LibraryGM.hairpin
       ~LibraryGM.hairpin_shorten_pair
       ~LibraryGM.hairpin_stencil_false
@@ -68,6 +69,8 @@ Class & static methods
 .. automethod:: LibraryGM.glissando
 
 .. automethod:: LibraryGM.glissando_thickness
+
+.. automethod:: LibraryGM.global_fermata
 
 .. automethod:: LibraryGM.hairpin
 
