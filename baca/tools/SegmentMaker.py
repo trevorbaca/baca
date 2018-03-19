@@ -151,6 +151,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_environment',
         '_fermata_measure_numbers',
         '_fermata_measure_staff_line_count',
+        '_fermata_measures',
         '_fermata_start_offsets',
         '_fermata_stop_offsets',
         '_final_bar_line',
@@ -280,6 +281,7 @@ class SegmentMaker(abjad.SegmentMaker):
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
+        fermata_measures: typing.List[int] = None,
         final_bar_line: typing.Union[bool, str, None] = None,
         final_markup: typing.Union[tuple, None] = None,
         final_markup_extra_offset: typing.Union[NumberPair, None] = None,
@@ -331,6 +333,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_check_persistence: bool = do_not_check_persistence
         self._do_not_include_layout_ly: bool = do_not_include_layout_ly
         self._duration: abjad.Duration = None
+        if fermata_measures is not None:
+            assert all(isinstance(_, int) for _ in fermata_measures)
+        self._fermata_measures = fermata_measures
         self._fermata_measure_numbers: typing.List = []
         self._fermata_measure_staff_line_count: int = \
             fermata_measure_staff_line_count
@@ -3255,6 +3260,12 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Gets fermata measure staff lines.
         '''
         return self._fermata_measure_staff_line_count
+
+    @property
+    def fermata_measures(self) -> typing.List[int]:
+        r'''Gets (user-provided) fermata measures.
+        '''
+        return self._fermata_measures
 
     @property
     def final_bar_line(self) -> typing.Union[bool, str, None]:

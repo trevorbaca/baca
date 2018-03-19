@@ -32,6 +32,7 @@ Bases
       ~SegmentMaker.do_not_include_layout_ly
       ~SegmentMaker.environment
       ~SegmentMaker.fermata_measure_staff_line_count
+      ~SegmentMaker.fermata_measures
       ~SegmentMaker.final_bar_line
       ~SegmentMaker.final_markup
       ~SegmentMaker.final_markup_extra_offset
@@ -106,6 +107,8 @@ Read-only properties
       .. autoattribute:: SegmentMaker.environment
 
 .. autoattribute:: SegmentMaker.fermata_measure_staff_line_count
+
+.. autoattribute:: SegmentMaker.fermata_measures
 
 .. autoattribute:: SegmentMaker.final_bar_line
 

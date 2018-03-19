@@ -19,9 +19,12 @@ Bases
 
    .. autosummary::
 
+      ~TimeSignatureMaker.count
+      ~TimeSignatureMaker.fermata_measures
       ~TimeSignatureMaker.metronome_mark_measure_map
       ~TimeSignatureMaker.repeat_count
       ~TimeSignatureMaker.rotation
+      ~TimeSignatureMaker.run
       ~TimeSignatureMaker.stage_measure_map
       ~TimeSignatureMaker.time_signatures
       ~TimeSignatureMaker.__call__
@@ -30,6 +33,10 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: TimeSignatureMaker.count
+
+.. autoattribute:: TimeSignatureMaker.fermata_measures
 
 .. autoattribute:: TimeSignatureMaker.metronome_mark_measure_map
 
@@ -40,6 +47,11 @@ Read-only properties
 .. autoattribute:: TimeSignatureMaker.stage_measure_map
 
 .. autoattribute:: TimeSignatureMaker.time_signatures
+
+Methods
+-------
+
+.. automethod:: TimeSignatureMaker.run
 
 Special methods
 ---------------
