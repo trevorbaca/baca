@@ -86,7 +86,11 @@ class TimeSignatureMaker(abjad.AbjadObject):
         measures_per_stage = [len(_) for _ in time_signature_groups]
         time_signatures = baca.sequence(time_signature_groups).flatten(depth=1)
         fermata_entries = self.stage_measure_map._make_fermata_entries()
-        items = self.metronome_mark_measure_map.items + fermata_entries
+        if self.metronome_mark_measure_map:
+            items = self.metronome_mark_measure_map.items
+        else:
+            items = []
+        items = list(items) + list(fermata_entries)
         metronome_mark_measure_map = baca.MetronomeMarkMeasureMap(items=items)
         return measures_per_stage, metronome_mark_measure_map, time_signatures
 
