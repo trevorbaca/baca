@@ -1,5 +1,8 @@
 import abjad
 import baca
+import typing
+from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .StageMeasureMap import StageMeasureMap
 
 
 class TimeSignatureMaker(abjad.AbjadObject):
@@ -39,10 +42,10 @@ class TimeSignatureMaker(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_metronome_mark_measure_map',
         '_repeat_count',
         '_rotation',
         '_stage_measure_map',
-        '_tempo_map',
         '_time_signatures',
         )
 
@@ -51,33 +54,35 @@ class TimeSignatureMaker(abjad.AbjadObject):
     def __init__(
         self,
         time_signatures,
-        repeat_count=None,
-        rotation=None,
-        stage_measure_map=None,
-        metronome_mark_measure_map=None,
-        ):
+        metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
+        repeat_count: int = None,
+        rotation: int = None,
+        stage_measure_map: StageMeasureMap = None,
+        ) -> None:
         self._time_signatures = time_signatures
+        self._metronome_mark_measure_map = metronome_mark_measure_map
+        self._repeat_count = repeat_count
         self._rotation = rotation
         self._stage_measure_map = stage_measure_map
-        self._tempo_map = metronome_mark_measure_map
-        self._repeat_count = repeat_count
 
     ### SPECIAL METHODS ###
 
-    def __call__(self):
-        r'''Calls time signature maker.
-
-        Returns measures per stage, tempo map and time signatures.
+    def __call__(self) -> typing.Tuple[
+        typing.List[int],
+        MetronomeMarkMeasureMap,
+        typing.List[abjad.TimeSignature],
+        ]:
+        r'''Calls time-signature-maker.
         '''
-        time_signatures = abjad.sequence(self.time_signatures)
+        time_signatures = baca.sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         items = []
-        for item in self.stage_measure_map:
+        for item in self.stage_measure_map.items:
             if isinstance(item, abjad.Fermata):
                 item = abjad.TimeSignature((1, 4))
             items.append(item)
-        stage_measure_map = baca.StageMeasureMap(items=items)
+        stage_measure_map = StageMeasureMap(items=items)
         time_signature_groups = self._make_time_signature_groups(
             self.repeat_count,
             stage_measure_map,
@@ -91,7 +96,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         else:
             items = []
         items = list(items) + list(fermata_entries)
-        metronome_mark_measure_map = baca.MetronomeMarkMeasureMap(items=items)
+        metronome_mark_measure_map = MetronomeMarkMeasureMap(items=items)
         return measures_per_stage, metronome_mark_measure_map, time_signatures
 
     ### PRIVATE METHODS ###
@@ -105,16 +110,16 @@ class TimeSignatureMaker(abjad.AbjadObject):
         time_signatures = abjad.CyclicTuple(time_signatures)
         time_signature_lists = []
         index = 0
-        for x in stage_measure_map:
-            if isinstance(x, abjad.TimeSignature):
-                time_signature_list = [x]
-            elif isinstance(x, (tuple, list)):
-                time_signature_list = list(x)
+        for item in stage_measure_map:
+            if isinstance(item, abjad.TimeSignature):
+                time_signature_list = [item]
+            elif isinstance(item, (tuple, list)):
+                time_signature_list = list(item)
             else:
-                stop = index + x
+                stop = index + item
                 time_signature_list = time_signatures[index:stop]
                 time_signature_list = list(time_signature_list)
-                index += x
+                index += item
             time_signature_lists.append(time_signature_list)
         repeat_count = repeat_count or 1
         time_signature_lists *= repeat_count
@@ -123,41 +128,33 @@ class TimeSignatureMaker(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def metronome_mark_measure_map(self):
-        r'''Gets tempo map.
-
-        Returns tempo map.
+    def metronome_mark_measure_map(self) -> typing.Optional[
+        MetronomeMarkMeasureMap
+        ]:
+        r'''Gets metronome mark measure map.
         '''
-        return self._tempo_map
+        return self._metronome_mark_measure_map
 
     @property
-    def repeat_count(self):
+    def repeat_count(self) -> typing.Optional[int]:
         r'''Gets repeat count.
-
-        Returns nonnegative integer or none.
         '''
         return self._repeat_count
 
     @property
-    def rotation(self):
+    def rotation(self) -> typing.Optional[int]:
         r'''Gets rotation.
-
-        Returns integer or none.
         '''
         return self._rotation
 
     @property
-    def stage_measure_map(self):
+    def stage_measure_map(self) -> typing.Optional[StageMeasureMap]:
         r'''Gets stage measure map.
-
-        Returns stage measure map.
         '''
         return self._stage_measure_map
 
     @property
-    def time_signatures(self):
+    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
         r'''Gets time signatures.
-
-        Returns list of time signatures.
         '''
         return self._time_signatures
