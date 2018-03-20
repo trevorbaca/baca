@@ -56,7 +56,6 @@ Bases
       ~SegmentMaker.mmspanner_right_padding
       ~SegmentMaker.previous_metadata
       ~SegmentMaker.range_checker
-      ~SegmentMaker.rehearsal_mark
       ~SegmentMaker.run
       ~SegmentMaker.score
       ~SegmentMaker.score_template
@@ -154,8 +153,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.previous_metadata
 
 .. autoattribute:: SegmentMaker.range_checker
-
-.. autoattribute:: SegmentMaker.rehearsal_mark
 
 .. only:: html
 

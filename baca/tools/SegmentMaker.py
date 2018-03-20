@@ -175,7 +175,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_offset_to_measure_number',
         '_previously_alive_contexts',
         '_range_checker',
-        '_rehearsal_mark',
         '_score',
         '_score_template',
         '_segment_bol_measure_numbers',
@@ -305,7 +304,6 @@ class SegmentMaker(abjad.SegmentMaker):
             typing.Tuple[Number, abjad.Tag]
             ] = 0,
         range_checker: abjad.PitchRange = None,
-        rehearsal_mark: str = None,
         score_template: ScoreTemplate = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
@@ -368,7 +366,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
         self._range_checker: abjad.PitchRange = range_checker
-        self._rehearsal_mark: str = rehearsal_mark
         self._score_template: ScoreTemplate = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         self._segment_duration: abjad.Duration = None
@@ -1080,13 +1077,6 @@ class SegmentMaker(abjad.SegmentMaker):
             start, _ = self._stage_number_to_measure_indices(stage_number)
             skip = skips[start]
             spanner.attach(directive, skip, tag='SM30')
-
-    def _attach_rehearsal_mark(self):
-        if not self.rehearsal_mark:
-            return
-        rehearsal_mark = abjad.RehearsalMark.from_string(self.rehearsal_mark)
-        skip = baca.select(self.score['GlobalSkips']).skip(0)
-        abjad.attach(rehearsal_mark, skip, tag='SM9')
 
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
@@ -1928,7 +1918,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
-            name = self.segment_name or self.rehearsal_mark
+            name = self.segment_name
             if bool(name):
                 string = f'[{name}.{stage_number}]'
             else:
@@ -4925,12 +4915,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._range_checker
 
     @property
-    def rehearsal_mark(self) -> typing.Optional[str]:
-        r'''Gets rehearsal mark.
-        '''
-        return self._rehearsal_mark
-
-    @property
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
         r'''Gets score template.
 
@@ -5525,7 +5509,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._treat_untreated_persistent_wrappers()
         self._label_clock_time()
         self._transpose_score_()
-        self._attach_rehearsal_mark()
         self._add_final_bar_line()
         self._add_final_markup()
         self._color_unregistered_pitches()
