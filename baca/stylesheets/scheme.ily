@@ -1,5 +1,23 @@
 %%% BAČA SCHEME DEFINITIONS %%%
 
+%%% MARKUP COMMANDS %%%
+
+#(define-markup-command (make-dark-cyan layout props text) (markup?)
+    "Dark cyan with font size 3."
+    (interpret-markup layout props
+        #{\markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #text }
+            #}
+        )
+    )
+
+#(define-markup-command (make-forest-green layout props text) (markup?)
+    "Forest green with font size 3."
+    (interpret-markup layout props
+        #{\markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #text }
+            #}
+        )
+    )
+
 %%% OVAL BAR NUMBERS %%%
 
 #(define-markup-command (oval layout props arg)

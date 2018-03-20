@@ -913,19 +913,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             abjad.attach(spacing_section, skip, tag=tag.prepend('HSS1'))
             if eol_adjusted:
                 multiplier = self._magic_lilypond_eol_adjustment
-                markup = abjad.Markup(f'[[{duration_!s} * {multiplier!s}]]')
+                string = f'[[{duration_!s} * {multiplier!s}]]'
+                markup = abjad.Markup(string)
             else:
-                markup = abjad.Markup(f'[{duration!s}]')
-            markup = markup.fontsize(3)
+                string = f'[{duration!s}]'
+                markup = abjad.Markup(string)
             if programmatic:
-                color = 'DarkCyan'
+                command = 'make-dark-cyan'
             else:
-                color = 'ForestGreen'
-            scheme_color = abjad.SchemeColor(color)
-            markup = markup.with_color(scheme_color)
-            markup = abjad.new(markup, direction=abjad.Up)
+                command = 'make-forest-green'
+            string = fr'^ \markup {{ \{command} "{string}" }}'
+            literal = abjad.LilyPondLiteral(string, format_slot='after')
             tag = abjad.Tag(abjad.tags.SPACING_MARKUP).prepend('HSS2')
-            abjad.attach(markup, skip, deactivate=True, tag=tag)
+            abjad.attach(literal, skip, deactivate=True, tag=tag)
 
     ### PRIVATE METHODS ###
 

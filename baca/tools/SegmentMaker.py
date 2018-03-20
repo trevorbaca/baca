@@ -1871,9 +1871,8 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_stop_duration = label.with_start_offsets(
             brackets=True,
             clock_time=True,
-            color=abjad.SchemeColor('DarkCyan'),
-            font_size=3,
             global_offset=segment_start_offset,
+            markup_command='make-dark-cyan',
             )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
@@ -1890,8 +1889,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
             markup = abjad.Markup(f'({measure_number})')
-            markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
-            markup = markup.fontsize(3)
+            markup = markup.with_literal(r'\make-dark-cyan')
             markup = abjad.new(markup, direction=abjad.Up)
             tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
             abjad.attach(
@@ -1901,8 +1899,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag.prepend('SM31'),
                 )
             markup = abjad.Markup(f'<{measure_index}>')
-            markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
-            markup = markup.fontsize(3)
+            markup = markup.with_literal(r'\make-dark-cyan')
             markup = abjad.new(markup, direction=abjad.Up)
             tag = abjad.Tag(abjad.tags.MEASURE_INDEX_MARKUP)
             abjad.attach(
@@ -1910,6 +1907,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 deactivate=True,
                 tag=tag.prepend('SM32'),
+                )
+            local_measure_number = measure_index + 1
+            markup = abjad.Markup(f'(({local_measure_number}))')
+            markup = markup.with_literal(r'\make-dark-cyan')
+            markup = abjad.new(markup, direction=abjad.Up)
+            tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
+            abjad.attach(
+                markup,
+                skip,
+                deactivate=True,
+                tag=tag.prepend('SM42'),
                 )
 
     def _label_stage_numbers(self):
@@ -1924,8 +1932,7 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 string = f'[{stage_number}]'
             markup = abjad.Markup(string)
-            markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
-            markup = markup.fontsize(3)
+            markup = markup.with_literal(r'\make-dark-cyan')
             markup = abjad.new(markup, direction=abjad.Up)
             skip = skips[start_measure_index]
             tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
@@ -2198,18 +2205,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 previous_time_signature = time_signature
 
     def _remove_tags(self, tags):
-        tags = tags or ()
-        assert isinstance(tags, (tuple, list)), repr(tags)
+        tags = tags or []
+        tags = list(tags)
         if self.environment == 'docs':
-            remove_documentation_tags = (
-                abjad.tags.CLOCK_TIME_MARKUP,
-                abjad.tags.FIGURE_NAME_MARKUP,
-                abjad.tags.MEASURE_INDEX_MARKUP,
-                abjad.tags.MEASURE_NUMBER_MARKUP,
-                abjad.tags.SPACING_MARKUP,
-                abjad.tags.STAGE_NUMBER_MARKUP,
-                )
-            tags += remove_documentation_tags
+            tags += abjad.tags.documentation_removal_tags()
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
                 if wrapper.tag is None:
