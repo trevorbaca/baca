@@ -1736,6 +1736,25 @@ class SegmentMaker(abjad.SegmentMaker):
             self._cache = None
             self._update_score_one_time()
 
+    def _import_manifests(self):
+        if not self.segment_directory:
+            return
+        score_package = self.segment_directory._import_score_package()
+        if not self.instruments:
+            instruments = getattr(score_package, 'instruments', None)
+            self._instruments = instruments
+        if not self.margin_markups:
+            margin_markups = getattr(score_package, 'margin_markups', None)
+            self._margin_markups = margin_markups
+        if not self.metronome_marks:
+            metronome_marks = getattr(score_package, 'metronome_marks', None)
+            self._metronome_marks = metronome_marks
+        if not self.score_template:
+            score_template = getattr(score_package, 'ScoreTemplate', None)
+            if score_template is not None:
+                score_template = score_template()
+            self._score_template = score_template
+
     @staticmethod
     def _indicator_to_grob(indicator):
         if isinstance(indicator, abjad.Dynamic):
@@ -5471,6 +5490,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.OrderedDict(previous_metadata)
         self._segment_directory: typing.Optional[
             abjad.Path] = segment_directory
+        self._import_manifests()
         self._make_score()
         self._make_lilypond_file()
         self._make_global_skips()
