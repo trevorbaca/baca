@@ -1692,9 +1692,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if stop_stage is None:
             time_signatures = stages[start_index]
         else:
-            if stop_stage == abjad.Infinity:
-                raise Exception("use 'end' instead.")
-            if stop_stage == 'end':
+            if stop_stage == -1:
                 stop_stage = self.stage_count
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
@@ -2276,8 +2274,8 @@ class SegmentMaker(abjad.SegmentMaker):
             start = scope.stages[0]
             if (scope.stages[1] == abjad.Infinity or
                 scope.stages[1] is abjad.Infinity):
-                raise Exception("use 'end' instead.")
-            elif scope.stages[1] == 'end':
+                raise Exception("use -1 instead.")
+            elif scope.stages[1] == -1:
                 stop = self.stage_count + 1
             else:
                 stop = scope.stages[1] + 1
@@ -2365,8 +2363,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _stage_number_to_measure_indices(self, stage_number):
         if stage_number is abjad.Infinity or stage_number == abjad.Infinity:
-            raise Exception("use 'end' instead.")
-        elif stage_number == 'end':
+            raise Exception("use -1 instead.")
+        elif stage_number == -1:
             stage_number = self.stage_count
         if self.stage_count < stage_number:
             count = self.stage_count
