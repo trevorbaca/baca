@@ -20,7 +20,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -133,7 +133,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -256,7 +256,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -380,7 +380,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -505,7 +505,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -628,7 +628,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.AccelerandoRhythmMaker(

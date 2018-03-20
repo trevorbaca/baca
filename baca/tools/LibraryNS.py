@@ -676,7 +676,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.scope('ViolinMusicVoice', (1, -1)),
             ...     baca.make_notes(),
             ...     baca.parts(abjad.PartAssignment('Violin')),
             ...     baca.pitch('E4'),
@@ -896,7 +896,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> part_assignment = abjad.PartAssignment('Flute')
 
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.scope('ViolinMusicVoice', (1, -1)),
             ...     baca.make_notes(),
             ...     baca.parts(part_assignment),
             ...     baca.pitches('E4 F4'),
@@ -1922,7 +1922,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.make_notes(),
             ...     baca.repeat_tie_from(baca.leaf(1)),
             ...     )
@@ -2031,7 +2031,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.make_notes(),
             ...     baca.repeat_tie_to(baca.leaf(2)),
             ...     )
@@ -5822,7 +5822,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.clef('percussion'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
@@ -5923,7 +5923,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.clef('bass'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
@@ -6025,7 +6025,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.clef('percussion'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
@@ -6125,7 +6125,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.clef('bass'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
@@ -6229,7 +6229,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
             ...     baca.suite([

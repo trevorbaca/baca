@@ -821,7 +821,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.bar_extent((-4, 4), baca.group_by_measure()[1]),
             ...     baca.bar_extent((-4, 4), baca.leaf(-1), after=True),
             ...     baca.make_even_runs(),
@@ -962,7 +962,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.bar_extent_persistent((0, 0)),
             ...     baca.make_even_runs(),
             ...     baca.staff_lines(1),
@@ -2093,7 +2093,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.scope('ViolinMusicVoice', (1, -1)),
             ...     baca.make_even_runs(),
             ...     baca.pitch('E4'),
             ...     )
@@ -3029,7 +3029,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.container('ViolinI', baca.leaves()[:2]),
             ...     baca.container('ViolinII', baca.leaves()[2:]),
             ...     baca.make_notes(repeat_ties=True),
@@ -5656,7 +5656,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.enchained_hairpin(
             ...         *baca.dynamics('p f'),
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
@@ -5796,7 +5796,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.enchained_hairpin(
             ...         *baca.dynamics('p f'),
             ...         bookend=True,
@@ -5952,7 +5952,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.enchained_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
@@ -6175,7 +6175,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.enchained_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
@@ -6745,7 +6745,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.not_parts(baca.force_accidentals(baca.pleaves()[:2])),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4 F4'),

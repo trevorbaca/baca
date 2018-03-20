@@ -16,7 +16,7 @@ class ColorFingeringCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.pitch('E4'),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),

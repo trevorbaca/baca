@@ -59,7 +59,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.glissando()
@@ -185,7 +185,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.make_even_runs(),
             ...     baca.glissando(baca.plts()[:2]),
@@ -1983,7 +1983,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.margin_markup('Fl.'),
             ...     baca.pitches('E4 F4'),
@@ -2127,7 +2127,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.mmrest_text_color('red'),
             ...     )
@@ -2214,7 +2214,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.make_notes(),
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.mmrest_text_color('red'),
@@ -2250,7 +2250,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.mmrest_text_extra_offset((0, 2)),
             ...     )
@@ -2350,7 +2350,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.mmrest_text_padding(2),
             ...     )
@@ -2449,7 +2449,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.mmrest_text_parent_center(),
             ...     )
@@ -2549,7 +2549,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('MusicVoice', (1, -1)),
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.mmrest_text_staff_padding(2),
             ...     )

@@ -21,7 +21,7 @@ class ContainerCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     baca.scope('MusicVoice', (1, -1)),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.container('ViolinI', baca.leaves()[:2]),
         ...     baca.container('ViolinII', baca.leaves()[2:]),
