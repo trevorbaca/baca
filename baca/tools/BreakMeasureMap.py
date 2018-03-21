@@ -17,7 +17,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('ViolinMusicVoice', (1, -1)),
+        ...     baca.scope('ViolinMusicVoice'),
         ...     baca.make_even_runs(),
         ...     baca.pitch('E4'),
         ...     )

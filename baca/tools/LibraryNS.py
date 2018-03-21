@@ -676,7 +676,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', (1, -1)),
+            ...     baca.scope('ViolinMusicVoice'),
             ...     baca.make_notes(),
             ...     baca.parts(abjad.PartAssignment('Violin')),
             ...     baca.pitch('E4'),
@@ -896,7 +896,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> part_assignment = abjad.PartAssignment('Flute')
 
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', (1, -1)),
+            ...     baca.scope('ViolinMusicVoice'),
             ...     baca.make_notes(),
             ...     baca.parts(part_assignment),
             ...     baca.pitches('E4 F4'),
@@ -1922,7 +1922,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.repeat_tie_from(baca.leaf(1)),
             ...     )
@@ -2031,7 +2031,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.repeat_tie_to(baca.leaf(2)),
             ...     )
@@ -3079,7 +3079,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def scope(
         voice_name: str,
-        stages: typing.Union[int, typing.Tuple[int, int]],
+        stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
         ) -> Scope:
         r'''Scopes `voice_name` for `stages`.
 
@@ -3094,7 +3094,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> baca.scope('HornVoiceI', (4, -1))
             Scope(stages=(4, -1), voice_name='HornVoiceI')
 
-            >>> baca.scope('HornVoiceI', (1, -1))
+            >>> baca.scope('HornVoiceI')
             Scope(stages=(1, -1), voice_name='HornVoiceI')
 
         ..  container:: example
@@ -3107,7 +3107,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_repeated_duration_notes([(1, 8)]),
             ...     )
             >>> maker(
@@ -5917,7 +5917,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('percussion'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
@@ -6018,7 +6018,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('bass'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
@@ -6120,7 +6120,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('percussion'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
@@ -6220,7 +6220,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('bass'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
@@ -6324,7 +6324,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
             ...     baca.suite([

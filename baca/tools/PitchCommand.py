@@ -19,7 +19,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', (1, -1)),
+        ...     baca.scope('MusicVoice'),
         ...     baca.make_even_runs(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
@@ -131,7 +131,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', (1, -1)),
+        ...     baca.scope('MusicVoice'),
         ...     baca.make_even_runs(),
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
         ...     )
@@ -243,7 +243,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', (1, -1)),
+        ...     baca.scope('MusicVoice'),
         ...     baca.make_even_runs(),
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', allow_repeats=True)
         ...     )

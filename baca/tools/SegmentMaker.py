@@ -29,7 +29,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', (1, -1)),
+        ...     baca.scope('MusicVoice'),
         ...     baca.make_even_runs(),
         ...     )
 
@@ -403,7 +403,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
@@ -3295,7 +3295,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3406,7 +3406,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3519,7 +3519,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3630,7 +3630,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3756,7 +3756,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3917,7 +3917,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4028,7 +4028,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4195,7 +4195,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.rhythm(figures),
             ...     )
 
@@ -4361,7 +4361,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.rhythm(figures),
             ...     )
 
@@ -4731,7 +4731,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5152,7 +5152,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['clarinet']),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
@@ -5280,7 +5280,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['clarinet']),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),

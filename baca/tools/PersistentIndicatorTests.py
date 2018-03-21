@@ -122,7 +122,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('treble'),
             ...     )
 
@@ -207,7 +207,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('alto'),
             ...     )
 
@@ -406,7 +406,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('treble', baca.leaf(0)),
             ...     baca.clef('treble', baca.leaf(1)),
             ...     )
@@ -507,7 +507,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.clef('treble'),
             ...     )
 
@@ -610,7 +610,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.dynamic('f'),
             ...     baca.make_notes(),
             ...     )
@@ -677,7 +677,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.dynamic('p'),
             ...     )
@@ -760,7 +760,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -842,7 +842,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.dynamic('f'),
             ...     baca.dynamic('f', baca.leaf(1)),
@@ -912,7 +912,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.dynamic('f'),
             ...     )
@@ -993,7 +993,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.dynamic('sfz'),
             ...     baca.dynamic('sfz', baca.leaf(1)),
@@ -1063,7 +1063,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.dynamic('sfz'),
             ...     )
@@ -1180,7 +1180,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -1397,7 +1397,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -1613,7 +1613,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -1847,7 +1847,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -2086,7 +2086,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
             ...         baca.instrument(instruments['Flute']),
@@ -2357,7 +2357,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -2615,7 +2615,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -2850,7 +2850,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -3084,7 +3084,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -3336,7 +3336,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -3593,7 +3593,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
             ...         baca.instrument(instruments['Flute']),
@@ -3900,7 +3900,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -4184,7 +4184,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -4431,7 +4431,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.make_notes(),
             ...     )
@@ -4677,7 +4677,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.margin_markup(margin_markups['III+IV']),
             ...     baca.make_notes(),
             ...     )
@@ -4941,7 +4941,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -5210,7 +5210,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.map(
             ...         baca.margin_markup(margin_markups['I+II']),
@@ -5541,7 +5541,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.make_notes(),
             ...     )
@@ -5811,7 +5811,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.tag(
             ...         '-PARTS',
             ...         baca.margin_markup(margin_markups['I+II']),
@@ -5963,11 +5963,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark('112'),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -6091,12 +6091,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark('112'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -6238,11 +6238,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
 
@@ -6384,12 +6384,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark('112'),
             ...     baca.metronome_mark('112', baca.leaf(1)),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -6566,12 +6566,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark('112'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -6717,7 +6717,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.bar_extent_persistent((0, 0)),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
@@ -6830,7 +6830,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -6920,7 +6920,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.bar_extent_persistent((0, 0)),
             ...     baca.bar_extent_persistent((0, 0), baca.leaf(1)),
             ...     baca.make_notes(),
@@ -6993,7 +6993,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.bar_extent_persistent((0, 0)),
             ...     baca.make_notes(),
             ...     )
@@ -7090,7 +7090,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(5),
             ...     )
@@ -7159,7 +7159,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
             ...     )
@@ -7244,7 +7244,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -7328,7 +7328,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(5),
             ...     baca.staff_lines(5, baca.leaf(1)),
@@ -7402,7 +7402,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     baca.staff_lines(5),
             ...     )
@@ -7503,11 +7503,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark(abjad.Accelerando()),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -7613,12 +7613,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark(abjad.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -7742,11 +7742,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
 
@@ -7870,12 +7870,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark(abjad.Accelerando()),
             ...     baca.metronome_mark(abjad.Accelerando(), baca.leaf(1)),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 
@@ -8025,12 +8025,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('GlobalSkips', (1, -1)),
+            ...     baca.scope('GlobalSkips'),
             ...     baca.metronome_mark(abjad.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.scope('MusicVoice'),
             ...     baca.make_notes(),
             ...     )
 

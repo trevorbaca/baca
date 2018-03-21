@@ -70,7 +70,7 @@ class OverrideCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', (1, -1)),
+        ...     baca.scope('MusicVoice'),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.beam_positions(6),
         ...     baca.rests_up(),

@@ -172,7 +172,7 @@ class RegisterCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', (1, -1)),
+        ...     baca.scope('MusicVoice'),
         ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
         ...     baca.make_even_runs(),
         ...     baca.RegisterCommand(
