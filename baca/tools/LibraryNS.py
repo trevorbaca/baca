@@ -3079,11 +3079,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def scope(
         voice_name: str,
-        stages: typing.Union[
-            int,
-            'str',
-            typing.Tuple[int, typing.Union[int, str]],
-            ],
+        stages: typing.Union[int, typing.Tuple[int, int]],
         ) -> Scope:
         r'''Scopes `voice_name` for `stages`.
 
@@ -3101,18 +3097,139 @@ class LibraryNS(abjad.AbjadObject):
             >>> baca.scope('HornVoiceI', (1, -1))
             Scope(stages=(1, -1), voice_name='HornVoiceI')
 
+        ..  container:: example
+
+            Negative stage numbers are allowed:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 12)),
+            ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', (1, -1)),
+            ...     baca.make_repeated_duration_notes([(1, 8)]),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', (-4, -3)),
+            ...     baca.pitch('D4'),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', (-2, -1)),
+            ...     baca.pitch('E4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                d'8
+                <BLANKLINE>
+                                d'8
+                <BLANKLINE>
+                                d'8
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                d'8
+                <BLANKLINE>
+                                d'8
+                <BLANKLINE>
+                                d'8
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                e'8
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                e'8
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Raises exception when stages are other than nonzero integers:
+
+            >>> baca.scope('MusicVoice', 0)
+            Traceback (most recent call last):
+                ...
+            Exception: stages must be nonzero integer or pair of nonzero integers (not 0).
+
+            >>> baca.scope('MusicVoice', 'text')
+            Traceback (most recent call last):
+                ...
+            Exception: stages must be nonzero integer or pair of nonzero integers (not 'text').
+
         '''
-        stop: typing.Union[int, str]
-        if isinstance(stages, str):
-            raise Exception(f'deprecated: {stages!r}.')
-        elif isinstance(stages, int):
+        message = 'stages must be nonzero integer or pair of nonzero integers'
+        message += f' (not {stages!r}).'
+        if isinstance(stages, int):
             start, stop = stages, stages
-        else:
-            assert isinstance(stages, tuple), repr(stages)
+        elif isinstance(stages, tuple):
             assert len(stages) == 2, repr(stages)
             start, stop = stages
-        assert isinstance(start, int), repr(start)
-        assert isinstance(stop, int), repr(stop)
+        else:
+            raise Exception(message)
+        if (not isinstance(start, int) or
+            not isinstance(stop, int) or 
+            start == 0  or
+            stop == 0):
+            raise Exception(message)
         stages = (start, stop)
         return Scope(
             stages=stages,
@@ -3177,31 +3294,23 @@ class LibraryNS(abjad.AbjadObject):
             Scope(stages=(1, -1), voice_name='HornVoiceIII')
             Scope(stages=(1, -1), voice_name='HornVoiceIV')
 
+        ..  container:: example
+
+            Raises exception on nonpair input:
+
+            >>> baca.scopes('MusicVoice', 1)
+            Traceback (most recent call last):
+                ...
+            Exception: each argument to baca.scopes() must be pair (not 'MusicVoice').
+
         '''
         scopes = []
         for pair in pairs:
-            if not isinstance(pair, tuple):
-                raise Exception(
-                    'each argument to baca.scopes() must be pair:'
-                    f'\n\n  {pair!r}\n\n'
-                    )
-            if not len(pair) == 2:
-                raise Exception(
-                    f'each argument to baca.scopes() must have length 2:'
-                    f'\n\n  {pair!r}\n\n'
-                    )
-            voice_name, stages = pair
-            stop: typing.Union[int, str]
-            if isinstance(stages, str):
-                raise Exception(f'deprecated {stages!r}.')
-            if isinstance(stages, int):
-                start, stop = stages, stages
-            else:
-                start, stop = stages
-            assert isinstance(start, int), repr(start)
-            assert isinstance(stop, int), repr(stop)
-            stages = (start, stop)
-            scope = Scope(stages=stages, voice_name=voice_name)
+            if not isinstance(pair, tuple) or not len(pair) == 2:
+                message = 'each argument to baca.scopes() must be pair'
+                message += f' (not {pair!r}).'
+                raise Exception(message)
+            scope = LibraryNS.scope(*pair)
             scopes.append(scope)
         return scopes
 

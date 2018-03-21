@@ -36,14 +36,16 @@ class Scope(abjad.AbjadObject):
 
     def __init__(
         self,
-        stages: typing.Tuple[int, typing.Union[int, str]] = None,
+        stages: typing.Tuple[int, int] = None,
         voice_name: str = None,
         ) -> None:
         assert isinstance(stages, tuple), repr(stages)
         assert len(stages) == 2, repr(stages)
         start, stop = stages
         assert isinstance(start, int), repr(start)
+        assert start != 0, repr(start)
         assert isinstance(stop, int), repr(stop)
+        assert stop != 0, repr(stop)
         self._stages = stages
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
@@ -52,7 +54,7 @@ class Scope(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def stages(self) -> typing.Tuple[int, typing.Union[int, str]]:
+    def stages(self) -> typing.Tuple[int, int]:
         r'''Gets stages.
         '''
         return self._stages
