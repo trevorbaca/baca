@@ -7,10 +7,13 @@ import traceback
 import typing
 from abjad import rhythmmakertools as rhythmos
 from .BreakMeasureMap import BreakMeasureMap
+from .Command import Command
 from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
+from .TimelineScope import TimelineScope
 from .Typing import Number
 from .Typing import NumberPair
 
@@ -392,7 +395,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, scopes, *commands):
+    def __call__(self, scopes, *commands) -> None:
         r'''Wraps each command in `commands` with each scope in `scopes`.
 
         ..  container:: example
@@ -575,19 +578,34 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Returns none.
+        ..  container:: example
+
+            Raises exception on noncommand input:
+
+            >>> maker(
+            ...     baca.scope('MusicVoice'),
+            ...     'text',
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception: 
+            <BLANKLINE>
+            Not a command:
+            <BLANKLINE>
+            text
+
         '''
-        prototype = (baca.Scope, baca.TimelineScope)
+        prototype = (Scope, TimelineScope)
         if isinstance(scopes, prototype):
             scopes = [scopes]
         else:
             assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
         for command in commands:
-            if not isinstance(command, baca.Command):
+            if not isinstance(command, Command):
                 raise Exception(f'\n\nNot a command:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
-                wrapper = baca.CommandWrapper(command=command, scope=scope)
+                wrapper = CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
 
     ### PRIVATE METHODS ###
