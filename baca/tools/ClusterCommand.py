@@ -377,7 +377,7 @@ class ClusterCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.clusters([3, 4], start_pitch='E4'),
         ...     baca.make_notes(repeat_ties=True),
         ...     )
@@ -602,7 +602,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.pitch('E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
@@ -746,7 +746,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.clusters([3]),
@@ -883,7 +883,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.clusters([3], start_pitch='G4'),
             ...     )
@@ -1029,7 +1029,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     )
@@ -1165,7 +1165,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.clusters([1, 3], start_pitch='E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     )
@@ -1301,7 +1301,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitch('E4'),
             ...     baca.clusters([]),

@@ -137,7 +137,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 12),
@@ -320,7 +320,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 0),
@@ -503,7 +503,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(0, 12),
@@ -686,7 +686,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, -12),
@@ -869,7 +869,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(-12, 12),

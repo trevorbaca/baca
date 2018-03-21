@@ -16,7 +16,7 @@ class LabelCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.make_even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.label(abjad.label().with_pitches(locale='us')),

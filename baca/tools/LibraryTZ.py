@@ -402,7 +402,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_color('red'),
             ...     )
@@ -443,7 +443,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_extra_offset((0, 2)),
             ...     )
@@ -644,7 +644,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_padding(2),
             ...     )
@@ -684,7 +684,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_parent_center()
             ...     )
@@ -888,7 +888,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_staff_padding(2)
             ...     )
@@ -1108,7 +1108,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_scripts_down()
             ...     )
@@ -1308,7 +1308,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_scripts_up()
             ...     )
@@ -1865,7 +1865,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_notes(),
             ...     baca.tie_from(baca.leaf(1)),
             ...     )
@@ -1962,7 +1962,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_notes(),
             ...     baca.tie_to(baca.leaf(1)),
             ...     )
@@ -2441,7 +2441,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -2555,7 +2555,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -4248,7 +4248,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_tied_notes(),
             ...     baca.untie_to(selector=baca.leaf(2)),
             ...     )
@@ -4843,7 +4843,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -4856,7 +4856,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('GlobalSkips'),
+            ...     'GlobalSkips',
             ...     baca.volta(baca.skips()[1:3]),
             ...     )
 
@@ -4963,7 +4963,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice', (1, 3)),
+            ...     ('MusicVoice', (1, 3)),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -4976,7 +4976,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('GlobalSkips', 2),
+            ...     ('GlobalSkips', 2),
             ...     baca.volta(),
             ...     )
 

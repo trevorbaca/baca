@@ -21,7 +21,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice', 1),
+        ...     ('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.make_even_runs(),
         ...     )

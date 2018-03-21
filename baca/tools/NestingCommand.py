@@ -122,7 +122,7 @@ class NestingCommand(Command):
         ...     time_signatures=time_signatures,
         ...     )
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.RhythmCommand(
         ...         rhythm_maker=selection,
         ...         ),

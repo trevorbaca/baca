@@ -16,7 +16,7 @@ class OctaveDisplacementCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.make_even_runs(),
         ...     baca.suite([
         ...         baca.pitch('G4'),

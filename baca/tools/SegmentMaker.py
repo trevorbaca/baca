@@ -32,7 +32,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.make_even_runs(),
         ...     )
 
@@ -406,7 +406,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
@@ -583,7 +583,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Raises exception on noncommand input:
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     'text',
             ...     )
             Traceback (most recent call last):
@@ -595,6 +595,13 @@ class SegmentMaker(abjad.SegmentMaker):
             text
 
         '''
+        from baca.tools.LibraryNS import LibraryNS
+        if isinstance(scopes, str):
+            scope = LibraryNS.scope(scopes)
+            scopes = [scope]
+        elif isinstance(scopes, tuple):
+            scope = LibraryNS.scope(*scopes)
+            scopes = [scope]
         prototype = (Scope, TimelineScope)
         if isinstance(scopes, prototype):
             scopes = [scopes]
@@ -2670,7 +2677,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.flags(),
             ...     )
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     ('ViolinMusicVoice', 1),
             ...     baca.rhythm(contribution['ViolinMusicVoice']),
             ...     )
 
@@ -2680,7 +2687,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.flags(),
             ...     )
             >>> maker(
-            ...     baca.scope('CelloMusicVoice', 1),
+            ...     ('CelloMusicVoice', 1),
             ...     baca.rhythm(contribution['CelloMusicVoice']),
             ...     )
 
@@ -2956,7 +2963,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     ('MusicVoice', 1),
             ...     baca.rhythm(figures),
             ...     )
 
@@ -3128,7 +3135,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     ('MusicVoice', 1),
             ...     baca.rhythm(figures),
             ...     )
 
@@ -3313,7 +3320,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3424,7 +3431,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3537,7 +3544,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3648,7 +3655,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3774,7 +3781,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3935,7 +3942,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4046,7 +4053,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4213,7 +4220,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.rhythm(figures),
             ...     )
 
@@ -4379,7 +4386,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.rhythm(figures),
             ...     )
 
@@ -4749,7 +4756,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5170,7 +5177,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.instrument(instruments['clarinet']),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
@@ -5298,7 +5305,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('MusicVoice'),
+            ...     'MusicVoice',
             ...     baca.instrument(instruments['clarinet']),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),

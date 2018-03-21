@@ -18,7 +18,7 @@ class MicrotoneDeviationCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('MusicVoice'),
+        ...     'MusicVoice',
         ...     baca.pitches('E4'),
         ...     baca.make_even_runs(),
         ...     baca.deviation([0, 0.5, 0, -0.5]),

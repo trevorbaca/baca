@@ -889,25 +889,25 @@ class ImbricationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoiceTwo', 1),
+            ...     ('MusicVoiceTwo', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_2_selections[0],
             ...         ),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoiceTwo', 2),
+            ...     ('MusicVoiceTwo', 2),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_2_selections[1],
             ...         ),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoiceOne', 1),
+            ...     ('MusicVoiceOne', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_1_selections[0],
             ...         ),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoiceOne', 2),
+            ...     ('MusicVoiceOne', 2),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_1_selections[1],
             ...         ),
