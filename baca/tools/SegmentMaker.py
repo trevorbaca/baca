@@ -5457,7 +5457,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
+        from baca.tools.LibraryNS import LibraryNS
+        if not isinstance(source, baca.Scope):
+            source = LibraryNS.scope(*source)
         assert isinstance(source, baca.Scope)
+        if not isinstance(target, baca.Scope):
+            target = LibraryNS.scope(*target)
         assert isinstance(target, baca.Scope)
         for wrapper in self.wrappers:
             if not isinstance(wrapper.command, baca.RhythmCommand):
