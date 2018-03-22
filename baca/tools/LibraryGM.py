@@ -37,6 +37,8 @@ class LibraryGM(abjad.AbjadObject):
     __slots__ = (
         )
 
+    mask_type = typing.Union[abjad.SilenceMask, abjad.SustainMask]
+
     ### PUBLIC METHODS ###
 
     @staticmethod
@@ -1676,9 +1678,16 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def make_notes(repeat_ties: bool = False) -> RhythmCommand:
+    def make_notes(
+        division_mask: mask_type = None,
+        repeat_ties: bool = False,
+        ) -> RhythmCommand:
         r'''Makes notes; rewrites meter.
         '''
+        if division_mask is None:
+            division_masks = None
+        else:
+            division_masks = [division_mask]
         if repeat_ties:
             tie_specifier = rhythmos.TieSpecifier(repeat_ties=True)
         else:
@@ -1686,17 +1695,25 @@ class LibraryGM(abjad.AbjadObject):
         return RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
+                division_masks=division_masks,
                 tie_specifier=tie_specifier,
                 )
             )
 
     @staticmethod
-    def make_repeat_tied_notes() -> RhythmCommand:
+    def make_repeat_tied_notes(
+        division_mask: mask_type = None,
+        ) -> RhythmCommand:
         r'''Makes repeat-tied notes; rewrites meter.
         '''
+        if division_mask is None:
+            division_masks = None
+        else:
+            division_masks = [division_mask]
         return RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
+                division_masks=division_masks,
                 tie_specifier=rhythmos.TieSpecifier(
                     tie_across_divisions=True,
                     repeat_ties=True,
