@@ -5476,7 +5476,9 @@ class SegmentMaker(abjad.SegmentMaker):
             if source.stages[0] in stages:
                 break
         else:
-            raise Exception(f'no {voice_name!r} rhythm command for {stage}.')
+            raise Exception(
+                f'no {source.voice_name!r} rhythm command for {source.stages}.'
+                )
         assert isinstance(wrapper, baca.CommandWrapper)
         assert isinstance(wrapper.command, baca.RhythmCommand)
         command = abjad.new(wrapper.command, **keywords)
