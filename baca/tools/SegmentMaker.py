@@ -5448,43 +5448,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### PUBLIC METHODS ###
 
-    def copy_rhythm(self, source, target, **keywords):
-        r'''Copies rhythm.
-
-        Gets rhythm command defined at `source` scope start.
-
-        Makes new rhythm command for `target` scope with optional `keywords`.
-
-        Returns none.
-        '''
-        from baca.tools.LibraryNS import LibraryNS
-        if not isinstance(source, baca.Scope):
-            source = LibraryNS.scope(*source)
-        assert isinstance(source, baca.Scope)
-        if not isinstance(target, baca.Scope):
-            target = LibraryNS.scope(*target)
-        assert isinstance(target, baca.Scope)
-        for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, baca.RhythmCommand):
-                continue
-            if wrapper.scope.voice_name != source.voice_name:
-                continue
-            assert isinstance(wrapper.scope.stages, tuple)
-            start = wrapper.scope.stages[0]
-            stop = wrapper.scope.stages[1] + 1
-            stages = range(start, stop)
-            if source.stages[0] in stages:
-                break
-        else:
-            raise Exception(
-                f'no {source.voice_name!r} rhythm command for {source.stages}.'
-                )
-        assert isinstance(wrapper, baca.CommandWrapper)
-        assert isinstance(wrapper.command, baca.RhythmCommand)
-        command = abjad.new(wrapper.command, **keywords)
-        wrapper = baca.CommandWrapper(command, target)
-        self.wrappers.append(wrapper)
-
     def run(
         self,
         deactivate: typing.List[str] = None,

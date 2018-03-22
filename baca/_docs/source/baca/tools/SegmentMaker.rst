@@ -27,7 +27,6 @@ Bases
       ~SegmentMaker.color_octaves
       ~SegmentMaker.color_out_of_range_pitches
       ~SegmentMaker.color_repeat_pitch_classes
-      ~SegmentMaker.copy_rhythm
       ~SegmentMaker.do_not_check_persistence
       ~SegmentMaker.do_not_include_layout_ly
       ~SegmentMaker.environment
@@ -198,8 +197,6 @@ Read-only properties
 
 Methods
 -------
-
-.. automethod:: SegmentMaker.copy_rhythm
 
 .. automethod:: SegmentMaker.run
 
