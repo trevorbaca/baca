@@ -2424,7 +2424,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if before != staff_lines:
                     strings = staff_lines._get_lilypond_format(context=staff)
                     if getattr(before, 'line_count', 5) == 5:
-                        context = staff.name
+                        context = staff.lilypond_type
                         string = f"{context}.BarLine.bar-extent = #'(-2 . 2)"
                         string = r'\once \override ' + string
                         strings.append(string)
