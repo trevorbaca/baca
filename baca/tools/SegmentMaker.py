@@ -605,12 +605,21 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (Scope, TimelineScope)
         if isinstance(scopes, prototype):
             scopes = [scopes]
-        else:
-            assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
+        assert isinstance(scopes, list), repr(scopes)
+        scopes_ = []
+        for scope in scopes:
+            if isinstance(scope, str):
+                scope_ = LibraryNS.scope(scope)
+            elif isinstance(scope, tuple):
+                scope_ = LibraryNS.scope(*scope)
+            else:
+                scope_ = scope
+            scopes_.append(scope_)
+        assert all(isinstance(_, prototype) for _ in scopes_), repr(scopes_)
         for command in commands:
             if not isinstance(command, Command):
                 raise Exception(f'\n\nNot a command:\n\n{format(command)}')
-        for scope in scopes:
+        for scope in scopes_:
             for command in commands:
                 wrapper = CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
