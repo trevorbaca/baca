@@ -39,6 +39,7 @@ Bases
       ~SegmentMaker.ignore_repeat_pitch_classes
       ~SegmentMaker.ignore_unpitched_notes
       ~SegmentMaker.ignore_unregistered_pitches
+      ~SegmentMaker.include_nonfirst_segment_stylesheet
       ~SegmentMaker.instruments
       ~SegmentMaker.last_segment
       ~SegmentMaker.magnify_staves
@@ -120,6 +121,8 @@ Read-only properties
 .. autoattribute:: SegmentMaker.ignore_unpitched_notes
 
 .. autoattribute:: SegmentMaker.ignore_unregistered_pitches
+
+.. autoattribute:: SegmentMaker.include_nonfirst_segment_stylesheet
 
 .. autoattribute:: SegmentMaker.instruments
 

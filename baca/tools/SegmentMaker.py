@@ -160,6 +160,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_markup',
         '_final_markup_extra_offset',
         '_first_measure_number',
+        '_include_nonfirst_segment_stylesheet',
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
@@ -286,9 +287,11 @@ class SegmentMaker(abjad.SegmentMaker):
         final_markup: typing.Union[tuple, None] = None,
         final_markup_extra_offset: typing.Union[NumberPair, None] = None,
         first_measure_number: typing.Union[int, None] = None,
+        first_segment: bool = None,
         ignore_repeat_pitch_classes: bool = None,
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
+        include_nonfirst_segment_stylesheet: bool = None,
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
         breaks: BreakMeasureMap = None,
@@ -347,6 +350,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._ignore_unpitched_notes: bool = ignore_unpitched_notes
         self._ignore_unregistered_pitches: bool = \
             ignore_unregistered_pitches
+        self._include_nonfirst_segment_stylesheet = \
+            include_nonfirst_segment_stylesheet
         self._instruments: abjad.OrderedDict = instruments
         self._last_measure_is_fermata = False
         self._last_segment: bool = last_segment
@@ -1748,7 +1753,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 return [self._absolute_string_trio_stylesheet_path]
         includes = []
         includes.append(self._score_package_stylesheet_path)
-        if 1 < self._get_segment_number():
+        if (1 < self._get_segment_number() or
+            self.include_nonfirst_segment_stylesheet):
             includes.append(self._score_package_nonfirst_stylesheet_path)
         return includes
 
@@ -4534,6 +4540,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         return self._ignore_unregistered_pitches
+
+    @property
+    def include_nonfirst_segment_stylesheet(self) -> typing.Optional[bool]:
+        r'''Is true when segment includes nonfirst segment stylesheet.
+        '''
+        return self._include_nonfirst_segment_stylesheet
 
     @property
     def instruments(self) -> typing.Optional[abjad.OrderedDict]:
