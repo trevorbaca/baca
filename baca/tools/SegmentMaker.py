@@ -604,7 +604,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         from baca.tools.LibraryNS import LibraryNS
-        abbreviations = self.score_template.voice_abbreviations
+        if self.score_template is not None:
+            abbreviations = self.score_template.voice_abbreviations
+        else:
+            abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
         prototype = (Scope, TimelineScope)
         if isinstance(scopes, str):
