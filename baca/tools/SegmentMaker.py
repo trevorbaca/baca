@@ -611,7 +611,8 @@ class SegmentMaker(abjad.SegmentMaker):
         abbreviations = abbreviations or abjad.OrderedDict()
         prototype = (Scope, TimelineScope)
         if isinstance(scopes, str):
-            scope = LibraryNS.scope(scopes)
+            voice_name = abbreviations.get(scopes, scopes)
+            scope = LibraryNS.scope(voice_name)
             scopes = [scope]
         elif isinstance(scopes, tuple):
             scopes = self._unpack_scope_pair(scopes, abbreviations)
