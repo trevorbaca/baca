@@ -35,6 +35,7 @@ Bases
       ~StringTrioScoreTemplate.make_square_staff_group
       ~StringTrioScoreTemplate.make_staff_group
       ~StringTrioScoreTemplate.part_manifest
+      ~StringTrioScoreTemplate.voice_abbreviations
       ~StringTrioScoreTemplate.__call__
       ~StringTrioScoreTemplate.__copy__
       ~StringTrioScoreTemplate.__eq__
@@ -57,6 +58,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: StringTrioScoreTemplate.part_manifest
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StringTrioScoreTemplate.voice_abbreviations
 
 Methods
 -------

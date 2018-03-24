@@ -1498,7 +1498,7 @@ class SegmentMaker(abjad.SegmentMaker):
         dictionary = self.previous_metadata.get('persistent_indicators')
         if dictionary:
             for context_name, momentos in dictionary.items():
-                if context_name not  in result:
+                if context_name not in result:
                     result[context_name] = momentos
         return result
 

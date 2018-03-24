@@ -35,6 +35,7 @@ Bases
       ~SingleStaffScoreTemplate.make_square_staff_group
       ~SingleStaffScoreTemplate.make_staff_group
       ~SingleStaffScoreTemplate.part_manifest
+      ~SingleStaffScoreTemplate.voice_abbreviations
       ~SingleStaffScoreTemplate.__call__
       ~SingleStaffScoreTemplate.__copy__
       ~SingleStaffScoreTemplate.__eq__
@@ -57,6 +58,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: SingleStaffScoreTemplate.part_manifest
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SingleStaffScoreTemplate.voice_abbreviations
 
 Methods
 -------

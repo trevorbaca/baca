@@ -33,6 +33,7 @@ Bases
       ~ScoreTemplate.make_square_staff_group
       ~ScoreTemplate.make_staff_group
       ~ScoreTemplate.part_manifest
+      ~ScoreTemplate.voice_abbreviations
       ~ScoreTemplate.__call__
       ~ScoreTemplate.__copy__
       ~ScoreTemplate.__eq__
@@ -51,6 +52,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: ScoreTemplate.part_manifest
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ScoreTemplate.voice_abbreviations
 
 Methods
 -------

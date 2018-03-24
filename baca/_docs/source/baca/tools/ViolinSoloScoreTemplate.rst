@@ -35,6 +35,7 @@ Bases
       ~ViolinSoloScoreTemplate.make_square_staff_group
       ~ViolinSoloScoreTemplate.make_staff_group
       ~ViolinSoloScoreTemplate.part_manifest
+      ~ViolinSoloScoreTemplate.voice_abbreviations
       ~ViolinSoloScoreTemplate.__call__
       ~ViolinSoloScoreTemplate.__copy__
       ~ViolinSoloScoreTemplate.__eq__
@@ -57,6 +58,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: ViolinSoloScoreTemplate.part_manifest
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ViolinSoloScoreTemplate.voice_abbreviations
 
 Methods
 -------

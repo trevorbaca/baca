@@ -35,6 +35,7 @@ Bases
       ~TwoVoiceStaffScoreTemplate.make_square_staff_group
       ~TwoVoiceStaffScoreTemplate.make_staff_group
       ~TwoVoiceStaffScoreTemplate.part_manifest
+      ~TwoVoiceStaffScoreTemplate.voice_abbreviations
       ~TwoVoiceStaffScoreTemplate.__call__
       ~TwoVoiceStaffScoreTemplate.__copy__
       ~TwoVoiceStaffScoreTemplate.__eq__
@@ -57,6 +58,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: TwoVoiceStaffScoreTemplate.part_manifest
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.voice_abbreviations
 
 Methods
 -------
