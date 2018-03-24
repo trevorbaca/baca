@@ -669,6 +669,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if not isinstance(command, Command):
                 raise Exception(f'\n\nNot a command:\n\n{format(command)}')
         for scope in scopes_:
+            if isinstance(scope, TimelineScope):
+                for scope_ in scope.scopes:
+                    if scope_.voice_name in abbreviations:
+                        voice_name = abbreviations[scope_.voice_name]
+                        scope_._voice_name = voice_name
             for command in commands:
                 wrapper = CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
