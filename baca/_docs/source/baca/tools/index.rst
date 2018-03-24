@@ -201,10 +201,8 @@ baca.tools
    PitchSet
    PitchTree
    PitchTreeSpanner
-   RangeDictionary
    Registration
    RegistrationComponent
-   RegistrationDictionary
    Scope
    ScoreTemplate
    Selection
@@ -256,10 +254,8 @@ baca.tools
    ~baca.tools.PitchSet.PitchSet
    ~baca.tools.PitchTree.PitchTree
    ~baca.tools.PitchTreeSpanner.PitchTreeSpanner
-   ~baca.tools.RangeDictionary.RangeDictionary
    ~baca.tools.Registration.Registration
    ~baca.tools.RegistrationComponent.RegistrationComponent
-   ~baca.tools.RegistrationDictionary.RegistrationDictionary
    ~baca.tools.Scope.Scope
    ~baca.tools.ScoreTemplate.ScoreTemplate
    ~baca.tools.Selection.Selection

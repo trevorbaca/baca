@@ -6,7 +6,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
     ..  container:: example
 
-        >>> metronome_marks = abjad.MetronomeMarkDictionary()
+        >>> metronome_marks = abjad.OrderedDict()
         >>> metronome_marks['72'] = abjad.MetronomeMark((1, 4), 72)
         >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> maker = baca.SegmentMaker(

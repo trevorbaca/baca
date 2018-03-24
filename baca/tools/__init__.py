@@ -74,13 +74,11 @@ from .PitchSet import PitchSet
 from .PitchSpecifier import PitchSpecifier
 from .PitchTree import PitchTree
 from .PitchTreeSpanner import PitchTreeSpanner
-from .RangeDictionary import RangeDictionary
 from .RegisterCommand import RegisterCommand
 from .RegisterInterpolationCommand import RegisterInterpolationCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .Registration import Registration
 from .RegistrationComponent import RegistrationComponent
-from .RegistrationDictionary import RegistrationDictionary
 from .RestAffixSpecifier import RestAffixSpecifier
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope

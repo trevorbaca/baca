@@ -1152,7 +1152,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             Example instruments:
 
-            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments = abjad.OrderedDict()
             >>> instruments['Flute'] = abjad.Flute(hide=True)
             >>> instruments['Piccolo'] = abjad.Piccolo(hide=True)
             >>> breaks = baca.breaks(
@@ -2589,7 +2589,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             Example instruments:
 
-            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments = abjad.OrderedDict()
             >>> instruments['Flute'] = abjad.Flute()
             >>> instruments['Piccolo'] = abjad.Piccolo()
             >>> breaks = baca.breaks(
@@ -5946,7 +5946,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
         ..  container:: example
 
             >>> breaks = baca.breaks(baca.page([1, 4, (8,)]))
-            >>> metronome_marks = abjad.MetronomeMarkDictionary()
+            >>> metronome_marks = abjad.OrderedDict()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
 
@@ -7486,7 +7486,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
         ..  container:: example
 
             >>> breaks = baca.breaks(baca.page([1, 4, (8,)]))
-            >>> metronome_marks = abjad.MetronomeMarkDictionary()
+            >>> metronome_marks = abjad.OrderedDict()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
 

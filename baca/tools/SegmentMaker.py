@@ -4764,7 +4764,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             With metronome mark measure map:
 
-            >>> metronome_marks = abjad.MetronomeMarkDictionary()
+            >>> metronome_marks = abjad.OrderedDict()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
@@ -5188,7 +5188,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Transposes score:
 
-            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments = abjad.OrderedDict()
             >>> instruments['clarinet'] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
             ...     instruments=instruments,
@@ -5316,7 +5316,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Does not transpose score:
 
-            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments = abjad.OrderedDict()
             >>> instruments['clarinet'] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
             ...     instruments=instruments,
