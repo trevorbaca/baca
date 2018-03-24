@@ -307,7 +307,7 @@ class MusicAccumulator(abjad.AbjadObject):
             selection = self.assemble(voice_name)
             if selection:
                 segment_maker(
-                    baca.scope(voice_name, 1),
+                    (voice_name, 1),
                     baca.make_rhythm(selection)
                     )
 

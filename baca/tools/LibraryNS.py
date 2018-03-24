@@ -3237,20 +3237,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def scopes(voices, stages) -> typing.List[Scope]:
-        r'''Makes scope crossproduct of `voices` against `stages`.
-        '''
-        from baca.tools.LibraryNS import LibraryNS
-        assert isinstance(voices, list), repr(voices)
-        assert isinstance(stages, list), repr(stages)
-        scopes = []
-        for voice in voices:
-            for item in stages:
-                scope = LibraryNS.scope(voice, item)
-                scopes.append(scope)
-        return scopes
-
-    @staticmethod
     def scorewide_spacing(
         path: typing.Union[abjad.Path, typing.Tuple[int, int]],
         fallback_duration: typing.Tuple[int, int],
