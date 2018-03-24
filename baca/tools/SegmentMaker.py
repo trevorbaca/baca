@@ -311,6 +311,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ] = 0,
         range_checker: abjad.PitchRange = None,
         score_template: ScoreTemplate = None,
+        segment_directory: abjad.Path = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
         spacing: HorizontalSpacingSpecifier = None,
@@ -379,6 +380,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._range_checker: abjad.PitchRange = range_checker
         self._score_template: ScoreTemplate = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
+        self._segment_directory: abjad.Path = segment_directory
         self._segment_duration: abjad.Duration = None
         self._skip_wellformedness_checks: bool = skip_wellformedness_checks
         self._skips_instead_of_rests: bool = skips_instead_of_rests
@@ -394,6 +396,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._validate_stage_count: int = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._wrappers: typing.List[CommandWrapper] = []
+        self._import_manifests()
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
         self._validate_measures_per_stage()
@@ -601,6 +604,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         from baca.tools.LibraryNS import LibraryNS
+        abbreviations = self.score_template.voice_abbreviations
+        abbreviations = abbreviations or abjad.OrderedDict()
         prototype = (Scope, TimelineScope)
         if isinstance(scopes, str):
             scope = LibraryNS.scope(scopes)
@@ -637,6 +642,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise TypeError(scopes)
             scopes_ = []
             for voice_name in voice_names:
+                voice_name = abbreviations.get(voice_name, voice_name)
                 for stage_token in stage_tokens:
                     scope = LibraryNS.scope(voice_name, stage_token)
                     scopes_.append(scope)
@@ -649,9 +655,12 @@ class SegmentMaker(abjad.SegmentMaker):
         scopes_ = []
         for scope in scopes:
             if isinstance(scope, str):
-                scope_ = LibraryNS.scope(scope)
+                voice_name = abbreviations.get(scope, scope)
+                scope_ = LibraryNS.scope(voice_name)
             elif isinstance(scope, tuple):
-                scope_ = LibraryNS.scope(*scope)
+                voice_name, stages = scope
+                voice_name = abbreviations.get(voice_name, voice_name)
+                scope_ = LibraryNS.scope(voice_name, stages)
             else:
                 scope_ = scope
             scopes_.append(scope_)
@@ -2347,10 +2356,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 print(f'Unknown voice {scope.voice_name} ...\n')
                 raise
             start = scope.stages[0]
-            if (scope.stages[1] == abjad.Infinity or
-                scope.stages[1] is abjad.Infinity):
-                raise Exception("use -1 instead.")
-            elif scope.stages[1] == -1:
+            if scope.stages[1] == -1:
                 stop = self.stage_count + 1
             else:
                 stop = scope.stages[1] + 1
@@ -2437,9 +2443,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.attach(literal, leaf, tag='SM26')
 
     def _stage_number_to_measure_indices(self, stage_number):
-        if stage_number is abjad.Infinity or stage_number == abjad.Infinity:
-            raise Exception("use -1 instead.")
-        elif stage_number == -1:
+        if stage_number == -1:
             stage_number = self.stage_count
         if self.stage_count < stage_number:
             count = self.stage_count
