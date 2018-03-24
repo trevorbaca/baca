@@ -601,15 +601,37 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         from baca.tools.LibraryNS import LibraryNS
+        prototype = (Scope, TimelineScope)
         if isinstance(scopes, str):
             scope = LibraryNS.scope(scopes)
             scopes = [scope]
         elif isinstance(scopes, tuple):
-            scope = LibraryNS.scope(*scopes)
-            scopes = [scope]
-        prototype = (Scope, TimelineScope)
-        if isinstance(scopes, prototype):
+            assert len(scopes) == 2, repr(scopes)
+            assert isinstance(scopes[0], (list, str)), repr(scopes)
+            assert isinstance(scopes[1], (int, list, tuple)), repr(scopes)
+            if isinstance(scopes[0], str):
+                voice_names = [scopes[0]]
+            else:
+                voice_names = scopes[0]
+            assert isinstance(voice_names, list), repr(voice_names)
+            assert all(isinstance(_, str) for _ in voice_names)
+            if isinstance(scopes[1], (int, tuple)):
+                stage_tokens = [scopes[1]]
+            else:
+                stage_tokens = scopes[1]
+            assert isinstance(stage_tokens, list), repr(stage_tokens)
+            assert all(isinstance(_, (int, tuple)) for _ in stage_tokens)
+            scopes_ = []
+            for voice_name in voice_names:
+                for stage_token in stage_tokens:
+                    #scope = LibraryNS.scope(*scopes)
+                    scope = LibraryNS.scope(voice_name, stage_token)
+                    scopes_.append(scope)
+            scopes = scopes_
+        elif isinstance(scopes, prototype):
             scopes = [scopes]
+        else:
+            assert isinstance(scopes, list), repr(scopes)
         assert isinstance(scopes, list), repr(scopes)
         scopes_ = []
         for scope in scopes:
