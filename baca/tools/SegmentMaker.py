@@ -615,16 +615,29 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice_names = scopes[0]
             assert isinstance(voice_names, list), repr(voice_names)
             assert all(isinstance(_, str) for _ in voice_names)
-            if isinstance(scopes[1], (int, tuple)):
-                stage_tokens = [scopes[1]]
+            token_type = typing.Union[int, typing.Tuple[int, int]]
+            stage_tokens: typing.List[token_type] = []
+            if isinstance(scopes[1], int):
+                stage_tokens.append(scopes[1])
+            elif isinstance(scopes[1], tuple):
+                assert len(scopes[1]) == 2, repr(scopes)
+                start, stop = scopes[1]
+                stage_tokens.append((start, stop))
+            elif isinstance(scopes[1], list):
+                for stage_token in scopes[1]:
+                    if isinstance(stage_token, int):
+                        stage_tokens.append(stage_token)
+                    elif isinstance(stage_token, tuple):
+                        assert len(stage_token) == 2, repr(scopes)
+                        start, stop = stage_token
+                        stage_tokens.append((start, stop))
+                    else:
+                        raise TypeError(scopes)
             else:
-                stage_tokens = scopes[1]
-            assert isinstance(stage_tokens, list), repr(stage_tokens)
-            assert all(isinstance(_, (int, tuple)) for _ in stage_tokens)
+                raise TypeError(scopes)
             scopes_ = []
             for voice_name in voice_names:
                 for stage_token in stage_tokens:
-                    #scope = LibraryNS.scope(*scopes)
                     scope = LibraryNS.scope(voice_name, stage_token)
                     scopes_.append(scope)
             scopes = scopes_
