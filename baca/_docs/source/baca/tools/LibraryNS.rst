@@ -62,7 +62,6 @@ Bases
       ~LibraryNS.resume_after
       ~LibraryNS.rhythm
       ~LibraryNS.scope
-      ~LibraryNS.scopes
       ~LibraryNS.scorewide_spacing
       ~LibraryNS.script_color
       ~LibraryNS.script_extra_offset
@@ -192,8 +191,6 @@ Class & static methods
 .. automethod:: LibraryNS.rhythm
 
 .. automethod:: LibraryNS.scope
-
-.. automethod:: LibraryNS.scopes
 
 .. automethod:: LibraryNS.scorewide_spacing
 
