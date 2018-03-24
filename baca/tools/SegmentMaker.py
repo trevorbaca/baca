@@ -611,59 +611,40 @@ class SegmentMaker(abjad.SegmentMaker):
             scope = LibraryNS.scope(scopes)
             scopes = [scope]
         elif isinstance(scopes, tuple):
-            assert len(scopes) == 2, repr(scopes)
-            assert isinstance(scopes[0], (list, str)), repr(scopes)
-            assert isinstance(scopes[1], (int, list, tuple)), repr(scopes)
-            if isinstance(scopes[0], str):
-                voice_names = [scopes[0]]
-            else:
-                voice_names = scopes[0]
-            assert isinstance(voice_names, list), repr(voice_names)
-            assert all(isinstance(_, str) for _ in voice_names)
-            token_type = typing.Union[int, typing.Tuple[int, int]]
-            stage_tokens: typing.List[token_type] = []
-            if isinstance(scopes[1], int):
-                stage_tokens.append(scopes[1])
-            elif isinstance(scopes[1], tuple):
-                assert len(scopes[1]) == 2, repr(scopes)
-                start, stop = scopes[1]
-                stage_tokens.append((start, stop))
-            elif isinstance(scopes[1], list):
-                for stage_token in scopes[1]:
-                    if isinstance(stage_token, int):
-                        stage_tokens.append(stage_token)
-                    elif isinstance(stage_token, tuple):
-                        assert len(stage_token) == 2, repr(scopes)
-                        start, stop = stage_token
-                        stage_tokens.append((start, stop))
-                    else:
-                        raise TypeError(scopes)
-            else:
-                raise TypeError(scopes)
-            scopes_ = []
-            for voice_name in voice_names:
-                voice_name = abbreviations.get(voice_name, voice_name)
-                for stage_token in stage_tokens:
-                    scope = LibraryNS.scope(voice_name, stage_token)
-                    scopes_.append(scope)
-            scopes = scopes_
+            scopes = self._unpack_scope_pair(scopes, abbreviations)
         elif isinstance(scopes, prototype):
             scopes = [scopes]
         else:
             assert isinstance(scopes, list), repr(scopes)
+            scopes_ = []
+            for scope in scopes:
+                if isinstance(scope, tuple):
+                    scopes__ = self._unpack_scope_pair(scope, abbreviations)
+                    scopes_.extend(scopes__)
+                else:
+                    scopes_.append(scope)
+            scopes = scopes_
         assert isinstance(scopes, list), repr(scopes)
         scopes_ = []
         for scope in scopes:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
                 scope_ = LibraryNS.scope(voice_name)
+                scopes_.append(scope_)
             elif isinstance(scope, tuple):
                 voice_name, stages = scope
                 voice_name = abbreviations.get(voice_name, voice_name)
-                scope_ = LibraryNS.scope(voice_name, stages)
+                if isinstance(stages, list):
+                    stages = self._unpack_stage_token_list(stages)
+                    for stage_token in stages:
+                        scope_ = LibraryNS.scope(voice_name, stage_token)
+                        scopes_.append(scope_)
+                else:
+                    scope_ = LibraryNS.scope(voice_name, stages)
+                    scopes_.append(scope_)
             else:
                 scope_ = scope
-            scopes_.append(scope_)
+                scopes_.append(scope_)
         assert all(isinstance(_, prototype) for _ in scopes_), repr(scopes_)
         for command in commands:
             if not isinstance(command, Command):
@@ -2646,6 +2627,53 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper,
                     status,
                     )
+
+    def _unpack_scope_pair(self, scopes, abbreviations):
+        from baca.tools.LibraryNS import LibraryNS
+        assert isinstance(scopes, tuple), repr(scopes)
+        assert len(scopes) == 2, repr(scopes)
+        assert isinstance(scopes[0], (list, str)), repr(scopes)
+        assert isinstance(scopes[1], (int, list, tuple)), repr(scopes)
+        if isinstance(scopes[0], str):
+            voice_names = [scopes[0]]
+        else:
+            voice_names = scopes[0]
+        assert isinstance(voice_names, list), repr(voice_names)
+        assert all(isinstance(_, str) for _ in voice_names)
+        token_type = typing.Union[int, typing.Tuple[int, int]]
+        stage_tokens: typing.List[token_type] = []
+        if isinstance(scopes[1], int):
+            stage_tokens.append(scopes[1])
+        elif isinstance(scopes[1], tuple):
+            assert len(scopes[1]) == 2, repr(scopes)
+            start, stop = scopes[1]
+            stage_tokens.append((start, stop))
+        elif isinstance(scopes[1], list):
+            stage_tokens = self._unpack_stage_token_list(scopes[1])
+        else:
+            raise TypeError(scopes)
+        scopes_ = []
+        for voice_name in voice_names:
+            voice_name = abbreviations.get(voice_name, voice_name)
+            for stage_token in stage_tokens:
+                scope = LibraryNS.scope(voice_name, stage_token)
+                scopes_.append(scope)
+        return scopes_
+
+    @staticmethod
+    def _unpack_stage_token_list(stage_token_list):
+        assert isinstance(stage_token_list, list), repr(stage_token_list)
+        stage_tokens = []
+        for stage_token in stage_token_list:
+            if isinstance(stage_token, int):
+                stage_tokens.append(stage_token)
+            elif isinstance(stage_token, tuple):
+                assert len(stage_token) == 2, repr(scopes)
+                start, stop = stage_token
+                stage_tokens.append((start, stop))
+            else:
+                raise TypeError(stage_token_list)
+        return stage_tokens
 
     def _update_score_one_time(self):
         is_forbidden_to_update = self.score._is_forbidden_to_update
