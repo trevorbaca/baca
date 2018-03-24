@@ -46,7 +46,6 @@ Bases
       ~LibraryGM.make_repeated_duration_notes
       ~LibraryGM.make_rests
       ~LibraryGM.make_rhythm
-      ~LibraryGM.make_scopes
       ~LibraryGM.make_single_attack
       ~LibraryGM.make_skips
       ~LibraryGM.make_tied_notes
@@ -119,8 +118,6 @@ Class & static methods
 .. automethod:: LibraryGM.make_rests
 
 .. automethod:: LibraryGM.make_rhythm
-
-.. automethod:: LibraryGM.make_scopes
 
 .. automethod:: LibraryGM.make_single_attack
 
