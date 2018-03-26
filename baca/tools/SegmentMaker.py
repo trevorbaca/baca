@@ -380,6 +380,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._range_checker: abjad.PitchRange = range_checker
         self._score_template: ScoreTemplate = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
+        if segment_directory is not None:
+            segment_directory = abjad.Path(
+                segment_directory,
+                scores=segment_directory.parent.parent.parent.parent,
+                )
         self._segment_directory: abjad.Path = segment_directory
         self._segment_duration: abjad.Duration = None
         self._skip_wellformedness_checks: bool = skip_wellformedness_checks
