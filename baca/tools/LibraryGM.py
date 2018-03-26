@@ -1708,6 +1708,8 @@ class LibraryGM(abjad.AbjadObject):
         '''
         if division_mask is None:
             division_masks = None
+        elif isinstance(division_mask, list):
+            division_masks = division_mask[:]
         else:
             division_masks = [division_mask]
         return RhythmCommand(
