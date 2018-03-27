@@ -1,6 +1,8 @@
 import abjad
 import baca
+import typing
 from abjad import rhythmmakertools as rhythmos
+from .MusicMaker import MusicMaker
 
 
 class MusicAccumulator(abjad.AbjadObject):
@@ -14,9 +16,9 @@ class MusicAccumulator(abjad.AbjadObject):
     __slots__ = (
         '_current_offset',
         '_figure_index',
-        '_figure_maker',
         '_figure_names',
         '_floating_selections',
+        '_music_maker',
         '_score_stop_offset',
         '_score_template',
         '_time_signatures',
@@ -25,7 +27,10 @@ class MusicAccumulator(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template):
+    def __init__(
+        self,
+        score_template: abjad.ScoreTemplate,
+        ) -> None:
         self._score_template = score_template
         voice_names = []
         dummy_score = score_template()
@@ -34,11 +39,11 @@ class MusicAccumulator(abjad.AbjadObject):
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
         self._figure_index = 0
-        self._figure_maker = self._make_default_figure_maker()
-        self._figure_names = []
+        self._music_maker = self._make_default_figure_maker()
+        self._figure_names: typing.List[str] = []
         self._floating_selections = self._make_voice_dictionary()
         self._score_stop_offset = abjad.Offset(0)
-        self._time_signatures = []
+        self._time_signatures: typing.List[abjad.TimeSignature] = []
 
     ### SPECIAL METHODS ###
 
@@ -89,6 +94,10 @@ class MusicAccumulator(abjad.AbjadObject):
 
     def _cache_floating_selection(self, music_contribution):
         for voice_name in music_contribution:
+            voice_name = self.score_template.voice_abbreviations.get(
+                voice_name,
+                voice_name,
+                )
             selection = music_contribution[voice_name]
             if not selection:
                 continue
@@ -239,7 +248,7 @@ class MusicAccumulator(abjad.AbjadObject):
 
     @staticmethod
     def _make_default_figure_maker():
-        return baca.MusicMaker(
+        return MusicMaker(
             rhythmos.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
@@ -261,26 +270,20 @@ class MusicAccumulator(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def music_maker(self):
+    def music_maker(self) -> MusicMaker:
         r'''Gets default music-maker.
-
-        Returns music-maker.
         '''
-        return self._figure_maker
+        return self._music_maker
 
     @property
-    def score_template(self):
+    def score_template(self) -> abjad.ScoreTemplate:
         r'''Gets score template.
-
-        Returns score template.
         '''
         return self._score_template
 
     @property
-    def time_signatures(self):
+    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
         r'''Gets time signatures.
-
-        Returns list.
         '''
         return self._time_signatures
 
