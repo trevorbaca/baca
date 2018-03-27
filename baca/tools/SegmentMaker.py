@@ -656,15 +656,34 @@ class SegmentMaker(abjad.SegmentMaker):
                 scopes_.append(scope_)
         assert all(isinstance(_, prototype) for _ in scopes_), repr(scopes_)
         for command in commands:
+            if isinstance(command, tuple):
+                assert len(command) == 2, repr(command)
+                command = command[0]
             if not isinstance(command, Command):
                 raise Exception(f'\n\nNot a command:\n\n{format(command)}')
-        for scope in scopes_:
+        scope_count = len(scopes_)
+        for i, scope in enumerate(scopes_):
             if isinstance(scope, TimelineScope):
                 for scope_ in scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
                         scope_._voice_name = voice_name
             for command in commands:
+                if isinstance(command, tuple):
+                    assert len(command) == 2, repr(command)
+                    command, match = command
+                    if isinstance(match, int):
+                        if 0 <= match and match != i:
+                            continue
+                        if match < 0 and -(scope_count - i) != match:
+                            continue
+                    elif isinstance(match, tuple):
+                        assert len(match) == 2, repr(command)
+                        triple = slice(*match).indices(scope_count)
+                        if i not in range(*triple):
+                            continue
+                    else:
+                        raise TypeError(command)
                 wrapper = CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
 
