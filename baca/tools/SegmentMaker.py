@@ -1531,6 +1531,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 first_context = parentage.get_first(abjad.Context)
                 indicator = wrapper.indicator
                 value = self._indicator_to_key(indicator, self.manifests)
+                if value is None and self.environment != 'docs':
+                    raise Exception(
+                        'can not find persistent indicator in manifest:\n\n'
+                        f'  {indicator}'
+                        )
                 if isinstance(indicator.persistent, str):
                     prototype = indicator.persistent
                 else:
