@@ -196,6 +196,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_validate_measure_count',
         '_validate_stage_count',
         '_voice_metadata',
+        '_voice_names',
         '_wrappers',
         )
 
@@ -400,6 +401,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._validate_measure_count: int = validate_measure_count
         self._validate_stage_count: int = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
+        self._voice_names: typing.Tuple[str, ...] = None
         self._wrappers: typing.List[CommandWrapper] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
@@ -607,9 +609,22 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
             text
 
+        ..  container:: example
+
+            Raises exception on unknown voice name:
+
+            >>> maker(
+            ...     'PercussionVoice',
+            ...     baca.make_repeated_duration_notes([(1, 4)]),
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception: unknown voice name 'PercussionVoice'.
+
         '''
         from baca.tools.LibraryNS import LibraryNS
         if self.score_template is not None:
+            self._cache_voice_names()
             abbreviations = self.score_template.voice_abbreviations
         else:
             abbreviations = abjad.OrderedDict()
@@ -663,6 +678,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(f'\n\nNot a command:\n\n{format(command)}')
         scope_count = len(scopes_)
         for i, scope in enumerate(scopes_):
+            if self._voice_names and scope.voice_name not in self._voice_names:
+                raise Exception(f'unknown voice name {scope.voice_name!r}.')
             if isinstance(scope, TimelineScope):
                 for scope_ in scope.scopes:
                     if scope_.voice_name in abbreviations:
@@ -1239,6 +1256,19 @@ class SegmentMaker(abjad.SegmentMaker):
             contexts_ = segment.get_metadatum(string)
             contexts.update(contexts_)
         self._previously_alive_contexts.extend(sorted(contexts))
+
+    def _cache_voice_names(self):
+        if self._voice_names is not None:
+            return
+        if self.score_template is None:
+            return
+        voice_names = ['GlobalSkips', 'GlobalRests']
+        score = self.score_template()
+        for voice in abjad.iterate(score).components(abjad.Voice):
+            if voice.name is not None:
+                voice_names.append(voice.name)
+        voice_names_ = tuple(voice_names)
+        self._voice_names = voice_names_
 
     def _call_commands(self):
         command_count = 0
