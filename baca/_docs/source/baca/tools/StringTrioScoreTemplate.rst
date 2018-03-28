@@ -27,6 +27,7 @@ Bases
 
       ~StringTrioScoreTemplate.allows_instrument
       ~StringTrioScoreTemplate.allows_part_assignment
+      ~StringTrioScoreTemplate.always_make_global_rests
       ~StringTrioScoreTemplate.attach_defaults
       ~StringTrioScoreTemplate.defaults
       ~StringTrioScoreTemplate.do_not_require_margin_markup
@@ -47,6 +48,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StringTrioScoreTemplate.always_make_global_rests
 
 .. only:: html
 

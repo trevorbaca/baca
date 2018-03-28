@@ -27,6 +27,7 @@ Bases
 
       ~SingleStaffScoreTemplate.allows_instrument
       ~SingleStaffScoreTemplate.allows_part_assignment
+      ~SingleStaffScoreTemplate.always_make_global_rests
       ~SingleStaffScoreTemplate.attach_defaults
       ~SingleStaffScoreTemplate.defaults
       ~SingleStaffScoreTemplate.do_not_require_margin_markup
@@ -47,6 +48,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SingleStaffScoreTemplate.always_make_global_rests
 
 .. only:: html
 

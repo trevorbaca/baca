@@ -986,11 +986,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _attach_fermatas(self):
-        always_make_global_rests = getattr(
-            self.score_template,
-            'always_make_global_rests',
-            False,
-            )
+        always_make_global_rests = self.score_template.always_make_global_rests
         if (not self.metronome_mark_measure_map and
             not always_make_global_rests):
             del(self.score['GlobalRests'])

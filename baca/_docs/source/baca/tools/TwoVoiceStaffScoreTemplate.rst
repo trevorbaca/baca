@@ -27,6 +27,7 @@ Bases
 
       ~TwoVoiceStaffScoreTemplate.allows_instrument
       ~TwoVoiceStaffScoreTemplate.allows_part_assignment
+      ~TwoVoiceStaffScoreTemplate.always_make_global_rests
       ~TwoVoiceStaffScoreTemplate.attach_defaults
       ~TwoVoiceStaffScoreTemplate.defaults
       ~TwoVoiceStaffScoreTemplate.do_not_require_margin_markup
@@ -47,6 +48,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.always_make_global_rests
 
 .. only:: html
 

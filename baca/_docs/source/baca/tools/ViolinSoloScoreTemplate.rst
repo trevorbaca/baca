@@ -27,6 +27,7 @@ Bases
 
       ~ViolinSoloScoreTemplate.allows_instrument
       ~ViolinSoloScoreTemplate.allows_part_assignment
+      ~ViolinSoloScoreTemplate.always_make_global_rests
       ~ViolinSoloScoreTemplate.attach_defaults
       ~ViolinSoloScoreTemplate.defaults
       ~ViolinSoloScoreTemplate.do_not_require_margin_markup
@@ -47,6 +48,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ViolinSoloScoreTemplate.always_make_global_rests
 
 .. only:: html
 

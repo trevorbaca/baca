@@ -25,6 +25,7 @@ Bases
 
       ~ScoreTemplate.allows_instrument
       ~ScoreTemplate.allows_part_assignment
+      ~ScoreTemplate.always_make_global_rests
       ~ScoreTemplate.attach_defaults
       ~ScoreTemplate.defaults
       ~ScoreTemplate.do_not_require_margin_markup
@@ -45,6 +46,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ScoreTemplate.always_make_global_rests
 
 .. autoattribute:: ScoreTemplate.defaults
 
