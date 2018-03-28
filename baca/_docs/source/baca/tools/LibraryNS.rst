@@ -41,7 +41,6 @@ Bases
       ~LibraryNS.pitches
       ~LibraryNS.possibile_dynamic
       ~LibraryNS.previous_metadata
-      ~LibraryNS.proportional_notation_duration
       ~LibraryNS.register
       ~LibraryNS.rehearsal_mark
       ~LibraryNS.rehearsal_mark_extra_offset
@@ -149,8 +148,6 @@ Class & static methods
 .. automethod:: LibraryNS.possibile_dynamic
 
 .. automethod:: LibraryNS.previous_metadata
-
-.. automethod:: LibraryNS.proportional_notation_duration
 
 .. automethod:: LibraryNS.register
 
