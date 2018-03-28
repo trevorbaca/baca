@@ -278,9 +278,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self,
         allow_empty_selections: bool = None,
         clock_time_override: abjad.MetronomeMark = None,
-        color_octaves: bool = None,
-        color_out_of_range_pitches: bool = None,
-        color_repeat_pitch_classes: bool = None,
+        color_octaves: bool = True,
+        color_out_of_range_pitches: bool = True,
+        color_repeat_pitch_classes: bool = True,
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
@@ -1581,6 +1581,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(markup, leaf, tag='SM12')
 
     def _color_repeat_pitch_classes_(self):
+        if not self.color_repeat_pitch_classes:
+            return
         manager = baca.WellformednessManager
         lts = manager._find_repeat_pitch_classes(self.score)
         markup = abjad.Markup('@', direction=abjad.Up)

@@ -960,13 +960,27 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         d'16
                                         -\staccato                                                       %! IC
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         bf'16
                                         -\staccato                                                       %! IC
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         s16
                                     }
@@ -991,13 +1005,27 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         cs''16
                                         -\staccato                                                       %! IC
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         a'16
                                         -\staccato                                                       %! IC
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         s16
                                         ]                                                                %! SM35
@@ -1020,11 +1048,25 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         d'16
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         bf'16
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
@@ -1057,11 +1099,25 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         cs''16
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
                                         a'16
+                                        - \tweak color #red                                              %! SM12
+                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
