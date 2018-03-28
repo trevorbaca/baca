@@ -345,8 +345,7 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/6 {
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 1/1 {
+                                \scaleDurations #'(1 . 1) {
                                     r4.
                                     r4.
                                 }
@@ -605,7 +604,7 @@ class MusicMaker(abjad.AbjadObject):
         self._apply_state_manifest(state_manifest)
         specifiers = list(self.specifiers or []) + list(specifiers)
         if all(isinstance(_, abjad.Rest) for _ in collections):
-            tuplet = abjad.Tuplet((1, 1), collections)
+            tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
