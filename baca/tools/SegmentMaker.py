@@ -1408,6 +1408,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if instrument is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing instrument.'
             raise Exception(message)
+        if instrument.hide is not True:
+            message = f'{voice} leaf {i} ({leaf!s}) has nonhidden instrument.'
+            raise Exception(message)
         if (instrument.hide and
             not self.score_template.do_not_require_margin_markup):
             markup = abjad.inspect(leaf).get_effective(abjad.MarginMarkup)
@@ -1429,8 +1432,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in abjad.iterate(voice).leaves(pitched=True):
                     if leaf not in self.range_checker:
                         if self.color_out_of_range_pitches:
-                            # HERE
-                            #abjad.label(leaf).color_leaves('red')
                             abjad.attach(markup, leaf, tag='SM13')
                             literal = abjad.LilyPondLiteral(r'\makeRed')
                             abjad.attach(literal, leaf, tag='SM13')
@@ -1584,8 +1585,6 @@ class SegmentMaker(abjad.SegmentMaker):
             if baca.PitchClassSegment(pitch_classes).has_duplicates():
                 notes_and_chords = vertical_moment.notes_and_chords
                 notes_and_chords = abjad.select(notes_and_chords)
-                # HERE
-                #abjad.label(notes_and_chords).color_leaves('red')
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf, tag='SM12')
                     literal = abjad.LilyPondLiteral(r'\makeRed')
@@ -1599,8 +1598,6 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
         for lt in lts:
-            # HERE
-            #abjad.label(lt).color_leaves('red')
             for leaf in lt:
                 abjad.attach(markup, leaf, tag='SM14')
                 literal = abjad.LilyPondLiteral(r'\makeRed')
