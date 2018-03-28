@@ -1262,7 +1262,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if self.score_template is None:
             return
-        voice_names = ['GlobalSkips', 'GlobalRests']
+        voice_names = ['GlobalSkips', 'GlobalRests', 'TimelineScope']
         score = self.score_template()
         for voice in abjad.iterate(score).components(abjad.Voice):
             if voice.name is not None:
