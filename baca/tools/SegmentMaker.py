@@ -1408,7 +1408,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if instrument is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing instrument.'
             raise Exception(message)
-        if instrument.hide:
+        if (instrument.hide and
+            not self.score_template.do_not_require_margin_markup):
             markup = abjad.inspect(leaf).get_effective(abjad.MarginMarkup)
             if markup is None:
                 message = f'{voice} leaf {i} ({leaf!s}) missing margin markup.'

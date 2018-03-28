@@ -29,6 +29,7 @@ Bases
       ~TwoVoiceStaffScoreTemplate.allows_part_assignment
       ~TwoVoiceStaffScoreTemplate.attach_defaults
       ~TwoVoiceStaffScoreTemplate.defaults
+      ~TwoVoiceStaffScoreTemplate.do_not_require_margin_markup
       ~TwoVoiceStaffScoreTemplate.group_families
       ~TwoVoiceStaffScoreTemplate.make_music_context
       ~TwoVoiceStaffScoreTemplate.make_piano_staff
@@ -52,6 +53,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: TwoVoiceStaffScoreTemplate.defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.do_not_require_margin_markup
 
 .. only:: html
 

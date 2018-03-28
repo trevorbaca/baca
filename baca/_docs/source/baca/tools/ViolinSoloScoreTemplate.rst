@@ -29,6 +29,7 @@ Bases
       ~ViolinSoloScoreTemplate.allows_part_assignment
       ~ViolinSoloScoreTemplate.attach_defaults
       ~ViolinSoloScoreTemplate.defaults
+      ~ViolinSoloScoreTemplate.do_not_require_margin_markup
       ~ViolinSoloScoreTemplate.group_families
       ~ViolinSoloScoreTemplate.make_music_context
       ~ViolinSoloScoreTemplate.make_piano_staff
@@ -52,6 +53,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: ViolinSoloScoreTemplate.defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ViolinSoloScoreTemplate.do_not_require_margin_markup
 
 .. only:: html
 

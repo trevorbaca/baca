@@ -29,6 +29,7 @@ Bases
       ~StringTrioScoreTemplate.allows_part_assignment
       ~StringTrioScoreTemplate.attach_defaults
       ~StringTrioScoreTemplate.defaults
+      ~StringTrioScoreTemplate.do_not_require_margin_markup
       ~StringTrioScoreTemplate.group_families
       ~StringTrioScoreTemplate.make_music_context
       ~StringTrioScoreTemplate.make_piano_staff
@@ -52,6 +53,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: StringTrioScoreTemplate.defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StringTrioScoreTemplate.do_not_require_margin_markup
 
 .. only:: html
 

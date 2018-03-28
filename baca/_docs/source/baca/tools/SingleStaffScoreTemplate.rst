@@ -29,6 +29,7 @@ Bases
       ~SingleStaffScoreTemplate.allows_part_assignment
       ~SingleStaffScoreTemplate.attach_defaults
       ~SingleStaffScoreTemplate.defaults
+      ~SingleStaffScoreTemplate.do_not_require_margin_markup
       ~SingleStaffScoreTemplate.group_families
       ~SingleStaffScoreTemplate.make_music_context
       ~SingleStaffScoreTemplate.make_piano_staff
@@ -52,6 +53,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: SingleStaffScoreTemplate.defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SingleStaffScoreTemplate.do_not_require_margin_markup
 
 .. only:: html
 

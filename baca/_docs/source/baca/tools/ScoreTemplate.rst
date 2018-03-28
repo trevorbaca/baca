@@ -27,6 +27,7 @@ Bases
       ~ScoreTemplate.allows_part_assignment
       ~ScoreTemplate.attach_defaults
       ~ScoreTemplate.defaults
+      ~ScoreTemplate.do_not_require_margin_markup
       ~ScoreTemplate.group_families
       ~ScoreTemplate.make_music_context
       ~ScoreTemplate.make_piano_staff
@@ -46,6 +47,12 @@ Read-only properties
 --------------------
 
 .. autoattribute:: ScoreTemplate.defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ScoreTemplate.do_not_require_margin_markup
 
 .. only:: html
 
