@@ -960,11 +960,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         d'16
                                         -\staccato                                                       %! IC
                                         - \tweak color #red                                              %! SM12
@@ -972,11 +968,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         bf'16
                                         -\staccato                                                       %! IC
                                         - \tweak color #red                                              %! SM12
@@ -1005,11 +997,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         cs''16
                                         -\staccato                                                       %! IC
                                         - \tweak color #red                                              %! SM12
@@ -1017,11 +1005,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         a'16
                                         -\staccato                                                       %! IC
                                         - \tweak color #red                                              %! SM12
@@ -1048,22 +1032,14 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         d'16
                                         - \tweak color #red                                              %! SM12
                                         ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         bf'16
                                         - \tweak color #red                                              %! SM12
                                         ^ \markup { OCTAVE }                                             %! SM12
@@ -1099,22 +1075,14 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         cs''16
                                         - \tweak color #red                                              %! SM12
                                         ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM12
                                         a'16
                                         - \tweak color #red                                              %! SM12
                                         ^ \markup { OCTAVE }                                             %! SM12

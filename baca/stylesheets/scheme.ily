@@ -633,3 +633,12 @@ makeMagenta = {
     \once \override NoteHead.color = #magenta
     \once \override Stem.color = #magenta
     }
+
+makeRed = {
+    \once \override Accidental.color = #red
+    \once \override Beam.color = #red
+    \once \override Dots.color = #red
+    \once \override Flag.color = #red
+    \once \override NoteHead.color = #red
+    \once \override Stem.color = #red
+    }

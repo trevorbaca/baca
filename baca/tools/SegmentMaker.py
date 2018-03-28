@@ -1429,8 +1429,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in abjad.iterate(voice).leaves(pitched=True):
                     if leaf not in self.range_checker:
                         if self.color_out_of_range_pitches:
-                            abjad.label(leaf).color_leaves('red')
+                            # HERE
+                            #abjad.label(leaf).color_leaves('red')
                             abjad.attach(markup, leaf, tag='SM13')
+                            literal = abjad.LilyPondLiteral(r'\makeRed')
+                            abjad.attach(literal, leaf, tag='SM13')
                         else:
                             raise Exception(f'out of range: {leaf!r}.')
         else:
@@ -1576,9 +1579,12 @@ class SegmentMaker(abjad.SegmentMaker):
             if baca.PitchClassSegment(pitch_classes).has_duplicates():
                 notes_and_chords = vertical_moment.notes_and_chords
                 notes_and_chords = abjad.select(notes_and_chords)
-                abjad.label(notes_and_chords).color_leaves('red')
+                # HERE
+                #abjad.label(notes_and_chords).color_leaves('red')
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf, tag='SM12')
+                    literal = abjad.LilyPondLiteral(r'\makeRed')
+                    abjad.attach(literal, leaf, tag='SM12')
 
     def _color_repeat_pitch_classes_(self):
         if not self.color_repeat_pitch_classes:
@@ -1588,9 +1594,12 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
         for lt in lts:
-            abjad.label(lt).color_leaves('red')
+            # HERE
+            #abjad.label(lt).color_leaves('red')
             for leaf in lt:
                 abjad.attach(markup, leaf, tag='SM14')
+                literal = abjad.LilyPondLiteral(r'\makeRed')
+                abjad.attach(literal, leaf, tag='SM14')
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -2923,11 +2932,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #red
-                                            \once \override Beam.color = #red
-                                            \once \override Dots.color = #red
-                                            \once \override NoteHead.color = #red
-                                            \once \override Stem.color = #red
+                                            \makeRed                                                     %! SM12
                                             f'16
                                             - \tweak color #red                                          %! SM12
                                             ^ \markup { OCTAVE }                                         %! SM12
@@ -3036,11 +3041,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #red
-                                            \once \override Beam.color = #red
-                                            \once \override Dots.color = #red
-                                            \once \override NoteHead.color = #red
-                                            \once \override Stem.color = #red
+                                            \makeRed                                                     %! SM12
                                             f16
                                             - \tweak color #red                                          %! SM12
                                             ^ \markup { OCTAVE }                                         %! SM12
@@ -3182,11 +3183,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 2]                                         %! SM4
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM13
                                         c16
                                         - \tweak color #red                                              %! SM13
                                         ^ \markup { * }                                                  %! SM13
@@ -3362,20 +3359,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM14
                                         a'16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
                 <BLANKLINE>
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM14
                                         a'16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
@@ -3400,20 +3389,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM14
                                         c''16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
                 <BLANKLINE>
-                                        \once \override Accidental.color = #red
-                                        \once \override Beam.color = #red
-                                        \once \override Dots.color = #red
-                                        \once \override NoteHead.color = #red
-                                        \once \override Stem.color = #red
+                                        \makeRed                                                         %! SM14
                                         c'16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
