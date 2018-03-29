@@ -191,6 +191,32 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def accidental_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides accidental stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='accidental',
+            selector=selector,
+            value=False,
+            )
+
+    @staticmethod
+    def accidental_x_extent_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides accidental x-extent.
+        '''
+        return OverrideCommand(
+            attribute='X_extent',
+            grob='accidental',
+            selector=selector,
+            value=False,
+            )
+
+    @staticmethod
     def allow_octaves(
         selector: Selector = 'baca.leaves()',
         ) -> IndicatorCommand:

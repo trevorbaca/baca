@@ -339,6 +339,19 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def note_head_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides note head stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='note_head',
+            selector=selector,
+            value=False,
+            )
+
+    @staticmethod
     def one_voice(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
@@ -1735,6 +1748,19 @@ class LibraryNS(abjad.AbjadObject):
                 spanner=abjad.Tie(repeat=True),
                 ),
             baca.select().ltqruns().nontrivial(),
+            )
+
+    @staticmethod
+    def repeat_tie_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides repeat tie stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='repeat_tie',
+            selector=selector,
+            value=False,
             )
 
     @staticmethod
@@ -6318,6 +6344,19 @@ class LibraryNS(abjad.AbjadObject):
             context=context,
             grob='stem',
             selector=selector,
+            )
+
+    @staticmethod
+    def stem_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides stem stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='stem',
+            selector=selector,
+            value=False,
             )
 
     @staticmethod
