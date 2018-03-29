@@ -2082,6 +2082,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def beam_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides beam stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='beam',
+            selector=selector,
+            value=False,
+            )
+
+    @staticmethod
     def breaks(*page_specifiers: typing.Any) -> BreakMeasureMap:
         r'''Makes breaks.
 
@@ -6545,6 +6558,19 @@ class LibraryAF(abjad.AbjadObject):
         return IndicatorCommand(
             indicators=[abjad.Articulation('fermata')],
             selector=selector,
+            )
+
+    @staticmethod
+    def flag_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides flag stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='flag',
+            selector=selector,
+            value=False,
             )
 
     @staticmethod
