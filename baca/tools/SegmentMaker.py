@@ -161,6 +161,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_markup_extra_offset',
         '_first_measure_number',
         '_include_nonfirst_segment_stylesheet',
+        '_ignore_out_of_range_pitches',
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
@@ -178,7 +179,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_midi',
         '_offset_to_measure_number',
         '_previously_alive_contexts',
-        '_range_checker',
         '_score',
         '_score_template',
         '_segment_bol_measure_numbers',
@@ -289,6 +289,7 @@ class SegmentMaker(abjad.SegmentMaker):
         final_markup_extra_offset: typing.Union[NumberPair, None] = None,
         first_measure_number: typing.Union[int, None] = None,
         first_segment: bool = None,
+        ignore_out_of_range_pitches: bool = None,
         ignore_repeat_pitch_classes: bool = None,
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
@@ -310,7 +311,6 @@ class SegmentMaker(abjad.SegmentMaker):
             Number,
             typing.Tuple[Number, abjad.Tag]
             ] = 0,
-        range_checker: abjad.PitchRange = None,
         score_template: ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skip_wellformedness_checks: bool = None,
@@ -349,6 +349,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._final_markup_extra_offset: NumberPair = \
             final_markup_extra_offset
         self._first_measure_number: int = first_measure_number
+        if ignore_out_of_range_pitches is not None:
+            ignore_out_of_range_pitches = bool(ignore_out_of_range_pitches)
+        self._ignore_out_of_range_pitches = ignore_out_of_range_pitches
         self._ignore_repeat_pitch_classes: bool = \
             ignore_repeat_pitch_classes
         self._ignore_unpitched_notes: bool = ignore_unpitched_notes
@@ -380,7 +383,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ] = mmspanner_right_padding
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
-        self._range_checker: abjad.PitchRange = range_checker
         self._score_template: ScoreTemplate = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
@@ -1421,22 +1423,22 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(message)
 
     def _check_range(self):
-        if not self.range_checker:
-            return
-        if isinstance(self.range_checker, abjad.PitchRange):
-            markup = abjad.Markup('*', direction=abjad.Up)
-            abjad.tweak(markup).color = 'red'
-            for voice in abjad.iterate(self.score).components(abjad.Voice):
-                for leaf in abjad.iterate(voice).leaves(pitched=True):
-                    if leaf not in self.range_checker:
-                        if self.color_out_of_range_pitches:
-                            abjad.attach(markup, leaf, tag='SM13')
-                            literal = abjad.LilyPondLiteral(r'\makeRed')
-                            abjad.attach(literal, leaf, tag='SM13')
-                        else:
-                            raise Exception(f'out of range: {leaf!r}.')
-        else:
-            raise NotImplementedError(self.range_checker)
+        markup = abjad.Markup('*', direction=abjad.Up)
+        abjad.tweak(markup).color = 'red'
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            for pleaf in abjad.iterate(voice).leaves(pitched=True):
+                instrument = abjad.inspect(pleaf).get_effective(
+                    abjad.Instrument
+                    )
+                if instrument is None:
+                    continue
+                if pleaf not in instrument.pitch_range:
+                    if not self.ignore_out_of_range_pitches:
+                        raise Exception(f'out of range {pleaf!r}.')
+                    if self.color_out_of_range_pitches:
+                        abjad.attach(markup, pleaf, tag='SM13')
+                        literal = abjad.LilyPondLiteral(r'\makeRed')
+                        abjad.attach(literal, pleaf, tag='SM13')
 
     def _check_wellformedness(self):
         if self.skip_wellformedness_checks:
@@ -3110,16 +3112,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> pitch_range = abjad.Violin().pitch_range
             >>> maker = baca.SegmentMaker(
             ...     color_out_of_range_pitches=True,
-            ...     range_checker=pitch_range,
+            ...     ignore_out_of_range_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
             ...     ('MusicVoice', 1),
+            ...     baca.instrument(abjad.Violin()),
             ...     baca.rhythm(figures),
             ...     )
 
@@ -3183,7 +3185,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 1]                                         %! SM4
+                                        \set Staff.instrumentName = \markup { Violin }                   %! SM8:EXPLICIT_INSTRUMENT:IC
+                                        \set Staff.shortInstrumentName = \markup { Vn. }                 %! SM8:EXPLICIT_INSTRUMENT:IC
+                                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)  %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                         e'16
+                                        ^ \markup {                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                            \with-color                                                  %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                                #(x11-color 'blue)                                       %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                                (Violin)                                                 %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                            }                                                            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                        \set Staff.instrumentName = \markup { Violin }                   %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                        \set Staff.shortInstrumentName = \markup { Vn. }                 %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                                     }
                                 }
                                 {
@@ -4056,6 +4069,12 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Is true when segment is first in score.
         '''
         return self._get_segment_number() == 1
+        
+    @property
+    def ignore_out_of_range_pitches(self) -> typing.Optional[bool]:
+        r'''Is true when segment ignores out-of-range pitches.
+        '''
+        return self._ignore_out_of_range_pitches
 
     @property
     def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
@@ -5093,12 +5112,6 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Gets previous segment metadata.
         '''
         return self._previous_metadata
-
-    @property
-    def range_checker(self) -> typing.Optional[abjad.PitchRange]:
-        r'''Gets range checker.
-        '''
-        return self._range_checker
 
     @property
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:

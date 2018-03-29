@@ -36,6 +36,7 @@ Bases
       ~SegmentMaker.final_markup_extra_offset
       ~SegmentMaker.first_measure_number
       ~SegmentMaker.first_segment
+      ~SegmentMaker.ignore_out_of_range_pitches
       ~SegmentMaker.ignore_repeat_pitch_classes
       ~SegmentMaker.ignore_unpitched_notes
       ~SegmentMaker.ignore_unregistered_pitches
@@ -55,7 +56,6 @@ Bases
       ~SegmentMaker.mmspanner_right_broken
       ~SegmentMaker.mmspanner_right_padding
       ~SegmentMaker.previous_metadata
-      ~SegmentMaker.range_checker
       ~SegmentMaker.run
       ~SegmentMaker.score
       ~SegmentMaker.score_template
@@ -116,6 +116,8 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.first_segment
 
+.. autoattribute:: SegmentMaker.ignore_out_of_range_pitches
+
 .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
 
 .. autoattribute:: SegmentMaker.ignore_unpitched_notes
@@ -153,8 +155,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.mmspanner_right_padding
 
 .. autoattribute:: SegmentMaker.previous_metadata
-
-.. autoattribute:: SegmentMaker.range_checker
 
 .. only:: html
 
