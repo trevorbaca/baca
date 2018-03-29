@@ -342,6 +342,8 @@ class SegmentMaker(abjad.SegmentMaker):
             fermata_measure_staff_line_count
         self._fermata_start_offsets: typing.List[abjad.Offset] = []
         self._fermata_stop_offsets: typing.List[abjad.Offset] = []
+        if final_bar_line is not None:
+            assert isinstance(final_bar_line, (bool, str))
         self._final_bar_line: typing.Union[bool, str, None] = final_bar_line
         self._final_markup: tuple = final_markup
         self._final_markup_extra_offset: NumberPair = \
