@@ -129,7 +129,8 @@ class MusicMaker(abjad.AbjadObject):
         talea_denominator=None,
         thread=None,
         time_treatments=None,
-        tuplet_denominator=None
+        tuplet_denominator=None,
+        tuplet_force_fraction=None
         ):
         r'''Calls music-maker on `collections` with keywords.
 
@@ -630,6 +631,7 @@ class MusicMaker(abjad.AbjadObject):
                 thread=thread,
                 time_treatments=time_treatments,
                 tuplet_denominator=tuplet_denominator,
+                tuplet_force_fraction=tuplet_force_fraction,
                 )
         anchor, specifiers = self._get_anchor_specifier(specifiers)
         container = abjad.Container(selections)
@@ -824,6 +826,7 @@ class MusicMaker(abjad.AbjadObject):
         thread=None,
         time_treatments=None,
         tuplet_denominator=None,
+        tuplet_force_fraction=None,
         ):
         selections = len(collections) * [None]
         rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
@@ -856,6 +859,7 @@ class MusicMaker(abjad.AbjadObject):
                 thread=thread,
                 time_treatments=time_treatments,
                 tuplet_denominator=tuplet_denominator,
+                tuplet_force_fraction=tuplet_force_fraction,
                 )
         return selections, specifiers_
 

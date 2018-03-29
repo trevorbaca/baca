@@ -48,6 +48,7 @@ class PitchFirstRhythmCommand(Command):
         thread=None,
         time_treatments=None,
         tuplet_denominator=None,
+        tuplet_force_fraction=None,
         ):
         assert len(selections) == len(collections)
         rhythm_maker = self._get_rhythm_maker(
@@ -57,6 +58,7 @@ class PitchFirstRhythmCommand(Command):
             talea_denominator=talea_denominator,
             time_treatments=time_treatments,
             tuplet_denominator=tuplet_denominator,
+            tuplet_force_fraction=tuplet_force_fraction,
             )
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
@@ -119,6 +121,7 @@ class PitchFirstRhythmCommand(Command):
         talea_denominator=None,
         time_treatments=None,
         tuplet_denominator=None,
+        tuplet_force_fraction=None,
         ):
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
         keywords = {}
@@ -134,13 +137,15 @@ class PitchFirstRhythmCommand(Command):
             keywords['time_treatments'] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        if tuplet_denominator is not None:
+        if (tuplet_denominator is not None or
+            tuplet_force_fraction is not None):
             specifier = rhythm_maker.tuplet_specifier
             if specifier is None:
                 specifier = rhythmos.TupletSpecifier()
             specifier = abjad.new(
                 specifier,
                 denominator=tuplet_denominator,
+                force_fraction=tuplet_force_fraction,
                 )
             rhythm_maker = abjad.new(
                 rhythm_maker,
