@@ -26,6 +26,8 @@ Bases
       ~LibraryNS.not_score
       ~LibraryNS.not_segment
       ~LibraryNS.note_column_shift
+      ~LibraryNS.note_head_color
+      ~LibraryNS.note_head_stencil_false
       ~LibraryNS.one_voice
       ~LibraryNS.only_parts
       ~LibraryNS.only_score
@@ -47,6 +49,7 @@ Bases
       ~LibraryNS.reiterated_dynamic
       ~LibraryNS.repeat_tie_from
       ~LibraryNS.repeat_tie_repeat_pitches
+      ~LibraryNS.repeat_tie_stencil_false
       ~LibraryNS.repeat_tie_to
       ~LibraryNS.repeat_ties_down
       ~LibraryNS.repeat_ties_up
@@ -88,6 +91,7 @@ Bases
       ~LibraryNS.staff_positions
       ~LibraryNS.start_markup
       ~LibraryNS.stem_color
+      ~LibraryNS.stem_stencil_false
       ~LibraryNS.stem_tremolo
       ~LibraryNS.stems_down
       ~LibraryNS.stems_up
@@ -119,6 +123,10 @@ Class & static methods
 .. automethod:: LibraryNS.not_segment
 
 .. automethod:: LibraryNS.note_column_shift
+
+.. automethod:: LibraryNS.note_head_color
+
+.. automethod:: LibraryNS.note_head_stencil_false
 
 .. automethod:: LibraryNS.one_voice
 
@@ -161,6 +169,8 @@ Class & static methods
 .. automethod:: LibraryNS.repeat_tie_from
 
 .. automethod:: LibraryNS.repeat_tie_repeat_pitches
+
+.. automethod:: LibraryNS.repeat_tie_stencil_false
 
 .. automethod:: LibraryNS.repeat_tie_to
 
@@ -243,6 +253,8 @@ Class & static methods
 .. automethod:: LibraryNS.start_markup
 
 .. automethod:: LibraryNS.stem_color
+
+.. automethod:: LibraryNS.stem_stencil_false
 
 .. automethod:: LibraryNS.stem_tremolo
 

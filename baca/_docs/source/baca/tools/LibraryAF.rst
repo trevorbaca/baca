@@ -20,6 +20,8 @@ Bases
    .. autosummary::
 
       ~LibraryAF.accents
+      ~LibraryAF.accidental_stencil_false
+      ~LibraryAF.accidental_x_extent_false
       ~LibraryAF.allow_octaves
       ~LibraryAF.alternate_bow_strokes
       ~LibraryAF.anchor
@@ -37,6 +39,7 @@ Bases
       ~LibraryAF.beam_everything
       ~LibraryAF.beam_positions
       ~LibraryAF.beam_runs
+      ~LibraryAF.beam_stencil_false
       ~LibraryAF.breaks
       ~LibraryAF.center_to_octave
       ~LibraryAF.clef
@@ -73,6 +76,7 @@ Bases
       ~LibraryAF.enchained_hairpin
       ~LibraryAF.enchained_transition
       ~LibraryAF.fermata
+      ~LibraryAF.flag_stencil_false
       ~LibraryAF.flageolets
       ~LibraryAF.flags
       ~LibraryAF.force_accidentals
@@ -84,6 +88,10 @@ Class & static methods
 ----------------------
 
 .. automethod:: LibraryAF.accents
+
+.. automethod:: LibraryAF.accidental_stencil_false
+
+.. automethod:: LibraryAF.accidental_x_extent_false
 
 .. automethod:: LibraryAF.allow_octaves
 
@@ -118,6 +126,8 @@ Class & static methods
 .. automethod:: LibraryAF.beam_positions
 
 .. automethod:: LibraryAF.beam_runs
+
+.. automethod:: LibraryAF.beam_stencil_false
 
 .. automethod:: LibraryAF.breaks
 
@@ -190,6 +200,8 @@ Class & static methods
 .. automethod:: LibraryAF.enchained_transition
 
 .. automethod:: LibraryAF.fermata
+
+.. automethod:: LibraryAF.flag_stencil_false
 
 .. automethod:: LibraryAF.flageolets
 

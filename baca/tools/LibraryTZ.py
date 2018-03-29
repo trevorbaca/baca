@@ -2923,7 +2923,7 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override GlobalContext.TimeSignature.transparent = ##t                  %! OC1
+                                \override Score.TimeSignature.transparent = ##t                          %! OC1
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
@@ -2953,7 +2953,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert GlobalContext.TimeSignature.transparent                          %! OC2
+                                \revert Score.TimeSignature.transparent                                  %! OC2
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
@@ -2964,7 +2964,7 @@ class LibraryTZ(abjad.AbjadObject):
         return OverrideCommand(
             attribute='transparent',
             value=True,
-            context='GlobalContext',
+            context='Score',
             grob='time_signature',
             selector=selector,
             )
