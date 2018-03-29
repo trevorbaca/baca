@@ -20,6 +20,7 @@ Bases
    .. autosummary::
 
       ~LibraryAF.accents
+      ~LibraryAF.allow_octaves
       ~LibraryAF.alternate_bow_strokes
       ~LibraryAF.anchor
       ~LibraryAF.anchor_after
@@ -83,6 +84,8 @@ Class & static methods
 ----------------------
 
 .. automethod:: LibraryAF.accents
+
+.. automethod:: LibraryAF.allow_octaves
 
 .. automethod:: LibraryAF.alternate_bow_strokes
 

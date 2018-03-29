@@ -1579,12 +1579,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             pitch_classes = [_.pitch_class for _ in pitches]
             if baca.PitchClassSegment(pitch_classes).has_duplicates():
-                notes_and_chords = vertical_moment.notes_and_chords
-                notes_and_chords = abjad.select(notes_and_chords)
-                for leaf in notes_and_chords:
-                    abjad.attach(markup, leaf, tag='SM12')
+                pleaves = vertical_moment.notes_and_chords
+                pleaves = abjad.select(pleaves)
+                color = True
+                for pleaf in pleaves:
+                    inspection = abjad.inspect(pleaf)
+                    if inspection.has_indicator(abjad.tags.ALLOW_OCTAVE):
+                        color = False
+                if not color:
+                    continue
+                for pleaf in pleaves:
+                    abjad.attach(markup, pleaf, tag='SM12')
                     literal = abjad.LilyPondLiteral(r'\makeRed')
-                    abjad.attach(literal, leaf, tag='SM12')
+                    abjad.attach(literal, pleaf, tag='SM12')
 
     def _color_repeat_pitch_classes_(self):
         if not self.color_repeat_pitch_classes:

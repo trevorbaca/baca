@@ -960,19 +960,13 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \makeRed                                                         %! SM12
                                         d'16
                                         -\staccato                                                       %! IC
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \makeRed                                                         %! SM12
                                         bf'16
                                         -\staccato                                                       %! IC
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         s16
                                     }
@@ -997,19 +991,13 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \makeRed                                                         %! SM12
                                         cs''16
                                         -\staccato                                                       %! IC
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        \makeRed                                                         %! SM12
                                         a'16
                                         -\staccato                                                       %! IC
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         s16
                                         ]                                                                %! SM35
@@ -1032,17 +1020,11 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \makeRed                                                         %! SM12
                                         d'16
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \makeRed                                                         %! SM12
                                         bf'16
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
@@ -1075,17 +1057,11 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \makeRed                                                         %! SM12
                                         cs''16
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        \makeRed                                                         %! SM12
                                         a'16
-                                        - \tweak color #red                                              %! SM12
-                                        ^ \markup { OCTAVE }                                             %! SM12
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
@@ -1434,10 +1410,12 @@ class ImbricationCommand(Command):
             raise Exception(message)
         self._apply_specifiers(container)
         if self.extend_beam:
-            leaves = list(abjad.iterate(container).leaves())
-            last_leaf = leaves[-1]
+            last_leaf = abjad.select(container).leaf(-1)
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
         selection = abjad.select(container)
+        if not self.hocket:
+            for pleaf in baca.select(container).pleaves():
+                abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
     ### PRIVATE METHODS ###

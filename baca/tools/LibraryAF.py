@@ -191,6 +191,17 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def allow_octaves(
+        selector: Selector = 'baca.leaves()',
+        ) -> IndicatorCommand:
+        r'''Attaches ALLOW_OCTAVE tag.
+        '''
+        return IndicatorCommand(
+            indicators=[abjad.tags.ALLOW_OCTAVE],
+            selector=selector,
+            )
+
+    @staticmethod
     def alternate_bow_strokes(
         downbow_first: bool = True,
         selector: Selector = 'baca.pheads()',
