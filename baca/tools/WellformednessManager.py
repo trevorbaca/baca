@@ -1,8 +1,6 @@
 import abjad
 import baca
-from typing import List
-from typing import Tuple
-from typing import Union
+import typing
 
 
 class WellformednessManager(abjad.WellformednessManager):
@@ -31,8 +29,8 @@ class WellformednessManager(abjad.WellformednessManager):
 
     def __call__(
         self,
-        argument: Union[abjad.Score, None] = None,
-        ) -> List[Tuple[list, int, str]]:
+        argument: typing.Union[abjad.Score, None] = None,
+        ) -> typing.List[typing.Tuple[list, int, str]]:
         r'''Calls wellformedness checks on `argument`.
 
         :param argument: input score.

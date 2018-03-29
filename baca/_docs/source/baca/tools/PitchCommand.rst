@@ -21,6 +21,7 @@ Bases
 
    .. autosummary::
 
+      ~PitchCommand.allow_octaves
       ~PitchCommand.allow_repeats
       ~PitchCommand.cyclic
       ~PitchCommand.deactivate
@@ -45,6 +46,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: PitchCommand.allow_octaves
 
 .. autoattribute:: PitchCommand.allow_repeats
 

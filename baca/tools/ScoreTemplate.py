@@ -1,6 +1,6 @@
 import abjad
 import roman # type: ignore
-from typing import List
+import typing
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
@@ -92,7 +92,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### PUBLIC METHODS ###
 
-    def group_families(self, *families) -> List[abjad.Context]:
+    def group_families(self, *families) -> typing.List[abjad.Context]:
         r'''Groups `families` only when more than one family is passed in.
 
         Returns list of zero or more contexts.

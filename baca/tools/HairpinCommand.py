@@ -1,8 +1,7 @@
 import abjad
 import baca
+import typing
 from .Command import Command
-from .Typing import List
-from .Typing import Optional
 from .Typing import Selector
 
 
@@ -36,7 +35,7 @@ class HairpinCommand(Command):
         right_broken: str = None,
         start: abjad.Dynamic = None,
         stop: abjad.Dynamic = None,
-        tags: List[abjad.Tag] = None,
+        tags: typing.List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if left_broken is not None:
@@ -53,7 +52,7 @@ class HairpinCommand(Command):
         self._stop: abjad.Dynamic = stop
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
-        self._tags: List[abjad.Tag] = tags
+        self._tags: typing.List[abjad.Tag] = tags
 
     ### SPECIAL METHODS ###
 
@@ -117,13 +116,13 @@ class HairpinCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def left_broken(self) -> Optional[str]:
+    def left_broken(self) -> typing.Optional[str]:
         r'''Gets left-broken hairpin string.
         '''
         return self._left_broken
 
     @property
-    def right_broken(self) -> Optional[str]:
+    def right_broken(self) -> typing.Optional[str]:
         r'''Gets right-broken hairpin string.
         '''
         return self._right_broken

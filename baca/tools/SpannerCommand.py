@@ -1,8 +1,7 @@
 import abjad
 import baca
+import typing
 from .Command import Command
-from .Typing import List
-from .Typing import Optional
 from .Typing import Selector
 
 
@@ -202,7 +201,7 @@ class SpannerCommand(Command):
         right_broken: bool = None,
         selector: Selector = 'baca.tleaves()',
         spanner: abjad.Spanner = None,
-        tags: List[abjad.Tag] = None,
+        tags: typing.List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if left_broken is not None:
@@ -214,7 +213,7 @@ class SpannerCommand(Command):
         self._spanner: abjad.Spanner = spanner
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
-        self._tags: List[abjad.Tag] = tags
+        self._tags: typing.List[abjad.Tag] = tags
 
     ### SPECIAL METHODS ###
 
@@ -244,19 +243,19 @@ class SpannerCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def left_broken(self) -> Optional[bool]:
+    def left_broken(self) -> typing.Optional[bool]:
         r'''Is true when spanner is left-broken.
         '''
         return self._left_broken
 
     @property
-    def right_broken(self) -> Optional[bool]:
+    def right_broken(self) -> typing.Optional[bool]:
         r'''Is true when spanner is right-broken.
         '''
         return self._right_broken
 
     @property
-    def selector(self) -> Optional[abjad.Expression]:
+    def selector(self) -> typing.Optional[abjad.Expression]:
         r'''Gets selector.
 
         ..  container:: example
@@ -311,7 +310,7 @@ class SpannerCommand(Command):
         return self._selector
 
     @property
-    def spanner(self) -> Optional[abjad.Spanner]:
+    def spanner(self) -> typing.Optional[abjad.Spanner]:
         r'''Gets spanner.
 
         ..  container:: example

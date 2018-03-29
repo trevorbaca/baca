@@ -1,11 +1,10 @@
 import abjad
 import baca
+import typing
 from .Command import Command
 from .PitchCommand import PitchCommand
 from .Typing import Number
-from .Typing import Optional
 from .Typing import Selector
-from .Typing import Union
 
 
 class StaffPositionInterpolationCommand(Command):
@@ -188,8 +187,8 @@ class StaffPositionInterpolationCommand(Command):
     def __init__(
         self,
         selector: Selector = 'baca.plts()',
-        start_pitch: Union[str, abjad.NamedPitch] = 'C4',
-        stop_pitch: Union[str, abjad.NamedPitch] = 'C4',
+        start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
+        stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         ) -> None:
         Command.__init__(self, selector=selector)
         start_pitch = abjad.NamedPitch(start_pitch)

@@ -1,10 +1,9 @@
 import abjad
 import baca
+import typing
 from .Command import Command
 from .Typing import Number
-from .Typing import Optional
 from .Typing import Selector
-from .Typing import Union
 
 
 class RegisterInterpolationCommand(Command):
@@ -1056,8 +1055,8 @@ class RegisterInterpolationCommand(Command):
     def __init__(
         self,
         selector: Selector = 'baca.plts()',
-        start_pitch: Union[Number, abjad.NumberedPitch] = 0,
-        stop_pitch: Union[Number, abjad.NumberedPitch] = 0,
+        start_pitch: typing.Union[Number, abjad.NumberedPitch] = 0,
+        stop_pitch: typing.Union[Number, abjad.NumberedPitch] = 0,
         ) -> None:
         Command.__init__(self, selector=selector)
         start_pitch = abjad.NumberedPitch(start_pitch)
@@ -1104,7 +1103,7 @@ class RegisterInterpolationCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def selector(self) -> Optional[abjad.Expression]:
+    def selector(self) -> typing.Optional[abjad.Expression]:
         r"""Gets selector.
 
         ..  container:: example

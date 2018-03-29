@@ -23,7 +23,6 @@ from .SuiteCommand import SuiteCommand
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
-from .Typing import Union
 
 
 class LibraryGM(abjad.AbjadObject):
@@ -919,8 +918,8 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def interpolate_staff_positions(
-        start_pitch: Union[str, abjad.NamedPitch],
-        stop_pitch: Union[str, abjad.NamedPitch],
+        start_pitch: typing.Union[str, abjad.NamedPitch],
+        stop_pitch: typing.Union[str, abjad.NamedPitch],
         selector: Selector = 'baca.plts()',
         ) -> StaffPositionInterpolationCommand:
         r'''Interpolates from staff position of ``start_pitch`` to staff
@@ -1844,7 +1843,7 @@ class LibraryGM(abjad.AbjadObject):
         alert: IndicatorCommand = None,
         context: str = 'Staff',
         selector: Selector = 'baca.leaf(0)',
-        ) -> Union[IndicatorCommand, SuiteCommand]:
+        ) -> typing.Union[IndicatorCommand, SuiteCommand]:
         r'''Sets margin markup on each leaf in `selector` output.
 
         ..  container:: example

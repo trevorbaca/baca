@@ -1,8 +1,7 @@
 import abjad
 import baca
 import collections
-from typing import List
-from typing import Union
+import typing
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
 from .Expression import Expression
@@ -38,7 +37,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tag(
-        tags: Union[str, List[str]],
+        tags: typing.Union[str, typing.List[str]],
         command: Command,
         deactivate: bool = None,
         tag_measure_number: bool = None,

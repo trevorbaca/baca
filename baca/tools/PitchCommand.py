@@ -379,6 +379,7 @@ class PitchCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_allow_octaves',
         '_allow_repeats',
         '_cyclic',
         '_do_not_transpose',
@@ -393,6 +394,7 @@ class PitchCommand(Command):
 
     def __init__(
         self,
+        allow_octaves: bool = None,
         allow_repeats: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
@@ -402,6 +404,9 @@ class PitchCommand(Command):
         selector: Selector = None,
         ) -> None:
         Command.__init__(self, selector=selector)
+        if allow_octaves is not None:
+            allow_octaves = bool(allow_octaves)
+        self._allow_octaves = allow_octaves
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
@@ -455,6 +460,9 @@ class PitchCommand(Command):
             if new_plt is not None:
                 self._mutated_score = True
                 plt = new_plt
+            if self.allow_octaves:
+                for pleaf in plt:
+                    abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
             if self.allow_repeats:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
@@ -584,6 +592,12 @@ class PitchCommand(Command):
         return new_lt
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_octaves(self) -> bool:
+        r'''Is true when command allows octaves.
+        '''
+        return self._allow_octaves
 
     @property
     def allow_repeats(self) -> bool:

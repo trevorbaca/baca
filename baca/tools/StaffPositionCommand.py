@@ -1,7 +1,7 @@
 import abjad
 import baca
+import typing
 from .Command import Command
-from .Typing import Optional
 from .Typing import Selector
 
 
@@ -115,20 +115,20 @@ class StaffPositionCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_repeats(self) -> Optional[bool]:
+    def allow_repeats(self) -> typing.Optional[bool]:
         r'''Is true when repeat staff positions are allowed.
         '''
         return self._allow_repeats
 
     @property
-    def exact(self) -> Optional[bool]:
+    def exact(self) -> typing.Optional[bool]:
         r'''Is true when number of staff positions must match number of leaves
         exactly.
         '''
         return self._exact
 
     @property
-    def numbers(self) -> Optional[abjad.CyclicTuple]:
+    def numbers(self) -> typing.Optional[abjad.CyclicTuple]:
         r'''Gets numbers.
         '''
         return self._numbers
