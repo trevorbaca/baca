@@ -34,7 +34,6 @@ Bases
       ~LibraryGM.label
       ~LibraryGM.laissez_vibrer
       ~LibraryGM.lbsd
-      ~LibraryGM.line_break
       ~LibraryGM.literal
       ~LibraryGM.long_fermata
       ~LibraryGM.loop
@@ -94,8 +93,6 @@ Class & static methods
 .. automethod:: LibraryGM.laissez_vibrer
 
 .. automethod:: LibraryGM.lbsd
-
-.. automethod:: LibraryGM.line_break
 
 .. automethod:: LibraryGM.literal
 
