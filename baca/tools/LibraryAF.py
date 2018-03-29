@@ -4403,6 +4403,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dots_stencil_false(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides dots stencil.
+        '''
+        return OverrideCommand(
+            attribute='stencil',
+            grob='dots',
+            selector=selector,
+            value=False,
+            )
+
+    @staticmethod
     def double_tonguing(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
