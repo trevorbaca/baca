@@ -5198,6 +5198,44 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def span_bar_color(
+        color: str,
+        after: bool = None,
+        context: str = 'Score',
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides span bar color.
+        '''
+        pass
+        return OverrideCommand(
+            after=after,
+            attribute='color',
+            value=color,
+            context=context,
+            grob='span_bar',
+            selector=selector,
+            )
+
+    @staticmethod
+    def span_bar_extra_offset(
+        pair: NumberPair,
+        after: bool = None,
+        context: str = 'Score',
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides span bar extra offset.
+        '''
+        pass
+        return OverrideCommand(
+            after=after,
+            attribute='extra_offset',
+            value=pair,
+            context=context,
+            grob='span_bar',
+            selector=selector,
+            )
+
+    @staticmethod
     def split_by_durations(
         durations: typing.Iterable,
         ) -> DivisionSequenceExpression:

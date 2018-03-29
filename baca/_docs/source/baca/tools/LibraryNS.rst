@@ -78,6 +78,8 @@ Bases
       ~LibraryNS.slurs_down
       ~LibraryNS.slurs_up
       ~LibraryNS.soprano_to_octave
+      ~LibraryNS.span_bar_color
+      ~LibraryNS.span_bar_extra_offset
       ~LibraryNS.split_by_durations
       ~LibraryNS.staccati
       ~LibraryNS.staccatissimi
@@ -221,6 +223,10 @@ Class & static methods
 .. automethod:: LibraryNS.slurs_up
 
 .. automethod:: LibraryNS.soprano_to_octave
+
+.. automethod:: LibraryNS.span_bar_color
+
+.. automethod:: LibraryNS.span_bar_extra_offset
 
 .. automethod:: LibraryNS.split_by_durations
 
