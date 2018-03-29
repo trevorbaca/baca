@@ -34,7 +34,6 @@ Bases
       ~LibraryNS.ottava_bassa
       ~LibraryNS.ottava_bracket_staff_padding
       ~LibraryNS.page
-      ~LibraryNS.page_break
       ~LibraryNS.parts
       ~LibraryNS.piecewise
       ~LibraryNS.pitch
@@ -134,8 +133,6 @@ Class & static methods
 .. automethod:: LibraryNS.ottava_bracket_staff_padding
 
 .. automethod:: LibraryNS.page
-
-.. automethod:: LibraryNS.page_break
 
 .. automethod:: LibraryNS.parts
 
