@@ -289,6 +289,19 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def no_ledgers(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides note head no-ledgers property.
+        '''
+        return OverrideCommand(
+            attribute='no_ledgers',
+            value=True,
+            grob='note_head',
+            selector=selector,
+            )
+
+    @staticmethod
     def not_parts(command: Command) -> Command:
         r'''Tags ``command`` with ``-PARTS``.
 
@@ -327,7 +340,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def note_column_shift(
         n: Number,
-        selector='baca.leaf(0)',
+        selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r'''Overrides note column force hshift.
         '''

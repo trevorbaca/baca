@@ -2425,6 +2425,19 @@ class LibraryTZ(abjad.AbjadObject):
         return TimelineScope(scopes)
 
     @staticmethod
+    def transparent_accidentals(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides accidental transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='accidental',
+            selector=selector,
+            )
+
+    @staticmethod
     def transparent_bar_lines(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
@@ -2668,6 +2681,71 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def transparent_beams(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides beam transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='beam',
+            selector=selector,
+            )
+
+    @staticmethod
+    def transparent_dots(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides dots transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='dots',
+            selector=selector,
+            )
+
+    @staticmethod
+    def transparent_flags(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides flag transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='flag',
+            selector=selector,
+            )
+
+    @staticmethod
+    def transparent_note_heads(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides note head transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='note_head',
+            selector=selector,
+            )
+
+    @staticmethod
+    def transparent_repeat_ties(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides repeat tie transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='repeat_tie',
+            selector=selector,
+            )
+
+    @staticmethod
     def transparent_rests(
         selector: Selector = 'baca.rests()',
         ) -> OverrideCommand:
@@ -2886,6 +2964,19 @@ class LibraryTZ(abjad.AbjadObject):
             value=True,
             context='Score',
             grob='span_bar',
+            selector=selector,
+            )
+
+    @staticmethod
+    def transparent_stems(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides stem transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='stem',
             selector=selector,
             )
 
