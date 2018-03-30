@@ -5185,7 +5185,24 @@ class LibraryAF(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raise exception on nonpair input:
+
+            >>> baca.dynamic_text_extra_offset(2)
+            Traceback (most recent call last):
+                ...
+            Exception: dynamic text extra offset must be pair (not 2).
+
         '''
+        if not isinstance(pair, tuple):
+            raise Exception(
+                f'dynamic text extra offset must be pair (not {pair}).'
+                )
+        if len(pair) != 2:
+            raise Exception(
+                f'dynamic text extra offset must be pair (not {pair}).'
+                )
         return OverrideCommand(
             attribute='extra_offset',
             value=pair,
