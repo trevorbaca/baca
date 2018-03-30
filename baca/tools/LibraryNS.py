@@ -341,7 +341,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def note_head_color(
         color: str,
-        selector: Selector = 'baca.leaf(0)',
+        selector: Selector = 'baca.pleaves()',
         ) -> OverrideCommand:
         r'''Overrides note head color.
         '''
