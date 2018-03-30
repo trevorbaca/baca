@@ -54,6 +54,7 @@ Bases
       ~LibraryNS.repeat_tie_to
       ~LibraryNS.repeat_ties_down
       ~LibraryNS.repeat_ties_up
+      ~LibraryNS.rest_extra_offset
       ~LibraryNS.rest_position
       ~LibraryNS.rests_after
       ~LibraryNS.rests_around
@@ -180,6 +181,8 @@ Class & static methods
 .. automethod:: LibraryNS.repeat_ties_down
 
 .. automethod:: LibraryNS.repeat_ties_up
+
+.. automethod:: LibraryNS.rest_extra_offset
 
 .. automethod:: LibraryNS.rest_position
 
