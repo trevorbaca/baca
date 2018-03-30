@@ -859,6 +859,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if os.getenv('TRAVIS'):
             return
         if 3 < timer.elapsed_time:
+            count = int(timer.elapsed_time)
             raise Exception(f'spacing application {count} {seconds}!')
 
     def _assert_nonoverlapping_rhythms(self, rhythms, voice):
