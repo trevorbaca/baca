@@ -5247,6 +5247,20 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dynamic_text_y_offset(
+        n: Number,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides dynamic text Y-extent.
+        '''
+        return OverrideCommand(
+            attribute='Y_offset',
+            value=n,
+            grob='dynamic_text',
+            selector=selector,
+            )
+
+    @staticmethod
     def dynamics(string: str) -> typing.List[abjad.Dynamic]:
         r'''Makes dynamics from `string`.
 

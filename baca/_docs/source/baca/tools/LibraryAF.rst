@@ -60,6 +60,7 @@ Bases
       ~LibraryAF.dls_padding
       ~LibraryAF.dls_staff_padding
       ~LibraryAF.dls_up
+      ~LibraryAF.dots_stencil_false
       ~LibraryAF.double_tonguing
       ~LibraryAF.down_arpeggios
       ~LibraryAF.down_bows
@@ -69,6 +70,7 @@ Bases
       ~LibraryAF.dynamic_text_transparent
       ~LibraryAF.dynamic_text_x_extent_zero
       ~LibraryAF.dynamic_text_x_offset
+      ~LibraryAF.dynamic_text_y_offset
       ~LibraryAF.dynamics
       ~LibraryAF.dynamics_down
       ~LibraryAF.dynamics_up
@@ -169,6 +171,8 @@ Class & static methods
 
 .. automethod:: LibraryAF.dls_up
 
+.. automethod:: LibraryAF.dots_stencil_false
+
 .. automethod:: LibraryAF.double_tonguing
 
 .. automethod:: LibraryAF.down_arpeggios
@@ -186,6 +190,8 @@ Class & static methods
 .. automethod:: LibraryAF.dynamic_text_x_extent_zero
 
 .. automethod:: LibraryAF.dynamic_text_x_offset
+
+.. automethod:: LibraryAF.dynamic_text_y_offset
 
 .. automethod:: LibraryAF.dynamics
 
