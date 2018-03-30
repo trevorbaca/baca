@@ -2333,6 +2333,28 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def rest_extra_offset(
+        pair: NumberPair,
+        selector: Selector = 'baca.rest(0)',
+        ) -> OverrideCommand:
+        r'''Overrides rest extra offset.
+        '''
+        if not isinstance(pair, tuple):
+            raise Exception(
+                f'rest extra offset must be pair (not {pair!r}).'
+                )
+        if len(pair) != 2:
+            raise Exception(
+                f'rest extra offset must be pair (not {pair!r}).'
+                )
+        return OverrideCommand(
+            attribute='extra_offset',
+            value=pair,
+            grob='rest',
+            selector=selector,
+            )
+
+    @staticmethod
     def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
         r'''Makes rests after music.
 
