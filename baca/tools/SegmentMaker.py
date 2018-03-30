@@ -1434,7 +1434,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if pleaf not in instrument.pitch_range:
                     if not self.ignore_out_of_range_pitches:
-                        raise Exception(f'out of range {pleaf!r}.')
+                        raise Exception(
+                            f'{voice.name} out of range {pleaf!r}.',
+                            )
                     if self.color_out_of_range_pitches:
                         abjad.attach(markup, pleaf, tag='SM13')
                         literal = abjad.LilyPondLiteral(r'\makeRed')
