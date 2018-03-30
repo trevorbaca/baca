@@ -44,9 +44,16 @@ Bases
       ~LibraryTZ.ties_up
       ~LibraryTZ.time_signature_extra_offset
       ~LibraryTZ.timeline
+      ~LibraryTZ.transparent_accidentals
       ~LibraryTZ.transparent_bar_lines
+      ~LibraryTZ.transparent_beams
+      ~LibraryTZ.transparent_dots
+      ~LibraryTZ.transparent_flags
+      ~LibraryTZ.transparent_note_heads
+      ~LibraryTZ.transparent_repeat_ties
       ~LibraryTZ.transparent_rests
       ~LibraryTZ.transparent_span_bars
+      ~LibraryTZ.transparent_stems
       ~LibraryTZ.transparent_time_signatures
       ~LibraryTZ.tremolo_down
       ~LibraryTZ.trill_spanner
@@ -122,11 +129,25 @@ Class & static methods
 
 .. automethod:: LibraryTZ.timeline
 
+.. automethod:: LibraryTZ.transparent_accidentals
+
 .. automethod:: LibraryTZ.transparent_bar_lines
+
+.. automethod:: LibraryTZ.transparent_beams
+
+.. automethod:: LibraryTZ.transparent_dots
+
+.. automethod:: LibraryTZ.transparent_flags
+
+.. automethod:: LibraryTZ.transparent_note_heads
+
+.. automethod:: LibraryTZ.transparent_repeat_ties
 
 .. automethod:: LibraryTZ.transparent_rests
 
 .. automethod:: LibraryTZ.transparent_span_bars
+
+.. automethod:: LibraryTZ.transparent_stems
 
 .. automethod:: LibraryTZ.transparent_time_signatures
 

@@ -22,6 +22,7 @@ Bases
       ~LibraryNS.natural_clusters
       ~LibraryNS.natural_harmonics
       ~LibraryNS.nest
+      ~LibraryNS.no_ledgers
       ~LibraryNS.not_parts
       ~LibraryNS.not_score
       ~LibraryNS.not_segment
@@ -115,6 +116,8 @@ Class & static methods
 .. automethod:: LibraryNS.natural_harmonics
 
 .. automethod:: LibraryNS.nest
+
+.. automethod:: LibraryNS.no_ledgers
 
 .. automethod:: LibraryNS.not_parts
 
