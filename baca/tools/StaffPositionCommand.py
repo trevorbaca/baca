@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from .Command import Command
+from .PitchCommand import PitchCommand
 from .Typing import Selector
 
 
@@ -99,7 +100,7 @@ class StaffPositionCommand(Command):
             number = self.numbers[i]
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
-            baca.PitchCommand._set_lt_pitch(plt, pitch)
+            PitchCommand._set_lt_pitch(plt, pitch)
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
