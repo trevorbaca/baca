@@ -81,10 +81,8 @@ class StaffPositionCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         r'''Calls command on `argument`.
-
-        Returns none.
         '''
         if argument is None:
             return
@@ -103,8 +101,9 @@ class StaffPositionCommand(Command):
             pitch = position.to_pitch(clef)
             baca.PitchCommand._set_lt_pitch(plt, pitch)
             plt_count += 1
-            if self.allow_repeats:
-                for pleaf in plt:
+            for pleaf in plt:
+                abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
+                if self.allow_repeats:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
                     abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
         if self.exact and plt_count != len(self.numbers):

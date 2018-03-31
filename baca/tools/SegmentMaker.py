@@ -1576,18 +1576,22 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.Markup('OCTAVE', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
         for vertical_moment in vertical_moments:
-            pitches = []
+            pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
+                if abjad.inspect(leaf).has_indicator(
+                    abjad.tags.STAFF_POSITION,
+                    ):
+                    continue
                 if isinstance(leaf, abjad.Note):
+                    pleaves.append(leaf)
                     pitches.append(leaf.written_pitch)
                 elif isinstance(leaf, abjad.Chord):
+                    pleaves.append(leaf)
                     pitches.extend(leaf.written_pitches)
             if not pitches:
                 continue
             pitch_classes = [_.pitch_class for _ in pitches]
             if baca.PitchClassSegment(pitch_classes).has_duplicates():
-                pleaves = vertical_moment.notes_and_chords
-                pleaves = abjad.select(pleaves)
                 color = True
                 for pleaf in pleaves:
                     inspection = abjad.inspect(pleaf)
