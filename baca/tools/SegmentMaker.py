@@ -2772,7 +2772,9 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         found = len(self.time_signatures)
         if found != self.validate_measure_count:
-            raise Exception(f'{found} != {self.validate_measure_count}')
+            message =  f'found {found} time measures'
+            message += f' (not {self.validate_measure_count}).'
+            raise Exception(message)
 
     def _validate_measures_per_stage(self):
         if self.measures_per_stage is None:
