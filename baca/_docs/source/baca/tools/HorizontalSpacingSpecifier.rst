@@ -24,7 +24,6 @@ Bases
       ~HorizontalSpacingSpecifier.eol_measure_numbers
       ~HorizontalSpacingSpecifier.fermata_measure_numbers
       ~HorizontalSpacingSpecifier.fermata_measure_width
-      ~HorizontalSpacingSpecifier.fermata_score
       ~HorizontalSpacingSpecifier.first_measure_number
       ~HorizontalSpacingSpecifier.last_measure_number
       ~HorizontalSpacingSpecifier.measure_count
@@ -48,8 +47,6 @@ Read-only properties
 .. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_numbers
 
 .. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_width
-
-.. autoattribute:: HorizontalSpacingSpecifier.fermata_score
 
 .. autoattribute:: HorizontalSpacingSpecifier.first_measure_number
 

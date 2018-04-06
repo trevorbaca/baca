@@ -1,5 +1,6 @@
 import abjad
 import baca
+import collections
 import typing
 from .BreakMeasureMap import BreakMeasureMap
 from .SpacingSection import SpacingSection
@@ -811,7 +812,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '_breaks',
         '_fermata_measure_numbers',
         '_fermata_measure_width',
-        '_fermata_score',
         '_fermata_start_offsets',
         '_first_measure_number',
         '_forbid_segment_maker_adjustments',
@@ -830,8 +830,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     def __init__(
         self,
         breaks=None,
+        fermata_measure_numbers=None,
         fermata_measure_width=None,
-        fermata_score=None,
         first_measure_number=None,
         measure_count=None,
         measures=None,
@@ -842,13 +842,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             prototype = BreakMeasureMap
             assert isinstance(breaks, prototype), repr(breaks)
         self._breaks = breaks
-        self._fermata_measure_numbers = []
+        if fermata_measure_numbers is not None:
+            assert isinstance(fermata_measure_numbers, collections.Iterable)
+            assert all(isinstance(_, int) for _ in fermata_measure_numbers)
+        self._fermata_measure_numbers = fermata_measure_numbers or []
         if fermata_measure_width is not None:
             fermata_measure_width = abjad.Duration(fermata_measure_width)
         self._fermata_measure_width = fermata_measure_width
-        if fermata_score is not None:
-            assert isinstance(fermata_score, str), repr(fermata_score)
-        self._fermata_score = fermata_score
         self._fermata_start_offsets = []
         if first_measure_number is not None:
             assert isinstance(first_measure_number, int)
@@ -877,7 +877,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '''
         score = segment_maker.score
         skips = baca.select(score['GlobalSkips']).skips()
-        self._populate_fermata_measure_numbers()
         programmatic = True
         if self.measures and len(self.measures) == len(skips):
             programmatic = False
@@ -990,15 +989,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         measure_timespan = abjad.inspect(skip).get_timespan()
         return measure_timespan.start_offset in self._fermata_start_offsets
 
-    def _populate_fermata_measure_numbers(self):
-        if not self.fermata_score:
-            return
-        path = abjad.Path(self.fermata_score)
-        string = 'fermata_measure_numbers'
-        dictionary = path.get_metadatum(string, abjad.OrderedDict())
-        for path, fermata_measure_numbers in dictionary.items():
-            self._fermata_measure_numbers.extend(fermata_measure_numbers)
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -1011,7 +1001,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
@@ -1045,7 +1035,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
@@ -1073,13 +1063,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
 
             >>> spacing.fermata_measure_numbers
-            []
+            [103, 105]
 
         '''
         return self._fermata_measure_numbers
@@ -1096,12 +1086,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._fermata_measure_width
 
     @property
-    def fermata_score(self) -> typing.Optional[str]:
-        r'''Gets name score package with fermata measures.
-        '''
-        return self._fermata_score
-
-    @property
     def first_measure_number(self) -> int:
         r'''Gets first measure number.
 
@@ -1111,7 +1095,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
@@ -1132,7 +1116,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
@@ -1160,7 +1144,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
@@ -1206,7 +1190,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)]),
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 5),
+            ...     (95, 5, []),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )

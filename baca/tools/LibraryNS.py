@@ -3035,15 +3035,16 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def scorewide_spacing(
-        path: typing.Union[abjad.Path, typing.Tuple[int, int]],
+        path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
         fallback_duration: typing.Tuple[int, int],
         breaks: BreakMeasureMap = None,
         fermata_measure_duration: typing.Tuple[int, int] = None,
         ) -> HorizontalSpacingSpecifier:
         r'''Makes scorewide spacing.
 
-        :param path: path from which first measure number / measure count
-            metadata pair will be read; pair may be passed directly for tests.
+        :param path: path from which first measure number, measure count,
+            and fermata measure numbers metadata will be read;
+            triple may be passed directly for tests.
 
         :param fallback_duration: spacing for measures without override.
 
@@ -3059,7 +3060,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
             ...     )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18),
+            ...     (95, 18, [105, 107]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ...     )
@@ -3071,7 +3072,7 @@ class LibraryNS(abjad.AbjadObject):
             [102, 112]
 
             >>> spacing.fermata_measure_numbers
-            []
+            [105, 107]
 
             >>> spacing.first_measure_number
             95
@@ -3087,14 +3088,13 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         if isinstance(path, tuple):
-            assert len(path) == 2, repr(path)
-            first_measure_number, measure_count = path
-            fermata_score = None
+            assert len(path) == 3, repr(path)
+            first_measure_number, measure_count, fermata_measure_numbers = path
         else:
             path = abjad.Path(path)
-            first_measure_number, measure_count = path.get_measure_count_pair()
+            first_measure_number, measure_count, fermata_measure_numbers = \
+                path.get_measure_profile_metadata()
             first_measure_number = first_measure_number or 1
-            fermata_score = path.contents.name
         fallback_fraction = abjad.NonreducedFraction(fallback_duration)
         measures = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1
@@ -3108,8 +3108,8 @@ class LibraryNS(abjad.AbjadObject):
             fermata_measure_width = None
         specifier = HorizontalSpacingSpecifier(
             breaks=breaks,
+            fermata_measure_numbers=fermata_measure_numbers,
             fermata_measure_width=fermata_measure_width,
-            fermata_score=fermata_score,
             first_measure_number=first_measure_number,
             measure_count=measure_count,
             measures=measures,
