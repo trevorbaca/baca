@@ -811,7 +811,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     __slots__ = (
         '_breaks',
         '_fermata_measure_numbers',
-        '_fermata_measure_width',
+        '_fermata_measure_duration',
         '_fermata_start_offsets',
         '_first_measure_number',
         '_forbid_segment_maker_adjustments',
@@ -831,7 +831,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         self,
         breaks=None,
         fermata_measure_numbers=None,
-        fermata_measure_width=(1, 4),
+        fermata_measure_duration=(1, 4),
         first_measure_number=None,
         measure_count=None,
         measures=None,
@@ -846,9 +846,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             assert isinstance(fermata_measure_numbers, collections.Iterable)
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self._fermata_measure_numbers = fermata_measure_numbers or []
-        if fermata_measure_width is not None:
-            fermata_measure_width = abjad.Duration(fermata_measure_width)
-        self._fermata_measure_width = fermata_measure_width
+        if fermata_measure_duration is not None:
+            fermata_measure_duration = abjad.Duration(fermata_measure_duration)
+        self._fermata_measure_duration = fermata_measure_duration
         self._fermata_start_offsets = []
         if first_measure_number is not None:
             assert isinstance(first_measure_number, int)
@@ -889,9 +889,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         first_measure_number = self.first_measure_number or 1
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
-            if (self.fermata_measure_width is not None and
+            if (self.fermata_measure_duration is not None and
                 self._is_fermata_measure(measure_number, skip)):
-                duration = self.fermata_measure_width
+                duration = self.fermata_measure_duration
             elif self.measures and measure_number in self.measures:
                 duration = self.measures[measure_number]
                 duration = abjad.NonreducedFraction(duration)
@@ -1075,15 +1075,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._fermata_measure_numbers
 
     @property
-    def fermata_measure_width(self) -> typing.Optional[
+    def fermata_measure_duration(self) -> typing.Optional[
         abjad.NonreducedFraction
         ]:
-        r'''Gets fermata measure width.
+        r'''Gets fermata measure duration.
 
-        Sets fermata measures to exactly this width when set; ignores minimum
-        width and multiplier.
+        Sets fermata measures to exactly this duration when set; ignores
+        minimum width and multiplier.
         '''
-        return self._fermata_measure_width
+        return self._fermata_measure_duration
 
     @property
     def first_measure_number(self) -> int:

@@ -22,8 +22,8 @@ Bases
       ~HorizontalSpacingSpecifier.bol_measure_numbers
       ~HorizontalSpacingSpecifier.breaks
       ~HorizontalSpacingSpecifier.eol_measure_numbers
+      ~HorizontalSpacingSpecifier.fermata_measure_duration
       ~HorizontalSpacingSpecifier.fermata_measure_numbers
-      ~HorizontalSpacingSpecifier.fermata_measure_width
       ~HorizontalSpacingSpecifier.first_measure_number
       ~HorizontalSpacingSpecifier.last_measure_number
       ~HorizontalSpacingSpecifier.magic_lilypond_eol_adjustment
@@ -45,9 +45,9 @@ Read-only properties
 
 .. autoattribute:: HorizontalSpacingSpecifier.eol_measure_numbers
 
-.. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_numbers
+.. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_duration
 
-.. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_width
+.. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_numbers
 
 .. autoattribute:: HorizontalSpacingSpecifier.first_measure_number
 

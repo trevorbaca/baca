@@ -3101,15 +3101,15 @@ class LibraryNS(abjad.AbjadObject):
         for n in range(first_measure_number, last_measure_number + 1):
             measures[n] = fallback_fraction
         if fermata_measure_duration is not None:
-            fermata_measure_width = abjad.NonreducedFraction(
+            fermata_measure_duration = abjad.NonreducedFraction(
                 fermata_measure_duration
                 )
         else:
-            fermata_measure_width = None
+            fermata_measure_duration = None
         specifier = HorizontalSpacingSpecifier(
             breaks=breaks,
+            fermata_measure_duration=fermata_measure_duration,
             fermata_measure_numbers=fermata_measure_numbers,
-            fermata_measure_width=fermata_measure_width,
             first_measure_number=first_measure_number,
             measure_count=measure_count,
             measures=measures,
