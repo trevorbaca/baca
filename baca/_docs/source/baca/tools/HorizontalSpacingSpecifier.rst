@@ -26,6 +26,7 @@ Bases
       ~HorizontalSpacingSpecifier.fermata_measure_width
       ~HorizontalSpacingSpecifier.first_measure_number
       ~HorizontalSpacingSpecifier.last_measure_number
+      ~HorizontalSpacingSpecifier.magic_lilypond_eol_adjustment
       ~HorizontalSpacingSpecifier.measure_count
       ~HorizontalSpacingSpecifier.measures
       ~HorizontalSpacingSpecifier.minimum_width
@@ -51,6 +52,8 @@ Read-only properties
 .. autoattribute:: HorizontalSpacingSpecifier.first_measure_number
 
 .. autoattribute:: HorizontalSpacingSpecifier.last_measure_number
+
+.. autoattribute:: HorizontalSpacingSpecifier.magic_lilypond_eol_adjustment
 
 .. autoattribute:: HorizontalSpacingSpecifier.measure_count
 

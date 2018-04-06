@@ -831,7 +831,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         self,
         breaks=None,
         fermata_measure_numbers=None,
-        fermata_measure_width=None,
+        fermata_measure_width=(1, 4),
         first_measure_number=None,
         measure_count=None,
         measures=None,
@@ -1135,6 +1135,30 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             return None
 
     @property
+    def magic_lilypond_eol_adjustment(self):
+        r'''Gets magic LilyPond EOL adjustment.
+
+        ..  container
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18, [103, 105]),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.magic_lilypond_eol_adjustment
+            Multiplier(35, 24)
+
+        Optically determined to correct LilyPond end-of-line spacing bug.
+
+        Class property.
+        '''
+        return self._magic_lilypond_eol_adjustment
+
+    @property
     def measure_count(self) -> int:
         r'''Gets measure count.
 
@@ -1221,9 +1245,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     ]
                 )
 
-            Works with ``'all'``:
-
-            >>> spacing.override('all', (1, 24))
+            >>> spacing.override((1, -1), (1, 24))
             >>> abjad.f(spacing.measures)
             abjad.OrderedDict(
                 [
@@ -1252,7 +1274,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             Works with measure number:
 
-            >>> spacing.override('all', (1, 16))
+            >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override(95, (1, 24))
             >>> abjad.f(spacing.measures)
             abjad.OrderedDict(
@@ -1282,7 +1304,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             Works with range of measure numbers:
 
-            >>> spacing.override('all', (1, 16))
+            >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override((95, 97), (1, 24))
             >>> abjad.f(spacing.measures)
             abjad.OrderedDict(
@@ -1312,7 +1334,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             Works with list of measure numbers:
 
-            >>> spacing.override('all', (1, 16))
+            >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override([95, 97, 99], (1, 24))
             >>> abjad.f(spacing.measures)
             abjad.OrderedDict(
@@ -1342,7 +1364,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             Works with negative indices:
 
-            >>> spacing.override('all', (1, 16))
+            >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override([-3, -1], (1, 24))
             >>> abjad.f(spacing.measures)
             abjad.OrderedDict(
@@ -1370,74 +1392,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     ]
                 )
 
-            Works with ``'end'``:
+        ..  container:: example
+
+            Raises exception when measures is not int, pair or list:
 
             >>> spacing.override('all', (1, 16))
-            >>> spacing.override('end', (1, 24))
-            >>> abjad.f(spacing.measures)
-            abjad.OrderedDict(
-                [
-                    (
-                        95,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        96,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        97,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        98,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        99,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    ]
-                )
-                
-            Works with ``'end'`` range:
-
-            >>> spacing.override('all', (1, 16))
-            >>> spacing.override((3, 'end'), (1, 24))
-            >>> abjad.f(spacing.measures)
-            abjad.OrderedDict(
-                [
-                    (
-                        95,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        96,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        97,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        98,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        99,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    ]
-                )
+            Traceback (most recent call last):
+                ...
+            TypeError: measures must be int, pair or list (not 'all').
 
         '''
-        if measures == 'all':
-            measures = (1, 'end')
         duration = abjad.NonreducedFraction(pair)
-        if isinstance(measures, (int, str)):
+        if isinstance(measures, int):
             number = self._coerce_measure_number(measures)
             self.measures[number] = duration
         elif isinstance(measures, tuple):
+            assert len(measures) == 2, repr(measures)
             start_measure, stop_measure = measures
             start_measure = self._coerce_measure_number(start_measure)
             stop_measure = self._coerce_measure_number(stop_measure)
@@ -1448,5 +1418,5 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 number = self._coerce_measure_number(measure)
                 self.measures[number] = duration
         else:
-            message = f'measures must be int, pair or list (not {measures!r})'
+            message = f'measures must be int, pair or list (not {measures!r}).'
             raise TypeError(message)

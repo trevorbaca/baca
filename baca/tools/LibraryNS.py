@@ -3038,7 +3038,7 @@ class LibraryNS(abjad.AbjadObject):
         path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
         fallback_duration: typing.Tuple[int, int],
         breaks: BreakMeasureMap = None,
-        fermata_measure_duration: typing.Tuple[int, int] = None,
+        fermata_measure_duration: typing.Tuple[int, int] = (1, 4),
         ) -> HorizontalSpacingSpecifier:
         r'''Makes scorewide spacing.
 
