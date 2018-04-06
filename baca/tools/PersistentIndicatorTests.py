@@ -35,7 +35,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     score_template=score_template,
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
@@ -118,7 +118,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -203,7 +203,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -304,7 +304,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
@@ -402,7 +402,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -503,7 +503,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -606,7 +606,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -673,7 +673,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -756,7 +756,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -838,7 +838,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -908,7 +908,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -989,7 +989,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -1059,7 +1059,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -1176,7 +1176,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=score_template,
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -1393,7 +1393,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -1609,7 +1609,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -1843,7 +1843,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2082,7 +2082,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
@@ -2353,7 +2353,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2611,7 +2611,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=score_template,
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2846,7 +2846,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3080,7 +3080,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3332,7 +3332,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3589,7 +3589,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
@@ -3896,7 +3896,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -4180,7 +4180,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=score_template,
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -4427,7 +4427,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -4673,7 +4673,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -4937,7 +4937,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5206,7 +5206,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
@@ -5537,7 +5537,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5807,7 +5807,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     ignore_unpitched_notes=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
@@ -5959,7 +5959,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 25)),
+            ...     spacing=baca.minimum_duration((1, 25)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6087,7 +6087,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6234,7 +6234,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6380,7 +6380,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6562,7 +6562,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6713,7 +6713,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6826,7 +6826,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6916,7 +6916,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6989,7 +6989,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7086,7 +7086,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7155,7 +7155,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7240,7 +7240,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7324,7 +7324,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7398,7 +7398,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7499,7 +7499,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 25)),
+            ...     spacing=baca.minimum_duration((1, 25)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7609,7 +7609,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7738,7 +7738,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7866,7 +7866,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8021,7 +8021,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(

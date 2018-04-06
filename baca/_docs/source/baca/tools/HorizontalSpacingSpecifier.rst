@@ -29,7 +29,7 @@ Bases
       ~HorizontalSpacingSpecifier.magic_lilypond_eol_adjustment
       ~HorizontalSpacingSpecifier.measure_count
       ~HorizontalSpacingSpecifier.measures
-      ~HorizontalSpacingSpecifier.minimum_width
+      ~HorizontalSpacingSpecifier.minimum_duration
       ~HorizontalSpacingSpecifier.multiplier
       ~HorizontalSpacingSpecifier.override
       ~HorizontalSpacingSpecifier.__call__
@@ -59,7 +59,7 @@ Read-only properties
 
 .. autoattribute:: HorizontalSpacingSpecifier.measures
 
-.. autoattribute:: HorizontalSpacingSpecifier.minimum_width
+.. autoattribute:: HorizontalSpacingSpecifier.minimum_duration
 
 .. autoattribute:: HorizontalSpacingSpecifier.multiplier
 

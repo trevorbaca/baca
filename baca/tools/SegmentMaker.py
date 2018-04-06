@@ -2839,7 +2839,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
             ...     score_template=baca.StringTrioScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 31)),
+            ...     spacing=baca.minimum_duration((1, 31)),
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
@@ -3123,7 +3123,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     color_out_of_range_pitches=True,
             ...     ignore_out_of_range_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
@@ -3302,7 +3302,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     color_repeat_pitch_classes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
+            ...         minimum_duration=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
@@ -4378,7 +4378,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unregistered_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
@@ -4544,7 +4544,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(

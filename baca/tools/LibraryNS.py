@@ -1679,7 +1679,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -1801,7 +1801,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -2900,7 +2900,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5669,7 +5669,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
 
@@ -5770,7 +5770,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
 
@@ -5872,7 +5872,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
 
@@ -5972,7 +5972,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
 
@@ -6076,7 +6076,7 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 12)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
             ...     )
 

@@ -52,7 +52,7 @@ Bases
       ~LibraryGM.marcati
       ~LibraryGM.margin_markup
       ~LibraryGM.metronome_mark
-      ~LibraryGM.minimum_width
+      ~LibraryGM.minimum_duration
       ~LibraryGM.mmrest_text_color
       ~LibraryGM.mmrest_text_extra_offset
       ~LibraryGM.mmrest_text_padding
@@ -130,7 +130,7 @@ Class & static methods
 
 .. automethod:: LibraryGM.metronome_mark
 
-.. automethod:: LibraryGM.minimum_width
+.. automethod:: LibraryGM.minimum_duration
 
 .. automethod:: LibraryGM.mmrest_text_color
 

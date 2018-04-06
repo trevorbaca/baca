@@ -494,13 +494,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     ..  container:: example
 
         Measurewise proportional spacing based on twice the minimum duration
-        per measure with minimum width equal to an eighth note:
+        per measure with minimum duration equal to an eighth note:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
-        ...         minimum_width=abjad.Duration(1, 8),
+        ...         minimum_duration=abjad.Duration(1, 8),
         ...         ),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
         ...     )
@@ -623,7 +623,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.HorizontalSpacingSpecifier(
-        ...         minimum_width=abjad.Duration(1, 8),
+        ...         minimum_duration=abjad.Duration(1, 8),
         ...         ),
         ...     time_signatures=[(4, 8), (3, 8)],
         ...     )
@@ -817,7 +817,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '_forbid_segment_maker_adjustments',
         '_measure_count',
         '_measures',
-        '_minimum_width',
+        '_minimum_duration',
         '_multiplier',
         )
 
@@ -835,7 +835,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         first_measure_number=None,
         measure_count=None,
         measures=None,
-        minimum_width=None,
+        minimum_duration=None,
         multiplier=None,
         ):
         if breaks is not None:
@@ -859,9 +859,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
         self._measure_count = measure_count
-        if minimum_width is not None:
-            minimum_width = abjad.Duration(minimum_width)
-        self._minimum_width = minimum_width
+        if minimum_duration is not None:
+            minimum_duration = abjad.Duration(minimum_duration)
+        self._minimum_duration = minimum_duration
         if multiplier is not None:
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
@@ -897,9 +897,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration = abjad.NonreducedFraction(duration)
             else:
                 duration = minimum_durations_by_measure[measure_index]
-                if self.minimum_width is not None:
-                    if self.minimum_width < duration:
-                        duration = self.minimum_width
+                if self.minimum_duration is not None:
+                    if self.minimum_duration < duration:
+                        duration = self.minimum_duration
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
             eol_adjusted = False
@@ -1081,7 +1081,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         r'''Gets fermata measure duration.
 
         Sets fermata measures to exactly this duration when set; ignores
-        minimum width and multiplier.
+        minimum duration and multiplier.
         '''
         return self._fermata_measure_duration
 
@@ -1186,12 +1186,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._measures
 
     @property
-    def minimum_width(self) -> typing.Optional[abjad.NonreducedFraction]:
-        r'''Gets minimum width.
+    def minimum_duration(self) -> typing.Optional[abjad.NonreducedFraction]:
+        r'''Gets minimum duration.
 
         Defaults to none and interprets none equal to ``1/8``.
         '''
-        return self._minimum_width
+        return self._minimum_duration
 
     @property
     def multiplier(self) -> typing.Optional[abjad.Multiplier]:

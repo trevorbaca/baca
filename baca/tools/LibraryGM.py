@@ -1974,13 +1974,13 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def minimum_width(
+    def minimum_duration(
         duration: typing.Union[tuple, abjad.Duration],
         ) -> HorizontalSpacingSpecifier:
         r'''Makes horizontal spacing specifier with `duration` minimum width.
         '''
         return HorizontalSpacingSpecifier(
-            minimum_width=duration,
+            minimum_duration=duration,
             )
 
     @staticmethod

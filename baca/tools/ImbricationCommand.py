@@ -884,7 +884,7 @@ class ImbricationCommand(Command):
             ...     measures_per_stage=[1, 1],
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
             ...     spacing=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
+            ...         minimum_duration=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
