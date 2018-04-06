@@ -2772,7 +2772,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         found = len(self.time_signatures)
         if found != self.validate_measure_count:
-            message =  f'found {found} time measures'
+            message =  f'found {found} measures'
             message += f' (not {self.validate_measure_count}).'
             raise Exception(message)
 
@@ -5589,6 +5589,20 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def validate_measure_count(self) -> typing.Optional[int]:
         r'''Gets validate measure count.
+
+        ..  container:: example
+
+            Raises exception when measures found do not equal validate count:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     validate_measure_count=6,
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception: found 4 measures (not 6).
+
         '''
         return self._validate_measure_count
     
