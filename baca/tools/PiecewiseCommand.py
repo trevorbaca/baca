@@ -14,9 +14,9 @@ class PiecewiseCommand(Command):
     __slots__ = (
         '_bookend',
         '_indicators',
-        '_preamble',
         '_selector',
         '_spanner',
+        '_spanner_selector',
         )
 
     ### INITIALIZER ###
@@ -25,9 +25,9 @@ class PiecewiseCommand(Command):
         self,
         bookend=None,
         indicators=None,
-        preamble=None,
         selector=None,
         spanner=None,
+        spanner_selector=None,
         ):
         Command.__init__(self, selector=selector)
         if bookend is not None:
@@ -36,15 +36,15 @@ class PiecewiseCommand(Command):
         if indicators is not None:
             indicators = abjad.CyclicTuple(indicators)
         self._indicators = indicators
-        if isinstance(preamble, str):
-            preamble = eval(preamble)
-        if preamble is not None:
-            prototype = (abjad.Expression, baca.MapCommand)
-            assert isinstance(preamble, prototype), repr(preamble)
-        self._preamble = preamble
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, baca.SpannerCommand))
         self._spanner = spanner
+        if isinstance(spanner_selector, str):
+            spanner_selector = eval(spanner_selector)
+        if spanner_selector is not None:
+            prototype = (abjad.Expression, baca.MapCommand)
+            assert isinstance(spanner_selector, prototype)
+        self._spanner_selector = spanner_selector
         self._tags = []
 
     ### SPECIAL METHODS ###
@@ -60,19 +60,19 @@ class PiecewiseCommand(Command):
             return
         if not self.indicators:
             return
-        preprocessed_argument = argument
-        if self.preamble is not None:
-            preprocessed_argument = self.preamble(preprocessed_argument)
+        spanner_argument = argument
+        if self.spanner_selector is not None:
+            spanner_argument = self.spanner_selector(spanner_argument)
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
-            leaves = abjad.select(preprocessed_argument).leaves()
+            leaves = abjad.select(spanner_argument).leaves()
             abjad.attach(
                 spanner,
                 leaves,
                 tag=self.tag.prepend('PWC1'),
                 )
         else:
-            spanner = self.spanner(preprocessed_argument)
+            spanner = self.spanner(spanner_argument)
         if self.selector is not None:
             argument = self.selector(argument)
         length = len(argument)
@@ -145,14 +145,6 @@ class PiecewiseCommand(Command):
         return self._indicators
 
     @property
-    def preamble(self):
-        r'''Gets preamble selector.
-
-        Returns selector or none.
-        '''
-        return self._preamble
-
-    @property
     def selector(self):
         r'''Gets selector.
 
@@ -167,3 +159,11 @@ class PiecewiseCommand(Command):
         Returns spanner command or none.
         '''
         return self._spanner
+
+    @property
+    def spanner_selector(self):
+        r'''Gets spanner selector.
+
+        Returns selector or none.
+        '''
+        return self._spanner_selector

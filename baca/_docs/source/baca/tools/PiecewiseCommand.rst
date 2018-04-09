@@ -27,11 +27,11 @@ Bases
       ~PiecewiseCommand.indicators
       ~PiecewiseCommand.manifests
       ~PiecewiseCommand.offset_to_measure_number
-      ~PiecewiseCommand.preamble
       ~PiecewiseCommand.previous_segment_voice_metadata
       ~PiecewiseCommand.score_template
       ~PiecewiseCommand.selector
       ~PiecewiseCommand.spanner
+      ~PiecewiseCommand.spanner_selector
       ~PiecewiseCommand.tag
       ~PiecewiseCommand.tag_measure_number
       ~PiecewiseCommand.tags
@@ -52,11 +52,11 @@ Read-only properties
 
 .. autoattribute:: PiecewiseCommand.indicators
 
-.. autoattribute:: PiecewiseCommand.preamble
-
 .. autoattribute:: PiecewiseCommand.selector
 
 .. autoattribute:: PiecewiseCommand.spanner
+
+.. autoattribute:: PiecewiseCommand.spanner_selector
 
 .. only:: html
 

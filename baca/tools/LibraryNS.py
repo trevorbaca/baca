@@ -887,7 +887,8 @@ class LibraryNS(abjad.AbjadObject):
         indicators: typing.Iterable,
         selector: Selector,
         bookend: bool = False,
-        preamble: typing.Union[str, abjad.Expression, MapCommand] = None,
+        spanner_selector: typing.Union[
+            str, abjad.Expression, MapCommand] = None,
         ):
         r'''Makes piecewise command from `spanner` command, `indicators` and
         indicator `selector`.
@@ -895,9 +896,9 @@ class LibraryNS(abjad.AbjadObject):
         return PiecewiseCommand(
             bookend=bookend,
             indicators=indicators,
-            preamble=preamble,
             selector=selector,
             spanner=spanner,
+            spanner_selector=spanner_selector,
             )
 
     @staticmethod

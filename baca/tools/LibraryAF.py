@@ -6032,8 +6032,9 @@ class LibraryAF(abjad.AbjadObject):
     def enchained_transition(
         *markups: typing.Any,
         do_not_bookend: bool = False,
-        preamble: typing.Union[bool, Selector, MapCommand, None] = True,
-        selector: Selector = 'baca.tleaves().group()'
+        selector: Selector = 'baca.tleaves().group()',
+        spanner_selector: typing.Union[
+            bool, Selector, MapCommand, None] = True
         ) -> PiecewiseCommand:
         r'''Makes enchained transition spanner.
 
@@ -6055,8 +6056,8 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
             ...         do_not_bookend=True,
-            ...         preamble=False,
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
+            ...         spanner_selector=False,
             ...     ),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -6277,8 +6278,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.enchained_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         preamble=False,
             ...         selector=baca.leaves().enchain([8]),
+            ...         spanner_selector=False,
             ...     ),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -6461,20 +6462,19 @@ class LibraryAF(abjad.AbjadObject):
         else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
-        #indicators.append(markups[-1])
-        if preamble is True:
-            preamble_ = selector
-        elif preamble is False:
-            preamble_ = None
+        if spanner_selector is True:
+            spanner_selector_ = selector
+        elif spanner_selector is False:
+            spanner_selector_ = None
         else:
-            assert isinstance(preamble, (str, abjad.Expression))
-            preamble_ = preamble
+            assert isinstance(spanner_selector, (str, abjad.Expression))
+            spanner_selector_ = spanner_selector
         return LibraryNS.piecewise(
             abjad.TextSpanner(),
             indicators,
             selector,
             bookend=not(do_not_bookend),
-            preamble=preamble_,
+            spanner_selector=spanner_selector_,
             )
 
     @staticmethod
