@@ -1407,10 +1407,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.single_segment_transition(
+            ...     baca.enchained_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         baca.tleaves().group(),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1517,10 +1516,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.single_segment_transition(
+            ...     baca.enchained_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         baca.map(baca.tleaves(), baca.tuplet(1)),
+            ...         selector=baca.map(baca.tleaves(), baca.tuplet(1)),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

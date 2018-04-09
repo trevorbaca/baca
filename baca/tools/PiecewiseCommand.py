@@ -75,6 +75,7 @@ class PiecewiseCommand(Command):
             spanner = self.spanner(preprocessed_argument)
         if self.selector is not None:
             argument = self.selector(argument)
+        length = len(argument)
         for i, item in enumerate(argument):
             leaf = baca.select(item).leaf(0)
             indicator = self.indicators[i]
@@ -87,15 +88,21 @@ class PiecewiseCommand(Command):
             if leaf not in spanner:
                 continue
             indicator = self.indicators[i + 1]
-            self._attach_indicators(spanner, indicator, leaf)
+            if i == length - 1:
+                last = True
+            else:
+                last = False
+            self._attach_indicators(spanner, indicator, leaf, last=last)
 
     ### PRIVATE METHODS ###
 
-    def _attach_indicators(self, spanner, argument, leaf):
+    def _attach_indicators(self, spanner, argument, leaf, last=False):
         if not isinstance(argument, tuple):
             argument = (argument,)
         for argument_ in argument:
             if argument_ is None:
+                pass
+            elif isinstance(argument_, abjad.ArrowLineSegment) and last:
                 pass
             elif isinstance(argument_, baca.IndicatorCommand):
                 for indicator in argument_.indicators:

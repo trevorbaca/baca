@@ -75,7 +75,6 @@ Bases
       ~LibraryNS.shift_dynamic
       ~LibraryNS.shift_hairpin_start
       ~LibraryNS.short_fermata
-      ~LibraryNS.single_segment_transition
       ~LibraryNS.skips_after
       ~LibraryNS.skips_around
       ~LibraryNS.skips_before
@@ -223,8 +222,6 @@ Class & static methods
 .. automethod:: LibraryNS.shift_hairpin_start
 
 .. automethod:: LibraryNS.short_fermata
-
-.. automethod:: LibraryNS.single_segment_transition
 
 .. automethod:: LibraryNS.skips_after
 

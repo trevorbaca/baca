@@ -14,6 +14,7 @@ from .ContainerCommand import ContainerCommand
 from .DiatonicClusterCommand import DiatonicClusterCommand
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
+from .MapCommand import MapCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
@@ -6031,7 +6032,7 @@ class LibraryAF(abjad.AbjadObject):
     def enchained_transition(
         *markups: typing.Any,
         do_not_bookend: bool = False,
-        preamble: typing.Union[bool, Selector] = True,
+        preamble: typing.Union[bool, Selector, MapCommand, None] = True,
         selector: Selector = 'baca.tleaves().group()'
         ) -> PiecewiseCommand:
         r'''Makes enchained transition spanner.
@@ -6460,16 +6461,20 @@ class LibraryAF(abjad.AbjadObject):
         else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
+        #indicators.append(markups[-1])
         if preamble is True:
-            preamble = selector
-        if preamble is False:
-            preamble = None
+            preamble_ = selector
+        elif preamble is False:
+            preamble_ = None
+        else:
+            assert isinstance(preamble, (str, abjad.Expression))
+            preamble_ = preamble
         return LibraryNS.piecewise(
             abjad.TextSpanner(),
             indicators,
             selector,
             bookend=not(do_not_bookend),
-            preamble=preamble,
+            preamble=preamble_,
             )
 
     @staticmethod
