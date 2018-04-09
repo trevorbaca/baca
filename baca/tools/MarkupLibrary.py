@@ -20,7 +20,6 @@ class MarkupLibrary(abjad.AbjadObject):
         argument: typing.Union[str, abjad.Markup],
         selector: Selector = 'baca.phead(0)',
         direction: abjad.OrdinalConstant = abjad.Up,
-        is_new: bool = True,
         upright: bool = True,
         whiteout: bool = True,
         ) -> IndicatorCommand:
@@ -255,8 +254,6 @@ class MarkupLibrary(abjad.AbjadObject):
             message = f'direction must be up or down (not {direction!r}).'
             raise Exception(message)
         if isinstance(argument, str):
-            if not is_new:
-                argument = f'({argument})'
             markup = abjad.Markup(argument, direction=direction)
         else:
             assert isinstance(argument, abjad.Markup), repr(argument)
@@ -620,18 +617,16 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def kn_rasg(is_new=True, selector='baca.pleaf(0)'):
+    def kn_rasg(selector='baca.pleaf(0)'):
         return baca.markup(
             'kn. rasg.',
-            is_new=is_new,
             selector=selector,
             )
 
     @staticmethod
-    def knuckle_rasg(is_new=True, selector='baca.pleaf(0)'):
+    def knuckle_rasg(selector='baca.pleaf(0)'):
         return baca.markup(
             'knuckle rasg.',
-            is_new=is_new,
             selector=selector,
             )
 
@@ -716,26 +711,23 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def nail_rasg(is_new=True, selector='baca.pleaf(0)'):
+    def nail_rasg(selector='baca.pleaf(0)'):
         return baca.markup(
             'nail rasg.',
-            is_new=is_new,
             selector=selector,
             )
 
     @staticmethod
-    def nail_rasgueado(is_new=True, selector='baca.pleaf(0)'):
+    def nail_rasgueado(selector='baca.pleaf(0)'):
         return baca.markup(
             'nail rasgueado',
-            is_new=is_new,
             selector=selector,
             )
 
     @staticmethod
-    def non_div(is_new=True, selector='baca.leaf(0)'):
+    def non_div(selector='baca.leaf(0)'):
         return baca.markup(
             'non div.',
-            is_new=is_new,
             selector=selector,
             )
 
@@ -944,18 +936,16 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def pochiss_pont(is_new=True, selector='baca.pleaf(0)'):
+    def pochiss_pont(selector='baca.pleaf(0)'):
         return baca.markup(
             'pochiss. pont.',
-            is_new=is_new,
             selector=selector,
             )
 
     @staticmethod
-    def pochiss_scratch(is_new=True, selector='baca.pleaf(0)'):
+    def pochiss_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'pochiss. scratch',
-            is_new=is_new,
             selector=selector,
             )
 
@@ -1051,10 +1041,9 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def ponticello(is_new=True, selector='baca.pleaf(0)'):
+    def ponticello(selector='baca.pleaf(0)'):
         return baca.markup(
             'ponticello',
-            is_new=is_new,
             selector=selector,
             )
 
@@ -1262,10 +1251,9 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def still(is_new=True, selector='baca.leaf(0)'):
+    def still(selector='baca.leaf(0)'):
         return baca.markup(
             'still',
-            is_new=is_new,
             selector=selector,
             )
 
@@ -1315,18 +1303,16 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tamb_tr(is_new=True, selector='baca.pleaf(0)'):
+    def tamb_tr(selector='baca.pleaf(0)'):
         return baca.markup(
             'tamb. tr.',
-            is_new=is_new,
             selector=selector,
             )
 
     @staticmethod
-    def tasto(is_new=True, selector='baca.pleaf(0)'):
+    def tasto(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto',
-            is_new=is_new,
             selector=selector,
             )
 
@@ -1427,10 +1413,9 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto_poss(is_new=True, selector='baca.pleaf(0)'):
+    def tasto_poss(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto poss.',
-            is_new=is_new,
             selector=selector,
             )
 
