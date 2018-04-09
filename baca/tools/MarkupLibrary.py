@@ -696,15 +696,15 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def molto_pont_plus_vib_molto(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'molto pont.',
             'vib. molto',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
@@ -896,29 +896,29 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def PO_plus_non_vib(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'PO',
             'non vib.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
     @staticmethod
     def PO_plus_poco_vib(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'PO',
             'poco vib.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
@@ -968,57 +968,57 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def poco_pont_plus_non_vib(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'poco pont.',
             'non vib.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
     @staticmethod
     def poco_pont_plus_sub_non_vib(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'poco pont.',
             'sub. non vib.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
     @staticmethod
     def poco_pont_plus_sub_vib_mod(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'poco pont.',
             'sub. vib. mod.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
     @staticmethod
     def poco_pont_plus_vib_mod(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'poco pont.',
             'vib. mod.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
@@ -1379,15 +1379,15 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def tasto_plus_non_vib(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'tasto',
             'non vib.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
@@ -1407,15 +1407,15 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def tasto_plus_poco_vib(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'tasto',
             'poco vib.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
@@ -1491,23 +1491,21 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def two_part_transition(
+    def plus_statement(
         string_1,
         string_2,
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        if first_is_new:
-            if second_is_new:
-                composite_string = f'{string_1} + {string_2}'
-            else:
-                composite_string = f'{string_1} (+{string_2})'
+        if parenthesize_first and parenthesize_last:
+            composite_string = f'({string_1} + {string_2})'
+        elif parenthesize_first and not parenthesize_last:
+            composite_string = f'({string_1}+) {string_2}'
+        elif not parenthesize_first and parenthesize_last:
+            composite_string = f'{string_1} (+{string_2})'
         else:
-            if second_is_new:
-                composite_string = f'({string_1}+) {string_2}'
-            else:
-                composite_string = f'({string_1} + {string_2})'
+            composite_string = f'{string_1} + {string_2}'
         return baca.markup(
             composite_string,
             selector=selector,
@@ -1550,29 +1548,29 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def XFB_plus_pochiss_pont(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'XFB',
             'pochiss. pont.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 
     @staticmethod
     def XFB_plus_tasto(
-        first_is_new=True,
-        second_is_new=True,
+        parenthesize_first=False,
+        parenthesize_last=False,
         selector='baca.pleaf(0)',
         ):
-        return MarkupLibrary.two_part_transition(
+        return MarkupLibrary.plus_statement(
             'XFB',
             'tasto',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
+            parenthesize_first=parenthesize_first,
+            parenthesize_last=parenthesize_last,
             selector=selector,
             )
 

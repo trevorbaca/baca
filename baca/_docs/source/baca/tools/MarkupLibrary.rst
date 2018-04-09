@@ -106,6 +106,7 @@ Bases
       ~MarkupLibrary.pP_XFB_flaut
       ~MarkupLibrary.pT_XFB_flaut
       ~MarkupLibrary.pizz
+      ~MarkupLibrary.plus_statement
       ~MarkupLibrary.po_meno_scratch
       ~MarkupLibrary.pochiss_pont
       ~MarkupLibrary.pochiss_scratch
@@ -166,7 +167,6 @@ Bases
       ~MarkupLibrary.terminate_each_note_abruptly
       ~MarkupLibrary.trans
       ~MarkupLibrary.trem_flaut_tast
-      ~MarkupLibrary.two_part_transition
       ~MarkupLibrary.vib_moltiss
       ~MarkupLibrary.vib_pochiss
       ~MarkupLibrary.vib_poco
@@ -351,6 +351,8 @@ Class & static methods
 
 .. automethod:: MarkupLibrary.pizz
 
+.. automethod:: MarkupLibrary.plus_statement
+
 .. automethod:: MarkupLibrary.po_meno_scratch
 
 .. automethod:: MarkupLibrary.pochiss_pont
@@ -470,8 +472,6 @@ Class & static methods
 .. automethod:: MarkupLibrary.trans
 
 .. automethod:: MarkupLibrary.trem_flaut_tast
-
-.. automethod:: MarkupLibrary.two_part_transition
 
 .. automethod:: MarkupLibrary.vib_moltiss
 
