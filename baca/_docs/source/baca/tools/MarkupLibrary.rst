@@ -71,6 +71,8 @@ Bases
       ~MarkupLibrary.estr_sul_pont
       ~MarkupLibrary.ext_pont
       ~MarkupLibrary.final_markup
+      ~MarkupLibrary.flaut
+      ~MarkupLibrary.flaut_partial_2
       ~MarkupLibrary.fluttertongue
       ~MarkupLibrary.fractional_OB
       ~MarkupLibrary.fractional_scratch
@@ -128,6 +130,8 @@ Bases
       ~MarkupLibrary.pos_ord_vib_poco
       ~MarkupLibrary.pres_de_la_table
       ~MarkupLibrary.put_reed_back_in
+      ~MarkupLibrary.rasp
+      ~MarkupLibrary.rasp_partial_2
       ~MarkupLibrary.remove_reed
       ~MarkupLibrary.remove_staple
       ~MarkupLibrary.scratch_moltiss
@@ -281,6 +285,10 @@ Class & static methods
 
 .. automethod:: MarkupLibrary.final_markup
 
+.. automethod:: MarkupLibrary.flaut
+
+.. automethod:: MarkupLibrary.flaut_partial_2
+
 .. automethod:: MarkupLibrary.fluttertongue
 
 .. automethod:: MarkupLibrary.fractional_OB
@@ -394,6 +402,10 @@ Class & static methods
 .. automethod:: MarkupLibrary.pres_de_la_table
 
 .. automethod:: MarkupLibrary.put_reed_back_in
+
+.. automethod:: MarkupLibrary.rasp
+
+.. automethod:: MarkupLibrary.rasp_partial_2
 
 .. automethod:: MarkupLibrary.remove_reed
 

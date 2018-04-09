@@ -45,6 +45,7 @@ Bases
       ~LibraryTZ.ties_up
       ~LibraryTZ.time_signature_extra_offset
       ~LibraryTZ.timeline
+      ~LibraryTZ.transition
       ~LibraryTZ.transparent_accidentals
       ~LibraryTZ.transparent_bar_lines
       ~LibraryTZ.transparent_beams
@@ -131,6 +132,8 @@ Class & static methods
 .. automethod:: LibraryTZ.time_signature_extra_offset
 
 .. automethod:: LibraryTZ.timeline
+
+.. automethod:: LibraryTZ.transition
 
 .. automethod:: LibraryTZ.transparent_accidentals
 

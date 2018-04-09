@@ -522,6 +522,20 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def flaut(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'flaut.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def flaut_partial_2(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'flaut. (2°)',
+            selector=selector,
+            )
+
+    @staticmethod
     def fluttertongue(selector='baca.pleaf(0)'):
         return baca.markup(
             'fluttertongue',
@@ -1114,6 +1128,20 @@ class MarkupLibrary(abjad.AbjadObject):
     def put_reed_back_in(selector='baca.leaf(0)'):
         return MarkupLibrary.boxed(
             'put reed back in',
+            selector=selector,
+            )
+
+    @staticmethod
+    def rasp(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'rasp',
+            selector=selector,
+            )
+
+    @staticmethod
+    def rasp_partial_2(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'rasp (2°)',
             selector=selector,
             )
 
