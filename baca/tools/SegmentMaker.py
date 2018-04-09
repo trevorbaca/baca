@@ -278,7 +278,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self,
         allow_empty_selections: bool = None,
         clock_time_override: abjad.MetronomeMark = None,
-        color_octaves: bool = True,
+        color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
         color_repeat_pitch_classes: bool = True,
         do_not_check_persistence: bool = None,
