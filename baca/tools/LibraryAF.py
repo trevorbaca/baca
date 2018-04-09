@@ -6030,7 +6030,8 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def enchained_transition(
         *markups: typing.Any,
-        bookend: bool = False,
+        do_not_bookend: bool = False,
+        preamble: typing.Union[bool, Selector] = True,
         selector: Selector = 'baca.tleaves().group()'
         ) -> PiecewiseCommand:
         r'''Makes enchained transition spanner.
@@ -6052,6 +6053,8 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.markup.ord(),
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
+            ...         do_not_bookend=True,
+            ...         preamble=False,
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
             ...     baca.make_even_runs(),
@@ -6273,7 +6276,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.enchained_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         bookend=True,
+            ...         preamble=False,
             ...         selector=baca.leaves().enchain([8]),
             ...     ),
             ...     baca.make_even_runs(),
@@ -6452,16 +6455,21 @@ class LibraryAF(abjad.AbjadObject):
         for markup in markups[:-1]:
             pair = (markup, LibraryAF.dashed_arrow())
             indicators.append(pair)
-        if bookend:
+        if do_not_bookend:
+            indicators.append(markups[-1])
+        else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
-        else:
-            indicators.append(markups[-1])
+        if preamble is True:
+            preamble = selector
+        if preamble is False:
+            preamble = None
         return LibraryNS.piecewise(
             abjad.TextSpanner(),
             indicators,
             selector,
-            bookend=bookend,
+            bookend=not(do_not_bookend),
+            preamble=preamble,
             )
 
     @staticmethod
