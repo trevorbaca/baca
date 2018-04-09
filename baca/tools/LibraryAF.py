@@ -5818,8 +5818,8 @@ class LibraryAF(abjad.AbjadObject):
                                     \override DynamicLineSpanner.staff-padding = #'4.5                   %! OC1
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     e'8
-                                    \<                                                                   %! PCW1
-                                    \p                                                                   %! PCW1
+                                    \<                                                                   %! PWC1
+                                    \p                                                                   %! PWC1
                                     [
                 <BLANKLINE>
                                     d''8
@@ -5834,8 +5834,8 @@ class LibraryAF(abjad.AbjadObject):
                                     % [MusicVoice measure 2]                                             %! SM4
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     g'8
-                                    \f                                                                   %! PCW1
-                                    \>                                                                   %! PCW1
+                                    \f                                                                   %! PWC1
+                                    \>                                                                   %! PWC1
                                     [
                 <BLANKLINE>
                                     f''8
@@ -5848,8 +5848,8 @@ class LibraryAF(abjad.AbjadObject):
                                     % [MusicVoice measure 3]                                             %! SM4
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     d''8
-                                    \p                                                                   %! PCW1
-                                    \<                                                                   %! PCW1
+                                    \p                                                                   %! PWC1
+                                    \<                                                                   %! PWC1
                                     [
                 <BLANKLINE>
                                     f'8
@@ -5864,7 +5864,7 @@ class LibraryAF(abjad.AbjadObject):
                                     % [MusicVoice measure 4]                                             %! SM4
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     f''8
-                                    \f                                                                   %! PCW1
+                                    \f                                                                   %! PWC1
                                     [
                 <BLANKLINE>
                                     e'8
@@ -5959,8 +5959,8 @@ class LibraryAF(abjad.AbjadObject):
                                     \override TextSpanner.staff-padding = #4.5                           %! OC1
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     e'8
-                                    \<                                                                   %! PCW1
-                                    \p                                                                   %! PCW1
+                                    \<                                                                   %! PWC1
+                                    \p                                                                   %! PWC1
                                     [
                 <BLANKLINE>
                                     d''8
@@ -5986,8 +5986,8 @@ class LibraryAF(abjad.AbjadObject):
                                     % [MusicVoice measure 3]                                             %! SM4
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     d''8
-                                    \f                                                                   %! PCW1
-                                    \>                                                                   %! PCW1
+                                    \f                                                                   %! PWC1
+                                    \>                                                                   %! PWC1
                                     [
                 <BLANKLINE>
                                     f'8
@@ -6007,7 +6007,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                     \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                                     d''8
-                                    \p                                                                   %! PCW1
+                                    \p                                                                   %! PWC1
                                     ]
                                     \revert TextSpanner.staff-padding                                    %! OC2
                 <BLANKLINE>
@@ -6118,10 +6118,10 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
                                     \override TextSpanner.staff-padding = #4.5                           %! OC1
-                                    \once \override TextSpanner.Y-extent = ##f                           %! PCW1
-                                    \once \override TextSpanner.arrow-width = 0.25                       %! PCW1
-                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PCW1
-                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
+                                    \once \override TextSpanner.Y-extent = ##f                           %! PWC1
+                                    \once \override TextSpanner.arrow-width = 0.25                       %! PWC1
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PWC1
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.left.text = \markup {
                                         \concat
                                             {
@@ -6131,18 +6131,18 @@ class LibraryAF(abjad.AbjadObject):
                                                 \hspace
                                                     #0.5
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PCW1
-                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PCW1
-                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PCW1
-                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
-                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PCW1
-                                    \once \override TextSpanner.dash-period = 1.5                        %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PWC1
+                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PWC1
+                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PWC1
+                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PWC1
+                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PWC1
+                                    \once \override TextSpanner.dash-period = 1.5                        %! PWC1
                                     e'8
                                     [
-                                    \startTextSpan                                                       %! PCW1
+                                    \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -6154,10 +6154,10 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \once \override TextSpanner.Y-extent = ##f                           %! PCW1
-                                    \once \override TextSpanner.arrow-width = 0.25                       %! PCW1
-                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PCW1
-                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
+                                    \once \override TextSpanner.Y-extent = ##f                           %! PWC1
+                                    \once \override TextSpanner.arrow-width = 0.25                       %! PWC1
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PWC1
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.left.text = \markup {
                                         \concat
                                             {
@@ -6167,19 +6167,19 @@ class LibraryAF(abjad.AbjadObject):
                                                 \hspace
                                                     #0.5
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PCW1
-                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PCW1
-                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PCW1
-                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
-                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PCW1
-                                    \once \override TextSpanner.dash-period = 1.5                        %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PWC1
+                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PWC1
+                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PWC1
+                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PWC1
+                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PWC1
+                                    \once \override TextSpanner.dash-period = 1.5                        %! PWC1
                                     g'8
-                                    \stopTextSpan                                                        %! PCW1
+                                    \stopTextSpan                                                        %! PWC1
                                     [
-                                    \startTextSpan                                                       %! PCW1
+                                    \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     f''8
                 <BLANKLINE>
@@ -6189,10 +6189,10 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override TextSpanner.Y-extent = ##f                           %! PCW1
-                                    \once \override TextSpanner.arrow-width = 0.25                       %! PCW1
-                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PCW1
-                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
+                                    \once \override TextSpanner.Y-extent = ##f                           %! PWC1
+                                    \once \override TextSpanner.arrow-width = 0.25                       %! PWC1
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PWC1
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.left.text = \markup {
                                         \concat
                                             {
@@ -6202,19 +6202,19 @@ class LibraryAF(abjad.AbjadObject):
                                                 \hspace
                                                     #0.5
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PCW1
-                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PCW1
-                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PCW1
-                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
-                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PCW1
-                                    \once \override TextSpanner.dash-period = 1.5                        %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PWC1
+                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PWC1
+                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PWC1
+                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PWC1
+                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PWC1
+                                    \once \override TextSpanner.dash-period = 1.5                        %! PWC1
                                     d''8
-                                    \stopTextSpan                                                        %! PCW1
+                                    \stopTextSpan                                                        %! PWC1
                                     [
-                                    \startTextSpan                                                       %! PCW1
+                                    \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
@@ -6226,9 +6226,9 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \once \override TextSpanner.Y-extent = ##f                           %! PCW1
-                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PCW1
-                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
+                                    \once \override TextSpanner.Y-extent = ##f                           %! PWC1
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PWC1
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.left.text = \markup {
                                         \concat
                                             {
@@ -6238,22 +6238,22 @@ class LibraryAF(abjad.AbjadObject):
                                                 \hspace
                                                     #0.25
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PCW1
-                                    \once \override TextSpanner.bound-details.right.padding = 1.5        %! PCW1
-                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
-                                    \once \override TextSpanner.dash-period = 0                          %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PWC1
+                                    \once \override TextSpanner.bound-details.right.padding = 1.5        %! PWC1
+                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PWC1
+                                    \once \override TextSpanner.dash-period = 0                          %! PWC1
                                     f''8
-                                    \stopTextSpan                                                        %! PCW1
+                                    \stopTextSpan                                                        %! PWC1
                                     [
-                                    \startTextSpan                                                       %! PCW1
+                                    \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     e'8
                 <BLANKLINE>
                                     d''8
                                     ]
-                                    \stopTextSpan                                                        %! PCW1
+                                    \stopTextSpan                                                        %! PWC1
                                     \revert TextSpanner.staff-padding                                    %! OC2
                 <BLANKLINE>
                                 }
@@ -6340,10 +6340,10 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
                                     \override TextSpanner.staff-padding = #4.5                           %! OC1
-                                    \once \override TextSpanner.Y-extent = ##f                           %! PCW1
-                                    \once \override TextSpanner.arrow-width = 0.25                       %! PCW1
-                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PCW1
-                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
+                                    \once \override TextSpanner.Y-extent = ##f                           %! PWC1
+                                    \once \override TextSpanner.arrow-width = 0.25                       %! PWC1
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PWC1
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.left.text = \markup {
                                         \concat
                                             {
@@ -6353,18 +6353,18 @@ class LibraryAF(abjad.AbjadObject):
                                                 \hspace
                                                     #0.5
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PCW1
-                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PCW1
-                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PCW1
-                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
-                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PCW1
-                                    \once \override TextSpanner.dash-period = 1.5                        %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PWC1
+                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PWC1
+                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PWC1
+                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PWC1
+                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PWC1
+                                    \once \override TextSpanner.dash-period = 1.5                        %! PWC1
                                     e'8
                                     [
-                                    \startTextSpan                                                       %! PCW1
+                                    \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -6387,10 +6387,10 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override TextSpanner.Y-extent = ##f                           %! PCW1
-                                    \once \override TextSpanner.arrow-width = 0.25                       %! PCW1
-                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PCW1
-                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PCW1
+                                    \once \override TextSpanner.Y-extent = ##f                           %! PWC1
+                                    \once \override TextSpanner.arrow-width = 0.25                       %! PWC1
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f     %! PWC1
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.left.text = \markup {
                                         \concat
                                             {
@@ -6400,13 +6400,13 @@ class LibraryAF(abjad.AbjadObject):
                                                 \hspace
                                                     #0.5
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PCW1
-                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PCW1
-                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PCW1
-                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PCW1
-                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0   %! PWC1
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f    %! PWC1
+                                    \once \override TextSpanner.bound-details.right.arrow = ##t          %! PWC1
+                                    \once \override TextSpanner.bound-details.right.padding = 0.5        %! PWC1
+                                    \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! PWC1
                                     \once \override TextSpanner.bound-details.right.text = \markup {
                                         \concat
                                             {
@@ -6416,13 +6416,13 @@ class LibraryAF(abjad.AbjadObject):
                                                     \upright
                                                         pont.
                                             }
-                                        }                                                                %! PCW1
-                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PCW1
-                                    \once \override TextSpanner.dash-period = 1.5                        %! PCW1
+                                        }                                                                %! PWC1
+                                    \once \override TextSpanner.dash-fraction = 0.25                     %! PWC1
+                                    \once \override TextSpanner.dash-period = 1.5                        %! PWC1
                                     d''8
-                                    \stopTextSpan                                                        %! PCW1
+                                    \stopTextSpan                                                        %! PWC1
                                     [
-                                    \startTextSpan                                                       %! PCW1
+                                    \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
@@ -6441,7 +6441,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                     d''8
                                     ]
-                                    \stopTextSpan                                                        %! PCW1
+                                    \stopTextSpan                                                        %! PWC1
                                     \revert TextSpanner.staff-padding                                    %! OC2
                 <BLANKLINE>
                                 }

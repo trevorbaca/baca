@@ -69,7 +69,7 @@ class PiecewiseCommand(Command):
             abjad.attach(
                 spanner,
                 leaves,
-                tag=self.tag.prepend('PCW1'),
+                tag=self.tag.prepend('PWC1'),
                 )
         else:
             spanner = self.spanner(preprocessed_argument)
