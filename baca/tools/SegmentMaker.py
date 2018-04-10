@@ -703,8 +703,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         triple = slice(*match).indices(scope_count)
                         if i not in range(*triple):
                             continue
+                    elif isinstance(match, list):
+                        assert all(isinstance(_, int) for _ in match)
+                        if i not in match:
+                            continue
                     else:
-                        raise TypeError(command)
+                        message = 'match must be int, tuple or list'
+                        message += f' (not {match!r}).'
+                        raise Exception(message)
                 wrapper = CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
 
