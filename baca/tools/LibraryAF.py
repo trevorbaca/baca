@@ -2203,6 +2203,19 @@ class LibraryAF(abjad.AbjadObject):
         return breaks
 
     @staticmethod
+    def breathe(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Attaches LilyPond breathe command (to before-slot) of ``selector``
+        output.
+        '''
+        breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='before')
+        return IndicatorCommand(
+            indicators=[breathe],
+            selector=selector,
+            )
+
+    @staticmethod
     def center_to_octave(
         n: int,
         selector: Selector = 'baca.plts()',
