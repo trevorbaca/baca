@@ -1585,6 +1585,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def make_repeated_duration_notes(
         durations: typing.Iterable,
+        beam_specifier: rhythmos.BeamSpecifier = None,
         division_mask: abjad.Pattern = None,
         rewrite_meter: bool = True,
         ) -> RhythmCommand:
@@ -1600,15 +1601,17 @@ class LibraryGM(abjad.AbjadObject):
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
+        tie_specifier = rhythmos.TieSpecifier(
+            repeat_ties=True,
+            )
+        division_expression = LibraryNS.split_by_durations(durations=durations)
         return RhythmCommand(
-            division_expression=LibraryNS.split_by_durations(
-                durations=durations),
+            division_expression=division_expression,
             rewrite_meter=rewrite_meter,
             rhythm_maker=rhythmos.NoteRhythmMaker(
+                beam_specifier=beam_specifier,
                 division_masks=division_masks,
-                tie_specifier=rhythmos.TieSpecifier(
-                    repeat_ties=True,
-                    ),
+                tie_specifier=tie_specifier,
                 ),
             )
 
