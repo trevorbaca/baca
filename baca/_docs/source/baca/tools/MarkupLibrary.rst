@@ -79,6 +79,7 @@ Bases
       ~MarkupLibrary.full_bow_strokes
       ~MarkupLibrary.glissando_lentissimo
       ~MarkupLibrary.gridato_possibile
+      ~MarkupLibrary.half_clt
       ~MarkupLibrary.instrument
       ~MarkupLibrary.kn_rasg
       ~MarkupLibrary.knuckle_rasg
@@ -300,6 +301,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.glissando_lentissimo
 
 .. automethod:: MarkupLibrary.gridato_possibile
+
+.. automethod:: MarkupLibrary.half_clt
 
 .. automethod:: MarkupLibrary.instrument
 
