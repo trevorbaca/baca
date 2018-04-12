@@ -3444,9 +3444,23 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def script_padding(
+        number: Number,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides script padding.
+        '''
+        return OverrideCommand(
+            attribute='padding',
+            value=number,
+            grob='script',
+            selector=selector,
+            )
+
+    @staticmethod
     def script_staff_padding(
         n: Number,
-        selector: Selector = 'baca.leaf(0)',
+        selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides script staff padding.
         '''

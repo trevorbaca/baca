@@ -68,6 +68,7 @@ Bases
       ~LibraryNS.scorewide_spacing
       ~LibraryNS.script_color
       ~LibraryNS.script_extra_offset
+      ~LibraryNS.script_padding
       ~LibraryNS.script_staff_padding
       ~LibraryNS.scripts_down
       ~LibraryNS.scripts_up
@@ -208,6 +209,8 @@ Class & static methods
 .. automethod:: LibraryNS.script_color
 
 .. automethod:: LibraryNS.script_extra_offset
+
+.. automethod:: LibraryNS.script_padding
 
 .. automethod:: LibraryNS.script_staff_padding
 
