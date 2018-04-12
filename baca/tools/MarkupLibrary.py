@@ -249,15 +249,30 @@ class MarkupLibrary(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Raises exception on nonstring, nonmarkup ``argument``:
+
+            >>> baca.markup(['Allegro', 'ma non troppo'])
+            Traceback (most recent call last):
+                ...
+            Exception: MarkupLibary.__call__():
+              Value of 'argument' must be str or markup.
+              Not ['Allegro', 'ma non troppo'].
+
         '''
         if direction not in (abjad.Down, abjad.Up):
             message = f'direction must be up or down (not {direction!r}).'
             raise Exception(message)
         if isinstance(argument, str):
             markup = abjad.Markup(argument, direction=direction)
-        else:
-            assert isinstance(argument, abjad.Markup), repr(argument)
+        elif isinstance(argument, abjad.Markup):
             markup = abjad.new(argument, direction=direction)
+        else:
+            message = 'MarkupLibary.__call__():\n'
+            message += "  Value of 'argument' must be str or markup.\n"
+            message += f'  Not {argument!r}.'
+            raise Exception(message)
         prototype = (str, abjad.Expression)
         if selector is not None and not isinstance(selector, prototype):
             message = f'selector must be string or expression'
