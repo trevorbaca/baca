@@ -4,6 +4,7 @@ import typing
 from abjad import rhythmmakertools as rhythmos
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
+from .BowContactPointCommand import BowContactPointCommand
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
@@ -1497,6 +1498,20 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def bcps(
+        bcps: typing.Iterable = None,
+        rotation: int = None,
+        selector: Selector = 'baca.leaves()',
+        ) -> BowContactPointCommand:
+        r'''Makes bow contact points.
+        '''
+        return BowContactPointCommand(
+            bcps=bcps,
+            rotation=rotation,
+            selector=selector,
+            )
+
+    @staticmethod
     def beam_divisions(
         stemlets: Number = None,
         ) -> rhythmos.BeamSpecifier:
@@ -2213,6 +2228,16 @@ class LibraryAF(abjad.AbjadObject):
         return IndicatorCommand(
             indicators=[breathe],
             selector=selector,
+            )
+
+    @staticmethod
+    def breathe_after_last() -> IndicatorCommand:
+        r'''Attaches LilyPond breathe command (to before-slot) of
+        leaf-just-after-last.
+        '''
+        breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='before')
+        return LibraryAF.breathe(
+            selector='baca.rleaves()[-1:]',
             )
 
     @staticmethod

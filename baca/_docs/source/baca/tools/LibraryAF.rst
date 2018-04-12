@@ -35,6 +35,7 @@ Bases
       ~LibraryAF.bar_extent_persistent
       ~LibraryAF.bar_extent_zero
       ~LibraryAF.bass_to_octave
+      ~LibraryAF.bcps
       ~LibraryAF.beam_divisions
       ~LibraryAF.beam_everything
       ~LibraryAF.beam_positions
@@ -42,6 +43,7 @@ Bases
       ~LibraryAF.beam_stencil_false
       ~LibraryAF.breaks
       ~LibraryAF.breathe
+      ~LibraryAF.breathe_after_last
       ~LibraryAF.center_to_octave
       ~LibraryAF.clef
       ~LibraryAF.clef_extra_offset
@@ -121,6 +123,8 @@ Class & static methods
 
 .. automethod:: LibraryAF.bass_to_octave
 
+.. automethod:: LibraryAF.bcps
+
 .. automethod:: LibraryAF.beam_divisions
 
 .. automethod:: LibraryAF.beam_everything
@@ -134,6 +138,8 @@ Class & static methods
 .. automethod:: LibraryAF.breaks
 
 .. automethod:: LibraryAF.breathe
+
+.. automethod:: LibraryAF.breathe_after_last
 
 .. automethod:: LibraryAF.center_to_octave
 

@@ -304,3 +304,18 @@ baca.tools
    ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback
    ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
    ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
+
+--------
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   BowContactPointCommand
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.tools.BowContactPointCommand.BowContactPointCommand

@@ -688,13 +688,19 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def lines(strings, selector='baca.leaf(0)', direction=abjad.Up):
+    def lines(
+        strings,
+        selector='baca.leaf(0)',
+        direction=abjad.Up,
+        no_whiteout=False,
+        ):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column()
         return baca.markup(
             markup,
             selector=selector,
             direction=direction,
+            whiteout=not(no_whiteout),
             )
 
     @staticmethod
