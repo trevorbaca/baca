@@ -41,6 +41,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -69,6 +70,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -134,6 +136,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -174,6 +177,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -268,6 +272,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -316,6 +321,7 @@ class Selection(abjad.Selection):
                     \override TextScript.staff-padding = #6
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -506,6 +512,7 @@ class Selection(abjad.Selection):
                 ...     c'8 ~ c'16 c'16 r8 c'16 c'16
                 ...     d'8 ~ d'16 d'16 r8 d'16 d'16
                 ...     """)
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pleaves().group()
@@ -524,7 +531,6 @@ class Selection(abjad.Selection):
                 Selection([Selection([Note("c'8"), Note("c'16"), Note("c'16"), Note("c'16"), Note("c'16"), Note("d'8"), Note("d'16"), Note("d'16"), Note("d'16"), Note("d'16")])])
 
                 >>> selector.color(result)
-                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -618,6 +624,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).runs().map(baca.lleak())
@@ -640,7 +647,6 @@ class Selection(abjad.Selection):
                 Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
 
                 >>> selector.color(result)
-                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -721,6 +727,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -763,6 +770,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -855,6 +863,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -883,6 +892,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -953,6 +963,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -981,6 +992,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1051,6 +1063,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1091,6 +1104,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1231,6 +1245,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1259,6 +1274,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1344,6 +1360,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1378,6 +1395,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1514,6 +1532,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1572,6 +1591,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1713,6 +1733,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1747,6 +1768,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1882,6 +1904,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1910,6 +1933,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -1975,6 +1999,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2027,6 +2052,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2147,6 +2173,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2175,6 +2202,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2240,6 +2268,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2298,6 +2327,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2436,6 +2466,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2464,6 +2495,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2534,6 +2566,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2586,6 +2619,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2721,6 +2755,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2749,6 +2784,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2814,6 +2850,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2866,6 +2903,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -2986,6 +3024,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3014,6 +3053,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -3079,6 +3119,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3125,6 +3166,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -3234,6 +3276,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3262,6 +3305,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -3332,6 +3376,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3372,6 +3417,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -3503,6 +3549,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).runs().map(baca.rleak())
@@ -3525,7 +3572,6 @@ class Selection(abjad.Selection):
                 Selection([Note("f'8"), Note("g'8"), Note("a'8")])
 
                 >>> selector.color(result)
-                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -3606,6 +3652,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3648,6 +3695,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -3737,6 +3785,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3765,6 +3814,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -3852,6 +3902,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3886,6 +3937,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -4017,6 +4069,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
                 >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
                 >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
@@ -4036,7 +4089,6 @@ class Selection(abjad.Selection):
                 Skip('s8')
 
                 >>> selector.color(result)
-                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -4077,6 +4129,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
                 >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
                 >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
@@ -4101,7 +4154,6 @@ class Selection(abjad.Selection):
                 Skip('s8')
 
                 >>> selector.color(result)
-                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -4153,6 +4205,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4215,6 +4268,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure
@@ -4354,6 +4408,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4398,6 +4453,7 @@ class Selection(abjad.Selection):
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
                 }
                 {
                     {   % measure

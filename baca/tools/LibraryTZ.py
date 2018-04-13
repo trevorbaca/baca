@@ -2452,7 +2452,7 @@ class LibraryTZ(abjad.AbjadObject):
         spanner_selector: typing.Union[
             bool, Selector, MapCommand, None] = True
         ) -> PiecewiseCommand:
-        r'''Makes transition spanner.
+        r'''Makes transition text spanner.
 
         ..  container:: example
 
