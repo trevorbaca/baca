@@ -158,6 +158,24 @@ class RhythmCommand(Command):
             else:
                 raise TypeError(leaf)
 
+    def _apply_division_expression(
+        self,
+        divisions,
+        ) -> typing.Optional[abjad.Sequence]:
+        if self.division_expression is not None:
+            divisions_ = self.division_expression(divisions)
+            if not isinstance(divisions_, abjad.Sequence):
+                message = 'division expression must return sequence:\n'
+                message += f'  Input divisions:\n'
+                message += f'    {divisions}\n'
+                message += f'  Division expression:\n'
+                message += f'    {self.division_expression}\n'
+                message += f'  Output divisions:\n'
+                message += f'    {divisions_}'
+                raise Exception(message)
+            divisions = divisions_
+        return divisions
+
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
         divisions = [baca.Division(_) for _ in durations]
@@ -234,7 +252,7 @@ class RhythmCommand(Command):
                 )
             divisions = division_maker(divisions)
             divisions = baca.sequence(divisions).flatten(depth=-1)
-            divisions = self._transform_divisions(divisions)
+            divisions = self._apply_division_expression(divisions)
             start_offset = divisions[0].start_offset
             previous_state = None
             dictionary = self.previous_segment_voice_metadata
@@ -287,15 +305,6 @@ class RhythmCommand(Command):
             last_leaf = abjad.select(selections).leaf(-1)
             if isinstance(last_leaf, abjad.Note):
                 abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, last_leaf)
-
-    def _transform_divisions(
-        self,
-        divisions,
-        ) -> typing.Optional[abjad.Sequence]:
-        if self.division_expression is not None:
-            divisions = self.division_expression(divisions)
-            assert isinstance(divisions, abjad.Sequence), repr(divisions)
-        return divisions
 
     ### PUBLIC PROPERTIES ###
 
