@@ -1,9 +1,16 @@
 import abjad
+import math
 import typing
 
 
 class Partial(abjad.AbjadObject):
     r'''Partial.
+
+    ..  container:: example
+
+        >>> baca.Partial('C1', 7)
+        Partial(fundamental=NamedPitch('c,,'), number=7)
+
     '''
 
     ### CLASS VARIABLES ###
@@ -11,6 +18,8 @@ class Partial(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_approximation',
+        '_deviation',
         '_fundamental',
         '_number',
         )
@@ -27,34 +36,62 @@ class Partial(abjad.AbjadObject):
         assert isinstance(number, int), repr(number)
         assert 1 <= number, repr(number)
         self._number = number
-        pitch = abjad.NamedPitch(fundamental)
-        self._pitch = pitch
-        # TODO:
-        deviation = 0
+        hertz = number * fundamental.hertz
+        approximation = abjad.NamedPitch.from_hertz(hertz)
+        self._approximation = approximation
+        deviation_multiplier = hertz / approximation.hertz
+        semitone_base = 2 ** abjad.Fraction(1, 12)
+        deviation_semitones = math.log(deviation_multiplier, semitone_base)
+        deviation_cents = 100 * deviation_semitones
+        deviation = round(deviation_cents)
         self._deviation = deviation
 
     ### PUBLIC PROPERTIES ###
 
     @property
+    def approximation(self) -> abjad.NamedPitch:
+        r'''Gets approximation.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).approximation
+            NamedPitch('bf')
+
+        '''
+        return self._approximation
+
+    @property
     def deviation(self) -> int:
         r'''Gets deviation in cents.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).deviation
+            -31
+
         '''
         return self._deviation
 
     @property
     def fundamental(self) -> abjad.NamedPitch:
         r'''Gets fundamental.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).fundamental
+            NamedPitch('c,,')
+
         '''
         return self._fundamental
 
     @property
     def number(self) -> int:
         r'''Gets number.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).number
+            7
+
         '''
         return self._number
-
-    @property
-    def pitch(self) -> abjad.NamedPitch:
-        r'''Gets pitch.
-        '''
-        return self._pitch

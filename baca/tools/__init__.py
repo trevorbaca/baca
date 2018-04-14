@@ -58,6 +58,7 @@ from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
 from .PartAssignmentCommand import PartAssignmentCommand
+from .Partial import Partial
 from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseCommand import PiecewiseCommand

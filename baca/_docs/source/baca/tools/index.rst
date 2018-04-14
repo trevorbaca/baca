@@ -191,6 +191,7 @@ baca.tools
    Matrix
    MetronomeMarkMeasureMap
    PageSpecifier
+   Partial
    PitchArray
    PitchArrayCell
    PitchArrayColumn
@@ -245,6 +246,7 @@ baca.tools
    ~baca.tools.Matrix.Matrix
    ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.tools.PageSpecifier.PageSpecifier
+   ~baca.tools.Partial.Partial
    ~baca.tools.PitchArray.PitchArray
    ~baca.tools.PitchArrayCell.PitchArrayCell
    ~baca.tools.PitchArrayColumn.PitchArrayColumn
