@@ -31,10 +31,8 @@ class HarmonicSeries(abjad.AbjadObject):
                 g4
                     ^ \markup { +2 }
                     _ \markup { 3 }
-                c4
-                    ^ \markup { +1200 }
-                    _ \markup { 4 }
                 \clef "treble"
+                c'4 _ \markup { 4 }
                 e'4
                     ^ \markup { -14 }
                     _ \markup { 5 }
@@ -170,8 +168,8 @@ class HarmonicSeries(abjad.AbjadObject):
                     b''4
                         ^ \markup { +4 }
                         _ \markup { 18 }
-                    c''4
-                        ^ \markup { +1198 }
+                    c'''4
+                        ^ \markup { -2 }
                         _ \markup { 19 }
                     cs'''4
                         ^ \markup { -14 }
