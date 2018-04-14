@@ -184,6 +184,7 @@ baca.tools
    Division
    Expression
    ExpressionGallery
+   HarmonicSeries
    Interpolator
    LBSD
    Loop
@@ -237,6 +238,7 @@ baca.tools
    ~baca.tools.Division.Division
    ~baca.tools.Expression.Expression
    ~baca.tools.ExpressionGallery.ExpressionGallery
+   ~baca.tools.HarmonicSeries.HarmonicSeries
    ~baca.tools.Interpolator.Interpolator
    ~baca.tools.LBSD.LBSD
    ~baca.tools.Loop.Loop
