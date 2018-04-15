@@ -21,6 +21,7 @@ from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
+from .SpannerCommand import SpannerCommand
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
 from .Typing import NumberPair
@@ -6205,6 +6206,154 @@ class LibraryAF(abjad.AbjadObject):
             indicators=[abjad.Articulation('fermata')],
             selector=selector,
             )
+
+    @staticmethod
+    def finger_pressure_transition(
+        selector: Selector = 'baca.tleaves()',
+        right_broken: bool = None,
+        ) -> SuiteCommand:
+        r'''Attaches finger pressure transition glissando to trimmed leaves.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.finger_pressure_transition(baca.notes()[:2]),
+            ...     baca.finger_pressure_transition(baca.notes()[2:]),
+            ...     baca.make_notes(),
+            ...     baca.natural_harmonics(baca.note(0)),
+            ...     baca.natural_harmonics(baca.note(2)),
+            ...     baca.pitch('C5'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Glissando.arrow-length = #'2                                   %! OC1
+                                \override Glissando.arrow-width = #'0.5                                  %! OC1
+                                \override Glissando.bound-details.right.arrow = ##t                      %! OC1
+                                \override Glissando.thickness = #'3                                      %! OC1
+                                \once \override NoteHead.style = #'harmonic                              %! OC1
+                                c''2
+                                \glissando                                                               %! SC
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c''4.
+                                \revert Glissando.arrow-length                                           %! OC2
+                                \revert Glissando.arrow-width                                            %! OC2
+                                \revert Glissando.bound-details                                          %! OC2
+                                \revert Glissando.thickness                                              %! OC2
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \override Glissando.arrow-length = #'2                                   %! OC1
+                                \override Glissando.arrow-width = #'0.5                                  %! OC1
+                                \override Glissando.bound-details.right.arrow = ##t                      %! OC1
+                                \override Glissando.thickness = #'3                                      %! OC1
+                                \once \override NoteHead.style = #'harmonic                              %! OC1
+                                c''2
+                                \glissando                                                               %! SC
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c''4.
+                                \revert Glissando.arrow-length                                           %! OC2
+                                \revert Glissando.arrow-width                                            %! OC2
+                                \revert Glissando.bound-details                                          %! OC2
+                                \revert Glissando.thickness                                              %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        from baca.tools.LibraryNS import LibraryNS
+        return LibraryNS.suite([
+            SpannerCommand(
+                right_broken=right_broken,
+                selector=selector,
+                spanner=abjad.Glissando(allow_repeats=True),
+                ),
+            OverrideCommand(
+                attribute='arrow_length',
+                value='2',
+                grob='glissando',
+                selector=selector,
+                ),
+            OverrideCommand(
+                attribute='arrow_width',
+                value='0.5',
+                grob='glissando',
+                selector=selector,
+                ),
+            OverrideCommand(
+                attribute='bound_details__right__arrow',
+                value=True,
+                grob='glissando',
+                selector=selector,
+                ),
+            OverrideCommand(
+                attribute='thickness',
+                value='3',
+                grob='glissando',
+                selector=selector,
+                ),
+            ])
 
     @staticmethod
     def flag_stencil_false(

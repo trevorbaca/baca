@@ -80,6 +80,7 @@ Bases
       ~LibraryAF.effort_dynamic
       ~LibraryAF.enchained_hairpin
       ~LibraryAF.fermata
+      ~LibraryAF.finger_pressure_transition
       ~LibraryAF.flag_stencil_false
       ~LibraryAF.flageolets
       ~LibraryAF.flags
@@ -212,6 +213,8 @@ Class & static methods
 .. automethod:: LibraryAF.enchained_hairpin
 
 .. automethod:: LibraryAF.fermata
+
+.. automethod:: LibraryAF.finger_pressure_transition
 
 .. automethod:: LibraryAF.flag_stencil_false
 
