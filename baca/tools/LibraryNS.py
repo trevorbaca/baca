@@ -1980,7 +1980,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.tie(repeat=True), baca.qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.qruns()),
             ...     baca.repeat_ties_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_up(),
@@ -2048,7 +2048,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.tie(repeat=True), baca.qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.qruns()),
             ...     baca.map(baca.repeat_ties_down(), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_up(),
@@ -2130,7 +2130,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.tie(repeat=True), baca.qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.qruns()),
             ...     baca.repeat_ties_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_down(),
@@ -2198,7 +2198,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.tie(repeat=True), baca.qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.qruns()),
             ...     baca.map(baca.repeat_ties_up(), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_down(),
