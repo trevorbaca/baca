@@ -1670,6 +1670,83 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def repeat_tie(
+        selector: Selector = 'baca.qrun(0)',
+        ) -> SpannerCommand:
+        r'''Attaches repeat tie to equipitch run 0.
+
+        ..  container:: example
+
+            Attaches repeat tie to each equipitch run:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.map(baca.repeat_tie(), baca.qruns()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                c'16
+                                \repeatTie                                                               %! SC
+                                ]
+                                bf'4
+                                bf'16
+                                \repeatTie                                                               %! SC
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                bf'16
+                                [
+                                e''16
+                                ]
+                                e''4
+                                \repeatTie                                                               %! SC
+                                e''16
+                                \repeatTie                                                               %! SC
+                                r16
+                                fs''16
+                                [
+                                af''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return SpannerCommand(
+            selector=selector,
+            spanner=abjad.Tie(repeat=True),
+            )
+
+    @staticmethod
     def repeat_tie_from(
         selector: Selector = 'baca.pleaf(-1)',
         ) -> TieCorrectionCommand:
