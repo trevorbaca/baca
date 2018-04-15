@@ -91,10 +91,12 @@ Bases
       ~MarkupLibrary.molto_flautando
       ~MarkupLibrary.molto_flautando_e_pont
       ~MarkupLibrary.molto_gridato
+      ~MarkupLibrary.molto_overpressure
       ~MarkupLibrary.molto_pont_plus_vib_molto
       ~MarkupLibrary.nail_rasg
       ~MarkupLibrary.nail_rasgueado
       ~MarkupLibrary.non_div
+      ~MarkupLibrary.non_flaut
       ~MarkupLibrary.non_flautando
       ~MarkupLibrary.non_flutt
       ~MarkupLibrary.non_spazz
@@ -114,6 +116,7 @@ Bases
       ~MarkupLibrary.pochiss_pont
       ~MarkupLibrary.pochiss_scratch
       ~MarkupLibrary.pochiss_vib
+      ~MarkupLibrary.poco_overpressure
       ~MarkupLibrary.poco_pont_plus_non_vib
       ~MarkupLibrary.poco_pont_plus_sub_non_vib
       ~MarkupLibrary.poco_pont_plus_sub_vib_mod
@@ -326,6 +329,8 @@ Class & static methods
 
 .. automethod:: MarkupLibrary.molto_gridato
 
+.. automethod:: MarkupLibrary.molto_overpressure
+
 .. automethod:: MarkupLibrary.molto_pont_plus_vib_molto
 
 .. automethod:: MarkupLibrary.nail_rasg
@@ -333,6 +338,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.nail_rasgueado
 
 .. automethod:: MarkupLibrary.non_div
+
+.. automethod:: MarkupLibrary.non_flaut
 
 .. automethod:: MarkupLibrary.non_flautando
 
@@ -371,6 +378,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.pochiss_scratch
 
 .. automethod:: MarkupLibrary.pochiss_vib
+
+.. automethod:: MarkupLibrary.poco_overpressure
 
 .. automethod:: MarkupLibrary.poco_pont_plus_non_vib
 

@@ -732,6 +732,13 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def molto_overpressure(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'molto overpressure',
+            selector=selector,
+            )
+
+    @staticmethod
     def molto_pont_plus_vib_molto(
         parenthesize_first=False,
         parenthesize_last=False,
@@ -770,6 +777,13 @@ class MarkupLibrary(abjad.AbjadObject):
     def non_div(selector='baca.leaf(0)'):
         return baca.markup(
             'non div.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def non_flaut(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'non flaut.',
             selector=selector,
             )
 
@@ -995,6 +1009,13 @@ class MarkupLibrary(abjad.AbjadObject):
     def pochiss_vib(selector='baca.pleaf(0)'):
         return baca.markup(
             'pochiss. vib.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def poco_overpressure(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'poco overpressure',
             selector=selector,
             )
 
