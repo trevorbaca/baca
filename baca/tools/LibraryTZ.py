@@ -1895,7 +1895,7 @@ class LibraryTZ(abjad.AbjadObject):
         r'''Ties repeat pitches.
         '''
         return baca.map(
-            LibraryTZ.tie(repeat=False),
+            LibraryTZ.tie(),
             baca.select().ltqruns().nontrivial(),
             )
 
