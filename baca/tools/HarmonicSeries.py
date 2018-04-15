@@ -192,9 +192,10 @@ class HarmonicSeries(abjad.AbjadObject):
                 abjad.attach(markup, note)
             markup = abjad.Markup(n, direction=abjad.Down)
             abjad.attach(markup, note)
-        if staff[0].written_pitch < abjad.NamedPitch('C4'):
+        notes = abjad.select(staff).notes()
+        if notes[0].written_pitch < abjad.NamedPitch('C4'):
             abjad.attach(abjad.Clef('bass'), staff[0])
-            for note in staff[1:]:
+            for note in notes[1:]:
                 if abjad.NamedPitch('C4') <= note.written_pitch:
                     abjad.attach(abjad.Clef('treble'), note)
                     break
