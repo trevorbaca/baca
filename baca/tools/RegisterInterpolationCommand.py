@@ -208,12 +208,12 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                fs''8
+                                fs''!8
                                 [
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 f''8
                                 ]
@@ -224,7 +224,7 @@ class RegisterInterpolationCommand(Command):
                                 a''8
                                 [
             <BLANKLINE>
-                                bf''8
+                                bf''!8
             <BLANKLINE>
                                 c''8
                                 ]
@@ -235,11 +235,11 @@ class RegisterInterpolationCommand(Command):
                                 b''8
                                 [
             <BLANKLINE>
-                                af''8
+                                af''!8
             <BLANKLINE>
                                 g''8
             <BLANKLINE>
-                                cs''8
+                                cs''!8
                                 ]
                             }
                             {
@@ -248,7 +248,7 @@ class RegisterInterpolationCommand(Command):
                                 d''8
                                 [
             <BLANKLINE>
-                                fs''8
+                                fs''!8
             <BLANKLINE>
                                 e''8
                                 ]
@@ -256,14 +256,14 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 5]                                             %! SM4
-                                ef''8
+                                ef''!8
                                 [
             <BLANKLINE>
                                 f''8
             <BLANKLINE>
                                 a''8
             <BLANKLINE>
-                                bf''8
+                                bf''!8
                                 ]
                             }
                             {
@@ -274,7 +274,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 b''8
             <BLANKLINE>
-                                af''8
+                                af''!8
                                 ]
                             }
                             {
@@ -283,11 +283,11 @@ class RegisterInterpolationCommand(Command):
                                 g''8
                                 [
             <BLANKLINE>
-                                cs''8
+                                cs''!8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
-                                fs''8
+                                fs''!8
                                 ]
                             }
                             {
@@ -296,7 +296,7 @@ class RegisterInterpolationCommand(Command):
                                 e''8
                                 [
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 f''8
                                 ]
@@ -391,12 +391,12 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                fs''8
+                                fs''!8
                                 [
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 f''8
                                 ]
@@ -407,7 +407,7 @@ class RegisterInterpolationCommand(Command):
                                 a''8
                                 [
             <BLANKLINE>
-                                bf'8
+                                bf'!8
             <BLANKLINE>
                                 c''8
                                 ]
@@ -418,11 +418,11 @@ class RegisterInterpolationCommand(Command):
                                 b'8
                                 [
             <BLANKLINE>
-                                af'8
+                                af'!8
             <BLANKLINE>
                                 g''8
             <BLANKLINE>
-                                cs''8
+                                cs''!8
                                 ]
                             }
                             {
@@ -431,7 +431,7 @@ class RegisterInterpolationCommand(Command):
                                 d''8
                                 [
             <BLANKLINE>
-                                fs'8
+                                fs'!8
             <BLANKLINE>
                                 e''8
                                 ]
@@ -439,14 +439,14 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 5]                                             %! SM4
-                                ef''8
+                                ef''!8
                                 [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf'8
+                                bf'!8
                                 ]
                             }
                             {
@@ -457,7 +457,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 b'8
             <BLANKLINE>
-                                af'8
+                                af'!8
                                 ]
                             }
                             {
@@ -466,11 +466,11 @@ class RegisterInterpolationCommand(Command):
                                 g'8
                                 [
             <BLANKLINE>
-                                cs''8
+                                cs''!8
             <BLANKLINE>
                                 d'8
             <BLANKLINE>
-                                fs'8
+                                fs'!8
                                 ]
                             }
                             {
@@ -479,7 +479,7 @@ class RegisterInterpolationCommand(Command):
                                 e'8
                                 [
             <BLANKLINE>
-                                ef'8
+                                ef'!8
             <BLANKLINE>
                                 f'8
                                 ]
@@ -574,12 +574,12 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                fs'8
+                                fs'!8
                                 [
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
-                                ef'8
+                                ef'!8
             <BLANKLINE>
                                 f'8
                                 ]
@@ -590,7 +590,7 @@ class RegisterInterpolationCommand(Command):
                                 a'8
                                 [
             <BLANKLINE>
-                                bf'8
+                                bf'!8
             <BLANKLINE>
                                 c''8
                                 ]
@@ -601,11 +601,11 @@ class RegisterInterpolationCommand(Command):
                                 b'8
                                 [
             <BLANKLINE>
-                                af'8
+                                af'!8
             <BLANKLINE>
                                 g'8
             <BLANKLINE>
-                                cs''8
+                                cs''!8
                                 ]
                             }
                             {
@@ -614,7 +614,7 @@ class RegisterInterpolationCommand(Command):
                                 d''8
                                 [
             <BLANKLINE>
-                                fs'8
+                                fs'!8
             <BLANKLINE>
                                 e''8
                                 ]
@@ -622,14 +622,14 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 5]                                             %! SM4
-                                ef''8
+                                ef''!8
                                 [
             <BLANKLINE>
                                 f''8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf'8
+                                bf'!8
                                 ]
                             }
                             {
@@ -640,7 +640,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 b'8
             <BLANKLINE>
-                                af'8
+                                af'!8
                                 ]
                             }
                             {
@@ -649,11 +649,11 @@ class RegisterInterpolationCommand(Command):
                                 g''8
                                 [
             <BLANKLINE>
-                                cs''8
+                                cs''!8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
-                                fs''8
+                                fs''!8
                                 ]
                             }
                             {
@@ -662,7 +662,7 @@ class RegisterInterpolationCommand(Command):
                                 e''8
                                 [
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 f''8
                                 ]
@@ -757,12 +757,12 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                fs''8
+                                fs''!8
                                 [
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 f''8
                                 ]
@@ -773,7 +773,7 @@ class RegisterInterpolationCommand(Command):
                                 a'8
                                 [
             <BLANKLINE>
-                                bf'8
+                                bf'!8
             <BLANKLINE>
                                 c''8
                                 ]
@@ -784,11 +784,11 @@ class RegisterInterpolationCommand(Command):
                                 b'8
                                 [
             <BLANKLINE>
-                                af'8
+                                af'!8
             <BLANKLINE>
                                 g'8
             <BLANKLINE>
-                                cs''8
+                                cs''!8
                                 ]
                             }
                             {
@@ -797,7 +797,7 @@ class RegisterInterpolationCommand(Command):
                                 d'8
                                 [
             <BLANKLINE>
-                                fs'8
+                                fs'!8
             <BLANKLINE>
                                 e'8
                                 ]
@@ -805,14 +805,14 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 5]                                             %! SM4
-                                ef'8
+                                ef'!8
                                 [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf8
+                                bf!8
                                 ]
                             }
                             {
@@ -823,7 +823,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 b8
             <BLANKLINE>
-                                af8
+                                af!8
                                 ]
                             }
                             {
@@ -832,11 +832,11 @@ class RegisterInterpolationCommand(Command):
                                 g8
                                 [
             <BLANKLINE>
-                                cs'8
+                                cs'!8
             <BLANKLINE>
                                 d'8
             <BLANKLINE>
-                                fs8
+                                fs!8
                                 ]
                             }
                             {
@@ -845,7 +845,7 @@ class RegisterInterpolationCommand(Command):
                                 e8
                                 [
             <BLANKLINE>
-                                ef8
+                                ef!8
             <BLANKLINE>
                                 f8
                                 ]
@@ -940,12 +940,12 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                fs8
+                                fs!8
                                 [
             <BLANKLINE>
                                 e8
             <BLANKLINE>
-                                ef8
+                                ef!8
             <BLANKLINE>
                                 f8
                                 ]
@@ -956,7 +956,7 @@ class RegisterInterpolationCommand(Command):
                                 a8
                                 [
             <BLANKLINE>
-                                bf8
+                                bf!8
             <BLANKLINE>
                                 c'8
                                 ]
@@ -967,11 +967,11 @@ class RegisterInterpolationCommand(Command):
                                 b8
                                 [
             <BLANKLINE>
-                                af8
+                                af!8
             <BLANKLINE>
                                 g'8
             <BLANKLINE>
-                                cs'8
+                                cs'!8
                                 ]
                             }
                             {
@@ -980,7 +980,7 @@ class RegisterInterpolationCommand(Command):
                                 d'8
                                 [
             <BLANKLINE>
-                                fs'8
+                                fs'!8
             <BLANKLINE>
                                 e'8
                                 ]
@@ -988,14 +988,14 @@ class RegisterInterpolationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 5]                                             %! SM4
-                                ef'8
+                                ef'!8
                                 [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf'8
+                                bf'!8
                                 ]
                             }
                             {
@@ -1006,7 +1006,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 b'8
             <BLANKLINE>
-                                af'8
+                                af'!8
                                 ]
                             }
                             {
@@ -1015,11 +1015,11 @@ class RegisterInterpolationCommand(Command):
                                 g'8
                                 [
             <BLANKLINE>
-                                cs''8
+                                cs''!8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
-                                fs''8
+                                fs''!8
                                 ]
                             }
                             {
@@ -1028,7 +1028,7 @@ class RegisterInterpolationCommand(Command):
                                 e''8
                                 [
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 f''8
                                 ]

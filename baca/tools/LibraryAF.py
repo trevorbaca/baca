@@ -3488,7 +3488,7 @@ class LibraryAF(abjad.AbjadObject):
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % [ViolinMusicVoice measure 2]                               %! SM4
-                                            ef''8
+                                            ef''!8
                 <BLANKLINE>
                                         }
                                     }
@@ -3749,7 +3749,7 @@ class LibraryAF(abjad.AbjadObject):
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % [ViolinMusicVoice measure 2]                               %! SM4
-                                            ef''8
+                                            ef''!8
                 <BLANKLINE>
                                         }
                                     }

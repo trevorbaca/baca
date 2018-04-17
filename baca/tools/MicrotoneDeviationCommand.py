@@ -73,11 +73,11 @@ class MicrotoneDeviationCommand(Command):
                                 e'8
                                 [
             <BLANKLINE>
-                                eqs'8
+                                eqs'!8
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
-                                eqf'8
+                                eqf'!8
                                 ]
                             }
                             {
@@ -86,7 +86,7 @@ class MicrotoneDeviationCommand(Command):
                                 e'8
                                 [
             <BLANKLINE>
-                                eqs'8
+                                eqs'!8
             <BLANKLINE>
                                 e'8
                                 ]
@@ -94,12 +94,12 @@ class MicrotoneDeviationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
-                                eqf'8
+                                eqf'!8
                                 [
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
-                                eqs'8
+                                eqs'!8
             <BLANKLINE>
                                 e'8
                                 ]
@@ -107,12 +107,12 @@ class MicrotoneDeviationCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 4]                                             %! SM4
-                                eqf'8
+                                eqf'!8
                                 [
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
-                                eqs'8
+                                eqs'!8
                                 ]
             <BLANKLINE>
                             }

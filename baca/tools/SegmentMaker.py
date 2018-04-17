@@ -1731,6 +1731,17 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(leaf).get_indicator(abjad.tags.RIGHT_BROKEN_BEAM):
                 self._extend_beam(leaf)
 
+    def _force_nonnatural_accidentals(self):
+        natural = abjad.Accidental('natural')
+        for pleaf in baca.select(self.score).pleaves():
+            if isinstance(pleaf, abjad.Note):
+                note_heads = [pleaf.note_head]
+            else:
+                note_heads = pleaf.note_heads
+            for note_head in note_heads:
+                if note_head.written_pitch.accidental != natural:
+                    note_head.is_forced = True
+
     def _get_first_measure_number(self):
         if self.first_measure_number is not None:
             return self.first_measure_number
@@ -3225,11 +3236,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
-                                        ef'16
+                                        ef'!16
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
-                                        af'16
+                                        af'!16
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
@@ -3247,13 +3258,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 4]                                         %! SM4
-                                        bf'16
+                                        bf'!16
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        bf'16
+                                        bf'!16
                 <BLANKLINE>
                                         c'16
                 <BLANKLINE>
@@ -3386,11 +3397,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 2]                                         %! SM4
-                                        fs'16
+                                        fs'!16
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
-                                        ef'16
+                                        ef'!16
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
@@ -3418,7 +3429,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 4]                                         %! SM4
-                                        bf'16
+                                        bf'!16
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -5402,7 +5413,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
-                                    fs'8
+                                    fs'!8
                                     [
                                     ^ \markup {                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                         \with-color                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
@@ -5415,7 +5426,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
-                                    fs'8
+                                    fs'!8
                 <BLANKLINE>
                                     g'8
                                     ]
@@ -5423,12 +5434,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    fs'8
+                                    fs'!8
                                     [
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
-                                    fs'8
+                                    fs'!8
                                     ]
                                 }
                                 {
@@ -5437,11 +5448,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                     g'8
                                     [
                 <BLANKLINE>
-                                    fs'8
+                                    fs'!8
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
-                                    fs'8
+                                    fs'!8
                                     ]
                                 }
                                 {
@@ -5450,7 +5461,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     g'8
                                     [
                 <BLANKLINE>
-                                    fs'8
+                                    fs'!8
                 <BLANKLINE>
                                     g'8
                                     ]
@@ -5678,7 +5689,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_stage_numbers()
 
         with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-        #if True:
             with abjad.Timer() as timer:
                 self._call_rhythm_commands()
         count = int(timer.elapsed_time)
@@ -5695,7 +5705,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_spacing()
 
         with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-        #if True:
             with abjad.Timer() as timer:
                 self._call_commands()
         count = int(timer.elapsed_time)
@@ -5717,6 +5726,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._check_persistent_indicators()
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
+        self._force_nonnatural_accidentals()
         self._remove_redundant_time_signatures()
         self._magnify_staves_()
         self._whitespace_leaves()

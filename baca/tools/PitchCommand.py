@@ -73,9 +73,9 @@ class PitchCommand(Command):
                                 g''8
                                 [
             <BLANKLINE>
-                                cs''8
+                                cs''!8
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 e''8
                                 ]
@@ -94,10 +94,10 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
-                                cs''8
+                                cs''!8
                                 [
             <BLANKLINE>
-                                ef''8
+                                ef''!8
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
@@ -112,7 +112,7 @@ class PitchCommand(Command):
             <BLANKLINE>
                                 g''8
             <BLANKLINE>
-                                cs''8
+                                cs''!8
                                 ]
             <BLANKLINE>
                             }
@@ -187,9 +187,9 @@ class PitchCommand(Command):
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
-                                fs'8
+                                fs'!8
             <BLANKLINE>
-                                <b' cs''>8
+                                <b' cs''!>8
                                 ]
                             }
                             {
@@ -206,10 +206,10 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
-                                fs'8
+                                fs'!8
                                 [
             <BLANKLINE>
-                                <b' cs''>8
+                                <b' cs''!>8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
@@ -222,9 +222,9 @@ class PitchCommand(Command):
                                 f'8
                                 [
             <BLANKLINE>
-                                fs'8
+                                fs'!8
             <BLANKLINE>
-                                <b' cs''>8
+                                <b' cs''!>8
                                 ]
             <BLANKLINE>
                             }

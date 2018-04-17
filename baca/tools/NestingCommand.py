@@ -188,11 +188,11 @@ class NestingCommand(Command):
             <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                   %! SM35
                                         \set stemRightBeamCount = 2                                  %! SM35
-                                        bf'16
+                                        bf'!16
             <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                   %! SM35
                                         \set stemRightBeamCount = 1                                  %! SM35
-                                        fs''16
+                                        fs''!16
                                     }
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
@@ -202,7 +202,7 @@ class NestingCommand(Command):
             <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                   %! SM35
                                         \set stemRightBeamCount = 2                                  %! SM35
-                                        ef''16
+                                        ef''!16
             <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                   %! SM35
                                         \set stemRightBeamCount = 1                                  %! SM35
@@ -220,7 +220,7 @@ class NestingCommand(Command):
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2                                       %! SM35
                                     \set stemRightBeamCount = 2                                      %! SM35
-                                    cs''16
+                                    cs''!16
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2                                       %! SM35
                                     \set stemRightBeamCount = 2                                      %! SM35
@@ -228,7 +228,7 @@ class NestingCommand(Command):
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2                                       %! SM35
                                     \set stemRightBeamCount = 0                                      %! SM35
-                                    af'16
+                                    af'!16
                                     ]                                                                %! SM35
             <BLANKLINE>
                                 }

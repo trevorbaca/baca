@@ -965,7 +965,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        bf'16
+                                        bf'!16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
                                         s16
@@ -991,7 +991,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
                                         \set stemRightBeamCount = 2                                      %! SM35
-                                        cs''16
+                                        cs''!16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM35
@@ -1024,11 +1024,11 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        bf'16
+                                        bf'!16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
-                                        fs''16
+                                        fs''!16
                                     }
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -1038,7 +1038,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        ef''16
+                                        ef''!16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
@@ -1057,7 +1057,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
-                                        cs''16
+                                        cs''!16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
@@ -1065,7 +1065,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
-                                        af'16
+                                        af'!16
                                         ]
                 <BLANKLINE>
                                     }
