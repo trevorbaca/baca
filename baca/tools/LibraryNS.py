@@ -5160,6 +5160,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def split_by_durations(
         durations: typing.Iterable,
+        remainder: abjad.OrdinalConstant = abjad.Right,
         ) -> DivisionSequenceExpression:
         r'''Splits divisions by `durations`.
 
@@ -5195,6 +5196,7 @@ class LibraryNS(abjad.AbjadObject):
         expression = expression.split_by_durations(
             cyclic=True,
             durations=durations,
+            remainder=remainder,
             )
         expression = expression.flatten(depth=-1)
         return expression
