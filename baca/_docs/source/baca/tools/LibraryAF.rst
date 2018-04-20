@@ -57,6 +57,7 @@ Bases
       ~LibraryAF.cross_note_heads
       ~LibraryAF.cross_staff
       ~LibraryAF.dashed_arrow
+      ~LibraryAF.dashed_hook
       ~LibraryAF.deviation
       ~LibraryAF.diatonic_clusters
       ~LibraryAF.displacement
@@ -167,6 +168,8 @@ Class & static methods
 .. automethod:: LibraryAF.cross_staff
 
 .. automethod:: LibraryAF.dashed_arrow
+
+.. automethod:: LibraryAF.dashed_hook
 
 .. automethod:: LibraryAF.deviation
 

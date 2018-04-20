@@ -86,6 +86,9 @@ Bases
       ~MarkupLibrary.leggieriss
       ~MarkupLibrary.leggierissimo
       ~MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
+      ~MarkupLibrary.lh_damp
+      ~MarkupLibrary.lh_damp_plus_half_clt
+      ~MarkupLibrary.lhd_plus_half_clt
       ~MarkupLibrary.lines
       ~MarkupLibrary.lv_possibile
       ~MarkupLibrary.molto_flautando
@@ -318,6 +321,12 @@ Class & static methods
 .. automethod:: MarkupLibrary.leggierissimo
 
 .. automethod:: MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
+
+.. automethod:: MarkupLibrary.lh_damp
+
+.. automethod:: MarkupLibrary.lh_damp_plus_half_clt
+
+.. automethod:: MarkupLibrary.lhd_plus_half_clt
 
 .. automethod:: MarkupLibrary.lines
 

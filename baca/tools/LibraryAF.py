@@ -3889,6 +3889,24 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dashed_hook() -> abjad.LineSegment:
+        r'''Makes dashed hook line segment.
+        '''
+        return abjad.LineSegment(
+            dash_fraction=0.25,
+            dash_period=1.5,
+            left_broken_text=False,
+            left_hspace=0.5,
+            left_stencil_align_direction_y=0,
+            right_broken_arrow=False,
+            right_broken_padding=0,
+            right_broken_text=False,
+            # right padding to avoid last leaf in spanner
+            right_padding=1.25,
+            right_text=abjad.Markup.draw_line(0, -1),
+            )
+
+    @staticmethod
     def deviation(
         deviations: typing.List[Number],
         selector: Selector = 'baca.plts()',

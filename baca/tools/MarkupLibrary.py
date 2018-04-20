@@ -688,6 +688,27 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def lh_damp(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'lh damp',
+            selector=selector,
+            )
+
+    @staticmethod
+    def lh_damp_plus_half_clt(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'lh damp + 1/2 clt',
+            selector=selector,
+            )
+
+    @staticmethod
+    def lhd_plus_half_clt(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'lhd + 1/2 clt',
+            selector=selector,
+            )
+
+    @staticmethod
     def lines(
         strings,
         selector='baca.leaf(0)',

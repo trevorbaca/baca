@@ -12,6 +12,7 @@ from .PiecewiseCommand import PiecewiseCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
 from .SuiteCommand import SuiteCommand
+from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .VoltaCommand import VoltaCommand
@@ -1353,13 +1354,174 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner(
+        text: typing.Union[str, abjad.Markup, IndicatorCommand],
+        line_segment: abjad.LineSegment = None,
+        right_padding: typing.Optional[Number] = 1.25,
         selector: Selector = 'baca.leaves()',
-        ) -> SpannerCommand:
-        r'''Makes text spanner.
+        ) -> TextSpannerCommand:
+        r'''Makes text spanner command.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.text_spanner(
+            ...         '1/2 clt',
+            ...         selector=baca.leaves()[:4 + 1],
+            ...         ),
+            ...     baca.make_even_runs(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 1]                                             %! SM4
+                                    \override TextSpanner.staff-padding = #4.5                           %! OC1
+                                    \once \override TextSpanner.Y-extent = ##f
+                                    \once \override TextSpanner.bound-details.left-broken.text = ##f
+                                    \once \override TextSpanner.bound-details.left.stencil-align-dir-y = 0
+                                    \once \override TextSpanner.bound-details.left.text = \markup {
+                                        \concat
+                                            {
+                                                \whiteout
+                                                    \upright
+                                                        "1/2 clt"
+                                                \hspace
+                                                    #0.5
+                                            }
+                                        }
+                                    \once \override TextSpanner.bound-details.right-broken.arrow = ##f
+                                    \once \override TextSpanner.bound-details.right-broken.padding = 0
+                                    \once \override TextSpanner.bound-details.right-broken.text = ##f
+                                    \once \override TextSpanner.bound-details.right.padding = 1.25
+                                    \once \override TextSpanner.bound-details.right.text = \markup {
+                                        \draw-line
+                                            #'(0 . -1)
+                                        }
+                                    \once \override TextSpanner.dash-fraction = 0.25
+                                    \once \override TextSpanner.dash-period = 1.5
+                                    e'8
+                                    [
+                                    \startTextSpan
+                <BLANKLINE>
+                                    d''8
+                <BLANKLINE>
+                                    f'8
+                <BLANKLINE>
+                                    e''8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 2]                                             %! SM4
+                                    g'8
+                                    \stopTextSpan
+                                    [
+                <BLANKLINE>
+                                    f''8
+                <BLANKLINE>
+                                    e'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 3]                                             %! SM4
+                                    d''8
+                                    [
+                <BLANKLINE>
+                                    f'8
+                <BLANKLINE>
+                                    e''8
+                <BLANKLINE>
+                                    g'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 4]                                             %! SM4
+                                    f''8
+                                    [
+                <BLANKLINE>
+                                    e'8
+                <BLANKLINE>
+                                    d''8
+                                    ]
+                                    \revert TextSpanner.staff-padding                                    %! OC2
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
         '''
-        return SpannerCommand(
+        from baca.tools.LibraryAF import LibraryAF
+        if line_segment is None:
+            line_segment = LibraryAF.dashed_hook()
+        if right_padding is not None:
+            line_segment = abjad.new(line_segment, right_padding=right_padding)
+        return TextSpannerCommand(
+            line_segment=line_segment,
             selector=selector,
-            spanner=abjad.TextSpanner(),
+            text=text,
             )
 
     @staticmethod
