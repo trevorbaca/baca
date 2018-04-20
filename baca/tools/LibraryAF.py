@@ -2589,6 +2589,7 @@ class LibraryAF(abjad.AbjadObject):
     def clef(
         clef: str = 'treble',
         selector: Selector = 'baca.leaf(0)',
+        redundant: bool = None,
         ) -> IndicatorCommand:
         r'''Attaches clef to leaf 0.
 
@@ -2724,6 +2725,8 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
+        if redundant is True:
+            return None
         indicator = abjad.Clef(clef)
         return IndicatorCommand(
             indicators=[indicator],
@@ -4943,6 +4946,7 @@ class LibraryAF(abjad.AbjadObject):
     def dynamic(
         dynamic: str,
         selector: Selector = 'baca.phead(0)',
+        redundant: bool = None,
         ) -> IndicatorCommand:
         r'''Attaches dynamic to pitched head 0.
 
@@ -5075,6 +5079,8 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
+        if redundant is True:
+            return None
         if dynamic in baca.tools.scheme.dynamics:
             steady_state = baca.tools.scheme.dynamic_to_steady_state(dynamic)
             command = '\\' + dynamic

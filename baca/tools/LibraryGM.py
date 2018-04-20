@@ -1977,9 +1977,12 @@ class LibraryGM(abjad.AbjadObject):
     def metronome_mark(
         key: str,
         selector: Selector = 'baca.leaf(0)',
+        redundant: bool = None,
         ) -> MetronomeMarkCommand:
         r'''Attaches metronome mark with `key`.
         '''
+        if redundant is True:
+            return None
         return MetronomeMarkCommand(
             key=key,
             selector=selector,
