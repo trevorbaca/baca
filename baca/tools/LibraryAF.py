@@ -2725,11 +2725,10 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        if redundant is True:
-            return None
         indicator = abjad.Clef(clef)
         return IndicatorCommand(
             indicators=[indicator],
+            redundant=redundant,
             selector=selector,
             )
 
@@ -5079,8 +5078,6 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        if redundant is True:
-            return None
         if dynamic in baca.tools.scheme.dynamics:
             steady_state = baca.tools.scheme.dynamic_to_steady_state(dynamic)
             command = '\\' + dynamic
@@ -5099,6 +5096,7 @@ class LibraryAF(abjad.AbjadObject):
         return IndicatorCommand(
             context='Voice',
             indicators=[indicator],
+            redundant=redundant,
             selector=selector,
             )
 

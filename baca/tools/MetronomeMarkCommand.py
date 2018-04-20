@@ -19,6 +19,7 @@ class MetronomeMarkCommand(Command):
 
     __slots__ = (
         '_key',
+        '_redundant',
         '_tags',
         )
 
@@ -28,6 +29,7 @@ class MetronomeMarkCommand(Command):
         self,
         deactivate: bool = None,
         key: typing.Union[str, abjad.Accelerando, abjad.Ritardando] = None,
+        redundant: bool = None,
         selector: Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
@@ -35,6 +37,9 @@ class MetronomeMarkCommand(Command):
         if key is not None:
             assert isinstance(key, (str, abjad.Accelerando, abjad.Ritardando))
         self._key = key
+        if redundant is not None:
+            redundant = bool(redundant)
+        self._redundant = redundant
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -48,6 +53,8 @@ class MetronomeMarkCommand(Command):
         if argument is None:
             return
         if self.key is None:
+            return
+        if self.redundant is True:
             return
         if isinstance(self.key, str):
             metronome_marks = self.manifests['abjad.MetronomeMark']
@@ -88,3 +95,9 @@ class MetronomeMarkCommand(Command):
         r'''Gets metronome mark key.
         '''
         return self._key
+
+    @property
+    def redundant(self) -> typing.Optional[bool]:
+        r'''Is true when command is redundant.
+        '''
+        return self._redundant

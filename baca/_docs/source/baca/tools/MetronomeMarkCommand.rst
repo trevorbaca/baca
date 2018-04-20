@@ -27,6 +27,7 @@ Bases
       ~MetronomeMarkCommand.manifests
       ~MetronomeMarkCommand.offset_to_measure_number
       ~MetronomeMarkCommand.previous_segment_voice_metadata
+      ~MetronomeMarkCommand.redundant
       ~MetronomeMarkCommand.score_template
       ~MetronomeMarkCommand.selector
       ~MetronomeMarkCommand.tag
@@ -46,6 +47,8 @@ Read-only properties
       .. autoattribute:: MetronomeMarkCommand.deactivate
 
 .. autoattribute:: MetronomeMarkCommand.key
+
+.. autoattribute:: MetronomeMarkCommand.redundant
 
 .. only:: html
 

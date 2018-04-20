@@ -30,6 +30,7 @@ Bases
       ~InstrumentChangeCommand.manifests
       ~InstrumentChangeCommand.offset_to_measure_number
       ~InstrumentChangeCommand.previous_segment_voice_metadata
+      ~InstrumentChangeCommand.redundant
       ~InstrumentChangeCommand.score_template
       ~InstrumentChangeCommand.selector
       ~InstrumentChangeCommand.tag
@@ -59,6 +60,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.indicators
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.redundant
 
 .. only:: html
 

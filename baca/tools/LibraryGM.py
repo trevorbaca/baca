@@ -1985,6 +1985,7 @@ class LibraryGM(abjad.AbjadObject):
             return None
         return MetronomeMarkCommand(
             key=key,
+            redundant=redundant,
             selector=selector,
             )
 

@@ -28,6 +28,7 @@ Bases
       ~IndicatorCommand.manifests
       ~IndicatorCommand.offset_to_measure_number
       ~IndicatorCommand.previous_segment_voice_metadata
+      ~IndicatorCommand.redundant
       ~IndicatorCommand.score_template
       ~IndicatorCommand.selector
       ~IndicatorCommand.tag
@@ -49,6 +50,8 @@ Read-only properties
       .. autoattribute:: IndicatorCommand.deactivate
 
 .. autoattribute:: IndicatorCommand.indicators
+
+.. autoattribute:: IndicatorCommand.redundant
 
 .. only:: html
 

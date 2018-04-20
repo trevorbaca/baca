@@ -1,7 +1,10 @@
 import abjad
 import baca
 import collections
+import typing
 from .Command import Command
+from .SegmentMaker import SegmentMaker
+from .Typing import Selector
 
 
 class IndicatorCommand(Command):
@@ -215,6 +218,7 @@ class IndicatorCommand(Command):
     __slots__ = (
         '_context',
         '_indicators',
+        '_redundant',
         '_tags',
         )
 
@@ -222,36 +226,41 @@ class IndicatorCommand(Command):
 
     def __init__(
         self,
-        context=None,
-        deactivate=None,
-        indicators=None,
-        selector='baca.pheads()',
-        tags=None,
-        ):
+        context: str = None,
+        deactivate: bool = None,
+        indicators: typing.List[typing.Any] = None,
+        redundant: bool = None,
+        selector: Selector = 'baca.pheads()',
+        tags: typing.List[abjad.Tag] = None,
+        ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
+        indicators_ = None
         if indicators is not None:
             if isinstance(indicators, collections.Iterable):
-                indicators = abjad.CyclicTuple(indicators)
+                indicators_ = abjad.CyclicTuple(indicators)
             else:
-                indicators = abjad.CyclicTuple([indicators])
-        self._indicators = indicators
+                indicators_ = abjad.CyclicTuple([indicators])
+        self._indicators = indicators_
+        if redundant is not None:
+            redundant = bool(redundant)
+        self._redundant = redundant
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
-
-        Returns none.
+    def __call__(self, argument=None) -> None:
+        r'''Calls command on ``argument``.
         '''
         if argument is None:
             return
         if self.indicators is None:
+            return
+        if self.redundant is True:
             return
         if self.selector:
             argument = self.selector(argument)
@@ -276,7 +285,7 @@ class IndicatorCommand(Command):
                         status = 'explicit'
                     else:
                         status = 'redundant'
-                    baca.SegmentMaker._treat_persistent_wrapper(
+                    SegmentMaker._treat_persistent_wrapper(
                         self.manifests,
                         wrapper,
                         status,
@@ -298,15 +307,13 @@ class IndicatorCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def context(self):
+    def context(self) -> typing.Optional[str]:
         r'''Gets context name.
-
-        Returns string or none.
         '''
         return self._context
 
     @property
-    def indicators(self):
+    def indicators(self) -> abjad.CyclicTuple:
         r'''Gets indicators.
 
         ..  container:: example
@@ -454,10 +461,11 @@ class IndicatorCommand(Command):
                     }
                 >>
 
-        Defaults to none.
-
-        Set to indicators or none.
-
-        Returns indicators or none.
         '''
         return self._indicators
+
+    @property
+    def redundant(self) -> typing.Optional[bool]:
+        r'''Is true when command is redundant.
+        '''
+        return self._redundant
