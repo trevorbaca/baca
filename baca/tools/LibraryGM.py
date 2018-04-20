@@ -1571,6 +1571,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def make_repeat_tied_notes(
         division_mask: mask_type = None,
+        do_not_rewrite_meter: bool = None,
         ) -> RhythmCommand:
         r'''Makes repeat-tied notes; rewrites meter.
         '''
@@ -1581,7 +1582,7 @@ class LibraryGM(abjad.AbjadObject):
         else:
             division_masks = [division_mask]
         return RhythmCommand(
-            rewrite_meter=True,
+            rewrite_meter=not(do_not_rewrite_meter),
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=division_masks,
                 tie_specifier=rhythmos.TieSpecifier(
