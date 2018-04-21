@@ -96,6 +96,7 @@ Bases
       ~MarkupLibrary.molto_gridato
       ~MarkupLibrary.molto_overpressure
       ~MarkupLibrary.molto_pont_plus_vib_molto
+      ~MarkupLibrary.molto_scratch
       ~MarkupLibrary.nail_rasg
       ~MarkupLibrary.nail_rasgueado
       ~MarkupLibrary.non_div
@@ -341,6 +342,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.molto_overpressure
 
 .. automethod:: MarkupLibrary.molto_pont_plus_vib_molto
+
+.. automethod:: MarkupLibrary.molto_scratch
 
 .. automethod:: MarkupLibrary.nail_rasg
 

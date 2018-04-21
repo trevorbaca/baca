@@ -6319,7 +6319,7 @@ class LibraryAF(abjad.AbjadObject):
                                 c''4.
                                 \revert Glissando.arrow-length                                           %! OC2
                                 \revert Glissando.arrow-width                                            %! OC2
-                                \revert Glissando.bound-details                                          %! OC2
+                                \revert Glissando.bound-details.right.arrow                              %! OC2
                                 \revert Glissando.thickness                                              %! OC2
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
@@ -6335,7 +6335,7 @@ class LibraryAF(abjad.AbjadObject):
                                 c''4.
                                 \revert Glissando.arrow-length                                           %! OC2
                                 \revert Glissando.arrow-width                                            %! OC2
-                                \revert Glissando.bound-details                                          %! OC2
+                                \revert Glissando.bound-details.right.arrow                              %! OC2
                                 \revert Glissando.thickness                                              %! OC2
                 <BLANKLINE>
                             }
