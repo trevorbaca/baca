@@ -1597,9 +1597,9 @@ class LibraryGM(abjad.AbjadObject):
         durations: typing.Iterable,
         beam_specifier: rhythmos.BeamSpecifier = None,
         division_mask: abjad.Pattern = None,
-        rewrite_meter: bool = True,
+        do_not_rewrite_meter: bool = None,
         ) -> RhythmCommand:
-        r'''Makes repeated-duration notes.
+        r'''Makes repeated-duration notes; rewrites meter.
         '''
         from baca.tools.LibraryNS import LibraryNS
         if division_mask is None:
@@ -1617,7 +1617,7 @@ class LibraryGM(abjad.AbjadObject):
         division_expression = LibraryNS.split_by_durations(durations=durations)
         return RhythmCommand(
             division_expression=division_expression,
-            rewrite_meter=rewrite_meter,
+            rewrite_meter=not(do_not_rewrite_meter),
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 beam_specifier=beam_specifier,
                 division_masks=division_masks,
@@ -1689,7 +1689,7 @@ class LibraryGM(abjad.AbjadObject):
     def make_tied_repeated_durations(
         durations: typing.Iterable,
         ) -> RhythmCommand:
-        r'''Makes tied repeated durations.
+        r'''Makes tied repeated durations; does not rewrite meter.
         '''
         command = LibraryGM.make_repeated_duration_notes(durations)
         return abjad.new(
