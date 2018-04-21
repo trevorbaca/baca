@@ -7731,6 +7731,23 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def swell(
+        peak: str,
+        counts: typing.List[int],
+        ) -> PiecewiseCommand:
+        r'''Makes two-stage niente swell.
+        '''
+        from baca.tools.LibraryAF import LibraryAF
+        assert isinstance(peak, str), repr(peak)
+        assert isinstance(counts, list), repr(counts)
+        assert all(isinstance(_, int) for _ in counts), repr(counts)
+        return LibraryAF.enchained_hairpin(
+            *baca.dynamics(f'niente {peak} niente'),
+            bookend=True,
+            selector=baca.leaves().enchain(counts),
+            )
+
+    @staticmethod
     def system(
         *distances: typing.Any,
         measure: int = None,
