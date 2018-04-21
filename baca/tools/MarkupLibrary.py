@@ -774,6 +774,13 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def molto_scratch(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'molto scratch',
+            selector=selector,
+            )
+
+    @staticmethod
     def MP_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'MP + XFB flaut.',
