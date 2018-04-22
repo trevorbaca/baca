@@ -91,6 +91,7 @@ baca.tools
    :hidden:
 
    AccidentalAdjustmentCommand
+   BowContactPointCommand
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
@@ -131,6 +132,7 @@ baca.tools
    :nosignatures:
 
    ~baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
+   ~baca.tools.BowContactPointCommand.BowContactPointCommand
    ~baca.tools.ClusterCommand.ClusterCommand
    ~baca.tools.ColorCommand.ColorCommand
    ~baca.tools.ColorFingeringCommand.ColorFingeringCommand
@@ -310,18 +312,3 @@ baca.tools
    ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback
    ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
    ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
-
---------
-
-Classes
--------
-
-.. toctree::
-   :hidden:
-
-   BowContactPointCommand
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.tools.BowContactPointCommand.BowContactPointCommand

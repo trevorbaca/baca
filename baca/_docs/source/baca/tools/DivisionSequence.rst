@@ -253,11 +253,7 @@ Methods
 
       .. automethod:: DivisionSequence.reverse
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: DivisionSequence.rotate
+.. automethod:: DivisionSequence.rotate
 
 .. only:: html
 

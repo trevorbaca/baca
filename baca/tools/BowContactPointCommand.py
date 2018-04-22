@@ -9,7 +9,7 @@ class BowContactPointCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = '(4) Commands'
     
     __slots__ = (
         '_bow_contact_points',
