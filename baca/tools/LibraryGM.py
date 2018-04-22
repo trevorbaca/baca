@@ -44,6 +44,7 @@ class LibraryGM(abjad.AbjadObject):
     def glissando(
         selector: Selector = 'baca.tleaves()',
         allow_repeats: bool = None,
+        allow_ties: bool = None,
         right_broken: bool = None,
         stems: bool = None,
         style: str = None,
@@ -364,6 +365,7 @@ class LibraryGM(abjad.AbjadObject):
         '''
         glissando = abjad.Glissando(
             allow_repeats=allow_repeats,
+            allow_ties=allow_ties,
             stems=stems,
             style=style,
             )
