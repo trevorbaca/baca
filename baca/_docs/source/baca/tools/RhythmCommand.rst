@@ -27,6 +27,7 @@ Bases
       ~RhythmCommand.get_tag
       ~RhythmCommand.left_broken
       ~RhythmCommand.manifests
+      ~RhythmCommand.multimeasure_rests
       ~RhythmCommand.offset_to_measure_number
       ~RhythmCommand.parameter
       ~RhythmCommand.persist
@@ -34,6 +35,7 @@ Bases
       ~RhythmCommand.reference_meters
       ~RhythmCommand.repeat_ties
       ~RhythmCommand.rewrite_meter
+      ~RhythmCommand.rewrite_rest_filled
       ~RhythmCommand.rhythm_maker
       ~RhythmCommand.rhythm_overwrites
       ~RhythmCommand.right_broken
@@ -68,6 +70,8 @@ Read-only properties
 
 .. autoattribute:: RhythmCommand.left_broken
 
+.. autoattribute:: RhythmCommand.multimeasure_rests
+
 .. autoattribute:: RhythmCommand.parameter
 
 .. autoattribute:: RhythmCommand.persist
@@ -77,6 +81,8 @@ Read-only properties
 .. autoattribute:: RhythmCommand.repeat_ties
 
 .. autoattribute:: RhythmCommand.rewrite_meter
+
+.. autoattribute:: RhythmCommand.rewrite_rest_filled
 
 .. autoattribute:: RhythmCommand.rhythm_maker
 

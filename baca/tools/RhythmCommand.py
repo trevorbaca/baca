@@ -32,9 +32,11 @@ class RhythmCommand(Command):
         '_division_maker',
         '_division_expression',
         '_left_broken',
+        '_multimeasure_rests',
         '_persist',
         '_reference_meters',
         '_rewrite_meter',
+        '_rewrite_rest_filled',
         '_rhythm_maker',
         '_rhythm_overwrites',
         '_right_broken',
@@ -54,9 +56,11 @@ class RhythmCommand(Command):
         division_maker: DivisionMaker = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
+        multimeasure_rests: bool = None,
         persist: str = None,
         reference_meters: typing.List = None,
         rewrite_meter: bool = None,
+        rewrite_rest_filled: bool = None,
         rhythm_maker: typing.Union[
             rhythmos.RhythmMaker, abjad.Selection] = None,
         rhythm_overwrites=None,
@@ -75,11 +79,19 @@ class RhythmCommand(Command):
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken: bool = left_broken
+        if multimeasure_rests is not None:
+            multimeasure_rests = bool(multimeasure_rests)
+        self._multimeasure_rests = multimeasure_rests
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist: str = persist
         self._reference_meters: typing.List = reference_meters
+        if rewrite_meter is not None:
+            rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter: bool = rewrite_meter
+        if rewrite_rest_filled is not None:
+            rewrite_rest_filled = bool(rewrite_rest_filled)
+        self._rewrite_rest_filled: bool = rewrite_rest_filled
         self._rhythm_maker: typing.Union[
             rhythmos.RhythmMaker, abjad.Selection] = rhythm_maker
         self._rhythm_overwrites = rhythm_overwrites
@@ -285,6 +297,11 @@ class RhythmCommand(Command):
                 time_signatures,
                 selections,
                 )
+        if self.rewrite_rest_filled:
+            selections = rhythmos.DurationSpecifier._rewrite_rest_filled_(
+                selections,
+                multimeasure_rests=self.multimeasure_rests,
+                )
         self._tag_broken_ties(selections)
         return selections, start_offset
 
@@ -327,6 +344,13 @@ class RhythmCommand(Command):
         return self._left_broken
 
     @property
+    def multimeasure_rests(self) -> typing.Optional[bool]:
+        r'''Is true when command spells each rest-filled division as a
+        single multimeasure rest.
+        '''
+        return self._multimeasure_rests
+
+    @property
     def parameter(self) -> str:
         r'''Gets persistence parameter.
 
@@ -366,6 +390,12 @@ class RhythmCommand(Command):
         r'''Is true when command rewrites meter.
         '''
         return self._rewrite_meter
+
+    @property
+    def rewrite_rest_filled(self) -> bool:
+        r'''Is true when command rewrites rest-filled divisions.
+        '''
+        return self._rewrite_rest_filled
 
     @property
     def rhythm_maker(self) -> typing.Optional[
