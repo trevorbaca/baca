@@ -7742,9 +7742,9 @@ class LibraryNS(abjad.AbjadObject):
         assert isinstance(counts, list), repr(counts)
         assert all(isinstance(_, int) for _ in counts), repr(counts)
         return LibraryAF.enchained_hairpin(
-            *baca.dynamics(f'niente {peak} niente'),
+            *LibraryAF.dynamics(f'niente {peak} niente'),
             bookend=True,
-            selector=baca.leaves().enchain(counts),
+            selector=baca.select().leaves().enchain(counts),
             )
 
     @staticmethod
