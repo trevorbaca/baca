@@ -27,7 +27,6 @@ Bases
       ~BowContactPointCommand.manifests
       ~BowContactPointCommand.offset_to_measure_number
       ~BowContactPointCommand.previous_segment_voice_metadata
-      ~BowContactPointCommand.rotation
       ~BowContactPointCommand.score_template
       ~BowContactPointCommand.selector
       ~BowContactPointCommand.tag
@@ -47,8 +46,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: BowContactPointCommand.deactivate
-
-.. autoattribute:: BowContactPointCommand.rotation
 
 .. only:: html
 

@@ -1500,15 +1500,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bcps(
-        bcps: typing.Iterable = None,
-        rotation: int = None,
+        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         selector: Selector = 'baca.leaves()',
         ) -> BowContactPointCommand:
         r'''Makes bow contact points.
         '''
         return BowContactPointCommand(
             bcps=bcps,
-            rotation=rotation,
             selector=selector,
             )
 

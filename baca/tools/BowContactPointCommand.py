@@ -1,6 +1,8 @@
 import abjad
 import baca
+import typing
 from .Command import Command
+from .Typing import Selector
 
 
 class BowContactPointCommand(Command):
@@ -13,46 +15,48 @@ class BowContactPointCommand(Command):
     
     __slots__ = (
         '_bow_contact_points',
-        '_rotation',
         )
 
-    _default_bow_contact_points = (
-        [(0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7)],
-        [(7, 7), (0, 7), (7, 7), (0, 7), (7, 7)],
-        [(0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7), (7, 7)],
-        [(0, 4), (1, 4), (2, 4), (1, 4)],
-        )
+    _default_bow_contact_points = [
+        (0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7),
+        (7, 7), (0, 7), (7, 7), (0, 7), (7, 7),
+        (0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7), (7, 7),
+        (0, 4), (1, 4), (2, 4), (1, 4),
+        ]
 
     ### INITIALIZER ###
 
-    def __init__(self, bcps=None, rotation=None, selector=None):
-        baca.Command.__init__(self, selector=selector)
+    def __init__(
+        self,
+        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
+        selector: Selector = None,
+        ) -> None:
+        Command.__init__(self, selector=selector)
         if bcps is None:
             bcps = BowContactPointCommand._default_bow_contact_points
         self._bow_contact_points = bcps
-        self._rotation = rotation
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
-
-        Returns none.
+    def __call__(self, argument=None) -> None:
+        r'''Calls command on ``argument``.
         '''
         if argument is None:
             return
         if self.selector:
             argument = self.selector(argument)
         bcps = baca.sequence(self.bow_contact_points)
-        bcps = bcps.rotate(n=self.rotation)
-        bcps = bcps.flatten(depth=1)
+        for bcp in bcps:
+            assert isinstance(bcp, tuple), repr(bcp)
+            assert len(bcp) == 2, repr(bcp)
         bcps = abjad.CyclicTuple(bcps)
         leaves = baca.select(argument).leaves()
         spanner = abjad.TextSpanner()
         abjad.attach(spanner, leaves)
         lts = baca.select(argument).lts()
         total = len(lts)
-        previous_bcp, i = None, 0
+        previous_bcp: typing.Tuple[int, int] = None
+        i = 0
         for lt in lts:
             previous_leaf = abjad.inspect(lt.head).get_leaf(-1)
             if (isinstance(lt.head, abjad.Rest) and
@@ -93,36 +97,38 @@ class BowContactPointCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bow_contact_points(self):
+    def bow_contact_points(self) -> typing.Iterable[typing.Tuple[int, int]]:
         r'''Gets bow contact points.
 
         ..  container:: example
 
             >>> command = baca.BowContactPointCommand()
-            >>> for list_ in command.bow_contact_points:
-            ...     list_
+            >>> for bcp in command.bow_contact_points:
+            ...     bcp
             ...
-            [(0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7)]
-            [(7, 7), (0, 7), (7, 7), (0, 7), (7, 7)]
-            [(0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7), (7, 7)]
-            [(0, 4), (1, 4), (2, 4), (1, 4)]
+            (0, 7)
+            (4, 7)
+            (5, 7)
+            (6, 7)
+            (7, 7)
+            (6, 7)
+            (7, 7)
+            (0, 7)
+            (7, 7)
+            (0, 7)
+            (7, 7)
+            (0, 7)
+            (4, 7)
+            (5, 7)
+            (6, 7)
+            (7, 7)
+            (6, 7)
+            (7, 7)
+            (0, 4)
+            (1, 4)
+            (2, 4)
+            (1, 4)
 
         Class constant.
-
-        Returns list of list of pairs.
         '''
         return self._bow_contact_points
-
-    @property
-    def rotation(self):
-        r'''Gets rotation.
-
-        ..  container:: example
-
-            >>> command = baca.BowContactPointCommand(rotation=-1)
-            >>> command.rotation
-            -1
-
-        Returns integer or none.
-        '''
-        return self._rotation
