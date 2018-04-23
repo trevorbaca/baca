@@ -1,6 +1,7 @@
 import abjad
 import baca
 import inspect
+from .DivisionSequence import DivisionSequence
 
 
 class DivisionSequenceExpression(abjad.Expression):
@@ -135,12 +136,10 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ### PUBLIC METHODS ###
 
-    def division_sequence(self):
+    def division_sequence(self) -> 'DivisionSequenceExpression':
         r'''Makes divison sequence expression.
-
-        Returns expression.
         '''
-        class_ = baca.DivisionSequence
+        class_ = DivisionSequence
         callback = self._make_initializer_callback(
             class_,
             module_names=['baca'],
@@ -157,10 +156,8 @@ class DivisionSequenceExpression(abjad.Expression):
         pattern_rotation_index=0,
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
-        ):
-        r'''Makes split-by-durations callback.
-
-        Returns expression.
+        ) -> 'DivisionSequenceExpression':
+        r'''Appends split-by-durations to expression.
         '''
         template = '{{}}.split_by_durations('
         template += 'compound_meter_multiplier={compound_meter_multiplier}'
@@ -178,6 +175,28 @@ class DivisionSequenceExpression(abjad.Expression):
             remainder=remainder,
             remainder_fuse_threshold=remainder_fuse_threshold,
             )
+        callback = abjad.Expression._frame_to_callback(
+            inspect.currentframe(),
+            evaluation_template=evaluation_template,
+            module_names=['baca'],
+            )
+        return self.append_callback(callback)
+
+    def split_by_rounded_ratios(
+        self,
+        ratios,
+        ) -> 'DivisionSequenceExpression':
+        r'''Appends split-by-rounded-ratios to expression.
+
+        ..  container:: example
+
+            >>> expression = baca.DivisionSequenceExpression()
+            >>> expression = expression.division_sequence()
+            >>> expression = expression.split_by_rounded_ratios([(2, 1)])
+            >>> expression = expression.flatten(depth=-1)
+
+        '''
+        evaluation_template = f'{{}}.split_by_rounded_ratios(ratios={ratios})'
         callback = abjad.Expression._frame_to_callback(
             inspect.currentframe(),
             evaluation_template=evaluation_template,

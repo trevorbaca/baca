@@ -67,6 +67,7 @@ Bases
       ~DivisionSequence.sort
       ~DivisionSequence.split
       ~DivisionSequence.split_by_durations
+      ~DivisionSequence.split_by_rounded_ratios
       ~DivisionSequence.sum
       ~DivisionSequence.sum_by_sign
       ~DivisionSequence.truncate
@@ -274,6 +275,8 @@ Methods
       .. automethod:: DivisionSequence.split
 
 .. automethod:: DivisionSequence.split_by_durations
+
+.. automethod:: DivisionSequence.split_by_rounded_ratios
 
 .. only:: html
 

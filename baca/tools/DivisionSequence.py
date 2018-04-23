@@ -2,6 +2,9 @@ import abjad
 import baca
 import collections
 import inspect
+from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback
+from .SplitByRoundedRatiosDivisionCallback import \
+    SplitByRoundedRatiosDivisionCallback
 
 
 class DivisionSequence(abjad.Sequence):
@@ -44,7 +47,7 @@ class DivisionSequence(abjad.Sequence):
         method_name='r',
         subscript='n',
         )
-    def rotate(self, n=0):
+    def rotate(self, n=0) -> 'DivisionSequence':
         r'''Rotates division sequence by index `n`.
 
         ..  container:: example
@@ -108,7 +111,6 @@ class DivisionSequence(abjad.Sequence):
                             }
                         }
 
-        Returns new division sequence.
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
@@ -126,6 +128,7 @@ class DivisionSequence(abjad.Sequence):
             start_offset += duration
         return type(self)(items=items)
 
+    @abjad.Signature()
     def split_by_durations(
         self,
         compound_meter_multiplier=None,
@@ -134,12 +137,12 @@ class DivisionSequence(abjad.Sequence):
         pattern_rotation_index=0,
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
-        ):
+        ) -> 'DivisionSequence':
         r'''Splits each division in division sequence by `durations`.
-
-        Returns new division sequence.
         '''
-        maker = baca.SplitByDurationsDivisionCallback(
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        callback = SplitByDurationsDivisionCallback(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
             durations=durations,
@@ -147,6 +150,20 @@ class DivisionSequence(abjad.Sequence):
             remainder=remainder,
             remainder_fuse_threshold=remainder_fuse_threshold,
             )
-        division_lists = maker(self)
+        division_lists = callback(self)
+        sequences = [type(self)(_) for _ in division_lists]
+        return type(self)(sequences)
+
+    @abjad.Signature()
+    def split_by_rounded_ratios(
+        self,
+        ratios,
+        ) -> 'DivisionSequence':
+        r'''Splits each division in division sequence by rounded `ratios`.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        callback = SplitByRoundedRatiosDivisionCallback(ratios=ratios)
+        division_lists = callback(self)
         sequences = [type(self)(_) for _ in division_lists]
         return type(self)(sequences)

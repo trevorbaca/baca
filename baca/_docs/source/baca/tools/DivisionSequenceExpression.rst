@@ -56,6 +56,7 @@ Bases
       ~DivisionSequenceExpression.select
       ~DivisionSequenceExpression.sequence
       ~DivisionSequenceExpression.split_by_durations
+      ~DivisionSequenceExpression.split_by_rounded_ratios
       ~DivisionSequenceExpression.string_template
       ~DivisionSequenceExpression.subclass_hook
       ~DivisionSequenceExpression.subexpressions
@@ -288,6 +289,8 @@ Methods
       .. automethod:: DivisionSequenceExpression.sequence
 
 .. automethod:: DivisionSequenceExpression.split_by_durations
+
+.. automethod:: DivisionSequenceExpression.split_by_rounded_ratios
 
 .. only:: html
 
