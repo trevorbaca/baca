@@ -5271,6 +5271,25 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dynamic_text_left(
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> SuiteCommand:
+        r'''Overrides dynamic text self-alignment-X and dynamic text X-extent.
+        '''
+        from baca.tools.LibraryNS import LibraryNS
+        command_1 = OverrideCommand(
+            attribute='self_alignment_X',
+            value=abjad.Left,
+            grob='dynamic_text',
+            selector=selector,
+            )
+        command_2 = LibraryAF.dynamic_text_x_extent_zero()
+        return LibraryNS.suite(
+            [command_1, command_2],
+            selector=selector,
+            )
+
+    @staticmethod
     def dynamic_text_stencil_false(
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
