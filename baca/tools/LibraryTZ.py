@@ -4313,6 +4313,20 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def tuplet_bracket_shorten_pair(
+        pair: NumberPair,
+        selector: Selector = 'baca.leaf(0)',
+        ) -> OverrideCommand:
+        r'''Overrides tuplet bracket shorten pair.
+        '''
+        return OverrideCommand(
+            attribute='shorten_pair',
+            value=pair,
+            grob='tuplet_bracket',
+            selector=selector,
+            )
+
+    @staticmethod
     def tuplet_bracket_staff_padding(
         n: Number,
         selector: Selector = 'baca.leaves()',

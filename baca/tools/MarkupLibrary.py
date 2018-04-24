@@ -556,6 +556,7 @@ class MarkupLibrary(abjad.AbjadObject):
         dates_ = abjad.Markup.line([dates_])
         markup = abjad.Markup.right_column([places_, dates_])
         markup = markup.with_color('black')
+        markup = markup.override(('font-name', 'Palatino'))
         return baca.markup(
             markup,
             selector=selector,

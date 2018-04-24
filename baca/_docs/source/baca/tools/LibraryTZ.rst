@@ -62,6 +62,7 @@ Bases
       ~LibraryTZ.trill_spanner_staff_padding
       ~LibraryTZ.tuplet_bracket_extra_offset
       ~LibraryTZ.tuplet_bracket_padding
+      ~LibraryTZ.tuplet_bracket_shorten_pair
       ~LibraryTZ.tuplet_bracket_staff_padding
       ~LibraryTZ.tuplet_brackets_down
       ~LibraryTZ.tuplet_brackets_up
@@ -166,6 +167,8 @@ Class & static methods
 .. automethod:: LibraryTZ.tuplet_bracket_extra_offset
 
 .. automethod:: LibraryTZ.tuplet_bracket_padding
+
+.. automethod:: LibraryTZ.tuplet_bracket_shorten_pair
 
 .. automethod:: LibraryTZ.tuplet_bracket_staff_padding
 
