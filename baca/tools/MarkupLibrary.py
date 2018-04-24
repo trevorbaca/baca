@@ -2,6 +2,8 @@ import abjad
 import baca
 import typing
 from .IndicatorCommand import IndicatorCommand
+from .SuiteCommand import SuiteCommand
+from .Typing import Number
 from .Typing import Selector
 
 
@@ -371,7 +373,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def boxed(string, selector='baca.leaf(0)', direction=abjad.Up):
+    def boxed(
+        string: str,
+        selector: Selector = 'baca.leaf(0)',
+        direction: abjad.OrdinalConstant = abjad.Up,
+        ) -> IndicatorCommand:
         r'''Makes boxed markup.
         '''
         markup = abjad.Markup(string)
@@ -384,10 +390,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def boxed_lines(
-        strings,
-        selector='baca.leaf(0)',
-        direction=abjad.Up,
-        ):
+        strings: typing.List[str],
+        selector: Selector = 'baca.leaf(0)',
+        direction: abjad.OrdinalConstant = abjad.Up,
+        ) -> IndicatorCommand:
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column()
         markup = markup.box().override(('box-padding', 0.5))
@@ -399,10 +405,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def boxed_repeat_count(
-        count,
-        selector='baca.leaf(0)',
-        direction=abjad.Up,
-        ):
+        count: int,
+        selector: Selector = 'baca.leaf(0)',
+        direction: abjad.OrdinalConstant = abjad.Up,
+        ) -> IndicatorCommand:
         string = f'x{count}'
         markup = abjad.Markup(string)
         markup = markup.sans().bold().fontsize(6)
@@ -414,7 +420,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def clicks_per_second(lower, upper, selector='baca.pleaf(0)'):
+    def clicks_per_second(
+        lower: int,
+        upper: int,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         string = f'{lower}-{upper} clicks/sec.'
         return baca.markup(
             string,
@@ -425,6 +435,13 @@ class MarkupLibrary(abjad.AbjadObject):
     def col_legno_battuto(selector='baca.pleaf(0)'):
         return baca.markup(
             'col legno battuto',
+            selector=selector,
+            )
+
+    @staticmethod
+    def crine(selecgtor='baca.pleaf(0))'):
+        return baca.markup(
+            'crine',
             selector=selector,
             )
 
@@ -475,20 +492,25 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def edition(not_parts, only_parts, selector='baca.pleaf(0)'):
+    def edition(
+        not_parts: typing.Union[str, IndicatorCommand],
+        only_parts: typing.Union[str, IndicatorCommand],
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> SuiteCommand:
         r'''Makes not-parts / only-parts markup suite.
         '''
         import baca
+        from baca.tools.LibraryNS import LibraryNS
         if isinstance(not_parts, str):
             not_parts = baca.markup(not_parts)
-        assert isinstance(not_parts, baca.IndicatorCommand)
-        not_parts = baca.not_parts(not_parts)
+        assert isinstance(not_parts, IndicatorCommand)
+        not_parts_ = LibraryNS.not_parts(not_parts)
         if isinstance(only_parts, str):
             only_parts = baca.markup(only_parts)
-        assert isinstance(only_parts, baca.IndicatorCommand)
-        only_parts = baca.only_parts(only_parts)
-        return baca.suite(
-            [not_parts, only_parts],
+        assert isinstance(only_parts, IndicatorCommand)
+        only_parts_ = LibraryNS.only_parts(only_parts)
+        return LibraryNS.suite(
+            [not_parts_, only_parts_],
             selector=selector,
             )
 
@@ -521,14 +543,18 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def final_markup(places, dates, selector='baca.leaf(-1)'):
-        places = r' \hspace #0.75 – \hspace #0.75 '.join(places)
-        places = abjad.Markup(places)
-        places = abjad.Markup.line([places])
-        dates = r' \hspace #0.75 – \hspace #0.75 '.join(dates)
-        dates = abjad.Markup(dates)
-        dates = abjad.Markup.line([dates])
-        markup = abjad.Markup.right_column([places, dates])
+    def final_markup(
+        places: typing.List[str],
+        dates: typing.List[str],
+        selector: Selector = 'baca.leaf(-1)',
+        ) -> IndicatorCommand:
+        string = r' \hspace #0.75 – \hspace #0.75 '.join(places)
+        places_ = abjad.Markup(string)
+        places_ = abjad.Markup.line([places_])
+        string = r' \hspace #0.75 – \hspace #0.75 '.join(dates)
+        dates_ = abjad.Markup(string)
+        dates_ = abjad.Markup.line([dates_])
+        markup = abjad.Markup.right_column([places_, dates_])
         markup = markup.with_color('black')
         return baca.markup(
             markup,
@@ -558,7 +584,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def fractional_OB(numerator, denominator, selector='baca.pleaf(0)'):
+    def fractional_OB(
+        numerator: int,
+        denominator: int,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         string = f'{numerator}/{denominator}OB'
         return baca.markup(
             string,
@@ -566,7 +596,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def fractional_scratch(numerator, denominator, selector='baca.pleaf(0)'):
+    def fractional_scratch(
+        numerator: int,
+        denominator: int,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         string = f'{numerator}/{denominator} scratch'
         return baca.markup(
             string,
@@ -602,7 +636,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def instrument(string, hcenter_in=16, column=True):
+    def instrument(
+        string: str,
+        hcenter_in: Number = 16,
+        column: bool = True,
+        ):
         r'''Makes instrument name markup.
 
         ..  container:: example
@@ -710,13 +748,27 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def lines(
-        strings,
-        selector='baca.leaf(0)',
-        direction=abjad.Up,
-        no_whiteout=False,
-        ):
-        assert isinstance(strings, list), repr(strings)
-        markup = abjad.MarkupList(strings).column()
+        items: typing.List,
+        selector: Selector = 'baca.leaf(0)',
+        direction: abjad.OrdinalConstant = abjad.Up,
+        no_whiteout: bool = False,
+        ) -> IndicatorCommand:
+        if not isinstance(items, list):
+            message = f'items must be list (not {type(items).__name__}):'
+            lines = ['    ' + _ for _ in format(items).split('\n')]
+            lines = '\n'.join(lines)
+            message += f'\n{lines}'
+            raise Exception(message)
+        items_ = []
+        for item in items:
+            if isinstance(item, (str, abjad.Markup)):
+                items_.append(item)
+            else:
+                assert isinstance(item, IndicatorCommand)
+                assert len(item.indicators) == 1
+                markup = item.indicators[0]
+                items_.append(markup)
+        markup = abjad.MarkupList(items_).column()
         return baca.markup(
             markup,
             selector=selector,
@@ -761,10 +813,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def molto_pont_plus_vib_molto(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'molto pont.',
             'vib. molto',
@@ -972,10 +1024,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def PO_plus_non_vib(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'PO',
             'non vib.',
@@ -986,10 +1038,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def PO_plus_poco_vib(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'PO',
             'poco vib.',
@@ -1049,10 +1101,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def poco_pont_plus_non_vib(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'poco pont.',
             'non vib.',
@@ -1063,10 +1115,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def poco_pont_plus_sub_non_vib(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'poco pont.',
             'sub. non vib.',
@@ -1077,10 +1129,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def poco_pont_plus_sub_vib_mod(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'poco pont.',
             'sub. vib. mod.',
@@ -1091,10 +1143,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def poco_pont_plus_vib_mod(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'poco pont.',
             'vib. mod.',
@@ -1272,7 +1324,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def short_instrument(string, hcenter_in=10, column=True):
+    def short_instrument(
+        string: str,
+        hcenter_in: Number = 10,
+        column: bool = True,
+        ) -> IndicatorCommand:
         r'''Makes short instrument name markup.
 
         ..  container:: example
@@ -1363,7 +1419,10 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def string_number(n, selector='baca.pleaf(0)'):
+    def string_number(
+        n: int,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         to_roman_numeral = {
             1: 'I',
             2: 'II',
@@ -1378,7 +1437,10 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def string_numbers(numbers, selector='baca.pleaf(0)'):
+    def string_numbers(
+        numbers: typing.List[int],
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         to_roman_numeral = {
             1: 'I',
             2: 'II',
@@ -1386,9 +1448,9 @@ class MarkupLibrary(abjad.AbjadObject):
             4: 'IV',
             }
         string_numbers = [to_roman_numeral[_] for _ in numbers]
-        string_numbers = '+'.join(string_numbers)
+        string = '+'.join(string_numbers)
         return baca.markup(
-            string_numbers,
+            string,
             selector=selector,
             direction=abjad.Down,
             )
@@ -1437,10 +1499,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def tasto_fractional_scratch(
-        numerator,
-        denominator,
-        selector='baca.pleaf(0)',
-        ):
+        numerator: int,
+        denominator: int,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         string = f'tasto + {numerator}/{denominator} scratch'
         return baca.markup(
             string,
@@ -1470,10 +1532,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def tasto_plus_non_vib(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'tasto',
             'non vib.',
@@ -1498,10 +1560,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def tasto_plus_poco_vib(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'tasto',
             'poco vib.',
@@ -1582,11 +1644,11 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def plus_statement(
-        string_1,
-        string_2,
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
+        string_1: str,
+        string_2: str,
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
         ):
         if parenthesize_first and parenthesize_last:
             composite_string = f'({string_1} + {string_2})'
@@ -1638,10 +1700,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def XFB_plus_pochiss_pont(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'XFB',
             'pochiss. pont.',
@@ -1652,10 +1714,10 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def XFB_plus_tasto(
-        parenthesize_first=False,
-        parenthesize_last=False,
-        selector='baca.pleaf(0)',
-        ):
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ) -> IndicatorCommand:
         return MarkupLibrary.plus_statement(
             'XFB',
             'tasto',

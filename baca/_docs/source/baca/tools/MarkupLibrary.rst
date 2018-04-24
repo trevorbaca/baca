@@ -61,6 +61,7 @@ Bases
       ~MarkupLibrary.boxed_repeat_count
       ~MarkupLibrary.clicks_per_second
       ~MarkupLibrary.col_legno_battuto
+      ~MarkupLibrary.crine
       ~MarkupLibrary.delicatiss
       ~MarkupLibrary.delicatissimo
       ~MarkupLibrary.directly_on_bridge_bow_diagonally
@@ -272,6 +273,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.clicks_per_second
 
 .. automethod:: MarkupLibrary.col_legno_battuto
+
+.. automethod:: MarkupLibrary.crine
 
 .. automethod:: MarkupLibrary.delicatiss
 
