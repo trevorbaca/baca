@@ -160,6 +160,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_markup',
         '_final_markup_extra_offset',
         '_first_measure_number',
+        '_first_segment',
         '_include_nonfirst_segment_stylesheet',
         '_ignore_out_of_range_pitches',
         '_ignore_repeat_pitch_classes',
@@ -349,6 +350,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._final_markup_extra_offset: NumberPair = \
             final_markup_extra_offset
         self._first_measure_number: int = first_measure_number
+        if first_segment is not None:
+            first_segment = bool(first_segment)
+        self._first_segment = first_segment
         if ignore_out_of_range_pitches is not None:
             ignore_out_of_range_pitches = bool(ignore_out_of_range_pitches)
         self._ignore_out_of_range_pitches = ignore_out_of_range_pitches
@@ -1886,7 +1890,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 return [self._absolute_string_trio_stylesheet_path]
         includes = []
         includes.append(self._score_package_stylesheet_path)
-        if (1 < self._get_segment_number() or
+        if (not self.first_segment or
             self.include_nonfirst_segment_stylesheet):
             includes.append(self._score_package_nonfirst_stylesheet_path)
         return includes
@@ -4091,9 +4095,11 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._first_measure_number
 
     @property
-    def first_segment(self) -> bool:
+    def first_segment(self) -> typing.Optional[bool]:
         r'''Is true when segment is first in score.
         '''
+        if self._first_segment is not None:
+            return self._first_segment
         return self._get_segment_number() == 1
         
     @property
