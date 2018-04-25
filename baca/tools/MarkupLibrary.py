@@ -1157,6 +1157,13 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def poco_rasp_partial_2(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'poco rasp (2°)',
+            selector=selector,
+            )
+
+    @staticmethod
     def poco_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'poco scratch',

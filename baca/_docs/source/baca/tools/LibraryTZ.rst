@@ -66,6 +66,7 @@ Bases
       ~LibraryTZ.tuplet_bracket_staff_padding
       ~LibraryTZ.tuplet_brackets_down
       ~LibraryTZ.tuplet_brackets_up
+      ~LibraryTZ.tuplet_number_denominator
       ~LibraryTZ.tuplet_number_extra_offset
       ~LibraryTZ.untie_to
       ~LibraryTZ.up_arpeggios
@@ -175,6 +176,8 @@ Class & static methods
 .. automethod:: LibraryTZ.tuplet_brackets_down
 
 .. automethod:: LibraryTZ.tuplet_brackets_up
+
+.. automethod:: LibraryTZ.tuplet_number_denominator
 
 .. automethod:: LibraryTZ.tuplet_number_extra_offset
 

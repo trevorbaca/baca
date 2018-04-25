@@ -4903,6 +4903,17 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def tuplet_number_denominator(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        return OverrideCommand(
+            attribute='text',
+            value='tuplet-number::calc-denominator-text',
+            grob='tuplet_number',
+            selector=selector,
+            )
+
+    @staticmethod
     def untie_to(
         selector: Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:

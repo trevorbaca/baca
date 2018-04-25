@@ -126,6 +126,7 @@ Bases
       ~MarkupLibrary.poco_pont_plus_sub_non_vib
       ~MarkupLibrary.poco_pont_plus_sub_vib_mod
       ~MarkupLibrary.poco_pont_plus_vib_mod
+      ~MarkupLibrary.poco_rasp_partial_2
       ~MarkupLibrary.poco_scratch
       ~MarkupLibrary.pont
       ~MarkupLibrary.pont_XFB
@@ -403,6 +404,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.poco_pont_plus_sub_vib_mod
 
 .. automethod:: MarkupLibrary.poco_pont_plus_vib_mod
+
+.. automethod:: MarkupLibrary.poco_rasp_partial_2
 
 .. automethod:: MarkupLibrary.poco_scratch
 
