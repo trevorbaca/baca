@@ -642,3 +642,24 @@ makeRed = {
     \once \override NoteHead.color = #red
     \once \override Stem.color = #red
     }
+
+%%% SYMBOLS %%%
+
+karimDamp = \markup{
+    \center-column {
+  {\override #'(thickness . 1.8)
+    \combine \draw-line #'(-1.5 . 0)
+    \combine \draw-line #'(0 . -1.5)
+    \combine \draw-line #'(0 . 1.5)
+    \combine \draw-line #'(1.5 . 0)
+    \draw-circle #0.8 #0.2 ##f
+    }}}
+
+% use scale instead of fontsize
+pierreDamp = \markup {
+    \combine \bold "O"
+    \path #0.2 
+    #'((moveto -.4 .8)(lineto 2.2 .8)
+        (closepath)
+        (moveto .9 -.5)(lineto .9 2.1))
+    }
