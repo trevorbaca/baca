@@ -603,6 +603,191 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            Commands may be grouped into lists:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> commands = []
+            >>> commands.append(baca.make_even_runs())
+            >>> commands.append(baca.label(abjad.label().with_indices()))
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     commands,
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 1]                                             %! SM4
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            0
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ^ \markup {
+                                        \small
+                                            1
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ^ \markup {
+                                        \small
+                                            2
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            3
+                                        }
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 2]                                             %! SM4
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            4
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ^ \markup {
+                                        \small
+                                            5
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            6
+                                        }
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 3]                                             %! SM4
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            7
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ^ \markup {
+                                        \small
+                                            8
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ^ \markup {
+                                        \small
+                                            9
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            10
+                                        }
+                                }
+                                {
+                <BLANKLINE>
+                                    % [MusicVoice measure 4]                                             %! SM4
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            11
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ^ \markup {
+                                        \small
+                                            12
+                                        }
+                <BLANKLINE>
+                                    \makeBlue                                                            %! SM24
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            13
+                                        }
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
             Raises exception on noncommand input:
 
             >>> maker(
@@ -631,6 +816,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
         '''
         from baca.tools.LibraryNS import LibraryNS
+        commands_ = []
+        for command in commands:
+            if isinstance(command, list):
+                commands_.extend(command)
+            else:
+                commands_.append(command)
+        commands = commands_
         if self.score_template is not None:
             self._cache_voice_names()
             abbreviations = self.score_template.voice_abbreviations
