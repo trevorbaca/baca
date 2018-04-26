@@ -2952,8 +2952,17 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             raise TypeError(scopes)
         scopes_ = []
+        voice_names_ = []
         for voice_name in voice_names:
-            voice_name = abbreviations.get(voice_name, voice_name)
+            result = abbreviations.get(voice_name, voice_name)
+            if isinstance(result, list):
+                voice_names_.extend(result)
+            else:
+                assert isinstance(result, str)
+                voice_names_.append(result)
+        voice_names = voice_names_
+        for voice_name in voice_names:
+            #voice_name = abbreviations.get(voice_name, voice_name)
             for stage_token in stage_tokens:
                 scope = LibraryNS.scope(voice_name, stage_token)
                 scopes_.append(scope)
