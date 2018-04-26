@@ -798,7 +798,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...
             Exception: 
             <BLANKLINE>
-            Not a command:
+            Neither command nor list of commands:
             <BLANKLINE>
             text
 
@@ -822,7 +822,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 commands_.extend(command)
             else:
                 commands_.append(command)
-        commands = commands_
+        commands = tuple(commands_)
         if self.score_template is not None:
             self._cache_voice_names()
             abbreviations = self.score_template.voice_abbreviations
@@ -874,8 +874,10 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            if not isinstance(command, Command):
-                raise Exception(f'\n\nNot a command:\n\n{format(command)}')
+            if not isinstance(command, (list, Command)):
+                message = '\n\nNeither command nor list of commands:'
+                message += f'\n\n{format(command)}'
+                raise Exception(message)
         scope_count = len(scopes_)
         for i, scope in enumerate(scopes_):
             if self._voice_names and scope.voice_name not in self._voice_names:
@@ -889,6 +891,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
+                    assert isinstance(command, (list, Command)), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
                             continue
@@ -907,8 +910,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         message = 'match must be int, tuple or list'
                         message += f' (not {match!r}).'
                         raise Exception(message)
-                wrapper = CommandWrapper(command=command, scope=scope)
-                self.wrappers.append(wrapper)
+                if isinstance(command, list):
+                    for command_ in command:
+                        assert isinstance(command_, Command), repr(command_)
+                        wrapper = CommandWrapper(command=command_, scope=scope)
+                        self.wrappers.append(wrapper)
+                else:
+                    assert isinstance(command, Command), repr(command)
+                    wrapper = CommandWrapper(command=command, scope=scope)
+                    self.wrappers.append(wrapper)
 
     ### PRIVATE METHODS ###
 
