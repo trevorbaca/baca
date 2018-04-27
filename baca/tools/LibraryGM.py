@@ -622,7 +622,20 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        hairpin = abjad.Hairpin(string)
+        start, shape, stop = abjad.Hairpin._parse_descriptor(string)
+        if start in baca.tools.scheme.dynamics:
+            start_dynamic_is_textual = True
+        else:
+            start_dynamic_is_textual = False
+        if stop in baca.tools.scheme.dynamics:
+            stop_dynamic_is_textual = True
+        else:
+            stop_dynamic_is_textual = False
+        hairpin = abjad.Hairpin(
+            string,
+            start_dynamic_is_textual=start_dynamic_is_textual,
+            stop_dynamic_is_textual=stop_dynamic_is_textual,
+            )
         if left_broken is not None:
             assert isinstance(left_broken, bool), repr(left_broken)
         if right_broken not in ('niente', None):
