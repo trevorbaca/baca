@@ -625,11 +625,11 @@ class LibraryGM(abjad.AbjadObject):
 
         '''
         start, shape, stop = abjad.Hairpin._parse_descriptor(string)
-        if start in baca.tools.scheme.dynamics:
+        if start == 'niente' or start in baca.tools.scheme.dynamics:
             start_dynamic_is_textual = True
         else:
             start_dynamic_is_textual = False
-        if stop in baca.tools.scheme.dynamics:
+        if stop == 'niente' or stop in baca.tools.scheme.dynamics:
             stop_dynamic_is_textual = True
         else:
             stop_dynamic_is_textual = False
