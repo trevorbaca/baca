@@ -416,6 +416,8 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.tleaves()',
         left_broken: str = None,
         right_broken: str = None,
+        start_ordinal: int = None,
+        stop_ordinal: int = None,
         ) -> HairpinCommand:
         r'''Makes hairpin from ``string`` and attaches hairpin trimmed leaves.
 
@@ -648,12 +650,24 @@ class LibraryGM(abjad.AbjadObject):
             left_broken = hairpin.shape_string
         if right_broken is True:
             right_broken = hairpin.shape_string
+        start = hairpin.start_dynamic
+        if start_ordinal is not None:
+            start = abjad.new(start, ordinal=start_ordinal)
+        if start.name in baca.tools.scheme.dynamics:
+            command = '\\' + start.name
+            start = abjad.new(start, command=command)
+        stop = hairpin.stop_dynamic
+        if stop_ordinal is not None:
+            stop = abjad.new(stop, ordinal=stop_ordinal)
+        if stop.name in baca.tools.scheme.dynamics:
+            command = '\\' + stop.name
+            stop = abjad.new(stop, command=command)
         command = HairpinCommand(
             left_broken=left_broken,
             right_broken=right_broken,
             selector=selector,
-            start=hairpin.start_dynamic,
-            stop=hairpin.stop_dynamic,
+            start=start,
+            stop=stop,
             )
         return command
 
