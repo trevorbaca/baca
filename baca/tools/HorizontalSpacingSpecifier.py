@@ -1054,6 +1054,17 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return eol_measure_numbers
 
     @property
+    def fermata_measure_duration(self) -> typing.Optional[
+        abjad.NonreducedFraction
+        ]:
+        r'''Gets fermata measure duration.
+
+        Sets fermata measures to exactly this duration when set; ignores
+        minimum duration and multiplier.
+        '''
+        return self._fermata_measure_duration
+
+    @property
     def fermata_measure_numbers(self) -> typing.List[int]:
         r'''Gets fermata measure numbers.
 
@@ -1073,17 +1084,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         '''
         return self._fermata_measure_numbers
-
-    @property
-    def fermata_measure_duration(self) -> typing.Optional[
-        abjad.NonreducedFraction
-        ]:
-        r'''Gets fermata measure duration.
-
-        Sets fermata measures to exactly this duration when set; ignores
-        minimum duration and multiplier.
-        '''
-        return self._fermata_measure_duration
 
     @property
     def first_measure_number(self) -> int:

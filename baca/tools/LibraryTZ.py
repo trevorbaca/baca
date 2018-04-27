@@ -4757,6 +4757,17 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def tuplet_number_denominator(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        return OverrideCommand(
+            attribute='text',
+            value='tuplet-number::calc-denominator-text',
+            grob='tuplet_number',
+            selector=selector,
+            )
+
+    @staticmethod
     def tuplet_number_extra_offset(
         pair: NumberPair,
         selector: Selector = 'baca.leaf(0)',
@@ -4898,17 +4909,6 @@ class LibraryTZ(abjad.AbjadObject):
         return OverrideCommand(
             attribute='extra_offset',
             value=pair,
-            grob='tuplet_number',
-            selector=selector,
-            )
-
-    @staticmethod
-    def tuplet_number_denominator(
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        return OverrideCommand(
-            attribute='text',
-            value='tuplet-number::calc-denominator-text',
             grob='tuplet_number',
             selector=selector,
             )

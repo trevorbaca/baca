@@ -996,6 +996,27 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def plus_statement(
+        string_1: str,
+        string_2: str,
+        parenthesize_first: bool = False,
+        parenthesize_last: bool = False,
+        selector: Selector = 'baca.pleaf(0)',
+        ):
+        if parenthesize_first and parenthesize_last:
+            composite_string = f'({string_1} + {string_2})'
+        elif parenthesize_first and not parenthesize_last:
+            composite_string = f'({string_1}+) {string_2}'
+        elif not parenthesize_first and parenthesize_last:
+            composite_string = f'{string_1} (+{string_2})'
+        else:
+            composite_string = f'{string_1} + {string_2}'
+        return baca.markup(
+            composite_string,
+            selector=selector,
+            )
+
+    @staticmethod
     def PO(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO',
@@ -1647,27 +1668,6 @@ class MarkupLibrary(abjad.AbjadObject):
     def trem_flaut_tast(selector='baca.pleaf(0)'):
         return baca.markup(
             'trem. flaut. tast.',
-            selector=selector,
-            )
-
-    @staticmethod
-    def plus_statement(
-        string_1: str,
-        string_2: str,
-        parenthesize_first: bool = False,
-        parenthesize_last: bool = False,
-        selector: Selector = 'baca.pleaf(0)',
-        ):
-        if parenthesize_first and parenthesize_last:
-            composite_string = f'({string_1} + {string_2})'
-        elif parenthesize_first and not parenthesize_last:
-            composite_string = f'({string_1}+) {string_2}'
-        elif not parenthesize_first and parenthesize_last:
-            composite_string = f'{string_1} (+{string_2})'
-        else:
-            composite_string = f'{string_1} + {string_2}'
-        return baca.markup(
-            composite_string,
             selector=selector,
             )
 
