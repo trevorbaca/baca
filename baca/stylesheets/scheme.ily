@@ -1,6 +1,21 @@
-%%% BAČA SCHEME DEFINITIONS %%%
+%%% BAR NUMBERS: OVAL %%%
 
-%%% MARKUP COMMANDS %%%
+#(define-markup-command (oval layout props arg)
+ (markup?)
+ #:properties ((thickness 1)
+               (font-size 0)
+               (oval-padding 0.5))
+ (let ((th (* (ly:output-def-lookup layout 'line-thickness)
+              thickness))
+       (pad (* (magstep font-size) oval-padding))
+       (m (interpret-markup layout props (markup #:hcenter-in 4.0 arg))))
+   (oval-stencil m th pad (* pad 8.0))))
+
+#(define (format-oval-barnumbers barnum measure-pos alt-number context)
+ (make-oval-markup
+  (robust-bar-number-function barnum measure-pos alt-number context)))
+
+%%% COLOR: MARKUP %%%
 
 #(define-markup-command (make-dark-cyan layout props text) (markup?)
     "Dark cyan with font size 3."
@@ -18,56 +33,57 @@
         )
     )
 
-%%% OVAL BAR NUMBERS %%%
+%%% COLOR: MUSIC %%%
 
-#(define-markup-command (oval layout props arg)
- (markup?)
- #:properties ((thickness 1)
-               (font-size 0)
-               (oval-padding 0.5))
- (let ((th (* (ly:output-def-lookup layout 'line-thickness)
-              thickness))
-       (pad (* (magstep font-size) oval-padding))
-       (m (interpret-markup layout props (markup #:hcenter-in 4.0 arg))))
-   (oval-stencil m th pad (* pad 8.0))))
+makeBlue = {
+    \once \override Accidental.color = #blue
+    \once \override Beam.color = #blue
+    \once \override Dots.color = #blue
+    \once \override Flag.color = #blue
+    \once \override NoteHead.color = #blue
+    \once \override Stem.color = #blue
+    }
 
-#(define (format-oval-barnumbers barnum measure-pos alt-number context)
- (make-oval-markup
-  (robust-bar-number-function barnum measure-pos alt-number context)))
+makeMagenta = {
+    \once \override Accidental.color = #magenta
+    \once \override Beam.color = #magenta
+    \once \override Dots.color = #magenta
+    \once \override Flag.color = #magenta
+    \once \override NoteHead.color = #magenta
+    \once \override Stem.color = #magenta
+    }
 
-%%% SLAP TONGUE %%%
+makeRed = {
+    \once \override Accidental.color = #red
+    \once \override Beam.color = #red
+    \once \override Dots.color = #red
+    \once \override Flag.color = #red
+    \once \override NoteHead.color = #red
+    \once \override Stem.color = #red
+    }
 
-slap =
-#(define-music-function (parser location music) (ly:music?)
-#{
-  \override NoteHead #'stencil = #(lambda (grob)
-    (grob-interpret-markup grob
-      (markup #:musicglyph "scripts.sforzato")))
-  \override NoteHead #'extra-offset = #'(0.1 . 0.0)
-  $music
-  \revert NoteHead #'stencil
-  \revert NoteHead #'extra-offset
-#})
+%%% DAMP %%%
 
-%%% TONGUE COMMAND FOR DOUBLE- AND TRIPLE-TONGUING WITH STACCATI %%%
+karimDamp = \markup{
+    \center-column {
+  {\override #'(thickness . 1.8)
+    \combine \draw-line #'(-1.5 . 0)
+    \combine \draw-line #'(0 . -1.5)
+    \combine \draw-line #'(0 . 1.5)
+    \combine \draw-line #'(1.5 . 0)
+    \draw-circle #0.8 #0.2 ##f
+    }}}
 
-tongue =
-#(define-music-function (parser location dots) (integer?)
-   (let ((script (make-music 'ArticulationEvent
-                             'articulation-type "staccato")))
-     (set! (ly:music-property script 'tweaks)
-           (acons 'stencil
-                  (lambda (grob)
-                    (let ((stil (ly:script-interface::print grob)))
-                      (let loop ((count (1- dots)) (new-stil stil))
-                        (if (> count 0)
-                            (loop (1- count)
-                                  (ly:stencil-combine-at-edge new-stil X RIGHT stil 0.2))
-                            (ly:stencil-aligned-to new-stil X CENTER)))))
-                  (ly:music-property script 'tweaks)))
-     script))
+% use scale instead of fontsize
+pierreDamp = \markup {
+    \combine \bold "O"
+    \path #0.2 
+    #'((moveto -.4 .8)(lineto 2.2 .8)
+        (closepath)
+        (moveto .9 -.5)(lineto .9 2.1))
+    }
 
-%%% DYNAMICS (ANCORA) %%%
+%%% DYNAMICS: ANCORA %%%
 
 ppp_ancora = #(
     make-dynamic-script
@@ -157,70 +173,7 @@ fff_ancora = #(
         )
     )
 
-%%% DYNAMICS (PHRASAL) %%%
-
-%%% NOTE: Use ...
-%%%
-%%%       DynamicText.X-extent = #'(0 . 0)
-%%%
-%%% ... instead of ...
-%%%
-%%%       DynamicText.X-extent = ##f
-%%%
-%%% ... to avoid warnings in LilyPond log.
-
-p_sub_but_accents_continue_sffz = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
-    #(make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -0.75 #:dynamic "p"
-            #:normal-text "sub. (but accents continue"
-            #:dynamic "sffz"
-            #:hspace -0.5
-            #:normal-text ")"
-            )
-        )
-    )
-
-f_but_accents_sffz =
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
-    #(make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -0.75 #:dynamic "f"
-            #:hspace 0.25
-            #:normal-text "(but accents"
-            #:hspace 0.25
-            #:dynamic "sffz"
-            #:hspace -0.5
-            #:normal-text ")"
-            )
-        )
-    )
-
-f_sub_but_accents_continue_sffz =
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
-    #(make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -0.75 #:dynamic "f"
-            #:hspace 0.25
-            #:normal-text "sub. (but accents continue"
-            #:dynamic "sffz"
-            #:hspace -0.5
-            #:normal-text ")"
-            )
-        )
-    )
-
-%%% DYNAMICS (EFFORT) %%%
+%%% DYNAMICS: EFFORT %%%
 
 effort_ppp = #(
     make-dynamic-script
@@ -362,12 +315,12 @@ effort_sffz = #(
         )
     )
 
-%%% DYNAMICS (FP) %%%
+%%% DYNAMICS: FP %%%
 
 ffp = #(make-dynamic-script "ffp")
 fffp = #(make-dynamic-script "fffp")
 
-%%% DYNAMICS (POSSIBILE) %%%
+%%% DYNAMICS: POSSIBILE %%%
 
 ppp_poss = #(
     make-dynamic-script
@@ -435,7 +388,7 @@ fff_poss = #(
         )
     )
 
-%%% DYNAMICS (SFORZANDO) %%%
+%%% DYNAMICS: SFORZANDO %%%
 
 sff = #(make-dynamic-script "sff")
 sffp = #(make-dynamic-script "sffp")
@@ -470,7 +423,7 @@ sfz_p = #(
         )
     )
 
-%%% DYNAMICS (SUBITO) %%%
+%%% DYNAMICS: SUBITO %%%
 
 ppp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
@@ -572,7 +525,70 @@ fff_sub =
         )
     )
 
-%%% SHAPE NOTE HEADS %%%
+%%% DYNAMICS: WITH TEXT %%%
+
+    %%% NOTE: Use ...
+    %%%
+    %%%       DynamicText.X-extent = #'(0 . 0)
+    %%%
+    %%% ... instead of ...
+    %%%
+    %%%       DynamicText.X-extent = ##f
+    %%%
+    %%% ... to avoid warnings in LilyPond log.
+
+p_sub_but_accents_continue_sffz = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent #'(0 . 0)
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -0.75 #:dynamic "p"
+            #:normal-text "sub. (but accents continue"
+            #:dynamic "sffz"
+            #:hspace -0.5
+            #:normal-text ")"
+            )
+        )
+    )
+
+f_but_accents_sffz =
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent #'(0 . 0)
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -0.75 #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "(but accents"
+            #:hspace 0.25
+            #:dynamic "sffz"
+            #:hspace -0.5
+            #:normal-text ")"
+            )
+        )
+    )
+
+f_sub_but_accents_continue_sffz =
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent #'(0 . 0)
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -0.75 #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "sub. (but accents continue"
+            #:dynamic "sffz"
+            #:hspace -0.5
+            #:normal-text ")"
+            )
+        )
+    )
+
+%%% NOTE-HEADS: SHAPED %%%
 
 blackDiamondNoteHead = #(
     define-music-function (parser location music) (ly:music?)
@@ -614,52 +630,34 @@ triangleNoteHead = #(
     #}
     )
 
-%%% COLORING %%%
+%%% SLAP TONGUE %%%
 
-makeBlue = {
-    \once \override Accidental.color = #blue
-    \once \override Beam.color = #blue
-    \once \override Dots.color = #blue
-    \once \override Flag.color = #blue
-    \once \override NoteHead.color = #blue
-    \once \override Stem.color = #blue
-    }
+slap =
+#(define-music-function (parser location music) (ly:music?)
+#{
+  \override NoteHead #'stencil = #(lambda (grob)
+    (grob-interpret-markup grob
+      (markup #:musicglyph "scripts.sforzato")))
+  \override NoteHead #'extra-offset = #'(0.1 . 0.0)
+  $music
+  \revert NoteHead #'stencil
+  \revert NoteHead #'extra-offset
+#})
 
-makeMagenta = {
-    \once \override Accidental.color = #magenta
-    \once \override Beam.color = #magenta
-    \once \override Dots.color = #magenta
-    \once \override Flag.color = #magenta
-    \once \override NoteHead.color = #magenta
-    \once \override Stem.color = #magenta
-    }
+%%% TONGUING: DOUBLE & TRIPLE %%%
 
-makeRed = {
-    \once \override Accidental.color = #red
-    \once \override Beam.color = #red
-    \once \override Dots.color = #red
-    \once \override Flag.color = #red
-    \once \override NoteHead.color = #red
-    \once \override Stem.color = #red
-    }
-
-%%% SYMBOLS %%%
-
-karimDamp = \markup{
-    \center-column {
-  {\override #'(thickness . 1.8)
-    \combine \draw-line #'(-1.5 . 0)
-    \combine \draw-line #'(0 . -1.5)
-    \combine \draw-line #'(0 . 1.5)
-    \combine \draw-line #'(1.5 . 0)
-    \draw-circle #0.8 #0.2 ##f
-    }}}
-
-% use scale instead of fontsize
-pierreDamp = \markup {
-    \combine \bold "O"
-    \path #0.2 
-    #'((moveto -.4 .8)(lineto 2.2 .8)
-        (closepath)
-        (moveto .9 -.5)(lineto .9 2.1))
-    }
+tongue =
+#(define-music-function (parser location dots) (integer?)
+   (let ((script (make-music 'ArticulationEvent
+                             'articulation-type "staccato")))
+     (set! (ly:music-property script 'tweaks)
+           (acons 'stencil
+                  (lambda (grob)
+                    (let ((stil (ly:script-interface::print grob)))
+                      (let loop ((count (1- dots)) (new-stil stil))
+                        (if (> count 0)
+                            (loop (1- count)
+                                  (ly:stencil-combine-at-edge new-stil X RIGHT stil 0.2))
+                            (ly:stencil-aligned-to new-stil X CENTER)))))
+                  (ly:music-property script 'tweaks)))
+     script))
