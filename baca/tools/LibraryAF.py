@@ -5077,16 +5077,18 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         if dynamic in baca.tools.scheme.dynamics:
-            steady_state = baca.tools.scheme.dynamic_to_steady_state(dynamic)
+            name = baca.tools.scheme.dynamic_to_steady_state(dynamic)
             command = '\\' + dynamic
             first = dynamic.split('_')[0]
             if first in ('sfz', 'sffz', 'sfffz'):
                 sforzando = True
             else:
                 sforzando = False
+            name_is_textual = not(sforzando)
             indicator = abjad.Dynamic(
-                steady_state,
+                name,
                 command=command,
+                name_is_textual=name_is_textual,
                 sforzando=sforzando,
                 )
         else:
