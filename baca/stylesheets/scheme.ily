@@ -525,6 +525,30 @@ fff_sub =
         )
     )
 
+%%% DYNAMICS: TEXT ONLY %%%
+
+    %%% NOTE: Use ...
+    %%%
+    %%%       DynamicText.X-extent = #'(0 . 0)
+    %%%
+    %%% ... instead of ...
+    %%%
+    %%%       DynamicText.X-extent = ##f
+    %%%
+    %%% ... to avoid warnings in LilyPond log.
+
+appena_udibile = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent #'(0 . 0)
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:normal-text "appena udibile"
+            )
+        )
+    )
+
 %%% DYNAMICS: WITH TEXT %%%
 
     %%% NOTE: Use ...
