@@ -653,13 +653,13 @@ class LibraryGM(abjad.AbjadObject):
         start = hairpin.start_dynamic
         if start_ordinal is not None:
             start = abjad.new(start, ordinal=start_ordinal)
-        if start.name in baca.tools.scheme.dynamics:
+        if getattr(start, 'name', None) in baca.tools.scheme.dynamics:
             command = '\\' + start.name
             start = abjad.new(start, command=command)
         stop = hairpin.stop_dynamic
         if stop_ordinal is not None:
             stop = abjad.new(stop, ordinal=stop_ordinal)
-        if stop.name in baca.tools.scheme.dynamics:
+        if getattr(stop, 'name', None) in baca.tools.scheme.dynamics:
             command = '\\' + stop.name
             stop = abjad.new(stop, command=command)
         command = HairpinCommand(
