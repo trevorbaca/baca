@@ -2110,7 +2110,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def breaks(*page_specifiers: typing.Any) -> BreakMeasureMap:
+    def breaks(
+        *page_specifiers: typing.Any,
+        local_measure_numbers: bool = None
+        ) -> BreakMeasureMap:
         r'''Makes breaks.
 
         ..  container:: example
@@ -2212,7 +2215,10 @@ class LibraryAF(abjad.AbjadObject):
                     )
                 lbsd = LibraryGM.lbsd(y_offset, alignment_distances, selector)
                 commands[measure_number] = [command, lbsd]
-        breaks = BreakMeasureMap(commands=commands)
+        breaks = BreakMeasureMap(
+            commands=commands,
+            local_measure_numbers=local_measure_numbers,
+            )
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 

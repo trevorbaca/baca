@@ -301,6 +301,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         '_bol_measure_numbers',
         '_commands',
         '_deactivate',
+        '_local_measure_numbers',
         '_tags',
         )
 
@@ -308,7 +309,13 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, commands=None, deactivate=None, tags=None):
+    def __init__(
+        self,
+        commands=None,
+        deactivate=None,
+        local_measure_numbers=None,
+        tags=None,
+        ):
         tags = tags or []
         assert baca.Command._are_valid_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
@@ -316,6 +323,9 @@ class BreakMeasureMap(abjad.AbjadObject):
         self._tags = tags
         self._bol_measure_numbers = []
         self._deactivate = deactivate
+        if local_measure_numbers is not None:
+            local_measure_numbers = bool(local_measure_numbers)
+        self._local_measure_numbers = local_measure_numbers
         if commands is not None:
             commands_ = abjad.OrderedDict()
             for measure_number, list_ in commands.items():
@@ -391,6 +401,12 @@ class BreakMeasureMap(abjad.AbjadObject):
         r'''Gets first measure number.
         '''
         return self.bol_measure_numbers[0]
+
+    @property
+    def local_measure_numbers(self) -> typing.Optional[bool]:
+        r'''Is true when segment measures numbers starting from 1.
+        '''
+        return self._local_measure_numbers
 
     @property
     def tag(self) -> typing.Optional[abjad.Tag]:

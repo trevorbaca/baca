@@ -13,6 +13,7 @@ from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
+from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .Typing import Number
 from .Typing import NumberPair
@@ -278,6 +279,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def __init__(
         self,
         allow_empty_selections: bool = None,
+        breaks: BreakMeasureMap = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
@@ -297,7 +299,6 @@ class SegmentMaker(abjad.SegmentMaker):
         include_nonfirst_segment_stylesheet: bool = None,
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
-        breaks: BreakMeasureMap = None,
         magnify_staves: typing.Union[
             abjad.Multiplier,
             typing.Tuple[abjad.Multiplier, abjad.Tag],
@@ -325,6 +326,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ) -> None:
         super(SegmentMaker, self).__init__()
         self._allow_empty_selections: bool = allow_empty_selections
+        self._breaks: BreakMeasureMap = breaks
         if clock_time_override is not None:
             assert isinstance(clock_time_override, abjad.MetronomeMark)
         self._clock_time_override = clock_time_override
@@ -366,7 +368,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._instruments: abjad.OrderedDict = instruments
         self._last_measure_is_fermata = False
         self._last_segment: bool = last_segment
-        self._breaks: BreakMeasureMap = breaks
         self._magnify_staves = magnify_staves
         self._margin_markups: abjad.OrderedDict = margin_markups
         if measures_per_stage in (True, None):
@@ -1006,9 +1007,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.breaks is None:
             return
         self.breaks(self.score['GlobalSkips'])
+        if self.breaks.local_measure_numbers:
+            abjad.setting(self.score).current_bar_number = 1
 
     def _apply_first_and_last_ties(self, voice):
-        from baca.tools.TieCorrectionCommand import TieCorrectionCommand
         dummy_tie = abjad.Tie()
         for current_leaf in abjad.iterate(voice).leaves():
             inspection = abjad.inspect(current_leaf)
@@ -2451,10 +2453,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_score(self):
         score = self.score_template()
-        first_measure_number = self._get_first_measure_number()
-        if first_measure_number != 1:
-            abjad.setting(score).current_bar_number = first_measure_number
         self._score = score
+        if self.do_not_include_layout_ly:
+            first_measure_number = self._get_first_measure_number()
+            if first_measure_number != 1:
+                abjad.setting(score).current_bar_number = first_measure_number
 
     def _momento_to_indicator(self, momento):
         if momento.value is None:
