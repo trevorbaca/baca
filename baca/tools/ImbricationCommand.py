@@ -169,13 +169,13 @@ class ImbricationCommand(Command):
         ...         'Voice 1',
         ...         [2, 19, 9],
         ...         baca.beam_everything(),
-        ...         baca.staccati(),
+        ...         baca.staccato(),
         ...         ),
         ...     baca.ImbricationCommand(
         ...         'Voice 3',
         ...         [16, 10, 18],
         ...         baca.beam_everything(),
-        ...         baca.accents(),
+        ...         baca.accent(),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -350,7 +350,7 @@ class ImbricationCommand(Command):
         ...         beam_divisions_together=True,
         ...         beam_rests=True,
         ...         ),
-        ...     baca.staccati(),
+        ...     baca.staccato(),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             talea=rhythmos.Talea(
@@ -373,7 +373,7 @@ class ImbricationCommand(Command):
         ...     baca.ImbricationCommand(
         ...         'Voice 1',
         ...         [2, 19, 9, 18, 16],
-        ...         baca.accents(),
+        ...         baca.accent(),
         ...         baca.beam_everything(),
         ...         ),
         ...     )
@@ -613,7 +613,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         segment,
-            ...         baca.accents(),
+            ...         baca.accent(),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -723,7 +723,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         segment,
-            ...         baca.accents(),
+            ...         baca.accent(),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -855,7 +855,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 10],
-            ...         baca.staccati(),
+            ...         baca.staccato(),
             ...         baca.beam_everything(),
             ...         extend_beam=True,
             ...         ),
@@ -870,7 +870,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [13, 9],
-            ...         baca.staccati(),
+            ...         baca.staccato(),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -1497,7 +1497,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccati(),
+            ...     baca.staccato(),
             ...     )
 
             >>> collections = [
@@ -1510,7 +1510,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accents(),
+            ...         baca.accent(),
             ...         baca.beam_everything(),
             ...         allow_unused_pitches=True,
             ...         ),
@@ -1631,7 +1631,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccati(),
+            ...     baca.staccato(),
             ...     )
 
             >>> collections = [
@@ -1644,7 +1644,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accents(),
+            ...         baca.accent(),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -1703,7 +1703,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccati(),
+            ...     baca.staccato(),
             ...     )
 
             >>> collections = [
@@ -1717,7 +1717,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accents(),
+            ...         baca.accent(),
             ...         baca.beam_everything(),
             ...         hocket=True,
             ...         ),
@@ -1884,7 +1884,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccati(),
+            ...     baca.staccato(),
             ...     )
 
             >>> collections = [
@@ -1897,7 +1897,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 18, 16, 15],
-            ...         baca.accents(),
+            ...         baca.accent(),
             ...         baca.beam_everything(),
             ...         selector=baca.plts()[-9:],
             ...         ),

@@ -38,6 +38,7 @@ Bases
       ~LibraryGM.literal
       ~LibraryGM.long_fermata
       ~LibraryGM.loop
+      ~LibraryGM.make_dynamics
       ~LibraryGM.make_even_runs
       ~LibraryGM.make_fused_tuplet_monads
       ~LibraryGM.make_multimeasure_rests
@@ -50,7 +51,7 @@ Bases
       ~LibraryGM.make_skips
       ~LibraryGM.make_tied_notes
       ~LibraryGM.make_tied_repeated_durations
-      ~LibraryGM.marcati
+      ~LibraryGM.marcato
       ~LibraryGM.margin_markup
       ~LibraryGM.metronome_mark
       ~LibraryGM.minimum_duration
@@ -103,6 +104,8 @@ Class & static methods
 
 .. automethod:: LibraryGM.loop
 
+.. automethod:: LibraryGM.make_dynamics
+
 .. automethod:: LibraryGM.make_even_runs
 
 .. automethod:: LibraryGM.make_fused_tuplet_monads
@@ -127,7 +130,7 @@ Class & static methods
 
 .. automethod:: LibraryGM.make_tied_repeated_durations
 
-.. automethod:: LibraryGM.marcati
+.. automethod:: LibraryGM.marcato
 
 .. automethod:: LibraryGM.margin_markup
 

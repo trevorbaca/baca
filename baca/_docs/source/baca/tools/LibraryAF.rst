@@ -19,8 +19,9 @@ Bases
 
    .. autosummary::
 
-      ~LibraryAF.accents
+      ~LibraryAF.accent
       ~LibraryAF.accidental_stencil_false
+      ~LibraryAF.accidental_transparent
       ~LibraryAF.accidental_x_extent_false
       ~LibraryAF.allow_octaves
       ~LibraryAF.alternate_bow_strokes
@@ -28,12 +29,13 @@ Bases
       ~LibraryAF.anchor_after
       ~LibraryAF.anchor_to_figure
       ~LibraryAF.ancora_dynamic
-      ~LibraryAF.arpeggios
+      ~LibraryAF.arpeggio
       ~LibraryAF.articulation
       ~LibraryAF.articulations
       ~LibraryAF.bar_extent
       ~LibraryAF.bar_extent_persistent
       ~LibraryAF.bar_extent_zero
+      ~LibraryAF.bar_line_transparent
       ~LibraryAF.bass_to_octave
       ~LibraryAF.bcps
       ~LibraryAF.beam_divisions
@@ -41,6 +43,7 @@ Bases
       ~LibraryAF.beam_positions
       ~LibraryAF.beam_runs
       ~LibraryAF.beam_stencil_false
+      ~LibraryAF.beam_transparent
       ~LibraryAF.breaks
       ~LibraryAF.breathe
       ~LibraryAF.breathe_after_last
@@ -54,7 +57,6 @@ Bases
       ~LibraryAF.color_fingerings
       ~LibraryAF.compound_quarter_divisions
       ~LibraryAF.container
-      ~LibraryAF.cross_note_heads
       ~LibraryAF.cross_staff
       ~LibraryAF.dashed_arrow
       ~LibraryAF.dashed_hook
@@ -65,10 +67,12 @@ Bases
       ~LibraryAF.dls_staff_padding
       ~LibraryAF.dls_up
       ~LibraryAF.dots_stencil_false
-      ~LibraryAF.double_tonguing
-      ~LibraryAF.down_arpeggios
-      ~LibraryAF.down_bows
+      ~LibraryAF.dots_transparent
+      ~LibraryAF.double_staccato
+      ~LibraryAF.down_arpeggio
+      ~LibraryAF.down_bow
       ~LibraryAF.dynamic
+      ~LibraryAF.dynamic_down
       ~LibraryAF.dynamic_text_extra_offset
       ~LibraryAF.dynamic_text_left
       ~LibraryAF.dynamic_text_stencil_false
@@ -76,17 +80,16 @@ Bases
       ~LibraryAF.dynamic_text_x_extent_zero
       ~LibraryAF.dynamic_text_x_offset
       ~LibraryAF.dynamic_text_y_offset
-      ~LibraryAF.dynamics
-      ~LibraryAF.dynamics_down
-      ~LibraryAF.dynamics_up
+      ~LibraryAF.dynamic_up
       ~LibraryAF.effort_dynamic
       ~LibraryAF.enchained_hairpin
       ~LibraryAF.fermata
       ~LibraryAF.finger_pressure_transition
       ~LibraryAF.flag_stencil_false
-      ~LibraryAF.flageolets
+      ~LibraryAF.flag_transparent
+      ~LibraryAF.flageolet
       ~LibraryAF.flags
-      ~LibraryAF.force_accidentals
+      ~LibraryAF.force_accidental
       ~LibraryAF.fuse_compound_quarter_divisions
       ~LibraryAF.__format__
       ~LibraryAF.__repr__
@@ -94,9 +97,11 @@ Bases
 Class & static methods
 ----------------------
 
-.. automethod:: LibraryAF.accents
+.. automethod:: LibraryAF.accent
 
 .. automethod:: LibraryAF.accidental_stencil_false
+
+.. automethod:: LibraryAF.accidental_transparent
 
 .. automethod:: LibraryAF.accidental_x_extent_false
 
@@ -112,7 +117,7 @@ Class & static methods
 
 .. automethod:: LibraryAF.ancora_dynamic
 
-.. automethod:: LibraryAF.arpeggios
+.. automethod:: LibraryAF.arpeggio
 
 .. automethod:: LibraryAF.articulation
 
@@ -123,6 +128,8 @@ Class & static methods
 .. automethod:: LibraryAF.bar_extent_persistent
 
 .. automethod:: LibraryAF.bar_extent_zero
+
+.. automethod:: LibraryAF.bar_line_transparent
 
 .. automethod:: LibraryAF.bass_to_octave
 
@@ -137,6 +144,8 @@ Class & static methods
 .. automethod:: LibraryAF.beam_runs
 
 .. automethod:: LibraryAF.beam_stencil_false
+
+.. automethod:: LibraryAF.beam_transparent
 
 .. automethod:: LibraryAF.breaks
 
@@ -164,8 +173,6 @@ Class & static methods
 
 .. automethod:: LibraryAF.container
 
-.. automethod:: LibraryAF.cross_note_heads
-
 .. automethod:: LibraryAF.cross_staff
 
 .. automethod:: LibraryAF.dashed_arrow
@@ -186,13 +193,17 @@ Class & static methods
 
 .. automethod:: LibraryAF.dots_stencil_false
 
-.. automethod:: LibraryAF.double_tonguing
+.. automethod:: LibraryAF.dots_transparent
 
-.. automethod:: LibraryAF.down_arpeggios
+.. automethod:: LibraryAF.double_staccato
 
-.. automethod:: LibraryAF.down_bows
+.. automethod:: LibraryAF.down_arpeggio
+
+.. automethod:: LibraryAF.down_bow
 
 .. automethod:: LibraryAF.dynamic
+
+.. automethod:: LibraryAF.dynamic_down
 
 .. automethod:: LibraryAF.dynamic_text_extra_offset
 
@@ -208,11 +219,7 @@ Class & static methods
 
 .. automethod:: LibraryAF.dynamic_text_y_offset
 
-.. automethod:: LibraryAF.dynamics
-
-.. automethod:: LibraryAF.dynamics_down
-
-.. automethod:: LibraryAF.dynamics_up
+.. automethod:: LibraryAF.dynamic_up
 
 .. automethod:: LibraryAF.effort_dynamic
 
@@ -224,11 +231,13 @@ Class & static methods
 
 .. automethod:: LibraryAF.flag_stencil_false
 
-.. automethod:: LibraryAF.flageolets
+.. automethod:: LibraryAF.flag_transparent
+
+.. automethod:: LibraryAF.flageolet
 
 .. automethod:: LibraryAF.flags
 
-.. automethod:: LibraryAF.force_accidentals
+.. automethod:: LibraryAF.force_accidental
 
 .. automethod:: LibraryAF.fuse_compound_quarter_divisions
 

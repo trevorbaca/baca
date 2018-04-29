@@ -30,6 +30,9 @@ from .Typing import Selector
 
 class LibraryAF(abjad.AbjadObject):
     r'''Library A - F.
+
+    >>> from abjad import rhythmmakertools as rhythmos
+
     '''
 
     ### CLASS VARIABLES ###
@@ -42,20 +45,20 @@ class LibraryAF(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def accents(
+    def accent(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches accents to pitched heads.
+        r'''Attaches accent.
 
         ..  container:: example
 
-            Attaches accents to all pitched heads:
+            Attaches accent to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accents(),
+            ...     baca.accent(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -121,13 +124,13 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches accents to pitched heads in tuplet 1:
+            Attaches accent to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.accents(), baca.tuplet(1)),
+            ...     baca.map(baca.accent(), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -207,6 +210,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def accidental_transparent(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides accidental transparency on.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='accidental',
+            selector=selector,
+            )
+
+    @staticmethod
     def accidental_x_extent_false(
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
@@ -241,8 +257,7 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches alternate bow strokes to all pitched heads (down-bow
-            first):
+            Attaches alternate bow strokes to pitched heads (down-bow first):
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -314,7 +329,7 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches alternate bow strokes to all pitched heads (up-bow first):
+            Attaches alternate bow strokes to pitched heads (up-bow first):
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -525,7 +540,7 @@ class LibraryAF(abjad.AbjadObject):
         dynamic: str,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
-        r'''Attaches ancora dynamic pitched head 0.
+        r'''Attaches ancora dynamic.
 
         ..  container:: example
 
@@ -667,20 +682,20 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def arpeggios(
+    def arpeggio(
         selector: Selector = 'baca.cheads()',
         ) -> IndicatorCommand:
-        r"""Attaches arpeggios.
+        r"""Attaches arpeggio.
 
         ..  container:: example
 
-            Attaches arpeggios to all chord heads:
+            Attaches arpeggio to chord heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.arpeggios(),
+            ...     baca.arpeggio(),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -745,13 +760,13 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches arpeggios to last two chord heads:
+            Attaches arpeggio to last two chord heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.arpeggios(baca.cheads()[-2:]),
+            ...     baca.arpeggio(baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -824,7 +839,7 @@ class LibraryAF(abjad.AbjadObject):
         articulation: str,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
-        r'''Attaches articulation to ``selector`` output.
+        r'''Attaches ``articulation``.
         '''
         articulation_ = abjad.Articulation(articulation)
         return IndicatorCommand(
@@ -837,7 +852,7 @@ class LibraryAF(abjad.AbjadObject):
         articulations: typing.List,
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches articulations.
+        r'''Attaches ``articulations``.
         '''
         return IndicatorCommand(
             indicators=articulations,
@@ -1151,6 +1166,249 @@ class LibraryAF(abjad.AbjadObject):
                     selector='baca.leaf(-1)',
                     ),
                 ],
+            selector=selector,
+            )
+
+    @staticmethod
+    def bar_line_transparent(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides bar line transparency.
+
+        ..  container:: example
+
+            Makes all bar lines transparent:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.RhythmCommand(
+            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
+            ...             talea=rhythmos.Talea(
+            ...                 counts=[1, 1, 1, -1],
+            ...                 denominator=8,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     baca.bar_line_transparent(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Score.BarLine.transparent = ##t                                %! OC1
+                                e'8
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                                ]
+                <BLANKLINE>
+                                r8
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                e''8
+                                [
+                <BLANKLINE>
+                                g'8
+                <BLANKLINE>
+                                f''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                r8
+                <BLANKLINE>
+                                e'8
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                r8
+                <BLANKLINE>
+                                e''8
+                                [
+                <BLANKLINE>
+                                g'8
+                                ]
+                                \revert Score.BarLine.transparent                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Makes bar line before measure 1 transparent:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.RhythmCommand(
+            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
+            ...             talea=rhythmos.Talea(
+            ...                 counts=[1, 1, 1, -1],
+            ...                 denominator=8,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     baca.bar_line_transparent(baca.group_by_measure()[1]),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                e'8
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                                ]
+                <BLANKLINE>
+                                r8
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \override Score.BarLine.transparent = ##t                                %! OC1
+                                e''8
+                                [
+                <BLANKLINE>
+                                g'8
+                <BLANKLINE>
+                                f''8
+                                ]
+                                \revert Score.BarLine.transparent                                        %! OC2
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                r8
+                <BLANKLINE>
+                                e'8
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                r8
+                <BLANKLINE>
+                                e''8
+                                [
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            context='Score',
+            grob='bar_line',
             selector=selector,
             )
 
@@ -2110,6 +2368,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def beam_transparent(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides beam transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='beam',
+            selector=selector,
+            )
+
+    @staticmethod
     def breaks(
         *page_specifiers: typing.Any,
         local_measure_numbers: bool = None
@@ -2226,8 +2497,7 @@ class LibraryAF(abjad.AbjadObject):
     def breathe(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Attaches LilyPond breathe command (to before-slot) of ``selector``
-        output.
+        r'''Attaches LilyPond breathe command to before-slot.
         '''
         breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='before')
         return IndicatorCommand(
@@ -2237,7 +2507,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def breathe_after_last() -> IndicatorCommand:
-        r'''Attaches LilyPond breathe command (to before-slot) of
+        r'''Attaches LilyPond breathe command to before-slot of
         leaf-just-after-last.
         '''
         breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='before')
@@ -2595,7 +2865,7 @@ class LibraryAF(abjad.AbjadObject):
         selector: Selector = 'baca.leaf(0)',
         redundant: bool = None,
         ) -> IndicatorCommand:
-        r'''Attaches clef to leaf 0.
+        r'''Attaches clef.
 
         ..  container:: example
 
@@ -2771,7 +3041,7 @@ class LibraryAF(abjad.AbjadObject):
         selector: Selector = 'baca.plts()',
         start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
         ) -> ClusterCommand:
-        r'''Makes clusters.
+        r'''Makes clusters with ``widths`` and ``start_pitch``.
         '''
         return ClusterCommand(
             selector=selector,
@@ -3094,7 +3364,7 @@ class LibraryAF(abjad.AbjadObject):
         numbers: typing.List[Number],
         selector: Selector = 'baca.pheads()',
         ) -> ColorFingeringCommand:
-        r'''Color fingerings.
+        r'''Adds color fingerings.
         '''
         return ColorFingeringCommand(numbers=numbers, selector=selector)
 
@@ -3115,7 +3385,8 @@ class LibraryAF(abjad.AbjadObject):
         identifier: str = None,
         selector: Selector = 'baca.leaves()',
         ) -> ContainerCommand:
-        r'''Inserts `selector` output in container.
+        r'''Makes container with ``identifier`` and extends container with
+        ``selector`` output.
 
         ..  container:: example
 
@@ -3205,158 +3476,14 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def cross_note_heads(
-        selector: Selector = 'baca.tleaves()',
-        ) -> OverrideCommand:
-        r'''Overrides note-head style on pitched leaves.
-
-        ..  container:: example
-
-            Overrides note-head style on all pitched leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.cross_note_heads(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                \override NoteHead.style = #'cross                                       %! OC1
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                \revert NoteHead.style                                                   %! OC2
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Overrides note-head style on pitched leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.cross_note_heads(baca.tuplet(1)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override NoteHead.style = #'cross                                       %! OC1
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                                \revert NoteHead.style                                                   %! OC2
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='style',
-            value='cross',
-            grob='note_head',
-            selector=selector,
-            )
-
-    @staticmethod
     def cross_staff(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches cross-staff command to leaves.
+        r'''Attaches cross-staff command.
 
         ..  container:: example
 
-            Attaches cross-staff command to all leaves:
+            Attaches cross-staff command to leaves:
 
             >>> score_template = baca.StringTrioScoreTemplate()
             >>> accumulator = baca.MusicAccumulator(score_template)
@@ -3365,7 +3492,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         'ViolinMusicVoice',
             ...         [[9, 11, 12, 14, 16]],
             ...         baca.flags(),
-            ...         baca.stems_up(),
+            ...         baca.stem_up(),
             ...         denominator=8,
             ...         figure_name='vn.1',
             ...         talea_denominator=8,
@@ -3378,7 +3505,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.anchor('ViolinMusicVoice'),
             ...         baca.cross_staff(),
             ...         baca.flags(),
-            ...         baca.stems_up(),
+            ...         baca.stem_up(),
             ...         figure_name='va.1',
             ...         talea_denominator=8,
             ...         ),
@@ -3626,7 +3753,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         'ViolinMusicVoice',
             ...         [[9, 11, 12, 14, 16]],
             ...         baca.flags(),
-            ...         baca.stems_up(),
+            ...         baca.stem_up(),
             ...         denominator=8,
             ...         figure_name='vn.1',
             ...         talea_denominator=8,
@@ -3639,7 +3766,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.anchor('ViolinMusicVoice'),
             ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
             ...         baca.flags(),
-            ...         baca.stems_up(),
+            ...         baca.stem_up(),
             ...         figure_name='va.1',
             ...         talea_denominator=8,
             ...         ),
@@ -3917,7 +4044,7 @@ class LibraryAF(abjad.AbjadObject):
         deviations: typing.List[Number],
         selector: Selector = 'baca.plts()',
         ) -> MicrotoneDeviationCommand:
-        r''''Makes microtone deviation.
+        r''''Sets microtone ``deviations``.
         '''
         return MicrotoneDeviationCommand(
             deviations=deviations,
@@ -3929,7 +4056,7 @@ class LibraryAF(abjad.AbjadObject):
         widths: typing.List[int],
         selector: Selector = 'baca.plts()',
         ) -> DiatonicClusterCommand:
-        r'''Makes diatonic clusters.
+        r'''Makes diatonic clusters with ``widths``.
         '''
         return DiatonicClusterCommand(
             selector=selector,
@@ -3941,7 +4068,7 @@ class LibraryAF(abjad.AbjadObject):
         displacements: typing.List[int],
         selector: Selector = 'baca.plts()',
         ) -> OctaveDisplacementCommand:
-        r'''Octave-displaces PLTs.
+        r'''Octave-displaces ``selector`` output.
 
         ..  container:: example
 
@@ -4136,7 +4263,7 @@ class LibraryAF(abjad.AbjadObject):
         n: Number,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
-        r'''Overrides dynamic line spanner padding on leaves.
+        r'''Overrides dynamic line spanner padding.
         '''
         return OverrideCommand(
             attribute='padding',
@@ -4150,7 +4277,8 @@ class LibraryAF(abjad.AbjadObject):
         n: Number,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
-        r'''Overrides dynamic line spanner staff padding on leaves.
+        r'''Overrides dynamic line spanner staff padding.
+        output.
 
         ..  container:: example
 
@@ -4310,7 +4438,7 @@ class LibraryAF(abjad.AbjadObject):
     def dls_up(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
-        r'''Up-overrides dynamic line spanner direction.
+        r'''Overrides dynamic line spanner direction.
 
         ..  container:: example
 
@@ -4480,20 +4608,33 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def double_tonguing(
+    def dots_transparent(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides dots transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='dots',
+            selector=selector,
+            )
+
+    @staticmethod
+    def double_staccato(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches double-staccati to pitched heads.
+        r'''Attaches double-staccato.
 
         ..  container:: example
 
-            Attaches double-staccati to all pitched heads:
+            Attaches double-staccato to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.double_tonguing(),
+            ...     baca.double_staccato(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4559,13 +4700,13 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches double-staccati to pitched heads in tuplet 1:
+            Attaches double-staccato to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.double_tonguing(
+            ...     baca.double_staccato(
             ...         baca.tuplets()[1:2].pheads(),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -4634,20 +4775,20 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def down_arpeggios(
+    def down_arpeggio(
         selector: Selector = 'baca.cheads()',
         ) -> IndicatorCommand:
-        r"""Attaches down-arpeggios to chord heads.
+        r"""Attaches down-arpeggio.
 
         ..  container:: example
 
-            Attaches down-arpeggios to all chord heads:
+            Attaches down-arpeggios to chord heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.down_arpeggios(),
+            ...     baca.down_arpeggio(),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -4721,7 +4862,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.down_arpeggios(baca.cheads()[-2:]),
+            ...     baca.down_arpeggio(baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -4792,20 +4933,20 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def down_bows(
+    def down_bow(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches down-bows to pitched heads.
+        r'''Attaches down-bow.
 
         ..  container:: example
 
-            Attaches down-bows to all pitched heads:
+            Attaches down-bow to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.down_bows(),
+            ...     baca.down_bow(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4871,13 +5012,13 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches down-bows to pitched heads in tuplet 1:
+            Attaches down-bow to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.down_bows(
+            ...     baca.down_bow(
             ...         baca.tuplets()[1:2].pheads(),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -4951,7 +5092,7 @@ class LibraryAF(abjad.AbjadObject):
         selector: Selector = 'baca.phead(0)',
         redundant: bool = None,
         ) -> IndicatorCommand:
-        r'''Attaches dynamic to pitched head 0.
+        r'''Attaches dynamic.
 
         ..  container:: example
 
@@ -5103,6 +5244,154 @@ class LibraryAF(abjad.AbjadObject):
             context='Voice',
             indicators=[indicator],
             redundant=redundant,
+            selector=selector,
+            )
+
+    @staticmethod
+    def dynamic_down(
+        selector: Selector = 'baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Attaches dynamic-down command.
+
+        ..  container:: example
+
+            Attaches dynamic-down command to leaf 0:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                \dynamicDown                                                             %! IC
+                                r8
+                                c'16
+                                \p                                                                       %! IC
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                \f                                                                       %! IC
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches dynamic-down command to leaf 0 in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic_down(baca.tuplets()[1:2].leaf(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                \p                                                                       %! IC
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \dynamicDown                                                             %! IC
+                                fs''16
+                                \f                                                                       %! IC
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return IndicatorCommand(
+            indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
             selector=selector,
             )
 
@@ -5314,7 +5603,7 @@ class LibraryAF(abjad.AbjadObject):
     def dynamic_text_transparent(
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
-        r'''Overrides dynamic text transparent.
+        r'''Overrides dynamic text transparency.
         '''
         return OverrideCommand(
             attribute='transparent',
@@ -5365,170 +5654,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamics(string: str) -> typing.List[abjad.Dynamic]:
-        r'''Makes dynamics from `string`.
-
-        ..  container::
-
-            >>> baca.dynamics('ff p f pp')
-            [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
-
-        '''
-        return [abjad.Dynamic(_) for _ in string.split()]
-
-    @staticmethod
-    def dynamics_down(
+    def dynamic_up(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Attaches dynamic-down command to leaf 0.
-
-        ..  container:: example
-
-            Attaches dynamic-down command to leaf 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
-            ...     baca.dynamics_down(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                \dynamicDown                                                             %! IC
-                                r8
-                                c'16
-                                \p                                                                       %! IC
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                \f                                                                       %! IC
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches dynamic-down command to leaf 0 in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
-            ...     baca.dynamics_down(baca.tuplets()[1:2].leaf(0)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \p                                                                       %! IC
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \dynamicDown                                                             %! IC
-                                fs''16
-                                \f                                                                       %! IC
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return IndicatorCommand(
-            indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
-            selector=selector,
-            )
-
-    @staticmethod
-    def dynamics_up(
-        selector: Selector = 'baca.leaf(0)',
-        ) -> IndicatorCommand:
-        r'''Attaches dynamic-up command to leaf 0.
+        r'''Attaches dynamic-up command.
 
         ..  container:: example
 
@@ -5540,7 +5669,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
             ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
-            ...     baca.dynamics_up(),
+            ...     baca.dynamic_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5608,7 +5737,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
             ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
-            ...     baca.dynamics_up(baca.tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic_up(baca.tuplets()[1:2].leaf(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5677,7 +5806,7 @@ class LibraryAF(abjad.AbjadObject):
         dynamic: str,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
-        r'''Attaches effort dynamic to pitched head 0.
+        r'''Attaches effort dynamic.
 
         ..  container:: example
 
@@ -5839,7 +5968,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.enchained_hairpin(
-            ...         *baca.dynamics('p f'),
+            ...         *baca.make_dynamics('p f'),
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
             ...     baca.make_even_runs(),
@@ -5979,7 +6108,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.enchained_hairpin(
-            ...         *baca.dynamics('p f'),
+            ...         *baca.make_dynamics('p f'),
             ...         bookend=True,
             ...         selector=baca.leaves().enchain([8]),
             ...     ),
@@ -6118,7 +6247,7 @@ class LibraryAF(abjad.AbjadObject):
     def fermata(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Attaches fermata to leaf.
+        r'''Attaches fermata.
 
         ..  container:: example
 
@@ -6259,7 +6388,7 @@ class LibraryAF(abjad.AbjadObject):
         selector: Selector = 'baca.tleaves()',
         right_broken: bool = None,
         ) -> SuiteCommand:
-        r'''Attaches finger pressure transition glissando to trimmed leaves.
+        r'''Makes finger pressure transition glissando.
 
         ..  container:: example
 
@@ -6274,8 +6403,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.finger_pressure_transition(baca.notes()[:2]),
             ...     baca.finger_pressure_transition(baca.notes()[2:]),
             ...     baca.make_notes(),
-            ...     baca.natural_harmonics(baca.note(0)),
-            ...     baca.natural_harmonics(baca.note(2)),
+            ...     baca.note_head_style_harmonic(baca.note(0)),
+            ...     baca.note_head_style_harmonic(baca.note(2)),
             ...     baca.pitch('C5'),
             ...     )
 
@@ -6416,20 +6545,33 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def flageolets(
+    def flag_transparent(
+        selector: Selector = 'baca.leaves()',
+        ):
+        r'''Overrides flag transparency.
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
+            grob='flag',
+            selector=selector,
+            )
+
+    @staticmethod
+    def flageolet(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches flageolets to pitched heads.
+        r'''Attaches flageolet.
 
         ..  container:: example
 
-            Attaches flageolets to all pitched heads:
+            Attaches flageolet to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.flageolets(),
+            ...     baca.flageolet(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6495,13 +6637,13 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches flageolets to pitched heads in tuplet 1:
+            Attaches flageolet to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.flageolets(baca.tuplets()[1:2].pheads()),
+            ...     baca.flageolet(baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6635,10 +6777,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def force_accidentals(
+    def force_accidental(
         selector: Selector = 'baca.pleaf(0)',
         ) -> AccidentalAdjustmentCommand:
-        r'''Forces accidentals.
+        r'''Forces accidental.
 
         ..  container:: example
 
@@ -6651,7 +6793,7 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.not_parts(baca.force_accidentals(baca.pleaves()[:2])),
+            ...     baca.not_parts(baca.force_accidental(baca.pleaves()[:2])),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4 F4'),
             ...     )

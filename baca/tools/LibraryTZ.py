@@ -74,21 +74,21 @@ class LibraryTZ(abjad.AbjadObject):
         return command
 
     @staticmethod
-    def tenuti(
+    def tenuto(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches tenuti to pitched heads.
+        r'''Attaches tenuto.
 
         ..  container:: example
 
-            Attaches tenuti to all pitched heads:
+            Attaches tenuto to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.tenuti(),
+            ...     baca.tenuto(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -153,13 +153,13 @@ class LibraryTZ(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches tenuti to pitched heads in tuplet 1:
+            Attaches tenuto to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.tenuti(baca.tuplets()[1:2].pheads()),
+            ...     baca.tenuto(baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -422,6 +422,206 @@ class LibraryTZ(abjad.AbjadObject):
             attribute='color',
             blacklist=blacklist,
             value=color,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
+    def text_script_down(
+        selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
+        ) -> OverrideCommand:
+        r'''Overrides text script direction.
+
+        ..  container:: example
+
+            Down-overrides text script direction on leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_script_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TextScript.direction = #down                                   %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            "più mosso"                                                  %! IC
+                                    }                                                                    %! IC
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            "lo stesso tempo"                                            %! IC
+                                    }                                                                    %! IC
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TextScript.direction                                             %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Down-overrides text script direction on leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.map(baca.text_script_down(), baca.tuplet(1)),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            "più mosso"                                                  %! IC
+                                    }                                                                    %! IC
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TextScript.direction = #down                                   %! OC1
+                                fs''16
+                                [
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            "lo stesso tempo"                                            %! IC
+                                    }                                                                    %! IC
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                                \revert TextScript.direction                                             %! OC2
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Raises exception when called on multimeasure rests:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.text_script_down()
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            Traceback (most recent call last):
+                ...
+            Exception: MultimeasureRest is forbidden.
+
+        '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
+        return OverrideCommand(
+            attribute='direction',
+            blacklist=blacklist,
+            value=abjad.Down,
             grob='text_script',
             selector=selector,
             )
@@ -913,251 +1113,11 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_script_x_offset(
-        n: Number,
+    def text_script_up(
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
-        r'''Overrides text script X-offset.
-        '''
-        if allow_mmrests is True:
-            blacklist = None
-        else:
-            blacklist = (abjad.MultimeasureRest,)
-        return OverrideCommand(
-            attribute='X_offset',
-            blacklist=blacklist,
-            value=n,
-            grob='text_script',
-            selector=selector,
-            )
-
-    @staticmethod
-    def text_script_y_offset(
-        n: Number,
-        selector: Selector = 'baca.leaves()',
-        allow_mmrests: bool = False,
-        ) -> OverrideCommand:
-        r'''Overrides text script Y-offset.
-        '''
-        if allow_mmrests is True:
-            blacklist = None
-        else:
-            blacklist = (abjad.MultimeasureRest,)
-        return OverrideCommand(
-            attribute='Y_offset',
-            blacklist=blacklist,
-            value=n,
-            grob='text_script',
-            selector=selector,
-            )
-
-    @staticmethod
-    def text_scripts_down(
-        selector: Selector = 'baca.leaves()',
-        allow_mmrests: bool = False,
-        ) -> OverrideCommand:
-        r'''Down-overrides text script.
-
-        ..  container:: example
-
-            Down-overrides text script direction on leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
-            ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.text_scripts_down(),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TextScript.direction = #down                                   %! OC1
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TextScript.direction                                             %! OC2
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Down-overrides text script direction on leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
-            ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.text_scripts_down(), baca.tuplet(1)),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TextScript.direction = #down                                   %! OC1
-                                fs''16
-                                [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                                \revert TextScript.direction                                             %! OC2
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Raises exception when called on multimeasure rests:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
-            ...     baca.text_scripts_down()
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            Traceback (most recent call last):
-                ...
-            Exception: MultimeasureRest is forbidden.
-
-        '''
-        if allow_mmrests is True:
-            blacklist = None
-        else:
-            blacklist = (abjad.MultimeasureRest,)
-        return OverrideCommand(
-            attribute='direction',
-            blacklist=blacklist,
-            value=abjad.Down,
-            grob='text_script',
-            selector=selector,
-            )
-
-    @staticmethod
-    def text_scripts_up(
-        selector: Selector = 'baca.leaves()',
-        allow_mmrests: bool = False,
-        ) -> OverrideCommand:
-        r'''Up-overrides text script direction.
+        r'''Overrides text script direction.
 
         ..  container:: example
 
@@ -1173,7 +1133,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_scripts_up(),
+            ...     baca.text_script_up(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1253,7 +1213,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.text_scripts_up(), baca.tuplet(1)),
+            ...     baca.map(baca.text_script_up(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1331,7 +1291,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.markup.boxed('still', selector=baca.leaf(1)),
-            ...     baca.text_scripts_up()
+            ...     baca.text_script_up()
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -1348,6 +1308,46 @@ class LibraryTZ(abjad.AbjadObject):
             attribute='direction',
             blacklist=blacklist,
             value=abjad.Up,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
+    def text_script_x_offset(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
+        ) -> OverrideCommand:
+        r'''Overrides text script X-offset.
+        '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
+        return OverrideCommand(
+            attribute='X_offset',
+            blacklist=blacklist,
+            value=n,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
+    def text_script_y_offset(
+        n: Number,
+        selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
+        ) -> OverrideCommand:
+        r'''Overrides text script Y-offset.
+        '''
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
+        return OverrideCommand(
+            attribute='Y_offset',
+            blacklist=blacklist,
+            value=n,
             grob='text_script',
             selector=selector,
             )
@@ -1827,7 +1827,7 @@ class LibraryTZ(abjad.AbjadObject):
     def tie(
         selector: Selector = 'baca.qrun(0)',
         ) -> SpannerCommand:
-        r'''Attaches tie to equipitch run 0.
+        r'''Attaches tie.
 
         ..  container:: example
 
@@ -1962,6 +1962,156 @@ class LibraryTZ(abjad.AbjadObject):
         return SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(),
+            )
+
+    @staticmethod
+    def tie_down(
+        selector: Selector = 'baca.tleaves()',
+        ) -> OverrideCommand:
+        r'''Overrides tie direction.
+
+        ..  container:: example
+
+            Overrides tie direction on pitched leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stem_up(),
+            ...     baca.map(baca.tie(), baca.qruns()),
+            ...     baca.tie_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                \override Stem.direction = #up                                           %! OC1
+                                \override Tie.direction = #down                                          %! OC1
+                                b'16
+                                ~                                                                        %! SC
+                                [
+                                b'16
+                                ]
+                                c''4
+                                ~                                                                        %! SC
+                                c''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                b'16
+                                ~                                                                        %! SC
+                                [
+                                b'16
+                                ~                                                                        %! SC
+                                ]
+                                b'4
+                                ~                                                                        %! SC
+                                b'16
+                                r16
+                            }
+                            \times 4/5 {
+                                b'16
+                                \revert Stem.direction                                                   %! OC2
+                                \revert Tie.direction                                                    %! OC2
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Overrides tie direction on pitched leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stem_up(),
+            ...     baca.map(baca.tie(), baca.qruns()),
+            ...     baca.map(baca.tie_down(), baca.tuplet(1)),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                \override Stem.direction = #up                                           %! OC1
+                                b'16
+                                ~                                                                        %! SC
+                                [
+                                b'16
+                                ]
+                                c''4
+                                ~                                                                        %! SC
+                                c''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                \override Tie.direction = #down                                          %! OC1
+                                b'16
+                                ~                                                                        %! SC
+                                [
+                                b'16
+                                ~                                                                        %! SC
+                                ]
+                                b'4
+                                ~                                                                        %! SC
+                                b'16
+                                \revert Tie.direction                                                    %! OC2
+                                r16
+                            }
+                            \times 4/5 {
+                                b'16
+                                \revert Stem.direction                                                   %! OC2
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return OverrideCommand(
+            attribute='direction',
+            value=abjad.Down,
+            grob='tie',
+            selector=selector,
             )
 
     @staticmethod
@@ -2151,7 +2301,7 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def ties_down(
+    def tie_up(
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r'''Overrides tie direction.
@@ -2165,159 +2315,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.stems_up(),
+            ...     baca.stem_down(),
             ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.ties_down(),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                \override Stem.direction = #up                                           %! OC1
-                                \override Tie.direction = #down                                          %! OC1
-                                b'16
-                                ~                                                                        %! SC
-                                [
-                                b'16
-                                ]
-                                c''4
-                                ~                                                                        %! SC
-                                c''16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 7/8 {
-                                b'16
-                                ~                                                                        %! SC
-                                [
-                                b'16
-                                ~                                                                        %! SC
-                                ]
-                                b'4
-                                ~                                                                        %! SC
-                                b'16
-                                r16
-                            }
-                            \times 4/5 {
-                                b'16
-                                \revert Stem.direction                                                   %! OC2
-                                \revert Tie.direction                                                    %! OC2
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Overrides tie direction on pitched leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.stems_up(),
-            ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.map(baca.ties_down(), baca.tuplet(1)),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                \override Stem.direction = #up                                           %! OC1
-                                b'16
-                                ~                                                                        %! SC
-                                [
-                                b'16
-                                ]
-                                c''4
-                                ~                                                                        %! SC
-                                c''16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 7/8 {
-                                \override Tie.direction = #down                                          %! OC1
-                                b'16
-                                ~                                                                        %! SC
-                                [
-                                b'16
-                                ~                                                                        %! SC
-                                ]
-                                b'4
-                                ~                                                                        %! SC
-                                b'16
-                                \revert Tie.direction                                                    %! OC2
-                                r16
-                            }
-                            \times 4/5 {
-                                b'16
-                                \revert Stem.direction                                                   %! OC2
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='direction',
-            value=abjad.Down,
-            grob='tie',
-            selector=selector,
-            )
-
-    @staticmethod
-    def ties_up(
-        selector: Selector = 'baca.tleaves()',
-        ) -> OverrideCommand:
-        r'''Overrides tie direction.
-
-        ..  container:: example
-
-            Overrides tie direction on pitched leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.stems_down(),
-            ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.ties_up(),
+            ...     baca.tie_up(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2383,9 +2383,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.stems_down(),
+            ...     baca.stem_down(),
             ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.map(baca.ties_up(), baca.tuplet(1)),
+            ...     baca.map(baca.tie_up(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2526,6 +2526,86 @@ class LibraryTZ(abjad.AbjadObject):
         return OverrideCommand(
             attribute='extra_offset',
             value=pair,
+            context='Score',
+            grob='time_signature',
+            selector=selector,
+            )
+
+    @staticmethod
+    def time_signature_transparent(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides time signature transparency.
+
+        ..  container:: example
+
+            Makes all time signatures transparent:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.time_signature_transparent(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override Score.TimeSignature.transparent = ##t                          %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert Score.TimeSignature.transparent                                  %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return OverrideCommand(
+            attribute='transparent',
+            value=True,
             context='Score',
             grob='time_signature',
             selector=selector,
@@ -2990,647 +3070,11 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def transparent_accidentals(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides accidental transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='accidental',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_bar_lines(
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Makes bar lines transparent.
-
-        ..  container:: example
-
-            Makes all bar lines transparent:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
-            ...             talea=rhythmos.Talea(
-            ...                 counts=[1, 1, 1, -1],
-            ...                 denominator=8,
-            ...                 ),
-            ...             ),
-            ...         ),
-            ...     baca.transparent_bar_lines(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override Score.BarLine.transparent = ##t                                %! OC1
-                                e'8
-                                [
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                                ]
-                <BLANKLINE>
-                                r8
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                e''8
-                                [
-                <BLANKLINE>
-                                g'8
-                <BLANKLINE>
-                                f''8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                r8
-                <BLANKLINE>
-                                e'8
-                                [
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                r8
-                <BLANKLINE>
-                                e''8
-                                [
-                <BLANKLINE>
-                                g'8
-                                ]
-                                \revert Score.BarLine.transparent                                        %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Makes bar line before measure 1 transparent:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
-            ...             talea=rhythmos.Talea(
-            ...                 counts=[1, 1, 1, -1],
-            ...                 denominator=8,
-            ...                 ),
-            ...             ),
-            ...         ),
-            ...     baca.transparent_bar_lines(baca.group_by_measure()[1]),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                e'8
-                                [
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                                ]
-                <BLANKLINE>
-                                r8
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                \override Score.BarLine.transparent = ##t                                %! OC1
-                                e''8
-                                [
-                <BLANKLINE>
-                                g'8
-                <BLANKLINE>
-                                f''8
-                                ]
-                                \revert Score.BarLine.transparent                                        %! OC2
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                r8
-                <BLANKLINE>
-                                e'8
-                                [
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                r8
-                <BLANKLINE>
-                                e''8
-                                [
-                <BLANKLINE>
-                                g'8
-                                ]
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            context='Score',
-            grob='bar_line',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_beams(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides beam transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='beam',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_dots(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides dots transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='dots',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_flags(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides flag transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='flag',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_note_heads(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides note head transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='note_head',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_repeat_ties(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides repeat tie transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='repeat_tie',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_rests(
-        selector: Selector = 'baca.rests()',
-        ) -> OverrideCommand:
-        r'''Makes rests transparent.
-
-        ..  container:: example
-
-            Makes rests transparent:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.transparent_rests(),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override Rest.transparent = ##t                                         %! OC1
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert Rest.transparent                                                 %! OC2
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Makes rests in tuplet 1 transparent:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.transparent_rests(), baca.tuplet(1)),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                \once \override Rest.transparent = ##t                                   %! OC1
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='rest',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_span_bars(
-        selector: Selector = 'baca.leaf(0)',
-        ) -> OverrideCommand:
-        r'''Makes span bars transparent.
-
-        ..  container:: example
-
-            Makes span bar before leaf 0 transparent:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.transparent_span_bars(),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \once \override Score.SpanBar.transparent = ##t                          %! OC1
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            context='Score',
-            grob='span_bar',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_stems(
-        selector: Selector = 'baca.leaves()',
-        ):
-        r'''Overrides stem transparency.
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            grob='stem',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transparent_time_signatures(
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Makes time signatures transparent.
-
-        ..  container:: example
-
-            Makes all time signatures transparent:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.transparent_time_signatures(),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override Score.TimeSignature.transparent = ##t                          %! OC1
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert Score.TimeSignature.transparent                                  %! OC2
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='transparent',
-            value=True,
-            context='Score',
-            grob='time_signature',
-            selector=selector,
-            )
-
-    @staticmethod
     def tremolo_down(
         n: Number,
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
-        r'''Overrides stem tremolo extra offset on trimmed leaves.
+        r'''Overrides stem tremolo extra offset.
         '''
         pair = (0, -n)
         return OverrideCommand(
@@ -3648,11 +3092,11 @@ class LibraryTZ(abjad.AbjadObject):
         right_broken: bool = None,
         selector: Selector = 'baca.tleaves().with_next_leaf()',
         ) -> SpannerCommand:
-        r'''Attaches trill to trimmed leaves (leaked to the right).
+        r'''Attaches trill spanner.
 
         ..  container:: example
 
-            Attaches trill to trimmed leaves (leaked to the right):
+            Attaches trill spanner to trimmed leaves (leaked to the right):
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -3717,8 +3161,8 @@ class LibraryTZ(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches trill to trimmed leaves (leaked to the right) in every
-            equipitch run:
+            Attaches trill spanner to trimmed leaves (leaked to the right) in
+            every equipitch run:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4153,6 +3597,150 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def tuplet_bracket_down(
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        r'''Overrides tuplet bracket direction.
+
+        ..  container:: example
+
+            Overrides tuplet bracket direction on leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_bracket_down(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                \override TupletBracket.direction = #down                                %! OC1
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                                \revert TupletBracket.direction                                          %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Overrides tuplet bracket direction on leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.map(baca.tuplet_bracket_down(), baca.tuplet(1)),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.direction = #down                                %! OC1
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                                \revert TupletBracket.direction                                          %! OC2
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return OverrideCommand(
+            attribute='direction',
+            value=abjad.Down,
+            grob='tuplet_bracket',
+            selector=selector,
+            )
+
+    @staticmethod
     def tuplet_bracket_extra_offset(
         pair: NumberPair,
         selector: Selector = 'baca.leaf(0)',
@@ -4469,151 +4057,7 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_brackets_down(
-        selector: Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r'''Overrides tuplet bracket direction.
-
-        ..  container:: example
-
-            Overrides tuplet bracket direction on leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.tuplet_brackets_down(),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                \override TupletBracket.direction = #down                                %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                                \revert TupletBracket.direction                                          %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Overrides tuplet bracket direction on leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.map(baca.tuplet_brackets_down(), baca.tuplet(1)),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.direction = #down                                %! OC1
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                                \revert TupletBracket.direction                                          %! OC2
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return OverrideCommand(
-            attribute='direction',
-            value=abjad.Down,
-            grob='tuplet_bracket',
-            selector=selector,
-            )
-
-    @staticmethod
-    def tuplet_brackets_up(
+    def tuplet_bracket_up(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides tuplet bracket direction.
@@ -4628,7 +4072,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.tuplet_brackets_up(),
+            ...     baca.tuplet_bracket_up(),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -4693,7 +4137,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.map(baca.tuplet_brackets_up(), baca.tuplet(1)),
+            ...     baca.map(baca.tuplet_bracket_up(), baca.tuplet(1)),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -4760,6 +4204,8 @@ class LibraryTZ(abjad.AbjadObject):
     def tuplet_number_denominator(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
+        r'''Overrides tuplet number text.
+        '''
         return OverrideCommand(
             attribute='text',
             value='tuplet-number::calc-denominator-text',
@@ -5004,20 +4450,20 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def up_arpeggios(
+    def up_arpeggio(
         selector: Selector = 'baca.cheads()',
         ) -> IndicatorCommand:
-        r"""Attaches up-arpeggios to chord heads.
+        r"""Attaches up-arpeggio.
 
         ..  container:: example
 
-            Attaches up-arpeggios to all chord heads:
+            Attaches up-arpeggios to chord heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.up_arpeggios(),
+            ...     baca.up_arpeggio(),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -5093,7 +4539,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.up_arpeggios(baca.cheads()[-2:]),
+            ...     baca.up_arpeggio(baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -5164,14 +4610,14 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def up_bows(
+    def up_bow(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches up-bows to pitched heads.
+        r'''Attaches up-bow.
 
         ..  container:: example
 
-            Attaches up-bows to all pitched heads:
+            Attaches up-bow to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -5179,7 +4625,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.up_bows(),
+            ...     baca.up_bow(),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -5251,7 +4697,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.up_bows(
+            ...     baca.up_bow(
             ...         baca.tuplets()[1:2].pheads(),
             ...         ),
             ...     counts=[1, 1, 5, -1],
@@ -5321,7 +4767,7 @@ class LibraryTZ(abjad.AbjadObject):
     def very_long_fermata(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Attaches very long fermata to leaf.
+        r'''Attaches very long fermata.
 
         ..  container:: example
 
@@ -5511,7 +4957,8 @@ class LibraryTZ(abjad.AbjadObject):
     def volta(
         selector: Selector = 'baca.leaves()',
         ) -> VoltaCommand:
-        r'''Wraps leaves in volta container.
+        r'''Makes volta container and extends container with ``selector``
+        output.
 
         ..  container:: example
 

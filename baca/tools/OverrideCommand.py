@@ -16,7 +16,7 @@ class OverrideCommand(Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.beam_positions(6),
-        ...     baca.stems_up(),
+        ...     baca.stem_up(),
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -73,8 +73,8 @@ class OverrideCommand(Command):
         ...     'MusicVoice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.beam_positions(6),
-        ...     baca.rests_up(),
-        ...     baca.stems_up(),
+        ...     baca.rest_up(),
+        ...     baca.stem_up(),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
         ...             talea=rhythmos.Talea(

@@ -49,7 +49,7 @@ class LibraryGM(abjad.AbjadObject):
         stems: bool = None,
         style: str = None,
         ) -> SpannerCommand:
-        r'''Attaches glissando to trimmed leaves.
+        r'''Attaches glissando.
 
         ..  container:: example
 
@@ -380,7 +380,7 @@ class LibraryGM(abjad.AbjadObject):
         n: Number,
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
-        r'''Attaches glissando to trimmed leaves.
+        r'''Overrides glissando thickness.
         '''
         return OverrideCommand(
             attribute='thickness',
@@ -394,7 +394,7 @@ class LibraryGM(abjad.AbjadObject):
         description: str = None,
         selector: Selector = 'baca.leaf(0)',
         ) -> GlobalFermataCommand:
-        r'''Attaches global fermata to leaves.
+        r'''Attaches global fermata.
         '''
         return GlobalFermataCommand(
             description=description,
@@ -419,7 +419,7 @@ class LibraryGM(abjad.AbjadObject):
         start_ordinal: int = None,
         stop_ordinal: int = None,
         ) -> HairpinCommand:
-        r'''Makes hairpin from ``string`` and attaches hairpin trimmed leaves.
+        r'''Attaches hairpin.
 
         ..  container:: example
 
@@ -702,7 +702,7 @@ class LibraryGM(abjad.AbjadObject):
     def hairpin_transparent(
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
-        r'''Overrides hairpin transparent.
+        r'''Overrides hairpin transparency.
         '''
         return OverrideCommand(
             attribute='transparent',
@@ -825,7 +825,7 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = None,
         truncate_ties: bool = None
         ):
-        r'''Imbricates `segment` in `voice_name`.
+        r'''Imbricates ``segment`` in voice with ``voice_name``.
 
         ..  container:: example
 
@@ -1004,7 +1004,7 @@ class LibraryGM(abjad.AbjadObject):
         expression: abjad.Expression,
         selector: Selector = 'baca.leaves()',
         ) -> LabelCommand:
-        r'''Labels selections with label `expression`.
+        r'''Labels ``selector`` output with label ``expression``.
 
         ..  container:: example
 
@@ -1198,11 +1198,11 @@ class LibraryGM(abjad.AbjadObject):
     def laissez_vibrer(
         selector: Selector  = 'baca.ptails()',
         ) -> IndicatorCommand:
-        r'''Attaches laissez vibrer to PLT tails.
+        r'''Attaches laissez vibrer.
 
         ..  container:: example
 
-            Attaches laissez vibrer to all PLT tails:
+            Attaches laissez vibrer to PLT tails:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -1370,7 +1370,7 @@ class LibraryGM(abjad.AbjadObject):
         format_slot: str = 'before',
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Makes LilyPond literal.
+        r'''Attaches LilyPond literal.
         '''
         literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
         return IndicatorCommand(
@@ -1382,7 +1382,7 @@ class LibraryGM(abjad.AbjadObject):
     def long_fermata(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
-        r'''Attaches long fermata to leaf.
+        r'''Attaches long fermata.
 
         ..  container:: example
 
@@ -1530,6 +1530,18 @@ class LibraryGM(abjad.AbjadObject):
         return LibraryNS.pitches(loop)
 
     @staticmethod
+    def make_dynamics(string: str) -> typing.List[abjad.Dynamic]:
+        r'''Makes dynamics from ``string``.
+
+        ..  container::
+
+            >>> baca.make_dynamics('ff p f pp')
+            [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
+
+        '''
+        return [abjad.Dynamic(_) for _ in string.split()]
+
+    @staticmethod
     def make_even_runs() -> RhythmCommand:
         r'''Makes even runs.
         '''
@@ -1666,7 +1678,7 @@ class LibraryGM(abjad.AbjadObject):
     
     @staticmethod
     def make_rhythm(selection: abjad.Selection) -> RhythmCommand:
-        r'''Set rhythm to `selection`.
+        r'''Sets rhythm to ``selection``.
         '''
         assert isinstance(selection, abjad.Selection), repr(selection)
         assert all(isinstance(_,  abjad.Component) for _ in selection)
@@ -1676,7 +1688,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def make_single_attack(duration) -> RhythmCommand:
-        r'''Makes single attacks with `duration`.
+        r'''Makes single attacks with ``duration``.
         '''
         duration = abjad.Duration(duration)
         numerator, denominator = duration.pair
@@ -1728,20 +1740,20 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def marcati(
+    def marcato(
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
-        r'''Attaches marcati to pitched heads.
+        r'''Attaches marcato.
 
         ..  container:: example
 
-            Attaches marcati to all pitched heads:
+            Attaches marcato to pitched heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.marcati(),
+            ...     baca.marcato(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1807,13 +1819,13 @@ class LibraryGM(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches marcati to pitched heads in tuplet 1:
+            Attaches marcato to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.marcati(baca.tuplets()[1:2].pheads()),
+            ...     baca.marcato(baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1886,7 +1898,7 @@ class LibraryGM(abjad.AbjadObject):
         context: str = 'Staff',
         selector: Selector = 'baca.leaf(0)',
         ) -> typing.Union[IndicatorCommand, SuiteCommand]:
-        r'''Sets margin markup on each leaf in `selector` output.
+        r'''Attaches margin markup.
 
         ..  container:: example
 
@@ -2009,7 +2021,7 @@ class LibraryGM(abjad.AbjadObject):
         selector: Selector = 'baca.leaf(0)',
         redundant: bool = None,
         ) -> MetronomeMarkCommand:
-        r'''Attaches metronome mark with `key`.
+        r'''Attaches metronome mark matching ``key`` metronome mark manifest.
         '''
         if redundant is True:
             return None
@@ -2023,7 +2035,7 @@ class LibraryGM(abjad.AbjadObject):
     def minimum_duration(
         duration: typing.Union[tuple, abjad.Duration],
         ) -> HorizontalSpacingSpecifier:
-        r'''Makes horizontal spacing specifier with `duration` minimum width.
+        r'''Makes horizontal spacing specifier with ``duration`` minimum width.
         '''
         return HorizontalSpacingSpecifier(
             minimum_duration=duration,
