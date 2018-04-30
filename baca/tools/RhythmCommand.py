@@ -75,6 +75,127 @@ class RhythmCommand(Command):
         ...         ],
         ...     )
 
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     command,
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 5]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+                            {
+            <BLANKLINE>
+                                % [MusicVoice measure 1]                                             %! SM4
+                                \makeBlue                                                            %! SM24
+                                c'8
+                                [
+            <BLANKLINE>
+                                \makeBlue                                                            %! SM24
+                                c'8
+            <BLANKLINE>
+                                \makeBlue                                                            %! SM24
+                                c'8
+                                ]
+                            }
+                            {
+            <BLANKLINE>
+                                % [MusicVoice measure 2]                                             %! SM4
+                                \makeBlue                                                            %! SM24
+                                c'8
+                                [
+            <BLANKLINE>
+                                \makeBlue                                                            %! SM24
+                                c'8
+            <BLANKLINE>
+                                \makeBlue                                                            %! SM24
+                                c'8
+                                ]
+                            }
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            \makeBlue                                                                %! SM24
+                            c'4.
+                            {
+            <BLANKLINE>
+                                % [MusicVoice measure 4]                                             %! SM4
+                                \makeBlue                                                            %! SM24
+                                c'8
+                                [
+            <BLANKLINE>
+                                \makeBlue                                                            %! SM24
+                                c'8
+            <BLANKLINE>
+                                \makeBlue                                                            %! SM24
+                                c'8
+                                ]
+                            }
+            <BLANKLINE>
+                            % [MusicVoice measure 5]                                                 %! SM4
+                            \makeBlue                                                                %! SM24
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
     '''
 
     ### CLASS ATTRIBUTES ###
@@ -149,7 +270,8 @@ class RhythmCommand(Command):
         if rewrite_rest_filled is not None:
             rewrite_rest_filled = bool(rewrite_rest_filled)
         self._rewrite_rest_filled: bool = rewrite_rest_filled
-        if not isinstance(rhythm_maker, (*rhythm_maker_type, type(None))):
+        prototype = (rhythmos.RhythmMaker, abjad.Selection, type(None))
+        if not isinstance(rhythm_maker, prototype):
             assert isinstance(rhythm_maker, collections.Iterable), repr(rhythm_maker)
             for pair in rhythm_maker:
                 assert isinstance(pair, tuple), repr(pair)
@@ -305,6 +427,7 @@ class RhythmCommand(Command):
         selections = [abjad.select(_) for _ in music]
         return selections
 
+    # TODO: make self.state work with multimaker input
     def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
@@ -313,8 +436,10 @@ class RhythmCommand(Command):
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
         else:
-            if not isinstance(rhythm_maker, rhythmos.RhythmMaker):
-                message = f'rhythm-maker or selection: {rhythm_maker!r}.'
+            prototype = (rhythmos.RhythmMaker, collections.Iterable)
+            if not isinstance(rhythm_maker, prototype):
+                message = 'must be rhythm-maker, selection or pairs:\n'
+                message += f'  not {rhythm_maker!r}'
                 raise TypeError(message)
             division_maker = self.division_maker
             if division_maker is None:
@@ -326,6 +451,7 @@ class RhythmCommand(Command):
             divisions = division_maker(divisions)
             divisions = baca.sequence(divisions).flatten(depth=-1)
             divisions = self._apply_division_expression(divisions)
+            division_count = len(divisions)
             start_offset = divisions[0].start_offset
             previous_state = None
             dictionary = self.previous_segment_voice_metadata
@@ -333,7 +459,41 @@ class RhythmCommand(Command):
                 previous_state = dictionary.get(abjad.tags.RHYTHM)
                 if previous_state.get('name') != self.persist:
                     previous_state = None
-            selections = rhythm_maker(divisions, previous_state=previous_state)
+            if isinstance(rhythm_maker, rhythmos.RhythmMaker):
+                pairs = [(rhythm_maker, abjad.index([0], 1))]
+            else:
+                pairs = list(rhythm_maker)
+            assert isinstance(pairs, list), repr(pairs)
+            for pair in pairs:
+                assert isinstance(pair, tuple), repr(pair)
+                assert len(pair) == 2, repr(pair)
+                rhythm_maker, pattern = pair
+                assert isinstance(rhythm_maker, rhythmos.RhythmMaker)
+                assert isinstance(pattern, abjad.Pattern), repr(pattern)
+            selections = []
+            previous_rhythm_maker, divisions_ = None, []
+            for i, division in enumerate(divisions):
+                divisions_.append(division)
+                found_rhythm_maker = False
+                for pair in pairs:
+                    rhythm_maker, pattern = pair
+                    if pattern.matches_index(i, division_count):
+                        found_rhythm_maker = True
+                        break
+                if not found_rhythm_maker:
+                    message = 'can not find rhythm-maker for division {i}.'
+                    raise Exception(message)
+                if (i == division_count - 1 or
+                    (previous_rhythm_maker is not None and
+                    rhythm_maker != previous_rhythm_maker)):
+                    selections_ = rhythm_maker(
+                        divisions_,
+                        previous_state=previous_state,
+                        )
+                    selections.extend(selections_)
+                    divisions_ = []
+                if rhythm_maker != previous_rhythm_maker:
+                    previous_rhythm_maker = rhythm_maker
             self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
