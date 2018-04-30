@@ -5,17 +5,27 @@ import typing
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
 from .DivisionMaker import DivisionMaker
+from .FlattenDivisionCallback import FlattenDivisionCallback
 from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
+from .PartitionDivisionCallback import PartitionDivisionCallback
 from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback
+from .SplitByRoundedRatiosDivisionCallback import \
+    SplitByRoundedRatiosDivisionCallback
 division_maker_type = (
     DivisionMaker,
+    FlattenDivisionCallback,
     FuseByCountsDivisionCallback,
+    PartitionDivisionCallback,
     SplitByDurationsDivisionCallback,
+    SplitByRoundedRatiosDivisionCallback,
     )
 division_maker_typing = typing.Union[
     DivisionMaker,
+    FlattenDivisionCallback,
     FuseByCountsDivisionCallback,
+    PartitionDivisionCallback,
     SplitByDurationsDivisionCallback,
+    SplitByRoundedRatiosDivisionCallback,
     ]
 rhythm_maker_type = (
     rhythmos.RhythmMaker,
