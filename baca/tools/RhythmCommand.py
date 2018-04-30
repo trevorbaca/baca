@@ -1,9 +1,30 @@
 import abjad
 import baca
+import collections
 import typing
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
 from .DivisionMaker import DivisionMaker
+from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
+from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback
+division_maker_type = (
+    DivisionMaker,
+    FuseByCountsDivisionCallback,
+    SplitByDurationsDivisionCallback,
+    )
+division_maker_typing = typing.Union[
+    DivisionMaker,
+    FuseByCountsDivisionCallback,
+    SplitByDurationsDivisionCallback,
+    ]
+rhythm_maker_type = (
+    rhythmos.RhythmMaker,
+    abjad.Selection,
+    )
+rhythm_maker_typing = typing.Union[
+    rhythmos.RhythmMaker,
+    abjad.Selection,
+    ]
 
 
 class RhythmCommand(Command):
@@ -58,12 +79,11 @@ class RhythmCommand(Command):
         left_broken: bool = None,
         multimeasure_rests: bool = None,
         persist: str = None,
-        reference_meters: typing.List = None,
+        reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
         rewrite_rest_filled: bool = None,
-        rhythm_maker: typing.Union[
-            rhythmos.RhythmMaker, abjad.Selection] = None,
-        rhythm_overwrites=None,
+        rhythm_maker: rhythm_maker_typing = None,
+        rhythm_overwrites: typing.List[tuple] = None,
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
@@ -74,7 +94,11 @@ class RhythmCommand(Command):
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
             raise Exception(message)
-        self._division_maker: DivisionMaker = division_maker
+        if division_maker is not None:
+            assert isinstance(division_maker, division_maker_type), repr(division_maker)
+        self._division_maker: division_maker_typing = division_maker
+        if division_expression is not None:
+            assert isinstance(division_expression, abjad.Expression)
         self._division_expression: abjad.Expression = division_expression
         if left_broken is not None:
             left_broken = bool(left_broken)
@@ -85,23 +109,39 @@ class RhythmCommand(Command):
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist: str = persist
-        self._reference_meters: typing.List = reference_meters
+        if reference_meters is not None:
+            assert isinstance(reference_meters, collections.Iterable)
+            assert all(isinstance(_, abjad.Meter) for _ in reference_meters)
+        self._reference_meters: typing.Iterable[abjad.Meter] = reference_meters
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter: bool = rewrite_meter
         if rewrite_rest_filled is not None:
             rewrite_rest_filled = bool(rewrite_rest_filled)
         self._rewrite_rest_filled: bool = rewrite_rest_filled
-        self._rhythm_maker: typing.Union[
-            rhythmos.RhythmMaker, abjad.Selection] = rhythm_maker
+        if rhythm_maker is not None:
+            assert isinstance(rhythm_maker, rhythm_maker_type), repr(rhythm_maker)
+        self._rhythm_maker: rhythm_maker_typing = rhythm_maker
+        if rhythm_overwrites is not None:
+            assert isinstance(rhythm_overwrites, list)
+            assert all(isinstance(_, tuple) for _ in rhythm_overwrites)
         self._rhythm_overwrites = rhythm_overwrites
         if right_broken is not None:
             right_broken = bool(right_broken)
         self._right_broken: bool = right_broken
+        if split_at_measure_boundaries is not None:
+            split_at_measure_boundaries = bool(split_at_measure_boundaries)
         self._split_at_measure_boundaries: bool = split_at_measure_boundaries
+        if stages is not None:
+            assert isinstance(stages, tuple), repr(stages)
+            assert len(stages) == 2, repr(stages)
         self._stages: typing.Tuple[int, int] = stages
         self._state: abjad.OrderedDict = None
+        if tie_first is not None:
+            tie_first = bool(tie_first)
         self._tie_first: bool = tie_first
+        if tie_last is not None:
+            tie_last = bool(tie_last)
         self._tie_last: bool = tie_last
 
     ### SPECIAL METHODS ###
@@ -109,7 +149,7 @@ class RhythmCommand(Command):
     def __call__(
         self,
         start_offset: abjad.Offset = None,
-        time_signatures: typing.List[abjad.TimeSignature] = None,
+        time_signatures: typing.Iterable[abjad.TimeSignature] = None,
         ) -> abjad.AnnotatedTimespan:
         r'''Calls command on ``start_offset`` and ``time_signatures``.
         '''
@@ -332,13 +372,13 @@ class RhythmCommand(Command):
         return self._division_expression
 
     @property
-    def division_maker(self) -> typing.Optional[DivisionMaker]:
+    def division_maker(self) -> typing.Optional[division_maker_typing]:
         r'''Gets division-maker.
         '''
         return self._division_maker
 
     @property
-    def left_broken(self) -> bool:
+    def left_broken(self) -> typing.Optional[bool]:
         r'''Is true when rhythm is left-broken.
         '''
         return self._left_broken
@@ -369,66 +409,63 @@ class RhythmCommand(Command):
         return self._persist
 
     @property
-    def reference_meters(self) -> typing.List:
+    def reference_meters(self) -> typing.Iterable[abjad.Meter]:
         r'''Gets reference meters.
 
         Only used to rewrite meters.
-
-        Set to list of meters or none.
         '''
         return self._reference_meters
 
     @property
-    def repeat_ties(self) -> bool:
+    def repeat_ties(self) -> typing.Optional[bool]:
         tie_specifier = getattr(self.rhythm_maker, 'tie_specifier', None)
         if tie_specifier is None:
             return False
         return tie_specifier.repeat_ties
 
     @property
-    def rewrite_meter(self) -> bool:
+    def rewrite_meter(self) -> typing.Optional[bool]:
         r'''Is true when command rewrites meter.
         '''
         return self._rewrite_meter
 
     @property
-    def rewrite_rest_filled(self) -> bool:
+    def rewrite_rest_filled(self) -> typing.Optional[bool]:
         r'''Is true when command rewrites rest-filled divisions.
         '''
         return self._rewrite_rest_filled
 
     @property
-    def rhythm_maker(self) -> typing.Optional[
-        typing.Union[rhythmos.RhythmMaker, abjad.Selection]
-        ]:
-        r'''Gets rhythm-maker (or selection).
+    def rhythm_maker(self) -> typing.Optional[rhythm_maker_typing]:
+        r'''Gets rhythm-maker or selection.
         '''
         return self._rhythm_maker
 
     @property
-    def rhythm_overwrites(self) -> typing.List:
+    def rhythm_overwrites(self) -> typing.List[tuple]:
         r'''Gets rhythm overwrites.
         '''
         return self._rhythm_overwrites
 
     @property
-    def right_broken(self) -> bool:
+    def right_broken(self) -> typing.Optional[bool]:
         r'''Is true when rhythm is right-broken.
         '''
         return self._right_broken
 
     @property
-    def split_at_measure_boundaries(self) -> bool:
+    def split_at_measure_boundaries(self) -> typing.Optional[bool]:
         r'''Is true when command splits at measure boundaries.
         '''
         return self._split_at_measure_boundaries
 
     @property
-    def stages(self) -> typing.Tuple[int, int]:
+    def stages(self) -> typing.Optional[typing.Tuple[int, int]]:
         r'''Gets stages.
         '''
         return self._stages
 
+    # TODO: remove because unused?
     @property
     def start_stage(self) -> int:
         r'''Gets start stage.
@@ -436,13 +473,14 @@ class RhythmCommand(Command):
         return self.stages[0]
 
     @property
-    def state(self) -> abjad.OrderedDict:
+    def state(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets postcall state of rhythm command.
 
         Populated by segment-maker.
         '''
         return self._state
 
+    # TODO: remove because unused?
     @property
     def stop_stage(self) -> int:
         r'''Gets stop stage.
@@ -450,13 +488,13 @@ class RhythmCommand(Command):
         return self.stages[-1]
 
     @property
-    def tie_first(self) -> bool:
-        r'''Is true when command ties into first note or chord.
+    def tie_first(self) -> typing.Optional[bool]:
+        r'''Is true when command ties into first pleaf.
         '''
         return self._tie_first
 
     @property
-    def tie_last(self) -> bool:
-        r'''Is true when command ties into last note or chord.
+    def tie_last(self) -> typing.Optional[bool]:
+        r'''Is true when command ties into last pleaf.
         '''
         return self._tie_last
