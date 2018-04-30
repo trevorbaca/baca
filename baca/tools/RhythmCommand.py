@@ -34,6 +34,15 @@ rhythm_maker_type = (
 rhythm_maker_typing = typing.Union[
     rhythmos.RhythmMaker,
     abjad.Selection,
+    typing.Iterable[
+        typing.Tuple[
+            typing.Union[
+                rhythmos.RhythmMaker,
+                abjad.Selection,
+                ],
+            abjad.Pattern,
+            ],
+        ],
     ]
 
 
@@ -53,6 +62,17 @@ class RhythmCommand(Command):
         >>> command = baca.RhythmCommand(
         ...     division_expression=abjad.sequence().sum().sequence(),
         ...     rhythm_maker=rhythmos.NoteRhythmMaker(),
+        ...     )
+
+    ..  container:: example
+
+        >>> rhythm_maker_1 = rhythmos.NoteRhythmMaker()
+        >>> rhythm_maker_2 = rhythmos.EvenRunRhythmMaker()
+        >>> command = baca.RhythmCommand(
+        ...     rhythm_maker=[
+        ...         (rhythm_maker_1, abjad.index([0], 2)),
+        ...         (rhythm_maker_2, abjad.index([1], 2)),
+        ...         ],
         ...     )
 
     '''
@@ -129,8 +149,14 @@ class RhythmCommand(Command):
         if rewrite_rest_filled is not None:
             rewrite_rest_filled = bool(rewrite_rest_filled)
         self._rewrite_rest_filled: bool = rewrite_rest_filled
-        if rhythm_maker is not None:
-            assert isinstance(rhythm_maker, rhythm_maker_type), repr(rhythm_maker)
+        if not isinstance(rhythm_maker, (*rhythm_maker_type, type(None))):
+            assert isinstance(rhythm_maker, collections.Iterable), repr(rhythm_maker)
+            for pair in rhythm_maker:
+                assert isinstance(pair, tuple), repr(pair)
+                assert len(pair) == 2, repr(pair)
+                rhythm_maker_, pattern = pair
+                assert isinstance(rhythm_maker_, rhythm_maker_type)
+                assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._rhythm_maker: rhythm_maker_typing = rhythm_maker
         if rhythm_overwrites is not None:
             assert isinstance(rhythm_overwrites, list)
@@ -182,25 +208,7 @@ class RhythmCommand(Command):
             annotation=music,
             )
 
-    ### PRIVATE PROPERTIES ###
-
-    @property
-    def _default_division_maker(self):
-        division_maker = baca.DivisionMaker()
-        return division_maker
-
-    @property
-    def _default_rhythm_maker(self):
-        mask = abjad.silence([0], 1, use_multimeasure_rests=True)
-        multimeasure_rests = rhythmos.NoteRhythmMaker(division_masks=[mask])
-        return multimeasure_rests
-
     ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _all_are_selections(argument):
-        return all(
-            isinstance(_, abjad.Selection) for _ in argument)
 
     @staticmethod
     def _annotate_unpitched_notes(argument):
@@ -298,7 +306,10 @@ class RhythmCommand(Command):
         return selections
 
     def _make_rhythm(self, start_offset, time_signatures):
-        rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
+        rhythm_maker = self.rhythm_maker
+        if rhythm_maker is None:
+            mask = abjad.silence([0], 1, use_multimeasure_rests=True)
+            rhythm_maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
         else:
@@ -307,7 +318,7 @@ class RhythmCommand(Command):
                 raise TypeError(message)
             division_maker = self.division_maker
             if division_maker is None:
-                division_maker = self._default_division_maker
+                division_maker = DivisionMaker()
             divisions = self._durations_to_divisions(
                 time_signatures,
                 start_offset,
@@ -325,7 +336,7 @@ class RhythmCommand(Command):
             selections = rhythm_maker(divisions, previous_state=previous_state)
             self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
-        assert self._all_are_selections(selections), repr(selections)
+        assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.split_at_measure_boundaries:
             specifier = rhythmos.DurationSpecifier
             selections = specifier._split_at_measure_boundaries(
@@ -333,7 +344,7 @@ class RhythmCommand(Command):
                 time_signatures,
                 repeat_ties=self.repeat_ties,
                 )
-            assert self._all_are_selections(selections), repr(selections)
+        assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.rewrite_meter:
             selections = rhythmos.DurationSpecifier._rewrite_meter_(
                 selections,

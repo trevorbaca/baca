@@ -123,7 +123,10 @@ class PitchFirstRhythmCommand(Command):
         tuplet_denominator=None,
         tuplet_force_fraction=None,
         ):
-        rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
+        rhythm_maker = self.rhythm_maker
+        if rhythm_maker is None:
+            mask = abjad.silence([0], 1, use_multimeasure_rests=True)
+            rhythm_maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
         keywords = {}
         if division_masks is not None:
             keywords['division_masks'] = division_masks
