@@ -75,13 +75,13 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tenuto(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches tenuto.
 
         ..  container:: example
 
-            Attaches tenuto to pitched heads:
+            Attaches tenuto to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -113,10 +113,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 -\tenuto                                                                 %! IC
                                 [
                                 d'16
-                                -\tenuto                                                                 %! IC
                                 ]
                                 bf'4
-                                -\tenuto                                                                 %! IC
                                 ~
                                 bf'16
                                 r16
@@ -124,26 +122,20 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tenuto                                                                 %! IC
                                 [
                                 e''16
-                                -\tenuto                                                                 %! IC
                                 ]
                                 ef''4
-                                -\tenuto                                                                 %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tenuto                                                                 %! IC
                                 [
                                 g''16
-                                -\tenuto                                                                 %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\tenuto                                                                 %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -159,7 +151,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.tenuto(baca.tuplets()[1:2].pheads()),
+            ...     baca.map(
+            ...         baca.tenuto(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4451,13 +4446,13 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def up_arpeggio(
-        selector: Selector = 'baca.cheads()',
+        selector: Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""Attaches up-arpeggio.
 
         ..  container:: example
 
-            Attaches up-arpeggios to chord heads:
+            Attaches up-arpeggios to chord head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4500,9 +4495,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16.
                             }
                             \scaleDurations #'(1 . 1) {
-                                \arpeggioArrowUp                                                         %! IC
                                 <ef'' e'' fs'''>8
-                                \arpeggio                                                                %! IC
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -4510,9 +4503,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16.
                             }
                             \scaleDurations #'(1 . 1) {
-                                \arpeggioArrowUp                                                         %! IC
                                 <g' af''>8
-                                \arpeggio                                                                %! IC
                                 ~
                                 [
                                 <g' af''>32
@@ -4611,13 +4602,13 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def up_bow(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches up-bow.
 
         ..  container:: example
 
-            Attaches up-bow to pitched heads:
+            Attaches up-bow to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4649,10 +4640,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 -\upbow                                                                  %! IC
                                 [
                                 d'16
-                                -\upbow                                                                  %! IC
                                 ]
                                 bf'4
-                                -\upbow                                                                  %! IC
                                 ~
                                 bf'16
                                 r16
@@ -4660,26 +4649,20 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\upbow                                                                  %! IC
                                 [
                                 e''16
-                                -\upbow                                                                  %! IC
                                 ]
                                 ef''4
-                                -\upbow                                                                  %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow                                                                  %! IC
                                 [
                                 g''16
-                                -\upbow                                                                  %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\upbow                                                                  %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -4689,17 +4672,18 @@ class LibraryTZ(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches up-bows to pitched heads in tuplet 1:
+            Attaches up-bow to pitched heads in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(
+            ...         baca.up_bow(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.up_bow(
-            ...         baca.tuplets()[1:2].pheads(),
-            ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )

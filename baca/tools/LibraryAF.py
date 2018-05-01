@@ -675,13 +675,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def arpeggio(
-        selector: Selector = 'baca.cheads()',
+        selector: Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""Attaches arpeggio.
 
         ..  container:: example
 
-            Attaches arpeggio to chord heads:
+            Attaches arpeggio to chord head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -722,7 +722,6 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 <ef'' e'' fs'''>8
-                                -\arpeggio                                                               %! IC
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -731,7 +730,6 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 <g' af''>8
-                                -\arpeggio                                                               %! IC
                                 ~
                                 [
                                 <g' af''>32
@@ -2348,7 +2346,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_stencil_false(
-        selector: Selector = 'baca.leaf(0)',
+        selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides beam stencil.
         '''
@@ -3469,13 +3467,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def cross_staff(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches cross-staff command.
 
         ..  container:: example
 
-            Attaches cross-staff command to leaves:
+            Attaches cross-staff command to pitched head 0:
 
             >>> score_template = baca.StringTrioScoreTemplate()
             >>> accumulator = baca.MusicAccumulator(score_template)
@@ -3664,16 +3662,12 @@ class LibraryAF(abjad.AbjadObject):
                                                 }                                                        %! SM8:REDRAWN_DEFAULT_INSTRUMENT:SM34:ST1
                                             \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
                 <BLANKLINE>
-                                            \crossStaff                                                  %! IC
                                             d'8
                 <BLANKLINE>
-                                            \crossStaff                                                  %! IC
                                             e'8
                 <BLANKLINE>
-                                            \crossStaff                                                  %! IC
                                             f'8
                 <BLANKLINE>
-                                            \crossStaff                                                  %! IC
                                             g'8
                                             \revert Stem.direction                                       %! OC2
                                         }
@@ -3756,7 +3750,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         'ViolaMusicVoice',
             ...         [[0, 2, 4, 5, 7]],
             ...         baca.anchor('ViolinMusicVoice'),
-            ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
+            ...         baca.cross_staff(baca.pleaves()[-2:]),
             ...         baca.flags(),
             ...         baca.stem_up(),
             ...         figure_name='va.1',
@@ -4588,7 +4582,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dots_stencil_false(
-        selector: Selector = 'baca.leaf(0)',
+        selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides dots stencil.
         '''
@@ -4614,13 +4608,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def double_staccato(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches double-staccato.
 
         ..  container:: example
 
-            Attaches double-staccato to pitched heads:
+            Attaches double-staccato to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4652,10 +4646,8 @@ class LibraryAF(abjad.AbjadObject):
                                 -\tongue #2                                                              %! IC
                                 [
                                 d'16
-                                -\tongue #2                                                              %! IC
                                 ]
                                 bf'4
-                                -\tongue #2                                                              %! IC
                                 ~
                                 bf'16
                                 r16
@@ -4663,26 +4655,20 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tongue #2                                                              %! IC
                                 [
                                 e''16
-                                -\tongue #2                                                              %! IC
                                 ]
                                 ef''4
-                                -\tongue #2                                                              %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tongue #2                                                              %! IC
                                 [
                                 g''16
-                                -\tongue #2                                                              %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\tongue #2                                                              %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -4698,8 +4684,9 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.double_staccato(
-            ...         baca.tuplets()[1:2].pheads(),
+            ...     baca.map(
+            ...         baca.double_staccato(baca.pheads()),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4768,13 +4755,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def down_arpeggio(
-        selector: Selector = 'baca.cheads()',
+        selector: Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""Attaches down-arpeggio.
 
         ..  container:: example
 
-            Attaches down-arpeggios to chord heads:
+            Attaches down-arpeggio to chord head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4815,9 +4802,7 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             \scaleDurations #'(1 . 1) {
-                                \arpeggioArrowDown                                                       %! IC
                                 <ef'' e'' fs'''>8
-                                \arpeggio                                                                %! IC
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -4825,9 +4810,7 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             \scaleDurations #'(1 . 1) {
-                                \arpeggioArrowDown                                                       %! IC
                                 <g' af''>8
-                                \arpeggio                                                                %! IC
                                 ~
                                 [
                                 <g' af''>32
@@ -4848,7 +4831,7 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches down-arpeggios to last two chord heads:
+            Attaches down-arpeggio to last two chord heads:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4926,13 +4909,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def down_bow(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches down-bow.
 
         ..  container:: example
 
-            Attaches down-bow to pitched heads:
+            Attaches down-bow to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4964,10 +4947,8 @@ class LibraryAF(abjad.AbjadObject):
                                 -\downbow                                                                %! IC
                                 [
                                 d'16
-                                -\downbow                                                                %! IC
                                 ]
                                 bf'4
-                                -\downbow                                                                %! IC
                                 ~
                                 bf'16
                                 r16
@@ -4975,26 +4956,20 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow                                                                %! IC
                                 [
                                 e''16
-                                -\downbow                                                                %! IC
                                 ]
                                 ef''4
-                                -\downbow                                                                %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow                                                                %! IC
                                 [
                                 g''16
-                                -\downbow                                                                %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\downbow                                                                %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -5010,8 +4985,9 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.down_bow(
-            ...         baca.tuplets()[1:2].pheads(),
+            ...     baca.map(
+            ...         baca.down_bow(baca.pheads()),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6237,7 +6213,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.espressivo(baca.pheads()), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.espressivo(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6619,13 +6598,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def flageolet(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches flageolet.
 
         ..  container:: example
 
-            Attaches flageolet to pitched heads:
+            Attaches flageolet to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -6657,10 +6636,8 @@ class LibraryAF(abjad.AbjadObject):
                                 -\flageolet                                                              %! IC
                                 [
                                 d'16
-                                -\flageolet                                                              %! IC
                                 ]
                                 bf'4
-                                -\flageolet                                                              %! IC
                                 ~
                                 bf'16
                                 r16
@@ -6668,26 +6645,20 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\flageolet                                                              %! IC
                                 [
                                 e''16
-                                -\flageolet                                                              %! IC
                                 ]
                                 ef''4
-                                -\flageolet                                                              %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\flageolet                                                              %! IC
                                 [
                                 g''16
-                                -\flageolet                                                              %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\flageolet                                                              %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -6703,7 +6674,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.flageolet(baca.tuplets()[1:2].pheads()),
+            ...     baca.map(
+            ...         baca.flageolet(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

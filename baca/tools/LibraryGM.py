@@ -674,7 +674,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def hairpin_shorten_pair(
         pair: NumberPair,
-        selector: Selector = 'baca.leaf(0)',
+        selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides hairpin shorten pair.
         '''
@@ -1196,13 +1196,13 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def laissez_vibrer(
-        selector: Selector  = 'baca.ptails()',
+        selector: Selector  = 'baca.ptail(0)',
         ) -> IndicatorCommand:
         r'''Attaches laissez vibrer.
 
         ..  container:: example
 
-            Attaches laissez vibrer to PLT tails:
+            Attaches laissez vibrer to PLT tail 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -1234,37 +1234,29 @@ class LibraryGM(abjad.AbjadObject):
                                 -\laissezVibrer                                                          %! IC
                                 [
                                 d'16
-                                -\laissezVibrer                                                          %! IC
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                -\laissezVibrer                                                          %! IC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\laissezVibrer                                                          %! IC
                                 [
                                 e''16
-                                -\laissezVibrer                                                          %! IC
                                 ]
                                 ef''4
                                 ~
                                 ef''16
-                                -\laissezVibrer                                                          %! IC
                                 r16
                                 af''16
-                                -\laissezVibrer                                                          %! IC
                                 [
                                 g''16
-                                -\laissezVibrer                                                          %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\laissezVibrer                                                          %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -1280,7 +1272,10 @@ class LibraryGM(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.laissez_vibrer(baca.tuplets()[1:2].ptails()),
+            ...     baca.map(
+            ...         baca.laissez_vibrer(baca.ptails()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1741,13 +1736,13 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def marcato(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches marcato.
 
         ..  container:: example
 
-            Attaches marcato to pitched heads:
+            Attaches marcato to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -1779,10 +1774,8 @@ class LibraryGM(abjad.AbjadObject):
                                 -\marcato                                                                %! IC
                                 [
                                 d'16
-                                -\marcato                                                                %! IC
                                 ]
                                 bf'4
-                                -\marcato                                                                %! IC
                                 ~
                                 bf'16
                                 r16
@@ -1790,26 +1783,20 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\marcato                                                                %! IC
                                 [
                                 e''16
-                                -\marcato                                                                %! IC
                                 ]
                                 ef''4
-                                -\marcato                                                                %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\marcato                                                                %! IC
                                 [
                                 g''16
-                                -\marcato                                                                %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\marcato                                                                %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -1825,7 +1812,10 @@ class LibraryGM(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.marcato(baca.tuplets()[1:2].pheads()),
+            ...     baca.map(
+            ...         baca.marcato(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

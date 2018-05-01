@@ -169,7 +169,7 @@ class ImbricationCommand(Command):
         ...         'Voice 1',
         ...         [2, 19, 9],
         ...         baca.beam_everything(),
-        ...         baca.staccato(),
+        ...         baca.staccato(baca.pheads()),
         ...         ),
         ...     baca.ImbricationCommand(
         ...         'Voice 3',
@@ -350,7 +350,7 @@ class ImbricationCommand(Command):
         ...         beam_divisions_together=True,
         ...         beam_rests=True,
         ...         ),
-        ...     baca.staccato(),
+        ...     baca.staccato(baca.pheads()),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             talea=rhythmos.Talea(
@@ -855,7 +855,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 10],
-            ...         baca.staccato(),
+            ...         baca.staccato(baca.pheads()),
             ...         baca.beam_everything(),
             ...         extend_beam=True,
             ...         ),
@@ -870,7 +870,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [13, 9],
-            ...         baca.staccato(),
+            ...         baca.staccato(baca.pheads()),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -1497,7 +1497,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccato(),
+            ...     baca.staccato(baca.pheads()),
             ...     )
 
             >>> collections = [
@@ -1631,7 +1631,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccato(),
+            ...     baca.staccato(baca.pheads()),
             ...     )
 
             >>> collections = [
@@ -1703,7 +1703,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccato(),
+            ...     baca.staccato(baca.pheads()),
             ...     )
 
             >>> collections = [
@@ -1884,7 +1884,7 @@ class ImbricationCommand(Command):
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
-            ...     baca.staccato(),
+            ...     baca.staccato(baca.pheads()),
             ...     )
 
             >>> collections = [

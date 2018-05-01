@@ -5595,13 +5595,13 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def staccatissimo(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches staccatissimo.
 
         ..  container:: example
 
-            Attaches staccatissimo to pitched heads:
+            Attaches staccatissimo to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -5633,10 +5633,8 @@ class LibraryNS(abjad.AbjadObject):
                                 -\staccatissimo                                                          %! IC
                                 [
                                 d'16
-                                -\staccatissimo                                                          %! IC
                                 ]
                                 bf'4
-                                -\staccatissimo                                                          %! IC
                                 ~
                                 bf'16
                                 r16
@@ -5644,26 +5642,20 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\staccatissimo                                                          %! IC
                                 [
                                 e''16
-                                -\staccatissimo                                                          %! IC
                                 ]
                                 ef''4
-                                -\staccatissimo                                                          %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\staccatissimo                                                          %! IC
                                 [
                                 g''16
-                                -\staccatissimo                                                          %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\staccatissimo                                                          %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -5679,7 +5671,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.staccatissimo(baca.tuplets()[1:2].pheads()),
+            ...     baca.map(
+            ...         baca.staccatissimo(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5747,13 +5742,13 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def staccato(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches staccato.
 
         ..  container:: example
 
-            Attaches staccato to pitched heads:
+            Attaches staccato to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -5785,10 +5780,8 @@ class LibraryNS(abjad.AbjadObject):
                                 -\staccato                                                               %! IC
                                 [
                                 d'16
-                                -\staccato                                                               %! IC
                                 ]
                                 bf'4
-                                -\staccato                                                               %! IC
                                 ~
                                 bf'16
                                 r16
@@ -5796,26 +5789,20 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\staccato                                                               %! IC
                                 [
                                 e''16
-                                -\staccato                                                               %! IC
                                 ]
                                 ef''4
-                                -\staccato                                                               %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\staccato                                                               %! IC
                                 [
                                 g''16
-                                -\staccato                                                               %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\staccato                                                               %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -5831,7 +5818,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.staccato(baca.tuplets()[1:2].pheads()),
+            ...     baca.map(
+            ...         baca.staccato(baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6811,14 +6801,14 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def stem_tremolo(
-        selector: Selector = 'baca.pleaves()',
+        selector: Selector = 'baca.pleaf(0)',
         tremolo_flags:int = 32,
         ) -> IndicatorCommand:
         r'''Attaches stem tremolo.
 
         ..  container:: example
 
-            Attaches stem tremolo to pitched leaves:
+            Attaches stem tremolo to pitched leaf 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -6850,39 +6840,29 @@ class LibraryNS(abjad.AbjadObject):
                                 :32                                                                      %! IC
                                 [
                                 d'16
-                                :32                                                                      %! IC
                                 ]
                                 bf'4
-                                :32                                                                      %! IC
                                 ~
                                 bf'16
-                                :32                                                                      %! IC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                :32                                                                      %! IC
                                 [
                                 e''16
-                                :32                                                                      %! IC
                                 ]
                                 ef''4
-                                :32                                                                      %! IC
                                 ~
                                 ef''16
-                                :32                                                                      %! IC
                                 r16
                                 af''16
-                                :32                                                                      %! IC
                                 [
                                 g''16
-                                :32                                                                      %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                :32                                                                      %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -6899,7 +6879,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.stem_tremolo(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.stem_tremolo(baca.pleaves()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -7137,12 +7120,12 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def stopped(selector='baca.pheads()'):
+    def stopped(selector='baca.phead(0)'):
         r'''Attaches stopped +-sign.
 
         ..  container:: example
 
-            Attaches stopped +-sign to pitched heads:
+            Attaches stopped +-sign to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7174,10 +7157,8 @@ class LibraryNS(abjad.AbjadObject):
                                 -\stopped                                                                %! IC
                                 [
                                 d'16
-                                -\stopped                                                                %! IC
                                 ]
                                 bf'4
-                                -\stopped                                                                %! IC
                                 ~
                                 bf'16
                                 r16
@@ -7185,26 +7166,20 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\stopped                                                                %! IC
                                 [
                                 e''16
-                                -\stopped                                                                %! IC
                                 ]
                                 ef''4
-                                -\stopped                                                                %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\stopped                                                                %! IC
                                 [
                                 g''16
-                                -\stopped                                                                %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\stopped                                                                %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
