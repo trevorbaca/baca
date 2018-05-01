@@ -778,6 +778,13 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def loure(selector='baca.pleaf(0)'):
+        return baca.markup(
+            'louré',
+            selector=selector,
+            )
+
+    @staticmethod
     def lv_possibile(selector='baca.ptail(0)'):
         return baca.markup(
             'l.v. possibile',

@@ -91,6 +91,7 @@ Bases
       ~MarkupLibrary.lh_damp_plus_half_clt
       ~MarkupLibrary.lhd_plus_half_clt
       ~MarkupLibrary.lines
+      ~MarkupLibrary.loure
       ~MarkupLibrary.lv_possibile
       ~MarkupLibrary.molto_flautando
       ~MarkupLibrary.molto_flautando_e_pont
@@ -334,6 +335,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.lhd_plus_half_clt
 
 .. automethod:: MarkupLibrary.lines
+
+.. automethod:: MarkupLibrary.loure
 
 .. automethod:: MarkupLibrary.lv_possibile
 
