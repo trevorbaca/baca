@@ -6168,6 +6168,150 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def espressivo(
+        selector: Selector = 'baca.phead(0)',
+        ) -> IndicatorCommand:
+        r'''Attaches espressivo.
+
+        ..  container:: example
+
+            Attaches espressivo to pitched head 0:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.espressivo(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                -\espressivo                                                             %! IC
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches espressivo to pitched heads in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(baca.espressivo(baca.pheads()), baca.tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                -\espressivo                                                             %! IC
+                                [
+                                e''16
+                                -\espressivo                                                             %! IC
+                                ]
+                                ef''4
+                                -\espressivo                                                             %! IC
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                -\espressivo                                                             %! IC
+                                [
+                                g''16
+                                -\espressivo                                                             %! IC
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return IndicatorCommand(
+            indicators=[abjad.Articulation('espressivo')],
+            selector=selector,
+            )
+
+    @staticmethod
     def fermata(
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:

@@ -82,6 +82,7 @@ Bases
       ~LibraryAF.dynamic_text_y_offset
       ~LibraryAF.dynamic_up
       ~LibraryAF.enchained_hairpin
+      ~LibraryAF.espressivo
       ~LibraryAF.fermata
       ~LibraryAF.finger_pressure_transition
       ~LibraryAF.flag_stencil_false
@@ -221,6 +222,8 @@ Class & static methods
 .. automethod:: LibraryAF.dynamic_up
 
 .. automethod:: LibraryAF.enchained_hairpin
+
+.. automethod:: LibraryAF.espressivo
 
 .. automethod:: LibraryAF.fermata
 
