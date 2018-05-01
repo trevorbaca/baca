@@ -1,3 +1,5 @@
+\include "text-spanner-id.ily"
+
 %%% BAR NUMBERS: OVAL %%%
 
 #(define-markup-command (oval layout props arg)
@@ -668,7 +670,7 @@ slap =
   \revert NoteHead #'extra-offset
 #})
 
-%%% TONGUING: DOUBLE & TRIPLE %%%
+%%% STACCATI: DOUBLE & TRIPLE %%%
 
 tongue =
 #(define-music-function (parser location dots) (integer?)
