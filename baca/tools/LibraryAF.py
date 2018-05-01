@@ -5222,7 +5222,72 @@ class LibraryAF(abjad.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Attaches effort dynamic to pitched head 0:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('"f"'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                \effort_f                                                                %! IC
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
         '''
+        assert isinstance(dynamic, str), repr(dynamic)
         if dynamic in baca.tools.scheme.dynamics:
             name = baca.tools.scheme.dynamic_to_steady_state(dynamic)
             command = '\\' + dynamic
@@ -5238,6 +5303,11 @@ class LibraryAF(abjad.AbjadObject):
                 name_is_textual=name_is_textual,
                 sforzando=sforzando,
                 )
+        elif dynamic.startswith('"'):
+            assert dynamic.endswith('"')
+            dynamic = dynamic.strip('"')
+            command = rf'\effort_{dynamic}'
+            indicator = abjad.Dynamic(f'{dynamic}', command=command)
         else:
             indicator = abjad.Dynamic(dynamic)
         return IndicatorCommand(
