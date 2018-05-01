@@ -3517,7 +3517,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.script_color('red'),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3592,7 +3592,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(baca.script_color('red'), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3681,7 +3681,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.script_down(),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3756,7 +3756,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(baca.script_down(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3846,7 +3846,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.script_extra_offset((-1.5, 0), baca.leaf(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3920,7 +3920,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
             ...         baca.script_extra_offset((-1.5, 0), baca.leaf(0)),
@@ -4039,7 +4039,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.script_up(),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4114,7 +4114,7 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.accent(),
+            ...     baca.accent(baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(baca.script_up(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),

@@ -46,13 +46,13 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def accent(
-        selector: Selector = 'baca.pheads()',
+        selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r'''Attaches accent.
 
         ..  container:: example
 
-            Attaches accent to pitched heads:
+            Attaches accent to pitched head 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -84,10 +84,8 @@ class LibraryAF(abjad.AbjadObject):
                                 -\accent                                                                 %! IC
                                 [
                                 d'16
-                                -\accent                                                                 %! IC
                                 ]
                                 bf'4
-                                -\accent                                                                 %! IC
                                 ~
                                 bf'16
                                 r16
@@ -95,26 +93,20 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                                 %! IC
                                 [
                                 e''16
-                                -\accent                                                                 %! IC
                                 ]
                                 ef''4
-                                -\accent                                                                 %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                                 %! IC
                                 [
                                 g''16
-                                -\accent                                                                 %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                                 %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -130,7 +122,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.accent(), baca.tuplet(1)),
+            ...     baca.map(baca.accent(baca.pheads()), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

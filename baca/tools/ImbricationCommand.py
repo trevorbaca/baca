@@ -175,7 +175,7 @@ class ImbricationCommand(Command):
         ...         'Voice 3',
         ...         [16, 10, 18],
         ...         baca.beam_everything(),
-        ...         baca.accent(),
+        ...         baca.accent(baca.pheads()),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -373,7 +373,7 @@ class ImbricationCommand(Command):
         ...     baca.ImbricationCommand(
         ...         'Voice 1',
         ...         [2, 19, 9, 18, 16],
-        ...         baca.accent(),
+        ...         baca.accent(baca.pheads()),
         ...         baca.beam_everything(),
         ...         ),
         ...     )
@@ -613,7 +613,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         segment,
-            ...         baca.accent(),
+            ...         baca.accent(baca.pheads()),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -723,7 +723,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         segment,
-            ...         baca.accent(),
+            ...         baca.accent(baca.pheads()),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -1510,7 +1510,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(),
+            ...         baca.accent(baca.pheads()),
             ...         baca.beam_everything(),
             ...         allow_unused_pitches=True,
             ...         ),
@@ -1644,7 +1644,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(),
+            ...         baca.accent(baca.pheads()),
             ...         baca.beam_everything(),
             ...         ),
             ...     )
@@ -1717,7 +1717,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(),
+            ...         baca.accent(baca.pheads()),
             ...         baca.beam_everything(),
             ...         hocket=True,
             ...         ),
@@ -1897,7 +1897,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 18, 16, 15],
-            ...         baca.accent(),
+            ...         baca.accent(baca.pheads()),
             ...         baca.beam_everything(),
             ...         selector=baca.plts()[-9:],
             ...         ),
