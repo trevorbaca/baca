@@ -81,7 +81,6 @@ Bases
       ~LibraryAF.dynamic_text_x_offset
       ~LibraryAF.dynamic_text_y_offset
       ~LibraryAF.dynamic_up
-      ~LibraryAF.effort_dynamic
       ~LibraryAF.enchained_hairpin
       ~LibraryAF.fermata
       ~LibraryAF.finger_pressure_transition
@@ -220,8 +219,6 @@ Class & static methods
 .. automethod:: LibraryAF.dynamic_text_y_offset
 
 .. automethod:: LibraryAF.dynamic_up
-
-.. automethod:: LibraryAF.effort_dynamic
 
 .. automethod:: LibraryAF.enchained_hairpin
 
