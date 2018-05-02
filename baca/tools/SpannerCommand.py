@@ -206,14 +206,14 @@ class SpannerCommand(Command):
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if left_broken is not None:
             left_broken = bool(left_broken)
-        self._left_broken: bool = left_broken
+        self._left_broken = left_broken
         if right_broken is not None:
             right_broken = bool(right_broken)
-        self._right_broken: bool = right_broken
-        self._spanner: abjad.Spanner = spanner
+        self._right_broken = right_broken
+        self._spanner = spanner
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
-        self._tags: typing.List[abjad.Tag] = tags
+        self._tags = tags
 
     ### SPECIAL METHODS ###
 

@@ -60,7 +60,7 @@ class Scope(abjad.AbjadObject):
         return self._stages
 
     @property
-    def voice_name(self) -> str:
+    def voice_name(self) -> typing.Optional[str]:
         r'''Gets voice name.
         '''
         return self._voice_name

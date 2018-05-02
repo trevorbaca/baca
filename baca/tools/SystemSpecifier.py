@@ -26,6 +26,7 @@ class SystemSpecifier(abjad.AbjadObject):
         measure: int = None,
         y_offset: Number = None,
         ) -> None:
+        distances_: typing.Optional[typing.List[Number]] = None
         if distances is not None:
             assert isinstance(distances, collections.Iterable), repr(distances)
             for distance in distances:
@@ -44,19 +45,19 @@ class SystemSpecifier(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def distances(self) -> typing.List[Number]:
+    def distances(self) -> typing.Optional[typing.List[Number]]:
         r'''Gets distances.
         '''
         return self._distances
 
     @property
-    def measure(self) -> int:
+    def measure(self) -> typing.Optional[int]:
         r'''Gets start measure.
         '''
         return self._measure
 
     @property
-    def y_offset(self) -> Number:
+    def y_offset(self) -> typing.Optional[Number]:
         r'''Gets Y-offset.
         '''
         return self._y_offset

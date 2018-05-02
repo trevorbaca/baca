@@ -247,29 +247,29 @@ class RhythmCommand(Command):
             raise Exception(message)
         if division_maker is not None:
             assert isinstance(division_maker, division_maker_type), repr(division_maker)
-        self._division_maker: division_maker_typing = division_maker
+        self._division_maker = division_maker
         if division_expression is not None:
             assert isinstance(division_expression, abjad.Expression)
-        self._division_expression: abjad.Expression = division_expression
+        self._division_expression = division_expression
         if left_broken is not None:
             left_broken = bool(left_broken)
-        self._left_broken: bool = left_broken
+        self._left_broken = left_broken
         if multimeasure_rests is not None:
             multimeasure_rests = bool(multimeasure_rests)
         self._multimeasure_rests = multimeasure_rests
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
-        self._persist: str = persist
+        self._persist = persist
         if reference_meters is not None:
             assert isinstance(reference_meters, collections.Iterable)
             assert all(isinstance(_, abjad.Meter) for _ in reference_meters)
-        self._reference_meters: typing.Iterable[abjad.Meter] = reference_meters
+        self._reference_meters = reference_meters
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
-        self._rewrite_meter: bool = rewrite_meter
+        self._rewrite_meter = rewrite_meter
         if rewrite_rest_filled is not None:
             rewrite_rest_filled = bool(rewrite_rest_filled)
-        self._rewrite_rest_filled: bool = rewrite_rest_filled
+        self._rewrite_rest_filled = rewrite_rest_filled
         prototype = (rhythmos.RhythmMaker, abjad.Selection, type(None))
         if not isinstance(rhythm_maker, prototype):
             assert isinstance(rhythm_maker, collections.Iterable), repr(rhythm_maker)
@@ -279,28 +279,28 @@ class RhythmCommand(Command):
                 rhythm_maker_, pattern = pair
                 assert isinstance(rhythm_maker_, rhythm_maker_type)
                 assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._rhythm_maker: rhythm_maker_typing = rhythm_maker
+        self._rhythm_maker = rhythm_maker
         if rhythm_overwrites is not None:
             assert isinstance(rhythm_overwrites, list)
             assert all(isinstance(_, tuple) for _ in rhythm_overwrites)
         self._rhythm_overwrites = rhythm_overwrites
         if right_broken is not None:
             right_broken = bool(right_broken)
-        self._right_broken: bool = right_broken
+        self._right_broken = right_broken
         if split_at_measure_boundaries is not None:
             split_at_measure_boundaries = bool(split_at_measure_boundaries)
-        self._split_at_measure_boundaries: bool = split_at_measure_boundaries
+        self._split_at_measure_boundaries = split_at_measure_boundaries
         if stages is not None:
             assert isinstance(stages, tuple), repr(stages)
             assert len(stages) == 2, repr(stages)
-        self._stages: typing.Tuple[int, int] = stages
-        self._state: abjad.OrderedDict = None
+        self._stages = stages
+        self._state: typing.Optional[abjad.OrderedDict] = None
         if tie_first is not None:
             tie_first = bool(tie_first)
-        self._tie_first: bool = tie_first
+        self._tie_first = tie_first
         if tie_last is not None:
             tie_last = bool(tie_last)
-        self._tie_last: bool = tie_last
+        self._tie_last = tie_last
 
     ### SPECIAL METHODS ###
 
@@ -590,7 +590,9 @@ class RhythmCommand(Command):
         return self._persist
 
     @property
-    def reference_meters(self) -> typing.Iterable[abjad.Meter]:
+    def reference_meters(self) -> typing.Optional[
+        typing.Iterable[abjad.Meter]
+        ]:
         r'''Gets reference meters.
 
         Only used to rewrite meters.
@@ -623,7 +625,7 @@ class RhythmCommand(Command):
         return self._rhythm_maker
 
     @property
-    def rhythm_overwrites(self) -> typing.List[tuple]:
+    def rhythm_overwrites(self) -> typing.Optional[typing.List[tuple]]:
         r'''Gets rhythm overwrites.
         '''
         return self._rhythm_overwrites
@@ -648,10 +650,13 @@ class RhythmCommand(Command):
 
     # TODO: remove because unused?
     @property
-    def start_stage(self) -> int:
+    def start_stage(self) -> typing.Optional[int]:
         r'''Gets start stage.
         '''
-        return self.stages[0]
+        if self.stages:
+            return self.stages[0]
+        else:
+            return None
 
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
@@ -663,10 +668,13 @@ class RhythmCommand(Command):
 
     # TODO: remove because unused?
     @property
-    def stop_stage(self) -> int:
+    def stop_stage(self) -> typing.Optional[int]:
         r'''Gets stop stage.
         '''
-        return self.stages[-1]
+        if self.stages is not None:
+            return self.stages[-1]
+        else:
+            return None
 
     @property
     def tie_first(self) -> typing.Optional[bool]:

@@ -28,7 +28,7 @@ class PartAssignmentCommand(Command):
                 message = 'part_assignment must be part assignment'
                 message += f' (not {part_assignment!r}).'
                 raise Exception(message)
-        self._part_assignment: abjad.PartAssignment = part_assignment
+        self._part_assignment = part_assignment
 
     ### SPECIAL METHODS ###
 
@@ -61,7 +61,7 @@ class PartAssignmentCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def part_assignment(self) -> abjad.PartAssignment:
+    def part_assignment(self) -> typing.Optional[abjad.PartAssignment]:
         r'''Gets part assignment.
         '''
         return self._part_assignment

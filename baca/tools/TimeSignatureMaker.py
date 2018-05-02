@@ -158,7 +158,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         return self._count
 
     @property
-    def fermata_measures(self) -> typing.List[int]:
+    def fermata_measures(self) -> typing.Optional[typing.List[int]]:
         r'''Gets fermata measures.
         '''
         return self._fermata_measures

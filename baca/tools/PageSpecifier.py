@@ -50,7 +50,9 @@ class PageSpecifier(abjad.AbjadObject):
         return self._number
 
     @property
-    def systems(self) -> typing.List[typing.Union[list, SystemSpecifier]]:
+    def systems(self) -> typing.Optional[
+        typing.List[typing.Union[list, SystemSpecifier]]
+        ]:
         r'''Gets systems.
         '''
         return self._systems

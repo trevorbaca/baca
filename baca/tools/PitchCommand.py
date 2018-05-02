@@ -594,31 +594,31 @@ class PitchCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_octaves(self) -> bool:
+    def allow_octaves(self) -> typing.Optional[bool]:
         r'''Is true when command allows octaves.
         '''
         return self._allow_octaves
 
     @property
-    def allow_repeats(self) -> bool:
+    def allow_repeats(self) -> typing.Optional[bool]:
         r'''Is true when command allows repeat pitches.
         '''
         return self._allow_repeats
 
     @property
-    def cyclic(self) -> bool:
+    def cyclic(self) -> typing.Optional[bool]:
         r'''Is true when command reads pitches cyclically.
         '''
         return self._cyclic
 
     @property
-    def do_not_transpose(self) -> bool:
+    def do_not_transpose(self) -> typing.Optional[bool]:
         r'''Is true when pitch escapes transposition.
         '''
         return self._do_not_transpose
 
     @property
-    def ignore_incomplete(self) -> bool:
+    def ignore_incomplete(self) -> typing.Optional[bool]:
         r'''Is true when persistent pitch command ignores previous segment
         incomplete last note.
         '''
@@ -643,7 +643,7 @@ class PitchCommand(Command):
         return self._persist
 
     @property
-    def pitches(self) -> typing.Iterable:
+    def pitches(self) -> typing.Optional[typing.Iterable]:
         r'''Gets pitches.
 
         ..  container:: example

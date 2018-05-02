@@ -35,7 +35,7 @@ class Command(abjad.AbjadObject):
         tag_measure_number: bool = None,
         ) -> None:
         from baca.tools.MapCommand import MapCommand
-        self._deactivate: bool = deactivate
+        self._deactivate = deactivate
         if isinstance(selector, str):
             selector_ = eval(selector)
         else:
@@ -43,8 +43,8 @@ class Command(abjad.AbjadObject):
         if selector_ is not None:
             prototype = (abjad.Expression, MapCommand)
             assert isinstance(selector_, prototype), repr(selector_)
-        self._selector: typing.Optional[abjad.Expression] = selector_
-        self._tags: typing.List[abjad.Tag] = None
+        self._selector = selector_
+        self._tags: typing.Optional[typing.List[abjad.Tag]] = None
         self.manifests = None
         self.offset_to_measure_number = None
         self.score_template = None
@@ -232,7 +232,10 @@ class Command(abjad.AbjadObject):
         r'''Gets tags.
         '''
         assert self._are_valid_tags(self._tags)
-        return self._tags[:]
+        result: typing.List[abjad.Tag] = []
+        if self._tags:
+            result = self._tags[:]
+        return result
 
     ### PUBLIC METHODS ###
 
