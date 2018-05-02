@@ -136,7 +136,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         self,
         stem: str,
         *contexts,
-        ) -> abjad.StaffGroup:
+        ) -> typing.Optional[abjad.StaffGroup]:
         r'''Makes piano staff.
         '''
         if not isinstance(stem, str):
@@ -151,7 +151,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         self,
         stem: str,
         *contexts,
-        ) -> abjad.StaffGroup:
+        ) -> typing.Optional[abjad.StaffGroup]:
         r'''Makes square staff group.
         '''
         if not isinstance(stem, str):
@@ -159,6 +159,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         contexts = tuple(_ for _ in contexts if _ is not None)
         result = None
         if len(contexts) == 1:
+            assert isinstance(contexts[0], abjad.StaffGroup)
             result = contexts[0]
         elif 1 < len(contexts):
             name = f'{stem}SquareStaffGroup'
@@ -171,7 +172,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         self,
         stem: str,
         *contexts,
-        ) -> abjad.StaffGroup:
+        ) -> typing.Optional[abjad.StaffGroup]:
         r'''Makes staff group.
         '''
         if not isinstance(stem, str):
