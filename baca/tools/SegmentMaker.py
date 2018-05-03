@@ -287,10 +287,10 @@ class SegmentMaker(abjad.SegmentMaker):
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
-        final_bar_line: typing.Union[bool, str, None] = None,
-        final_markup: typing.Union[tuple, None] = None,
-        final_markup_extra_offset: typing.Union[NumberPair, None] = None,
-        first_measure_number: typing.Union[int, None] = None,
+        final_bar_line: typing.Union[bool, str] = None,
+        final_markup: tuple = None,
+        final_markup_extra_offset: NumberPair = None,
+        first_measure_number: int = None,
         first_segment: bool = None,
         ignore_out_of_range_pitches: bool = None,
         ignore_repeat_pitch_classes: bool = None,
@@ -325,92 +325,85 @@ class SegmentMaker(abjad.SegmentMaker):
         validate_stage_count: int = None,
         ) -> None:
         super(SegmentMaker, self).__init__()
-        self._allow_empty_selections: bool = allow_empty_selections
-        self._breaks: BreakMeasureMap = breaks
+        self._allow_empty_selections = allow_empty_selections
+        self._breaks = breaks
         if clock_time_override is not None:
             assert isinstance(clock_time_override, abjad.MetronomeMark)
         self._clock_time_override = clock_time_override
-        self._color_octaves: bool = color_octaves
-        self._color_out_of_range_pitches: bool = \
-            color_out_of_range_pitches
-        self._color_repeat_pitch_classes: bool = \
-            color_repeat_pitch_classes
+        self._color_octaves = color_octaves
+        self._color_out_of_range_pitches = color_out_of_range_pitches
+        self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
-        self._do_not_check_persistence: bool = do_not_check_persistence
-        self._do_not_include_layout_ly: bool = do_not_include_layout_ly
-        self._duration: abjad.Duration = None
+        self._do_not_check_persistence = do_not_check_persistence
+        self._do_not_include_layout_ly = do_not_include_layout_ly
+        self._duration: typing.Optional[abjad.Duration] = None
         self._fermata_measure_numbers: typing.List = []
-        self._fermata_measure_staff_line_count: int = \
+        self._fermata_measure_staff_line_count = \
             fermata_measure_staff_line_count
         self._fermata_start_offsets: typing.List[abjad.Offset] = []
         self._fermata_stop_offsets: typing.List[abjad.Offset] = []
         if final_bar_line is not None:
             assert isinstance(final_bar_line, (bool, str))
-        self._final_bar_line: typing.Union[bool, str, None] = final_bar_line
-        self._final_markup: tuple = final_markup
-        self._final_markup_extra_offset: NumberPair = \
-            final_markup_extra_offset
-        self._first_measure_number: int = first_measure_number
+        self._final_bar_line = final_bar_line
+        self._final_markup = final_markup
+        self._final_markup_extra_offset = final_markup_extra_offset
+        self._first_measure_number = first_measure_number
         if first_segment is not None:
             first_segment = bool(first_segment)
         self._first_segment = first_segment
         if ignore_out_of_range_pitches is not None:
             ignore_out_of_range_pitches = bool(ignore_out_of_range_pitches)
         self._ignore_out_of_range_pitches = ignore_out_of_range_pitches
-        self._ignore_repeat_pitch_classes: bool = \
-            ignore_repeat_pitch_classes
-        self._ignore_unpitched_notes: bool = ignore_unpitched_notes
-        self._ignore_unregistered_pitches: bool = \
-            ignore_unregistered_pitches
+        self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
+        self._ignore_unpitched_notes = ignore_unpitched_notes
+        self._ignore_unregistered_pitches = ignore_unregistered_pitches
         self._include_nonfirst_segment_stylesheet = \
             include_nonfirst_segment_stylesheet
-        self._instruments: abjad.OrderedDict = instruments
+        self._instruments = instruments
         self._last_measure_is_fermata = False
-        self._last_segment: bool = last_segment
+        self._last_segment = last_segment
         self._magnify_staves = magnify_staves
-        self._margin_markups: abjad.OrderedDict = margin_markups
+        self._margin_markups = margin_markups
         if measures_per_stage in (True, None):
             if time_signatures:
                 measures_per_stage = len(time_signatures) * [1]
             else:
                 measures_per_stage = []
-        self._measures_per_stage: typing.List[int] = measures_per_stage
-        self._metronome_mark_measure_map: MetronomeMarkMeasureMap = \
-            metronome_mark_measure_map
-        self._metronome_mark_stem_height: typing.Optional[Number] = \
-            metronome_mark_stem_height
-        self._metronome_marks: abjad.OrderedDict = metronome_marks
-        self._midi: bool = None
-        self._mmspanner_right_broken: bool = mmspanner_right_broken
+        self._measures_per_stage = measures_per_stage
+        self._metronome_mark_measure_map = metronome_mark_measure_map
+        self._metronome_mark_stem_height = metronome_mark_stem_height
+        self._metronome_marks = metronome_marks
+        self._midi: typing.Optional[bool] = None
+        self._mmspanner_right_broken = mmspanner_right_broken
         self._mmspanner_right_padding: typing.Union[
             Number, typing.Tuple[Number, abjad.Tag]
             ] = mmspanner_right_padding
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
-        self._score_template: ScoreTemplate = score_template
+        self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
             segment_directory = abjad.Path(
                 segment_directory,
                 scores=segment_directory.parent.parent.parent.parent,
                 )
-        self._segment_directory: abjad.Path = segment_directory
-        self._segment_duration: abjad.Duration = None
-        self._skip_wellformedness_checks: bool = skip_wellformedness_checks
-        self._skips_instead_of_rests: bool = skips_instead_of_rests
-        self._spacing: HorizontalSpacingSpecifier = spacing
+        self._segment_directory: typing.Optional[abjad.Path] = segment_directory
+        self._segment_duration: typing.Optional[abjad.Duration] = None
+        self._skip_wellformedness_checks = skip_wellformedness_checks
+        self._skips_instead_of_rests = skips_instead_of_rests
+        self._spacing = spacing
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
-        self._start_clock_time: str = None
-        self._stop_clock_time: str = None
+        self._start_clock_time: typing.Optional[str] = None
+        self._stop_clock_time: typing.Optional[str] = None
         if test_container_identifiers is not None:
             test_container_identifiers = bool(test_container_identifiers)
         self._test_container_identifiers = test_container_identifiers
-        self._transpose_score: bool = transpose_score
-        self._validate_measure_count: int = validate_measure_count
-        self._validate_stage_count: int = validate_stage_count
+        self._transpose_score = transpose_score
+        self._validate_measure_count = validate_measure_count
+        self._validate_stage_count = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
-        self._voice_names: typing.Tuple[str, ...] = None
+        self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
         self._wrappers: typing.List[CommandWrapper] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
@@ -949,6 +942,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _alive_during_any_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
+        assert self.previous_metadata is not None
         names: typing.List = self.previous_metadata.get(
             'alive_during_segment',
             [],
@@ -957,6 +951,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _alive_during_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
+        assert self.previous_metadata is not None
         names: typing.List = self.previous_metadata.get(
             'alive_during_segment',
             [],
@@ -4951,6 +4946,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def magnify_staves(self) -> typing.Union[
         abjad.Multiplier,
         typing.Tuple[abjad.Multiplier, abjad.Tag],
+        None,
         ]:
         r'''Gets staff magnification.
         '''
@@ -5328,7 +5324,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metronome_mark_stem_height
 
     @property
-    def metronome_marks(self) -> abjad.OrderedDict:
+    def metronome_marks(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets metronome marks.
         '''
         return self._metronome_marks
@@ -5356,7 +5352,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._mmspanner_right_padding
 
     @property
-    def previous_metadata(self) -> abjad.OrderedDict:
+    def previous_metadata(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets previous segment metadata.
         '''
         return self._previous_metadata
@@ -5896,13 +5892,11 @@ class SegmentMaker(abjad.SegmentMaker):
             directory.
 
         '''
-        self._environment: typing.Optional[str] = environment
+        self._environment = environment
         self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
-        self._midi: typing.Optional[bool] = midi
-        self._previous_metadata: abjad.OrderedDict = \
-            abjad.OrderedDict(previous_metadata)
-        self._segment_directory: typing.Optional[
-            abjad.Path] = segment_directory
+        self._midi = midi
+        self._previous_metadata = abjad.OrderedDict(previous_metadata)
+        self._segment_directory = segment_directory
         self._import_manifests()
         self._make_score()
         self._make_lilypond_file()
@@ -5962,4 +5956,5 @@ class SegmentMaker(abjad.SegmentMaker):
         self._check_all_music_in_part_containers()
         self._check_duplicate_part_assignments()
         self._collect_metadata()
+        assert isinstance(self._lilypond_file, abjad.LilyPondFile)
         return self._lilypond_file

@@ -313,7 +313,7 @@ class IndicatorCommand(Command):
         return self._context
 
     @property
-    def indicators(self) -> abjad.CyclicTuple:
+    def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
         r'''Gets indicators.
 
         ..  container:: example

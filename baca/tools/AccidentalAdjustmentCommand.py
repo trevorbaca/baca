@@ -1,5 +1,6 @@
 import abjad
 import baca
+import typing
 from .Command import Command
 from .Typing import Selector
 
@@ -163,19 +164,19 @@ class AccidentalAdjustmentCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def cautionary(self) -> bool:
+    def cautionary(self) -> typing.Optional[bool]:
         r'''Is true when command makes accidentals cautionary.
         '''
         return self._cautionary
 
     @property
-    def forced(self) -> bool:
+    def forced(self) -> typing.Optional[bool]:
         r'''Is true when command forces accidentals.
         '''
         return self._forced
 
     @property
-    def parenthesized(self) -> bool:
+    def parenthesized(self) -> typing.Optional[bool]:
         r'''Is true when command parenthesizes accidentals.
         '''
         return self._parenthesized

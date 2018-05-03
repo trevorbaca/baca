@@ -110,7 +110,7 @@ class ContainerCommand(Command):
             if not isinstance(identifier, str):
                 message = f'identifier must be string (not {identifier!r}).'
                 raise Exception(message)
-        self._identifier: str = identifier
+        self._identifier = identifier
         self._tags = []
 
     ### SPECIAL METHODS ###

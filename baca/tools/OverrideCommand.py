@@ -336,25 +336,25 @@ class OverrideCommand(Command):
         return self._after 
 
     @property
-    def attribute(self) -> str:
+    def attribute(self) -> typing.Optional[str]:
         r'''Gets attribute name.
         '''
         return self._attribute
 
     @property
-    def blacklist(self) -> typing.Tuple[type]:
+    def blacklist(self) -> typing.Optional[typing.Tuple[type]]:
         r'''Gets blacklist leaves.
         '''
         return self._blacklist
 
     @property
-    def context(self) -> str:
+    def context(self) -> typing.Optional[str]:
         r'''Gets context name.
         '''
         return self._context
 
     @property
-    def grob(self) -> str:
+    def grob(self) -> typing.Optional[str]:
         r'''Gets grob name.
         '''
         return self._grob
@@ -366,7 +366,7 @@ class OverrideCommand(Command):
         return self._value
 
     @property
-    def whitelist(self) -> typing.Tuple[type]:
+    def whitelist(self) -> typing.Optional[typing.Tuple[type]]:
         r'''Gets whitelist leaves.
         '''
         return self._whitelist

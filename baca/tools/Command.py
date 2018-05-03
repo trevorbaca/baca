@@ -207,12 +207,14 @@ class Command(abjad.AbjadObject):
     # TODO: supply with all self.get_tag(leaf) functionality
     # TODO: always return tag (never none) for in-place prepend
     @property
-    def tag(self) -> typing.Optional[abjad.Tag]:
+    def tag(self) -> abjad.Tag:
         r'''Gets tag.
         '''
         # TODO: replace self.get_tag() functionality
         words = [str(_) for _ in self.tags]
-        return abjad.Tag.from_words(words)
+        tag = abjad.Tag.from_words(words)
+        assert isinstance(tag, abjad.Tag)
+        return tag
 
     @property
     def tag_measure_number(self) -> typing.Optional[bool]:

@@ -184,11 +184,13 @@ class TextSpannerCommand(Command):
         if isinstance(text, str):
             markup_library = MarkupLibrary()
             command = markup_library(text)
+            assert command.indicators is not None
             markup = command.indicators[0]
         elif isinstance(text, abjad.Markup):
             markup = text
         else:
             assert isinstance(text, IndicatorCommand), repr(text)
+            assert text.indicators is not None
             assert len(text.indicators) == 1
             markup = text.indicators[0]
             assert isinstance(markup, abjad.Markup)

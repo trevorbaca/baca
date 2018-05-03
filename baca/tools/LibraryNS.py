@@ -1266,7 +1266,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def previous_metadata(path: str) -> abjad.OrderedDict:
+    def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets previous segment metadata before ``path``.
         '''
         # reproduces abjad.Path.get_previous_path()

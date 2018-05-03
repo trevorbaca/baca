@@ -409,12 +409,13 @@ class BreakMeasureMap(abjad.AbjadObject):
         return self._local_measure_numbers
 
     @property
-    def tag(self) -> typing.Optional[abjad.Tag]:
+    def tag(self) -> abjad.Tag:
         r'''Gets tag.
         '''
         if self.tags:
             return abjad.Tag.from_words(self.tags)
-        return None
+        else:
+            return abjad.Tag()
 
     @property
     def tags(self) -> typing.List[str]:

@@ -1592,10 +1592,9 @@ class LibraryGM(abjad.AbjadObject):
             division_masks = None
         else:
             division_masks = [division_mask]
+        tie_specifier = None
         if repeat_ties:
             tie_specifier = rhythmos.TieSpecifier(repeat_ties=True)
-        else:
-            tie_specifier = None
         return RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
@@ -2010,7 +2009,7 @@ class LibraryGM(abjad.AbjadObject):
         key: str,
         selector: Selector = 'baca.leaf(0)',
         redundant: bool = None,
-        ) -> MetronomeMarkCommand:
+        ) -> typing.Optional[MetronomeMarkCommand]:
         r'''Attaches metronome mark matching ``key`` metronome mark manifest.
         '''
         if redundant is True:

@@ -55,7 +55,7 @@ class BowContactPointCommand(Command):
         abjad.attach(spanner, leaves)
         lts = baca.select(argument).lts()
         total = len(lts)
-        previous_bcp: typing.Tuple[int, int] = None
+        previous_bcp = None
         i = 0
         for lt in lts:
             previous_leaf = abjad.inspect(lt.head).get_leaf(-1)

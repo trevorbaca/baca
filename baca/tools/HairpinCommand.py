@@ -40,19 +40,19 @@ class HairpinCommand(Command):
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if left_broken is not None:
             assert left_broken in ('<', '>', 'niente'), repr(left_broken)
-        self._left_broken: str = left_broken
+        self._left_broken = left_broken
         if right_broken is not None:
             assert right_broken in ('<', '>', 'niente'), repr(right_broken)
-        self._right_broken: str = right_broken
+        self._right_broken = right_broken
         if start is not None:
             assert isinstance(start, abjad.Dynamic), repr(start)
-        self._start: abjad.Dynamic = start
+        self._start = start
         if stop is not None:
             assert isinstance(stop, abjad.Dynamic), repr(stop)
-        self._stop: abjad.Dynamic = stop
+        self._stop = stop
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
-        self._tags: typing.List[abjad.Tag] = tags
+        self._tags = tags
 
     ### SPECIAL METHODS ###
 

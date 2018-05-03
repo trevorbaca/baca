@@ -868,6 +868,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         if measures is not None:
             prototype = abjad.OrderedDict
             assert isinstance(measures, prototype), repr(measures)
+        else:
+            measures = abjad.OrderedDict()
         self._measures = measures
 
     ### SPECIAL METHODS ###
@@ -1180,7 +1182,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return self._measure_count
 
     @property
-    def measures(self) -> typing.Optional[abjad.OrderedDict]:
+    def measures(self) -> abjad.OrderedDict:
         r'''Gets measure overrides.
         '''
         return self._measures

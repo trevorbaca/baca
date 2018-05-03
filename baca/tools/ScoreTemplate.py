@@ -151,7 +151,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         self,
         stem: str,
         *contexts,
-        ) -> typing.Optional[abjad.StaffGroup]:
+        ) -> typing.Optional[typing.Union[abjad.Staff, abjad.StaffGroup]]:
         r'''Makes square staff group.
         '''
         if not isinstance(stem, str):
@@ -159,7 +159,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         contexts = tuple(_ for _ in contexts if _ is not None)
         result = None
         if len(contexts) == 1:
-            assert isinstance(contexts[0], abjad.StaffGroup)
+            prototype = (abjad.Staff, abjad.StaffGroup)
+            assert isinstance(contexts[0], prototype), repr(contexts[0])
             result = contexts[0]
         elif 1 < len(contexts):
             name = f'{stem}SquareStaffGroup'

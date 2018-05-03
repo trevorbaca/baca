@@ -639,7 +639,7 @@ class MarkupLibrary(abjad.AbjadObject):
     @staticmethod
     def instrument(
         string: str,
-        hcenter_in: Number = 16,
+        hcenter_in: typing.Optional[Number] = 16,
         column: bool = True,
         ):
         r'''Makes instrument name markup.
@@ -766,6 +766,7 @@ class MarkupLibrary(abjad.AbjadObject):
                 items_.append(item)
             else:
                 assert isinstance(item, IndicatorCommand)
+                assert item.indicators is not None
                 assert len(item.indicators) == 1
                 markup = item.indicators[0]
                 items_.append(markup)

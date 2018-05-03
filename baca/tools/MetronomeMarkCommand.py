@@ -56,7 +56,7 @@ class MetronomeMarkCommand(Command):
             return
         if self.redundant is True:
             return
-        if isinstance(self.key, str):
+        if isinstance(self.key, str) and self.manifests is not None:
             metronome_marks = self.manifests['abjad.MetronomeMark']
             indicator = metronome_marks.get(self.key)
             if indicator is None:

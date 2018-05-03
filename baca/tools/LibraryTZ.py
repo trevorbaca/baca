@@ -66,6 +66,7 @@ class LibraryTZ(abjad.AbjadObject):
                     tag_measure_number=tag_measure_number,
                     )
         else:
+            assert command._tags is not None
             tags.sort()
             tags_ = [abjad.Tag(_) for _ in tags]
             command._tags.extend(tags_)
@@ -3049,11 +3050,10 @@ class LibraryTZ(abjad.AbjadObject):
         else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
+        spanner_selector_ = None
         if spanner_selector is True:
             spanner_selector_ = selector
-        elif spanner_selector is False:
-            spanner_selector_ = None
-        else:
+        elif spanner_selector is not False:
             assert isinstance(spanner_selector, (str, abjad.Expression))
             spanner_selector_ = spanner_selector
         return LibraryNS.piecewise(

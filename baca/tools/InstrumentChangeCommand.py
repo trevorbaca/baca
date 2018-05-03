@@ -18,6 +18,8 @@ class InstrumentChangeCommand(IndicatorCommand):
             return
         if self.selector is not None:
             argument = self.selector(argument)
+        if self.indicators is None:
+            return
         first_leaf = abjad.inspect(argument).get_leaf(0)
         if first_leaf is not None:
             parentage = abjad.inspect(first_leaf).get_parentage()

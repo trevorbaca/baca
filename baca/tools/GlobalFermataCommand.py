@@ -43,18 +43,18 @@ class GlobalFermataCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Applies command ``argument`` selector output.
+        r'''Applies command to ``argument`` selector output.
         '''
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
+        if isinstance(self.description, str):
+            command = self.description_to_command.get(self.description)
+        else:
+            command = 'fermata'
         for leaf in abjad.iterate(argument).leaves():
             assert isinstance(leaf, abjad.MultimeasureRest)
-            command = self.description_to_command.get(
-                self.description,
-                'fermata',
-                )
             string = f'scripts.u{command}'
             directive = abjad.Markup.musicglyph(string)
             directive = abjad.new(directive, direction=abjad.Up)
