@@ -1,4 +1,4 @@
-\include "text-spanner-id.ily"
+%\include "text-spanner-id.ily"
 
 %%% BAR NUMBERS: OVAL %%%
 
