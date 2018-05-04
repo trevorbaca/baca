@@ -1592,16 +1592,6 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.staff-padding = #6                                  %! OC1
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
-                                \once \override TextSpanner.bound-details.right.text = \markup {
-                                    \concat
-                                        {
-                                            \hspace
-                                                #0.0
-                                            \whiteout
-                                                \upright
-                                                    ord.
-                                        }
-                                    }                                                                    %! PWC1
                                 c'16
                                 [
                                 -\tweak Y-extent ##f                                                     %! PWC1
@@ -1626,6 +1616,16 @@ class LibraryTZ(abjad.AbjadObject):
                                 -\tweak bound-details.right-broken.text ##f                              %! PWC1
                                 -\tweak bound-details.right.padding 0.5                                  %! PWC1
                                 -\tweak bound-details.right.stencil-align-dir-y #center                  %! PWC1
+                                -\tweak bound-details.right.text \markup {
+                                    \concat
+                                        {
+                                            \hspace
+                                                #0.0
+                                            \whiteout
+                                                \upright
+                                                    ord.
+                                        }
+                                    }                                                                    %! PWC1
                                 \startTextSpan                                                           %! PWC1
                                 d'16
                                 ]
@@ -1713,16 +1713,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextSpanner.staff-padding = #6                                 %! OC1
-                                \once \override TextSpanner.bound-details.right.text = \markup {
-                                    \concat
-                                        {
-                                            \hspace
-                                                #0.0
-                                            \whiteout
-                                                \upright
-                                                    ord.
-                                        }
-                                    }                                                                    %! PWC1
                                 fs''16
                                 [
                                 -\tweak Y-extent ##f                                                     %! PWC1
@@ -1747,6 +1737,16 @@ class LibraryTZ(abjad.AbjadObject):
                                 -\tweak bound-details.right-broken.text ##f                              %! PWC1
                                 -\tweak bound-details.right.padding 0.5                                  %! PWC1
                                 -\tweak bound-details.right.stencil-align-dir-y #center                  %! PWC1
+                                -\tweak bound-details.right.text \markup {
+                                    \concat
+                                        {
+                                            \hspace
+                                                #0.0
+                                            \whiteout
+                                                \upright
+                                                    ord.
+                                        }
+                                    }                                                                    %! PWC1
                                 \startTextSpan                                                           %! PWC1
                                 e''16
                                 ]
@@ -2975,16 +2975,6 @@ class LibraryTZ(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override TextSpanner.bound-details.right.text = \markup {
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.0
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                            }
-                                        }                                                                %! PWC1
                                     d''8
                                     \stopTextSpan                                                        %! PWC1
                                     [
@@ -3010,6 +3000,16 @@ class LibraryTZ(abjad.AbjadObject):
                                     -\tweak bound-details.right-broken.text ##f                          %! PWC1
                                     -\tweak bound-details.right.padding 0.5                              %! PWC1
                                     -\tweak bound-details.right.stencil-align-dir-y #center              %! PWC1
+                                    -\tweak bound-details.right.text \markup {
+                                        \concat
+                                            {
+                                                \hspace
+                                                    #0.0
+                                                \whiteout
+                                                    \upright
+                                                        pont.
+                                            }
+                                        }                                                                %! PWC1
                                     \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
                                     f'8
