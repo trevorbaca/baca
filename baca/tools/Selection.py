@@ -6,6 +6,8 @@ import inspect
 class Selection(abjad.Selection):
     r'''Selection.
 
+    Selection.
+
     ..  container:: example
 
         >>> baca.select()
