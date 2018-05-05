@@ -10,6 +10,10 @@
     system-system-spacing.minimum-distance = 24
 }
 
+\header {
+    tagline = ##f
+}
+
 \layout {
     \accidentalStyle forget
     indent = 10

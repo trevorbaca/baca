@@ -1354,6 +1354,7 @@ class LibraryTZ(abjad.AbjadObject):
         line_segment: abjad.LineSegment = None,
         right_padding: typing.Optional[Number] = 1.25,
         selector: Selector = 'baca.leaves()',
+        tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None,
         ) -> TextSpannerCommand:
         r'''Makes text spanner command.
 
@@ -1369,11 +1370,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.text_spanner(
             ...         '1/2 clt',
-            ...         selector=baca.leaves()[:4 + 1],
+            ...         selector=baca.leaves()[:7 + 1],
+            ...         tweaks=[('staff-padding', 4.5)],
             ...         ),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.text_spanner_staff_padding(4.5),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -1430,9 +1431,9 @@ class LibraryTZ(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \override TextSpanner.staff-padding = #4.5                           %! OC1
                                     e'8
                                     [
+                                    - \tweak staff-padding #4.5
                                     - \tweak Y-extent ##f
                                     - \tweak bound-details.left.text \markup {
                                         \concat
@@ -1469,7 +1470,6 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
                                     g'8
-                                    \stopTextSpan
                                     [
                 <BLANKLINE>
                                     f''8
@@ -1481,6 +1481,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
                                     d''8
+                                    \stopTextSpan
                                     [
                 <BLANKLINE>
                                     f'8
@@ -1500,7 +1501,6 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                     d''8
                                     ]
-                                    \revert TextSpanner.staff-padding                                    %! OC2
                 <BLANKLINE>
                                 }
                             }
@@ -1518,6 +1518,7 @@ class LibraryTZ(abjad.AbjadObject):
             line_segment=line_segment,
             selector=selector,
             text=text,
+            tweaks=tweaks,
             )
 
     @staticmethod

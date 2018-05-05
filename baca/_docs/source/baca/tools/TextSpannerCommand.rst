@@ -33,6 +33,7 @@ Bases
       ~TextSpannerCommand.tag_measure_number
       ~TextSpannerCommand.tags
       ~TextSpannerCommand.text
+      ~TextSpannerCommand.tweaks
       ~TextSpannerCommand.__call__
       ~TextSpannerCommand.__format__
       ~TextSpannerCommand.__repr__
@@ -67,6 +68,8 @@ Read-only properties
       .. autoattribute:: TextSpannerCommand.tags
 
 .. autoattribute:: TextSpannerCommand.text
+
+.. autoattribute:: TextSpannerCommand.tweaks
 
 Read/write properties
 ---------------------

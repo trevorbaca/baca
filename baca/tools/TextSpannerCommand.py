@@ -167,6 +167,7 @@ class TextSpannerCommand(Command):
     __slots__ = (
         '_line_segment',
         '_text',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
@@ -176,6 +177,7 @@ class TextSpannerCommand(Command):
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
         text: typing.Union[str, abjad.Markup, IndicatorCommand] = None,
+        tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if line_segment is not None:
@@ -195,6 +197,10 @@ class TextSpannerCommand(Command):
             markup = text.indicators[0]
             assert isinstance(markup, abjad.Markup)
         self._text = markup
+        if tweaks is not None:
+            assert isinstance(tweaks, list), repr(tweaks)
+            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._tweaks = tweaks
         self._tags = []
 
     ### SPECIAL METHODS ###
@@ -212,6 +218,9 @@ class TextSpannerCommand(Command):
         if not leaves:
             return
         spanner = abjad.TextSpanner()
+        manager = abjad.tweak(spanner)
+        for attribute, value in (self.tweaks or []):
+            setattr(manager, attribute, value)
         abjad.attach(spanner, leaves)
         first_leaf = leaves[0]
         spanner.attach(
@@ -240,3 +249,11 @@ class TextSpannerCommand(Command):
         r'''Gets text.
         '''
         return self._text
+
+    @property
+    def tweaks(self) -> typing.Optional[
+        typing.List[typing.Tuple[typing.Any, typing.Any]]
+        ]:
+        r'''Gets tweaks.
+        '''
+        return self._tweaks
