@@ -85,8 +85,8 @@ class TextSpannerCommand(Command):
                                 \override TextSpanner.staff-padding = #4.5                           %! OC1
                                 e'8
                                 [
-                                -\tweak Y-extent ##f
-                                -\tweak bound-details.left.text \markup {
+                                - \tweak Y-extent ##f
+                                - \tweak bound-details.left.text \markup {
                                     \concat
                                         {
                                             \whiteout
@@ -96,15 +96,15 @@ class TextSpannerCommand(Command):
                                                 #0.5
                                         }
                                     }
-                                -\tweak dash-fraction 0.25
-                                -\tweak dash-period 1.5
-                                -\tweak bound-details.left-broken.text ##f
-                                -\tweak bound-details.left.stencil-align-dir-y 0
-                                -\tweak bound-details.right-broken.arrow ##f
-                                -\tweak bound-details.right-broken.padding 0
-                                -\tweak bound-details.right-broken.text ##f
-                                -\tweak bound-details.right.padding 1.25
-                                -\tweak bound-details.right.text \markup {
+                                - \tweak dash-fraction 0.25
+                                - \tweak dash-period 1.5
+                                - \tweak bound-details.left-broken.text ##f
+                                - \tweak bound-details.left.stencil-align-dir-y 0
+                                - \tweak bound-details.right-broken.arrow ##f
+                                - \tweak bound-details.right-broken.padding 0
+                                - \tweak bound-details.right-broken.text ##f
+                                - \tweak bound-details.right.padding 1.25
+                                - \tweak bound-details.right.text \markup {
                                     \draw-line
                                         #'(0 . -1)
                                     }
