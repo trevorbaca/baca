@@ -209,3 +209,14 @@ startTextSpanThree =
 
 stopTextSpanThree =
 #(make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "3")
+
+
+%%% ENGRAVER SWAP TO MAKE COMMANDS WORK CORRECTLY %%%
+
+\layout {
+    \context {
+        \Voice
+        \remove Text_spanner_engraver
+        \consists \alternateTextSpannerEngraver
+    }
+}

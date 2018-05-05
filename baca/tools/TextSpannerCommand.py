@@ -165,6 +165,7 @@ class TextSpannerCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_lilypond_id',
         '_line_segment',
         '_text',
         '_tweaks',
@@ -174,12 +175,16 @@ class TextSpannerCommand(Command):
 
     def __init__(
         self,
+        lilypond_id: int = None,
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
         text: typing.Union[str, abjad.Markup, IndicatorCommand] = None,
         tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
+        if lilypond_id is not None:
+            assert lilypond_id in (1, 2, 3), repr(lilypond_id)
+        self._lilypond_id = lilypond_id
         if line_segment is not None:
             assert isinstance(line_segment, abjad.LineSegment)
         self._line_segment = line_segment
@@ -217,7 +222,7 @@ class TextSpannerCommand(Command):
         leaves = abjad.select(argument).leaves()
         if not leaves:
             return
-        spanner = abjad.TextSpanner()
+        spanner = abjad.TextSpanner(lilypond_id=self.lilypond_id)
         manager = abjad.tweak(spanner)
         for attribute, value in (self.tweaks or []):
             setattr(manager, attribute, value)
@@ -237,6 +242,12 @@ class TextSpannerCommand(Command):
             )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def lilypond_id(self) -> typing.Optional[int]:
+        r'''Gets LilyPond ID.
+        '''
+        return self._lilypond_id
 
     @property
     def line_segment(self) -> typing.Optional[abjad.LineSegment]:

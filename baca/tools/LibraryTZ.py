@@ -1352,6 +1352,7 @@ class LibraryTZ(abjad.AbjadObject):
     def text_spanner(
         text: typing.Union[str, abjad.Markup, IndicatorCommand],
         line_segment: abjad.LineSegment = None,
+        lilypond_id: int = None,
         right_padding: typing.Optional[Number] = 1.25,
         selector: Selector = 'baca.leaves()',
         tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None,
@@ -1371,7 +1372,13 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.text_spanner(
             ...         '1/2 clt',
             ...         selector=baca.leaves()[:7 + 1],
-            ...         tweaks=[('staff-padding', 4.5)],
+            ...         tweaks=[('staff-padding', 4)],
+            ...         ),
+            ...     baca.text_spanner(
+            ...         'damp',
+            ...         lilypond_id=1,
+            ...         selector=baca.leaves()[:11 + 1],
+            ...         tweaks=[('staff-padding', 6.5)],
             ...         ),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1433,7 +1440,7 @@ class LibraryTZ(abjad.AbjadObject):
                                     % [MusicVoice measure 1]                                             %! SM4
                                     e'8
                                     [
-                                    - \tweak staff-padding #4.5
+                                    - \tweak staff-padding #4
                                     - \tweak Y-extent ##f
                                     - \tweak bound-details.left.text \markup {
                                         \concat
@@ -1458,6 +1465,31 @@ class LibraryTZ(abjad.AbjadObject):
                                             #'(0 . -1)
                                         }
                                     \startTextSpan
+                                    - \tweak staff-padding #6.5
+                                    - \tweak Y-extent ##f
+                                    - \tweak bound-details.left.text \markup {
+                                        \concat
+                                            {
+                                                \whiteout
+                                                    \upright
+                                                        damp
+                                                \hspace
+                                                    #0.5
+                                            }
+                                        }
+                                    - \tweak dash-fraction 0.25
+                                    - \tweak dash-period 1.5
+                                    - \tweak bound-details.left-broken.text ##f
+                                    - \tweak bound-details.left.stencil-align-dir-y 0
+                                    - \tweak bound-details.right-broken.arrow ##f
+                                    - \tweak bound-details.right-broken.padding 0
+                                    - \tweak bound-details.right-broken.text ##f
+                                    - \tweak bound-details.right.padding 1.25
+                                    - \tweak bound-details.right.text \markup {
+                                        \draw-line
+                                            #'(0 . -1)
+                                        }
+                                    \startTextSpanOne
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -1495,6 +1527,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
                                     f''8
+                                    \stopTextSpanOne
                                     [
                 <BLANKLINE>
                                     e'8
@@ -1510,11 +1543,14 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         from baca.tools.LibraryAF import LibraryAF
+        if lilypond_id is not None:
+            assert lilypond_id in (1, 2, 3), repr(lilypond_id)
         if line_segment is None:
             line_segment = LibraryAF.dashed_hook()
         if right_padding is not None:
             line_segment = abjad.new(line_segment, right_padding=right_padding)
         return TextSpannerCommand(
+            lilypond_id=lilypond_id,
             line_segment=line_segment,
             selector=selector,
             text=text,

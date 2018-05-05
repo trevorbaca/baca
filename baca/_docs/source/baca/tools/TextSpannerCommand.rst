@@ -23,6 +23,7 @@ Bases
 
       ~TextSpannerCommand.deactivate
       ~TextSpannerCommand.get_tag
+      ~TextSpannerCommand.lilypond_id
       ~TextSpannerCommand.line_segment
       ~TextSpannerCommand.manifests
       ~TextSpannerCommand.offset_to_measure_number
@@ -46,6 +47,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: TextSpannerCommand.deactivate
+
+.. autoattribute:: TextSpannerCommand.lilypond_id
 
 .. autoattribute:: TextSpannerCommand.line_segment
 
