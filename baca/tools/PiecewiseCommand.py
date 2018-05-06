@@ -31,7 +31,7 @@ class PiecewiseCommand(Command):
         indicators: typing.Iterable = None,
         selector: Selector = None,
         spanner: abjad.Spanner = None,
-        spanner_selector: typing.Union[Selector, MapCommand] = None,
+        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
         if bookend is not None:
@@ -47,7 +47,7 @@ class PiecewiseCommand(Command):
             spanner_selector = eval(spanner_selector)
         if spanner_selector is not None:
             prototype = (abjad.Expression, MapCommand)
-            assert isinstance(spanner_selector, prototype)
+            assert isinstance(spanner_selector, prototype), repr(spanner_selector)
         self._spanner_selector = spanner_selector
         self._tags = []
 
@@ -55,6 +55,8 @@ class PiecewiseCommand(Command):
 
     def __call__(self, argument=None) -> None:
         r'''Calls command on ``argument``.
+
+        ..  note:: IMPORTANT: ``spanner_selector`` applies before ``selector``.
         '''
         if argument is None:
             return
@@ -62,20 +64,21 @@ class PiecewiseCommand(Command):
             return
         if not self.indicators:
             return
-        spanner_argument = argument
         if self.spanner_selector is not None:
             assert not isinstance(self.spanner_selector, str)
-            spanner_argument = self.spanner_selector(spanner_argument)
+            argument = self.spanner_selector(argument)
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
-            leaves = abjad.select(spanner_argument).leaves()
+            leaves = abjad.select(argument).leaves()
             abjad.attach(
                 spanner,
                 leaves,
                 tag=self.tag.prepend('PWC1'),
                 )
         else:
-            spanner = self.spanner(spanner_argument)
+            assert isinstance(self.spanner, SpannerCommand)
+            spanner = self.spanner(argument)
+        argument = abjad.select(spanner).leaves()
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)

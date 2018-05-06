@@ -1715,7 +1715,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         selector=baca.map(baca.tleaves(), baca.tuplet(1)),
+            ...         spanner_selector=baca.map(baca.tleaves(), baca.tuplet(1)),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2656,9 +2656,9 @@ class LibraryTZ(abjad.AbjadObject):
     def transition(
         *markups: typing.Any,
         do_not_bookend: bool = False,
-        selector: Selector = 'baca.tleaves().group()',
-        spanner_selector: typing.Union[
-            bool, Selector, MapCommand, None] = True
+        #selector: Selector = 'baca.tleaves().group()',
+        selector: Selector = 'baca.leaves().group()',
+        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()'
         ) -> PiecewiseCommand:
         r'''Makes transition text spanner.
 
@@ -2681,7 +2681,6 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.markup.ord(),
             ...         do_not_bookend=True,
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
-            ...         spanner_selector=False,
             ...     ),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2903,7 +2902,6 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
             ...         selector=baca.leaves().enchain([8]),
-            ...         spanner_selector=False,
             ...     ),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3087,18 +3085,12 @@ class LibraryTZ(abjad.AbjadObject):
         else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
-        spanner_selector_ = None
-        if spanner_selector is True:
-            spanner_selector_ = selector
-        elif spanner_selector is not False:
-            assert isinstance(spanner_selector, (str, abjad.Expression))
-            spanner_selector_ = spanner_selector
         return LibraryNS.piecewise(
             abjad.TextSpanner(),
             indicators,
             selector,
             bookend=not(do_not_bookend),
-            spanner_selector=spanner_selector_,
+            spanner_selector=spanner_selector,
             )
 
     @staticmethod

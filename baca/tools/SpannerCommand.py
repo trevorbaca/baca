@@ -199,6 +199,7 @@ class SpannerCommand(Command):
         deactivate: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,
+        # TODO: change to baca.leaves()
         selector: Selector = 'baca.tleaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,

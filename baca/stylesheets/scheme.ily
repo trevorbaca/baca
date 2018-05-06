@@ -1,3 +1,4 @@
+#(ly:set-option 'relative-includes #t)
 \include "text-spanner-id.ily"
 
 %%% BAR NUMBERS: OVAL %%%

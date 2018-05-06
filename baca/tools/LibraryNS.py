@@ -1043,7 +1043,7 @@ class LibraryNS(abjad.AbjadObject):
         indicators: typing.Iterable,
         selector: Selector,
         bookend: bool = False,
-        spanner_selector: typing.Union[Selector, MapCommand] = None,
+        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         ):
         r'''Makes piecewise command from ``spanner``, ``indicators`` and
         indicator ``selector``.
@@ -8114,7 +8114,7 @@ class LibraryNS(abjad.AbjadObject):
         peak: str,
         counts: typing.List[int],
         selector: Selector = 'baca.leaves()',
-        spanner_selector: Selector = 'baca.leaves()',
+        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         ) -> PiecewiseCommand:
         r'''Makes two-stage niente swell.
         '''
