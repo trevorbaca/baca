@@ -2,7 +2,11 @@ import abjad
 import baca
 import collections
 import copy
+import typing
 from .Command import Command
+from .MapCommand import MapCommand
+from .SpannerCommand import SpannerCommand
+from .Typing import Selector
 
 
 class PiecewiseCommand(Command):
@@ -23,12 +27,12 @@ class PiecewiseCommand(Command):
 
     def __init__(
         self,
-        bookend=None,
-        indicators=None,
-        selector=None,
-        spanner=None,
-        spanner_selector=None,
-        ):
+        bookend: bool = None,
+        indicators: typing.Iterable = None,
+        selector: Selector = None,
+        spanner: abjad.Spanner = None,
+        spanner_selector: typing.Union[Selector, MapCommand] = None,
+        ) -> None:
         Command.__init__(self, selector=selector)
         if bookend is not None:
             bookend = bool(bookend)
@@ -37,22 +41,20 @@ class PiecewiseCommand(Command):
             indicators = abjad.CyclicTuple(indicators)
         self._indicators = indicators
         if spanner is not None:
-            assert isinstance(spanner, (abjad.Spanner, baca.SpannerCommand))
+            assert isinstance(spanner, (abjad.Spanner, SpannerCommand))
         self._spanner = spanner
         if isinstance(spanner_selector, str):
             spanner_selector = eval(spanner_selector)
         if spanner_selector is not None:
-            prototype = (abjad.Expression, baca.MapCommand)
+            prototype = (abjad.Expression, MapCommand)
             assert isinstance(spanner_selector, prototype)
         self._spanner_selector = spanner_selector
         self._tags = []
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
-
-        Returns none.
+    def __call__(self, argument=None) -> None:
+        r'''Calls command on ``argument``.
         '''
         if argument is None:
             return
@@ -62,6 +64,7 @@ class PiecewiseCommand(Command):
             return
         spanner_argument = argument
         if self.spanner_selector is not None:
+            assert not isinstance(self.spanner_selector, str)
             spanner_argument = self.spanner_selector(spanner_argument)
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
@@ -74,6 +77,7 @@ class PiecewiseCommand(Command):
         else:
             spanner = self.spanner(spanner_argument)
         if self.selector is not None:
+            assert not isinstance(self.selector, str)
             argument = self.selector(argument)
         length = len(argument)
         for i, item in enumerate(argument):
@@ -129,41 +133,33 @@ class PiecewiseCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bookend(self):
+    def bookend(self) -> typing.Optional[bool]:
         r'''Is true when command bookend-attaches indicators.
-
-        Returns true, false or none.
         '''
         return self._bookend
 
     @property
-    def indicators(self):
+    def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
         r'''Gets indicators.
-
-        Returns cyclic tuple or none.
         '''
         return self._indicators
 
     @property
-    def selector(self):
+    def selector(self) -> typing.Optional[abjad.Expression]:
         r'''Gets selector.
-
-        Returns selector or none.
         '''
         return self._selector
 
     @property
-    def spanner(self):
-        r'''Gets spanner command.
-
-        Returns spanner command or none.
+    def spanner(self) -> typing.Optional[abjad.Spanner]:
+        r'''Gets spanner.
         '''
         return self._spanner
 
     @property
-    def spanner_selector(self):
+    def spanner_selector(self) -> typing.Optional[
+        typing.Union[abjad.Expression, MapCommand]
+        ]:
         r'''Gets spanner selector.
-
-        Returns selector or none.
         '''
         return self._spanner_selector

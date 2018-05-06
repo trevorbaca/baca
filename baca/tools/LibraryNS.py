@@ -1043,8 +1043,7 @@ class LibraryNS(abjad.AbjadObject):
         indicators: typing.Iterable,
         selector: Selector,
         bookend: bool = False,
-        spanner_selector: typing.Union[
-            str, abjad.Expression, MapCommand] = None,
+        spanner_selector: typing.Union[Selector, MapCommand] = None,
         ):
         r'''Makes piecewise command from ``spanner``, ``indicators`` and
         indicator ``selector``.
@@ -8114,6 +8113,8 @@ class LibraryNS(abjad.AbjadObject):
     def swell(
         peak: str,
         counts: typing.List[int],
+        selector: Selector = 'baca.leaves()',
+        spanner_selector: Selector = 'baca.leaves()',
         ) -> PiecewiseCommand:
         r'''Makes two-stage niente swell.
         '''
@@ -8122,10 +8123,15 @@ class LibraryNS(abjad.AbjadObject):
         assert isinstance(peak, str), repr(peak)
         assert isinstance(counts, list), repr(counts)
         assert all(isinstance(_, int) for _ in counts), repr(counts)
+        if isinstance(selector, str):
+            selector = eval(selector)
+        assert isinstance(selector, abjad.Expression), repr(selector)
+        selector = selector.enchain(counts)
         return LibraryAF.enchained_hairpin(
             *LibraryGM.make_dynamics(f'niente {peak} niente'),
             bookend=True,
-            selector=baca.select().leaves().enchain(counts),
+            selector=selector,
+            spanner_selector=spanner_selector,
             )
 
     @staticmethod
