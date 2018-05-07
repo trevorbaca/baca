@@ -1,0 +1,21 @@
+#! /usr/bin/env python
+import abjad
+import doctest
+import os
+import pathlib
+import sys
+
+
+if __name__ == '__main__':
+    os.system('clear')
+    if 1 < len(sys.argv):
+        args = ' '.join(sys.argv[1:])
+        print(f'Running doctest on {args} ...')
+    else:
+        print(f'Must specify one or more files ...')
+        sys.exit()
+
+
+
+    for name in sys.argv[1:]:
+        update_file(name)
