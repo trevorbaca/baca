@@ -5,4 +5,4 @@ Bača API
    :includehidden:
    :maxdepth: 3
 
-   baca/tools/index
+   api/index
