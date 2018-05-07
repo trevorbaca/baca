@@ -1,8 +1,6 @@
-#import abjad # remove?
 import os
 import sphinx_rtd_theme
 import sys
-#from docutils import nodes
 from pygments.formatters.latex import LatexFormatter
 from sphinx.highlighting import PygmentsBridge
 
@@ -34,6 +32,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx_autodoc_typehints',
+    'uqbar.sphinx.api',
     'uqbar.sphinx.inheritance',
     'uqbar.sphinx.style',
     'abjad.docs.ext.abjadbook',
@@ -53,31 +52,11 @@ templates_path = ['_templates']
 
 version = ''
 
-# REMOVE?
-#doctest_path = [
-#    os.path.abspath(abjad.__path__[0]),
-#    ]
-#
-#doctest_global_setup = r'''
-#from __future__ import print_function
-#import abjad
-#import baca
-#'''
-#
-#doctest_global_cleanup = r'''
-#for server in servertools.Server._servers.values():
-#    server.quit()
-#'''
-#
-#nodes.doctest_block = nodes.literal_block
-
 ### HTML ###
 
 html_theme = 'default'
-
 html_theme = 'sphinx_rtd_theme'
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-
 html_static_path = ['_static']
 
 ### HTML HELP ###

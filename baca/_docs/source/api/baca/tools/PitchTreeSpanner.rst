@@ -1,0 +1,64 @@
+.. _baca--tools--PitchTreeSpanner:
+
+PitchTreeSpanner
+================
+
+.. automodule:: baca.tools.PitchTreeSpanner
+
+.. currentmodule:: baca.tools.PitchTreeSpanner
+
+.. container:: svg-container
+
+   .. inheritance-diagram:: baca
+      :lineage: baca.tools.PitchTreeSpanner
+
+.. autoclass:: PitchTreeSpanner
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PitchTreeSpanner.__contains__
+
+   .. automethod:: PitchTreeSpanner.__copy__
+
+   .. automethod:: PitchTreeSpanner.__format__
+
+   .. automethod:: PitchTreeSpanner.__getitem__
+
+   .. automethod:: PitchTreeSpanner.__iter__
+
+   .. automethod:: PitchTreeSpanner.__len__
+
+   .. automethod:: PitchTreeSpanner.__lt__
+
+   .. automethod:: PitchTreeSpanner.__repr__
+
+   .. automethod:: PitchTreeSpanner.__reversed__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: PitchTreeSpanner.count
+
+   .. automethod:: PitchTreeSpanner.index
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PitchTreeSpanner.foo
+
+   .. autoattribute:: PitchTreeSpanner.leaves
+
+   .. autoattribute:: PitchTreeSpanner.level
