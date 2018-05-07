@@ -1,3 +1,6 @@
 # keep commented out when checking out trevor/dev:
 #-e git://github.com/Abjad/abjad.git#egg=abjad [development]
 roman
+sphinx
+sphinx-rtd-theme
+uqbar
