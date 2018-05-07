@@ -8,7 +8,6 @@ class CustomLatexFormatter(LatexFormatter):
         super(CustomLatexFormatter, self).__init__(**options)
         self.verboptions = r'''formatcom=\footnotesize'''
 
-
 PygmentsBridge.latex_formatter = CustomLatexFormatter
 
 ### CORE ###
