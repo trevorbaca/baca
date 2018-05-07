@@ -37,7 +37,6 @@ Bases
       ~PitchTreeSpanner.index
       ~PitchTreeSpanner.leaves
       ~PitchTreeSpanner.level
-      ~PitchTreeSpanner.overrides
       ~PitchTreeSpanner.__contains__
       ~PitchTreeSpanner.__copy__
       ~PitchTreeSpanner.__format__
@@ -58,12 +57,6 @@ Read-only properties
       .. autoattribute:: PitchTreeSpanner.leaves
 
 .. autoattribute:: PitchTreeSpanner.level
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchTreeSpanner.overrides
 
 Methods
 -------
