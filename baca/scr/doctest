@@ -1,11 +1,87 @@
 #! /usr/bin/env python
 import abjad
+import baca
 import doctest
+import ide
+import io
 import os
 import pathlib
 import sys
 
 
+_colors = {
+    'BLUE': '\033[94m',
+    'RED': '\033[91m',
+    'GREEN': '\033[92m',
+    'END': '\033[0m',
+    }
+
+def _get_globs():
+    globs = {}
+    globs['abjad'] = abjad
+    globs.update(abjad.__dict__)
+    globs['baca'] = baca
+    globs.update(baca.__dict__)
+    globs['ide'] = ide
+    globs.update(ide.__dict__)
+    return globs
+
+def _doctest_files(names, globs):
+    optionflags = (
+        doctest.NORMALIZE_WHITESPACE
+        | doctest.ELLIPSIS
+        | doctest.REPORT_ONLY_FIRST_FAILURE
+        )
+    failed_file_paths, error_messages = [], []
+    failure_count, test_count = 0, 0
+    current_directory = pathlib.Path('.').absolute()
+    for name in names:
+        path = current_directory / name
+        assert path.is_file(), repr(path)
+        relative_path = os.path.relpath(path)
+        string_buffer = io.StringIO()
+        with abjad.RedirectedStreams(stdout=string_buffer):
+            failure_count_, test_count_ = doctest.testfile(
+                path,
+                module_relative=False,
+                globs=globs,
+                optionflags=optionflags,
+                )
+            failure_count += failure_count_
+            test_count += test_count_
+            doctest_output = string_buffer.getvalue()
+        if failure_count_:
+            failed_file_paths.append(os.path.relpath(path))
+            error_messages.append(doctest_output)
+            result_code = ''.join((
+                _colors['RED'],
+                'FAILED',
+                _colors['END'],
+                ))
+        else:
+            result_code = ''.join((
+                _colors['BLUE'],
+                'OK',
+                _colors['END'],
+                ))
+        print(f'{relative_path} {result_code}')
+    if failed_file_paths:
+        print()
+        for error_message in error_messages:
+            print(error_message)
+    for path in failed_file_paths:
+        print(f'FAILED: {path}')
+    print()
+    test_identifier = abjad.String('test').pluralize(test_count)
+    module_identifier = abjad.String('module').pluralize(len(names))
+    success_count = test_count - failure_count
+    string = (
+        f'{success_count} passed, {failure_count} failed out of '
+        f'{test_count} {test_identifier} '
+        f'in {len(names)} {module_identifier}.'
+        )
+    print(string)
+    
 if __name__ == '__main__':
     os.system('clear')
     if 1 < len(sys.argv):
@@ -14,8 +90,6 @@ if __name__ == '__main__':
     else:
         print(f'Must specify one or more files ...')
         sys.exit()
-
-
-
-    for name in sys.argv[1:]:
-        update_file(name)
+    globs = _get_globs()
+    names = sys.argv[1:]
+    _doctest_files(names, globs)
