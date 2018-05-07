@@ -1,5 +1,4 @@
 import sphinx_rtd_theme
-import sys
 from pygments.formatters.latex import LatexFormatter
 from sphinx.highlighting import PygmentsBridge
 
