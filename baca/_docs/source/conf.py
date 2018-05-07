@@ -1,12 +1,8 @@
-import os
 import sphinx_rtd_theme
 import sys
 from pygments.formatters.latex import LatexFormatter
 from sphinx.highlighting import PygmentsBridge
 
-
-# REMOVE?
-sys.path.insert(0, os.path.abspath(os.path.join('..', '..', '..')))
 
 class CustomLatexFormatter(LatexFormatter):
     def __init__(self, **options):
