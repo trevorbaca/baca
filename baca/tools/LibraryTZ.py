@@ -2656,9 +2656,10 @@ class LibraryTZ(abjad.AbjadObject):
     def transition(
         *markups: typing.Any,
         do_not_bookend: bool = False,
-        #selector: Selector = 'baca.tleaves().group()',
         selector: Selector = 'baca.leaves().group()',
-        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()'
+        spanner_selector: typing.Union[
+            MapCommand, Selector] = 'baca.tleaves()',
+        tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None
         ) -> PiecewiseCommand:
         r'''Makes transition text spanner.
 
@@ -3085,8 +3086,16 @@ class LibraryTZ(abjad.AbjadObject):
         else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
+        text_spanner = abjad.TextSpanner()
+        if tweaks is not None:
+            assert isinstance(tweaks, list), repr(tweaks)
+            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+            manager = abjad.tweak(text_spanner)
+            for attribute, value in tweaks:
+                value = abjad.Scheme.format_embedded_scheme_value(value)
+                setattr(manager, attribute, value)
         return LibraryNS.piecewise(
-            abjad.TextSpanner(),
+            text_spanner,
             indicators,
             selector,
             bookend=not(do_not_bookend),
