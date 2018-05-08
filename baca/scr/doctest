@@ -83,11 +83,7 @@ def _doctest_files(names, globs):
     print(string)
     
 if __name__ == '__main__':
-    os.system('clear')
-    if 1 < len(sys.argv):
-        args = ' '.join(sys.argv[1:])
-        print(f'Running doctest on {args} ...')
-    else:
+    if len(sys.argv) <= 1:
         print(f'Must specify one or more files ...')
         sys.exit()
     globs = _get_globs()

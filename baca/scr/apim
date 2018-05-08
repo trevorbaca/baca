@@ -1,0 +1,2 @@
+cd ~/abjad/abjad/docs
+make html
