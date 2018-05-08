@@ -73,3 +73,5 @@ IndicatorCommand
    .. autoattribute:: IndicatorCommand.tag
 
    .. autoattribute:: IndicatorCommand.tags
+
+   .. autoattribute:: IndicatorCommand.tweaks

@@ -73,3 +73,5 @@ InstrumentChangeCommand
    .. autoattribute:: InstrumentChangeCommand.tag
 
    .. autoattribute:: InstrumentChangeCommand.tags
+
+   .. autoattribute:: InstrumentChangeCommand.tweaks

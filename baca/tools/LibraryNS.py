@@ -35,6 +35,7 @@ from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
+from .Typing import Tweak
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -1625,6 +1626,7 @@ class LibraryNS(abjad.AbjadObject):
     def rehearsal_mark(
         argument: typing.Union[int, str],
         selector: Selector = 'baca.leaf(0)',
+        tweaks: typing.List[Tweak] = None,
         ) -> IndicatorCommand:
         r'''Attaches rehearsal mark.
         '''
@@ -1633,9 +1635,16 @@ class LibraryNS(abjad.AbjadObject):
         else:
             assert isinstance(argument, int)
             mark = abjad.RehearsalMark(number=argument)
+        if tweaks is not None:
+            assert isinstance(tweaks, list), tweaks
+            for tweak in tweaks:
+                assert isinstance(tweak, tuple), repr(tweak)
+                assert len(tweak) == 2, repr(tweak)
+                assert isinstance(tweak[0], str), repr(tweak)
         return IndicatorCommand(
             indicators=[mark],
             selector=selector,
+            tweaks=tweaks,
             )
 
     @staticmethod

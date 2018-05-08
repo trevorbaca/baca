@@ -4,6 +4,7 @@ from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .MarkupLibrary import MarkupLibrary
 from .Typing import Selector
+from .Typing import Tweak
 
 
 class TextSpannerCommand(Command):
@@ -179,7 +180,7 @@ class TextSpannerCommand(Command):
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
         text: typing.Union[str, abjad.Markup, IndicatorCommand] = None,
-        tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None,
+        tweaks: typing.List[Tweak] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if lilypond_id is not None:
@@ -223,9 +224,10 @@ class TextSpannerCommand(Command):
         if not leaves:
             return
         spanner = abjad.TextSpanner(lilypond_id=self.lilypond_id)
-        manager = abjad.tweak(spanner)
-        for attribute, value in (self.tweaks or []):
-            setattr(manager, attribute, value)
+#        manager = abjad.tweak(spanner)
+#        for attribute, value in (self.tweaks or []):
+#            setattr(manager, attribute, value)
+        self._apply_tweaks(spanner)
         abjad.attach(spanner, leaves)
         first_leaf = leaves[0]
         spanner.attach(
@@ -262,9 +264,7 @@ class TextSpannerCommand(Command):
         return self._text
 
     @property
-    def tweaks(self) -> typing.Optional[
-        typing.List[typing.Tuple[typing.Any, typing.Any]]
-        ]:
+    def tweaks(self) -> typing.Optional[typing.List[Tweak]]:
         r'''Gets tweaks.
         '''
         return self._tweaks

@@ -5,6 +5,7 @@ import typing
 from .Command import Command
 from .SegmentMaker import SegmentMaker
 from .Typing import Selector
+from .Typing import Tweak
 
 
 class IndicatorCommand(Command):
@@ -220,6 +221,7 @@ class IndicatorCommand(Command):
         '_indicators',
         '_redundant',
         '_tags',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
@@ -232,6 +234,7 @@ class IndicatorCommand(Command):
         redundant: bool = None,
         selector: Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
+        tweaks: typing.List[Tweak] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if context is not None:
@@ -247,6 +250,10 @@ class IndicatorCommand(Command):
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
+        if tweaks is not None:
+            assert isinstance(tweaks, list), repr(tweaks)
+            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._tweaks = tweaks
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -270,6 +277,7 @@ class IndicatorCommand(Command):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
+                self._apply_tweaks(indicator)
                 reapplied = self._remove_reapplied_wrappers(leaf, indicator)
                 wrapper = abjad.attach(
                     indicator,
@@ -469,3 +477,9 @@ class IndicatorCommand(Command):
         r'''Is true when command is redundant.
         '''
         return self._redundant
+
+    @property
+    def tweaks(self) -> typing.Optional[typing.List[Tweak]]:
+        r'''Gets tweaks.
+        '''
+        return self._tweaks

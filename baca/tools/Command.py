@@ -63,6 +63,13 @@ class Command(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    def _apply_tweaks(self, argument):
+        if not self.tweaks:
+            return
+        manager = abjad.tweak(argument)
+        for attribute, value in self.tweaks:
+            setattr(manager, attribute, value)
+
     @staticmethod
     def _are_valid_tags(tags):
         assert isinstance(tags, list), repr(tags)
