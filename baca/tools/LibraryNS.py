@@ -4206,10 +4206,12 @@ class LibraryNS(abjad.AbjadObject):
         '''
         from baca.tools.LibraryAF import LibraryAF
         from baca.tools.LibraryTZ import LibraryTZ
+        if isinstance(clef, str):
+            clef = abjad.Clef(clef)
         if isinstance(clef, (int, float)):
             extra_offset_x = clef
         else:
-            clef = abjad.Clef(clef)
+            assert isinstance(clef, abjad.Clef)
             width = clef._to_width[clef.name]
             extra_offset_x = -width
         command = LibraryNS.suite(

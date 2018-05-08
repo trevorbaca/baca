@@ -1,0 +1,2 @@
+cd ~/abjad-ide
+clear; mypy ide
