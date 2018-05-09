@@ -2373,7 +2373,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def breaks(
         *page_specifiers: typing.Any,
-        local_measure_numbers: bool = None
+        local_measure_numbers: bool = None,
         ) -> BreakMeasureMap:
         r'''Makes breaks.
 
