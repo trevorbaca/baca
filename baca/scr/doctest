@@ -2,7 +2,7 @@
 import abjad
 import baca
 import doctest
-import ide
+import importlib
 import io
 import os
 import pathlib
@@ -22,8 +22,12 @@ def _get_globs():
     globs.update(abjad.__dict__)
     globs['baca'] = baca
     globs.update(baca.__dict__)
-    globs['ide'] = ide
-    globs.update(ide.__dict__)
+    try:
+        ide = importlib.import_module('ide')
+        globs['ide'] = ide
+        globs.update(ide.__dict__)
+    except ModuleNotFoundError:
+        pass
     return globs
 
 def _doctest_files(names, globs):
