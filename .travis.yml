@@ -15,6 +15,7 @@ before_install:
 - cd abjad; git checkout trevor/dev; pip install -e .[development]
 - echo `git branch`
 - cd ..
+- pwd
 
 install:
 - pip install --upgrade pip
@@ -25,6 +26,10 @@ install:
 - export MYPYPATH=/tmp/typehints
 
 before_script:
+- echo $PATH
+- export PATH=$PATH:./baca/scr
+- echo $PATH
+- echo `which doctest`
 - export MYPYPATH=`pwd`/abjad:/tmp/typehints
 - echo $MYPYPATH
 
