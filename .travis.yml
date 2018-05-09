@@ -29,8 +29,7 @@ before_script:
 - echo $MYPYPATH
 
 script:
-# TODO: uncomment
-#- coverage run -a `which doctest` ./baca
+- coverage run -a `which doctest` ./baca
 - mypy baca
 
 after_success:
