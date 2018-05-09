@@ -1,6 +1,6 @@
 import abjad
 import baca
-from baca.tools.Tree import Tree
+from .Tree import Tree
 
 
 class PitchTree(Tree):
@@ -464,8 +464,8 @@ class PitchTree(Tree):
 
         ..  docs::
 
-            >>> graph_ = tree.__graph__()
-            >>> abjad.f(graph_, strict=89)
+            >>> graph_ = tree.__graph__() # doctest: +SKIP
+            >>> abjad.f(graph_, strict=89) # doctest: +SKIP
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];
@@ -612,152 +612,152 @@ class PitchTree(Tree):
 
     ### SPECIAL METHODS ###
 
-    def __graph__(self, **keywords):
-        r'''Graphs pitch tree.
-
-        ..  container:: example
-
-            Graphs numbered pitch tree:
-
-            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-            >>> tree = baca.PitchTree(items=items)
-
-            >>> graph(tree) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph, strict=89)
-                digraph G {
-                    graph [bgcolor=transparent,
-                        truecolor=true];
-                    node_0 [label="",
-                        shape=circle];
-                    node_1 [label="",
-                        shape=circle];
-                    node_2 [label="4",
-                        shape=box];
-                    node_3 [label="6",
-                        shape=box];
-                    node_4 [label="10",
-                        shape=box];
-                    node_5 [label="",
-                        shape=circle];
-                    node_6 [label="9",
-                        shape=box];
-                    node_7 [label="7",
-                        shape=box];
-                    node_8 [label="8",
-                        shape=box];
-                    node_9 [label="11",
-                        shape=box];
-                    node_10 [label="9",
-                        shape=box];
-                    node_11 [label="1",
-                        shape=box];
-                    node_12 [label="",
-                        shape=circle];
-                    node_13 [label="0",
-                        shape=box];
-                    node_14 [label="2",
-                        shape=box];
-                    node_15 [label="3",
-                        shape=box];
-                    node_16 [label="5",
-                        shape=box];
-                    node_0 -> node_1;
-                    node_0 -> node_5;
-                    node_0 -> node_12;
-                    node_1 -> node_2;
-                    node_1 -> node_3;
-                    node_1 -> node_4;
-                    node_5 -> node_6;
-                    node_5 -> node_7;
-                    node_5 -> node_8;
-                    node_5 -> node_9;
-                    node_5 -> node_10;
-                    node_5 -> node_11;
-                    node_12 -> node_13;
-                    node_12 -> node_14;
-                    node_12 -> node_15;
-                    node_12 -> node_16;
-                }
-
-        ..  container:: example
-
-            Graphs named pitch tree:
-
-            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-            >>> tree = baca.PitchTree(
-            ...     items=items,
-            ...     item_class=abjad.NamedPitch,
-            ...     )
-
-            >>> graph(tree) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph, strict=89)
-                digraph G {
-                    graph [bgcolor=transparent,
-                        truecolor=true];
-                    node_0 [label="",
-                        shape=circle];
-                    node_1 [label="",
-                        shape=circle];
-                    node_2 [label="e'",
-                        shape=box];
-                    node_3 [label="fs'",
-                        shape=box];
-                    node_4 [label="bf'",
-                        shape=box];
-                    node_5 [label="",
-                        shape=circle];
-                    node_6 [label="a'",
-                        shape=box];
-                    node_7 [label="g'",
-                        shape=box];
-                    node_8 [label="af'",
-                        shape=box];
-                    node_9 [label="b'",
-                        shape=box];
-                    node_10 [label="a'",
-                        shape=box];
-                    node_11 [label="cs'",
-                        shape=box];
-                    node_12 [label="",
-                        shape=circle];
-                    node_13 [label="c'",
-                        shape=box];
-                    node_14 [label="d'",
-                        shape=box];
-                    node_15 [label="ef'",
-                        shape=box];
-                    node_16 [label="f'",
-                        shape=box];
-                    node_0 -> node_1;
-                    node_0 -> node_5;
-                    node_0 -> node_12;
-                    node_1 -> node_2;
-                    node_1 -> node_3;
-                    node_1 -> node_4;
-                    node_5 -> node_6;
-                    node_5 -> node_7;
-                    node_5 -> node_8;
-                    node_5 -> node_9;
-                    node_5 -> node_10;
-                    node_5 -> node_11;
-                    node_12 -> node_13;
-                    node_12 -> node_14;
-                    node_12 -> node_15;
-                    node_12 -> node_16;
-                }
-
-        Returns Graphviz graph.
-        '''
-        superclass = super(PitchTree, self)
-        return superclass.__graph__(**keywords)
+#    def __graph__(self, **keywords):
+#        r'''Graphs pitch tree.
+#
+#        ..  container:: example
+#
+#            Graphs numbered pitch tree:
+#
+#            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
+#            >>> tree = baca.PitchTree(items=items)
+#
+#            >>> graph(tree) # doctest: +SKIP
+#
+#            ..  docs::
+#
+#                >>> tree_graph = tree.__graph__()
+#                >>> abjad.f(tree_graph, strict=89)
+#                digraph G {
+#                    graph [bgcolor=transparent,
+#                        truecolor=true];
+#                    node_0 [label="",
+#                        shape=circle];
+#                    node_1 [label="",
+#                        shape=circle];
+#                    node_2 [label="4",
+#                        shape=box];
+#                    node_3 [label="6",
+#                        shape=box];
+#                    node_4 [label="10",
+#                        shape=box];
+#                    node_5 [label="",
+#                        shape=circle];
+#                    node_6 [label="9",
+#                        shape=box];
+#                    node_7 [label="7",
+#                        shape=box];
+#                    node_8 [label="8",
+#                        shape=box];
+#                    node_9 [label="11",
+#                        shape=box];
+#                    node_10 [label="9",
+#                        shape=box];
+#                    node_11 [label="1",
+#                        shape=box];
+#                    node_12 [label="",
+#                        shape=circle];
+#                    node_13 [label="0",
+#                        shape=box];
+#                    node_14 [label="2",
+#                        shape=box];
+#                    node_15 [label="3",
+#                        shape=box];
+#                    node_16 [label="5",
+#                        shape=box];
+#                    node_0 -> node_1;
+#                    node_0 -> node_5;
+#                    node_0 -> node_12;
+#                    node_1 -> node_2;
+#                    node_1 -> node_3;
+#                    node_1 -> node_4;
+#                    node_5 -> node_6;
+#                    node_5 -> node_7;
+#                    node_5 -> node_8;
+#                    node_5 -> node_9;
+#                    node_5 -> node_10;
+#                    node_5 -> node_11;
+#                    node_12 -> node_13;
+#                    node_12 -> node_14;
+#                    node_12 -> node_15;
+#                    node_12 -> node_16;
+#                }
+#
+#        ..  container:: example
+#
+#            Graphs named pitch tree:
+#
+#            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
+#            >>> tree = baca.PitchTree(
+#            ...     items=items,
+#            ...     item_class=abjad.NamedPitch,
+#            ...     )
+#
+#            >>> graph(tree) # doctest: +SKIP
+#
+#            ..  docs::
+#
+#                >>> tree_graph = tree.__graph__()
+#                >>> abjad.f(tree_graph, strict=89)
+#                digraph G {
+#                    graph [bgcolor=transparent,
+#                        truecolor=true];
+#                    node_0 [label="",
+#                        shape=circle];
+#                    node_1 [label="",
+#                        shape=circle];
+#                    node_2 [label="e'",
+#                        shape=box];
+#                    node_3 [label="fs'",
+#                        shape=box];
+#                    node_4 [label="bf'",
+#                        shape=box];
+#                    node_5 [label="",
+#                        shape=circle];
+#                    node_6 [label="a'",
+#                        shape=box];
+#                    node_7 [label="g'",
+#                        shape=box];
+#                    node_8 [label="af'",
+#                        shape=box];
+#                    node_9 [label="b'",
+#                        shape=box];
+#                    node_10 [label="a'",
+#                        shape=box];
+#                    node_11 [label="cs'",
+#                        shape=box];
+#                    node_12 [label="",
+#                        shape=circle];
+#                    node_13 [label="c'",
+#                        shape=box];
+#                    node_14 [label="d'",
+#                        shape=box];
+#                    node_15 [label="ef'",
+#                        shape=box];
+#                    node_16 [label="f'",
+#                        shape=box];
+#                    node_0 -> node_1;
+#                    node_0 -> node_5;
+#                    node_0 -> node_12;
+#                    node_1 -> node_2;
+#                    node_1 -> node_3;
+#                    node_1 -> node_4;
+#                    node_5 -> node_6;
+#                    node_5 -> node_7;
+#                    node_5 -> node_8;
+#                    node_5 -> node_9;
+#                    node_5 -> node_10;
+#                    node_5 -> node_11;
+#                    node_12 -> node_13;
+#                    node_12 -> node_14;
+#                    node_12 -> node_15;
+#                    node_12 -> node_16;
+#                }
+#
+#        Returns Graphviz graph.
+#        '''
+#        superclass = super(PitchTree, self)
+#        return superclass.__graph__(**keywords)
 
     def __illustrate__(
         self,

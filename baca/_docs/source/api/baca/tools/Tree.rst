@@ -29,8 +29,6 @@ Tree
 
    .. automethod:: Tree.__getitem__
 
-   .. automethod:: Tree.__graph__
-
    .. automethod:: Tree.__hash__
 
    .. automethod:: Tree.__len__

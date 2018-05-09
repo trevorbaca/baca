@@ -29,8 +29,6 @@ PitchTree
 
    .. automethod:: PitchTree.__getitem__
 
-   .. automethod:: PitchTree.__graph__
-
    .. automethod:: PitchTree.__hash__
 
    .. automethod:: PitchTree.__illustrate__
