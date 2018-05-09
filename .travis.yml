@@ -3,41 +3,39 @@ language: python
 sudo: false
 
 python:
-- 3.6
+    - 3.6
 
 before_install:
-- LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
-- LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
-- LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
-- wget -q $LILYPOND_URL
-- sh $LILYPOND_SCRIPT --batch
-- git clone https://github.com/Abjad/abjad.git;
-- cd abjad; git checkout trevor/dev; pip install -e .[development]
-- echo `git branch`
-- cd ..
-- pwd
+    - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
+    - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
+    - LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
+    - wget -q $LILYPOND_URL
+    - sh $LILYPOND_SCRIPT --batch
+    - git clone https://github.com/Abjad/abjad.git;
+    - cd abjad; git checkout trevor/dev; pip install -e .[development]
+    - echo `git branch`
+    - cd ..
+    - pwd
 
 install:
-- pip install --upgrade pip
-- pip install coverage
-- pip install -r requirements.txt
-- pip install -e . 
-- pip install --target /tmp/typehints --no-deps uqbar>=0.2.11
-- export MYPYPATH=/tmp/typehints
+    - pip install --upgrade pip
+    - pip install coverage
+    - pip install -r requirements.txt
+    - pip install -e . 
+    - pip install --target /tmp/typehints --no-deps uqbar>=0.2.11
+    - export MYPYPATH=/tmp/typehints
 
 before_script:
-- echo $PATH
-- export PATH=$PATH:./baca/scr
-- echo $PATH
-- echo `which doctest`
-- export MYPYPATH=`pwd`/abjad:/tmp/typehints
-- echo $MYPYPATH
+    - export PATH=$PATH:./baca/scr
+    - echo $PATH
+    - echo `which doctest`
+    - export MYPYPATH=`pwd`/abjad:/tmp/typehints
+    - echo $MYPYPATH
 
 script:
-- echo `which doctest`
-#- coverage run -a `which doctest` ./baca
-- mypy baca
+    - coverage run -a `which doctest` ./baca
+    - mypy baca
 
 after_success:
-- pip install coveralls
-- coveralls
+    - pip install coveralls
+    - coveralls
