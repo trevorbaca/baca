@@ -21,13 +21,16 @@ install:
 - pip install coverage
 - pip install -r requirements.txt
 - pip install -e . 
+- pip install --target /tmp/typehints --no-deps uqbar>=0.2.11
+- export MYPYPATH=/tmp/typehints
 
 before_script:
-- export MYPYPATH=`pwd`/abjad
+- export MYPYPATH=`pwd`/abjad:/tmp/typehints
 - echo $MYPYPATH
 
 script:
-#3- coverage run -a `which ajv` doctest --external-modules=baca ./baca
+# TODO: uncomment
+#- coverage run -a `which doctest` ./baca
 - mypy baca
 
 after_success:
