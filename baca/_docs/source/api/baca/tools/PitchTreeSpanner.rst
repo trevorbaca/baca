@@ -59,6 +59,8 @@ PitchTreeSpanner
 
    .. autoattribute:: PitchTreeSpanner.foo
 
+   .. autoattribute:: PitchTreeSpanner.leak
+
    .. autoattribute:: PitchTreeSpanner.leaves
 
    .. autoattribute:: PitchTreeSpanner.level
