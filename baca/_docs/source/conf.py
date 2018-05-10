@@ -14,7 +14,7 @@ PygmentsBridge.latex_formatter = CustomLatexFormatter
 
 add_function_parentheses = True
 
-copyright = u'1997-2018, Trevor Bača'
+copyright = '1997-2018, Trevor Bača'
 
 exclude_patterns = []
 
@@ -29,12 +29,12 @@ extensions = [
     'uqbar.sphinx.api',
     'uqbar.sphinx.inheritance',
     'uqbar.sphinx.style',
-    'abjad.docs.ext.abjadbook',
+    'abjadext.book.sphinx',
     ]
 
 master_doc = 'index'
 
-project = u'Bača API'
+project = 'Bača API'
 
 pygments_style = 'sphinx'
 
@@ -77,9 +77,9 @@ latex_elements = {
 latex_documents = [
     (
         'index',
-        u'BačaAPI.tex',
-        u'Bača API',
-        u'Trevor Bača',
+        'BačaAPI.tex',
+        'Bača API',
+        'Trevor Bača',
         'manual',
         ),
     ]
@@ -93,9 +93,9 @@ latex_domain_indices = False
 man_pages = [
     (
         'index',
-        u'BačaAPI',
-        u'Bača API',
-        [u'Trevor Bača'],
+        'BačaAPI',
+        'Bača API',
+        ['Trevor Bača'],
         1,
         )
     ]
@@ -105,10 +105,10 @@ man_pages = [
 texinfo_documents = [
     (
         'index',
-        u'BačaAPI',
-        u'Bača API',
-        u'Trevor Bača',
-        u'BačaAPI',
+        'BačaAPI',
+        'Bača API',
+        'Trevor Bača',
+        'BačaAPI',
         'One line description of project.',
         'Miscellaneous',
         ),
@@ -127,7 +127,7 @@ intersphinx_mapping = {
     }
 #todo_include_todos = True
 
-uqbar_api_title = u'Bača API'
+uqbar_api_title = 'Bača API'
 uqbar_api_source_paths = ['baca']
 uqbar_api_root_documenter_class = 'uqbar.apis.SummarizingRootDocumenter'
 uqbar_api_module_documenter_class = 'uqbar.apis.SummarizingModuleDocumenter'
