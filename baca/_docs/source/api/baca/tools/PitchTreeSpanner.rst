@@ -37,8 +37,6 @@ PitchTreeSpanner
 
    .. automethod:: PitchTreeSpanner.__repr__
 
-   .. automethod:: PitchTreeSpanner.__reversed__
-
    .. raw:: html
 
       <hr/>
@@ -46,9 +44,9 @@ PitchTreeSpanner
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchTreeSpanner.count
+   .. automethod:: PitchTreeSpanner.start_command
 
-   .. automethod:: PitchTreeSpanner.index
+   .. automethod:: PitchTreeSpanner.stop_command
 
    .. raw:: html
 

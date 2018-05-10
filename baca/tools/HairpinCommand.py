@@ -84,9 +84,11 @@ class HairpinCommand(Command):
             reapplied = self._remove_reapplied_wrappers(spanner[-1], dummy)
         if self.start:
             reapplied = self._remove_reapplied_wrappers(spanner[0], self.start)
+            leaf = spanner[0]
+            assert isinstance(leaf, abjad.Leaf)
             wrapper = spanner.attach(
                 self.start,
-                spanner[0],
+                leaf,
                 deactivate=self.deactivate,
                 tag=self.tag.prepend('HC2'),
                 wrapper=True,
@@ -99,9 +101,11 @@ class HairpinCommand(Command):
                     )
         if self.stop and (1 < len(spanner) or self.left_broken):
             reapplied = self._remove_reapplied_wrappers(spanner[-1], self.stop)
+            leaf = spanner[-1]
+            assert isinstance(leaf, abjad.Leaf)
             wrapper = spanner.attach(
                 self.stop,
-                spanner[-1],
+                leaf,
                 deactivate=self.deactivate,
                 tag=self.tag.prepend('HC3'),
                 wrapper=True,
