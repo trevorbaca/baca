@@ -44,6 +44,8 @@ PitchTreeSpanner
    .. rubric:: Methods
       :class: class-header
 
+   .. automethod:: PitchTreeSpanner.index
+
    .. automethod:: PitchTreeSpanner.start_command
 
    .. automethod:: PitchTreeSpanner.stop_command
