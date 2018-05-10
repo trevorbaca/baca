@@ -123,7 +123,7 @@ graphviz_dot_args = ['-s32']
 graphviz_output_format = 'svg'
 intersphinx_mapping = {
     'abjad': ('http://abjad.mbrsi.org', None),
-    'python': ('http://docs.python.org/3.2', None),
+    'python': ('http://docs.python.org/3.6', None),
     }
 #todo_include_todos = True
 
