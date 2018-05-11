@@ -27,7 +27,7 @@ class TieCorrectionCommand(Command):
 
     def __init__(
         self,
-        direction: typing.Union[abjad.OrdinalConstant] = None,
+        direction: typing.Union[str, abjad.VerticalAlignment] = None,
         repeat: bool = None,
         selector: Selector = 'baca.pleaf(-1)',
         untie: bool = None,
@@ -150,7 +150,7 @@ class TieCorrectionCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def direction(self) -> typing.Optional[abjad.OrdinalConstant]:
+    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
         r'''Gets direction.
 
         Interprets none equal to right.

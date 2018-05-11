@@ -1741,7 +1741,7 @@ class LibraryAF(abjad.AbjadObject):
 
         """
         return RegisterToOctaveCommand(
-            anchor=abjad.Bottom,
+            anchor=abjad.Down,
             octave_number=n,
             selector=selector,
             )

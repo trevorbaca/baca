@@ -130,7 +130,7 @@ class PitchSegment(abjad.PitchSegment):
         Returns new segment.
         '''
         command = baca.RegisterToOctaveCommand(
-            anchor=abjad.Bottom,
+            anchor=abjad.Down,
             octave_number=n,
             )
         selection = self._to_selection()
@@ -333,7 +333,7 @@ class PitchSegment(abjad.PitchSegment):
         Returns new segment.
         '''
         command = baca.RegisterToOctaveCommand(
-            anchor=abjad.Top,
+            anchor=abjad.Up,
             octave_number=n,
             )
         selection = self._to_selection()

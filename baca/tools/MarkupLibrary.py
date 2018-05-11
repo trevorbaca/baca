@@ -21,7 +21,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def __call__(
         argument: typing.Union[str, abjad.Markup],
         selector: Selector = 'baca.phead(0)',
-        direction: abjad.OrdinalConstant = abjad.Up,
+        direction: abjad.VerticalAlignment = abjad.Up,
         upright: bool = True,
         whiteout: bool = True,
         ) -> IndicatorCommand:
@@ -376,7 +376,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def boxed(
         string: str,
         selector: Selector = 'baca.leaf(0)',
-        direction: abjad.OrdinalConstant = abjad.Up,
+        direction: abjad.VerticalAlignment = abjad.Up,
         ) -> IndicatorCommand:
         r'''Makes boxed markup.
         '''
@@ -392,7 +392,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def boxed_lines(
         strings: typing.List[str],
         selector: Selector = 'baca.leaf(0)',
-        direction: abjad.OrdinalConstant = abjad.Up,
+        direction: abjad.VerticalAlignment = abjad.Up,
         ) -> IndicatorCommand:
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column()
@@ -407,7 +407,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def boxed_repeat_count(
         count: int,
         selector: Selector = 'baca.leaf(0)',
-        direction: abjad.OrdinalConstant = abjad.Up,
+        direction: abjad.VerticalAlignment = abjad.Up,
         ) -> IndicatorCommand:
         string = f'x{count}'
         markup = abjad.Markup(string)
@@ -751,7 +751,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def lines(
         items: typing.List,
         selector: Selector = 'baca.leaf(0)',
-        direction: abjad.OrdinalConstant = abjad.Up,
+        direction: abjad.VerticalAlignment = abjad.Up,
         no_whiteout: bool = False,
         ) -> IndicatorCommand:
         if not isinstance(items, list):

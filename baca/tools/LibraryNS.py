@@ -5437,7 +5437,7 @@ class LibraryNS(abjad.AbjadObject):
 
         """
         return RegisterToOctaveCommand(
-            anchor=abjad.Top,
+            anchor=abjad.Up,
             octave_number=n,
             selector=selector,
             )
@@ -5562,7 +5562,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def split_by_durations(
         durations: typing.Iterable,
-        remainder: abjad.OrdinalConstant = abjad.Right,
+        remainder: abjad.VerticalAlignment = abjad.Right,
         ) -> DivisionSequenceExpression:
         r'''Splits divisions by ``durations``.
 

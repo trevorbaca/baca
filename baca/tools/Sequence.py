@@ -180,9 +180,9 @@ class Sequence(abjad.Sequence):
     def _make_accumulate_markup(markup, operands=None, count=None):
         import abjad
         if count is None:
-            count = abjad.Identity
+            count = abjad.Exact
         markup_list = abjad.MarkupList()
-        operands = operands or [abjad.Identity]
+        operands = operands or [abjad.Exact]
         operand_markups = []
         for operand in operands:
             if hasattr(operand, 'get_markup'):
@@ -193,7 +193,7 @@ class Sequence(abjad.Sequence):
         operand_markup = abjad.MarkupList(operand_markups).concat()
         markup_list.append(operand_markup)
         infix = 'Φ'
-        if count != abjad.Identity:
+        if count != abjad.Exact:
             infix += '/' + str(count)
         markup_list.append(infix)
         markup_list.append(markup)
@@ -203,8 +203,8 @@ class Sequence(abjad.Sequence):
     @staticmethod
     def _make_accumulate_string_template(operands=None, count=None):
         if count is None:
-            count = abjad.Identity
-        operands = operands or [abjad.Identity]
+            count = abjad.Exact
+        operands = operands or [abjad.Exact]
         operand_strings = []
         for operand in operands:
             if hasattr(operand, 'get_string'):
@@ -217,7 +217,7 @@ class Sequence(abjad.Sequence):
         else:
             operands = ', '.join(operand_strings)
             operands = '[' + operands + ']'
-        if count == abjad.Identity:
+        if count == abjad.Exact:
             string_template = f'{operands} Φ {{}}'
         else:
             string_template = f'{operands} Φ/{count} {{}}'
@@ -278,7 +278,7 @@ class Sequence(abjad.Sequence):
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 >>> expression.get_string()
-                'Identity Φ J'
+                'Exact Φ J'
 
                 >>> markup = expression.get_markup()
                 >>> abjad.show(markup, strict=89) # doctest: +SKIP
@@ -291,7 +291,7 @@ class Sequence(abjad.Sequence):
                             {
                                 \concat
                                     {
-                                        Identity
+                                        Exact
                                     }
                                 Φ
                                 \bold
@@ -749,7 +749,7 @@ class Sequence(abjad.Sequence):
         Returns sequence of orbit length with `count` set to identity.
         '''
         if count is None:
-            count = abjad.Identity
+            count = abjad.Exact
         if self._expression:
             return self._update_expression(
                 inspect.currentframe(),
@@ -761,7 +761,7 @@ class Sequence(abjad.Sequence):
         if not isinstance(operands, list):
             operands = [operands]
         items = [self]
-        if count == abjad.Identity:
+        if count == abjad.Exact:
             for i in range(1000):
                 sequence = items[-1]
                 for operand in operands:

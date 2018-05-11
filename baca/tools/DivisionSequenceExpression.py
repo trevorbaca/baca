@@ -164,7 +164,7 @@ class DivisionSequenceExpression(abjad.Expression):
         template += ', cyclic={cyclic}'
         template += ', durations={durations}'
         template += ', pattern_rotation_index={pattern_rotation_index}'
-        template += ', remainder={remainder}'
+        template += ', remainder={remainder!r}'
         template += ', remainder_fuse_threshold={remainder_fuse_threshold}'
         template += ')'
         evaluation_template = template.format(
