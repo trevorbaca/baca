@@ -5562,7 +5562,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def split_by_durations(
         durations: typing.Iterable,
-        remainder: abjad.VerticalAlignment = abjad.Right,
+        remainder: abjad.HorizontalAlignment = abjad.Right,
         ) -> DivisionSequenceExpression:
         r'''Splits divisions by ``durations``.
 
