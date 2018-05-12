@@ -1512,9 +1512,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if voice_name not in self.voice_metadata:
                     self.voice_metadata[voice_name] = abjad.OrderedDict()
                 self.voice_metadata[voice_name][parameter] = state
-        commands = abjad.String('command').pluralize(command_count)
-        if self.environment != 'docs':
-            print(f'  Found {command_count} nonrhythm {commands} ...')
+        return command_count
 
     def _call_rhythm_commands(self):
         self._attach_metronome_marks()
@@ -1572,9 +1570,7 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms = self._intercalate_silences(rhythms)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
-        commands = abjad.String('command').pluralize(command_count)
-        if self.environment != 'docs':
-            print(f'  Found {command_count} rhythm {commands} ...')
+        return command_count
 
     def _check_all_music_in_part_containers(self):
         name = 'all_music_in_part_containers'
@@ -2240,6 +2236,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return indicator
 
     def _label_clock_time(self):
+        if self.environment == 'docs':
+            return
         skips = baca.select(self.score['GlobalSkips']).skips()
         if self.clock_time_override:
             metronome_mark = self.clock_time_override
@@ -4943,6 +4941,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._last_segment
 
     @property
+    def lilypond_file(self) -> typing.Optional[abjad.LilyPondFile]:
+        '''
+        Gets LilyPond file.
+        '''
+        return self._lilypond_file
+
+    @property
     def magnify_staves(self) -> typing.Union[
         abjad.Multiplier,
         typing.Tuple[abjad.Multiplier, abjad.Tag],
@@ -5896,63 +5901,103 @@ class SegmentMaker(abjad.SegmentMaker):
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._segment_directory = segment_directory
         self._import_manifests()
-        self._make_score()
-        self._make_lilypond_file()
-        self._make_global_skips()
-        self._label_measure_indices()
-        self._label_stage_numbers()
-
-        with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-            with abjad.Timer() as timer:
-                self._call_rhythm_commands()
+        with abjad.Timer() as timer:
+            self._make_score()
+            self._make_lilypond_file()
+            self._make_global_skips()
+            self._label_measure_indices()
+            self._label_stage_numbers()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if self.environment != 'docs':
-            print(f'  Rhythm command time {count} {seconds} ...')
+            print(f'  Score initialization {count} {seconds} ...')
 
-        self._populate_offset_to_measure_number()
-        self._extend_beams()
-        self._annotate_sounds_during()
-        self._attach_first_segment_score_template_defaults()
-        self._reapply_persistent_indicators()
-        self._attach_first_appearance_score_template_defaults()
-        self._apply_spacing()
-
-        with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-            with abjad.Timer() as timer:
-                self._call_commands()
+        with abjad.Timer() as timer:
+            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+                command_count = self._call_rhythm_commands()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if self.environment != 'docs':
-            print(f'  Nonrhythm command time {count} {seconds} ...')
+            message = f'  Rhythm commands {count} {seconds}'
+            message += f' [for {command_count} commands] ...'
+            print(message)
 
-        self._cache_fermata_measure_numbers()
-        self._shorten_long_repeat_ties()
-        self._treat_untreated_persistent_wrappers()
-        self._label_clock_time()
-        self._transpose_score_()
-        self._add_final_bar_line()
-        self._add_final_markup()
-        self._color_unregistered_pitches()
-        self._color_unpitched_notes()
-        self._check_wellformedness()
-        self._check_range()
-        self._check_persistent_indicators()
-        self._color_repeat_pitch_classes_()
-        self._color_octaves_()
-        self._force_nonnatural_accidentals()
-        self._remove_redundant_time_signatures()
-        self._magnify_staves_()
-        self._whitespace_leaves()
-        self._comment_measure_numbers()
-        self._apply_breaks()
-        self._style_fermata_measures()
-        self._shift_clefs_into_fermata_measures()
-        self._deactivate_tags(deactivate or [])
-        self._remove_tags(remove)
-        self._add_container_identifiers()
-        self._check_all_music_in_part_containers()
-        self._check_duplicate_part_assignments()
-        self._collect_metadata()
-        assert isinstance(self._lilypond_file, abjad.LilyPondFile)
-        return self._lilypond_file
+        with abjad.Timer() as timer:
+            self._populate_offset_to_measure_number()
+            self._extend_beams()
+            self._annotate_sounds_during()
+            self._attach_first_segment_score_template_defaults()
+            self._reapply_persistent_indicators()
+            self._attach_first_appearance_score_template_defaults()
+            self._apply_spacing()
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            print(f'  After-rhythm commands {count} {seconds} ...')
+
+        with abjad.Timer() as timer:
+            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+                command_count = self._call_commands()
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            message = f'  Nonrhythm commands {count} {seconds}'
+            message += f' [for {command_count} commands] ...'
+            print(message)
+
+        # TODO: optimize by consolidating score iteration:
+        with abjad.Timer() as timer:
+            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+                #self._remove_redundant_time_signatures()
+                self._cache_fermata_measure_numbers()
+                self._shorten_long_repeat_ties()
+                self._treat_untreated_persistent_wrappers()
+                # TODO: move *BEFORE* _treat_untreated_persistent_wrappers:
+                self._remove_redundant_time_signatures()
+                self._transpose_score_()
+                self._add_final_bar_line()
+                self._add_final_markup()
+                self._color_unregistered_pitches()
+                self._color_unpitched_notes()
+                self._check_wellformedness()
+                self._check_range()
+                self._check_persistent_indicators()
+                self._color_repeat_pitch_classes_()
+                self._color_octaves_()
+                self._force_nonnatural_accidentals()
+                self._magnify_staves_()
+                self._whitespace_leaves()
+                self._comment_measure_numbers()
+                self._apply_breaks()
+                self._style_fermata_measures()
+                self._shift_clefs_into_fermata_measures()
+                self._deactivate_tags(deactivate or [])
+                self._remove_tags(remove)
+                self._add_container_identifiers()
+                self._check_all_music_in_part_containers()
+                self._check_duplicate_part_assignments()
+                self._collect_metadata()
+
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            print(f'  Postprocessing {count} {seconds} ...')
+
+        with abjad.Timer() as timer:
+            # TODO: optimize: takes 17 seconds on a page of récursif:
+            self.score._update_now(offsets_in_seconds=True)
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            print(f'  Offsets-in-seconds update {count} {seconds} ...')
+
+        with abjad.Timer() as timer:
+            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+                self._label_clock_time()
+        count = int(timer.elapsed_time)
+        seconds = abjad.String('second').pluralize(count)
+        if self.environment != 'docs':
+            print(f'  Clocktime markup {count} {seconds} ...')
+
+        assert isinstance(self.lilypond_file, abjad.LilyPondFile)
+        return self.lilypond_file

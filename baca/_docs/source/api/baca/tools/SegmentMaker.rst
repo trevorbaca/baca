@@ -93,6 +93,8 @@ SegmentMaker
 
    .. autoattribute:: SegmentMaker.last_segment
 
+   .. autoattribute:: SegmentMaker.lilypond_file
+
    .. autoattribute:: SegmentMaker.magnify_staves
 
    .. autoattribute:: SegmentMaker.manifests
