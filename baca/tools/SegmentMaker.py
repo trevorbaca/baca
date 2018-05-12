@@ -5984,16 +5984,15 @@ class SegmentMaker(abjad.SegmentMaker):
             print(f'  Postprocessing {count} {seconds} ...')
 
         with abjad.Timer() as timer:
-            # TODO: optimize: takes 17 seconds on a page of récursif:
-            self.score._update_now(offsets_in_seconds=True)
+            method = getattr(self.score, '_update_now')
+            method(offsets_in_seconds=True)
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if self.environment != 'docs':
             print(f'  Offsets-in-seconds update {count} {seconds} ...')
 
         with abjad.Timer() as timer:
-            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-                self._label_clock_time()
+            self._label_clock_time()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if self.environment != 'docs':
