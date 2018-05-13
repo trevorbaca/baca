@@ -1,2 +1,2 @@
 cd ~/abjad/docs
-make htmd
+make html
