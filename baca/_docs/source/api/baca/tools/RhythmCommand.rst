@@ -94,11 +94,7 @@ RhythmCommand
 
    .. autoattribute:: RhythmCommand.stages
 
-   .. autoattribute:: RhythmCommand.start_stage
-
    .. autoattribute:: RhythmCommand.state
-
-   .. autoattribute:: RhythmCommand.stop_stage
 
    .. autoattribute:: RhythmCommand.tag
 

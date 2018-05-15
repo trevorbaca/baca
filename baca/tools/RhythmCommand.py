@@ -648,16 +648,6 @@ class RhythmCommand(Command):
         '''
         return self._stages
 
-    # TODO: remove because unused?
-    @property
-    def start_stage(self) -> typing.Optional[int]:
-        r'''Gets start stage.
-        '''
-        if self.stages:
-            return self.stages[0]
-        else:
-            return None
-
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
         r'''Gets postcall state of rhythm command.
@@ -665,16 +655,6 @@ class RhythmCommand(Command):
         Populated by segment-maker.
         '''
         return self._state
-
-    # TODO: remove because unused?
-    @property
-    def stop_stage(self) -> typing.Optional[int]:
-        r'''Gets stop stage.
-        '''
-        if self.stages is not None:
-            return self.stages[-1]
-        else:
-            return None
 
     @property
     def tie_first(self) -> typing.Optional[bool]:
