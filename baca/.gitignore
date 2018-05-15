@@ -57,3 +57,4 @@ target/
 
 # ignore docs build directories
 _docs/build
+.pytest_cache

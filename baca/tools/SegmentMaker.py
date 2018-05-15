@@ -20,7 +20,8 @@ from .Typing import NumberPair
 
 
 class SegmentMaker(abjad.SegmentMaker):
-    r'''Segment-maker.
+    r"""
+    Segment-maker.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -134,7 +135,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS ATTRIBUTES ###
 
@@ -413,7 +414,8 @@ class SegmentMaker(abjad.SegmentMaker):
     ### SPECIAL METHODS ###
 
     def __call__(self, scopes, *commands) -> None:
-        r'''Wraps each command in `commands` with each scope in `scopes`.
+        r"""
+        Wraps each command in `commands` with each scope in `scopes`.
 
         ..  container:: example
 
@@ -808,7 +810,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...
             Exception: unknown voice name 'PercussionVoice'.
 
-        '''
+        """
         from baca.tools.LibraryNS import LibraryNS
         commands_ = []
         for command in commands:
@@ -3040,27 +3042,31 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def allow_empty_selections(self) -> typing.Optional[bool]:
-        r'''Is true when segment allows empty selectors.
+        """
+        Is true when segment allows empty selectors.
 
         Otherwise segment raises exception on empty selectors.
-        '''
+        """
         return self._allow_empty_selections
 
     @property
     def breaks(self) -> typing.Optional[BreakMeasureMap]:
-        r'''Gets breaks.
-        '''
+        """
+        Gets breaks.
+        """
         return self._breaks
 
     @property
     def clock_time_override(self) -> typing.Optional[abjad.MetronomeMark]:
-        r'''Gets clock time override.
-        '''
+        """
+        Gets clock time override.
+        """
         return self._clock_time_override
 
     @property
     def color_octaves(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker colors octaves.
+        r"""
+        Is true when segment-maker colors octaves.
 
         ..  container:: example
 
@@ -3314,12 +3320,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._color_octaves
 
     @property
     def color_out_of_range_pitches(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker colors out-of-range pitches.
+        r"""
+        Is true when segment-maker colors out-of-range pitches.
 
         ..  container:: example
 
@@ -3493,12 +3500,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._color_out_of_range_pitches
 
     @property
     def color_repeat_pitch_classes(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker colors repeat pitch-classes.
+        r"""
+        Is true when segment-maker colors repeat pitch-classes.
 
         ..  container:: example
 
@@ -3670,30 +3678,34 @@ class SegmentMaker(abjad.SegmentMaker):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._color_repeat_pitch_classes
 
     @property
     def do_not_check_persistence(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker does not check persistent indicators.
-        '''
+        """
+        Is true when segment-maker does not check persistent indicators.
+        """
         return self._do_not_check_persistence
 
     @property
     def do_not_include_layout_ly(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker does not include layout.ly.
-        '''
+        """
+        Is true when segment-maker does not include layout.ly.
+        """
         return self._do_not_include_layout_ly
 
     @property
     def fermata_measure_staff_line_count(self) -> typing.Optional[int]:
-        r'''Gets fermata measure staff lines.
-        '''
+        """
+        Gets fermata measure staff lines.
+        """
         return self._fermata_measure_staff_line_count
 
     @property
     def final_bar_line(self) -> typing.Union[bool, str, None]:
-        r'''Gets final bar line.
+        r"""
+        Gets final bar line.
 
         ..  container:: example
 
@@ -4146,12 +4158,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._final_bar_line
 
     @property
     def final_markup(self) -> typing.Optional[tuple]:
-        r'''Gets final markup.
+        r"""
+        Gets final markup.
 
         ..  container:: example
 
@@ -4288,44 +4301,50 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._final_markup
 
     @property
     def final_markup_extra_offset(self) -> typing.Optional[NumberPair]:
-        r'''Gets final markup extra offset.
-        '''
+        """
+        Gets final markup extra offset.
+        """
         return self._final_markup_extra_offset
 
     @property
     def first_measure_number(self) -> typing.Optional[int]:
-        r'''Gets user-defined first measure number.
-        '''
+        """
+        Gets user-defined first measure number.
+        """
         return self._first_measure_number
 
     @property
     def first_segment(self) -> typing.Optional[bool]:
-        r'''Is true when segment is first in score.
-        '''
+        """
+        Is true when segment is first in score.
+        """
         if self._first_segment is not None:
             return self._first_segment
         return self._get_segment_number() == 1
         
     @property
     def ignore_out_of_range_pitches(self) -> typing.Optional[bool]:
-        r'''Is true when segment ignores out-of-range pitches.
-        '''
+        """
+        Is true when segment ignores out-of-range pitches.
+        """
         return self._ignore_out_of_range_pitches
 
     @property
     def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
-        r'''Is true when segment ignores repeat pitch-classes.
-        '''
+        """
+        Is true when segment ignores repeat pitch-classes.
+        """
         return self._ignore_repeat_pitch_classes
 
     @property
     def ignore_unpitched_notes(self) -> typing.Optional[bool]:
-        r'''Is true when segment ignores unpitched notes.
+        r"""
+        Is true when segment ignores unpitched notes.
 
         ..  container:: example
 
@@ -4564,12 +4583,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._ignore_unpitched_notes
 
     @property
     def ignore_unregistered_pitches(self) -> typing.Optional[bool]:
-        r'''Is true when segment ignores unregistered pitches.
+        r"""
+        Is true when segment ignores unregistered pitches.
 
         ..  container:: example
 
@@ -4919,32 +4939,35 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._ignore_unregistered_pitches
 
     @property
     def include_nonfirst_segment_stylesheet(self) -> typing.Optional[bool]:
-        r'''Is true when segment includes nonfirst segment stylesheet.
-        '''
+        """
+        Is true when segment includes nonfirst segment stylesheet.
+        """
         return self._include_nonfirst_segment_stylesheet
 
     @property
     def instruments(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets instruments.
-        '''
+        """
+        Gets instruments.
+        """
         return self._instruments
 
     @property
     def last_segment(self) -> typing.Optional[bool]:
-        r'''Is true when composer declares segment to be last in score.
-        '''
+        """
+        Is true when composer declares segment to be last in score.
+        """
         return self._last_segment
 
     @property
     def lilypond_file(self) -> typing.Optional[abjad.LilyPondFile]:
-        '''
+        """
         Gets LilyPond file.
-        '''
+        """
         return self._lilypond_file
 
     @property
@@ -4953,14 +4976,16 @@ class SegmentMaker(abjad.SegmentMaker):
         typing.Tuple[abjad.Multiplier, abjad.Tag],
         None,
         ]:
-        r'''Gets staff magnification.
-        '''
+        """
+        Gets staff magnification.
+        """
         return self._magnify_staves
 
     @property
     def manifests(self) -> abjad.OrderedDict:
-        r'''Gets manifests.
-        '''
+        """
+        Gets manifests.
+        """
         manifests = abjad.OrderedDict()
         manifests['abjad.Instrument'] = self.instruments
         manifests['abjad.MarginMarkup'] = self.margin_markups
@@ -4969,22 +4994,25 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def margin_markups(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets margin markups.
-        '''
+        """
+        Gets margin markups.
+        """
         return self._margin_markups
 
     @property
     def measure_count(self) -> int:
-        r'''Gets measure count.
-        '''
+        """
+        Gets measure count.
+        """
         if self.time_signatures:
             return len(self.time_signatures)
         return 0
 
     @property
     def measures_per_stage(self) -> typing.List[int]:
-        r'''Gets measures per stage.
-        '''
+        """
+        Gets measures per stage.
+        """
         if self._measures_per_stage is None:
             time_signatures = self.time_signatures or []
             return [len(time_signatures)]
@@ -4992,7 +5020,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def metadata(self) -> abjad.OrderedDict:
-        r'''Gets segment metadata.
+        r"""
+        Gets segment metadata.
 
         ..  container:: example
 
@@ -5141,13 +5170,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     ]
                 )
 
-        '''
+        """
         return self._metadata
 
     @property
     def metronome_mark_measure_map(self) -> typing.Optional[
         MetronomeMarkMeasureMap]:
-        r'''Gets metronome mark measure map.
+        r"""
+        Gets metronome mark measure map.
 
         ..  container:: example
 
@@ -5317,31 +5347,35 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._metronome_mark_measure_map
 
     @property
     def metronome_mark_stem_height(self) -> typing.Optional[Number]:
-        r'''Gets metronome mark stem height.
-        '''
+        """
+        Gets metronome mark stem height.
+        """
         return self._metronome_mark_stem_height
 
     @property
     def metronome_marks(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets metronome marks.
-        '''
+        """
+        Gets metronome marks.
+        """
         return self._metronome_marks
 
     @property
     def midi(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker outputs MIDI.
-        '''
+        """
+        Is true when segment-maker outputs MIDI.
+        """
         return self._midi
 
     @property
     def mmspanner_right_broken(self) -> typing.Optional[bool]:
-        r'''Is true when metronome mark spanner is right-broken.
-        '''
+        """
+        Is true when metronome mark spanner is right-broken.
+        """
         return self._mmspanner_right_broken
 
     @property
@@ -5350,19 +5384,22 @@ class SegmentMaker(abjad.SegmentMaker):
         ) -> typing.Union[
         Number, typing.Tuple[Number, abjad.Tag],
         ]:
-        r'''Gets metronome mark spanner right padding.
-        '''
+        """
+        Gets metronome mark spanner right padding.
+        """
         return self._mmspanner_right_padding
 
     @property
     def previous_metadata(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets previous segment metadata.
-        '''
+        """
+        Gets previous segment metadata.
+        """
         return self._previous_metadata
 
     @property
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
-        r'''Gets score template.
+        """
+        Gets score template.
 
         ..  container:: example
 
@@ -5375,18 +5412,20 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker.score_template
             SingleStaffScoreTemplate()
 
-        '''
+        """
         return self._score_template
 
     @property
     def skip_wellformedness_checks(self) -> typing.Optional[bool]:
-        r'''Is true when segment skips wellformedness checks.
-        '''
+        """
+        Is true when segment skips wellformedness checks.
+        """
         return self._skip_wellformedness_checks
 
     @property
     def skips_instead_of_rests(self) -> typing.Optional[bool]:
-        r'''Is true when segment fills empty measures with skips.
+        r"""
+        Is true when segment fills empty measures with skips.
 
         ..  container:: example
 
@@ -5529,41 +5568,46 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._skips_instead_of_rests
 
     @property
     def spacing(self) -> typing.Optional[HorizontalSpacingSpecifier]:
-        r'''Gets spacing.
-        '''
+        """
+        Gets spacing.
+        """
         return self._spacing
 
     @property
     def stage_count(self) -> int:
-        r'''Gets stage count.
+        """
+        Gets stage count.
 
         Defined equal to 1 when `self.measures_per_stage` is none.
-        '''
+        """
         if self.measures_per_stage is None:
             return 1
         return len(self.measures_per_stage)
 
     @property
     def test_container_identifiers(self) -> typing.Optional[bool]:
-        r'''Is true when segment-maker adds container identifiers in docs
+        """
+        Is true when segment-maker adds container identifiers in docs
         environment.
-        '''
+        """
         return self._test_container_identifiers
 
     @property
     def time_signatures(self) -> typing.List[abjad.TimeSignature]:
-        r'''Gets time signatures.
-        '''
+        """
+        Gets time signatures.
+        """
         return self._time_signatures
 
     @property
     def transpose_score(self) -> typing.Optional[bool]:
-        r'''Is true when segment transposes score.
+        r"""
+        Is true when segment transposes score.
 
         ..  container:: example
 
@@ -5821,12 +5865,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        '''
+        """
         return self._transpose_score
 
     @property
     def validate_measure_count(self) -> typing.Optional[int]:
-        r'''Gets validate measure count.
+        """
+        Gets validate measure count.
 
         ..  container:: example
 
@@ -5841,25 +5886,28 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...
             Exception: found 4 measures (not 6).
 
-        '''
+        """
         return self._validate_measure_count
     
     @property
     def validate_stage_count(self) -> typing.Optional[int]:
-        r'''Gets validate stage count.
-        '''
+        """
+        Gets validate stage count.
+        """
         return self._validate_stage_count
 
     @property
     def voice_metadata(self) -> abjad.OrderedDict:
-        r'''Gets voice metadata.
-        '''
+        """
+        Gets voice metadata.
+        """
         return self._voice_metadata
 
     @property
     def wrappers(self) -> typing.List[CommandWrapper]:
-        r'''Gets wrappers.
-        '''
+        """
+        Gets wrappers.
+        """
         return self._wrappers
 
     ### PUBLIC METHODS ###
@@ -5874,7 +5922,8 @@ class SegmentMaker(abjad.SegmentMaker):
         remove: typing.List[str] = None,
         segment_directory: abjad.Path = None,
         ) -> abjad.LilyPondFile:
-        r'''Runs segment-maker.
+        """
+        Runs segment-maker.
 
         :param deactivate: tags to deactivate in LilyPond file output.
 
@@ -5894,7 +5943,7 @@ class SegmentMaker(abjad.SegmentMaker):
         :param segment_directory: path providing access to current segment
             directory.
 
-        '''
+        """
         self._environment = environment
         self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
         self._midi = midi
