@@ -62,6 +62,8 @@ TextSpannerCommand
 
    .. autoattribute:: TextSpannerCommand.deactivate
 
+   .. autoattribute:: TextSpannerCommand.leak
+
    .. autoattribute:: TextSpannerCommand.lilypond_id
 
    .. autoattribute:: TextSpannerCommand.line_segment

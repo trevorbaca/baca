@@ -2477,6 +2477,39 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = class_(momento.value)
         return indicator
 
+    def _parallelize_multimeasure_rests(self):
+        prototype = abjad.MultimeasureRest
+        context = self.score['MusicContext']
+        for mmrest in abjad.iterate(context).components(prototype):
+            previous = abjad.inspect(mmrest).get_leaf(-1)
+            if previous is None:
+                continue
+            if isinstance(previous, prototype):
+                continue
+            if not abjad.inspect(previous).has_spanner(abjad.TextSpanner):
+                continue
+            parentage = abjad.inspect(previous).get_parentage()
+            voice = parentage.get_first(abjad.Voice)
+            multiplier = abjad.inspect(mmrest).get_indicator(
+                abjad.Multiplier,
+                )
+            before = abjad.LilyPondLiteral(
+                [
+                    rf'\voices "{voice.name}", "MultimeasureRestVoice"',
+                    '<<',
+                    r'    \tweak NoteHead.no-ledgers ##t',
+                    r'    \tweak NoteHead.transparent ##t',
+                    r'    \tweak Dots.transparent ##t',
+                    rf"    c'1 * {multiplier!s}",
+                    r'\\',
+                    ],
+                    'before',
+                    )
+            abjad.attach(before, mmrest)
+            after = abjad.LilyPondLiteral('>>', 'after')
+            abjad.attach(after, mmrest)
+            abjad.tweak(previous.note_head).color = 'red'
+
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
         for skip in baca.select(self.score['GlobalSkips']).skips():
@@ -6018,6 +6051,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._whitespace_leaves()
                 self._comment_measure_numbers()
                 self._apply_breaks()
+                self._parallelize_multimeasure_rests()
                 self._style_fermata_measures()
                 self._shift_clefs_into_fermata_measures()
                 self._deactivate_tags(deactivate or [])

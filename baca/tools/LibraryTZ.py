@@ -1351,6 +1351,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner(
         text: typing.Union[str, abjad.Markup, IndicatorCommand],
+        leak: bool = None,
         line_segment: abjad.LineSegment = None,
         lilypond_id: int = None,
         right_padding: typing.Optional[Number] = 1.25,
@@ -1550,6 +1551,7 @@ class LibraryTZ(abjad.AbjadObject):
         if right_padding is not None:
             line_segment = abjad.new(line_segment, right_padding=right_padding)
         return TextSpannerCommand(
+            leak=leak,
             lilypond_id=lilypond_id,
             line_segment=line_segment,
             selector=selector,

@@ -166,6 +166,7 @@ class TextSpannerCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_leak',
         '_lilypond_id',
         '_line_segment',
         '_text',
@@ -176,6 +177,7 @@ class TextSpannerCommand(Command):
 
     def __init__(
         self,
+        leak: bool = None,
         lilypond_id: int = None,
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
@@ -183,6 +185,9 @@ class TextSpannerCommand(Command):
         tweaks: typing.List[Tweak] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
+        if leak is not None:
+            leak = bool(leak)
+        self._leak = leak
         if lilypond_id is not None:
             assert lilypond_id in (1, 2, 3), repr(lilypond_id)
         self._lilypond_id = lilypond_id
@@ -223,10 +228,10 @@ class TextSpannerCommand(Command):
         leaves = abjad.select(argument).leaves()
         if not leaves:
             return
-        spanner = abjad.TextSpanner(lilypond_id=self.lilypond_id)
-#        manager = abjad.tweak(spanner)
-#        for attribute, value in (self.tweaks or []):
-#            setattr(manager, attribute, value)
+        spanner = abjad.TextSpanner(
+            leak=self.leak,
+            lilypond_id=self.lilypond_id,
+            )
         self._apply_tweaks(spanner)
         abjad.attach(spanner, leaves)
         first_leaf = leaves[0]
@@ -244,6 +249,13 @@ class TextSpannerCommand(Command):
             )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def leak(self) -> typing.Optional[bool]:
+        """
+        Is true when spanner leaks one leaf to the right.
+        """
+        return self._leak
 
     @property
     def lilypond_id(self) -> typing.Optional[int]:
