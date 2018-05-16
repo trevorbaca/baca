@@ -1,0 +1,1821 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Division &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../index.html"/>
+        <link rel="up" title="baca" href="index.html"/>
+        <link rel="next" title="Expression" href="Expression.html"/>
+        <link rel="prev" title="DesignMaker" href="DesignMaker.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">baca</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicMaker.html">MusicMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SegmentMaker.html">SegmentMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayColumn.html">PitchArrayColumn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSegment.html">PitchSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WellformednessManager.html">WellformednessManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="index.html">baca</a> &raquo;</li>
+        
+      <li>Division</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/baca/Division.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.Division">
+<span id="division"></span><span id="baca-division"></span><h1>Division<a class="headerlink" href="#module-baca.Division" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../_images/inheritance-776669d28183a703171401064c33870ff6e0137e.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+    graph [bgcolor=transparent,
+        color=lightsteelblue2,
+        fontname=Arial,
+        fontsize=10,
+        outputorder=edgesfirst,
+        overlap=prism,
+        penwidth=2,
+        rankdir=LR,
+        splines=spline,
+        style=&quot;dashed, rounded&quot;,
+        truecolor=true];
+    node [colorscheme=pastel19,
+        fontname=Arial,
+        fontsize=10,
+        height=0,
+        margin=0.05,
+        penwidth=2,
+        shape=box,
+        style=&quot;filled, rounded&quot;,
+        width=0];
+    edge [color=lightslategrey,
+        penwidth=1];
+    subgraph &quot;cluster_abjad.tools.abctools&quot; {
+        graph [label=&quot;abjad.tools.abctools&quot;];
+        node [color=1];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; [label=&quot;Abjad\nObject&quot;];
+    }
+    subgraph &quot;cluster_abjad.tools.mathtools&quot; {
+        graph [label=&quot;abjad.tools.mathtools&quot;];
+        node [color=2];
+        &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot; [label=&quot;Nonreduced\nFraction&quot;];
+    }
+    subgraph cluster_baca {
+        graph [label=baca];
+        node [color=3];
+        &quot;baca.Division.Division&quot; [URL=&quot;../api/baca/Division.html#baca.Division.Division&quot;,
+            color=black,
+            fontcolor=white,
+            label=Division,
+            target=_top];
+    }
+    subgraph cluster_builtins {
+        graph [label=builtins];
+        node [color=4];
+        &quot;builtins.object&quot; [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+            label=object,
+            target=_top];
+    }
+    subgraph cluster_fractions {
+        graph [label=fractions];
+        node [color=5];
+        &quot;fractions.Fraction&quot; [URL=&quot;https://docs.python.org/3.6/library/fractions.html#fractions.Fraction&quot;,
+            label=Fraction,
+            target=_top];
+    }
+    subgraph cluster_numbers {
+        graph [label=numbers];
+        node [color=6];
+        &quot;numbers.Complex&quot; [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Complex&quot;,
+            label=Complex,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;numbers.Number&quot; [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Number&quot;,
+            label=Number,
+            target=_top];
+        &quot;numbers.Rational&quot; [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Rational&quot;,
+            label=Rational,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;numbers.Real&quot; [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Real&quot;,
+            label=Real,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;numbers.Complex&quot; -&gt; &quot;numbers.Real&quot;;
+        &quot;numbers.Number&quot; -&gt; &quot;numbers.Complex&quot;;
+        &quot;numbers.Real&quot; -&gt; &quot;numbers.Rational&quot;;
+    }
+    &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;;
+    &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot; -&gt; &quot;baca.Division.Division&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;numbers.Number&quot;;
+    &quot;fractions.Fraction&quot; -&gt; &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;;
+    &quot;numbers.Rational&quot; -&gt; &quot;fractions.Fraction&quot;;
+}</p></object>
+</div>
+<dl class="class">
+<dt id="baca.Division.Division">
+<em class="property">class </em><code class="descclassname">baca.Division.</code><code class="descname">Division</code><span class="sig-paren">(</span><em>*arguments</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division" title="Permalink to this definition">¶</a></dt>
+<dd><p>Division.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="n">rhythmmakertools</span> <span class="k">as</span> <span class="n">rhythmos</span>
+</pre></div>
+</div>
+<div class="example docutils container">
+<p>Division with duration, start offset and payload:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">payload</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">NoteRhythmMaker</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Division with duration and start offset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">division</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span>
+<span class="go">baca.Division(</span>
+<span class="go">    (3, 8),</span>
+<span class="go">    start_offset=abjad.Offset(5, 4),</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Division with duration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">division</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span>
+<span class="go">baca.Division(</span>
+<span class="go">    (3, 8)</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Initializes from other division:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">payload</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">NoteRhythmMaker</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">==</span> <span class="n">new_division</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Initializes from nonreduced fraction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">fraction</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">payload</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">NoteRhythmMaker</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">==</span> <span class="n">new_division</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Empty initialization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">division</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span>
+<span class="go">baca.Division(</span>
+<span class="go">    (0, 1)</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Makes divisions from durations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_offsets</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mathtools</span><span class="o">.</span><span class="n">cumulative_sums</span><span class="p">(</span><span class="n">durations</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">duration</span><span class="p">,</span> <span class="n">start_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="n">start_offsets</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">duration</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">start_offset</span><span class="o">=</span><span class="n">start_offset</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>    <span class="n">divisions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisions</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">divisions</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">division</span> <span class="ow">in</span> <span class="n">divisions</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">Division((1, 8), start_offset=Offset(0, 1))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 4))</span>
+<span class="go">Division((1, 8), start_offset=Offset(3, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 2))</span>
+<span class="go">Division((1, 8), start_offset=Offset(5, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(3, 4))</span>
+<span class="go">Division((1, 8), start_offset=Offset(7, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 1))</span>
+<span class="go">Division((1, 8), start_offset=Offset(9, 8))</span>
+</pre></div>
+</div>
+<p>Partitions divisions into thirds:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Ratio</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parts</span> <span class="o">=</span> <span class="n">divisions</span><span class="o">.</span><span class="n">partition_by_ratio_of_lengths</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Gets middle third:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">division</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">division</span>
+<span class="go">Division((1, 8), start_offset=Offset(3, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 2))</span>
+<span class="go">Division((1, 8), start_offset=Offset(5, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(3, 4))</span>
+</pre></div>
+</div>
+<p>Gets start offset of middle third:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start_offset</span>
+<span class="go">Offset(3, 8)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Makes divisions from durations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_offsets</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mathtools</span><span class="o">.</span><span class="n">cumulative_sums</span><span class="p">(</span><span class="n">durations</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">duration</span><span class="p">,</span> <span class="n">start_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="n">start_offsets</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">duration</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">start_offset</span><span class="o">=</span><span class="n">start_offset</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>    <span class="n">divisions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisions</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">divisions</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">division</span> <span class="ow">in</span> <span class="n">divisions</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">Division((1, 8), start_offset=Offset(0, 1))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 4))</span>
+<span class="go">Division((1, 8), start_offset=Offset(3, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 2))</span>
+<span class="go">Division((1, 8), start_offset=Offset(5, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(3, 4))</span>
+<span class="go">Division((1, 8), start_offset=Offset(7, 8))</span>
+<span class="go">Division((1, 8), start_offset=Offset(1, 1))</span>
+<span class="go">Division((1, 8), start_offset=Offset(9, 8))</span>
+</pre></div>
+</div>
+<p>Splits divisions every five sixteenths:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parts</span> <span class="o">=</span> <span class="n">divisions</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">)],</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parts</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;part </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">division</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">division</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">part 0</span>
+<span class="go">    Division((1, 8), start_offset=Offset(0, 1))</span>
+<span class="go">    Division((1, 8), start_offset=Offset(1, 8))</span>
+<span class="go">    Division((1, 16), start_offset=Offset(1, 4))</span>
+<span class="go">part 1</span>
+<span class="go">    Division((1, 16), start_offset=Offset(5, 16))</span>
+<span class="go">    Division((1, 8), start_offset=Offset(3, 8))</span>
+<span class="go">    Division((1, 8), start_offset=Offset(1, 2))</span>
+<span class="go">part 2</span>
+<span class="go">    Division((1, 8), start_offset=Offset(5, 8))</span>
+<span class="go">    Division((1, 8), start_offset=Offset(3, 4))</span>
+<span class="go">    Division((1, 16), start_offset=Offset(7, 8))</span>
+<span class="go">part 3</span>
+<span class="go">    Division((1, 16), start_offset=Offset(15, 16))</span>
+<span class="go">    Division((1, 8), start_offset=Offset(1, 1))</span>
+<span class="go">    Division((1, 8), start_offset=Offset(9, 8))</span>
+</pre></div>
+</div>
+<p>Gets start offset of first division of last part:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start_offset</span>
+<span class="go">Offset(15, 16)</span>
+</pre></div>
+</div>
+</div>
+<hr/><p class="class-header rubric">Special methods</p>
+<dl class="method">
+<dt id="baca.Division.Division.__abs__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__abs__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__abs__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets absolute value of nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">NonreducedFraction(3, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <cite>argument</cite> to division.</p>
+<div class="example docutils container">
+<p>No start offsets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">+</span> <span class="n">division_2</span>
+<span class="go">Division((6, 4))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>One start offset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">+</span> <span class="n">division_2</span>
+<span class="go">Division((6, 4), start_offset=Offset(1, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Contiguous start offsets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">+</span> <span class="n">division_2</span>
+<span class="go">Division((6, 4), start_offset=Offset(1, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Noncontiguous start offsets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">+</span> <span class="n">division_2</span>
+<span class="go">Division((40, 4), start_offset=Offset(1, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Identical start offsets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">+</span> <span class="n">division_2</span>
+<span class="go">Division((4, 4), start_offset=Offset(1, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Overlapping start offsets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">+</span> <span class="n">division_2</span>
+<span class="go">Division((5, 4), start_offset=Offset(1, 1))</span>
+</pre></div>
+</div>
+</div>
+<p>Returns new division.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__bool__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__bool__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__bool__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a != 0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__ceil__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__ceil__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__ceil__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be math.ceil(a) in 3.0.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__complex__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/numbers.html#numbers.Real" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Real</span></code></a>).</code><code class="descname">__complex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__complex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>complex(self) == complex(float(self), 0)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__copy__">
+<code class="descname">__copy__</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__copy__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies division.</p>
+<p>Returns new division.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__deepcopy__">
+<code class="descname">__deepcopy__</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__deepcopy__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deep copies division.</p>
+<p>Returns new division.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__div__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__div__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__div__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides nonreduced fraction by <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span>
+<span class="go">NonreducedFraction(3, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__divmod__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/numbers.html#numbers.Real" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Real</span></code></a>).</code><code class="descname">__divmod__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__divmod__" title="Permalink to this definition">¶</a></dt>
+<dd><p>divmod(self, other): The pair (self // other, self % other).</p>
+<p>Sometimes this can be computed faster than the pair of
+operations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__eq__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__eq__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when <cite>argument</cite> equals nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__float__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/numbers.html#numbers.Rational" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Rational</span></code></a>).</code><code class="descname">__float__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__float__" title="Permalink to this definition">¶</a></dt>
+<dd><p>float(self) = self.numerator / self.denominator</p>
+<p>It’s important that this conversion use the integer’s “true”
+division rather than casting one side to float before dividing
+so that ratios of huge integers convert without overflowing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__floor__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__floor__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__floor__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be math.floor(a) in 3.0.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__floordiv__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__floordiv__</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__floordiv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a // b</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__format__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__format__</code><span class="sig-paren">(</span><em>format_specification=''</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats nonreduced fraction.</p>
+<p>Set <cite>format_specification</cite> to <cite>‘’</cite> or <cite>‘storage’</cite>.
+Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">fraction</span><span class="p">))</span>
+<span class="go">abjad.NonreducedFraction(-6, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__ge__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__ge__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when nonreduced fraction is greater than or equal to
+<cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__gt__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__gt__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when nonreduced fraction is greater than <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__hash__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hashes nonreduced fraction.</p>
+<p>Required to be explicitly redefined on Python 3 if __eq__ changes.</p>
+<p>Returns integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__le__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__le__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when nonreduced fraction is less than or equal to <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__lt__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__lt__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when nonreduced fraction is less than <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__mod__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__mod__</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__mod__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a % b</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__mul__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__mul__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies nonreduced fraction by <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="go">NonreducedFraction(9, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__neg__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__neg__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__neg__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Negates nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">-</span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">NonreducedFraction(-3, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="baca.Division.Division.__new__">
+<em class="property">static </em><code class="descname">__new__</code><span class="sig-paren">(</span><em>class_</em>, <em>argument=None</em>, <em>payload=None</em>, <em>start_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__new__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and return a new object.  See help(type) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__pos__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__pos__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__pos__" title="Permalink to this definition">¶</a></dt>
+<dd><p>+a: Coerces a subclass instance to Fraction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__pow__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__pow__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__pow__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises nonreduced fraction to <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span>
+<span class="go">NonreducedFraction(6, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__radd__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__radd__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__radd__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds nonreduced fraction to <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">+</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">NonreducedFraction(6, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rdiv__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__rdiv__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rdiv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides <cite>argument</cite> by nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">NonreducedFraction(3, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rdivmod__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/numbers.html#numbers.Real" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Real</span></code></a>).</code><code class="descname">__rdivmod__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rdivmod__" title="Permalink to this definition">¶</a></dt>
+<dd><p>divmod(other, self): The pair (self // other, self % other).</p>
+<p>Sometimes this can be computed faster than the pair of
+operations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__repr__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation of nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">NonreducedFraction(3, 6)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rfloordiv__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__rfloordiv__</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rfloordiv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a // b</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rmod__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__rmod__</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rmod__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a % b</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rmul__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__rmul__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rmul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies <cite>argument</cite> by nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span> <span class="o">*</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">NonreducedFraction(9, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__round__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__round__</code><span class="sig-paren">(</span><em>ndigits=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__round__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be round(self, ndigits) in 3.0.</p>
+<p>Rounds half toward even.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rpow__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__rpow__</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rpow__" title="Permalink to this definition">¶</a></dt>
+<dd><p>a ** b</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rsub__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__rsub__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rsub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtracts nonreduced fraction from <cite>argument</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">-</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">NonreducedFraction(0, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__rtruediv__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__rtruediv__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__rtruediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides <cite>argument</cite> by nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">NonreducedFraction(3, 3)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets string representation of division.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtracts <cite>argument</cite> from division.</p>
+<div class="example docutils container">
+<p>No timespans:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">-</span> <span class="n">division_2</span>
+<span class="go">Division((2, 2))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">-</span> <span class="n">division_1</span>
+<span class="go">Division((-2, 2))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Overlapping timespans that start at the same time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">-</span> <span class="n">division_2</span>
+<span class="go">Division((2, 1), start_offset=Offset(12, 1))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">-</span> <span class="n">division_1</span>
+<span class="go">Division((-2, 1), start_offset=Offset(12, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Overlapping timespans that start at different times:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">-</span> <span class="n">division_2</span>
+<span class="go">Division((2, 1), start_offset=Offset(10, 1))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">-</span> <span class="n">division_1</span>
+<span class="go">Division((2, 1), start_offset=Offset(14, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Nonoverlapping timespans:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">-</span> <span class="n">division_2</span>
+<span class="go">Division((6, 2), start_offset=Offset(0, 1))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">-</span> <span class="n">division_1</span>
+<span class="go">Division((4, 2), start_offset=Offset(20, 1))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<blockquote>
+<div>Raises exception when one division has a start offset and the
+other does not:</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_1</span> <span class="o">-</span> <span class="n">division_2</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">Exception</span>: <span class="n">both divisions must have (or not have) start offsets.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_2</span> <span class="o">-</span> <span class="n">division_1</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">Exception</span>: <span class="n">both divisions must have (or not have) start offsets.</span>
+</pre></div>
+</div>
+</div>
+<p>Uses timespan arithmetic when both divisions have a start offset.</p>
+<p>Returns new division.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__truediv__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">__truediv__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divides nonreduced fraction in Python 3.</p>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.__trunc__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">__trunc__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.__trunc__" title="Permalink to this definition">¶</a></dt>
+<dd><p>trunc(a)</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Methods</p>
+<dl class="method">
+<dt id="baca.Division.Division.conjugate">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/numbers.html#numbers.Real" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Real</span></code></a>).</code><code class="descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.conjugate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conjugate is a no-op for Reals.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.limit_denominator">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">limit_denominator</code><span class="sig-paren">(</span><em>max_denominator=1000000</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.limit_denominator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closest Fraction to self with denominator at most max_denominator.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="s1">&#39;3.141592653589793&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">Fraction(22, 7)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="s1">&#39;3.141592653589793&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">Fraction(311, 99)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">4321</span><span class="p">,</span> <span class="mi">8765</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="go">Fraction(4321, 8765)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.multiply">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">multiply</code><span class="sig-paren">(</span><em>multiplier</em>, <em>preserve_numerator=False</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies nonreduced fraction by <cite>multiplier</cite> with numerator
+preservation where possible.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">preserve_numerator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">NonreducedFraction(9, 24)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">preserve_numerator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">NonreducedFraction(9, 32)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">preserve_numerator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">NonreducedFraction(45, 96)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">preserve_numerator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">NonreducedFraction(3, 12)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.multiply_with_cross_cancelation">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">multiply_with_cross_cancelation</code><span class="sig-paren">(</span><em>multiplier</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.multiply_with_cross_cancelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies nonreduced fraction by <cite>argument</cite> with cross-cancelation.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_with_cross_cancelation</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">NonreducedFraction(4, 12)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_with_cross_cancelation</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">NonreducedFraction(4, 2)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_with_cross_cancelation</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">NonreducedFraction(12, 40)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_with_cross_cancelation</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">NonreducedFraction(12, 20)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_with_cross_cancelation</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">NonreducedFraction(1, 1)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.multiply_without_reducing">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">multiply_without_reducing</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.multiply_without_reducing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies nonreduced fraction by <cite>argument</cite> without reducing.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_without_reducing</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">NonreducedFraction(9, 24)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_without_reducing</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">NonreducedFraction(16, 40)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">multiply_without_reducing</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">NonreducedFraction(12, 32)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.reduce">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">reduce</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces nonreduced fraction.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">reduce</span><span class="p">()</span>
+<span class="go">Fraction(-2, 1)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.with_denominator">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">with_denominator</code><span class="sig-paren">(</span><em>denominator</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.with_denominator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns new nonreduced fraction with integer <cite>denominator</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">with_denominator</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go">NonreducedFraction(6, 12)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">numerator</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">fraction</span><span class="p">,</span> <span class="n">fraction</span><span class="o">.</span><span class="n">with_denominator</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">0/6 0/12</span>
+<span class="go">1/6 2/12</span>
+<span class="go">2/6 4/12</span>
+<span class="go">3/6 6/12</span>
+<span class="go">4/6 8/12</span>
+<span class="go">5/6 10/12</span>
+<span class="go">6/6 12/12</span>
+<span class="go">7/6 14/12</span>
+<span class="go">8/6 16/12</span>
+<span class="go">9/6 18/12</span>
+<span class="go">10/6 20/12</span>
+<span class="go">11/6 22/12</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">numerator</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">fraction</span><span class="p">,</span> <span class="n">fraction</span><span class="o">.</span><span class="n">with_denominator</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">0/6 0/8</span>
+<span class="go">1/6 1/6</span>
+<span class="go">2/6 2/6</span>
+<span class="go">3/6 4/8</span>
+<span class="go">4/6 4/6</span>
+<span class="go">5/6 5/6</span>
+<span class="go">6/6 8/8</span>
+<span class="go">7/6 7/6</span>
+<span class="go">8/6 8/6</span>
+<span class="go">9/6 12/8</span>
+<span class="go">10/6 10/6</span>
+<span class="go">11/6 11/6</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">numerator</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">fraction</span><span class="p">,</span> <span class="n">fraction</span><span class="o">.</span><span class="n">with_denominator</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">0/6 0/12</span>
+<span class="go">1/6 2/12</span>
+<span class="go">2/6 4/12</span>
+<span class="go">3/6 6/12</span>
+<span class="go">4/6 8/12</span>
+<span class="go">5/6 10/12</span>
+<span class="go">6/6 12/12</span>
+<span class="go">7/6 14/12</span>
+<span class="go">8/6 16/12</span>
+<span class="go">9/6 18/12</span>
+<span class="go">10/6 20/12</span>
+<span class="go">11/6 22/12</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.with_multiple_of_denominator">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">with_multiple_of_denominator</code><span class="sig-paren">(</span><em>denominator</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.with_multiple_of_denominator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns new nonreduced fraction with multiple of integer
+<cite>denominator</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">with_multiple_of_denominator</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">NonreducedFraction(5, 10)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">with_multiple_of_denominator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">NonreducedFraction(1, 2)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">with_multiple_of_denominator</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">NonreducedFraction(2, 4)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">with_multiple_of_denominator</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">NonreducedFraction(4, 8)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">with_multiple_of_denominator</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">NonreducedFraction(8, 16)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.Division.Division.yield_equivalent_durations">
+<code class="descname">yield_equivalent_durations</code><span class="sig-paren">(</span><em>minimum_written_duration=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.yield_equivalent_durations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all durations equivalent to this duration.</p>
+<p>Returns output in Cantor diagonalized order.</p>
+<p>Ensures written duration never less than <cite>minimum_written_duration</cite>.</p>
+<div class="example docutils container">
+<p>Yields durations equivalent to <code class="docutils literal notranslate"><span class="pre">1/8</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pairs</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">yield_equivalent_durations</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span> <span class="n">pair</span>
+<span class="gp">...</span>
+<span class="go">(Multiplier(1, 1), Duration(1, 1))</span>
+<span class="go">(Multiplier(2, 3), Duration(3, 2))</span>
+<span class="go">(Multiplier(4, 3), Duration(3, 4))</span>
+<span class="go">(Multiplier(4, 7), Duration(7, 4))</span>
+<span class="go">(Multiplier(8, 7), Duration(7, 8))</span>
+<span class="go">(Multiplier(8, 15), Duration(15, 8))</span>
+<span class="go">(Multiplier(16, 15), Duration(15, 16))</span>
+<span class="go">(Multiplier(16, 31), Duration(31, 16))</span>
+<span class="go">(Multiplier(32, 31), Duration(31, 32))</span>
+<span class="go">(Multiplier(32, 63), Duration(63, 32))</span>
+<span class="go">(Multiplier(64, 63), Duration(63, 64))</span>
+<span class="go">(Multiplier(64, 127), Duration(127, 64))</span>
+<span class="go">(Multiplier(128, 127), Duration(127, 128))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Yields durations equivalent to <code class="docutils literal notranslate"><span class="pre">1/12</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pairs</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">yield_equivalent_durations</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span> <span class="n">pair</span>
+<span class="gp">...</span>
+<span class="go">(Multiplier(1, 1), Duration(1, 1))</span>
+<span class="go">(Multiplier(2, 3), Duration(3, 2))</span>
+<span class="go">(Multiplier(4, 3), Duration(3, 4))</span>
+<span class="go">(Multiplier(4, 7), Duration(7, 4))</span>
+<span class="go">(Multiplier(8, 7), Duration(7, 8))</span>
+<span class="go">(Multiplier(8, 15), Duration(15, 8))</span>
+<span class="go">(Multiplier(16, 15), Duration(15, 16))</span>
+<span class="go">(Multiplier(16, 31), Duration(31, 16))</span>
+<span class="go">(Multiplier(32, 31), Duration(31, 32))</span>
+<span class="go">(Multiplier(32, 63), Duration(63, 32))</span>
+<span class="go">(Multiplier(64, 63), Duration(63, 64))</span>
+<span class="go">(Multiplier(64, 127), Duration(127, 64))</span>
+<span class="go">(Multiplier(128, 127), Duration(127, 128))</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Yields durations equivalent to <code class="docutils literal notranslate"><span class="pre">5/48</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pairs</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span><span class="o">.</span><span class="n">yield_equivalent_durations</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span> <span class="n">pair</span>
+<span class="gp">...</span>
+<span class="go">(Multiplier(5, 3), Duration(3, 1))</span>
+<span class="go">(Multiplier(5, 4), Duration(4, 1))</span>
+<span class="go">(Multiplier(5, 6), Duration(6, 1))</span>
+<span class="go">(Multiplier(5, 7), Duration(7, 1))</span>
+<span class="go">(Multiplier(5, 8), Duration(8, 1))</span>
+<span class="go">(Multiplier(10, 7), Duration(7, 2))</span>
+<span class="go">(Multiplier(2, 3), Duration(15, 2))</span>
+<span class="go">(Multiplier(4, 3), Duration(15, 4))</span>
+<span class="go">(Multiplier(20, 31), Duration(31, 4))</span>
+<span class="go">(Multiplier(40, 31), Duration(31, 8))</span>
+<span class="go">(Multiplier(40, 63), Duration(63, 8))</span>
+<span class="go">(Multiplier(80, 63), Duration(63, 16))</span>
+<span class="go">(Multiplier(80, 127), Duration(127, 16))</span>
+<span class="go">(Multiplier(160, 127), Duration(127, 32))</span>
+</pre></div>
+</div>
+</div>
+<p>Defaults <cite>minimum_written_duration</cite> to <code class="docutils literal notranslate"><span class="pre">1/128</span></code>.</p>
+<p>Returns generator.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Class &amp; static methods</p>
+<dl class="classmethod">
+<dt id="baca.Division.Division.from_decimal">
+<em class="property">classmethod </em><code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">from_decimal</code><span class="sig-paren">(</span><em>dec</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.from_decimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a finite Decimal instance to a rational number, exactly.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baca.Division.Division.from_float">
+<em class="property">classmethod </em><code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/fractions.html#fractions.Fraction" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Fraction</span></code></a>).</code><code class="descname">from_float</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.from_float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a finite float to a rational number, exactly.</p>
+<p>Beware that Fraction.from_float(0.3) != Fraction(3, 10).</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="baca.Division.Division.yield_durations">
+<em class="property">static </em><code class="descname">yield_durations</code><span class="sig-paren">(</span><em>unique=False</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.yield_durations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all positive durations.</p>
+<div class="example docutils container">
+<p>Yields all positive durations in Cantor diagonalized order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="o">.</span><span class="n">yield_durations</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">next</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">Duration(1, 1)</span>
+<span class="go">Duration(2, 1)</span>
+<span class="go">Duration(1, 2)</span>
+<span class="go">Duration(1, 3)</span>
+<span class="go">Duration(1, 1)</span>
+<span class="go">Duration(3, 1)</span>
+<span class="go">Duration(4, 1)</span>
+<span class="go">Duration(3, 2)</span>
+<span class="go">Duration(2, 3)</span>
+<span class="go">Duration(1, 4)</span>
+<span class="go">Duration(1, 5)</span>
+<span class="go">Duration(1, 2)</span>
+<span class="go">Duration(1, 1)</span>
+<span class="go">Duration(2, 1)</span>
+<span class="go">Duration(5, 1)</span>
+<span class="go">Duration(6, 1)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Yields all positive durations in Cantor diagonalized order
+uniquely:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="o">.</span><span class="n">yield_durations</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">next</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">Duration(1, 1)</span>
+<span class="go">Duration(2, 1)</span>
+<span class="go">Duration(1, 2)</span>
+<span class="go">Duration(1, 3)</span>
+<span class="go">Duration(3, 1)</span>
+<span class="go">Duration(4, 1)</span>
+<span class="go">Duration(3, 2)</span>
+<span class="go">Duration(2, 3)</span>
+<span class="go">Duration(1, 4)</span>
+<span class="go">Duration(1, 5)</span>
+<span class="go">Duration(5, 1)</span>
+<span class="go">Duration(6, 1)</span>
+<span class="go">Duration(5, 2)</span>
+<span class="go">Duration(4, 3)</span>
+<span class="go">Duration(3, 4)</span>
+<span class="go">Duration(2, 5)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="baca.Division.Division.yield_nonreduced_fractions">
+<em class="property">static </em><code class="descname">yield_nonreduced_fractions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.Division.Division.yield_nonreduced_fractions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields positive nonreduced fractions in Cantor diagonalized order.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="o">.</span><span class="n">yield_nonreduced_fractions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">next</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">(1, 1)</span>
+<span class="go">(2, 1)</span>
+<span class="go">(1, 2)</span>
+<span class="go">(1, 3)</span>
+<span class="go">(2, 2)</span>
+<span class="go">(3, 1)</span>
+<span class="go">(4, 1)</span>
+<span class="go">(3, 2)</span>
+<span class="go">(2, 3)</span>
+<span class="go">(1, 4)</span>
+<span class="go">(1, 5)</span>
+<span class="go">(2, 4)</span>
+<span class="go">(3, 3)</span>
+<span class="go">(4, 2)</span>
+<span class="go">(5, 1)</span>
+<span class="go">(6, 1)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns generator.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Read-only properties</p>
+<dl class="attribute">
+<dt id="baca.Division.Division.denominator">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">denominator</code><a class="headerlink" href="#baca.Division.Division.denominator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Denominator of nonreduced fraction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">denominator</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>Returns positive integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.duration">
+<code class="descname">duration</code><a class="headerlink" href="#baca.Division.Division.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets duration of division.</p>
+<div class="example docutils container">
+<p>Gets duration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">duration</span>
+<span class="go">Duration(3, 8)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Gets duration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">duration</span>
+<span class="go">Duration(3, 2)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns duration.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.imag">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">imag</code><a class="headerlink" href="#baca.Division.Division.imag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nonreduced fractions have no imaginary part.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">imag</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>Returns zero.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.numerator">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">numerator</code><a class="headerlink" href="#baca.Division.Division.numerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numerator of nonreduced fraction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">numerator</span>
+<span class="go">-6</span>
+</pre></div>
+</div>
+<p>Returns integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.pair">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">pair</code><a class="headerlink" href="#baca.Division.Division.pair" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read only pair of nonreduced fraction numerator and denominator.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">pair</span>
+<span class="go">(-6, 3)</span>
+</pre></div>
+</div>
+<p>Returns integer pair.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.payload">
+<code class="descname">payload</code><a class="headerlink" href="#baca.Division.Division.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets payload of division.</p>
+<div class="example docutils container">
+<p>Division with payload:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">payload</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">NoteRhythmMaker</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">payload</span>
+<span class="go">NoteRhythmMaker()</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Division without duration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">payload</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<p>Set to object or none.</p>
+<p>Defaults to none.</p>
+<p>Returns object or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.real">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">NonreducedFraction</span></code>).</code><code class="descname">real</code><a class="headerlink" href="#baca.Division.Division.real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nonreduced fractions are their own real component.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NonreducedFraction</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="o">.</span><span class="n">real</span>
+<span class="go">NonreducedFraction(-6, 3)</span>
+</pre></div>
+</div>
+<p>Returns nonreduced fraction.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.start_offset">
+<code class="descname">start_offset</code><a class="headerlink" href="#baca.Division.Division.start_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets start offset of division.</p>
+<div class="example docutils container">
+<p>Division with start offset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">start_offset</span>
+<span class="go">Offset(5, 4)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Division without start offset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">start_offset</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<p>Set to offset or none.</p>
+<p>Defaults to none.</p>
+<p>Returns offset or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.Division.Division.stop_offset">
+<code class="descname">stop_offset</code><a class="headerlink" href="#baca.Division.Division.stop_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets stop offset of division.</p>
+<div class="example docutils container">
+<p>Division with start offset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">start_offset</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">stop_offset</span>
+<span class="go">Offset(13, 8)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Division without start offset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">Division</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division</span><span class="o">.</span><span class="n">stop_offset</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Returns none when start offset is none.</p>
+</div>
+<p>Returns offset or none.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Expression.html" class="btn btn-neutral float-right" title="Expression" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DesignMaker.html" class="btn btn-neutral" title="DesignMaker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

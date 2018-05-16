@@ -1,0 +1,1993 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SegmentMaker &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../index.html"/>
+        <link rel="up" title="baca" href="index.html"/>
+        <link rel="next" title="AcciaccaturaSpecifier" href="AcciaccaturaSpecifier.html"/>
+        <link rel="prev" title="PitchFirstRhythmMaker" href="PitchFirstRhythmMaker.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">baca</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicMaker.html">MusicMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SegmentMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Division.html">Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayColumn.html">PitchArrayColumn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSegment.html">PitchSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WellformednessManager.html">WellformednessManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="index.html">baca</a> &raquo;</li>
+        
+      <li>SegmentMaker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/baca/SegmentMaker.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.SegmentMaker">
+<span id="segmentmaker"></span><span id="baca-segmentmaker"></span><h1>SegmentMaker<a class="headerlink" href="#module-baca.SegmentMaker" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../_images/inheritance-39e8ae159d84858880e1a81a59498ba56a04a12b.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+    graph [bgcolor=transparent,
+        color=lightsteelblue2,
+        fontname=Arial,
+        fontsize=10,
+        outputorder=edgesfirst,
+        overlap=prism,
+        penwidth=2,
+        rankdir=LR,
+        splines=spline,
+        style=&quot;dashed, rounded&quot;,
+        truecolor=true];
+    node [colorscheme=pastel19,
+        fontname=Arial,
+        fontsize=10,
+        height=0,
+        margin=0.05,
+        penwidth=2,
+        shape=box,
+        style=&quot;filled, rounded&quot;,
+        width=0];
+    edge [color=lightslategrey,
+        penwidth=1];
+    subgraph &quot;cluster_abjad.tools.abctools&quot; {
+        graph [label=&quot;abjad.tools.abctools&quot;];
+        node [color=1];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; [label=&quot;Abjad\nObject&quot;];
+    }
+    subgraph &quot;cluster_abjad.tools.segmenttools&quot; {
+        graph [label=&quot;abjad.tools.segmenttools&quot;];
+        node [color=2];
+        &quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot; [label=&quot;Segment\nMaker&quot;];
+    }
+    subgraph cluster_baca {
+        graph [label=baca];
+        node [color=3];
+        &quot;baca.SegmentMaker.SegmentMaker&quot; [URL=&quot;../api/baca/SegmentMaker.html#baca.SegmentMaker.SegmentMaker&quot;,
+            color=black,
+            fontcolor=white,
+            label=&quot;Segment\nMaker&quot;,
+            target=_top];
+    }
+    subgraph cluster_builtins {
+        graph [label=builtins];
+        node [color=4];
+        &quot;builtins.object&quot; [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+            label=object,
+            target=_top];
+    }
+    &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot;;
+    &quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot; -&gt; &quot;baca.SegmentMaker.SegmentMaker&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+}</p></object>
+</div>
+<dl class="class">
+<dt id="baca.SegmentMaker.SegmentMaker">
+<em class="property">class </em><code class="descclassname">baca.SegmentMaker.</code><code class="descname">SegmentMaker</code><span class="sig-paren">(</span><em>allow_empty_selections=None</em>, <em>breaks=None</em>, <em>clock_time_override=None</em>, <em>color_octaves=None</em>, <em>color_out_of_range_pitches=True</em>, <em>color_repeat_pitch_classes=True</em>, <em>do_not_check_persistence=None</em>, <em>do_not_include_layout_ly=None</em>, <em>fermata_measure_staff_line_count=None</em>, <em>final_bar_line=None</em>, <em>final_markup=None</em>, <em>final_markup_extra_offset=None</em>, <em>first_measure_number=None</em>, <em>first_segment=None</em>, <em>ignore_out_of_range_pitches=None</em>, <em>ignore_repeat_pitch_classes=None</em>, <em>ignore_unpitched_notes=None</em>, <em>ignore_unregistered_pitches=None</em>, <em>include_nonfirst_segment_stylesheet=None</em>, <em>instruments=None</em>, <em>last_segment=None</em>, <em>magnify_staves=None</em>, <em>margin_markups=None</em>, <em>measures_per_stage=None</em>, <em>metronome_mark_measure_map=None</em>, <em>metronome_mark_stem_height=1</em>, <em>metronome_marks=None</em>, <em>mmspanner_right_broken=None</em>, <em>mmspanner_right_padding=0</em>, <em>score_template=None</em>, <em>segment_directory=None</em>, <em>skip_wellformedness_checks=None</em>, <em>skips_instead_of_rests=None</em>, <em>spacing=None</em>, <em>test_container_identifiers=None</em>, <em>time_signatures=None</em>, <em>transpose_score=None</em>, <em>validate_measure_count=None</em>, <em>validate_stage_count=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Segment-maker.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="n">rhythmmakertools</span> <span class="k">as</span> <span class="n">rhythmos</span>
+</pre></div>
+</div>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-fe0eb52135d550109ac143020ebb56e5e9758964.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-fe0eb52135d550109ac143020ebb56e5e9758964.png" alt=""/>
+</a></div>
+<hr/><p class="class-header rubric">Special methods</p>
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>scopes</em>, <em>*commands</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps each command in <cite>commands</cite> with each scope in <cite>scopes</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">label</span><span class="p">()</span><span class="o">.</span><span class="n">with_indices</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-7a5f5ff9cb89496f083bcedc5884a76e4dbd0668.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-7a5f5ff9cb89496f083bcedc5884a76e4dbd0668.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Commands may be grouped into lists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">commands</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">label</span><span class="p">()</span><span class="o">.</span><span class="n">with_indices</span><span class="p">()))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">commands</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-7a5f5ff9cb89496f083bcedc5884a76e4dbd0668.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-7a5f5ff9cb89496f083bcedc5884a76e4dbd0668.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Raises exception on noncommand input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; maker(
+...     &#39;MusicVoice&#39;,
+...     &#39;text&#39;,
+...     )
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 3, in &lt;module&gt;
+  File &quot;/Users/trevorbaca/baca/baca/SegmentMaker.py&quot;, line 876, in __call__
+    raise Exception(message)
+Exception: 
+
+Neither command nor list of commands:
+
+text
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Raises exception on unknown voice name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;PercussionVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_repeated_duration_notes</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">3</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/SegmentMaker.py&quot;</span>, line <span class="m">880</span>, in <span class="n">__call__</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;unknown voice name </span><span class="si">{scope.voice_name!r}</span><span class="s1">.&#39;</span><span class="p">)</span>
+<span class="gr">Exception</span>: <span class="n">unknown voice name &#39;PercussionVoice&#39;.</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">None</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.__eq__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">__eq__</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true if <cite>expr</cite> is a segment-maker with equivalent properties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.__format__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__format__</code><span class="sig-paren">(</span><em>format_specification=''</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats Abjad object.</p>
+<p>Set <cite>format_specification</cite> to <cite>‘’</cite> or <cite>‘storage’</cite>.
+Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.__hash__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hashes segment-maker.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.__illustrate__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">__illustrate__</code><span class="sig-paren">(</span><em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.__illustrate__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Illustrates segment-maker.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">LilyPondFile</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.__repr__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation of Abjad object.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Methods</p>
+<dl class="method">
+<dt id="baca.SegmentMaker.SegmentMaker.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>deactivate=None</em>, <em>environment=None</em>, <em>metadata=None</em>, <em>midi=None</em>, <em>previous_metadata=None</em>, <em>remove=None</em>, <em>segment_directory=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs segment-maker.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>deactivate</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.List" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – tags to deactivate in LilyPond file output.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – stylesheet path control parameter. Leave set to
+none to render segments in real score.
+Set to <code class="docutils literal notranslate"><span class="pre">'docs'</span></code> for API examples.
+Set to <code class="docutils literal notranslate"><span class="pre">'external'</span></code> to debug API examples in a separate file.</li>
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>]) – metadata found in current segment directory.</li>
+<li><strong>midi</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – set to true to generate MIDI output.</li>
+<li><strong>previous_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>]) – metadata found in previous segment directory.</li>
+<li><strong>remove</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.List" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – tags to remove in LilyPond file output.</li>
+<li><strong>segment_directory</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>]) – path providing access to current segment
+directory.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">LilyPondFile</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Read-only properties</p>
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.allow_empty_selections">
+<code class="descname">allow_empty_selections</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.allow_empty_selections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment allows empty selectors.</p>
+<p>Otherwise segment raises exception on empty selectors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.breaks">
+<code class="descname">breaks</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.breaks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets breaks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="BreakMeasureMap.html#baca.BreakMeasureMap.BreakMeasureMap" title="baca.BreakMeasureMap.BreakMeasureMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">BreakMeasureMap</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.clock_time_override">
+<code class="descname">clock_time_override</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.clock_time_override" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets clock time override.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">MetronomeMark</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.color_octaves">
+<code class="descname">color_octaves</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.color_octaves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker colors octaves.</p>
+<div class="example docutils container">
+<p>Colors octaves:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">color_octaves</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">StringTrioScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">spacing</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">minimum_duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;ViolinMusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">flags</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;ViolinMusicVoice&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rhythm</span><span class="p">(</span><span class="n">contribution</span><span class="p">[</span><span class="s1">&#39;ViolinMusicVoice&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;CelloMusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">flags</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;CelloMusicVoice&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rhythm</span><span class="p">(</span><span class="n">contribution</span><span class="p">[</span><span class="s1">&#39;CelloMusicVoice&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">setting</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">auto_beaming</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-702a69d6dda3277824079024c64888f90db38efe.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-702a69d6dda3277824079024c64888f90db38efe.png" alt=""/>
+</a></div>
+<p>Defaults to none.</p>
+<p>Set to true, false or none.</p>
+<p>Returns true, false or none.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.color_out_of_range_pitches">
+<code class="descname">color_out_of_range_pitches</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.color_out_of_range_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker colors out-of-range pitches.</p>
+<div class="example docutils container">
+<p>Colors out-of-range pitches:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection_lists</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">4</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">11</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span><span class="p">,</span> <span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">collections</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">collection_lists</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">flags</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>    <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="p">[</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures_</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">figure</span> <span class="ow">in</span> <span class="n">figures</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">figures_</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">figures_</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">color_out_of_range_pitches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">ignore_out_of_range_pitches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">spacing</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">minimum_duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="n">time_signatures</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Violin</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rhythm</span><span class="p">(</span><span class="n">figures</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">setting</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">auto_beaming</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-18dcb69047d61f16c4ef48d419f24d3e8407ea44.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-18dcb69047d61f16c4ef48d419f24d3e8407ea44.png" alt=""/>
+</a></div>
+<p>Defaults to none.</p>
+<p>Set to true, false or none.</p>
+<p>Returns true, false or none.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.color_repeat_pitch_classes">
+<code class="descname">color_repeat_pitch_classes</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.color_repeat_pitch_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker colors repeat pitch-classes.</p>
+<div class="example docutils container">
+<p>Colors repeat pitch-classes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection_lists</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">4</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">11</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span><span class="p">,</span> <span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">collections</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">collection_lists</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">flags</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>    <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="p">[</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures_</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">figure</span> <span class="ow">in</span> <span class="n">figures</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">figures_</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">figures_</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">color_repeat_pitch_classes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">spacing</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">HorizontalSpacingSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">minimum_duration</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="n">time_signatures</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rhythm</span><span class="p">(</span><span class="n">figures</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">setting</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">auto_beaming</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-f1f886168ae78a146b8758bee4eff94f266065ba.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-f1f886168ae78a146b8758bee4eff94f266065ba.png" alt=""/>
+</a></div>
+<p>Defaults to none.</p>
+<p>Set to true, false or none.</p>
+<p>Returns true, false or none.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.do_not_check_persistence">
+<code class="descname">do_not_check_persistence</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.do_not_check_persistence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker does not check persistent indicators.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.do_not_include_layout_ly">
+<code class="descname">do_not_include_layout_ly</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.do_not_include_layout_ly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker does not include layout.ly.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.environment">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">environment</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets environment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.fermata_measure_staff_line_count">
+<code class="descname">fermata_measure_staff_line_count</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.fermata_measure_staff_line_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets fermata measure staff lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.final_bar_line">
+<code class="descname">final_bar_line</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.final_bar_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets final bar line.</p>
+<div class="example docutils container">
+<p>Nonlast segment sets final bar line to <code class="docutils literal notranslate"><span class="pre">'|'</span></code> by default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-fe0eb52135d550109ac143020ebb56e5e9758964.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-fe0eb52135d550109ac143020ebb56e5e9758964.png" alt=""/>
+</a><p>Override nonlast segment final bar line like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">final_bar_line</span><span class="o">=</span><span class="s1">&#39;||&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-df0cb2179803be4f67fe27cc8ce8669a6efcb5f5.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-df0cb2179803be4f67fe27cc8ce8669a6efcb5f5.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Last segment in score sets final bar line to <code class="docutils literal notranslate"><span class="pre">'|.'</span></code> by default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">last_segment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-b79dd3900031d89015a63b6369600afd6c234ba6.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-b79dd3900031d89015a63b6369600afd6c234ba6.png" alt=""/>
+</a><p>Override last segment final bar line like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">final_bar_line</span><span class="o">=</span><span class="s1">&#39;||&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;segment_count&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-df0cb2179803be4f67fe27cc8ce8669a6efcb5f5.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-df0cb2179803be4f67fe27cc8ce8669a6efcb5f5.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.final_markup">
+<code class="descname">final_markup</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.final_markup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets final markup.</p>
+<div class="example docutils container">
+<p>Sets final markup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">final_bar_line</span><span class="o">=</span><span class="s1">&#39;|.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">final_markup</span><span class="o">=</span><span class="p">([</span><span class="s1">&#39;Madison, WI&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;October 2016&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="n">final_markup_extra_offset</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-41dc4afab72829710d4916d04d2c90decd8d537a.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-41dc4afab72829710d4916d04d2c90decd8d537a.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.final_markup_extra_offset">
+<code class="descname">final_markup_extra_offset</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.final_markup_extra_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets final markup extra offset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]]]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.first_measure_number">
+<code class="descname">first_measure_number</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.first_measure_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets user-defined first measure number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.first_segment">
+<code class="descname">first_segment</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.first_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment is first in score.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.ignore_out_of_range_pitches">
+<code class="descname">ignore_out_of_range_pitches</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.ignore_out_of_range_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment ignores out-of-range pitches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes">
+<code class="descname">ignore_repeat_pitch_classes</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment ignores repeat pitch-classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.ignore_unpitched_notes">
+<code class="descname">ignore_unpitched_notes</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.ignore_unpitched_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment ignores unpitched notes.</p>
+<div class="example docutils container">
+<p>Ignores unpitched notes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-fe0eb52135d550109ac143020ebb56e5e9758964.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-fe0eb52135d550109ac143020ebb56e5e9758964.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Colors unpitched notes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-20ef5fcbdbb66d531b7f2ed74100859cfb8e95ee.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-20ef5fcbdbb66d531b7f2ed74100859cfb8e95ee.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.ignore_unregistered_pitches">
+<code class="descname">ignore_unregistered_pitches</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.ignore_unregistered_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment ignores unregistered pitches.</p>
+<div class="example docutils container">
+<p>Ignores unregistered pitches:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">acciaccatura_specifiers</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>                <span class="n">baca</span><span class="o">.</span><span class="n">AcciaccaturaSpecifier</span><span class="p">(),</span>
+<span class="gp">... </span>                <span class="p">],</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">color_unregistered_pitches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">denominator</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection_lists</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">4</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">11</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span><span class="p">,</span> <span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">collections</span> <span class="ow">in</span> <span class="n">collection_lists</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="p">[</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures_</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">figure</span> <span class="ow">in</span> <span class="n">figures</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">figures_</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">figures_</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_unregistered_pitches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">spacing</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">minimum_duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="n">time_signatures</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rhythm</span><span class="p">(</span><span class="n">figures</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="o">.</span><span class="n">spacing_spanner</span><span class="o">.</span><span class="n">strict_grace_spacing</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="o">.</span><span class="n">spacing_spanner</span><span class="o">.</span><span class="n">strict_note_spacing</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-3e0196c69f5de9c0c7ca3ad5c48e3093d0ce18a1.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-3e0196c69f5de9c0c7ca3ad5c48e3093d0ce18a1.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Colors unregistered pitches:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">acciaccatura_specifiers</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>                <span class="n">baca</span><span class="o">.</span><span class="n">AcciaccaturaSpecifier</span><span class="p">(),</span>
+<span class="gp">... </span>                <span class="p">],</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">color_unregistered_pitches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">denominator</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection_lists</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">4</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">11</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span><span class="p">,</span> <span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">collections</span> <span class="ow">in</span> <span class="n">collection_lists</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="p">[</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures_</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">figure</span> <span class="ow">in</span> <span class="n">figures</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">figures_</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">figures_</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">spacing</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">minimum_duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="n">time_signatures</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rhythm</span><span class="p">(</span><span class="n">figures</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="o">.</span><span class="n">spacing_spanner</span><span class="o">.</span><span class="n">strict_grace_spacing</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="o">.</span><span class="n">spacing_spanner</span><span class="o">.</span><span class="n">strict_note_spacing</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-be24b41aa5bdd01e196dd6275b6607d2efa2ec1d.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-be24b41aa5bdd01e196dd6275b6607d2efa2ec1d.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.include_nonfirst_segment_stylesheet">
+<code class="descname">include_nonfirst_segment_stylesheet</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.include_nonfirst_segment_stylesheet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment includes nonfirst segment stylesheet.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.instruments">
+<code class="descname">instruments</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.instruments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets instruments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.last_segment">
+<code class="descname">last_segment</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.last_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when composer declares segment to be last in score.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.lilypond_file">
+<code class="descname">lilypond_file</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.lilypond_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets LilyPond file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">LilyPondFile</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.magnify_staves">
+<code class="descname">magnify_staves</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.magnify_staves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets staff magnification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Multiplier</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Multiplier</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code>], <code class="docutils literal notranslate"><span class="pre">None</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.manifests">
+<code class="descname">manifests</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.manifests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets manifests.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.margin_markups">
+<code class="descname">margin_markups</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.margin_markups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets margin markups.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.measure_count">
+<code class="descname">measure_count</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.measure_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets measure count.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.measures_per_stage">
+<code class="descname">measures_per_stage</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.measures_per_stage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets measures per stage.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.List" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.metadata">
+<code class="descname">metadata</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets segment metadata.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;persistent_indicators&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;persistent_indicators&#39;</span><span class="p">][</span><span class="s1">&#39;MusicStaff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Momento</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">context</span><span class="o">=</span><span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">prototype</span><span class="o">=</span><span class="s1">&#39;abjad.Clef&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">value</span><span class="o">=</span><span class="s1">&#39;alto&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;segment_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">previous_metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-ec478d74003c99f15dfa4ffc171e2a783b168cf7.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-ec478d74003c99f15dfa4ffc171e2a783b168cf7.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">maker</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span>
+<span class="go">abjad.OrderedDict(</span>
+<span class="go">    [</span>
+<span class="go">        (</span>
+<span class="go">            &#39;alive_during_segment&#39;,</span>
+<span class="go">            [</span>
+<span class="go">                &#39;Score&#39;,</span>
+<span class="go">                &#39;GlobalContext&#39;,</span>
+<span class="go">                &#39;GlobalSkips&#39;,</span>
+<span class="go">                &#39;MusicContext&#39;,</span>
+<span class="go">                &#39;MusicStaff&#39;,</span>
+<span class="go">                &#39;MusicVoice&#39;,</span>
+<span class="go">                ],</span>
+<span class="go">            ),</span>
+<span class="go">        (&#39;first_measure_number&#39;, 1),</span>
+<span class="go">        (&#39;last_measure_number&#39;, 4),</span>
+<span class="go">        (</span>
+<span class="go">            &#39;persistent_indicators&#39;,</span>
+<span class="go">            abjad.OrderedDict(</span>
+<span class="go">                [</span>
+<span class="go">                    (</span>
+<span class="go">                        &#39;MusicStaff&#39;,</span>
+<span class="go">                        [</span>
+<span class="go">                            abjad.Momento(</span>
+<span class="go">                                context=&#39;MusicVoice&#39;,</span>
+<span class="go">                                prototype=&#39;abjad.Clef&#39;,</span>
+<span class="go">                                value=&#39;alto&#39;,</span>
+<span class="go">                                ),</span>
+<span class="go">                            ],</span>
+<span class="go">                        ),</span>
+<span class="go">                    (</span>
+<span class="go">                        &#39;Score&#39;,</span>
+<span class="go">                        [</span>
+<span class="go">                            abjad.Momento(</span>
+<span class="go">                                context=&#39;GlobalSkips&#39;,</span>
+<span class="go">                                prototype=&#39;abjad.TimeSignature&#39;,</span>
+<span class="go">                                value=&#39;3/8&#39;,</span>
+<span class="go">                                ),</span>
+<span class="go">                            ],</span>
+<span class="go">                        ),</span>
+<span class="go">                    ]</span>
+<span class="go">                ),</span>
+<span class="go">            ),</span>
+<span class="go">        (&#39;segment_number&#39;, 2),</span>
+<span class="go">        (</span>
+<span class="go">            &#39;sounds_during_segment&#39;,</span>
+<span class="go">            abjad.OrderedDict(</span>
+<span class="go">                [</span>
+<span class="go">                    (&#39;MusicVoice&#39;, False),</span>
+<span class="go">                    ]</span>
+<span class="go">                ),</span>
+<span class="go">            ),</span>
+<span class="go">        (</span>
+<span class="go">            &#39;time_signatures&#39;,</span>
+<span class="go">            [&#39;4/8&#39;, &#39;3/8&#39;, &#39;4/8&#39;, &#39;3/8&#39;],</span>
+<span class="go">            ),</span>
+<span class="go">        ]</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.metronome_mark_measure_map">
+<code class="descname">metronome_mark_measure_map</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.metronome_mark_measure_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets metronome mark measure map.</p>
+<div class="example docutils container">
+<p>With metronome mark measure map:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metronome_marks</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metronome_marks</span><span class="p">[</span><span class="s1">&#39;90&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_unpitched_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">metronome_mark_measure_map</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">MetronomeMarkMeasureMap</span><span class="p">([</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">metronome_marks</span><span class="p">[</span><span class="s1">&#39;90&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="p">]),</span>
+<span class="gp">... </span>    <span class="n">metronome_marks</span><span class="o">=</span><span class="n">metronome_marks</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-4b7ac775dff29d7baac687a3988c014b73087f05.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-4b7ac775dff29d7baac687a3988c014b73087f05.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="MetronomeMarkMeasureMap.html#baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap" title="baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetronomeMarkMeasureMap</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.metronome_mark_stem_height">
+<code class="descname">metronome_mark_stem_height</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.metronome_mark_stem_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets metronome mark stem height.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.metronome_marks">
+<code class="descname">metronome_marks</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.metronome_marks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets metronome marks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.midi">
+<code class="descname">midi</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.midi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker outputs MIDI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.mmspanner_right_broken">
+<code class="descname">mmspanner_right_broken</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.mmspanner_right_broken" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when metronome mark spanner is right-broken.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.mmspanner_right_padding">
+<code class="descname">mmspanner_right_padding</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.mmspanner_right_padding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets metronome mark spanner right padding.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code>]]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.previous_metadata">
+<code class="descname">previous_metadata</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.previous_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets previous segment metadata.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.score">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">score</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets score.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.score_template">
+<code class="descname">score_template</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.score_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets score template.</p>
+<div class="example docutils container">
+<p>Gets score template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="o">.</span><span class="n">score_template</span>
+<span class="go">SingleStaffScoreTemplate()</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ScoreTemplate</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.segment_directory">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">segment_directory</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.segment_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets segment directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.segment_name">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">SegmentMaker</span></code>).</code><code class="descname">segment_name</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.segment_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets segment name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.skip_wellformedness_checks">
+<code class="descname">skip_wellformedness_checks</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.skip_wellformedness_checks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment skips wellformedness checks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.skips_instead_of_rests">
+<code class="descname">skips_instead_of_rests</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.skips_instead_of_rests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment fills empty measures with skips.</p>
+<div class="example docutils container">
+<p>Fills empty measures with multimeasure rests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-bc364ce09de7a35f0013dc2cbde42054d9a72952.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-bc364ce09de7a35f0013dc2cbde42054d9a72952.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Fills empty measures with skips:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">skips_instead_of_rests</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-1b805bdbaf37923901e2a84cf194347eda8560f1.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-1b805bdbaf37923901e2a84cf194347eda8560f1.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.spacing">
+<code class="descname">spacing</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets spacing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="HorizontalSpacingSpecifier.html#baca.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier" title="baca.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">HorizontalSpacingSpecifier</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.stage_count">
+<code class="descname">stage_count</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.stage_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets stage count.</p>
+<p>Defined equal to 1 when <cite>self.measures_per_stage</cite> is none.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.test_container_identifiers">
+<code class="descname">test_container_identifiers</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.test_container_identifiers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment-maker adds container identifiers in docs
+environment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.time_signatures">
+<code class="descname">time_signatures</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.time_signatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets time signatures.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.List" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSignature</span></code>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.transpose_score">
+<code class="descname">transpose_score</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.transpose_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment transposes score.</p>
+<div class="example docutils container">
+<p>Transposes score:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instruments</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instruments</span><span class="p">[</span><span class="s1">&#39;clarinet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">ClarinetInBFlat</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">instruments</span><span class="o">=</span><span class="n">instruments</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="n">transpose_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="n">instruments</span><span class="p">[</span><span class="s1">&#39;clarinet&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">pitches</span><span class="p">(</span><span class="s1">&#39;E4 F4&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-8af76a1a39543fe660a0845d27b2b13787773b43.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-8af76a1a39543fe660a0845d27b2b13787773b43.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Does not transpose score:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instruments</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instruments</span><span class="p">[</span><span class="s1">&#39;clarinet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">ClarinetInBFlat</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">instruments</span><span class="o">=</span><span class="n">instruments</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="n">transpose_score</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="n">instruments</span><span class="p">[</span><span class="s1">&#39;clarinet&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">pitches</span><span class="p">(</span><span class="s1">&#39;E4 F4&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-f992e8749929944a280df95159ac272a85128bd6.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-f992e8749929944a280df95159ac272a85128bd6.png" alt=""/>
+</a></div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.validate_measure_count">
+<code class="descname">validate_measure_count</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.validate_measure_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets validate measure count.</p>
+<div class="example docutils container">
+<p>Raises exception when measures found do not equal validate count:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score_template</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">SingleStaffScoreTemplate</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="n">validate_measure_count</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">4</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/SegmentMaker.py&quot;</span>, line <span class="m">411</span>, in <span class="n">__init__</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_validate_measure_count_</span><span class="p">()</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/SegmentMaker.py&quot;</span>, line <span class="m">3042</span>, in <span class="n">_validate_measure_count_</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gr">Exception</span>: <span class="n">found 4 measures (not 6).</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.validate_stage_count">
+<code class="descname">validate_stage_count</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.validate_stage_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets validate stage count.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.voice_metadata">
+<code class="descname">voice_metadata</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.voice_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets voice metadata.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.SegmentMaker.SegmentMaker.wrappers">
+<code class="descname">wrappers</code><a class="headerlink" href="#baca.SegmentMaker.SegmentMaker.wrappers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets wrappers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.List" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="CommandWrapper.html#baca.CommandWrapper.CommandWrapper" title="baca.CommandWrapper.CommandWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandWrapper</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AcciaccaturaSpecifier.html" class="btn btn-neutral float-right" title="AcciaccaturaSpecifier" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PitchFirstRhythmMaker.html" class="btn btn-neutral" title="PitchFirstRhythmMaker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

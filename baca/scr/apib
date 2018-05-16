@@ -1,2 +1,2 @@
-cd ~/baca/baca/_docs
+cd ~/baca/docs
 make html

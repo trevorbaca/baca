@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PitchArrayColumn &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../index.html"/>
+        <link rel="up" title="baca" href="index.html"/>
+        <link rel="next" title="PitchArrayList" href="PitchArrayList.html"/>
+        <link rel="prev" title="PitchArrayCell" href="PitchArrayCell.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">baca</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicMaker.html">MusicMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SegmentMaker.html">SegmentMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Division.html">Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PitchArrayColumn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSegment.html">PitchSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WellformednessManager.html">WellformednessManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="index.html">baca</a> &raquo;</li>
+        
+      <li>PitchArrayColumn</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/baca/PitchArrayColumn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.PitchArrayColumn">
+<span id="pitcharraycolumn"></span><span id="baca-pitcharraycolumn"></span><h1>PitchArrayColumn<a class="headerlink" href="#module-baca.PitchArrayColumn" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../_images/inheritance-ebeb2ad492f22dce3ca76f3854c7d79599098a5b.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+    graph [bgcolor=transparent,
+        color=lightsteelblue2,
+        fontname=Arial,
+        fontsize=10,
+        outputorder=edgesfirst,
+        overlap=prism,
+        penwidth=2,
+        rankdir=LR,
+        splines=spline,
+        style=&quot;dashed, rounded&quot;,
+        truecolor=true];
+    node [colorscheme=pastel19,
+        fontname=Arial,
+        fontsize=10,
+        height=0,
+        margin=0.05,
+        penwidth=2,
+        shape=box,
+        style=&quot;filled, rounded&quot;,
+        width=0];
+    edge [color=lightslategrey,
+        penwidth=1];
+    subgraph &quot;cluster_abjad.tools.abctools&quot; {
+        graph [label=&quot;abjad.tools.abctools&quot;];
+        node [color=1];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; [label=&quot;Abjad\nObject&quot;];
+        &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; [label=&quot;Abjad\nValue\nObject&quot;];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot;;
+    }
+    subgraph cluster_baca {
+        graph [label=baca];
+        node [color=2];
+        &quot;baca.PitchArrayColumn.PitchArrayColumn&quot; [URL=&quot;../api/baca/PitchArrayColumn.html#baca.PitchArrayColumn.PitchArrayColumn&quot;,
+            color=black,
+            fontcolor=white,
+            label=&quot;Pitch\nArray\nColumn&quot;,
+            target=_top];
+    }
+    subgraph cluster_builtins {
+        graph [label=builtins];
+        node [color=3];
+        &quot;builtins.object&quot; [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+            label=object,
+            target=_top];
+    }
+    &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.PitchArrayColumn.PitchArrayColumn&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+}</p></object>
+</div>
+<dl class="class">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn">
+<em class="property">class </em><code class="descclassname">baca.PitchArrayColumn.</code><code class="descname">PitchArrayColumn</code><span class="sig-paren">(</span><em>cells=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pitch array column.</p>
+<div class="example docutils container">
+<p>A pitch array column:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">PitchArray</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>        <span class="p">[(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="go">[  ] [d&#39;] [bqf    ]</span>
+<span class="go">[g&#39;     ] [fs&#39;] [ ]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span>
+<span class="go">baca.PitchArrayColumn(</span>
+<span class="go">    cells=(</span>
+<span class="go">        baca.PitchArrayCell(</span>
+<span class="go">            width=1,</span>
+<span class="go">            ),</span>
+<span class="go">        baca.PitchArrayCell(</span>
+<span class="go">            pitches=[</span>
+<span class="go">                abjad.NamedPitch(&quot;g&#39;&quot;),</span>
+<span class="go">                ],</span>
+<span class="go">            width=2,</span>
+<span class="go">            ),</span>
+<span class="go">        ),</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">[  ]</span>
+<span class="go">[g&#39;     ]</span>
+</pre></div>
+</div>
+</div>
+<hr/><p class="class-header rubric">Special methods</p>
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__copy__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadValueObject</span></code>).</code><code class="descname">__copy__</code><span class="sig-paren">(</span><em>*arguments</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__copy__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies Abjad value object.</p>
+<p>Returns new Abjad value object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when <cite>argument</cite> is a pitch array column with pitch array cells
+equal to those of this pitch array column. Otherwise false.</p>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__format__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__format__</code><span class="sig-paren">(</span><em>format_specification=''</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats Abjad object.</p>
+<p>Set <cite>format_specification</cite> to <cite>‘’</cite> or <cite>‘storage’</cite>.
+Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets cell or cell slice identified by <cite>argument</cite>.</p>
+<p>Returns pitch array cell or slice or pitch array cells.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__hash__">
+<code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hashes pitch array column.</p>
+<p>Required to be explicitly redefined on Python 3 if __eq__ changes.</p>
+<p>Returns integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__ne__">
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when pitch array column does not equal <cite>argument</cite>. Otherwise
+false.</p>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__repr__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation of Abjad object.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets string representation of pitch array column.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Methods</p>
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>cell</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends <cite>cell</cite> to pitch array column.</p>
+<p>Returns none.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.extend">
+<code class="descname">extend</code><span class="sig-paren">(</span><em>cells</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends <cite>cells</cite> against pitch array column.</p>
+<p>Returns none.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.remove_pitches">
+<code class="descname">remove_pitches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.remove_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes pitches from pitch array cells in pitch array column.</p>
+<p>Returns none.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Read-only properties</p>
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.cell_tokens">
+<code class="descname">cell_tokens</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.cell_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets cells items of pitch array column.</p>
+<p>Returns tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.cell_widths">
+<code class="descname">cell_widths</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.cell_widths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets cell widths of pitch array column.</p>
+<p>Returns tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.cells">
+<code class="descname">cells</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets cells of pitch array column.</p>
+<p>Returns tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.column_index">
+<code class="descname">column_index</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.column_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets column index of pitch array column.</p>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.depth">
+<code class="descname">depth</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets depth of pitch array column.</p>
+<p>Defined equal to number of pitch array cells in pitch array column.</p>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets dimensions of pitch array column.</p>
+<p>Returns pair.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.has_voice_crossing">
+<code class="descname">has_voice_crossing</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.has_voice_crossing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when pitch array column has voice crossing. Otherwise
+false.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">PitchArray</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="go">[  ] [d&#39;] [bqf    ]</span>
+<span class="go">[g&#39;     ] [fs&#39;] [ ]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">column</span><span class="o">.</span><span class="n">has_voice_crossing</span>
+<span class="gp">...</span>
+<span class="go">False</span>
+<span class="go">True</span>
+<span class="go">True</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.is_defective">
+<code class="descname">is_defective</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.is_defective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when pitch array column depth does not equal depth of
+parent
+array. Otherwise false.</p>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.parent_array">
+<code class="descname">parent_array</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.parent_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets parent array that houses pitch array column.</p>
+<p>Returns pitch array.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.pitches">
+<code class="descname">pitches</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets pitches in pitch array column.</p>
+<p>Returns tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.start_cells">
+<code class="descname">start_cells</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.start_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets start cells in pitch array column.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">PitchArray</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">],</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="go">[  ] [d&#39;] [bf bqf    ]</span>
+<span class="go">[g&#39;     ] [fs&#39;   ] [ ]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">column</span><span class="o">.</span><span class="n">start_cells</span>
+<span class="gp">...</span>
+<span class="go">[PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch(&quot;g&#39;&quot;)], width=2)]</span>
+<span class="go">[PitchArrayCell(pitches=[NamedPitch(&quot;d&#39;&quot;)], width=1)]</span>
+<span class="go">[PitchArrayCell(pitches=[NamedPitch(&#39;bf&#39;), NamedPitch(&#39;bqf&#39;)], width=2), PitchArrayCell(pitches=[NamedPitch(&quot;fs&#39;&quot;)], width=1)]</span>
+<span class="go">[PitchArrayCell(width=1)]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.start_pitches">
+<code class="descname">start_pitches</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.start_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets start pitches in pitch array column.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">PitchArray</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">],</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">column</span><span class="o">.</span><span class="n">start_pitches</span>
+<span class="gp">...</span>
+<span class="go">[NamedPitch(&quot;g&#39;&quot;)]</span>
+<span class="go">[NamedPitch(&quot;d&#39;&quot;)]</span>
+<span class="go">[NamedPitch(&#39;bf&#39;), NamedPitch(&#39;bqf&#39;), NamedPitch(&quot;fs&#39;&quot;)]</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.stop_cells">
+<code class="descname">stop_cells</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.stop_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets stop cells in pitch array column.</p>
+<p>Returns tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.stop_pitches">
+<code class="descname">stop_pitches</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.stop_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets stop pitches in pitch array column.</p>
+<p>Returns tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.weight">
+<code class="descname">weight</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets weight of pitch array column.</p>
+<p>Defined equal to the sum of the weight of pitch array cells in pitch
+array column.</p>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.PitchArrayColumn.PitchArrayColumn.width">
+<code class="descname">width</code><a class="headerlink" href="#baca.PitchArrayColumn.PitchArrayColumn.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets width of pitch array column.</p>
+<p>Defined equal to 1 when pitch array column contains cells.</p>
+<p>Defined equal to 0 when pitch array column contains no cells.</p>
+<p>Returns 1 or 0.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PitchArrayList.html" class="btn btn-neutral float-right" title="PitchArrayList" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PitchArrayCell.html" class="btn btn-neutral" title="PitchArrayCell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

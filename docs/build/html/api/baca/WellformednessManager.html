@@ -1,0 +1,1268 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>WellformednessManager &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../index.html"/>
+        <link rel="up" title="baca" href="index.html"/>
+        <link rel="next" title="ZaggedPitchClassMaker" href="ZaggedPitchClassMaker.html"/>
+        <link rel="prev" title="ViolinSoloScoreTemplate" href="ViolinSoloScoreTemplate.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">baca</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MusicMaker.html">MusicMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SegmentMaker.html">SegmentMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Division.html">Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayColumn.html">PitchArrayColumn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSegment.html">PitchSegment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">WellformednessManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="index.html">baca</a> &raquo;</li>
+        
+      <li>WellformednessManager</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/baca/WellformednessManager.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.WellformednessManager">
+<span id="wellformednessmanager"></span><span id="baca-wellformednessmanager"></span><h1>WellformednessManager<a class="headerlink" href="#module-baca.WellformednessManager" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../_images/inheritance-fc620c9ebf2a4927c03b0ae10b70e6e94a2d88ad.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+    graph [bgcolor=transparent,
+        color=lightsteelblue2,
+        fontname=Arial,
+        fontsize=10,
+        outputorder=edgesfirst,
+        overlap=prism,
+        penwidth=2,
+        rankdir=LR,
+        splines=spline,
+        style=&quot;dashed, rounded&quot;,
+        truecolor=true];
+    node [colorscheme=pastel19,
+        fontname=Arial,
+        fontsize=10,
+        height=0,
+        margin=0.05,
+        penwidth=2,
+        shape=box,
+        style=&quot;filled, rounded&quot;,
+        width=0];
+    edge [color=lightslategrey,
+        penwidth=1];
+    subgraph &quot;cluster_abjad.tools.abctools&quot; {
+        graph [label=&quot;abjad.tools.abctools&quot;];
+        node [color=1];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; [label=&quot;Abjad\nObject&quot;];
+    }
+    subgraph &quot;cluster_abjad.tools.systemtools&quot; {
+        graph [label=&quot;abjad.tools.systemtools&quot;];
+        node [color=2];
+        &quot;abjad.tools.systemtools.WellformednessManager.WellformednessManager&quot; [label=&quot;Wellformedness\nManager&quot;];
+    }
+    subgraph cluster_baca {
+        graph [label=baca];
+        node [color=3];
+        &quot;baca.WellformednessManager.WellformednessManager&quot; [URL=&quot;../api/baca/WellformednessManager.html#baca.WellformednessManager.WellformednessManager&quot;,
+            color=black,
+            fontcolor=white,
+            label=&quot;Wellformedness\nManager&quot;,
+            target=_top];
+    }
+    subgraph cluster_builtins {
+        graph [label=builtins];
+        node [color=4];
+        &quot;builtins.object&quot; [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+            label=object,
+            target=_top];
+    }
+    &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.systemtools.WellformednessManager.WellformednessManager&quot;;
+    &quot;abjad.tools.systemtools.WellformednessManager.WellformednessManager&quot; -&gt; &quot;baca.WellformednessManager.WellformednessManager&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+}</p></object>
+</div>
+<dl class="class">
+<dt id="baca.WellformednessManager.WellformednessManager">
+<em class="property">class </em><code class="descclassname">baca.WellformednessManager.</code><code class="descname">WellformednessManager</code><span class="sig-paren">(</span><em>allow_percussion_clef=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wellformedness manager.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="go">WellformednessManager()</span>
+</pre></div>
+</div>
+</div>
+<hr/><p class="class-header rubric">Special methods</p>
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls wellformedness checks on <cite>argument</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argument</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]) – input score.</td>
+</tr>
+</tbody>
+</table>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 c&#39; d&#39; d&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">manager</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">violators</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">check</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">check</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">violators</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">()</span>
+<span class="gp">... </span>
+<span class="go">check_beamed_long_notes</span>
+<span class="go">4</span>
+<span class="go">[]</span>
+<span class="go">check_discontiguous_spanners</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_duplicate_ids</span>
+<span class="go">5</span>
+<span class="go">[]</span>
+<span class="go">check_empty_containers</span>
+<span class="go">1</span>
+<span class="go">[]</span>
+<span class="go">check_misdurated_measures</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_misfilled_measures</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_mismatched_enchained_hairpins</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_mispitched_ties</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_misrepresented_flags</span>
+<span class="go">4</span>
+<span class="go">[]</span>
+<span class="go">check_missing_parents</span>
+<span class="go">5</span>
+<span class="go">[]</span>
+<span class="go">check_nested_measures</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_notes_on_wrong_clef</span>
+<span class="go">4</span>
+<span class="go">[]</span>
+<span class="go">check_out_of_range_notes</span>
+<span class="go">4</span>
+<span class="go">[]</span>
+<span class="go">check_overlapping_beams</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_overlapping_glissandi</span>
+<span class="go">0</span>
+<span class="go">set()</span>
+<span class="go">check_overlapping_hairpins</span>
+<span class="go">0</span>
+<span class="go">set()</span>
+<span class="go">check_overlapping_octavation_spanners</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_overlapping_ties</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+<span class="go">check_overlapping_trill_spanners</span>
+<span class="go">0</span>
+<span class="go">set()</span>
+<span class="go">check_repeat_pitch_classes</span>
+<span class="go">4</span>
+<span class="go">[LogicalTie([Note(&quot;c&#39;4&quot;)]), LogicalTie([Note(&quot;c&#39;4&quot;)]), LogicalTie([Note(&quot;d&#39;4&quot;)]), LogicalTie([Note(&quot;d&#39;4&quot;)])]</span>
+<span class="go">check_tied_rests</span>
+<span class="go">0</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns (violators, total, check) triples.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.List" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.__format__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__format__</code><span class="sig-paren">(</span><em>format_specification=''</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats Abjad object.</p>
+<p>Set <cite>format_specification</cite> to <cite>‘’</cite> or <cite>‘storage’</cite>.
+Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.__repr__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation of Abjad object.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Methods</p>
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_beamed_long_notes">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_beamed_long_notes</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_beamed_long_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks beamed long notes.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;8 d&#39; e&#39; f&#39;4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Beam</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[:])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violators</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">check_beamed_long_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violators</span>
+<span class="go">[Note(&quot;f&#39;4.&quot;)]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns pair.</p>
+<p>First item in pair is list of beamed long notes.</p>
+<p>Second item in pair is count of all long notes in <cite>argument</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_discontiguous_spanners">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_discontiguous_spanners</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_discontiguous_spanners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks discontiguous spanners.</p>
+<p>There are now two different types of spanner. Most spanners demand that
+spanner components be logical-voice-contiguous. But a few special
+spanners (like MetronomeMark) do not make such a demand. The check here
+consults the experimental <cite>_contiguity_constraint</cite>.</p>
+<p>Returns list of discontiguous spanners and nonnegative integer count of
+all spanners in <cite>argument</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_duplicate_ids">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_duplicate_ids</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_duplicate_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks duplicate IDs.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_empty_containers">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_empty_containers</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_empty_containers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks empty containers.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    {</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violators</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">check_empty_containers</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violators</span>
+<span class="go">[Container()]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns list of empty containers and count of all containers in
+<cite>argument</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_misdurated_measures">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_misdurated_measures</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_misdurated_measures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks misdurated measures.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_misfilled_measures">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_misfilled_measures</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_misfilled_measures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks misfilled measures.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_mismatched_enchained_hairpins">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_mismatched_enchained_hairpins</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_mismatched_enchained_hairpins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks mismatched enchained hairpins.</p>
+<div class="example docutils container">
+<p>Checks mismatched enchained hairpins:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Hairpin</span><span class="p">(</span><span class="s1">&#39;p &gt; pp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	4 beamed long notes</span>
+<span class="go">0 /	2 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">2 /	2 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	2 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Enchained hairpins are fine so long as hairpin ends match.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_mispitched_ties">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_mispitched_ties</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_mispitched_ties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks mispitched notes.</p>
+<div class="example docutils container">
+<p>Checks for mispitched ties attached to notes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 ~ c&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">written_pitch</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">NamedPitch</span><span class="p">(</span><span class="s2">&quot;d&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	2 beamed long notes</span>
+<span class="go">0 /	1 discontiguous spanners</span>
+<span class="go">0 /	3 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">1 /	1 mispitched ties</span>
+<span class="go">0 /	2 misrepresented flags</span>
+<span class="go">0 /	3 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	2 notes on wrong clef</span>
+<span class="go">0 /	2 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	1 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Checks for mispitched ties attached to chords:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;&lt;c&#39; d&#39; bf&#39;&gt;4 ~ &lt;c&#39; d&#39; bf&#39;&gt;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">written_pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	2 beamed long notes</span>
+<span class="go">0 /	1 discontiguous spanners</span>
+<span class="go">0 /	3 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">1 /	1 mispitched ties</span>
+<span class="go">0 /	2 misrepresented flags</span>
+<span class="go">0 /	3 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	2 notes on wrong clef</span>
+<span class="go">0 /	2 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	1 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Returns violator ties together with total number of ties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_misrepresented_flags">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_misrepresented_flags</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_misrepresented_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks misrepresented flags.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_missing_parents">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_missing_parents</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_missing_parents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks missing parents.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_nested_measures">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_nested_measures</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_nested_measures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks nested measures.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_notes_on_wrong_clef">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_notes_on_wrong_clef</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_notes_on_wrong_clef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks notes and chords on wrong clef.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;alto&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">clef</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Violin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">violin</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-aae01db71659f1e69e741dd48967fd35e1c2a6cf.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-aae01db71659f1e69e741dd48967fd35e1c2a6cf.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	0 beamed long notes</span>
+<span class="go">0 /	0 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">4 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Allows percussion clef:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;percussion&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">clef</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Violin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">violin</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-a18a364af5822473c0ec8a80a5b04d50a1217d19.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-a18a364af5822473c0ec8a80a5b04d50a1217d19.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">allow_percussion_clef</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">))</span>
+<span class="go">0 /	0 beamed long notes</span>
+<span class="go">0 /	0 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Forbids percussion clef:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">allow_percussion_clef</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">))</span>
+<span class="go">0 /	0 beamed long notes</span>
+<span class="go">0 /	0 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">4 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_out_of_range_notes">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_out_of_range_notes</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_out_of_range_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks out-of-range notes.</p>
+<div class="example docutils container">
+<p>Out of range:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;8 r8 &lt;d fs&gt;8 r8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Violin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">violin</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-6cf843903c7ba9eb1aa1701848928b82d002b408.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-6cf843903c7ba9eb1aa1701848928b82d002b408.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	0 beamed long notes</span>
+<span class="go">0 /	0 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">1 /	2 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	2 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_overlapping_beams">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_overlapping_beams</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_overlapping_beams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks overlapping beams.</p>
+<div class="example docutils container">
+<p>Overlapping beams are well-formed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;8 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Beam</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Beam</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    [</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    ]</span>
+<span class="go">    [</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    ]</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violators</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">check_overlapping_beams</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">beam</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">violators</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">beam</span>
+<span class="gp">... </span>
+<span class="go">Beam(&quot;c&#39;8, d&#39;8, e&#39;8&quot;)</span>
+<span class="go">Beam(&quot;e&#39;8, f&#39;8&quot;)</span>
+</pre></div>
+</div>
+<p>(Enchained beams are not well-formed either.)</p>
+</div>
+<p>Returns list of overlapping beams and nonnegative integer count of
+total beams in score.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_overlapping_glissandi">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_overlapping_glissandi</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_overlapping_glissandi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks overlapping glissandi.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_overlapping_hairpins">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_overlapping_hairpins</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_overlapping_hairpins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks overlapping hairpins.</p>
+<div class="example docutils container">
+<p>Checks overlapping hairpins:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Hairpin</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Hairpin</span><span class="p">(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[:])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	4 beamed long notes</span>
+<span class="go">0 /	2 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	2 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">2 /	2 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Enchained hairpins are fine so long as hairpin ends match.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_overlapping_octavation_spanners">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_overlapping_octavation_spanners</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_overlapping_octavation_spanners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks overlapping octavation spanners.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_overlapping_ties">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_overlapping_ties</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_overlapping_ties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks overlapping ties.</p>
+<div class="example docutils container">
+<p>Checks overlapping ties:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 c&#39; c&#39; c&#39;&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tie</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tie</span><span class="o">.</span><span class="n">_ignore_attachment_test</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tie</span><span class="o">.</span><span class="n">_ignore_before_attach</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">tie</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	4 beamed long notes</span>
+<span class="go">0 /	2 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	2 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">2 /	2 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Returns violators and count of total ties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_overlapping_trill_spanners">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_overlapping_trill_spanners</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_overlapping_trill_spanners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks overlapping trill spanners.</p>
+<div class="example docutils container">
+<p>Enchained trill spanners are ok:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TrillSpanner</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TrillSpanner</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-b8c6733d0f696587205ff21bec3e5e906680f3d0.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-b8c6733d0f696587205ff21bec3e5e906680f3d0.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">is_well_formed</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Overlapping trill spanners are not well-formed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TrillSpanner</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TrillSpanner</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-4533a3c6d516a2e7785b3552af930efb87d9d9fe.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-4533a3c6d516a2e7785b3552af930efb87d9d9fe.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">())</span>
+<span class="go">0 /	4 beamed long notes</span>
+<span class="go">0 /	2 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">2 /	2 overlapping trill spanners</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Enchained hairpins are fine so long as hairpin ends match.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.check_tied_rests">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">check_tied_rests</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_tied_rests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks tied rests.</p>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.is_well_formed">
+<code class="descname">is_well_formed</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.is_well_formed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when <cite>argument</cite> is well-formed.</p>
+<div class="example docutils container">
+<p>Is well-formed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">is_well_formed</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Repeat pitches are not well-formed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 c&#39; d&#39; d&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">is_well_formed</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.WellformednessManager.WellformednessManager.tabulate_wellformedness">
+<code class="descname">tabulate_wellformedness</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.tabulate_wellformedness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tabulates wellformedness violations.</p>
+<div class="example docutils container">
+<p>Is well-formed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="go">0 /	4 beamed long notes</span>
+<span class="go">0 /	0 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">0 /	4 repeat pitch classes</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Repeat pitches are not well-formed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 c&#39; d&#39; d&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">tabulate_wellformedness</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="go">0 /	4 beamed long notes</span>
+<span class="go">0 /	0 discontiguous spanners</span>
+<span class="go">0 /	5 duplicate ids</span>
+<span class="go">0 /	1 empty containers</span>
+<span class="go">0 /	0 misdurated measures</span>
+<span class="go">0 /	0 misfilled measures</span>
+<span class="go">0 /	0 mismatched enchained hairpins</span>
+<span class="go">0 /	0 mispitched ties</span>
+<span class="go">0 /	4 misrepresented flags</span>
+<span class="go">0 /	5 missing parents</span>
+<span class="go">0 /	0 nested measures</span>
+<span class="go">0 /	4 notes on wrong clef</span>
+<span class="go">0 /	4 out of range notes</span>
+<span class="go">0 /	0 overlapping beams</span>
+<span class="go">0 /	0 overlapping glissandi</span>
+<span class="go">0 /	0 overlapping hairpins</span>
+<span class="go">0 /	0 overlapping octavation spanners</span>
+<span class="go">0 /	0 overlapping ties</span>
+<span class="go">0 /	0 overlapping trill spanners</span>
+<span class="go">4 /	4 repeat pitch classes</span>
+<span class="go">0 /	0 tied rests</span>
+</pre></div>
+</div>
+</div>
+<p>Returns string.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Class &amp; static methods</p>
+<dl class="staticmethod">
+<dt id="baca.WellformednessManager.WellformednessManager.check_repeat_pitch_classes">
+<em class="property">static </em><code class="descname">check_repeat_pitch_classes</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.check_repeat_pitch_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks repeat pitch-classes by voice.</p>
+<div class="example docutils container">
+<p>Finds no repeats:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">voice</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-0e13f2788cdc62d22cb5aa4f44906c81448556f3.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-0e13f2788cdc62d22cb5aa4f44906c81448556f3.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">check_repeat_pitch_classes</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="go">([], 4)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Finds repeat pitches:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 c&#39; d&#39; d&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">voice</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-d67ba32f9663caf2595ded2fe3fb9d52d66c832c.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-d67ba32f9663caf2595ded2fe3fb9d52d66c832c.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">check_repeat_pitch_classes</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="go">([LogicalTie([Note(&quot;c&#39;4&quot;)]), LogicalTie([Note(&quot;c&#39;4&quot;)]), LogicalTie([Note(&quot;d&#39;4&quot;)]), LogicalTie([Note(&quot;d&#39;4&quot;)])], 4)</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Finds repeat pitch-classes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voice</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="s2">&quot;c&#39;4 d&#39; e&#39; e&#39;&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">voice</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../_images/abjadbook/lilypond-7249e7e98a83a9a7997c283a0d49f918aab57103.ly" title="" class="abjadbook">
+    <img src="../../_images/abjadbook/lilypond-7249e7e98a83a9a7997c283a0d49f918aab57103.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">WellformednessManager</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">check_repeat_pitch_classes</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
+<span class="go">([LogicalTie([Note(&quot;e&#39;4&quot;)]), LogicalTie([Note(&quot;e&#39;&#39;4&quot;)])], 4)</span>
+</pre></div>
+</div>
+</div>
+<p>Returns violators and total.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Read-only properties</p>
+<dl class="attribute">
+<dt id="baca.WellformednessManager.WellformednessManager.allow_percussion_clef">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">WellformednessManager</span></code>).</code><code class="descname">allow_percussion_clef</code><a class="headerlink" href="#baca.WellformednessManager.WellformednessManager.allow_percussion_clef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when manager allows percussion clef. Otherwise false.</p>
+<p>Returns true, false or none.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ZaggedPitchClassMaker.html" class="btn btn-neutral float-right" title="ZaggedPitchClassMaker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ViolinSoloScoreTemplate.html" class="btn btn-neutral" title="ViolinSoloScoreTemplate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
