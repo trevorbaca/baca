@@ -2,7 +2,8 @@ import abjad
 
 
 class Division(abjad.NonreducedFraction):
-    r"""Division.
+    r"""
+    Division.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -204,7 +205,8 @@ class Division(abjad.NonreducedFraction):
     ### INITIALIZER ###
 
     def __init__(self, *arguments, **keywords):
-        r"""Dummy initializer to satisfy mypy.
+        """
+        Dummy initializer to satisfy mypy.
         """
         pass
 
@@ -237,7 +239,8 @@ class Division(abjad.NonreducedFraction):
     ### SPECIAL METHODS###
 
     def __add__(self, argument):
-        r"""Adds `argument` to division.
+        """
+        Adds ``argument`` to division.
 
         ..  container:: example
 
@@ -353,7 +356,8 @@ class Division(abjad.NonreducedFraction):
         return division
 
     def __copy__(self, *args):
-        r"""Copies division.
+        """
+        Copies division.
 
         Returns new division.
         """
@@ -361,28 +365,32 @@ class Division(abjad.NonreducedFraction):
         return type(self)(*arguments)
 
     def __deepcopy__(self, *args):
-        r"""Deep copies division.
+        """
+        Deep copies division.
 
         Returns new division.
         """
         return self.__copy__(*args)
 
     def __getnewargs__(self):
-        r"""Gets new arguments.
+        """
+        Gets new arguments.
 
         Returns tuple.
         """
         return (self.pair, self.payload, self.start_offset)
 
     def __str__(self):
-        r"""Gets string representation of division.
+        """
+        Gets string representation of division.
 
         Returns string.
         """
         return repr(self)
 
     def __sub__(self, argument):
-        r"""Subtracts `argument` from division.
+        """
+        Subtracts ``argument`` from division.
 
         ..  container:: example
 
@@ -544,7 +552,8 @@ class Division(abjad.NonreducedFraction):
 
     @property
     def duration(self):
-        r"""Gets duration of division.
+        """
+        Gets duration of division.
 
         ..  container:: example
 
@@ -570,7 +579,8 @@ class Division(abjad.NonreducedFraction):
 
     @property
     def payload(self):
-        r"""Gets payload of division.
+        """
+        Gets payload of division.
 
         ..  container:: example
 
@@ -607,7 +617,8 @@ class Division(abjad.NonreducedFraction):
 
     @property
     def start_offset(self):
-        r"""Gets start offset of division.
+        """
+        Gets start offset of division.
 
         ..  container:: example
 
@@ -640,7 +651,8 @@ class Division(abjad.NonreducedFraction):
 
     @property
     def stop_offset(self):
-        r"""Gets stop offset of division.
+        """
+        Gets stop offset of division.
 
         ..  container:: example
 
@@ -675,7 +687,8 @@ class Division(abjad.NonreducedFraction):
 
     @staticmethod
     def yield_durations(unique=False):
-        r"""Yields all positive durations.
+        """
+        Yields all positive durations.
 
         ..  container:: example
 
@@ -740,7 +753,8 @@ class Division(abjad.NonreducedFraction):
                 yield duration
 
     def yield_equivalent_durations(self, minimum_written_duration=None):
-        r"""Yields all durations equivalent to this duration.
+        """
+        Yields all durations equivalent to this duration.
 
         Returns output in Cantor diagonalized order.
 
@@ -810,7 +824,7 @@ class Division(abjad.NonreducedFraction):
             (Multiplier(80, 127), Duration(127, 16))
             (Multiplier(160, 127), Duration(127, 32))
 
-        Defaults `minimum_written_duration` to ``1/128``.
+        Defaults ``minimum_written_duration`` to ``1/128``.
 
         Returns generator.
         """
@@ -835,7 +849,8 @@ class Division(abjad.NonreducedFraction):
 
     @staticmethod
     def yield_nonreduced_fractions():
-        """Yields positive nonreduced fractions in Cantor diagonalized order.
+        """
+        Yields positive nonreduced fractions in Cantor diagonalized order.
 
         ..  container:: example
 

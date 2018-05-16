@@ -516,9 +516,9 @@ here.</p>
 <dl class="method">
 <dt id="baca.DivisionMaker.DivisionMaker.__call__">
 <code class="descname">__call__</code><span class="sig-paren">(</span><em>argument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.DivisionMaker.DivisionMaker.__call__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Makes divisions from <cite>argument</cite>.</p>
-<p>Pass in <cite>argument</cite> as either a list of divisions or as a list of division
-lists.</p>
+<dd><p>Makes divisions from <code class="docutils literal notranslate"><span class="pre">argument</span></code>.</p>
+<p>Pass in <code class="docutils literal notranslate"><span class="pre">argument</span></code> as either a list of divisions or as a list of
+division lists.</p>
 <p>Returns either a list of divisions or a list of division lists.</p>
 </dd></dl>
 
@@ -564,7 +564,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <dl class="method">
 <dt id="baca.DivisionMaker.DivisionMaker.append_callback">
 <code class="descname">append_callback</code><span class="sig-paren">(</span><em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.DivisionMaker.DivisionMaker.append_callback" title="Permalink to this definition">¶</a></dt>
-<dd><p>Configures division-maker with arbitrary <cite>callback</cite>.</p>
+<dd><p>Configures division-maker with arbitrary <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
 <p>Returns new division-maker.</p>
 </dd></dl>
 
@@ -578,7 +578,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <dl class="method">
 <dt id="baca.DivisionMaker.DivisionMaker.fuse_by_counts">
 <code class="descname">fuse_by_counts</code><span class="sig-paren">(</span><em>cyclic=True</em>, <em>counts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.DivisionMaker.DivisionMaker.fuse_by_counts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fuses divisions (or division lists) by <cite>counts</cite>.</p>
+<dd><p>Fuses divisions (or division lists) by <code class="docutils literal notranslate"><span class="pre">counts</span></code>.</p>
 <div class="example docutils container">
 <p>Fuses every two divisions together:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">DivisionMaker</span><span class="p">()</span>
@@ -607,7 +607,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <dl class="method">
 <dt id="baca.DivisionMaker.DivisionMaker.partition_by_counts">
 <code class="descname">partition_by_counts</code><span class="sig-paren">(</span><em>counts=None</em>, <em>fuse_assignable_total_duration=False</em>, <em>append_remainder=False</em>, <em>remainder_direction=Right</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.DivisionMaker.DivisionMaker.partition_by_counts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Partitions divisions (or division lists) by <cite>counts</cite>.</p>
+<dd><p>Partitions divisions (or division lists) by <code class="docutils literal notranslate"><span class="pre">counts</span></code>.</p>
 <div class="example docutils container">
 <p>Partitions divisions into pairs with remainder at right:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">division_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">DivisionMaker</span><span class="p">()</span>

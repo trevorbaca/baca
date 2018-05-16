@@ -3,7 +3,8 @@ import collections
 
 
 class Cursor(abjad.AbjadObject):
-    r"""Cursor.
+    """
+    Cursor.
 
     ..  container:: example
 
@@ -92,7 +93,8 @@ class Cursor(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r"""Is true when `argument` is a cursor with keyword
+        """
+        Is true when `argument` is a cursor with keyword
         arguments equal to this cursor. Otherwise false.
 
         Returns true or false.
@@ -101,7 +103,8 @@ class Cursor(abjad.AbjadObject):
         return superclass.__eq__(argument)
 
     def __getitem__(self, argument):
-        r"""Gets item from cursor.
+        """
+        Gets item from cursor.
 
         ..  container:: example
 
@@ -122,7 +125,8 @@ class Cursor(abjad.AbjadObject):
         return self.source.__getitem__(argument)
 
     def __hash__(self):
-        r"""Hashes cursor.
+        """
+        Hashes cursor.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
@@ -131,7 +135,8 @@ class Cursor(abjad.AbjadObject):
         return super(Cursor, self).__hash__()
 
     def __iter__(self, count=1):
-        r"""Iterates cursor.
+        """
+        Iterates cursor.
 
         ..  container:: example
 
@@ -166,7 +171,8 @@ class Cursor(abjad.AbjadObject):
         return iter(self.source)
 
     def __len__(self):
-        r"""Gets length of cursor.
+        """
+        Gets length of cursor.
 
         ..  container:: example
 
@@ -185,7 +191,8 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def cyclic(self):
-        r"""Is true when cursor is cyclic.
+        """
+        Is true when cursor is cyclic.
 
         Otherwise false.
 
@@ -199,7 +206,8 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def is_exhausted(self):
-        r"""Is true when cursor is exhausted.
+        """
+        Is true when cursor is exhausted.
 
         ..  container:: example
 
@@ -232,7 +240,8 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def position(self):
-        r"""Gets position.
+        """
+        Gets position.
 
         ..  container:: example
 
@@ -362,7 +371,8 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def singletons(self):
-        r"""Is true when cursor returns singletons not enclosed within a list.
+        """
+        Is true when cursor returns singletons not enclosed within a list.
         If false when cursor returns singletons enclosed within a list.
 
         ..  container:: example
@@ -427,7 +437,8 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def source(self):
-        r"""Gets source.
+        """
+        Gets source.
 
         ..  container:: example
 
@@ -455,7 +466,8 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def suppress_exception(self):
-        r"""Is true when cursor returns none on exhaustion.
+        """
+        Is true when cursor returns none on exhaustion.
         Is false when cursor raises exception on exhaustion.
 
         ..  container:: example
@@ -526,7 +538,8 @@ class Cursor(abjad.AbjadObject):
 
     @staticmethod
     def from_pitch_class_segments(pitch_class_segments):
-        r"""Makes cursor from `pitch_class_segments`.
+        """
+        Makes cursor from `pitch_class_segments`.
 
         ..  container:: example
 
@@ -576,7 +589,8 @@ class Cursor(abjad.AbjadObject):
         return cursor
 
     def next(self, count=1, exhausted=False):
-        r"""Gets next `count` elements in source.
+        """
+        Gets next ``count`` elements in source.
 
         ..  container:: example
 
@@ -715,7 +729,8 @@ class Cursor(abjad.AbjadObject):
         return result
 
     def reset(self):
-        r"""Resets cursor.
+        """
+        Resets cursor.
 
         ..  container:: example
 

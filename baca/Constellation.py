@@ -3,7 +3,7 @@ import baca
 
 
 class Constellation(abjad.AbjadObject):
-    r"""
+    """
     Constellation.
 
     ..  container:: example
@@ -250,7 +250,8 @@ class Constellation(abjad.AbjadObject):
 
     @property
     def partitioned_generator_pitch_numbers(self):
-        r"""Gets partitioned generator pitch numbers.
+        """
+        Gets partitioned generator pitch numbers.
 
         ..  container:: example
 
@@ -271,7 +272,8 @@ class Constellation(abjad.AbjadObject):
 
     @property
     def pitch_range(self):
-        r"""Gets pitch range of constellation.
+        """
+        Gets pitch range of constellation.
 
         ..  container:: example
 
@@ -284,7 +286,8 @@ class Constellation(abjad.AbjadObject):
 
     @property
     def pivot_chord(self):
-        r"""Gets pivot chord.
+        r"""
+        Gets pivot chord.
 
         ..  container:: example
 
@@ -307,7 +310,8 @@ class Constellation(abjad.AbjadObject):
 
     @staticmethod
     def constellate(cells, range):
-        r"""Constellates `cells`.
+        """
+        Constellates ``cells``.
 
         ..  container:: example
 
@@ -340,7 +344,8 @@ class Constellation(abjad.AbjadObject):
             Sequence([7, 15, 17, 28, 32, 35])
             Sequence([19, 27, 28, 29, 32, 35])
 
-        Returns outer product of octave transpositions of `cells` in `range`.
+        Returns outer product of octave transpositions of ``cells`` in
+        ``range``.
         """
         if not isinstance(range, abjad.PitchRange):
             raise TypeError(f'pitch range only: {range!r}.')
@@ -358,7 +363,8 @@ class Constellation(abjad.AbjadObject):
         return result
 
     def get_chord(self, chord_number):
-        """Gets chord with 1-indexed chord number.
+        """
+        Gets chord with 1-indexed chord number.
 
         ..  container:: example
 
@@ -373,7 +379,8 @@ class Constellation(abjad.AbjadObject):
         return self._pitch_number_lists[chord_index]
 
     def get_number_of_chord(self, chord):
-        r"""Gets number of chord.
+        """
+        Gets number of chord.
 
         ..  container:: example
 

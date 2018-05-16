@@ -8,7 +8,8 @@ from .SplitByRoundedRatiosDivisionCallback import \
 
 
 class DivisionSequence(abjad.Sequence):
-    r"""Division sequence.
+    """
+    Division sequence.
 
     ..  container:: example
 
@@ -48,7 +49,8 @@ class DivisionSequence(abjad.Sequence):
         subscript='n',
         )
     def rotate(self, n=0) -> 'DivisionSequence':
-        r"""Rotates division sequence by index `n`.
+        """
+        Rotates division sequence by index ``n``.
 
         ..  container:: example
 
@@ -138,7 +140,8 @@ class DivisionSequence(abjad.Sequence):
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ) -> 'DivisionSequence':
-        r"""Splits each division in division sequence by `durations`.
+        """
+        Splits each division in division sequence by ``durations``.
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
@@ -159,7 +162,8 @@ class DivisionSequence(abjad.Sequence):
         self,
         ratios,
         ) -> 'DivisionSequence':
-        r"""Splits each division in division sequence by rounded `ratios`.
+        """
+        Splits each division in division sequence by rounded ``ratios``.
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())

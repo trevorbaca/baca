@@ -3,7 +3,8 @@ import baca
 
 
 class DivisionMaker(abjad.AbjadValueObject):
-    r"""Division-maker.
+    r"""
+    Division-maker.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -267,10 +268,11 @@ class DivisionMaker(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r"""Makes divisions from `argument`.
+        """
+        Makes divisions from ``argument``.
 
-        Pass in `argument` as either a list of divisions or as a list of division
-        lists.
+        Pass in ``argument`` as either a list of divisions or as a list of
+        division lists.
 
         Returns either a list of divisions or a list of division lists.
         """
@@ -338,7 +340,8 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     @property
     def callbacks(self):
-        r"""Gets division-maker callbacks.
+        """
+        Gets division-maker callbacks.
 
         ..  container:: example
 
@@ -369,14 +372,16 @@ class DivisionMaker(abjad.AbjadValueObject):
     ### PUBLIC METHODS ###
 
     def append_callback(self, callback):
-        r"""Configures division-maker with arbitrary `callback`.
+        """
+        Configures division-maker with arbitrary ``callback``.
 
         Returns new division-maker.
         """
         return self._append_callback(callback)
 
     def flatten(self, depth=-1):
-        r"""Flattens division lists.
+        """
+        Flattens division lists.
 
         Returns new division-maker.
         """
@@ -388,7 +393,8 @@ class DivisionMaker(abjad.AbjadValueObject):
         cyclic=True,
         counts=None,
         ):
-        r"""Fuses divisions (or division lists) by `counts`.
+        r"""
+        Fuses divisions (or division lists) by ``counts``.
 
         ..  container:: example
 
@@ -432,7 +438,8 @@ class DivisionMaker(abjad.AbjadValueObject):
         append_remainder=False,
         remainder_direction=abjad.Right,
         ):
-        r"""Partitions divisions (or division lists) by `counts`.
+        """
+        Partitions divisions (or division lists) by ``counts``.
 
         ..  container:: example
 
@@ -605,7 +612,8 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     @staticmethod
     def show(music, divisions):
-        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
+        """
+        Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
         """
@@ -623,7 +631,8 @@ class DivisionMaker(abjad.AbjadValueObject):
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ):
-        r"""Splits divisions by durations.
+        r"""
+        Splits divisions by durations.
 
         ..  container:: example
 
@@ -738,7 +747,8 @@ class DivisionMaker(abjad.AbjadValueObject):
         self,
         ratios=None,
         ):
-        r"""Splits divisions by rounded ratios.
+        r"""
+        Splits divisions by rounded ratios.
 
         ..  container:: example
 

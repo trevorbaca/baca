@@ -3,7 +3,8 @@ import baca
 
 
 class ConstellationCircuit(abjad.AbjadObject):
-    r'''Constellation circuit.
+    """
+    Constellation circuit.
 
     ..  container:: example
 
@@ -24,7 +25,7 @@ class ConstellationCircuit(abjad.AbjadObject):
         Constellation(120)
         Constellation(108)
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -51,7 +52,8 @@ class ConstellationCircuit(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets item or slice identified by `argument`.
+        """
+        Gets item or slice identified by `argument`.
 
         ..  container:: example
 
@@ -59,22 +61,24 @@ class ConstellationCircuit(abjad.AbjadObject):
             Constellation(108)
 
         Returns constellation.
-        '''
+        """
         return self._constellations.__getitem__(argument)
 
     def __len__(self):
-        r'''Gets length of circuit.
+        """
+        Gets length of circuit.
 
         ..  container:: example
 
             >>> len(constellation_circuit)
             8
 
-        '''
+        """
         return len(self._constellations)
 
     def __repr__(self):
-        r'''Gets interpreter representation of circuit.
+        """
+        Gets interpreter representation of circuit.
 
         ..  container:: example
 
@@ -82,7 +86,7 @@ class ConstellationCircuit(abjad.AbjadObject):
             ConstellationCircuit(8)
 
         Returns string.
-        '''
+        """
         return f'{type(self).__name__}({len(self)})'
 
     ### PRIVATE PROPERTIES ###
@@ -142,7 +146,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     @property
     def generator_chords(self):
-        r"""Gets generator chords.
+        """
+        Gets generator chords.
 
         ..  container:: example
 
@@ -166,7 +171,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     @property
     def pitch_range(self):
-        r'''Gets pitch range.
+        """
+        Gets pitch range.
 
         ..  container:: example
 
@@ -174,17 +180,19 @@ class ConstellationCircuit(abjad.AbjadObject):
             PitchRange('[A0, C8]')
 
         Returns pitch range.
-        '''
+        """
         return self._pitch_range
 
     @property
     def pivot_chords(self):
-        r"""Gets pivot chords.
+        """
+        Gets pivot chords.
 
         ..  container:: example
 
             >>> for chord in constellation_circuit.pivot_chords:
             ...     chord
+            ...
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
             Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
             Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
@@ -204,7 +212,8 @@ class ConstellationCircuit(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     def get(self, *args):
-        r'''Gets constellation in circuit.
+        """
+        Gets constellation in circuit.
 
         ..  container:: example
 
@@ -217,7 +226,7 @@ class ConstellationCircuit(abjad.AbjadObject):
             Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
 
         Returns constellation or list.
-        '''
+        """
         if len(args) == 1:
             constellation_number = args[0]
             constellation_index = constellation_number - 1
@@ -229,7 +238,8 @@ class ConstellationCircuit(abjad.AbjadObject):
             return constellation.get_chord(chord_number)
 
     def illustrate_colored_generator_chords(self):
-        r"""Illustrates colored generator chords.
+        r"""
+        Illustrates colored generator chords.
 
         ..  container:: example
 
@@ -284,7 +294,8 @@ class ConstellationCircuit(abjad.AbjadObject):
         return self._illustrate_chords(self._colored_generator_chords)
 
     def illustrate_colored_generator_chords_and_pivot_chords(self):
-        r"""Illustrates colored generator chords and pivot chords.
+        r"""
+        Illustrates colored generator chords and pivot chords.
 
         ..  container:: example
 
@@ -357,7 +368,8 @@ class ConstellationCircuit(abjad.AbjadObject):
         return self._illustrate_chords(chords)
 
     def illustrate_generator_chords(self):
-        r"""Illustrates generator chords.
+        r"""
+        Illustrates generator chords.
 
         ..  container:: example
 
@@ -412,7 +424,8 @@ class ConstellationCircuit(abjad.AbjadObject):
         return self._illustrate_chords(self.generator_chords)
 
     def illustrate_generator_chords_and_pivot_chords(self):
-        r"""Illustrates generator chords and pivot chords.
+        r"""
+        Illustrates generator chords and pivot chords.
 
         ..  container:: example
 
@@ -485,7 +498,8 @@ class ConstellationCircuit(abjad.AbjadObject):
         return self._illustrate_chords(chords)
 
     def illustrate_pivot_chords(self):
-        r"""Illustrates pivot chords.
+        r"""
+        Illustrates pivot chords.
 
         ..  container:: example
 
@@ -541,7 +555,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     @classmethod
     def make_constellation_circuit_1(class_):
-        r'''Makes constellation circuit 1.
+        """
+        Makes constellation circuit 1.
 
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
@@ -557,5 +572,5 @@ class ConstellationCircuit(abjad.AbjadObject):
             Constellation(108)
 
         Returns constellation circuit.
-        '''
+        """
         return class_(class_.CC1, abjad.PitchRange('[A0, C8]'))
