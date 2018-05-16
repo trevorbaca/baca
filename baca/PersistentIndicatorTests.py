@@ -407,8 +407,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.clef('treble', baca.leaf(0)),
-            ...     baca.clef('treble', baca.leaf(1)),
+            ...     baca.clef('treble', selector=baca.leaf(0)),
+            ...     baca.clef('treble', selector=baca.leaf(1)),
             ...     )
             >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
@@ -845,7 +845,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.make_notes(),
             ...     baca.dynamic('f'),
-            ...     baca.dynamic('f', baca.leaf(1)),
+            ...     baca.dynamic('f', selector=baca.leaf(1)),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -996,7 +996,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.make_notes(),
             ...     baca.dynamic('sfz'),
-            ...     baca.dynamic('sfz', baca.leaf(1)),
+            ...     baca.dynamic('sfz', selector=baca.leaf(1)),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -6380,7 +6380,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker(
             ...     'GlobalSkips',
             ...     baca.metronome_mark('112'),
-            ...     baca.metronome_mark('112', baca.leaf(1)),
+            ...     baca.metronome_mark('112', selector=baca.leaf(1)),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -6909,7 +6909,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.bar_extent_persistent((0, 0)),
-            ...     baca.bar_extent_persistent((0, 0), baca.leaf(1)),
+            ...     baca.bar_extent_persistent((0, 0), selector=baca.leaf(1)),
             ...     baca.make_notes(),
             ...     baca.staff_lines(1),
             ...     baca.staff_position(0),
@@ -7318,7 +7318,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.make_notes(),
             ...     baca.staff_lines(5),
-            ...     baca.staff_lines(5, baca.leaf(1)),
+            ...     baca.staff_lines(5, selector=baca.leaf(1)),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -7853,7 +7853,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker(
             ...     'GlobalSkips',
             ...     baca.metronome_mark(abjad.Accelerando()),
-            ...     baca.metronome_mark(abjad.Accelerando(), baca.leaf(1)),
+            ...     baca.metronome_mark(
+            ...         abjad.Accelerando(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     )
             >>> maker(
             ...     'MusicVoice',

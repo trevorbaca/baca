@@ -521,8 +521,8 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">maker</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;docs&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">block</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Block</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;layout&#39;</span><span class="p">)</span>
@@ -705,7 +705,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_notes</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 </pre></div>
 </div>
@@ -765,7 +765,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_notes</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="s1">&#39;sfz&#39;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="s1">&#39;sfz&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="s1">&#39;sfz&#39;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 </pre></div>
 </div>
@@ -2164,7 +2164,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;GlobalSkips&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">metronome_mark</span><span class="p">(</span><span class="s1">&#39;112&#39;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">metronome_mark</span><span class="p">(</span><span class="s1">&#39;112&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">metronome_mark</span><span class="p">(</span><span class="s1">&#39;112&#39;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
@@ -2357,7 +2357,7 @@ warning:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">bar_extent_persistent</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">bar_extent_persistent</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">bar_extent_persistent</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_notes</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">staff_lines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">staff_position</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
@@ -2539,7 +2539,7 @@ warning:</p>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_notes</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">staff_lines</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">staff_lines</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">staff_lines</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 </pre></div>
 </div>
@@ -2739,7 +2739,10 @@ warning:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;GlobalSkips&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">metronome_mark</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Accelerando</span><span class="p">()),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">metronome_mark</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Accelerando</span><span class="p">(),</span> <span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">metronome_mark</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">abjad</span><span class="o">.</span><span class="n">Accelerando</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>

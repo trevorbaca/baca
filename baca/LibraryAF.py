@@ -47,6 +47,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def accent(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -124,7 +125,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.accent(baca.pheads()), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.accent(selector=baca.pheads()),
+            ...         baca.tuplet(1),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -192,6 +196,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def accidental_stencil_false(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
@@ -206,6 +211,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def accidental_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ):
         """
@@ -220,6 +226,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def accidental_x_extent_false(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
@@ -234,6 +241,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def allow_octaves(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> IndicatorCommand:
         """
@@ -246,6 +254,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def alternate_bow_strokes(
+        *,
         downbow_first: bool = True,
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
@@ -540,6 +549,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def ancora_dynamic(
         dynamic: str,
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -619,7 +629,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.ancora_dynamic(
             ...         'ff',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -686,6 +696,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def arpeggio(
+        *,
         selector: Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -768,7 +779,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.arpeggio(baca.cheads()[-2:]),
+            ...     baca.arpeggio(selector=baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -839,6 +850,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def articulation(
         articulation: str,
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         """
@@ -853,6 +865,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def articulations(
         articulations: typing.List,
+        *,
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         """
@@ -866,6 +879,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def bar_extent(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaf(0)',
         after: bool = False,
         ) -> OverrideCommand:
@@ -882,8 +896,8 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.bar_extent((-4, 4), baca.group_by_measure()[1]),
-            ...     baca.bar_extent((-4, 4), baca.leaf(-1), after=True),
+            ...     baca.bar_extent((-4, 4), selector=baca.group_by_measure()[1]),
+            ...     baca.bar_extent((-4, 4), selector=baca.leaf(-1), after=True),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     )
@@ -1009,6 +1023,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def bar_extent_persistent(
         pair: NumberPair = None,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -1155,6 +1170,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bar_extent_zero(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> SuiteCommand:
         """
@@ -1178,6 +1194,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bar_line_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -1317,7 +1334,7 @@ class LibraryAF(abjad.AbjadObject):
             ...                 ),
             ...             ),
             ...         ),
-            ...     baca.bar_line_transparent(baca.group_by_measure()[1]),
+            ...     baca.bar_line_transparent(selector=baca.group_by_measure()[1]),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -1423,6 +1440,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def bass_to_octave(
         n: int,
+        *,
         selector: Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""
@@ -1438,7 +1456,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.bass_to_octave(3),
-            ...     baca.color(baca.plts().group()),
+            ...     baca.color(selector=baca.plts().group()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1558,7 +1576,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.map(baca.bass_to_octave(3), baca.plts()),
-            ...     baca.color(baca.plts()),
+            ...     baca.color(selector=baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1678,7 +1696,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.map(baca.bass_to_octave(3), baca.plts()[-2:]),
-            ...     baca.color(baca.plts()[-2:]),
+            ...     baca.color(selector=baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1768,6 +1786,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def bcps(
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> BowContactPointCommand:
         """
@@ -1780,6 +1799,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_divisions(
+        *,
         stemlets: Number = None,
         ) -> rhythmos.BeamSpecifier:
         r"""
@@ -1898,6 +1918,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_everything(
+        *,
         hide_nibs: bool = False,
         stemlets: Number = None,
         ) -> rhythmos.BeamSpecifier:
@@ -2092,6 +2113,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def beam_positions(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -2156,7 +2178,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.beam_positions(6, baca.tuplet(1)),
+            ...     baca.beam_positions(6, selector=baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     time_treatments=[-1],
             ...     )
@@ -2208,7 +2230,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def beam_runs(hide_nibs: bool = False) -> rhythmos.BeamSpecifier:
+    def beam_runs(*, hide_nibs: bool = False) -> rhythmos.BeamSpecifier:
         r"""
         Beams PLT runs.
 
@@ -2370,6 +2392,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_stencil_false(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -2384,6 +2407,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ):
         """
@@ -2501,7 +2525,11 @@ class LibraryAF(abjad.AbjadObject):
                     indicators=[break_],
                     selector=selector,
                     )
-                lbsd = LibraryGM.lbsd(y_offset, alignment_distances, selector)
+                lbsd = LibraryGM.lbsd(
+                    y_offset,
+                    alignment_distances,
+                    selector=selector,
+                    )
                 commands[measure_number] = [command, lbsd]
         breaks = BreakMeasureMap(
             commands=commands,
@@ -2512,6 +2540,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def breathe(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         """
@@ -2537,6 +2566,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def center_to_octave(
         n: int,
+        *,
         selector: Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""
@@ -2552,7 +2582,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.center_to_octave(3),
-            ...     baca.color(baca.plts().group()),
+            ...     baca.color(selector=baca.plts().group()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -2672,7 +2702,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.map(baca.center_to_octave(3), baca.plts()),
-            ...     baca.color(baca.plts()),
+            ...     baca.color(selector=baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -2792,7 +2822,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.map(baca.center_to_octave(3), baca.plts()[-2:]),
-            ...     baca.color(baca.plts()[-2:]),
+            ...     baca.color(selector=baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -2882,6 +2912,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def clef(
         clef: str = 'treble',
+        *,
         selector: Selector = 'baca.leaf(0)',
         redundant: bool = None,
         ) -> IndicatorCommand:
@@ -3030,6 +3061,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def clef_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
@@ -3045,6 +3077,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def clef_x_extent_false(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
@@ -3061,6 +3094,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def clusters(
         widths: typing.List[int],
+        *,
         selector: Selector = 'baca.plts()',
         start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
         ) -> ClusterCommand:
@@ -3167,7 +3201,7 @@ class LibraryAF(abjad.AbjadObject):
         return Coat(pitch)
 
     @staticmethod
-    def color(selector: Selector = 'baca.leaves()') -> ColorCommand:
+    def color(*, selector: Selector = 'baca.leaves()') -> ColorCommand:
         r"""
         Colors leaves.
 
@@ -3388,6 +3422,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def color_fingerings(
         numbers: typing.List[Number],
+        *,
         selector: Selector = 'baca.pheads()',
         ) -> ColorFingeringCommand:
         """
@@ -3411,6 +3446,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def container(
         identifier: str = None,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> ContainerCommand:
         r"""
@@ -3426,8 +3462,8 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.container('ViolinI', baca.leaves()[:2]),
-            ...     baca.container('ViolinII', baca.leaves()[2:]),
+            ...     baca.container('ViolinI', selector=baca.leaves()[:2]),
+            ...     baca.container('ViolinII', selector=baca.leaves()[2:]),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4 F4'),
             ...     )
@@ -3506,6 +3542,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def cross_staff(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -3790,7 +3827,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         'ViolaMusicVoice',
             ...         [[0, 2, 4, 5, 7]],
             ...         baca.anchor('ViolinMusicVoice'),
-            ...         baca.cross_staff(baca.pleaves()[-2:]),
+            ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
             ...         baca.flags(),
             ...         baca.stem_up(),
             ...         figure_name='va.1',
@@ -4070,6 +4107,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def deviation(
         deviations: typing.List[Number],
+        *,
         selector: Selector = 'baca.plts()',
         ) -> MicrotoneDeviationCommand:
         """
@@ -4083,6 +4121,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def diatonic_clusters(
         widths: typing.List[int],
+        *,
         selector: Selector = 'baca.plts()',
         ) -> DiatonicClusterCommand:
         """
@@ -4096,6 +4135,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def displacement(
         displacements: typing.List[int],
+        *,
         selector: Selector = 'baca.plts()',
         ) -> OctaveDisplacementCommand:
         r"""
@@ -4224,7 +4264,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     3 * [[0, 2, 3]],
-            ...     baca.displacement([0, 0, -1, -1, 1, 1], baca.plts()[-6:]),
+            ...     baca.displacement(
+            ...         [0, 0, -1, -1, 1, 1],
+            ...         selector=baca.plts()[-6:],
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4292,6 +4335,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dls_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -4307,6 +4351,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dls_staff_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -4393,7 +4438,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dls_staff_padding(4, baca.tuplet(1)),
+            ...     baca.dls_staff_padding(4, selector=baca.tuplet(1)),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4468,6 +4513,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dls_up(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -4554,7 +4600,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dls_up(baca.tuplet(1)),
+            ...     baca.dls_up(selector=baca.tuplet(1)),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4629,6 +4675,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dots_stencil_false(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -4643,6 +4690,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dots_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ):
         """
@@ -4657,6 +4705,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def double_staccato(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -4735,7 +4784,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.double_staccato(baca.pheads()),
+            ...         baca.double_staccato(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -4805,6 +4854,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def down_arpeggio(
+        *,
         selector: Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -4888,7 +4938,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.down_arpeggio(baca.cheads()[-2:]),
+            ...     baca.down_arpeggio(selector=baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -4960,6 +5010,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def down_bow(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -5038,7 +5089,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.down_bow(baca.pheads()),
+            ...         baca.down_bow(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -5109,6 +5160,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dynamic(
         dynamic: str,
+        *,
         selector: Selector = 'baca.phead(0)',
         redundant: bool = None,
         ) -> IndicatorCommand:
@@ -5187,7 +5239,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5341,6 +5393,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dynamic_down(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -5355,7 +5408,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
             ...     baca.dynamic_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5423,8 +5476,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
-            ...     baca.dynamic_down(baca.tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic_down(selector=baca.tuplets()[1:2].leaf(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5491,6 +5544,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dynamic_text_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
         r"""
@@ -5505,7 +5559,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].pleaf(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].pleaf(0)),
             ...     baca.dynamic_text_extra_offset((-3, 0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5573,10 +5627,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].leaf(0)),
             ...     baca.dynamic_text_extra_offset(
             ...         (-3, 0),
-            ...         baca.tuplets()[1:2].leaf(0),
+            ...         selector=baca.tuplets()[1:2].leaf(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5663,6 +5717,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dynamic_text_left(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> SuiteCommand:
         """
@@ -5683,6 +5738,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dynamic_text_stencil_false(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
         """
@@ -5697,6 +5753,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dynamic_text_transparent(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
         """
@@ -5711,6 +5768,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dynamic_text_x_extent_zero(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
         """
@@ -5726,6 +5784,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dynamic_text_x_offset(
         n: Number,
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
         """
@@ -5741,6 +5800,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dynamic_text_y_offset(
         n: Number,
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> OverrideCommand:
         """
@@ -5755,6 +5815,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dynamic_up(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -5769,7 +5830,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
             ...     baca.dynamic_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5837,8 +5898,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
-            ...     baca.dynamic_up(baca.tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamic_up(selector=baca.tuplets()[1:2].leaf(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6203,6 +6264,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def espressivo(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -6281,7 +6343,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.espressivo(baca.pheads()),
+            ...         baca.espressivo(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -6351,6 +6413,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def fermata(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -6428,7 +6491,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.fermata(baca.tuplets()[1:2].phead(0)),
+            ...     baca.fermata(selector=baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6492,6 +6555,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def finger_pressure_transition(
+        *,
         selector: Selector = 'baca.tleaves()',
         right_broken: bool = None,
         ) -> SuiteCommand:
@@ -6508,11 +6572,11 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.finger_pressure_transition(baca.notes()[:2]),
-            ...     baca.finger_pressure_transition(baca.notes()[2:]),
+            ...     baca.finger_pressure_transition(selector=baca.notes()[:2]),
+            ...     baca.finger_pressure_transition(selector=baca.notes()[2:]),
             ...     baca.make_notes(),
-            ...     baca.note_head_style_harmonic(baca.note(0)),
-            ...     baca.note_head_style_harmonic(baca.note(2)),
+            ...     baca.note_head_style_harmonic(selector=baca.note(0)),
+            ...     baca.note_head_style_harmonic(selector=baca.note(2)),
             ...     baca.pitch('C5'),
             ...     )
 
@@ -6641,6 +6705,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def flag_stencil_false(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
@@ -6655,6 +6720,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def flag_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ):
         """
@@ -6669,6 +6735,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def flageolet(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -6747,7 +6814,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.flageolet(baca.pheads()),
+            ...         baca.flageolet(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -6885,6 +6952,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def force_accidental(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> AccidentalAdjustmentCommand:
         r"""
@@ -6901,7 +6969,7 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.not_parts(baca.force_accidental(baca.pleaves()[:2])),
+            ...     baca.not_parts(baca.force_accidental(selector=baca.pleaves()[:2])),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4 F4'),
             ...     )

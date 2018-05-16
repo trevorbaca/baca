@@ -43,10 +43,11 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def glissando(
-        selector: Selector = 'baca.tleaves()',
+        *,
         allow_repeats: bool = None,
         allow_ties: bool = None,
         right_broken: bool = None,
+        selector: Selector = 'baca.tleaves()',
         stems: bool = None,
         style: str = None,
         ) -> SpannerCommand:
@@ -192,8 +193,8 @@ class LibraryGM(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.make_even_runs(),
-            ...     baca.glissando(baca.plts()[:2]),
-            ...     baca.glissando(baca.plts()[-2:]),
+            ...     baca.glissando(selector=baca.plts()[:2]),
+            ...     baca.glissando(selector=baca.plts()[-2:]),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -380,6 +381,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def glissando_thickness(
         n: Number,
+        *,
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         """
@@ -395,6 +397,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def global_fermata(
         description: str = None,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> GlobalFermataCommand:
         """
@@ -418,9 +421,10 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def hairpin(
         string: str = None,
-        selector: Selector = 'baca.tleaves()',
+        *,
         left_broken: str = None,
         right_broken: str = None,
+        selector: Selector = 'baca.tleaves()',
         start_ordinal: int = None,
         stop_ordinal: int = None,
         ) -> HairpinCommand:
@@ -567,7 +571,10 @@ class LibraryGM(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.hairpin('p < f'),
+            ...         baca.tuplets(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -681,6 +688,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def hairpin_shorten_pair(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -695,6 +703,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def hairpin_stencil_false(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -709,6 +718,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def hairpin_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -954,6 +964,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def instrument(
         instrument: abjad.Instrument,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> InstrumentChangeCommand:
         """
@@ -971,6 +982,7 @@ class LibraryGM(abjad.AbjadObject):
     def interpolate_staff_positions(
         start_pitch: typing.Union[str, abjad.NamedPitch],
         stop_pitch: typing.Union[str, abjad.NamedPitch],
+        *,
         selector: Selector = 'baca.plts()',
         ) -> StaffPositionInterpolationCommand:
         """
@@ -1017,6 +1029,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def label(
         expression: abjad.Expression,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> LabelCommand:
         r"""
@@ -1131,7 +1144,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.label(
             ...         abjad.label().with_pitches(locale='us'),
-            ...         baca.tuplet(1),
+            ...         selector=baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1212,6 +1225,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def laissez_vibrer(
+        *,
         selector: Selector  = 'baca.ptail(0)',
         ) -> IndicatorCommand:
         r"""
@@ -1290,7 +1304,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.laissez_vibrer(baca.ptails()),
+            ...         baca.laissez_vibrer(selector=baca.ptails()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -1362,6 +1376,7 @@ class LibraryGM(abjad.AbjadObject):
     def lbsd(
         y_offset: int,
         alignment_distances: typing.Sequence,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         """
@@ -1380,6 +1395,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def literal(
         string: str,
+        *,
         format_slot: str = 'before',
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
@@ -1394,6 +1410,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def long_fermata(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -1471,7 +1488,7 @@ class LibraryGM(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.long_fermata(baca.tuplets()[1:2].phead(0)),
+            ...     baca.long_fermata(selector=baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1769,6 +1786,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def marcato(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -1847,7 +1865,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.marcato(baca.pheads()),
+            ...         baca.marcato(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -1918,6 +1936,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def margin_markup(
         argument: str,
+        *,
         alert: IndicatorCommand = None,
         context: str = 'Staff',
         selector: Selector = 'baca.leaf(0)',
@@ -2043,6 +2062,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def metronome_mark(
         key: str,
+        *,
         selector: Selector = 'baca.leaf(0)',
         redundant: bool = None,
         ) -> typing.Optional[MetronomeMarkCommand]:
@@ -2071,6 +2091,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def mmrest_text_color(
         color: str = 'red',
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -2195,6 +2216,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def mmrest_text_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -2296,6 +2318,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def mmrest_text_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -2396,6 +2419,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def mmrest_text_parent_center(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -2497,6 +2521,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def mmrest_text_staff_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""

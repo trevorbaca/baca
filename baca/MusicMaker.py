@@ -1607,8 +1607,8 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.hairpin('p < f', baca.tuplets()[:2]),
-            ...     baca.hairpin('f > p', baca.tuplets()[-1:]),
+            ...     baca.hairpin('p < f', selector=baca.tuplets()[:2]),
+            ...     baca.hairpin('f > p', selector=baca.tuplets()[-1:]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]

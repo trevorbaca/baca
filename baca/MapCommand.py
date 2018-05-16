@@ -21,7 +21,10 @@ class MapCommand(Command):
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(baca.accent(baca.pheads()), baca.tuplet(1)),
+        ...     baca.map(
+        ...         baca.accent(selector=baca.pheads()),
+        ...         baca.tuplet(1),
+        ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],

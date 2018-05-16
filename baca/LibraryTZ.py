@@ -42,6 +42,7 @@ class LibraryTZ(abjad.AbjadObject):
     def tag(
         tags: typing.Union[str, typing.List[str]],
         command: Command,
+        *,
         deactivate: bool = None,
         tag_measure_number: bool = None,
         ) -> Command:
@@ -78,6 +79,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tenuto(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -156,7 +158,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.tenuto(baca.pheads()),
+            ...         baca.tenuto(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -227,6 +229,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_color(
         color: str = 'red',
+        *,
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -429,6 +432,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_down(
         selector: Selector = 'baca.leaves()',
+        *,
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -630,6 +634,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -672,6 +677,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -874,6 +880,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_parent_center(
         selector: Selector = 'baca.leaves()',
+        *,
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -915,6 +922,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_staff_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -1120,6 +1128,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_up(
         selector: Selector = 'baca.leaves()',
+        *,
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -1321,6 +1330,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_x_offset(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -1342,6 +1352,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_script_y_offset(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -1363,6 +1374,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner(
         text: typing.Union[str, abjad.Markup, IndicatorCommand],
+        *,
         leak: bool = None,
         line_segment: abjad.LineSegment = None,
         lilypond_id: int = None,
@@ -1575,6 +1587,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner_left_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -1590,6 +1603,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner_right_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -1605,6 +1619,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner_staff_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -1836,6 +1851,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner_stencil_false(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -1850,6 +1866,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -1865,6 +1882,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner_y_offset(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -1879,6 +1897,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tie(
+        *,
         selector: Selector = 'baca.qrun(0)',
         ) -> SpannerCommand:
         r"""
@@ -2021,6 +2040,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tie_down(
+        *,
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
@@ -2172,6 +2192,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tie_from(
+        *,
         selector: Selector = 'baca.pleaf(-1)',
         ) -> TieCorrectionCommand:
         r"""
@@ -2188,7 +2209,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.make_notes(),
-            ...     baca.tie_from(baca.leaf(1)),
+            ...     baca.tie_from(selector=baca.leaf(1)),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -2271,6 +2292,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tie_to(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:
         r"""
@@ -2287,7 +2309,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.make_notes(),
-            ...     baca.tie_to(baca.leaf(1)),
+            ...     baca.tie_to(selector=baca.leaf(1)),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -2361,6 +2383,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tie_up(
+        *,
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
@@ -2513,6 +2536,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def time_signature_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
@@ -2594,6 +2618,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def time_signature_transparent(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -3136,6 +3161,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tremolo_down(
         n: Number,
+        *,
         selector: Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         """
@@ -3152,6 +3178,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def trill_spanner(
         string: str = None,
+        *,
         harmonic: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,
@@ -3387,7 +3414,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.trill_spanner('Eb4'), baca.qrun(0)),
+            ...     baca.map(baca.trill_spanner(string='Eb4'), baca.qrun(0)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3453,7 +3480,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill_spanner('Eb4'), baca.qruns()),
+            ...     baca.map(baca.trill_spanner(string='Eb4'), baca.qruns()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3544,7 +3571,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill_spanner('M2'), baca.qruns()),
+            ...     baca.map(baca.trill_spanner(string='M2'), baca.qruns()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3651,6 +3678,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def trill_spanner_staff_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.tleaves().with_next_leaf()',
         ) -> OverrideCommand:
         """
@@ -3665,6 +3693,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_down(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -3811,6 +3840,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_bracket_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
@@ -3958,6 +3988,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_bracket_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -3973,6 +4004,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_bracket_shorten_pair(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
@@ -3988,6 +4020,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_bracket_staff_padding(
         n: Number,
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -4130,6 +4163,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_up(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
@@ -4275,6 +4309,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_number_denominator(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
@@ -4290,6 +4325,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_number_extra_offset(
         pair: NumberPair,
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
@@ -4436,6 +4472,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def untie_to(
+        *,
         selector: Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:
         r"""
@@ -4527,6 +4564,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def up_arpeggio(
+        *,
         selector: Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -4612,7 +4650,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.up_arpeggio(baca.cheads()[-2:]),
+            ...     baca.up_arpeggio(selector=baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -4684,6 +4722,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def up_bow(
+        *,
         selector: Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
@@ -4762,7 +4801,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.up_bow(baca.pheads()),
+            ...         baca.up_bow(selector=baca.pheads()),
             ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
@@ -4832,6 +4871,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def very_long_fermata(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -4910,7 +4950,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.very_long_fermata(
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4975,6 +5015,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def voice_four(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -4988,6 +5029,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def voice_one(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -5001,6 +5043,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def voice_three(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -5014,6 +5057,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def voice_two(
+        *,
         selector: Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
@@ -5027,6 +5071,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def volta(
+        *,
         selector: Selector = 'baca.leaves()',
         ) -> VoltaCommand:
         r"""
@@ -5056,7 +5101,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.volta(baca.skips()[1:3]),
+            ...     baca.volta(selector=baca.skips()[1:3]),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')

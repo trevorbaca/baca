@@ -357,7 +357,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <hr/><p class="class-header rubric">Class &amp; static methods</p>
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.glissando">
-<em class="property">static </em><code class="descname">glissando</code><span class="sig-paren">(</span><em>selector='baca.tleaves()'</em>, <em>allow_repeats=None</em>, <em>allow_ties=None</em>, <em>right_broken=None</em>, <em>stems=None</em>, <em>style=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.glissando" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">glissando</code><span class="sig-paren">(</span><em>*</em>, <em>allow_repeats=None</em>, <em>allow_ties=None</em>, <em>right_broken=None</em>, <em>selector='baca.tleaves()'</em>, <em>stems=None</em>, <em>style=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.glissando" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches glissando.</p>
 <div class="example docutils container">
 <p>With segment-maker:</p>
@@ -394,8 +394,8 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">... </span>    <span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">pitches</span><span class="p">(</span><span class="s1">&#39;E4 D5 F4 E5 G4 F5&#39;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">make_even_runs</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">glissando</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">plts</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]),</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">glissando</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">plts</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">glissando</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">plts</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">glissando</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">plts</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]),</span>
 <span class="gp">... </span>    <span class="p">)</span>
 </pre></div>
 </div>
@@ -440,7 +440,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.glissando_thickness">
-<em class="property">static </em><code class="descname">glissando_thickness</code><span class="sig-paren">(</span><em>n</em>, <em>selector='baca.tleaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.glissando_thickness" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">glissando_thickness</code><span class="sig-paren">(</span><em>n</em>, <em>*</em>, <em>selector='baca.tleaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.glissando_thickness" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides glissando thickness.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -454,7 +454,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.global_fermata">
-<em class="property">static </em><code class="descname">global_fermata</code><span class="sig-paren">(</span><em>description=None</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.global_fermata" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">global_fermata</code><span class="sig-paren">(</span><em>description=None</em>, <em>*</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.global_fermata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches global fermata.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -482,7 +482,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.hairpin">
-<em class="property">static </em><code class="descname">hairpin</code><span class="sig-paren">(</span><em>string=None</em>, <em>selector='baca.tleaves()'</em>, <em>left_broken=None</em>, <em>right_broken=None</em>, <em>start_ordinal=None</em>, <em>stop_ordinal=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">hairpin</code><span class="sig-paren">(</span><em>string=None</em>, <em>*</em>, <em>left_broken=None</em>, <em>right_broken=None</em>, <em>selector='baca.tleaves()'</em>, <em>start_ordinal=None</em>, <em>stop_ordinal=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches hairpin.</p>
 <div class="example docutils container">
 <p>Attaches hairpin to trimmed leaves:</p>
@@ -528,7 +528,10 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]],</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">),</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="p">),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rests_around</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">tuplet_bracket_staff_padding</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
@@ -553,7 +556,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.hairpin_shorten_pair">
-<em class="property">static </em><code class="descname">hairpin_shorten_pair</code><span class="sig-paren">(</span><em>pair</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin_shorten_pair" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">hairpin_shorten_pair</code><span class="sig-paren">(</span><em>pair</em>, <em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin_shorten_pair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides hairpin shorten pair.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -567,7 +570,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.hairpin_stencil_false">
-<em class="property">static </em><code class="descname">hairpin_stencil_false</code><span class="sig-paren">(</span><em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin_stencil_false" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">hairpin_stencil_false</code><span class="sig-paren">(</span><em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin_stencil_false" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides hairpin stencil.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -581,7 +584,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.hairpin_transparent">
-<em class="property">static </em><code class="descname">hairpin_transparent</code><span class="sig-paren">(</span><em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin_transparent" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">hairpin_transparent</code><span class="sig-paren">(</span><em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.hairpin_transparent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides hairpin transparency.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -702,7 +705,7 @@ index of rotation <cite>m</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.instrument">
-<em class="property">static </em><code class="descname">instrument</code><span class="sig-paren">(</span><em>instrument</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.instrument" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">instrument</code><span class="sig-paren">(</span><em>instrument</em>, <em>*</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.instrument" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes instrument change command.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -716,7 +719,7 @@ index of rotation <cite>m</cite>.</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.interpolate_staff_positions">
-<em class="property">static </em><code class="descname">interpolate_staff_positions</code><span class="sig-paren">(</span><em>start_pitch</em>, <em>stop_pitch</em>, <em>selector='baca.plts()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.interpolate_staff_positions" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">interpolate_staff_positions</code><span class="sig-paren">(</span><em>start_pitch</em>, <em>stop_pitch</em>, <em>*</em>, <em>selector='baca.plts()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.interpolate_staff_positions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolates from staff position of <code class="docutils literal notranslate"><span class="pre">start_pitch</span></code> to staff
 position of <code class="docutils literal notranslate"><span class="pre">stop_pitch</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -760,7 +763,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.label">
-<em class="property">static </em><code class="descname">label</code><span class="sig-paren">(</span><em>expression</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.label" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">label</code><span class="sig-paren">(</span><em>expression</em>, <em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Labels <code class="docutils literal notranslate"><span class="pre">selector</span></code> output with label <code class="docutils literal notranslate"><span class="pre">expression</span></code>.</p>
 <div class="example docutils container">
 <p>Labels pitch names:</p>
@@ -789,7 +792,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]],</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">label</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">abjad</span><span class="o">.</span><span class="n">label</span><span class="p">()</span><span class="o">.</span><span class="n">with_pitches</span><span class="p">(</span><span class="n">locale</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">tuplet</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">tuplet</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
 <span class="gp">... </span>        <span class="p">),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rests_around</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">tuplet_bracket_staff_padding</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
@@ -815,7 +818,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.laissez_vibrer">
-<em class="property">static </em><code class="descname">laissez_vibrer</code><span class="sig-paren">(</span><em>selector='baca.ptail(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.laissez_vibrer" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">laissez_vibrer</code><span class="sig-paren">(</span><em>*</em>, <em>selector='baca.ptail(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.laissez_vibrer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches laissez vibrer.</p>
 <div class="example docutils container">
 <p>Attaches laissez vibrer to PLT tail 0:</p>
@@ -843,7 +846,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 <span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]],</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">laissez_vibrer</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">ptails</span><span class="p">()),</span>
+<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">laissez_vibrer</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">ptails</span><span class="p">()),</span>
 <span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">tuplet</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
 <span class="gp">... </span>        <span class="p">),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rests_around</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
@@ -870,7 +873,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.lbsd">
-<em class="property">static </em><code class="descname">lbsd</code><span class="sig-paren">(</span><em>y_offset</em>, <em>alignment_distances</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.lbsd" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">lbsd</code><span class="sig-paren">(</span><em>y_offset</em>, <em>alignment_distances</em>, <em>*</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.lbsd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes line-break system details.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -884,7 +887,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.literal">
-<em class="property">static </em><code class="descname">literal</code><span class="sig-paren">(</span><em>string</em>, <em>format_slot='before'</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.literal" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">literal</code><span class="sig-paren">(</span><em>string</em>, <em>*</em>, <em>format_slot='before'</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.literal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches LilyPond literal.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -898,7 +901,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.long_fermata">
-<em class="property">static </em><code class="descname">long_fermata</code><span class="sig-paren">(</span><em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.long_fermata" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">long_fermata</code><span class="sig-paren">(</span><em>*</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.long_fermata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches long fermata.</p>
 <div class="example docutils container">
 <p>Attaches long fermata to first leaf:</p>
@@ -925,7 +928,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 <span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]],</span>
-<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">long_fermata</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">phead</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">long_fermata</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">phead</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rests_around</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">tuplet_bracket_staff_padding</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
@@ -1152,7 +1155,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.marcato">
-<em class="property">static </em><code class="descname">marcato</code><span class="sig-paren">(</span><em>selector='baca.phead(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.marcato" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">marcato</code><span class="sig-paren">(</span><em>*</em>, <em>selector='baca.phead(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.marcato" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches marcato.</p>
 <div class="example docutils container">
 <p>Attaches marcato to pitched head 0:</p>
@@ -1180,7 +1183,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 <span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]],</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">marcato</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">pheads</span><span class="p">()),</span>
+<span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">marcato</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">pheads</span><span class="p">()),</span>
 <span class="gp">... </span>        <span class="n">baca</span><span class="o">.</span><span class="n">tuplet</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
 <span class="gp">... </span>        <span class="p">),</span>
 <span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">rests_around</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
@@ -1207,7 +1210,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.margin_markup">
-<em class="property">static </em><code class="descname">margin_markup</code><span class="sig-paren">(</span><em>argument</em>, <em>alert=None</em>, <em>context='Staff'</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.margin_markup" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">margin_markup</code><span class="sig-paren">(</span><em>argument</em>, <em>*</em>, <em>alert=None</em>, <em>context='Staff'</em>, <em>selector='baca.leaf(0)'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.margin_markup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches margin markup.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
@@ -1243,7 +1246,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.metronome_mark">
-<em class="property">static </em><code class="descname">metronome_mark</code><span class="sig-paren">(</span><em>key</em>, <em>selector='baca.leaf(0)'</em>, <em>redundant=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.metronome_mark" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">metronome_mark</code><span class="sig-paren">(</span><em>key</em>, <em>*</em>, <em>selector='baca.leaf(0)'</em>, <em>redundant=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.metronome_mark" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attaches metronome mark matching <code class="docutils literal notranslate"><span class="pre">key</span></code> metronome mark manifest.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1271,7 +1274,7 @@ position of <code class="docutils literal notranslate"><span class="pre">stop_pi
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.mmrest_text_color">
-<em class="property">static </em><code class="descname">mmrest_text_color</code><span class="sig-paren">(</span><em>color='red'</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_color" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">mmrest_text_color</code><span class="sig-paren">(</span><em>color='red'</em>, <em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_color" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides multimeasure rest text color.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
@@ -1355,7 +1358,7 @@ rests:</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.mmrest_text_extra_offset">
-<em class="property">static </em><code class="descname">mmrest_text_extra_offset</code><span class="sig-paren">(</span><em>pair</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_extra_offset" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">mmrest_text_extra_offset</code><span class="sig-paren">(</span><em>pair</em>, <em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_extra_offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides multimeasure rest text extra offset.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
@@ -1390,7 +1393,7 @@ rests:</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.mmrest_text_padding">
-<em class="property">static </em><code class="descname">mmrest_text_padding</code><span class="sig-paren">(</span><em>n</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_padding" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">mmrest_text_padding</code><span class="sig-paren">(</span><em>n</em>, <em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_padding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides multimeasure rest text padding.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
@@ -1425,7 +1428,7 @@ rests:</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.mmrest_text_parent_center">
-<em class="property">static </em><code class="descname">mmrest_text_parent_center</code><span class="sig-paren">(</span><em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_parent_center" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">mmrest_text_parent_center</code><span class="sig-paren">(</span><em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_parent_center" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides multimeasure rest text parent alignment X to center.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>
@@ -1460,7 +1463,7 @@ rests:</p>
 
 <dl class="staticmethod">
 <dt id="baca.LibraryGM.LibraryGM.mmrest_text_staff_padding">
-<em class="property">static </em><code class="descname">mmrest_text_staff_padding</code><span class="sig-paren">(</span><em>n</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_staff_padding" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">mmrest_text_staff_padding</code><span class="sig-paren">(</span><em>n</em>, <em>*</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryGM.LibraryGM.mmrest_text_staff_padding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides multimeasure rest text staff padding.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">SegmentMaker</span><span class="p">(</span>

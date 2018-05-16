@@ -23,7 +23,7 @@ class AccidentalAdjustmentCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.force_accidental(baca.pleaves()[:2]),
+        ...     baca.force_accidental(selector=baca.pleaves()[:2]),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
         ...     )
