@@ -2488,6 +2488,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             if not abjad.inspect(previous).has_spanner(abjad.TextSpanner):
                 continue
+            spanner = abjad.inspect(previous).get_spanner(abjad.TextSpanner)
+            if not getattr(spanner, 'leak', False):
+                continue
             parentage = abjad.inspect(previous).get_parentage()
             voice = parentage.get_first(abjad.Voice)
             multiplier = abjad.inspect(mmrest).get_indicator(
