@@ -2508,7 +2508,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(before, mmrest)
             after = abjad.LilyPondLiteral('>>', 'after')
             abjad.attach(after, mmrest)
-            abjad.tweak(previous.note_head).color = 'red'
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
