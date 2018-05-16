@@ -1,0 +1,1318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PitchSegment &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../../index.html"/>
+        <link rel="up" title="tools" href="index.html"/>
+        <link rel="next" title="PitchSet" href="PitchSet.html"/>
+        <link rel="prev" title="PitchClassSet" href="PitchClassSet.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">baca</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicMaker.html">MusicMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SegmentMaker.html">SegmentMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Division.html">Division</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayColumn.html">PitchArrayColumn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">PitchSegment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WellformednessManager.html">WellformednessManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="../index.html">baca</a> &raquo;</li>
+        
+          <li><a href="index.html">tools</a> &raquo;</li>
+        
+      <li>PitchSegment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/baca/tools/PitchSegment.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.tools.PitchSegment">
+<span id="pitchsegment"></span><span id="baca-tools-pitchsegment"></span><h1>PitchSegment<a class="headerlink" href="#module-baca.tools.PitchSegment" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../../_images/inheritance-a562a9f6c033e3fa76e0b1ac0be8e616c678b398.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+    graph [bgcolor=transparent,
+        color=lightsteelblue2,
+        fontname=Arial,
+        fontsize=10,
+        outputorder=edgesfirst,
+        overlap=prism,
+        penwidth=2,
+        rankdir=LR,
+        splines=spline,
+        style=&quot;dashed, rounded&quot;,
+        truecolor=true];
+    node [colorscheme=pastel19,
+        fontname=Arial,
+        fontsize=10,
+        height=0,
+        margin=0.05,
+        penwidth=2,
+        shape=box,
+        style=&quot;filled, rounded&quot;,
+        width=0];
+    edge [color=lightslategrey,
+        penwidth=1];
+    subgraph &quot;cluster_abjad.tools.abctools&quot; {
+        graph [label=&quot;abjad.tools.abctools&quot;];
+        node [color=1];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; [label=&quot;Abjad\nObject&quot;];
+    }
+    subgraph &quot;cluster_abjad.tools.datastructuretools&quot; {
+        graph [label=&quot;abjad.tools.datastructuretools&quot;];
+        node [color=2];
+        &quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; [label=&quot;Typed\nCollection&quot;,
+            shape=oval,
+            style=bold];
+        &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot; [label=&quot;Typed\nTuple&quot;];
+        &quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;;
+    }
+    subgraph &quot;cluster_abjad.tools.pitchtools&quot; {
+        graph [label=&quot;abjad.tools.pitchtools&quot;];
+        node [color=3];
+        &quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot; [label=&quot;Pitch\nSegment&quot;];
+        &quot;abjad.tools.pitchtools.Segment.Segment&quot; [label=Segment,
+            shape=oval,
+            style=bold];
+        &quot;abjad.tools.pitchtools.Segment.Segment&quot; -&gt; &quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot;;
+    }
+    subgraph &quot;cluster_baca.tools&quot; {
+        graph [label=&quot;baca.tools&quot;];
+        node [color=4];
+        &quot;baca.tools.PitchSegment.PitchSegment&quot; [URL=&quot;../api/baca/tools/PitchSegment.html#baca.tools.PitchSegment.PitchSegment&quot;,
+            color=black,
+            fontcolor=white,
+            label=&quot;Pitch\nSegment&quot;,
+            target=_top];
+    }
+    subgraph cluster_builtins {
+        graph [label=builtins];
+        node [color=5];
+        &quot;builtins.object&quot; [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+            label=object,
+            target=_top];
+    }
+    subgraph &quot;cluster_collections.abc&quot; {
+        graph [label=&quot;collections.abc&quot;];
+        node [color=6];
+        &quot;collections.abc.Collection&quot; [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Collection&quot;,
+            label=Collection,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;collections.abc.Container&quot; [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Container&quot;,
+            label=Container,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;collections.abc.Iterable&quot; [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Iterable&quot;,
+            label=Iterable,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;collections.abc.Reversible&quot; [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Reversible&quot;,
+            label=Reversible,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;collections.abc.Sequence&quot; [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Sequence&quot;,
+            label=Sequence,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;collections.abc.Sized&quot; [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Sized&quot;,
+            label=Sized,
+            shape=oval,
+            style=bold,
+            target=_top];
+        &quot;collections.abc.Collection&quot; -&gt; &quot;collections.abc.Sequence&quot;;
+        &quot;collections.abc.Container&quot; -&gt; &quot;collections.abc.Collection&quot;;
+        &quot;collections.abc.Iterable&quot; -&gt; &quot;collections.abc.Collection&quot;;
+        &quot;collections.abc.Iterable&quot; -&gt; &quot;collections.abc.Reversible&quot;;
+        &quot;collections.abc.Reversible&quot; -&gt; &quot;collections.abc.Sequence&quot;;
+        &quot;collections.abc.Sized&quot; -&gt; &quot;collections.abc.Collection&quot;;
+    }
+    &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;;
+    &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot; -&gt; &quot;abjad.tools.pitchtools.Segment.Segment&quot;;
+    &quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot; -&gt; &quot;baca.tools.PitchSegment.PitchSegment&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;collections.abc.Container&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;collections.abc.Iterable&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;collections.abc.Sized&quot;;
+    &quot;collections.abc.Sequence&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;;
+}</p></object>
+</div>
+<dl class="class">
+<dt id="baca.tools.PitchSegment.PitchSegment">
+<em class="property">class </em><code class="descclassname">baca.tools.PitchSegment.</code><code class="descname">PitchSegment</code><span class="sig-paren">(</span><em>items=None</em>, <em>item_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pitch segment.</p>
+<div class="example docutils container">
+<p>Initializes segment:</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a></div>
+</div>
+<hr/><p class="class-header rubric">Special methods</p>
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__add__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">__add__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds typed tuple to <cite>argument</cite>.</p>
+<p>Returns new typed tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__contains__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">__contains__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when pitch segment contains <cite>argument</cite>.
+Otherwise false.</p>
+<div class="example docutils container">
+<p>Numbered pitch segment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NamedPitch</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">segment</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">6</span> <span class="ow">in</span> <span class="n">segment</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">NamedPitch</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">segment</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="ow">in</span> <span class="n">segment</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__eq__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedCollection</span></code>).</code><code class="descname">__eq__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when <cite>argument</cite> is a typed collection with items that
+compare equal to those of this typed collection. Otherwise false.</p>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__format__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__format__</code><span class="sig-paren">(</span><em>format_specification=''</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats Abjad object.</p>
+<p>Set <cite>format_specification</cite> to <cite>‘’</cite> or <cite>‘storage’</cite>.
+Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__getitem__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">__getitem__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets item or slice identified by <cite>argument</cite>.</p>
+<p>Returns item or new typed tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__hash__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hashes typed tuple.</p>
+<p>Returns integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__illustrate__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">__illustrate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__illustrate__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Illustrates pitch segment.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="s2">&quot;bf, aqs fs&#39; g&#39; bqf g&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.png" alt=""/>
+</a></div>
+<p>Returns LilyPond file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__iter__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedCollection</span></code>).</code><code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates typed collection.</p>
+<p>Returns generator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__len__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedCollection</span></code>).</code><code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__len__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets length of typed collection.</p>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__mul__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">__mul__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies typed tuple by <cite>argument</cite>.</p>
+<p>Returns new typed tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__radd__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">__radd__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__radd__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Right-adds <cite>argument</cite> to typed tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__repr__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation of segment.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__reversed__">
+<code class="descclassname">(<a class="reference external" href="https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.6)"><code class="descclassname docutils literal notranslate"><span class="pre">Sequence</span></code></a>).</code><code class="descname">__reversed__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__reversed__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__rmul__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">__rmul__</code><span class="sig-paren">(</span><em>argument</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__rmul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies <cite>argument</cite> by typed tuple.</p>
+<p>Returns new typed tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.__str__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets pitch segment string.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;-2, -1.5, 6, 7, -1.5, 7&gt;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="s2">&quot;bf, aqs fs&#39; g&#39; bqf g&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&quot;&lt;bf, aqs fs&#39; g&#39; bqf g&#39;&gt;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Returns string.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Methods</p>
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.bass_to_octave">
+<code class="descname">bass_to_octave</code><span class="sig-paren">(</span><em>n=4</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.bass_to_octave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Octave-transposes segment to bass in octave <cite>n</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">bass_to_octave</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">PitchSegment([10, 10.5, 18, 19, 10.5, 19])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">bass_to_octave</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-3c133d20bc7974c3a92afe7e795a686585aa409d.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-3c133d20bc7974c3a92afe7e795a686585aa409d.png" alt=""/>
+</a></div>
+<p>Returns new segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.center_to_octave">
+<code class="descname">center_to_octave</code><span class="sig-paren">(</span><em>n=4</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.center_to_octave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Octave-transposes segment to center in octave <cite>n</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">center_to_octave</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">PitchSegment([-14, -13.5, -6, -5, -13.5, -5])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">center_to_octave</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-4fc0465712b98716ce713f8d5a9e8338cb7da97d.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-4fc0465712b98716ce713f8d5a9e8338cb7da97d.png" alt=""/>
+</a></div>
+<p>Returns new segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.chord">
+<code class="descname">chord</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.chord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes segment to set.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">chord</span><span class="p">()</span>
+<span class="go">PitchSet([-2, -1.5, 6, 7])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="o">.</span><span class="n">chord</span><span class="p">(),</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-11b6f91b2504bc32bb2707e5f272289d906cd187.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-11b6f91b2504bc32bb2707e5f272289d906cd187.png" alt=""/>
+</a></div>
+<p>Returns pitch set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.count">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">count</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts <cite>item</cite> in collection.</p>
+<p>Coerces <cite>item</cite>.</p>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.has_duplicates">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">has_duplicates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.has_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when segment has duplicates. Otherwise false.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">has_duplicates</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="s2">&quot;c d e f g a b&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">has_duplicates</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<p>Returns true or false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.index">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedTuple</span></code>).</code><code class="descname">index</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets index of <cite>item</cite> in collection.</p>
+<p>Coerces <cite>item</cite>.</p>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.invert">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">invert</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverts pitch segment about <cite>axis</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;2, 1.5, -6, -7, 1.5, -7&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-51743b49f0cfca489359452e74a631517b96667f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-51743b49f0cfca489359452e74a631517b96667f.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.make_notes">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">make_notes</code><span class="sig-paren">(</span><em>n=None</em>, <em>written_duration=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.make_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes first <cite>n</cite> notes in pitch segment.</p>
+<p>Sets <cite>n</cite> equal to <cite>n</cite> or length of segment.</p>
+<p>Sets <cite>written_duration</cite> equal to <cite>written_duration</cite> or <code class="docutils literal notranslate"><span class="pre">1/8</span></code>:</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">make_notes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-352331de202327d52e85443a695330eb2a5efae2.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-352331de202327d52e85443a695330eb2a5efae2.png" alt=""/>
+</a></div>
+<p>Allows nonassignable <cite>written_duration</cite>:</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">make_notes</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-33f8dd61fdcb368647974b7ab8b4895e612db1f4.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-33f8dd61fdcb368647974b7ab8b4895e612db1f4.png" alt=""/>
+</a></div>
+<p>Returns list of notes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.multiply">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">multiply</code><span class="sig-paren">(</span><em>n=1</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies pitch segment by index <cite>n</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;-6, -4.5, 18, 21, -4.5, 21&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-d9fae74c6601f760e8d7b8bad05ee6bf8bd9180e.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-d9fae74c6601f760e8d7b8bad05ee6bf8bd9180e.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.retrograde">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">retrograde</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.retrograde" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrograde of pitch segment.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">retrograde</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;7, -1.5, 7, 6, -1.5, -2&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-b823b197e93a429bdb509b751e6b212ea0743e28.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-b823b197e93a429bdb509b751e6b212ea0743e28.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.rotate">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">rotate</code><span class="sig-paren">(</span><em>n=0</em>, <em>stravinsky=False</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates pitch segment by index <cite>n</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;7, -2, -1.5, 6, 7, -1.5&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-f89420dab74599f5a8bbc8611e0d90cb376a24a1.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-f89420dab74599f5a8bbc8611e0d90cb376a24a1.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.soprano_to_octave">
+<code class="descname">soprano_to_octave</code><span class="sig-paren">(</span><em>n=4</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.soprano_to_octave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Octave-transposes segment to soprano in octave <cite>n</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">soprano_to_octave</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">PitchSegment([-14, -13.5, -6, -5, -13.5, -5])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">soprano_to_octave</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-4fc0465712b98716ce713f8d5a9e8338cb7da97d.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-4fc0465712b98716ce713f8d5a9e8338cb7da97d.png" alt=""/>
+</a></div>
+<p>Returns new segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.space_down">
+<code class="descname">space_down</code><span class="sig-paren">(</span><em>bass=None</em>, <em>semitones=None</em>, <em>soprano=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.space_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spaces pitch segment down.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">space_down</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">PitchSegment([14, 10, 9, 0])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">space_down</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-1bdd53d933ce1f96df0ee599a48f58eaaa31ebd6.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-1bdd53d933ce1f96df0ee599a48f58eaaa31ebd6.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>With 2 in bass:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">space_down</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">PitchSegment([12, 10, 9, 2])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">space_down</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2b6141a4f1fde3ebff058cfdf27f86d952822460.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2b6141a4f1fde3ebff058cfdf27f86d952822460.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.space_up">
+<code class="descname">space_up</code><span class="sig-paren">(</span><em>bass=None</em>, <em>semitones=None</em>, <em>soprano=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.space_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spaces pitch segment up.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">space_up</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">PitchSegment([0, 2, 9, 10])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">space_up</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-7966bfb45a74e9d648c577b0e5a5f7a9d3fca1a5.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-7966bfb45a74e9d648c577b0e5a5f7a9d3fca1a5.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>With 2 in bass:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-57e855f65afc9aae8bf39e336b4ca19ea2be11d3.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">space_up</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">PitchSegment([2, 9, 10, 12])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">space_up</span><span class="p">(</span><span class="n">bass</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-ae60fc089be7190a33d7202af40145bfd2d927d9.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-ae60fc089be7190a33d7202af40145bfd2d927d9.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.split">
+<code class="descname">split</code><span class="sig-paren">(</span><em>pitch=0</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits segment at <cite>pitch</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pitch_segment</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pitch</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">upper</span>
+<span class="go">PitchSegment([6, 7, 7])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">upper</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-1a300ed9ea987cdcf8c03a6f3d5962eba4f5f334.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-1a300ed9ea987cdcf8c03a6f3d5962eba4f5f334.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lower</span>
+<span class="go">PitchSegment([-2, -1.5, -1.5])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-7b032f7970267e9f62d6e21854e1de8e61b4ca35.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-7b032f7970267e9f62d6e21854e1de8e61b4ca35.png" alt=""/>
+</a></div>
+<p>Returns upper, lower segments.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.to_pitch_classes">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">to_pitch_classes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.to_pitch_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes to pitch-classes.</p>
+<div class="example docutils container">
+<p>To numbered pitch-class segment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">to_pitch_classes</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;PC&lt;10, 10.5, 6, 7, 10.5, 7&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-ddd2135ff97b0cdc9cb355d7d0cf65823a0d067a.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-ddd2135ff97b0cdc9cb355d7d0cf65823a0d067a.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>To named pitch-class segment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="s2">&quot;bf, aqs fs&#39; g&#39; bqf g&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">to_pitch_classes</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;PC&lt;bf aqs fs g bqf g&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-cefc253818ea5d9954efe1a8ae7a91d263c7bd09.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-cefc253818ea5d9954efe1a8ae7a91d263c7bd09.png" alt=""/>
+</a></div>
+<p>Returns new segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.to_pitches">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">to_pitches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.to_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes to pitches.</p>
+<div class="example docutils container">
+<p>To numbered pitch segment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">to_pitches</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;-2, -1.5, 6, 7, -1.5, 7&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>To named pitch segment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="s2">&quot;bf, aqs fs&#39; g&#39; bqf g&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">to_pitches</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&quot;&lt;bf, aqs fs&#39; g&#39; bqf g&#39;&gt;&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-09c0228039375fc1c26b536aa28e07023b36b210.png" alt=""/>
+</a></div>
+<p>Returns new segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.PitchSegment.PitchSegment.transpose">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>n=0</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transposes pitch segment by index <cite>n</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&#39;&lt;9, 9.5, 17, 18, 9.5, 18&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-c374a741ff54a3656b6bd5cee74389ccb34525ba.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-c374a741ff54a3656b6bd5cee74389ccb34525ba.png" alt=""/>
+</a></div>
+<p>Returns new pitch segment.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Class &amp; static methods</p>
+<dl class="classmethod">
+<dt id="baca.tools.PitchSegment.PitchSegment.from_selection">
+<em class="property">classmethod </em><code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">from_selection</code><span class="sig-paren">(</span><em>selection</em>, <em>item_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.from_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes pitch segment from <cite>selection</cite>.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff_1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 &lt;d&#39; fs&#39; a&#39;&gt;4 b2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c4. r8 g2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">((</span><span class="n">staff_1</span><span class="p">,</span> <span class="n">staff_2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="o">.</span><span class="n">from_selection</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+<span class="go">&quot;&lt;c&#39; d&#39; fs&#39; a&#39; b c g&gt;&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-d6493acee409d5a3133811c1a54a8957fb4da75a.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-d6493acee409d5a3133811c1a54a8957fb4da75a.png" alt=""/>
+</a></div>
+<p>Returns pitch segment.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Read-only properties</p>
+<dl class="attribute">
+<dt id="baca.tools.PitchSegment.PitchSegment.hertz">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">hertz</code><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.hertz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets Hertz of pitches in segment.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="s1">&#39;c e g b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">hertz</span>
+<span class="go">[130.8127826502993, 164.81377845643496, 195.99771799087463, 246.94165062806206]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.PitchSegment.PitchSegment.inflection_point_count">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">inflection_point_count</code><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.inflection_point_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets segment inflection point count.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">inflection_point_count</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</div>
+<p>Returns nonnegative integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.PitchSegment.PitchSegment.item_class">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedCollection</span></code>).</code><code class="descname">item_class</code><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.item_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets item class of collection.</p>
+<p>Collection coerces items according to <cite>item_class</cite>.</p>
+<p>Returns class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.PitchSegment.PitchSegment.items">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">TypedCollection</span></code>).</code><code class="descname">items</code><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets items in collection.</p>
+<p>Returns list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.PitchSegment.PitchSegment.local_maxima">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">local_maxima</code><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.local_maxima" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets segment local maxima.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">local_maxima</span>
+<span class="go">[NumberedPitch(7)]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.PitchSegment.PitchSegment.local_minima">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">PitchSegment</span></code>).</code><code class="descname">local_minima</code><a class="headerlink" href="#baca.tools.PitchSegment.PitchSegment.local_minima" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets segment local minima.</p>
+<div class="example docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2e168a8dd2d3e4a7056bc925b414fa2cae24e36f.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segment</span><span class="o">.</span><span class="n">local_minima</span>
+<span class="go">[NumberedPitch(-1.5)]</span>
+</pre></div>
+</div>
+</div>
+<p>Returns list.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PitchSet.html" class="btn btn-neutral float-right" title="PitchSet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PitchClassSet.html" class="btn btn-neutral" title="PitchClassSet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

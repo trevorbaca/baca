@@ -1,0 +1,111 @@
+\version "2.19.0"
+\language "english"
+
+#(ly:set-option 'relative-includes #t)
+
+\include "default.ily"
+
+#(set-global-staff-size 16)
+
+\layout {
+    \accidentalStyle dodecaphonic
+    indent = #0
+    line-width = #287.5
+    ragged-right = ##t
+}
+
+\paper {
+    markup-system-spacing.padding = 8
+    system-system-spacing.padding = 10
+    top-markup-spacing.padding = 4
+}
+
+\score {
+    \new Score
+    \with
+    {
+        \override BarLine.transparent = ##t
+        \override BarNumber.stencil = ##f
+        \override Beam.stencil = ##f
+        \override Flag.stencil = ##f
+        \override HorizontalBracket.staff-padding = #4
+        \override SpacingSpanner.strict-grace-spacing = ##t
+        \override SpacingSpanner.strict-note-spacing = ##t
+        \override SpacingSpanner.uniform-stretching = ##t
+        \override Stem.stencil = ##f
+        \override TextScript.X-extent = ##f
+        \override TextScript.staff-padding = #2
+        \override TimeSignature.stencil = ##f
+        proportionalNotationDuration = #(ly:make-moment 1 16)
+    }
+    <<
+        \new Staff
+        {
+            \new Voice
+            \with
+            {
+                \consists Horizontal_bracket_engraver
+            }
+            {
+                \once \override Accidental.color = #red
+                \once \override Beam.color = #red
+                \once \override Dots.color = #red
+                \once \override NoteHead.color = #red
+                \once \override Stem.color = #red
+                \time 1/8
+                e'8
+                \startGroup
+                ^ \markup { 0 }
+                fs'8
+                bf'8
+                \stopGroup
+                s8
+                a'8
+                \startGroup
+                ^ \markup { 1 }
+                g'8
+                af'8
+                b'8
+                a'8
+                \once \override Accidental.color = #red
+                \once \override Beam.color = #red
+                \once \override Dots.color = #red
+                \once \override NoteHead.color = #red
+                \once \override Stem.color = #red
+                cs'8
+                \stopGroup
+                s8
+                \once \override Accidental.color = #red
+                \once \override Beam.color = #red
+                \once \override Dots.color = #red
+                \once \override NoteHead.color = #red
+                \once \override Stem.color = #red
+                cs'8
+                \startGroup
+                ^ \markup { 2 }
+                \once \override Accidental.color = #blue
+                \once \override Beam.color = #blue
+                \once \override Dots.color = #blue
+                \once \override NoteHead.color = #blue
+                \once \override Stem.color = #blue
+                d'8
+                \once \override Accidental.color = #blue
+                \once \override Beam.color = #blue
+                \once \override Dots.color = #blue
+                \once \override NoteHead.color = #blue
+                \once \override Stem.color = #blue
+                d'8
+                \once \override Accidental.color = #red
+                \once \override Beam.color = #red
+                \once \override Dots.color = #red
+                \once \override NoteHead.color = #red
+                \once \override Stem.color = #red
+                e'8
+                \stopGroup
+                s8
+                \bar "|."                                                                %! SCORE1
+                \override Score.BarLine.transparent = ##f
+            }
+        }
+    >>
+}

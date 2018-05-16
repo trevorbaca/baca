@@ -1,0 +1,1292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MusicMaker &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../../index.html"/>
+        <link rel="up" title="tools" href="index.html"/>
+        <link rel="next" title="PersistentIndicatorTests" href="PersistentIndicatorTests.html"/>
+        <link rel="prev" title="MusicContribution" href="MusicContribution.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">baca</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MusicMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SegmentMaker.html">SegmentMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Division.html">Division</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayColumn.html">PitchArrayColumn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSegment.html">PitchSegment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WellformednessManager.html">WellformednessManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="../index.html">baca</a> &raquo;</li>
+        
+          <li><a href="index.html">tools</a> &raquo;</li>
+        
+      <li>MusicMaker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/baca/tools/MusicMaker.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.tools.MusicMaker">
+<span id="musicmaker"></span><span id="baca-tools-musicmaker"></span><h1>MusicMaker<a class="headerlink" href="#module-baca.tools.MusicMaker" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../../_images/inheritance-d0be709a1b0cb70d01081bd495570d9aa72eff37.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+    graph [bgcolor=transparent,
+        color=lightsteelblue2,
+        fontname=Arial,
+        fontsize=10,
+        outputorder=edgesfirst,
+        overlap=prism,
+        penwidth=2,
+        rankdir=LR,
+        splines=spline,
+        style=&quot;dashed, rounded&quot;,
+        truecolor=true];
+    node [colorscheme=pastel19,
+        fontname=Arial,
+        fontsize=10,
+        height=0,
+        margin=0.05,
+        penwidth=2,
+        shape=box,
+        style=&quot;filled, rounded&quot;,
+        width=0];
+    edge [color=lightslategrey,
+        penwidth=1];
+    subgraph &quot;cluster_abjad.tools.abctools&quot; {
+        graph [label=&quot;abjad.tools.abctools&quot;];
+        node [color=1];
+        &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; [label=&quot;Abjad\nObject&quot;];
+    }
+    subgraph &quot;cluster_baca.tools&quot; {
+        graph [label=&quot;baca.tools&quot;];
+        node [color=2];
+        &quot;baca.tools.MusicMaker.MusicMaker&quot; [URL=&quot;../api/baca/tools/MusicMaker.html#baca.tools.MusicMaker.MusicMaker&quot;,
+            color=black,
+            fontcolor=white,
+            label=&quot;Music\nMaker&quot;,
+            target=_top];
+    }
+    subgraph cluster_builtins {
+        graph [label=builtins];
+        node [color=3];
+        &quot;builtins.object&quot; [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+            label=object,
+            target=_top];
+    }
+    &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.MusicMaker.MusicMaker&quot;;
+    &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+}</p></object>
+</div>
+<dl class="class">
+<dt id="baca.tools.MusicMaker.MusicMaker">
+<em class="property">class </em><code class="descclassname">baca.tools.MusicMaker.</code><code class="descname">MusicMaker</code><span class="sig-paren">(</span><em>*specifiers</em>, <em>allow_repeats=None</em>, <em>color_unregistered_pitches=None</em>, <em>denominator=None</em>, <em>thread=None</em>, <em>voice_names=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Music-maker.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="n">rhythmmakertools</span> <span class="k">as</span> <span class="n">rhythmos</span>
+</pre></div>
+</div>
+<div class="example docutils container">
+<p>Default music-maker:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-174c8bb0bc0d5099f5493e66d3a3f42ab73f55f7.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-174c8bb0bc0d5099f5493e66d3a3f42ab73f55f7.png" alt=""/>
+</a></div>
+<hr/><p class="class-header rubric">Special methods</p>
+<dl class="method">
+<dt id="baca.tools.MusicMaker.MusicMaker.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>voice_name</em>, <em>collections</em>, <em>*specifiers</em>, <em>allow_repeats=None</em>, <em>color_unregistered_pitches=None</em>, <em>counts=None</em>, <em>division_masks=None</em>, <em>exhaustive=None</em>, <em>extend_beam=None</em>, <em>figure_index=None</em>, <em>figure_name=None</em>, <em>hide_time_signature=None</em>, <em>imbrication_map=None</em>, <em>is_foreshadow=None</em>, <em>is_incomplete=None</em>, <em>is_recollection=None</em>, <em>logical_tie_masks=None</em>, <em>denominator=None</em>, <em>state_manifest=None</em>, <em>talea_denominator=None</em>, <em>thread=None</em>, <em>time_treatments=None</em>, <em>tuplet_denominator=None</em>, <em>tuplet_force_fraction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls music-maker on <cite>collections</cite> with keywords.</p>
+<div class="example docutils container">
+<p>Default music-maker:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-174c8bb0bc0d5099f5493e66d3a3f42ab73f55f7.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-174c8bb0bc0d5099f5493e66d3a3f42ab73f55f7.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Calltime counts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-e3f1827b18982902731a329fe294266a6461f4c1.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-e3f1827b18982902731a329fe294266a6461f4c1.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Calltime denominator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">talea_denominator</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-8e2012a3b36a5f2ce299e1d676e1595da1fd82b6.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-8e2012a3b36a5f2ce299e1d676e1595da1fd82b6.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Calltime time treatments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">time_treatments</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2def5af36c8ed77eb485f8bd3f78ba9de666e8b6.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2def5af36c8ed77eb485f8bd3f78ba9de666e8b6.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Rest input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))],</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">nest</span><span class="p">(</span><span class="s1">&#39;+1/8&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2895dd377cb7fa4ac5e17fb91d97ee9cb067f333.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2895dd377cb7fa4ac5e17fb91d97ee9cb067f333.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>The following negative-valued talea count patterns work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-aeeb558d18446f4304ebc9297d000c32c7fd55df.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-aeeb558d18446f4304ebc9297d000c32c7fd55df.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-1a3e8f1dafca14520abb0f49b97675836f598ad3.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-1a3e8f1dafca14520abb0f49b97675836f598ad3.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-d12efccb6f7842bdaa35b56ba9cc3aa1b6f0fd8b.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-d12efccb6f7842bdaa35b56ba9cc3aa1b6f0fd8b.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-78f67b5460e8d72101089cb589e697083a14246d.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-78f67b5460e8d72101089cb589e697083a14246d.png" alt=""/>
+</a><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-0135fc8a2be394368d2fc417af075ee470b5df35.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-0135fc8a2be394368d2fc417af075ee470b5df35.png" alt=""/>
+</a></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Write hide_time_signature calltime examples.</p>
+</div>
+<div class="example docutils container">
+<p>Works with chords:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-ee22f78a1000cd3d8c9f39afa8cc2e8459a2003b.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-ee22f78a1000cd3d8c9f39afa8cc2e8459a2003b.png" alt=""/>
+</a></div>
+<p>Returns selection, time signature, state manifest.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.MusicMaker.MusicMaker.__format__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__format__</code><span class="sig-paren">(</span><em>format_specification=''</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats Abjad object.</p>
+<p>Set <cite>format_specification</cite> to <cite>‘’</cite> or <cite>‘storage’</cite>.
+Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baca.tools.MusicMaker.MusicMaker.__repr__">
+<code class="descclassname">(<code class="descclassname docutils literal notranslate"><span class="pre">AbjadObject</span></code>).</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation of Abjad object.</p>
+<p>Returns string.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Class &amp; static methods</p>
+<dl class="staticmethod">
+<dt id="baca.tools.MusicMaker.MusicMaker.show">
+<em class="property">static </em><code class="descname">show</code><span class="sig-paren">(</span><em>music_contribution</em>, <em>time_signatures=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes rhythm-maker-style LilyPond file for documentation examples.</p>
+<p>Returns LilyPond file.</p>
+</dd></dl>
+
+<hr/><p class="class-header rubric">Read-only properties</p>
+<dl class="attribute">
+<dt id="baca.tools.MusicMaker.MusicMaker.allow_repeats">
+<code class="descname">allow_repeats</code><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.allow_repeats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when music-maker allows repeat pitches.</p>
+<p>Defaults to none.</p>
+<p>Set to true, false or none.</p>
+<p>Returns true, false or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.MusicMaker.MusicMaker.color_unregistered_pitches">
+<code class="descname">color_unregistered_pitches</code><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.color_unregistered_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when music-maker colors unregistered pitches.</p>
+<p>Defaults to none.</p>
+<p>Set to true, false or none.</p>
+<p>Returns true, false or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.MusicMaker.MusicMaker.denominator">
+<code class="descname">denominator</code><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.denominator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets denominator.</p>
+<div class="example docutils container">
+<p>No denominator by default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-bcc2ee1931f80ae6496bfb8111ac1c513132ee81.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-bcc2ee1931f80ae6496bfb8111ac1c513132ee81.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Denominator supplied at configuration time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">contribution</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-88ee82b54fbe8c02b5cf41f3bfdda2acc4733e29.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-88ee82b54fbe8c02b5cf41f3bfdda2acc4733e29.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Denominator supplied at call time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">denominator</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">contribution</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2d213c7af630bb9faaffe4df497ed6485f779eca.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2d213c7af630bb9faaffe4df497ed6485f779eca.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Denominator supplied at call time overrides denominator supplied at
+configuration time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">denominator</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">contribution</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">time_signatures</span><span class="o">=</span><span class="p">[</span><span class="n">contribution</span><span class="o">.</span><span class="n">time_signature</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2d213c7af630bb9faaffe4df497ed6485f779eca.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2d213c7af630bb9faaffe4df497ed6485f779eca.png" alt=""/>
+</a></div>
+<p>Defaults to none.</p>
+<p>Set to positive integer or none.</p>
+<p>Returns positive integer or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.MusicMaker.MusicMaker.specifiers">
+<code class="descname">specifiers</code><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.specifiers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets specifiers.</p>
+<div class="example docutils container">
+<p>Register specifier transposes to octave rooted on F#3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-190e4bd1746c21e7493749eb5e66bfb33a19a1c4.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-190e4bd1746c21e7493749eb5e66bfb33a19a1c4.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Ocatve-transposes to a target interpolated from C4 up to C5:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2c9cfe0345b98d1a3b4d8752e65a18818de8a155.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2c9cfe0345b98d1a3b4d8752e65a18818de8a155.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Hairpin specifier selects all leaves:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">dynamic_line_spanner</span><span class="o">.</span><span class="n">staff_padding</span> <span class="o">=</span> <span class="mf">4.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2eb5a56a78b65bd9736a6a2b291affabb9ffd554.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2eb5a56a78b65bd9736a6a2b291affabb9ffd554.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Maps hairpin to each run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">),</span> <span class="n">baca</span><span class="o">.</span><span class="n">runs</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">RestAffixSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">pattern</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">inverted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">dynamic_line_spanner</span><span class="o">.</span><span class="n">staff_padding</span> <span class="o">=</span> <span class="mf">4.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-58392c8afaf4b9908e2681a39e1c9cfa5f6ff6f7.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-58392c8afaf4b9908e2681a39e1c9cfa5f6ff6f7.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Hairpin specifiers select notes of first and last tuplet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">),</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplet</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;f &gt; p&#39;</span><span class="p">),</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplet</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">dynamic_line_spanner</span><span class="o">.</span><span class="n">staff_padding</span> <span class="o">=</span> <span class="mf">4.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-c427aa337cc5ae4bdd14feafc091bf8aec8ec9d7.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-c427aa337cc5ae4bdd14feafc091bf8aec8ec9d7.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Hairpin specifiers treat first two tuplets and then the rest:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;p &lt; f&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">hairpin</span><span class="p">(</span><span class="s1">&#39;f &gt; p&#39;</span><span class="p">,</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">dynamic_line_spanner</span><span class="o">.</span><span class="n">staff_padding</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-3bb4d7c274639f8523cc9106154e401c4b9b6cb7.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-3bb4d7c274639f8523cc9106154e401c4b9b6cb7.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Spanner specifier selects all leaves by default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">SpannerCommand</span><span class="p">(</span><span class="n">spanner</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Slur</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Down</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-2c2f1d5cad9e558f7785af203204654c12394878.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-2c2f1d5cad9e558f7785af203204654c12394878.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Slur specifier selects leaves in each tuplet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">slur</span><span class="p">(),</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Down</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-0105db50ec8bcd0439c55cecd27edfd5079489e5.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-0105db50ec8bcd0439c55cecd27edfd5079489e5.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Slur specifier selects first two pitched leaves in each tuplet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">getter</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pleaves</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">getter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">slur</span><span class="p">(),</span> <span class="n">selector</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Down</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-152f5e485433d9ec7ec41ae651ab9c0327f0b400.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-152f5e485433d9ec7ec41ae651ab9c0327f0b400.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Slur specifier selects last two pitched leaves in each tuplet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">getter</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">pleaves</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">getter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">baca</span><span class="o">.</span><span class="n">slur</span><span class="p">(),</span> <span class="n">selector</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Down</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-bea16300b541a478936a3c942ac02cdad6cb9a95.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-bea16300b541a478936a3c942ac02cdad6cb9a95.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Beam specifier beams divisions together:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">rhythmos</span><span class="o">.</span><span class="n">BeamSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">beam_divisions_together</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">beam</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-5c6a8f18ca4d8040d501a54b4c7411ab76b9af90.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-5c6a8f18ca4d8040d501a54b4c7411ab76b9af90.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Beam specifier beams nothing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">rhythmos</span><span class="o">.</span><span class="n">BeamSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">beam_each_division</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-f28abf654ff6606c20ac86d30a5e8aa74f5edb65.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-f28abf654ff6606c20ac86d30a5e8aa74f5edb65.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Nesting specifier augments one sixteenth:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">NestingCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">time_treatments</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;+1/16&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">rhythmos</span><span class="o">.</span><span class="n">BeamSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">beam_divisions_together</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">beam</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-41f5beee8bed8dd0783ee66024ecae7d01ae325b.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-41f5beee8bed8dd0783ee66024ecae7d01ae325b.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Nesting specifier augments first two collections one sixteenth:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">NestingCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">lmr_specifier</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">LMRSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">left_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="n">time_treatments</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;+1/16&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">rhythmos</span><span class="o">.</span><span class="n">BeamSpecifier</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">beam_divisions_together</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">lilypond_file</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">override</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">beam</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-ac85b2edcbd211ba802a812cac3490e2655db44b.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-ac85b2edcbd211ba802a812cac3490e2655db44b.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Sixteenths followed by eighths:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">pattern</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">index_first</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-5b8fe1849c8114a955993e727852726c18c4186e.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-5b8fe1849c8114a955993e727852726c18c4186e.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Sixteenths surrounding dotted eighths:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">pattern</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-3ee78ecbcc8cc49ee59d4ec7e61ee33156a26beb.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-3ee78ecbcc8cc49ee59d4ec7e61ee33156a26beb.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Sixteenths surrounding argumented dotted eighths:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="n">time_treatments</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">pattern</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-18a9a11d3bb1e2513921110774654ee6d80063a5.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-18a9a11d3bb1e2513921110774654ee6d80063a5.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Augmented sixteenths surrounding dotted eighths:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">pattern</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="n">time_treatments</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-e16bd766c0c5608b18e51486f88b786a7f7aee5a.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-e16bd766c0c5608b18e51486f88b786a7f7aee5a.png" alt=""/>
+</a></div>
+<div class="example docutils container">
+<p>Diminished sixteenths surrounding dotted eighths:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmCommand</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">pattern</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">rhythm_maker</span><span class="o">=</span><span class="n">baca</span><span class="o">.</span><span class="n">PitchFirstRhythmMaker</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">talea</span><span class="o">=</span><span class="n">rhythmos</span><span class="o">.</span><span class="n">Talea</span><span class="p">(</span>
+<span class="gp">... </span>                <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">denominator</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">),</span>
+<span class="gp">... </span>            <span class="n">time_treatments</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">),</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span><span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span> <span class="n">collections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-59d777164227d4f21a86511f133fe2b796d5c028.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-59d777164227d4f21a86511f133fe2b796d5c028.png" alt=""/>
+</a></div>
+<p>Defaults to none.</p>
+<p>Set to specifiers or none.</p>
+<p>Returns specifiers or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.MusicMaker.MusicMaker.thread">
+<code class="descname">thread</code><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when music-maker threads rhythm-maker over collections.</p>
+<div class="example docutils container">
+<p>Does not thread rhythm-maker over collections:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-bbd04ae368da2d70d3ab52d6825ba084a7a1b61e.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-bbd04ae368da2d70d3ab52d6825ba084a7a1b61e.png" alt=""/>
+</a><p>Does thread rhythm-maker over collections:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contribution</span> <span class="o">=</span> <span class="n">music_maker</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Voice 1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">collections</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">thread</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">music_maker</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">contribution</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">lilypond_file</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a href="../../../_images/abjadbook/lilypond-5fa87ac9107e67d11a4bfec3aea31caceebf3f95.ly" title="" class="abjadbook">
+    <img src="../../../_images/abjadbook/lilypond-5fa87ac9107e67d11a4bfec3aea31caceebf3f95.png" alt=""/>
+</a></div>
+<p>Set to true, false or none.</p>
+<p>Defaults to none.</p>
+<p>Returns true, false or none.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.tools.MusicMaker.MusicMaker.voice_names">
+<code class="descname">voice_names</code><a class="headerlink" href="#baca.tools.MusicMaker.MusicMaker.voice_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets voice names.</p>
+<p>Used to check call-time voice names.</p>
+<p>Defaults to none.</p>
+<p>Set to list of strings or none.</p>
+<p>Returns list or strings or none.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PersistentIndicatorTests.html" class="btn btn-neutral float-right" title="PersistentIndicatorTests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MusicContribution.html" class="btn btn-neutral" title="MusicContribution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

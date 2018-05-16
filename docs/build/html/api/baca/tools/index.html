@@ -1,0 +1,1742 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tools &mdash; Bača API  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/uqbar.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/abjad.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Bača API  documentation" href="../../../index.html"/>
+        <link rel="up" title="baca" href="../index.html"/>
+        <link rel="next" title="LibraryAF" href="LibraryAF.html"/>
+        <link rel="prev" title="baca" href="../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Bača API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Bača API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">baca</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="LibraryAF.html">LibraryAF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryGM.html">LibraryGM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryNS.html">LibraryNS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LibraryTZ.html">LibraryTZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkupLibrary.html">MarkupLibrary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SchemeManifest.html">SchemeManifest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicAccumulator.html">MusicAccumulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicContribution.html">MusicContribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MusicMaker.html">MusicMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PersistentIndicatorTests.html">PersistentIndicatorTests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchFirstRhythmMaker.html">PitchFirstRhythmMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SegmentMaker.html">SegmentMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AcciaccaturaSpecifier.html">AcciaccaturaSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AnchorSpecifier.html">AnchorSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ArpeggiationSpacingSpecifier.html">ArpeggiationSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChordalSpacingSpecifier.html">ChordalSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HorizontalSpacingSpecifier.html">HorizontalSpacingSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LMRSpecifier.html">LMRSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSpecifier.html">PitchSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RestAffixSpecifier.html">RestAffixSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AccidentalAdjustmentCommand.html">AccidentalAdjustmentCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BowContactPointCommand.html">BowContactPointCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ClusterCommand.html">ClusterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorCommand.html">ColorCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorFingeringCommand.html">ColorFingeringCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Command.html">Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CommandWrapper.html">CommandWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContainerCommand.html">ContainerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DiatonicClusterCommand.html">DiatonicClusterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GlobalFermataCommand.html">GlobalFermataCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HairpinCommand.html">HairpinCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImbricationCommand.html">ImbricationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IndicatorCommand.html">IndicatorCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InstrumentChangeCommand.html">InstrumentChangeCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LabelCommand.html">LabelCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MapCommand.html">MapCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetronomeMarkCommand.html">MetronomeMarkCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MicrotoneDeviationCommand.html">MicrotoneDeviationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NestingCommand.html">NestingCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OctaveDisplacementCommand.html">OctaveDisplacementCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OverrideCommand.html">OverrideCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartAssignmentCommand.html">PartAssignmentCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PiecewiseCommand.html">PiecewiseCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchCommand.html">PitchCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchFirstRhythmCommand.html">PitchFirstRhythmCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterCommand.html">RegisterCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterInterpolationCommand.html">RegisterInterpolationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegisterToOctaveCommand.html">RegisterToOctaveCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RhythmCommand.html">RhythmCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SettingCommand.html">SettingCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpannerCommand.html">SpannerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffPositionCommand.html">StaffPositionCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffPositionInterpolationCommand.html">StaffPositionInterpolationCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SuiteCommand.html">SuiteCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextSpannerCommand.html">TextSpannerCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TieCorrectionCommand.html">TieCorrectionCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VoltaCommand.html">VoltaCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BreakMeasureMap.html">BreakMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Coat.html">Coat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CollectionList.html">CollectionList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Constellation.html">Constellation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ConstellationCircuit.html">ConstellationCircuit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Counter.html">Counter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cursor.html">Cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DesignMaker.html">DesignMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Division.html">Division</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Expression.html">Expression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExpressionGallery.html">ExpressionGallery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarmonicSeries.html">HarmonicSeries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Interpolator.html">Interpolator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LBSD.html">LBSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Loop.html">Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Matrix.html">Matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetronomeMarkMeasureMap.html">MetronomeMarkMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PageSpecifier.html">PageSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Partial.html">Partial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArray.html">PitchArray</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayCell.html">PitchArrayCell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayColumn.html">PitchArrayColumn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayList.html">PitchArrayList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchArrayRow.html">PitchArrayRow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchClassSegment.html">PitchClassSegment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchClassSet.html">PitchClassSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSegment.html">PitchSegment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchSet.html">PitchSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchTree.html">PitchTree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PitchTreeSpanner.html">PitchTreeSpanner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Registration.html">Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RegistrationComponent.html">RegistrationComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Scope.html">Scope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ScoreTemplate.html">ScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Sequence.html">Sequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SingleStaffScoreTemplate.html">SingleStaffScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpacingIndication.html">SpacingIndication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SpacingSection.html">SpacingSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StaffLines.html">StaffLines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StageMeasureMap.html">StageMeasureMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="StringTrioScoreTemplate.html">StringTrioScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SystemSpecifier.html">SystemSpecifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimeSignatureGroups.html">TimeSignatureGroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimeSignatureMaker.html">TimeSignatureMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimelineScope.html">TimelineScope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tree.html">Tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html">TwoVoiceStaffScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ViolinSoloScoreTemplate.html">ViolinSoloScoreTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WellformednessManager.html">WellformednessManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ZaggedPitchClassMaker.html">ZaggedPitchClassMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionMaker.html">DivisionMaker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionSequence.html">DivisionSequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DivisionSequenceExpression.html">DivisionSequenceExpression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlattenDivisionCallback.html">FlattenDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FuseByCountsDivisionCallback.html">FuseByCountsDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartitionDivisionCallback.html">PartitionDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SplitByDurationsDivisionCallback.html">SplitByDurationsDivisionCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html">SplitByRoundedRatiosDivisionCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bača API</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Bača API</a> &raquo;</li>
+        
+          <li><a href="../index.html">baca</a> &raquo;</li>
+        
+      <li>tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/baca/tools/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-baca.tools">
+<span id="tools"></span><span id="baca-tools"></span><h1>tools<a class="headerlink" href="#module-baca.tools" title="Permalink to this headline">¶</a></h1>
+<div class="svg-container docutils container">
+<object data="../../../_images/inheritance-df0b452786c7478b9e08dabc949e9aa8473d456a.svg" type="image/svg+xml">
+            <p class="warning">digraph InheritanceGraph {
+	graph [bgcolor=transparent,
+		color=lightsteelblue2,
+		fontname=Arial,
+		fontsize=10,
+		outputorder=edgesfirst,
+		overlap=prism,
+		penwidth=2,
+		rankdir=LR,
+		splines=spline,
+		style=&quot;dashed, rounded&quot;,
+		truecolor=true
+	];
+	node [colorscheme=pastel19,
+		fontname=Arial,
+		fontsize=10,
+		height=0,
+		margin=0.05,
+		penwidth=2,
+		shape=box,
+		style=&quot;filled, rounded&quot;,
+		width=0
+	];
+	edge [color=lightslategrey,
+		penwidth=1
+	];
+	subgraph &quot;cluster_abjad.tools.abctools&quot; {
+		graph [label=&quot;abjad.tools.abctools&quot;];
+		node [color=1];
+		&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;		 [color=1,
+			label=&quot;Abjad\nObject&quot;];
+		&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot;		 [color=1,
+			label=&quot;Abjad\nValue\nObject&quot;];
+		&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot;;
+	}
+	subgraph &quot;cluster_abjad.tools.datastructuretools&quot; {
+		graph [label=&quot;abjad.tools.datastructuretools&quot;];
+		node [color=2];
+		&quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;		 [color=2,
+			label=&quot;Cyclic\nTuple&quot;];
+		&quot;abjad.tools.datastructuretools.Expression.Expression&quot;		 [color=2,
+			label=Expression];
+		&quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;		 [color=2,
+			label=Sequence];
+		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;		 [color=2,
+			label=&quot;Typed\nCollection&quot;,
+			shape=oval,
+			style=bold];
+		&quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot;		 [color=2,
+			label=&quot;Typed\nFrozenset&quot;];
+		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot;;
+		&quot;abjad.tools.datastructuretools.TypedList.TypedList&quot;		 [color=2,
+			label=&quot;Typed\nList&quot;];
+		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedList.TypedList&quot;;
+		&quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;		 [color=2,
+			label=&quot;Typed\nTuple&quot;];
+		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;;
+	}
+	subgraph &quot;cluster_abjad.tools.mathtools&quot; {
+		graph [label=&quot;abjad.tools.mathtools&quot;];
+		node [color=3];
+		&quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;		 [color=3,
+			label=&quot;Nonreduced\nFraction&quot;];
+	}
+	subgraph &quot;cluster_abjad.tools.pitchtools&quot; {
+		graph [label=&quot;abjad.tools.pitchtools&quot;];
+		node [color=4];
+		&quot;abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment&quot;		 [color=4,
+			label=&quot;Pitch\nClass\nSegment&quot;];
+		&quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot;		 [color=4,
+			label=&quot;Pitch\nClass\nSet&quot;];
+		&quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot;		 [color=4,
+			label=&quot;Pitch\nSegment&quot;];
+		&quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot;		 [color=4,
+			label=&quot;Pitch\nSet&quot;];
+		&quot;abjad.tools.pitchtools.Segment.Segment&quot;		 [color=4,
+			label=Segment,
+			shape=oval,
+			style=bold];
+		&quot;abjad.tools.pitchtools.Segment.Segment&quot; -&gt; &quot;abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment&quot;		 [minlen=1];
+		&quot;abjad.tools.pitchtools.Segment.Segment&quot; -&gt; &quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot;		 [minlen=2];
+		&quot;abjad.tools.pitchtools.Set.Set&quot;		 [color=4,
+			label=Set,
+			shape=oval,
+			style=bold];
+		&quot;abjad.tools.pitchtools.Set.Set&quot; -&gt; &quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot;		 [minlen=1];
+		&quot;abjad.tools.pitchtools.Set.Set&quot; -&gt; &quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot;		 [minlen=2];
+	}
+	subgraph &quot;cluster_abjad.tools.rhythmmakertools&quot; {
+		graph [label=&quot;abjad.tools.rhythmmakertools&quot;];
+		node [color=5];
+		&quot;abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker&quot;		 [color=5,
+			label=&quot;Rhythm\nMaker&quot;];
+	}
+	subgraph &quot;cluster_abjad.tools.scoretools&quot; {
+		graph [label=&quot;abjad.tools.scoretools&quot;];
+		node [color=6];
+		&quot;abjad.tools.scoretools.Selection.Selection&quot;		 [color=6,
+			label=Selection];
+	}
+	subgraph &quot;cluster_abjad.tools.segmenttools&quot; {
+		graph [label=&quot;abjad.tools.segmenttools&quot;];
+		node [color=7];
+		&quot;abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate&quot;		 [color=7,
+			label=&quot;Score\nTemplate&quot;,
+			shape=oval,
+			style=bold];
+		&quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot;		 [color=7,
+			label=&quot;Segment\nMaker&quot;];
+	}
+	subgraph &quot;cluster_abjad.tools.spannertools&quot; {
+		graph [label=&quot;abjad.tools.spannertools&quot;];
+		node [color=8];
+		&quot;abjad.tools.spannertools.Spanner.Spanner&quot;		 [color=8,
+			label=Spanner];
+	}
+	subgraph &quot;cluster_abjad.tools.systemtools&quot; {
+		graph [label=&quot;abjad.tools.systemtools&quot;];
+		node [color=9];
+		&quot;abjad.tools.systemtools.WellformednessManager.WellformednessManager&quot;		 [color=9,
+			label=&quot;Wellformedness\nManager&quot;];
+	}
+	subgraph &quot;cluster_baca.tools&quot; {
+		graph [label=&quot;baca.tools&quot;];
+		node [color=1];
+		&quot;baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier&quot;		 [URL=&quot;../api/baca/tools/AcciaccaturaSpecifier.html#baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Acciaccatura\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand&quot;		 [URL=&quot;../api/baca/tools/AccidentalAdjustmentCommand.html#baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Accidental\nAdjustment\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.AnchorSpecifier.AnchorSpecifier&quot;		 [URL=&quot;../api/baca/tools/AnchorSpecifier.html#baca.tools.AnchorSpecifier.AnchorSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Anchor\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier&quot;		 [URL=&quot;../api/baca/tools/ArpeggiationSpacingSpecifier.html#baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Arpeggiation\nSpacing\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.BowContactPointCommand.BowContactPointCommand&quot;		 [URL=&quot;../api/baca/tools/BowContactPointCommand.html#baca.tools.BowContactPointCommand.BowContactPointCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Bow\nContact\nPoint\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.BreakMeasureMap.BreakMeasureMap&quot;		 [URL=&quot;../api/baca/tools/BreakMeasureMap.html#baca.tools.BreakMeasureMap.BreakMeasureMap&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Break\nMeasure\nMap&quot;,
+			target=_top];
+		&quot;baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier&quot;		 [URL=&quot;../api/baca/tools/ChordalSpacingSpecifier.html#baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Chordal\nSpacing\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.ClusterCommand.ClusterCommand&quot;		 [URL=&quot;../api/baca/tools/ClusterCommand.html#baca.tools.ClusterCommand.ClusterCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Cluster\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Coat.Coat&quot;		 [URL=&quot;../api/baca/tools/Coat.html#baca.tools.Coat.Coat&quot;,
+			color=black,
+			fontcolor=white,
+			label=Coat,
+			target=_top];
+		&quot;baca.tools.CollectionList.CollectionList&quot;		 [URL=&quot;../api/baca/tools/CollectionList.html#baca.tools.CollectionList.CollectionList&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Collection\nList&quot;,
+			target=_top];
+		&quot;baca.tools.ColorCommand.ColorCommand&quot;		 [URL=&quot;../api/baca/tools/ColorCommand.html#baca.tools.ColorCommand.ColorCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Color\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.ColorFingeringCommand.ColorFingeringCommand&quot;		 [URL=&quot;../api/baca/tools/ColorFingeringCommand.html#baca.tools.ColorFingeringCommand.ColorFingeringCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Color\nFingering\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot;		 [URL=&quot;../api/baca/tools/Command.html#baca.tools.Command.Command&quot;,
+			color=black,
+			fontcolor=white,
+			label=Command,
+			shape=oval,
+			style=&quot;bold, filled&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand&quot;		 [minlen=1];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.BowContactPointCommand.BowContactPointCommand&quot;		 [minlen=2];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.ClusterCommand.ClusterCommand&quot;		 [minlen=3];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.ColorCommand.ColorCommand&quot;		 [minlen=1];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.ColorFingeringCommand.ColorFingeringCommand&quot;		 [minlen=2];
+		&quot;baca.tools.ContainerCommand.ContainerCommand&quot;		 [URL=&quot;../api/baca/tools/ContainerCommand.html#baca.tools.ContainerCommand.ContainerCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Container\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.ContainerCommand.ContainerCommand&quot;		 [minlen=3];
+		&quot;baca.tools.DiatonicClusterCommand.DiatonicClusterCommand&quot;		 [URL=&quot;../api/baca/tools/DiatonicClusterCommand.html#baca.tools.DiatonicClusterCommand.DiatonicClusterCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Diatonic\nCluster\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.DiatonicClusterCommand.DiatonicClusterCommand&quot;		 [minlen=1];
+		&quot;baca.tools.GlobalFermataCommand.GlobalFermataCommand&quot;		 [URL=&quot;../api/baca/tools/GlobalFermataCommand.html#baca.tools.GlobalFermataCommand.GlobalFermataCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Global\nFermata\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.GlobalFermataCommand.GlobalFermataCommand&quot;		 [minlen=2];
+		&quot;baca.tools.HairpinCommand.HairpinCommand&quot;		 [URL=&quot;../api/baca/tools/HairpinCommand.html#baca.tools.HairpinCommand.HairpinCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Hairpin\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.HairpinCommand.HairpinCommand&quot;		 [minlen=3];
+		&quot;baca.tools.ImbricationCommand.ImbricationCommand&quot;		 [URL=&quot;../api/baca/tools/ImbricationCommand.html#baca.tools.ImbricationCommand.ImbricationCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Imbrication\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.ImbricationCommand.ImbricationCommand&quot;		 [minlen=1];
+		&quot;baca.tools.IndicatorCommand.IndicatorCommand&quot;		 [URL=&quot;../api/baca/tools/IndicatorCommand.html#baca.tools.IndicatorCommand.IndicatorCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Indicator\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.IndicatorCommand.IndicatorCommand&quot;		 [minlen=2];
+		&quot;baca.tools.LabelCommand.LabelCommand&quot;		 [URL=&quot;../api/baca/tools/LabelCommand.html#baca.tools.LabelCommand.LabelCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Label\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.LabelCommand.LabelCommand&quot;		 [minlen=3];
+		&quot;baca.tools.MapCommand.MapCommand&quot;		 [URL=&quot;../api/baca/tools/MapCommand.html#baca.tools.MapCommand.MapCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Map\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.MapCommand.MapCommand&quot;		 [minlen=1];
+		&quot;baca.tools.MetronomeMarkCommand.MetronomeMarkCommand&quot;		 [URL=&quot;../api/baca/tools/MetronomeMarkCommand.html#baca.tools.MetronomeMarkCommand.MetronomeMarkCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Metronome\nMark\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.MetronomeMarkCommand.MetronomeMarkCommand&quot;		 [minlen=2];
+		&quot;baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand&quot;		 [URL=&quot;../api/baca/tools/MicrotoneDeviationCommand.html#baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Microtone\nDeviation\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand&quot;		 [minlen=3];
+		&quot;baca.tools.NestingCommand.NestingCommand&quot;		 [URL=&quot;../api/baca/tools/NestingCommand.html#baca.tools.NestingCommand.NestingCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Nesting\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.NestingCommand.NestingCommand&quot;		 [minlen=1];
+		&quot;baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand&quot;		 [URL=&quot;../api/baca/tools/OctaveDisplacementCommand.html#baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Octave\nDisplacement\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand&quot;		 [minlen=2];
+		&quot;baca.tools.OverrideCommand.OverrideCommand&quot;		 [URL=&quot;../api/baca/tools/OverrideCommand.html#baca.tools.OverrideCommand.OverrideCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Override\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.OverrideCommand.OverrideCommand&quot;		 [minlen=3];
+		&quot;baca.tools.PartAssignmentCommand.PartAssignmentCommand&quot;		 [URL=&quot;../api/baca/tools/PartAssignmentCommand.html#baca.tools.PartAssignmentCommand.PartAssignmentCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Part\nAssignment\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.PartAssignmentCommand.PartAssignmentCommand&quot;		 [minlen=1];
+		&quot;baca.tools.PiecewiseCommand.PiecewiseCommand&quot;		 [URL=&quot;../api/baca/tools/PiecewiseCommand.html#baca.tools.PiecewiseCommand.PiecewiseCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Piecewise\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.PiecewiseCommand.PiecewiseCommand&quot;		 [minlen=2];
+		&quot;baca.tools.PitchCommand.PitchCommand&quot;		 [URL=&quot;../api/baca/tools/PitchCommand.html#baca.tools.PitchCommand.PitchCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.PitchCommand.PitchCommand&quot;		 [minlen=3];
+		&quot;baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand&quot;		 [URL=&quot;../api/baca/tools/PitchFirstRhythmCommand.html#baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nFirst\nRhythm\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand&quot;		 [minlen=1];
+		&quot;baca.tools.RegisterCommand.RegisterCommand&quot;		 [URL=&quot;../api/baca/tools/RegisterCommand.html#baca.tools.RegisterCommand.RegisterCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Register\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.RegisterCommand.RegisterCommand&quot;		 [minlen=2];
+		&quot;baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand&quot;		 [URL=&quot;../api/baca/tools/RegisterInterpolationCommand.html#baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Register\nInterpolation\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand&quot;		 [minlen=3];
+		&quot;baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand&quot;		 [URL=&quot;../api/baca/tools/RegisterToOctaveCommand.html#baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Register\nTo\nOctave\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand&quot;		 [minlen=1];
+		&quot;baca.tools.RhythmCommand.RhythmCommand&quot;		 [URL=&quot;../api/baca/tools/RhythmCommand.html#baca.tools.RhythmCommand.RhythmCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Rhythm\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.RhythmCommand.RhythmCommand&quot;		 [minlen=2];
+		&quot;baca.tools.SettingCommand.SettingCommand&quot;		 [URL=&quot;../api/baca/tools/SettingCommand.html#baca.tools.SettingCommand.SettingCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Setting\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.SettingCommand.SettingCommand&quot;		 [minlen=3];
+		&quot;baca.tools.SpannerCommand.SpannerCommand&quot;		 [URL=&quot;../api/baca/tools/SpannerCommand.html#baca.tools.SpannerCommand.SpannerCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Spanner\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.SpannerCommand.SpannerCommand&quot;		 [minlen=1];
+		&quot;baca.tools.StaffPositionCommand.StaffPositionCommand&quot;		 [URL=&quot;../api/baca/tools/StaffPositionCommand.html#baca.tools.StaffPositionCommand.StaffPositionCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Staff\nPosition\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.StaffPositionCommand.StaffPositionCommand&quot;		 [minlen=2];
+		&quot;baca.tools.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand&quot;		 [URL=&quot;../api/baca/tools/StaffPositionInterpolationCommand.html#baca.tools.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Staff\nPosition\nInterpolation\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand&quot;		 [minlen=3];
+		&quot;baca.tools.SuiteCommand.SuiteCommand&quot;		 [URL=&quot;../api/baca/tools/SuiteCommand.html#baca.tools.SuiteCommand.SuiteCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Suite\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.SuiteCommand.SuiteCommand&quot;		 [minlen=1];
+		&quot;baca.tools.TextSpannerCommand.TextSpannerCommand&quot;		 [URL=&quot;../api/baca/tools/TextSpannerCommand.html#baca.tools.TextSpannerCommand.TextSpannerCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Text\nSpanner\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.TextSpannerCommand.TextSpannerCommand&quot;		 [minlen=2];
+		&quot;baca.tools.TieCorrectionCommand.TieCorrectionCommand&quot;		 [URL=&quot;../api/baca/tools/TieCorrectionCommand.html#baca.tools.TieCorrectionCommand.TieCorrectionCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Tie\nCorrection\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.TieCorrectionCommand.TieCorrectionCommand&quot;		 [minlen=3];
+		&quot;baca.tools.VoltaCommand.VoltaCommand&quot;		 [URL=&quot;../api/baca/tools/VoltaCommand.html#baca.tools.VoltaCommand.VoltaCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Volta\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.Command.Command&quot; -&gt; &quot;baca.tools.VoltaCommand.VoltaCommand&quot;		 [minlen=1];
+		&quot;baca.tools.CommandWrapper.CommandWrapper&quot;		 [URL=&quot;../api/baca/tools/CommandWrapper.html#baca.tools.CommandWrapper.CommandWrapper&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Command\nWrapper&quot;,
+			target=_top];
+		&quot;baca.tools.Constellation.Constellation&quot;		 [URL=&quot;../api/baca/tools/Constellation.html#baca.tools.Constellation.Constellation&quot;,
+			color=black,
+			fontcolor=white,
+			label=Constellation,
+			target=_top];
+		&quot;baca.tools.ConstellationCircuit.ConstellationCircuit&quot;		 [URL=&quot;../api/baca/tools/ConstellationCircuit.html#baca.tools.ConstellationCircuit.ConstellationCircuit&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Constellation\nCircuit&quot;,
+			target=_top];
+		&quot;baca.tools.Counter.Counter&quot;		 [URL=&quot;../api/baca/tools/Counter.html#baca.tools.Counter.Counter&quot;,
+			color=black,
+			fontcolor=white,
+			label=Counter,
+			target=_top];
+		&quot;baca.tools.Cursor.Cursor&quot;		 [URL=&quot;../api/baca/tools/Cursor.html#baca.tools.Cursor.Cursor&quot;,
+			color=black,
+			fontcolor=white,
+			label=Cursor,
+			target=_top];
+		&quot;baca.tools.DesignMaker.DesignMaker&quot;		 [URL=&quot;../api/baca/tools/DesignMaker.html#baca.tools.DesignMaker.DesignMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Design\nMaker&quot;,
+			target=_top];
+		&quot;baca.tools.Division.Division&quot;		 [URL=&quot;../api/baca/tools/Division.html#baca.tools.Division.Division&quot;,
+			color=black,
+			fontcolor=white,
+			label=Division,
+			target=_top];
+		&quot;baca.tools.DivisionMaker.DivisionMaker&quot;		 [URL=&quot;../api/baca/tools/DivisionMaker.html#baca.tools.DivisionMaker.DivisionMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Division\nMaker&quot;,
+			target=_top];
+		&quot;baca.tools.DivisionSequence.DivisionSequence&quot;		 [URL=&quot;../api/baca/tools/DivisionSequence.html#baca.tools.DivisionSequence.DivisionSequence&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Division\nSequence&quot;,
+			target=_top];
+		&quot;baca.tools.DivisionSequenceExpression.DivisionSequenceExpression&quot;		 [URL=&quot;../api/baca/tools/DivisionSequenceExpression.html#baca.tools.DivisionSequenceExpression.DivisionSequenceExpression&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Division\nSequence\nExpression&quot;,
+			target=_top];
+		&quot;baca.tools.Expression.Expression&quot;		 [URL=&quot;../api/baca/tools/Expression.html#baca.tools.Expression.Expression&quot;,
+			color=black,
+			fontcolor=white,
+			label=Expression,
+			target=_top];
+		&quot;baca.tools.ExpressionGallery.ExpressionGallery&quot;		 [URL=&quot;../api/baca/tools/ExpressionGallery.html#baca.tools.ExpressionGallery.ExpressionGallery&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Expression\nGallery&quot;,
+			target=_top];
+		&quot;baca.tools.FlattenDivisionCallback.FlattenDivisionCallback&quot;		 [URL=&quot;../api/baca/tools/FlattenDivisionCallback.html#baca.tools.FlattenDivisionCallback.FlattenDivisionCallback&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Flatten\nDivision\nCallback&quot;,
+			target=_top];
+		&quot;baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback&quot;		 [URL=&quot;../api/baca/tools/FuseByCountsDivisionCallback.html#baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Fuse\nBy\nCounts\nDivision\nCallback&quot;,
+			target=_top];
+		&quot;baca.tools.HarmonicSeries.HarmonicSeries&quot;		 [URL=&quot;../api/baca/tools/HarmonicSeries.html#baca.tools.HarmonicSeries.HarmonicSeries&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Harmonic\nSeries&quot;,
+			target=_top];
+		&quot;baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier&quot;		 [URL=&quot;../api/baca/tools/HorizontalSpacingSpecifier.html#baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Horizontal\nSpacing\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.InstrumentChangeCommand.InstrumentChangeCommand&quot;		 [URL=&quot;../api/baca/tools/InstrumentChangeCommand.html#baca.tools.InstrumentChangeCommand.InstrumentChangeCommand&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Instrument\nChange\nCommand&quot;,
+			target=_top];
+		&quot;baca.tools.IndicatorCommand.IndicatorCommand&quot; -&gt; &quot;baca.tools.InstrumentChangeCommand.InstrumentChangeCommand&quot;		 [minlen=1];
+		&quot;baca.tools.Interpolator.Interpolator&quot;		 [URL=&quot;../api/baca/tools/Interpolator.html#baca.tools.Interpolator.Interpolator&quot;,
+			color=black,
+			fontcolor=white,
+			label=Interpolator,
+			target=_top];
+		&quot;baca.tools.LBSD.LBSD&quot;		 [URL=&quot;../api/baca/tools/LBSD.html#baca.tools.LBSD.LBSD&quot;,
+			color=black,
+			fontcolor=white,
+			label=LBSD,
+			target=_top];
+		&quot;baca.tools.LMRSpecifier.LMRSpecifier&quot;		 [URL=&quot;../api/baca/tools/LMRSpecifier.html#baca.tools.LMRSpecifier.LMRSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=LMRSpecifier,
+			target=_top];
+		&quot;baca.tools.LibraryAF.LibraryAF&quot;		 [URL=&quot;../api/baca/tools/LibraryAF.html#baca.tools.LibraryAF.LibraryAF&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Library\nAF&quot;,
+			target=_top];
+		&quot;baca.tools.LibraryGM.LibraryGM&quot;		 [URL=&quot;../api/baca/tools/LibraryGM.html#baca.tools.LibraryGM.LibraryGM&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Library\nGM&quot;,
+			target=_top];
+		&quot;baca.tools.LibraryNS.LibraryNS&quot;		 [URL=&quot;../api/baca/tools/LibraryNS.html#baca.tools.LibraryNS.LibraryNS&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Library\nNS&quot;,
+			target=_top];
+		&quot;baca.tools.LibraryTZ.LibraryTZ&quot;		 [URL=&quot;../api/baca/tools/LibraryTZ.html#baca.tools.LibraryTZ.LibraryTZ&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Library\nTZ&quot;,
+			target=_top];
+		&quot;baca.tools.Loop.Loop&quot;		 [URL=&quot;../api/baca/tools/Loop.html#baca.tools.Loop.Loop&quot;,
+			color=black,
+			fontcolor=white,
+			label=Loop,
+			target=_top];
+		&quot;baca.tools.MarkupLibrary.MarkupLibrary&quot;		 [URL=&quot;../api/baca/tools/MarkupLibrary.html#baca.tools.MarkupLibrary.MarkupLibrary&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Markup\nLibrary&quot;,
+			target=_top];
+		&quot;baca.tools.Matrix.Matrix&quot;		 [URL=&quot;../api/baca/tools/Matrix.html#baca.tools.Matrix.Matrix&quot;,
+			color=black,
+			fontcolor=white,
+			label=Matrix,
+			target=_top];
+		&quot;baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap&quot;		 [URL=&quot;../api/baca/tools/MetronomeMarkMeasureMap.html#baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Metronome\nMark\nMeasure\nMap&quot;,
+			target=_top];
+		&quot;baca.tools.MusicAccumulator.MusicAccumulator&quot;		 [URL=&quot;../api/baca/tools/MusicAccumulator.html#baca.tools.MusicAccumulator.MusicAccumulator&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Music\nAccumulator&quot;,
+			target=_top];
+		&quot;baca.tools.MusicContribution.MusicContribution&quot;		 [URL=&quot;../api/baca/tools/MusicContribution.html#baca.tools.MusicContribution.MusicContribution&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Music\nContribution&quot;,
+			target=_top];
+		&quot;baca.tools.MusicMaker.MusicMaker&quot;		 [URL=&quot;../api/baca/tools/MusicMaker.html#baca.tools.MusicMaker.MusicMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Music\nMaker&quot;,
+			target=_top];
+		&quot;baca.tools.PageSpecifier.PageSpecifier&quot;		 [URL=&quot;../api/baca/tools/PageSpecifier.html#baca.tools.PageSpecifier.PageSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Page\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.Partial.Partial&quot;		 [URL=&quot;../api/baca/tools/Partial.html#baca.tools.Partial.Partial&quot;,
+			color=black,
+			fontcolor=white,
+			label=Partial,
+			target=_top];
+		&quot;baca.tools.PartitionDivisionCallback.PartitionDivisionCallback&quot;		 [URL=&quot;../api/baca/tools/PartitionDivisionCallback.html#baca.tools.PartitionDivisionCallback.PartitionDivisionCallback&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Partition\nDivision\nCallback&quot;,
+			target=_top];
+		&quot;baca.tools.PersistentIndicatorTests.PersistentIndicatorTests&quot;		 [URL=&quot;../api/baca/tools/PersistentIndicatorTests.html#baca.tools.PersistentIndicatorTests.PersistentIndicatorTests&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Persistent\nIndicator\nTests&quot;,
+			target=_top];
+		&quot;baca.tools.PitchArray.PitchArray&quot;		 [URL=&quot;../api/baca/tools/PitchArray.html#baca.tools.PitchArray.PitchArray&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nArray&quot;,
+			target=_top];
+		&quot;baca.tools.PitchArrayCell.PitchArrayCell&quot;		 [URL=&quot;../api/baca/tools/PitchArrayCell.html#baca.tools.PitchArrayCell.PitchArrayCell&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nArray\nCell&quot;,
+			target=_top];
+		&quot;baca.tools.PitchArrayColumn.PitchArrayColumn&quot;		 [URL=&quot;../api/baca/tools/PitchArrayColumn.html#baca.tools.PitchArrayColumn.PitchArrayColumn&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nArray\nColumn&quot;,
+			target=_top];
+		&quot;baca.tools.PitchArrayList.PitchArrayList&quot;		 [URL=&quot;../api/baca/tools/PitchArrayList.html#baca.tools.PitchArrayList.PitchArrayList&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nArray\nList&quot;,
+			target=_top];
+		&quot;baca.tools.PitchArrayRow.PitchArrayRow&quot;		 [URL=&quot;../api/baca/tools/PitchArrayRow.html#baca.tools.PitchArrayRow.PitchArrayRow&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nArray\nRow&quot;,
+			target=_top];
+		&quot;baca.tools.PitchClassSegment.PitchClassSegment&quot;		 [URL=&quot;../api/baca/tools/PitchClassSegment.html#baca.tools.PitchClassSegment.PitchClassSegment&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nClass\nSegment&quot;,
+			target=_top];
+		&quot;baca.tools.PitchClassSet.PitchClassSet&quot;		 [URL=&quot;../api/baca/tools/PitchClassSet.html#baca.tools.PitchClassSet.PitchClassSet&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nClass\nSet&quot;,
+			target=_top];
+		&quot;baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;		 [URL=&quot;../api/baca/tools/PitchFirstRhythmMaker.html#baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nFirst\nRhythm\nMaker&quot;,
+			target=_top];
+		&quot;baca.tools.PitchSegment.PitchSegment&quot;		 [URL=&quot;../api/baca/tools/PitchSegment.html#baca.tools.PitchSegment.PitchSegment&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nSegment&quot;,
+			target=_top];
+		&quot;baca.tools.PitchSet.PitchSet&quot;		 [URL=&quot;../api/baca/tools/PitchSet.html#baca.tools.PitchSet.PitchSet&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nSet&quot;,
+			target=_top];
+		&quot;baca.tools.PitchSpecifier.PitchSpecifier&quot;		 [URL=&quot;../api/baca/tools/PitchSpecifier.html#baca.tools.PitchSpecifier.PitchSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.PitchTree.PitchTree&quot;		 [URL=&quot;../api/baca/tools/PitchTree.html#baca.tools.PitchTree.PitchTree&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nTree&quot;,
+			target=_top];
+		&quot;baca.tools.PitchTreeSpanner.PitchTreeSpanner&quot;		 [URL=&quot;../api/baca/tools/PitchTreeSpanner.html#baca.tools.PitchTreeSpanner.PitchTreeSpanner&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Pitch\nTree\nSpanner&quot;,
+			target=_top];
+		&quot;baca.tools.Registration.Registration&quot;		 [URL=&quot;../api/baca/tools/Registration.html#baca.tools.Registration.Registration&quot;,
+			color=black,
+			fontcolor=white,
+			label=Registration,
+			target=_top];
+		&quot;baca.tools.RegistrationComponent.RegistrationComponent&quot;		 [URL=&quot;../api/baca/tools/RegistrationComponent.html#baca.tools.RegistrationComponent.RegistrationComponent&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Registration\nComponent&quot;,
+			target=_top];
+		&quot;baca.tools.RestAffixSpecifier.RestAffixSpecifier&quot;		 [URL=&quot;../api/baca/tools/RestAffixSpecifier.html#baca.tools.RestAffixSpecifier.RestAffixSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Rest\nAffix\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.SchemeManifest.SchemeManifest&quot;		 [URL=&quot;../api/baca/tools/SchemeManifest.html#baca.tools.SchemeManifest.SchemeManifest&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Scheme\nManifest&quot;,
+			target=_top];
+		&quot;baca.tools.Scope.Scope&quot;		 [URL=&quot;../api/baca/tools/Scope.html#baca.tools.Scope.Scope&quot;,
+			color=black,
+			fontcolor=white,
+			label=Scope,
+			target=_top];
+		&quot;baca.tools.ScoreTemplate.ScoreTemplate&quot;		 [URL=&quot;../api/baca/tools/ScoreTemplate.html#baca.tools.ScoreTemplate.ScoreTemplate&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Score\nTemplate&quot;,
+			shape=oval,
+			style=&quot;bold, filled&quot;,
+			target=_top];
+		&quot;baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate&quot;		 [URL=&quot;../api/baca/tools/SingleStaffScoreTemplate.html#baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Single\nStaff\nScore\nTemplate&quot;,
+			target=_top];
+		&quot;baca.tools.ScoreTemplate.ScoreTemplate&quot; -&gt; &quot;baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate&quot;		 [minlen=1];
+		&quot;baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate&quot;		 [URL=&quot;../api/baca/tools/StringTrioScoreTemplate.html#baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;String\nTrio\nScore\nTemplate&quot;,
+			target=_top];
+		&quot;baca.tools.ScoreTemplate.ScoreTemplate&quot; -&gt; &quot;baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate&quot;		 [minlen=2];
+		&quot;baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate&quot;		 [URL=&quot;../api/baca/tools/TwoVoiceStaffScoreTemplate.html#baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Two\nVoice\nStaff\nScore\nTemplate&quot;,
+			target=_top];
+		&quot;baca.tools.ScoreTemplate.ScoreTemplate&quot; -&gt; &quot;baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate&quot;		 [minlen=3];
+		&quot;baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate&quot;		 [URL=&quot;../api/baca/tools/ViolinSoloScoreTemplate.html#baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Violin\nSolo\nScore\nTemplate&quot;,
+			target=_top];
+		&quot;baca.tools.ScoreTemplate.ScoreTemplate&quot; -&gt; &quot;baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate&quot;		 [minlen=1];
+		&quot;baca.tools.SegmentMaker.SegmentMaker&quot;		 [URL=&quot;../api/baca/tools/SegmentMaker.html#baca.tools.SegmentMaker.SegmentMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Segment\nMaker&quot;,
+			target=_top];
+		&quot;baca.tools.Selection.Selection&quot;		 [URL=&quot;../api/baca/tools/Selection.html#baca.tools.Selection.Selection&quot;,
+			color=black,
+			fontcolor=white,
+			label=Selection,
+			target=_top];
+		&quot;baca.tools.Sequence.Sequence&quot;		 [URL=&quot;../api/baca/tools/Sequence.html#baca.tools.Sequence.Sequence&quot;,
+			color=black,
+			fontcolor=white,
+			label=Sequence,
+			target=_top];
+		&quot;baca.tools.SpacingIndication.SpacingIndication&quot;		 [URL=&quot;../api/baca/tools/SpacingIndication.html#baca.tools.SpacingIndication.SpacingIndication&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Spacing\nIndication&quot;,
+			target=_top];
+		&quot;baca.tools.SpacingSection.SpacingSection&quot;		 [URL=&quot;../api/baca/tools/SpacingSection.html#baca.tools.SpacingSection.SpacingSection&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Spacing\nSection&quot;,
+			target=_top];
+		&quot;baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback&quot;		 [URL=&quot;../api/baca/tools/SplitByDurationsDivisionCallback.html#baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Split\nBy\nDurations\nDivision\nCallback&quot;,
+			target=_top];
+		&quot;baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback&quot;		 [URL=&quot;../api/baca/tools/SplitByRoundedRatiosDivisionCallback.html#baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Split\nBy\nRounded\nRatios\nDivision\nCallback&quot;,
+			target=_top];
+		&quot;baca.tools.StaffLines.StaffLines&quot;		 [URL=&quot;../api/baca/tools/StaffLines.html#baca.tools.StaffLines.StaffLines&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Staff\nLines&quot;,
+			target=_top];
+		&quot;baca.tools.StageMeasureMap.StageMeasureMap&quot;		 [URL=&quot;../api/baca/tools/StageMeasureMap.html#baca.tools.StageMeasureMap.StageMeasureMap&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Stage\nMeasure\nMap&quot;,
+			target=_top];
+		&quot;baca.tools.SystemSpecifier.SystemSpecifier&quot;		 [URL=&quot;../api/baca/tools/SystemSpecifier.html#baca.tools.SystemSpecifier.SystemSpecifier&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;System\nSpecifier&quot;,
+			target=_top];
+		&quot;baca.tools.TimeSignatureGroups.TimeSignatureGroups&quot;		 [URL=&quot;../api/baca/tools/TimeSignatureGroups.html#baca.tools.TimeSignatureGroups.TimeSignatureGroups&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Time\nSignature\nGroups&quot;,
+			target=_top];
+		&quot;baca.tools.TimeSignatureMaker.TimeSignatureMaker&quot;		 [URL=&quot;../api/baca/tools/TimeSignatureMaker.html#baca.tools.TimeSignatureMaker.TimeSignatureMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Time\nSignature\nMaker&quot;,
+			target=_top];
+		&quot;baca.tools.TimelineScope.TimelineScope&quot;		 [URL=&quot;../api/baca/tools/TimelineScope.html#baca.tools.TimelineScope.TimelineScope&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Timeline\nScope&quot;,
+			target=_top];
+		&quot;baca.tools.Tree.Tree&quot;		 [URL=&quot;../api/baca/tools/Tree.html#baca.tools.Tree.Tree&quot;,
+			color=black,
+			fontcolor=white,
+			label=Tree,
+			target=_top];
+		&quot;baca.tools.Tree.Tree&quot; -&gt; &quot;baca.tools.PitchTree.PitchTree&quot;		 [minlen=1];
+		&quot;baca.tools.WellformednessManager.WellformednessManager&quot;		 [URL=&quot;../api/baca/tools/WellformednessManager.html#baca.tools.WellformednessManager.WellformednessManager&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Wellformedness\nManager&quot;,
+			target=_top];
+		&quot;baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker&quot;		 [URL=&quot;../api/baca/tools/ZaggedPitchClassMaker.html#baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker&quot;,
+			color=black,
+			fontcolor=white,
+			label=&quot;Zagged\nPitch\nClass\nMaker&quot;,
+			target=_top];
+	}
+	subgraph cluster_builtins {
+		graph [label=builtins];
+		node [color=2];
+		&quot;builtins.object&quot;		 [URL=&quot;https://docs.python.org/3.6/library/functions.html#object&quot;,
+			color=2,
+			label=object,
+			target=_top];
+	}
+	subgraph &quot;cluster_collections.abc&quot; {
+		graph [label=&quot;collections.abc&quot;];
+		node [color=3];
+		&quot;collections.abc.Collection&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Collection&quot;,
+			color=3,
+			label=Collection,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Sequence&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Sequence&quot;,
+			color=3,
+			label=Sequence,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Collection&quot; -&gt; &quot;collections.abc.Sequence&quot;;
+		&quot;collections.abc.Set&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Set&quot;,
+			color=3,
+			label=Set,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Collection&quot; -&gt; &quot;collections.abc.Set&quot;		 [minlen=1];
+		&quot;collections.abc.Container&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Container&quot;,
+			color=3,
+			label=Container,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Container&quot; -&gt; &quot;collections.abc.Collection&quot;;
+		&quot;collections.abc.Iterable&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Iterable&quot;,
+			color=3,
+			label=Iterable,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Iterable&quot; -&gt; &quot;collections.abc.Collection&quot;;
+		&quot;collections.abc.Reversible&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Reversible&quot;,
+			color=3,
+			label=Reversible,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Iterable&quot; -&gt; &quot;collections.abc.Reversible&quot;		 [minlen=1];
+		&quot;collections.abc.MutableSequence&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.MutableSequence&quot;,
+			color=3,
+			label=&quot;Mutable\nSequence&quot;,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Reversible&quot; -&gt; &quot;collections.abc.Sequence&quot;;
+		&quot;collections.abc.Sequence&quot; -&gt; &quot;collections.abc.MutableSequence&quot;		 [minlen=1];
+		&quot;collections.abc.Sized&quot;		 [URL=&quot;https://docs.python.org/3.6/library/collections.abc.html#collections.abc.Sized&quot;,
+			color=3,
+			label=Sized,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;collections.abc.Sized&quot; -&gt; &quot;collections.abc.Collection&quot;;
+	}
+	subgraph cluster_fractions {
+		graph [label=fractions];
+		node [color=4];
+		&quot;fractions.Fraction&quot;		 [URL=&quot;https://docs.python.org/3.6/library/fractions.html#fractions.Fraction&quot;,
+			color=4,
+			label=Fraction,
+			target=_top];
+	}
+	subgraph cluster_numbers {
+		graph [label=numbers];
+		node [color=5];
+		&quot;numbers.Complex&quot;		 [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Complex&quot;,
+			color=5,
+			label=Complex,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;numbers.Real&quot;		 [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Real&quot;,
+			color=5,
+			label=Real,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;numbers.Complex&quot; -&gt; &quot;numbers.Real&quot;		 [minlen=1];
+		&quot;numbers.Number&quot;		 [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Number&quot;,
+			color=5,
+			label=Number,
+			target=_top];
+		&quot;numbers.Number&quot; -&gt; &quot;numbers.Complex&quot;		 [minlen=1];
+		&quot;numbers.Rational&quot;		 [URL=&quot;https://docs.python.org/3.6/library/numbers.html#numbers.Rational&quot;,
+			color=5,
+			label=Rational,
+			shape=oval,
+			style=bold,
+			target=_top];
+		&quot;numbers.Real&quot; -&gt; &quot;numbers.Rational&quot;		 [minlen=1];
+	}
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;;
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;;
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;;
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.spannertools.Spanner.Spanner&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.systemtools.WellformednessManager.WellformednessManager&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.BreakMeasureMap.BreakMeasureMap&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Coat.Coat&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Command.Command&quot;;
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.CommandWrapper.CommandWrapper&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Constellation.Constellation&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.ConstellationCircuit.ConstellationCircuit&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Counter.Counter&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Cursor.Cursor&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.DesignMaker.DesignMaker&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.ExpressionGallery.ExpressionGallery&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.HarmonicSeries.HarmonicSeries&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Interpolator.Interpolator&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.LBSD.LBSD&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.LMRSpecifier.LMRSpecifier&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.LibraryAF.LibraryAF&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.LibraryGM.LibraryGM&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.LibraryNS.LibraryNS&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.LibraryTZ.LibraryTZ&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.MarkupLibrary.MarkupLibrary&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Matrix.Matrix&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.MusicAccumulator.MusicAccumulator&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.MusicMaker.MusicMaker&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.PageSpecifier.PageSpecifier&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Partial.Partial&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.PersistentIndicatorTests.PersistentIndicatorTests&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.PitchArray.PitchArray&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.PitchArrayCell.PitchArrayCell&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.PitchArrayRow.PitchArrayRow&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.PitchSpecifier.PitchSpecifier&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.SchemeManifest.SchemeManifest&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Scope.Scope&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.SpacingSection.SpacingSection&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.StaffLines.StaffLines&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.StageMeasureMap.StageMeasureMap&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.SystemSpecifier.SystemSpecifier&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.TimeSignatureGroups.TimeSignatureGroups&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.TimeSignatureMaker.TimeSignatureMaker&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.TimelineScope.TimelineScope&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.Tree.Tree&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.datastructuretools.Expression.Expression&quot;;
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;;
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.scoretools.Selection.Selection&quot;;
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.AnchorSpecifier.AnchorSpecifier&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.CollectionList.CollectionList&quot;;
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.DivisionMaker.DivisionMaker&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.FlattenDivisionCallback.FlattenDivisionCallback&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.MusicContribution.MusicContribution&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.PartitionDivisionCallback.PartitionDivisionCallback&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.PitchArrayColumn.PitchArrayColumn&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.Registration.Registration&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.RegistrationComponent.RegistrationComponent&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.RestAffixSpecifier.RestAffixSpecifier&quot;	 [minlen=2];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.SpacingIndication.SpacingIndication&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback&quot;	 [minlen=2];
+	&quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot; -&gt; &quot;baca.tools.Loop.Loop&quot;	 [minlen=1];
+	&quot;abjad.tools.datastructuretools.Expression.Expression&quot; -&gt; &quot;baca.tools.DivisionSequenceExpression.DivisionSequenceExpression&quot;	 [minlen=1];
+	&quot;abjad.tools.datastructuretools.Expression.Expression&quot; -&gt; &quot;baca.tools.Expression.Expression&quot;	 [minlen=2];
+	&quot;abjad.tools.datastructuretools.Sequence.Sequence&quot; -&gt; &quot;baca.tools.DivisionSequence.DivisionSequence&quot;	 [minlen=1];
+	&quot;abjad.tools.datastructuretools.Sequence.Sequence&quot; -&gt; &quot;baca.tools.Sequence.Sequence&quot;	 [minlen=2];
+	&quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot; -&gt; &quot;abjad.tools.pitchtools.Set.Set&quot;;
+	&quot;abjad.tools.datastructuretools.TypedList.TypedList&quot; -&gt; &quot;baca.tools.PitchArrayList.PitchArrayList&quot;	 [minlen=1];
+	&quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot; -&gt; &quot;abjad.tools.pitchtools.Segment.Segment&quot;;
+	&quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot; -&gt; &quot;baca.tools.Division.Division&quot;	 [minlen=1];
+	&quot;abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment&quot; -&gt; &quot;baca.tools.PitchClassSegment.PitchClassSegment&quot;	 [minlen=1];
+	&quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot; -&gt; &quot;baca.tools.PitchClassSet.PitchClassSet&quot;	 [minlen=1];
+	&quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot; -&gt; &quot;baca.tools.PitchSegment.PitchSegment&quot;	 [minlen=1];
+	&quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot; -&gt; &quot;baca.tools.PitchSet.PitchSet&quot;	 [minlen=1];
+	&quot;abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;	 [minlen=1];
+	&quot;abjad.tools.scoretools.Selection.Selection&quot; -&gt; &quot;baca.tools.Selection.Selection&quot;	 [minlen=1];
+	&quot;abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate&quot; -&gt; &quot;baca.tools.ScoreTemplate.ScoreTemplate&quot;;
+	&quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot; -&gt; &quot;baca.tools.SegmentMaker.SegmentMaker&quot;	 [minlen=1];
+	&quot;abjad.tools.spannertools.Spanner.Spanner&quot; -&gt; &quot;baca.tools.PitchTreeSpanner.PitchTreeSpanner&quot;	 [minlen=1];
+	&quot;abjad.tools.systemtools.WellformednessManager.WellformednessManager&quot; -&gt; &quot;baca.tools.WellformednessManager.WellformednessManager&quot;	 [minlen=1];
+	&quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
+	&quot;builtins.object&quot; -&gt; &quot;collections.abc.Container&quot;	 [minlen=1];
+	&quot;builtins.object&quot; -&gt; &quot;collections.abc.Iterable&quot;;
+	&quot;builtins.object&quot; -&gt; &quot;collections.abc.Sized&quot;	 [minlen=2];
+	&quot;builtins.object&quot; -&gt; &quot;numbers.Number&quot;	 [minlen=3];
+	&quot;collections.abc.MutableSequence&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedList.TypedList&quot;;
+	&quot;collections.abc.Sequence&quot; -&gt; &quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;;
+	&quot;collections.abc.Sequence&quot; -&gt; &quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;;
+	&quot;collections.abc.Sequence&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;;
+	&quot;collections.abc.Sequence&quot; -&gt; &quot;abjad.tools.scoretools.Selection.Selection&quot;;
+	&quot;collections.abc.Sequence&quot; -&gt; &quot;baca.tools.CollectionList.CollectionList&quot;;
+	&quot;collections.abc.Set&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot;;
+	&quot;fractions.Fraction&quot; -&gt; &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;;
+	&quot;numbers.Rational&quot; -&gt; &quot;fractions.Fraction&quot;	 [minlen=1];
+}</p></object>
+</div>
+<hr/><p class="section-header rubric">(1) Library</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="LibraryAF.html#baca.tools.LibraryAF.LibraryAF" title="baca.tools.LibraryAF.LibraryAF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibraryAF</span></code></a></td>
+<td>Library A - F.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="LibraryGM.html#baca.tools.LibraryGM.LibraryGM" title="baca.tools.LibraryGM.LibraryGM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibraryGM</span></code></a></td>
+<td>Library G - M.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="LibraryNS.html#baca.tools.LibraryNS.LibraryNS" title="baca.tools.LibraryNS.LibraryNS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibraryNS</span></code></a></td>
+<td>Library N - S.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="LibraryTZ.html#baca.tools.LibraryTZ.LibraryTZ" title="baca.tools.LibraryTZ.LibraryTZ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibraryTZ</span></code></a></td>
+<td>Library T - Z.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="MarkupLibrary.html#baca.tools.MarkupLibrary.MarkupLibrary" title="baca.tools.MarkupLibrary.MarkupLibrary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkupLibrary</span></code></a></td>
+<td>Markup library.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="SchemeManifest.html#baca.tools.SchemeManifest.SchemeManifest" title="baca.tools.SchemeManifest.SchemeManifest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SchemeManifest</span></code></a></td>
+<td>Scheme manifest.</td>
+</tr>
+</tbody>
+</table>
+<hr/><p class="section-header rubric">(2) Makers</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="MusicAccumulator.html#baca.tools.MusicAccumulator.MusicAccumulator" title="baca.tools.MusicAccumulator.MusicAccumulator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MusicAccumulator</span></code></a></td>
+<td>Music-accumulator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="MusicContribution.html#baca.tools.MusicContribution.MusicContribution" title="baca.tools.MusicContribution.MusicContribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MusicContribution</span></code></a></td>
+<td>Music contribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="MusicMaker.html#baca.tools.MusicMaker.MusicMaker" title="baca.tools.MusicMaker.MusicMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MusicMaker</span></code></a></td>
+<td>Music-maker.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PersistentIndicatorTests.html#baca.tools.PersistentIndicatorTests.PersistentIndicatorTests" title="baca.tools.PersistentIndicatorTests.PersistentIndicatorTests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PersistentIndicatorTests</span></code></a></td>
+<td>Persistent indicator tests.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchFirstRhythmMaker.html#baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker" title="baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchFirstRhythmMaker</span></code></a></td>
+<td>Collection rhythm-maker.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="SegmentMaker.html#baca.tools.SegmentMaker.SegmentMaker" title="baca.tools.SegmentMaker.SegmentMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SegmentMaker</span></code></a></td>
+<td>Segment-maker.</td>
+</tr>
+</tbody>
+</table>
+<hr/><p class="section-header rubric">(3) Specifiers</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="AcciaccaturaSpecifier.html#baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier" title="baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AcciaccaturaSpecifier</span></code></a></td>
+<td>Acciaccatura specifier.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="AnchorSpecifier.html#baca.tools.AnchorSpecifier.AnchorSpecifier" title="baca.tools.AnchorSpecifier.AnchorSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnchorSpecifier</span></code></a></td>
+<td>Anchor specifier.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ArpeggiationSpacingSpecifier.html#baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier" title="baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArpeggiationSpacingSpecifier</span></code></a></td>
+<td>Arpeggiation spacing specifier.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="ChordalSpacingSpecifier.html#baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier" title="baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChordalSpacingSpecifier</span></code></a></td>
+<td>Chordal spacing specifier.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="HorizontalSpacingSpecifier.html#baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier" title="baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HorizontalSpacingSpecifier</span></code></a></td>
+<td>Horizontal spacing specifier.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="LMRSpecifier.html#baca.tools.LMRSpecifier.LMRSpecifier" title="baca.tools.LMRSpecifier.LMRSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LMRSpecifier</span></code></a></td>
+<td>Left-middle-right specifier.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchSpecifier.html#baca.tools.PitchSpecifier.PitchSpecifier" title="baca.tools.PitchSpecifier.PitchSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchSpecifier</span></code></a></td>
+<td>Pitch specifier.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="RestAffixSpecifier.html#baca.tools.RestAffixSpecifier.RestAffixSpecifier" title="baca.tools.RestAffixSpecifier.RestAffixSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestAffixSpecifier</span></code></a></td>
+<td>Rest affix specifier.</td>
+</tr>
+</tbody>
+</table>
+<hr/><p class="section-header rubric">(4) Commands</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="AccidentalAdjustmentCommand.html#baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand" title="baca.tools.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AccidentalAdjustmentCommand</span></code></a></td>
+<td>Accidental adjustment command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="BowContactPointCommand.html#baca.tools.BowContactPointCommand.BowContactPointCommand" title="baca.tools.BowContactPointCommand.BowContactPointCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BowContactPointCommand</span></code></a></td>
+<td>Bow contact point command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ClusterCommand.html#baca.tools.ClusterCommand.ClusterCommand" title="baca.tools.ClusterCommand.ClusterCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClusterCommand</span></code></a></td>
+<td>Cluster command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="ColorCommand.html#baca.tools.ColorCommand.ColorCommand" title="baca.tools.ColorCommand.ColorCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorCommand</span></code></a></td>
+<td>Color command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ColorFingeringCommand.html#baca.tools.ColorFingeringCommand.ColorFingeringCommand" title="baca.tools.ColorFingeringCommand.ColorFingeringCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorFingeringCommand</span></code></a></td>
+<td>Color fingering command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Command.html#baca.tools.Command.Command" title="baca.tools.Command.Command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Command</span></code></a></td>
+<td>Command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="CommandWrapper.html#baca.tools.CommandWrapper.CommandWrapper" title="baca.tools.CommandWrapper.CommandWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CommandWrapper</span></code></a></td>
+<td>Command wrapper.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="ContainerCommand.html#baca.tools.ContainerCommand.ContainerCommand" title="baca.tools.ContainerCommand.ContainerCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ContainerCommand</span></code></a></td>
+<td>Container command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="DiatonicClusterCommand.html#baca.tools.DiatonicClusterCommand.DiatonicClusterCommand" title="baca.tools.DiatonicClusterCommand.DiatonicClusterCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiatonicClusterCommand</span></code></a></td>
+<td>Diatonic cluster command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="GlobalFermataCommand.html#baca.tools.GlobalFermataCommand.GlobalFermataCommand" title="baca.tools.GlobalFermataCommand.GlobalFermataCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalFermataCommand</span></code></a></td>
+<td>Global fermata command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="HairpinCommand.html#baca.tools.HairpinCommand.HairpinCommand" title="baca.tools.HairpinCommand.HairpinCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HairpinCommand</span></code></a></td>
+<td>Hairpin command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="ImbricationCommand.html#baca.tools.ImbricationCommand.ImbricationCommand" title="baca.tools.ImbricationCommand.ImbricationCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImbricationCommand</span></code></a></td>
+<td>Imbrication command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="IndicatorCommand.html#baca.tools.IndicatorCommand.IndicatorCommand" title="baca.tools.IndicatorCommand.IndicatorCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IndicatorCommand</span></code></a></td>
+<td>Indicator command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="InstrumentChangeCommand.html#baca.tools.InstrumentChangeCommand.InstrumentChangeCommand" title="baca.tools.InstrumentChangeCommand.InstrumentChangeCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InstrumentChangeCommand</span></code></a></td>
+<td>Instrument change command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="LabelCommand.html#baca.tools.LabelCommand.LabelCommand" title="baca.tools.LabelCommand.LabelCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelCommand</span></code></a></td>
+<td>Label command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="MapCommand.html#baca.tools.MapCommand.MapCommand" title="baca.tools.MapCommand.MapCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapCommand</span></code></a></td>
+<td>Map command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="MetronomeMarkCommand.html#baca.tools.MetronomeMarkCommand.MetronomeMarkCommand" title="baca.tools.MetronomeMarkCommand.MetronomeMarkCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MetronomeMarkCommand</span></code></a></td>
+<td>Metronome mark command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="MicrotoneDeviationCommand.html#baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand" title="baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MicrotoneDeviationCommand</span></code></a></td>
+<td>Microtone deviation command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="NestingCommand.html#baca.tools.NestingCommand.NestingCommand" title="baca.tools.NestingCommand.NestingCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NestingCommand</span></code></a></td>
+<td>Nesting command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="OctaveDisplacementCommand.html#baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand" title="baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OctaveDisplacementCommand</span></code></a></td>
+<td>Octave displacement command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="OverrideCommand.html#baca.tools.OverrideCommand.OverrideCommand" title="baca.tools.OverrideCommand.OverrideCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OverrideCommand</span></code></a></td>
+<td>Override command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PartAssignmentCommand.html#baca.tools.PartAssignmentCommand.PartAssignmentCommand" title="baca.tools.PartAssignmentCommand.PartAssignmentCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PartAssignmentCommand</span></code></a></td>
+<td>Part assignment command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PiecewiseCommand.html#baca.tools.PiecewiseCommand.PiecewiseCommand" title="baca.tools.PiecewiseCommand.PiecewiseCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PiecewiseCommand</span></code></a></td>
+<td>Piecewise command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchCommand.html#baca.tools.PitchCommand.PitchCommand" title="baca.tools.PitchCommand.PitchCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchCommand</span></code></a></td>
+<td>Pitch command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchFirstRhythmCommand.html#baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand" title="baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchFirstRhythmCommand</span></code></a></td>
+<td>Pitch-first rhythm command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="RegisterCommand.html#baca.tools.RegisterCommand.RegisterCommand" title="baca.tools.RegisterCommand.RegisterCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterCommand</span></code></a></td>
+<td>Register command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="RegisterInterpolationCommand.html#baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand" title="baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterInterpolationCommand</span></code></a></td>
+<td>Register interpolation command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="RegisterToOctaveCommand.html#baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand" title="baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterToOctaveCommand</span></code></a></td>
+<td>Register-to-octave command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="RhythmCommand.html#baca.tools.RhythmCommand.RhythmCommand" title="baca.tools.RhythmCommand.RhythmCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RhythmCommand</span></code></a></td>
+<td>Rhythm command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="SettingCommand.html#baca.tools.SettingCommand.SettingCommand" title="baca.tools.SettingCommand.SettingCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SettingCommand</span></code></a></td>
+<td>Setting command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="SpannerCommand.html#baca.tools.SpannerCommand.SpannerCommand" title="baca.tools.SpannerCommand.SpannerCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpannerCommand</span></code></a></td>
+<td>Spanner command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="StaffPositionCommand.html#baca.tools.StaffPositionCommand.StaffPositionCommand" title="baca.tools.StaffPositionCommand.StaffPositionCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StaffPositionCommand</span></code></a></td>
+<td>Staff position command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="StaffPositionInterpolationCommand.html#baca.tools.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand" title="baca.tools.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StaffPositionInterpolationCommand</span></code></a></td>
+<td>Staff position interpolation command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="SuiteCommand.html#baca.tools.SuiteCommand.SuiteCommand" title="baca.tools.SuiteCommand.SuiteCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SuiteCommand</span></code></a></td>
+<td>Suite command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="TextSpannerCommand.html#baca.tools.TextSpannerCommand.TextSpannerCommand" title="baca.tools.TextSpannerCommand.TextSpannerCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextSpannerCommand</span></code></a></td>
+<td>Text spanner command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="TieCorrectionCommand.html#baca.tools.TieCorrectionCommand.TieCorrectionCommand" title="baca.tools.TieCorrectionCommand.TieCorrectionCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TieCorrectionCommand</span></code></a></td>
+<td>Tie correction command.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="VoltaCommand.html#baca.tools.VoltaCommand.VoltaCommand" title="baca.tools.VoltaCommand.VoltaCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VoltaCommand</span></code></a></td>
+<td>Volta command.</td>
+</tr>
+</tbody>
+</table>
+<hr/><p class="section-header rubric">(5) Utilities</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="BreakMeasureMap.html#baca.tools.BreakMeasureMap.BreakMeasureMap" title="baca.tools.BreakMeasureMap.BreakMeasureMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BreakMeasureMap</span></code></a></td>
+<td>Breaks measure map.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Coat.html#baca.tools.Coat.Coat" title="baca.tools.Coat.Coat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coat</span></code></a></td>
+<td>Coat.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="CollectionList.html#baca.tools.CollectionList.CollectionList" title="baca.tools.CollectionList.CollectionList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionList</span></code></a></td>
+<td>Collection list.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Constellation.html#baca.tools.Constellation.Constellation" title="baca.tools.Constellation.Constellation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Constellation</span></code></a></td>
+<td>Constellation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ConstellationCircuit.html#baca.tools.ConstellationCircuit.ConstellationCircuit" title="baca.tools.ConstellationCircuit.ConstellationCircuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConstellationCircuit</span></code></a></td>
+<td>Constellation circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Counter.html#baca.tools.Counter.Counter" title="baca.tools.Counter.Counter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Counter</span></code></a></td>
+<td>Counter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Cursor.html#baca.tools.Cursor.Cursor" title="baca.tools.Cursor.Cursor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cursor</span></code></a></td>
+<td>Cursor.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="DesignMaker.html#baca.tools.DesignMaker.DesignMaker" title="baca.tools.DesignMaker.DesignMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DesignMaker</span></code></a></td>
+<td>Design-maker.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Division.html#baca.tools.Division.Division" title="baca.tools.Division.Division"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Division</span></code></a></td>
+<td>Division.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Expression.html#baca.tools.Expression.Expression" title="baca.tools.Expression.Expression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression</span></code></a></td>
+<td>Expression.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ExpressionGallery.html#baca.tools.ExpressionGallery.ExpressionGallery" title="baca.tools.ExpressionGallery.ExpressionGallery"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpressionGallery</span></code></a></td>
+<td>Expression gallery.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="HarmonicSeries.html#baca.tools.HarmonicSeries.HarmonicSeries" title="baca.tools.HarmonicSeries.HarmonicSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HarmonicSeries</span></code></a></td>
+<td>Harmonic series.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Interpolator.html#baca.tools.Interpolator.Interpolator" title="baca.tools.Interpolator.Interpolator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Interpolator</span></code></a></td>
+<td>Interpolator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="LBSD.html#baca.tools.LBSD.LBSD" title="baca.tools.LBSD.LBSD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LBSD</span></code></a></td>
+<td>Line-break system details.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Loop.html#baca.tools.Loop.Loop" title="baca.tools.Loop.Loop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Loop</span></code></a></td>
+<td>Loop.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Matrix.html#baca.tools.Matrix.Matrix" title="baca.tools.Matrix.Matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Matrix</span></code></a></td>
+<td>A matrix.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="MetronomeMarkMeasureMap.html#baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap" title="baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MetronomeMarkMeasureMap</span></code></a></td>
+<td>Metronome mark measure map.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PageSpecifier.html#baca.tools.PageSpecifier.PageSpecifier" title="baca.tools.PageSpecifier.PageSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PageSpecifier</span></code></a></td>
+<td>Page specifier.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Partial.html#baca.tools.Partial.Partial" title="baca.tools.Partial.Partial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Partial</span></code></a></td>
+<td>Partial.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchArray.html#baca.tools.PitchArray.PitchArray" title="baca.tools.PitchArray.PitchArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchArray</span></code></a></td>
+<td>Pitch array.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchArrayCell.html#baca.tools.PitchArrayCell.PitchArrayCell" title="baca.tools.PitchArrayCell.PitchArrayCell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchArrayCell</span></code></a></td>
+<td>Pitch array cell.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchArrayColumn.html#baca.tools.PitchArrayColumn.PitchArrayColumn" title="baca.tools.PitchArrayColumn.PitchArrayColumn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchArrayColumn</span></code></a></td>
+<td>Pitch array column.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchArrayList.html#baca.tools.PitchArrayList.PitchArrayList" title="baca.tools.PitchArrayList.PitchArrayList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchArrayList</span></code></a></td>
+<td>Pitch array list.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchArrayRow.html#baca.tools.PitchArrayRow.PitchArrayRow" title="baca.tools.PitchArrayRow.PitchArrayRow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchArrayRow</span></code></a></td>
+<td>Pitch array row.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchClassSegment.html#baca.tools.PitchClassSegment.PitchClassSegment" title="baca.tools.PitchClassSegment.PitchClassSegment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchClassSegment</span></code></a></td>
+<td>Pitch-class segment.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchClassSet.html#baca.tools.PitchClassSet.PitchClassSet" title="baca.tools.PitchClassSet.PitchClassSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchClassSet</span></code></a></td>
+<td>Pitch-class set.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchSegment.html#baca.tools.PitchSegment.PitchSegment" title="baca.tools.PitchSegment.PitchSegment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchSegment</span></code></a></td>
+<td>Pitch segment.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchSet.html#baca.tools.PitchSet.PitchSet" title="baca.tools.PitchSet.PitchSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchSet</span></code></a></td>
+<td>Pitch set.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="PitchTree.html#baca.tools.PitchTree.PitchTree" title="baca.tools.PitchTree.PitchTree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchTree</span></code></a></td>
+<td>Pitch tree.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PitchTreeSpanner.html#baca.tools.PitchTreeSpanner.PitchTreeSpanner" title="baca.tools.PitchTreeSpanner.PitchTreeSpanner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchTreeSpanner</span></code></a></td>
+<td>Pitch tree spanner.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Registration.html#baca.tools.Registration.Registration" title="baca.tools.Registration.Registration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Registration</span></code></a></td>
+<td>Registration.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="RegistrationComponent.html#baca.tools.RegistrationComponent.RegistrationComponent" title="baca.tools.RegistrationComponent.RegistrationComponent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegistrationComponent</span></code></a></td>
+<td>Registration component.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Scope.html#baca.tools.Scope.Scope" title="baca.tools.Scope.Scope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Scope</span></code></a></td>
+<td>Scope.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="ScoreTemplate.html#baca.tools.ScoreTemplate.ScoreTemplate" title="baca.tools.ScoreTemplate.ScoreTemplate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScoreTemplate</span></code></a></td>
+<td>Score template</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Selection.html#baca.tools.Selection.Selection" title="baca.tools.Selection.Selection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Selection</span></code></a></td>
+<td>Selection.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="Sequence.html#baca.tools.Sequence.Sequence" title="baca.tools.Sequence.Sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sequence</span></code></a></td>
+<td>Sequence.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="SingleStaffScoreTemplate.html#baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate" title="baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SingleStaffScoreTemplate</span></code></a></td>
+<td>Single-staff score template.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="SpacingIndication.html#baca.tools.SpacingIndication.SpacingIndication" title="baca.tools.SpacingIndication.SpacingIndication"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpacingIndication</span></code></a></td>
+<td>Spacing indication.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="SpacingSection.html#baca.tools.SpacingSection.SpacingSection" title="baca.tools.SpacingSection.SpacingSection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpacingSection</span></code></a></td>
+<td>Spacing section.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="StaffLines.html#baca.tools.StaffLines.StaffLines" title="baca.tools.StaffLines.StaffLines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StaffLines</span></code></a></td>
+<td>Staff lines.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="StageMeasureMap.html#baca.tools.StageMeasureMap.StageMeasureMap" title="baca.tools.StageMeasureMap.StageMeasureMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StageMeasureMap</span></code></a></td>
+<td>Stage measure map.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="StringTrioScoreTemplate.html#baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate" title="baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StringTrioScoreTemplate</span></code></a></td>
+<td>String trio score template.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="SystemSpecifier.html#baca.tools.SystemSpecifier.SystemSpecifier" title="baca.tools.SystemSpecifier.SystemSpecifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemSpecifier</span></code></a></td>
+<td>System specifier.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="TimeSignatureGroups.html#baca.tools.TimeSignatureGroups.TimeSignatureGroups" title="baca.tools.TimeSignatureGroups.TimeSignatureGroups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSignatureGroups</span></code></a></td>
+<td>Time signature groups.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="TimeSignatureMaker.html#baca.tools.TimeSignatureMaker.TimeSignatureMaker" title="baca.tools.TimeSignatureMaker.TimeSignatureMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSignatureMaker</span></code></a></td>
+<td>Time-signature-maker.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="TimelineScope.html#baca.tools.TimelineScope.TimelineScope" title="baca.tools.TimelineScope.TimelineScope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimelineScope</span></code></a></td>
+<td>Timeline scope.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="Tree.html#baca.tools.Tree.Tree" title="baca.tools.Tree.Tree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tree</span></code></a></td>
+<td>Tree.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="TwoVoiceStaffScoreTemplate.html#baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate" title="baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TwoVoiceStaffScoreTemplate</span></code></a></td>
+<td>Two-voice staff score template.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ViolinSoloScoreTemplate.html#baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate" title="baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ViolinSoloScoreTemplate</span></code></a></td>
+<td>Violin solo score template.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="WellformednessManager.html#baca.tools.WellformednessManager.WellformednessManager" title="baca.tools.WellformednessManager.WellformednessManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WellformednessManager</span></code></a></td>
+<td>Wellformedness manager.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ZaggedPitchClassMaker.html#baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker" title="baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZaggedPitchClassMaker</span></code></a></td>
+<td>Zagged-pitch-class-maker.</td>
+</tr>
+</tbody>
+</table>
+<hr/><p class="section-header rubric">(6) Divisions</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="DivisionMaker.html#baca.tools.DivisionMaker.DivisionMaker" title="baca.tools.DivisionMaker.DivisionMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DivisionMaker</span></code></a></td>
+<td>Division-maker.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="DivisionSequence.html#baca.tools.DivisionSequence.DivisionSequence" title="baca.tools.DivisionSequence.DivisionSequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DivisionSequence</span></code></a></td>
+<td>Division sequence.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="DivisionSequenceExpression.html#baca.tools.DivisionSequenceExpression.DivisionSequenceExpression" title="baca.tools.DivisionSequenceExpression.DivisionSequenceExpression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DivisionSequenceExpression</span></code></a></td>
+<td>Division expression.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="FlattenDivisionCallback.html#baca.tools.FlattenDivisionCallback.FlattenDivisionCallback" title="baca.tools.FlattenDivisionCallback.FlattenDivisionCallback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlattenDivisionCallback</span></code></a></td>
+<td>Flatten division callback.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="FuseByCountsDivisionCallback.html#baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback" title="baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FuseByCountsDivisionCallback</span></code></a></td>
+<td>Fuse-by-counts division callback.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="PartitionDivisionCallback.html#baca.tools.PartitionDivisionCallback.PartitionDivisionCallback" title="baca.tools.PartitionDivisionCallback.PartitionDivisionCallback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PartitionDivisionCallback</span></code></a></td>
+<td>Partition division callback.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="SplitByDurationsDivisionCallback.html#baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback" title="baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SplitByDurationsDivisionCallback</span></code></a></td>
+<td>Split-by-durations division callback.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="SplitByRoundedRatiosDivisionCallback.html#baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback" title="baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SplitByRoundedRatiosDivisionCallback</span></code></a></td>
+<td>Split-by-rounded-ratios division callback.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="LibraryAF.html" class="btn btn-neutral float-right" title="LibraryAF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="baca" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1997-2018, Trevor Bača.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/abjad.js"></script>
+      <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="../../../_static/ga.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

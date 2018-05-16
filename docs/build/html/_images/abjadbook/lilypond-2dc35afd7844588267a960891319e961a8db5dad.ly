@@ -1,0 +1,110 @@
+\version "2.19.0"
+\language "english"
+
+#(ly:set-option 'relative-includes #t)
+
+\include "../../../../source/_stylesheets/string-trio-stylesheet.ily"
+
+\layout {
+    indent = #0
+}
+
+\score {
+    \context Score = "Score"
+    <<
+        \context GlobalContext = "GlobalContext"
+        <<
+            \context GlobalSkips = "GlobalSkips"
+            {
+                
+                % [GlobalSkips measure 1]                                                %! SM4
+                \newSpacingSection                                                       %! HSS1:SPACING
+                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)         %! HSS1:SPACING
+                \autoPageBreaksOff                                                       %! BMM1:BREAK
+                \noBreak                                                                 %! BMM2:BREAK
+                \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details  %! IC:BREAK
+                #'((Y-offset . 0) (alignment-distances . (11)))                          %! IC:BREAK
+                \time 4/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                \once \override Score.TimeSignature.color = #(x11-color 'blue)           %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                \pageBreak                                                               %! IC:BREAK
+                s1 * 1/2
+                
+                % [GlobalSkips measure 2]                                                %! SM4
+                \newSpacingSection                                                       %! HSS1:SPACING
+                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)         %! HSS1:SPACING
+                \noBreak                                                                 %! BMM2:BREAK
+                \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details  %! IC:BREAK
+                #'((Y-offset . 15) (alignment-distances . (11)))                         %! IC:BREAK
+                \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)      %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                \break                                                                   %! IC:BREAK
+                s1 * 1/2
+                
+                % [GlobalSkips measure 3]                                                %! SM4
+                \newSpacingSection                                                       %! HSS1:SPACING
+                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)         %! HSS1:SPACING
+                \noBreak                                                                 %! BMM2:BREAK
+                \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)      %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                s1 * 1/2
+                \override Score.BarLine.transparent = ##f                                %! SM5
+                \bar "|"                                                                 %! SM5
+                
+            }
+        >>
+        \context MusicContext = "MusicContext"
+        <<
+            \context Staff = "MusicStaff"
+            {
+                \context Voice = "MusicVoice"
+                {
+                    
+                    % [MusicVoice measure 1]                                             %! SM4
+                    \set Staff.instrumentName =                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                    \markup { I+II }                                                     %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                    \set Staff.shortInstrumentName =                                     %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                    \markup { I+II }                                                     %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                %@% \set Staff.instrumentName =                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                %@% \markup { III+IV }                                                   %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                %@% \set Staff.shortInstrumentName =                                     %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                %@% \markup { III+IV }                                                   %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
+                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
+                %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
+                    c'2
+                    ^ \markup {
+                        \column
+                            {
+                                \line                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                    {                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                        \with-color                                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                            #(x11-color 'blue)                           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                            [“I+II”]                                     %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                    }                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@% \line                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%     {                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%         \with-color                                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%             #(x11-color 'blue)                           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%             [“III+IV”]                                   %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%     }                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            }
+                        }
+                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
+                    \set Staff.instrumentName =                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    \markup { I+II }                                                     %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    \set Staff.shortInstrumentName =                                     %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    \markup { I+II }                                                     %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
+                    \set Staff.instrumentName =                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    \markup { III+IV }                                                   %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    \set Staff.shortInstrumentName =                                     %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    \markup { III+IV }                                                   %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                    
+                    % [MusicVoice measure 2]                                             %! SM4
+                    c'2
+                    
+                    % [MusicVoice measure 3]                                             %! SM4
+                    c'2
+                    
+                }
+            }
+        >>
+    >>
+}
