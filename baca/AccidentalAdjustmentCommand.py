@@ -6,7 +6,8 @@ from .Typing import Selector
 
 
 class AccidentalAdjustmentCommand(Command):
-    r'''Accidental adjustment command.
+    r"""
+    Accidental adjustment command.
 
     ..  container:: example
 
@@ -88,7 +89,7 @@ class AccidentalAdjustmentCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -122,8 +123,9 @@ class AccidentalAdjustmentCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Inserts ``selector`` output in container.
-        '''
+        """
+        Inserts ``selector`` output in container.
+        """
         if argument is None:
             return
         if self.selector is not None:
@@ -165,18 +167,21 @@ class AccidentalAdjustmentCommand(Command):
 
     @property
     def cautionary(self) -> typing.Optional[bool]:
-        r'''Is true when command makes accidentals cautionary.
-        '''
+        """
+        Is true when command makes accidentals cautionary.
+        """
         return self._cautionary
 
     @property
     def forced(self) -> typing.Optional[bool]:
-        r'''Is true when command forces accidentals.
-        '''
+        """
+        Is true when command forces accidentals.
+        """
         return self._forced
 
     @property
     def parenthesized(self) -> typing.Optional[bool]:
-        r'''Is true when command parenthesizes accidentals.
-        '''
+        """
+        Is true when command parenthesizes accidentals.
+        """
         return self._parenthesized

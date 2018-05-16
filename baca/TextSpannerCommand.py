@@ -8,7 +8,8 @@ from .Typing import Tweak
 
 
 class TextSpannerCommand(Command):
-    r'''Text spanner command.
+    r"""
+    Text spanner command.
 
     ..  container:: example
 
@@ -161,7 +162,7 @@ class TextSpannerCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -217,8 +218,9 @@ class TextSpannerCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on `argument`.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if self.text is None:
@@ -259,24 +261,28 @@ class TextSpannerCommand(Command):
 
     @property
     def lilypond_id(self) -> typing.Optional[int]:
-        r'''Gets LilyPond ID.
-        '''
+        """
+        Gets LilyPond ID.
+        """
         return self._lilypond_id
 
     @property
     def line_segment(self) -> typing.Optional[abjad.LineSegment]:
-        r'''Gets line segment.
-        '''
+        """
+        Gets line segment.
+        """
         return self._line_segment
 
     @property
     def text(self) -> abjad.Markup:
-        r'''Gets text.
-        '''
+        """
+        Gets text.
+        """
         return self._text
 
     @property
     def tweaks(self) -> typing.Optional[typing.List[Tweak]]:
-        r'''Gets tweaks.
-        '''
+        """
+        Gets tweaks.
+        """
         return self._tweaks

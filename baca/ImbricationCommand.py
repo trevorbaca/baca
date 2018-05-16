@@ -6,7 +6,8 @@ from .Command import Command
 
 
 class ImbricationCommand(Command):
-    r'''Imbrication command.
+    r"""
+    Imbrication command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -525,7 +526,7 @@ class ImbricationCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -583,7 +584,8 @@ class ImbricationCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, container=None):
-        r'''Calls command on `container`.
+        r"""
+        Calls command on `container`.
 
         ..  container:: example
 
@@ -1339,7 +1341,7 @@ class ImbricationCommand(Command):
                 >>
 
         Returns new container.
-        '''
+        """
         original_container = container
         container = copy.deepcopy(container)
         abjad.override(container).tuplet_bracket.stencil = False
@@ -1486,7 +1488,8 @@ class ImbricationCommand(Command):
 
     @property
     def allow_unused_pitches(self):
-        r'''Is true when specifier allows unused pitches.
+        r"""
+        Is true when specifier allows unused pitches.
 
         ..  container:: example
 
@@ -1665,34 +1668,37 @@ class ImbricationCommand(Command):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._allow_unused_pitches
 
     @property
     def by_pitch_class(self):
-        r'''Is true when specifier matches on pitch-class rather than pitch.
+        """
+        Is true when specifier matches on pitch-class rather than pitch.
 
         Set to true, false or none.
 
         Defaults to none.
 
         Returns true, false or none.
-        '''
+        """
         return self._by_pitch_class
 
     @property
     def extend_beam(self):
-        r'''Is true when specifier extends beam.
+        """
+        Is true when specifier extends beam.
 
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._extend_beam
 
     @property
     def hocket(self):
-        r'''Is true when specifier hockets voices.
+        r"""
+        Is true when specifier hockets voices.
 
         ..  container:: example
 
@@ -1860,20 +1866,22 @@ class ImbricationCommand(Command):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._hocket
 
     @property
     def segment(self):
-        r'''Gets to-be-imbricated segment.
+        """
+        Gets to-be-imbricated segment.
 
         Returns pitch or pitch-class segment.
-        '''
+        """
         return self._segment
 
     @property
     def selector(self):
-        r'''Gets selector.
+        r"""
+        Gets selector.
 
         ..  container:: example
 
@@ -2071,12 +2079,13 @@ class ImbricationCommand(Command):
         Set to selector or none.
 
         Returns selector or none.
-        '''
+        """
         return self._selector
 
     @property
     def specifiers(self):
-        r'''Gets specifiers.
+        r"""
+        Gets specifiers.
 
         ..  container:: example
 
@@ -2655,12 +2664,13 @@ class ImbricationCommand(Command):
                 >>
 
         Returns specifiers or none.
-        '''
+        """
         return list(self._specifiers)
 
     @property
     def truncate_ties(self):
-        r'''Is true when specifier truncates ties.
+        r"""
+        Is true when specifier truncates ties.
 
         ..  container:: example
 
@@ -2810,13 +2820,14 @@ class ImbricationCommand(Command):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._truncate_ties
 
     @property
     def voice_name(self):
-        r'''Gets voice name.
+        """
+        Gets voice name.
 
         Returns string.
-        '''
+        """
         return self._voice_name

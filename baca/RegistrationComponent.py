@@ -4,7 +4,7 @@ from abjad.tools.abctools.AbjadValueObject import AbjadValueObject
 
 
 class RegistrationComponent(AbjadValueObject):
-    '''Registration component.
+    """Registration component.
 
     ..  container:: example
 
@@ -16,7 +16,7 @@ class RegistrationComponent(AbjadValueObject):
         >>> component
         RegistrationComponent(source_pitch_range=PitchRange('[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -46,39 +46,39 @@ class RegistrationComponent(AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when `argument` is a registration component
+        r"""Is true when `argument` is a registration component
         with source pitch range and target octave start pitch equal to those of
         this registration component. Otherwise false.
 
         Returns true or false.
-        '''
+        """
         return super(RegistrationComponent, self).__eq__(argument)
 
     def __format__(self, format_specification=''):
-        r'''Formats registration component.
+        r"""Formats registration component.
 
         Set `format_specification` to `''`, `'lilypond'` or `'storage'`.
 
         Returns string.
-        '''
+        """
         if format_specification in ('', 'storage'):
             return abjad.StorageFormatManager(self).get_storage_format()
         return str(self)
 
     def __hash__(self):
-        r'''Hashes registration component.
+        r"""Hashes registration component.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
         Returns integer.
-        '''
+        """
         return super(RegistrationComponent, self).__hash__()
 
     ### PUBLIC PROPERTIES ###
 
     @property
     def source_pitch_range(self):
-        r'''Gets source pitch range of registration component.
+        r"""Gets source pitch range of registration component.
 
         ..  container:: example
 
@@ -89,12 +89,12 @@ class RegistrationComponent(AbjadValueObject):
             PitchRange('[A0, C8]')
 
         Returns pitch range or none.
-        '''
+        """
         return self._source_pitch_range
 
     @property
     def target_octave_start_pitch(self):
-        r'''Gets target octave start pitch of registration component.
+        r"""Gets target octave start pitch of registration component.
 
         ..  container:: example
 
@@ -105,5 +105,5 @@ class RegistrationComponent(AbjadValueObject):
             NumberedPitch(15)
 
         Returns numbered pitch or none.
-        '''
+        """
         return self._target_octave_start_pitch

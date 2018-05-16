@@ -214,27 +214,27 @@ class HarmonicSeries(abjad.AbjadObject):
 
     @property
     def fundamental(self) -> abjad.NamedPitch:
-        r'''Gets fundamental.
+        r"""Gets fundamental.
 
         ..  container:: example
 
             >>> baca.HarmonicSeries('C2').fundamental
             NamedPitch('c,')
 
-        '''
+        """
         return self._fundamental
 
     ### PUBLIC METHODS ###
 
     def partial(self, n: int) -> Partial:
-        r'''Gets partial ``n``.
+        r"""Gets partial ``n``.
 
         ..  container:: example
 
             >>> baca.HarmonicSeries('C2').partial(7)
             Partial(fundamental=NamedPitch('c,'), number=7)
 
-        '''
+        """
         return Partial(
             fundamental=self.fundamental,
             number=n,

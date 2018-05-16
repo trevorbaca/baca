@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class DiatonicClusterCommand(Command):
-    r'''Diatonic cluster command.
+    r"""
+    Diatonic cluster command.
 
     ..  container:: example
 
@@ -24,7 +25,7 @@ class DiatonicClusterCommand(Command):
                 <f' g' a' b' c'' d''>4
             }
 
-    '''
+    """
 
     ### CLASS ATTRIBUTES ###
 
@@ -43,10 +44,11 @@ class DiatonicClusterCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if not self.widths:
@@ -86,12 +88,13 @@ class DiatonicClusterCommand(Command):
 
     @property
     def widths(self):
-        r'''Gets widths.
+        """
+        Gets widths.
 
         Defaults to none.
 
         Set to positive integers or none.
 
         Returns positive integers or none.
-        '''
+        """
         return self._widths

@@ -3,7 +3,8 @@ import baca
 
 
 class Constellation(abjad.AbjadObject):
-    r'''Constellation.
+    r"""
+    Constellation.
 
     ..  container:: example
 
@@ -34,7 +35,7 @@ class Constellation(abjad.AbjadObject):
         Constellation(120)
         Constellation(108)
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -53,7 +54,8 @@ class Constellation(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __contains__(self, pitch_set):
-        r'''Is true when constellation contains `pitch_set`.
+        """
+        Is true when constellation contains ``pitch_set``.
 
         ..  container:: example
 
@@ -73,11 +75,12 @@ class Constellation(abjad.AbjadObject):
             False
 
         Returns true or false.
-        '''
+        """
         return pitch_set in self._pitch_number_lists
 
     def __getitem__(self, argument):
-        r'''Gets item or slice identified by `argument`.
+        """
+        Gets item or slice identified by ``argument``.
 
         ..  container:: example
 
@@ -86,11 +89,12 @@ class Constellation(abjad.AbjadObject):
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         Returns list.
-        '''
+        """
         return self._pitch_number_lists.__getitem__(argument)
 
     def __len__(self):
-        r'''Gets length of constellation.
+        """
+        Gets length of constellation.
 
         ..  container::
 
@@ -99,11 +103,12 @@ class Constellation(abjad.AbjadObject):
             180
 
         Returns nonnegative integer.
-        '''
+        """
         return len(self._pitch_number_lists)
 
     def __repr__(self):
-        r'''Gets interpreter representation of constellation.
+        """
+        Gets interpreter representation of constellation.
 
         ..  container:: example
 
@@ -111,7 +116,7 @@ class Constellation(abjad.AbjadObject):
             >>> constellation
             Constellation(180)
 
-        '''
+        """
         return f'{type(self).__name__}({len(self)})'
 
     ### PRIVATE PROPERTIES ###
@@ -208,7 +213,8 @@ class Constellation(abjad.AbjadObject):
 
     @property
     def constellation_number(self):
-        r'''Gets constellation number.
+        """
+        Gets constellation number.
 
         ..  container:: example
 
@@ -217,12 +223,13 @@ class Constellation(abjad.AbjadObject):
             1
 
         Returns positive integer.
-        '''
+        """
         return self._circuit._constellations.index(self) + 1
 
     @property
     def generator_chord(self):
-        r"""Gets generator chord.
+        r"""
+        Gets generator chord.
 
         ..  container:: example
 
@@ -243,7 +250,7 @@ class Constellation(abjad.AbjadObject):
 
     @property
     def partitioned_generator_pitch_numbers(self):
-        r'''Gets partitioned generator pitch numbers.
+        r"""Gets partitioned generator pitch numbers.
 
         ..  container:: example
 
@@ -259,12 +266,12 @@ class Constellation(abjad.AbjadObject):
             [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 
         Returns list of lists.
-        '''
+        """
         return self._partitioned_generator_pitch_numbers
 
     @property
     def pitch_range(self):
-        r'''Gets pitch range of constellation.
+        r"""Gets pitch range of constellation.
 
         ..  container:: example
 
@@ -272,7 +279,7 @@ class Constellation(abjad.AbjadObject):
             >>> constellation.pitch_range
             PitchRange('[A0, C8]')
 
-        '''
+        """
         return self._circuit.pitch_range
 
     @property
@@ -300,7 +307,7 @@ class Constellation(abjad.AbjadObject):
 
     @staticmethod
     def constellate(cells, range):
-        r'''Constellates `cells`.
+        r"""Constellates `cells`.
 
         ..  container:: example
 
@@ -334,7 +341,7 @@ class Constellation(abjad.AbjadObject):
             Sequence([19, 27, 28, 29, 32, 35])
 
         Returns outer product of octave transpositions of `cells` in `range`.
-        '''
+        """
         if not isinstance(range, abjad.PitchRange):
             raise TypeError(f'pitch range only: {range!r}.')
         transposition_list = []
@@ -351,7 +358,7 @@ class Constellation(abjad.AbjadObject):
         return result
 
     def get_chord(self, chord_number):
-        '''Gets chord with 1-indexed chord number.
+        """Gets chord with 1-indexed chord number.
 
         ..  container:: example
 
@@ -360,13 +367,13 @@ class Constellation(abjad.AbjadObject):
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         Returns list of numbers.
-        '''
+        """
         assert 1 <= chord_number
         chord_index = chord_number - 1
         return self._pitch_number_lists[chord_index]
 
     def get_number_of_chord(self, chord):
-        r'''Gets number of chord.
+        r"""Gets number of chord.
 
         ..  container:: example
 
@@ -376,7 +383,7 @@ class Constellation(abjad.AbjadObject):
             17
 
         Returns positive integer.
-        '''
+        """
         chord = abjad.Chord(chord, (1, 4))
         pitch_numbers = [_.number for _ in chord.written_pitches]
         pitch_numbers = baca.sequence(items=pitch_numbers)

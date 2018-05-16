@@ -4,7 +4,7 @@ from .ScoreTemplate import ScoreTemplate
 
 
 class ViolinSoloScoreTemplate(ScoreTemplate):
-    r'''Violin solo score template.
+    r"""Violin solo score template.
 
     ..  container:: example
 
@@ -107,7 +107,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -116,8 +116,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:
-        r'''Calls violin solo score template.
-        '''
+        r"""Calls violin solo score template.
+        """
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 

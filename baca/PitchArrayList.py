@@ -2,7 +2,7 @@ import abjad
 
 
 class PitchArrayList(abjad.TypedList):
-    r'''Pitch array list.
+    r"""Pitch array list.
 
     ..  container:: example
 
@@ -98,7 +98,7 @@ class PitchArrayList(abjad.TypedList):
                 ]
             )
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -112,7 +112,7 @@ class PitchArrayList(abjad.TypedList):
     ### PUBLIC METHODS ###
 
     def to_score(self):
-        r'''Makes score from pitch arrays.
+        r"""Makes score from pitch arrays.
 
         ..  container:: example
 
@@ -173,7 +173,7 @@ class PitchArrayList(abjad.TypedList):
         Creates one staff per pitch-array row.
 
         Returns score.
-        '''
+        """
         score = abjad.Score([])
         staff_group = abjad.StaffGroup([])
         score.append(staff_group)

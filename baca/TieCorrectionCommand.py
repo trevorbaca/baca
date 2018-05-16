@@ -6,14 +6,15 @@ from .Typing import Selector
 
 
 class TieCorrectionCommand(Command):
-    r'''Tie correction command.
+    """
+    Tie correction command.
 
     ..  container:: example
 
         >>> baca.TieCorrectionCommand()
         TieCorrectionCommand(selector=baca.pleaf(-1))
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -46,8 +47,9 @@ class TieCorrectionCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Applies command to result of selector called on `argument`.
-        '''
+        """
+        Applies command to result of selector called on ``argument``.
+        """
         if argument is None:
             return
         if self.selector is not None:
@@ -151,20 +153,23 @@ class TieCorrectionCommand(Command):
 
     @property
     def direction(self) -> typing.Optional[abjad.HorizontalAlignment]:
-        r'''Gets direction.
+        """
+        Gets direction.
 
         Interprets none equal to right.
-        '''
+        """
         return self._direction
 
     @property
     def repeat(self) -> typing.Optional[bool]:
-        r'''Is true when newly created ties should be repeat ties.
-        '''
+        """
+        Is true when newly created ties should be repeat ties.
+        """
         return self._repeat
 
     @property
     def untie(self) -> typing.Optional[bool]:
-        r'''Is true when command severs tie instead of creating tie.
-        '''
+        """
+        Is true when command severs tie instead of creating tie.
+        """
         return self._untie

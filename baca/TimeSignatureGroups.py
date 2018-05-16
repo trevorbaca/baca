@@ -2,7 +2,7 @@ import abjad
 
 
 class TimeSignatureGroups(abjad.AbjadObject):
-    r'''Time signature groups.
+    r"""Time signature groups.
 
     ..  container:: example
 
@@ -34,7 +34,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
 
         >>> abjad.show(groups, strict=89) # doctest: +SKIP
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -57,7 +57,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __illustrate__(self):
-        r'''Illustrates time signature groups.
+        r"""Illustrates time signature groups.
 
         >>> abjad.show(groups, strict=89) # doctest: +SKIP
 
@@ -131,7 +131,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
             >>
 
         Returns LilyPond file.
-        '''
+        """
         staff = abjad.Staff()
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):
@@ -178,8 +178,8 @@ class TimeSignatureGroups(abjad.AbjadObject):
 
     @property
     def groups(self):
-        r'''Gets groups.
+        r"""Gets groups.
 
         Returns list of time signature lists.
-        '''
+        """
         return self._groups

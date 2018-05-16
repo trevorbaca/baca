@@ -9,7 +9,8 @@ from .Typing import Tweak
 
 
 class IndicatorCommand(Command):
-    r'''Indicator command.
+    r"""
+    Indicator command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -212,7 +213,7 @@ class IndicatorCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -261,8 +262,9 @@ class IndicatorCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on ``argument``.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if self.indicators is None:
@@ -316,13 +318,15 @@ class IndicatorCommand(Command):
 
     @property
     def context(self) -> typing.Optional[str]:
-        r'''Gets context name.
-        '''
+        """
+        Gets context name.
+        """
         return self._context
 
     @property
     def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
-        r'''Gets indicators.
+        r"""
+        Gets indicators.
 
         ..  container:: example
 
@@ -469,17 +473,19 @@ class IndicatorCommand(Command):
                     }
                 >>
 
-        '''
+        """
         return self._indicators
 
     @property
     def redundant(self) -> typing.Optional[bool]:
-        r'''Is true when command is redundant.
-        '''
+        """
+        Is true when command is redundant.
+        """
         return self._redundant
 
     @property
     def tweaks(self) -> typing.Optional[typing.List[Tweak]]:
-        r'''Gets tweaks.
-        '''
+        """
+        Gets tweaks.
+        """
         return self._tweaks

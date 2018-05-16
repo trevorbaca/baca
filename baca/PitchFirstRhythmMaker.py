@@ -6,7 +6,7 @@ from abjad import rhythmmakertools as rhythmos
 
 
 class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
-    r'''Collection rhythm-maker.
+    r"""Collection rhythm-maker.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -121,7 +121,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 }   % measure
             }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -191,7 +191,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         state=None,
         total_collections=None,
         ):
-        r'''Calls rhythm-maker on `collections`.
+        r"""Calls rhythm-maker on `collections`.
 
         ..  container:: example
 
@@ -304,7 +304,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 )
 
         Returns selections together with state manifest.
-        '''
+        """
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
         selections = self._make_music(
@@ -441,7 +441,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @classmethod
     def _make_accelerando_multipliers(class_, durations, exponent):
-        r'''Makes accelerando multipliers.
+        r"""Makes accelerando multipliers.
 
         ..  container:: example
 
@@ -494,7 +494,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set exponent greater than 1 for ritardando.
 
         Set exponent less than 1 for accelerando.
-        '''
+        """
         pairs = abjad.mathtools.cumulative_sums_pairwise(durations)
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
@@ -751,7 +751,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def acciaccatura_specifiers(self):
-        r'''Gets acciaccatura specifiers.
+        r"""Gets acciaccatura specifiers.
 
         ..  container:: example
 
@@ -942,12 +942,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to acciaccatura specifiers or none.
 
         Returns acciaccatura specifiers or none.
-        '''
+        """
         return self._acciaccatura_specifiers
 
     @property
     def beam_specifier(self):
-        r'''Gets beam specifier.
+        r"""Gets beam specifier.
 
         ..  container:: example
 
@@ -1315,12 +1315,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to beam specifier or none.
 
         Returns beam specifier or none.
-        '''
+        """
         return rhythmos.RhythmMaker.beam_specifier.fget(self)
 
     @property
     def division_masks(self):
-        r'''Gets division masks.
+        r"""Gets division masks.
 
         ..  container:: example
 
@@ -1458,12 +1458,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to division masks or none.
 
         Returns tuple of division masks or none.
-        '''
+        """
         return rhythmos.RhythmMaker.division_masks.fget(self)
 
     @property
     def duration_specifier(self):
-        r'''Gets duration specifier.
+        r"""Gets duration specifier.
 
         ..  container:: example
 
@@ -1587,12 +1587,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to duration specifier or none.
 
         Returns duration specifier or none.
-        '''
+        """
         return rhythmos.RhythmMaker.duration_specifier.fget(self)
 
     @property
     def logical_tie_masks(self):
-        r'''Gets logical tie masks.
+        r"""Gets logical tie masks.
 
         ..  container:: example
 
@@ -1704,12 +1704,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to patterns or none.
 
         Returns tuple patterns or none.
-        '''
+        """
         return rhythmos.RhythmMaker.logical_tie_masks.fget(self)
 
     @property
     def talea(self):
-        r'''Gets talea.
+        r"""Gets talea.
 
         ..  container:: example
 
@@ -1817,12 +1817,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to talea or none.
 
         Returns talea.
-        '''
+        """
         return self._talea
 
     @property
     def tie_specifier(self):
-        r'''Gets tie specifier.
+        r"""Gets tie specifier.
 
         ..  container:: example
 
@@ -1936,12 +1936,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to tie specifier or none.
 
         Returns tie specifier or none.
-        '''
+        """
         return rhythmos.RhythmMaker.tie_specifier.fget(self)
 
     @property
     def time_treatments(self):
-        r'''Gets time treatments.
+        r"""Gets time treatments.
 
         ..  container:: example
 
@@ -2543,12 +2543,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         positive durations; and the strings ``'accel'`` and ``'rit'``.
 
         Returns tuple of time treatments or none.
-        '''
+        """
         return self._time_treatments
 
     @property
     def tuplet_specifier(self):
-        r'''Gets tuplet specifier.
+        r"""Gets tuplet specifier.
 
         ..  container:: example
 
@@ -2688,17 +2688,17 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         Set to tuplet specifier or none.
 
         Returns tuplet specifier or none.
-        '''
+        """
         return rhythmos.RhythmMaker.tuplet_specifier.fget(self)
 
     ### PUBLIC METHODS ###
 
     @staticmethod
     def show(selections, time_signatures=None):
-        r'''Makes rhythm-maker-style LilyPond file for documentation examples.
+        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
-        '''
+        """
         return abjad.LilyPondFile.rhythm(
             selections,
             time_signatures=time_signatures,

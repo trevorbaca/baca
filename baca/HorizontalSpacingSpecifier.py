@@ -7,7 +7,7 @@ from .SpacingSection import SpacingSection
 
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
-    r'''Horizontal spacing specifier.
+    r"""Horizontal spacing specifier.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -802,7 +802,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Minimum duration in each measure is taken from the **nonmultiplied**
         duration of each note.
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -875,8 +875,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker=None) -> None:
-        r'''Calls command on `segment_maker`.
-        '''
+        r"""Calls command on `segment_maker`.
+        """
         score = segment_maker.score
         skips = baca.select(score['GlobalSkips']).skips()
         programmatic = True
@@ -995,7 +995,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     @property
     def bol_measure_numbers(self) -> typing.List[int]:
-        r'''Gets beginning-of-line measure numbers.
+        r"""Gets beginning-of-line measure numbers.
 
         ..  container:: example
 
@@ -1011,7 +1011,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> spacing.bol_measure_numbers
             [95, 103]
 
-        '''
+        """
         bol_measure_numbers = []
         if self.breaks and self.breaks.bol_measure_numbers:
             first_breaks_measure_number = self.breaks.bol_measure_numbers[0]
@@ -1023,13 +1023,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     @property
     def breaks(self) -> typing.Optional[BreakMeasureMap]:
-        r'''Gets break measure map.
-        '''
+        r"""Gets break measure map.
+        """
         return self._breaks
 
     @property
     def eol_measure_numbers(self) -> typing.List[int]:
-        r'''Gets end-of-line measure numbers.
+        r"""Gets end-of-line measure numbers.
 
         ..  container:: example
 
@@ -1045,7 +1045,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> spacing.eol_measure_numbers
             [102, 112]
 
-        '''
+        """
         eol_measure_numbers = []
         for bol_measure_number in self.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
@@ -1059,16 +1059,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     def fermata_measure_duration(self) -> typing.Optional[
         abjad.NonreducedFraction
         ]:
-        r'''Gets fermata measure duration.
+        r"""Gets fermata measure duration.
 
         Sets fermata measures to exactly this duration when set; ignores
         minimum duration and multiplier.
-        '''
+        """
         return self._fermata_measure_duration
 
     @property
     def fermata_measure_numbers(self) -> typing.List[int]:
-        r'''Gets fermata measure numbers.
+        r"""Gets fermata measure numbers.
 
         ..  container:: example
 
@@ -1084,12 +1084,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> spacing.fermata_measure_numbers
             [103, 105]
 
-        '''
+        """
         return self._fermata_measure_numbers
 
     @property
     def first_measure_number(self) -> int:
-        r'''Gets first measure number.
+        r"""Gets first measure number.
 
         ..  container:: example
 
@@ -1105,12 +1105,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> spacing.first_measure_number
             95
 
-        '''
+        """
         return self._first_measure_number
 
     @property
     def last_measure_number(self) -> typing.Optional[int]:
-        r'''Gets last measure number.
+        r"""Gets last measure number.
 
         ..  container:: example
 
@@ -1129,7 +1129,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Returns none when first measure number is not defined.
 
         Returns none when measure count is not defined.
-        '''
+        """
         if (self.first_measure_number is not None and
             self.measure_count is not None):
             return self.first_measure_number + self.measure_count - 1
@@ -1138,7 +1138,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     @property
     def magic_lilypond_eol_adjustment(self):
-        r'''Gets magic LilyPond EOL adjustment.
+        r"""Gets magic LilyPond EOL adjustment.
 
         ..  container
 
@@ -1157,12 +1157,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Optically determined to correct LilyPond end-of-line spacing bug.
 
         Class property.
-        '''
+        """
         return self._magic_lilypond_eol_adjustment
 
     @property
     def measure_count(self) -> int:
-        r'''Gets measure count.
+        r"""Gets measure count.
 
         ..  container:: example
 
@@ -1178,27 +1178,27 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> spacing.measure_count
             18
 
-        '''
+        """
         return self._measure_count
 
     @property
     def measures(self) -> abjad.OrderedDict:
-        r'''Gets measure overrides.
-        '''
+        r"""Gets measure overrides.
+        """
         return self._measures
 
     @property
     def minimum_duration(self) -> typing.Optional[abjad.NonreducedFraction]:
-        r'''Gets minimum duration.
+        r"""Gets minimum duration.
 
         Defaults to none and interprets none equal to ``1/8``.
-        '''
+        """
         return self._minimum_duration
 
     @property
     def multiplier(self) -> typing.Optional[abjad.Multiplier]:
-        r'''Gets multiplier.
-        '''
+        r"""Gets multiplier.
+        """
         return self._multiplier
 
     ### PUBLIC METHODS ###
@@ -1208,7 +1208,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         measures: typing.Union[int, tuple, list],
         pair: typing.Union[typing.Tuple[int, int], str],
         ) -> None:
-        r'''Overrides `measures` with spacing `pair`.
+        r"""Overrides `measures` with spacing `pair`.
 
         ..  container:: example
 
@@ -1403,7 +1403,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 ...
             TypeError: measures must be int, pair or list (not 'all').
 
-        '''
+        """
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
             number = self._coerce_measure_number(measures)

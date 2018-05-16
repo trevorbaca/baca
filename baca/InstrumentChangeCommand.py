@@ -6,14 +6,16 @@ from .Typing import Selector
 
 
 class InstrumentChangeCommand(IndicatorCommand):
-    r'''Instrument change command.
-    '''
+    """
+    Instrument change command.
+    """
 
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Inserts ``selector`` output in container and sets part assignment.
-        '''
+        """
+        Inserts ``selector`` output in container and sets part assignment.
+        """
         if argument is None:
             return
         if self.selector is not None:

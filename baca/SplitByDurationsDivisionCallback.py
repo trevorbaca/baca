@@ -3,7 +3,7 @@ import baca
 
 
 class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
-    r'''Split-by-durations division callback.
+    r"""Split-by-durations division callback.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -110,7 +110,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     division.
 
     Follows the two-step configure-once / call-repeatedly pattern shown here.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -161,7 +161,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r'''Calls division-maker on `divisions`.
+        r"""Calls division-maker on `divisions`.
 
         ..  container:: example
 
@@ -374,7 +374,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             Division((3, 16), start_offset=Offset(33, 16))
 
         Returns possibly empty list of division lists.
-        '''
+        """
         divisions = divisions or []
         if not divisions:
             return divisions
@@ -474,7 +474,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def compound_meter_multiplier(self):
-        r'''Gets compound meter multiplier of callback.
+        r"""Gets compound meter multiplier of callback.
 
         ..  container:: example
 
@@ -565,12 +565,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Set to multiplier.
 
         Returns multiplier.
-        '''
+        """
         return self._compound_meter_multiplier
 
     @property
     def cyclic(self):
-        r'''Is true when division-maker reads durations cyclically for each
+        r"""Is true when division-maker reads durations cyclically for each
         input division.
 
         Is false when division-maker reads durations only once per input
@@ -678,12 +678,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Set to true or false.
 
         Returns true or false.
-        '''
+        """
         return self._cyclic
 
     @property
     def durations(self):
-        r'''Gets durations of division-maker.
+        r"""Gets durations of division-maker.
 
         ..  container:: example
 
@@ -777,12 +777,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Set to durations or none.
 
         Returns durations or none.
-        '''
+        """
         return self._pattern
 
     @property
     def pattern_rotation_index(self):
-        r'''Gets durations rotation index of division-maker.
+        r"""Gets durations rotation index of division-maker.
 
         ..  container:: example
 
@@ -934,12 +934,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Set to integer.
 
         Returns integer.
-        '''
+        """
         return self._pattern_rotation_index
 
     @property
     def remainder(self):
-        r'''Gets direction to which any remainder will be positioned.
+        r"""Gets direction to which any remainder will be positioned.
 
         ..  container:: example
 
@@ -1091,12 +1091,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Set to left or right.
 
         Returns left or right.
-        '''
+        """
         return self._remainder
 
     @property
     def remainder_fuse_threshold(self):
-        r'''Gets remainder fuse threshold of division-maker.
+        r"""Gets remainder fuse threshold of division-maker.
 
         ..  container:: example
 
@@ -1245,17 +1245,17 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Set to duration or none.
 
         Returns duration or none.
-        '''
+        """
         return self._remainder_fuse_threshold
 
     ### PUBLIC METHODS ###
 
     @staticmethod
     def show(music, divisions):
-        r'''Makes rhythm-maker-style LilyPond file for documentation examples.
+        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
-        '''
+        """
         return abjad.LilyPondFile.rhythm(
             music,
             divisions=divisions,

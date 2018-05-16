@@ -6,14 +6,15 @@ from .Typing import Selector
 
 
 class MetronomeMarkCommand(Command):
-    r'''Metronome mark command.
+    """
+    Metronome mark command.
 
     ..  container:: example
 
         >>> baca.MetronomeMarkCommand()
         MetronomeMarkCommand(selector=baca.leaf(0), tags=[])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -47,8 +48,9 @@ class MetronomeMarkCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Applies command to result of selector called on `argument`.
-        '''
+        """
+        Applies command to result of selector called on `argument`.
+        """
         from .SegmentMaker import SegmentMaker
         if argument is None:
             return
@@ -92,12 +94,14 @@ class MetronomeMarkCommand(Command):
     def key(self) -> typing.Optional[
             typing.Union[str, abjad.Accelerando, abjad.Ritardando]
             ]:
-        r'''Gets metronome mark key.
-        '''
+        """
+        Gets metronome mark key.
+        """
         return self._key
 
     @property
     def redundant(self) -> typing.Optional[bool]:
-        r'''Is true when command is redundant.
-        '''
+        """
+        Is true when command is redundant.
+        """
         return self._redundant

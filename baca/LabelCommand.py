@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class LabelCommand(Command):
-    r'''Label command.
+    r"""
+    Label command.
 
     ..  container:: example
 
@@ -237,7 +238,7 @@ class LabelCommand(Command):
                 }
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ##
 
@@ -256,10 +257,11 @@ class LabelCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if self.expression is None:
@@ -272,12 +274,13 @@ class LabelCommand(Command):
 
     @property
     def expression(self):
-        r'''Gets expression.
+        """
+        Gets expression.
 
         Defaults to none.
 
         Set to label expression or none.
 
         Returns label expression or none.
-        '''
+        """
         return self._expression

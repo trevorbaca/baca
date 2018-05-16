@@ -4,14 +4,14 @@ import typing
 
 
 class Partial(abjad.AbjadObject):
-    r'''Partial.
+    r"""Partial.
 
     ..  container:: example
 
         >>> baca.Partial('C1', 7)
         Partial(fundamental=NamedPitch('c,,'), number=7)
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -50,48 +50,48 @@ class Partial(abjad.AbjadObject):
 
     @property
     def approximation(self) -> abjad.NamedPitch:
-        r'''Gets approximation.
+        r"""Gets approximation.
 
         ..  container:: example
 
             >>> baca.Partial('C1', 7).approximation
             NamedPitch('bf')
 
-        '''
+        """
         return self._approximation
 
     @property
     def deviation(self) -> int:
-        r'''Gets deviation in cents.
+        r"""Gets deviation in cents.
 
         ..  container:: example
 
             >>> baca.Partial('C1', 7).deviation
             -31
 
-        '''
+        """
         return self._deviation
 
     @property
     def fundamental(self) -> abjad.NamedPitch:
-        r'''Gets fundamental.
+        r"""Gets fundamental.
 
         ..  container:: example
 
             >>> baca.Partial('C1', 7).fundamental
             NamedPitch('c,,')
 
-        '''
+        """
         return self._fundamental
 
     @property
     def number(self) -> int:
-        r'''Gets number.
+        r"""Gets number.
 
         ..  container:: example
 
             >>> baca.Partial('C1', 7).number
             7
 
-        '''
+        """
         return self._number

@@ -4,14 +4,15 @@ from .Command import Command
 
 
 class VoltaCommand(Command):
-    r'''Volta command.
+    """
+    Volta command.
 
     ..  container:: example
 
         >>> baca.VoltaCommand()
         VoltaCommand()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -21,8 +22,9 @@ class VoltaCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Applies command to result of selector called on `argument`.
-        '''
+        """
+        Applies command to result of selector called on ``argument``.
+        """
         if argument is None:
             return
         if self.selector is not None:

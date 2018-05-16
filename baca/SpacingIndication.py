@@ -2,7 +2,7 @@ import abjad
 
 
 class SpacingIndication(abjad.AbjadValueObject):
-    r'''Spacing indication.
+    r"""Spacing indication.
 
     LilyPond ``Score.proportionalNotationDuration`` will equal
     ``proportional_notation_duration`` when tempo equals ``tempo_indication``.
@@ -26,7 +26,7 @@ class SpacingIndication(abjad.AbjadValueObject):
     SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Spacing indications are immutable.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -65,9 +65,9 @@ class SpacingIndication(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Spacing indications compare equal when normalized
+        r"""Spacing indications compare equal when normalized
         spacing durations compare equal.
-        '''
+        """
         if isinstance(argument, SpacingIndication):
             if self.normalized_spacing_duration == \
                 argument.normalized_spacing_duration:
@@ -75,12 +75,12 @@ class SpacingIndication(abjad.AbjadValueObject):
         return False
 
     def __hash__(self):
-        r'''Hashes spacing indication.
+        r"""Hashes spacing indication.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
         Returns integer.
-        '''
+        """
         return super(SpacingIndication, self).__hash__()
 
     ### PRIVATE METHODS ###
@@ -99,10 +99,10 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     @property
     def normalized_spacing_duration(self):
-        r'''Proportional notation duration normalized to 60 MM.
+        r"""Proportional notation duration normalized to 60 MM.
 
         Returns duration.
-        '''
+        """
         indication = self.tempo_indication
         scalar = indication.reference_duration / indication.units_per_minute * \
             60 / abjad.Duration(1, 4)
@@ -110,16 +110,16 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     @property
     def proportional_notation_duration(self):
-        r'''LilyPond proportional notation duration of spacing indication.
+        r"""LilyPond proportional notation duration of spacing indication.
 
         Returns duration.
-        '''
+        """
         return self._proportional_notation_duration
 
     @property
     def tempo_indication(self):
-        r'''MetronomeMark of spacing indication.
+        r"""MetronomeMark of spacing indication.
 
         Returns tempo.
-        '''
+        """
         return self._tempo_indication

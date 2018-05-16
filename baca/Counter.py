@@ -2,7 +2,7 @@ import abjad
 
 
 class Counter(abjad.AbjadObject):
-    r'''Counter.
+    r"""Counter.
 
     ..  container:: example
 
@@ -55,7 +55,7 @@ class Counter(abjad.AbjadObject):
         >>> counter(-2), counter.current
         (-2, 10.5)
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -75,10 +75,10 @@ class Counter(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, count=1):
-        r'''Calls counter.
+        r"""Calls counter.
 
         Returns new value.
-        '''
+        """
         current = self.current + count
         self._current = current
         return count
@@ -87,18 +87,18 @@ class Counter(abjad.AbjadObject):
 
     @property
     def current(self):
-        r'''Gets current value.
+        r"""Gets current value.
 
         Returns integer.
-        '''
+        """
         return self._current
 
     @property
     def start(self):
-        r'''Gets start value.
+        r"""Gets start value.
 
         Set to integer.
 
         Returns integer.
-        '''
+        """
         return self._start

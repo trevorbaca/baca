@@ -7,7 +7,7 @@ import itertools
 
 
 class Sequence(abjad.Sequence):
-    r'''Sequence.
+    r"""Sequence.
 
     ..  container:: example
 
@@ -165,7 +165,7 @@ class Sequence(abjad.Sequence):
                     \override Score.BarLine.transparent = ##f
                 }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -246,7 +246,7 @@ class Sequence(abjad.Sequence):
         string_template_callback='_make_accumulate_string_template',
         )
     def accumulate(self, operands=None, count=None):
-        r'''Accumulates `operands` calls against sequence to identity.
+        r"""Accumulates `operands` calls against sequence to identity.
 
         ..  container:: example
 
@@ -747,7 +747,7 @@ class Sequence(abjad.Sequence):
         Returns sequence of length `count` + 1 with integer `count`.
 
         Returns sequence of orbit length with `count` set to identity.
-        '''
+        """
         if count is None:
             count = abjad.Exact
         if self._expression:
@@ -788,7 +788,7 @@ class Sequence(abjad.Sequence):
         superscript='count',
         )
     def boustrophedon(self, count=2):
-        r'''Iterates sequence boustrophedon.
+        r"""Iterates sequence boustrophedon.
 
         ..  container:: example
 
@@ -904,7 +904,7 @@ class Sequence(abjad.Sequence):
                     }
 
         Returns new sequence.
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = []
@@ -934,7 +934,7 @@ class Sequence(abjad.Sequence):
         return type(self)(items=result)
 
     def degree_of_rotational_symmetry(self):
-        '''Gets degree of rotational symmetry.
+        """Gets degree of rotational symmetry.
 
         ..  container:: example
 
@@ -954,7 +954,7 @@ class Sequence(abjad.Sequence):
             1
 
         Returns positive integer.
-        '''
+        """
         degree_of_rotational_symmetry = 0
         for index in range(len(self)):
             rotation = self[index:] + self[:index]
@@ -964,7 +964,7 @@ class Sequence(abjad.Sequence):
         return degree_of_rotational_symmetry
 
     def group_by_sign(self, sign=(-1, 0, 1)):
-        r'''Groups sequence by sign of items.
+        r"""Groups sequence by sign of items.
 
         >>> sequence = baca.Sequence(
         ...     [0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6],
@@ -1091,7 +1091,7 @@ class Sequence(abjad.Sequence):
         Groups positive elements when ``1`` in `sign`.
 
         Returns nested sequence.
-        '''
+        """
         items = []
         pairs = itertools.groupby(self, abjad.mathtools.sign)
         for current_sign, group in pairs:
@@ -1104,7 +1104,7 @@ class Sequence(abjad.Sequence):
 
     @abjad.Signature(method_name='H')
     def helianthate(self, n=0, m=0):
-        r'''Helianthates sequence.
+        r"""Helianthates sequence.
 
         ..  container:: example
 
@@ -1247,7 +1247,7 @@ class Sequence(abjad.Sequence):
                 >>> expression([[1, 2, 3], [4, 5], [6, 7, 8]])
                 Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
 
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         start = list(self[:])
@@ -1285,7 +1285,7 @@ class Sequence(abjad.Sequence):
         subscript='counts',
         )
     def partition(self, counts=None):
-        r'''Partitions sequence cyclically by `counts` with overhang.
+        r"""Partitions sequence cyclically by `counts` with overhang.
 
         ..  container:: example
 
@@ -1337,7 +1337,7 @@ class Sequence(abjad.Sequence):
                         }
 
         Returns new sequence.
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.partition_by_counts(
@@ -1347,7 +1347,7 @@ class Sequence(abjad.Sequence):
             )
 
     def period_of_rotation(self):
-        '''Gets period of rotation.
+        """Gets period of rotation.
 
         ..  container:: example
 
@@ -1370,12 +1370,12 @@ class Sequence(abjad.Sequence):
         symmetry of sequence.
 
         Returns positive integer.
-        '''
+        """
         return len(self) // self.degree_of_rotational_symmetry()
 
     @abjad.Signature()
     def repeat_by(self, counts=None, cyclic=None):
-        r'''Repeat sequence elements at `counts`.
+        r"""Repeat sequence elements at `counts`.
 
         ..  container:: example
 
@@ -1548,7 +1548,7 @@ class Sequence(abjad.Sequence):
         Raises exception on negative counts.
 
         Returns new sequence.
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         if counts is None:
@@ -1568,7 +1568,7 @@ class Sequence(abjad.Sequence):
 
     @abjad.Signature()
     def reveal(self, count=None):
-        r'''Reveals contents of sequence.
+        r"""Reveals contents of sequence.
 
         ..  container:: example
 
@@ -1747,7 +1747,7 @@ class Sequence(abjad.Sequence):
                         }
 
         Returns new sequence.
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         if count is None:

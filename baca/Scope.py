@@ -4,7 +4,7 @@ import typing
 
 
 class Scope(abjad.AbjadObject):
-    r'''Scope.
+    r"""Scope.
 
     ..  container:: example
 
@@ -19,7 +19,7 @@ class Scope(abjad.AbjadObject):
             voice_name='ViolinMusicVoice',
             )
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -55,12 +55,12 @@ class Scope(abjad.AbjadObject):
 
     @property
     def stages(self) -> typing.Tuple[int, int]:
-        r'''Gets stages.
-        '''
+        r"""Gets stages.
+        """
         return self._stages
 
     @property
     def voice_name(self) -> typing.Optional[str]:
-        r'''Gets voice name.
-        '''
+        r"""Gets voice name.
+        """
         return self._voice_name

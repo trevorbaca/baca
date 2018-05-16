@@ -2,8 +2,8 @@ import abjad
 
 
 class Expression(abjad.Expression):
-    r'''Expression.
-    '''
+    r"""Expression.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -33,7 +33,7 @@ class Expression(abjad.Expression):
     ### PUBLIC METHODS ###
 
     def pitch_class_segment(self, **keywords):
-        r'''Makes pitch-class segment subclass expression.
+        r"""Makes pitch-class segment subclass expression.
 
         ..  container:: example
 
@@ -66,7 +66,7 @@ class Expression(abjad.Expression):
 
 
         Returns expression.
-        '''
+        """
         import baca
         class_ = baca.PitchClassSegment
         callback = self._make_initializer_callback(
@@ -79,13 +79,13 @@ class Expression(abjad.Expression):
         return abjad.new(expression, proxy_class=class_)
 
     def pitch_class_segments(self):
-        r'''Maps pitch-class segment subclass initializer to expression.
-        '''
+        r"""Maps pitch-class segment subclass initializer to expression.
+        """
         initializer = Expression().pitch_class_segment()
         return self.map(initializer)
 
     def select(self, **keywords):
-        r'''Makes select expression.
+        r"""Makes select expression.
 
         ..  container:: example
 
@@ -136,7 +136,7 @@ class Expression(abjad.Expression):
                 Note("gf'8")
 
         Returns expression.
-        '''
+        """
         import baca
         class_ = baca.Selection
         callback = self._make_initializer_callback(

@@ -6,7 +6,8 @@ from .Typing import Selector
 
 
 class ContainerCommand(Command):
-    r'''Container command.
+    r"""
+    Container command.
 
     ..  container:: example
 
@@ -90,7 +91,7 @@ class ContainerCommand(Command):
             >>
         >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -116,8 +117,9 @@ class ContainerCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Inserts ``selector`` output in container.
-        '''
+        """
+        Inserts ``selector`` output in container.
+        """
         if argument is None:
             return
         if self.selector is not None:
@@ -136,6 +138,7 @@ class ContainerCommand(Command):
 
     @property
     def identifier(self) -> typing.Optional[str]:
-        r'''Gets identifier.
-        '''
+        """
+        Gets identifier.
+        """
         return self._identifier

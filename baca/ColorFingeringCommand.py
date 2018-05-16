@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class ColorFingeringCommand(Command):
-    r'''Color fingering command.
+    r"""
+    Color fingering command.
 
     ..  container:: example
 
@@ -104,7 +105,7 @@ class ColorFingeringCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ##
 
@@ -124,10 +125,11 @@ class ColorFingeringCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if not self.numbers:
@@ -146,7 +148,8 @@ class ColorFingeringCommand(Command):
 
     @property
     def numbers(self):
-        r'''Gets numbers.
+        """
+        Gets numbers.
 
         ..  container:: example
 
@@ -155,5 +158,5 @@ class ColorFingeringCommand(Command):
             CyclicTuple([0, 1, 2, 1])
 
         Set to nonnegative integers.
-        '''
+        """
         return self._numbers

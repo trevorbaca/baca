@@ -3,7 +3,7 @@ import baca
 
 
 class PitchClassSet(abjad.PitchClassSet):
-    r'''Pitch-class set.
+    r"""Pitch-class set.
 
     ..  container:: example
 
@@ -24,7 +24,7 @@ class PitchClassSet(abjad.PitchClassSet):
                     <fs' g' bf' bqf'>1
                 }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -36,7 +36,7 @@ class PitchClassSet(abjad.PitchClassSet):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when segment equals `argument`. Otherwise false.
+        r"""Is true when segment equals `argument`. Otherwise false.
 
         ..  container:: example
 
@@ -51,7 +51,7 @@ class PitchClassSet(abjad.PitchClassSet):
             >>> set_2 == set_1
             True
 
-        '''
+        """
         if (not issubclass(type(argument), type(self)) and
             not issubclass(type(self), type(argument))):
             return False
@@ -60,7 +60,7 @@ class PitchClassSet(abjad.PitchClassSet):
     ### PUBLIC METHODS ###
 
     def to_pitch_classes(self):
-        r'''Makes new pitch-class set.
+        r"""Makes new pitch-class set.
 
         ..  container:: example
 
@@ -72,11 +72,11 @@ class PitchClassSet(abjad.PitchClassSet):
             PitchClassSet([6, 7, 10, 10.5])
 
         Returns new pitch-class set.
-        '''
+        """
         return abjad.new(self)
 
     def to_pitches(self):
-        r'''Makes pitch set.
+        r"""Makes pitch set.
 
         ..  container:: example
 
@@ -88,7 +88,7 @@ class PitchClassSet(abjad.PitchClassSet):
             PitchSet([6, 7, 10, 10.5])
 
         Returns pitch set.
-        '''
+        """
         if self.item_class is abjad.NamedPitchClass:
             item_class = abjad.NamedPitch
         elif self.item_class is abjad.NumberedPitchClass:

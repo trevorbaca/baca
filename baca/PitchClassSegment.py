@@ -4,7 +4,7 @@ import inspect
 
 
 class PitchClassSegment(abjad.PitchClassSegment):
-    r'''Pitch-class segment.
+    r"""Pitch-class segment.
 
     ..  container:: example
 
@@ -54,7 +54,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -66,7 +66,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when segment equals `argument`. Otherwise false.
+        r"""Is true when segment equals `argument`. Otherwise false.
 
         ..  container:: example
 
@@ -81,7 +81,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> segment_2 == segment_1
             True
 
-        '''
+        """
         if (not issubclass(type(argument), type(self)) and
             not issubclass(type(self), type(argument))):
             return False
@@ -91,7 +91,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
     @abjad.Signature(is_operator=True, method_name='A')
     def alpha(self):
-        r'''Gets alpha transform of segment.
+        r"""Gets alpha transform of segment.
 
         ..  container:: example
 
@@ -243,7 +243,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> isinstance(segment, baca.PitchClassSegment)
             True
 
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         numbers = []
@@ -313,7 +313,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return segment
 
     def arpeggiate_up(self):
-        r'''Arpeggiates pitch-class segment up.
+        r"""Arpeggiates pitch-class segment up.
 
         ..  container:: example
 
@@ -351,7 +351,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>
 
         Returns pitch segment.
-        '''
+        """
         specifier = baca.ArpeggiationSpacingSpecifier(direction=abjad.Up)
         result = specifier([self])
         assert len(result) == 1
@@ -360,7 +360,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return segment
 
     def chord(self):
-        r'''Changes segment to set.
+        r"""Changes segment to set.
 
         ..  container:: example
 
@@ -381,7 +381,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 }
 
         Returns pitch-class set.
-        '''
+        """
         return baca.PitchClassSet(
             items=self,
             item_class=self.item_class,
@@ -396,7 +396,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         rotation=False,
         transposition=False,
         ):
-        r'''Gets transforms of segment that match `segment_2`.
+        r"""Gets transforms of segment that match `segment_2`.
 
         ..  container:: example
 
@@ -465,7 +465,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> isinstance(transforms, list)
             True
 
-        '''
+        """
         result = []
         if not len(self) == len(segment_2):
             return result
@@ -490,7 +490,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         show_identity_operators=False,
         transposition=False,
         ):
-        r'''Gets transforms of `segment`.
+        r"""Gets transforms of `segment`.
 
         ..  container:: example
 
@@ -802,7 +802,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> isinstance(transforms, list)
             True
 
-        '''
+        """
         operators = []
         if transposition:
             for n in range(12):
@@ -861,7 +861,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return result
 
     def has_duplicates(self):
-        r'''Is true when pitch-class segment has duplicates.
+        r"""Is true when pitch-class segment has duplicates.
 
         ..  container:: example
 
@@ -912,11 +912,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             True
 
         Returns true or false.
-        '''
+        """
         return not len(set(self)) == len(self)
 
     def has_repeats(self):
-        r'''Is true when pitch-class segment has repeats.
+        r"""Is true when pitch-class segment has repeats.
 
         ..  container:: example
 
@@ -968,7 +968,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             True
 
         Returns true or false.
-        '''
+        """
         previous_item = None
         for item in self:
             if item == previous_item:
@@ -977,7 +977,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return False
 
     def sequence(self):
-        r'''Changes pitch-class segment into a sequence.
+        r"""Changes pitch-class segment into a sequence.
 
         ..  container:: example
 
@@ -1003,11 +1003,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             Sequence([NumberedPitchClass(10), NumberedPitchClass(11), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)])
 
         Returns sequence.
-        '''
+        """
         return baca.sequence(self)
 
     def space_down(self, bass=None, semitones=None, soprano=None):
-        r'''Spaces segment down.
+        r"""Spaces segment down.
 
         ..  container:: example
 
@@ -1073,7 +1073,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>
 
         Returns pitch segment.
-        '''
+        """
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=abjad.Down,
@@ -1088,7 +1088,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return segment
 
     def space_up(self, bass=None, semitones=None, soprano=None):
-        r'''Spaces segment up.
+        r"""Spaces segment up.
 
         ..  container:: example
 
@@ -1154,7 +1154,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>
 
         Returns pitch segment.
-        '''
+        """
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=abjad.Up,

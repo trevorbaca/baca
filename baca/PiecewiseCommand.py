@@ -10,8 +10,9 @@ from .Typing import Selector
 
 
 class PiecewiseCommand(Command):
-    r'''Piecewise command.
-    '''
+    """
+    Piecewise command.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -54,10 +55,11 @@ class PiecewiseCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on ``argument``.
+        """
+        Calls command on ``argument``.
 
         ..  note:: IMPORTANT: ``spanner_selector`` applies before ``selector``.
-        '''
+        """
         if argument is None:
             return
         if self.spanner is None:
@@ -137,32 +139,32 @@ class PiecewiseCommand(Command):
 
     @property
     def bookend(self) -> typing.Optional[bool]:
-        r'''Is true when command bookend-attaches indicators.
-        '''
+        r"""Is true when command bookend-attaches indicators.
+        """
         return self._bookend
 
     @property
     def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
-        r'''Gets indicators.
-        '''
+        r"""Gets indicators.
+        """
         return self._indicators
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
-        r'''Gets selector.
-        '''
+        r"""Gets selector.
+        """
         return self._selector
 
     @property
     def spanner(self) -> typing.Optional[abjad.Spanner]:
-        r'''Gets spanner.
-        '''
+        r"""Gets spanner.
+        """
         return self._spanner
 
     @property
     def spanner_selector(self) -> typing.Optional[
         typing.Union[abjad.Expression, MapCommand]
         ]:
-        r'''Gets spanner selector.
-        '''
+        r"""Gets spanner selector.
+        """
         return self._spanner_selector

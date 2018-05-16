@@ -3,7 +3,8 @@ import baca
 
 
 class AcciaccaturaSpecifier(abjad.AbjadObject):
-    r'''Acciaccatura specifier.
+    r"""
+    Acciaccatura specifier.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -89,7 +90,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 }   % measure
             }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -124,10 +125,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collection=None):
-        r'''Calls acciaccatura specifier on `collection`.
+        """
+        Calls acciaccatura specifier on ``collection``.
 
         Returns acciaccatura container together with new collection.
-        '''
+        """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
         lmr_specifier = self._get_lmr_specifier()
@@ -171,7 +173,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
     @property
     def durations(self):
-        r'''Gets durations.
+        r"""
+        Gets durations.
 
         ..  container:: example
 
@@ -344,12 +347,13 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         Set to durations or none.
 
         Returns durations or none.
-        '''
+        """
         return self._durations
 
     @property
     def lmr_specifier(self):
-        r'''Gets LMR specifier.
+        r"""
+        Gets LMR specifier.
 
         ..  container:: example
 
@@ -821,12 +825,13 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         Set to LMR specifier or none.
 
         Returns LMR specifier or none.
-        '''
+        """
         return self._lmr_specifier
 
     @property
     def pattern(self):
-        r'''Gets pattern.
+        r"""
+        Gets pattern.
 
         ..  container:: example
 
@@ -1083,5 +1088,5 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         Set to pattern or none.
 
         Returns pattern or none.
-        '''
+        """
         return self._pattern

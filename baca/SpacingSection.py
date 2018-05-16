@@ -2,7 +2,7 @@ import abjad
 
 
 class SpacingSection(abjad.AbjadObject):
-    r'''Spacing section.
+    r"""Spacing section.
 
     ..  container:: example
 
@@ -23,7 +23,7 @@ class SpacingSection(abjad.AbjadObject):
                 f'4
             }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -47,7 +47,7 @@ class SpacingSection(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when `argument` is a spacing section with same duration as
+        r"""Is true when `argument` is a spacing section with same duration as
         this spacing section.
 
         ..  container:: example
@@ -78,21 +78,21 @@ class SpacingSection(abjad.AbjadObject):
             True
 
         Returns string.
-        '''
+        """
         if isinstance(argument, type(self)):
             return self.duration == argument.duration
 
     def __hash__(self):
-        r'''Hashes spacing section.
+        r"""Hashes spacing section.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
         Returns integer.
-        '''
+        """
         return super(SpacingSection, self).__hash__()
 
     def __str__(self):
-        r'''Gets string representation of spacing section.
+        r"""Gets string representation of spacing section.
 
         ..  container:: example
 
@@ -100,7 +100,7 @@ class SpacingSection(abjad.AbjadObject):
             '2/24'
 
         Returns string.
-        '''
+        """
         return str(self.duration)
 
     ### PRIVATE METHODS ###
@@ -117,7 +117,7 @@ class SpacingSection(abjad.AbjadObject):
 
 #    @property
 #    def context(self):
-#        r'''Gets class constant ``'Score'``.
+#        r"""Gets class constant ``'Score'``.
 #
 #        ..  container:: example
 #
@@ -125,12 +125,12 @@ class SpacingSection(abjad.AbjadObject):
 #            'Score'
 #
 #        Returns ``'Score'``.
-#        '''
+#        """
 #        return self._context
 
     @property
     def duration(self):
-        r'''Gets duration.
+        r"""Gets duration.
 
         ..  container:: example
 
@@ -138,12 +138,12 @@ class SpacingSection(abjad.AbjadObject):
             NonreducedFraction(2, 24)
 
         Returns nonreduced fraction or none.
-        '''
+        """
         return self._duration
 
 #    @property
 #    def persistent(self):
-#        r'''Is class constant true.
+#        r"""Is class constant true.
 #
 #        ..  container:: example
 #
@@ -151,14 +151,14 @@ class SpacingSection(abjad.AbjadObject):
 #            True
 #
 #        Returns true.
-#        '''
+#        """
 #        return self._persistent
 
     ### PUBLIC METHODS ###
 
     @staticmethod
     def from_string(string):
-        r'''Makes spacing section from fraction `string`.
+        r"""Makes spacing section from fraction `string`.
 
         ..  container:: example
 
@@ -166,6 +166,6 @@ class SpacingSection(abjad.AbjadObject):
             SpacingSection(duration=NonreducedFraction(2, 24))
 
         Returns new spacing section.
-        '''
+        """
         duration = abjad.NonreducedFraction(string)
         return SpacingSection(duration=duration)

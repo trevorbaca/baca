@@ -4,14 +4,14 @@ import typing
 
 
 class WellformednessManager(abjad.WellformednessManager):
-    r'''Wellformedness manager.
+    r"""Wellformedness manager.
 
     ..  container:: example
 
         >>> baca.WellformednessManager()
         WellformednessManager()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -31,7 +31,7 @@ class WellformednessManager(abjad.WellformednessManager):
         self,
         argument: typing.Union[abjad.Score, None] = None,
         ) -> typing.List[typing.Tuple[list, int, str]]:
-        r'''Calls wellformedness checks on `argument`.
+        r"""Calls wellformedness checks on `argument`.
 
         :param argument: input score.
 
@@ -131,7 +131,7 @@ class WellformednessManager(abjad.WellformednessManager):
             <BLANKLINE>
 
         Returns (violators, total, check) triples.
-        '''
+        """
         triples: list = []
         if argument is None:
             return triples
@@ -174,7 +174,7 @@ class WellformednessManager(abjad.WellformednessManager):
 
     @staticmethod
     def check_repeat_pitch_classes(argument=None):
-        r'''Checks repeat pitch-classes by voice.
+        r"""Checks repeat pitch-classes by voice.
 
         ..  container:: example
 
@@ -210,13 +210,13 @@ class WellformednessManager(abjad.WellformednessManager):
             ([LogicalTie([Note("e'4")]), LogicalTie([Note("e''4")])], 4)
 
         Returns violators and total.
-        '''
+        """
         total = len(baca.select(argument).plts())
         violators = WellformednessManager._find_repeat_pitch_classes(argument)
         return violators, total
 
     def is_well_formed(self, argument=None):
-        r'''Is true when `argument` is well-formed.
+        r"""Is true when `argument` is well-formed.
 
         ..  container:: example
 
@@ -237,7 +237,7 @@ class WellformednessManager(abjad.WellformednessManager):
             False
 
         Returns true or false.
-        '''
+        """
         triples = self(argument)
         for violators, total, check_name in triples:
             if violators:
@@ -245,7 +245,7 @@ class WellformednessManager(abjad.WellformednessManager):
         return True
 
     def tabulate_wellformedness(self, argument=None):
-        r'''Tabulates wellformedness violations.
+        r"""Tabulates wellformedness violations.
 
         ..  container:: example
 
@@ -308,7 +308,7 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	0 tied rests
 
         Returns string.
-        '''
+        """
         triples = self(argument)
         strings = []
         for violators, total, check_name in triples:

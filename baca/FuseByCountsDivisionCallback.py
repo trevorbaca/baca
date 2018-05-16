@@ -3,7 +3,7 @@ import baca
 
 
 class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
-    r'''Fuse-by-counts division callback.
+    r"""Fuse-by-counts division callback.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -93,7 +93,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     hypermeasures with optional secondary division-maker.
 
     Follows the two-step configure-once / call-repeatly pattern shown here.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -129,7 +129,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r'''Calls fuse-by-counts division callback.
+        r"""Calls fuse-by-counts division callback.
 
         ..  container:: example
 
@@ -437,7 +437,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             [Division((14, 8), start_offset=Offset(1, 4))]
 
         Returns list of division lists.
-        '''
+        """
         divisions = divisions or ()
         start_offset = None
         if divisions:
@@ -507,27 +507,27 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def counts(self):
-        r'''Gets measure counts of hypermeasure division-maker.
+        r"""Gets measure counts of hypermeasure division-maker.
 
         Set to (possibly empty) list or tuple of positive integers.
 
         Or set to infinity.
-        '''
+        """
         return self._counts
 
     @property
     def cyclic(self):
-        r'''Is true when hypermeasure division-maker treats measure counts
+        r"""Is true when hypermeasure division-maker treats measure counts
         cyclically. Otherwise false.
 
         Set to true or false.
-        '''
+        """
         return self._cyclic
 
     @property
     def secondary_division_maker(self):
-        r'''Gets hypermeasure postprocessor of hypermeasure division-maker.
+        r"""Gets hypermeasure postprocessor of hypermeasure division-maker.
 
         Returns division-maker or none.
-        '''
+        """
         return self._secondary_division_maker

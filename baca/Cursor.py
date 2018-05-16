@@ -3,7 +3,7 @@ import collections
 
 
 class Cursor(abjad.AbjadObject):
-    r'''Cursor.
+    r"""Cursor.
 
     ..  container:: example
 
@@ -45,7 +45,7 @@ class Cursor(abjad.AbjadObject):
         >>> cursor.next(count=-1)
         ['rit.']
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -92,16 +92,16 @@ class Cursor(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when `argument` is a cursor with keyword
+        r"""Is true when `argument` is a cursor with keyword
         arguments equal to this cursor. Otherwise false.
 
         Returns true or false.
-        '''
+        """
         superclass = super(Cursor, self)
         return superclass.__eq__(argument)
 
     def __getitem__(self, argument):
-        r'''Gets item from cursor.
+        r"""Gets item from cursor.
 
         ..  container:: example
 
@@ -118,20 +118,20 @@ class Cursor(abjad.AbjadObject):
             'rit.'
 
         Returns item or slice.
-        '''
+        """
         return self.source.__getitem__(argument)
 
     def __hash__(self):
-        r'''Hashes cursor.
+        r"""Hashes cursor.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
         Returns integer.
-        '''
+        """
         return super(Cursor, self).__hash__()
 
     def __iter__(self, count=1):
-        r'''Iterates cursor.
+        r"""Iterates cursor.
 
         ..  container:: example
 
@@ -162,11 +162,11 @@ class Cursor(abjad.AbjadObject):
             'rit.'
 
         Returns generator.
-        '''
+        """
         return iter(self.source)
 
     def __len__(self):
-        r'''Gets length of cursor.
+        r"""Gets length of cursor.
 
         ..  container:: example
 
@@ -178,14 +178,14 @@ class Cursor(abjad.AbjadObject):
         Defined equal to length of cursor source.
 
         Returns nonnegative integer.
-        '''
+        """
         return len(self.source)
 
     ### PUBLIC PROPERTIES ###
 
     @property
     def cyclic(self):
-        r'''Is true when cursor is cyclic.
+        r"""Is true when cursor is cyclic.
 
         Otherwise false.
 
@@ -194,12 +194,12 @@ class Cursor(abjad.AbjadObject):
         Defaults to none.
 
         Returns true, false or none.
-        '''
+        """
         return self._cyclic
 
     @property
     def is_exhausted(self):
-        r'''Is true when cursor is exhausted.
+        r"""Is true when cursor is exhausted.
 
         ..  container:: example
 
@@ -221,7 +221,7 @@ class Cursor(abjad.AbjadObject):
             (['rit.'], True)
 
         Returns true or false.
-        '''
+        """
         if self.position is None:
             return False
         try:
@@ -232,7 +232,7 @@ class Cursor(abjad.AbjadObject):
 
     @property
     def position(self):
-        r'''Gets position.
+        r"""Gets position.
 
         ..  container:: example
 
@@ -357,12 +357,12 @@ class Cursor(abjad.AbjadObject):
             ['rit.']
 
         Returns tuple.
-        '''
+        """
         return self._position
 
     @property
     def singletons(self):
-        r'''Is true when cursor returns singletons not enclosed within a list.
+        r"""Is true when cursor returns singletons not enclosed within a list.
         If false when cursor returns singletons enclosed within a list.
 
         ..  container:: example
@@ -422,12 +422,12 @@ class Cursor(abjad.AbjadObject):
             >>> cursor.next() is None
             True
 
-        '''
+        """
         return self._singletons
 
     @property
     def source(self):
-        r'''Gets source.
+        r"""Gets source.
 
         ..  container:: example
 
@@ -450,12 +450,12 @@ class Cursor(abjad.AbjadObject):
             CyclicTuple([13, 'da capo', Note("cs'8."), 'rit.'])
 
         Returns source.
-        '''
+        """
         return self._source
 
     @property
     def suppress_exception(self):
-        r'''Is true when cursor returns none on exhaustion.
+        r"""Is true when cursor returns none on exhaustion.
         Is false when cursor raises exception on exhaustion.
 
         ..  container:: example
@@ -519,14 +519,14 @@ class Cursor(abjad.AbjadObject):
             >>> cursor.next()
             []
 
-        '''
+        """
         return self._suppress_exception
 
     ### PUBLIC METHODS ###
 
     @staticmethod
     def from_pitch_class_segments(pitch_class_segments):
-        r'''Makes cursor from `pitch_class_segments`.
+        r"""Makes cursor from `pitch_class_segments`.
 
         ..  container:: example
 
@@ -565,7 +565,7 @@ class Cursor(abjad.AbjadObject):
         Coerces numeric `pitch_class_segments`.
 
         Returns cursor.
-        '''
+        """
         cells = []
         for pitch_class_segment in pitch_class_segments:
                 pitch_class_segment = abjad.PitchClassSegment(
@@ -576,7 +576,7 @@ class Cursor(abjad.AbjadObject):
         return cursor
 
     def next(self, count=1, exhausted=False):
-        r'''Gets next `count` elements in source.
+        r"""Gets next `count` elements in source.
 
         ..  container:: example
 
@@ -683,7 +683,7 @@ class Cursor(abjad.AbjadObject):
             Exception: cursor only 4.
 
         Returns tuple.
-        '''
+        """
         result = []
         if self.position is None:
             self._position = 0
@@ -715,7 +715,7 @@ class Cursor(abjad.AbjadObject):
         return result
 
     def reset(self):
-        r'''Resets cursor.
+        r"""Resets cursor.
 
         ..  container:: example
 
@@ -735,5 +735,5 @@ class Cursor(abjad.AbjadObject):
             ['da capo']
 
         Returns none.
-        '''
+        """
         self._position = 0

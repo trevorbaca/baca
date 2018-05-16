@@ -4,7 +4,7 @@ from .ScoreTemplate import ScoreTemplate
 
 
 class StringTrioScoreTemplate(ScoreTemplate):
-    r'''String trio score template.
+    r"""String trio score template.
 
     ..  container:: example
 
@@ -214,7 +214,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -229,8 +229,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:
-        r'''Calls string trio score template.
-        '''
+        r"""Calls string trio score template.
+        """
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 

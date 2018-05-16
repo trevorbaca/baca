@@ -3,7 +3,7 @@ import baca
 
 
 class PitchSpecifier(abjad.AbjadObject):
-    r'''Pitch specifier.
+    r"""Pitch specifier.
 
     ..  container:: example
 
@@ -114,7 +114,7 @@ class PitchSpecifier(abjad.AbjadObject):
                 }
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -146,7 +146,7 @@ class PitchSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collections=None):
-        r'''Calls specifier on `collections`.
+        r"""Calls specifier on `collections`.
 
         ..  container:: example
 
@@ -170,7 +170,7 @@ class PitchSpecifier(abjad.AbjadObject):
             PitchSegment([9])
 
         Returns new collection list.
-        '''
+        """
         if collections is None:
             return
         collections = baca.CollectionList(collections=collections)
@@ -181,7 +181,7 @@ class PitchSpecifier(abjad.AbjadObject):
         return collections
 
     def __repr__(self):
-        r'''Gets interpreter representation of specifier.
+        r"""Gets interpreter representation of specifier.
 
         ..  container:: example
 
@@ -189,7 +189,7 @@ class PitchSpecifier(abjad.AbjadObject):
             PitchSpecifier()
 
         Returns string.
-        '''
+        """
         superclass = super(PitchSpecifier, self)
         return superclass.__repr__()
 
@@ -222,7 +222,7 @@ class PitchSpecifier(abjad.AbjadObject):
 
     @property
     def expressions(self):
-        r'''Gets expressions.
+        r"""Gets expressions.
 
         ..  container:: example
 
@@ -285,13 +285,13 @@ class PitchSpecifier(abjad.AbjadObject):
         Set to expressions or none.
 
         Returns list of expressions or none.
-        '''
+        """
         if self._expressions is not None:
             return list(self._expressions)
 
     @property
     def remove_duplicate_pitch_classes(self):
-        r'''Is true when specifier removes duplicate pitch-classes.
+        r"""Is true when specifier removes duplicate pitch-classes.
 
         ..  container:: example
 
@@ -307,12 +307,12 @@ class PitchSpecifier(abjad.AbjadObject):
             PitchSegment([9])
 
         Returns true, false or none.
-        '''
+        """
         return self._remove_duplicate_pitch_classes
 
     @property
     def remove_duplicates(self):
-        r'''Is true when specifier removes duplicates.
+        r"""Is true when specifier removes duplicates.
 
         ..  container:: example
 
@@ -328,12 +328,12 @@ class PitchSpecifier(abjad.AbjadObject):
             PitchSegment([9])
 
         Returns true, false or none.
-        '''
+        """
         return self._remove_duplicates
 
     @property
     def to_pitch_classes(self):
-        r'''Is true when specifier changes pitches to pitch-classes.
+        r"""Is true when specifier changes pitches to pitch-classes.
         Otherwise false.
 
         ..  note:: Applies prior to expressions.
@@ -466,5 +466,5 @@ class PitchSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._to_pitch_classes

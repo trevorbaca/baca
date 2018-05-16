@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class OctaveDisplacementCommand(Command):
-    r"""Octave displacement command.
+    r"""
+    Octave displacement command.
 
     ..  container:: example
 
@@ -142,10 +143,11 @@ class OctaveDisplacementCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if self.displacements is None:
@@ -178,7 +180,8 @@ class OctaveDisplacementCommand(Command):
 
     @property
     def displacements(self):
-        r'''Gets displacements.
+        """
+        Gets displacements.
 
         ..  container:: example
 
@@ -193,5 +196,5 @@ class OctaveDisplacementCommand(Command):
         Set to integers or none.
 
         Returns cyclic tuple of integers, or none.
-        '''
+        """
         return self._displacements

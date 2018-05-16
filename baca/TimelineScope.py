@@ -6,7 +6,7 @@ from .Scope import Scope
 
 
 class TimelineScope(abjad.AbjadObject):
-    r'''Timeline scope.
+    r"""Timeline scope.
 
     ..  container:: example
 
@@ -44,7 +44,7 @@ class TimelineScope(abjad.AbjadObject):
             >>> baca.TimelineScope()
             TimelineScope()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -97,12 +97,12 @@ class TimelineScope(abjad.AbjadObject):
 
     @property
     def scopes(self) -> typing.Tuple[Scope]:
-        r'''Gets scopes.
-        '''
+        r"""Gets scopes.
+        """
         return self._scopes
 
     @property
     def voice_name(self) -> str:
-        r'''Returns ``'TimelineScope'``.
-        '''
+        r"""Returns ``'TimelineScope'``.
+        """
         return 'TimelineScope'

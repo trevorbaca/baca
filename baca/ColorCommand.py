@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class ColorCommand(Command):
-    r'''Color command.
+    r"""
+    Color command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -321,7 +322,7 @@ class ColorCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -337,10 +338,11 @@ class ColorCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns colored selector result.
-        '''
+        """
         if argument is None:
             return
         argument = self.selector(argument)

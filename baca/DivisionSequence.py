@@ -8,14 +8,14 @@ from .SplitByRoundedRatiosDivisionCallback import \
 
 
 class DivisionSequence(abjad.Sequence):
-    r'''Division sequence.
+    r"""Division sequence.
 
     ..  container:: example
 
         >>> baca.DivisionSequence([(3, 8), (3, 8), (2, 8)])
         DivisionSequence([Division((3, 8)), Division((3, 8)), Division((2, 8))])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -48,7 +48,7 @@ class DivisionSequence(abjad.Sequence):
         subscript='n',
         )
     def rotate(self, n=0) -> 'DivisionSequence':
-        r'''Rotates division sequence by index `n`.
+        r"""Rotates division sequence by index `n`.
 
         ..  container:: example
 
@@ -111,7 +111,7 @@ class DivisionSequence(abjad.Sequence):
                             }
                         }
 
-        '''
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         n = n or 0
@@ -138,8 +138,8 @@ class DivisionSequence(abjad.Sequence):
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ) -> 'DivisionSequence':
-        r'''Splits each division in division sequence by `durations`.
-        '''
+        r"""Splits each division in division sequence by `durations`.
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         callback = SplitByDurationsDivisionCallback(
@@ -159,8 +159,8 @@ class DivisionSequence(abjad.Sequence):
         self,
         ratios,
         ) -> 'DivisionSequence':
-        r'''Splits each division in division sequence by rounded `ratios`.
-        '''
+        r"""Splits each division in division sequence by rounded `ratios`.
+        """
         if self._expression:
             return self._update_expression(inspect.currentframe())
         callback = SplitByRoundedRatiosDivisionCallback(ratios=ratios)

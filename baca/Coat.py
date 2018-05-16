@@ -2,8 +2,9 @@ import abjad
 
 
 class Coat(abjad.AbjadObject):
-    r'''Coat.
-    '''
+    """
+    Coat.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -22,6 +23,7 @@ class Coat(abjad.AbjadObject):
 
     @property
     def argument(self):
-        r'''Gets argument.
-        '''
+        """
+        Gets argument.
+        """
         return self._argument

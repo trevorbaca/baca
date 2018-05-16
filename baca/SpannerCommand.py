@@ -6,7 +6,8 @@ from .Typing import Selector
 
 
 class SpannerCommand(Command):
-    r'''Spanner command.
+    r"""
+    Spanner command.
 
     ..  container:: example
 
@@ -181,7 +182,7 @@ class SpannerCommand(Command):
         >>> baca.SpannerCommand()
         SpannerCommand(selector=baca.tleaves(), tags=[])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -219,10 +220,11 @@ class SpannerCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns spanner (for handoff to piecewise command).
-        '''
+        """
         if argument is None:
             return
         if self.spanner is None:
@@ -245,19 +247,22 @@ class SpannerCommand(Command):
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
-        r'''Is true when spanner is left-broken.
-        '''
+        """
+        Is true when spanner is left-broken.
+        """
         return self._left_broken
 
     @property
     def right_broken(self) -> typing.Optional[bool]:
-        r'''Is true when spanner is right-broken.
-        '''
+        """
+        Is true when spanner is right-broken.
+        """
         return self._right_broken
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
-        r'''Gets selector.
+        r"""
+        Gets selector.
 
         ..  container:: example
 
@@ -307,12 +312,13 @@ class SpannerCommand(Command):
         Set to selector or none.
 
         Returns selector or none.
-        '''
+        """
         return self._selector
 
     @property
     def spanner(self) -> typing.Optional[abjad.Spanner]:
-        r'''Gets spanner.
+        r"""
+        Gets spanner.
 
         ..  container:: example
 
@@ -390,5 +396,5 @@ class SpannerCommand(Command):
         Set to spanner or none.
 
         Returns spanner or none.
-        '''
+        """
         return self._spanner

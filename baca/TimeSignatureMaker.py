@@ -6,7 +6,7 @@ from .StageMeasureMap import StageMeasureMap
 
 
 class TimeSignatureMaker(abjad.AbjadObject):
-    r'''Time-signature-maker.
+    r"""Time-signature-maker.
 
     ..  container:: example
 
@@ -35,7 +35,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         >>> time_signatures
         Sequence([(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -82,8 +82,8 @@ class TimeSignatureMaker(abjad.AbjadObject):
         MetronomeMarkMeasureMap,
         typing.List[abjad.TimeSignature],
         ]:
-        r'''Calls time-signature-maker.
-        '''
+        r"""Calls time-signature-maker.
+        """
         if not self.stage_measure_map:
             raise Exception('try TimeSignatureMaker.run() instead.')
         time_signatures = baca.sequence(self.time_signatures)
@@ -153,57 +153,57 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     @property
     def count(self) -> typing.Optional[int]:
-        r'''Gets count.
-        '''
+        r"""Gets count.
+        """
         return self._count
 
     @property
     def fermata_measures(self) -> typing.Optional[typing.List[int]]:
-        r'''Gets fermata measures.
-        '''
+        r"""Gets fermata measures.
+        """
         return self._fermata_measures
 
     @property
     def metronome_mark_measure_map(self) -> typing.Optional[
         MetronomeMarkMeasureMap
         ]:
-        r'''Gets metronome mark measure map.
-        '''
+        r"""Gets metronome mark measure map.
+        """
         return self._metronome_mark_measure_map
 
     @property
     def repeat_count(self) -> typing.Optional[int]:
-        r'''Gets repeat count.
-        '''
+        r"""Gets repeat count.
+        """
         return self._repeat_count
 
     @property
     def rotation(self) -> typing.Optional[int]:
-        r'''Gets rotation.
-        '''
+        r"""Gets rotation.
+        """
         return self._rotation
 
     @property
     def stage_measure_map(self) -> typing.Optional[StageMeasureMap]:
-        r'''Gets stage measure map.
-        '''
+        r"""Gets stage measure map.
+        """
         return self._stage_measure_map
 
     @property
     def time_signatures(self) -> typing.List[abjad.TimeSignature]:
-        r'''Gets time signatures.
-        '''
+        r"""Gets time signatures.
+        """
         return self._time_signatures
 
     ### PUBLIC METHODS ###
 
     def run(self) -> typing.List[abjad.TimeSignature]:
-        r'''Makes time signatures (without stages).
+        r"""Makes time signatures (without stages).
 
         Accounts for fermata measures.
 
         Does not account for stages.
-        '''
+        """
         if not self.count:
             raise Exception('must specify count with run().')
         if self.metronome_mark_measure_map:

@@ -6,14 +6,15 @@ from .Typing import Selector
 
 
 class HairpinCommand(Command):
-    r'''Hairpin command.
+    """
+    Hairpin command.
 
     ..  container:: example
 
         >>> baca.HairpinCommand()
         HairpinCommand(selector=baca.tleaves(), tags=[])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -57,8 +58,9 @@ class HairpinCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Applies command to result of selector called on `argument`.
-        '''
+        """
+        Applies command to result of selector called on `argument`.
+        """
         from .SegmentMaker import SegmentMaker
         if argument is None:
             return
@@ -121,28 +123,32 @@ class HairpinCommand(Command):
 
     @property
     def left_broken(self) -> typing.Optional[str]:
-        r'''Gets left-broken hairpin string.
-        '''
+        """
+        Gets left-broken hairpin string.
+        """
         return self._left_broken
 
     @property
     def right_broken(self) -> typing.Optional[str]:
-        r'''Gets right-broken hairpin string.
-        '''
+        """
+        Gets right-broken hairpin string.
+        """
         return self._right_broken
 
     @property
     def start(self):
-        r'''Gets hairpin start.
+        """
+        Gets hairpin start.
 
         Returns dynamic or none.
-        '''
+        """
         return self._start
 
     @property
     def stop(self):
-        r'''Gets hairpin stop.
+        """
+        Gets hairpin stop.
 
         Returns dynamic or none.
-        '''
+        """
         return self._stop

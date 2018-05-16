@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class ClusterCommand(Command):
-    r"""Cluster command.
+    r"""
+    Cluster command.
 
     ..  container:: example
 
@@ -535,10 +536,11 @@ class ClusterCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if not self.widths:
@@ -590,7 +592,8 @@ class ClusterCommand(Command):
 
     @property
     def hide_flat_markup(self):
-        r'''Is true when cluster hides flat markup.
+        r"""
+        Is true when cluster hides flat markup.
 
         ..  container:: example
 
@@ -716,12 +719,13 @@ class ClusterCommand(Command):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._hide_flat_markup
 
     @property
     def selector(self):
-        r'''Selects PLTs.
+        """
+        Selects PLTs.
 
         ..  container:: example
 
@@ -729,12 +733,13 @@ class ClusterCommand(Command):
             baca.plts()
 
         Returns selector.
-        '''
+        """
         return self._selector
 
     @property
     def start_pitch(self):
-        r'''Gets start pitch.
+        r"""
+        Gets start pitch.
 
         ..  container:: example
 
@@ -1012,12 +1017,13 @@ class ClusterCommand(Command):
         Set to named pitch or none.
 
         Returns named pitch or none.
-        '''
+        """
         return self._start_pitch
 
     @property
     def widths(self):
-        r'''Gets widths.
+        r"""
+        Gets widths.
 
         ..  container:: example
 
@@ -1375,5 +1381,5 @@ class ClusterCommand(Command):
         Set to nonnegative integers or none.
 
         Returns nonnegative integers or none.
-        '''
+        """
         return self._widths

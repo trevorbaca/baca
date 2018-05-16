@@ -4,7 +4,7 @@ from .Tree import Tree
 
 
 class PitchTree(Tree):
-    r'''Pitch tree.
+    r"""Pitch tree.
 
     ..  container:: example
 
@@ -587,7 +587,7 @@ class PitchTree(Tree):
                 }
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -613,7 +613,7 @@ class PitchTree(Tree):
     ### SPECIAL METHODS ###
 
 #    def __graph__(self, **keywords):
-#        r'''Graphs pitch tree.
+#        r"""Graphs pitch tree.
 #
 #        ..  container:: example
 #
@@ -755,7 +755,7 @@ class PitchTree(Tree):
 #                }
 #
 #        Returns Graphviz graph.
-#        '''
+#        """
 #        superclass = super(PitchTree, self)
 #        return superclass.__graph__(**keywords)
 
@@ -770,7 +770,7 @@ class PitchTree(Tree):
         set_classes=False,
         **keywords
         ):
-        r'''Illustrates pitch tree.
+        r"""Illustrates pitch tree.
 
         ..  container:: example
 
@@ -1023,7 +1023,7 @@ class PitchTree(Tree):
                 >>
 
         Returns LilyPond file.
-        '''
+        """
         assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
         voice = abjad.Voice()
         voice.consists_commands.append('Horizontal_bracket_engraver')
@@ -1237,7 +1237,7 @@ class PitchTree(Tree):
     ### PUBLIC METHODS ###
 
     def has_repeats(self):
-        r'''Is true when tree has repeats.
+        r"""Is true when tree has repeats.
 
         ..  container:: example
 
@@ -1416,7 +1416,7 @@ class PitchTree(Tree):
                 >>
 
         Returns true or false.
-        '''
+        """
         leaves = self.iterate(level=-1)
         for left, right in abjad.Sequence(leaves).nwise(n=2, wrapped=True):
             if left == right:

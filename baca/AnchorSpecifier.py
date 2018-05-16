@@ -3,14 +3,15 @@ import baca
 
 
 class AnchorSpecifier(abjad.AbjadValueObject):
-    r'''Anchor specifier.
+    """
+    Anchor specifier.
 
     ..  container:: example
 
         >>> baca.AnchorSpecifier()
         AnchorSpecifier()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -63,41 +64,46 @@ class AnchorSpecifier(abjad.AbjadValueObject):
 
     @property
     def figure_name(self):
-        r'''Gets figure name.
+        """
+        Gets figure name.
 
         Returns strings or none.
-        '''
+        """
         return self._figure_name
 
     @property
     def local_selector(self):
-        r'''Gets local selector.
+        """
+        Gets local selector.
 
         Returns selector or none.
-        '''
+        """
         return self._local_selector
 
     @property
     def remote_selector(self):
-        r'''Gets remote selector.
+        """
+        Gets remote selector.
 
         Returns selector or none.
-        '''
+        """
         return self._remote_selector
 
     @property
     def remote_voice_name(self):
-        r'''Gets remote voice name.
+        """
+        Gets remote voice name.
 
         Set to string or none.
 
         Returns strings or none.
-        '''
+        """
         return self._remote_voice_name
 
     @property
     def use_remote_stop_offset(self):
-        r'''Is true when contribution anchors to remote selection stop offset.
+        """
+        Is true when contribution anchors to remote selection stop offset.
 
         Otherwise anchors to remote selection start offset.
 
@@ -106,5 +112,5 @@ class AnchorSpecifier(abjad.AbjadValueObject):
         Defaults to none.
 
         Returns true, false or none.
-        '''
+        """
         return self._use_remote_stop_offset

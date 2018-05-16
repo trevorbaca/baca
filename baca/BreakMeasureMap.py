@@ -6,7 +6,8 @@ from .LBSD import LBSD
 
 
 class BreakMeasureMap(abjad.AbjadObject):
-    r'''Breaks measure map.
+    r"""
+    Breaks measure map.
 
     ..  container:: example
 
@@ -291,7 +292,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -343,8 +344,9 @@ class BreakMeasureMap(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, context=None) -> None:
-        r'''Calls map on `context`.
-        '''
+        """
+        Calls map on ``context``.
+        """
         if context is None:
             return
         skips = baca.select(context).skips()
@@ -378,40 +380,46 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     @property
     def bol_measure_numbers(self) -> typing.List[int]:
-        r'''Gets beginning-of-line measure numbers.
+        """
+        Gets beginning-of-line measure numbers.
 
         Populated during ``baca.breaks()`` initialization.
-        '''
+        """
         return  self._bol_measure_numbers
 
     @property
     def commands(self) -> abjad.OrderedDict:
-        r'''Gets commands.
-        '''
+        """
+        Gets commands.
+        """
         return self._commands
 
     @property
     def deactivate(self) -> typing.Optional[bool]:
-        r'''Is true when tags should write deactivated.
-        '''
+        """
+        Is true when tags should write deactivated.
+        """
         return self._deactivate
 
     @property
     def first_measure_number(self) -> int:
-        r'''Gets first measure number.
-        '''
+        """
+        Gets first measure number.
+        """
         return self.bol_measure_numbers[0]
 
     @property
     def local_measure_numbers(self) -> typing.Optional[bool]:
-        r'''Is true when segment measures numbers starting from 1.
-        '''
+        """
+        Is true when segment measures numbers starting from 1.
+        """
         return self._local_measure_numbers
 
     @property
     def tag(self) -> abjad.Tag:
-        r'''Gets tag.
-        '''
+        """
+        Gets tag.
+        """
         if self.tags:
             return abjad.Tag.from_words(self.tags)
         else:
@@ -419,7 +427,8 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     @property
     def tags(self) -> typing.List[str]:
-        r'''Gets tags.
-        '''
+        """
+        Gets tags.
+        """
         assert Command._are_valid_tags(self._tags), repr(self._tags)
         return self._tags[:]

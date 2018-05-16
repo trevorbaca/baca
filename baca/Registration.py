@@ -3,7 +3,7 @@ import copy
 
 
 class Registration(abjad.AbjadValueObject):
-    '''Registration.
+    """Registration.
 
     ..  container:: example
 
@@ -26,7 +26,7 @@ class Registration(abjad.AbjadValueObject):
                 ],
             )
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -132,8 +132,8 @@ class Registration(abjad.AbjadValueObject):
 
     @property
     def components(self):
-        r'''Gets components.
+        r"""Gets components.
 
         Returns list or none.
-        '''
+        """
         return self._components

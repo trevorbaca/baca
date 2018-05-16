@@ -3,7 +3,7 @@ import baca
 
 
 class PartitionDivisionCallback(abjad.AbjadValueObject):
-    r'''Partition division callback.
+    r"""Partition division callback.
 
     ..  container:: example
 
@@ -97,7 +97,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
     Groups beats into conductors' groups.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -129,7 +129,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r'''Calls partition division callback on `divisions`.
+        r"""Calls partition division callback on `divisions`.
 
         ..  container:: example
 
@@ -186,7 +186,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             Division((1, 4), start_offset=Offset(3, 2))
 
         Returns list of division lists.
-        '''
+        """
         grouped_divisions = []
         divisions, start_offset = baca.DivisionMaker._to_divisions(
             divisions)
@@ -209,7 +209,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         return result
 
     def __format__(self, format_specification=''):
-        r'''Formats beat callback.
+        r"""Formats beat callback.
 
         ..  container:: example
 
@@ -222,14 +222,14 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
                 )
 
         Returns string.
-        '''
+        """
         return abjad.AbjadValueObject.__format__(
             self,
             format_specification=format_specification,
             )
 
     def __repr__(self):
-        r'''Gets interpreter representation of beat callback.
+        r"""Gets interpreter representation of beat callback.
 
         ..  container:: example
 
@@ -237,7 +237,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
 
         Returns string.
-        '''
+        """
         return abjad.AbjadValueObject.__repr__(self)
 
     ### PRIVATE METHODS ###
@@ -302,7 +302,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def append_remainder(self):
-        r'''Is true when remainder beat group fuses to next closest beat group.
+        r"""Is true when remainder beat group fuses to next closest beat group.
         Otherwise false.
 
         ..  container:: example
@@ -410,12 +410,12 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         Defaults to false.
 
         Set to true or false.
-        '''
+        """
         return self._append_remainder
 
     @property
     def counts(self):
-        r'''Gets counts of beat callback.
+        r"""Gets counts of beat callback.
 
         ..  container:: example
 
@@ -464,12 +464,12 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         Defaults to none.
 
         Set to positive integers or none.
-        '''
+        """
         return self._counts
 
     @property
     def fuse_assignable_total_duration(self):
-        r'''Is true when assignable total duration of all input beats fuse into
+        r"""Is true when assignable total duration of all input beats fuse into
         a single duration. Otherwise false.
 
         ..  container:: example
@@ -572,12 +572,12 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         Defaults to false.
 
         Set to true or false.
-        '''
+        """
         return self._fuse_assignable_total_duration
 
     @property
     def remainder_direction(self):
-        r'''Gets remainder direction of beat callback.
+        r"""Gets remainder direction of beat callback.
 
         ..  container:: example
 
@@ -664,5 +664,5 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         Defaults to right.
 
         Set to right or left.
-        '''
+        """
         return self._remainder_direction

@@ -2,7 +2,7 @@ import abjad
 
 
 class MetronomeMarkMeasureMap(abjad.AbjadObject):
-    r'''Metronome mark measure map.
+    r"""Metronome mark measure map.
 
     ..  container:: example
 
@@ -204,7 +204,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -224,7 +224,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets `argument`.
+        r"""Gets `argument`.
 
         ..  container:: example
 
@@ -238,14 +238,14 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             (1, Accelerando())
 
         Returns item.
-        '''
+        """
         return self.items.__getitem__(argument)
 
     ### PUBLIC PROPERTIES ###
 
     @property
     def items(self):
-        r'''Gets items.
+        r"""Gets items.
 
         ..  container:: example
 
@@ -266,5 +266,5 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         Set to tuple or none.
 
         Returns tuple or none.
-        '''
+        """
         return self._items

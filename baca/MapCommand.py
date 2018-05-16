@@ -5,7 +5,8 @@ from .Command import Command
 
 
 class MapCommand(Command):
-    r'''Map command.
+    r"""
+    Map command.
 
     ..  container:: example
 
@@ -80,7 +81,7 @@ class MapCommand(Command):
                 }
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -104,10 +105,11 @@ class MapCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Maps commands to result of selector called on `argument`.
+        """
+        Maps commands to result of selector called on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if not self.commands:
@@ -127,8 +129,9 @@ class MapCommand(Command):
 
     @property
     def commands(self):
-        r'''Gets commands.
+        """
+        Gets commands.
 
         Returns cylic tuple or none.
-        '''
+        """
         return self._commands

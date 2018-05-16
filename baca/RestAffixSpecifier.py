@@ -3,7 +3,7 @@ import collections
 
 
 class RestAffixSpecifier(abjad.AbjadValueObject):
-    r'''Rest affix specifier.
+    r"""Rest affix specifier.
 
     ..  container:: example
 
@@ -140,7 +140,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         >>> baca.RestAffixSpecifier()
         RestAffixSpecifier()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -181,7 +181,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collection_index=None, total_collections=None):
-        r'''Calls command on `collection_index` and `total_collections`.
+        r"""Calls command on `collection_index` and `total_collections`.
 
         ..  container:: example
 
@@ -235,7 +235,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                 >>
 
         Returns prefix, suffix pair.
-        '''
+        """
         if self.pattern is None:
             if collection_index == 0 and collection_index == total_collections - 1:
                 return self.prefix, self.suffix
@@ -251,7 +251,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     @property
     def pattern(self):
-        r'''Gets pattern.
+        r"""Gets pattern.
 
         ..  container:: example
 
@@ -478,12 +478,12 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         Defaults to none.
 
         Returns pattern or none.
-        '''
+        """
         return self._pattern
 
     @property
     def prefix(self):
-        r'''Gets prefix.
+        r"""Gets prefix.
 
         ..  container:: example
 
@@ -536,24 +536,24 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         Defaults to none.
 
         Returns list of positive integers or none.
-        '''
+        """
         return self._prefix
 
     @property
     def skips_instead_of_rests(self):
-        r'''Is true when command makes skips instead of rests.
+        r"""Is true when command makes skips instead of rests.
 
         Set to true, false or none.
 
         Defaults to none.
 
         Returns true, false or none.
-        '''
+        """
         return self._skips_instead_of_rests
 
     @property
     def suffix(self):
-        r'''Gets suffix.
+        r"""Gets suffix.
 
         ..  container:: example
 
@@ -606,5 +606,5 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         Defaults to none.
 
         Returns list of positive integers or none.
-        '''
+        """
         return self._suffix

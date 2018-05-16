@@ -8,7 +8,8 @@ from .Typing import Selector
 
 
 class StaffPositionInterpolationCommand(Command):
-    r"""Staff position interpolation command.
+    r"""
+    Staff position interpolation command.
 
     :param selector: command selector.
 
@@ -199,8 +200,9 @@ class StaffPositionInterpolationCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on `argument`.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if self.selector:
@@ -241,12 +243,14 @@ class StaffPositionInterpolationCommand(Command):
 
     @property
     def start_pitch(self) -> abjad.NamedPitch:
-        r'''Gets start pitch.
-        '''
+        """
+        Gets start pitch.
+        """
         return self._start_pitch
 
     @property
     def stop_pitch(self) -> abjad.NamedPitch:
-        r'''Gets stop pitch.
-        '''
+        """
+        Gets stop pitch.
+        """
         return self._stop_pitch

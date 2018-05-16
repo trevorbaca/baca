@@ -3,7 +3,7 @@ import numbers
 
 
 class PitchArrayCell(abjad.AbjadObject):
-    '''Pitch array cell.
+    """Pitch array cell.
 
     ..  container:: example
 
@@ -152,7 +152,7 @@ class PitchArrayCell(abjad.AbjadObject):
         >>> baca.PitchArrayCell(pitches=[0, 2, 4], width=2)
         PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=2)
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -187,10 +187,10 @@ class PitchArrayCell(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __str__(self):
-        r'''Gets string representation of pitch array cell.
+        r"""Gets string representation of pitch array cell.
 
         Returns string.
-        '''
+        """
         return self._format_string
 
     ### PRIVATE PROPERTIES ###
@@ -313,7 +313,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def column_indices(self):
-        r'''Gets column start and stop indices.
+        r"""Gets column start and stop indices.
 
         ..  container:: example
 
@@ -333,7 +333,7 @@ class PitchArrayCell(abjad.AbjadObject):
             True
 
         Returns tuple or none.
-        '''
+        """
         if self.parent_row is not None:
             if self.width == 1:
                 return (self.column_start_index,)
@@ -342,7 +342,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def column_start_index(self):
-        r'''Gets column start index.
+        r"""Gets column start index.
 
         ..  container:: example
 
@@ -362,7 +362,7 @@ class PitchArrayCell(abjad.AbjadObject):
             True
 
         Returns nonnegative integer or none.
-        '''
+        """
         if self.parent_row is None:
             return
         start_index = 0
@@ -373,7 +373,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def column_stop_index(self):
-        r'''Gets column stop index.
+        r"""Gets column stop index.
 
         ..  container:: example
 
@@ -393,13 +393,13 @@ class PitchArrayCell(abjad.AbjadObject):
             True
 
         Returns nonnegative integer or none.
-        '''
+        """
         if self.parent_row is not None:
             return self.column_start_index + self.width - 1
 
     @property
     def indices(self):
-        r'''Gets indices.
+        r"""Gets indices.
 
         ..  container:: example
 
@@ -421,12 +421,12 @@ class PitchArrayCell(abjad.AbjadObject):
             (1, (3,))
 
         Returns pair.
-        '''
+        """
         return self.row_index, self.column_indices
 
     @property
     def is_first_in_row(self):
-        r'''Is true when pitch array cell is first in row. Otherwise false.
+        r"""Is true when pitch array cell is first in row. Otherwise false.
 
         ..  container:: example
 
@@ -448,7 +448,7 @@ class PitchArrayCell(abjad.AbjadObject):
             (PitchArrayCell(width=1), False)
 
         Returns true or false.
-        '''
+        """
         if self.parent_row is not None:
             if self.column_indices[0] == 0:
                 return True
@@ -456,7 +456,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def is_last_in_row(self):
-        r'''Is true when pitch array cell is last in row. Otherwise false.
+        r"""Is true when pitch array cell is last in row. Otherwise false.
 
         ..  container:: example
 
@@ -478,7 +478,7 @@ class PitchArrayCell(abjad.AbjadObject):
             (PitchArrayCell(width=1), True)
 
         Returns true or false.
-        '''
+        """
         if self.parent_row is not None:
             if self.column_indices[-1] == self.parent_row.width - 1:
                 return True
@@ -486,10 +486,10 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def item(self):
-        r'''Gets item.
+        r"""Gets item.
 
         Complicated return type.
-        '''
+        """
         if not self.pitches:
             return self.width
         elif len(self.pitches) == 1:
@@ -518,7 +518,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def next(self):
-        r'''Gets next pitch array cell in row after this pitch array cell.
+        r"""Gets next pitch array cell in row after this pitch array cell.
 
         ..  container:: example
 
@@ -538,7 +538,7 @@ class PitchArrayCell(abjad.AbjadObject):
             (PitchArrayCell(width=1), PitchArrayCell(width=1))
 
         Returns pitch array cell.
-        '''
+        """
         if self.parent_row is not None:
             if self.is_last_in_row:
                 message = 'cell is last in row.'
@@ -549,10 +549,10 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def parent_array(self):
-        r'''Gets parent array.
+        r"""Gets parent array.
 
         Return pitch array.
-        '''
+        """
         parent_row = self.parent_row
         if parent_row is not None:
             return parent_row.parent_array
@@ -560,10 +560,10 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def parent_column(self):
-        r'''Gets parent column.
+        r"""Gets parent column.
 
         Returns pitch array column.
-        '''
+        """
         parent_array = self.parent_array
         if parent_array is not None:
             start_column_index = self.column_indices[0]
@@ -572,18 +572,18 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def parent_row(self):
-        r'''Gets parent row.
+        r"""Gets parent row.
 
         Returns pitch array row.
-        '''
+        """
         return self._parent_row
 
     @property
     def pitches(self):
-        r'''Gets and sets pitches of pitch array cell.
+        r"""Gets and sets pitches of pitch array cell.
 
         Returns list.
-        '''
+        """
         return self._pitches
 
     @pitches.setter
@@ -599,7 +599,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def previous(self):
-        r'''Gets pitch array cell in row prior to this pitch array cell.
+        r"""Gets pitch array cell in row prior to this pitch array cell.
 
         ..  container:: example
 
@@ -619,7 +619,7 @@ class PitchArrayCell(abjad.AbjadObject):
             (PitchArrayCell(width=1), PitchArrayCell(width=1))
 
         Returns pitch array cell.
-        '''
+        """
         if self.parent_row is not None:
             if self.is_first_in_row:
                 message = 'cell is first in row.'
@@ -630,10 +630,10 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def row_index(self):
-        r'''Gets row index.
+        r"""Gets row index.
 
         Returns nonnegative integer or none.
-        '''
+        """
         parent_row = self.parent_row
         if parent_row is not None:
             return parent_row.row_index
@@ -641,38 +641,38 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def weight(self):
-        r'''Gets weight.
+        r"""Gets weight.
 
         Weight defined equal to number of pitches in cell.
 
         Returns nonnegative integer.
-        '''
+        """
         return len(self.pitches)
 
     @property
     def width(self):
-        r'''Gets width.
+        r"""Gets width.
 
         Width defined equal to number of columns spanned by cell.
 
         Returns positive integer.
-        '''
+        """
         return self._width
 
     ### PUBLIC METHODS ###
 
     def append_pitch(self, pitch):
-        r'''Appends `pitch` to cell.
+        r"""Appends `pitch` to cell.
 
         Returns none.
-        '''
+        """
         if self.pitches is None:
             self._pitches = []
         pitch = abjad.NamedPitch(pitch)
         self._pitches.append(pitch)
 
     def matches_cell(self, argument):
-        r'''Is true when pitch array cell matches `argument`. Otherwise false.
+        r"""Is true when pitch array cell matches `argument`. Otherwise false.
 
         ..  container:: example
 
@@ -692,7 +692,7 @@ class PitchArrayCell(abjad.AbjadObject):
             False
 
         Returns true or false.
-        '''
+        """
         if isinstance(argument, type(self)):
             if self.pitches == argument.pitches:
                 if self.width == argument.width:

@@ -3,7 +3,7 @@ import baca
 
 
 class DesignMaker(abjad.AbjadObject):
-    r'''Design-maker.
+    r"""Design-maker.
 
     ..  container:: example
 
@@ -12,7 +12,7 @@ class DesignMaker(abjad.AbjadObject):
         >>> baca.DesignMaker()
         DesignMaker()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -30,10 +30,10 @@ class DesignMaker(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self):
-        r'''Calls design-maker.
+        r"""Calls design-maker.
 
         Returns pitch-class tree.
-        '''
+        """
         design = baca.PitchTree(items=self._result)
         self._check_duplicate_pitch_classes(design)
         return design
@@ -68,12 +68,12 @@ class DesignMaker(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     def partition(self, cursor, number, counts, operators=None):
-        r'''Partitions next `number` cells in `cursor` by `counts`.
+        r"""Partitions next `number` cells in `cursor` by `counts`.
 
         Appies optional `operators` to resulting parts of partition.
 
         Returns none.
-        '''
+        """
         cells = cursor.next(number)
         list_ = []
         for cell in cells:
@@ -88,12 +88,12 @@ class DesignMaker(abjad.AbjadObject):
         self._result.extend(parts)
 
     def partition_cyclic(self, cursor, number, counts, operators=None):
-        r'''Partitions next `number` cells in `cursor` cyclically by `counts`.
+        r"""Partitions next `number` cells in `cursor` cyclically by `counts`.
 
         Applies optional `operators` to parts in resulting partition.
 
         Returns none.
-        '''
+        """
         cells = cursor.next(number)
         list_ = []
         for cell in cells:

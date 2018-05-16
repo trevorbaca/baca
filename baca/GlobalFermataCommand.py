@@ -6,14 +6,15 @@ from .Typing import Selector
 
 
 class GlobalFermataCommand(Command):
-    r'''Global fermata command.
+    """
+    Global fermata command.
 
     ..  container:: example
 
         >>> baca.GlobalFermataCommand()
         GlobalFermataCommand(selector=baca.leaf(0))
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -43,8 +44,9 @@ class GlobalFermataCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Applies command to ``argument`` selector output.
-        '''
+        """
+        Applies command to ``argument`` selector output.
+        """
         if argument is None:
             return
         if self.selector is not None:
@@ -77,6 +79,7 @@ class GlobalFermataCommand(Command):
 
     @property
     def description(self) -> typing.Optional[str]:
-        r'''Gets description.
-        '''
+        """
+        Gets description.
+        """
         return self._description

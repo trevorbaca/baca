@@ -4,7 +4,7 @@ from .ScoreTemplate import ScoreTemplate
 
 
 class SingleStaffScoreTemplate(ScoreTemplate):
-    r'''Single-staff score template.
+    r"""Single-staff score template.
 
     ..  container:: example
 
@@ -74,7 +74,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -83,8 +83,8 @@ class SingleStaffScoreTemplate(ScoreTemplate):
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:
-        r'''Calls score template.
-        '''
+        r"""Calls score template.
+        """
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 

@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class NestingCommand(Command):
-    r'''Nesting command.
+    r"""
+    Nesting command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -238,7 +239,7 @@ class NestingCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -268,7 +269,8 @@ class NestingCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, selections=None):
-        r'''Calls command on `selections`.
+        r"""
+        Calls command on `selections`.
 
         ..  container:: example
 
@@ -354,7 +356,7 @@ class NestingCommand(Command):
                 >>
 
         Returns new selections.
-        '''
+        """
         if selections is None:
             return
         time_treatments = self._get_time_treatments()
@@ -428,24 +430,26 @@ class NestingCommand(Command):
     # TODO: write LMR specifier examples
     @property
     def lmr_specifier(self):
-        r'''Gets LMR specifier.
+        """
+        Gets LMR specifier.
 
         Defaults to none.
 
         Set to LMR specifier or none.
 
         Returns LMR specifier or none.
-        '''
+        """
         return self._lmr_specifier
 
     @property
     def time_treatments(self):
-        r'''Gets time treatments.
+        """
+        Gets time treatments.
 
         Defaults to none.
 
         Set to time treatments or none.
 
         Returns time treatments or none.
-        '''
+        """
         return self._time_treatments

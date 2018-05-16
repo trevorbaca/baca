@@ -4,14 +4,15 @@ from .Command import Command
 
 
 class SuiteCommand(Command):
-    r'''Suite command.
+    """
+    Suite command.
 
     ..  container:: example
 
         >>> baca.SuiteCommand()
         SuiteCommand()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -33,10 +34,11 @@ class SuiteCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Applies commands to result of selector called on `argument`.
+        """
+        Applies commands to result of selector called on ``argument``.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if not self.commands:
@@ -50,8 +52,9 @@ class SuiteCommand(Command):
 
     @property
     def commands(self):
-        r'''Gets commands.
+        """
+        Gets commands.
 
         Returns tuple or none.
-        '''
+        """
         return self._commands

@@ -1243,7 +1243,7 @@ last two pitched logical ties appears in octave 3:</p>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">9</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryAF.py&quot;</span>, line <span class="m">2452</span>, in <span class="n">breaks</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryAF.py&quot;</span>, line <span class="m">2479</span>, in <span class="n">breaks</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 <span class="gr">Exception</span>: <span class="n">page number (9) is not 2.</span>
 </pre></div>
@@ -1273,7 +1273,7 @@ last two pitched logical ties appears in octave 3:</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">_apply_breaks</span><span class="p">()</span>
   File <span class="nb">&quot;/Users/trevorbaca/baca/baca/SegmentMaker.py&quot;</span>, line <span class="m">1006</span>, in <span class="n">_apply_breaks</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">breaks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;GlobalSkips&#39;</span><span class="p">])</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/BreakMeasureMap.py&quot;</span>, line <span class="m">373</span>, in <span class="n">__call__</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/BreakMeasureMap.py&quot;</span>, line <span class="m">375</span>, in <span class="n">__call__</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 <span class="gr">Exception</span>: <span class="n">score ends at measure 103 (not 109).</span>
 </pre></div>
@@ -1849,7 +1849,7 @@ two pitched logical ties appears in octave 3:</p>
 <dl class="staticmethod">
 <dt id="baca.LibraryAF.LibraryAF.deviation">
 <em class="property">static </em><code class="descname">deviation</code><span class="sig-paren">(</span><em>deviations</em>, <em>selector='baca.plts()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryAF.LibraryAF.deviation" title="Permalink to this definition">¶</a></dt>
-<dd><p>‘Sets microtone <code class="docutils literal notranslate"><span class="pre">deviations</span></code>.</p>
+<dd><p>Sets microtone <code class="docutils literal notranslate"><span class="pre">deviations</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1960,8 +1960,7 @@ two pitched logical ties appears in octave 3:</p>
 <dl class="staticmethod">
 <dt id="baca.LibraryAF.LibraryAF.dls_staff_padding">
 <em class="property">static </em><code class="descname">dls_staff_padding</code><span class="sig-paren">(</span><em>n</em>, <em>selector='baca.leaves()'</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.LibraryAF.LibraryAF.dls_staff_padding" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overrides dynamic line spanner staff padding.
-output.</p>
+<dd><p>Overrides dynamic line spanner staff padding</p>
 <div class="example docutils container">
 <p>Overrides dynamic line spanner staff padding on all leaves:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music_maker</span> <span class="o">=</span> <span class="n">baca</span><span class="o">.</span><span class="n">MusicMaker</span><span class="p">()</span>
@@ -2425,7 +2424,7 @@ output.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">baca</span><span class="o">.</span><span class="n">dynamic_text_extra_offset</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryAF.py&quot;</span>, line <span class="m">5596</span>, in <span class="n">dynamic_text_extra_offset</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryAF.py&quot;</span>, line <span class="m">5651</span>, in <span class="n">dynamic_text_extra_offset</span>
     <span class="n">f</span><span class="s1">&#39;dynamic text extra offset must be pair (not </span><span class="si">{pair}</span><span class="s1">).&#39;</span>
 <span class="gr">Exception</span>: <span class="n">dynamic text extra offset must be pair (not 2).</span>
 </pre></div>

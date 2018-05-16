@@ -4,14 +4,15 @@ from .Command import Command
 
 
 class SettingCommand(Command):
-    r'''Setting command.
+    """
+    Setting command.
 
     ..  container:: example
 
         >>> baca.SettingCommand()
         SettingCommand(selector=baca.leaf(0))
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -42,10 +43,11 @@ class SettingCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on ``argument``.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if self.setting is None:
@@ -70,28 +72,31 @@ class SettingCommand(Command):
 
     @property
     def context(self):
-        r'''Gets context name.
+        """
+        Gets context name.
 
         Defaults to none.
 
         Set to string or none.
 
         Returns string or none.
-        '''
+        """
         return self._context
 
     @property
     def setting(self):
-        r'''Gets setting name.
+        """
+        Gets setting name.
 
         Set to string or none.
-        '''
+        """
         return self._setting
 
     @property
     def value(self):
-        r'''Gets setting value.
+        """
+        Gets setting value.
 
         Set to string or none.
-        '''
+        """
         return self._value

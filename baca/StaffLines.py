@@ -2,8 +2,8 @@ import abjad
 
 
 class StaffLines(abjad.AbjadObject):
-    r'''Staff lines.
-    '''
+    r"""Staff lines.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -32,7 +32,7 @@ class StaffLines(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when staff lines line count equals `argument` line count.
+        r"""Is true when staff lines line count equals `argument` line count.
 
         ..  container:: example
 
@@ -61,7 +61,7 @@ class StaffLines(abjad.AbjadObject):
             >>> staff_lines_3 == staff_lines_3
             True
 
-        '''
+        """
         if not isinstance(argument, type(self)):
             return False
         return self.line_count == argument.line_count
@@ -95,7 +95,7 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def context(self):
-        r'''Returns class constant ``'Staff'``.
+        r"""Returns class constant ``'Staff'``.
 
         ..  container:: example
 
@@ -103,12 +103,12 @@ class StaffLines(abjad.AbjadObject):
             'Staff'
 
         Returns ``'Staff'``.
-        '''
+        """
         return self._context
 
     @property
     def hide(self):
-        r'''Is true when staff lines should not appear in output.
+        r"""Is true when staff lines should not appear in output.
 
         ..  container:: example
 
@@ -118,12 +118,12 @@ class StaffLines(abjad.AbjadObject):
         Defaults to none.
 
         Returns true, false or none.
-        '''
+        """
         return self._hide
 
     @property
     def line_count(self):
-        r'''Gets line count.
+        r"""Gets line count.
 
         ..  container:: example
 
@@ -131,12 +131,12 @@ class StaffLines(abjad.AbjadObject):
             1
 
         Returns nonnegative integer.
-        '''
+        """
         return self._line_count
 
     @property
     def persistent(self):
-        r'''Is class constant true.
+        r"""Is class constant true.
 
         ..  container:: example
 
@@ -144,5 +144,5 @@ class StaffLines(abjad.AbjadObject):
             True
 
         Returns true.
-        '''
+        """
         return self._persistent

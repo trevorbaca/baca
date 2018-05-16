@@ -7,7 +7,8 @@ from .Typing import Selector
 
 
 class RegisterInterpolationCommand(Command):
-    r"""Register interpolation command.
+    r"""
+    Register interpolation command.
 
     :param selector: command selector.
 
@@ -1067,8 +1068,9 @@ class RegisterInterpolationCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on `argument`.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if self.selector:
@@ -1104,7 +1106,8 @@ class RegisterInterpolationCommand(Command):
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
-        r"""Gets selector.
+        r"""
+        Gets selector.
 
         ..  container:: example
 
@@ -1534,12 +1537,14 @@ class RegisterInterpolationCommand(Command):
 
     @property
     def start_pitch(self) -> abjad.NumberedPitch:
-        r'''Gets start pitch.
-        '''
+        """
+        Gets start pitch.
+        """
         return self._start_pitch
 
     @property
     def stop_pitch(self) -> abjad.NumberedPitch:
-        r'''Gets stop pitch.
-        '''
+        """
+        Gets stop pitch.
+        """
         return self._stop_pitch

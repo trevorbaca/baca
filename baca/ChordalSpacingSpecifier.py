@@ -3,7 +3,8 @@ import baca
 
 
 class ChordalSpacingSpecifier(abjad.AbjadValueObject):
-    r'''Chordal spacing specifier.
+    """
+    Chordal spacing specifier.
 
     ..  container:: example
 
@@ -55,7 +56,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
         >>> specifier([[2, 1, 0]])
         CollectionList([<2, 12, 13>])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -97,7 +98,8 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collections=None):
-        r'''Calls specifier on `collections`.
+        """
+        Calls specifier on `collections`.
 
         ..  container:: example
 
@@ -106,7 +108,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             True
 
         Returns pitch collection or none.
-        '''
+        """
         if collections is None:
             return
         if not isinstance(collections, baca.CollectionList):
@@ -268,7 +270,8 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
     @property
     def bass(self):
-        r'''Gets bass.
+        """
+        Gets bass.
 
         ..  container:: example
 
@@ -311,12 +314,13 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             CollectionList([<5, 6, 7, 9, 11>])
 
         Returns pitch-class or none.
-        '''
+        """
         return self._bass
 
     @property
     def direction(self):
-        r'''Gets direction.
+        """
+        Gets direction.
 
         ..  container:: example
 
@@ -351,12 +355,13 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             CollectionList([<6, 7, 9, 11, 17>])
 
         Returns up, down or none.
-        '''
+        """
         return self._direction
 
     @property
     def minimum_semitones(self):
-        r'''Gets minimum semitones.
+        """
+        Gets minimum semitones.
 
         ..  container:: example
 
@@ -439,22 +444,24 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
         Set to positive integer or none.
 
         Returns positive integer or none.
-        '''
+        """
         return self._minimum_semitones
 
     @property
     def pattern(self):
-        r'''Gets pattern.
+        """
+        Gets pattern.
 
         Set to pattern or none.
 
         Returns pattern or none.
-        '''
+        """
         return self._pattern
 
     @property
     def soprano(self):
-        r'''Gets soprano.
+        """
+        Gets soprano.
 
         ..  container:: example
 
@@ -503,5 +510,5 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             CollectionList([<19, 18, 17, 11, 9>])
 
         Returns pitch-class or none.
-        '''
+        """
         return self._soprano

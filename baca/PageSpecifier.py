@@ -4,8 +4,8 @@ from .SystemSpecifier import SystemSpecifier
 
 
 class PageSpecifier(abjad.AbjadObject):
-    r'''Page specifier.
-    '''
+    r"""Page specifier.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -45,14 +45,14 @@ class PageSpecifier(abjad.AbjadObject):
 
     @property
     def number(self) -> typing.Optional[int]:
-        r'''Gets page number.
-        '''
+        r"""Gets page number.
+        """
         return self._number
 
     @property
     def systems(self) -> typing.Optional[
         typing.List[typing.Union[list, SystemSpecifier]]
         ]:
-        r'''Gets systems.
-        '''
+        r"""Gets systems.
+        """
         return self._systems

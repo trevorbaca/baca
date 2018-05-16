@@ -4,14 +4,15 @@ from .Command import Command
 
 
 class PitchFirstRhythmCommand(Command):
-    r'''Pitch-first rhythm command.
+    """
+    Pitch-first rhythm command.
 
     ..  container:: example
 
         >>> baca.PitchFirstRhythmCommand()
         PitchFirstRhythmCommand()
 
-    '''
+    """
 
     ### CLASS ATTRIBUTES ###
 
@@ -160,24 +161,26 @@ class PitchFirstRhythmCommand(Command):
 
     @property
     def pattern(self):
-        r'''Gets pattern.
+        """
+        Gets pattern.
 
         Set to pattern or none.
 
         Defaults to none.
 
         Returns pattern or none.
-        '''
+        """
         return self._pattern
 
     @property
     def rhythm_maker(self):
-        r'''Gets rhythm-maker.
+        """
+        Gets rhythm-maker.
 
         Set to rhythm-maker or none.
 
         Defaults to none.
 
         Returns rhythm-maker or music.
-        '''
+        """
         return self._rhythm_maker

@@ -2,7 +2,7 @@ import abjad
 
 
 class SchemeManifest(abjad.AbjadObject):
-    r'''Scheme manifest.
+    r"""Scheme manifest.
 
     New functions defined in ``~/baca/baca/stylesheets/scheme.ily`` must
     currently be added here by hand.
@@ -10,7 +10,7 @@ class SchemeManifest(abjad.AbjadObject):
     TODO: eliminate duplication. Define ALL custom Scheme functions here
     (``SchemeManifest``) and teach ``SchemeManifest`` to write
     ``~/baca/baca/stylesheets/scheme.ily`` to disk automatically.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -29,7 +29,7 @@ class SchemeManifest(abjad.AbjadObject):
 
     @property
     def dynamics(self):
-        r'''Gets dynamics.
+        r"""Gets dynamics.
 
         ..  container:: example
 
@@ -44,13 +44,13 @@ class SchemeManifest(abjad.AbjadObject):
             'sfz_p'
 
         Returns list.
-        '''
+        """
         return [_[0] for _ in self._dynamics]
 
     ### PUBLIC METHODS ###
 
     def dynamic_to_steady_state(self, dynamic):
-        r'''Changes `dynamic` to steady state.
+        r"""Changes `dynamic` to steady state.
 
         ..  container:: example
 
@@ -58,7 +58,7 @@ class SchemeManifest(abjad.AbjadObject):
             'p'
 
         Returns string.
-        '''
+        """
         for dynamic_, steady_state in self._dynamics:
             if dynamic_ == dynamic:
                 return steady_state

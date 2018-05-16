@@ -3,7 +3,8 @@ import baca
 
 
 class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
-    r'''Arpeggiation spacing specifier.
+    """
+    Arpeggiation spacing specifier.
 
     ..  container:: example
 
@@ -22,7 +23,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
         >>> baca.ArpeggiationSpacingSpecifier()
         ArpeggiationSpacingSpecifier()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -48,7 +49,8 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collections=None):
-        r'''Calls specifier on `collections`.
+        """
+        Calls specifier on `collections`.
 
         ..  container:: example
 
@@ -63,7 +65,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             True
 
         Returns collection list or none.
-        '''
+        """
         if collections is None:
             return
         if collections == []:
@@ -104,7 +106,8 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     @property
     def direction(self):
-        r"""Gets direction.
+        r"""
+        Gets direction.
 
         ..  container:: example
 
@@ -211,10 +214,11 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     @property
     def pattern(self):
-        r'''Gets pattern.
+        """
+        Gets pattern.
 
         Set to pattern or none.
 
         Returns pattern or none.
-        '''
+        """
         return self._pattern

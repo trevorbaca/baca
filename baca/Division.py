@@ -2,7 +2,7 @@ import abjad
 
 
 class Division(abjad.NonreducedFraction):
-    r'''Division.
+    r"""Division.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -188,7 +188,7 @@ class Division(abjad.NonreducedFraction):
         >>> parts[-1][0].start_offset
         Offset(15, 16)
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -204,8 +204,8 @@ class Division(abjad.NonreducedFraction):
     ### INITIALIZER ###
 
     def __init__(self, *arguments, **keywords):
-        r'''Dummy initializer to satisfy mypy.
-        '''
+        r"""Dummy initializer to satisfy mypy.
+        """
         pass
 
     def __new__(
@@ -237,7 +237,7 @@ class Division(abjad.NonreducedFraction):
     ### SPECIAL METHODS###
 
     def __add__(self, argument):
-        r'''Adds `argument` to division.
+        r"""Adds `argument` to division.
 
         ..  container:: example
 
@@ -321,7 +321,7 @@ class Division(abjad.NonreducedFraction):
             Division((5, 4), start_offset=Offset(1, 1))
 
         Returns new division.
-        '''
+        """
         if not isinstance(argument, type(self)):
             argument = type(self)(argument)
         start_offsets = []
@@ -353,36 +353,36 @@ class Division(abjad.NonreducedFraction):
         return division
 
     def __copy__(self, *args):
-        r'''Copies division.
+        r"""Copies division.
 
         Returns new division.
-        '''
+        """
         arguments = self.__getnewargs__()
         return type(self)(*arguments)
 
     def __deepcopy__(self, *args):
-        r'''Deep copies division.
+        r"""Deep copies division.
 
         Returns new division.
-        '''
+        """
         return self.__copy__(*args)
 
     def __getnewargs__(self):
-        r'''Gets new arguments.
+        r"""Gets new arguments.
 
         Returns tuple.
-        '''
+        """
         return (self.pair, self.payload, self.start_offset)
 
     def __str__(self):
-        r'''Gets string representation of division.
+        r"""Gets string representation of division.
 
         Returns string.
-        '''
+        """
         return repr(self)
 
     def __sub__(self, argument):
-        r'''Subtracts `argument` from division.
+        r"""Subtracts `argument` from division.
 
         ..  container:: example
 
@@ -478,7 +478,7 @@ class Division(abjad.NonreducedFraction):
         Uses timespan arithmetic when both divisions have a start offset.
 
         Returns new division.
-        '''
+        """
         if not isinstance(argument, type(self)):
             argument = type(self)(argument, start_offset=self.start_offset)
         self_has_start_offset = bool(self.start_offset is not None)
@@ -544,7 +544,7 @@ class Division(abjad.NonreducedFraction):
 
     @property
     def duration(self):
-        r'''Gets duration of division.
+        r"""Gets duration of division.
 
         ..  container:: example
 
@@ -565,12 +565,12 @@ class Division(abjad.NonreducedFraction):
             Duration(3, 2)
 
         Returns duration.
-        '''
+        """
         return abjad.Duration(self)
 
     @property
     def payload(self):
-        r'''Gets payload of division.
+        r"""Gets payload of division.
 
         ..  container:: example
 
@@ -602,12 +602,12 @@ class Division(abjad.NonreducedFraction):
         Defaults to none.
 
         Returns object or none.
-        '''
+        """
         return self._payload
 
     @property
     def start_offset(self):
-        r'''Gets start offset of division.
+        r"""Gets start offset of division.
 
         ..  container:: example
 
@@ -635,12 +635,12 @@ class Division(abjad.NonreducedFraction):
         Defaults to none.
 
         Returns offset or none.
-        '''
+        """
         return self._start_offset
 
     @property
     def stop_offset(self):
-        r'''Gets stop offset of division.
+        r"""Gets stop offset of division.
 
         ..  container:: example
 
@@ -666,7 +666,7 @@ class Division(abjad.NonreducedFraction):
             Returns none when start offset is none.
 
         Returns offset or none.
-        '''
+        """
         if self.start_offset is None:
             return
         return self.start_offset + self.duration
@@ -675,7 +675,7 @@ class Division(abjad.NonreducedFraction):
 
     @staticmethod
     def yield_durations(unique=False):
-        r'''Yields all positive durations.
+        r"""Yields all positive durations.
 
         ..  container:: example
 
@@ -729,7 +729,7 @@ class Division(abjad.NonreducedFraction):
             Duration(2, 5)
 
         Returns generator.
-        '''
+        """
         generator = Division.yield_nonreduced_fractions()
         while True:
             integer_pair = next(generator)
@@ -740,7 +740,7 @@ class Division(abjad.NonreducedFraction):
                 yield duration
 
     def yield_equivalent_durations(self, minimum_written_duration=None):
-        r'''Yields all durations equivalent to this duration.
+        r"""Yields all durations equivalent to this duration.
 
         Returns output in Cantor diagonalized order.
 
@@ -813,7 +813,7 @@ class Division(abjad.NonreducedFraction):
         Defaults `minimum_written_duration` to ``1/128``.
 
         Returns generator.
-        '''
+        """
         duration = abjad.Duration(self)
         if minimum_written_duration is None:
             minimum_written_duration = type(duration)(1, 128)
@@ -835,7 +835,7 @@ class Division(abjad.NonreducedFraction):
 
     @staticmethod
     def yield_nonreduced_fractions():
-        '''Yields positive nonreduced fractions in Cantor diagonalized order.
+        """Yields positive nonreduced fractions in Cantor diagonalized order.
 
         ..  container:: example
 
@@ -861,7 +861,7 @@ class Division(abjad.NonreducedFraction):
             (6, 1)
 
         Returns generator.
-        '''
+        """
         number = 2
         while True:
             if number % 2 == 0:

@@ -6,7 +6,8 @@ from .Command import Command
 
 
 class MicrotoneDeviationCommand(Command):
-    r'''Microtone deviation command.
+    r"""
+    Microtone deviation command.
 
     ..  container:: example
 
@@ -121,7 +122,7 @@ class MicrotoneDeviationCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ##
 
@@ -141,10 +142,11 @@ class MicrotoneDeviationCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Cyclically applies deviations to plts in `argument`.
+        """
+        Cyclically applies deviations to plts in `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if not self.deviations:
@@ -172,7 +174,8 @@ class MicrotoneDeviationCommand(Command):
 
     @property
     def deviations(self):
-        r'''Gets deviations.
+        """
+        Gets deviations.
 
         ..  container:: example
 
@@ -183,5 +186,5 @@ class MicrotoneDeviationCommand(Command):
         Set to iterable of items (each -0.5, 0 or 0.5).
 
         Returns cyclic tuple or none.
-        '''
+        """
         return self._deviations

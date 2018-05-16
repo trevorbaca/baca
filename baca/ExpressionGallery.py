@@ -2,7 +2,7 @@ import abjad
 
 
 class ExpressionGallery(abjad.AbjadObject):
-    r'''Expression gallery.
+    r"""Expression gallery.
 
     ..  container:: example expression
 
@@ -298,7 +298,7 @@ class ExpressionGallery(abjad.AbjadObject):
                     }
                 }
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 

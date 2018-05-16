@@ -3,7 +3,7 @@ import baca
 
 
 class PitchSegment(abjad.PitchSegment):
-    r'''Pitch segment.
+    r"""Pitch segment.
 
     ..  container:: example
 
@@ -43,7 +43,7 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -58,7 +58,7 @@ class PitchSegment(abjad.PitchSegment):
     ### PUBLIC METHODS ###
 
     def bass_to_octave(self, n=4):
-        r'''Octave-transposes segment to bass in octave `n`.
+        r"""Octave-transposes segment to bass in octave `n`.
 
         ..  container:: example
 
@@ -128,7 +128,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns new segment.
-        '''
+        """
         command = baca.RegisterToOctaveCommand(
             anchor=abjad.Down,
             octave_number=n,
@@ -139,7 +139,7 @@ class PitchSegment(abjad.PitchSegment):
         return abjad.new(self, items=segment)
 
     def center_to_octave(self, n=4):
-        r'''Octave-transposes segment to center in octave `n`.
+        r"""Octave-transposes segment to center in octave `n`.
 
         ..  container:: example
 
@@ -209,7 +209,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns new segment.
-        '''
+        """
         command = baca.RegisterToOctaveCommand(
             anchor=abjad.Center,
             octave_number=n,
@@ -220,7 +220,7 @@ class PitchSegment(abjad.PitchSegment):
         return abjad.new(self, items=segment)
 
     def chord(self):
-        r'''Changes segment to set.
+        r"""Changes segment to set.
 
         ..  container:: example
 
@@ -254,14 +254,14 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns pitch set.
-        '''
+        """
         return baca.PitchSet(
             items=self,
             item_class=self.item_class,
             )
 
     def soprano_to_octave(self, n=4):
-        r'''Octave-transposes segment to soprano in octave `n`.
+        r"""Octave-transposes segment to soprano in octave `n`.
 
         ..  container:: example
 
@@ -331,7 +331,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns new segment.
-        '''
+        """
         command = baca.RegisterToOctaveCommand(
             anchor=abjad.Up,
             octave_number=n,
@@ -347,7 +347,7 @@ class PitchSegment(abjad.PitchSegment):
         semitones=None,
         soprano=None,
         ):
-        r'''Spaces pitch segment down.
+        r"""Spaces pitch segment down.
 
         ..  container:: example
 
@@ -470,7 +470,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns new pitch segment.
-        '''
+        """
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=abjad.Down,
@@ -489,7 +489,7 @@ class PitchSegment(abjad.PitchSegment):
         semitones=None,
         soprano=None,
         ):
-        r'''Spaces pitch segment up.
+        r"""Spaces pitch segment up.
 
         ..  container:: example
 
@@ -612,7 +612,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns new pitch segment.
-        '''
+        """
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=abjad.Up,
@@ -626,7 +626,7 @@ class PitchSegment(abjad.PitchSegment):
         return segment
 
     def split(self, pitch=0):
-        r'''Splits segment at `pitch`.
+        r"""Splits segment at `pitch`.
 
         ..  container:: example
 
@@ -719,7 +719,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
         Returns upper, lower segments.
-        '''
+        """
         upper, lower = [], []
         for pitch_ in self:
             if pitch_ < pitch:

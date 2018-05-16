@@ -2,7 +2,7 @@ import abjad
 
 
 class LMRSpecifier(abjad.AbjadObject):
-    r'''Left-middle-right specifier.
+    r"""Left-middle-right specifier.
 
     ..  container:: example
 
@@ -46,7 +46,7 @@ class LMRSpecifier(abjad.AbjadObject):
         >>> for part in parts: part
         Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -126,10 +126,10 @@ class LMRSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, sequence=None):
-        r'''Calls LMR specifier on `sequence`.
+        r"""Calls LMR specifier on `sequence`.
 
         Returns list of subsequences.
-        '''
+        """
         top_lengths = self._get_top_lengths(len(sequence))
         top_parts = abjad.sequence(sequence).partition_by_counts(
             top_lengths,
@@ -226,7 +226,7 @@ class LMRSpecifier(abjad.AbjadObject):
 
     @property
     def left_counts(self):
-        r'''Gets left counts.
+        r"""Gets left counts.
 
         ..  container:: example
 
@@ -370,12 +370,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to positive integers or none.
 
         Returns tuple of positive integers or none.
-        '''
+        """
         return self._left_counts
 
     @property
     def left_cyclic(self):
-        r'''Is true when specifier reads left counts cyclically.
+        r"""Is true when specifier reads left counts cyclically.
         Otherwise false.
 
         Defaults to none.
@@ -383,12 +383,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._left_cyclic
 
     @property
     def left_length(self):
-        r'''Gets left length.
+        r"""Gets left length.
 
         ..  container:: example
 
@@ -446,12 +446,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to nonnegative integer or none.
 
         Returns nonnegative integer or none.
-        '''
+        """
         return self._left_length
 
     @property
     def left_reversed(self):
-        r'''Is true when specifier reverses left partition.
+        r"""Is true when specifier reverses left partition.
         Otherwise false.
 
         Defaults to none.
@@ -459,24 +459,24 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._left_reversed
 
     @property
     def middle_counts(self):
-        r'''Gets middle counts.
+        r"""Gets middle counts.
 
         Defaults to none.
 
         Set to positive integers or none.
 
         Returns positive integers or none.
-        '''
+        """
         return self._middle_counts
 
     @property
     def middle_cyclic(self):
-        r'''Is true when specifier reads middle counts cyclically.
+        r"""Is true when specifier reads middle counts cyclically.
         Otherwise false.
 
         ..  container:: example
@@ -547,12 +547,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._middle_cyclic
 
     @property
     def middle_reversed(self):
-        r'''Is true when specifier reverses middle partition.
+        r"""Is true when specifier reverses middle partition.
         Otherwise false.
 
         ..  container:: example
@@ -624,12 +624,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._middle_reversed
 
     @property
     def priority(self):
-        r'''Gets priority.
+        r"""Gets priority.
 
         ..  container:: example
 
@@ -754,24 +754,24 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to left, right or none.
 
         Returns left, right or none.
-        '''
+        """
         return self._priority
 
     @property
     def right_counts(self):
-        r'''Gets right counts.
+        r"""Gets right counts.
 
         Defaults to none.
 
         Set to positive integers or none.
 
         Returns positive integers or none.
-        '''
+        """
         return self._right_counts
 
     @property
     def right_cyclic(self):
-        r'''Is true when specifier reads right counts cyclically.
+        r"""Is true when specifier reads right counts cyclically.
         Otherwise false.
 
         Defaults to none.
@@ -779,12 +779,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._right_cyclic
 
     @property
     def right_length(self):
-        r'''Gets right length.
+        r"""Gets right length.
 
         ..  container:: example
 
@@ -901,12 +901,12 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to nonnegative integer or none.
 
         Returns nonnegative integer or none.
-        '''
+        """
         return self._right_length
 
     @property
     def right_reversed(self):
-        r'''Is true when specifier reverses right partition.
+        r"""Is true when specifier reverses right partition.
         Otherwise false.
 
         Defaults to none.
@@ -914,5 +914,5 @@ class LMRSpecifier(abjad.AbjadObject):
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._right_reversed

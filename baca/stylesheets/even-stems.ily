@@ -30,7 +30,7 @@ bsu = { \change Staff = bass \stemUp }
 
 treble = {
   \clef treble
-  aes''32[ \bsu cis'! \tsd disis'''! \bsu deses'! \tsd d''' \bsu ees'!]
+  aes''32[ \bsu cis'! \tsd disis"""! \bsu deses'! \tsd d""" \bsu ees'!]
 }
 
 bass = {

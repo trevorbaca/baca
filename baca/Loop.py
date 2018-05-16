@@ -3,7 +3,7 @@ import collections
 
 
 class Loop(abjad.CyclicTuple):
-    r'''Loop.
+    r"""Loop.
 
     ..  container::
 
@@ -57,7 +57,7 @@ class Loop(abjad.CyclicTuple):
             selector=baca.pleaves(),
             )
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -86,10 +86,10 @@ class Loop(abjad.CyclicTuple):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, i):
-        r'''Gets pitch `i` cyclically with intervals.
+        r"""Gets pitch `i` cyclically with intervals.
 
         Returns pitch.
-        '''
+        """
         if isinstance(i, slice):
             raise NotImplementedError
         iteration = i // len(self)
@@ -115,12 +115,12 @@ class Loop(abjad.CyclicTuple):
 
     @property
     def intervals(self):
-        r'''Gets intervals.
-        '''
+        r"""Gets intervals.
+        """
         return self._intervals
 
     @property
     def items(self):
-        r'''Gets items.
-        '''
+        r"""Gets items.
+        """
         return self._items

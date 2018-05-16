@@ -3,7 +3,7 @@ import fractions
 
 
 class Interpolator(abjad.AbjadObject):
-    r'''Interpolator.
+    r"""Interpolator.
 
     ..  container:: example
 
@@ -23,7 +23,7 @@ class Interpolator(abjad.AbjadObject):
         6 [-5, -3, -1, 1, 3, 5]
         7 [-5, Fraction(-10, 3), Fraction(-5, 3), 0, Fraction(5, 3), Fraction(10, 3), 5]
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -33,7 +33,7 @@ class Interpolator(abjad.AbjadObject):
 
     @staticmethod
     def interpolate_linear(start, stop, count=2):
-        r'''Interpolates `count` values linearly from `start` to `stop`.
+        r"""Interpolates `count` values linearly from `start` to `stop`.
 
         ..  container:: example
 
@@ -72,7 +72,7 @@ class Interpolator(abjad.AbjadObject):
             7 [2, Fraction(11, 6), Fraction(5, 3), Fraction(3, 2), Fraction(4, 3), Fraction(7, 6), 1]
 
         Returns list of numbers.
-        '''
+        """
         import numbers
         assert isinstance(start, numbers.Number), repr(start)
         assert isinstance(stop, numbers.Number), repr(stop)

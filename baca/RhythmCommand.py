@@ -47,7 +47,8 @@ rhythm_maker_typing = typing.Union[
 
 
 class RhythmCommand(Command):
-    r'''Rhythm command.
+    r"""
+    Rhythm command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -196,7 +197,7 @@ class RhythmCommand(Command):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS ATTRIBUTES ###
 
@@ -309,8 +310,9 @@ class RhythmCommand(Command):
         start_offset: abjad.Offset = None,
         time_signatures: typing.Iterable[abjad.TimeSignature] = None,
         ) -> abjad.AnnotatedTimespan:
-        r'''Calls command on ``start_offset`` and ``time_signatures``.
-        '''
+        """
+        Calls command on ``start_offset`` and ``time_signatures``.
+        """
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = abjad.inspect(music).get_leaf(0)
@@ -548,55 +550,62 @@ class RhythmCommand(Command):
 
     @property
     def division_expression(self) -> typing.Optional[abjad.Expression]:
-        r'''Gets division expression.
-        '''
+        """
+        Gets division expression.
+        """
         return self._division_expression
 
     @property
     def division_maker(self) -> typing.Optional[division_maker_typing]:
-        r'''Gets division-maker.
-        '''
+        """
+        Gets division-maker.
+        """
         return self._division_maker
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
-        r'''Is true when rhythm is left-broken.
-        '''
+        """
+        Is true when rhythm is left-broken.
+        """
         return self._left_broken
 
     @property
     def multimeasure_rests(self) -> typing.Optional[bool]:
-        r'''Is true when command spells each rest-filled division as a
+        """
+        Is true when command spells each rest-filled division as a
         single multimeasure rest.
-        '''
+        """
         return self._multimeasure_rests
 
     @property
     def parameter(self) -> str:
-        r'''Gets persistence parameter.
+        """
+        Gets persistence parameter.
 
         ..  container:: example
 
             >>> baca.RhythmCommand().parameter
             'RHYTHM'
 
-        '''
+        """
         return abjad.tags.RHYTHM
 
     @property
     def persist(self) -> typing.Optional[str]:
-        '''Gets persist name.
-        '''
+        """
+        Gets persist name.
+        """
         return self._persist
 
     @property
     def reference_meters(self) -> typing.Optional[
         typing.Iterable[abjad.Meter]
         ]:
-        r'''Gets reference meters.
+        """
+        Gets reference meters.
 
         Only used to rewrite meters.
-        '''
+        """
         return self._reference_meters
 
     @property
@@ -608,62 +617,72 @@ class RhythmCommand(Command):
 
     @property
     def rewrite_meter(self) -> typing.Optional[bool]:
-        r'''Is true when command rewrites meter.
-        '''
+        """
+        Is true when command rewrites meter.
+        """
         return self._rewrite_meter
 
     @property
     def rewrite_rest_filled(self) -> typing.Optional[bool]:
-        r'''Is true when command rewrites rest-filled divisions.
-        '''
+        """
+        Is true when command rewrites rest-filled divisions.
+        """
         return self._rewrite_rest_filled
 
     @property
     def rhythm_maker(self) -> typing.Optional[rhythm_maker_typing]:
-        r'''Gets rhythm-maker or selection.
-        '''
+        """
+        Gets rhythm-maker or selection.
+        """
         return self._rhythm_maker
 
     @property
     def rhythm_overwrites(self) -> typing.Optional[typing.List[tuple]]:
-        r'''Gets rhythm overwrites.
-        '''
+        """
+        Gets rhythm overwrites.
+        """
         return self._rhythm_overwrites
 
     @property
     def right_broken(self) -> typing.Optional[bool]:
-        r'''Is true when rhythm is right-broken.
-        '''
+        """
+        Is true when rhythm is right-broken.
+        """
         return self._right_broken
 
     @property
     def split_at_measure_boundaries(self) -> typing.Optional[bool]:
-        r'''Is true when command splits at measure boundaries.
-        '''
+        """
+        Is true when command splits at measure boundaries.
+        """
         return self._split_at_measure_boundaries
 
     @property
     def stages(self) -> typing.Optional[typing.Tuple[int, int]]:
-        r'''Gets stages.
-        '''
+        """
+        Gets stages.
+        """
         return self._stages
 
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets postcall state of rhythm command.
+        """
+        Gets postcall state of rhythm command.
 
         Populated by segment-maker.
-        '''
+        """
         return self._state
 
     @property
     def tie_first(self) -> typing.Optional[bool]:
-        r'''Is true when command ties into first pleaf.
-        '''
+        """
+        Is true when command ties into first pleaf.
+        """
         return self._tie_first
 
     @property
     def tie_last(self) -> typing.Optional[bool]:
-        r'''Is true when command ties into last pleaf.
-        '''
+        """
+        Is true when command ties into last pleaf.
+        """
         return self._tie_last

@@ -6,8 +6,9 @@ from .Typing import Selector
 
 
 class PartAssignmentCommand(Command):
-    r'''Part assignment command.
-    '''
+    """
+    Part assignment command.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -33,8 +34,9 @@ class PartAssignmentCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Inserts ``selector`` output in container and sets part assignment.
-        '''
+        """
+        Inserts ``selector`` output in container and sets part assignment.
+        """
         if argument is None:
             return
         if self.selector is not None:
@@ -62,6 +64,7 @@ class PartAssignmentCommand(Command):
 
     @property
     def part_assignment(self) -> typing.Optional[abjad.PartAssignment]:
-        r'''Gets part assignment.
-        '''
+        """
+        Gets part assignment.
+        """
         return self._part_assignment

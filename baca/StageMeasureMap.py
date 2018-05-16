@@ -3,7 +3,7 @@ import typing
 
 
 class StageMeasureMap(abjad.AbjadObject):
-    r'''Stage measure map.
+    r"""Stage measure map.
 
     ..  container:: example
 
@@ -48,7 +48,7 @@ class StageMeasureMap(abjad.AbjadObject):
                 ),
             )
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -80,7 +80,7 @@ class StageMeasureMap(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument) -> item_type:
-        r'''Gets item identified by `argument`.
+        r"""Gets item identified by `argument`.
 
         ..  container:: example
 
@@ -94,7 +94,7 @@ class StageMeasureMap(abjad.AbjadObject):
             >>> stages[0]
             4
 
-        '''
+        """
         return self.items.__getitem__(argument)
 
     ### PRIVATE METHODS ###
@@ -113,7 +113,7 @@ class StageMeasureMap(abjad.AbjadObject):
 
     @property
     def items(self) -> typing.Tuple[item_type, ...]:
-        r'''Gets items.
+        r"""Gets items.
 
         ..  container:: example
 
@@ -127,12 +127,12 @@ class StageMeasureMap(abjad.AbjadObject):
             >>> stages.items
             (4, 4, 4, TimeSignature((1, 4)), 4)
 
-        '''
+        """
         return self._items
 
     @property
     def stage_count(self) -> int:
-        r'''Gets stage count.
+        r"""Gets stage count.
 
         ..  container:: example
 
@@ -146,5 +146,5 @@ class StageMeasureMap(abjad.AbjadObject):
             >>> stages.stage_count
             5
 
-        '''
+        """
         return len(self.items)

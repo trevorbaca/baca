@@ -3,7 +3,8 @@ import baca
 
 
 class CommandWrapper(abjad.AbjadObject):
-    r'''Command wrapper.
+    r"""
+    Command wrapper.
 
     ..  container:: example
 
@@ -78,7 +79,7 @@ class CommandWrapper(abjad.AbjadObject):
                 ),
             )
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -106,7 +107,8 @@ class CommandWrapper(abjad.AbjadObject):
 
     @property
     def command(self):
-        r'''Gets command.
+        """
+        Gets command.
 
         ..  container:: example
 
@@ -136,12 +138,13 @@ class CommandWrapper(abjad.AbjadObject):
         Set to command or none.
 
         Returns command or none.
-        '''
+        """
         return self._command
 
     @property
     def scope(self):
-        r'''Gets scope.
+        """
+        Gets scope.
 
         ..  container:: example
 
@@ -163,5 +166,5 @@ class CommandWrapper(abjad.AbjadObject):
         Set to scope or none.
 
         Returns scope or none.
-        '''
+        """
         return self._scope

@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class RegisterCommand(Command):
-    r"""Register command.
+    r"""
+    Register command.
 
     ..  container:: example
 
@@ -331,10 +332,11 @@ class RegisterCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if self.registration is None:
@@ -359,7 +361,8 @@ class RegisterCommand(Command):
 
     @property
     def registration(self):
-        r'''Gets registration.
+        """
+        Gets registration.
 
         ..  container:: example
 
@@ -386,5 +389,5 @@ class RegisterCommand(Command):
         Set to registration or none.
 
         Returns registration or none.
-        '''
+        """
         return self._registration

@@ -2,7 +2,7 @@ import abjad
 
 
 class Matrix(abjad.AbjadObject):
-    '''A matrix.
+    """A matrix.
 
     Initializes from rows:
 
@@ -50,7 +50,7 @@ class Matrix(abjad.AbjadObject):
     Concatenation and division remain to be implemented.
 
     Standard transforms of linear algebra remain to be implemented.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -79,23 +79,23 @@ class Matrix(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets row `argument` from matrix.
+        r"""Gets row `argument` from matrix.
 
         >>> matrix[1]
         (10, 11, 12, 13)
 
         Returns row.
-        '''
+        """
         return self.rows.__getitem__(argument)
 
     def __repr__(self):
-        r'''Gets interpreter representation of matrix.
+        r"""Gets interpreter representation of matrix.
 
         >>> matrix
         Matrix(3x4)
 
         Returns string.
-        '''
+        """
         return f'{type(self).__name__}({self._n_rows}x{self._n_columns})'
 
     ### PRIVATE METHODS ###
@@ -124,7 +124,7 @@ class Matrix(abjad.AbjadObject):
 
     @property
     def columns(self):
-        r'''Columns of matrix.
+        r"""Columns of matrix.
 
         >>> matrix = baca.Matrix(
         ...     [[0, 1, 2, 3],
@@ -136,12 +136,12 @@ class Matrix(abjad.AbjadObject):
         ((0, 10, 20), (1, 11, 21), (2, 12, 22), (3, 13, 23))
 
         Returns tuple.
-        '''
+        """
         return self._columns
 
     @property
     def rows(self):
-        r'''Rows of matrix.
+        r"""Rows of matrix.
 
         >>> matrix = baca.Matrix(
         ...     [[0, 1, 2, 3],
@@ -153,5 +153,5 @@ class Matrix(abjad.AbjadObject):
         ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
 
         Returns tuple.
-        '''
+        """
         return self._rows

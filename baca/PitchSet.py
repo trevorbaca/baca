@@ -3,7 +3,7 @@ import baca
 
 
 class PitchSet(abjad.PitchSet):
-    r'''Pitch set.
+    r"""Pitch set.
 
     ..  container:: example
 
@@ -39,7 +39,7 @@ class PitchSet(abjad.PitchSet):
                     >>
                 >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -51,7 +51,7 @@ class PitchSet(abjad.PitchSet):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r'''Is true when segment equals `argument`. Otherwise false.
+        r"""Is true when segment equals `argument`. Otherwise false.
 
         ..  container:: example
 
@@ -66,7 +66,7 @@ class PitchSet(abjad.PitchSet):
             >>> set_2 == set_1
             True
 
-        '''
+        """
         if (not issubclass(type(argument), type(self)) and
             not issubclass(type(self), type(argument))):
             return False
@@ -80,7 +80,7 @@ class PitchSet(abjad.PitchSet):
         semitones=None,
         soprano=None,
         ):
-        r'''Spaces pitch set down.
+        r"""Spaces pitch set down.
 
         ..  container:: example
 
@@ -195,7 +195,7 @@ class PitchSet(abjad.PitchSet):
                 >>
 
         Returns new pitch set.
-        '''
+        """
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=abjad.Down,
@@ -214,7 +214,7 @@ class PitchSet(abjad.PitchSet):
         semitones=None,
         soprano=None,
         ):
-        r'''Spaces pitch set up.
+        r"""Spaces pitch set up.
 
         ..  container:: example
 
@@ -329,7 +329,7 @@ class PitchSet(abjad.PitchSet):
                 >>
 
         Returns new pitch segment.
-        '''
+        """
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=abjad.Up,
@@ -343,7 +343,7 @@ class PitchSet(abjad.PitchSet):
         return segment
 
     def to_pitch_classes(self):
-        r'''Makes pitch-class set.
+        r"""Makes pitch-class set.
 
         ..  container:: example
 
@@ -355,7 +355,7 @@ class PitchSet(abjad.PitchSet):
             PitchClassSet([6, 7, 9, 10, 10.5])
 
         Returns new pitch-class set.
-        '''
+        """
         if self.item_class is abjad.NumberedPitch:
             item_class = abjad.NumberedPitchClass
         elif self.item_class is abjad.NamedPitch:

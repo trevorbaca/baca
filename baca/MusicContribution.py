@@ -3,14 +3,14 @@ import baca
 
 
 class MusicContribution(abjad.AbjadValueObject):
-    r'''Music contribution.
+    r"""Music contribution.
 
     ..  container:: example
 
         >>> baca.MusicContribution()
         MusicContribution()
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -57,17 +57,17 @@ class MusicContribution(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, voice_name):
-        r'''Gets `voice_name` selection list.
+        r"""Gets `voice_name` selection list.
 
         Returns list of selections.
-        '''
+        """
         return self.selections.__getitem__(voice_name)
 
     def __iter__(self):
-        r'''Iterates figure contribution.
+        r"""Iterates figure contribution.
 
         Yields voice names.
-        '''
+        """
         for voice_name in self.selections:
             yield voice_name
 
@@ -86,50 +86,50 @@ class MusicContribution(abjad.AbjadValueObject):
 
     @property
     def anchor(self):
-        r'''Gets anchor.
+        r"""Gets anchor.
 
         Returns anchor specifier or none.
-        '''
+        """
         return self._anchor
 
     @property
     def color_selector(self):
-        r'''Gets color selector.
+        r"""Gets color selector.
 
         Returns selector or none.
-        '''
+        """
         return self._color_selector
 
     @property
     def color_selector_result(self):
-        r'''Gets color selector result.
+        r"""Gets color selector result.
 
         Returns selector result or none.
-        '''
+        """
         return self._color_selector_result
 
     @property
     def figure_name(self):
-        r'''Gets figure name.
+        r"""Gets figure name.
 
         Returns string or none.
-        '''
+        """
         return self._figure_name
 
     @property
     def hide_time_signature(self):
-        r'''Is true when contribution hides time signature.
+        r"""Is true when contribution hides time signature.
 
         Returns true, false or none.
-        '''
+        """
         return self._hide_time_signature
 
     @property
     def selections(self):
-        r'''Gets selections.
+        r"""Gets selections.
 
         Returns list of selections or none.
-        '''
+        """
         if self._selections is not None:
             assert isinstance(self._selections, dict), repr(self._selections)
             for value in self._selections.values():
@@ -138,27 +138,27 @@ class MusicContribution(abjad.AbjadValueObject):
 
     @property
     def state_manifest(self):
-        r'''Gets state manifest.
+        r"""Gets state manifest.
 
         Returns state manifest or none.
-        '''
+        """
         return self._state_manifest
 
     @property
     def time_signature(self):
-        r'''Gets time signature.
+        r"""Gets time signature.
 
         Returns time signature or none.
-        '''
+        """
         return self._time_signature
 
     ### PUBLIC METHODS ###
 
     def print_color_selector_result(self):
-        r'''Prints color selector result.
+        r"""Prints color selector result.
 
         Returns none.
-        '''
+        """
         if self.color_selector is None:
             return
         if self.color_selector_result is None:

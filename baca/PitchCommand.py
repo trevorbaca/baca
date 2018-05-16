@@ -7,7 +7,8 @@ from .Typing import Selector
 
 
 class PitchCommand(Command):
-    r'''Pitch command.
+    r"""
+    Pitch command.
 
     ..  container:: example
 
@@ -374,7 +375,7 @@ class PitchCommand(Command):
             }
 
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -431,8 +432,9 @@ class PitchCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if not self.pitches:
@@ -595,56 +597,56 @@ class PitchCommand(Command):
 
     @property
     def allow_octaves(self) -> typing.Optional[bool]:
-        r'''Is true when command allows octaves.
-        '''
+        r"""Is true when command allows octaves.
+        """
         return self._allow_octaves
 
     @property
     def allow_repeats(self) -> typing.Optional[bool]:
-        r'''Is true when command allows repeat pitches.
-        '''
+        r"""Is true when command allows repeat pitches.
+        """
         return self._allow_repeats
 
     @property
     def cyclic(self) -> typing.Optional[bool]:
-        r'''Is true when command reads pitches cyclically.
-        '''
+        r"""Is true when command reads pitches cyclically.
+        """
         return self._cyclic
 
     @property
     def do_not_transpose(self) -> typing.Optional[bool]:
-        r'''Is true when pitch escapes transposition.
-        '''
+        r"""Is true when pitch escapes transposition.
+        """
         return self._do_not_transpose
 
     @property
     def ignore_incomplete(self) -> typing.Optional[bool]:
-        r'''Is true when persistent pitch command ignores previous segment
+        r"""Is true when persistent pitch command ignores previous segment
         incomplete last note.
-        '''
+        """
         return self._ignore_incomplete
 
     @property
     def parameter(self) -> str:
-        r'''Gets persistence parameter.
+        r"""Gets persistence parameter.
 
         ..  container:: example
 
             >>> baca.PitchCommand().parameter
             'PITCH'
 
-        '''
+        """
         return abjad.tags.PITCH
         
     @property
     def persist(self) -> typing.Optional[str]:
-        r'''Gets persist name.
-        '''
+        r"""Gets persist name.
+        """
         return self._persist
 
     @property
     def pitches(self) -> typing.Optional[typing.Iterable]:
-        r'''Gets pitches.
+        r"""Gets pitches.
 
         ..  container:: example
 
@@ -663,11 +665,11 @@ class PitchCommand(Command):
             NamedPitch("f''")
             NamedPitch("b''")
 
-        '''
+        """
         return self._pitches
 
     @property
     def state(self) -> abjad.OrderedDict:
-        r'''Gets state dictionary.
-        '''
+        r"""Gets state dictionary.
+        """
         return self._state

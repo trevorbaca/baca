@@ -3,7 +3,7 @@ import baca
 
 
 class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
-    r'''Split-by-rounded-ratios division callback.
+    r"""Split-by-rounded-ratios division callback.
 
     ..  container:: example
 
@@ -39,7 +39,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
     division.
 
     Follows the two-step configure-once / call-repeatedly pattern shown here.
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -64,7 +64,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r'''Calls rounded ratio division-maker on `divisions`.
+        r"""Calls rounded ratio division-maker on `divisions`.
 
         ..  container:: example
 
@@ -124,7 +124,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
             Division((3, 4), start_offset=Offset(11, 4))
 
         Returns possibly empty list of division lists.
-        '''
+        """
         divisions = divisions or []
         if not divisions:
             return []
@@ -164,7 +164,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def ratios(self):
-        r'''Gets ratios of rounded ratio division-maker.
+        r"""Gets ratios of rounded ratio division-maker.
 
         ..  container:: example
 
@@ -234,5 +234,5 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
             [Division((1, 4)), Division((2, 4)), Division((1, 4))]
 
         Set to ratios or none.
-        '''
+        """
         return self._ratios

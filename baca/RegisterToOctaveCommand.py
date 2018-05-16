@@ -4,7 +4,8 @@ from .Command import Command
 
 
 class RegisterToOctaveCommand(Command):
-    r"""Register-to-octave command.
+    r"""
+    Register-to-octave command.
 
     ..  container:: example
 
@@ -325,10 +326,11 @@ class RegisterToOctaveCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on ``argument``.
 
         Returns none.
-        '''
+        """
         if argument is None:
             return
         if self.octave_number is None:
@@ -386,7 +388,8 @@ class RegisterToOctaveCommand(Command):
 
     @property
     def anchor(self):
-        r"""Gets anchor.
+        """
+        Gets anchor.
 
         ..  container:: example
 
@@ -450,7 +453,8 @@ class RegisterToOctaveCommand(Command):
 
     @property
     def octave_number(self):
-        r"""Gets octave number.
+        r"""
+        Gets octave number.
 
         ..  container:: example
 

@@ -6,8 +6,9 @@ from .Typing import Selector
 
 
 class BowContactPointCommand(Command):
-    r'''Bow contact point command.
-    '''
+    """
+    Bow contact point command.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -39,8 +40,9 @@ class BowContactPointCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on ``argument``.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if self.selector:
@@ -98,7 +100,8 @@ class BowContactPointCommand(Command):
 
     @property
     def bow_contact_points(self) -> typing.Iterable[typing.Tuple[int, int]]:
-        r'''Gets bow contact points.
+        r"""
+        Gets bow contact points.
 
         ..  container:: example
 
@@ -130,5 +133,5 @@ class BowContactPointCommand(Command):
             (1, 4)
 
         Class constant.
-        '''
+        """
         return self._bow_contact_points

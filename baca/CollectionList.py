@@ -4,7 +4,8 @@ import collections as collections_module
 
 
 class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
-    r'''Collection list.
+    """
+    Collection list.
 
     ..  container:: example
 
@@ -185,7 +186,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         >>> baca.CollectionList()
         CollectionList([])
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -223,7 +224,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     ### SPECIAL METHODS ###
 
     def __add__(self, argument):
-        r'''Adds `argument` to collections.
+        """
+        Adds ``argument`` to collections.
 
         ..  container:: example
 
@@ -233,7 +235,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                 CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
         Returns new collection list.
-        '''
+        """
         if not isinstance(argument, collections_module.Iterable):
             raise TypeError(f'must be collection list: {argument!r}.')
         argument_collections = [
@@ -243,7 +245,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def __eq__(self, argument):
-        r'''Is true when `argument` is a collection list with collections
+        """
+        Is true when ``argument`` is a collection list with collections
         equal to those of this collection list. Otherwise false.
 
         ..  container:: example
@@ -293,13 +296,14 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             True
 
         Returns true or false.
-        '''
+        """
         if not isinstance(argument, type(self)):
             return False
         return self.collections == argument.collections
 
     def __format__(self, format_specification=''):
-        r'''Gets storage format of collections.
+        """
+        Gets storage format of collections.
 
         ..  container:: example
 
@@ -332,12 +336,13 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                 )
 
         Returns string.
-        '''
+        """
         superclass = super(CollectionList, self)
         return superclass.__format__()
 
     def __getitem__(self, argument):
-        r'''Gets collection or collection slice identified by `argument`.
+        """
+        Gets collection or collection slice identified by ``argument``.
 
         ..  container:: example
 
@@ -370,7 +375,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<16, 20, 19>])
 
         Returns collection.
-        '''
+        """
         collections = self.collections or []
         result = collections.__getitem__(argument)
         try:
@@ -380,7 +385,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
     # TODO: reimplement to show all four types of collection
     def __illustrate__(self):
-        r'''Illustrates collections.
+        r"""
+        Illustrates collections.
 
         ..  container:: example
 
@@ -444,12 +450,13 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                 >>
 
         Returns LilyPond file.
-        '''
+        """
         tree = baca.PitchTree(list(self))
         return tree.__illustrate__()
 
     def __len__(self):
-        r'''Gets length of collections.
+        """
+        Gets length of collections.
 
         ..  container:: example
 
@@ -462,11 +469,12 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             2
 
         Returns nonnegative integer.
-        '''
+        """
         return len(self.collections)
 
     def __repr__(self):
-        r'''Gets interpreter representation of collections.
+        """
+        Gets interpreter representation of collections.
 
         ..  container:: example
 
@@ -477,7 +485,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
         Returns string.
-        '''
+        """
         collections = self.collections or []
         collections = ', '.join([str(_) for _ in collections])
         string = f'{type(self).__name__}([{collections}])'
@@ -642,7 +650,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
     @property
     def collections(self):
-        r'''Gets collections in list.
+        """
+        Gets collections in list.
 
         ..  container:: example
 
@@ -655,24 +664,26 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
 
         Returns list.
-        '''
+        """
         if self._collections:
             return list(self._collections)
 
     @property
     def item_class(self):
-        r'''Gets item class of collections in list.
+        """
+        Gets item class of collections in list.
 
         Set to class modeling pitch or pitch-class.
 
         Returns class or none.
-        '''
+        """
         return self._item_class
 
     ### PUBLIC METHODS ###
 
     def accumulate(self, operands=None):
-        r'''Accumulates `operands` against collections to identity.
+        """
+        Accumulates `operands` against collections to identity.
 
         ..  container:: example
 
@@ -737,7 +748,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             PitchClassSegment([5, 9, 6])
 
         Returns new collection list.
-        '''
+        """
         sequence = baca.Sequence(items=self)
         collections = []
         for sequence_ in sequence.accumulate(operands=operands):
@@ -745,7 +756,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def arpeggiate_down(self, pattern=None):
-        r'''Apreggiates collections down according to `pattern`.
+        """
+        Apreggiates collections down according to `pattern`.
 
         ..  container:: example
 
@@ -770,7 +782,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
 
         Returns new collection list.
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -789,7 +801,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def arpeggiate_up(self, pattern=None):
-        r'''Apreggiates collections up according to `pattern`.
+        """
+        Apreggiates collections up according to `pattern`.
 
         ..  container:: example
 
@@ -814,7 +827,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
 
         Returns new collection list.
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -833,7 +846,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def bass_to_octave(self, n=4, pattern=None):
-        r'''Octave-transposes collections to bass in octave `n`.
+        """
+        Octave-transposes collections to bass in octave ``n``.
 
         ..  container:: example
 
@@ -866,7 +880,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-9, 2, 13, 24>])
 
         Returns new collection list.
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -879,7 +893,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def center_to_octave(self, n=4, pattern=None):
-        r'''Octave-transposes collections to center in octave `n`.
+        """
+        Octave-transposes collections to center in octave ``n``.
 
         ..  container:: example
 
@@ -912,7 +927,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-21, -10, 1, 12>])
 
         Returns new collection list.
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -925,7 +940,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def chords(self, pattern=None):
-        r'''Turns collections into chords according to `pattern`.
+        """
+        Turns collections into chords according to ``pattern``.
 
         ..  container:: example
 
@@ -975,7 +991,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             PitchSet([16, 19, 20])
 
         Returns new collection list.
-        '''
+        """
         collections = []
         length = len(self)
         pattern = pattern or abjad.index_all()
@@ -987,7 +1003,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def cursor(self, cyclic=None, singletons=None):
-        r'''Wraps collections in cursor.
+        """
+        Wraps collections in cursor.
 
         ..  container:: example
 
@@ -1025,11 +1042,12 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             [PitchSegment([16, 17])]
 
         Returns cursor.
-        '''
+        """
         return baca.Cursor(self, cyclic=cyclic, singletons=singletons)
 
     def flatten(self):
-        r'''Flattens collections.
+        """
+        Flattens collections.
 
         ..  container:: example
 
@@ -1051,11 +1069,12 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             "<f' c'' d'' fs'' f'' e'' f'' g''>"
 
         Returns collection.
-        '''
+        """
         return self.join()[0]
 
     def has_duplicate_pitch_classes(self, level=-1):
-        r'''Is true when collections have duplicate pitch-classes at `level`.
+        """
+        Is true when collections have duplicate pitch-classes at ``level``.
 
         ..  container:: example
 
@@ -1073,7 +1092,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         Set `level` to 1 or -1.
 
         Returns true or false.
-        '''
+        """
         pitch_class_class = self._get_pitch_class_class()
         if level == 1:
             for collection in self:
@@ -1096,7 +1115,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return False
 
     def has_duplicates(self, level=-1):
-        r'''Is true when collections have duplicates at `level`.
+        """
+        Is true when collections have duplicates at ``level``.
 
         ..  container:: example
 
@@ -1141,10 +1161,10 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.has_duplicates(level=-1)
             True
 
-        Set `level` to 0, 1 or -1.
+        Set ``level`` to 0, 1 or -1.
 
         Returns true or false.
-        '''
+        """
         if level == 0:
             known_items = []
             for collection in self:
@@ -1170,7 +1190,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return False
 
     def has_repeat_pitch_classes(self, level=-1):
-        r'''Is true when collections have repeat pitch-classes as `level`.
+        """
+        Is true when collections have repeat pitch-classes as ``level``.
 
         ..  container:: example
 
@@ -1185,7 +1206,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         Set `level` to 0 or -1.
 
         Returns true or false.
-        '''
+        """
         pitch_class_class = self._get_pitch_class_class()
         if level == 1:
             for collection in self:
@@ -1208,7 +1229,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return False
 
     def has_repeats(self, level=-1):
-        r'''Is true when collections have repeats at `level`.
+        """
+        Is true when collections have repeats at ``level``.
 
         ..  container:: example
 
@@ -1253,10 +1275,10 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.has_repeats(level=-1)
             True
 
-        Set `level` to 0, 1 or -1.
+        Set ``level`` to 0, 1 or -1.
 
         Returns true or false.
-        '''
+        """
         if level == 0:
             previous_collection = None
             for collection in self:
@@ -1282,7 +1304,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return False
 
     def helianthate(self, n=0, m=0):
-        r'''Helianthates collections.
+        """
+        Helianthates collections.
 
         ..  container:: example
 
@@ -1310,13 +1333,14 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             PitchSegment([5, 4])
 
         Returns new collection list.
-        '''
+        """
         collections = baca.Sequence(items=self)
         collections = collections.helianthate(n=n, m=m)
         return abjad.new(self, collections=collections)
 
     def join(self):
-        r'''Joins collections.
+        """
+        Joins collections.
 
         ..  container:: example
 
@@ -1329,7 +1353,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
 
         Returns new collection list.
-        '''
+        """
         collections = []
         if self:
             collection = self[0]
@@ -1339,7 +1363,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def partition(self, argument, cyclic=False, join=False, overhang=False):
-        r'''Partitions collections according to `argument`.
+        """
+        Partitions collections according to ``argument``.
 
         ..  container:: example
 
@@ -1400,7 +1425,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             PitchSegment([16, 17, 19, 16, 17, 19])
 
         Returns sequence.
-        '''
+        """
         if isinstance(argument, abjad.Ratio):
             message = 'implement ratio-partition at some point.'
             raise NotImplementedError(message)
@@ -1419,7 +1444,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return result
 
     def read(self, counts=None, check=None):
-        r'''Reads collections by `counts`.
+        """
+        Reads collections by ``counts``.
 
         ..  container:: example
 
@@ -1456,7 +1482,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             ValueError: call reads 30 items; not a multiple of 8 items.
 
         Returns new collection list.
-        '''
+        """
         if counts in (None, []):
             return abjad.new(self)
         counts = list(counts)
@@ -1485,7 +1511,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
     def remove(self, indices=None, period=None):
-        r'''Removes collections at `indices`.
+        """
+        Removes collections at ``indices``.
 
         ..  container:: example
 
@@ -1494,13 +1521,14 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<2, 3>, <4>])
 
         Returns new collection list.
-        '''
+        """
         sequence = baca.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
     def remove_duplicate_pitch_classes(self, level=-1):
-        r'''Removes duplicate pitch-classes at `level`.
+        """
+        Removes duplicate pitch-classes at ``level``.
 
         ..  container:: example
 
@@ -1512,10 +1540,10 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.remove_duplicate_pitch_classes(level=-1)
             CollectionList([<4, 5, 7>, <18>])
 
-        Set `level` to 1 or -1.
+        Set ``level`` to 1 or -1.
 
         Returns new collection list.
-        '''
+        """
         pitch_class_class = self._get_pitch_class_class()
         collections_ = []
         if level == 1:
@@ -1549,7 +1577,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections_)
 
     def remove_duplicates(self, level=-1):
-        r'''Removes duplicates at `level`.
+        """
+        Removes duplicates at ``level``.
 
         ..  container:: example
 
@@ -1566,10 +1595,10 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.remove_duplicates(level=-1)
             CollectionList([<16, 17>, <13, 14>])
 
-        Set `level` to 0, 1 or -1.
+        Set ``level`` to 0, 1 or -1.
 
         Returns new collection list.
-        '''
+        """
         collections_ = []
         if level == 0:
             collections_, known_items = [], []
@@ -1606,7 +1635,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections_)
 
     def remove_repeat_pitch_classes(self, level=-1):
-        r'''Removes repeat pitch-classes at `level`.
+        """
+        Removes repeat pitch-classes at ``level``.
 
         ..  container:: example
 
@@ -1618,10 +1648,10 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.remove_repeat_pitch_classes(level=-1)
             CollectionList([<4, 5>, <18>])
 
-        Set `level` to 1 or -1.
+        Set ``level`` to 1 or -1.
 
         Returns new collection list.
-        '''
+        """
         pitch_class_class = self._get_pitch_class_class()
         collections_ = []
         if level == 1:
@@ -1654,7 +1684,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections_)
 
     def remove_repeats(self, level=-1):
-        r'''Removes repeats at `level`.
+        """
+        Removes repeats at ``level``.
 
         ..  container:: example
 
@@ -1669,10 +1700,10 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.remove_repeats(level=-1)
             CollectionList([<4, 5>, <4, 5>, <7>])
 
-        Set `level` to 0, 1 or -1.
+        Set ``level`` to 0, 1 or -1.
 
         Returns true or false.
-        '''
+        """
         collections_ = []
         if level == 0:
             previous_collection = None
@@ -1709,7 +1740,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections_)
 
     def repeat(self, n=1):
-        r'''Repeats collections.
+        """
+        Repeats collections.
 
         ..  container:: example
 
@@ -1725,7 +1757,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             PitchSegment([16, 19])
 
         Returns new collection list.
-        '''
+        """
         collections = baca.Sequence(items=self)
         collections = collections.repeat(n=n)
         collections = collections.flatten(depth=1)
@@ -1734,7 +1766,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
     def retain(self, indices=None, period=None):
-        r'''Retains collections at `indices`.
+        """
+        Retains collections at ``indices``.
 
         ..  container:: example
 
@@ -1751,13 +1784,14 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<0, 1>, <4>, <7>])
 
         Returns new collection list.
-        '''
+        """
         sequence = baca.Sequence(items=self)
         collections = sequence.retain(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
     def soprano_to_octave(self, n=4, pattern=None):
-        r'''Octave-transposes collections to soprano in octave `n`.
+        """
+        Octave-transposes collections to soprano in octave ``n``.
 
         ..  container:: example
 
@@ -1790,7 +1824,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-33, -22, -11, 0>])
 
         Returns new collection list.
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -1809,7 +1843,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         semitones=None,
         soprano=None,
         ):
-        r'''Spaces collections down.
+        """
+        Spaces collections down.
 
         ..  container:: example
 
@@ -1820,7 +1855,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.space_down(bass=5)
             CollectionList([<24, 18, 14, 5>, <16, 7, 5>])
 
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -1843,7 +1878,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         semitones=None,
         soprano=None,
         ):
-        r'''Spaces collections up.
+        """
+        Spaces collections up.
 
         ..  container:: example
 
@@ -1854,7 +1890,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.space_up(bass=5)
             CollectionList([<5, 6, 12, 14>, <5, 7, 16>])
 
-        '''
+        """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
         pattern = pattern or abjad.index_all()
@@ -1871,7 +1907,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def to_pitch_classes(self):
-        r'''Changes to pitch-class collections.
+        """
+        Changes to pitch-class collections.
 
         ..  container:: example
 
@@ -1922,7 +1959,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                 CollectionList([PC<c d fs f>, PC<e af g>])
 
         Returns new collection list.
-        '''
+        """
         item_class = self._to_pitch_class_item_class(self.item_class)
         collections_ = []
         for collection in self:
@@ -1931,7 +1968,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections_, item_class=item_class)
 
     def to_pitches(self):
-        r'''Changes to pitch collections.
+        """
+        Changes to pitch collections.
 
         ..  container:: example
 
@@ -1982,7 +2020,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                 CollectionList([<c' d' fs' f'>, <e' af' g'>])
 
         Returns new collection list.
-        '''
+        """
         item_class = self._to_pitch_item_class(self.item_class)
         collections_ = []
         for collection in self:
@@ -1991,7 +2029,8 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         return abjad.new(self, collections=collections_, item_class=item_class)
 
     def transpose(self, n=0):
-        r'''Transposes collections.
+        """
+        Transposes collections.
 
         ..  container:: example
 
@@ -2042,7 +2081,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                 CollectionList([PC<af bf d df>, PC<c ff ef>])
 
         Returns new collection list.
-        '''
+        """
         collections_ = []
         for collection in self:
             collection_ = collection.transpose(n)

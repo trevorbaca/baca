@@ -282,7 +282,7 @@
   <div class="section" id="baca">
 <span id="id1"></span><h1>baca<a class="headerlink" href="#baca" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="module-baca"></span><div class="svg-container docutils container">
-<object data="../../_images/inheritance-6837d36205999ac3d2721b9cf8302b29111399af.svg" type="image/svg+xml">
+<object data="../../_images/inheritance-f063523b88f5f41ac5d5aae2e04262bf14e8107d.svg" type="image/svg+xml">
             <p class="warning">digraph InheritanceGraph {
 	graph [bgcolor=transparent,
 		color=lightsteelblue2,
@@ -309,73 +309,73 @@
 	edge [color=lightslategrey,
 		penwidth=1
 	];
+	subgraph &quot;cluster_abjad.rhythmmakertools&quot; {
+		graph [label=&quot;abjad.rhythmmakertools&quot;];
+		node [color=1];
+		&quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot;		 [color=1,
+			label=&quot;Rhythm\nMaker&quot;];
+	}
 	subgraph &quot;cluster_abjad.tools.abctools&quot; {
 		graph [label=&quot;abjad.tools.abctools&quot;];
-		node [color=1];
-		&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;		 [color=1,
+		node [color=2];
+		&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;		 [color=2,
 			label=&quot;Abjad\nObject&quot;];
-		&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot;		 [color=1,
+		&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot;		 [color=2,
 			label=&quot;Abjad\nValue\nObject&quot;];
 		&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot;;
 	}
 	subgraph &quot;cluster_abjad.tools.datastructuretools&quot; {
 		graph [label=&quot;abjad.tools.datastructuretools&quot;];
-		node [color=2];
-		&quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;		 [color=2,
+		node [color=3];
+		&quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;		 [color=3,
 			label=&quot;Cyclic\nTuple&quot;];
-		&quot;abjad.tools.datastructuretools.Expression.Expression&quot;		 [color=2,
+		&quot;abjad.tools.datastructuretools.Expression.Expression&quot;		 [color=3,
 			label=Expression];
-		&quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;		 [color=2,
+		&quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;		 [color=3,
 			label=Sequence];
-		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;		 [color=2,
+		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;		 [color=3,
 			label=&quot;Typed\nCollection&quot;,
 			shape=oval,
 			style=bold];
-		&quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot;		 [color=2,
+		&quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot;		 [color=3,
 			label=&quot;Typed\nFrozenset&quot;];
 		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset&quot;;
-		&quot;abjad.tools.datastructuretools.TypedList.TypedList&quot;		 [color=2,
+		&quot;abjad.tools.datastructuretools.TypedList.TypedList&quot;		 [color=3,
 			label=&quot;Typed\nList&quot;];
 		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedList.TypedList&quot;;
-		&quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;		 [color=2,
+		&quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;		 [color=3,
 			label=&quot;Typed\nTuple&quot;];
 		&quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedTuple.TypedTuple&quot;;
 	}
 	subgraph &quot;cluster_abjad.tools.mathtools&quot; {
 		graph [label=&quot;abjad.tools.mathtools&quot;];
-		node [color=3];
-		&quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;		 [color=3,
+		node [color=4];
+		&quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;		 [color=4,
 			label=&quot;Nonreduced\nFraction&quot;];
 	}
 	subgraph &quot;cluster_abjad.tools.pitchtools&quot; {
 		graph [label=&quot;abjad.tools.pitchtools&quot;];
-		node [color=4];
-		&quot;abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment&quot;		 [color=4,
+		node [color=5];
+		&quot;abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment&quot;		 [color=5,
 			label=&quot;Pitch\nClass\nSegment&quot;];
-		&quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot;		 [color=4,
+		&quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot;		 [color=5,
 			label=&quot;Pitch\nClass\nSet&quot;];
-		&quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot;		 [color=4,
+		&quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot;		 [color=5,
 			label=&quot;Pitch\nSegment&quot;];
-		&quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot;		 [color=4,
+		&quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot;		 [color=5,
 			label=&quot;Pitch\nSet&quot;];
-		&quot;abjad.tools.pitchtools.Segment.Segment&quot;		 [color=4,
+		&quot;abjad.tools.pitchtools.Segment.Segment&quot;		 [color=5,
 			label=Segment,
 			shape=oval,
 			style=bold];
 		&quot;abjad.tools.pitchtools.Segment.Segment&quot; -&gt; &quot;abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment&quot;		 [minlen=1];
 		&quot;abjad.tools.pitchtools.Segment.Segment&quot; -&gt; &quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot;		 [minlen=2];
-		&quot;abjad.tools.pitchtools.Set.Set&quot;		 [color=4,
+		&quot;abjad.tools.pitchtools.Set.Set&quot;		 [color=5,
 			label=Set,
 			shape=oval,
 			style=bold];
 		&quot;abjad.tools.pitchtools.Set.Set&quot; -&gt; &quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot;		 [minlen=1];
 		&quot;abjad.tools.pitchtools.Set.Set&quot; -&gt; &quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot;		 [minlen=2];
-	}
-	subgraph &quot;cluster_abjad.tools.rhythmmakertools&quot; {
-		graph [label=&quot;abjad.tools.rhythmmakertools&quot;];
-		node [color=5];
-		&quot;abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker&quot;		 [color=5,
-			label=&quot;Rhythm\nMaker&quot;];
 	}
 	subgraph &quot;cluster_abjad.tools.scoretools&quot; {
 		graph [label=&quot;abjad.tools.scoretools&quot;];
@@ -1138,6 +1138,7 @@
 			target=_top];
 		&quot;numbers.Real&quot; -&gt; &quot;numbers.Rational&quot;		 [minlen=1];
 	}
+	&quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;;
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;;
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;;
@@ -1187,9 +1188,9 @@
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.TimelineScope.TimelineScope&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.Tree.Tree&quot;	 [minlen=2];
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.ZaggedPitchClassMaker.ZaggedPitchClassMaker&quot;	 [minlen=3];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.datastructuretools.Expression.Expression&quot;;
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;;
-	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.scoretools.Selection.Selection&quot;;
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate&quot;	 [minlen=2];
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;baca.AnchorSpecifier.AnchorSpecifier&quot;	 [minlen=3];
@@ -1221,7 +1222,6 @@
 	&quot;abjad.tools.pitchtools.PitchClassSet.PitchClassSet&quot; -&gt; &quot;baca.PitchClassSet.PitchClassSet&quot;	 [minlen=1];
 	&quot;abjad.tools.pitchtools.PitchSegment.PitchSegment&quot; -&gt; &quot;baca.PitchSegment.PitchSegment&quot;	 [minlen=1];
 	&quot;abjad.tools.pitchtools.PitchSet.PitchSet&quot; -&gt; &quot;baca.PitchSet.PitchSet&quot;	 [minlen=1];
-	&quot;abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;	 [minlen=1];
 	&quot;abjad.tools.scoretools.Selection.Selection&quot; -&gt; &quot;baca.Selection.Selection&quot;	 [minlen=1];
 	&quot;abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate&quot; -&gt; &quot;baca.ScoreTemplate.ScoreTemplate&quot;;
 	&quot;abjad.tools.segmenttools.SegmentMaker.SegmentMaker&quot; -&gt; &quot;baca.SegmentMaker.SegmentMaker&quot;	 [minlen=1];

@@ -763,7 +763,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">3</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">783</span>, in <span class="n">page</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">804</span>, in <span class="n">page</span>
     <span class="k">return</span> <span class="n">PageSpecifier</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">number</span><span class="p">,</span> <span class="n">systems</span><span class="o">=</span><span class="n">systems_</span><span class="p">)</span>
   File <span class="nb">&quot;/Users/trevorbaca/baca/baca/PageSpecifier.py&quot;</span>, line <span class="m">39</span>, in <span class="n">__init__</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -1045,7 +1045,7 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
     <span class="n">command_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_commands</span><span class="p">()</span>
   File <span class="nb">&quot;/Users/trevorbaca/baca/baca/SegmentMaker.py&quot;</span>, line <span class="m">1504</span>, in <span class="n">_call_commands</span>
     <span class="n">wrapper</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/PartAssignmentCommand.py&quot;</span>, line <span class="m">55</span>, in <span class="n">__call__</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/PartAssignmentCommand.py&quot;</span>, line <span class="m">57</span>, in <span class="n">__call__</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 <span class="gr">Exception</span>: <span class="n">ViolinMusicVoice does not allow Flute part assignment:</span>
 <span class="go">  abjad.PartAssignment(&#39;Flute&#39;)</span>
@@ -2017,7 +2017,7 @@ indicator <code class="docutils literal notranslate"><span class="pre">selector<
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">baca</span><span class="o">.</span><span class="n">scope</span><span class="p">(</span><span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">3428</span>, in <span class="n">scope</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">3480</span>, in <span class="n">scope</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 <span class="gr">Exception</span>: <span class="n">stages must be nonzero integer or pair of nonzero integers (not 0).</span>
 </pre></div>
@@ -2025,7 +2025,7 @@ indicator <code class="docutils literal notranslate"><span class="pre">selector<
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">baca</span><span class="o">.</span><span class="n">scope</span><span class="p">(</span><span class="s1">&#39;MusicVoice&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">3423</span>, in <span class="n">scope</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">3475</span>, in <span class="n">scope</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 <span class="gr">Exception</span>: <span class="n">stages must be nonzero integer or pair of nonzero integers (not &#39;text&#39;).</span>
 </pre></div>
@@ -3557,7 +3557,7 @@ with a dedicated format slot.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">baca</span><span class="o">.</span><span class="n">suite</span><span class="p">([</span><span class="s1">&#39;Allegro&#39;</span><span class="p">])</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">7348</span>, in <span class="n">suite</span>
+  File <span class="nb">&quot;/Users/trevorbaca/baca/baca/LibraryNS.py&quot;</span>, line <span class="m">7438</span>, in <span class="n">suite</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;must be command:</span><span class="se">\n\n</span><span class="si">{command}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="gr">Exception</span>: <span class="n">must be command:</span>
 

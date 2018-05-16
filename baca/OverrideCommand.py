@@ -6,7 +6,7 @@ from .Typing import Selector
 
 
 class OverrideCommand(Command):
-    r'''Override command.
+    r"""Override command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -185,7 +185,7 @@ class OverrideCommand(Command):
         >>> baca.OverrideCommand()
         OverrideCommand(selector=baca.leaves(), tags=[])
 
-    '''
+    """
 
     ### CLASS ATTRIBUTES ###
 
@@ -250,8 +250,8 @@ class OverrideCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on `argument`.
-        '''
+        r"""Calls command on `argument`.
+        """
         if argument is None:
             return
         if self.selector:
@@ -331,42 +331,42 @@ class OverrideCommand(Command):
 
     @property
     def after(self) -> typing.Optional[bool]:
-        r'''Is true if command positions LilyPond command after selection.
-        '''
+        r"""Is true if command positions LilyPond command after selection.
+        """
         return self._after 
 
     @property
     def attribute(self) -> typing.Optional[str]:
-        r'''Gets attribute name.
-        '''
+        r"""Gets attribute name.
+        """
         return self._attribute
 
     @property
     def blacklist(self) -> typing.Optional[typing.Tuple[type]]:
-        r'''Gets blacklist leaves.
-        '''
+        r"""Gets blacklist leaves.
+        """
         return self._blacklist
 
     @property
     def context(self) -> typing.Optional[str]:
-        r'''Gets context name.
-        '''
+        r"""Gets context name.
+        """
         return self._context
 
     @property
     def grob(self) -> typing.Optional[str]:
-        r'''Gets grob name.
-        '''
+        r"""Gets grob name.
+        """
         return self._grob
 
     @property
     def value(self) -> typing.Any:
-        r'''Gets attribute value.
-        '''
+        r"""Gets attribute value.
+        """
         return self._value
 
     @property
     def whitelist(self) -> typing.Optional[typing.Tuple[type]]:
-        r'''Gets whitelist leaves.
-        '''
+        r"""Gets whitelist leaves.
+        """
         return self._whitelist

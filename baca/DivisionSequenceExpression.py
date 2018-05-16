@@ -5,7 +5,7 @@ from .DivisionSequence import DivisionSequence
 
 
 class DivisionSequenceExpression(abjad.Expression):
-    r'''Division expression.
+    r"""Division expression.
 
     ..  note:: Reimplement as signatured-decorated DivisionSequence method.
 
@@ -103,7 +103,7 @@ class DivisionSequenceExpression(abjad.Expression):
     Initializer returns division sequence expression.
 
     Call returns division sequence.
-    '''
+    """
 
     ### CLASS VARIALBES ###
 
@@ -117,28 +117,28 @@ class DivisionSequenceExpression(abjad.Expression):
     ### SPECIAL METHODS ###
 
     def __add__(self, i):
-        r'''Gets proxy method.
-        '''
+        r"""Gets proxy method.
+        """
         proxy_method = self.__getattr__('__add__')
         return proxy_method(i)
 
     def __getitem__(self, argument):
-        r'''Gets proxy method.
-        '''
+        r"""Gets proxy method.
+        """
         proxy_method = self.__getattr__('__getitem__')
         return proxy_method(argument)
 
     def __radd__(self, i):
-        r'''Gets proxy method.
-        '''
+        r"""Gets proxy method.
+        """
         proxy_method = self.__getattr__('__radd__')
         return proxy_method(i)
 
     ### PUBLIC METHODS ###
 
     def division_sequence(self) -> 'DivisionSequenceExpression':
-        r'''Makes divison sequence expression.
-        '''
+        r"""Makes divison sequence expression.
+        """
         class_ = DivisionSequence
         callback = self._make_initializer_callback(
             class_,
@@ -157,8 +157,8 @@ class DivisionSequenceExpression(abjad.Expression):
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ) -> 'DivisionSequenceExpression':
-        r'''Appends split-by-durations to expression.
-        '''
+        r"""Appends split-by-durations to expression.
+        """
         template = '{{}}.split_by_durations('
         template += 'compound_meter_multiplier={compound_meter_multiplier}'
         template += ', cyclic={cyclic}'
@@ -186,7 +186,7 @@ class DivisionSequenceExpression(abjad.Expression):
         self,
         ratios,
         ) -> 'DivisionSequenceExpression':
-        r'''Appends split-by-rounded-ratios to expression.
+        r"""Appends split-by-rounded-ratios to expression.
 
         ..  container:: example
 
@@ -195,7 +195,7 @@ class DivisionSequenceExpression(abjad.Expression):
             >>> expression = expression.split_by_rounded_ratios([(2, 1)])
             >>> expression = expression.flatten(depth=-1)
 
-        '''
+        """
         evaluation_template = f'{{}}.split_by_rounded_ratios(ratios={ratios})'
         callback = abjad.Expression._frame_to_callback(
             inspect.currentframe(),

@@ -5,7 +5,7 @@ from abjad import rhythmmakertools as rhythmos
 
 
 class MusicMaker(abjad.AbjadObject):
-    r'''Music-maker.
+    r"""Music-maker.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -52,7 +52,7 @@ class MusicMaker(abjad.AbjadObject):
                 }
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ###
 
@@ -132,7 +132,7 @@ class MusicMaker(abjad.AbjadObject):
         tuplet_denominator=None,
         tuplet_force_fraction=None
         ):
-        r'''Calls music-maker on `collections` with keywords.
+        r"""Calls music-maker on `collections` with keywords.
 
         ..  container:: example
 
@@ -598,7 +598,7 @@ class MusicMaker(abjad.AbjadObject):
                 >>
 
         Returns selection, time signature, state manifest.
-        '''
+        """
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
         self._validate_voice_name(voice_name)
@@ -1053,31 +1053,31 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def allow_repeats(self):
-        r'''Is true when music-maker allows repeat pitches.
+        r"""Is true when music-maker allows repeat pitches.
 
         Defaults to none.
 
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._allow_repeats
 
     @property
     def color_unregistered_pitches(self):
-        r'''Is true when music-maker colors unregistered pitches.
+        r"""Is true when music-maker colors unregistered pitches.
 
         Defaults to none.
 
         Set to true, false or none.
 
         Returns true, false or none.
-        '''
+        """
         return self._color_unregistered_pitches
 
     @property
     def denominator(self):
-        r'''Gets denominator.
+        r"""Gets denominator.
 
         ..  container:: example
 
@@ -1314,12 +1314,12 @@ class MusicMaker(abjad.AbjadObject):
         Set to positive integer or none.
 
         Returns positive integer or none.
-        '''
+        """
         return self._denominator
 
     @property
     def specifiers(self):
-        r'''Gets specifiers.
+        r"""Gets specifiers.
 
         ..  container:: example
 
@@ -2537,12 +2537,12 @@ class MusicMaker(abjad.AbjadObject):
         Set to specifiers or none.
 
         Returns specifiers or none.
-        '''
+        """
         return self._specifiers
 
     @property
     def thread(self):
-        r'''Is true when music-maker threads rhythm-maker over collections.
+        r"""Is true when music-maker threads rhythm-maker over collections.
 
         ..  container:: example
 
@@ -2640,12 +2640,12 @@ class MusicMaker(abjad.AbjadObject):
         Defaults to none.
 
         Returns true, false or none.
-        '''
+        """
         return self._thread
 
     @property
     def voice_names(self):
-        r'''Gets voice names.
+        r"""Gets voice names.
 
         Used to check call-time voice names.
 
@@ -2654,7 +2654,7 @@ class MusicMaker(abjad.AbjadObject):
         Set to list of strings or none.
 
         Returns list or strings or none.
-        '''
+        """
         if self._voice_names:
             return list(self._voice_names)
 
@@ -2662,10 +2662,10 @@ class MusicMaker(abjad.AbjadObject):
 
     @staticmethod
     def show(music_contribution, time_signatures=None):
-        r'''Makes rhythm-maker-style LilyPond file for documentation examples.
+        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
-        '''
+        """
         assert isinstance(music_contribution, baca.MusicContribution)
         return abjad.LilyPondFile.rhythm(
             music_contribution.selections,

@@ -7,7 +7,8 @@ from .Typing import Selector
 
 
 class StaffPositionCommand(Command):
-    r'''Staff position command.
+    r"""
+    Staff position command.
 
     ..  container:: example
 
@@ -49,7 +50,7 @@ class StaffPositionCommand(Command):
                 e'4
             }
 
-    '''
+    """
 
     ### CLASS ATTRIBUTES ###
 
@@ -83,8 +84,9 @@ class StaffPositionCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r'''Calls command on `argument`.
-        '''
+        """
+        Calls command on ``argument``.
+        """
         if argument is None:
             return
         if not self.numbers:
@@ -116,19 +118,22 @@ class StaffPositionCommand(Command):
 
     @property
     def allow_repeats(self) -> typing.Optional[bool]:
-        r'''Is true when repeat staff positions are allowed.
-        '''
+        """
+        Is true when repeat staff positions are allowed.
+        """
         return self._allow_repeats
 
     @property
     def exact(self) -> typing.Optional[bool]:
-        r'''Is true when number of staff positions must match number of leaves
+        """
+        Is true when number of staff positions must match number of leaves
         exactly.
-        '''
+        """
         return self._exact
 
     @property
     def numbers(self) -> typing.Optional[abjad.CyclicTuple]:
-        r'''Gets numbers.
-        '''
+        """
+        Gets numbers.
+        """
         return self._numbers

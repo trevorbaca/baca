@@ -6,8 +6,9 @@ from .Typing import Selector
 
 
 class Command(abjad.AbjadObject):
-    r'''Command.
-    '''
+    """
+    Command.
+    """
 
     ### CLASS VARIABLES ###
 
@@ -55,10 +56,11 @@ class Command(abjad.AbjadObject):
 
     @abc.abstractmethod
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        """
+        Calls command on `argument`.
 
         Returns none.
-        '''
+        """
         pass
 
     ### PRIVATE METHODS ###
@@ -142,14 +144,16 @@ class Command(abjad.AbjadObject):
 
     @property
     def deactivate(self) -> typing.Optional[bool]:
-        r'''Is true when command deactivates tag.
-        '''
+        """
+        Is true when command deactivates tag.
+        """
         return self._deactivate
 
     @property
     def manifests(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets segment-maker manifests.
-        '''
+        """
+        Gets segment-maker manifests.
+        """
         return self._manifests
 
     @manifests.setter
@@ -163,8 +167,9 @@ class Command(abjad.AbjadObject):
 
     @property
     def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
-        r'''Gets segment-maker offset-to-measure-number dictionary.
-        '''
+        """
+        Gets segment-maker offset-to-measure-number dictionary.
+        """
         return self._offset_to_measure_number
 
     @offset_to_measure_number.setter
@@ -178,8 +183,9 @@ class Command(abjad.AbjadObject):
     @property
     def previous_segment_voice_metadata(self) -> typing.Optional[
         abjad.OrderedDict]:
-        r'''Gets previous segment voice metadata.
-        '''
+        """
+        Gets previous segment voice metadata.
+        """
         return self._previous_segment_voice_metadata
 
     @previous_segment_voice_metadata.setter
@@ -192,8 +198,9 @@ class Command(abjad.AbjadObject):
 
     @property
     def score_template(self) -> abjad.ScoreTemplate:
-        r'''Gets score template.
-        '''
+        """
+        Gets score template.
+        """
         return self._score_template
 
     @score_template.setter
@@ -206,8 +213,9 @@ class Command(abjad.AbjadObject):
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
-        r'''Gets selector.
-        '''
+        """
+        Gets selector.
+        """
         return self._selector
 
     # TODO: reimplement as method with leaf argument
@@ -215,8 +223,9 @@ class Command(abjad.AbjadObject):
     # TODO: always return tag (never none) for in-place prepend
     @property
     def tag(self) -> abjad.Tag:
-        r'''Gets tag.
-        '''
+        """
+        Gets tag.
+        """
         # TODO: replace self.get_tag() functionality
         words = [str(_) for _ in self.tags]
         tag = abjad.Tag.from_words(words)
@@ -225,8 +234,9 @@ class Command(abjad.AbjadObject):
 
     @property
     def tag_measure_number(self) -> typing.Optional[bool]:
-        r'''Is true when command tags measure number.
-        '''
+        """
+        Is true when command tags measure number.
+        """
         return self._tag_measure_number
 
     @tag_measure_number.setter
@@ -238,8 +248,9 @@ class Command(abjad.AbjadObject):
 
     @property
     def tags(self) -> typing.List[abjad.Tag]:
-        r'''Gets tags.
-        '''
+        """
+        Gets tags.
+        """
         assert self._are_valid_tags(self._tags)
         result: typing.List[abjad.Tag] = []
         if self._tags:
@@ -250,8 +261,9 @@ class Command(abjad.AbjadObject):
 
     # TODO: replace in favor of self.tag(leaf)
     def get_tag(self, leaf: abjad.Leaf = None) -> typing.Optional[abjad.Tag]:
-        r'''Gets tag for `leaf`.
-        '''
+        """
+        Gets tag for `leaf`.
+        """
         tags = self.tags[:]
         if self.tag_measure_number:
             start_offset = abjad.inspect(leaf).get_timespan().start_offset

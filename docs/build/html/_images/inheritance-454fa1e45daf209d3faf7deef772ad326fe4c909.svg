@@ -8,6 +8,11 @@
  viewBox="0.00 0.00 410.17 102.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 98)">
 <title>InheritanceGraph</title>
+<g id="clust1" class="cluster">
+<title>cluster_abjad.tools.abctools</title>
+<path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M90.6846,-14C90.6846,-14 170.5859,-14 170.5859,-14 176.5859,-14 182.5859,-20 182.5859,-26 182.5859,-26 182.5859,-68 182.5859,-68 182.5859,-74 176.5859,-80 170.5859,-80 170.5859,-80 90.6846,-80 90.6846,-80 84.6846,-80 78.6846,-74 78.6846,-68 78.6846,-68 78.6846,-26 78.6846,-26 78.6846,-20 84.6846,-14 90.6846,-14"/>
+<text text-anchor="middle" x="130.6353" y="-68" font-family="Arial" font-size="10.00" fill="#000000">abjad.tools.abctools</text>
+</g>
 <g id="clust2" class="cluster">
 <title>cluster_baca</title>
 <path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M214.5859,-8C214.5859,-8 382.1735,-8 382.1735,-8 388.1735,-8 394.1735,-14 394.1735,-20 394.1735,-20 394.1735,-74 394.1735,-74 394.1735,-80 388.1735,-86 382.1735,-86 382.1735,-86 214.5859,-86 214.5859,-86 208.5859,-86 202.5859,-80 202.5859,-74 202.5859,-74 202.5859,-20 202.5859,-20 202.5859,-14 208.5859,-8 214.5859,-8"/>
@@ -17,11 +22,6 @@
 <title>cluster_builtins</title>
 <path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M20,-19C20,-19 46.6846,-19 46.6846,-19 52.6846,-19 58.6846,-25 58.6846,-31 58.6846,-31 58.6846,-62 58.6846,-62 58.6846,-68 52.6846,-74 46.6846,-74 46.6846,-74 20,-74 20,-74 14,-74 8,-68 8,-62 8,-62 8,-31 8,-31 8,-25 14,-19 20,-19"/>
 <text text-anchor="middle" x="33.3423" y="-62" font-family="Arial" font-size="10.00" fill="#000000">builtins</text>
-</g>
-<g id="clust1" class="cluster">
-<title>cluster_abjad.tools.abctools</title>
-<path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M90.6846,-14C90.6846,-14 170.5859,-14 170.5859,-14 176.5859,-14 182.5859,-20 182.5859,-26 182.5859,-26 182.5859,-68 182.5859,-68 182.5859,-74 176.5859,-80 170.5859,-80 170.5859,-80 90.6846,-80 90.6846,-80 84.6846,-80 78.6846,-74 78.6846,-68 78.6846,-68 78.6846,-26 78.6846,-26 78.6846,-20 84.6846,-14 90.6846,-14"/>
-<text text-anchor="middle" x="130.6353" y="-68" font-family="Arial" font-size="10.00" fill="#000000">abjad.tools.abctools</text>
 </g>
 <!-- abjad.tools.abctools.AbjadObject.AbjadObject&#45;&gt;baca.Command.Command -->
 <g id="edge2" class="edge">

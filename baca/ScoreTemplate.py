@@ -4,8 +4,8 @@ import typing
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
-    r'''Score template
-    '''
+    r"""Score template
+    """
 
     ### CLASS VARIABLES ###
 
@@ -86,17 +86,17 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     @property
     def defaults(self) -> list:
-        r'''Gets defaults.
-        '''
+        r"""Gets defaults.
+        """
         return self._defaults
 
     ### PUBLIC METHODS ###
 
     def group_families(self, *families) -> typing.List[abjad.Context]:
-        r'''Groups `families` only when more than one family is passed in.
+        r"""Groups `families` only when more than one family is passed in.
 
         Returns list of zero or more contexts.
-        '''
+        """
         families_ = []
         for family in families:
             if family is not None:
@@ -122,8 +122,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         return contexts
 
     def make_music_context(self, *contexts) -> abjad.Context:
-        r'''Makes music context.
-        '''
+        r"""Makes music context.
+        """
         contexts = tuple(_ for _ in contexts if _ is not None)
         return abjad.Context(
             contexts,
@@ -137,8 +137,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         stem: str,
         *contexts,
         ) -> typing.Optional[abjad.StaffGroup]:
-        r'''Makes piano staff.
-        '''
+        r"""Makes piano staff.
+        """
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = tuple(_ for _ in contexts if _ is not None)
@@ -152,8 +152,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         stem: str,
         *contexts,
         ) -> typing.Optional[typing.Union[abjad.Staff, abjad.StaffGroup]]:
-        r'''Makes square staff group.
-        '''
+        r"""Makes square staff group.
+        """
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = tuple(_ for _ in contexts if _ is not None)
@@ -174,8 +174,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         stem: str,
         *contexts,
         ) -> typing.Optional[abjad.StaffGroup]:
-        r'''Makes staff group.
-        '''
+        r"""Makes staff group.
+        """
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = tuple(_ for _ in contexts if _ is not None)
