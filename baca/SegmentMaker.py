@@ -1848,6 +1848,7 @@ class SegmentMaker(abjad.SegmentMaker):
         contexts = []
         contexts.extend(self.score['GlobalContext'])
         contexts.extend(abjad.iterate(self.score).components(abjad.Voice))
+        first_measure_number = self._get_first_measure_number()
         for context in contexts:
             for leaf in abjad.iterate(context).leaves():
                 offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -1857,11 +1858,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
                 if measure_number is None:
                     continue
+                local_measure_number = measure_number - first_measure_number
+                local_measure_number += 1
                 if self.segment_name :
                     name = self.segment_name + ' '
                 else:
                     name = ''
-                string = f'% [{name}{context.name} measure {measure_number}]'
+                if self.environment == 'docs':
+                    string = f'% [{name}{context.name}'
+                    string += f' measure {measure_number}]'
+                else:
+                    string = f'% [{name}{context.name}'
+                    string += f' measure {measure_number} /'
+                    string += f' measure {local_measure_number}]'
                 literal = abjad.LilyPondLiteral(string, 'absolute_before')
                 abjad.attach(literal, leaf, tag='SM4')
 
