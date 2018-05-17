@@ -1380,7 +1380,7 @@ class LibraryTZ(abjad.AbjadObject):
         lilypond_id: int = None,
         right_padding: typing.Optional[Number] = 1.25,
         selector: Selector = 'baca.leaves()',
-        tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None,
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> TextSpannerCommand:
         r"""
         Makes text spanner command.
@@ -2714,7 +2714,7 @@ class LibraryTZ(abjad.AbjadObject):
         selector: Selector = 'baca.leaves().group()',
         spanner_selector: typing.Union[
             MapCommand, Selector] = 'baca.tleaves()',
-        tweaks: typing.List[typing.Tuple[typing.Any, typing.Any]] = None
+        tweaks: typing.List[typing.Tuple] = None
         ) -> PiecewiseCommand:
         r"""
         Makes transition text spanner.
@@ -3143,19 +3143,13 @@ class LibraryTZ(abjad.AbjadObject):
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
         text_spanner = abjad.TextSpanner()
-        if tweaks is not None:
-            assert isinstance(tweaks, list), repr(tweaks)
-            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
-            manager = abjad.tweak(text_spanner)
-            for attribute, value in tweaks:
-                value = abjad.Scheme.format_embedded_scheme_value(value)
-                setattr(manager, attribute, value)
         return LibraryNS.piecewise(
             text_spanner,
             indicators,
             selector,
             bookend=not(do_not_bookend),
             spanner_selector=spanner_selector,
+            tweaks=tweaks,
             )
 
     @staticmethod

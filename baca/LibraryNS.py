@@ -35,7 +35,6 @@ from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
-from .Typing import Tweak
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -1081,6 +1080,7 @@ class LibraryNS(abjad.AbjadObject):
         *,
         bookend: bool = False,
         spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        tweaks: typing.List[typing.Tuple] = None,
         ):
         """
         Makes piecewise command from ``spanner``, ``indicators`` and
@@ -1092,6 +1092,7 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             spanner=spanner,
             spanner_selector=spanner_selector,
+            tweaks=tweaks,
             )
 
     @staticmethod
@@ -1673,7 +1674,7 @@ class LibraryNS(abjad.AbjadObject):
         argument: typing.Union[int, str],
         *,
         selector: Selector = 'baca.leaf(0)',
-        tweaks: typing.List[Tweak] = None,
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> IndicatorCommand:
         """
         Attaches rehearsal mark.

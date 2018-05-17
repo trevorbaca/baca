@@ -4,7 +4,6 @@ from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .MarkupLibrary import MarkupLibrary
 from .Typing import Selector
-from .Typing import Tweak
 
 
 class TextSpannerCommand(Command):
@@ -183,7 +182,7 @@ class TextSpannerCommand(Command):
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
         text: typing.Union[str, abjad.Markup, IndicatorCommand] = None,
-        tweaks: typing.List[Tweak] = None,
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if leak is not None:
@@ -195,6 +194,7 @@ class TextSpannerCommand(Command):
         if line_segment is not None:
             assert isinstance(line_segment, abjad.LineSegment)
         self._line_segment = line_segment
+        self._tags = []
         if isinstance(text, str):
             markup_library = MarkupLibrary()
             command = markup_library(text)
@@ -213,7 +213,6 @@ class TextSpannerCommand(Command):
             assert isinstance(tweaks, list), repr(tweaks)
             assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
         self._tweaks = tweaks
-        self._tags = []
 
     ### SPECIAL METHODS ###
 
@@ -281,7 +280,7 @@ class TextSpannerCommand(Command):
         return self._text
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[Tweak]]:
+    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
         """
         Gets tweaks.
         """

@@ -75,3 +75,5 @@ PiecewiseCommand
    .. autoattribute:: PiecewiseCommand.tag
 
    .. autoattribute:: PiecewiseCommand.tags
+
+   .. autoattribute:: PiecewiseCommand.tweaks

@@ -22,17 +22,20 @@ class PiecewiseCommand(Command):
         '_selector',
         '_spanner',
         '_spanner_selector',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
+        *,
         bookend: bool = None,
         indicators: typing.Iterable = None,
         selector: Selector = None,
         spanner: abjad.Spanner = None,
         spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if bookend is not None:
@@ -51,6 +54,10 @@ class PiecewiseCommand(Command):
             assert isinstance(spanner_selector, prototype), repr(spanner_selector)
         self._spanner_selector = spanner_selector
         self._tags = []
+        if tweaks is not None:
+            assert isinstance(tweaks, list), repr(tweaks)
+            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
@@ -168,3 +175,10 @@ class PiecewiseCommand(Command):
         r"""Gets spanner selector.
         """
         return self._spanner_selector
+
+    @property
+    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks

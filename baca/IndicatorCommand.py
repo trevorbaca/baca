@@ -5,7 +5,6 @@ import typing
 from .Command import Command
 from .SegmentMaker import SegmentMaker
 from .Typing import Selector
-from .Typing import Tweak
 
 
 class IndicatorCommand(Command):
@@ -235,7 +234,7 @@ class IndicatorCommand(Command):
         redundant: bool = None,
         selector: Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
-        tweaks: typing.List[Tweak] = None,
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if context is not None:
@@ -484,7 +483,7 @@ class IndicatorCommand(Command):
         return self._redundant
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[Tweak]]:
+    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
         """
         Gets tweaks.
         """
