@@ -282,7 +282,7 @@
   <div class="section" id="baca">
 <span id="id1"></span><h1>baca<a class="headerlink" href="#baca" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="module-baca"></span><div class="svg-container docutils container">
-<object data="../../_images/inheritance-f063523b88f5f41ac5d5aae2e04262bf14e8107d.svg" type="image/svg+xml">
+<object data="../../_images/inheritance-e1d84c0428e6094f1e4a800a1535fb477e47bd8b.svg" type="image/svg+xml">
             <p class="warning">digraph InheritanceGraph {
 	graph [bgcolor=transparent,
 		color=lightsteelblue2,
@@ -309,10 +309,10 @@
 	edge [color=lightslategrey,
 		penwidth=1
 	];
-	subgraph &quot;cluster_abjad.rhythmmakertools&quot; {
-		graph [label=&quot;abjad.rhythmmakertools&quot;];
+	subgraph &quot;cluster_abjad.rhythmos&quot; {
+		graph [label=&quot;abjad.rhythmos&quot;];
 		node [color=1];
-		&quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot;		 [color=1,
+		&quot;abjad.rhythmos.RhythmMaker.RhythmMaker&quot;		 [color=1,
 			label=&quot;Rhythm\nMaker&quot;];
 	}
 	subgraph &quot;cluster_abjad.tools.abctools&quot; {
@@ -1138,7 +1138,7 @@
 			target=_top];
 		&quot;numbers.Real&quot; -&gt; &quot;numbers.Rational&quot;		 [minlen=1];
 	}
-	&quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;	 [minlen=1];
+	&quot;abjad.rhythmos.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.CyclicTuple.CyclicTuple&quot;;
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.datastructuretools.TypedCollection.TypedCollection&quot;;
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;abjad.tools.mathtools.NonreducedFraction.NonreducedFraction&quot;;
@@ -1188,7 +1188,7 @@
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.TimelineScope.TimelineScope&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.Tree.Tree&quot;	 [minlen=2];
 	&quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot; -&gt; &quot;baca.ZaggedPitchClassMaker.ZaggedPitchClassMaker&quot;	 [minlen=3];
-	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot;	 [minlen=1];
+	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.rhythmos.RhythmMaker.RhythmMaker&quot;	 [minlen=1];
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.datastructuretools.Expression.Expression&quot;;
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.datastructuretools.Sequence.Sequence&quot;;
 	&quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.tools.scoretools.Selection.Selection&quot;;

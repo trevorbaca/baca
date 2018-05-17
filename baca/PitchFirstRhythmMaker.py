@@ -2,13 +2,13 @@ import abjad
 import baca
 import collections
 import math
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 
 
 class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
     r"""Collection rhythm-maker.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

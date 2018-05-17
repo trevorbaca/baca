@@ -1,13 +1,13 @@
 import abjad
 import baca
 import copy
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 
 
 class MusicMaker(abjad.AbjadObject):
     r"""Music-maker.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

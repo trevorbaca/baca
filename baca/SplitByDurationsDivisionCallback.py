@@ -5,7 +5,7 @@ import baca
 class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     r"""Split-by-durations division callback.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

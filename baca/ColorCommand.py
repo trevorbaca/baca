@@ -7,7 +7,7 @@ class ColorCommand(Command):
     r"""
     Color command.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

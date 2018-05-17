@@ -1,7 +1,7 @@
 import abjad
 import baca
 import copy
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .Command import Command
 
 
@@ -9,7 +9,7 @@ class ImbricationCommand(Command):
     r"""
     Imbrication command.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

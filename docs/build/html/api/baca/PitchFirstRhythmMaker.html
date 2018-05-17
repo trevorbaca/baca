@@ -284,7 +284,7 @@
   <div class="section" id="module-baca.PitchFirstRhythmMaker">
 <span id="pitchfirstrhythmmaker"></span><span id="baca-pitchfirstrhythmmaker"></span><h1>PitchFirstRhythmMaker<a class="headerlink" href="#module-baca.PitchFirstRhythmMaker" title="Permalink to this headline">¶</a></h1>
 <div class="svg-container docutils container">
-<object data="../../_images/inheritance-eb79b4b8865bd0f1e3b7eed98b58c484dc53ef83.svg" type="image/svg+xml">
+<object data="../../_images/inheritance-d6f016ef6f36ad7a9630153ea39e4609d21c2827.svg" type="image/svg+xml">
             <p class="warning">digraph InheritanceGraph {
     graph [bgcolor=transparent,
         color=lightsteelblue2,
@@ -308,10 +308,10 @@
         width=0];
     edge [color=lightslategrey,
         penwidth=1];
-    subgraph &quot;cluster_abjad.rhythmmakertools&quot; {
-        graph [label=&quot;abjad.rhythmmakertools&quot;];
+    subgraph &quot;cluster_abjad.rhythmos&quot; {
+        graph [label=&quot;abjad.rhythmos&quot;];
         node [color=1];
-        &quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot; [label=&quot;Rhythm\nMaker&quot;];
+        &quot;abjad.rhythmos.RhythmMaker.RhythmMaker&quot; [label=&quot;Rhythm\nMaker&quot;];
     }
     subgraph &quot;cluster_abjad.tools.abctools&quot; {
         graph [label=&quot;abjad.tools.abctools&quot;];
@@ -336,8 +336,8 @@
             label=object,
             target=_top];
     }
-    &quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;;
-    &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.rhythmmakertools.RhythmMaker.RhythmMaker&quot;;
+    &quot;abjad.rhythmos.RhythmMaker.RhythmMaker&quot; -&gt; &quot;baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker&quot;;
+    &quot;abjad.tools.abctools.AbjadValueObject.AbjadValueObject&quot; -&gt; &quot;abjad.rhythmos.RhythmMaker.RhythmMaker&quot;;
     &quot;builtins.object&quot; -&gt; &quot;abjad.tools.abctools.AbjadObject.AbjadObject&quot;;
 }</p></object>
 </div>
@@ -345,7 +345,7 @@
 <dt id="baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker">
 <em class="property">class </em><code class="descclassname">baca.PitchFirstRhythmMaker.</code><code class="descname">PitchFirstRhythmMaker</code><span class="sig-paren">(</span><em>acciaccatura_specifiers=None</em>, <em>beam_specifier=None</em>, <em>division_masks=None</em>, <em>duration_specifier=None</em>, <em>logical_tie_masks=None</em>, <em>talea=None</em>, <em>tie_specifier=None</em>, <em>time_treatments=None</em>, <em>tuplet_specifier=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection rhythm-maker.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="n">rhythmmakertools</span> <span class="k">as</span> <span class="n">rhythmos</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="n">rhythmos</span> <span class="k">as</span> <span class="n">rhythmos</span>
 </pre></div>
 </div>
 <div class="example docutils container">

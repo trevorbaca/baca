@@ -2,7 +2,7 @@ import abjad
 import baca
 import collections
 import typing
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .Command import Command
 from .DivisionMaker import DivisionMaker
 from .FlattenDivisionCallback import FlattenDivisionCallback
@@ -50,7 +50,7 @@ class RhythmCommand(Command):
     r"""
     Rhythm command.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

@@ -8,11 +8,6 @@
  viewBox="0.00 0.00 625.72 265.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 261)">
 <title>InheritanceGraph</title>
-<g id="clust1" class="cluster">
-<title>cluster_abjad.tools.abctools</title>
-<path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M108.5504,-171C108.5504,-171 248.8298,-171 248.8298,-171 254.8298,-171 260.8298,-177 260.8298,-183 260.8298,-183 260.8298,-237 260.8298,-237 260.8298,-243 254.8298,-249 248.8298,-249 248.8298,-249 108.5504,-249 108.5504,-249 102.5504,-249 96.5504,-243 96.5504,-237 96.5504,-237 96.5504,-183 96.5504,-183 96.5504,-177 102.5504,-171 108.5504,-171"/>
-<text text-anchor="middle" x="178.6901" y="-237" font-family="Arial" font-size="10.00" fill="#000000">abjad.tools.abctools</text>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_abjad.tools.scoretools</title>
 <path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M424.4491,-138C424.4491,-138 512.5868,-138 512.5868,-138 518.5868,-138 524.5868,-144 524.5868,-150 524.5868,-150 524.5868,-181 524.5868,-181 524.5868,-187 518.5868,-193 512.5868,-193 512.5868,-193 424.4491,-193 424.4491,-193 418.4491,-193 412.4491,-187 412.4491,-181 412.4491,-181 412.4491,-150 412.4491,-150 412.4491,-144 418.4491,-138 424.4491,-138"/>
@@ -32,6 +27,11 @@
 <title>cluster_collections.abc</title>
 <path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M90.6846,-8C90.6846,-8 380.4491,-8 380.4491,-8 386.4491,-8 392.4491,-14 392.4491,-20 392.4491,-20 392.4491,-151 392.4491,-151 392.4491,-157 386.4491,-163 380.4491,-163 380.4491,-163 90.6846,-163 90.6846,-163 84.6846,-163 78.6846,-157 78.6846,-151 78.6846,-151 78.6846,-20 78.6846,-20 78.6846,-14 84.6846,-8 90.6846,-8"/>
 <text text-anchor="middle" x="235.5668" y="-151" font-family="Arial" font-size="10.00" fill="#000000">collections.abc</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_abjad.tools.abctools</title>
+<path fill="transparent" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M108.5504,-171C108.5504,-171 248.8298,-171 248.8298,-171 254.8298,-171 260.8298,-177 260.8298,-183 260.8298,-183 260.8298,-237 260.8298,-237 260.8298,-243 254.8298,-249 248.8298,-249 248.8298,-249 108.5504,-249 108.5504,-249 102.5504,-249 96.5504,-243 96.5504,-237 96.5504,-237 96.5504,-183 96.5504,-183 96.5504,-177 102.5504,-171 108.5504,-171"/>
+<text text-anchor="middle" x="178.6901" y="-237" font-family="Arial" font-size="10.00" fill="#000000">abjad.tools.abctools</text>
 </g>
 <!-- abjad.tools.abctools.AbjadObject.AbjadObject&#45;&gt;abjad.tools.abctools.AbjadValueObject.AbjadValueObject -->
 <g id="edge1" class="edge">

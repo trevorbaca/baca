@@ -1,7 +1,7 @@
 import abjad
 import baca
 import typing
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .GlobalFermataCommand import GlobalFermataCommand
 from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier

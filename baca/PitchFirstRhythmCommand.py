@@ -1,5 +1,5 @@
 import abjad
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .Command import Command
 
 

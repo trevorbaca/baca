@@ -5,7 +5,7 @@ class Division(abjad.NonreducedFraction):
     r"""
     Division.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

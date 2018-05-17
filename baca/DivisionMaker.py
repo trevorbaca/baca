@@ -6,7 +6,7 @@ class DivisionMaker(abjad.AbjadValueObject):
     r"""
     Division-maker.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

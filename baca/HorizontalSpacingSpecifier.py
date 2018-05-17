@@ -9,7 +9,7 @@ from .SpacingSection import SpacingSection
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
     r"""Horizontal spacing specifier.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

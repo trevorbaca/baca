@@ -8,7 +8,7 @@ from .Typing import Selector
 class OverrideCommand(Command):
     r"""Override command.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

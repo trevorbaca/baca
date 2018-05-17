@@ -12,7 +12,7 @@ class IndicatorCommand(Command):
     r"""
     Indicator command.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

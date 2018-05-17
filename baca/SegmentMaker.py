@@ -5,7 +5,7 @@ import pathlib
 import sys
 import traceback
 import typing
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
 from .CommandWrapper import CommandWrapper
@@ -23,7 +23,7 @@ class SegmentMaker(abjad.SegmentMaker):
     r"""
     Segment-maker.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

@@ -2,7 +2,7 @@ import abjad
 import baca
 import collections
 import typing
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .Command import Command
 from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
@@ -25,7 +25,7 @@ class LibraryTZ(abjad.AbjadObject):
     """
     Library T - Z.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     """
 

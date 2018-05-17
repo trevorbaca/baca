@@ -5,7 +5,7 @@ import baca
 class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     r"""Fuse-by-counts division callback.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     ..  container:: example
 

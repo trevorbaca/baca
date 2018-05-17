@@ -1,7 +1,7 @@
 import abjad
 import baca
 import typing
-from abjad import rhythmmakertools as rhythmos
+from abjad import rhythmos as rhythmos
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BowContactPointCommand import BowContactPointCommand
@@ -32,7 +32,7 @@ class LibraryAF(abjad.AbjadObject):
     """
     Library A - F.
 
-    >>> from abjad import rhythmmakertools as rhythmos
+    >>> from abjad import rhythmos as rhythmos
 
     """
 
