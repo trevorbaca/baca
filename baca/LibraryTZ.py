@@ -1665,15 +1665,15 @@ class LibraryTZ(abjad.AbjadObject):
                                 c'16
                                 [
                                 - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \whiteout
-                                                \upright
-                                                    pont.
-                                            \hspace
-                                                #0.5
-                                        }
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    pont.                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
+                                        }                                                                %! PWC1
                                     }                                                                    %! PWC1
                                 - \tweak arrow-width 0.25                                                %! PWC1
                                 - \tweak dash-fraction 0.25                                              %! PWC1
@@ -1686,15 +1686,15 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.right-broken.text ##f                             %! PWC1
                                 - \tweak bound-details.right.padding 0.5                                 %! PWC1
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                - \tweak bound-details.right.text \markup {
-                                    \concat
-                                        {
-                                            \hspace
-                                                #0.0
-                                            \whiteout
-                                                \upright
-                                                    ord.
-                                        }
+                                - \tweak bound-details.right.text \markup {                              %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.0                                                     %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    ord.                                                 %! PWC1
+                                        }                                                                %! PWC1
                                     }                                                                    %! PWC1
                                 \startTextSpan                                                           %! PWC1
                                 d'16
@@ -1786,15 +1786,15 @@ class LibraryTZ(abjad.AbjadObject):
                                 fs''16
                                 [
                                 - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \whiteout
-                                                \upright
-                                                    pont.
-                                            \hspace
-                                                #0.5
-                                        }
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    pont.                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
+                                        }                                                                %! PWC1
                                     }                                                                    %! PWC1
                                 - \tweak arrow-width 0.25                                                %! PWC1
                                 - \tweak dash-fraction 0.25                                              %! PWC1
@@ -1807,15 +1807,15 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.right-broken.text ##f                             %! PWC1
                                 - \tweak bound-details.right.padding 0.5                                 %! PWC1
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                - \tweak bound-details.right.text \markup {
-                                    \concat
-                                        {
-                                            \hspace
-                                                #0.0
-                                            \whiteout
-                                                \upright
-                                                    ord.
-                                        }
+                                - \tweak bound-details.right.text \markup {                              %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.0                                                     %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    ord.                                                 %! PWC1
+                                        }                                                                %! PWC1
                                     }                                                                    %! PWC1
                                 \startTextSpan                                                           %! PWC1
                                 e''16
@@ -2802,15 +2802,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     e'8
                                     [
                                     - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                                \hspace
-                                                    #0.5
-                                            }
+                                    - \tweak bound-details.left.text \markup {                           %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        pont.                                            %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.5                                                 %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     - \tweak arrow-width 0.25                                            %! PWC1
                                     - \tweak dash-fraction 0.25                                          %! PWC1
@@ -2839,15 +2839,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     \stopTextSpan                                                        %! PWC1
                                     [
                                     - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        ord.
-                                                \hspace
-                                                    #0.5
-                                            }
+                                    - \tweak bound-details.left.text \markup {                           %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        ord.                                             %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.5                                                 %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     - \tweak arrow-width 0.25                                            %! PWC1
                                     - \tweak dash-fraction 0.25                                          %! PWC1
@@ -2874,15 +2874,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     \stopTextSpan                                                        %! PWC1
                                     [
                                     - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                                \hspace
-                                                    #0.5
-                                            }
+                                    - \tweak bound-details.left.text \markup {                           %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        pont.                                            %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.5                                                 %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     - \tweak arrow-width 0.25                                            %! PWC1
                                     - \tweak dash-fraction 0.25                                          %! PWC1
@@ -2911,15 +2911,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     \stopTextSpan                                                        %! PWC1
                                     [
                                     - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        ord.
-                                                \hspace
-                                                    #0.25
-                                            }
+                                    - \tweak bound-details.left.text \markup {                           %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        ord.                                             %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.25                                                %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     - \tweak dash-period 0                                               %! PWC1
                                     - \tweak bound-details.left-broken.text ##f                          %! PWC1
@@ -3023,15 +3023,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     e'8
                                     [
                                     - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                                \hspace
-                                                    #0.5
-                                            }
+                                    - \tweak bound-details.left.text \markup {                           %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        pont.                                            %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.5                                                 %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     - \tweak arrow-width 0.25                                            %! PWC1
                                     - \tweak dash-fraction 0.25                                          %! PWC1
@@ -3071,15 +3071,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     \stopTextSpan                                                        %! PWC1
                                     [
                                     - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        ord.
-                                                \hspace
-                                                    #0.5
-                                            }
+                                    - \tweak bound-details.left.text \markup {                           %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        ord.                                             %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.5                                                 %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     - \tweak arrow-width 0.25                                            %! PWC1
                                     - \tweak dash-fraction 0.25                                          %! PWC1
@@ -3092,15 +3092,15 @@ class LibraryTZ(abjad.AbjadObject):
                                     - \tweak bound-details.right-broken.text ##f                         %! PWC1
                                     - \tweak bound-details.right.padding 0.5                             %! PWC1
                                     - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    - \tweak bound-details.right.text \markup {
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.0
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                            }
+                                    - \tweak bound-details.right.text \markup {                          %! PWC1
+                                        \concat                                                          %! PWC1
+                                            {                                                            %! PWC1
+                                                \hspace                                                  %! PWC1
+                                                    #0.0                                                 %! PWC1
+                                                \whiteout                                                %! PWC1
+                                                    \upright                                             %! PWC1
+                                                        pont.                                            %! PWC1
+                                            }                                                            %! PWC1
                                         }                                                                %! PWC1
                                     \startTextSpan                                                       %! PWC1
                 <BLANKLINE>
