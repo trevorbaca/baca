@@ -341,7 +341,7 @@
 </div>
 <dl class="class">
 <dt id="baca.HairpinCommand.HairpinCommand">
-<em class="property">class </em><code class="descclassname">baca.HairpinCommand.</code><code class="descname">HairpinCommand</code><span class="sig-paren">(</span><em>deactivate=None</em>, <em>left_broken=None</em>, <em>selector='baca.tleaves()'</em>, <em>right_broken=None</em>, <em>start=None</em>, <em>stop=None</em>, <em>tags=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.HairpinCommand.HairpinCommand" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baca.HairpinCommand.</code><code class="descname">HairpinCommand</code><span class="sig-paren">(</span><em>deactivate=None</em>, <em>leak=None</em>, <em>left_broken=None</em>, <em>selector='baca.tleaves()'</em>, <em>right_broken=None</em>, <em>start=None</em>, <em>stop=None</em>, <em>tags=None</em><span class="sig-paren">)</span><a class="headerlink" href="#baca.HairpinCommand.HairpinCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hairpin command.</p>
 <div class="example docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">baca</span><span class="o">.</span><span class="n">HairpinCommand</span><span class="p">()</span>
@@ -471,6 +471,20 @@ Interprets <cite>‘’</cite> equal to <cite>‘storage’</cite>.</p>
 <dt id="baca.HairpinCommand.HairpinCommand.deactivate">
 <code class="descclassname">(<a class="reference internal" href="Command.html#baca.Command.Command" title="baca.Command.Command"><code class="descclassname docutils literal notranslate"><span class="pre">Command</span></code></a>).</code><code class="descname">deactivate</code><a class="headerlink" href="#baca.HairpinCommand.HairpinCommand.deactivate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is true when command deactivates tag.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baca.HairpinCommand.HairpinCommand.leak">
+<code class="descname">leak</code><a class="headerlink" href="#baca.HairpinCommand.HairpinCommand.leak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is true when hairpin leaks one leaf to the right.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

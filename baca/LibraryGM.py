@@ -422,6 +422,7 @@ class LibraryGM(abjad.AbjadObject):
     def hairpin(
         string: str = None,
         *,
+        leak: bool = None,
         left_broken: str = None,
         right_broken: str = None,
         selector: Selector = 'baca.tleaves()',
@@ -638,6 +639,8 @@ class LibraryGM(abjad.AbjadObject):
 
         """
         import baca
+        if leak is not None:
+            leak = bool(leak)
         start, shape, stop = abjad.Hairpin._parse_descriptor(string)
         if start == 'niente' or start in baca.scheme.dynamics:
             start_dynamic_is_textual = True
@@ -677,6 +680,7 @@ class LibraryGM(abjad.AbjadObject):
             command = '\\' + stop.name
             stop = abjad.new(stop, command=command)
         command = HairpinCommand(
+            leak=leak,
             left_broken=left_broken,
             right_broken=right_broken,
             selector=selector,

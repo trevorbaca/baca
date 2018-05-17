@@ -62,6 +62,8 @@ HairpinCommand
 
    .. autoattribute:: HairpinCommand.deactivate
 
+   .. autoattribute:: HairpinCommand.leak
+
    .. autoattribute:: HairpinCommand.left_broken
 
    .. autoattribute:: HairpinCommand.right_broken

@@ -19,6 +19,7 @@ class HairpinCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_leak',
         '_left_broken',
         '_right_broken',
         '_start',
@@ -31,6 +32,7 @@ class HairpinCommand(Command):
     def __init__(
         self,
         deactivate: bool = None,
+        leak: bool = None,
         left_broken: str = None,
         selector: Selector = 'baca.tleaves()',
         right_broken: str = None,
@@ -39,6 +41,9 @@ class HairpinCommand(Command):
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
+        if leak is not None:
+            leak = bool(leak)
+        self._leak = leak
         if left_broken is not None:
             assert left_broken in ('<', '>', 'niente'), repr(left_broken)
         self._left_broken = left_broken
@@ -69,7 +74,7 @@ class HairpinCommand(Command):
         if not argument:
             return
         leaves = abjad.select(argument).leaves()
-        spanner = abjad.Hairpin(context='Voice')
+        spanner = abjad.Hairpin(context='Voice', leak=self.leak)
         abjad.attach(
             spanner,
             leaves,
@@ -120,6 +125,13 @@ class HairpinCommand(Command):
                     )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def leak(self) -> typing.Optional[bool]:
+        """
+        Is true when hairpin leaks one leaf to the right.
+        """
+        return self._leak
 
     @property
     def left_broken(self) -> typing.Optional[str]:
