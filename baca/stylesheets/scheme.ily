@@ -552,6 +552,15 @@ appena_udibile =
         )
     )
 
+niente = #(
+    make-dynamic-script
+    (markup
+        #:whiteout
+        #:normal-text
+        #:italic "niente"
+        )
+    )
+
 %%% DYNAMICS: WITH TEXT %%%
 
     %%% NOTE: Use ...
