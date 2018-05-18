@@ -419,6 +419,18 @@ class LibraryGM(abjad.AbjadObject):
         return selector
 
     @staticmethod
+    def group_notes_by_measures(
+        counts: typing.List[int] = [1],
+        ) -> abjad.Expression:
+        """
+        Makes selector.
+        """
+        selector = baca.select().notes().group_by_measure()
+        selector = selector.partition_by_counts(counts, cyclic=True)
+        selector = selector.map(baca.select().flatten())
+        return selector
+
+    @staticmethod
     def hairpin(
         string: str = None,
         *,

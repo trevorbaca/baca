@@ -40,6 +40,8 @@ LibraryGM
 
    .. automethod:: LibraryGM.group_by_measures
 
+   .. automethod:: LibraryGM.group_notes_by_measures
+
    .. automethod:: LibraryGM.hairpin
 
    .. automethod:: LibraryGM.hairpin_shorten_pair
