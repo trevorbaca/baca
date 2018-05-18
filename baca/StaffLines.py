@@ -2,7 +2,8 @@ import abjad
 
 
 class StaffLines(abjad.AbjadObject):
-    r"""Staff lines.
+    """
+    Staff lines.
     """
 
     ### CLASS VARIABLES ###
@@ -32,7 +33,8 @@ class StaffLines(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r"""Is true when staff lines line count equals `argument` line count.
+        """
+        Is true when staff lines line count equals `argument` line count.
 
         ..  container:: example
 
@@ -95,7 +97,8 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def context(self):
-        r"""Returns class constant ``'Staff'``.
+        """
+        Returns class constant ``'Staff'``.
 
         ..  container:: example
 
@@ -108,7 +111,8 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def hide(self):
-        r"""Is true when staff lines should not appear in output.
+        """
+        Is true when staff lines should not appear in output.
 
         ..  container:: example
 
@@ -123,7 +127,8 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def line_count(self):
-        r"""Gets line count.
+        """
+        Gets line count.
 
         ..  container:: example
 
@@ -136,7 +141,8 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def persistent(self):
-        r"""Is class constant true.
+        """
+        Is class constant true.
 
         ..  container:: example
 

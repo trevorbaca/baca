@@ -2,7 +2,8 @@ import abjad
 
 
 class SpacingSection(abjad.AbjadObject):
-    r"""Spacing section.
+    r"""
+    Spacing section.
 
     ..  container:: example
 
@@ -47,7 +48,8 @@ class SpacingSection(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r"""Is true when `argument` is a spacing section with same duration as
+        """
+        Is true when `argument` is a spacing section with same duration as
         this spacing section.
 
         ..  container:: example
@@ -83,7 +85,8 @@ class SpacingSection(abjad.AbjadObject):
             return self.duration == argument.duration
 
     def __hash__(self):
-        r"""Hashes spacing section.
+        """
+        Hashes spacing section.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
@@ -92,7 +95,8 @@ class SpacingSection(abjad.AbjadObject):
         return super(SpacingSection, self).__hash__()
 
     def __str__(self):
-        r"""Gets string representation of spacing section.
+        """
+        Gets string representation of spacing section.
 
         ..  container:: example
 
@@ -117,7 +121,8 @@ class SpacingSection(abjad.AbjadObject):
 
 #    @property
 #    def context(self):
-#        r"""Gets class constant ``'Score'``.
+#        """
+#        Gets class constant ``'Score'``.
 #
 #        ..  container:: example
 #
@@ -130,7 +135,8 @@ class SpacingSection(abjad.AbjadObject):
 
     @property
     def duration(self):
-        r"""Gets duration.
+        """
+        Gets duration.
 
         ..  container:: example
 
@@ -143,7 +149,8 @@ class SpacingSection(abjad.AbjadObject):
 
 #    @property
 #    def persistent(self):
-#        r"""Is class constant true.
+#        """
+#        Is class constant true.
 #
 #        ..  container:: example
 #
@@ -158,7 +165,8 @@ class SpacingSection(abjad.AbjadObject):
 
     @staticmethod
     def from_string(string):
-        r"""Makes spacing section from fraction `string`.
+        """
+        Makes spacing section from fraction `string`.
 
         ..  container:: example
 

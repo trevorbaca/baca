@@ -2712,8 +2712,7 @@ class LibraryTZ(abjad.AbjadObject):
         *markups: typing.Any,
         do_not_bookend: bool = False,
         selector: Selector = 'baca.leaves().group()',
-        spanner_selector: typing.Union[
-            MapCommand, Selector] = 'baca.tleaves()',
+        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()',
         tweaks: typing.List[typing.Tuple] = None
         ) -> PiecewiseCommand:
         r"""

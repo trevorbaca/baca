@@ -7,7 +7,8 @@ import itertools
 
 
 class Sequence(abjad.Sequence):
-    r"""Sequence.
+    r"""
+    Sequence.
 
     ..  container:: example
 
@@ -246,7 +247,8 @@ class Sequence(abjad.Sequence):
         string_template_callback='_make_accumulate_string_template',
         )
     def accumulate(self, operands=None, count=None):
-        r"""Accumulates `operands` calls against sequence to identity.
+        r"""
+        Accumulates `operands` calls against sequence to identity.
 
         ..  container:: example
 
@@ -788,7 +790,8 @@ class Sequence(abjad.Sequence):
         superscript='count',
         )
     def boustrophedon(self, count=2):
-        r"""Iterates sequence boustrophedon.
+        r"""
+        Iterates sequence boustrophedon.
 
         ..  container:: example
 
@@ -964,7 +967,8 @@ class Sequence(abjad.Sequence):
         return degree_of_rotational_symmetry
 
     def group_by_sign(self, sign=(-1, 0, 1)):
-        r"""Groups sequence by sign of items.
+        r"""
+        Groups sequence by sign of items.
 
         >>> sequence = baca.Sequence(
         ...     [0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6],
@@ -1104,7 +1108,8 @@ class Sequence(abjad.Sequence):
 
     @abjad.Signature(method_name='H')
     def helianthate(self, n=0, m=0):
-        r"""Helianthates sequence.
+        r"""
+        Helianthates sequence.
 
         ..  container:: example
 
@@ -1285,7 +1290,8 @@ class Sequence(abjad.Sequence):
         subscript='counts',
         )
     def partition(self, counts=None):
-        r"""Partitions sequence cyclically by `counts` with overhang.
+        r"""
+        Partitions sequence cyclically by `counts` with overhang.
 
         ..  container:: example
 
@@ -1375,7 +1381,8 @@ class Sequence(abjad.Sequence):
 
     @abjad.Signature()
     def repeat_by(self, counts=None, cyclic=None):
-        r"""Repeat sequence elements at `counts`.
+        r"""
+        Repeat sequence elements at `counts`.
 
         ..  container:: example
 
@@ -1568,7 +1575,8 @@ class Sequence(abjad.Sequence):
 
     @abjad.Signature()
     def reveal(self, count=None):
-        r"""Reveals contents of sequence.
+        r"""
+        Reveals contents of sequence.
 
         ..  container:: example
 

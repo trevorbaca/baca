@@ -2,7 +2,8 @@ import abjad
 
 
 class PersistentIndicatorTests(abjad.AbjadObject):
-    r"""Persistent indicator tests.
+    """
+    Persistent indicator tests.
     """
 
     ### CLASS VARIABLES ###
@@ -16,7 +17,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def clefs(self) -> None:
-        r"""Clefs.
+        r"""
+        Clefs.
 
         ..  container:: example
 
@@ -597,7 +599,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def dynamics(self) -> None:
-        r"""Dynamics.
+        r"""
+        Dynamics.
 
         ..  container:: example
 
@@ -1140,7 +1143,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def hidden_instruments(self) -> None:
-        r"""Hidden instruments.
+        r"""
+        Hidden instruments.
 
         Hidden instruments provide an alert.
         
@@ -2583,7 +2587,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def instruments(self) -> None:
-        r"""Instruments.
+        r"""
+        Instruments.
 
         ..  container:: example
 
@@ -4144,7 +4149,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def margin_markups(self) -> None:
-        r"""Margin markups.
+        r"""
+        Margin markups.
 
         ..  container:: example
 
@@ -5941,7 +5947,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def metronome_marks(self) -> None:
-        r"""Metronome marks.
+        r"""
+        Metronome marks.
 
         ..  container:: example
 
@@ -6692,7 +6699,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def persistent_overrides(self) -> None:
-        r"""Persistent overrides.
+        r"""
+        Persistent overrides.
 
         ..  container:: example
 
@@ -7064,7 +7072,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def staff_lines(self) -> None:
-        r"""Staff lines.
+        r"""
+        Staff lines.
 
         ..  container:: example
 
@@ -7468,7 +7477,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     @property
     def tempo_trends(self) -> None:
-        r"""Tempo trends.
+        r"""
+        Tempo trends.
 
         ..  container:: example
 

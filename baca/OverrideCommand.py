@@ -6,7 +6,8 @@ from .Typing import Selector
 
 
 class OverrideCommand(Command):
-    r"""Override command.
+    r"""
+    Override command.
 
     >>> from abjad import rhythmos as rhythmos
 
@@ -250,7 +251,8 @@ class OverrideCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> None:
-        r"""Calls command on `argument`.
+        """
+        Calls command on `argument`.
         """
         if argument is None:
             return
@@ -331,42 +333,49 @@ class OverrideCommand(Command):
 
     @property
     def after(self) -> typing.Optional[bool]:
-        r"""Is true if command positions LilyPond command after selection.
+        """
+        Is true if command positions LilyPond command after selection.
         """
         return self._after 
 
     @property
     def attribute(self) -> typing.Optional[str]:
-        r"""Gets attribute name.
+        """
+        Gets attribute name.
         """
         return self._attribute
 
     @property
     def blacklist(self) -> typing.Optional[typing.Tuple[type]]:
-        r"""Gets blacklist leaves.
+        """
+        Gets blacklist leaves.
         """
         return self._blacklist
 
     @property
     def context(self) -> typing.Optional[str]:
-        r"""Gets context name.
+        """
+        Gets context name.
         """
         return self._context
 
     @property
     def grob(self) -> typing.Optional[str]:
-        r"""Gets grob name.
+        """
+        Gets grob name.
         """
         return self._grob
 
     @property
     def value(self) -> typing.Any:
-        r"""Gets attribute value.
+        """
+        Gets attribute value.
         """
         return self._value
 
     @property
     def whitelist(self) -> typing.Optional[typing.Tuple[type]]:
-        r"""Gets whitelist leaves.
+        """
+        Gets whitelist leaves.
         """
         return self._whitelist

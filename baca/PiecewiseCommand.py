@@ -146,25 +146,29 @@ class PiecewiseCommand(Command):
 
     @property
     def bookend(self) -> typing.Optional[bool]:
-        r"""Is true when command bookend-attaches indicators.
+        """
+        Is true when command bookend-attaches indicators.
         """
         return self._bookend
 
     @property
     def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
-        r"""Gets indicators.
+        """
+        Gets indicators.
         """
         return self._indicators
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
-        r"""Gets selector.
+        """
+        Gets selector.
         """
         return self._selector
 
     @property
     def spanner(self) -> typing.Optional[abjad.Spanner]:
-        r"""Gets spanner.
+        """
+        Gets spanner.
         """
         return self._spanner
 
@@ -172,7 +176,8 @@ class PiecewiseCommand(Command):
     def spanner_selector(self) -> typing.Optional[
         typing.Union[abjad.Expression, MapCommand]
         ]:
-        r"""Gets spanner selector.
+        """
+        Gets spanner selector.
         """
         return self._spanner_selector
 

@@ -6,7 +6,8 @@ from .Scope import Scope
 
 
 class TimelineScope(abjad.AbjadObject):
-    r"""Timeline scope.
+    """
+    Timeline scope.
 
     ..  container:: example
 
@@ -97,12 +98,14 @@ class TimelineScope(abjad.AbjadObject):
 
     @property
     def scopes(self) -> typing.Tuple[Scope]:
-        r"""Gets scopes.
+        """
+        Gets scopes.
         """
         return self._scopes
 
     @property
     def voice_name(self) -> str:
-        r"""Returns ``'TimelineScope'``.
+        """
+        Returns ``'TimelineScope'``.
         """
         return 'TimelineScope'

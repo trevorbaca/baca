@@ -2,7 +2,8 @@ import abjad
 
 
 class PitchTreeSpanner(abjad.Spanner):
-    r"""Pitch tree spanner.
+    """
+    Pitch tree spanner.
     """
 
     ### CLASS VARIABLES ###
@@ -24,7 +25,8 @@ class PitchTreeSpanner(abjad.Spanner):
 
     @property
     def level(self):
-        r"""Gets level of pitch tree spanner.
+        """
+        Gets level of pitch tree spanner.
 
         Returns integer.
         """
@@ -32,6 +34,7 @@ class PitchTreeSpanner(abjad.Spanner):
 
     @property
     def foo(self):
-        r"""Gets foo.
+        """
+        Gets foo.
         """
         return 'foo'

@@ -3,7 +3,8 @@ import fractions
 
 
 class Interpolator(abjad.AbjadObject):
-    r"""Interpolator.
+    """
+    Interpolator.
 
     ..  container:: example
 
@@ -33,7 +34,8 @@ class Interpolator(abjad.AbjadObject):
 
     @staticmethod
     def interpolate_linear(start, stop, count=2):
-        r"""Interpolates `count` values linearly from `start` to `stop`.
+        """
+        Interpolates `count` values linearly from `start` to `stop`.
 
         ..  container:: example
 

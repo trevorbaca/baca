@@ -6,7 +6,8 @@ from .StageMeasureMap import StageMeasureMap
 
 
 class TimeSignatureMaker(abjad.AbjadObject):
-    r"""Time-signature-maker.
+    """
+    Time-signature-maker.
 
     ..  container:: example
 
@@ -82,7 +83,8 @@ class TimeSignatureMaker(abjad.AbjadObject):
         MetronomeMarkMeasureMap,
         typing.List[abjad.TimeSignature],
         ]:
-        r"""Calls time-signature-maker.
+        """
+        Calls time-signature-maker.
         """
         if not self.stage_measure_map:
             raise Exception('try TimeSignatureMaker.run() instead.')
@@ -153,13 +155,15 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     @property
     def count(self) -> typing.Optional[int]:
-        r"""Gets count.
+        """
+        Gets count.
         """
         return self._count
 
     @property
     def fermata_measures(self) -> typing.Optional[typing.List[int]]:
-        r"""Gets fermata measures.
+        """
+        Gets fermata measures.
         """
         return self._fermata_measures
 
@@ -167,38 +171,44 @@ class TimeSignatureMaker(abjad.AbjadObject):
     def metronome_mark_measure_map(self) -> typing.Optional[
         MetronomeMarkMeasureMap
         ]:
-        r"""Gets metronome mark measure map.
+        """
+        Gets metronome mark measure map.
         """
         return self._metronome_mark_measure_map
 
     @property
     def repeat_count(self) -> typing.Optional[int]:
-        r"""Gets repeat count.
+        """
+        Gets repeat count.
         """
         return self._repeat_count
 
     @property
     def rotation(self) -> typing.Optional[int]:
-        r"""Gets rotation.
+        """
+        Gets rotation.
         """
         return self._rotation
 
     @property
     def stage_measure_map(self) -> typing.Optional[StageMeasureMap]:
-        r"""Gets stage measure map.
+        """
+        Gets stage measure map.
         """
         return self._stage_measure_map
 
     @property
     def time_signatures(self) -> typing.List[abjad.TimeSignature]:
-        r"""Gets time signatures.
+        """
+        Gets time signatures.
         """
         return self._time_signatures
 
     ### PUBLIC METHODS ###
 
     def run(self) -> typing.List[abjad.TimeSignature]:
-        r"""Makes time signatures (without stages).
+        """
+        Makes time signatures (without stages).
 
         Accounts for fermata measures.
 

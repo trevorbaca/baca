@@ -4,7 +4,8 @@ import typing
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
-    r"""Score template
+    """
+    Score template
     """
 
     ### CLASS VARIABLES ###
@@ -86,14 +87,16 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     @property
     def defaults(self) -> list:
-        r"""Gets defaults.
+        """
+        Gets defaults.
         """
         return self._defaults
 
     ### PUBLIC METHODS ###
 
     def group_families(self, *families) -> typing.List[abjad.Context]:
-        r"""Groups `families` only when more than one family is passed in.
+        """
+        Groups `families` only when more than one family is passed in.
 
         Returns list of zero or more contexts.
         """
@@ -122,7 +125,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         return contexts
 
     def make_music_context(self, *contexts) -> abjad.Context:
-        r"""Makes music context.
+        """
+        Makes music context.
         """
         contexts = tuple(_ for _ in contexts if _ is not None)
         return abjad.Context(
@@ -137,7 +141,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         stem: str,
         *contexts,
         ) -> typing.Optional[abjad.StaffGroup]:
-        r"""Makes piano staff.
+        """
+        Makes piano staff.
         """
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
@@ -152,7 +157,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         stem: str,
         *contexts,
         ) -> typing.Optional[typing.Union[abjad.Staff, abjad.StaffGroup]]:
-        r"""Makes square staff group.
+        """
+        Makes square staff group.
         """
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
@@ -174,7 +180,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         stem: str,
         *contexts,
         ) -> typing.Optional[abjad.StaffGroup]:
-        r"""Makes staff group.
+        """
+        Makes staff group.
         """
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')

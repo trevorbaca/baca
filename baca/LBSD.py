@@ -3,7 +3,8 @@ import collections
 
 
 class LBSD(abjad.AbjadObject):
-    r"""Line-break system details.
+    """
+    Line-break system details.
     """
 
     ### CLASS VARIABLES ###
@@ -47,12 +48,14 @@ class LBSD(abjad.AbjadObject):
 
     @property
     def alignment_distances(self):
-        r"""Gets alignment distances.
+        """
+        Gets alignment distances.
         """
         return self._alignment_distances
 
     @property
     def y_offset(self):
-        r"""Gets Y offset.
+        """
+        Gets Y offset.
         """
         return self._y_offset

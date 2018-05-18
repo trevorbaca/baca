@@ -5,7 +5,8 @@ from abjad import rhythmos as rhythmos
 
 
 class MusicMaker(abjad.AbjadObject):
-    r"""Music-maker.
+    r"""
+    Music-maker.
 
     >>> from abjad import rhythmos as rhythmos
 
@@ -132,7 +133,8 @@ class MusicMaker(abjad.AbjadObject):
         tuplet_denominator=None,
         tuplet_force_fraction=None
         ):
-        r"""Calls music-maker on `collections` with keywords.
+        r"""
+        Calls music-maker on `collections` with keywords.
 
         ..  container:: example
 
@@ -1053,7 +1055,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def allow_repeats(self):
-        r"""Is true when music-maker allows repeat pitches.
+        """
+        Is true when music-maker allows repeat pitches.
 
         Defaults to none.
 
@@ -1065,7 +1068,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def color_unregistered_pitches(self):
-        r"""Is true when music-maker colors unregistered pitches.
+        """
+        Is true when music-maker colors unregistered pitches.
 
         Defaults to none.
 
@@ -1077,7 +1081,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def denominator(self):
-        r"""Gets denominator.
+        r"""
+        Gets denominator.
 
         ..  container:: example
 
@@ -1319,7 +1324,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def specifiers(self):
-        r"""Gets specifiers.
+        r"""
+        Gets specifiers.
 
         ..  container:: example
 
@@ -2542,7 +2548,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def thread(self):
-        r"""Is true when music-maker threads rhythm-maker over collections.
+        r"""
+        Is true when music-maker threads rhythm-maker over collections.
 
         ..  container:: example
 
@@ -2645,7 +2652,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @property
     def voice_names(self):
-        r"""Gets voice names.
+        """
+        Gets voice names.
 
         Used to check call-time voice names.
 
@@ -2662,7 +2670,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @staticmethod
     def show(music_contribution, time_signatures=None):
-        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
+        """
+        Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
         """

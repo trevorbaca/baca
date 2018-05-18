@@ -100,7 +100,7 @@ class BowContactPointCommand(Command):
 
     @property
     def bow_contact_points(self) -> typing.Iterable[typing.Tuple[int, int]]:
-        r"""
+        """
         Gets bow contact points.
 
         ..  container:: example

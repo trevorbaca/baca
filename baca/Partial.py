@@ -4,7 +4,8 @@ import typing
 
 
 class Partial(abjad.AbjadObject):
-    r"""Partial.
+    """
+    Partial.
 
     ..  container:: example
 
@@ -50,7 +51,8 @@ class Partial(abjad.AbjadObject):
 
     @property
     def approximation(self) -> abjad.NamedPitch:
-        r"""Gets approximation.
+        """
+        Gets approximation.
 
         ..  container:: example
 
@@ -62,7 +64,8 @@ class Partial(abjad.AbjadObject):
 
     @property
     def deviation(self) -> int:
-        r"""Gets deviation in cents.
+        """
+        Gets deviation in cents.
 
         ..  container:: example
 
@@ -74,7 +77,8 @@ class Partial(abjad.AbjadObject):
 
     @property
     def fundamental(self) -> abjad.NamedPitch:
-        r"""Gets fundamental.
+        """
+        Gets fundamental.
 
         ..  container:: example
 
@@ -86,7 +90,8 @@ class Partial(abjad.AbjadObject):
 
     @property
     def number(self) -> int:
-        r"""Gets number.
+        """
+        Gets number.
 
         ..  container:: example
 

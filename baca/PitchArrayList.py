@@ -2,7 +2,8 @@ import abjad
 
 
 class PitchArrayList(abjad.TypedList):
-    r"""Pitch array list.
+    """
+    Pitch array list.
 
     ..  container:: example
 
@@ -112,7 +113,8 @@ class PitchArrayList(abjad.TypedList):
     ### PUBLIC METHODS ###
 
     def to_score(self):
-        r"""Makes score from pitch arrays.
+        r"""
+        Makes score from pitch arrays.
 
         ..  container:: example
 

@@ -597,38 +597,44 @@ class PitchCommand(Command):
 
     @property
     def allow_octaves(self) -> typing.Optional[bool]:
-        r"""Is true when command allows octaves.
+        """
+        Is true when command allows octaves.
         """
         return self._allow_octaves
 
     @property
     def allow_repeats(self) -> typing.Optional[bool]:
-        r"""Is true when command allows repeat pitches.
+        """
+        Is true when command allows repeat pitches.
         """
         return self._allow_repeats
 
     @property
     def cyclic(self) -> typing.Optional[bool]:
-        r"""Is true when command reads pitches cyclically.
+        """
+        Is true when command reads pitches cyclically.
         """
         return self._cyclic
 
     @property
     def do_not_transpose(self) -> typing.Optional[bool]:
-        r"""Is true when pitch escapes transposition.
+        """
+        Is true when pitch escapes transposition.
         """
         return self._do_not_transpose
 
     @property
     def ignore_incomplete(self) -> typing.Optional[bool]:
-        r"""Is true when persistent pitch command ignores previous segment
+        """
+        Is true when persistent pitch command ignores previous segment
         incomplete last note.
         """
         return self._ignore_incomplete
 
     @property
     def parameter(self) -> str:
-        r"""Gets persistence parameter.
+        """
+        Gets persistence parameter.
 
         ..  container:: example
 
@@ -640,13 +646,15 @@ class PitchCommand(Command):
         
     @property
     def persist(self) -> typing.Optional[str]:
-        r"""Gets persist name.
+        """
+        Gets persist name.
         """
         return self._persist
 
     @property
     def pitches(self) -> typing.Optional[typing.Iterable]:
-        r"""Gets pitches.
+        """
+        Gets pitches.
 
         ..  container:: example
 
@@ -670,6 +678,7 @@ class PitchCommand(Command):
 
     @property
     def state(self) -> abjad.OrderedDict:
-        r"""Gets state dictionary.
+        """
+        Gets state dictionary.
         """
         return self._state

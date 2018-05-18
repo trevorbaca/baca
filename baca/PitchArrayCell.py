@@ -187,7 +187,8 @@ class PitchArrayCell(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __str__(self):
-        r"""Gets string representation of pitch array cell.
+        """
+        Gets string representation of pitch array cell.
 
         Returns string.
         """
@@ -313,7 +314,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def column_indices(self):
-        r"""Gets column start and stop indices.
+        """
+        Gets column start and stop indices.
 
         ..  container:: example
 
@@ -342,7 +344,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def column_start_index(self):
-        r"""Gets column start index.
+        """
+        Gets column start index.
 
         ..  container:: example
 
@@ -373,7 +376,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def column_stop_index(self):
-        r"""Gets column stop index.
+        """
+        Gets column stop index.
 
         ..  container:: example
 
@@ -399,7 +403,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def indices(self):
-        r"""Gets indices.
+        """
+        Gets indices.
 
         ..  container:: example
 
@@ -426,7 +431,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def is_first_in_row(self):
-        r"""Is true when pitch array cell is first in row. Otherwise false.
+        """
+        Is true when pitch array cell is first in row. Otherwise false.
 
         ..  container:: example
 
@@ -456,7 +462,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def is_last_in_row(self):
-        r"""Is true when pitch array cell is last in row. Otherwise false.
+        """
+        Is true when pitch array cell is last in row. Otherwise false.
 
         ..  container:: example
 
@@ -486,7 +493,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def item(self):
-        r"""Gets item.
+        """
+        Gets item.
 
         Complicated return type.
         """
@@ -518,7 +526,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def next(self):
-        r"""Gets next pitch array cell in row after this pitch array cell.
+        """
+        Gets next pitch array cell in row after this pitch array cell.
 
         ..  container:: example
 
@@ -549,7 +558,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def parent_array(self):
-        r"""Gets parent array.
+        """
+        Gets parent array.
 
         Return pitch array.
         """
@@ -560,7 +570,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def parent_column(self):
-        r"""Gets parent column.
+        """
+        Gets parent column.
 
         Returns pitch array column.
         """
@@ -572,7 +583,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def parent_row(self):
-        r"""Gets parent row.
+        """
+        Gets parent row.
 
         Returns pitch array row.
         """
@@ -580,7 +592,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def pitches(self):
-        r"""Gets and sets pitches of pitch array cell.
+        """
+        Gets and sets pitches of pitch array cell.
 
         Returns list.
         """
@@ -599,7 +612,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def previous(self):
-        r"""Gets pitch array cell in row prior to this pitch array cell.
+        """
+        Gets pitch array cell in row prior to this pitch array cell.
 
         ..  container:: example
 
@@ -630,7 +644,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def row_index(self):
-        r"""Gets row index.
+        """
+        Gets row index.
 
         Returns nonnegative integer or none.
         """
@@ -641,7 +656,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def weight(self):
-        r"""Gets weight.
+        """
+        Gets weight.
 
         Weight defined equal to number of pitches in cell.
 
@@ -651,7 +667,8 @@ class PitchArrayCell(abjad.AbjadObject):
 
     @property
     def width(self):
-        r"""Gets width.
+        """
+        Gets width.
 
         Width defined equal to number of columns spanned by cell.
 
@@ -662,7 +679,8 @@ class PitchArrayCell(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     def append_pitch(self, pitch):
-        r"""Appends `pitch` to cell.
+        """
+        Appends `pitch` to cell.
 
         Returns none.
         """
@@ -672,7 +690,8 @@ class PitchArrayCell(abjad.AbjadObject):
         self._pitches.append(pitch)
 
     def matches_cell(self, argument):
-        r"""Is true when pitch array cell matches `argument`. Otherwise false.
+        """
+        Is true when pitch array cell matches `argument`. Otherwise false.
 
         ..  container:: example
 

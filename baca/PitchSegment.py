@@ -3,7 +3,8 @@ import baca
 
 
 class PitchSegment(abjad.PitchSegment):
-    r"""Pitch segment.
+    r"""
+    Pitch segment.
 
     ..  container:: example
 
@@ -58,7 +59,8 @@ class PitchSegment(abjad.PitchSegment):
     ### PUBLIC METHODS ###
 
     def bass_to_octave(self, n=4):
-        r"""Octave-transposes segment to bass in octave `n`.
+        r"""
+        Octave-transposes segment to bass in octave `n`.
 
         ..  container:: example
 
@@ -139,7 +141,8 @@ class PitchSegment(abjad.PitchSegment):
         return abjad.new(self, items=segment)
 
     def center_to_octave(self, n=4):
-        r"""Octave-transposes segment to center in octave `n`.
+        r"""
+        Octave-transposes segment to center in octave `n`.
 
         ..  container:: example
 
@@ -220,7 +223,8 @@ class PitchSegment(abjad.PitchSegment):
         return abjad.new(self, items=segment)
 
     def chord(self):
-        r"""Changes segment to set.
+        r"""
+        Changes segment to set.
 
         ..  container:: example
 
@@ -261,7 +265,8 @@ class PitchSegment(abjad.PitchSegment):
             )
 
     def soprano_to_octave(self, n=4):
-        r"""Octave-transposes segment to soprano in octave `n`.
+        r"""
+        Octave-transposes segment to soprano in octave `n`.
 
         ..  container:: example
 
@@ -347,7 +352,8 @@ class PitchSegment(abjad.PitchSegment):
         semitones=None,
         soprano=None,
         ):
-        r"""Spaces pitch segment down.
+        r"""
+        Spaces pitch segment down.
 
         ..  container:: example
 
@@ -489,7 +495,8 @@ class PitchSegment(abjad.PitchSegment):
         semitones=None,
         soprano=None,
         ):
-        r"""Spaces pitch segment up.
+        r"""
+        Spaces pitch segment up.
 
         ..  container:: example
 
@@ -626,7 +633,8 @@ class PitchSegment(abjad.PitchSegment):
         return segment
 
     def split(self, pitch=0):
-        r"""Splits segment at `pitch`.
+        r"""
+        Splits segment at `pitch`.
 
         ..  container:: example
 

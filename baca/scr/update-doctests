@@ -6,7 +6,8 @@ import sys
 
 
 def update_file(name):
-    r"""Updates file with `name`.
+    """
+    Updates file with `name`.
     """
     output = pathlib.Path('/Users/trevorbaca/.tmp/doctest.out')
     os.system(f'doctest {name} > {str(output)}')

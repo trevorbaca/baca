@@ -117,19 +117,22 @@ class DivisionSequenceExpression(abjad.Expression):
     ### SPECIAL METHODS ###
 
     def __add__(self, i):
-        r"""Gets proxy method.
+        """
+        Gets proxy method.
         """
         proxy_method = self.__getattr__('__add__')
         return proxy_method(i)
 
     def __getitem__(self, argument):
-        r"""Gets proxy method.
+        """
+        Gets proxy method.
         """
         proxy_method = self.__getattr__('__getitem__')
         return proxy_method(argument)
 
     def __radd__(self, i):
-        r"""Gets proxy method.
+        """
+        Gets proxy method.
         """
         proxy_method = self.__getattr__('__radd__')
         return proxy_method(i)
@@ -137,7 +140,8 @@ class DivisionSequenceExpression(abjad.Expression):
     ### PUBLIC METHODS ###
 
     def division_sequence(self) -> 'DivisionSequenceExpression':
-        r"""Makes divison sequence expression.
+        """
+        Makes divison sequence expression.
         """
         class_ = DivisionSequence
         callback = self._make_initializer_callback(
@@ -157,7 +161,8 @@ class DivisionSequenceExpression(abjad.Expression):
         remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ) -> 'DivisionSequenceExpression':
-        r"""Appends split-by-durations to expression.
+        """
+        Appends split-by-durations to expression.
         """
         template = '{{}}.split_by_durations('
         template += 'compound_meter_multiplier={compound_meter_multiplier}'
@@ -186,7 +191,8 @@ class DivisionSequenceExpression(abjad.Expression):
         self,
         ratios,
         ) -> 'DivisionSequenceExpression':
-        r"""Appends split-by-rounded-ratios to expression.
+        """
+        Appends split-by-rounded-ratios to expression.
 
         ..  container:: example
 

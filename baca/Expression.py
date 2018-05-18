@@ -2,7 +2,8 @@ import abjad
 
 
 class Expression(abjad.Expression):
-    r"""Expression.
+    """
+    Expression.
     """
 
     ### CLASS VARIABLES ###
@@ -63,7 +64,29 @@ class Expression(abjad.Expression):
                     >>> lilypond_file = segment.__illustrate__(
                     ...     figure_name=markup,
                     ...     )
-
+                    >>> abjad.f(lilypond_file[abjad.Staff])
+                    \new Staff
+                    {
+                        \new Voice
+                        {
+                            b'8
+                            ^ \markup {
+                                \concat
+                                    {
+                                        A
+                                        \bold
+                                            J
+                                    }
+                                }
+                            bqs'8
+                            g'8
+                            fs'8
+                            bqs'8
+                            fs'8
+                            \bar "|." %! SCORE1
+                            \override Score.BarLine.transparent = ##f
+                        }
+                    }
 
         Returns expression.
         """
@@ -79,7 +102,8 @@ class Expression(abjad.Expression):
         return abjad.new(expression, proxy_class=class_)
 
     def pitch_class_segments(self):
-        r"""Maps pitch-class segment subclass initializer to expression.
+        """
+        Maps pitch-class segment subclass initializer to expression.
         """
         initializer = Expression().pitch_class_segment()
         return self.map(initializer)

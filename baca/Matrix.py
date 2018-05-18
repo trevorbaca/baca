@@ -79,7 +79,8 @@ class Matrix(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r"""Gets row `argument` from matrix.
+        """
+        Gets row `argument` from matrix.
 
         >>> matrix[1]
         (10, 11, 12, 13)
@@ -89,7 +90,8 @@ class Matrix(abjad.AbjadObject):
         return self.rows.__getitem__(argument)
 
     def __repr__(self):
-        r"""Gets interpreter representation of matrix.
+        """
+        Gets interpreter representation of matrix.
 
         >>> matrix
         Matrix(3x4)
@@ -124,7 +126,8 @@ class Matrix(abjad.AbjadObject):
 
     @property
     def columns(self):
-        r"""Columns of matrix.
+        """
+        Columns of matrix.
 
         >>> matrix = baca.Matrix(
         ...     [[0, 1, 2, 3],
@@ -141,7 +144,8 @@ class Matrix(abjad.AbjadObject):
 
     @property
     def rows(self):
-        r"""Rows of matrix.
+        """
+        Rows of matrix.
 
         >>> matrix = baca.Matrix(
         ...     [[0, 1, 2, 3],

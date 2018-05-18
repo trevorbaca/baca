@@ -4,7 +4,8 @@ import typing
 
 
 class WellformednessManager(abjad.WellformednessManager):
-    r"""Wellformedness manager.
+    """
+    Wellformedness manager.
 
     ..  container:: example
 
@@ -31,7 +32,8 @@ class WellformednessManager(abjad.WellformednessManager):
         self,
         argument: typing.Union[abjad.Score, None] = None,
         ) -> typing.List[typing.Tuple[list, int, str]]:
-        r"""Calls wellformedness checks on `argument`.
+        r"""
+        Calls wellformedness checks on `argument`.
 
         :param argument: input score.
 
@@ -174,7 +176,8 @@ class WellformednessManager(abjad.WellformednessManager):
 
     @staticmethod
     def check_repeat_pitch_classes(argument=None):
-        r"""Checks repeat pitch-classes by voice.
+        r"""
+        Checks repeat pitch-classes by voice.
 
         ..  container:: example
 
@@ -216,7 +219,8 @@ class WellformednessManager(abjad.WellformednessManager):
         return violators, total
 
     def is_well_formed(self, argument=None):
-        r"""Is true when `argument` is well-formed.
+        r"""
+        Is true when `argument` is well-formed.
 
         ..  container:: example
 
@@ -245,7 +249,8 @@ class WellformednessManager(abjad.WellformednessManager):
         return True
 
     def tabulate_wellformedness(self, argument=None):
-        r"""Tabulates wellformedness violations.
+        """
+        Tabulates wellformedness violations.
 
         ..  container:: example
 

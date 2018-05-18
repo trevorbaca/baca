@@ -3,7 +3,8 @@ from .ScoreTemplate import ScoreTemplate
 
 
 class TwoVoiceStaffScoreTemplate(ScoreTemplate):
-    r"""Two-voice staff score template.
+    r"""
+    Two-voice staff score template.
 
     ..  container:: example
 
@@ -98,7 +99,8 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:
-        r"""Calls two-voice staff score template.
+        """
+        Calls two-voice staff score template.
         """
         # GLOBAL CONTEXT
         global_context = self._make_global_context()

@@ -8,7 +8,8 @@ from .Typing import Selector
 
 
 class MarkupLibrary(abjad.AbjadObject):
-    r"""Markup library.
+    """
+    Markup library.
     """
 
     ### CLASS VARIABLES ###
@@ -25,7 +26,8 @@ class MarkupLibrary(abjad.AbjadObject):
         upright: bool = True,
         whiteout: bool = True,
         ) -> IndicatorCommand:
-        r"""Makes markup and inserts into indicator command.
+        r"""
+        Makes markup and inserts into indicator command.
 
         ..  container:: example
 
@@ -378,7 +380,8 @@ class MarkupLibrary(abjad.AbjadObject):
         selector: Selector = 'baca.leaf(0)',
         direction: abjad.VerticalAlignment = abjad.Up,
         ) -> IndicatorCommand:
-        r"""Makes boxed markup.
+        """
+        Makes boxed markup.
         """
         markup = abjad.Markup(string)
         markup = markup.box().override(('box-padding', 0.5))
@@ -497,7 +500,8 @@ class MarkupLibrary(abjad.AbjadObject):
         only_parts: typing.Union[str, IndicatorCommand],
         selector: Selector = 'baca.pleaf(0)',
         ) -> SuiteCommand:
-        r"""Makes not-parts / only-parts markup suite.
+        """
+        Makes not-parts / only-parts markup suite.
         """
         import baca
         from .LibraryNS import LibraryNS
@@ -642,7 +646,8 @@ class MarkupLibrary(abjad.AbjadObject):
         hcenter_in: typing.Optional[Number] = 16,
         column: bool = True,
         ):
-        r"""Makes instrument name markup.
+        r"""
+        Makes instrument name markup.
 
         ..  container:: example
 
@@ -1366,7 +1371,8 @@ class MarkupLibrary(abjad.AbjadObject):
         hcenter_in: Number = 10,
         column: bool = True,
         ) -> IndicatorCommand:
-        r"""Makes short instrument name markup.
+        r"""
+        Makes short instrument name markup.
 
         ..  container:: example
 

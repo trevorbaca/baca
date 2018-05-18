@@ -3,7 +3,8 @@ import baca
 
 
 class PitchSet(abjad.PitchSet):
-    r"""Pitch set.
+    r"""
+    Pitch set.
 
     ..  container:: example
 
@@ -51,7 +52,8 @@ class PitchSet(abjad.PitchSet):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r"""Is true when segment equals `argument`. Otherwise false.
+        """
+        Is true when segment equals `argument`. Otherwise false.
 
         ..  container:: example
 
@@ -80,7 +82,8 @@ class PitchSet(abjad.PitchSet):
         semitones=None,
         soprano=None,
         ):
-        r"""Spaces pitch set down.
+        r"""
+        Spaces pitch set down.
 
         ..  container:: example
 
@@ -214,7 +217,8 @@ class PitchSet(abjad.PitchSet):
         semitones=None,
         soprano=None,
         ):
-        r"""Spaces pitch set up.
+        r"""
+        Spaces pitch set up.
 
         ..  container:: example
 
@@ -343,7 +347,8 @@ class PitchSet(abjad.PitchSet):
         return segment
 
     def to_pitch_classes(self):
-        r"""Makes pitch-class set.
+        r"""
+        Makes pitch-class set.
 
         ..  container:: example
 

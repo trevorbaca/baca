@@ -4,7 +4,8 @@ from .Partial import Partial
 
 
 class HarmonicSeries(abjad.AbjadObject):
-    r"""Harmonic series.
+    r"""
+    Harmonic series.
 
     ..  container:: example
 
@@ -101,7 +102,8 @@ class HarmonicSeries(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __illustrate__(self) -> abjad.LilyPondFile:
-        r"""Illustrates harmonic series.
+        r"""
+        Illustrates harmonic series.
 
         ..  container:: example
 
@@ -214,7 +216,8 @@ class HarmonicSeries(abjad.AbjadObject):
 
     @property
     def fundamental(self) -> abjad.NamedPitch:
-        r"""Gets fundamental.
+        """
+        Gets fundamental.
 
         ..  container:: example
 
@@ -227,7 +230,8 @@ class HarmonicSeries(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     def partial(self, n: int) -> Partial:
-        r"""Gets partial ``n``.
+        """
+        Gets partial ``n``.
 
         ..  container:: example
 

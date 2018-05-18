@@ -6,7 +6,8 @@ from .MusicMaker import MusicMaker
 
 
 class MusicAccumulator(abjad.AbjadObject):
-    r"""Music-accumulator.
+    """
+    Music-accumulator.
     """
 
     ### CLASS VARIABLES ###
@@ -48,7 +49,8 @@ class MusicAccumulator(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, music_contribution=None):
-        r"""Calls figure-accumulator on `music_contribution`.
+        r"""
+        Calls figure-accumulator on `music_contribution`.
 
         Raises exception on duplicate figure name.
 
@@ -271,26 +273,30 @@ class MusicAccumulator(abjad.AbjadObject):
 
     @property
     def music_maker(self) -> MusicMaker:
-        r"""Gets default music-maker.
+        """
+        Gets default music-maker.
         """
         return self._music_maker
 
     @property
     def score_template(self) -> abjad.ScoreTemplate:
-        r"""Gets score template.
+        """
+        Gets score template.
         """
         return self._score_template
 
     @property
     def time_signatures(self) -> typing.List[abjad.TimeSignature]:
-        r"""Gets time signatures.
+        """
+        Gets time signatures.
         """
         return self._time_signatures
 
     ### PUBLIC METHODS ###
 
     def assemble(self, voice_name):
-        r"""Assembles complete selection for `voice_name`.
+        """
+        Assembles complete selection for `voice_name`.
 
         Returns selection or none.
         """
@@ -302,7 +308,8 @@ class MusicAccumulator(abjad.AbjadObject):
         return selection
 
     def populate_segment_maker(self, segment_maker):
-        r"""Populates `segment_maker`.
+        """
+        Populates `segment_maker`.
 
         Returns none.
         """
@@ -316,7 +323,8 @@ class MusicAccumulator(abjad.AbjadObject):
 
     @staticmethod
     def show(contribution, time_signatures):
-        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
+        """
+        Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
         """

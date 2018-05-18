@@ -4,7 +4,8 @@ import copy
 
 
 class Tree(abjad.AbjadObject):
-    r"""Tree.
+    """
+    Tree.
 
     ..  container:: example
 
@@ -151,7 +152,8 @@ class Tree(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __contains__(self, argument):
-        r"""Is true when tree contains `argument`.
+        """
+        Is true when tree contains `argument`.
 
         ..  container:: example
 
@@ -180,7 +182,8 @@ class Tree(abjad.AbjadObject):
         return argument in self._children
 
     def __eq__(self, argument):
-        r"""Is true when `argument` is the same type as tree and when the payload
+        """
+        Is true when `argument` is the same type as tree and when the payload
         of all subtrees are equal.
 
         ..  container:: example
@@ -228,7 +231,8 @@ class Tree(abjad.AbjadObject):
         return False
 
     def __format__(self, format_specification=''):
-        r"""Formats tree.
+        """
+        Formats tree.
 
         ..  container:: example
 
@@ -283,7 +287,8 @@ class Tree(abjad.AbjadObject):
         return superclass.__format__(format_specification=format_specification)
 
     def __getitem__(self, argument):
-        r"""Gets node or node slice identified by `argument`.
+        """
+        Gets node or node slice identified by `argument`.
 
         ..  container:: example
 
@@ -307,7 +312,8 @@ class Tree(abjad.AbjadObject):
         return self._children.__getitem__(argument)
 
 #    def __graph__(self, **keywords):
-#        r"""Graphs tree.
+#        """
+#        Graphs tree.
 #
 #        ..  container:: example
 #
@@ -385,7 +391,8 @@ class Tree(abjad.AbjadObject):
 #        return graph
 
     def __hash__(self):
-        r"""Hashes tree.
+        """
+        Hashes tree.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
@@ -395,7 +402,8 @@ class Tree(abjad.AbjadObject):
 
 # TODO: make this work without recursion error
 #    def __iter__(self):
-#        r"""Iterates tree at level -1.
+#        """
+#        Iterates tree at level -1.
 #
 #        ..  container:: example
 #
@@ -410,7 +418,8 @@ class Tree(abjad.AbjadObject):
 #        return self.iterate(level=-1)
 
     def __len__(self):
-        r"""Gets length of tree.
+        """
+        Gets length of tree.
 
         ..  container:: example
 
@@ -429,7 +438,8 @@ class Tree(abjad.AbjadObject):
         return len(self._children)
 
     def __repr__(self):
-        r"""Gets interpreter representation of tree.
+        """
+        Gets interpreter representation of tree.
 
         ..  container:: example
 
@@ -488,7 +498,8 @@ class Tree(abjad.AbjadObject):
         return False
 
     def _get_depth(self):
-        r"""Gets depth.
+        """
+        Gets depth.
 
         ..  container:: example
 
@@ -514,7 +525,8 @@ class Tree(abjad.AbjadObject):
             return None
 
     def _get_level(self, negative=False):
-        r"""Gets level.
+        """
+        Gets level.
 
         ..  container:: example
 
@@ -568,7 +580,8 @@ class Tree(abjad.AbjadObject):
         level,
         nodes_must_be_complete=False,
         ):
-        r"""Gets next `n` nodes `level`.
+        """
+        Gets next `n` nodes `level`.
 
         ..  container:: example
 
@@ -849,7 +862,8 @@ class Tree(abjad.AbjadObject):
         return tuple(result)
 
     def _get_position(self):
-        r"""Gets position.
+        """
+        Gets position.
 
         ..  container:: example
 
@@ -873,8 +887,9 @@ class Tree(abjad.AbjadObject):
         return tuple(result)
 
     def _get_position_of_descendant(self, descendant):
-        r"""Gets position of `descendent` relative to node
-        rather than relative to root.
+        """
+        Gets position of `descendent` relative to node rather than relative to
+        root.
 
         ..  container:: example
 
@@ -951,7 +966,8 @@ class Tree(abjad.AbjadObject):
         return True
 
     def _iterate_depth_first(self, reverse=False):
-        r"""Iterates depth-first.
+        """
+        Iterates depth-first.
 
         ..  container:: example
 
@@ -1011,7 +1027,8 @@ class Tree(abjad.AbjadObject):
         node._parent = None
 
     def _remove_to_root(self, reverse=False):
-        r"""Removes node and all nodes left of node to root.
+        """
+        Removes node and all nodes left of node to root.
 
         ..container:: example
 
@@ -1075,7 +1092,8 @@ class Tree(abjad.AbjadObject):
 
     @property
     def item_class(self):
-        r"""Gets item class.
+        """
+        Gets item class.
 
         ..  container:: example
 
@@ -1104,7 +1122,8 @@ class Tree(abjad.AbjadObject):
 
     @property
     def items(self):
-        r"""Gets items.
+        """
+        Gets items.
 
         ..  container:: example
 
@@ -1131,7 +1150,8 @@ class Tree(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     def get_payload(self, nested=False, reverse=False):
-        r"""Gets payload.
+        """
+        Gets payload.
 
         ..  container:: example
 
@@ -1179,7 +1199,8 @@ class Tree(abjad.AbjadObject):
         return result
 
     def iterate(self, level=None, reverse=False):
-        r"""Iterates tree at optional `level`.
+        """
+        Iterates tree at optional `level`.
 
         ..  container:: example
 

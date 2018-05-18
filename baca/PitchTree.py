@@ -4,7 +4,8 @@ from .Tree import Tree
 
 
 class PitchTree(Tree):
-    r"""Pitch tree.
+    r"""
+    Pitch tree.
 
     ..  container:: example
 
@@ -613,7 +614,8 @@ class PitchTree(Tree):
     ### SPECIAL METHODS ###
 
 #    def __graph__(self, **keywords):
-#        r"""Graphs pitch tree.
+#        r"""
+#        Graphs pitch tree.
 #
 #        ..  container:: example
 #
@@ -770,7 +772,8 @@ class PitchTree(Tree):
         set_classes=False,
         **keywords
         ):
-        r"""Illustrates pitch tree.
+        r"""
+        Illustrates pitch tree.
 
         ..  container:: example
 
@@ -1237,7 +1240,8 @@ class PitchTree(Tree):
     ### PUBLIC METHODS ###
 
     def has_repeats(self):
-        r"""Is true when tree has repeats.
+        r"""
+        Is true when tree has repeats.
 
         ..  container:: example
 
@@ -1424,7 +1428,8 @@ class PitchTree(Tree):
         return False
 
     def invert(self, axis=None):
-        r"""Inverts pitch tree.
+        r"""
+        Inverts pitch tree.
 
         ..  container:: example
 
@@ -1718,7 +1723,8 @@ class PitchTree(Tree):
         return self._apply_to_leaves_and_emit_new_tree(operator)
 
     def retrograde(self):
-        r"""Gets retrograde of tree.
+        r"""
+        Gets retrograde of tree.
 
         ..  container:: example
 
@@ -1873,7 +1879,8 @@ class PitchTree(Tree):
         return result
 
     def rotate(self, n=0):
-        r"""Rotates tree by index `n`.
+        r"""
+        Rotates tree by index `n`.
 
         ..  container:: example
 
@@ -2167,7 +2174,8 @@ class PitchTree(Tree):
         return result
 
     def transpose(self, n=0):
-        r"""Transposes pitch tree.
+        r"""
+        Transposes pitch tree.
 
         ..  container:: example
 

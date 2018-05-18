@@ -3,7 +3,8 @@ import baca
 
 
 class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
-    r"""Fuse-by-counts division callback.
+    r"""
+    Fuse-by-counts division callback.
 
     >>> from abjad import rhythmos as rhythmos
 
@@ -129,7 +130,8 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r"""Calls fuse-by-counts division callback.
+        r"""
+        Calls fuse-by-counts division callback.
 
         ..  container:: example
 
@@ -507,7 +509,8 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def counts(self):
-        r"""Gets measure counts of hypermeasure division-maker.
+        """
+        Gets measure counts of hypermeasure division-maker.
 
         Set to (possibly empty) list or tuple of positive integers.
 
@@ -517,7 +520,8 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def cyclic(self):
-        r"""Is true when hypermeasure division-maker treats measure counts
+        """
+        Is true when hypermeasure division-maker treats measure counts
         cyclically. Otherwise false.
 
         Set to true or false.
@@ -526,7 +530,8 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def secondary_division_maker(self):
-        r"""Gets hypermeasure postprocessor of hypermeasure division-maker.
+        """
+        Gets hypermeasure postprocessor of hypermeasure division-maker.
 
         Returns division-maker or none.
         """

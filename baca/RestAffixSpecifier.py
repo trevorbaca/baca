@@ -3,7 +3,8 @@ import collections
 
 
 class RestAffixSpecifier(abjad.AbjadValueObject):
-    r"""Rest affix specifier.
+    r"""
+    Rest affix specifier.
 
     ..  container:: example
 
@@ -181,7 +182,8 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collection_index=None, total_collections=None):
-        r"""Calls command on `collection_index` and `total_collections`.
+        r"""
+        Calls command on `collection_index` and `total_collections`.
 
         ..  container:: example
 
@@ -251,7 +253,8 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     @property
     def pattern(self):
-        r"""Gets pattern.
+        r"""
+        Gets pattern.
 
         ..  container:: example
 
@@ -483,7 +486,8 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     @property
     def prefix(self):
-        r"""Gets prefix.
+        r"""
+        Gets prefix.
 
         ..  container:: example
 
@@ -541,7 +545,8 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     @property
     def skips_instead_of_rests(self):
-        r"""Is true when command makes skips instead of rests.
+        """
+        Is true when command makes skips instead of rests.
 
         Set to true, false or none.
 
@@ -553,7 +558,8 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     @property
     def suffix(self):
-        r"""Gets suffix.
+        r"""
+        Gets suffix.
 
         ..  container:: example
 

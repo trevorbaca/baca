@@ -5,7 +5,8 @@ from .Typing import Number
 
 
 class SystemSpecifier(abjad.AbjadObject):
-    r"""System specifier.
+    """
+    System specifier.
     """
 
     ### CLASS VARIABLES ###
@@ -46,18 +47,21 @@ class SystemSpecifier(abjad.AbjadObject):
 
     @property
     def distances(self) -> typing.Optional[typing.List[Number]]:
-        r"""Gets distances.
+        """
+        Gets distances.
         """
         return self._distances
 
     @property
     def measure(self) -> typing.Optional[int]:
-        r"""Gets start measure.
+        """
+        Gets start measure.
         """
         return self._measure
 
     @property
     def y_offset(self) -> typing.Optional[Number]:
-        r"""Gets Y-offset.
+        """
+        Gets Y-offset.
         """
         return self._y_offset

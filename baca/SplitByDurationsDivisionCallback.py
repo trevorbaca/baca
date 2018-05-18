@@ -3,7 +3,8 @@ import baca
 
 
 class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
-    r"""Split-by-durations division callback.
+    r"""
+    Split-by-durations division callback.
 
     >>> from abjad import rhythmos as rhythmos
 
@@ -161,7 +162,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r"""Calls division-maker on `divisions`.
+        r"""
+        Calls division-maker on `divisions`.
 
         ..  container:: example
 
@@ -474,7 +476,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def compound_meter_multiplier(self):
-        r"""Gets compound meter multiplier of callback.
+        r"""
+        Gets compound meter multiplier of callback.
 
         ..  container:: example
 
@@ -570,7 +573,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def cyclic(self):
-        r"""Is true when division-maker reads durations cyclically for each
+        r"""
+        Is true when division-maker reads durations cyclically for each
         input division.
 
         Is false when division-maker reads durations only once per input
@@ -683,7 +687,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def durations(self):
-        r"""Gets durations of division-maker.
+        r"""
+        Gets durations of division-maker.
 
         ..  container:: example
 
@@ -782,7 +787,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def pattern_rotation_index(self):
-        r"""Gets durations rotation index of division-maker.
+        r"""
+        Gets durations rotation index of division-maker.
 
         ..  container:: example
 
@@ -939,7 +945,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def remainder(self):
-        r"""Gets direction to which any remainder will be positioned.
+        r"""
+        Gets direction to which any remainder will be positioned.
 
         ..  container:: example
 
@@ -1096,7 +1103,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def remainder_fuse_threshold(self):
-        r"""Gets remainder fuse threshold of division-maker.
+        r"""
+        Gets remainder fuse threshold of division-maker.
 
         ..  container:: example
 
@@ -1252,7 +1260,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @staticmethod
     def show(music, divisions):
-        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
+        """
+        Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
         """

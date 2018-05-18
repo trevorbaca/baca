@@ -2,7 +2,8 @@ import abjad
 
 
 class TimeSignatureGroups(abjad.AbjadObject):
-    r"""Time signature groups.
+    """
+    Time signature groups.
 
     ..  container:: example
 
@@ -57,7 +58,8 @@ class TimeSignatureGroups(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __illustrate__(self):
-        r"""Illustrates time signature groups.
+        r"""
+        Illustrates time signature groups.
 
         >>> abjad.show(groups, strict=89) # doctest: +SKIP
 
@@ -178,7 +180,8 @@ class TimeSignatureGroups(abjad.AbjadObject):
 
     @property
     def groups(self):
-        r"""Gets groups.
+        """
+        Gets groups.
 
         Returns list of time signature lists.
         """

@@ -2,7 +2,8 @@ import abjad
 
 
 class SpacingIndication(abjad.AbjadValueObject):
-    r"""Spacing indication.
+    """
+    Spacing indication.
 
     LilyPond ``Score.proportionalNotationDuration`` will equal
     ``proportional_notation_duration`` when tempo equals ``tempo_indication``.
@@ -65,7 +66,8 @@ class SpacingIndication(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r"""Spacing indications compare equal when normalized
+        """
+        Spacing indications compare equal when normalized
         spacing durations compare equal.
         """
         if isinstance(argument, SpacingIndication):
@@ -75,7 +77,8 @@ class SpacingIndication(abjad.AbjadValueObject):
         return False
 
     def __hash__(self):
-        r"""Hashes spacing indication.
+        """
+        Hashes spacing indication.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
@@ -99,7 +102,8 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     @property
     def normalized_spacing_duration(self):
-        r"""Proportional notation duration normalized to 60 MM.
+        """
+        Proportional notation duration normalized to 60 MM.
 
         Returns duration.
         """
@@ -110,7 +114,8 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     @property
     def proportional_notation_duration(self):
-        r"""LilyPond proportional notation duration of spacing indication.
+        """
+        LilyPond proportional notation duration of spacing indication.
 
         Returns duration.
         """
@@ -118,7 +123,8 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     @property
     def tempo_indication(self):
-        r"""MetronomeMark of spacing indication.
+        """
+        MetronomeMark of spacing indication.
 
         Returns tempo.
         """

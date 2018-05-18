@@ -3,7 +3,8 @@ import baca
 
 
 class PartitionDivisionCallback(abjad.AbjadValueObject):
-    r"""Partition division callback.
+    """
+    Partition division callback.
 
     ..  container:: example
 
@@ -129,7 +130,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, divisions=None):
-        r"""Calls partition division callback on `divisions`.
+        """
+        Calls partition division callback on `divisions`.
 
         ..  container:: example
 
@@ -209,7 +211,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         return result
 
     def __format__(self, format_specification=''):
-        r"""Formats beat callback.
+        """
+        Formats beat callback.
 
         ..  container:: example
 
@@ -229,7 +232,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             )
 
     def __repr__(self):
-        r"""Gets interpreter representation of beat callback.
+        """
+        Gets interpreter representation of beat callback.
 
         ..  container:: example
 
@@ -302,7 +306,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def append_remainder(self):
-        r"""Is true when remainder beat group fuses to next closest beat group.
+        """
+        Is true when remainder beat group fuses to next closest beat group.
         Otherwise false.
 
         ..  container:: example
@@ -415,7 +420,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def counts(self):
-        r"""Gets counts of beat callback.
+        """
+        Gets counts of beat callback.
 
         ..  container:: example
 
@@ -469,7 +475,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def fuse_assignable_total_duration(self):
-        r"""Is true when assignable total duration of all input beats fuse into
+        """
+        Is true when assignable total duration of all input beats fuse into
         a single duration. Otherwise false.
 
         ..  container:: example
@@ -577,7 +584,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def remainder_direction(self):
-        r"""Gets remainder direction of beat callback.
+        """
+        Gets remainder direction of beat callback.
 
         ..  container:: example
 

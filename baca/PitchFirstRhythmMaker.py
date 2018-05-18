@@ -6,7 +6,8 @@ from abjad import rhythmos as rhythmos
 
 
 class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
-    r"""Collection rhythm-maker.
+    r"""
+    Collection rhythm-maker.
 
     >>> from abjad import rhythmos as rhythmos
 
@@ -191,7 +192,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         state=None,
         total_collections=None,
         ):
-        r"""Calls rhythm-maker on `collections`.
+        r"""
+        Calls rhythm-maker on `collections`.
 
         ..  container:: example
 
@@ -441,7 +443,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @classmethod
     def _make_accelerando_multipliers(class_, durations, exponent):
-        r"""Makes accelerando multipliers.
+        r"""
+        Makes accelerando multipliers.
 
         ..  container:: example
 
@@ -751,7 +754,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def acciaccatura_specifiers(self):
-        r"""Gets acciaccatura specifiers.
+        r"""
+        Gets acciaccatura specifiers.
 
         ..  container:: example
 
@@ -947,7 +951,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def beam_specifier(self):
-        r"""Gets beam specifier.
+        r"""
+        Gets beam specifier.
 
         ..  container:: example
 
@@ -1320,7 +1325,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def division_masks(self):
-        r"""Gets division masks.
+        r"""
+        Gets division masks.
 
         ..  container:: example
 
@@ -1463,7 +1469,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def duration_specifier(self):
-        r"""Gets duration specifier.
+        r"""
+        Gets duration specifier.
 
         ..  container:: example
 
@@ -1592,7 +1599,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def logical_tie_masks(self):
-        r"""Gets logical tie masks.
+        r"""
+        Gets logical tie masks.
 
         ..  container:: example
 
@@ -1709,7 +1717,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def talea(self):
-        r"""Gets talea.
+        r"""
+        Gets talea.
 
         ..  container:: example
 
@@ -1822,7 +1831,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def tie_specifier(self):
-        r"""Gets tie specifier.
+        r"""
+        Gets tie specifier.
 
         ..  container:: example
 
@@ -1941,7 +1951,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def time_treatments(self):
-        r"""Gets time treatments.
+        r"""
+        Gets time treatments.
 
         ..  container:: example
 
@@ -2548,7 +2559,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @property
     def tuplet_specifier(self):
-        r"""Gets tuplet specifier.
+        r"""
+        Gets tuplet specifier.
 
         ..  container:: example
 
@@ -2695,7 +2707,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     @staticmethod
     def show(selections, time_signatures=None):
-        r"""Makes rhythm-maker-style LilyPond file for documentation examples.
+        """
+        Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
         """

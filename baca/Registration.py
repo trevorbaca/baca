@@ -54,7 +54,8 @@ class Registration(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, pitches):
-        r"""Calls registration on `pitches`.
+        r"""
+        Calls registration on `pitches`.
 
         ..  container:: example
 
@@ -132,7 +133,8 @@ class Registration(abjad.AbjadValueObject):
 
     @property
     def components(self):
-        r"""Gets components.
+        """
+        Gets components.
 
         Returns list or none.
         """

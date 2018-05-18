@@ -3,7 +3,8 @@ import baca
 
 
 class PitchSpecifier(abjad.AbjadObject):
-    r"""Pitch specifier.
+    r"""
+    Pitch specifier.
 
     ..  container:: example
 
@@ -146,7 +147,8 @@ class PitchSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collections=None):
-        r"""Calls specifier on `collections`.
+        """
+        Calls specifier on `collections`.
 
         ..  container:: example
 
@@ -181,7 +183,8 @@ class PitchSpecifier(abjad.AbjadObject):
         return collections
 
     def __repr__(self):
-        r"""Gets interpreter representation of specifier.
+        """
+        Gets interpreter representation of specifier.
 
         ..  container:: example
 
@@ -222,7 +225,8 @@ class PitchSpecifier(abjad.AbjadObject):
 
     @property
     def expressions(self):
-        r"""Gets expressions.
+        r"""
+        Gets expressions.
 
         ..  container:: example
 
@@ -291,7 +295,8 @@ class PitchSpecifier(abjad.AbjadObject):
 
     @property
     def remove_duplicate_pitch_classes(self):
-        r"""Is true when specifier removes duplicate pitch-classes.
+        r"""
+        Is true when specifier removes duplicate pitch-classes.
 
         ..  container:: example
 
@@ -312,7 +317,8 @@ class PitchSpecifier(abjad.AbjadObject):
 
     @property
     def remove_duplicates(self):
-        r"""Is true when specifier removes duplicates.
+        r"""
+        Is true when specifier removes duplicates.
 
         ..  container:: example
 
@@ -333,7 +339,8 @@ class PitchSpecifier(abjad.AbjadObject):
 
     @property
     def to_pitch_classes(self):
-        r"""Is true when specifier changes pitches to pitch-classes.
+        r"""
+        Is true when specifier changes pitches to pitch-classes.
         Otherwise false.
 
         ..  note:: Applies prior to expressions.

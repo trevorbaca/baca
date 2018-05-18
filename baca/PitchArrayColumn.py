@@ -65,7 +65,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
-        r"""Is true when `argument` is a pitch array column with pitch array cells
+        """
+        Is true when `argument` is a pitch array column with pitch array cells
         equal to those of this pitch array column. Otherwise false.
 
         Returns true or false.
@@ -78,14 +79,16 @@ class PitchArrayColumn(abjad.AbjadValueObject):
         return False
 
     def __getitem__(self, argument):
-        r"""Gets cell or cell slice identified by `argument`.
+        """
+        Gets cell or cell slice identified by `argument`.
 
         Returns pitch array cell or slice or pitch array cells.
         """
         return self.cells.__getitem__(argument)
 
     def __hash__(self):
-        r"""Hashes pitch array column.
+        """
+        Hashes pitch array column.
 
         Required to be explicitly redefined on Python 3 if __eq__ changes.
 
@@ -94,7 +97,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
         return super(PitchArrayColumn, self).__hash__()
 
     def __ne__(self, argument):
-        r"""Is true when pitch array column does not equal `argument`. Otherwise
+        """
+        Is true when pitch array column does not equal `argument`. Otherwise
         false.
 
         Returns true or false.
@@ -102,7 +106,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
         return not self == argument
 
     def __str__(self):
-        r"""Gets string representation of pitch array column.
+        """
+        Gets string representation of pitch array column.
 
         Returns string.
         """
@@ -123,7 +128,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
     ### PUBLIC METHODS ###
 
     def append(self, cell):
-        r"""Appends `cell` to pitch array column.
+        """
+        Appends `cell` to pitch array column.
 
         Returns none.
         """
@@ -134,7 +140,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
         self._cells.append(cell)
 
     def extend(self, cells):
-        r"""Extends `cells` against pitch array column.
+        """
+        Extends `cells` against pitch array column.
 
         Returns none.
         """
@@ -147,7 +154,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
             self.append(cell)
 
     def remove_pitches(self):
-        r"""Removes pitches from pitch array cells in pitch array column.
+        r"""
+        Removes pitches from pitch array cells in pitch array column.
 
         Returns none.
         """
@@ -226,7 +234,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def cell_tokens(self):
-        r"""Gets cells items of pitch array column.
+        r"""
+        Gets cells items of pitch array column.
 
         Returns tuple.
         """
@@ -234,7 +243,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def cell_widths(self):
-        r"""Gets cell widths of pitch array column.
+        r"""
+        Gets cell widths of pitch array column.
 
         Returns tuple.
         """
@@ -242,7 +252,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def cells(self):
-        r"""Gets cells of pitch array column.
+        r"""
+        Gets cells of pitch array column.
 
         Returns tuple.
         """
@@ -250,7 +261,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def column_index(self):
-        r"""Gets column index of pitch array column.
+        """
+        Gets column index of pitch array column.
 
         Returns nonnegative integer.
         """
@@ -258,7 +270,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def depth(self):
-        r"""Gets depth of pitch array column.
+        """
+        Gets depth of pitch array column.
 
         Defined equal to number of pitch array cells in pitch array column.
 
@@ -268,7 +281,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def dimensions(self):
-        r"""Gets dimensions of pitch array column.
+        """
+        Gets dimensions of pitch array column.
 
         Returns pair.
         """
@@ -276,7 +290,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def has_voice_crossing(self):
-        r"""Is true when pitch array column has voice crossing. Otherwise
+        """
+        Is true when pitch array column has voice crossing. Otherwise
         false.
 
         ..  container:: example
@@ -311,7 +326,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def is_defective(self):
-        r"""Is true when pitch array column depth does not equal depth of
+        """
+        Is true when pitch array column depth does not equal depth of
         parent
         array. Otherwise false.
 
@@ -322,7 +338,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def parent_array(self):
-        r"""Gets parent array that houses pitch array column.
+        """
+        Gets parent array that houses pitch array column.
 
         Returns pitch array.
         """
@@ -330,7 +347,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def pitches(self):
-        r"""Gets pitches in pitch array column.
+        """
+        Gets pitches in pitch array column.
 
         Returns tuple.
         """
@@ -341,7 +359,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def start_cells(self):
-        r"""Gets start cells in pitch array column.
+        """
+        Gets start cells in pitch array column.
 
         ..  container:: example
 
@@ -373,7 +392,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def start_pitches(self):
-        r"""Gets start pitches in pitch array column.
+        """
+        Gets start pitches in pitch array column.
 
         ..  container:: example
 
@@ -400,7 +420,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def stop_cells(self):
-        r"""Gets stop cells in pitch array column.
+        """
+        Gets stop cells in pitch array column.
 
         Returns tuple.
         """
@@ -413,7 +434,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def stop_pitches(self):
-        r"""Gets stop pitches in pitch array column.
+        """
+        Gets stop pitches in pitch array column.
 
         Returns tuple.
         """
@@ -424,7 +446,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def weight(self):
-        r"""Gets weight of pitch array column.
+        """
+        Gets weight of pitch array column.
 
         Defined equal to the sum of the weight of pitch array cells in pitch
         array column.
@@ -435,7 +458,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     @property
     def width(self):
-        r"""Gets width of pitch array column.
+        """
+        Gets width of pitch array column.
 
         Defined equal to 1 when pitch array column contains cells.
 

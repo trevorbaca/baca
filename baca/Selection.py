@@ -4,7 +4,8 @@ import inspect
 
 
 class Selection(abjad.Selection):
-    r"""Selection.
+    """
+    Selection.
 
     Selection.
 
@@ -25,7 +26,8 @@ class Selection(abjad.Selection):
     ### PUBLIC METHODS ###
 
     def chead(self, n):
-        r"""Selects chord head `n`.
+        r"""
+        Selects chord head `n`.
 
         ..  container:: example
 
@@ -120,7 +122,8 @@ class Selection(abjad.Selection):
         return self.cheads()[n]
 
     def cheads(self):
-        r"""Selects chord heads.
+        r"""
+        Selects chord heads.
 
         ..  container:: example
 
@@ -256,7 +259,8 @@ class Selection(abjad.Selection):
             )
 
     def enchain(self, counts):
-        r"""Enchains items in selection.
+        r"""
+        Enchains items in selection.
 
         ..  container:: example
 
@@ -504,7 +508,8 @@ class Selection(abjad.Selection):
             )
 
     def group(self):
-        r"""Groups selection.
+        r"""
+        Groups selection.
 
         ..  container:: example
 
@@ -617,7 +622,8 @@ class Selection(abjad.Selection):
         return self.group_by()
 
     def lleak(self):
-        r"""Leaks to the left.
+        r"""
+        Leaks to the left.
 
         ..  container:: example
 
@@ -711,7 +717,8 @@ class Selection(abjad.Selection):
         return self.with_previous_leaf()
 
     def lleaves(self):
-        r"""Selects leaves, leaked to the left.
+        r"""
+        Selects leaves, leaked to the left.
 
         ..  container:: example
 
@@ -847,7 +854,8 @@ class Selection(abjad.Selection):
         return self.leaves().with_previous_leaf()
 
     def lt(self, n):
-        r"""Selects logical tie `n`.
+        r"""
+        Selects logical tie `n`.
 
         ..  container:: example
 
@@ -947,7 +955,8 @@ class Selection(abjad.Selection):
         return self.lts()[n]
 
     def ltqrun(self, n):
-        r"""Selects logical tie equipitch run `n`.
+        r"""
+        Selects logical tie equipitch run `n`.
 
         ..  container:: example
 
@@ -1047,7 +1056,8 @@ class Selection(abjad.Selection):
         return self.ltqruns()[n]
 
     def ltqruns(self):
-        r"""Selects logical tie equipitch runs.
+        r"""
+        Selects logical tie equipitch runs.
 
         ..  container:: example
 
@@ -1229,7 +1239,8 @@ class Selection(abjad.Selection):
         return result
 
     def ltrun(self, n):
-        r"""Selects logical tie run `n`.
+        r"""
+        Selects logical tie run `n`.
 
         ..  container:: example
 
@@ -1344,7 +1355,8 @@ class Selection(abjad.Selection):
         return self.ltruns()[n]
 
     def ltruns(self):
-        r"""Selects logical tie runs.
+        r"""
+        Selects logical tie runs.
 
         ..  container:: example
 
@@ -1516,7 +1528,8 @@ class Selection(abjad.Selection):
         return result.map(abjad.Run)
 
     def lts(self):
-        r"""Selects logical ties.
+        r"""
+        Selects logical ties.
 
         ..  container:: example
 
@@ -1717,7 +1730,8 @@ class Selection(abjad.Selection):
         return self.logical_ties(grace_notes=None)
 
     def ntruns(self):
-        r"""Selects nontrivial runs.
+        r"""
+        Selects nontrivial runs.
 
         ..  container:: example
 
@@ -1888,7 +1902,8 @@ class Selection(abjad.Selection):
         return self.runs().nontrivial()
 
     def phead(self, n):
-        r"""Selects pitched head `n`.
+        r"""
+        Selects pitched head `n`.
 
         ..  container:: example
 
@@ -1983,7 +1998,8 @@ class Selection(abjad.Selection):
         return self.pheads()[n]
 
     def pheads(self):
-        r"""Selects pitched heads.
+        r"""
+        Selects pitched heads.
 
         ..  container:: example
 
@@ -2157,7 +2173,8 @@ class Selection(abjad.Selection):
         return self.plts().map(baca.select()[0])
 
     def pleaf(self, n):
-        r"""Selects pitched leaf `n`.
+        r"""
+        Selects pitched leaf `n`.
 
         ..  container:: example
 
@@ -2252,7 +2269,8 @@ class Selection(abjad.Selection):
         return self.pleaves()[n]
 
     def pleaves(self):
-        r"""Selects pitched leaves.
+        r"""
+        Selects pitched leaves.
 
         ..  container:: example
 
@@ -2450,7 +2468,8 @@ class Selection(abjad.Selection):
             )
 
     def plt(self, n):
-        r"""Selects pitched logical tie `n`.
+        r"""
+        Selects pitched logical tie `n`.
 
         ..  container:: example
 
@@ -2550,7 +2569,8 @@ class Selection(abjad.Selection):
         return self.plts()[n]
 
     def plts(self):
-        r"""Selects pitched logical ties.
+        r"""
+        Selects pitched logical ties.
 
         ..  container:: example
 
@@ -2739,7 +2759,8 @@ class Selection(abjad.Selection):
         return self.logical_ties(pitched=True, grace_notes=None)
 
     def ptail(self, n):
-        r"""Selects pitched tail `n`.
+        r"""
+        Selects pitched tail `n`.
 
         ..  container:: example
 
@@ -2834,7 +2855,8 @@ class Selection(abjad.Selection):
         return self.ptails()[n]
 
     def ptails(self):
-        r"""Selects pitched tails.
+        r"""
+        Selects pitched tails.
 
         ..  container:: example
 
@@ -3008,7 +3030,8 @@ class Selection(abjad.Selection):
         return self.plts().map(baca.select()[-1])
 
     def ptlt(self, n):
-        r"""Selects pitched trivial logical tie `n`.
+        r"""
+        Selects pitched trivial logical tie `n`.
 
         ..  container:: example
 
@@ -3103,7 +3126,8 @@ class Selection(abjad.Selection):
         return self.ptlts()[n]
 
     def ptlts(self):
-        r"""Selects pitched trivial logical ties.
+        r"""
+        Selects pitched trivial logical ties.
 
         ..  container:: example
 
@@ -3260,7 +3284,8 @@ class Selection(abjad.Selection):
             )
 
     def qrun(self, n):
-        r"""Selects equipitch run `n`.
+        r"""
+        Selects equipitch run `n`.
 
         ..  container:: example
 
@@ -3360,7 +3385,8 @@ class Selection(abjad.Selection):
         return self.qruns()[n]
 
     def qruns(self):
-        r"""Selects equipitch runs.
+        r"""
+        Selects equipitch runs.
 
         ..  container:: example
 
@@ -3542,7 +3568,8 @@ class Selection(abjad.Selection):
         return result
 
     def rleak(self):
-        r"""Leaks to the right.
+        r"""
+        Leaks to the right.
 
         ..  container:: example
 
@@ -3636,7 +3663,8 @@ class Selection(abjad.Selection):
         return self.with_next_leaf()
 
     def rleaves(self):
-        r"""Selects leaves, leaked to the right.
+        r"""
+        Selects leaves, leaked to the right.
 
         ..  container:: example
 
@@ -3769,7 +3797,8 @@ class Selection(abjad.Selection):
         return self.leaves().with_next_leaf()
 
     def rrun(self, n):
-        r"""Selects run `n` (leaked to the right).
+        r"""
+        Selects run `n` (leaked to the right).
 
         ..  container:: example
 
@@ -3886,7 +3915,8 @@ class Selection(abjad.Selection):
         return self.rruns()[n]
 
     def rruns(self):
-        r"""Selects runs (leaked to the right).
+        r"""
+        Selects runs (leaked to the right).
 
         ..  container:: example
 
@@ -4062,7 +4092,8 @@ class Selection(abjad.Selection):
         return result.map(abjad.Run)
 
     def skip(self, n):
-        r"""Selects skip `n`.
+        r"""
+        Selects skip `n`.
 
         ..  container:: example
 
@@ -4122,7 +4153,8 @@ class Selection(abjad.Selection):
         return self.skips()[n]
 
     def skips(self):
-        r"""Selects skips.
+        r"""
+        Selects skips.
 
         ..  container:: example
 
@@ -4189,7 +4221,8 @@ class Selection(abjad.Selection):
         return self.components(abjad.Skip)
 
     def tleaves(self):
-        r"""Selects trimmed leaves.
+        r"""
+        Selects trimmed leaves.
 
         ..  container:: example
 
@@ -4392,7 +4425,8 @@ class Selection(abjad.Selection):
         return super(Selection, self).leaves(trim=True, grace_notes=False)
 
     def wleaves(self):
-        r"""Selects leaves, leaked "wide" (to both the left and right).
+        r"""
+        Selects leaves, leaked "wide" (to both the left and right).
 
         ..  container:: example
 

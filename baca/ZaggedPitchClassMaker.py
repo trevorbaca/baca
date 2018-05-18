@@ -3,7 +3,8 @@ import baca
 
 
 class ZaggedPitchClassMaker(abjad.AbjadObject):
-    r"""Zagged-pitch-class-maker.
+    r"""
+    Zagged-pitch-class-maker.
 
     ..  container:: example
 
@@ -89,7 +90,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self):
-        r"""Calls zagged pitch-class maker.
+        """
+        Calls zagged pitch-class maker.
 
         Returns pitch-class tree.
         """
@@ -139,7 +141,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         return material
 
     def __eq__(self, argument):
-        r"""Is true when `argument` is a zagged pitch-class with type and
+        """
+        Is true when `argument` is a zagged pitch-class with type and
         public properties equal to those of this zagged pitch-class maker.
         Otherwise false.
 
@@ -149,7 +152,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         return agent.compare(argument)
 
     def __hash__(self):
-        r"""Hashes zagged pitch-class maker.
+        """
+        Hashes zagged pitch-class maker.
         """
         agent = abjad.StorageFormatManager(self)
         return hash(agent.hash_values)
@@ -158,7 +162,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
     @property
     def division_ratios(self):
-        r"""Gets division cells of maker.
+        """
+        Gets division cells of maker.
 
         ..  container:: example
 
@@ -226,7 +231,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
     @property
     def grouping_counts(self):
-        r"""Gets grouping counts of maker.
+        """
+        Gets grouping counts of maker.
 
         ..  container:: example
 
@@ -257,7 +263,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
     @property
     def pc_cells(self):
-        r"""Gets pitch-class cells of maker.
+        """
+        Gets pitch-class cells of maker.
 
         Returns list of number lists.
         """

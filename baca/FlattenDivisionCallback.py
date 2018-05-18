@@ -3,7 +3,8 @@ import baca
 
 
 class FlattenDivisionCallback(abjad.AbjadValueObject):
-    r"""Flatten division callback.
+    """
+    Flatten division callback.
     """
 
     ### CLASS VARIABLES ###
@@ -22,7 +23,8 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r"""Calls flatten division callback on `argument`.
+        """
+        Calls flatten division callback on `argument`.
 
         Returns list of divisions or list of division lists.
         """
@@ -32,7 +34,8 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def depth(self):
-        r"""Gets depth of callback.
+        """
+        Gets depth of callback.
 
         Returns integer.
         """
