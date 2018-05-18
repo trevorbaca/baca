@@ -1,2 +1,2 @@
-cd ~/abjad-ide/docs
+cd ~/ide/docs
 make html
