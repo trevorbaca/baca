@@ -2711,6 +2711,7 @@ class LibraryTZ(abjad.AbjadObject):
     def transition(
         *markups: typing.Any,
         do_not_bookend: bool = False,
+        lilypond_id: int = None,
         selector: Selector = 'baca.leaves().group()',
         spanner_selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()',
         tweaks: typing.List[typing.Tuple] = None
@@ -3141,7 +3142,9 @@ class LibraryTZ(abjad.AbjadObject):
         else:
             pair = (markups[-1], LibraryAF.dashed_arrow())
             indicators.append(pair)
-        text_spanner = abjad.TextSpanner()
+        if lilypond_id is not None:
+            assert lilypond_id in (1, 2, 3), repr(lilypond_id)
+        text_spanner = abjad.TextSpanner(lilypond_id=lilypond_id)
         return LibraryNS.piecewise(
             text_spanner,
             indicators,
