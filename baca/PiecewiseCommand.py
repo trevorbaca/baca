@@ -87,6 +87,7 @@ class PiecewiseCommand(Command):
         else:
             assert isinstance(self.spanner, SpannerCommand)
             spanner = self.spanner(argument)
+        self._apply_tweaks(spanner)
         argument = abjad.select(spanner).leaves()
         if self.selector is not None:
             assert not isinstance(self.selector, str)

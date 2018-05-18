@@ -1466,7 +1466,6 @@ class LibraryTZ(abjad.AbjadObject):
                                     % [MusicVoice measure 1]                                             %! SM4
                                     e'8
                                     [
-                                    - \tweak staff-padding #4
                                     - \tweak Y-extent ##f
                                     - \tweak bound-details.left.text \markup {
                                         \concat
@@ -1490,8 +1489,8 @@ class LibraryTZ(abjad.AbjadObject):
                                         \draw-line
                                             #'(0 . -1)
                                         }
+                                    - \tweak staff-padding #4
                                     \startTextSpan
-                                    - \tweak staff-padding #6.5
                                     - \tweak Y-extent ##f
                                     - \tweak bound-details.left.text \markup {
                                         \concat
@@ -1515,6 +1514,7 @@ class LibraryTZ(abjad.AbjadObject):
                                         \draw-line
                                             #'(0 . -1)
                                         }
+                                    - \tweak staff-padding #6.5
                                     \startTextSpanOne
                 <BLANKLINE>
                                     d''8
