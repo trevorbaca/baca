@@ -668,14 +668,16 @@ class LibraryGM(abjad.AbjadObject):
             left_broken = hairpin.shape_string
         if right_broken is True:
             right_broken = hairpin.shape_string
-        command = LibraryAF.dynamic(start)
-        start = command.indicators[0]
-        if start_ordinal is not None:
-            start = abjad.new(start, ordinal=start_ordinal)
-        command = LibraryAF.dynamic(stop)
-        stop = command.indicators[0]
-        if stop_ordinal is not None:
-            stop = abjad.new(stop, ordinal=stop_ordinal)
+        if start is not None:
+            command = LibraryAF.dynamic(start)
+            start = command.indicators[0]
+            if start_ordinal is not None:
+                start = abjad.new(start, ordinal=start_ordinal)
+        if stop is not None:
+            command = LibraryAF.dynamic(stop)
+            stop = command.indicators[0]
+            if stop_ordinal is not None:
+                stop = abjad.new(stop, ordinal=stop_ordinal)
         command = HairpinCommand(
             leak=leak,
             left_broken=left_broken,
