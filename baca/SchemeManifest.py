@@ -2,7 +2,8 @@ import abjad
 
 
 class SchemeManifest(abjad.AbjadObject):
-    r"""Scheme manifest.
+    """
+    Scheme manifest.
 
     New functions defined in ``~/baca/baca/stylesheets/scheme.ily`` must
     currently be added here by hand.
@@ -20,6 +21,7 @@ class SchemeManifest(abjad.AbjadObject):
         ('appena_udibile', 'appena udibile'),
         ('f_but_accents_sffz', 'f'),
         ('f_sub_but_accents_continue_sffz', 'f'),
+        ('niente', 'niente'),
         ('p_sub_but_accents_continue_sffz', 'p'),
         ('sfz_f', 'f'),
         ('sfz_p', 'p'),
@@ -29,7 +31,8 @@ class SchemeManifest(abjad.AbjadObject):
 
     @property
     def dynamics(self):
-        r"""Gets dynamics.
+        """
+        Gets dynamics.
 
         ..  container:: example
 
@@ -39,6 +42,7 @@ class SchemeManifest(abjad.AbjadObject):
             'appena_udibile'
             'f_but_accents_sffz'
             'f_sub_but_accents_continue_sffz'
+            'niente'
             'p_sub_but_accents_continue_sffz'
             'sfz_f'
             'sfz_p'
@@ -50,7 +54,8 @@ class SchemeManifest(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     def dynamic_to_steady_state(self, dynamic):
-        r"""Changes `dynamic` to steady state.
+        """
+        Changes `dynamic` to steady state.
 
         ..  container:: example
 
