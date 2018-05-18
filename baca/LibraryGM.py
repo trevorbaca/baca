@@ -566,7 +566,7 @@ class LibraryGM(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches hairpin to trimmed leaves in each tuplets:
+            Attaches hairpin to trimmed leaves in each tuplet:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -639,6 +639,7 @@ class LibraryGM(abjad.AbjadObject):
 
         """
         import baca
+        from .LibraryAF import LibraryAF
         if leak is not None:
             leak = bool(leak)
         start, shape, stop = abjad.Hairpin._parse_descriptor(string)
@@ -667,18 +668,14 @@ class LibraryGM(abjad.AbjadObject):
             left_broken = hairpin.shape_string
         if right_broken is True:
             right_broken = hairpin.shape_string
-        start = hairpin.start_dynamic
+        command = LibraryAF.dynamic(start)
+        start = command.indicators[0]
         if start_ordinal is not None:
             start = abjad.new(start, ordinal=start_ordinal)
-        if getattr(start, 'name', None) in baca.scheme.dynamics:
-            command = '\\' + start.name
-            start = abjad.new(start, command=command)
-        stop = hairpin.stop_dynamic
+        command = LibraryAF.dynamic(stop)
+        stop = command.indicators[0]
         if stop_ordinal is not None:
             stop = abjad.new(stop, ordinal=stop_ordinal)
-        if getattr(stop, 'name', None) in baca.scheme.dynamics:
-            command = '\\' + stop.name
-            stop = abjad.new(stop, command=command)
         command = HairpinCommand(
             leak=leak,
             left_broken=left_broken,

@@ -6,8 +6,77 @@ from .Typing import Selector
 
 
 class HairpinCommand(Command):
-    """
+    r"""
     Hairpin command.
+
+    ..  container:: example
+
+        Hairpin with effort dynamics:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.map(
+        ...         baca.hairpin('"p" < "f"'),
+        ...         baca.tuplet(1),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            \<                                                                       %! HC1
+                            \effort_p                                                                %! HC1
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            \effort_f                                                                %! HC1
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
 
     ..  container:: example
 
@@ -64,7 +133,7 @@ class HairpinCommand(Command):
 
     def __call__(self, argument=None) -> None:
         """
-        Applies command to result of selector called on `argument`.
+        Applies command to result of selector called on ``argument``.
         """
         from .SegmentMaker import SegmentMaker
         if argument is None:
@@ -148,19 +217,15 @@ class HairpinCommand(Command):
         return self._right_broken
 
     @property
-    def start(self):
+    def start(self) -> typing.Optional[abjad.Dynamic]:
         """
         Gets hairpin start.
-
-        Returns dynamic or none.
         """
         return self._start
 
     @property
-    def stop(self):
+    def stop(self) -> typing.Optional[abjad.Dynamic]:
         """
         Gets hairpin stop.
-
-        Returns dynamic or none.
         """
         return self._stop
