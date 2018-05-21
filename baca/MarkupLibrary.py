@@ -23,6 +23,7 @@ class MarkupLibrary(abjad.AbjadObject):
         argument: typing.Union[str, abjad.Markup],
         selector: Selector = 'baca.phead(0)',
         direction: abjad.VerticalAlignment = abjad.Up,
+        literal: bool = False,
         upright: bool = True,
         whiteout: bool = True,
         ) -> IndicatorCommand:
@@ -39,6 +40,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.markup('più mosso'),
             ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_outside_staff_priority(1000),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -57,6 +59,7 @@ class MarkupLibrary(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TupletBracket.outside-staff-priority = #1000                   %! OC1
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
@@ -91,6 +94,7 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
+                                \revert TupletBracket.outside-staff-priority                             %! OC2
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
@@ -107,6 +111,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.markup('più mosso', baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_outside_staff_priority(1000),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -125,6 +130,7 @@ class MarkupLibrary(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TupletBracket.outside-staff-priority = #1000                   %! OC1
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
@@ -159,6 +165,7 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
+                                \revert TupletBracket.outside-staff-priority                             %! OC2
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
@@ -175,6 +182,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.markup('*', baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_outside_staff_priority(1000),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -193,6 +201,7 @@ class MarkupLibrary(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TupletBracket.outside-staff-priority = #1000                   %! OC1
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
@@ -247,6 +256,78 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
+                                \revert TupletBracket.outside-staff-priority                             %! OC2
+                                \revert TupletBracket.staff-padding                                      %! OC2
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Set the ``literal=True`` to pass predefined markup commands:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup(r'\bacaTripleDiamondMarkup', literal=True),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_outside_staff_priority(1000),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.outside-staff-priority = #1000                   %! OC1
+                                \override TupletBracket.staff-padding = #5                               %! OC1
+                                r8
+                                c'16
+                                [
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            \bacaTripleDiamondMarkup                                     %! IC
+                                    }                                                                    %! IC
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.outside-staff-priority                             %! OC2
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
                         }
@@ -269,7 +350,13 @@ class MarkupLibrary(abjad.AbjadObject):
             message = f'direction must be up or down (not {direction!r}).'
             raise Exception(message)
         if isinstance(argument, str):
-            markup = abjad.Markup(argument, direction=direction)
+            if literal:
+                markup = abjad.Markup.from_literal(
+                    argument,
+                    direction=direction,
+                    )
+            else:
+                markup = abjad.Markup(argument, direction=direction)
         elif isinstance(argument, abjad.Markup):
             markup = abjad.new(argument, direction=direction)
         else:

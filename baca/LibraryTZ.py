@@ -3982,6 +3982,22 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def tuplet_bracket_outside_staff_priority(
+        n: Number,
+        *,
+        selector: Selector = 'baca.leaves()',
+        ) -> OverrideCommand:
+        """
+        Overrides tuplet bracket outside-staff-priority.
+        """
+        return OverrideCommand(
+            attribute='outside_staff_priority',
+            value=n,
+            grob='tuplet_bracket',
+            selector=selector,
+            )
+
+    @staticmethod
     def tuplet_bracket_padding(
         n: Number,
         *,

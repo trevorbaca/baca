@@ -98,6 +98,8 @@ LibraryTZ
 
    .. automethod:: LibraryTZ.tuplet_bracket_extra_offset
 
+   .. automethod:: LibraryTZ.tuplet_bracket_outside_staff_priority
+
    .. automethod:: LibraryTZ.tuplet_bracket_padding
 
    .. automethod:: LibraryTZ.tuplet_bracket_shorten_pair
