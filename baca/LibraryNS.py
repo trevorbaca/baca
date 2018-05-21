@@ -2,11 +2,13 @@ import abjad
 import baca
 import collections
 import typing
+from abjad import rhythmos
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Command import Command
 from .ContainerCommand import ContainerCommand
+from .DivisionMaker import DivisionMaker
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .IndicatorCommand import IndicatorCommand
@@ -35,6 +37,19 @@ from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
+rhythm_maker_typing = typing.Union[
+    rhythmos.RhythmMaker,
+    abjad.Selection,
+    typing.Iterable[
+        typing.Tuple[
+            typing.Union[
+                rhythmos.RhythmMaker,
+                abjad.Selection,
+                ],
+            abjad.Pattern,
+            ],
+        ],
+    ]
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -3350,12 +3365,41 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def rhythm(argument) -> RhythmCommand:
+    def rhythm(
+        rhythm_maker: rhythm_maker_typing,
+        *,
+        division_maker: DivisionMaker = None,
+        division_expression: abjad.Expression = None,
+        left_broken: bool = None,
+        multimeasure_rests: bool = None,
+        persist: str = None,
+        reference_meters: typing.Iterable[abjad.Meter] = None,
+        rewrite_meter: bool = None,
+        rewrite_rest_filled: bool = None,
+        right_broken: bool = None,
+        split_at_measure_boundaries: bool = None,
+        stages: typing.Tuple[int, int] = None,
+        tie_first: bool = None,
+        tie_last: bool = None,
+        ) -> RhythmCommand:
         """
         Makes rhythm command.
         """
         return RhythmCommand(
-            rhythm_maker=argument,
+            rhythm_maker=rhythm_maker,
+            division_maker=division_maker,
+            division_expression=division_expression,
+            left_broken=left_broken,
+            multimeasure_rests=multimeasure_rests,
+            persist=persist,
+            reference_meters=reference_meters,
+            rewrite_meter=rewrite_meter,
+            rewrite_rest_filled=rewrite_rest_filled,
+            right_broken=right_broken,
+            split_at_measure_boundaries=split_at_measure_boundaries,
+            stages=stages,
+            tie_first=tie_first,
+            tie_last=tie_last,
             )
 
     @staticmethod
