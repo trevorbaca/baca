@@ -2552,8 +2552,9 @@ class LibraryAF(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: integrate <>
     @staticmethod
-    def breathe_after_last() -> IndicatorCommand:
+    def breathe_after() -> IndicatorCommand:
         """
         Attaches LilyPond breathe command to before-slot of
         leaf-just-after-last.

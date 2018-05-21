@@ -86,7 +86,7 @@ LibraryAF
 
    .. automethod:: LibraryAF.breathe
 
-   .. automethod:: LibraryAF.breathe_after_last
+   .. automethod:: LibraryAF.breathe_after
 
    .. automethod:: LibraryAF.center_to_octave
 
