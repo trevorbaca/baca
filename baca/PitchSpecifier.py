@@ -341,7 +341,6 @@ class PitchSpecifier(abjad.AbjadObject):
     def to_pitch_classes(self):
         r"""
         Is true when specifier changes pitches to pitch-classes.
-        Otherwise false.
 
         ..  note:: Applies prior to expressions.
 

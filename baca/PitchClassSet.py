@@ -38,7 +38,7 @@ class PitchClassSet(abjad.PitchClassSet):
 
     def __eq__(self, argument):
         """
-        Is true when segment equals `argument`. Otherwise false.
+        Is true when segment equals `argument`.
 
         ..  container:: example
 

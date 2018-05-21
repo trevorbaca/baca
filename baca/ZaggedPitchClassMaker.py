@@ -144,7 +144,6 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         """
         Is true when `argument` is a zagged pitch-class with type and
         public properties equal to those of this zagged pitch-class maker.
-        Otherwise false.
 
         Returns boolean.
         """

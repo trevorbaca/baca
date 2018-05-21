@@ -308,7 +308,6 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
     def append_remainder(self):
         """
         Is true when remainder beat group fuses to next closest beat group.
-        Otherwise false.
 
         ..  container:: example
 
@@ -477,7 +476,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
     def fuse_assignable_total_duration(self):
         """
         Is true when assignable total duration of all input beats fuse into
-        a single duration. Otherwise false.
+        a single duration.
 
         ..  container:: example
 

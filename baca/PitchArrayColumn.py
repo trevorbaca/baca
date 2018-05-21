@@ -67,7 +67,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
     def __eq__(self, argument):
         """
         Is true when `argument` is a pitch array column with pitch array cells
-        equal to those of this pitch array column. Otherwise false.
+        equal to those of this pitch array column.
 
         Returns true or false.
         """
@@ -98,8 +98,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     def __ne__(self, argument):
         """
-        Is true when pitch array column does not equal `argument`. Otherwise
-        false.
+        Is true when pitch array column does not equal `argument`.
 
         Returns true or false.
         """
@@ -291,8 +290,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
     @property
     def has_voice_crossing(self):
         """
-        Is true when pitch array column has voice crossing. Otherwise
-        false.
+        Is true when pitch array column has voice crossing.
 
         ..  container:: example
 
@@ -329,7 +327,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
         """
         Is true when pitch array column depth does not equal depth of
         parent
-        array. Otherwise false.
+        array.
 
         Returns true or false.
         """

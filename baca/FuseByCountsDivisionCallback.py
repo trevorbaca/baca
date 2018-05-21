@@ -522,7 +522,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     def cyclic(self):
         """
         Is true when hypermeasure division-maker treats measure counts
-        cyclically. Otherwise false.
+        cyclically.
 
         Set to true or false.
         """

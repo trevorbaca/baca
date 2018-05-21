@@ -49,7 +49,7 @@ class RegistrationComponent(AbjadValueObject):
         """
         Is true when `argument` is a registration component
         with source pitch range and target octave start pitch equal to those of
-        this registration component. Otherwise false.
+        this registration component.
 
         Returns true or false.
         """

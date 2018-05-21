@@ -95,7 +95,7 @@ class Cursor(abjad.AbjadObject):
     def __eq__(self, argument):
         """
         Is true when `argument` is a cursor with keyword
-        arguments equal to this cursor. Otherwise false.
+        arguments equal to this cursor.
 
         Returns true or false.
         """
@@ -193,8 +193,6 @@ class Cursor(abjad.AbjadObject):
     def cyclic(self):
         """
         Is true when cursor is cyclic.
-
-        Otherwise false.
 
         Set to true, false or none.
 

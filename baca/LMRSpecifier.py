@@ -380,7 +380,6 @@ class LMRSpecifier(abjad.AbjadObject):
     def left_cyclic(self):
         """
         Is true when specifier reads left counts cyclically.
-        Otherwise false.
 
         Defaults to none.
 
@@ -458,7 +457,6 @@ class LMRSpecifier(abjad.AbjadObject):
     def left_reversed(self):
         """
         Is true when specifier reverses left partition.
-        Otherwise false.
 
         Defaults to none.
 
@@ -485,7 +483,6 @@ class LMRSpecifier(abjad.AbjadObject):
     def middle_cyclic(self):
         """
         Is true when specifier reads middle counts cyclically.
-        Otherwise false.
 
         ..  container:: example
 
@@ -562,7 +559,6 @@ class LMRSpecifier(abjad.AbjadObject):
     def middle_reversed(self):
         """
         Is true when specifier reverses middle partition.
-        Otherwise false.
 
         ..  container:: example
 
@@ -784,7 +780,6 @@ class LMRSpecifier(abjad.AbjadObject):
     def right_cyclic(self):
         """
         Is true when specifier reads right counts cyclically.
-        Otherwise false.
 
         Defaults to none.
 
@@ -921,7 +916,6 @@ class LMRSpecifier(abjad.AbjadObject):
     def right_reversed(self):
         """
         Is true when specifier reverses right partition.
-        Otherwise false.
 
         Defaults to none.
 

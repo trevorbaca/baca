@@ -107,7 +107,7 @@ class PitchArray(abjad.AbjadObject):
 
     def __contains__(self, argument):
         """
-        Is true when pitch array contains `argument`. Otherwise false.
+        Is true when pitch array contains `argument`.
 
         Returns true or false.
         """
@@ -137,7 +137,7 @@ class PitchArray(abjad.AbjadObject):
     def __eq__(self, argument):
         """
         Is true when `argument` is a pitch aarray with contents equal to that of
-        this pitch array. Otherwise false.
+        this pitch array.
 
         Returns true or false.
         """
@@ -208,7 +208,7 @@ class PitchArray(abjad.AbjadObject):
 
     def __ne__(self, argument):
         """
-        Is true when pitch array does not equal `argument`. Otherwise false.
+        Is true when pitch array does not equal `argument`.
 
         Returns true or false.
         """
@@ -354,7 +354,7 @@ class PitchArray(abjad.AbjadObject):
     @property
     def has_voice_crossing(self):
         """
-        Is true when pitch array has voice crossing. Otherwise false.
+        Is true when pitch array has voice crossing.
 
         ..  container:: example
 
@@ -380,7 +380,7 @@ class PitchArray(abjad.AbjadObject):
     @property
     def is_rectangular(self):
         """
-        Is true when no rows in pitch array are defective. Otherwise false.
+        Is true when no rows in pitch array are defective.
 
         Returns true or false.
         """
@@ -723,7 +723,7 @@ class PitchArray(abjad.AbjadObject):
     def has_spanning_cell_over_index(self, index):
         """
         Is true when pitch array has one or more spanning cells over
-        `index`. Otherwise false.
+        `index`.
 
         Returns true or false.
         """

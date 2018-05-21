@@ -247,7 +247,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     def __eq__(self, argument):
         """
         Is true when ``argument`` is a collection list with collections
-        equal to those of this collection list. Otherwise false.
+        equal to those of this collection list.
 
         ..  container:: example
 
