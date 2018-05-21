@@ -1,9 +1,9 @@
 #(ly:set-option 'relative-includes #t)
 \include "text-spanner-id.ily"
 
-%%% ARTICULATIONS: DOUBLE & TRIPLE STACCATI %%%
+%%% ARTICULATIONS: MULTIPLE STACCATI %%%
 
-tongue =
+baca_staccati =
 #(define-music-function (parser location dots) (integer?)
    (let ((script (make-music 'ArticulationEvent
                              'articulation-type "staccato")))
@@ -642,21 +642,21 @@ f_sub_but_accents_continue_sffz =
         )
     )
 
-%%% MARKUP: DIAMONDS (BLACK, WHITE) %%%
+%%% MARKUP: DIAMONDS %%%
 
-bacaBlackDiamondMarkup = \markup
+baca_black_diamond_markup = \markup
 {
     \scale #'(0.75 . 0.75)
     \musicglyph #"noteheads.s2harmonic"
 }
 
-bacaDiamondMarkup = \markup
+baca_diamond_markup = \markup
 {
     \scale #'(0.75 . 0.75)
     \musicglyph #"noteheads.s0harmonic"
 }
 
-bacaDoubleBlackDiamondMarkup = \markup
+baca_double_black_diamond_markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -667,7 +667,7 @@ bacaDoubleBlackDiamondMarkup = \markup
     }
 }
 
-bacaDoubleDiamondMarkup = \markup
+baca_double_diamond_markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -678,7 +678,7 @@ bacaDoubleDiamondMarkup = \markup
     }
 }
 
-bacaTripleBlackDiamondMarkup = \markup
+baca_triple_black_diamond_markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -690,7 +690,7 @@ bacaTripleBlackDiamondMarkup = \markup
     }
 }
 
-bacaTripleDiamondMarkup = \markup
+baca_triple_diamond_markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -744,9 +744,9 @@ triangleNoteHead = #(
     #}
     )
 
-%%% SLAP TONGUE %%%
+%%% NOTE-HEAD: SLAP-TONGUE %%%
 
-slap =
+baca_slap_tongue_note_head =
 #(define-music-function (parser location music) (ly:music?)
 #{
   \override NoteHead #'stencil = #(lambda (grob)

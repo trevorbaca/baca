@@ -271,7 +271,7 @@ class MarkupLibrary(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup(r'\bacaTripleDiamondMarkup', literal=True),
+            ...     baca.markup(r'\baca_triple_diamond_markup', literal=True),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_outside_staff_priority(1000),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -300,7 +300,7 @@ class MarkupLibrary(abjad.AbjadObject):
                                 ^ \markup {                                                              %! IC
                                     \whiteout                                                            %! IC
                                         \upright                                                         %! IC
-                                            \bacaTripleDiamondMarkup                                     %! IC
+                                            \baca_triple_diamond_markup                                     %! IC
                                     }                                                                    %! IC
                                 d'16
                                 ]

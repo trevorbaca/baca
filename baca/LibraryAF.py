@@ -4742,7 +4742,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                -\tongue #2                                                              %! IC
+                                -\baca_staccati #2                                                              %! IC
                                 [
                                 d'16
                                 ]
@@ -4820,21 +4820,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tongue #2                                                              %! IC
+                                -\baca_staccati #2                                                              %! IC
                                 [
                                 e''16
-                                -\tongue #2                                                              %! IC
+                                -\baca_staccati #2                                                              %! IC
                                 ]
                                 ef''4
-                                -\tongue #2                                                              %! IC
+                                -\baca_staccati #2                                                              %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tongue #2                                                              %! IC
+                                -\baca_staccati #2                                                              %! IC
                                 [
                                 g''16
-                                -\tongue #2                                                              %! IC
+                                -\baca_staccati #2                                                              %! IC
                                 ]
                             }
                             \times 4/5 {
@@ -4848,7 +4848,7 @@ class LibraryAF(abjad.AbjadObject):
 
         """
         return IndicatorCommand(
-            indicators=[abjad.Articulation('tongue #2')],
+            indicators=[abjad.Articulation('baca_staccati #2')],
             selector=selector,
             )
 
