@@ -1,6 +1,24 @@
 #(ly:set-option 'relative-includes #t)
 \include "text-spanner-id.ily"
 
+%%% ARTICULATIONS: DOUBLE & TRIPLE STACCATI %%%
+
+tongue =
+#(define-music-function (parser location dots) (integer?)
+   (let ((script (make-music 'ArticulationEvent
+                             'articulation-type "staccato")))
+     (set! (ly:music-property script 'tweaks)
+           (acons 'stencil
+                  (lambda (grob)
+                    (let ((stil (ly:script-interface::print grob)))
+                      (let loop ((count (1- dots)) (new-stil stil))
+                        (if (> count 0)
+                            (loop (1- count)
+                                  (ly:stencil-combine-at-edge new-stil X RIGHT stil 0.2))
+                            (ly:stencil-aligned-to new-stil X CENTER)))))
+                  (ly:music-property script 'tweaks)))
+     script))
+
 %%% BAR NUMBERS: OVAL %%%
 
 #(define-markup-command (oval layout props arg)
@@ -624,6 +642,66 @@ f_sub_but_accents_continue_sffz =
         )
     )
 
+%%% MARKUP: DIAMONDS (BLACK, WHITE) %%%
+
+bacaBlackDiamondMarkup = \markup
+{
+    \scale #'(0.75 . 0.75)
+    \musicglyph #"noteheads.s2harmonic"
+}
+
+bacaDiamondMarkup = \markup
+{
+    \scale #'(0.75 . 0.75)
+    \musicglyph #"noteheads.s0harmonic"
+}
+
+bacaDoubleBlackDiamondMarkup = \markup
+{
+    \override #'(baseline-skip . 1.75)
+    \scale #'(0.75 . 0.75)
+    \column
+    {
+        \musicglyph #"noteheads.s2harmonic"
+        \musicglyph #"noteheads.s2harmonic"
+    }
+}
+
+bacaDoubleDiamondMarkup = \markup
+{
+    \override #'(baseline-skip . 1.75)
+    \scale #'(0.75 . 0.75)
+    \column
+    {
+        \musicglyph #"noteheads.s0harmonic"
+        \musicglyph #"noteheads.s0harmonic"
+    }
+}
+
+bacaTripleBlackDiamondMarkup = \markup
+{
+    \override #'(baseline-skip . 1.75)
+    \scale #'(0.75 . 0.75)
+    \column
+    {
+        \musicglyph #"noteheads.s2harmonic"
+        \musicglyph #"noteheads.s2harmonic"
+        \musicglyph #"noteheads.s2harmonic"
+    }
+}
+
+bacaTripleDiamondMarkup = \markup
+{
+    \override #'(baseline-skip . 1.75)
+    \scale #'(0.75 . 0.75)
+    \column
+    {
+        \musicglyph #"noteheads.s0harmonic"
+        \musicglyph #"noteheads.s0harmonic"
+        \musicglyph #"noteheads.s0harmonic"
+    }
+}
+
 %%% NOTE-HEADS: SHAPED %%%
 
 blackDiamondNoteHead = #(
@@ -679,21 +757,3 @@ slap =
   \revert NoteHead #'stencil
   \revert NoteHead #'extra-offset
 #})
-
-%%% STACCATI: DOUBLE & TRIPLE %%%
-
-tongue =
-#(define-music-function (parser location dots) (integer?)
-   (let ((script (make-music 'ArticulationEvent
-                             'articulation-type "staccato")))
-     (set! (ly:music-property script 'tweaks)
-           (acons 'stencil
-                  (lambda (grob)
-                    (let ((stil (ly:script-interface::print grob)))
-                      (let loop ((count (1- dots)) (new-stil stil))
-                        (if (> count 0)
-                            (loop (1- count)
-                                  (ly:stencil-combine-at-edge new-stil X RIGHT stil 0.2))
-                            (ly:stencil-aligned-to new-stil X CENTER)))))
-                  (ly:music-property script 'tweaks)))
-     script))
