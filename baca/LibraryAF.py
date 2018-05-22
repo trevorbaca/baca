@@ -1520,7 +1520,7 @@ class LibraryAF(abjad.AbjadObject):
         Makes bar-extent zero suite.
         """
         return SuiteCommand(
-            [
+            commands=[
                 LibraryAF.bar_extent(
                     (0, 0),
                     after=True,

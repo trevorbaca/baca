@@ -2072,7 +2072,7 @@ class LibraryGM(abjad.AbjadObject):
             )
         if bool(alert):
             assert isinstance(alert, IndicatorCommand), repr(alert)
-            return SuiteCommand([command, alert])
+            return SuiteCommand(commands=[command, alert])
         else:
             return command
 
