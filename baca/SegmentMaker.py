@@ -2809,7 +2809,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self._fermata_start_offsets:
             return
         prototype = baca.StaffLines
-        staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
+        staff_lines = baca.StaffLines(
+            line_count=self.fermata_measure_staff_line_count,
+            )
         bar_lines_already_styled = []
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
