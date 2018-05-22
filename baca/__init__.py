@@ -170,15 +170,6 @@ from .LibraryTZ import LibraryTZ
 #trill = LibraryTZ.trill
 #untie_to = LibraryTZ.trill
 
-
-
-
-
-
-
-
-
-
 from .PitchClassSegment import _pitch_class_segment as pitch_class_segment
 from .PitchClassSet import _pitch_class_set as pitch_class_set
 from .PitchSegment import _pitch_segment as pitch_segment
@@ -212,8 +203,6 @@ markup = MarkupLibrary()
 
 def map(commands, selector):
     """
-    Maps ``commands`` to result of ``selector``.
-
-    Returns map command.
+    Calls each command in ``commands`` on the output of ``selector``.
     """
     return MapCommand(commands=commands, selector=selector)

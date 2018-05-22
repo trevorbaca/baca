@@ -7527,7 +7527,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def suite(
-        *commands: typing.Sequence[Command],
+        *commands: Command,
         selector: Selector = None,
         ) -> SuiteCommand:
         """

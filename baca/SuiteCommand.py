@@ -27,7 +27,7 @@ class SuiteCommand(Command):
 
     def __init__(
         self,
-        *commands: typing.Sequence[Command],
+        *commands: Command,
         selector: Selector = None,
         ) -> None:
         Command.__init__(self, selector=selector)
@@ -58,7 +58,7 @@ class SuiteCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self) -> typing.Tuple[Command]:
+    def commands(self) -> typing.Tuple[Command, ...]:
         """
         Gets commands.
         """
