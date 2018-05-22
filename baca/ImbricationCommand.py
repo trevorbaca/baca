@@ -1653,9 +1653,9 @@ class ImbricationCommand(Command):
             ...     )
             Traceback (most recent call last):
                 ...
-            Exception: Cursor(position=4, singletons=True,
-            source=Sequence(items=(2, 19, 9, 18, 16)),
-            suppress_exception=True) used only 3 of 5 pitches.
+            Exception: Cursor(source=Sequence(items=(2, 19, 9, 18, 16)),
+            position=4, singletons=True, suppress_exception=True) used only 3
+            of 5 pitches.
 
         ..  container:: example
 
