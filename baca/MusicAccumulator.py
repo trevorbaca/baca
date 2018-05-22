@@ -30,7 +30,6 @@ class MusicAccumulator(abjad.AbjadObject):
 
     def __init__(
         self,
-        *,
         score_template: abjad.ScoreTemplate,
         ) -> None:
         self._score_template = score_template
