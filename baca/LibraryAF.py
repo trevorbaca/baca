@@ -1519,8 +1519,9 @@ class LibraryAF(abjad.AbjadObject):
         """
         Makes bar-extent zero suite.
         """
-        return SuiteCommand(
-            commands=[
+        from .LibraryNS import LibraryNS
+        return LibraryNS.suite(
+            [
                 LibraryAF.bar_extent(
                     (0, 0),
                     after=True,
