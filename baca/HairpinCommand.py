@@ -100,6 +100,7 @@ class HairpinCommand(Command):
 
     def __init__(
         self,
+        *,
         deactivate: bool = None,
         leak: bool = None,
         left_broken: str = None,

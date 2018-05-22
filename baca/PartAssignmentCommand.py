@@ -20,6 +20,7 @@ class PartAssignmentCommand(Command):
 
     def __init__(
         self,
+        *,
         part_assignment: abjad.PartAssignment = None,
         selector: Selector = 'baca.leaves()',
         ) -> None:

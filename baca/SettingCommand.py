@@ -26,6 +26,7 @@ class SettingCommand(Command):
 
     def __init__(
         self,
+        *,
         context=None,
         selector='baca.leaf(0)',
         setting=None,

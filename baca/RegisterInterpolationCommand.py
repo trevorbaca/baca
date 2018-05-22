@@ -1055,6 +1055,7 @@ class RegisterInterpolationCommand(Command):
 
     def __init__(
         self,
+        *,
         selector: Selector = 'baca.plts()',
         start_pitch: typing.Union[Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[Number, abjad.NumberedPitch] = 0,

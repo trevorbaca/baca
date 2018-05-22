@@ -518,6 +518,7 @@ class ClusterCommand(Command):
 
     def __init__(
         self,
+        *,
         hide_flat_markup=None,
         selector='baca.plts()',
         start_pitch=None,

@@ -132,7 +132,12 @@ class OctaveDisplacementCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, displacements=None, selector='baca.plts()'):
+    def __init__(
+        self,
+        *,
+        displacements=None,
+        selector='baca.plts()',
+        ):
         Command.__init__(self, selector=selector)
         if displacements is not None:
             displacements = tuple(displacements)

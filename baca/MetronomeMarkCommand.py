@@ -28,6 +28,7 @@ class MetronomeMarkCommand(Command):
 
     def __init__(
         self,
+        *,
         deactivate: bool = None,
         key: typing.Union[str, abjad.Accelerando, abjad.Ritardando] = None,
         redundant: bool = None,

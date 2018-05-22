@@ -33,6 +33,7 @@ class GlobalFermataCommand(Command):
 
     def __init__(
         self,
+        *,
         description: str = None,
         selector: Selector = 'baca.leaf(0)',
         ) -> None:

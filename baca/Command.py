@@ -31,6 +31,7 @@ class Command(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         deactivate: bool = None,
         selector: Selector = None,
         tag_measure_number: bool = None,

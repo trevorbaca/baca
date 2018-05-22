@@ -103,6 +103,7 @@ class ContainerCommand(Command):
 
     def __init__(
         self,
+        *,
         identifier: str = None,
         selector: Selector = 'baca.leaves()',
         ) -> None:

@@ -3387,7 +3387,6 @@ class LibraryNS(abjad.AbjadObject):
         Makes rhythm command.
         """
         return RhythmCommand(
-            rhythm_maker=rhythm_maker,
             division_maker=division_maker,
             division_expression=division_expression,
             left_broken=left_broken,
@@ -3397,6 +3396,7 @@ class LibraryNS(abjad.AbjadObject):
             rewrite_meter=rewrite_meter,
             rewrite_rest_filled=rewrite_rest_filled,
             rhythm_overwrites=rhythm_overwrites,
+            rhythm_maker=rhythm_maker,
             right_broken=right_broken,
             split_at_measure_boundaries=split_at_measure_boundaries,
             stages=stages,

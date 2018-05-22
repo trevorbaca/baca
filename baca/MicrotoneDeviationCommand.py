@@ -132,7 +132,12 @@ class MicrotoneDeviationCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, deviations=None, selector='baca.plts()'):
+    def __init__(
+        self,
+        *,
+        deviations=None,
+        selector='baca.plts()',
+        ):
         Command.__init__(self)
         if deviations is not None:
             assert isinstance(deviations, collections.Iterable)

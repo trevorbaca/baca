@@ -115,7 +115,12 @@ class ColorFingeringCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, numbers=None, selector='baca.pheads()'):
+    def __init__(
+        self,
+        *,
+        numbers=None,
+        selector='baca.pheads()',
+        ):
         Command.__init__(self, selector=selector)
         if numbers is not None:
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)

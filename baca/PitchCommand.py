@@ -395,6 +395,7 @@ class PitchCommand(Command):
 
     def __init__(
         self,
+        *,
         allow_octaves: bool = None,
         allow_repeats: bool = None,
         cyclic: bool = None,

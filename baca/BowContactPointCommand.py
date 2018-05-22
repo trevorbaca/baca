@@ -29,6 +29,7 @@ class BowContactPointCommand(Command):
 
     def __init__(
         self,
+        *,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         selector: Selector = None,
         ) -> None:

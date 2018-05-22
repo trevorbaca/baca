@@ -216,4 +216,4 @@ def map(commands, selector):
 
     Returns map command.
     """
-    return MapCommand(commands, selector)
+    return MapCommand(commands=commands, selector=selector)

@@ -27,6 +27,7 @@ class PitchFirstRhythmCommand(Command):
 
     def __init__(
         self,
+        *,
         pattern=None,
         rhythm_maker=None,
         ):

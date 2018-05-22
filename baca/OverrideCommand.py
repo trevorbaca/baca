@@ -205,6 +205,7 @@ class OverrideCommand(Command):
 
     def __init__(
         self,
+        *,
         after: bool = None,
         attribute: str = None,
         blacklist: typing.Tuple[type] = None,

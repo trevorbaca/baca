@@ -331,7 +331,11 @@ class ColorCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, selector='baca.leaves()'):
+    def __init__(
+        self,
+        *,
+        selector='baca.leaves()',
+        ):
         assert selector is not None
         Command.__init__(self, selector=selector)
 

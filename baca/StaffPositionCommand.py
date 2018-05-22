@@ -64,6 +64,7 @@ class StaffPositionCommand(Command):
 
     def __init__(
         self,
+        *,
         numbers,
         allow_repeats: bool = None,
         exact: bool = None, 

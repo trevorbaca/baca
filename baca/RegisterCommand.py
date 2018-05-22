@@ -289,7 +289,7 @@ class RegisterCommand(Command):
         ...     'Voice 1',
         ...     [{10, 12, 14}],
         ...     baca.RegisterCommand(
-        ...         baca.Registration([('[A0, C8]', -6)]),
+        ...         registration=baca.Registration([('[A0, C8]', -6)]),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -321,7 +321,12 @@ class RegisterCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, registration=None, selector='baca.plts()'):
+    def __init__(
+        self,
+        *,
+        registration=None,
+        selector='baca.plts()',
+        ):
         import baca
         Command.__init__(self, selector=selector)
         if registration is not None:

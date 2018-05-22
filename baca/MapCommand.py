@@ -99,6 +99,7 @@ class MapCommand(Command):
 
     def __init__(
         self,
+        *,
         commands: typing.Union[
             abjad.Expression, Command, typing.Iterable] = None,
         selector: Selector = None,

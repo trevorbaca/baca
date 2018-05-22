@@ -11,8 +11,8 @@ class CommandWrapper(abjad.AbjadObject):
         Pitch command wrapped with simple scope:
 
         >>> command = baca.CommandWrapper(
-        ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-        ...     baca.scope('ViolinMusicVoice', (1, 4)),
+        ...     command=baca.pitches([7, 1, 3, 4, 5, 11]),
+        ...     scope=baca.scope('ViolinMusicVoice', (1, 4)),
         ...     )
 
         >>> abjad.f(command, strict=89)
@@ -42,8 +42,8 @@ class CommandWrapper(abjad.AbjadObject):
         Pitch command wrapped with timeline scope:
 
         >>> command = baca.CommandWrapper(
-        ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-        ...     baca.timeline([
+        ...     command=baca.pitches([7, 1, 3, 4, 5, 11]),
+        ...     scope=baca.timeline([
         ...         ('ViolinMusicVoice', (1, 4)),
         ...         ('ViolaMusicVoice', (1, 4)),
         ...         ]),
@@ -94,7 +94,12 @@ class CommandWrapper(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, command=None, scope=None):
+    def __init__(
+        self,
+        *,
+        command=None,
+        scope=None,
+        ):
         if scope is not None:
             prototype = (baca.Scope, baca.TimelineScope)
             assert isinstance(scope, prototype), format(scope)
@@ -113,8 +118,8 @@ class CommandWrapper(abjad.AbjadObject):
         ..  container:: example
 
             >>> command = baca.CommandWrapper(
-            ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-            ...     baca.scope('ViolinMusicVoice', (1, 4)),
+            ...     command=baca.pitches([7, 1, 3, 4, 5, 11]),
+            ...     scope=baca.scope('ViolinMusicVoice', (1, 4)),
             ...     )
 
             >>> abjad.f(command.command, strict=89)
@@ -151,8 +156,8 @@ class CommandWrapper(abjad.AbjadObject):
             Gets scope:
 
             >>> command = baca.CommandWrapper(
-            ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-            ...     baca.scope('ViolinMusicVoice', (1, 4)),
+            ...     command=baca.pitches([7, 1, 3, 4, 5, 11]),
+            ...     scope=baca.scope('ViolinMusicVoice', (1, 4)),
             ...     )
 
             >>> abjad.f(command.scope, strict=89)

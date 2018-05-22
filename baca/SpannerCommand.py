@@ -197,6 +197,7 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
+        *,
         deactivate: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,

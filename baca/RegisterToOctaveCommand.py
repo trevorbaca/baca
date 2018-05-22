@@ -310,6 +310,7 @@ class RegisterToOctaveCommand(Command):
 
     def __init__(
         self,
+        *,
         anchor=None,
         octave_number=None,
         selector='baca.plts()',

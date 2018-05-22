@@ -23,7 +23,12 @@ class SuiteCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, commands=None, selector=None):
+    def __init__(
+        self,
+        *,
+        commands=None,
+        selector=None,
+        ):
         Command.__init__(self, selector=selector)
         if isinstance(commands, baca.Command):
             commands = (commands,)

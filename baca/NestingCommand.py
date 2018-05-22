@@ -252,6 +252,7 @@ class NestingCommand(Command):
 
     def __init__(
         self,
+        *,
         lmr_specifier=None,
         time_treatments=None,
         ):

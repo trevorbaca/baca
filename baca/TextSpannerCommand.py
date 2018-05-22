@@ -177,6 +177,7 @@ class TextSpannerCommand(Command):
 
     def __init__(
         self,
+        *,
         leak: bool = None,
         lilypond_id: int = None,
         line_segment: abjad.LineSegment = None,

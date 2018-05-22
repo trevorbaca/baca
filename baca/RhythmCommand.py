@@ -226,7 +226,6 @@ class RhythmCommand(Command):
 
     def __init__(
         self,
-        rhythm_maker: rhythm_maker_typing = None,
         *,
         division_maker: DivisionMaker = None,
         division_expression: abjad.Expression = None,
@@ -237,6 +236,7 @@ class RhythmCommand(Command):
         rewrite_meter: bool = None,
         rewrite_rest_filled: bool = None,
         rhythm_overwrites: typing.List[tuple] = None,
+        rhythm_maker: rhythm_maker_typing = None,
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,

@@ -228,6 +228,7 @@ class IndicatorCommand(Command):
 
     def __init__(
         self,
+        *,
         context: str = None,
         deactivate: bool = None,
         indicators: typing.List[typing.Any] = None,

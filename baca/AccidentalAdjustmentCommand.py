@@ -103,6 +103,7 @@ class AccidentalAdjustmentCommand(Command):
 
     def __init__(
         self,
+        *,
         cautionary: bool = None,
         forced: bool = None,
         parenthesized: bool = None,

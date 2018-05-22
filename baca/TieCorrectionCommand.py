@@ -28,6 +28,7 @@ class TieCorrectionCommand(Command):
 
     def __init__(
         self,
+        *,
         direction: abjad.HorizontalAlignment = None,
         repeat: bool = None,
         selector: Selector = 'baca.pleaf(-1)',

@@ -187,6 +187,7 @@ class StaffPositionInterpolationCommand(Command):
 
     def __init__(
         self,
+        *,
         selector: Selector = 'baca.plts()',
         start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
