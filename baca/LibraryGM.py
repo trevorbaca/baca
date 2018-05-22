@@ -305,8 +305,8 @@ class LibraryGM(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.glissando(),
             ...         baca.tuplets()[1:2].runs(),
+            ...         baca.glissando(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -518,7 +518,10 @@ class LibraryGM(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.hairpin('p < f'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -585,8 +588,8 @@ class LibraryGM(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.hairpin('p < f'),
             ...         baca.tuplets(),
+            ...         baca.hairpin('p < f'),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1321,8 +1324,8 @@ class LibraryGM(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.laissez_vibrer(selector=baca.ptails()),
             ...         baca.tuplet(1),
+            ...         baca.laissez_vibrer(selector=baca.ptails()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1882,8 +1885,8 @@ class LibraryGM(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.marcato(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.marcato(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),

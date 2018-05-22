@@ -2093,8 +2093,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
-            ...         baca.instrument(instruments['Flute']),
             ...         baca.leaves()[1],
+            ...         baca.instrument(instruments['Flute']),
             ...         ),
             ...     baca.make_notes(),
             ...     )
@@ -3601,8 +3601,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
-            ...         baca.instrument(instruments['Flute']),
             ...         baca.leaves()[1],
+            ...         baca.instrument(instruments['Flute']),
             ...         ),
             ...     baca.make_notes(),
             ...     )
@@ -5219,8 +5219,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.margin_markup(margin_markups['I+II']),
             ...     baca.map(
-            ...         baca.margin_markup(margin_markups['I+II']),
             ...         baca.leaves()[1],
+            ...         baca.margin_markup(margin_markups['I+II']),
             ...         ),
             ...     baca.make_notes(),
             ...     )

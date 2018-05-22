@@ -1,5 +1,6 @@
-#from baca import tools
-#from baca.tools import *
+import abjad
+import typing
+
 # singletons
 from .SchemeManifest import SchemeManifest
 scheme = SchemeManifest()
@@ -201,8 +202,22 @@ _import_static_methods(LibraryTZ)
 _publish_selectors(Selection)
 markup = MarkupLibrary()
 
-def map(commands, selector):
+def map(
+    selector: typing.Union[abjad.Expression, str],
+    *commands: typing.Union[Command, abjad.Expression],
+    ) -> MapCommand:
     """
     Calls each command in ``commands`` on the output of ``selector``.
     """
-    return MapCommand(commands=commands, selector=selector)
+    if not isinstance(selector, (abjad.Expression, str)):
+        message = '\n  Map selector must be expression or string.'
+        message += f'\n  Not {format(selector)}.'
+        raise Exception(message)
+    if not commands:
+        raise Exception('map commands must not be empty.')
+    for command in commands:
+        if not isinstance(command, (Command, abjad.Expression)):
+            message = '\n  Must be command or expression.'
+            message += f'\n  Not {type(command).__name__}: {command!r}.'
+            raise Exception(message)
+    return MapCommand(selector, *commands)

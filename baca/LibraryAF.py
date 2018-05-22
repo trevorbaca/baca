@@ -126,8 +126,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.accent(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.accent(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -416,8 +416,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.alternate_bow_strokes(),
             ...         baca.tuplet(1),
+            ...         baca.alternate_bow_strokes(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(6),
@@ -698,7 +698,7 @@ class LibraryAF(abjad.AbjadObject):
     def apply(
         selector: Selector,
         *commands: typing.Iterable[Command],
-        ) -> typing.List[MapCommand]:
+        ) -> typing.List[Command]:
         r"""
         Applies ``selector`` to each command in ``commands``.
 
@@ -1030,11 +1030,11 @@ class LibraryAF(abjad.AbjadObject):
             message = '\n  Selector must be str or expression.'
             message += f'\n  Not {selector!r}.'
             raise Exception(message)
-        commands_: typing.List[MapCommand] = []
+        commands_: typing.List[Command] = []
         for command in commands:
             assert isinstance(command, Command), repr(command)
-            command._selector = selector
-            commands_.append(command)
+            command_ = abjad.new(command, selector=selector)
+            commands_.append(command_)
         return commands_
 
     @staticmethod
@@ -1917,7 +1917,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.map(baca.bass_to_octave(3), baca.plts()),
+            ...     baca.map(
+            ...         baca.plts(),
+            ...         baca.bass_to_octave(3),
+            ...         ),
             ...     baca.color(selector=baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -2037,7 +2040,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.map(baca.bass_to_octave(3), baca.plts()[-2:]),
+            ...     baca.map(
+            ...         baca.plts()[-2:],
+            ...         baca.bass_to_octave(3),
+            ...         ),
             ...     baca.color(selector=baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -3044,7 +3050,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.map(baca.center_to_octave(3), baca.plts()),
+            ...     baca.map(
+            ...         baca.plts(),
+            ...         baca.center_to_octave(3),
+            ...         ),
             ...     baca.color(selector=baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -3164,7 +3173,10 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.map(baca.center_to_octave(3), baca.plts()[-2:]),
+            ...     baca.map(
+            ...         baca.plts()[-2:],
+            ...         baca.center_to_octave(3),
+            ...         ),
             ...     baca.color(selector=baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -4709,7 +4721,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dls_staff_padding(4),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.hairpin('p < f'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4782,7 +4797,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dls_staff_padding(4, selector=baca.tuplet(1)),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.hairpin('p < f'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4871,7 +4889,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dls_up(),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.hairpin('p < f'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4944,7 +4965,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dls_up(selector=baca.tuplet(1)),
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.hairpin('p < f'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5127,8 +5151,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.double_staccato(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.double_staccato(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5432,8 +5456,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.down_bow(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.down_bow(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6687,8 +6711,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.espressivo(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.espressivo(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -7158,8 +7182,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.flageolet(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.flageolet(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),

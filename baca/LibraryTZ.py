@@ -158,8 +158,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.tenuto(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.tenuto(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -330,7 +330,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.text_script_color('red'), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.text_script_color('red'),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -532,7 +535,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.text_script_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.text_script_down(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -778,7 +784,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.text_script_padding(4), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.text_script_padding(4),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1024,8 +1033,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.text_script_staff_padding(4),
             ...         baca.tuplet(1),
+            ...         baca.text_script_staff_padding(4),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1228,7 +1237,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.text_script_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.text_script_up(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1741,14 +1753,14 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.text_spanner_staff_padding(6),
             ...         baca.tuplet(1),
+            ...         baca.text_spanner_staff_padding(6),
             ...         ),
             ...     baca.text_script_staff_padding(6),
             ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         spanner_selector=baca.map(baca.tleaves(), baca.tuplet(1)),
+            ...         spanner_selector=baca.map(baca.tuplet(1), baca.tleaves()),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1911,7 +1923,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.map(baca.tie(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.tie(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2056,7 +2071,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[11, 11, 12], [11, 11, 11], [11]],
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_up(),
-            ...     baca.map(baca.tie(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.tie(),
+            ...         ),
             ...     baca.tie_down(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2124,8 +2142,14 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[11, 11, 12], [11, 11, 11], [11]],
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_up(),
-            ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.map(baca.tie_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.tie(),
+            ...         ),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.tie_down(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2286,8 +2310,8 @@ class LibraryTZ(abjad.AbjadObject):
         Ties repeat pitches.
         """
         return baca.map(
-            LibraryTZ.tie(),
             baca.select().ltqruns().nontrivial(),
+            LibraryTZ.tie(),
             )
 
     @staticmethod
@@ -2399,7 +2423,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[11, 11, 12], [11, 11, 11], [11]],
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_down(),
-            ...     baca.map(baca.tie(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.tie(),
+            ...         ),
             ...     baca.tie_up(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2467,8 +2494,14 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[11, 11, 12], [11, 11, 11], [11]],
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_down(),
-            ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.map(baca.tie_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.tie(),
+            ...         ),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.tie_up(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3257,7 +3290,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill_spanner(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.trill_spanner(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3339,7 +3375,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill_spanner(), baca.runs()),
+            ...     baca.map(
+            ...         baca.runs(),
+            ...         baca.trill_spanner(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3410,7 +3449,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.trill_spanner(string='Eb4'), baca.qrun(0)),
+            ...     baca.map(
+            ...         baca.qrun(0),
+            ...         baca.trill_spanner(string='Eb4'),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3476,7 +3518,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill_spanner(string='Eb4'), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.trill_spanner(string='Eb4'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3567,7 +3612,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.trill_spanner(string='M2'), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.trill_spanner(string='M2'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3770,7 +3818,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.map(baca.tuplet_bracket_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.tuplet_bracket_down(),
+            ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -3916,8 +3967,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.tuplet_bracket_extra_offset((-1, 0)),
             ...         baca.tuplet(1),
+            ...         baca.tuplet_bracket_extra_offset((-1, 0)),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4110,8 +4161,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.tuplet_bracket_staff_padding(5),
             ...         baca.tuplet(1),
+            ...         baca.tuplet_bracket_staff_padding(5),
             ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -4256,7 +4307,10 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.map(baca.tuplet_bracket_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.tuplet_bracket_up(),
+            ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -4418,8 +4472,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     baca.map(
-            ...         baca.tuplet_number_extra_offset((-1, 0)),
             ...         baca.tuplet(1),
+            ...         baca.tuplet_number_extra_offset((-1, 0)),
             ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -4813,8 +4867,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.up_bow(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.up_bow(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),

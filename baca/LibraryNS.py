@@ -1920,7 +1920,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.map(baca.repeat_tie(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.repeat_tie(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1999,7 +2002,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.repeat_tie(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.repeat_tie(),
+            ...         ),
             ...     baca.repeat_tie_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_up(),
@@ -2067,8 +2073,14 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.repeat_tie(), baca.qruns()),
-            ...     baca.map(baca.repeat_tie_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.repeat_tie(),
+            ...         ),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.repeat_tie_down(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_up(),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2240,11 +2252,11 @@ class LibraryNS(abjad.AbjadObject):
         Repeat-ties repeat pitches.
         """
         return baca.map(
+            baca.select().ltqruns().nontrivial(),
             SpannerCommand(
                 selector='baca.qrun(0)',
                 spanner=abjad.Tie(repeat=True),
                 ),
-            baca.select().ltqruns().nontrivial(),
             )
 
     @staticmethod
@@ -2393,7 +2405,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.repeat_tie(), baca.qruns()),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.repeat_tie(),
+            ...         ),
             ...     baca.repeat_tie_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_down(),
@@ -2461,8 +2476,14 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.repeat_tie(), baca.qruns()),
-            ...     baca.map(baca.repeat_tie_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.repeat_tie(),
+            ...         ),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.repeat_tie_up(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_down(),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2610,7 +2631,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.rest_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.rest_down(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2780,7 +2804,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.rest_position(-6), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.rest_position(-6),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2926,7 +2953,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.rest_transparent(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.rest_transparent(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3070,7 +3100,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.rest_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.rest_up(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3738,7 +3771,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.accent(selector=baca.pheads()),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.script_color('red'), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.script_color('red'),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3904,7 +3940,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.accent(selector=baca.pheads()),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.script_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.script_down(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -4071,8 +4110,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     baca.accent(selector=baca.pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.script_extra_offset((-1.5, 0), selector=baca.leaf(0)),
             ...         baca.tuplet(1),
+            ...         baca.script_extra_offset((-1.5, 0), selector=baca.leaf(0)),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4270,7 +4309,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.accent(selector=baca.pheads()),
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.script_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.script_up(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -4857,7 +4899,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.slur(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.slur(),
+            ...         ),
             ...     baca.slur_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4940,8 +4985,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.slur(),
             ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+            ...         baca.slur(),
             ...         ),
             ...     baca.slur_down(),
             ...     baca.rests_around([2], [4]),
@@ -5013,10 +5058,13 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.slur(),
             ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+            ...         baca.slur(),
             ...         ),
-            ...     baca.map(baca.slur_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.slur_down(),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5102,8 +5150,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.slur(),
             ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+            ...         baca.slur(),
             ...         ),
             ...     baca.slur_up(),
             ...     baca.stem_down(),
@@ -5181,10 +5229,13 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.slur(),
             ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+            ...         baca.slur(),
             ...         ),
-            ...     baca.map(baca.slur_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.slur_up(),
+            ...         ),
             ...     baca.stem_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5397,7 +5448,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.map(baca.soprano_to_octave(3), baca.plts()),
+            ...     baca.map(
+            ...         baca.plts(),
+            ...         baca.soprano_to_octave(3),
+            ...         ),
             ...     baca.color(selector=baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -5517,7 +5571,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.map(baca.soprano_to_octave(3), baca.plts()[-2:]),
+            ...     baca.map(
+            ...         baca.plts()[-2:],
+            ...         baca.soprano_to_octave(3),
+            ...         ),
             ...     baca.color(selector=baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -5852,8 +5909,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.staccatissimo(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.staccatissimo(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6001,8 +6058,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
-            ...         baca.staccato(selector=baca.pheads()),
             ...         baca.tuplet(1),
+            ...         baca.staccato(selector=baca.pheads()),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6752,7 +6809,10 @@ class LibraryNS(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.stem_color('red'), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.stem_color('red'),
+            ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6900,7 +6960,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.stem_down(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.stem_down(),
+            ...         ),
             ...     baca.stem_up(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -7080,8 +7143,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.stem_tremolo(selector=baca.pleaves()),
             ...         baca.tuplet(1),
+            ...         baca.stem_tremolo(selector=baca.pleaves()),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -7231,7 +7294,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
             ...     baca.rests_around([2], [4]),
             ...     baca.stem_down(),
-            ...     baca.map(baca.stem_up(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.stem_up(),
+            ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -7642,7 +7708,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.sustain_pedal(), baca.tuplet(1)),
+            ...     baca.map(
+            ...         baca.tuplet(1),
+            ...         baca.sustain_pedal(),
+            ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -7712,8 +7781,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.sustain_pedal(selector=baca.lleaves()),
             ...         baca.tuplet(1),
+            ...         baca.sustain_pedal(selector=baca.lleaves()),
             ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -7784,8 +7853,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.sustain_pedal(selector=baca.rleaves()),
             ...         baca.tuplet(1),
+            ...         baca.sustain_pedal(selector=baca.rleaves()),
             ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -7856,8 +7925,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.sustain_pedal(selector=baca.wleaves()),
             ...         baca.tuplet(1),
+            ...         baca.sustain_pedal(selector=baca.wleaves()),
             ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -7927,7 +7996,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.sustain_pedal(), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.sustain_pedal(),
+            ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -8003,8 +8075,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.sustain_pedal(selector=baca.lleaves()),
             ...         baca.tuplets(),
+            ...         baca.sustain_pedal(selector=baca.lleaves()),
             ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -8081,8 +8153,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.sustain_pedal(selector=baca.rleaves()),
             ...         baca.tuplets(),
+            ...         baca.sustain_pedal(selector=baca.rleaves()),
             ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -8175,8 +8247,8 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
-            ...         baca.sustain_pedal(selector=baca.rleaves()),
             ...         baca.tuplets(),
+            ...         baca.sustain_pedal(selector=baca.rleaves()),
             ...         ),
             ...     baca.sustain_pedal_staff_padding(4),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -8252,10 +8324,13 @@ class LibraryNS(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.map(baca.sustain_pedal(), baca.tuplets()),
             ...     baca.map(
-            ...         baca.sustain_pedal_staff_padding(4),
+            ...         baca.tuplets(),
+            ...         baca.sustain_pedal(),
+            ...         ),
+            ...     baca.map(
             ...         baca.tuplet(1),
+            ...         baca.sustain_pedal_staff_padding(4),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

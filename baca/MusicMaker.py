@@ -1483,7 +1483,10 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
-            ...     baca.map(baca.hairpin('p < f'), baca.runs()),
+            ...     baca.map(
+            ...         baca.runs(),
+            ...         baca.hairpin('p < f'),
+            ...         ),
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.Pattern(
             ...             indices=[0, -1],
@@ -1551,8 +1554,14 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.map(baca.hairpin('p < f'), baca.tuplet(0)),
-            ...     baca.map(baca.hairpin('f > p'), baca.tuplet(-1)),
+            ...     baca.map(
+            ...         baca.tuplet(0),
+            ...         baca.hairpin('p < f'),
+            ...         ),
+            ...     baca.map(
+            ...         baca.tuplet(-1),
+            ...         baca.hairpin('f > p'),
+            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
@@ -1733,7 +1742,10 @@ class MusicMaker(abjad.AbjadObject):
             Slur specifier selects leaves in each tuplet:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.map(baca.slur(), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.slur(),
+            ...         ),
             ...     )
 
             >>> collections = [
@@ -1800,7 +1812,10 @@ class MusicMaker(abjad.AbjadObject):
             >>> getter = baca.pleaves()[:2]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.map(baca.slur(), selector),
+            ...     baca.map(
+            ...         selector,
+            ...         baca.slur(),
+            ...         ),
             ...     )
 
             >>> collections = [
@@ -1867,7 +1882,10 @@ class MusicMaker(abjad.AbjadObject):
             >>> getter = baca.pleaves()[-2:]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.map(baca.slur(), selector),
+            ...     baca.map(
+            ...         selector,
+            ...         baca.slur(),
+            ...         ),
             ...     )
 
             >>> collections = [

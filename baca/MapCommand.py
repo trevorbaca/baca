@@ -24,8 +24,8 @@ class MapCommand(Command):
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.map(
-        ...         baca.accent(selector=baca.pheads()),
         ...         baca.tuplet(1),
+        ...         baca.accent(selector=baca.pheads()),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -99,25 +99,25 @@ class MapCommand(Command):
 
     def __init__(
         self,
-        *,
-        commands: typing.Union[
-            abjad.Expression, Command, typing.Iterable] = None,
         selector: Selector = None,
+        *commands: typing.Union[abjad.Expression, Command],
         ) -> None:
         Command.__init__(self, selector=selector)
-        if isinstance(commands, (abjad.Expression, Command)):
-            commands = abjad.CyclicTuple([commands])
-        elif isinstance(commands, collections.Iterable):
-            commands = abjad.CyclicTuple(commands)
-        elif commands is not None:
-            raise TypeError(commands)
-        self._commands = commands
+        command_list: typing.List[typing.Union[abjad.Expression, Command]] = []
+        for command in commands:
+            if not isinstance(command, (abjad.Expression, Command)):
+                message = '\n  Commands must contain only commands and expressions.'
+                message += f'\n  Not {type(command).__name__}: {command!r}.'
+                raise Exception(message)
+            command_list.append(command)
+        self._commands = tuple(command_list)
 
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None) -> typing.Optional[typing.List]:
         """
-        Maps commands to result of selector called on ``argument``.
+        Maps each command in ``commands`` to each item in output of selector
+        called on ``argument``.
         """
         if argument is None:
             return None
@@ -127,17 +127,23 @@ class MapCommand(Command):
             argument = self.selector(argument)
             if self.selector._is_singular_get_item():
                 argument = [argument]
+#        items_ = []
+#        for i, item in enumerate(argument):
+#            command = self.commands[i]
+#            item_ = command(item)
+#            items_.append(item_)
+#        return items_
         items_ = []
-        for i, item in enumerate(argument):
-            command = self.commands[i]
-            item_ = command(item)
-            items_.append(item_)
+        for command in self.commands:
+            for item in argument:
+                item_ = command(item)
+                items_.append(item_)
         return items_
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self) -> typing.Optional[abjad.CyclicTuple]:
+    def commands(self) -> typing.Optional[typing.Tuple]:
         """
         Gets commands.
         """

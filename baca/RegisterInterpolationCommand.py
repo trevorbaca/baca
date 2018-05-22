@@ -1363,7 +1363,10 @@ class RegisterInterpolationCommand(Command):
             ...     'Voice 1',
             ...     collections,
             ...     baca.color(selector=baca.tuplets()),
-            ...     baca.map(baca.register(0, 24), baca.tuplets()),
+            ...     baca.map(
+            ...         baca.tuplets(),
+            ...         baca.register(0, 24),
+            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP

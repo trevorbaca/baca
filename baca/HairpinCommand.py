@@ -18,8 +18,8 @@ class HairpinCommand(Command):
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.map(
-        ...         baca.hairpin('"p" < "f"'),
         ...         baca.tuplet(1),
+        ...         baca.hairpin('"p" < "f"'),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
