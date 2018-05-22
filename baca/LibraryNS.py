@@ -4363,10 +4363,8 @@ class LibraryNS(abjad.AbjadObject):
             width = clef._to_width[clef.name]
             extra_offset_x = -width
         command = LibraryNS.suite(
-            [
-                LibraryAF.clef_x_extent_false(),
-                LibraryAF.clef_extra_offset((extra_offset_x, 0)),
-                ],
+            LibraryAF.clef_x_extent_false(),
+            LibraryAF.clef_extra_offset((extra_offset_x, 0)),
             )
         LibraryTZ.tag(
             abjad.tags.SHIFTED_CLEF,
@@ -4388,10 +4386,10 @@ class LibraryNS(abjad.AbjadObject):
         dynamic = abjad.Dynamic(dynamic)
         width = dynamic._to_width[dynamic.name]
         extra_offset_x = -width
-        return LibraryNS.suite([
+        return LibraryNS.suite(
             LibraryAF.dynamic_text_extra_offset((extra_offset_x, 0)),
             LibraryAF.dynamic_text_x_extent_zero(),
-            ])
+            )
 
     @staticmethod
     def shift_hairpin_start(
@@ -4408,11 +4406,11 @@ class LibraryNS(abjad.AbjadObject):
         width = dynamic._to_width[dynamic.name]
         extra_offset_x = -width
         hairpin_shorten_left = width - 1.25
-        return LibraryNS.suite([
+        return LibraryNS.suite(
             LibraryAF.dynamic_text_extra_offset((extra_offset_x, 0)),
             LibraryAF.dynamic_text_x_extent_zero(),
             LibraryGM.hairpin_shorten_pair((hairpin_shorten_left, 0)),
-            ])
+            )
 
     @staticmethod
     def short_fermata(
@@ -6501,10 +6499,10 @@ class LibraryNS(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.make_notes(),
             ...     baca.staff_lines(2),
-            ...     baca.suite([
+            ...     baca.suite(
             ...         baca.staff_positions([-2, -1, 0, 1, 2]),
             ...         baca.clef('bass'),
-            ...         ]),
+            ...         ),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -7527,14 +7525,12 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             )
 
-    # TODO: change signature to baca.suite(*commands, selector=None)
     @staticmethod
     def suite(
-        commands: typing.Sequence[Command],
-        *,
+        *commands: typing.Sequence[Command],
         selector: Selector = None,
         ) -> SuiteCommand:
-        r"""
+        """
         Makes suite.
 
         ..  container:: example
@@ -7544,19 +7540,21 @@ class LibraryNS(abjad.AbjadObject):
             >>> baca.suite(['Allegro'])
             Traceback (most recent call last):
                 ...
-            Exception: must be command:
-            <BLANKLINE>
-            Allegro
+            Exception:
+              Commands must contain only commands.
+              Not list: ['Allegro'].
 
         """
-        if not isinstance(commands, list):
-            raise Exception(f'must be command list:\n\n{commands}')
         for command in commands:
             if not isinstance(command, Command):
-                raise Exception(f'must be command:\n\n{command}')
+                message = '\n  Commands must contain only commands.'
+                message += f'\n  Not {type(command).__name__}: {command!r}.'
+                raise Exception(message)
         if not isinstance(selector, (str, abjad.Expression, type(None))):
-            raise Exception(f'must be selector, string or none:\n\n{selector}')
-        return SuiteCommand(commands=commands, selector=selector)
+            message = f'\n  Must be selector, string or none:'
+            message += f'\n  Not {selector!r}.'
+            raise Exception(message)
+        return SuiteCommand(*commands, selector=selector)
 
     @staticmethod
     def sustain_pedal(

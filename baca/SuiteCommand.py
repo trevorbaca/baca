@@ -1,6 +1,8 @@
 import baca
 import collections
+import typing
 from .Command import Command
+from .Typing import Selector
 
 
 class SuiteCommand(Command):
@@ -25,24 +27,24 @@ class SuiteCommand(Command):
 
     def __init__(
         self,
-        *,
-        commands=None,
-        selector=None,
-        ):
+        *commands: typing.Sequence[Command],
+        selector: Selector = None,
+        ) -> None:
         Command.__init__(self, selector=selector)
-        if isinstance(commands, baca.Command):
-            commands = (commands,)
-        elif isinstance(commands, collections.Iterable):
-            commands = tuple(commands)
-        self._commands = commands
+        command_list: typing.List[Command] = []
+        for command in commands:
+            if not isinstance(command, Command):
+                message = '\n  Commands must contain only commands.'
+                message += f'\n  Not {type(command).__name__}: {command!r}.'
+                raise Exception(message)
+            command_list.append(command)
+        self._commands = tuple(command_list)
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         """
         Applies commands to result of selector called on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -56,10 +58,8 @@ class SuiteCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self):
+    def commands(self) -> typing.Tuple[Command]:
         """
         Gets commands.
-
-        Returns tuple or none.
         """
         return self._commands

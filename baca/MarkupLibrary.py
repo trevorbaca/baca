@@ -601,7 +601,8 @@ class MarkupLibrary(abjad.AbjadObject):
         assert isinstance(only_parts, IndicatorCommand)
         only_parts_ = LibraryNS.only_parts(only_parts)
         return LibraryNS.suite(
-            [not_parts_, only_parts_],
+            not_parts_,
+            only_parts_,
             selector=selector,
             )
 

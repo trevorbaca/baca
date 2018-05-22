@@ -1521,18 +1521,16 @@ class LibraryAF(abjad.AbjadObject):
         """
         from .LibraryNS import LibraryNS
         return LibraryNS.suite(
-            [
-                LibraryAF.bar_extent(
-                    (0, 0),
-                    after=True,
-                    selector='baca.leaves()',
-                    ),
-                LibraryAF.bar_extent(
-                    (0, 0),
-                    after=True,
-                    selector='baca.leaf(-1)',
-                    ),
-                ],
+            LibraryAF.bar_extent(
+                (0, 0),
+                after=True,
+                selector='baca.leaves()',
+                ),
+            LibraryAF.bar_extent(
+                (0, 0),
+                after=True,
+                selector='baca.leaf(-1)',
+                ),
             selector=selector,
             )
 
@@ -6077,7 +6075,8 @@ class LibraryAF(abjad.AbjadObject):
             )
         command_2 = LibraryAF.dynamic_text_x_extent_zero()
         return LibraryNS.suite(
-            [command_1, command_2],
+            command_1,
+            command_2,
             selector=selector,
             )
 
@@ -7016,7 +7015,7 @@ class LibraryAF(abjad.AbjadObject):
 
         """
         from .LibraryNS import LibraryNS
-        return LibraryNS.suite([
+        return LibraryNS.suite(
             SpannerCommand(
                 right_broken=right_broken,
                 selector=selector,
@@ -7046,7 +7045,7 @@ class LibraryAF(abjad.AbjadObject):
                 grob='glissando',
                 selector=selector,
                 ),
-            ])
+            )
 
     @staticmethod
     def flag_stencil_false(

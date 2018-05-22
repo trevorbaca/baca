@@ -19,10 +19,10 @@ class OctaveDisplacementCommand(Command):
         >>> maker(
         ...     'MusicVoice',
         ...     baca.make_even_runs(),
-        ...     baca.suite([
+        ...     baca.suite(
         ...         baca.pitch('G4'),
         ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
-        ...         ]),
+        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
