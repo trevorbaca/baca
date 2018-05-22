@@ -106,6 +106,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         durations=None,
         lmr_specifier=None,
         pattern=None,

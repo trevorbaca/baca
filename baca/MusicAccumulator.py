@@ -30,6 +30,7 @@ class MusicAccumulator(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         score_template: abjad.ScoreTemplate,
         ) -> None:
         self._score_template = score_template
@@ -57,7 +58,7 @@ class MusicAccumulator(abjad.AbjadObject):
         ..  container:: example
 
             >>> score_template = baca.StringTrioScoreTemplate()
-            >>> accumulator = baca.MusicAccumulator(score_template)
+            >>> accumulator = baca.MusicAccumulator(score_template=score_template)
             >>> accumulator(
             ...     accumulator.music_maker(
             ...         'ViolinMusicVoice',

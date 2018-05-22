@@ -160,6 +160,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         pattern=None,
         prefix=None,
         skips_instead_of_rests=None,

@@ -23,6 +23,7 @@ class SystemSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         distances: typing.Iterable[Number] = None,
         measure: int = None,
         y_offset: Number = None,

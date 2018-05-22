@@ -67,10 +67,11 @@ class Cursor(abjad.AbjadObject):
 
     def __init__(
         self,
-        source=None,
+        *,
         cyclic=None,
         position=None,
         singletons=None,
+        source=None,
         suppress_exception=None,
         ):
         if cyclic is not None:
@@ -550,6 +551,7 @@ class Cursor(abjad.AbjadObject):
 
             >>> abjad.f(cursor, strict=89)
             baca.Cursor(
+                cyclic=True,
                 source=abjad.CyclicTuple(
                     [
                         abjad.PitchClassSegment(
@@ -570,7 +572,6 @@ class Cursor(abjad.AbjadObject):
                             ),
                         ]
                     ),
-                cyclic=True,
                 )
 
         Coerces numeric `pitch_class_segments`.

@@ -62,7 +62,10 @@ class PitchArray(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, rows=None):
+    def __init__(
+        self,
+        rows=None,
+        ):
         import baca
         self._rows = []
         self._columns = []

@@ -69,7 +69,7 @@ class Counter(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, start=0):
+    def __init__(self, *, start=0):
         self._start = start
         self._current = start
 

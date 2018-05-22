@@ -38,7 +38,12 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, direction=None, pattern=None):
+    def __init__(
+        self,
+        *,
+        direction=None,
+        pattern=None,
+        ):
         if direction is not None:
             assert direction in (abjad.Up, abjad.Down), repr(direction)
         self._direction = direction

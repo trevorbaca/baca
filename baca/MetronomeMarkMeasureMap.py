@@ -217,7 +217,10 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, items=None):
+    def __init__(
+        self,
+        items=None,
+        ):
         if items is not None:
             items = tuple(items)
         self._items = items
@@ -226,7 +229,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
     def __getitem__(self, argument):
         """
-        Gets `argument`.
+        Gets ``argument``.
 
         ..  container:: example
 

@@ -131,6 +131,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         compound_meter_multiplier=abjad.Multiplier(1),
         cyclic=True,
         durations=(),

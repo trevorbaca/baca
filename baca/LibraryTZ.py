@@ -2705,7 +2705,7 @@ class LibraryTZ(abjad.AbjadObject):
         """
         from .LibraryNS import LibraryNS
         scopes = [LibraryNS.scope(*_) for _ in scopes]
-        return TimelineScope(scopes)
+        return TimelineScope(scopes=scopes)
 
     @staticmethod
     def transition(

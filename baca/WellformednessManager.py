@@ -20,7 +20,11 @@ class WellformednessManager(abjad.WellformednessManager):
 
     ### INITIALIZER ###
 
-    def __init__(self, allow_percussion_clef=None):
+    def __init__(
+        self,
+        *,
+        allow_percussion_clef=None,
+        ):
         abjad.WellformednessManager.__init__(
             self,
             allow_percussion_clef=allow_percussion_clef,

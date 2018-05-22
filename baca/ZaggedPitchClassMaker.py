@@ -79,6 +79,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         pc_cells=None,
         division_ratios=None,
         grouping_counts=None,

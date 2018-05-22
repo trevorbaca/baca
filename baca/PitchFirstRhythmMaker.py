@@ -145,6 +145,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
     def __init__(
         self,
+        *,
         acciaccatura_specifiers=None,
         beam_specifier=None,
         division_masks=None,

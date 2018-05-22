@@ -3897,7 +3897,7 @@ class LibraryAF(abjad.AbjadObject):
             Attaches cross-staff command to pitched head 0:
 
             >>> score_template = baca.StringTrioScoreTemplate()
-            >>> accumulator = baca.MusicAccumulator(score_template)
+            >>> accumulator = baca.MusicAccumulator(score_template=score_template)
             >>> accumulator(
             ...     accumulator.music_maker(
             ...         'ViolinMusicVoice',
@@ -4154,7 +4154,7 @@ class LibraryAF(abjad.AbjadObject):
             Attaches cross-staff command to last two pitched leaves:
 
             >>> score_template = baca.StringTrioScoreTemplate()
-            >>> accumulator = baca.MusicAccumulator(score_template)
+            >>> accumulator = baca.MusicAccumulator(score_template=score_template)
             >>> accumulator(
             ...     accumulator.music_maker(
             ...         'ViolinMusicVoice',

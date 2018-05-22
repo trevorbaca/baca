@@ -37,6 +37,7 @@ class Scope(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         stages: typing.Tuple[int, int] = None,
         voice_name: str = None,
         ) -> None:

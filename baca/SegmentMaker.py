@@ -279,6 +279,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def __init__(
         self,
+        *,
         allow_empty_selections: bool = None,
         breaks: BreakMeasureMap = None,
         clock_time_override: abjad.MetronomeMark = None,
@@ -2482,6 +2483,8 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = class_(name='', command=momento.value)
         elif isinstance(momento.value, class_):
             indicator = momento.value
+        elif class_ is baca.StaffLines:
+            indicator = class_(line_count=momento.value)
         else:
             indicator = class_(momento.value)
         return indicator

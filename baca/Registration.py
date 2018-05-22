@@ -40,7 +40,10 @@ class Registration(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, components=None):
+    def __init__(
+        self,
+        components=None,
+        ):
         import baca
         components_ = []
         for component in components or []:

@@ -65,7 +65,10 @@ class PitchArrayRow(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, cells=None):
+    def __init__(
+        self,
+        cells=None,
+        ):
         self._parent_array = None
         self._pitch_range = abjad.PitchRange()
         self._cells = []

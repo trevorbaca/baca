@@ -16,7 +16,11 @@ class PitchTreeSpanner(abjad.Spanner):
 
     ### INITIALIZER ###
 
-    def __init__(self, level=0):
+    def __init__(
+        self,
+        *,
+        level=0,
+        ):
         abjad.Spanner.__init__(self)
         assert isinstance(level, int), repr(level)
         self._level = level

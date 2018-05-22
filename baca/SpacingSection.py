@@ -40,7 +40,10 @@ class SpacingSection(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, duration=None):
+    def __init__(
+        self,
+        duration=None,
+        ):
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
         self._duration = duration
@@ -49,7 +52,7 @@ class SpacingSection(abjad.AbjadObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is a spacing section with same duration as
+        Is true when ``argument`` is a spacing section with same duration as
         this spacing section.
 
         ..  container:: example
@@ -166,7 +169,7 @@ class SpacingSection(abjad.AbjadObject):
     @staticmethod
     def from_string(string):
         """
-        Makes spacing section from fraction `string`.
+        Makes spacing section from fraction ``string``.
 
         ..  container:: example
 

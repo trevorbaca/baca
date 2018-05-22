@@ -21,6 +21,7 @@ class PageSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         number: int = None,
         systems: typing.List[typing.Union[list, SystemSpecifier]] = None,
         ) -> None:

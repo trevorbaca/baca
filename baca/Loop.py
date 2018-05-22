@@ -8,7 +8,7 @@ class Loop(abjad.CyclicTuple):
 
     ..  container::
 
-        >>> loop = baca.Loop([0, 2, 4], [1])
+        >>> loop = baca.Loop([0, 2, 4], intervals=[1])
         >>> abjad.f(loop, strict=89)
         baca.Loop(
             [
@@ -73,7 +73,12 @@ class Loop(abjad.CyclicTuple):
 
     ### INITIALIZER ###
 
-    def __init__(self, items=None, intervals=None):
+    def __init__(
+        self,
+        items=None,
+        *,
+        intervals=None,
+        ):
         if items is not None:
             assert isinstance(items, collections.Iterable), repr(items)
             items = [abjad.NamedPitch(_) for _ in items]

@@ -59,7 +59,11 @@ class TimelineScope(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, scopes=None):
+    def __init__(
+        self,
+        *,
+        scopes=None,
+        ):
         if scopes is not None:
             assert isinstance(scopes, (tuple, list))
             scopes_ = []

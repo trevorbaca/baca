@@ -72,6 +72,7 @@ class LMRSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         left_counts=None,
         left_cyclic=None,
         left_length=None,

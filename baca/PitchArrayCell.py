@@ -169,7 +169,12 @@ class PitchArrayCell(abjad.AbjadObject):
 
     ### INTIALIZER ###
 
-    def __init__(self, pitches=None, width=1):
+    def __init__(
+        self,
+        pitches=None,
+        *,
+        width=1,
+        ):
         self._pitches = None
         if pitches is not None:
             if isinstance(pitches, str):

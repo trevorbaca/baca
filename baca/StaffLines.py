@@ -21,7 +21,12 @@ class StaffLines(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, line_count=None, hide=None):
+    def __init__(
+        self,
+        *,
+        line_count=None,
+        hide=None,
+        ):
         if line_count is not None:
             assert isinstance(line_count, int), repr(line_count)
             assert 0 <= line_count, repr(line_count)
@@ -38,9 +43,9 @@ class StaffLines(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> staff_lines_1 = baca.StaffLines(1)
-            >>> staff_lines_2 = baca.StaffLines(1)
-            >>> staff_lines_3 = baca.StaffLines(5)
+            >>> staff_lines_1 = baca.StaffLines(line_count=1)
+            >>> staff_lines_2 = baca.StaffLines(line_count=1)
+            >>> staff_lines_3 = baca.StaffLines(line_count=5)
 
             >>> staff_lines_1 == staff_lines_1
             True
@@ -102,7 +107,7 @@ class StaffLines(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.StaffLines(1).context
+            >>> baca.StaffLines(line_count=1).context
             'Staff'
 
         Returns ``'Staff'``.
@@ -116,7 +121,7 @@ class StaffLines(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.StaffLines(1, hide=True).hide
+            >>> baca.StaffLines(line_count=1, hide=True).hide
             True
 
         Defaults to none.
@@ -132,7 +137,7 @@ class StaffLines(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.StaffLines(1).line_count
+            >>> baca.StaffLines(line_count=1).line_count
             1
 
         Returns nonnegative integer.
@@ -146,7 +151,7 @@ class StaffLines(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.StaffLines(1).persistent
+            >>> baca.StaffLines(line_count=1).persistent
             True
 
         Returns true.

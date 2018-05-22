@@ -32,6 +32,7 @@ class MusicContribution(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         anchor=None,
         color_selector=None,
         color_selector_result=None,

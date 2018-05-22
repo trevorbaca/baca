@@ -54,6 +54,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         ratios=None,
         ):
         if ratios is not None:

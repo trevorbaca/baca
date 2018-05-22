@@ -110,6 +110,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         cyclic=True,
         counts=None,
         secondary_division_maker=None,

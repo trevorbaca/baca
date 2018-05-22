@@ -137,7 +137,12 @@ class Tree(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, items=None, item_class=None):
+    def __init__(
+        self,
+        items=None,
+        *,
+        item_class=None,
+        ):
         self._children = []
         self._expression = None
         self._item_class = item_class

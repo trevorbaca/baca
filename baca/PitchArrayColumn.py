@@ -55,7 +55,10 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, cells=None):
+    def __init__(
+        self,
+        cells=None,
+        ):
         self._cells = []
         self._column_index = None
         self._parent_array = None

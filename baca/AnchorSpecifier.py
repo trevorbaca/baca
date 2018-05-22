@@ -31,6 +31,7 @@ class AnchorSpecifier(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         figure_name=None,
         local_selector=None,
         remote_selector=None,

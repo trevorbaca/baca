@@ -210,6 +210,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     def __init__(
         self,
         collections=None,
+        *,
         item_class=None,
         ):
         self._expression = None
@@ -1043,7 +1044,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns cursor.
         """
-        return baca.Cursor(self, cyclic=cyclic, singletons=singletons)
+        return baca.Cursor(cyclic=cyclic, singletons=singletons, source=self)
 
     def flatten(self):
         """

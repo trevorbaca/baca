@@ -76,6 +76,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         bass=None,
         direction=None,
         minimum_semitones=None,

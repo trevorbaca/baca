@@ -117,6 +117,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         counts=None,
         fuse_assignable_total_duration=False,
         append_remainder=False,

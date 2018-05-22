@@ -258,6 +258,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def __init__(
         self,
+        *,
         callbacks=None,
         ):
         callbacks = callbacks or ()

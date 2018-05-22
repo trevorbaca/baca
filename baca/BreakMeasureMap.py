@@ -312,6 +312,7 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         commands=None,
         deactivate=None,
         local_measure_numbers=None,

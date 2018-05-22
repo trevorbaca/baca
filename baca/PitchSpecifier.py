@@ -132,6 +132,7 @@ class PitchSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         expressions=None,
         remove_duplicate_pitch_classes=None,
         remove_duplicates=None,

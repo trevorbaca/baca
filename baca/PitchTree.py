@@ -602,6 +602,7 @@ class PitchTree(Tree):
     def __init__(
         self,
         items=None,
+        *,
         item_class=None,
         ):
         item_class = item_class or abjad.NumberedPitch

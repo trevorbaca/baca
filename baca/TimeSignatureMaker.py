@@ -57,6 +57,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
     def __init__(
         self,
         time_signatures,
+        *,
         count: int = None,
         fermata_measures: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,

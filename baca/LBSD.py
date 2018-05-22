@@ -21,7 +21,12 @@ class LBSD(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, y_offset=None, alignment_distances=None):
+    def __init__(
+        self,
+        *,
+        y_offset=None,
+        alignment_distances=None,
+        ):
         self._y_offset = y_offset
         if alignment_distances is not None:
             assert isinstance(alignment_distances, collections.Iterable)

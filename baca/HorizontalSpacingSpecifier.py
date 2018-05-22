@@ -830,6 +830,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
+        *,
         breaks=None,
         fermata_measure_numbers=None,
         fermata_measure_duration=(1, 4),
@@ -911,7 +912,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration_ = duration
                 duration *= self._magic_lilypond_eol_adjustment
                 eol_adjusted = True
-            spacing_section = SpacingSection(duration)
+            spacing_section = SpacingSection(duration=duration)
             tag = abjad.Tag(abjad.tags.SPACING)
             abjad.attach(spacing_section, skip, tag=tag.prepend('HSS1'))
             if eol_adjusted:
