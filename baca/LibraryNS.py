@@ -7527,6 +7527,7 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: change signature to baca.suite(*commands, selector=None)
     @staticmethod
     def suite(
         commands: typing.Sequence[Command],
