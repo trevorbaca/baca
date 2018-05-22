@@ -698,7 +698,7 @@ class LibraryAF(abjad.AbjadObject):
     def apply(
         selector: Selector,
         *commands: typing.Iterable[Command],
-        ) -> typing.List:
+        ) -> typing.List[MapCommand]:
         r"""
         Applies ``selector`` to each command in ``commands``.
 
@@ -1030,7 +1030,7 @@ class LibraryAF(abjad.AbjadObject):
             message = '\n  Selector must be str or expression.'
             message += f'\n  Not {selector!r}.'
             raise Exception(message)
-        commands_: typing.List[Command] = []
+        commands_: typing.List[MapCommand] = []
         for command in commands:
             assert isinstance(command, Command), repr(command)
             command._selector = selector

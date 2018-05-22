@@ -1,7 +1,9 @@
 import abjad
 import baca
 import collections
+import typing
 from .Command import Command
+from .Typing import Selector
 
 
 class MapCommand(Command):
@@ -95,9 +97,14 @@ class MapCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, commands=None, selector=None):
+    def __init__(
+        self,
+        commands: typing.Union[
+            abjad.Expression, Command, typing.Iterable] = None,
+        selector: Selector = None,
+        ) -> None:
         Command.__init__(self, selector=selector)
-        if isinstance(commands, (abjad.Expression, baca.Command)):
+        if isinstance(commands, (abjad.Expression, Command)):
             commands = abjad.CyclicTuple([commands])
         elif isinstance(commands, collections.Iterable):
             commands = abjad.CyclicTuple(commands)
@@ -107,16 +114,14 @@ class MapCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> typing.Optional[typing.List]:
         """
-        Maps commands to result of selector called on `argument`.
-
-        Returns none.
+        Maps commands to result of selector called on ``argument``.
         """
         if argument is None:
-            return
+            return None
         if not self.commands:
-            return
+            return None
         if self.selector is not None:
             argument = self.selector(argument)
             if self.selector._is_singular_get_item():
@@ -131,10 +136,8 @@ class MapCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self):
+    def commands(self) -> typing.Optional[abjad.CyclicTuple]:
         """
         Gets commands.
-
-        Returns cylic tuple or none.
         """
         return self._commands
