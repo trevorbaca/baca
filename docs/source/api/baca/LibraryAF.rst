@@ -52,6 +52,8 @@ LibraryAF
 
    .. automethod:: LibraryAF.ancora_dynamic
 
+   .. automethod:: LibraryAF.apply
+
    .. automethod:: LibraryAF.arpeggio
 
    .. automethod:: LibraryAF.articulation

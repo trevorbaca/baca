@@ -212,7 +212,7 @@ markup = MarkupLibrary()
 
 def map(commands, selector):
     """
-    Maps `commands` to result of `selector`.
+    Maps ``commands`` to result of ``selector``.
 
     Returns map command.
     """
