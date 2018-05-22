@@ -6,14 +6,16 @@ import sys
 
 os.system('clear')
 if 1 < len(sys.argv):
-    args = ' '.join(sys.argv[1:])
-    print(f'Running trim-doctest on {args} ...')
+    arguments = ' '.join(sys.argv[1:])
+    print(f'Running trim-doctest on {arguments} ...')
 else:
-    args = ''
+    arguments = ''
     print(f'Running trim-doctest ...')
 
 output = pathlib.Path('/Users/trevorbaca/.tmp/doctest.out')
-os.system(f'ajv doctest --external-modules=baca -x {args} > {str(output)}')
+os.system(
+    f'ajv doctest --external-modules=baca -x {arguments} > {str(output)}'
+    )
 os.system(f'cat {str(output)}')
 
 keep, got, file_location_line = [], False, None

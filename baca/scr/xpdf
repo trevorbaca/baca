@@ -5,10 +5,10 @@ import sys
 
 
 if 1 < len(sys.argv):
-    args = ' '.join(sys.argv[1:])
-    print(f'Running xpdf on {args} ...')
+    arguments = ' '.join(sys.argv[1:])
+    print(f'Running xpdf on {arguments} ...')
 else:
-    args = ''
+    arguments = ''
     print(f'Running xpdf ...')
 
 log = '~/.abjad/ide/latex.log'

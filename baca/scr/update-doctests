@@ -70,8 +70,8 @@ def update_file(name):
 if __name__ == '__main__':
     os.system('clear')
     if 1 < len(sys.argv):
-        args = ' '.join(sys.argv[1:])
-        print(f'Running update-doctests on {args} ...')
+        arguments = ' '.join(sys.argv[1:])
+        print(f'Running update-doctests on {arguments} ...')
     else:
         print(f'Must specify one or more files ...')
         sys.exit()

@@ -211,7 +211,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     ### PUBLIC METHODS ###
 
-    def get(self, *args):
+    def get(self, *arguments):
         """
         Gets constellation in circuit.
 
@@ -227,12 +227,12 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         Returns constellation or list.
         """
-        if len(args) == 1:
-            constellation_number = args[0]
+        if len(arguments) == 1:
+            constellation_number = arguments[0]
             constellation_index = constellation_number - 1
             return self._constellations[constellation_index]
-        elif len(args) == 2:
-            constellation_number, chord_number = args
+        elif len(arguments) == 2:
+            constellation_number, chord_number = arguments
             constellation_index = constellation_number - 1
             constellation = self._constellations[constellation_index]
             return constellation.get_chord(chord_number)

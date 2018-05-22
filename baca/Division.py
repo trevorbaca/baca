@@ -355,7 +355,7 @@ class Division(abjad.NonreducedFraction):
             raise Exception(f'invalid start offsets: {start_offsets!r}.')
         return division
 
-    def __copy__(self, *args):
+    def __copy__(self, *arguments):
         """
         Copies division.
 
@@ -364,13 +364,13 @@ class Division(abjad.NonreducedFraction):
         arguments = self.__getnewargs__()
         return type(self)(*arguments)
 
-    def __deepcopy__(self, *args):
+    def __deepcopy__(self, *arguments):
         """
         Deep copies division.
 
         Returns new division.
         """
-        return self.__copy__(*args)
+        return self.__copy__(*arguments)
 
     def __getnewargs__(self):
         """

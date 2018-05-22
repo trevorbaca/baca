@@ -40,28 +40,30 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, *args):
-        if len(args) == 1 and isinstance(args[0], type(self)):
-            self._tempo_indication = args[0].tempo_indication
+    def __init__(self, *arguments):
+        if len(arguments) == 1 and isinstance(arguments[0], type(self)):
+            self._tempo_indication = arguments[0].tempo_indication
             self._proportional_notation_duration = \
-                args[0].proportional_notation_duration
-        elif len(args) == 2:
-            tempo = args[0]
+                arguments[0].proportional_notation_duration
+        elif len(arguments) == 2:
+            tempo = arguments[0]
             if isinstance(tempo, tuple):
                 tempo = abjad.MetronomeMark(*tempo)
             tempo_indication = tempo
-            proportional_notation_duration = abjad.Duration(args[1])
+            proportional_notation_duration = abjad.Duration(arguments[1])
             self._tempo_indication = tempo_indication
             self._proportional_notation_duration = \
                 proportional_notation_duration
-        elif len(args) == 0:
+        elif len(arguments) == 0:
             tempo = abjad.MetronomeMark()
             proportional_notation_duration = abjad.Duration(1, 68)
             self._tempo_indication = tempo
             self._proportional_notation_duration = \
                 proportional_notation_duration
         else:
-            raise ValueError(f'bad spacing indication args: {args!r}.')
+            raise ValueError(
+                f'bad spacing indication arguments: {arguments!r}.'
+                )
 
     ### SPECIAL METHODS ###
 

@@ -58,18 +58,18 @@ class Matrix(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, *args, **keywords):
-        if len(args) == 1:
+    def __init__(self, *arguments, **keywords):
+        if len(arguments) == 1:
             assert not keywords
-            rows, columns = self._initialize_from_rows(args[0])
+            rows, columns = self._initialize_from_rows(arguments[0])
         elif 'columns' in keywords:
-            assert not args
+            assert not arguments
             rows, columns = self._initialize_from_columns(keywords['columns'])
-        elif len(args) == 0:
+        elif len(arguments) == 0:
             rows, columns = self._initialize_from_rows([[0], [0]])
         else:
             message = 'can not initialize {}: {!r}.'
-            message = message(type(self).__name__, args)
+            message = message(type(self).__name__, arguments)
             raise ValueError(message)
         self._rows = rows
         self._columns = columns
