@@ -475,30 +475,30 @@ class RhythmCommand(Command):
                 previous_state = dictionary.get(abjad.tags.RHYTHM)
                 if previous_state.get('name') != self.persist:
                     previous_state = None
-            selections = []
-            previous_rhythm_maker, divisions_ = None, []
+
+            labelled_divisions = []
             for i, division in enumerate(divisions):
-                divisions_.append(division)
-                found_rhythm_maker = False
                 for pair in pairs:
                     rhythm_maker, pattern = pair
                     if pattern.matches_index(i, division_count):
-                        found_rhythm_maker = True
+                        labelled_divisions.append((division, rhythm_maker))
                         break
-                if not found_rhythm_maker:
-                    message = 'can not find rhythm-maker for division {i}.'
-                    raise Exception(message)
-                if (i == division_count - 1 or
-                    (previous_rhythm_maker is not None and
-                    rhythm_maker != previous_rhythm_maker)):
-                    selections_ = rhythm_maker(
-                        divisions_,
-                        previous_state=previous_state,
-                        )
-                    selections.extend(selections_)
-                    divisions_ = []
-                if rhythm_maker != previous_rhythm_maker:
-                    previous_rhythm_maker = rhythm_maker
+                else:
+                    raise Exception('no rhythm-maker for division {i}.')
+            assert len(labelled_divisions) == len(divisions)
+            labelled_divisions = baca.sequence(labelled_divisions)
+            labelled_divisions = labelled_divisions.group_by(
+                lambda pair: pair[1],
+                )
+            selections = []
+            for subsequence in labelled_divisions:
+                divisions_ = [pair[0] for pair in subsequence]
+                rhythm_maker = subsequence[0][1]
+                selections_ = rhythm_maker(
+                    divisions_,
+                    previous_state=previous_state,
+                    )
+                selections.extend(selections_)
             self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
@@ -842,20 +842,10 @@ class RhythmCommand(Command):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                                    ]
-                                }
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \makeBlue                                                                %! SM24
+                                c'4.
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
