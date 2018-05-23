@@ -84,8 +84,6 @@ RhythmCommand
 
    .. autoattribute:: RhythmCommand.rhythm_maker
 
-   .. autoattribute:: RhythmCommand.rhythm_overwrites
-
    .. autoattribute:: RhythmCommand.right_broken
 
    .. autoattribute:: RhythmCommand.selector

@@ -202,7 +202,6 @@ class RhythmCommand(Command):
         '_rewrite_meter',
         '_rewrite_rest_filled',
         '_rhythm_maker',
-        '_rhythm_overwrites',
         '_right_broken',
         '_split_at_measure_boundaries',
         '_stages',
@@ -226,7 +225,6 @@ class RhythmCommand(Command):
         reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
         rewrite_rest_filled: bool = None,
-        rhythm_overwrites: typing.List[tuple] = None,
         rhythm_maker: rhythm_maker_typing = None,
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
@@ -265,10 +263,6 @@ class RhythmCommand(Command):
         self._rewrite_rest_filled = rewrite_rest_filled
         self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
-        if rhythm_overwrites is not None:
-            assert isinstance(rhythm_overwrites, list)
-            assert all(isinstance(_, tuple) for _ in rhythm_overwrites)
-        self._rhythm_overwrites = rhythm_overwrites
         if right_broken is not None:
             right_broken = bool(right_broken)
         self._right_broken = right_broken
@@ -402,47 +396,6 @@ class RhythmCommand(Command):
         assert not any(_.start_offset is None for _ in divisions_)
         return divisions_
 
-    def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatManager(self)
-        keyword_argument_names = agent.signature_keyword_names
-        if not self.rhythm_overwrites:
-            keyword_argument_names = list(keyword_argument_names)
-            keyword_argument_names.remove('rhythm_overwrites')
-        return abjad.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            )
-
-    def _handle_rhythm_overwrites(self, time_signatures, selections):
-        if not self.rhythm_overwrites:
-            selections
-        maker = abjad.MeasureMaker()
-        dummy_measures = maker(time_signatures)
-        dummy_time_signature_voice = abjad.Voice(dummy_measures)
-        dummy_music_voice = abjad.Voice()
-        dummy_music_voice.extend(selections)
-        dummy_staff = abjad.Staff([
-            dummy_time_signature_voice,
-            dummy_music_voice,
-            ])
-        dummy_staff.is_simultaneous = True
-        assert len(self.rhythm_overwrites) == 1, repr(self.rhythm_overwrites)
-        selector, division_maker, rhythm_maker = self.rhythm_overwrites[0]
-        old_selection = selector(dummy_music_voice)
-        old_selection = abjad.select(old_selection)
-        result = old_selection._get_parent_and_start_stop_indices()
-        parent, start_index, stop_index = result
-        old_duration = abjad.inspect(old_selection).get_duration()
-        division_lists = division_maker([old_duration])
-        assert len(division_lists) == 1
-        division_list = division_lists[0]
-        new_selection = rhythm_maker(division_list)
-        stop_index += 1
-        dummy_music_voice[start_index:stop_index] = new_selection
-        music = dummy_music_voice[:]
-        selections = [abjad.select(_) for _ in music]
-        return selections
-
     def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
@@ -518,11 +471,6 @@ class RhythmCommand(Command):
                 reference_meters=self.reference_meters,
                 rewrite_tuplets=False,
                 repeat_ties=self.repeat_ties,
-                )
-        if self.rhythm_overwrites:
-            selections = self._handle_rhythm_overwrites(
-                time_signatures,
-                selections,
                 )
         if self.rewrite_rest_filled:
             selections = rhythmos.DurationSpecifier._rewrite_rest_filled_(
@@ -984,13 +932,6 @@ class RhythmCommand(Command):
 
         """
         return self._rhythm_maker
-
-    @property
-    def rhythm_overwrites(self) -> typing.Optional[typing.List[tuple]]:
-        """
-        Gets rhythm overwrites.
-        """
-        return self._rhythm_overwrites
 
     @property
     def right_broken(self) -> typing.Optional[bool]:
