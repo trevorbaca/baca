@@ -263,15 +263,7 @@ class RhythmCommand(Command):
         if rewrite_rest_filled is not None:
             rewrite_rest_filled = bool(rewrite_rest_filled)
         self._rewrite_rest_filled = rewrite_rest_filled
-        prototype = (rhythmos.RhythmMaker, abjad.Selection, type(None))
-        if not isinstance(rhythm_maker, prototype):
-            assert isinstance(rhythm_maker, collections.Iterable), repr(rhythm_maker)
-            for pair in rhythm_maker:
-                assert isinstance(pair, tuple), repr(pair)
-                assert len(pair) == 2, repr(pair)
-                rhythm_maker_, pattern = pair
-                assert isinstance(rhythm_maker_, rhythm_maker_type)
-                assert isinstance(pattern, abjad.Pattern), repr(pattern)
+        self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
         if rhythm_overwrites is not None:
             assert isinstance(rhythm_overwrites, list)
@@ -361,6 +353,30 @@ class RhythmCommand(Command):
                 raise Exception(message)
             divisions = divisions_
         return divisions
+
+    @staticmethod
+    def _check_rhythm_maker_input(rhythm_maker):
+        if rhythm_maker is None:
+            return
+        prototype = (abjad.Selection, rhythmos.RhythmMaker)
+        if isinstance(rhythm_maker, prototype):
+            return
+        message = "\n  Input parameter 'rhythm_maker' accepts:"
+        message += '\n    rhythm-maker'
+        message += '\n    selection'
+        message += '\n    sequence of (rhythm-maker-or-selection, pattern) pairs'
+        message += '\n    none'
+        message += "\n  Input parameter 'rhythm_maker' received:"
+        message += f'\n    {format(rhythm_maker)}'
+        if not isinstance(rhythm_maker, collections.Sequence): 
+            raise Exception(message)
+        for pair in rhythm_maker:
+            if not isinstance(pair, tuple) or len(pair) != 2:
+                raise Exception(message)
+            if not isinstance(pair[0], prototype):
+                raise Exception(message)
+            if not isinstance(pair[1], abjad.Pattern):
+                raise Exception(message)
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
@@ -888,6 +904,24 @@ class RhythmCommand(Command):
                         }
                     >>
                 >>
+
+        ..  container:: example
+
+            Raises exception on invalid input:
+
+            >>> command = baca.RhythmCommand(
+            ...     rhythm_maker='text',
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception:
+              Input parameter 'rhythm_maker' accepts:
+                rhythm-maker
+                selection
+                sequence of (rhythm-maker-or-selection, pattern) pairs
+                none
+              Input parameter 'rhythm_maker' received:
+                text
 
         """
         return self._rhythm_maker
