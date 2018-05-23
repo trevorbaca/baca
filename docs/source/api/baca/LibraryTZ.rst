@@ -42,6 +42,8 @@ LibraryTZ
 
    .. automethod:: LibraryTZ.text_script_extra_offset
 
+   .. automethod:: LibraryTZ.text_script_font_size
+
    .. automethod:: LibraryTZ.text_script_padding
 
    .. automethod:: LibraryTZ.text_script_parent_center

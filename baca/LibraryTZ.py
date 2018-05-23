@@ -681,6 +681,28 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_script_font_size(
+        n: Number,
+        *,
+        selector: Selector = 'baca.leaves()',
+        allow_mmrests: bool = False,
+        ) -> OverrideCommand:
+        """
+        Overrides text script font size.
+        """
+        if allow_mmrests is True:
+            blacklist = None
+        else:
+            blacklist = (abjad.MultimeasureRest,)
+        return OverrideCommand(
+            attribute='font_size',
+            blacklist=blacklist,
+            value=n,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_script_padding(
         n: Number,
         *,

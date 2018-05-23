@@ -402,6 +402,16 @@ class RhythmCommand(Command):
         assert not any(_.start_offset is None for _ in divisions_)
         return divisions_
 
+    # TODO: eventually integrate into self._make_rhythm()
+    def _get_previous_segment_stop_state(self):
+        previous_segment_stop_state = None
+        dictionary = self.previous_segment_voice_metadata
+        if dictionary:
+            previous_segment_stop_state = dictionary.get(abjad.tags.RHYTHM)
+            if previous_state.get('name') != self.persist:
+                previous_segment_stop_state = None
+        return previous_segment_stop_state
+
     def _get_storage_format_specification(self):
         agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
@@ -469,13 +479,6 @@ class RhythmCommand(Command):
             divisions = self._apply_division_expression(divisions)
             division_count = len(divisions)
             start_offset = divisions[0].start_offset
-            previous_state = None
-            dictionary = self.previous_segment_voice_metadata
-            if dictionary:
-                previous_state = dictionary.get(abjad.tags.RHYTHM)
-                if previous_state.get('name') != self.persist:
-                    previous_state = None
-
             labelled_divisions = []
             for i, division in enumerate(divisions):
                 for pair in pairs:
@@ -484,20 +487,23 @@ class RhythmCommand(Command):
                         labelled_divisions.append((division, rhythm_maker))
                         break
                 else:
-                    raise Exception('no rhythm-maker for division {i}.')
+                    raise Exception(f'no rhythm-maker for division {i}.')
             assert len(labelled_divisions) == len(divisions)
             labelled_divisions = baca.sequence(labelled_divisions)
             labelled_divisions = labelled_divisions.group_by(
                 lambda pair: pair[1],
                 )
             selections = []
+            maker_to_state = abjad.OrderedDict()
             for subsequence in labelled_divisions:
                 divisions_ = [pair[0] for pair in subsequence]
                 rhythm_maker = subsequence[0][1]
+                previous_state = maker_to_state.get(rhythm_maker, None)
                 selections_ = rhythm_maker(
                     divisions_,
                     previous_state=previous_state,
                     )
+                maker_to_state[rhythm_maker] = rhythm_maker.state
                 selections.extend(selections_)
             self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
@@ -760,7 +766,6 @@ class RhythmCommand(Command):
         """
         return self._rewrite_rest_filled
 
-    # TODO: make patterns work
     @property
     def rhythm_maker(self) -> typing.Optional[rhythm_maker_typing]:
         r"""
@@ -769,25 +774,35 @@ class RhythmCommand(Command):
 
         ..  container:: example
 
-            Alternates rhythm-makers:
+            Alternates rhythm-makers.
+            
+            Talea rhythm-maker remembers previous state across divisions:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 12)),
-            ...     time_signatures=[(3, 8), (4, 8), (3, 8), (4, 8)],
+            ...     time_signatures=5 * [(4, 8)],
             ...     )
 
-            >>> rhythm_maker_1 = rhythmos.NoteRhythmMaker()
-            >>> rhythm_maker_2 = rhythmos.EvenRunRhythmMaker()
+            >>> rhythm_maker_1 = rhythmos.NoteRhythmMaker(
+            ...     division_masks=[abjad.silence([0], 1)],
+            ...     )
+            >>> rhythm_maker_2 = rhythmos.TaleaRhythmMaker(
+            ...     talea=rhythmos.Talea(
+            ...         counts=[3, 4],
+            ...         denominator=16,
+            ...         ),
+            ...     )
             >>> command = baca.RhythmCommand(
             ...     rhythm_maker=[
-            ...         (rhythm_maker_1, abjad.index([0], 2)),
-            ...         (rhythm_maker_2, abjad.index([1], 2)),
+            ...         (rhythm_maker_1, abjad.index([2])),
+            ...         (rhythm_maker_2, abjad.index([0], 1)),
             ...         ],
             ...     )
 
             >>> maker(
             ...     'MusicVoice',
+            ...     baca.label(abjad.label().with_durations(denominator=16)),
             ...     command,
             ...     )
 
@@ -806,30 +821,33 @@ class RhythmCommand(Command):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
+                            s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 5]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -845,46 +863,98 @@ class RhythmCommand(Command):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \makeBlue                                                                %! SM24
-                                c'4.
-                                {
+                                c'8.
+                                ^ \markup {
+                                    \small
+                                        3/16
+                                    }
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                                    [
+                                \makeBlue                                                                %! SM24
+                                c'4
+                                ^ \markup {
+                                    \small
+                                        4/16
+                                    }
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
+                                \makeBlue                                                                %! SM24
+                                c'16
+                                ~
+                                ^ \markup {
+                                    \small
+                                        3/16
+                                    }
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \makeBlue                                                                %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                                    ]
-                                }
+                                \makeBlue                                                                %! SM24
+                                c'4
+                                ^ \markup {
+                                    \small
+                                        4/16
+                                    }
+                <BLANKLINE>
+                                \makeBlue                                                                %! SM24
+                                c'8
+                                ^ \markup {
+                                    \small
+                                        2/16
+                                    }
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
+                                r2
+                                ^ \markup {
+                                    \small
+                                        8/16
+                                    }
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
                                 \makeBlue                                                                %! SM24
-                                c'4.
-                                {
+                                c'16
+                                ^ \markup {
+                                    \small
+                                        1/16
+                                    }
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                                    [
+                                \makeBlue                                                                %! SM24
+                                c'4
+                                ^ \markup {
+                                    \small
+                                        4/16
+                                    }
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
+                                \makeBlue                                                                %! SM24
+                                c'8.
+                                ^ \markup {
+                                    \small
+                                        3/16
+                                    }
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
+                                % [MusicVoice measure 5]                                                 %! SM4
+                                \makeBlue                                                                %! SM24
+                                c'4
+                                ^ \markup {
+                                    \small
+                                        4/16
+                                    }
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
-                                    c'8
-                                    ]
+                                \makeBlue                                                                %! SM24
+                                c'8.
+                                [
+                                ^ \markup {
+                                    \small
+                                        3/16
+                                    }
                 <BLANKLINE>
-                                }
+                                \makeBlue                                                                %! SM24
+                                c'16
+                                ]
+                                ^ \markup {
+                                    \small
+                                        1/16
+                                    }
+                <BLANKLINE>
                             }
                         }
                     >>
