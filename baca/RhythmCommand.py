@@ -354,29 +354,35 @@ class RhythmCommand(Command):
             divisions = divisions_
         return divisions
 
-    @staticmethod
-    def _check_rhythm_maker_input(rhythm_maker):
+    def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
             return
         prototype = (abjad.Selection, rhythmos.RhythmMaker)
         if isinstance(rhythm_maker, prototype):
             return
-        message = "\n  Input parameter 'rhythm_maker' accepts:"
-        message += '\n    rhythm-maker'
-        message += '\n    selection'
-        message += '\n    sequence of (rhythm-maker-or-selection, pattern) pairs'
-        message += '\n    none'
-        message += "\n  Input parameter 'rhythm_maker' received:"
-        message += f'\n    {format(rhythm_maker)}'
-        if not isinstance(rhythm_maker, collections.Sequence): 
+        if not self._check_rhythm_maker_pattern_pairs(rhythm_maker):
+            message = "\n  Input parameter 'rhythm_maker' accepts:"
+            message += '\n    rhythm-maker'
+            message += '\n    selection'
+            message += '\n    sequence of (rhythm-maker-or-selection, pattern) pairs'
+            message += '\n    none'
+            message += "\n  Input parameter 'rhythm_maker' received:"
+            message += f'\n    {format(rhythm_maker)}'
             raise Exception(message)
-        for pair in rhythm_maker:
+
+    @staticmethod
+    def _check_rhythm_maker_pattern_pairs(pairs):
+        if not isinstance(pairs, collections.Sequence): 
+            return False
+        prototype = (abjad.Selection, rhythmos.RhythmMaker)
+        for pair in pairs:
             if not isinstance(pair, tuple) or len(pair) != 2:
-                raise Exception(message)
+                return False
             if not isinstance(pair[0], prototype):
-                raise Exception(message)
+                return False
             if not isinstance(pair[1], abjad.Pattern):
-                raise Exception(message)
+                return False
+        return True
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
@@ -446,11 +452,11 @@ class RhythmCommand(Command):
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
         else:
-            prototype = (rhythmos.RhythmMaker, collections.Iterable)
-            if not isinstance(rhythm_maker, prototype):
-                message = 'must be rhythm-maker, selection or pairs:\n'
-                message += f'  not {rhythm_maker!r}'
-                raise TypeError(message)
+            if isinstance(rhythm_maker, rhythmos.RhythmMaker):
+                pairs = [(rhythm_maker, abjad.index([0], 1))]
+            else:
+                pairs = list(rhythm_maker)
+            assert self._check_rhythm_maker_pattern_pairs(pairs)
             division_maker = self.division_maker
             if division_maker is None:
                 division_maker = DivisionMaker()
@@ -469,17 +475,6 @@ class RhythmCommand(Command):
                 previous_state = dictionary.get(abjad.tags.RHYTHM)
                 if previous_state.get('name') != self.persist:
                     previous_state = None
-            if isinstance(rhythm_maker, rhythmos.RhythmMaker):
-                pairs = [(rhythm_maker, abjad.index([0], 1))]
-            else:
-                pairs = list(rhythm_maker)
-            assert isinstance(pairs, list), repr(pairs)
-            for pair in pairs:
-                assert isinstance(pair, tuple), repr(pair)
-                assert len(pair) == 2, repr(pair)
-                rhythm_maker, pattern = pair
-                assert isinstance(rhythm_maker, rhythmos.RhythmMaker)
-                assert isinstance(pattern, abjad.Pattern), repr(pattern)
             selections = []
             previous_rhythm_maker, divisions_ = None, []
             for i, division in enumerate(divisions):
