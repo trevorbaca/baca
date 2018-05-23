@@ -402,16 +402,6 @@ class RhythmCommand(Command):
         assert not any(_.start_offset is None for _ in divisions_)
         return divisions_
 
-    # TODO: eventually integrate into self._make_rhythm()
-    def _get_previous_segment_stop_state(self):
-        previous_segment_stop_state = None
-        dictionary = self.previous_segment_voice_metadata
-        if dictionary:
-            previous_segment_stop_state = dictionary.get(abjad.tags.RHYTHM)
-            if previous_state.get('name') != self.persist:
-                previous_segment_stop_state = None
-        return previous_segment_stop_state
-
     def _get_storage_format_specification(self):
         agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
@@ -453,7 +443,6 @@ class RhythmCommand(Command):
         selections = [abjad.select(_) for _ in music]
         return selections
 
-    # TODO: make self.state work with multimaker input
     def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
@@ -494,11 +483,17 @@ class RhythmCommand(Command):
                 lambda pair: pair[1],
                 )
             selections = []
+            previous_segment_stop_state = self._previous_segment_stop_state()
             maker_to_state = abjad.OrderedDict()
             for subsequence in labelled_divisions:
                 divisions_ = [pair[0] for pair in subsequence]
                 rhythm_maker = subsequence[0][1]
-                previous_state = maker_to_state.get(rhythm_maker, None)
+                # TODO: eventually allow previous segment stop state
+                #       and local stop state to work together
+                if previous_segment_stop_state is None:
+                    previous_state = maker_to_state.get(rhythm_maker, None)
+                else:
+                    previous_state = previous_segment_stop_state
                 selections_ = rhythm_maker(
                     divisions_,
                     previous_state=previous_state,
@@ -536,6 +531,15 @@ class RhythmCommand(Command):
                 )
         self._tag_broken_ties(selections)
         return selections, start_offset
+
+    def _previous_segment_stop_state(self):
+        previous_segment_stop_state = None
+        dictionary = self.previous_segment_voice_metadata
+        if dictionary:
+            previous_segment_stop_state = dictionary.get(abjad.tags.RHYTHM)
+            if previous_segment_stop_state.get('name') != self.persist:
+                previous_segment_stop_state = None
+        return previous_segment_stop_state
 
     def _tag_broken_ties(self, selections):
         if not isinstance(self.rhythm_maker, rhythmos.RhythmMaker):
