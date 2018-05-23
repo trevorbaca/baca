@@ -97,7 +97,3 @@ RhythmCommand
    .. autoattribute:: RhythmCommand.tag
 
    .. autoattribute:: RhythmCommand.tags
-
-   .. autoattribute:: RhythmCommand.tie_first
-
-   .. autoattribute:: RhythmCommand.tie_last

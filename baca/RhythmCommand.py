@@ -206,8 +206,6 @@ class RhythmCommand(Command):
         '_split_at_measure_boundaries',
         '_stages',
         '_state',
-        '_tie_first',
-        '_tie_last',
         )
 
     _publish_storage_format = True
@@ -229,8 +227,6 @@ class RhythmCommand(Command):
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
-        tie_first: bool = None,
-        tie_last: bool = None,
         ) -> None:
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
@@ -274,12 +270,6 @@ class RhythmCommand(Command):
             assert len(stages) == 2, repr(stages)
         self._stages = stages
         self._state: typing.Optional[abjad.OrderedDict] = None
-        if tie_first is not None:
-            tie_first = bool(tie_first)
-        self._tie_first = tie_first
-        if tie_last is not None:
-            tie_last = bool(tie_last)
-        self._tie_last = tie_last
 
     ### SPECIAL METHODS ###
 
@@ -296,14 +286,6 @@ class RhythmCommand(Command):
         first_leaf = abjad.inspect(music).get_leaf(0)
         last_leaf = abjad.inspect(music).get_leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
-        if self.tie_first and isinstance(first_leaf, pitched_prototype):
-            abjad.attach(abjad.tags.TIE_TO, first_leaf)
-            if self.repeat_ties:
-                abjad.attach(abjad.tags.REPEAT_TIE, first_leaf)
-        if self.tie_last and isinstance(last_leaf, pitched_prototype):
-            abjad.attach(abjad.tags.TIE_FROM, last_leaf)
-            if self.repeat_ties:
-                abjad.attach(abjad.tags.REPEAT_TIE, last_leaf)
         return abjad.AnnotatedTimespan(
             start_offset=start_offset,
             stop_offset=None,
@@ -962,17 +944,3 @@ class RhythmCommand(Command):
         Populated by segment-maker.
         """
         return self._state
-
-    @property
-    def tie_first(self) -> typing.Optional[bool]:
-        """
-        Is true when command ties into first pleaf.
-        """
-        return self._tie_first
-
-    @property
-    def tie_last(self) -> typing.Optional[bool]:
-        """
-        Is true when command ties into last pleaf.
-        """
-        return self._tie_last

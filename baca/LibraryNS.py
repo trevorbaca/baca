@@ -3412,8 +3412,6 @@ class LibraryNS(abjad.AbjadObject):
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
-        tie_first: bool = None,
-        tie_last: bool = None,
         ) -> RhythmCommand:
         """
         Makes rhythm command.
@@ -3431,8 +3429,6 @@ class LibraryNS(abjad.AbjadObject):
             right_broken=right_broken,
             split_at_measure_boundaries=split_at_measure_boundaries,
             stages=stages,
-            tie_first=tie_first,
-            tie_last=tie_last,
             )
 
     @staticmethod
