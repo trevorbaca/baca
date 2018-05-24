@@ -2,7 +2,7 @@ import abjad
 import baca
 import collections
 import typing
-from abjad import rhythmos as rhythmos
+from abjad import rmakers as rmakers
 from .Command import Command
 from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
@@ -25,7 +25,7 @@ class LibraryTZ(abjad.AbjadObject):
     """
     Library T - Z.
 
-    >>> from abjad import rhythmos as rhythmos
+    >>> from abjad import rmakers as rmakers
 
     """
 
@@ -5178,8 +5178,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
-            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
-            ...             talea=rhythmos.Talea(
+            ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+            ...             talea=rmakers.Talea(
             ...                 counts=[1, 1, 1, -1],
             ...                 denominator=8,
             ...                 ),
@@ -5298,8 +5298,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     ('MusicVoice', (1, 3)),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
-            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
-            ...             talea=rhythmos.Talea(
+            ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+            ...             talea=rmakers.Talea(
             ...                 counts=[1, 1, 1, -1],
             ...                 denominator=8,
             ...                 ),

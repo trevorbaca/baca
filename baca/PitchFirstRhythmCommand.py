@@ -1,5 +1,5 @@
 import abjad
-from abjad import rhythmos as rhythmos
+from abjad import rmakers as rmakers
 from .Command import Command
 
 
@@ -128,7 +128,7 @@ class PitchFirstRhythmCommand(Command):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
             mask = abjad.silence([0], 1, use_multimeasure_rests=True)
-            rhythm_maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
+            rhythm_maker = rmakers.NoteRhythmMaker(division_masks=[mask])
         keywords = {}
         if division_masks is not None:
             keywords['division_masks'] = division_masks
@@ -146,7 +146,7 @@ class PitchFirstRhythmCommand(Command):
             tuplet_force_fraction is not None):
             specifier = rhythm_maker.tuplet_specifier
             if specifier is None:
-                specifier = rhythmos.TupletSpecifier()
+                specifier = rmakers.TupletSpecifier()
             specifier = abjad.new(
                 specifier,
                 denominator=tuplet_denominator,

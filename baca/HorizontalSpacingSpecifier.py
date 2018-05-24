@@ -10,7 +10,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     r"""
     Horizontal spacing specifier.
 
-    >>> from abjad import rhythmos as rhythmos
+    >>> from abjad import rmakers as rmakers
 
     ..  container:: example
 
@@ -25,7 +25,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     'MusicVoice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -138,7 +138,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     'MusicVoice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -261,7 +261,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     'MusicVoice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -385,7 +385,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     'MusicVoice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -510,7 +510,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     'MusicVoice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -633,16 +633,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     'MusicVoice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rhythmos.AccelerandoRhythmMaker(
-        ...             beam_specifier=rhythmos.BeamSpecifier(
+        ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
+        ...             beam_specifier=rmakers.BeamSpecifier(
         ...             use_feather_beams=True,
         ...                 ),
-        ...             interpolation_specifiers=rhythmos.InterpolationSpecifier(
+        ...             interpolation_specifiers=rmakers.InterpolationSpecifier(
         ...                 start_duration=abjad.Duration(1, 8),
         ...                 stop_duration=abjad.Duration(1, 20),
         ...                 written_duration=abjad.Duration(1, 16),
         ...                 ),
-        ...             tuplet_specifier=rhythmos.TupletSpecifier(
+        ...             tuplet_specifier=rmakers.TupletSpecifier(
         ...                 use_note_duration_bracket=True,
         ...                 ),
         ...             ),

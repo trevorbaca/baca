@@ -5,7 +5,7 @@ class Division(abjad.NonreducedFraction):
     r"""
     Division.
 
-    >>> from abjad import rhythmos as rhythmos
+    >>> from abjad import rmakers as rmakers
 
     ..  container:: example
 
@@ -13,7 +13,7 @@ class Division(abjad.NonreducedFraction):
 
         >>> division = baca.Division(
         ...     (3, 8),
-        ...     payload=rhythmos.NoteRhythmMaker(),
+        ...     payload=rmakers.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
 
@@ -49,7 +49,7 @@ class Division(abjad.NonreducedFraction):
 
         >>> division = baca.Division(
         ...     (3, 8),
-        ...     payload=rhythmos.NoteRhythmMaker(),
+        ...     payload=rmakers.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
         >>> new_division = baca.Division(division)
@@ -63,7 +63,7 @@ class Division(abjad.NonreducedFraction):
         >>> fraction = abjad.NonreducedFraction((6, 4))
         >>> division = baca.Division(
         ...     fraction,
-        ...     payload=rhythmos.NoteRhythmMaker(),
+        ...     payload=rmakers.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
         >>> new_division = baca.Division(division)
@@ -588,7 +588,7 @@ class Division(abjad.NonreducedFraction):
 
             >>> division = baca.Division(
             ...     (3, 8),
-            ...     payload=rhythmos.NoteRhythmMaker(),
+            ...     payload=rmakers.NoteRhythmMaker(),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
 

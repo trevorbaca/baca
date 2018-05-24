@@ -7,7 +7,7 @@ class ColorCommand(Command):
     r"""
     Color command.
 
-    >>> from abjad import rhythmos as rhythmos
+    >>> from abjad import rmakers as rmakers
 
     ..  container:: example
 
@@ -19,7 +19,7 @@ class ColorCommand(Command):
         ...     baca.color(),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             talea=rhythmos.Talea(
+        ...             talea=rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
