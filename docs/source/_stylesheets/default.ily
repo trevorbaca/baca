@@ -1,4 +1,4 @@
-\include "/Users/trevorbaca/baca/baca/stylesheets/scheme.ily"
+\include "/Users/trevorbaca/baca/baca/lilypond/baca.ily"
 
 \header {
     tagline = ##f

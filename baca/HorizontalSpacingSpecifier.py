@@ -934,8 +934,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _coerce_measure_number(self, measure_number):
-        if measure_number == 'end':
-            return self.last_measure_number
         if measure_number == 0:
             raise Exception(f'zero-valued measure number not allowed.')
         if measure_number < 0:

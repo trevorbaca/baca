@@ -356,6 +356,8 @@ class RhythmCommand(Command):
                 return False
             if not isinstance(pair[0], prototype):
                 return False
+            if pair[1] is True:
+                return True
             if not isinstance(pair[1], (list, tuple, abjad.Pattern)):
                 return False
         return True
@@ -407,11 +409,14 @@ class RhythmCommand(Command):
             for i, division in enumerate(divisions):
                 for pair in pairs:
                     rhythm_maker, pattern = pair
+                    if pattern is True:
+                        pattern = abjad.index([0], 1)
                     if isinstance(pattern, list):
                         indices = pattern
                         pattern = abjad.index(indices)
                     elif isinstance(pattern, tuple):
-                        indices = list(range(*pattern))
+                        triple = slice(*pattern).indices(division_count)
+                        indices = list(range(*triple))
                         pattern = abjad.index(indices)
                     if pattern.matches_index(i, division_count):
                         labelled_divisions.append((division, rhythm_maker))

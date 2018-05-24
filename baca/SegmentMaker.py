@@ -163,7 +163,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_markup_extra_offset',
         '_first_measure_number',
         '_first_segment',
-        '_include_nonfirst_segment_stylesheet',
         '_ignore_out_of_range_pitches',
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
@@ -180,6 +179,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
+        '_nonfirst_segment_lilypond_include',
         '_offset_to_measure_number',
         '_previously_alive_contexts',
         '_score',
@@ -211,7 +211,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_docs',
         'source',
         '_stylesheets',
-        'string-trio-stylesheet.ily',
+        'string-trio.ily',
         )
 
     _absolute_two_voice_staff_stylesheet_path = pathlib.Path(
@@ -222,7 +222,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_docs',
         'source',
         '_stylesheets',
-        'two-voice-staff-stylesheet.ily',
+        'two-voice-staff.ily',
         )
 
     _prototype_to_manifest_name = {
@@ -247,31 +247,31 @@ class SegmentMaker(abjad.SegmentMaker):
         'redundant': 'DeepPink4',
         }
 
-    _relative_string_trio_stylesheet_path = pathlib.Path(
-        '..',
-        '..',
-        '..',
-        '..',
-        'source',
-        '_stylesheets',
-        'string-trio-stylesheet.ily',
-        )
-
-    _relative_two_voice_staff_stylesheet_path = pathlib.Path(
-        '..',
-        '..',
-        '..',
-        '..',
-        'source',
-        '_stylesheets',
-        'two-voice-staff-stylesheet.ily',
-        )
+#    _relative_string_trio_stylesheet_path = pathlib.Path(
+#        '..',
+#        '..',
+#        '..',
+#        '..',
+#        'source',
+#        '_stylesheets',
+#        'string-trio.ily',
+#        )
+#
+#    _relative_two_voice_staff_stylesheet_path = pathlib.Path(
+#        '..',
+#        '..',
+#        '..',
+#        '..',
+#        'source',
+#        '_stylesheets',
+#        'two-voice-staff.ily',
+#        )
 
     _score_package_stylesheet_path = pathlib.Path(
         '..', '..', 'stylesheets', 'stylesheet.ily',
         )
 
-    _score_package_nonfirst_stylesheet_path = pathlib.Path(
+    _score_package_nonfirst_segment_path = pathlib.Path(
         '..', '..', 'stylesheets', 'nonfirst-segment.ily',
         )
 
@@ -298,7 +298,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_repeat_pitch_classes: bool = None,
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
-        include_nonfirst_segment_stylesheet: bool = None,
+        nonfirst_segment_lilypond_include: bool = None,
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
         magnify_staves: typing.Union[
@@ -360,8 +360,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self._ignore_unpitched_notes = ignore_unpitched_notes
         self._ignore_unregistered_pitches = ignore_unregistered_pitches
-        self._include_nonfirst_segment_stylesheet = \
-            include_nonfirst_segment_stylesheet
+        self._nonfirst_segment_lilypond_include = \
+            nonfirst_segment_lilypond_include
         self._instruments = instruments
         self._last_measure_is_fermata = False
         self._last_segment = last_segment
@@ -2000,12 +2000,14 @@ class SegmentMaker(abjad.SegmentMaker):
         start_offset, stop_offset = self._get_stage_offsets(*pair)
         return start_offset, time_signatures
 
-    def _get_stylesheets(self):
+    def _get_lilypond_includes(self):
         if self.environment == 'docs':
             if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
-                return [self._relative_two_voice_staff_stylesheet_path]
+                #return [self._relative_two_voice_staff_stylesheet_path]
+                return ['two-voice-staff.ily']
             else:
-                return [self._relative_string_trio_stylesheet_path]
+                #return [self._relative_string_trio_stylesheet_path]
+                return ['string-trio.ily']
         elif self.environment == 'external':
             if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
                 return [self._absolute_two_voice_staff_stylesheet_path]
@@ -2014,8 +2016,8 @@ class SegmentMaker(abjad.SegmentMaker):
         includes = []
         includes.append(self._score_package_stylesheet_path)
         if (not self.first_segment or
-            self.include_nonfirst_segment_stylesheet):
-            includes.append(self._score_package_nonfirst_stylesheet_path)
+            self.nonfirst_segment_lilypond_include):
+            includes.append(self._score_package_nonfirst_segment_path)
         return includes
 
     @staticmethod
@@ -2309,16 +2311,17 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _make_lilypond_file(self):
-        includes = self._get_stylesheets()
-        if self.environment == 'external':
-            use_relative_includes = False
-        else:
-            use_relative_includes = True
+        includes = self._get_lilypond_includes()
+#        if self.environment == 'external':
+#            use_relative_includes = False
+#        else:
+#            use_relative_includes = True
         lilypond_file = abjad.LilyPondFile.new(
             music=self.score,
             date_time_token=False,
             includes=includes,
-            use_relative_includes=use_relative_includes,
+            #use_relative_includes=use_relative_includes,
+            use_relative_includes=False,
             )
         block_names = ('layout', 'paper')
         for item in lilypond_file.items[:]:
@@ -4913,13 +4916,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._ignore_unregistered_pitches
 
     @property
-    def include_nonfirst_segment_stylesheet(self) -> typing.Optional[bool]:
-        """
-        Is true when segment includes nonfirst segment stylesheet.
-        """
-        return self._include_nonfirst_segment_stylesheet
-
-    @property
     def instruments(self) -> typing.Optional[abjad.OrderedDict]:
         """
         Gets instruments.
@@ -5358,6 +5354,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets metronome mark spanner right padding.
         """
         return self._mmspanner_right_padding
+
+    @property
+    def nonfirst_segment_lilypond_include(self) -> typing.Optional[bool]:
+        """
+        Is true when nonfirst segment lilypond include appears in output file.
+        """
+        return self._nonfirst_segment_lilypond_include
 
     @property
     def previous_metadata(self) -> typing.Optional[abjad.OrderedDict]:

@@ -83,6 +83,15 @@ baca_red_music = {
     \once \override Stem.color = #red
     }
 
+baca_unpitched_music = {
+    \once \override Accidental.color = #(x11-color 'goldenrod)
+    \once \override Beam.color = #(x11-color 'goldenrod)
+    \once \override Dots.color = #(x11-color 'goldenrod)
+    \once \override Flag.color = #(x11-color 'goldenrod)
+    \once \override NoteHead.color = #(x11-color 'goldenrod)
+    \once \override Stem.color = #(x11-color 'goldenrod)
+    }
+
 %%% DAMP %%%
 
 baca_karim_damp = \markup{

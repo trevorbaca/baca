@@ -87,8 +87,6 @@ SegmentMaker
 
    .. autoattribute:: SegmentMaker.ignore_unregistered_pitches
 
-   .. autoattribute:: SegmentMaker.include_nonfirst_segment_stylesheet
-
    .. autoattribute:: SegmentMaker.instruments
 
    .. autoattribute:: SegmentMaker.last_segment
@@ -118,6 +116,8 @@ SegmentMaker
    .. autoattribute:: SegmentMaker.mmspanner_right_broken
 
    .. autoattribute:: SegmentMaker.mmspanner_right_padding
+
+   .. autoattribute:: SegmentMaker.nonfirst_segment_lilypond_include
 
    .. autoattribute:: SegmentMaker.previous_metadata
 
