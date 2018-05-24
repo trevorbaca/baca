@@ -1087,22 +1087,13 @@ class LibraryGM(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {
-                                    \small
-                                        C4
-                                    }
+                                ^ \markup { C4 }
                                 d'16
                                 ]
-                                ^ \markup {
-                                    \small
-                                        D4
-                                    }
+                                ^ \markup { D4 }
                                 bf'4
                                 ~
-                                ^ \markup {
-                                    \small
-                                        Bb4
-                                    }
+                                ^ \markup { Bb4 }
                                 bf'16
                                 r16
                             }
@@ -1110,43 +1101,25 @@ class LibraryGM(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {
-                                    \small
-                                        "F#5"
-                                    }
+                                ^ \markup { "F#5" }
                                 e''16
                                 ]
-                                ^ \markup {
-                                    \small
-                                        E5
-                                    }
+                                ^ \markup { E5 }
                                 ef''4
                                 ~
-                                ^ \markup {
-                                    \small
-                                        Eb5
-                                    }
+                                ^ \markup { Eb5 }
                                 ef''16
                                 r16
                                 af''16
                                 [
-                                ^ \markup {
-                                    \small
-                                        Ab5
-                                    }
+                                ^ \markup { Ab5 }
                                 g''16
                                 ]
-                                ^ \markup {
-                                    \small
-                                        G5
-                                    }
+                                ^ \markup { G5 }
                             }
                             \times 4/5 {
                                 a'16
-                                ^ \markup {
-                                    \small
-                                        A4
-                                    }
+                                ^ \markup { A4 }
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -1200,36 +1173,21 @@ class LibraryGM(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {
-                                    \small
-                                        "F#5"
-                                    }
+                                ^ \markup { "F#5" }
                                 e''16
                                 ]
-                                ^ \markup {
-                                    \small
-                                        E5
-                                    }
+                                ^ \markup { E5 }
                                 ef''4
                                 ~
-                                ^ \markup {
-                                    \small
-                                        Eb5
-                                    }
+                                ^ \markup { Eb5 }
                                 ef''16
                                 r16
                                 af''16
                                 [
-                                ^ \markup {
-                                    \small
-                                        Ab5
-                                    }
+                                ^ \markup { Ab5 }
                                 g''16
                                 ]
-                                ^ \markup {
-                                    \small
-                                        G5
-                                    }
+                                ^ \markup { G5 }
                             }
                             \times 4/5 {
                                 a'16

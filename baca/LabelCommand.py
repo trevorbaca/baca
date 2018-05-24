@@ -71,104 +71,62 @@ class LabelCommand(Command):
                                 % [MusicVoice measure 1]                                             %! SM4
                                 e'8
                                 [
-                                ^ \markup {
-                                    \small
-                                        E4
-                                    }
+                                ^ \markup { E4 }
             <BLANKLINE>
                                 d''8
-                                ^ \markup {
-                                    \small
-                                        D5
-                                    }
+                                ^ \markup { D5 }
             <BLANKLINE>
                                 f'8
-                                ^ \markup {
-                                    \small
-                                        F4
-                                    }
+                                ^ \markup { F4 }
             <BLANKLINE>
                                 e''8
                                 ]
-                                ^ \markup {
-                                    \small
-                                        E5
-                                    }
+                                ^ \markup { E5 }
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 2]                                             %! SM4
                                 g'8
                                 [
-                                ^ \markup {
-                                    \small
-                                        G4
-                                    }
+                                ^ \markup { G4 }
             <BLANKLINE>
                                 f''8
-                                ^ \markup {
-                                    \small
-                                        F5
-                                    }
+                                ^ \markup { F5 }
             <BLANKLINE>
                                 e'8
                                 ]
-                                ^ \markup {
-                                    \small
-                                        E4
-                                    }
+                                ^ \markup { E4 }
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
                                 d''8
                                 [
-                                ^ \markup {
-                                    \small
-                                        D5
-                                    }
+                                ^ \markup { D5 }
             <BLANKLINE>
                                 f'8
-                                ^ \markup {
-                                    \small
-                                        F4
-                                    }
+                                ^ \markup { F4 }
             <BLANKLINE>
                                 e''8
-                                ^ \markup {
-                                    \small
-                                        E5
-                                    }
+                                ^ \markup { E5 }
             <BLANKLINE>
                                 g'8
                                 ]
-                                ^ \markup {
-                                    \small
-                                        G4
-                                    }
+                                ^ \markup { G4 }
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 4]                                             %! SM4
                                 f''8
                                 [
-                                ^ \markup {
-                                    \small
-                                        F5
-                                    }
+                                ^ \markup { F5 }
             <BLANKLINE>
                                 e'8
-                                ^ \markup {
-                                    \small
-                                        E4
-                                    }
+                                ^ \markup { E4 }
             <BLANKLINE>
                                 d''8
                                 ]
-                                ^ \markup {
-                                    \small
-                                        D5
-                                    }
+                                ^ \markup { D5 }
             <BLANKLINE>
                             }
                         }
@@ -206,21 +164,12 @@ class LabelCommand(Command):
                         \scaleDurations #'(1 . 1) {
                             c'16
                             [
-                            ^ \markup {
-                                \small
-                                    C4
-                                }
+                            ^ \markup { C4 }
                             d'16
-                            ^ \markup {
-                                \small
-                                    D4
-                                }
+                            ^ \markup { D4 }
                             bf'16
                             ]
-                            ^ \markup {
-                                \small
-                                    Bb4
-                                }
+                            ^ \markup { Bb4 }
                         }
                         \scaleDurations #'(1 . 1) {
                             fs''16

@@ -356,7 +356,7 @@ class RhythmCommand(Command):
                 return False
             if not isinstance(pair[0], prototype):
                 return False
-            if not isinstance(pair[1], abjad.Pattern):
+            if not isinstance(pair[1], (list, tuple, abjad.Pattern)):
                 return False
         return True
 
@@ -407,6 +407,12 @@ class RhythmCommand(Command):
             for i, division in enumerate(divisions):
                 for pair in pairs:
                     rhythm_maker, pattern = pair
+                    if isinstance(pattern, list):
+                        indices = pattern
+                        pattern = abjad.index(indices)
+                    elif isinstance(pattern, tuple):
+                        indices = list(range(*pattern))
+                        pattern = abjad.index(indices)
                     if pattern.matches_index(i, division_count):
                         labelled_divisions.append((division, rhythm_maker))
                         break
@@ -734,9 +740,15 @@ class RhythmCommand(Command):
             ...         ],
             ...     )
 
+            >>> label = abjad.label().with_durations(
+            ...     direction=abjad.Down,
+            ...     denominator=16,
+            ...     )
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.label(abjad.label().with_durations(denominator=16)),
+            ...     baca.label(label),
+            ...     baca.text_script_font_size(-2),
+            ...     baca.text_script_staff_padding(5),
             ...     command,
             ...     )
 
@@ -796,26 +808,31 @@ class RhythmCommand(Command):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextScript.font-size = #-2                                     %! OC1
+                                \override TextScript.staff-padding = #5                                  %! OC1
                                 \makeBlue                                                                %! SM24
                                 c'8.
-                                ^ \markup {
-                                    \small
-                                        3/16
+                                _ \markup {
+                                    \fraction
+                                        3
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'4
-                                ^ \markup {
-                                    \small
-                                        4/16
+                                _ \markup {
+                                    \fraction
+                                        4
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'16
                                 ~
-                                ^ \markup {
-                                    \small
-                                        3/16
+                                _ \markup {
+                                    \fraction
+                                        3
+                                        16
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
@@ -824,70 +841,81 @@ class RhythmCommand(Command):
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'4
-                                ^ \markup {
-                                    \small
-                                        4/16
+                                _ \markup {
+                                    \fraction
+                                        4
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'8
-                                ^ \markup {
-                                    \small
-                                        2/16
+                                _ \markup {
+                                    \fraction
+                                        2
+                                        16
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 r2
-                                ^ \markup {
-                                    \small
-                                        8/16
+                                _ \markup {
+                                    \fraction
+                                        8
+                                        16
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 \makeBlue                                                                %! SM24
                                 c'16
-                                ^ \markup {
-                                    \small
-                                        1/16
+                                _ \markup {
+                                    \fraction
+                                        1
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'4
-                                ^ \markup {
-                                    \small
-                                        4/16
+                                _ \markup {
+                                    \fraction
+                                        4
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'8.
-                                ^ \markup {
-                                    \small
-                                        3/16
+                                _ \markup {
+                                    \fraction
+                                        3
+                                        16
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 5]                                                 %! SM4
                                 \makeBlue                                                                %! SM24
                                 c'4
-                                ^ \markup {
-                                    \small
-                                        4/16
+                                _ \markup {
+                                    \fraction
+                                        4
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'8.
                                 [
-                                ^ \markup {
-                                    \small
-                                        3/16
+                                _ \markup {
+                                    \fraction
+                                        3
+                                        16
                                     }
                 <BLANKLINE>
                                 \makeBlue                                                                %! SM24
                                 c'16
                                 ]
-                                ^ \markup {
-                                    \small
-                                        1/16
+                                _ \markup {
+                                    \fraction
+                                        1
+                                        16
                                     }
+                                \revert TextScript.font-size                                             %! OC2
+                                \revert TextScript.staff-padding                                         %! OC2
                 <BLANKLINE>
                             }
                         }

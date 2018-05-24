@@ -480,32 +480,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            0
-                                        }
+                                    ^ \markup { 0 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            1
-                                        }
+                                    ^ \markup { 1 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            2
-                                        }
+                                    ^ \markup { 2 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            3
-                                        }
+                                    ^ \markup { 3 }
                                 }
                                 {
                 <BLANKLINE>
@@ -513,25 +501,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            4
-                                        }
+                                    ^ \markup { 4 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            5
-                                        }
+                                    ^ \markup { 5 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            6
-                                        }
+                                    ^ \markup { 6 }
                                 }
                                 {
                 <BLANKLINE>
@@ -539,32 +518,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            7
-                                        }
+                                    ^ \markup { 7 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            8
-                                        }
+                                    ^ \markup { 8 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            9
-                                        }
+                                    ^ \markup { 9 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            10
-                                        }
+                                    ^ \markup { 10 }
                                 }
                                 {
                 <BLANKLINE>
@@ -572,25 +539,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            11
-                                        }
+                                    ^ \markup { 11 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            12
-                                        }
+                                    ^ \markup { 12 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            13
-                                        }
+                                    ^ \markup { 13 }
                 <BLANKLINE>
                                 }
                             }
@@ -665,32 +623,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            0
-                                        }
+                                    ^ \markup { 0 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            1
-                                        }
+                                    ^ \markup { 1 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            2
-                                        }
+                                    ^ \markup { 2 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            3
-                                        }
+                                    ^ \markup { 3 }
                                 }
                                 {
                 <BLANKLINE>
@@ -698,25 +644,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            4
-                                        }
+                                    ^ \markup { 4 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            5
-                                        }
+                                    ^ \markup { 5 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            6
-                                        }
+                                    ^ \markup { 6 }
                                 }
                                 {
                 <BLANKLINE>
@@ -724,32 +661,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            7
-                                        }
+                                    ^ \markup { 7 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            8
-                                        }
+                                    ^ \markup { 8 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            9
-                                        }
+                                    ^ \markup { 9 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            10
-                                        }
+                                    ^ \markup { 10 }
                                 }
                                 {
                 <BLANKLINE>
@@ -757,25 +682,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \small
-                                            11
-                                        }
+                                    ^ \markup { 11 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
-                                    ^ \markup {
-                                        \small
-                                            12
-                                        }
+                                    ^ \markup { 12 }
                 <BLANKLINE>
                                     \makeBlue                                                            %! SM24
                                     c'8
                                     ]
-                                    ^ \markup {
-                                        \small
-                                            13
-                                        }
+                                    ^ \markup { 13 }
                 <BLANKLINE>
                                 }
                             }
