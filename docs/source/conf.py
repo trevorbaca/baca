@@ -125,7 +125,7 @@ intersphinx_mapping = {
     'abjad': ('http://abjad.mbrsi.org', None),
     'python': ('http://docs.python.org/3.6', None),
     }
-#todo_include_todos = True
+todo_include_todos = True
 
 uqbar_api_title = 'Bača API'
 uqbar_api_source_paths = ['baca']
