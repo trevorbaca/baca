@@ -477,20 +477,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 0 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 1 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 2 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 3 }
@@ -498,16 +498,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 4 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 5 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 6 }
@@ -515,20 +515,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 7 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 8 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 9 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 10 }
@@ -536,16 +536,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 11 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 12 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 13 }
@@ -620,20 +620,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 0 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 1 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 2 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 3 }
@@ -641,16 +641,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 4 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 5 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 6 }
@@ -658,20 +658,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 7 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 8 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 9 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 10 }
@@ -679,16 +679,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                                     ^ \markup { 11 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ^ \markup { 12 }
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                     ^ \markup { 13 }
@@ -1564,7 +1564,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             )
                     if self.color_out_of_range_pitches:
                         abjad.attach(markup, pleaf, tag='SM13')
-                        literal = abjad.LilyPondLiteral(r'\baca_red_music')
+                        string = r'\baca_out_of_range_warning'
+                        literal = abjad.LilyPondLiteral(string)
                         abjad.attach(literal, pleaf, tag='SM13')
 
     def _check_wellformedness(self):
@@ -1725,7 +1726,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 for pleaf in pleaves:
                     abjad.attach(markup, pleaf, tag='SM12')
-                    literal = abjad.LilyPondLiteral(r'\baca_red_music')
+                    string = r'\baca_octave_warning'
+                    literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, pleaf, tag='SM12')
 
     def _color_repeat_pitch_classes_(self):
@@ -1738,7 +1740,8 @@ class SegmentMaker(abjad.SegmentMaker):
         for lt in lts:
             for leaf in lt:
                 abjad.attach(markup, leaf, tag='SM14')
-                literal = abjad.LilyPondLiteral(r'\baca_red_music')
+                string = r'\baca_repeat_pitch_class_warning'
+                literal = abjad.LilyPondLiteral(string)
                 abjad.attach(literal, leaf, tag='SM14')
 
     def _color_unpitched_notes(self):
@@ -1748,7 +1751,8 @@ class SegmentMaker(abjad.SegmentMaker):
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
-            literal = abjad.LilyPondLiteral(r'\baca_blue_music')
+            string = r'\baca_unpitched_music_warning'
+            literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, pleaf, tag='SM24')
 
     def _color_unregistered_pitches(self):
@@ -1758,7 +1762,8 @@ class SegmentMaker(abjad.SegmentMaker):
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
-            literal = abjad.LilyPondLiteral(r'\baca_magenta_music')
+            string = r'\baca_unregistered_pitch_warning'
+            literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, pleaf, tag='SM25')
 
     def _comment_measure_numbers(self):
@@ -3157,7 +3162,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
-                                            \baca_red_music                                                     %! SM12
+                                            \baca_octave_warning                                         %! SM12
                                             f'16
                                             - \tweak color #red                                          %! SM12
                                             ^ \markup { OCTAVE }                                         %! SM12
@@ -3266,7 +3271,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
-                                            \baca_red_music                                                     %! SM12
+                                            \baca_octave_warning                                         %! SM12
                                             f16
                                             - \tweak color #red                                          %! SM12
                                             ^ \markup { OCTAVE }                                         %! SM12
@@ -3420,7 +3425,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 2]                                         %! SM4
-                                        \baca_red_music                                                         %! SM13
+                                        \baca_out_of_range_warning                                       %! SM13
                                         c16
                                         - \tweak color #red                                              %! SM13
                                         ^ \markup { * }                                                  %! SM13
@@ -3597,12 +3602,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
-                                        \baca_red_music                                                         %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM14
                                         a'16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
                 <BLANKLINE>
-                                        \baca_red_music                                                         %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM14
                                         a'16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
@@ -3627,12 +3632,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        \baca_red_music                                                         %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM14
                                         c''16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
                 <BLANKLINE>
-                                        \baca_red_music                                                         %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM14
                                         c'16
                                         - \tweak color #red                                              %! SM14
                                         ^ \markup { @ }                                                  %! SM14
@@ -4491,62 +4496,62 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>
@@ -4839,7 +4844,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 1]                                         %! SM4
-                                        \baca_magenta_music                                                     %! SM25
+                                        \baca_unregistered_pitch_warning                                 %! SM25
                                         e'8.
                                     }
                                 }
@@ -4849,26 +4854,28 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 2]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
-                                            fs'16 [                                                      %! ACC1
+                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            fs'16
+                                            [                                                            %! ACC1
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             d'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             ef'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             f'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             a'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
-                                            af'16 ]                                                      %! ACC1
+                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            af'16
+                                            ]                                                            %! ACC1
                 <BLANKLINE>
                                         }
-                                        \baca_magenta_music                                                     %! SM25
+                                        \baca_unregistered_pitch_warning                                 %! SM25
                                         c'8.
                                     }
                                 }
@@ -4876,7 +4883,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 3]                                         %! SM4
-                                        \baca_magenta_music                                                     %! SM25
+                                        \baca_unregistered_pitch_warning                                 %! SM25
                                         b'8.
                                     }
                                 }
@@ -4886,23 +4893,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 4]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
-                                            bf'16 [                                                      %! ACC1
+                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            bf'16
+                                            [                                                            %! ACC1
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             g'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             a'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM25
                                             af'16
                 <BLANKLINE>
-                                            \baca_magenta_music                                                 %! SM25
-                                            c'16 ]                                                       %! ACC1
+                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            c'16
+                                            ]                                                            %! ACC1
                 <BLANKLINE>
                                         }
-                                        \baca_magenta_music                                                     %! SM25
+                                        \baca_unregistered_pitch_warning                                 %! SM25
                                         f'8.
                 <BLANKLINE>
                                     }

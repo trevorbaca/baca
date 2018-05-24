@@ -6891,11 +6891,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:REAPPLIED_PERSISTENT_OVERRIDE:SM37
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4.
                 <BLANKLINE>
                             }
@@ -7055,11 +7055,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:REDUNDANT_PERSISTENT_OVERRIDE:IC
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4.
                 <BLANKLINE>
                             }

@@ -56,13 +56,13 @@ baca_staccati =
 
 %%% COLOR: MUSIC %%%
 
-baca_blue_music = {
-    \once \override Accidental.color = #blue
-    \once \override Beam.color = #blue
-    \once \override Dots.color = #blue
-    \once \override Flag.color = #blue
-    \once \override NoteHead.color = #blue
-    \once \override Stem.color = #blue
+baca_goldenrod_music = {
+    \once \override Accidental.color = #(x11-color 'goldenrod)
+    \once \override Beam.color = #(x11-color 'goldenrod)
+    \once \override Dots.color = #(x11-color 'goldenrod)
+    \once \override Flag.color = #(x11-color 'goldenrod)
+    \once \override NoteHead.color = #(x11-color 'goldenrod)
+    \once \override Stem.color = #(x11-color 'goldenrod)
     }
 
 baca_magenta_music = {
@@ -83,14 +83,15 @@ baca_red_music = {
     \once \override Stem.color = #red
     }
 
-baca_unpitched_music = {
-    \once \override Accidental.color = #(x11-color 'goldenrod)
-    \once \override Beam.color = #(x11-color 'goldenrod)
-    \once \override Dots.color = #(x11-color 'goldenrod)
-    \once \override Flag.color = #(x11-color 'goldenrod)
-    \once \override NoteHead.color = #(x11-color 'goldenrod)
-    \once \override Stem.color = #(x11-color 'goldenrod)
-    }
+baca_octave_warning = \baca_red_music
+
+baca_out_of_range_warning = \baca_red_music
+
+baca_repeat_pitch_class_warning = \baca_red_music
+
+baca_unpitched_music_warning = \baca_goldenrod_music
+
+baca_unregistered_pitch_warning = \baca_magenta_music
 
 %%% DAMP %%%
 

@@ -123,62 +123,62 @@ class RhythmCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 2]                                             %! SM4
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 4]                                             %! SM4
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
             <BLANKLINE>
-                                \baca_blue_music                                                            %! SM24
+                                \baca_unpitched_music_warning                                        %! SM24
                                 c'8
                                 ]
             <BLANKLINE>
@@ -581,50 +581,50 @@ class RhythmCommand(Command):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \baca_blue_music                                                            %! SM24
+                                    \baca_unpitched_music_warning                                        %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>
@@ -719,8 +719,6 @@ class RhythmCommand(Command):
 
         ..  container:: example
 
-            Alternates rhythm-makers.
-            
             Talea rhythm-maker remembers previous state across divisions:
 
             >>> maker = baca.SegmentMaker(
@@ -740,8 +738,8 @@ class RhythmCommand(Command):
             ...     )
             >>> command = baca.RhythmCommand(
             ...     rhythm_maker=[
-            ...         (rhythm_maker_1, abjad.index([2])),
-            ...         (rhythm_maker_2, abjad.index([0], 1)),
+            ...         (rhythm_maker_1, [2]),
+            ...         (rhythm_maker_2, True),
             ...         ],
             ...     )
 
@@ -815,7 +813,7 @@ class RhythmCommand(Command):
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \override TextScript.font-size = #-2                                     %! OC1
                                 \override TextScript.staff-padding = #5                                  %! OC1
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -823,7 +821,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -831,7 +829,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'16
                                 ~
                                 _ \markup {
@@ -841,10 +839,10 @@ class RhythmCommand(Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'8
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -852,7 +850,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'8
                                 _ \markup {
                                     \fraction
@@ -869,7 +867,7 @@ class RhythmCommand(Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -877,7 +875,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -885,7 +883,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -894,7 +892,7 @@ class RhythmCommand(Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 5]                                                 %! SM4
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -902,7 +900,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'8.
                                 [
                                 _ \markup {
@@ -911,7 +909,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_blue_music                                                                %! SM24
+                                \baca_unpitched_music_warning                                            %! SM24
                                 c'16
                                 ]
                                 _ \markup {
