@@ -247,26 +247,6 @@ class SegmentMaker(abjad.SegmentMaker):
         'redundant': 'DeepPink4',
         }
 
-#    _relative_string_trio_stylesheet_path = pathlib.Path(
-#        '..',
-#        '..',
-#        '..',
-#        '..',
-#        'source',
-#        '_stylesheets',
-#        'string-trio.ily',
-#        )
-#
-#    _relative_two_voice_staff_stylesheet_path = pathlib.Path(
-#        '..',
-#        '..',
-#        '..',
-#        '..',
-#        'source',
-#        '_stylesheets',
-#        'two-voice-staff.ily',
-#        )
-
     _score_package_stylesheet_path = pathlib.Path(
         '..', '..', 'stylesheets', 'stylesheet.ily',
         )
@@ -1786,7 +1766,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     name = self.segment_name + ' '
                 else:
                     name = ''
-                if self.environment == 'docs':
+                if self.first_segment or self.environment == 'docs':
                     string = f'% [{name}{context.name}'
                     string += f' measure {measure_number}]'
                 else:
@@ -2008,10 +1988,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_lilypond_includes(self):
         if self.environment == 'docs':
             if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
-                #return [self._relative_two_voice_staff_stylesheet_path]
                 return ['two-voice-staff.ily']
             else:
-                #return [self._relative_string_trio_stylesheet_path]
                 return ['string-trio.ily']
         elif self.environment == 'external':
             if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
@@ -2317,15 +2295,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_lilypond_file(self):
         includes = self._get_lilypond_includes()
-#        if self.environment == 'external':
-#            use_relative_includes = False
-#        else:
-#            use_relative_includes = True
         lilypond_file = abjad.LilyPondFile.new(
             music=self.score,
             date_time_token=False,
             includes=includes,
-            #use_relative_includes=use_relative_includes,
             use_relative_includes=False,
             )
         block_names = ('layout', 'paper')
