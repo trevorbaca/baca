@@ -25,7 +25,12 @@ class MapCommand(Command):
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.map(
         ...         baca.tuplet(1),
-        ...         baca.accent(selector=baca.pheads()),
+        ...         baca.apply(
+        ...             baca.pheads(),
+        ...             baca.marcato(),
+        ...             baca.staccato(),
+        ...             ),
+        ...         baca.slur(tweaks=[('direction', 'down')]),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -60,22 +65,30 @@ class MapCommand(Command):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
                             [
+                            - \tweak direction #down                                                 %! SC
+                            (                                                                        %! SC
                             e''16
-                            -\accent                                                                 %! IC
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
                             ]
+                            )                                                                        %! SC
                         }
                         \times 4/5 {
                             a'16
@@ -127,12 +140,6 @@ class MapCommand(Command):
             argument = self.selector(argument)
             if self.selector._is_singular_get_item():
                 argument = [argument]
-#        items_ = []
-#        for i, item in enumerate(argument):
-#            command = self.commands[i]
-#            item_ = command(item)
-#            items_.append(item_)
-#        return items_
         items_ = []
         for command in self.commands:
             for item in argument:

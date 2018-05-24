@@ -73,3 +73,5 @@ SpannerCommand
    .. autoattribute:: SpannerCommand.tag
 
    .. autoattribute:: SpannerCommand.tags
+
+   .. autoattribute:: SpannerCommand.tweaks

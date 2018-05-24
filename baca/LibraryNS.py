@@ -4813,6 +4813,7 @@ class LibraryNS(abjad.AbjadObject):
     def slur(
         *,
         selector: Selector = 'baca.tleaves()',
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> SpannerCommand:
         r"""
         Attaches slur.
@@ -4960,6 +4961,7 @@ class LibraryNS(abjad.AbjadObject):
         return SpannerCommand(
             selector=selector,
             spanner=abjad.Slur(),
+            tweaks=tweaks,
             )
 
     @staticmethod

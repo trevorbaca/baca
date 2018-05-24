@@ -215,9 +215,15 @@ def map(
         raise Exception(message)
     if not commands:
         raise Exception('map commands must not be empty.')
-    for command in commands:
+    commands_ = []
+    for item in commands:
+        if isinstance(item, (list, tuple)):
+            commands_.extend(item)
+        else:
+            commands_.append(item)
+    for command in commands_:
         if not isinstance(command, (Command, abjad.Expression)):
             message = '\n  Must be command or expression.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
-    return MapCommand(selector, *commands)
+    return MapCommand(selector, *commands_)

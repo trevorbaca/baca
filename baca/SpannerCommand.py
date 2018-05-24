@@ -191,6 +191,7 @@ class SpannerCommand(Command):
         '_right_broken',
         '_spanner',
         '_tags',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
@@ -205,6 +206,7 @@ class SpannerCommand(Command):
         selector: Selector = 'baca.tleaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if left_broken is not None:
@@ -217,12 +219,16 @@ class SpannerCommand(Command):
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
+        if tweaks is not None:
+            assert isinstance(tweaks, list), repr(tweaks)
+            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
         """
-        Calls command on `argument`.
+        Calls command on ``argument``.
 
         Returns spanner (for handoff to piecewise command).
         """
@@ -234,6 +240,7 @@ class SpannerCommand(Command):
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
+        self._apply_tweaks(spanner)
         abjad.attach(
             spanner,
             leaves,
@@ -399,3 +406,10 @@ class SpannerCommand(Command):
         Returns spanner or none.
         """
         return self._spanner
+
+    @property
+    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks
