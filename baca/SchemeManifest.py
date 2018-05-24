@@ -5,12 +5,12 @@ class SchemeManifest(abjad.AbjadObject):
     """
     Scheme manifest.
 
-    New functions defined in ``~/baca/baca/stylesheets/scheme.ily`` must
+    New functions defined in ``~/baca/baca/stylesheets/baca.ily`` must
     currently be added here by hand.
 
     TODO: eliminate duplication. Define ALL custom Scheme functions here
     (``SchemeManifest``) and teach ``SchemeManifest`` to write
-    ``~/baca/baca/stylesheets/scheme.ily`` to disk automatically.
+    ``~/baca/baca/stylesheets/baca.ily`` to disk automatically.
     """
 
     ### CLASS VARIABLES ###
