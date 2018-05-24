@@ -923,9 +923,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 string = f'[{duration!s}]'
                 markup = abjad.Markup(string)
             if programmatic:
-                command = 'make-dark-cyan'
+                command = 'baca-dark-cyan-markup'
             else:
-                command = 'make-forest-green'
+                command = 'baca-forest-green-markup'
             string = fr'^ \markup {{ \{command} "{string}" }}'
             literal = abjad.LilyPondLiteral(string, format_slot='after')
             tag = abjad.Tag(abjad.tags.SPACING_MARKUP).prepend('HSS2')

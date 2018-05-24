@@ -123,62 +123,62 @@ class RhythmCommand(Command):
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 1]                                             %! SM4
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 2]                                             %! SM4
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 3]                                             %! SM4
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % [MusicVoice measure 4]                                             %! SM4
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 [
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
             <BLANKLINE>
-                                \makeBlue                                                            %! SM24
+                                \baca_blue_music                                                            %! SM24
                                 c'8
                                 ]
             <BLANKLINE>
@@ -576,50 +576,50 @@ class RhythmCommand(Command):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>
@@ -810,7 +810,7 @@ class RhythmCommand(Command):
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \override TextScript.font-size = #-2                                     %! OC1
                                 \override TextScript.staff-padding = #5                                  %! OC1
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -818,7 +818,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -826,7 +826,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'16
                                 ~
                                 _ \markup {
@@ -836,10 +836,10 @@ class RhythmCommand(Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'8
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -847,7 +847,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'8
                                 _ \markup {
                                     \fraction
@@ -864,7 +864,7 @@ class RhythmCommand(Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -872,7 +872,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -880,7 +880,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -889,7 +889,7 @@ class RhythmCommand(Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 5]                                                 %! SM4
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -897,7 +897,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'8.
                                 [
                                 _ \markup {
@@ -906,7 +906,7 @@ class RhythmCommand(Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \makeBlue                                                                %! SM24
+                                \baca_blue_music                                                                %! SM24
                                 c'16
                                 ]
                                 _ \markup {

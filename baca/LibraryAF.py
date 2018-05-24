@@ -777,36 +777,36 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                                     [
                                     (                                                                    %! SC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
@@ -815,23 +815,23 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
@@ -841,14 +841,14 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>
@@ -933,36 +933,36 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 1]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 2]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                                     [
                                     (                                                                    %! SC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
@@ -971,23 +971,23 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 3]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     -\marcato                                                            %! IC
                                     -\staccato                                                           %! IC
@@ -997,14 +997,14 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     % [MusicVoice measure 4]                                             %! SM4
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \makeBlue                                                            %! SM24
+                                    \baca_blue_music                                                            %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>

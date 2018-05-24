@@ -32,13 +32,13 @@ baca_staccati =
        (m (interpret-markup layout props (markup #:hcenter-in 4.0 arg))))
    (oval-stencil m th pad (* pad 8.0))))
 
-#(define (format-oval-barnumbers barnum measure-pos alt-number context)
+#(define (baca-oval-bar-numbers barnum measure-pos alt-number context)
  (make-oval-markup
   (robust-bar-number-function barnum measure-pos alt-number context)))
 
 %%% COLOR: MARKUP %%%
 
-#(define-markup-command (make-dark-cyan layout props text) (markup?)
+#(define-markup-command (baca-dark-cyan-markup layout props text) (markup?)
     "Dark cyan with font size 3."
     (interpret-markup layout props
         #{\markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #text }
@@ -46,7 +46,7 @@ baca_staccati =
         )
     )
 
-#(define-markup-command (make-forest-green layout props text) (markup?)
+#(define-markup-command (baca-forest-green-markup layout props text) (markup?)
     "Forest green with font size 3."
     (interpret-markup layout props
         #{\markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #text }
@@ -56,7 +56,7 @@ baca_staccati =
 
 %%% COLOR: MUSIC %%%
 
-makeBlue = {
+baca_blue_music = {
     \once \override Accidental.color = #blue
     \once \override Beam.color = #blue
     \once \override Dots.color = #blue
@@ -65,7 +65,7 @@ makeBlue = {
     \once \override Stem.color = #blue
     }
 
-makeMagenta = {
+baca_magenta_music = {
     \once \override Accidental.color = #magenta
     \once \override Beam.color = #magenta
     \once \override Dots.color = #magenta
@@ -74,7 +74,7 @@ makeMagenta = {
     \once \override Stem.color = #magenta
     }
 
-makeRed = {
+baca_red_music = {
     \once \override Accidental.color = #red
     \once \override Beam.color = #red
     \once \override Dots.color = #red
@@ -85,7 +85,7 @@ makeRed = {
 
 %%% DAMP %%%
 
-karimDamp = \markup{
+baca_karim_damp = \markup{
     \center-column {
   {\override #'(thickness . 1.8)
     \combine \draw-line #'(-1.5 . 0)
@@ -96,7 +96,7 @@ karimDamp = \markup{
     }}}
 
 % use scale instead of fontsize
-pierreDamp = \markup {
+baca_pierre_damp = \markup {
     \combine \bold "O"
     \path #0.2 
     #'((moveto -.4 .8)(lineto 2.2 .8)
@@ -704,7 +704,7 @@ baca_triple_diamond_markup = \markup
 
 %%% NOTE-HEADS: SHAPED %%%
 
-blackDiamondNoteHead = #(
+baca_black_diamond_note_head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \override NoteHead.style = #'harmonic-black
@@ -712,7 +712,7 @@ blackDiamondNoteHead = #(
     #}
     )
 
-diamondNoteHead = #(
+baca_diamond_note_head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \override NoteHead.style = #'harmonic
@@ -720,7 +720,7 @@ diamondNoteHead = #(
     #}
     )
 
-semicircleNoteHead = #(
+baca_semicircle_note_head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(re re re re re re re)
@@ -728,7 +728,7 @@ semicircleNoteHead = #(
     #}
     )
 
-squareNoteHead = #(
+baca_square_note_head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(la la la la la la la)
@@ -736,7 +736,7 @@ squareNoteHead = #(
     #}
     )
 
-triangleNoteHead = #(
+baca_triangle_note_head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(do do do do do do do)
