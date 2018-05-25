@@ -684,7 +684,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
     def accumulate(self, operands=None):
         """
-        Accumulates `operands` against collections to identity.
+        Accumulates ``operands`` against collections to identity.
 
         ..  container:: example
 
@@ -758,7 +758,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
     def arpeggiate_down(self, pattern=None):
         """
-        Apreggiates collections down according to `pattern`.
+        Apreggiates collections down according to ``pattern``.
 
         ..  container:: example
 
@@ -803,7 +803,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
     def arpeggiate_up(self, pattern=None):
         """
-        Apreggiates collections up according to `pattern`.
+        Apreggiates collections up according to ``pattern``.
 
         ..  container:: example
 
@@ -1090,7 +1090,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.has_duplicate_pitch_classes(level=-1)
             True
 
-        Set `level` to 1 or -1.
+        Set ``level`` to 1 or -1.
 
         Returns true or false.
         """
@@ -1204,7 +1204,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             >>> collections.has_repeat_pitch_classes(level=-1)
             True
 
-        Set `level` to 0 or -1.
+        Set ``level`` to 0 or -1.
 
         Returns true or false.
         """

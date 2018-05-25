@@ -50,7 +50,7 @@ class MetronomeMarkCommand(Command):
 
     def __call__(self, argument=None) -> None:
         """
-        Applies command to result of selector called on `argument`.
+        Applies command to result of selector called on ``argument``.
         """
         from .SegmentMaker import SegmentMaker
         if argument is None:

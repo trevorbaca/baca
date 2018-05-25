@@ -93,7 +93,7 @@ class Loop(abjad.CyclicTuple):
 
     def __getitem__(self, i):
         """
-        Gets pitch `i` cyclically with intervals.
+        Gets pitch ``i`` cyclically with intervals.
 
         Returns pitch.
         """

@@ -27,7 +27,7 @@ class Selection(abjad.Selection):
 
     def chead(self, n):
         r"""
-        Selects chord head `n`.
+        Selects chord head ``n``.
 
         ..  container:: example
 
@@ -855,7 +855,7 @@ class Selection(abjad.Selection):
 
     def lt(self, n):
         r"""
-        Selects logical tie `n`.
+        Selects logical tie ``n``.
 
         ..  container:: example
 
@@ -956,7 +956,7 @@ class Selection(abjad.Selection):
 
     def ltqrun(self, n):
         r"""
-        Selects logical tie equipitch run `n`.
+        Selects logical tie equipitch run ``n``.
 
         ..  container:: example
 
@@ -1240,7 +1240,7 @@ class Selection(abjad.Selection):
 
     def ltrun(self, n):
         r"""
-        Selects logical tie run `n`.
+        Selects logical tie run ``n``.
 
         ..  container:: example
 
@@ -1903,7 +1903,7 @@ class Selection(abjad.Selection):
 
     def phead(self, n):
         r"""
-        Selects pitched head `n`.
+        Selects pitched head ``n``.
 
         ..  container:: example
 
@@ -2174,7 +2174,7 @@ class Selection(abjad.Selection):
 
     def pleaf(self, n):
         r"""
-        Selects pitched leaf `n`.
+        Selects pitched leaf ``n``.
 
         ..  container:: example
 
@@ -2469,7 +2469,7 @@ class Selection(abjad.Selection):
 
     def plt(self, n):
         r"""
-        Selects pitched logical tie `n`.
+        Selects pitched logical tie ``n``.
 
         ..  container:: example
 
@@ -2760,7 +2760,7 @@ class Selection(abjad.Selection):
 
     def ptail(self, n):
         r"""
-        Selects pitched tail `n`.
+        Selects pitched tail ``n``.
 
         ..  container:: example
 
@@ -3031,7 +3031,7 @@ class Selection(abjad.Selection):
 
     def ptlt(self, n):
         r"""
-        Selects pitched trivial logical tie `n`.
+        Selects pitched trivial logical tie ``n``.
 
         ..  container:: example
 
@@ -3285,7 +3285,7 @@ class Selection(abjad.Selection):
 
     def qrun(self, n):
         r"""
-        Selects equipitch run `n`.
+        Selects equipitch run ``n``.
 
         ..  container:: example
 
@@ -3798,7 +3798,7 @@ class Selection(abjad.Selection):
 
     def rrun(self, n):
         r"""
-        Selects run `n` (leaked to the right).
+        Selects run ``n`` (leaked to the right).
 
         ..  container:: example
 
@@ -4093,7 +4093,7 @@ class Selection(abjad.Selection):
 
     def skip(self, n):
         r"""
-        Selects skip `n`.
+        Selects skip ``n``.
 
         ..  container:: example
 

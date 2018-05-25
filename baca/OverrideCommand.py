@@ -253,7 +253,7 @@ class OverrideCommand(Command):
 
     def __call__(self, argument=None) -> None:
         """
-        Calls command on `argument`.
+        Calls command on ``argument``.
         """
         if argument is None:
             return

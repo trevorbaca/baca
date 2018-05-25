@@ -271,7 +271,7 @@ class NestingCommand(Command):
 
     def __call__(self, selections=None):
         r"""
-        Calls command on `selections`.
+        Calls command on ``selections``.
 
         ..  container:: example
 

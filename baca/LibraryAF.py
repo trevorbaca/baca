@@ -3465,7 +3465,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         r"""
-        Coats `pitch`.
+        Coats ``pitch``.
 
         ..  container:: example
 

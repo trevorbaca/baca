@@ -248,7 +248,7 @@ class Sequence(abjad.Sequence):
         )
     def accumulate(self, operands=None, count=None):
         r"""
-        Accumulates `operands` calls against sequence to identity.
+        Accumulates ``operands`` calls against sequence to identity.
 
         ..  container:: example
 
@@ -746,9 +746,9 @@ class Sequence(abjad.Sequence):
 
         Returns sequence of accumulated sequences.
 
-        Returns sequence of length `count` + 1 with integer `count`.
+        Returns sequence of length ``count`` + 1 with integer ``count``.
 
-        Returns sequence of orbit length with `count` set to identity.
+        Returns sequence of orbit length with ``count`` set to identity.
         """
         if count is None:
             count = abjad.Exact
@@ -1088,11 +1088,11 @@ class Sequence(abjad.Sequence):
             Sequence([1, 2, 5])
             Sequence([-5, -6])
 
-        Groups negative elements when ``-1`` in `sign`.
+        Groups negative elements when ``-1`` in ``sign``.
 
-        Groups zero-valued elements When ``0`` in `sign`.
+        Groups zero-valued elements When ``0`` in ``sign``.
 
-        Groups positive elements when ``1`` in `sign`.
+        Groups positive elements when ``1`` in ``sign``.
 
         Returns nested sequence.
         """
@@ -1291,7 +1291,7 @@ class Sequence(abjad.Sequence):
         )
     def partition(self, counts=None):
         r"""
-        Partitions sequence cyclically by `counts` with overhang.
+        Partitions sequence cyclically by ``counts`` with overhang.
 
         ..  container:: example
 
@@ -1382,7 +1382,7 @@ class Sequence(abjad.Sequence):
     @abjad.Signature()
     def repeat_by(self, counts=None, cyclic=None):
         r"""
-        Repeat sequence elements at `counts`.
+        Repeat sequence elements at ``counts``.
 
         ..  container:: example
 

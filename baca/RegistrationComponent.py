@@ -47,9 +47,9 @@ class RegistrationComponent(AbjadValueObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is a registration component
-        with source pitch range and target octave start pitch equal to those of
-        this registration component.
+        Is true when ``argument`` is a registration component with source pitch
+        range and target octave start pitch equal to those of this registration
+        component.
 
         Returns true or false.
         """
@@ -58,8 +58,6 @@ class RegistrationComponent(AbjadValueObject):
     def __format__(self, format_specification=''):
         """
         Formats registration component.
-
-        Set `format_specification` to `''`, `'lilypond'` or `'storage'`.
 
         Returns string.
         """

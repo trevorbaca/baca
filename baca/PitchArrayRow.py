@@ -79,7 +79,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def __add__(self, argument):
         """
-        Concatenates `argument` to pitch array row.
+        Concatenates ``argument`` to pitch array row.
 
         ..  container:: example
 
@@ -123,8 +123,8 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is a pitch array row with contents equal to that
-        of this pitch array row.
+        Is true when ``argument`` is a pitch array row with contents equal to
+        that of this pitch array row.
 
         Returns true or false.
         """
@@ -137,7 +137,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def __getitem__(self, argument):
         """
-        Gets cell or cell slice identified by `argument`.
+        Gets cell or cell slice identified by ``argument``.
 
         Returns pitch array cell or slice of pitch array cells.
         """
@@ -188,7 +188,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def __iadd__(self, argument):
         """
-        Adds `argument` to pitch array row in place.
+        Adds ``argument`` to pitch array row in place.
 
         ..  container:: example
 
@@ -236,7 +236,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def __ne__(self, argument):
         """
-        Is true when pitch array row does not equal `argument`.
+        Is true when pitch array row does not equal ``argument``.
 
         Returns true or false.
         """
@@ -429,7 +429,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def append(self, cell):
         """
-        Appends `cell` to pitch array row.
+        Appends ``cell`` to pitch array row.
 
         ..  container:: example
 
@@ -459,7 +459,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def apply_pitches(self, pitch_tokens):
         """
-        Applies `pitch_tokens` to pitch cells in pitch array row.
+        Applies ``pitch_tokens`` to pitch cells in pitch array row.
 
         ..  container:: example
 
@@ -490,7 +490,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def copy_subrow(self, start=None, stop=None):
         """
-        Copies subrow of pitch array row from `start` to `stop`.
+        Copies subrow of pitch array row from ``start`` to ``stop``.
 
         ..  container:: example
 
@@ -559,7 +559,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def extend(self, cells):
         """
-        Extends pitch array row with `cells`.
+        Extends pitch array row with ``cells``.
 
         ..  container:: example
 
@@ -589,7 +589,7 @@ class PitchArrayRow(abjad.AbjadObject):
     def has_spanning_cell_over_index(self, i):
         """
         Is true when pitch array row has one or more cells spanning over
-        index `i`.
+        index ``i``.
 
         ..  container:: example
 
@@ -625,7 +625,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def index(self, cell):
         """
-        Gets index of pitch array `cell` in pitch array row.
+        Gets index of pitch array ``cell`` in pitch array row.
 
         Retunrs nonnegative integer.
         """
@@ -633,7 +633,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def merge(self, cells):
         """
-        Merges `cells`.
+        Merges ``cells``.
 
         Returns pitch array cell.
         """
@@ -664,7 +664,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def pad_to_width(self, width):
         """
-        Pads pitch array row to `width`.
+        Pads pitch array row to ``width``.
 
         Returns none.
         """
@@ -679,7 +679,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def pop(self, cell_index):
         """
-        Pops cell `cell_index` from pitch array row.
+        Pops cell ``cell_index`` from pitch array row.
 
         Returns pitch array cell.
         """
@@ -689,7 +689,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
     def remove(self, cell):
         """
-        Removes `cell` form pitch array row.
+        Removes ``cell`` form pitch array row.
 
         Returns none.
         """
@@ -704,7 +704,7 @@ class PitchArrayRow(abjad.AbjadObject):
         Changes pitch array row to measures.
 
         Sets time signature numerators equal to pitch array row widths and time
-        signature denominators equal to `cell_duration_denominator`.
+        signature denominators equal to ``cell_duration_denominator``.
 
         ..  container:: example
 

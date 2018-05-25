@@ -67,7 +67,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
 
     def __call__(self, divisions=None):
         """
-        Calls rounded ratio division-maker on `divisions`.
+        Calls rounded ratio division-maker on ``divisions``.
 
         ..  container:: example
 

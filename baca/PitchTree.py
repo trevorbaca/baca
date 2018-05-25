@@ -1881,7 +1881,7 @@ class PitchTree(Tree):
 
     def rotate(self, n=0):
         r"""
-        Rotates tree by index `n`.
+        Rotates tree by index ``n``.
 
         ..  container:: example
 

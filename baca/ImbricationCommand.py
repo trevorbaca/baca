@@ -585,7 +585,7 @@ class ImbricationCommand(Command):
 
     def __call__(self, container=None):
         r"""
-        Calls command on `container`.
+        Calls command on ``container``.
 
         ..  container:: example
 

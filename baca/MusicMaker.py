@@ -134,7 +134,7 @@ class MusicMaker(abjad.AbjadObject):
         tuplet_force_fraction=None
         ):
         r"""
-        Calls music-maker on `collections` with keywords.
+        Calls music-maker on ``collections`` with keywords.
 
         ..  container:: example
 

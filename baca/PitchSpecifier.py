@@ -149,11 +149,11 @@ class PitchSpecifier(abjad.AbjadObject):
 
     def __call__(self, collections=None):
         """
-        Calls specifier on `collections`.
+        Calls specifier on ``collections``.
 
         ..  container:: example
 
-            Returns none when `collections` is none:
+            Returns none when ``collections`` is none:
 
             >>> specifier = baca.PitchSpecifier()
             >>> specifier() is None

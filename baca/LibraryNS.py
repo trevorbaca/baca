@@ -1753,7 +1753,7 @@ class LibraryNS(abjad.AbjadObject):
         selector: Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         r"""
-        Attaches `dynamic` to pitched heads.
+        Attaches ``dynamic`` to pitched heads.
 
         ..  container:: example
 

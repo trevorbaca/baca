@@ -164,7 +164,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     def __call__(self, divisions=None):
         r"""
-        Calls division-maker on `divisions`.
+        Calls division-maker on ``divisions``.
 
         ..  container:: example
 
@@ -237,7 +237,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 }
 
             Positions remainder at right of output because divison-maker
-            `remainder` defaults to right.
+            ``remainder`` defaults to right.
 
         ..  container:: example
 

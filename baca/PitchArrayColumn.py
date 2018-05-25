@@ -69,8 +69,8 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is a pitch array column with pitch array cells
-        equal to those of this pitch array column.
+        Is true when ``argument`` is a pitch array column with pitch array
+        cells equal to those of this pitch array column.
 
         Returns true or false.
         """
@@ -83,7 +83,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     def __getitem__(self, argument):
         """
-        Gets cell or cell slice identified by `argument`.
+        Gets cell or cell slice identified by ``argument``.
 
         Returns pitch array cell or slice or pitch array cells.
         """
@@ -101,7 +101,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     def __ne__(self, argument):
         """
-        Is true when pitch array column does not equal `argument`.
+        Is true when pitch array column does not equal ``argument``.
 
         Returns true or false.
         """
@@ -131,7 +131,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     def append(self, cell):
         """
-        Appends `cell` to pitch array column.
+        Appends ``cell`` to pitch array column.
 
         Returns none.
         """
@@ -143,7 +143,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     def extend(self, cells):
         """
-        Extends `cells` against pitch array column.
+        Extends ``cells`` against pitch array column.
 
         Returns none.
         """

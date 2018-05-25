@@ -148,7 +148,7 @@ class MicrotoneDeviationCommand(Command):
 
     def __call__(self, argument=None):
         """
-        Cyclically applies deviations to plts in `argument`.
+        Cyclically applies deviations to plts in ``argument``.
 
         Returns none.
         """

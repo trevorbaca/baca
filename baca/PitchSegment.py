@@ -60,7 +60,7 @@ class PitchSegment(abjad.PitchSegment):
 
     def bass_to_octave(self, n=4):
         r"""
-        Octave-transposes segment to bass in octave `n`.
+        Octave-transposes segment to bass in octave ``n``.
 
         ..  container:: example
 
@@ -142,7 +142,7 @@ class PitchSegment(abjad.PitchSegment):
 
     def center_to_octave(self, n=4):
         r"""
-        Octave-transposes segment to center in octave `n`.
+        Octave-transposes segment to center in octave ``n``.
 
         ..  container:: example
 
@@ -266,7 +266,7 @@ class PitchSegment(abjad.PitchSegment):
 
     def soprano_to_octave(self, n=4):
         r"""
-        Octave-transposes segment to soprano in octave `n`.
+        Octave-transposes segment to soprano in octave ``n``.
 
         ..  container:: example
 
@@ -634,7 +634,7 @@ class PitchSegment(abjad.PitchSegment):
 
     def split(self, pitch=0):
         r"""
-        Splits segment at `pitch`.
+        Splits segment at ``pitch``.
 
         ..  container:: example
 

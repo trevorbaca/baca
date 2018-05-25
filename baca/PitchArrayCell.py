@@ -3,7 +3,8 @@ import numbers
 
 
 class PitchArrayCell(abjad.AbjadObject):
-    """Pitch array cell.
+    """
+    Pitch array cell.
 
     ..  container:: example
 
@@ -685,7 +686,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     def append_pitch(self, pitch):
         """
-        Appends `pitch` to cell.
+        Appends ``pitch`` to cell.
 
         Returns none.
         """
@@ -696,7 +697,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
     def matches_cell(self, argument):
         """
-        Is true when pitch array cell matches `argument`.
+        Is true when pitch array cell matches ``argument``.
 
         ..  container:: example
 

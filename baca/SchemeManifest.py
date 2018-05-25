@@ -55,7 +55,7 @@ class SchemeManifest(abjad.AbjadObject):
 
     def dynamic_to_steady_state(self, dynamic):
         """
-        Changes `dynamic` to steady state.
+        Changes ``dynamic`` to steady state.
 
         ..  container:: example
 

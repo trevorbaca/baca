@@ -184,7 +184,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     def __call__(self, collection_index=None, total_collections=None):
         r"""
-        Calls command on `collection_index` and `total_collections`.
+        Calls command on ``collection_index`` and ``total_collections``.
 
         ..  container:: example
 

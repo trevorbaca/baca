@@ -396,7 +396,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def __call__(self, scopes, *commands) -> None:
         r"""
-        Wraps each command in `commands` with each scope in `scopes`.
+        Wraps each command in ``commands`` with each scope in ``scopes``.
 
         ..  container:: example
 
@@ -5538,7 +5538,7 @@ class SegmentMaker(abjad.SegmentMaker):
         """
         Gets stage count.
 
-        Defined equal to 1 when `self.measures_per_stage` is none.
+        Defined equal to 1 when ``self.measures_per_stage`` is none.
         """
         if self.measures_per_stage is None:
             return 1

@@ -80,7 +80,7 @@ class Matrix(abjad.AbjadObject):
 
     def __getitem__(self, argument):
         """
-        Gets row `argument` from matrix.
+        Gets row ``argument`` from matrix.
 
         >>> matrix[1]
         (10, 11, 12, 13)

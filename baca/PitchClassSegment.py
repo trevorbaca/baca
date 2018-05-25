@@ -68,7 +68,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
     def __eq__(self, argument):
         """
-        Is true when segment equals `argument`.
+        Is true when segment equals ``argument``.
 
         ..  container:: example
 
@@ -403,7 +403,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         transposition=False,
         ):
         r"""
-        Gets transforms of segment that match `segment_2`.
+        Gets transforms of segment that match ``segment_2``.
 
         ..  container:: example
 
@@ -498,7 +498,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         transposition=False,
         ):
         r"""
-        Gets transforms of `segment`.
+        Gets transforms of ``segment``.
 
         ..  container:: example
 

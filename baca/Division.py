@@ -758,7 +758,7 @@ class Division(abjad.NonreducedFraction):
 
         Returns output in Cantor diagonalized order.
 
-        Ensures written duration never less than `minimum_written_duration`.
+        Ensures written duration never less than ``minimum_written_duration``.
 
         ..  container:: example
 

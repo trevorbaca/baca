@@ -37,7 +37,7 @@ class WellformednessManager(abjad.WellformednessManager):
         argument: typing.Union[abjad.Score, None] = None,
         ) -> typing.List[typing.Tuple[list, int, str]]:
         r"""
-        Calls wellformedness checks on `argument`.
+        Calls wellformedness checks on ``argument``.
 
         :param argument: input score.
 
@@ -224,7 +224,7 @@ class WellformednessManager(abjad.WellformednessManager):
 
     def is_well_formed(self, argument=None):
         r"""
-        Is true when `argument` is well-formed.
+        Is true when ``argument`` is well-formed.
 
         ..  container:: example
 

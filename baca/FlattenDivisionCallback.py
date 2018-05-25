@@ -24,7 +24,7 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
 
     def __call__(self, argument=None):
         """
-        Calls flatten division callback on `argument`.
+        Calls flatten division callback on ``argument``.
 
         Returns list of divisions or list of division lists.
         """

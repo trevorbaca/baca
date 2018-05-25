@@ -878,7 +878,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     def __call__(self, segment_maker=None) -> None:
         """
-        Calls command on `segment_maker`.
+        Calls command on ``segment_maker``.
         """
         score = segment_maker.score
         skips = baca.select(score['GlobalSkips']).skips()
@@ -1222,7 +1222,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         pair: typing.Union[typing.Tuple[int, int], str],
         ) -> None:
         r"""
-        Overrides `measures` with spacing `pair`.
+        Overrides ``measures`` with spacing ``pair``.
 
         ..  container:: example
 

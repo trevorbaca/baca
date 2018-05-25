@@ -158,7 +158,7 @@ class Tree(abjad.AbjadObject):
 
     def __contains__(self, argument):
         """
-        Is true when tree contains `argument`.
+        Is true when tree contains ``argument``.
 
         ..  container:: example
 
@@ -188,7 +188,7 @@ class Tree(abjad.AbjadObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is the same type as tree and when the payload
+        Is true when ``argument`` is the same type as tree and when the payload
         of all subtrees are equal.
 
         ..  container:: example
@@ -293,7 +293,7 @@ class Tree(abjad.AbjadObject):
 
     def __getitem__(self, argument):
         """
-        Gets node or node slice identified by `argument`.
+        Gets node or node slice identified by ``argument``.
 
         ..  container:: example
 
@@ -571,9 +571,9 @@ class Tree(abjad.AbjadObject):
             >>> tree[-1]._get_level(negative=True)
             -2
 
-        Returns nonnegative integer when `negative` is false.
+        Returns nonnegative integer when ``negative`` is false.
 
-        Returns negative integer when `negative` is true.
+        Returns negative integer when ``negative`` is true.
         """
         if negative:
             return -self._get_depth()
@@ -586,7 +586,7 @@ class Tree(abjad.AbjadObject):
         nodes_must_be_complete=False,
         ):
         """
-        Gets next `n` nodes `level`.
+        Gets next ``n`` nodes ``level``.
 
         ..  container:: example
 
@@ -657,7 +657,7 @@ class Tree(abjad.AbjadObject):
 
         ..  container:: example
 
-            Tree of length greater than ``1`` for examples with positive `n`:
+            Tree of length greater than ``1`` for examples with positive ``n``:
 
             >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
             >>> tree = baca.Tree(items=items)
@@ -710,7 +710,7 @@ class Tree(abjad.AbjadObject):
 
         ..  container:: example
 
-            Tree of length greater than ``1`` for examples with negative `n`:
+            Tree of length greater than ``1`` for examples with negative ``n``:
 
             >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
             >>> tree = baca.Tree(items=items)
@@ -893,8 +893,8 @@ class Tree(abjad.AbjadObject):
 
     def _get_position_of_descendant(self, descendant):
         """
-        Gets position of `descendent` relative to node rather than relative to
-        root.
+        Gets position of ``descendent`` relative to node rather than relative
+        to root.
 
         ..  container:: example
 
@@ -1205,7 +1205,7 @@ class Tree(abjad.AbjadObject):
 
     def iterate(self, level=None, reverse=False):
         """
-        Iterates tree at optional `level`.
+        Iterates tree at optional ``level``.
 
         ..  container:: example
 

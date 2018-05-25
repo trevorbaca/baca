@@ -50,7 +50,7 @@ class MusicAccumulator(abjad.AbjadObject):
 
     def __call__(self, music_contribution=None):
         r"""
-        Calls figure-accumulator on `music_contribution`.
+        Calls figure-accumulator on ``music_contribution``.
 
         Raises exception on duplicate figure name.
 
@@ -296,7 +296,7 @@ class MusicAccumulator(abjad.AbjadObject):
 
     def assemble(self, voice_name):
         """
-        Assembles complete selection for `voice_name`.
+        Assembles complete selection for ``voice_name``.
 
         Returns selection or none.
         """
@@ -309,7 +309,7 @@ class MusicAccumulator(abjad.AbjadObject):
 
     def populate_segment_maker(self, segment_maker):
         """
-        Populates `segment_maker`.
+        Populates ``segment_maker``.
 
         Returns none.
         """

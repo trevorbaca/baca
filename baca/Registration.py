@@ -58,7 +58,7 @@ class Registration(abjad.AbjadValueObject):
 
     def __call__(self, pitches):
         r"""
-        Calls registration on `pitches`.
+        Calls registration on ``pitches``.
 
         ..  container:: example
 

@@ -96,7 +96,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     def group_families(self, *families) -> typing.List[abjad.Context]:
         """
-        Groups `families` only when more than one family is passed in.
+        Groups ``families`` only when more than one family is passed in.
 
         Returns list of zero or more contexts.
         """

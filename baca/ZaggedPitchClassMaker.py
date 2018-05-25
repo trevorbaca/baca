@@ -143,7 +143,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is a zagged pitch-class with type and
+        Is true when ``argument`` is a zagged pitch-class with type and
         public properties equal to those of this zagged pitch-class maker.
 
         Returns boolean.

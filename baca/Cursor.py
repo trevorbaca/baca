@@ -95,7 +95,7 @@ class Cursor(abjad.AbjadObject):
 
     def __eq__(self, argument):
         """
-        Is true when `argument` is a cursor with keyword
+        Is true when ``argument`` is a cursor with keyword
         arguments equal to this cursor.
 
         Returns true or false.

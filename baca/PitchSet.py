@@ -53,7 +53,7 @@ class PitchSet(abjad.PitchSet):
 
     def __eq__(self, argument):
         """
-        Is true when segment equals `argument`.
+        Is true when segment equals ``argument``.
 
         ..  container:: example
 

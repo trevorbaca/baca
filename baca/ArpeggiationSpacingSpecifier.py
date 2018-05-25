@@ -55,7 +55,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     def __call__(self, collections=None):
         """
-        Calls specifier on `collections`.
+        Calls specifier on ``collections``.
 
         ..  container:: example
 

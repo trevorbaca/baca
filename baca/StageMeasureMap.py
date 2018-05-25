@@ -82,7 +82,7 @@ class StageMeasureMap(abjad.AbjadObject):
 
     def __getitem__(self, argument) -> item_type:
         """
-        Gets item identified by `argument`.
+        Gets item identified by ``argument``.
 
         ..  container:: example
 

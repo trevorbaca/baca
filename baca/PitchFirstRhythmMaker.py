@@ -194,7 +194,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         total_collections=None,
         ):
         r"""
-        Calls rhythm-maker on `collections`.
+        Calls rhythm-maker on ``collections``.
 
         ..  container:: example
 

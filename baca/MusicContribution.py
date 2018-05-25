@@ -60,7 +60,7 @@ class MusicContribution(abjad.AbjadValueObject):
 
     def __getitem__(self, voice_name):
         """
-        Gets `voice_name` selection list.
+        Gets ``voice_name`` selection list.
 
         Returns list of selections.
         """

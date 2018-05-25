@@ -759,8 +759,8 @@ class LibraryGM(abjad.AbjadObject):
         m: int = 0,
         ) -> typing.Sequence:
         """
-        Helianthates `sequence` by outer index of rotation `n` and inner
-        index of rotation `m`.
+        Helianthates ``sequence`` by outer index of rotation ``n`` and inner
+        index of rotation ``m``.
 
         ..  container:: example
 

@@ -131,7 +131,7 @@ class ColorFingeringCommand(Command):
 
     def __call__(self, argument=None):
         """
-        Calls command on `argument`.
+        Calls command on ``argument``.
 
         Returns none.
         """

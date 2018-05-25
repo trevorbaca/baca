@@ -58,7 +58,7 @@ class Command(abjad.AbjadObject):
     @abc.abstractmethod
     def __call__(self, argument=None):
         """
-        Calls command on `argument`.
+        Calls command on ``argument``.
 
         Returns none.
         """

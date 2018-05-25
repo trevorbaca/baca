@@ -132,7 +132,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
     def __call__(self, divisions=None):
         """
-        Calls partition division callback on `divisions`.
+        Calls partition division callback on ``divisions``.
 
         ..  container:: example
 

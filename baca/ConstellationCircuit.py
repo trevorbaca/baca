@@ -53,7 +53,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     def __getitem__(self, argument):
         """
-        Gets item or slice identified by `argument`.
+        Gets item or slice identified by ``argument``.
 
         ..  container:: example
 

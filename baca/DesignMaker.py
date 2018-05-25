@@ -71,9 +71,9 @@ class DesignMaker(abjad.AbjadObject):
 
     def partition(self, cursor, number, counts, operators=None):
         """
-        Partitions next `number` cells in `cursor` by `counts`.
+        Partitions next ``number`` cells in ``cursor`` by ``counts``.
 
-        Appies optional `operators` to resulting parts of partition.
+        Appies optional ``operators`` to resulting parts of partition.
 
         Returns none.
         """

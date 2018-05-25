@@ -35,7 +35,7 @@ class Interpolator(abjad.AbjadObject):
     @staticmethod
     def interpolate_linear(start, stop, count=2):
         """
-        Interpolates `count` values linearly from `start` to `stop`.
+        Interpolates ``count`` values linearly from ``start`` to ``stop``.
 
         ..  container:: example
 

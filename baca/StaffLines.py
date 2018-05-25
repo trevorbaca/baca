@@ -39,7 +39,7 @@ class StaffLines(abjad.AbjadObject):
 
     def __eq__(self, argument):
         """
-        Is true when staff lines line count equals `argument` line count.
+        Is true when staff lines line count equals ``argument`` line count.
 
         ..  container:: example
 
