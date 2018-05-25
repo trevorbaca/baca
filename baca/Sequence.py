@@ -16,7 +16,7 @@ class Sequence(abjad.Sequence):
 
         ..  container:: example
 
-            >>> baca.Sequence([1, 2, 3, 4, 5, 6])
+            >>> baca.sequence([1, 2, 3, 4, 5, 6])
             Sequence([1, 2, 3, 4, 5, 6])
 
         ..  container:: example expression
@@ -52,14 +52,14 @@ class Sequence(abjad.Sequence):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            >>> baca.sequence(items=collection)
+            >>> baca.sequence(collection)
             Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
 
         ..  container:: example expression
 
             >>> expression = baca.sequence()
 
-            >>> expression(items=collection)
+            >>> expression(collection)
             Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
 
     ..  container:: example
@@ -79,7 +79,7 @@ class Sequence(abjad.Sequence):
             >>> expression = expression.pitch_class_segment()
             >>> expression = expression.transpose(n=1)
 
-            >>> sequence = baca.Sequence(collections)
+            >>> sequence = baca.sequence(collections)
             >>> sequence = sequence.map(expression)
             >>> sequence.join()
             Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
@@ -258,10 +258,10 @@ class Sequence(abjad.Sequence):
 
                 >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
                 >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.Sequence(items=[collection_1, collection_2])
+                >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> sequence = baca.Sequence(items=[collection_1, collection_2])
+                >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate():
                 ...     item
                 ...
@@ -309,12 +309,12 @@ class Sequence(abjad.Sequence):
 
                 >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
                 >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.Sequence(items=[collection_1, collection_2])
+                >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 >>> alpha = baca.pitch_class_segment().alpha()
 
-                >>> sequence = baca.Sequence(items=[collection_1, collection_2])
+                >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate([alpha]):
                 ...     item
                 ...
@@ -370,14 +370,14 @@ class Sequence(abjad.Sequence):
 
                 >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
                 >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.Sequence(items=[collection_1, collection_2])
+                >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 >>> transposition = baca.Expression()
                 >>> transposition = transposition.pitch_class_segment()
                 >>> transposition = transposition.transpose(n=3)
 
-                >>> sequence = baca.Sequence(items=[collection_1, collection_2])
+                >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate([transposition]):
                 ...     item
                 ...
@@ -441,7 +441,7 @@ class Sequence(abjad.Sequence):
 
                 >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
                 >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.Sequence(items=[collection_1, collection_2])
+                >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 >>> transposition = baca.Expression()
@@ -451,7 +451,7 @@ class Sequence(abjad.Sequence):
                 >>> alpha = alpha.pitch_class_segment()
                 >>> alpha = alpha.alpha()
 
-                >>> sequence = baca.Sequence(items=[collection_1, collection_2])
+                >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate([alpha, transposition]):
                 ...     item
                 ...
@@ -538,7 +538,7 @@ class Sequence(abjad.Sequence):
 
                 >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
                 >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.Sequence(items=[collection_1, collection_2])
+                >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 >>> permutation = baca.Expression()
@@ -546,7 +546,7 @@ class Sequence(abjad.Sequence):
                 >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
                 >>> permutation = permutation.permute(row)
 
-                >>> sequence = baca.Sequence(items=[collection_1, collection_2])
+                >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate([permutation]):
                 ...     item
                 ...
@@ -642,7 +642,7 @@ class Sequence(abjad.Sequence):
 
                 >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
                 >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.Sequence(items=[collection_1, collection_2])
+                >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 >>> permutation = baca.Expression()
@@ -653,7 +653,7 @@ class Sequence(abjad.Sequence):
                 >>> transposition = transposition.pitch_class_segment()
                 >>> transposition = transposition.transpose(n=3)
 
-                >>> sequence = baca.Sequence(items=[collection_1, collection_2])
+                >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate(
                 ...     [permutation, transposition],
                 ...     ):
@@ -797,7 +797,7 @@ class Sequence(abjad.Sequence):
 
             Iterates atoms boustrophedon:
 
-            >>> sequence = baca.Sequence([1, 2, 3, 4, 5])
+            >>> sequence = baca.sequence([1, 2, 3, 4, 5])
 
             >>> sequence.boustrophedon(count=0)
             Sequence([])
@@ -819,7 +819,7 @@ class Sequence(abjad.Sequence):
             ...     baca.PitchClassSegment([1, 2, 3]),
             ...     baca.PitchClassSegment([4, 5, 6]),
             ...     ]
-            >>> sequence = baca.Sequence(collections)
+            >>> sequence = baca.sequence(collections)
 
             >>> sequence.boustrophedon(count=0)
             Sequence([])
@@ -853,7 +853,7 @@ class Sequence(abjad.Sequence):
             Iterates mixed items boustrophedon:
 
             >>> collection = baca.PitchClassSegment([1, 2, 3])
-            >>> sequence = baca.Sequence([collection, 4, 5])
+            >>> sequence = baca.sequence([collection, 4, 5])
             >>> for item in sequence.boustrophedon(count=3):
             ...     item
             ...
@@ -937,23 +937,24 @@ class Sequence(abjad.Sequence):
         return type(self)(items=result)
 
     def degree_of_rotational_symmetry(self):
-        """Gets degree of rotational symmetry.
+        """
+        Gets degree of rotational symmetry.
 
         ..  container:: example
 
-            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
+            >>> baca.sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
             6
 
-            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
+            >>> baca.sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
             3
 
-            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
+            >>> baca.sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
             2
 
-            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
+            >>> baca.sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
             1
 
-            >>> baca.Sequence().degree_of_rotational_symmetry()
+            >>> baca.sequence().degree_of_rotational_symmetry()
             1
 
         Returns positive integer.
@@ -970,7 +971,7 @@ class Sequence(abjad.Sequence):
         r"""
         Groups sequence by sign of items.
 
-        >>> sequence = baca.Sequence(
+        >>> sequence = baca.sequence(
         ...     [0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6],
         ...     )
 
@@ -1117,7 +1118,7 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> sequence = baca.Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
+                >>> sequence = baca.sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
                 >>> sequence = sequence.helianthate(n=-1, m=1)
                 >>> for item in sequence:
                 ...     item
@@ -1297,7 +1298,7 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> sequence = baca.Sequence(range(16))
+                >>> sequence = baca.sequence(range(16))
                 >>> parts = sequence.partition([3])
 
                 >>> for part in parts:
@@ -1353,23 +1354,24 @@ class Sequence(abjad.Sequence):
             )
 
     def period_of_rotation(self):
-        """Gets period of rotation.
+        """
+        Gets period of rotation.
 
         ..  container:: example
 
-            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).period_of_rotation()
+            >>> baca.sequence([1, 2, 3, 4, 5, 6]).period_of_rotation()
             6
 
-            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).period_of_rotation()
+            >>> baca.sequence([1, 2, 3, 1, 2, 3]).period_of_rotation()
             3
 
-            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).period_of_rotation()
+            >>> baca.sequence([1, 2, 1, 2, 1, 2]).period_of_rotation()
             2
 
-            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).period_of_rotation()
+            >>> baca.sequence([1, 1, 1, 1, 1, 1]).period_of_rotation()
             1
 
-            >>> baca.Sequence().period_of_rotation()
+            >>> baca.sequence().period_of_rotation()
             0
 
         Defined equal to length of sequence divided by degree of rotational
@@ -1390,7 +1392,7 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).repeat_by()
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).repeat_by()
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
             ..  container:: example expression
@@ -1584,7 +1586,7 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal()
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal()
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
             ..  container:: example expression
@@ -1619,7 +1621,7 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example expression
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=0)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=0)
                 Sequence([])
 
             ..  container:: example expression
@@ -1654,25 +1656,25 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=1)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=1)
                 Sequence([[1]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=2)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=2)
                 Sequence([[1, 2]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=3)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=3)
                 Sequence([[1, 2, 3]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=4)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=4)
                 Sequence([[1, 2, 3], 4])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=5)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=5)
                 Sequence([[1, 2, 3], 4, [5]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=6)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=6)
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=99)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=99)
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
             ..  container:: example expression
@@ -1707,25 +1709,25 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-1)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-1)
                 Sequence([[6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-2)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-2)
                 Sequence([[5, 6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-3)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-3)
                 Sequence([4, [5, 6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-4)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-4)
                 Sequence([[3], 4, [5, 6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-5)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-5)
                 Sequence([[2, 3], 4, [5, 6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-6)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-6)
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
-                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-99)
+                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-99)
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
             ..  container:: example expression
