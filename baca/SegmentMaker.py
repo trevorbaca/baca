@@ -4660,7 +4660,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 2]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            fs'16 [                                                      %! ACC1
+                                            fs'16
+                                            [                                                            %! ACC1
                 <BLANKLINE>
                                             d'16
                 <BLANKLINE>
@@ -4670,7 +4671,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             a'16
                 <BLANKLINE>
-                                            af'16 ]                                                      %! ACC1
+                                            af'16
+                                            ]                                                            %! ACC1
                 <BLANKLINE>
                                         }
                                         c'8.
@@ -4689,7 +4691,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 4]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            bf'16 [                                                      %! ACC1
+                                            bf'16
+                                            [                                                            %! ACC1
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -4697,7 +4700,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             af'16
                 <BLANKLINE>
-                                            c'16 ]                                                       %! ACC1
+                                            c'16
+                                            ]                                                            %! ACC1
                 <BLANKLINE>
                                         }
                                         f'8.

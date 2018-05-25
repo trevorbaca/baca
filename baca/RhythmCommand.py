@@ -381,11 +381,13 @@ class RhythmCommand(Command):
 
     def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker
+        literal_selections = False
         if rhythm_maker is None:
             mask = abjad.silence([0], 1, use_multimeasure_rests=True)
             rhythm_maker = rmakers.NoteRhythmMaker(division_masks=[mask])
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
+            literal_selections = True
         else:
             if isinstance(rhythm_maker, rmakers.RhythmMaker):
                 pairs = [(rhythm_maker, abjad.index([0], 1))]
@@ -448,7 +450,6 @@ class RhythmCommand(Command):
                     )
                 maker_to_state[rhythm_maker] = rhythm_maker.state
                 selections.extend(selections_)
-            self._annotate_unpitched_notes(selections)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.split_at_measure_boundaries:
@@ -473,6 +474,8 @@ class RhythmCommand(Command):
                 multimeasure_rests=self.multimeasure_rests,
                 )
         self._tag_broken_ties(selections)
+        if not literal_selections:
+            self._annotate_unpitched_notes(selections)
         return selections, start_offset
 
     def _previous_segment_stop_state(self):
@@ -701,8 +704,77 @@ class RhythmCommand(Command):
 
     @property
     def rewrite_meter(self) -> typing.Optional[bool]:
-        """
+        r"""
         Is true when command rewrites meter.
+
+        ..  container:: example
+
+            REGRESSION. All notes below are tagged unpitched (and colored
+            gold), even tied notes resulting from meter rewriting:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(10, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_repeat_tied_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 10/8                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 5/4
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'4.
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'4
+                                \repeatTie
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'4.
+                                \repeatTie
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'4
+                                \repeatTie
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         """
         return self._rewrite_meter
 
