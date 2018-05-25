@@ -93,6 +93,11 @@ class PiecewiseCommand(Command):
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
         length = len(argument)
+        for leaf in abjad.select(argument).leaves():
+            if leaf not in spanner:
+                message = f'\n  Leaf {leaf!s} not in {spanner!s}'
+                message += "\n  Does selector leak spanner selector?"
+                raise Exception(message)
         for i, item in enumerate(argument):
             leaf = baca.select(item).leaf(0)
             indicator = self.indicators[i]

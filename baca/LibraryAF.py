@@ -6354,7 +6354,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.enchained_hairpin(
-            ...         *baca.make_dynamics('p f'),
+            ...         baca.make_dynamics('p f'),
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
             ...     baca.make_even_runs(),
@@ -6494,7 +6494,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.enchained_hairpin(
-            ...         *baca.make_dynamics('p f'),
+            ...         baca.make_dynamics('p f'),
             ...         bookend=True,
             ...         selector=baca.leaves().enchain([8]),
             ...     ),
@@ -6620,11 +6620,17 @@ class LibraryAF(abjad.AbjadObject):
 
         """
         from .LibraryNS import LibraryNS
+        dynamics_: typing.List[abjad.Dynamic] = []
         for dynamic in dynamics:
+            if isinstance(dynamic, (list, tuple)):
+                dynamics_.extend(dynamic)
+            else:
+                dynamics_.append(dynamic)
+        for dynamic in dynamics_:
             assert isinstance(dynamic, abjad.Dynamic), repr(dynamic)
         return LibraryNS.piecewise(
             abjad.Hairpin(),
-            dynamics,
+            dynamics_,
             selector,
             bookend=bookend,
             spanner_selector=spanner_selector,
