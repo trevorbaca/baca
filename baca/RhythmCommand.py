@@ -346,11 +346,10 @@ class RhythmCommand(Command):
             message += f'\n    {format(rhythm_maker)}'
             raise Exception(message)
 
-    @staticmethod
-    def _check_rhythm_maker_pattern_pairs(pairs):
+    def _check_rhythm_maker_pattern_pairs(self, pairs):
         if not isinstance(pairs, collections.Sequence): 
             return False
-        prototype = (abjad.Selection, rmakers.RhythmMaker)
+        prototype = (abjad.Selection, rmakers.RhythmMaker, type(self))
         for pair in pairs:
             if not isinstance(pair, tuple) or len(pair) != 2:
                 return False
@@ -434,6 +433,9 @@ class RhythmCommand(Command):
             for subsequence in labelled_divisions:
                 divisions_ = [pair[0] for pair in subsequence]
                 rhythm_maker = subsequence[0][1]
+                if isinstance(rhythm_maker, type(self)):
+                    rhythm_maker = rhythm_maker.rhythm_maker
+                    assert isinstance(rhythm_maker, rmakers.RhythmMaker)
                 # TODO: eventually allow previous segment stop state
                 #       and local stop state to work together
                 if previous_segment_stop_state is None:
