@@ -12,8 +12,9 @@ before_install:
     - wget -q $LILYPOND_URL
     - sh $LILYPOND_SCRIPT --batch
     - git clone https://github.com/Abjad/abjad.git;
-    - cd abjad; git checkout trevor/dev; pip install -e .[development]
-    - echo `git branch`
+    - cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
+    - python -c "import abjadext"
+    - git branch
     - cd ..
     - pwd
 
@@ -28,7 +29,7 @@ install:
 before_script:
     - export PATH=$PATH:./baca/scr
     - echo $PATH
-    - echo `which doctest`
+    - which doctest
     - export MYPYPATH=`pwd`/abjad:/tmp/typehints
     - echo $MYPYPATH
 
