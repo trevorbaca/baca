@@ -1,7 +1,7 @@
 import abjad
 import baca
 import typing
-from abjad import rmakers as rmakers
+import abjadext.rmakers
 from .GlobalFermataCommand import GlobalFermataCommand
 from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
@@ -17,8 +17,9 @@ from .PitchCommand import PitchCommand
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .SpannerCommand import SpannerCommand
-from .StaffPositionInterpolationCommand import \
-    StaffPositionInterpolationCommand
+from .StaffPositionInterpolationCommand import (
+    StaffPositionInterpolationCommand,
+    )
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
 from .Typing import NumberPair
@@ -37,7 +38,7 @@ class LibraryGM(abjad.AbjadObject):
     __slots__ = (
         )
 
-    mask_type = typing.Union[abjad.SilenceMask, abjad.SustainMask]
+    mask_type = typing.Union[abjadext.rmakers.SilenceMask, abjadext.rmakers.SustainMask]
 
     ### PUBLIC METHODS ###
 
@@ -1559,7 +1560,7 @@ class LibraryGM(abjad.AbjadObject):
         Makes even runs.
         """
         return RhythmCommand(
-            rhythm_maker=rmakers.EvenRunRhythmMaker()
+            rhythm_maker=abjadext.rmakers.EvenRunRhythmMaker()
             )
 
     @staticmethod
@@ -1578,8 +1579,8 @@ class LibraryGM(abjad.AbjadObject):
             division_expression=abjad.sequence()
                 .sum()
                 .sequence(),
-            rhythm_maker=rmakers.TupletRhythmMaker(
-                tie_specifier=rmakers.TieSpecifier(
+            rhythm_maker=abjadext.rmakers.TupletRhythmMaker(
+                tie_specifier=abjadext.rmakers.TieSpecifier(
                     repeat_ties=True,
                     ),
                 tuplet_ratios=tuplet_ratios,
@@ -1591,12 +1592,12 @@ class LibraryGM(abjad.AbjadObject):
         """
         Makes multimeasure rests.
         """
-        mask = rmakers.SilenceMask(
+        mask = abjadext.rmakers.SilenceMask(
             pattern=abjad.index_all(),
             use_multimeasure_rests=True,
             )
         return RhythmCommand(
-            rhythm_maker=rmakers.NoteRhythmMaker(
+            rhythm_maker=abjadext.rmakers.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
             )
@@ -1615,10 +1616,10 @@ class LibraryGM(abjad.AbjadObject):
             division_masks = [division_mask]
         tie_specifier = None
         if repeat_ties:
-            tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
+            tie_specifier = abjadext.rmakers.TieSpecifier(repeat_ties=True)
         return RhythmCommand(
             rewrite_meter=True,
-            rhythm_maker=rmakers.NoteRhythmMaker(
+            rhythm_maker=abjadext.rmakers.NoteRhythmMaker(
                 division_masks=division_masks,
                 tie_specifier=tie_specifier,
                 )
@@ -1640,9 +1641,9 @@ class LibraryGM(abjad.AbjadObject):
             division_masks = [division_mask]
         return RhythmCommand(
             rewrite_meter=not(do_not_rewrite_meter),
-            rhythm_maker=rmakers.NoteRhythmMaker(
+            rhythm_maker=abjadext.rmakers.NoteRhythmMaker(
                 division_masks=division_masks,
-                tie_specifier=rmakers.TieSpecifier(
+                tie_specifier=abjadext.rmakers.TieSpecifier(
                     tie_across_divisions=True,
                     repeat_ties=True,
                     ),
@@ -1652,7 +1653,8 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def make_repeated_duration_notes(
         durations: typing.Iterable,
-        beam_specifier: rmakers.BeamSpecifier = None,
+        *,
+        beam_specifier: abjadext.rmakers.BeamSpecifier = None,
         division_mask: abjad.Pattern = None,
         do_not_rewrite_meter: bool = None,
         ) -> RhythmCommand:
@@ -1669,14 +1671,14 @@ class LibraryGM(abjad.AbjadObject):
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
-        tie_specifier = rmakers.TieSpecifier(
+        tie_specifier = abjadext.rmakers.TieSpecifier(
             repeat_ties=True,
             )
         division_expression = LibraryNS.split_by_durations(durations=durations)
         return RhythmCommand(
             division_expression=division_expression,
             rewrite_meter=not(do_not_rewrite_meter),
-            rhythm_maker=rmakers.NoteRhythmMaker(
+            rhythm_maker=abjadext.rmakers.NoteRhythmMaker(
                 beam_specifier=beam_specifier,
                 division_masks=division_masks,
                 tie_specifier=tie_specifier,
@@ -1689,8 +1691,8 @@ class LibraryGM(abjad.AbjadObject):
         Makes rests.
         """
         return RhythmCommand(
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                division_masks=[abjad.silence([0], 1)],
+            rhythm_maker=abjadext.rmakers.NoteRhythmMaker(
+                division_masks=[abjadext.rmakers.silence([0], 1)],
                 ),
             )
     
@@ -1712,8 +1714,8 @@ class LibraryGM(abjad.AbjadObject):
         """
         duration = abjad.Duration(duration)
         numerator, denominator = duration.pair
-        rhythm_maker = rmakers.IncisedRhythmMaker(
-            incise_specifier=rmakers.InciseSpecifier(
+        rhythm_maker = abjadext.rmakers.IncisedRhythmMaker(
+            incise_specifier=abjadext.rmakers.InciseSpecifier(
                 fill_with_notes=False,
                 outer_divisions_only=True,
                 prefix_talea=[numerator],
@@ -1731,7 +1733,7 @@ class LibraryGM(abjad.AbjadObject):
         Makes skips.
         """
         return RhythmCommand(
-            rhythm_maker=rmakers.SkipRhythmMaker()
+            rhythm_maker=abjadext.rmakers.SkipRhythmMaker()
             )
 
     @staticmethod
@@ -1741,8 +1743,8 @@ class LibraryGM(abjad.AbjadObject):
         """
         return RhythmCommand(
             rewrite_meter=True,
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                tie_specifier=rmakers.TieSpecifier(
+            rhythm_maker=abjadext.rmakers.NoteRhythmMaker(
+                tie_specifier=abjadext.rmakers.TieSpecifier(
                     tie_across_divisions=True,
                     ),
                 ),

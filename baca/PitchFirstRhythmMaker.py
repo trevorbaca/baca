@@ -2,21 +2,21 @@ import abjad
 import baca
 import collections
 import math
-from abjad import rmakers as rmakers
+import abjadext.rmakers
 
 
-class PitchFirstRhythmMaker(rmakers.RhythmMaker):
+class PitchFirstRhythmMaker(abjadext.rmakers.RhythmMaker):
     r"""
     Collection rhythm-maker.
 
-    >>> from abjad import rmakers as rmakers
+    >>> import abjadext.rmakers
 
     ..  container:: example
 
         Sixteenths and eighths:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     talea=rmakers.Talea(
+        ...     talea=abjadext.rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
         ...         ),
@@ -156,7 +156,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         time_treatments=None,
         tuplet_specifier=None,
         ):
-        rmakers.RhythmMaker.__init__(
+        abjadext.rmakers.RhythmMaker.__init__(
             self,
             beam_specifier=beam_specifier,
             duration_specifier=duration_specifier,
@@ -173,8 +173,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         self._next_attack = 0
         self._next_segment = 0
         self._state = abjad.OrderedDict()
-        talea = talea or rmakers.Talea()
-        if not isinstance(talea, rmakers.Talea):
+        talea = talea or abjadext.rmakers.Talea()
+        if not isinstance(talea, abjadext.rmakers.Talea):
             raise TypeError(f'must be talea: {talea!r}.')
         self._talea = talea
         if time_treatments is not None:
@@ -201,7 +201,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Without state manifest:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -254,7 +254,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With state manifest:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -390,7 +390,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     def _get_talea(self):
         if self.talea is not None:
             return self.talea
-        return rmakers.Talea()
+        return abjadext.rmakers.Talea()
 
     def _get_time_treatments(self):
         if not self.time_treatments:
@@ -430,7 +430,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         assert len(leaf_selection) == len(multipliers)
         for multiplier, leaf in zip(multipliers, leaf_selection):
             abjad.attach(multiplier, leaf)
-        rhythm_maker_class = rmakers.AccelerandoRhythmMaker
+        rhythm_maker_class = abjadext.rmakers.AccelerandoRhythmMaker
         if rhythm_maker_class._is_accelerando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
         elif rhythm_maker_class._is_ritardando(leaf_selection):
@@ -506,7 +506,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         start_offsets = [_ / total_duration for _ in start_offsets]
         #print(total_duration, start_offsets)
         start_offsets_ = []
-        rhythm_maker_class = rmakers.AccelerandoRhythmMaker
+        rhythm_maker_class = abjadext.rmakers.AccelerandoRhythmMaker
         for start_offset in start_offsets:
             start_offset_ = rhythm_maker_class._interpolate_exponential(
                 0,
@@ -766,7 +766,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=4,
             ...         ),
@@ -850,7 +850,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...             lmr_specifier=baca.LMRSpecifier()
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=4,
             ...         ),
@@ -960,7 +960,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams each division by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1015,10 +1015,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams divisions together:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     beam_specifier=abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1089,10 +1089,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams nothing:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     beam_specifier=abjadext.rmakers.BeamSpecifier(
             ...         beam_each_division=False,
             ...         ),
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1137,7 +1137,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Does not beam rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1192,10 +1192,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Does beam rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     beam_specifier=abjadext.rmakers.BeamSpecifier(
             ...         beam_rests=True,
             ...     ),
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1250,11 +1250,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams rests with stemlets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     beam_specifier=abjadext.rmakers.BeamSpecifier(
             ...         beam_rests=True,
             ...         stemlet_length=0.75,
             ...     ),
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1322,7 +1322,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns beam specifier or none.
         """
-        return rmakers.RhythmMaker.beam_specifier.fget(self)
+        return abjadext.rmakers.RhythmMaker.beam_specifier.fget(self)
 
     @property
     def division_masks(self):
@@ -1334,7 +1334,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             No division masks:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1380,9 +1380,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     division_masks=[
-            ...         abjad.silence([1], 2),
+            ...         abjadext.rmakers.silence([1], 2),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1420,9 +1420,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     division_masks=[
-            ...         abjad.sustain([1], 2),
+            ...         abjadext.rmakers.sustain([1], 2),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1466,7 +1466,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns tuple of division masks or none.
         """
-        return rmakers.RhythmMaker.division_masks.fget(self)
+        return abjadext.rmakers.RhythmMaker.division_masks.fget(self)
 
     @property
     def duration_specifier(self):
@@ -1479,7 +1479,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             durations by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
             ...         ),
@@ -1533,10 +1533,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             durations:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     duration_specifier=rmakers.DurationSpecifier(
+            ...     duration_specifier=abjadext.rmakers.DurationSpecifier(
             ...         decrease_monotonic=False,
             ...         ),
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
             ...         ),
@@ -1596,7 +1596,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns duration specifier or none.
         """
-        return rmakers.RhythmMaker.duration_specifier.fget(self)
+        return abjadext.rmakers.RhythmMaker.duration_specifier.fget(self)
 
     @property
     def logical_tie_masks(self):
@@ -1609,9 +1609,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     logical_tie_masks=[
-            ...         abjad.silence([2], 3),
+            ...         abjadext.rmakers.silence([2], 3),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1659,10 +1659,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     logical_tie_masks=[
-            ...         abjad.silence([0]),
-            ...         abjad.silence([-1]),
+            ...         abjadext.rmakers.silence([0]),
+            ...         abjadext.rmakers.silence([-1]),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1714,7 +1714,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns tuple patterns or none.
         """
-        return rmakers.RhythmMaker.logical_tie_masks.fget(self)
+        return abjadext.rmakers.RhythmMaker.logical_tie_masks.fget(self)
 
     @property
     def talea(self):
@@ -1726,11 +1726,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     beam_specifier=abjadext.rmakers.BeamSpecifier(
             ...         beam_rests=True,
             ...         stemlet_length=1.5,
             ...         ),
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[3, -1, 2, 2],
             ...         denominator=16,
             ...         ),
@@ -1784,11 +1784,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With very large nonassignable counts:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[29],
             ...         denominator=64,
             ...         ),
-            ...     tie_specifier=rmakers.TieSpecifier(
+            ...     tie_specifier=abjadext.rmakers.TieSpecifier(
             ...         repeat_ties=True,
             ...         ),
             ...     )
@@ -1840,11 +1840,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Ties across divisions with matching pitches:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
-            ...     tie_specifier=rmakers.TieSpecifier(
+            ...     tie_specifier=abjadext.rmakers.TieSpecifier(
             ...         tie_across_divisions=True,
             ...         ),
             ...     )
@@ -1889,11 +1889,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Ties consecutive notes with matching pitches:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
-            ...     tie_specifier=rmakers.TieSpecifier(
+            ...     tie_specifier=abjadext.rmakers.TieSpecifier(
             ...         tie_consecutive_notes=True,
             ...         ),
             ...     )
@@ -1948,7 +1948,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns tie specifier or none.
         """
-        return rmakers.RhythmMaker.tie_specifier.fget(self)
+        return abjadext.rmakers.RhythmMaker.tie_specifier.fget(self)
 
     @property
     def time_treatments(self):
@@ -1961,7 +1961,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[1],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -2010,7 +2010,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[-1],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -2058,7 +2058,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['accel'],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2111,7 +2111,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['rit'],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2164,7 +2164,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['accel', 'rit'],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2215,7 +2215,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['accel', -2, 'rit'],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2268,7 +2268,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[abjad.Ratio((3, 2))],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -2357,11 +2357,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[abjad.Duration(1, 4)],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
+            ...     tuplet_specifier=abjadext.rmakers.TupletSpecifier(
             ...         denominator=abjad.Duration(1, 16),
             ...         ),
             ...     )
@@ -2446,11 +2446,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=8,
             ...         ),
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
+            ...     tuplet_specifier=abjadext.rmakers.TupletSpecifier(
             ...         denominator=abjad.Duration(1, 16),
             ...         ),
             ...     )
@@ -2568,7 +2568,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Does not simplify redudant tuplets by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[3],
             ...         denominator=16,
             ...         ),
@@ -2629,12 +2629,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Trivializes tuplets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[3],
             ...         denominator=16,
             ...         ),
             ...     time_treatments=[-2],
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
+            ...     tuplet_specifier=abjadext.rmakers.TupletSpecifier(
             ...         trivialize=True,
             ...         ),
             ...     )
@@ -2702,7 +2702,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns tuplet specifier or none.
         """
-        return rmakers.RhythmMaker.tuplet_specifier.fget(self)
+        return abjadext.rmakers.RhythmMaker.tuplet_specifier.fget(self)
 
     ### PUBLIC METHODS ###
 

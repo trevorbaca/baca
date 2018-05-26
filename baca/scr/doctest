@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import abjad
+import abjadext
 import baca
 import doctest
 import importlib
@@ -19,6 +20,8 @@ _colors = {
 def _get_globs():
     globs = {}
     globs['abjad'] = abjad
+    globs.update(abjad.__dict__)
+    globs['abjadext'] = abjadext
     globs.update(abjad.__dict__)
     globs['baca'] = baca
     globs.update(baca.__dict__)

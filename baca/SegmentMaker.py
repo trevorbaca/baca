@@ -2,10 +2,10 @@ import abjad
 import baca
 import os
 import pathlib
+import abjadext.rmakers
 import sys
 import traceback
 import typing
-from abjad import rmakers as rmakers
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
 from .CommandWrapper import CommandWrapper
@@ -23,7 +23,7 @@ class SegmentMaker(abjad.SegmentMaker):
     r"""
     Segment-maker.
 
-    >>> from abjad import rmakers as rmakers
+    >>> import abjadext.rmakers
 
     ..  container:: example
 
@@ -1428,14 +1428,14 @@ class SegmentMaker(abjad.SegmentMaker):
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
-                    maker = rmakers.SkipRhythmMaker()
+                    maker = abjadext.rmakers.SkipRhythmMaker()
                 else:
-                    mask = abjad.silence(
+                    mask = abjadext.rmakers.silence(
                         [0],
                         1,
                         use_multimeasure_rests=True,
                         )
-                    maker = rmakers.NoteRhythmMaker(division_masks=[mask])
+                    maker = abjadext.rmakers.NoteRhythmMaker(division_masks=[mask])
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
                 continue
@@ -4552,7 +4552,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
-                ...             talea=rmakers.Talea(
+                ...             talea=abjadext.rmakers.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -4723,7 +4723,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
-                ...             talea=rmakers.Talea(
+                ...             talea=abjadext.rmakers.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),

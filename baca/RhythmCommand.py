@@ -2,7 +2,7 @@ import abjad
 import baca
 import collections
 import typing
-from abjad import rmakers as rmakers
+import abjadext.rmakers
 from .Command import Command
 from .DivisionMaker import DivisionMaker
 from .FlattenDivisionCallback import FlattenDivisionCallback
@@ -28,16 +28,16 @@ division_maker_typing = typing.Union[
     SplitByRoundedRatiosDivisionCallback,
     ]
 rhythm_maker_type = (
-    rmakers.RhythmMaker,
+    abjadext.rmakers.RhythmMaker,
     abjad.Selection,
     )
 rhythm_maker_typing = typing.Union[
-    rmakers.RhythmMaker,
+    abjadext.rmakers.RhythmMaker,
     abjad.Selection,
     typing.Iterable[
         typing.Tuple[
             typing.Union[
-                rmakers.RhythmMaker,
+                abjadext.rmakers.RhythmMaker,
                 abjad.Selection,
                 ],
             abjad.Pattern,
@@ -50,7 +50,7 @@ class RhythmCommand(Command):
     r"""
     Rhythm command.
 
-    >>> from abjad import rmakers as rmakers
+    >>> import abjadext.rmakers
 
     ..  container:: example
 
@@ -61,7 +61,7 @@ class RhythmCommand(Command):
         ...     )
 
         >>> command = baca.RhythmCommand(
-        ...     rhythm_maker=rmakers.EvenRunRhythmMaker(),
+        ...     rhythm_maker=abjadext.rmakers.EvenRunRhythmMaker(),
         ...     )
 
         >>> maker(
@@ -333,7 +333,7 @@ class RhythmCommand(Command):
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
             return
-        prototype = (abjad.Selection, rmakers.RhythmMaker)
+        prototype = (abjad.Selection, abjadext.rmakers.RhythmMaker)
         if isinstance(rhythm_maker, prototype):
             return
         if not self._check_rhythm_maker_pattern_pairs(rhythm_maker):
@@ -349,7 +349,7 @@ class RhythmCommand(Command):
     def _check_rhythm_maker_pattern_pairs(self, pairs):
         if not isinstance(pairs, collections.Sequence): 
             return False
-        prototype = (abjad.Selection, rmakers.RhythmMaker, type(self))
+        prototype = (abjad.Selection, abjadext.rmakers.RhythmMaker, type(self))
         for pair in pairs:
             if not isinstance(pair, tuple) or len(pair) != 2:
                 return False
@@ -383,13 +383,13 @@ class RhythmCommand(Command):
         rhythm_maker = self.rhythm_maker
         literal_selections = False
         if rhythm_maker is None:
-            mask = abjad.silence([0], 1, use_multimeasure_rests=True)
-            rhythm_maker = rmakers.NoteRhythmMaker(division_masks=[mask])
+            mask = abjadext.rmakers.silence([0], 1, use_multimeasure_rests=True)
+            rhythm_maker = abjadext.rmakers.NoteRhythmMaker(division_masks=[mask])
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
             literal_selections = True
         else:
-            if isinstance(rhythm_maker, rmakers.RhythmMaker):
+            if isinstance(rhythm_maker, abjadext.rmakers.RhythmMaker):
                 pairs = [(rhythm_maker, abjad.index([0], 1))]
             else:
                 pairs = list(rhythm_maker)
@@ -437,7 +437,7 @@ class RhythmCommand(Command):
                 rhythm_maker = subsequence[0][1]
                 if isinstance(rhythm_maker, type(self)):
                     rhythm_maker = rhythm_maker.rhythm_maker
-                    assert isinstance(rhythm_maker, rmakers.RhythmMaker)
+                    assert isinstance(rhythm_maker, abjadext.rmakers.RhythmMaker)
                 # TODO: eventually allow previous segment stop state
                 #       and local stop state to work together
                 if previous_segment_stop_state is None:
@@ -453,7 +453,7 @@ class RhythmCommand(Command):
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.split_at_measure_boundaries:
-            specifier = rmakers.DurationSpecifier
+            specifier = abjadext.rmakers.DurationSpecifier
             selections = specifier._split_at_measure_boundaries(
                 selections,
                 time_signatures,
@@ -461,7 +461,7 @@ class RhythmCommand(Command):
                 )
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.rewrite_meter:
-            selections = rmakers.DurationSpecifier._rewrite_meter_(
+            selections = abjadext.rmakers.DurationSpecifier._rewrite_meter_(
                 selections,
                 time_signatures,
                 reference_meters=self.reference_meters,
@@ -469,7 +469,7 @@ class RhythmCommand(Command):
                 repeat_ties=self.repeat_ties,
                 )
         if self.rewrite_rest_filled:
-            selections = rmakers.DurationSpecifier._rewrite_rest_filled_(
+            selections = abjadext.rmakers.DurationSpecifier._rewrite_rest_filled_(
                 selections,
                 multimeasure_rests=self.multimeasure_rests,
                 )
@@ -488,7 +488,7 @@ class RhythmCommand(Command):
         return previous_segment_stop_state
 
     def _tag_broken_ties(self, selections):
-        if not isinstance(self.rhythm_maker, rmakers.RhythmMaker):
+        if not isinstance(self.rhythm_maker, abjadext.rmakers.RhythmMaker):
             return
         if (self.left_broken and
             self.rhythm_maker.previous_state.get('incomplete_last_note')):
@@ -524,7 +524,7 @@ class RhythmCommand(Command):
 
             >>> command = baca.RhythmCommand(
             ...     division_expression=abjad.sequence().sum().sequence(),
-            ...     rhythm_maker=rmakers.EvenRunRhythmMaker(),
+            ...     rhythm_maker=abjadext.rmakers.EvenRunRhythmMaker(),
             ...     )
 
             >>> maker(
@@ -801,11 +801,11 @@ class RhythmCommand(Command):
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
-            >>> rhythm_maker_1 = rmakers.NoteRhythmMaker(
-            ...     division_masks=[abjad.silence([0], 1)],
+            >>> rhythm_maker_1 = abjadext.rmakers.NoteRhythmMaker(
+            ...     division_masks=[abjadext.rmakers.silence([0], 1)],
             ...     )
-            >>> rhythm_maker_2 = rmakers.TaleaRhythmMaker(
-            ...     talea=rmakers.Talea(
+            >>> rhythm_maker_2 = abjadext.rmakers.TaleaRhythmMaker(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[3, 4],
             ...         denominator=16,
             ...         ),

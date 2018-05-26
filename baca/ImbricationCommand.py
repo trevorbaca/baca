@@ -1,7 +1,7 @@
 import abjad
 import baca
 import copy
-from abjad import rmakers as rmakers
+import abjadext.rmakers
 from .Command import Command
 
 
@@ -9,14 +9,14 @@ class ImbricationCommand(Command):
     r"""
     Imbrication command.
 
-    >>> from abjad import rmakers as rmakers
+    >>> import abjadext.rmakers
 
     ..  container:: example
 
         Defaults:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
+        ...     abjadext.rmakers.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         ),
         ...     )
@@ -153,7 +153,7 @@ class ImbricationCommand(Command):
         Multiple imbricated voices:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
+        ...     abjadext.rmakers.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         ),
         ...     )
@@ -347,14 +347,14 @@ class ImbricationCommand(Command):
         Hides tuplet brackets above imbricated voice:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
+        ...     abjadext.rmakers.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         beam_rests=True,
         ...         ),
         ...     baca.staccato(selector=baca.pheads()),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             talea=rmakers.Talea(
+        ...             talea=abjadext.rmakers.Talea(
         ...                 counts=[1],
         ...                 denominator=16,
         ...                 ),
@@ -594,7 +594,7 @@ class ImbricationCommand(Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             talea=rmakers.Talea(
+            ...             talea=abjadext.rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
@@ -843,7 +843,7 @@ class ImbricationCommand(Command):
             Extends beam across figures:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     rmakers.BeamSpecifier(
+                ...     abjadext.rmakers.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -1082,7 +1082,7 @@ class ImbricationCommand(Command):
             Works with chords:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1203,7 +1203,7 @@ class ImbricationCommand(Command):
             Works with rests:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1434,7 +1434,7 @@ class ImbricationCommand(Command):
                 continue
             if isinstance(specifier, baca.ImbricationCommand):
                 continue
-            if isinstance(specifier, rmakers.BeamSpecifier):
+            if isinstance(specifier, abjadext.rmakers.BeamSpecifier):
                 specifier._detach_all_beams(selections)
             if isinstance(specifier, baca.NestingCommand):
                 nested_selections = specifier(selections)
@@ -1496,7 +1496,7 @@ class ImbricationCommand(Command):
             Allows unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1630,7 +1630,7 @@ class ImbricationCommand(Command):
             Raises exception on unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1705,7 +1705,7 @@ class ImbricationCommand(Command):
             Hockets voices:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1888,7 +1888,7 @@ class ImbricationCommand(Command):
             Selects last nine notes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -2092,7 +2092,7 @@ class ImbricationCommand(Command):
             Beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2108,7 +2108,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         abjadext.rmakers.BeamSpecifier(
             ...             beam_each_division=False,
             ...             ),
             ...         ),
@@ -2228,7 +2228,7 @@ class ImbricationCommand(Command):
             Beams divisions together but excludes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2244,7 +2244,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         abjadext.rmakers.BeamSpecifier(
             ...             beam_divisions_together=True,
             ...             ),
             ...         ),
@@ -2380,7 +2380,7 @@ class ImbricationCommand(Command):
             Beams divisions together and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2526,7 +2526,7 @@ class ImbricationCommand(Command):
             Beams each division and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     abjadext.rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2542,7 +2542,7 @@ class ImbricationCommand(Command):
             ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         abjadext.rmakers.BeamSpecifier(
             ...             beam_rests=True,
             ...             ),
             ...         ),
@@ -2679,7 +2679,7 @@ class ImbricationCommand(Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             talea=rmakers.Talea(
+            ...             talea=abjadext.rmakers.Talea(
             ...                 counts=[5],
             ...                 denominator=32,
             ...                 ),

@@ -11,7 +11,7 @@ class IndicatorCommand(Command):
     r"""
     Indicator command.
 
-    >>> from abjad import rmakers as rmakers
+    >>> import abjadext.rmakers
 
     ..  container:: example
 
@@ -21,7 +21,7 @@ class IndicatorCommand(Command):
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             talea=rmakers.Talea(
+        ...             talea=abjadext.rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
@@ -336,7 +336,7 @@ class IndicatorCommand(Command):
             ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             talea=rmakers.Talea(
+            ...             talea=abjadext.rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
@@ -414,7 +414,7 @@ class IndicatorCommand(Command):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             talea=rmakers.Talea(
+            ...             talea=abjadext.rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),

@@ -1,7 +1,7 @@
 import abjad
 import baca
 import typing
-from abjad import rmakers as rmakers
+import abjadext.rmakers
 from .MusicMaker import MusicMaker
 
 
@@ -251,12 +251,12 @@ class MusicAccumulator(abjad.AbjadObject):
     @staticmethod
     def _make_default_figure_maker():
         return MusicMaker(
-            rmakers.BeamSpecifier(
+            abjadext.rmakers.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
             baca.PitchFirstRhythmCommand(
                 rhythm_maker=baca.PitchFirstRhythmMaker(
-                    talea=rmakers.Talea(
+                    talea=abjadext.rmakers.Talea(
                         counts=[1],
                         denominator=16,
                         ),

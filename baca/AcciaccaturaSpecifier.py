@@ -6,7 +6,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
     r"""
     Acciaccatura specifier.
 
-    >>> from abjad import rmakers as rmakers
+    >>> import abjadext.rmakers
 
     ..  container:: example
 
@@ -16,7 +16,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         ...     acciaccatura_specifiers=[
         ...         baca.AcciaccaturaSpecifier()
         ...         ],
-        ...     talea=rmakers.Talea(
+        ...     talea=abjadext.rmakers.Talea(
         ...         counts=[1],
         ...         denominator=8,
         ...         ),
@@ -185,7 +185,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -269,7 +269,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...             durations=[(1, 8)],
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -364,7 +364,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -453,7 +453,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...                 ),
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -547,7 +547,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...                 ),
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -643,7 +643,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...                 ),
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -739,7 +739,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...                 ),
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -842,7 +842,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -926,7 +926,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...             pattern=abjad.index_last(1),
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -1010,7 +1010,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             ...             pattern=abjad.index([1], 2),
             ...             ),
             ...         ],
-            ...     talea=rmakers.Talea(
+            ...     talea=abjadext.rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
