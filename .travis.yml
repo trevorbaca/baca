@@ -13,9 +13,11 @@ before_install:
     - sh $LILYPOND_SCRIPT --batch
     - git clone https://github.com/Abjad/abjad.git;
     - pip install --upgrade pip
+    # [rmakers] option allows "from abjadext import rmakers":
     - cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
     - git branch
     - cd ..
+    # allows mypy to find abjad-ext-rmakers/abjadext:
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git
     - pwd
     - ls
