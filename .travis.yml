@@ -13,10 +13,11 @@ before_install:
     - sh $LILYPOND_SCRIPT --batch
     - git clone https://github.com/Abjad/abjad.git;
     - cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
-    - python -c "import abjadext"
     - git branch
     - cd ..
     - pwd
+    - git clone https://github.com/Abjad/abjad-ext-rmakers.git
+    - ls
 
 install:
     - pip install --upgrade pip
@@ -30,7 +31,7 @@ before_script:
     - export PATH=$PATH:./baca/scr
     - echo $PATH
     - which doctest
-    - export MYPYPATH=`pwd`/abjad:/tmp/typehints
+    - export MYPYPATH=`pwd`/abjad:`pwd`/abjad-ext-rmakers:/tmp/typehints
     - echo $MYPYPATH
 
 script:
