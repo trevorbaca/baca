@@ -13,7 +13,7 @@ before_install:
     - sh $LILYPOND_SCRIPT --batch
     - git clone https://github.com/Abjad/abjad.git;
     - pip install --upgrade pip
-    - cd abjad; git checkout trevor/dev; pip install --quiet -e .
+    - cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
     - git branch
     - cd ..
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git
