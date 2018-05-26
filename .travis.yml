@@ -12,11 +12,11 @@ before_install:
     - wget -q $LILYPOND_URL
     - sh $LILYPOND_SCRIPT --batch
     - git clone https://github.com/Abjad/abjad.git;
-    - cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
+    - cd abjad; git checkout trevor/dev; pip install --quiet -e
     - git branch
     - cd ..
-    - pwd
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git
+    - pwd
     - ls
 
 install:
