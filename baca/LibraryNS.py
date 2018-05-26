@@ -2,7 +2,7 @@ import abjad
 import baca
 import collections
 import typing
-import abjadext.rmakers
+from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
@@ -38,12 +38,12 @@ from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
 rhythm_maker_typing = typing.Union[
-    abjadext.rmakers.RhythmMaker,
+    rmakers.RhythmMaker,
     abjad.Selection,
     typing.Iterable[
         typing.Tuple[
             typing.Union[
-                abjadext.rmakers.RhythmMaker,
+                rmakers.RhythmMaker,
                 abjad.Selection,
                 ],
             abjad.Pattern,

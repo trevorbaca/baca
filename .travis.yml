@@ -33,8 +33,8 @@ before_script:
     - echo $MYPYPATH
 
 script:
-    - coverage run -a `which doctest` ./baca/*.py
     - mypy baca
+    - coverage run -a `which doctest` ./baca/*.py
 
 after_success:
     - pip install coveralls

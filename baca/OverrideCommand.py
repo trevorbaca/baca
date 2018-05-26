@@ -9,7 +9,7 @@ class OverrideCommand(Command):
     r"""
     Override command.
 
-    >>> import abjadext.rmakers
+    >>> from abjadext import rmakers
 
     ..  container:: example
 
@@ -77,8 +77,8 @@ class OverrideCommand(Command):
         ...     baca.rest_up(),
         ...     baca.stem_up(),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=abjadext.rmakers.TaleaRhythmMaker(
-        ...             talea=abjadext.rmakers.Talea(
+        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...             talea=rmakers.Talea(
         ...                 counts=[1, 1, 1, -1],
         ...                 denominator=8,
         ...                 ),

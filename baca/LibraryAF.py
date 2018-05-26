@@ -1,7 +1,7 @@
 import abjad
 import baca
 import typing
-import abjadext.rmakers
+from abjadext import rmakers
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BowContactPointCommand import BowContactPointCommand
@@ -32,7 +32,7 @@ class LibraryAF(abjad.AbjadObject):
     """
     Library A - F.
 
-    >>> import abjadext.rmakers
+    >>> from abjadext import rmakers
 
     """
 
@@ -1555,8 +1555,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
-            ...         rhythm_maker=abjadext.rmakers.TaleaRhythmMaker(
-            ...             talea=abjadext.rmakers.Talea(
+            ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+            ...             talea=rmakers.Talea(
             ...                 counts=[1, 1, 1, -1],
             ...                 denominator=8,
             ...                 ),
@@ -1669,8 +1669,8 @@ class LibraryAF(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
-            ...         rhythm_maker=abjadext.rmakers.TaleaRhythmMaker(
-            ...             talea=abjadext.rmakers.Talea(
+            ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+            ...             talea=rmakers.Talea(
             ...                 counts=[1, 1, 1, -1],
             ...                 denominator=8,
             ...                 ),
@@ -2149,7 +2149,7 @@ class LibraryAF(abjad.AbjadObject):
     def beam_divisions(
         *,
         stemlets: Number = None,
-        ) -> abjadext.rmakers.BeamSpecifier:
+        ) -> rmakers.BeamSpecifier:
         r"""
         Beams divisions.
 
@@ -2258,7 +2258,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return abjadext.rmakers.BeamSpecifier(
+        return rmakers.BeamSpecifier(
             beam_each_division=True,
             beam_rests=bool(stemlets),
             stemlet_length=stemlets,
@@ -2269,7 +2269,7 @@ class LibraryAF(abjad.AbjadObject):
         *,
         hide_nibs: bool = False,
         stemlets: Number = None,
-        ) -> abjadext.rmakers.BeamSpecifier:
+        ) -> rmakers.BeamSpecifier:
         r"""
         Beams everything.
 
@@ -2450,7 +2450,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return abjadext.rmakers.BeamSpecifier(
+        return rmakers.BeamSpecifier(
             beam_divisions_together=True,
             beam_each_division=True,
             beam_rests=True,
@@ -2578,7 +2578,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def beam_runs(*, hide_nibs: bool = False) -> abjadext.rmakers.BeamSpecifier:
+    def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
         r"""
         Beams PLT runs.
 
@@ -2731,7 +2731,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return abjadext.rmakers.BeamSpecifier(
+        return rmakers.BeamSpecifier(
             beam_divisions_together=True,
             beam_each_division=True,
             beam_rests=False,
@@ -7257,7 +7257,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def flags() -> abjadext.rmakers.BeamSpecifier:
+    def flags() -> rmakers.BeamSpecifier:
         r"""
         Flags music.
 
@@ -7319,7 +7319,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return abjadext.rmakers.BeamSpecifier(
+        return rmakers.BeamSpecifier(
             beam_divisions_together=False,
             beam_each_division=False,
             )

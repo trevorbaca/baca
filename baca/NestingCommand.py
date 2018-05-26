@@ -7,7 +7,7 @@ class NestingCommand(Command):
     r"""
     Nesting command.
 
-    >>> import abjadext.rmakers
+    >>> from abjadext import rmakers
 
     ..  container:: example
 
@@ -17,7 +17,7 @@ class NestingCommand(Command):
         ...     baca.NestingCommand(
         ...         time_treatments=['+1/16'],
         ...         ),
-        ...     abjadext.rmakers.BeamSpecifier(
+        ...     rmakers.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         ),
         ...     )
@@ -94,7 +94,7 @@ class NestingCommand(Command):
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjadext.rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -283,7 +283,7 @@ class NestingCommand(Command):
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
-            ...     abjadext.rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
