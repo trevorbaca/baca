@@ -1141,6 +1141,7 @@ class LibraryNS(abjad.AbjadObject):
     def pitches(
         pitches: typing.Iterable,
         *,
+        allow_octaves: bool = None,
         allow_repeats: bool = None,
         do_not_transpose: bool = None,
         exact: bool = None,
@@ -1167,6 +1168,7 @@ class LibraryNS(abjad.AbjadObject):
         if persist is not None and not isinstance(persist, str):
             raise Exception(f'persist name must be string (not {persist!r}).')
         return PitchCommand(
+            allow_octaves=allow_octaves,
             allow_repeats=allow_repeats,
             cyclic=cyclic,
             do_not_transpose=do_not_transpose,

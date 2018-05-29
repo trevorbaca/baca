@@ -1584,6 +1584,11 @@ class LibraryGM(abjad.AbjadObject):
                     repeat_ties=True,
                     ),
                 tuplet_ratios=tuplet_ratios,
+                tuplet_specifier=rmakers.TupletSpecifier(
+                    extract_trivial=True,
+                    rewrite_rest_filled=True,
+                    trivialize=True,
+                    ),
                 ),
             )
 
