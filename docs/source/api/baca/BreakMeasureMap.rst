@@ -44,6 +44,8 @@ BreakMeasureMap
 
    .. autoattribute:: BreakMeasureMap.local_measure_numbers
 
+   .. autoattribute:: BreakMeasureMap.partial_score
+
    .. autoattribute:: BreakMeasureMap.tag
 
    .. autoattribute:: BreakMeasureMap.tags

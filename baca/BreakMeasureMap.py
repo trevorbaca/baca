@@ -303,7 +303,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         '_commands',
         '_deactivate',
         '_local_measure_numbers',
-        '_measure_count',
+        '_partial_score',
         '_tags',
         )
 
@@ -317,7 +317,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         commands: abjad.OrderedDict = None,
         deactivate: bool = None,
         local_measure_numbers: bool = None,
-        measure_count: int = None,
+        partial_score: int = None,
         tags: typing.List[str] = None,
         ) -> None:
         tags = tags or []
@@ -330,6 +330,9 @@ class BreakMeasureMap(abjad.AbjadObject):
         if local_measure_numbers is not None:
             local_measure_numbers = bool(local_measure_numbers)
         self._local_measure_numbers = local_measure_numbers
+        if partial_score is not None:
+            assert isinstance(partial_score, int), repr(partial_score)
+        self._partial_score = partial_score
         if commands is not None:
             commands_ = abjad.OrderedDict()
             for measure_number, list_ in commands.items():
@@ -346,14 +349,14 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, context=None) -> None:
+    def __call__(self, context: abjad.Context = None) -> None:
         """
         Calls map on ``context``.
         """
         if context is None:
             return
         skips = baca.select(context).skips()
-        measure_count = len(skips)
+        measure_count = self.partial_score or len(skips)
         last_measure_number = self.first_measure_number + measure_count - 1
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
         abjad.attach(
@@ -362,7 +365,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             deactivate=self.deactivate,
             tag=self.tag.prepend('BMM1'),
             )
-        for skip in skips:
+        for skip in skips[:measure_count]:
             if not abjad.inspect(skip).has_indicator(LBSD):
                 literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
                 abjad.attach(
@@ -418,6 +421,17 @@ class BreakMeasureMap(abjad.AbjadObject):
         Is true when segment measures numbers starting from 1.
         """
         return self._local_measure_numbers
+
+    @property
+    def partial_score(self) -> typing.Optional[int]:
+        """
+        Gets number of measures in partial score.
+
+        Set to a positive integer to cap total measures generated.
+
+        Leave set to none to render all measures in score.
+        """
+        return self._partial_score
 
     @property
     def tag(self) -> abjad.Tag:
