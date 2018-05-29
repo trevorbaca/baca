@@ -2772,6 +2772,7 @@ class LibraryAF(abjad.AbjadObject):
     def breaks(
         *page_specifiers: typing.Any,
         local_measure_numbers: bool = None,
+        measure_count: typing.Optional[int] = 176,
         ) -> BreakMeasureMap:
         r"""
         Makes breaks.
@@ -2787,6 +2788,10 @@ class LibraryAF(abjad.AbjadObject):
             ...         [23, 20, [15, 20, 20]],
             ...         ),
             ...     )
+
+        Set ``measure_count`` when rendering only the first measures of a
+        score; leave ``measure_count`` set to none when rendering a complete
+        score.
 
         ..  container:: example
 
@@ -2835,7 +2840,10 @@ class LibraryAF(abjad.AbjadObject):
         from .LibraryNS import LibraryNS
         commands = abjad.OrderedDict()
         if not page_specifiers:
-            return BreakMeasureMap(commands=commands)
+            return BreakMeasureMap(
+                commands=commands,
+                measure_count=measure_count,
+                )
         first_system = page_specifiers[0].systems[0]
         if hasattr(first_system, 'measure'):
             first_measure_number = first_system.measure
@@ -2882,6 +2890,7 @@ class LibraryAF(abjad.AbjadObject):
         breaks = BreakMeasureMap(
             commands=commands,
             local_measure_numbers=local_measure_numbers,
+            measure_count=measure_count,
             )
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks

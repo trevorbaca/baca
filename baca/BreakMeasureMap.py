@@ -303,6 +303,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         '_commands',
         '_deactivate',
         '_local_measure_numbers',
+        '_measure_count',
         '_tags',
         )
 
@@ -313,17 +314,18 @@ class BreakMeasureMap(abjad.AbjadObject):
     def __init__(
         self,
         *,
-        commands=None,
-        deactivate=None,
-        local_measure_numbers=None,
-        tags=None,
-        ):
+        commands: abjad.OrderedDict = None,
+        deactivate: bool = None,
+        local_measure_numbers: bool = None,
+        measure_count: int = None,
+        tags: typing.List[str] = None,
+        ) -> None:
         tags = tags or []
         assert baca.Command._are_valid_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)
         self._tags = tags
-        self._bol_measure_numbers = []
+        self._bol_measure_numbers: typing.List[int] = []
         self._deactivate = deactivate
         if local_measure_numbers is not None:
             local_measure_numbers = bool(local_measure_numbers)
@@ -369,6 +371,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     deactivate=self.deactivate,
                     tag=self.tag.prepend('BMM2'),
                     )
+        assert self.commands is not None
         for measure_number, commands in self.commands.items():
             if last_measure_number < measure_number:
                 message = f'score ends at measure {last_measure_number}'
@@ -389,7 +392,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         return  self._bol_measure_numbers
 
     @property
-    def commands(self) -> abjad.OrderedDict:
+    def commands(self) -> typing.Optional[abjad.OrderedDict]:
         """
         Gets commands.
         """
