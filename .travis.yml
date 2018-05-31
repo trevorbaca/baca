@@ -32,14 +32,16 @@ before_install:
     - pip install --no-deps --target $UQBAR uqbar
     - export MYPYPATH=$MYPYPATH:$UQBAR
 
-    # tell shell where doctest script is:
-    - BACA_SCR=`pwd`/baca/scr
-    - export PATH=$PATH:$BACA_SCR
-
     # log setup:
-    - ls /tmp; pwd; ls; which doctest
+    - ls /tmp
+    - pwd; ls
     - echo $MYPYPATH
+
+    # log path:
+    - BACA=`pwd`/baca
+    - export PATH=$PATH:$BACA/scr
     - echo $PATH
+    - which doctest
 
 install:
     - pip install coverage
@@ -47,8 +49,8 @@ install:
     - pip install -e . 
 
 script:
-    - mypy baca
-    - coverage run -a `which doctest` ./baca/*.py
+    - mypy $BACA
+    - coverage run -a `which doctest` $BACA/*.py
 
 after_success:
     - pip install coveralls
