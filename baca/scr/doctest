@@ -105,7 +105,8 @@ if __name__ == '__main__':
             files.append(path)
             continue
         assert path.is_dir()
-        for path_ in path.iterdir():
+        for path_ in path.glob('**/*.py'):
             if path_.is_file():
                 files.append(path_)
+    files.sort()
     _doctest_files(files, globs)
