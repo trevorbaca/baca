@@ -6,14 +6,19 @@ python:
     - 3.6
 
 before_install:
-    # install lilypond:
-    - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
-    - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
-    - wget -q -O /tmp/$LILYPOND_SCRIPT $LILYPOND_URL/$LILYPOND_SCRIPT
-    - sh /tmp/$LILYPOND_SCRIPT --batch
+    # alias package
+    - PACKAGE=`pwd`/baca
+    - export PATH=$PATH:$PACKAGE/scr
 
     # upgrade pip:
     - pip install --upgrade pip
+
+    # install lilypond:
+    - LILYPOND=/tmp/lilypond
+    - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
+    - LILYPOND_SOURCE=lilypond-2.19.80-1.linux-64.sh
+    - wget -q -O $LILYPOND $LILYPOND_URL/$LILYPOND_SOURCE
+    - sh $LILYPOND --batch
 
     # clone & install abjad dev branch:
     - ABJAD=/tmp/abjad
@@ -33,23 +38,20 @@ before_install:
     - export MYPYPATH=$MYPYPATH:$UQBAR
 
     # log setup:
-    - ls /tmp
-    - pwd; ls
     - echo $MYPYPATH
-
-    # log path:
-    - BACA=`pwd`/baca
-    - export PATH=$PATH:$BACA/scr
     - echo $PATH
+    - ls
+    - ls /tmp
+    - pwd
     - which doctest
+    - which mypy
 
 install:
     - pip install coverage
-    - pip install -r requirements.txt
     - pip install -e . 
 
 script:
-    - mypy $BACA
+    - mypy $PACKAGE
     - coverage run -a `which doctest` $BACA/*.py
 
 after_success:
