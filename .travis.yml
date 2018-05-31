@@ -9,8 +9,10 @@ before_install:
     # install lilypond:
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
     - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
-    - wget -q $LILYPOND_URL/$LILYPOND_SCRIPT
-    - sh $LILYPOND_SCRIPT --batch
+    #- wget -q $LILYPOND_URL/$LILYPOND_SCRIPT
+    #- sh $LILYPOND_SCRIPT --batch
+    - wget -q -O /tmp/$LILYPOND_SCRIPT $LILYPOND_URL/$LILYPOND_SCRIPT
+    - sh /tmp/$LILYPOND_SCRIPT --batch
 
     # upgrade pip:
     - pip install --upgrade pip
@@ -27,7 +29,8 @@ before_install:
 
     # install uqbar:
     - UQBAR=/tmp/uqbar
-    - pip install --no-deps --target $UQBAR uqbar>=0.2.11
+    #- pip install --no-deps --target $UQBAR uqbar>=0.2.11
+    - pip install --no-deps --target $UQBAR uqbar
 
     # check things:
     - ls /tmp
