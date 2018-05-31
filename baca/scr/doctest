@@ -33,7 +33,7 @@ def _get_globs():
         pass
     return globs
 
-def _doctest_files(names, globs):
+def _doctest_files(files, globs):
     optionflags = (
         doctest.NORMALIZE_WHITESPACE
         | doctest.ELLIPSIS
@@ -42,23 +42,25 @@ def _doctest_files(names, globs):
     failed_file_paths, error_messages = [], []
     failure_count, test_count = 0, 0
     current_directory = pathlib.Path('.').absolute()
-    for name in names:
-        path = current_directory / name
-        assert path.is_file(), repr(path)
-        relative_path = os.path.relpath(path)
+    for file_ in files:
+        assert file_.is_file(), repr(file_)
+        relative_path = os.path.relpath(file_)
         string_buffer = io.StringIO()
         with abjad.RedirectedStreams(stdout=string_buffer):
-            failure_count_, test_count_ = doctest.testfile(
-                path,
-                module_relative=False,
-                globs=globs,
-                optionflags=optionflags,
-                )
+            try:
+                failure_count_, test_count_ = doctest.testfile(
+                    file_,
+                    module_relative=False,
+                    globs=globs,
+                    optionflags=optionflags,
+                    )
+            except UnicodeDecodeError:
+                continue
             failure_count += failure_count_
             test_count += test_count_
             doctest_output = string_buffer.getvalue()
         if failure_count_:
-            failed_file_paths.append(os.path.relpath(path))
+            failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)
             result_code = ''.join((
                 _colors['RED'],
@@ -76,8 +78,8 @@ def _doctest_files(names, globs):
         print()
         for error_message in error_messages:
             print(error_message)
-    for path in failed_file_paths:
-        print(f'FAILED: {path}')
+    for file_ in failed_file_paths:
+        print(f'FAILED: {file_}')
     print()
     test_identifier = abjad.String('test').pluralize(test_count)
     module_identifier = abjad.String('module').pluralize(len(names))
@@ -95,4 +97,15 @@ if __name__ == '__main__':
         sys.exit()
     globs = _get_globs()
     names = sys.argv[1:]
-    _doctest_files(names, globs)
+    current_directory = pathlib.Path('.').absolute()
+    files = []
+    for name in names:
+        path = current_directory / name
+        if path.is_file():
+            files.append(path)
+            continue
+        assert path.is_dir()
+        for path_ in path.iterdir():
+            if path_.is_file():
+                files.append(path_)
+    _doctest_files(files, globs)
