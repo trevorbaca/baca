@@ -6,14 +6,14 @@ python:
     - 3.6
 
 before_install:
-    # upgrade pip:
-    - pip install --upgrade pip
-
     # install lilypond:
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
     - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
     - wget -q $LILYPOND_URL/$LILYPOND_SCRIPT
     - sh $LILYPOND_SCRIPT --batch
+
+    # upgrade pip:
+    - pip install --upgrade pip
 
     # clone & install abjad dev branch:
     - ABJAD=/tmp/abjad
@@ -26,21 +26,25 @@ before_install:
     - pip install -e $RMAKERS
 
     # install uqbar:
-    - UQBAR=/tmp/typehints
-    #- pip install --target /tmp/typehints --no-deps uqbar>=0.2.11
+    - UQBAR=/tmp/uqbar
     - pip install --no-deps --target $UQBAR uqbar>=0.2.11
 
+    # check things:
     - ls /tmp
-    - ls /tmp/typehints
+    - ls /tmp/abjad
+    - ls /tmp/abjad-ext-rmakers
+    - ls /tmp/uqbar
 
     # tell mypy where uqbar, abjad, rmakers are:
-    - export MYPYPATH=$UQBAR:$ABJAD:$RMAKERS
+    - export MYPYPATH=$ABJAD:$RMAKERS:$UQBAR
     - echo $MYPYPATH
+
     # tell shell where doctest script is:
     - export PATH=$PATH:./baca/scr
     - echo $PATH
+
+    # check things:
     - which doctest
-    # log directory status:
     - pwd
     - ls
 
