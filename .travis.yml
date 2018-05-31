@@ -14,7 +14,8 @@ before_install:
     - git clone https://github.com/Abjad/abjad.git;
     - pip install --upgrade pip
     # [rmakers] option allows "from abjadext import rmakers":
-    - cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
+    #- cd abjad; git checkout trevor/dev; pip install --quiet -e .[rmakers]
+    - cd abjad; git checkout trevor/dev; pip install --quiet -e .
     - git branch
     - cd ..
     # allows mypy to find abjad-ext-rmakers/abjadext:
