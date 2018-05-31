@@ -20,6 +20,7 @@ before_install:
     # allows mypy to find abjad-ext-rmakers/abjadext:
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git
     - pwd
+    - cd abjad-ext-rmakers; pip install -e .
     - ls
 
 install:
