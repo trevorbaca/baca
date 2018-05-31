@@ -26,7 +26,7 @@ before_install:
     - pip install --target /tmp/typehints --no-deps uqbar>=0.2.11
     - ls /tmp/typehints
     # tell mypy where uqbar, abjad, rmakers are:
-    - export MYPYPATH=$MYPYPATH:/tmp/typehints:./abjad:/.abjad-ext-rmakers
+    - export MYPYPATH=$MYPYPATH:/tmp/typehints:./abjad:./abjad-ext-rmakers
     #- export MYPYPATH=`pwd`/abjad:`pwd`/abjad-ext-rmakers:/tmp/typehints
     - echo $MYPYPATH
     # tell shell where doctest script is:
