@@ -9,8 +9,6 @@ before_install:
     # install lilypond:
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
     - LILYPOND_SCRIPT=lilypond-2.19.80-1.linux-64.sh
-    #- wget -q $LILYPOND_URL/$LILYPOND_SCRIPT
-    #- sh $LILYPOND_SCRIPT --batch
     - wget -q -O /tmp/$LILYPOND_SCRIPT $LILYPOND_URL/$LILYPOND_SCRIPT
     - sh /tmp/$LILYPOND_SCRIPT --batch
 
@@ -21,35 +19,27 @@ before_install:
     - ABJAD=/tmp/abjad
     - git clone -b trevor/dev https://github.com/Abjad/abjad.git $ABJAD
     - pip install -e $ABJAD
+    - export MYPYPATH=$ABJAD
 
     # clone & install rmakers:
     - RMAKERS=/tmp/abjad-ext-rmakers
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git $RMAKERS
     - pip install -e $RMAKERS
+    - export MYPYPATH=$MYPYPATH:$RMAKERS
 
     # install uqbar:
     - UQBAR=/tmp/uqbar
-    #- pip install --no-deps --target $UQBAR uqbar>=0.2.11
     - pip install --no-deps --target $UQBAR uqbar
-
-    # check things:
-    - ls /tmp
-    - ls /tmp/abjad
-    - ls /tmp/abjad-ext-rmakers
-    - ls /tmp/uqbar
-
-    # tell mypy where uqbar, abjad, rmakers are:
-    - export MYPYPATH=$ABJAD:$RMAKERS:$UQBAR
-    - echo $MYPYPATH
+    - export MYPYPATH=$MYPYPATH:$UQBAR
 
     # tell shell where doctest script is:
-    - export PATH=$PATH:./baca/scr
-    - echo $PATH
+    - BACA_SCR=`pwd`/baca/scr
+    - export PATH=$PATH:$BACA_SCR
 
-    # check things:
-    - which doctest
-    - pwd
-    - ls
+    # log setup:
+    - ls /tmp; pwd; ls; which doctest
+    - echo $MYPYPATH
+    - echo $PATH
 
 install:
     - pip install coverage
