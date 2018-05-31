@@ -1,2 +1,4 @@
-vim ~/.abjad/abjad_tmp.py
-clear && abjad ~/.abjad/abjad_tmp.py
+ABJAD_TMP=~/.abjad/abjad_tmp.py
+
+vim $ABJAD_TMP
+clear; python -i $ABJAD_TMP
