@@ -21,6 +21,7 @@ before_install:
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git
     - pwd
     - cd abjad-ext-rmakers; pip install -e .
+    - cd ..
     - ls
 
 install:
