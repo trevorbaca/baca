@@ -55,7 +55,7 @@ install:
 
 script:
     - mypy $PACKAGE
-    - coverage run -a `which doctest` $BACA/*.py
+    - coverage run -a `which doctest` $PACKAGE/*.py
 
 after_success:
     - pip install coveralls
