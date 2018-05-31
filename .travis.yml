@@ -17,7 +17,8 @@ before_install:
     - git clone https://github.com/Abjad/abjad.git;
     - cd abjad; git checkout trevor/dev; pip install --quiet -e .; cd ..
     # clone rmakers, install into site-packages:
-    - git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp
+    - ls /tmp
+    - git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
     - cd /tmp/abjad-ext-rmakers; pip install -e .; cd -
     # log directory status:
     - pwd
