@@ -13,6 +13,9 @@ before_install:
     # upgrade pip:
     - pip install --upgrade pip
 
+    # install mypy:
+    - pip install mypy
+
     # install lilypond:
     - LILYPOND=/tmp/lilypond
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
