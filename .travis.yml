@@ -15,15 +15,13 @@ before_install:
     - sh $LILYPOND_SCRIPT --batch
     # clone abjad, checkout dev branch, install into site-packages:
     - ABJAD=/tmp/abjad
-    #- git clone https://github.com/Abjad/abjad.git;
-    - git clone https://github.com/Abjad/abjad.git $ABJAD
-    #- cd abjad; git checkout trevor/dev; pip install --quiet -e .; cd ..
-    - cd $ABJAD; git checkout trevor/dev; pip install -e .; cd -
+    - git clone -b trevor/dev https://github.com/Abjad/abjad.git $ABJAD
+    #- cd $ABJAD; git checkout trevor/dev; pip install -e .; cd -
+    - pip install -e $ABJAD
     # clone rmakers, install into site-packages:
     - ls /tmp
     - RMAKERS=/tmp/abjad-ext-rmakers
     - git clone https://github.com/Abjad/abjad-ext-rmakers.git $RMAKERS
-    #- cd /tmp/abjad-ext-rmakers; pip install -e .; cd -
     - pip install -e $RMAKERS
     # log directory status:
     - pwd
