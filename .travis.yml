@@ -17,17 +17,18 @@ before_install:
     - git clone https://github.com/Abjad/abjad.git;
     - cd abjad; git checkout trevor/dev; pip install --quiet -e .; cd ..
     # clone rmakers, install into site-packages:
-    - git clone https://github.com/Abjad/abjad-ext-rmakers.git
-    - cd abjad-ext-rmakers; pip install -e .; cd ..
+    - git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp
+    - cd /tmp/abjad-ext-rmakers; pip install -e .; cd -
     # log directory status:
     - pwd
     - ls
     # install uqbar (for mypy):
     - pip install --target /tmp/typehints --no-deps uqbar>=0.2.11
     - ls /tmp/typehints
+    - ls /tmp
     # tell mypy where uqbar, abjad, rmakers are:
-    - export MYPYPATH=$MYPYPATH:/tmp/typehints:./abjad:./abjad-ext-rmakers
-    #- export MYPYPATH=`pwd`/abjad:`pwd`/abjad-ext-rmakers:/tmp/typehints
+    #- export MYPYPATH=$MYPYPATH:/tmp/typehints:./abjad:./abjad-ext-rmakers
+    - export MYPYPATH=$MYPYPATH:/tmp/typehints:./abjad:/tmp/abjad-ext-rmakers
     - echo $MYPYPATH
     # tell shell where doctest script is:
     - export PATH=$PATH:./baca/scr
