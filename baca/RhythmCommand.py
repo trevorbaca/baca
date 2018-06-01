@@ -61,7 +61,11 @@ class RhythmCommand(Command):
         ...     )
 
         >>> command = baca.RhythmCommand(
-        ...     rhythm_maker=rmakers.EvenRunRhythmMaker(),
+        ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+        ...         tuplet_specifier=rmakers.TupletSpecifier(
+        ...             extract_trivial=True,
+        ...             ),
+        ...         ),
         ...     )
 
         >>> maker(
@@ -120,69 +124,61 @@ class RhythmCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            [
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                ]
-                            }
-                            {
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            [
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                ]
-                            }
-                            {
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            [
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                ]
-                            }
-                            {
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            [
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
             <BLANKLINE>
-                                \baca_unpitched_music_warning                                        %! SM24
-                                c'8
-                                ]
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>
@@ -524,7 +520,11 @@ class RhythmCommand(Command):
 
             >>> command = baca.RhythmCommand(
             ...     division_expression=abjad.sequence().sum().sequence(),
-            ...     rhythm_maker=rmakers.EvenRunRhythmMaker(),
+            ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            ...         tuplet_specifier=rmakers.TupletSpecifier(
+            ...             extract_trivial=True,
+            ...             ),
+            ...         ),
             ...     )
 
             >>> maker(
@@ -583,57 +583,55 @@ class RhythmCommand(Command):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>

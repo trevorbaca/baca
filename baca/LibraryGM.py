@@ -66,7 +66,7 @@ class LibraryGM(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.glissando()
             ...     )
@@ -114,68 +114,60 @@ class LibraryGM(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    e'8
-                                    \glissando                                                           %! SC
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                e'8
+                                \glissando                                                               %! SC
+                                [
                 <BLANKLINE>
-                                    d''8
-                                    \glissando                                                           %! SC
+                                d''8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    f'8
-                                    \glissando                                                           %! SC
+                                f'8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                    \glissando                                                           %! SC
-                                }
-                                {
+                                e''8
+                                ]
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    g'8
-                                    \glissando                                                           %! SC
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \glissando                                                               %! SC
+                                [
                 <BLANKLINE>
-                                    f''8
-                                    \glissando                                                           %! SC
+                                f''8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                    \glissando                                                           %! SC
-                                }
-                                {
+                                e'8
+                                ]
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    d''8
-                                    \glissando                                                           %! SC
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \glissando                                                               %! SC
+                                [
                 <BLANKLINE>
-                                    f'8
-                                    \glissando                                                           %! SC
+                                f'8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    e''8
-                                    \glissando                                                           %! SC
+                                e''8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                    \glissando                                                           %! SC
-                                }
-                                {
+                                g'8
+                                ]
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    \glissando                                                           %! SC
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \glissando                                                               %! SC
+                                [
                 <BLANKLINE>
-                                    e'8
-                                    \glissando                                                           %! SC
+                                e'8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    d''8
-                                    ]
+                                d''8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -193,7 +185,7 @@ class LibraryGM(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.glissando(selector=baca.plts()[:2]),
             ...     baca.glissando(selector=baca.plts()[-2:]),
             ...     )
@@ -241,57 +233,49 @@ class LibraryGM(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    e'8
-                                    \glissando                                                           %! SC
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                e'8
+                                \glissando                                                               %! SC
+                                [
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    g'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    d''8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
                 <BLANKLINE>
-                                    e'8
-                                    \glissando                                                           %! SC
+                                e'8
+                                \glissando                                                               %! SC
                 <BLANKLINE>
-                                    d''8
-                                    ]
+                                d''8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -1555,12 +1539,16 @@ class LibraryGM(abjad.AbjadObject):
         return [abjad.Dynamic(_) for _ in string.split()]
 
     @staticmethod
-    def make_even_runs() -> RhythmCommand:
+    def make_even_divisions() -> RhythmCommand:
         """
-        Makes even runs.
+        Makes even divisions.
         """
         return RhythmCommand(
-            rhythm_maker=rmakers.EvenRunRhythmMaker()
+            rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+                tuplet_specifier=rmakers.TupletSpecifier(
+                    extract_trivial=True,
+                    ),
+                ),
             )
 
     @staticmethod

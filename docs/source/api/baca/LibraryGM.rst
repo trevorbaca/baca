@@ -74,7 +74,7 @@ LibraryGM
 
    .. automethod:: LibraryGM.make_dynamics
 
-   .. automethod:: LibraryGM.make_even_runs
+   .. automethod:: LibraryGM.make_even_divisions
 
    .. automethod:: LibraryGM.make_fused_tuplet_monads
 

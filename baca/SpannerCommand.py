@@ -70,7 +70,7 @@ class SpannerCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.SpannerCommand(
         ...         selector=baca.leaves()[4:7],
@@ -121,57 +121,49 @@ class SpannerCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                d''8
+                            d''8
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e''8
-                                ]
-                            }
-                            {
+                            e''8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                g'8
-                                [
-                                (                                                                    %! SC
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+                            (                                                                        %! SC
             <BLANKLINE>
-                                f''8
+                            f''8
             <BLANKLINE>
-                                e'8
-                                ]
-                                )                                                                    %! SC
-                            }
-                            {
+                            e'8
+                            ]
+                            )                                                                        %! SC
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                d''8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e''8
+                            e''8
             <BLANKLINE>
-                                g'8
-                                ]
-                            }
-                            {
+                            g'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                f''8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                d''8
-                                ]
+                            d''8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

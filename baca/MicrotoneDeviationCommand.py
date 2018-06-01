@@ -21,7 +21,7 @@ class MicrotoneDeviationCommand(Command):
         >>> maker(
         ...     'MusicVoice',
         ...     baca.pitches('E4'),
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ...     )
 
@@ -68,55 +68,47 @@ class MicrotoneDeviationCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                eqs'!8
+                            eqs'!8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                eqf'!8
-                                ]
-                            }
-                            {
+                            eqf'!8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                eqs'!8
+                            eqs'!8
             <BLANKLINE>
-                                e'8
-                                ]
-                            }
-                            {
+                            e'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                eqf'!8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            eqf'!8
+                            [
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                eqs'!8
+                            eqs'!8
             <BLANKLINE>
-                                e'8
-                                ]
-                            }
-                            {
+                            e'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                eqf'!8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            eqf'!8
+                            [
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                eqs'!8
-                                ]
+                            eqs'!8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

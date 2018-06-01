@@ -175,7 +175,7 @@ class RegisterCommand(Command):
         >>> maker(
         ...     'MusicVoice',
         ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.RegisterCommand(
         ...         registration=baca.Registration(
         ...             [('[A0, C8]', 15)],
@@ -226,55 +226,47 @@ class RegisterCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                g''8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            g''8
+                            [
             <BLANKLINE>
-                                gqs''!8
+                            gqs''!8
             <BLANKLINE>
-                                gs''!8
+                            gs''!8
             <BLANKLINE>
-                                gtqs''!8
-                                ]
-                            }
-                            {
+                            gtqs''!8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                aqf''!8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            aqf''!8
+                            [
             <BLANKLINE>
-                                af''!8
+                            af''!8
             <BLANKLINE>
-                                atqf''!8
-                                ]
-                            }
-                            {
+                            atqf''!8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                g''8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            g''8
+                            [
             <BLANKLINE>
-                                gqs''!8
+                            gqs''!8
             <BLANKLINE>
-                                gs''!8
+                            gs''!8
             <BLANKLINE>
-                                gtqs''!8
-                                ]
-                            }
-                            {
+                            gtqs''!8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                aqf''!8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            aqf''!8
+                            [
             <BLANKLINE>
-                                af''!8
+                            af''!8
             <BLANKLINE>
-                                atqf''!8
-                                ]
+                            atqf''!8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

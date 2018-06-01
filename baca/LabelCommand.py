@@ -18,7 +18,7 @@ class LabelCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.label(abjad.label().with_pitches(locale='us')),
         ...     )
@@ -66,69 +66,61 @@ class LabelCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'8
-                                [
-                                ^ \markup { E4 }
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
+                            ^ \markup { E4 }
             <BLANKLINE>
-                                d''8
-                                ^ \markup { D5 }
+                            d''8
+                            ^ \markup { D5 }
             <BLANKLINE>
-                                f'8
-                                ^ \markup { F4 }
+                            f'8
+                            ^ \markup { F4 }
             <BLANKLINE>
-                                e''8
-                                ]
-                                ^ \markup { E5 }
-                            }
-                            {
+                            e''8
+                            ]
+                            ^ \markup { E5 }
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                g'8
-                                [
-                                ^ \markup { G4 }
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+                            ^ \markup { G4 }
             <BLANKLINE>
-                                f''8
-                                ^ \markup { F5 }
+                            f''8
+                            ^ \markup { F5 }
             <BLANKLINE>
-                                e'8
-                                ]
-                                ^ \markup { E4 }
-                            }
-                            {
+                            e'8
+                            ]
+                            ^ \markup { E4 }
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                d''8
-                                [
-                                ^ \markup { D5 }
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+                            ^ \markup { D5 }
             <BLANKLINE>
-                                f'8
-                                ^ \markup { F4 }
+                            f'8
+                            ^ \markup { F4 }
             <BLANKLINE>
-                                e''8
-                                ^ \markup { E5 }
+                            e''8
+                            ^ \markup { E5 }
             <BLANKLINE>
-                                g'8
-                                ]
-                                ^ \markup { G4 }
-                            }
-                            {
+                            g'8
+                            ]
+                            ^ \markup { G4 }
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                f''8
-                                [
-                                ^ \markup { F5 }
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+                            ^ \markup { F5 }
             <BLANKLINE>
-                                e'8
-                                ^ \markup { E4 }
+                            e'8
+                            ^ \markup { E4 }
             <BLANKLINE>
-                                d''8
-                                ]
-                                ^ \markup { D5 }
+                            d''8
+                            ]
+                            ^ \markup { D5 }
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

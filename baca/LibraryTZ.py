@@ -1440,7 +1440,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         selector=baca.leaves()[:11 + 1],
             ...         tweaks=[('staff-padding', 6.5)],
             ...         ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     )
 
@@ -1495,107 +1495,99 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    e'8
-                                    [
-                                    - \tweak Y-extent ##f
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        "1/2 clt"
-                                                \hspace
-                                                    #0.5
-                                            }
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                e'8
+                                [
+                                - \tweak Y-extent ##f
+                                - \tweak bound-details.left.text \markup {
+                                    \concat
+                                        {
+                                            \whiteout
+                                                \upright
+                                                    "1/2 clt"
+                                            \hspace
+                                                #0.5
                                         }
-                                    - \tweak dash-fraction 0.25
-                                    - \tweak dash-period 1.5
-                                    - \tweak bound-details.left-broken.text ##f
-                                    - \tweak bound-details.left.stencil-align-dir-y 0
-                                    - \tweak bound-details.right-broken.arrow ##f
-                                    - \tweak bound-details.right-broken.padding 0
-                                    - \tweak bound-details.right-broken.text ##f
-                                    - \tweak bound-details.right.padding 1.25
-                                    - \tweak bound-details.right.text \markup {
-                                        \draw-line
-                                            #'(0 . -1)
+                                    }
+                                - \tweak dash-fraction 0.25
+                                - \tweak dash-period 1.5
+                                - \tweak bound-details.left-broken.text ##f
+                                - \tweak bound-details.left.stencil-align-dir-y 0
+                                - \tweak bound-details.right-broken.arrow ##f
+                                - \tweak bound-details.right-broken.padding 0
+                                - \tweak bound-details.right-broken.text ##f
+                                - \tweak bound-details.right.padding 1.25
+                                - \tweak bound-details.right.text \markup {
+                                    \draw-line
+                                        #'(0 . -1)
+                                    }
+                                - \tweak staff-padding #4
+                                \startTextSpan
+                                - \tweak Y-extent ##f
+                                - \tweak bound-details.left.text \markup {
+                                    \concat
+                                        {
+                                            \whiteout
+                                                \upright
+                                                    damp
+                                            \hspace
+                                                #0.5
                                         }
-                                    - \tweak staff-padding #4
-                                    \startTextSpan
-                                    - \tweak Y-extent ##f
-                                    - \tweak bound-details.left.text \markup {
-                                        \concat
-                                            {
-                                                \whiteout
-                                                    \upright
-                                                        damp
-                                                \hspace
-                                                    #0.5
-                                            }
-                                        }
-                                    - \tweak dash-fraction 0.25
-                                    - \tweak dash-period 1.5
-                                    - \tweak bound-details.left-broken.text ##f
-                                    - \tweak bound-details.left.stencil-align-dir-y 0
-                                    - \tweak bound-details.right-broken.arrow ##f
-                                    - \tweak bound-details.right-broken.padding 0
-                                    - \tweak bound-details.right-broken.text ##f
-                                    - \tweak bound-details.right.padding 1.25
-                                    - \tweak bound-details.right.text \markup {
-                                        \draw-line
-                                            #'(0 . -1)
-                                        }
-                                    - \tweak staff-padding #6.5
-                                    \startTextSpanOne
+                                    }
+                                - \tweak dash-fraction 0.25
+                                - \tweak dash-period 1.5
+                                - \tweak bound-details.left-broken.text ##f
+                                - \tweak bound-details.left.stencil-align-dir-y 0
+                                - \tweak bound-details.right-broken.arrow ##f
+                                - \tweak bound-details.right-broken.padding 0
+                                - \tweak bound-details.right-broken.text ##f
+                                - \tweak bound-details.right.padding 1.25
+                                - \tweak bound-details.right.text \markup {
+                                    \draw-line
+                                        #'(0 . -1)
+                                    }
+                                - \tweak staff-padding #6.5
+                                \startTextSpanOne
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    g'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    d''8
-                                    \stopTextSpan
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan
+                                [
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    \stopTextSpanOne
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpanOne
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    d''8
-                                    ]
+                                d''8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -2794,7 +2786,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         do_not_bookend=True,
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
             ...     )
@@ -2850,149 +2842,141 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \override TextSpanner.staff-padding = #4.5                           %! OC1
-                                    e'8
-                                    [
-                                    - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {                           %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        pont.                                            %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.5                                                 %! PWC1
-                                            }                                                            %! PWC1
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                [
+                                - \tweak Y-extent ##f                                                    %! PWC1
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    pont.                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
-                                    - \tweak arrow-width 0.25                                            %! PWC1
-                                    - \tweak dash-fraction 0.25                                          %! PWC1
-                                    - \tweak dash-period 1.5                                             %! PWC1
-                                    - \tweak bound-details.left-broken.text ##f                          %! PWC1
-                                    - \tweak bound-details.left.stencil-align-dir-y #center              %! PWC1
-                                    - \tweak bound-details.right.arrow ##t                               %! PWC1
-                                    - \tweak bound-details.right-broken.arrow ##f                        %! PWC1
-                                    - \tweak bound-details.right-broken.padding 0                        %! PWC1
-                                    - \tweak bound-details.right-broken.text ##f                         %! PWC1
-                                    - \tweak bound-details.right.padding 0.5                             %! PWC1
-                                    - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    \startTextSpan                                                       %! PWC1
+                                    }                                                                    %! PWC1
+                                - \tweak arrow-width 0.25                                                %! PWC1
+                                - \tweak dash-fraction 0.25                                              %! PWC1
+                                - \tweak dash-period 1.5                                                 %! PWC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
+                                \startTextSpan                                                           %! PWC1
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    g'8
-                                    \stopTextSpan                                                        %! PWC1
-                                    [
-                                    - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {                           %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        ord.                                             %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.5                                                 %! PWC1
-                                            }                                                            %! PWC1
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \stopTextSpan                                                            %! PWC1
+                                [
+                                - \tweak Y-extent ##f                                                    %! PWC1
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    ord.                                                 %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
-                                    - \tweak arrow-width 0.25                                            %! PWC1
-                                    - \tweak dash-fraction 0.25                                          %! PWC1
-                                    - \tweak dash-period 1.5                                             %! PWC1
-                                    - \tweak bound-details.left-broken.text ##f                          %! PWC1
-                                    - \tweak bound-details.left.stencil-align-dir-y #center              %! PWC1
-                                    - \tweak bound-details.right.arrow ##t                               %! PWC1
-                                    - \tweak bound-details.right-broken.arrow ##f                        %! PWC1
-                                    - \tweak bound-details.right-broken.padding 0                        %! PWC1
-                                    - \tweak bound-details.right-broken.text ##f                         %! PWC1
-                                    - \tweak bound-details.right.padding 0.5                             %! PWC1
-                                    - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    \startTextSpan                                                       %! PWC1
+                                    }                                                                    %! PWC1
+                                - \tweak arrow-width 0.25                                                %! PWC1
+                                - \tweak dash-fraction 0.25                                              %! PWC1
+                                - \tweak dash-period 1.5                                                 %! PWC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
+                                \startTextSpan                                                           %! PWC1
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    d''8
-                                    \stopTextSpan                                                        %! PWC1
-                                    [
-                                    - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {                           %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        pont.                                            %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.5                                                 %! PWC1
-                                            }                                                            %! PWC1
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PWC1
+                                [
+                                - \tweak Y-extent ##f                                                    %! PWC1
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    pont.                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
-                                    - \tweak arrow-width 0.25                                            %! PWC1
-                                    - \tweak dash-fraction 0.25                                          %! PWC1
-                                    - \tweak dash-period 1.5                                             %! PWC1
-                                    - \tweak bound-details.left-broken.text ##f                          %! PWC1
-                                    - \tweak bound-details.left.stencil-align-dir-y #center              %! PWC1
-                                    - \tweak bound-details.right.arrow ##t                               %! PWC1
-                                    - \tweak bound-details.right-broken.arrow ##f                        %! PWC1
-                                    - \tweak bound-details.right-broken.padding 0                        %! PWC1
-                                    - \tweak bound-details.right-broken.text ##f                         %! PWC1
-                                    - \tweak bound-details.right.padding 0.5                             %! PWC1
-                                    - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    \startTextSpan                                                       %! PWC1
+                                    }                                                                    %! PWC1
+                                - \tweak arrow-width 0.25                                                %! PWC1
+                                - \tweak dash-fraction 0.25                                              %! PWC1
+                                - \tweak dash-period 1.5                                                 %! PWC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
+                                \startTextSpan                                                           %! PWC1
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    \stopTextSpan                                                        %! PWC1
-                                    [
-                                    - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {                           %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        ord.                                             %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.25                                                %! PWC1
-                                            }                                                            %! PWC1
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpan                                                            %! PWC1
+                                [
+                                - \tweak Y-extent ##f                                                    %! PWC1
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    ord.                                                 %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.25                                                    %! PWC1
                                         }                                                                %! PWC1
-                                    - \tweak dash-period 0                                               %! PWC1
-                                    - \tweak bound-details.left-broken.text ##f                          %! PWC1
-                                    - \tweak bound-details.left.stencil-align-dir-y #center              %! PWC1
-                                    - \tweak bound-details.right-broken.padding 0                        %! PWC1
-                                    - \tweak bound-details.right-broken.text ##f                         %! PWC1
-                                    - \tweak bound-details.right.padding 1.5                             %! PWC1
-                                    - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    \startTextSpan                                                       %! PWC1
+                                    }                                                                    %! PWC1
+                                - \tweak dash-period 0                                                   %! PWC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
+                                - \tweak bound-details.right.padding 1.5                                 %! PWC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
+                                \startTextSpan                                                           %! PWC1
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    d''8
-                                    ]
-                                    \stopTextSpan                                                        %! PWC1
-                                    \revert TextSpanner.staff-padding                                    %! OC2
+                                d''8
+                                ]
+                                \stopTextSpan                                                            %! PWC1
+                                \revert TextSpanner.staff-padding                                        %! OC2
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -3015,7 +2999,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.markup.ord(),
             ...         selector=baca.leaves().enchain([8]),
             ...     ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
             ...     )
@@ -3071,115 +3055,107 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \override TextSpanner.staff-padding = #4.5                           %! OC1
-                                    e'8
-                                    [
-                                    - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {                           %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        pont.                                            %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.5                                                 %! PWC1
-                                            }                                                            %! PWC1
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                [
+                                - \tweak Y-extent ##f                                                    %! PWC1
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    pont.                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
-                                    - \tweak arrow-width 0.25                                            %! PWC1
-                                    - \tweak dash-fraction 0.25                                          %! PWC1
-                                    - \tweak dash-period 1.5                                             %! PWC1
-                                    - \tweak bound-details.left-broken.text ##f                          %! PWC1
-                                    - \tweak bound-details.left.stencil-align-dir-y #center              %! PWC1
-                                    - \tweak bound-details.right.arrow ##t                               %! PWC1
-                                    - \tweak bound-details.right-broken.arrow ##f                        %! PWC1
-                                    - \tweak bound-details.right-broken.padding 0                        %! PWC1
-                                    - \tweak bound-details.right-broken.text ##f                         %! PWC1
-                                    - \tweak bound-details.right.padding 0.5                             %! PWC1
-                                    - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    \startTextSpan                                                       %! PWC1
+                                    }                                                                    %! PWC1
+                                - \tweak arrow-width 0.25                                                %! PWC1
+                                - \tweak dash-fraction 0.25                                              %! PWC1
+                                - \tweak dash-period 1.5                                                 %! PWC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
+                                \startTextSpan                                                           %! PWC1
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    g'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    d''8
-                                    \stopTextSpan                                                        %! PWC1
-                                    [
-                                    - \tweak Y-extent ##f                                                %! PWC1
-                                    - \tweak bound-details.left.text \markup {                           %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        ord.                                             %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.5                                                 %! PWC1
-                                            }                                                            %! PWC1
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PWC1
+                                [
+                                - \tweak Y-extent ##f                                                    %! PWC1
+                                - \tweak bound-details.left.text \markup {                               %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    ord.                                                 %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
-                                    - \tweak arrow-width 0.25                                            %! PWC1
-                                    - \tweak dash-fraction 0.25                                          %! PWC1
-                                    - \tweak dash-period 1.5                                             %! PWC1
-                                    - \tweak bound-details.left-broken.text ##f                          %! PWC1
-                                    - \tweak bound-details.left.stencil-align-dir-y #center              %! PWC1
-                                    - \tweak bound-details.right.arrow ##t                               %! PWC1
-                                    - \tweak bound-details.right-broken.arrow ##f                        %! PWC1
-                                    - \tweak bound-details.right-broken.padding 0                        %! PWC1
-                                    - \tweak bound-details.right-broken.text ##f                         %! PWC1
-                                    - \tweak bound-details.right.padding 0.5                             %! PWC1
-                                    - \tweak bound-details.right.stencil-align-dir-y #center             %! PWC1
-                                    - \tweak bound-details.right.text \markup {                          %! PWC1
-                                        \concat                                                          %! PWC1
-                                            {                                                            %! PWC1
-                                                \hspace                                                  %! PWC1
-                                                    #0.0                                                 %! PWC1
-                                                \whiteout                                                %! PWC1
-                                                    \upright                                             %! PWC1
-                                                        pont.                                            %! PWC1
-                                            }                                                            %! PWC1
+                                    }                                                                    %! PWC1
+                                - \tweak arrow-width 0.25                                                %! PWC1
+                                - \tweak dash-fraction 0.25                                              %! PWC1
+                                - \tweak dash-period 1.5                                                 %! PWC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
+                                - \tweak bound-details.right.text \markup {                              %! PWC1
+                                    \concat                                                              %! PWC1
+                                        {                                                                %! PWC1
+                                            \hspace                                                      %! PWC1
+                                                #0.0                                                     %! PWC1
+                                            \whiteout                                                    %! PWC1
+                                                \upright                                                 %! PWC1
+                                                    pont.                                                %! PWC1
                                         }                                                                %! PWC1
-                                    \startTextSpan                                                       %! PWC1
+                                    }                                                                    %! PWC1
+                                \startTextSpan                                                           %! PWC1
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    d''8
-                                    ]
-                                    \stopTextSpan                                                        %! PWC1
-                                    \revert TextSpanner.staff-padding                                    %! OC2
+                                d''8
+                                ]
+                                \stopTextSpan                                                            %! PWC1
+                                \revert TextSpanner.staff-padding                                        %! OC2
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>

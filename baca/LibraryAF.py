@@ -720,7 +720,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.slur(),
             ...         baca.staccato(),
             ...         ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -774,85 +774,77 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    [
-                                    (                                                                    %! SC
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                [
+                                (                                                                        %! SC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    ]
-                                    )                                                                    %! SC
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                ]
+                                )                                                                        %! SC
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -876,7 +868,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.slur(),
             ...         baca.staccato(),
             ...         ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -930,85 +922,77 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    [
-                                    (                                                                    %! SC
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                [
+                                (                                                                        %! SC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    -\marcato                                                            %! IC
-                                    -\staccato                                                           %! IC
-                                    ]
-                                    )                                                                    %! SC
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                -\marcato                                                                %! IC
+                                -\staccato                                                               %! IC
+                                ]
+                                )                                                                        %! SC
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -1241,7 +1225,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.bar_extent((-4, 4), selector=baca.group_by_measure()[1]),
             ...     baca.bar_extent((-4, 4), selector=baca.leaf(-1), after=True),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     )
 
@@ -1296,58 +1280,50 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    e'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                e'8
+                                [
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \override Staff.BarLine.bar-extent = #'(-4 . 4)                      %! OC1
-                                    g'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! OC1
+                                g'8
+                                [
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                    \revert Staff.BarLine.bar-extent                                     %! OC2
-                                }
-                                {
+                                e'8
+                                ]
+                                \revert Staff.BarLine.bar-extent                                         %! OC2
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    d''8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    d''8
-                                    ]
-                                    \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                %! OC1
+                                d''8
+                                ]
+                                \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! OC1
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -1383,7 +1359,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.bar_extent_persistent((0, 0)),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.staff_lines(1),
             ...     baca.staff_position(0),
             ...     )
@@ -1439,60 +1415,52 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \override Staff.BarLine.bar-extent = #'(0 . 0)                       %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
-                                    \stopStaff                                                           %! SM8:EXPLICIT_STAFF_LINES:IC
-                                    \once \override Staff.StaffSymbol.line-count = 1                     %! SM8:EXPLICIT_STAFF_LINES:IC
-                                    \startStaff                                                          %! SM8:EXPLICIT_STAFF_LINES:IC
-                                    \once \override Staff.StaffSymbol.color = #(x11-color 'blue)         %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
-                                    b'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
+                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                b'8
+                                [
                 <BLANKLINE>
-                                    b'8
+                                b'8
                 <BLANKLINE>
-                                    b'8
+                                b'8
                 <BLANKLINE>
-                                    b'8
-                                    ]
-                                }
-                                {
+                                b'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    b'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                b'8
+                                [
                 <BLANKLINE>
-                                    b'8
+                                b'8
                 <BLANKLINE>
-                                    b'8
-                                    ]
-                                }
-                                {
+                                b'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    b'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                b'8
+                                [
                 <BLANKLINE>
-                                    b'8
+                                b'8
                 <BLANKLINE>
-                                    b'8
+                                b'8
                 <BLANKLINE>
-                                    b'8
-                                    ]
-                                }
-                                {
+                                b'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    b'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                b'8
+                                [
                 <BLANKLINE>
-                                    b'8
+                                b'8
                 <BLANKLINE>
-                                    b'8
-                                    ]
+                                b'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -2827,7 +2795,7 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     'ViolinMusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitch('E4'),
             ...     )
             >>> lilypond_file = maker.run(environment='docs')
@@ -6366,7 +6334,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.make_dynamics('p f'),
             ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.dls_staff_padding(4.5),
             ...     )
@@ -6422,68 +6390,60 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \override DynamicLineSpanner.staff-padding = #'4.5                   %! OC1
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    e'8
-                                    \<                                                                   %! PWC1
-                                    \p                                                                   %! PWC1
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override DynamicLineSpanner.staff-padding = #'4.5                       %! OC1
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                e'8
+                                \<                                                                       %! PWC1
+                                \p                                                                       %! PWC1
+                                [
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    g'8
-                                    \f                                                                   %! PWC1
-                                    \>                                                                   %! PWC1
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                g'8
+                                \f                                                                       %! PWC1
+                                \>                                                                       %! PWC1
+                                [
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    d''8
-                                    \p                                                                   %! PWC1
-                                    \<                                                                   %! PWC1
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                d''8
+                                \p                                                                       %! PWC1
+                                \<                                                                       %! PWC1
+                                [
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    f''8
-                                    \f                                                                   %! PWC1
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                f''8
+                                \f                                                                       %! PWC1
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    d''8
-                                    ]
-                                    \revert DynamicLineSpanner.staff-padding                             %! OC2
+                                d''8
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -6507,7 +6467,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         bookend=True,
             ...         selector=baca.leaves().enchain([8]),
             ...     ),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
             ...     )
@@ -6563,65 +6523,57 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \override TextSpanner.staff-padding = #4.5                           %! OC1
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    e'8
-                                    \<                                                                   %! PWC1
-                                    \p                                                                   %! PWC1
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                e'8
+                                \<                                                                       %! PWC1
+                                \p                                                                       %! PWC1
+                                [
                 <BLANKLINE>
-                                    d''8
+                                d''8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
-                                    ]
-                                }
-                                {
+                                e''8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    g'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
                 <BLANKLINE>
-                                    f''8
+                                f''8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    d''8
-                                    \f                                                                   %! PWC1
-                                    \>                                                                   %! PWC1
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                d''8
+                                \f                                                                       %! PWC1
+                                \>                                                                       %! PWC1
+                                [
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e''8
+                                e''8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f''8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    \once \override Voice.DynamicText.color = #(x11-color 'blue)         %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
-                                    d''8
-                                    \p                                                                   %! PWC1
-                                    ]
-                                    \revert TextSpanner.staff-padding                                    %! OC2
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
+                                d''8
+                                \p                                                                       %! PWC1
+                                ]
+                                \revert TextSpanner.staff-padding                                        %! OC2
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>

@@ -23,10 +23,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker(
         ...     'MusicVoice',
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
-        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -72,53 +70,51 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'16
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
+                            f'8
+                            ]
             <BLANKLINE>
-                                e'16
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'4
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'4
-                            }
-                            {
+                            f'8
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                e'2
+                            e'8
             <BLANKLINE>
-                            }
+                            f'8
+                            ]
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -136,10 +132,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker(
         ...     'MusicVoice',
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
-        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -157,7 +151,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 8/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -171,14 +165,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 2/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -193,53 +187,51 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'16
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
+                            f'8
+                            ]
             <BLANKLINE>
-                                e'16
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'4
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'4
-                            }
-                            {
+                            f'8
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                e'2
+                            e'8
             <BLANKLINE>
-                            }
+                            f'8
+                            ]
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -259,10 +251,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker(
         ...     'MusicVoice',
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
-        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -280,7 +270,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 8/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -294,14 +284,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 2/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)              %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
                         \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -316,53 +306,51 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'16
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
+                            f'8
+                            ]
             <BLANKLINE>
-                                e'16
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'4
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'4
-                            }
-                            {
+                            f'8
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                e'2
+                            e'8
             <BLANKLINE>
-                            }
+                            f'8
+                            ]
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -383,10 +371,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker(
         ...     'MusicVoice',
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
-        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -404,7 +390,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 8/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -418,14 +404,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)              %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 2/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)              %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -440,53 +426,51 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'16
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
+                            f'8
+                            ]
             <BLANKLINE>
-                                e'16
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'4
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'4
-                            }
-                            {
+                            f'8
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                e'2
+                            e'8
             <BLANKLINE>
-                            }
+                            f'8
+                            ]
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -508,10 +492,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker(
         ...     'MusicVoice',
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.EvenRunRhythmMaker(),
-        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -529,7 +511,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)             %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
                         \time 8/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
@@ -565,53 +547,51 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'16
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
+                            f'8
+                            ]
             <BLANKLINE>
-                                e'16
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'16
+                            f'8
             <BLANKLINE>
-                                e'16
+                            e'8
             <BLANKLINE>
-                                f'16
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                e'4
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'4
-                            }
-                            {
+                            f'8
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                e'2
+                            e'8
             <BLANKLINE>
-                            }
+                            f'8
+                            ]
+            <BLANKLINE>
                         }
                     }
                 >>

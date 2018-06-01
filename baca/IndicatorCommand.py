@@ -96,7 +96,7 @@ class IndicatorCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     )
@@ -144,69 +144,61 @@ class IndicatorCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'8
-                                \fermata                                                             %! IC
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            \fermata                                                                 %! IC
+                            [
             <BLANKLINE>
-                                d''8
-                                \fermata                                                             %! IC
+                            d''8
+                            \fermata                                                                 %! IC
             <BLANKLINE>
-                                f'8
-                                \fermata                                                             %! IC
+                            f'8
+                            \fermata                                                                 %! IC
             <BLANKLINE>
-                                e''8
-                                \fermata                                                             %! IC
-                                ]
-                            }
-                            {
+                            e''8
+                            \fermata                                                                 %! IC
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                g'8
-                                \fermata                                                             %! IC
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            \fermata                                                                 %! IC
+                            [
             <BLANKLINE>
-                                f''8
-                                \fermata                                                             %! IC
+                            f''8
+                            \fermata                                                                 %! IC
             <BLANKLINE>
-                                e'8
-                                \fermata                                                             %! IC
-                                ]
-                            }
-                            {
+                            e'8
+                            \fermata                                                                 %! IC
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                d''8
-                                \fermata                                                             %! IC
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            \fermata                                                                 %! IC
+                            [
             <BLANKLINE>
-                                f'8
-                                \fermata                                                             %! IC
+                            f'8
+                            \fermata                                                                 %! IC
             <BLANKLINE>
-                                e''8
-                                \fermata                                                             %! IC
+                            e''8
+                            \fermata                                                                 %! IC
             <BLANKLINE>
-                                g'8
-                                \fermata                                                             %! IC
-                                ]
-                            }
-                            {
+                            g'8
+                            \fermata                                                                 %! IC
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                f''8
-                                \fermata                                                             %! IC
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            \fermata                                                                 %! IC
+                            [
             <BLANKLINE>
-                                e'8
-                                \fermata                                                             %! IC
+                            e'8
+                            \fermata                                                                 %! IC
             <BLANKLINE>
-                                d''8
-                                \fermata                                                             %! IC
-                                ]
+                            d''8
+                            \fermata                                                                 %! IC
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

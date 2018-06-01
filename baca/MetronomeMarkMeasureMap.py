@@ -24,7 +24,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         >>> maker(
         ...     ('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -169,30 +169,26 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                e'8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e'8
-                                ]
-                            }
+                            e'8
+                            ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
                             R1 * 1/2

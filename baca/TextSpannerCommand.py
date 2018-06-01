@@ -24,7 +24,7 @@ class TextSpannerCommand(Command):
         ...         baca.markup.half_clt(),
         ...         selector=baca.leaves()[:4 + 1],
         ...         ),
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
         ...     )
@@ -80,82 +80,74 @@ class TextSpannerCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                \override TextSpanner.staff-padding = #4.5                           %! OC1
-                                e'8
-                                [
-                                - \tweak Y-extent ##f
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \whiteout
-                                                \upright
-                                                    "1/2 clt"
-                                            \hspace
-                                                #0.5
-                                        }
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            e'8
+                            [
+                            - \tweak Y-extent ##f
+                            - \tweak bound-details.left.text \markup {
+                                \concat
+                                    {
+                                        \whiteout
+                                            \upright
+                                                "1/2 clt"
+                                        \hspace
+                                            #0.5
                                     }
-                                - \tweak dash-fraction 0.25
-                                - \tweak dash-period 1.5
-                                - \tweak bound-details.left-broken.text ##f
-                                - \tweak bound-details.left.stencil-align-dir-y 0
-                                - \tweak bound-details.right-broken.arrow ##f
-                                - \tweak bound-details.right-broken.padding 0
-                                - \tweak bound-details.right-broken.text ##f
-                                - \tweak bound-details.right.padding 1.25
-                                - \tweak bound-details.right.text \markup {
-                                    \draw-line
-                                        #'(0 . -1)
-                                    }
-                                \startTextSpan
+                                }
+                            - \tweak dash-fraction 0.25
+                            - \tweak dash-period 1.5
+                            - \tweak bound-details.left-broken.text ##f
+                            - \tweak bound-details.left.stencil-align-dir-y 0
+                            - \tweak bound-details.right-broken.arrow ##f
+                            - \tweak bound-details.right-broken.padding 0
+                            - \tweak bound-details.right-broken.text ##f
+                            - \tweak bound-details.right.padding 1.25
+                            - \tweak bound-details.right.text \markup {
+                                \draw-line
+                                    #'(0 . -1)
+                                }
+                            \startTextSpan
             <BLANKLINE>
-                                d''8
+                            d''8
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e''8
-                                ]
-                            }
-                            {
+                            e''8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                g'8
-                                \stopTextSpan
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            \stopTextSpan
+                            [
             <BLANKLINE>
-                                f''8
+                            f''8
             <BLANKLINE>
-                                e'8
-                                ]
-                            }
-                            {
+                            e'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                d''8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                e''8
+                            e''8
             <BLANKLINE>
-                                g'8
-                                ]
-                            }
-                            {
+                            g'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                f''8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
             <BLANKLINE>
-                                e'8
+                            e'8
             <BLANKLINE>
-                                d''8
-                                ]
-                                \revert TextSpanner.staff-padding                                    %! OC2
+                            d''8
+                            ]
+                            \revert TextSpanner.staff-padding                                        %! OC2
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

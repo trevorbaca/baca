@@ -18,7 +18,7 @@ class OctaveDisplacementCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.suite(
         ...         baca.pitch('G4'),
         ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
@@ -68,55 +68,47 @@ class OctaveDisplacementCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                g'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            g'8
+                            [
             <BLANKLINE>
-                                g'8
+                            g'8
             <BLANKLINE>
-                                g''8
+                            g''8
             <BLANKLINE>
-                                g''8
-                                ]
-                            }
-                            {
+                            g''8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                g'8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
             <BLANKLINE>
-                                g'8
+                            g'8
             <BLANKLINE>
-                                g8
-                                ]
-                            }
-                            {
+                            g8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                g8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            g8
+                            [
             <BLANKLINE>
-                                g'''8
+                            g'''8
             <BLANKLINE>
-                                g'''8
+                            g'''8
             <BLANKLINE>
-                                g'8
-                                ]
-                            }
-                            {
+                            g'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                g'8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            g'8
+                            [
             <BLANKLINE>
-                                g''8
+                            g''8
             <BLANKLINE>
-                                g''8
-                                ]
+                            g''8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>

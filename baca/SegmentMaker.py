@@ -35,7 +35,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -81,55 +81,47 @@ class SegmentMaker(abjad.SegmentMaker):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                c'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'8
+                            [
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                c'8
-                                ]
-                            }
-                            {
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                c'8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            c'8
+                            [
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                c'8
-                                ]
-                            }
-                            {
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                c'8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            c'8
+                            [
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                c'8
-                                ]
-                            }
-                            {
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                c'8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            c'8
+                            [
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                c'8
-                                ]
+                            c'8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>
@@ -407,7 +399,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
 
@@ -454,83 +446,75 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 0 }
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 0 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 1 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 1 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 2 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 2 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 3 }
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 3 }
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 4 }
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 4 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 5 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 5 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 6 }
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 6 }
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 7 }
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 7 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 8 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 8 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 9 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 9 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 10 }
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 10 }
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 11 }
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 11 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 12 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 12 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 13 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 13 }
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -546,7 +530,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> commands = []
-            >>> commands.append(baca.make_even_runs())
+            >>> commands.append(baca.make_even_divisions())
             >>> commands.append(baca.label(abjad.label().with_indices()))
 
             >>> maker(
@@ -597,83 +581,75 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 0 }
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 0 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 1 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 1 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 2 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 2 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 3 }
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 3 }
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 4 }
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 4 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 5 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 5 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 6 }
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 6 }
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 7 }
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 7 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 8 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 8 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 9 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 9 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 10 }
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 10 }
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
-                                    ^ \markup { 11 }
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup { 11 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ^ \markup { 12 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ^ \markup { 12 }
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                    ^ \markup { 13 }
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                                ^ \markup { 13 }
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -3670,7 +3646,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -3716,55 +3692,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -3781,7 +3749,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -3827,55 +3795,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -3894,7 +3854,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -3940,55 +3900,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -4005,7 +3957,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> metadata = {'segment_count': 1}
@@ -4055,55 +4007,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -4132,7 +4076,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4178,75 +4122,67 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    \once \override TextScript.extra-offset = #'(-9 . -2)
-                                    c'8
-                                    ]
-                                    _ \markup {                                                          %! SCORE2
-                                        \whiteout                                                        %! SCORE2
-                                            \upright                                                     %! SCORE2
-                                                \override                                                %! SCORE2
-                                                    #'(font-name . "Palatino")                           %! SCORE2
-                                                    \with-color                                          %! SCORE2
-                                                        #black                                           %! SCORE2
-                                                        \right-column                                    %! SCORE2
-                                                            {                                            %! SCORE2
-                                                                \line                                    %! SCORE2
-                                                                    {                                    %! SCORE2
-                                                                        "Madison, WI"                    %! SCORE2
-                                                                    }                                    %! SCORE2
-                                                                \line                                    %! SCORE2
-                                                                    {                                    %! SCORE2
-                                                                        "October 2016"                   %! SCORE2
-                                                                    }                                    %! SCORE2
-                                                            }                                            %! SCORE2
-                                        }                                                                %! SCORE2
+                                \once \override TextScript.extra-offset = #'(-9 . -2)
+                                c'8
+                                ]
+                                _ \markup {                                                              %! SCORE2
+                                    \whiteout                                                            %! SCORE2
+                                        \upright                                                         %! SCORE2
+                                            \override                                                    %! SCORE2
+                                                #'(font-name . "Palatino")                               %! SCORE2
+                                                \with-color                                              %! SCORE2
+                                                    #black                                               %! SCORE2
+                                                    \right-column                                        %! SCORE2
+                                                        {                                                %! SCORE2
+                                                            \line                                        %! SCORE2
+                                                                {                                        %! SCORE2
+                                                                    "Madison, WI"                        %! SCORE2
+                                                                }                                        %! SCORE2
+                                                            \line                                        %! SCORE2
+                                                                {                                        %! SCORE2
+                                                                    "October 2016"                       %! SCORE2
+                                                                }                                        %! SCORE2
+                                                        }                                                %! SCORE2
+                                    }                                                                    %! SCORE2
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -4309,7 +4245,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4355,55 +4291,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -4420,7 +4348,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4466,69 +4394,61 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
-                                }
-                                {
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
                 <BLANKLINE>
-                                    \baca_unpitched_music_warning                                        %! SM24
-                                    c'8
-                                    ]
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -5149,7 +5069,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -5245,55 +5165,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                c'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    c'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                                [
                 <BLANKLINE>
-                                    c'8
+                                c'8
                 <BLANKLINE>
-                                    c'8
-                                    ]
+                                c'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -5584,7 +5496,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.instrument(instruments['clarinet']),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 F4'),
             ...     )
 
@@ -5631,66 +5543,58 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
-                                    fs'!8
-                                    [
-                                    ^ \markup {                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        \with-color                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                            #(x11-color 'blue)                                           %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                            (“clarinet”)                                                 %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        }                                                                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \set Staff.instrumentName = \markup { "Clarinet in B-flat" }             %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
+                                fs'!8
+                                [
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“clarinet”)                                                     %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { "Clarinet in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
-                                    g'8
+                                g'8
                 <BLANKLINE>
-                                    fs'!8
+                                fs'!8
                 <BLANKLINE>
-                                    g'8
-                                    ]
-                                }
-                                {
+                                g'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    fs'!8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                fs'!8
+                                [
                 <BLANKLINE>
-                                    g'8
+                                g'8
                 <BLANKLINE>
-                                    fs'!8
-                                    ]
-                                }
-                                {
+                                fs'!8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    g'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                g'8
+                                [
                 <BLANKLINE>
-                                    fs'!8
+                                fs'!8
                 <BLANKLINE>
-                                    g'8
+                                g'8
                 <BLANKLINE>
-                                    fs'!8
-                                    ]
-                                }
-                                {
+                                fs'!8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    g'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                g'8
+                                [
                 <BLANKLINE>
-                                    fs'!8
+                                fs'!8
                 <BLANKLINE>
-                                    g'8
-                                    ]
+                                g'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -5712,7 +5616,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.instrument(instruments['clarinet']),
-            ...     baca.make_even_runs(),
+            ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 F4'),
             ...     )
 
@@ -5759,66 +5663,58 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                             \context Voice = "MusicVoice"
                             {
-                                {
                 <BLANKLINE>
-                                    % [MusicVoice measure 1]                                             %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:EXPLICIT_INSTRUMENT:IC
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
-                                    e'8
-                                    [
-                                    ^ \markup {                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        \with-color                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                            #(x11-color 'blue)                                           %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                            (“clarinet”)                                                 %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        }                                                                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \set Staff.instrumentName = \markup { "Clarinet in B-flat" }             %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:EXPLICIT_INSTRUMENT:IC
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
+                                e'8
+                                [
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                        (“clarinet”)                                                     %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
+                                \set Staff.instrumentName = \markup { "Clarinet in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
+                                \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    f'8
-                                    ]
-                                }
-                                {
+                                f'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 2]                                             %! SM4
-                                    e'8
-                                    [
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                e'8
+                                [
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 3]                                             %! SM4
-                                    f'8
-                                    [
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                f'8
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    f'8
+                                f'8
                 <BLANKLINE>
-                                    e'8
-                                    ]
-                                }
-                                {
+                                e'8
+                                ]
                 <BLANKLINE>
-                                    % [MusicVoice measure 4]                                             %! SM4
-                                    f'8
-                                    [
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f'8
+                                [
                 <BLANKLINE>
-                                    e'8
+                                e'8
                 <BLANKLINE>
-                                    f'8
-                                    ]
+                                f'8
+                                ]
                 <BLANKLINE>
-                                }
                             }
                         }
                     >>

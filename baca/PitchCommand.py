@@ -21,7 +21,7 @@ class PitchCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
 
@@ -68,55 +68,47 @@ class PitchCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                g''8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            g''8
+                            [
             <BLANKLINE>
-                                cs''!8
+                            cs''!8
             <BLANKLINE>
-                                ef''!8
+                            ef''!8
             <BLANKLINE>
-                                e''8
-                                ]
-                            }
-                            {
+                            e''8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                f''8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            f''8
+                            [
             <BLANKLINE>
-                                b''8
+                            b''8
             <BLANKLINE>
-                                g''8
-                                ]
-                            }
-                            {
+                            g''8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                cs''!8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            cs''!8
+                            [
             <BLANKLINE>
-                                ef''!8
+                            ef''!8
             <BLANKLINE>
-                                e''8
+                            e''8
             <BLANKLINE>
-                                f''8
-                                ]
-                            }
-                            {
+                            f''8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                b''8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            b''8
+                            [
             <BLANKLINE>
-                                g''8
+                            g''8
             <BLANKLINE>
-                                cs''!8
-                                ]
+                            cs''!8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>
@@ -133,7 +125,7 @@ class PitchCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
         ...     )
 
@@ -180,55 +172,47 @@ class PitchCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                c'8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'8
+                            [
             <BLANKLINE>
-                                f'8
+                            f'8
             <BLANKLINE>
-                                fs'!8
+                            fs'!8
             <BLANKLINE>
-                                <b' cs''!>8
-                                ]
-                            }
-                            {
+                            <b' cs''!>8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                d''8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            d''8
+                            [
             <BLANKLINE>
-                                c'8
+                            c'8
             <BLANKLINE>
-                                f'8
-                                ]
-                            }
-                            {
+                            f'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                fs'!8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            fs'!8
+                            [
             <BLANKLINE>
-                                <b' cs''!>8
+                            <b' cs''!>8
             <BLANKLINE>
-                                d''8
+                            d''8
             <BLANKLINE>
-                                c'8
-                                ]
-                            }
-                            {
+                            c'8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                f'8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f'8
+                            [
             <BLANKLINE>
-                                fs'!8
+                            fs'!8
             <BLANKLINE>
-                                <b' cs''!>8
-                                ]
+                            <b' cs''!>8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>
@@ -245,7 +229,7 @@ class PitchCommand(Command):
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.make_even_runs(),
+        ...     baca.make_even_divisions(),
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', allow_repeats=True)
         ...     )
 
@@ -292,55 +276,47 @@ class PitchCommand(Command):
                     {
                         \context Voice = "MusicVoice"
                         {
-                            {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! SM4
-                                <c' d' e' f' g' a' b'>8
-                                [
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            <c' d' e' f' g' a' b'>8
+                            [
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
+                            <c' d' e' f' g' a' b'>8
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
+                            <c' d' e' f' g' a' b'>8
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
-                                ]
-                            }
-                            {
+                            <c' d' e' f' g' a' b'>8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! SM4
-                                <c' d' e' f' g' a' b'>8
-                                [
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            <c' d' e' f' g' a' b'>8
+                            [
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
+                            <c' d' e' f' g' a' b'>8
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
-                                ]
-                            }
-                            {
+                            <c' d' e' f' g' a' b'>8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 3]                                             %! SM4
-                                <c' d' e' f' g' a' b'>8
-                                [
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            <c' d' e' f' g' a' b'>8
+                            [
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
+                            <c' d' e' f' g' a' b'>8
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
+                            <c' d' e' f' g' a' b'>8
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
-                                ]
-                            }
-                            {
+                            <c' d' e' f' g' a' b'>8
+                            ]
             <BLANKLINE>
-                                % [MusicVoice measure 4]                                             %! SM4
-                                <c' d' e' f' g' a' b'>8
-                                [
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            <c' d' e' f' g' a' b'>8
+                            [
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
+                            <c' d' e' f' g' a' b'>8
             <BLANKLINE>
-                                <c' d' e' f' g' a' b'>8
-                                ]
+                            <c' d' e' f' g' a' b'>8
+                            ]
             <BLANKLINE>
-                            }
                         }
                     }
                 >>
