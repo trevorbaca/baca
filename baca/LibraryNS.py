@@ -1081,7 +1081,7 @@ class LibraryNS(abjad.AbjadObject):
         indicators: typing.Iterable,
         selector: Selector,
         *,
-        bookend: bool = False,
+        bookend: typing.Union[bool, int] = False,
         spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         tweaks: typing.List[typing.Tuple] = None,
         ):

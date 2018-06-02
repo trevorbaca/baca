@@ -30,7 +30,7 @@ class PiecewiseCommand(Command):
     def __init__(
         self,
         *,
-        bookend: bool = None,
+        bookend: typing.Union[bool, int] = None,
         indicators: typing.Iterable = None,
         selector: Selector = None,
         spanner: abjad.Spanner = None,
@@ -39,7 +39,7 @@ class PiecewiseCommand(Command):
         ) -> None:
         Command.__init__(self, selector=selector)
         if bookend is not None:
-            bookend = bool(bookend)
+            assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
         if indicators is not None:
             indicators = abjad.CyclicTuple(indicators)
@@ -98,23 +98,31 @@ class PiecewiseCommand(Command):
                 message = f'\n  Leaf {leaf!s} not in {spanner!s}'
                 message += "\n  Does selector leak spanner selector?"
                 raise Exception(message)
-        for i, item in enumerate(argument):
-            leaf = baca.select(item).leaf(0)
+        piece_count = len(argument)
+        if self.bookend in (False, None):
+            pattern = abjad.Pattern()
+        elif self.bookend is True:
+            pattern = abjad.index([0], 1)
+        else:
+            assert isinstance(self.bookend, int)
+            pattern = abjad.index([self.bookend], period=piece_count)
+        for i, piece in enumerate(argument):
+            first_leaf = baca.select(piece).leaf(0)
             indicator = self.indicators[i]
-            self._attach_indicators(spanner, indicator, leaf)
-            if not self.bookend:
+            self._attach_indicators(spanner, indicator, first_leaf)
+            if not pattern.matches_index(i, piece_count):
                 continue
-            if len(item) <= 1:
+            if len(piece) <= 1:
                 continue
-            leaf = baca.select(item).leaf(-1)
-            if leaf not in spanner:
+            last_leaf = baca.select(piece).leaf(-1)
+            if last_leaf not in spanner:
                 continue
             indicator = self.indicators[i + 1]
             if i == length - 1:
                 last = True
             else:
                 last = False
-            self._attach_indicators(spanner, indicator, leaf, last=last)
+            self._attach_indicators(spanner, indicator, last_leaf, last=last)
 
     ### PRIVATE METHODS ###
 
@@ -151,9 +159,19 @@ class PiecewiseCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bookend(self) -> typing.Optional[bool]:
+    def bookend(self) -> typing.Optional[typing.Union[bool, int]]:
         """
-        Is true when command bookend-attaches indicators.
+        Gets bookend token.
+
+        Command attaches indicator to first leaf in each group of
+        selector output when ``bookend`` is false.
+
+        Command attaches indicator to both first leaf and last
+        leaf in each group of selector output when ``bookend`` is true.
+
+        When ``bookend`` equals integer ``n``, command attaches indicator to
+        first leaf and last leaf in group ``n`` of selector output and attaches
+        indicator to only first leaf in other groups of selector output.
         """
         return self._bookend
 
