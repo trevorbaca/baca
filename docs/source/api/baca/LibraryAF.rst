@@ -72,6 +72,8 @@ LibraryAF
 
    .. automethod:: LibraryAF.bcps
 
+   .. automethod:: LibraryAF.beam
+
    .. automethod:: LibraryAF.beam_divisions
 
    .. automethod:: LibraryAF.beam_everything

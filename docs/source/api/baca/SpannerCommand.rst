@@ -62,6 +62,8 @@ SpannerCommand
 
    .. autoattribute:: SpannerCommand.deactivate
 
+   .. autoattribute:: SpannerCommand.detach_first
+
    .. autoattribute:: SpannerCommand.left_broken
 
    .. autoattribute:: SpannerCommand.right_broken

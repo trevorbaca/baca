@@ -2114,6 +2114,131 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def beam(
+        *,
+        selector: Selector = 'baca.tleaves()',
+        tweaks: typing.List[typing.Tuple] = None,
+        ) -> SpannerCommand:
+        r"""
+        Attaches beam.
+
+        ..  container:: example
+
+            Beams everything:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.beam(),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitch('C4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                c'8
+                                [                                                                        %! SC
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                c'8
+                <BLANKLINE>
+                                c'8
+                <BLANKLINE>
+                                c'8
+                                ]                                                                        %! SC
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        """
+        return SpannerCommand(
+            detach_first=True,
+            selector=selector,
+            spanner=abjad.Beam(),
+            tweaks=tweaks,
+            )
+
+    @staticmethod
     def beam_divisions(
         *,
         stemlets: Number = None,

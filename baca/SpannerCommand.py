@@ -179,6 +179,7 @@ class SpannerCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_detach_first',
         '_left_broken',
         '_right_broken',
         '_spanner',
@@ -192,6 +193,7 @@ class SpannerCommand(Command):
         self,
         *,
         deactivate: bool = None,
+        detach_first: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,
         selector: Selector = 'baca.leaves()',
@@ -200,6 +202,9 @@ class SpannerCommand(Command):
         tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
+        if detach_first is not None:
+            detach_first = bool(detach_first)
+        self._detach_first = detach_first
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken = left_broken
@@ -232,6 +237,11 @@ class SpannerCommand(Command):
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
         self._apply_tweaks(spanner)
+        if self.detach_first:
+            abjad.detach(
+                type(spanner),
+                leaves,
+                )
         abjad.attach(
             spanner,
             leaves,
@@ -243,6 +253,14 @@ class SpannerCommand(Command):
         return spanner
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def detach_first(self) -> typing.Optional[bool]:
+        """
+        Is true when command detaches existing spanners before attaching new
+        ones.
+        """
+        return self._detach_first
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
