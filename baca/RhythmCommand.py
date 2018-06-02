@@ -5,45 +5,13 @@ import typing
 from abjadext import rmakers
 from .Command import Command
 from .DivisionMaker import DivisionMaker
-from .FlattenDivisionCallback import FlattenDivisionCallback
-from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
-from .PartitionDivisionCallback import PartitionDivisionCallback
-from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback
-from .SplitByRoundedRatiosDivisionCallback import \
-    SplitByRoundedRatiosDivisionCallback
-division_maker_type = (
-    DivisionMaker,
-    FlattenDivisionCallback,
-    FuseByCountsDivisionCallback,
-    PartitionDivisionCallback,
-    SplitByDurationsDivisionCallback,
-    SplitByRoundedRatiosDivisionCallback,
-    )
-division_maker_typing = typing.Union[
-    DivisionMaker,
-    FlattenDivisionCallback,
-    FuseByCountsDivisionCallback,
-    PartitionDivisionCallback,
-    SplitByDurationsDivisionCallback,
-    SplitByRoundedRatiosDivisionCallback,
-    ]
+from .Typing import DivisionMakerTyping
+from .Typing import RhythmMakerTyping
+from .Typing import division_maker_type
 rhythm_maker_type = (
     rmakers.RhythmMaker,
     abjad.Selection,
     )
-rhythm_maker_typing = typing.Union[
-    rmakers.RhythmMaker,
-    abjad.Selection,
-    typing.Iterable[
-        typing.Tuple[
-            typing.Union[
-                rmakers.RhythmMaker,
-                abjad.Selection,
-                ],
-            abjad.Pattern,
-            ],
-        ],
-    ]
 
 
 class RhythmCommand(Command):
@@ -219,7 +187,7 @@ class RhythmCommand(Command):
         reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
         rewrite_rest_filled: bool = None,
-        rhythm_maker: rhythm_maker_typing = None,
+        rhythm_maker: RhythmMakerTyping = None,
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
@@ -641,7 +609,7 @@ class RhythmCommand(Command):
         return self._division_expression
 
     @property
-    def division_maker(self) -> typing.Optional[division_maker_typing]:
+    def division_maker(self) -> typing.Optional[DivisionMakerTyping]:
         """
         Gets division-maker.
         """
@@ -784,7 +752,7 @@ class RhythmCommand(Command):
         return self._rewrite_rest_filled
 
     @property
-    def rhythm_maker(self) -> typing.Optional[rhythm_maker_typing]:
+    def rhythm_maker(self) -> typing.Optional[RhythmMakerTyping]:
         r"""
         Gets rhythm-maker-or-selection or (rhythm-maker-or-selection, pattern)
         pairs.

@@ -36,20 +36,8 @@ from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number
 from .Typing import NumberPair
+from .Typing import RhythmMakerTyping
 from .Typing import Selector
-rhythm_maker_typing = typing.Union[
-    rmakers.RhythmMaker,
-    abjad.Selection,
-    typing.Iterable[
-        typing.Tuple[
-            typing.Union[
-                rmakers.RhythmMaker,
-                abjad.Selection,
-                ],
-            abjad.Pattern,
-            ],
-        ],
-    ]
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -3401,7 +3389,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rhythm(
-        rhythm_maker: rhythm_maker_typing,
+        rhythm_maker: RhythmMakerTyping,
         *,
         division_maker: DivisionMaker = None,
         division_expression: abjad.Expression = None,
