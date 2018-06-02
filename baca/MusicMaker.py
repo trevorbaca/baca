@@ -1681,7 +1681,7 @@ class MusicMaker(abjad.AbjadObject):
             Spanner specifier selects all leaves by default:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(spanner=abjad.Slur()),
+            ...     baca.slur(),
             ...     )
 
             >>> collections = [

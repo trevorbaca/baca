@@ -172,7 +172,7 @@ class SpannerCommand(Command):
     ..  container:: example
 
         >>> baca.SpannerCommand()
-        SpannerCommand(selector=baca.tleaves(), tags=[])
+        SpannerCommand(selector=baca.leaves(), tags=[])
 
     """
 
@@ -194,8 +194,7 @@ class SpannerCommand(Command):
         deactivate: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,
-        # TODO: change to baca.leaves()
-        selector: Selector = 'baca.tleaves()',
+        selector: Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
         tweaks: typing.List[typing.Tuple] = None,
