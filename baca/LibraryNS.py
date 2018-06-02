@@ -1079,10 +1079,10 @@ class LibraryNS(abjad.AbjadObject):
     def piecewise(
         spanner: abjad.Spanner,
         indicators: typing.Iterable,
-        selector: Selector,
+        pieces: Selector,
         *,
         bookend: typing.Union[bool, int] = False,
-        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         tweaks: typing.List[typing.Tuple] = None,
         ):
         """
@@ -1092,9 +1092,9 @@ class LibraryNS(abjad.AbjadObject):
         return PiecewiseCommand(
             bookend=bookend,
             indicators=indicators,
+            pieces=pieces,
             selector=selector,
             spanner=spanner,
-            spanner_selector=spanner_selector,
             tweaks=tweaks,
             )
 
@@ -8396,8 +8396,8 @@ class LibraryNS(abjad.AbjadObject):
         peak: str,
         counts: typing.List[int],
         *,
-        selector: Selector = 'baca.leaves()',
-        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        pieces: Selector = 'baca.leaves()',
+        selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         ) -> PiecewiseCommand:
         """
         Makes two-stage niente swell.
@@ -8407,15 +8407,15 @@ class LibraryNS(abjad.AbjadObject):
         assert isinstance(peak, str), repr(peak)
         assert isinstance(counts, list), repr(counts)
         assert all(isinstance(_, int) for _ in counts), repr(counts)
-        if isinstance(selector, str):
-            selector = eval(selector)
-        assert isinstance(selector, abjad.Expression), repr(selector)
-        selector = selector.enchain(counts)
+        if isinstance(pieces, str):
+            pieces = eval(pieces)
+        assert isinstance(pieces, abjad.Expression), repr(pieces)
+        pieces = pieces.enchain(counts)
         return LibraryAF.enchained_hairpin(
-            *LibraryGM.make_dynamics(f'niente {peak} niente'),
+            LibraryGM.make_dynamics(f'niente {peak} niente'),
             bookend=True,
+            pieces=pieces,
             selector=selector,
-            spanner_selector=spanner_selector,
             )
 
     @staticmethod

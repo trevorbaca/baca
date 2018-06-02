@@ -6437,8 +6437,8 @@ class LibraryAF(abjad.AbjadObject):
     def enchained_hairpin(
         *dynamics: typing.Any,
         bookend: typing.Union[bool, int] = False,
-        selector: Selector = 'baca.tleaves().group()',
-        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()'
+        pieces: Selector = 'baca.tleaves().group()',
+        selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()'
         ) -> PiecewiseCommand:
         r"""
         Makes enchained hairpin.
@@ -6458,7 +6458,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_staff_padding(5),
             ...     baca.enchained_hairpin(
             ...         baca.make_dynamics('p f'),
-            ...         selector=baca.leaves().partition_by_counts(
+            ...         pieces=baca.leaves().partition_by_counts(
             ...             [3],
             ...             cyclic=True,
             ...             overhang=True,
@@ -6595,7 +6595,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.enchained_hairpin(
             ...         baca.make_dynamics('p f'),
             ...         bookend=-1,
-            ...         selector=baca.leaves().partition_by_counts(
+            ...         pieces=baca.leaves().partition_by_counts(
             ...             [3],
             ...             cyclic=True,
             ...             overhang=True,
@@ -6735,7 +6735,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.enchained_hairpin(
             ...         baca.make_dynamics('p f'),
             ...         bookend=True,
-            ...         selector=baca.leaves().partition_by_counts(
+            ...         pieces=baca.leaves().partition_by_counts(
             ...             [3],
             ...             cyclic=True,
             ...             overhang=True,
@@ -6884,7 +6884,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_staff_padding(5),
             ...     baca.enchained_hairpin(
             ...         baca.make_dynamics('p f'),
-            ...         selector=baca.group_by_measures([1]),
+            ...         pieces=baca.group_by_measures([1]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -7014,7 +7014,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.enchained_hairpin(
             ...         baca.make_dynamics('p f'),
             ...         bookend=-1,
-            ...         selector=baca.group_by_measures([1]),
+            ...         pieces=baca.group_by_measures([1]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -7147,7 +7147,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.enchained_hairpin(
             ...         baca.make_dynamics('p f'),
             ...         bookend=True,
-            ...         selector=baca.group_by_measures([1]),
+            ...         pieces=baca.group_by_measures([1]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -7285,9 +7285,9 @@ class LibraryAF(abjad.AbjadObject):
         return LibraryNS.piecewise(
             abjad.Hairpin(),
             dynamics_,
-            selector,
+            pieces,
             bookend=bookend,
-            spanner_selector=spanner_selector,
+            selector=selector,
             )
 
     @staticmethod

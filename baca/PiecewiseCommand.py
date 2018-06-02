@@ -19,9 +19,9 @@ class PiecewiseCommand(Command):
     __slots__ = (
         '_bookend',
         '_indicators',
+        '_pieces',
         '_selector',
         '_spanner',
-        '_spanner_selector',
         '_tweaks',
         )
 
@@ -32,9 +32,9 @@ class PiecewiseCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Iterable = None,
-        selector: Selector = None,
+        pieces: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         spanner: abjad.Spanner = None,
-        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        selector: Selector = 'baca.leaves()',
         tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
@@ -44,15 +44,15 @@ class PiecewiseCommand(Command):
         if indicators is not None:
             indicators = abjad.CyclicTuple(indicators)
         self._indicators = indicators
+        if isinstance(pieces, str):
+            pieces = eval(pieces)
+        if pieces is not None:
+            prototype = (abjad.Expression, MapCommand)
+            assert isinstance(pieces, prototype), repr(pieces)
+        self._pieces = pieces
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, SpannerCommand))
         self._spanner = spanner
-        if isinstance(spanner_selector, str):
-            spanner_selector = eval(spanner_selector)
-        if spanner_selector is not None:
-            prototype = (abjad.Expression, MapCommand)
-            assert isinstance(spanner_selector, prototype), repr(spanner_selector)
-        self._spanner_selector = spanner_selector
         self._tags = []
         if tweaks is not None:
             assert isinstance(tweaks, list), repr(tweaks)
@@ -65,7 +65,9 @@ class PiecewiseCommand(Command):
         """
         Calls command on ``argument``.
 
-        ..  note:: IMPORTANT: ``spanner_selector`` applies before ``selector``.
+        ..  note:: IMPORTANT: spanner ``selector`` applies before ``pieces``
+            selector.
+
         """
         if argument is None:
             return
@@ -73,9 +75,9 @@ class PiecewiseCommand(Command):
             return
         if not self.indicators:
             return
-        if self.spanner_selector is not None:
-            assert not isinstance(self.spanner_selector, str)
-            argument = self.spanner_selector(argument)
+        if self.selector is not None:
+            assert not isinstance(self.selector, str)
+            argument = self.selector(argument)
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
             leaves = abjad.select(argument).leaves()
@@ -89,16 +91,18 @@ class PiecewiseCommand(Command):
             spanner = self.spanner(argument)
         self._apply_tweaks(spanner)
         argument = abjad.select(spanner).leaves()
-        if self.selector is not None:
-            assert not isinstance(self.selector, str)
-            argument = self.selector(argument)
-        length = len(argument)
-        for leaf in abjad.select(argument).leaves():
+        if self.pieces is not None:
+            assert not isinstance(self.pieces, str)
+            pieces = self.pieces(argument)
+        else:
+            pieces = argument
+        length = len(pieces)
+        for leaf in abjad.select(pieces).leaves():
             if leaf not in spanner:
                 message = f'\n  Leaf {leaf!s} not in {spanner!s}'
-                message += "\n  Does selector leak spanner selector?"
+                message += "\n  Do pieces contradict spanner selector?"
                 raise Exception(message)
-        piece_count = len(argument)
+        piece_count = len(pieces)
         if self.bookend in (False, None):
             pattern = abjad.Pattern()
         elif self.bookend is True:
@@ -106,7 +110,7 @@ class PiecewiseCommand(Command):
         else:
             assert isinstance(self.bookend, int)
             pattern = abjad.index([self.bookend], period=piece_count)
-        for i, piece in enumerate(argument):
+        for i, piece in enumerate(pieces):
             first_leaf = baca.select(piece).leaf(0)
             indicator = self.indicators[i]
             self._attach_indicators(spanner, indicator, first_leaf)
@@ -183,9 +187,18 @@ class PiecewiseCommand(Command):
         return self._indicators
 
     @property
+    def pieces(self) -> typing.Optional[
+        typing.Union[abjad.Expression, MapCommand]
+        ]:
+        """
+        Gets piece selector.
+        """
+        return self._pieces
+
+    @property
     def selector(self) -> typing.Optional[abjad.Expression]:
         """
-        Gets selector.
+        Gets spanner selector.
         """
         return self._selector
 
@@ -195,15 +208,6 @@ class PiecewiseCommand(Command):
         Gets spanner.
         """
         return self._spanner
-
-    @property
-    def spanner_selector(self) -> typing.Optional[
-        typing.Union[abjad.Expression, MapCommand]
-        ]:
-        """
-        Gets spanner selector.
-        """
-        return self._spanner_selector
 
     @property
     def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:

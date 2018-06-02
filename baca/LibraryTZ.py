@@ -1774,7 +1774,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         spanner_selector=baca.map(baca.tuplet(1), baca.tleaves()),
+            ...         selector=baca.map(baca.tuplet(1), baca.tleaves()),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2759,8 +2759,8 @@ class LibraryTZ(abjad.AbjadObject):
         *markups: typing.Any,
         do_not_bookend: bool = False,
         lilypond_id: int = None,
-        selector: Selector = 'baca.leaves().group()',
-        spanner_selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()',
+        pieces: Selector = 'baca.leaves().group()',
+        selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()',
         tweaks: typing.List[typing.Tuple] = None
         ) -> PiecewiseCommand:
         r"""
@@ -2784,7 +2784,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
             ...         do_not_bookend=True,
-            ...         selector=baca.leaves().enchain([5, 4, 5, 4]),
+            ...         pieces=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2997,7 +2997,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         selector=baca.leaves().enchain([8]),
+            ...         pieces=baca.leaves().enchain([8]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3179,9 +3179,9 @@ class LibraryTZ(abjad.AbjadObject):
         return LibraryNS.piecewise(
             text_spanner,
             indicators,
-            selector,
+            pieces,
             bookend=not(do_not_bookend),
-            spanner_selector=spanner_selector,
+            selector=selector,
             tweaks=tweaks,
             )
 

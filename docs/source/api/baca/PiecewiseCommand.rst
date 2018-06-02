@@ -66,11 +66,11 @@ PiecewiseCommand
 
    .. autoattribute:: PiecewiseCommand.indicators
 
+   .. autoattribute:: PiecewiseCommand.pieces
+
    .. autoattribute:: PiecewiseCommand.selector
 
    .. autoattribute:: PiecewiseCommand.spanner
-
-   .. autoattribute:: PiecewiseCommand.spanner_selector
 
    .. autoattribute:: PiecewiseCommand.tag
 
