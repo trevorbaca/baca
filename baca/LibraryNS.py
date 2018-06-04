@@ -1079,10 +1079,10 @@ class LibraryNS(abjad.AbjadObject):
     def piecewise(
         spanner: abjad.Spanner,
         indicators: typing.Iterable,
-        pieces: Selector,
+        pieces: typing.Union[MapCommand, Selector],
         *,
         bookend: typing.Union[bool, int] = False,
-        selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        selector: Selector = 'baca.leaves()',
         tweaks: typing.List[typing.Tuple] = None,
         ):
         """
@@ -8396,8 +8396,8 @@ class LibraryNS(abjad.AbjadObject):
         peak: str,
         counts: typing.List[int],
         *,
-        pieces: Selector = 'baca.leaves()',
-        selector: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        pieces: typing.Union[MapCommand, Selector] = 'baca.leaves()',
+        selector: Selector = 'baca.leaves()',
         ) -> PiecewiseCommand:
         """
         Makes two-stage niente swell.

@@ -96,6 +96,7 @@ class PiecewiseCommand(Command):
             pieces = self.pieces(argument)
         else:
             pieces = argument
+        assert pieces is not None
         length = len(pieces)
         for leaf in abjad.select(pieces).leaves():
             if leaf not in spanner:

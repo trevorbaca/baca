@@ -2759,8 +2759,8 @@ class LibraryTZ(abjad.AbjadObject):
         *markups: typing.Any,
         do_not_bookend: bool = False,
         lilypond_id: int = None,
-        pieces: Selector = 'baca.leaves().group()',
-        selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()',
+        pieces: typing.Union[MapCommand, Selector] = 'baca.leaves().group()',
+        selector: Selector = 'baca.tleaves()',
         tweaks: typing.List[typing.Tuple] = None
         ) -> PiecewiseCommand:
         r"""

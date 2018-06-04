@@ -6437,8 +6437,8 @@ class LibraryAF(abjad.AbjadObject):
     def enchained_hairpin(
         *dynamics: typing.Any,
         bookend: typing.Union[bool, int] = False,
-        pieces: Selector = 'baca.tleaves().group()',
-        selector: typing.Union[MapCommand, Selector] = 'baca.tleaves()'
+        pieces: typing.Union[MapCommand, Selector] = 'baca.tleaves().group()',
+        selector: Selector = 'baca.tleaves()'
         ) -> PiecewiseCommand:
         r"""
         Makes enchained hairpin.
