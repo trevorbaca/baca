@@ -12,7 +12,7 @@ from .Typing import Selector
 
 def markup(
     argument: typing.Union[str, abjad.Markup],
-    selector: Selector = 'baca.phead(0)',
+    selector: Selector = 'baca.pleaf(0)',
     direction: abjad.VerticalAlignment = abjad.Up,
     literal: bool = False,
     upright: bool = True,
