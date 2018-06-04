@@ -98,6 +98,8 @@ LibraryAF
 
    .. automethod:: LibraryAF.clef_extra_offset
 
+   .. automethod:: LibraryAF.clef_shift
+
    .. automethod:: LibraryAF.clef_x_extent_false
 
    .. automethod:: LibraryAF.clusters
@@ -137,6 +139,8 @@ LibraryAF
    .. automethod:: LibraryAF.down_bow
 
    .. automethod:: LibraryAF.dynamic_down
+
+   .. automethod:: LibraryAF.dynamic_shift
 
    .. automethod:: LibraryAF.dynamic_text_extra_offset
 

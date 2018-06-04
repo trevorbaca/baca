@@ -46,7 +46,11 @@ LibraryGM
 
    .. automethod:: LibraryGM.hairpin_shorten_pair
 
+   .. automethod:: LibraryGM.hairpin_start_shift
+
    .. automethod:: LibraryGM.hairpin_stencil_false
+
+   .. automethod:: LibraryGM.hairpin_swell
 
    .. automethod:: LibraryGM.hairpin_transparent
 

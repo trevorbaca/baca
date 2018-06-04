@@ -4140,74 +4140,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def shift_clef(
-        clef: typing.Union[str, abjad.Clef],
-        *,
-        selector: Selector = 'baca.leaf(0)',
-        ) -> SuiteCommand:
-        """
-        Shifts clef to left by width of clef.
-        """
-        from .LibraryAF import LibraryAF
-        if isinstance(clef, str):
-            clef = abjad.Clef(clef)
-        if isinstance(clef, (int, float)):
-            extra_offset_x = clef
-        else:
-            assert isinstance(clef, abjad.Clef)
-            width = clef._to_width[clef.name]
-            extra_offset_x = -width
-        command = library.suite(
-            LibraryAF.clef_x_extent_false(),
-            LibraryAF.clef_extra_offset((extra_offset_x, 0)),
-            )
-        library.tag(
-            abjad.tags.SHIFTED_CLEF,
-            command,
-            tag_measure_number=True,
-            )
-        return command
-
-    @staticmethod
-    def shift_dynamic(
-        dynamic: typing.Union[str, abjad.Dynamic],
-        *,
-        selector: Selector = 'baca.leaf(0)',
-        ) -> SuiteCommand:
-        """
-        Shifts dynamic to left by width of dynamic.
-        """
-        from .LibraryAF import LibraryAF
-        dynamic = abjad.Dynamic(dynamic)
-        width = dynamic._to_width[dynamic.name]
-        extra_offset_x = -width
-        return library.suite(
-            LibraryAF.dynamic_text_extra_offset((extra_offset_x, 0)),
-            LibraryAF.dynamic_text_x_extent_zero(),
-            )
-
-    @staticmethod
-    def shift_hairpin_start(
-        dynamic: typing.Union[str, abjad.Dynamic],
-        *,
-        selector: Selector = 'baca.leaf(0)',
-        ) -> SuiteCommand:
-        """
-        Shifts hairpin start dynamic to left by width of dynamic.
-        """
-        from .LibraryAF import LibraryAF
-        from .LibraryGM import LibraryGM
-        dynamic = abjad.Dynamic(dynamic)
-        width = dynamic._to_width[dynamic.name]
-        extra_offset_x = -width
-        hairpin_shorten_left = width - 1.25
-        return library.suite(
-            LibraryAF.dynamic_text_extra_offset((extra_offset_x, 0)),
-            LibraryAF.dynamic_text_x_extent_zero(),
-            LibraryGM.hairpin_shorten_pair((hairpin_shorten_left, 0)),
-            )
-
-    @staticmethod
     def short_fermata(
         *,
         selector: Selector = 'baca.leaf(0)',
@@ -8080,33 +8012,6 @@ class LibraryNS(abjad.AbjadObject):
             value=n,
             context=context,
             grob='sustain_pedal_line_spanner',
-            selector=selector,
-            )
-
-    @staticmethod
-    def swell(
-        peak: str,
-        counts: typing.List[int],
-        *,
-        pieces: typing.Union[MapCommand, Selector] = 'baca.leaves()',
-        selector: Selector = 'baca.leaves()',
-        ) -> PiecewiseCommand:
-        """
-        Makes two-stage niente swell.
-        """
-        from .LibraryAF import LibraryAF
-        from .LibraryGM import LibraryGM
-        assert isinstance(peak, str), repr(peak)
-        assert isinstance(counts, list), repr(counts)
-        assert all(isinstance(_, int) for _ in counts), repr(counts)
-        if isinstance(pieces, str):
-            pieces = eval(pieces)
-        assert isinstance(pieces, abjad.Expression), repr(pieces)
-        pieces = pieces.enchain(counts)
-        return LibraryAF.enchained_hairpin(
-            LibraryGM.make_dynamics(f'niente {peak} niente'),
-            bookend=True,
-            pieces=pieces,
             selector=selector,
             )
 

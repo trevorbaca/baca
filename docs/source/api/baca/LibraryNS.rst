@@ -142,12 +142,6 @@ LibraryNS
 
    .. automethod:: LibraryNS.script_up
 
-   .. automethod:: LibraryNS.shift_clef
-
-   .. automethod:: LibraryNS.shift_dynamic
-
-   .. automethod:: LibraryNS.shift_hairpin_start
-
    .. automethod:: LibraryNS.short_fermata
 
    .. automethod:: LibraryNS.skips_after
@@ -207,7 +201,5 @@ LibraryNS
    .. automethod:: LibraryNS.sustain_pedal
 
    .. automethod:: LibraryNS.sustain_pedal_staff_padding
-
-   .. automethod:: LibraryNS.swell
 
    .. automethod:: LibraryNS.system
