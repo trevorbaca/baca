@@ -1,10 +1,10 @@
 import abjad
-import typing
 
-# library functions
+# functions
+from .dynamicslib import *
 from .library import *
 
-# everything else
+# classes
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
@@ -126,51 +126,7 @@ from .LibraryGM import LibraryGM
 from .LibraryNS import LibraryNS
 from .LibraryTZ import LibraryTZ
 
-
-# MYPY:
-#
-# UNCOMMENT WHEN RUNNING MYPY AGAINST SCORES
-#
-# LEAVE COMMENTED-OUT WHEN BUILDING API
-#
-#### SELECTORS ###
-#
-#def phead(n):
-#    return baca.select().phead(n)
-#
-#def pheads():
-#    return baca.select().pheads()
-#
-#def pleaf(n):
-#    return baca.select().pleaf(n)
-#
-#### LIBRARY A-F ###
-#
-#accents = LibraryAF.accents
-#breaks = LibraryAF.breaks
-#clef = LibraryAF.clef
-#dynamic = LibraryAF.dynamic
-#
-#### LIBRARY G-M ###
-#
-#make_scopes = LibraryGM.make_scopes
-#margin_markup = LibraryGM.margin_markup
-#metronome_mark = LibraryGM.metronome_mark
-#
-#### LIBRARY N-S ###
-#
-#page = LibraryNS.page
-#pitches = LibraryNS.pitches
-#scope = LibraryNS.scope
-#scorewide_spacing = LibraryNS.scorewide_spacing
-#strict_quarter_divisions = LibraryNS.strict_quarter_divisions
-#
-#### LIBRARY T-Z ###
-#
-#trill_spanner_staff_padding = LibraryTZ.trill_spanner_staff_padding
-#trill = LibraryTZ.trill
-#untie_to = LibraryTZ.trill
-
+# expression constructors
 from .PitchClassSegment import _pitch_class_segment as pitch_class_segment
 from .PitchClassSet import _pitch_class_set as pitch_class_set
 from .PitchSegment import _pitch_segment as pitch_segment

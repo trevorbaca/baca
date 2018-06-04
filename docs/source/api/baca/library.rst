@@ -23,8 +23,6 @@ library
 
 .. autofunction:: dashed_hook
 
-.. autofunction:: dynamic
-
 .. autofunction:: lbsd
 
 .. autofunction:: literal

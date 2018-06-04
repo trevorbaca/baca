@@ -138,28 +138,6 @@ LibraryAF
 
    .. automethod:: LibraryAF.down_bow
 
-   .. automethod:: LibraryAF.dynamic_down
-
-   .. automethod:: LibraryAF.dynamic_shift
-
-   .. automethod:: LibraryAF.dynamic_text_extra_offset
-
-   .. automethod:: LibraryAF.dynamic_text_left
-
-   .. automethod:: LibraryAF.dynamic_text_stencil_false
-
-   .. automethod:: LibraryAF.dynamic_text_transparent
-
-   .. automethod:: LibraryAF.dynamic_text_x_extent_zero
-
-   .. automethod:: LibraryAF.dynamic_text_x_offset
-
-   .. automethod:: LibraryAF.dynamic_text_y_offset
-
-   .. automethod:: LibraryAF.dynamic_up
-
-   .. automethod:: LibraryAF.enchained_hairpin
-
    .. automethod:: LibraryAF.espressivo
 
    .. automethod:: LibraryAF.fermata

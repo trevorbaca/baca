@@ -22,11 +22,13 @@ baca
 .. toctree::
    :hidden:
 
+   dynamicslib
    library
 
 .. autosummary::
    :nosignatures:
 
+   dynamicslib
    library
 
 .. raw:: html

@@ -42,18 +42,6 @@ LibraryGM
 
    .. automethod:: LibraryGM.group_notes_by_measures
 
-   .. automethod:: LibraryGM.hairpin
-
-   .. automethod:: LibraryGM.hairpin_shorten_pair
-
-   .. automethod:: LibraryGM.hairpin_start_shift
-
-   .. automethod:: LibraryGM.hairpin_stencil_false
-
-   .. automethod:: LibraryGM.hairpin_swell
-
-   .. automethod:: LibraryGM.hairpin_transparent
-
    .. automethod:: LibraryGM.helianthate
 
    .. automethod:: LibraryGM.imbricate
@@ -71,8 +59,6 @@ LibraryGM
    .. automethod:: LibraryGM.long_fermata
 
    .. automethod:: LibraryGM.loop
-
-   .. automethod:: LibraryGM.make_dynamics
 
    .. automethod:: LibraryGM.make_even_divisions
 

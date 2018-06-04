@@ -283,6 +283,43 @@ Bača API
 
    <hr/>
 
+.. rubric:: :ref:`baca.dynamicslib <baca--dynamicslib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.dynamicslib.dynamic
+   ~baca.dynamicslib.dynamic_down
+   ~baca.dynamicslib.dynamic_shift
+   ~baca.dynamicslib.dynamic_text_extra_offset
+   ~baca.dynamicslib.dynamic_text_left
+   ~baca.dynamicslib.dynamic_text_stencil_false
+   ~baca.dynamicslib.dynamic_text_transparent
+   ~baca.dynamicslib.dynamic_text_x_extent_zero
+   ~baca.dynamicslib.dynamic_text_x_offset
+   ~baca.dynamicslib.dynamic_text_y_offset
+   ~baca.dynamicslib.dynamic_up
+   ~baca.dynamicslib.dynamics
+   ~baca.dynamicslib.hairpin
+   ~baca.dynamicslib.hairpin_chain
+   ~baca.dynamicslib.hairpin_shorten_pair
+   ~baca.dynamicslib.hairpin_start_shift
+   ~baca.dynamicslib.hairpin_stencil_false
+   ~baca.dynamicslib.hairpin_swell
+   ~baca.dynamicslib.hairpin_transparent
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.library <baca--library>`
    :class: section-header
 
@@ -298,7 +335,6 @@ Bača API
 
    ~baca.library.dashed_arrow
    ~baca.library.dashed_hook
-   ~baca.library.dynamic
    ~baca.library.lbsd
    ~baca.library.literal
    ~baca.library.map
