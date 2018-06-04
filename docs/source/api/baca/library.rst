@@ -29,6 +29,8 @@ library
 
 .. autofunction:: map
 
+.. autofunction:: pick
+
 .. autofunction:: piecewise
 
 .. autofunction:: pitches

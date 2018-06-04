@@ -131,6 +131,16 @@ def piecewise(
         tweaks=tweaks,
         )
 
+def pick(pattern, *commands) -> typing.List[typing.Tuple]:
+    """
+    Maps ``pattern`` to each command in ``commands``.
+    """
+    pairs = []
+    for command in commands:
+        pair = (command, pattern)
+        pairs.append(pair)
+    return pairs
+
 def pitches(
     pitches: typing.Iterable,
     *,

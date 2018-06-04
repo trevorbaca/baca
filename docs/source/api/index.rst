@@ -337,6 +337,7 @@ Bača API
    ~baca.library.lbsd
    ~baca.library.literal
    ~baca.library.map
+   ~baca.library.pick
    ~baca.library.piecewise
    ~baca.library.pitches
    ~baca.library.scope
