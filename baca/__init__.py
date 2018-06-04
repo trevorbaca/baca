@@ -6,6 +6,7 @@ from .library import *
 
 # markup library
 from . import markup
+from . import markups
 
 # classes
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier

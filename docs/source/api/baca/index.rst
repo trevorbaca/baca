@@ -25,6 +25,7 @@ baca
    dynamicslib
    library
    markup
+   markups
 
 .. autosummary::
    :nosignatures:
@@ -32,6 +33,7 @@ baca
    dynamicslib
    library
    markup
+   markups
 
 .. raw:: html
 
