@@ -2323,7 +2323,8 @@ class LibraryTZ(abjad.AbjadObject):
         """
         Ties repeat pitches.
         """
-        return baca.map(
+        from . import library
+        return library.map(
             baca.select().ltqruns().nontrivial(),
             LibraryTZ.tie(),
             )

@@ -16,6 +16,23 @@ baca
 
    <hr/>
 
+.. rubric:: Subpackages
+   :class: section-header
+
+.. toctree::
+   :hidden:
+
+   library
+
+.. autosummary::
+   :nosignatures:
+
+   library
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: (1) Library
    :class: section-header
 
@@ -414,8 +431,6 @@ baca
 .. autofunction:: ltruns
 
 .. autofunction:: lts
-
-.. autofunction:: map
 
 .. autofunction:: nontrivial
 

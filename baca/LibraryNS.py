@@ -2241,7 +2241,8 @@ class LibraryNS(abjad.AbjadObject):
         """
         Repeat-ties repeat pitches.
         """
-        return baca.map(
+        from . import library
+        return library.map(
             baca.select().ltqruns().nontrivial(),
             SpannerCommand(
                 selector='baca.qrun(0)',

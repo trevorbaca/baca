@@ -242,7 +242,6 @@ Bača API
    ~baca.ltrun
    ~baca.ltruns
    ~baca.lts
-   ~baca.map
    ~baca.nontrivial
    ~baca.note
    ~baca.notes
@@ -279,3 +278,22 @@ Bača API
    ~baca.with_next_leaf
    ~baca.with_previous_leaf
    ~baca.wleaves
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.library <baca--library>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.library.map
