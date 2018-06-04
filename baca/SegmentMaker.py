@@ -2637,7 +2637,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 clef = wrapper.indicator
                 dictionary = self._offset_to_measure_number
-                command = baca.shift_clef(clef, selector=baca.leaf(0))
+                command = baca.clef_shift(clef, selector=baca.leaf(0))
                 command.offset_to_measure_number = dictionary
                 command(leaf)
 

@@ -1,5 +1,5 @@
 """
-Library functions.
+Function library.
 """
 import abjad
 import typing

@@ -1,8 +1,8 @@
 import abjad
 import typing
+from . import markup as baca_markup
 from .Command import Command
 from .IndicatorCommand import IndicatorCommand
-from .MarkupLibrary import MarkupLibrary
 from .Typing import Selector
 
 
@@ -189,8 +189,7 @@ class TextSpannerCommand(Command):
         self._line_segment = line_segment
         self._tags = []
         if isinstance(text, str):
-            markup_library = MarkupLibrary()
-            command = markup_library(text)
+            command = baca_markup.markup(text)
             assert command.indicators is not None
             markup = command.indicators[0]
         elif isinstance(text, abjad.Markup):

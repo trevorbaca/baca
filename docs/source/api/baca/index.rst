@@ -24,12 +24,14 @@ baca
 
    dynamicslib
    library
+   markup
 
 .. autosummary::
    :nosignatures:
 
    dynamicslib
    library
+   markup
 
 .. raw:: html
 
@@ -45,7 +47,6 @@ baca
    LibraryGM
    LibraryNS
    LibraryTZ
-   MarkupLibrary
    SchemeManifest
 
 .. autosummary::
@@ -55,7 +56,6 @@ baca
    ~LibraryGM.LibraryGM
    ~LibraryNS.LibraryNS
    ~LibraryTZ.LibraryTZ
-   ~MarkupLibrary.MarkupLibrary
    ~SchemeManifest.SchemeManifest
 
 .. raw:: html

@@ -1,5 +1,5 @@
 """
-Dynamics functions.
+Dynamics library.
 """
 import abjad
 import typing

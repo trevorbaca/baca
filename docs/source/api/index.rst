@@ -27,7 +27,6 @@ Bača API
    ~baca.LibraryGM.LibraryGM
    ~baca.LibraryNS.LibraryNS
    ~baca.LibraryTZ.LibraryTZ
-   ~baca.MarkupLibrary.MarkupLibrary
    ~baca.SchemeManifest.SchemeManifest
 
 .. raw:: html
@@ -344,3 +343,189 @@ Bača API
    ~baca.library.split_by_durations
    ~baca.library.suite
    ~baca.library.tag
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.markup <baca--markup>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.markup.FB
+   ~baca.markup.FB_flaut
+   ~baca.markup.MP_XFB_flaut
+   ~baca.markup.OB
+   ~baca.markup.OB_full_bow_strokes
+   ~baca.markup.OB_no_pitch
+   ~baca.markup.OB_terminate_abruptly
+   ~baca.markup.OB_terminate_each_note_abruptly
+   ~baca.markup.PO
+   ~baca.markup.PO_FB_flaut
+   ~baca.markup.PO_NBS
+   ~baca.markup.PO_XFB_flaut
+   ~baca.markup.PO_plus_non_vib
+   ~baca.markup.PO_plus_poco_vib
+   ~baca.markup.PO_scratch
+   ~baca.markup.PO_slow_bow
+   ~baca.markup.P_XFB_flaut
+   ~baca.markup.XFB
+   ~baca.markup.XFB_flaut
+   ~baca.markup.XFB_plus_pochiss_pont
+   ~baca.markup.XFB_plus_tasto
+   ~baca.markup.XFB_sempre
+   ~baca.markup.XP
+   ~baca.markup.XP_FB
+   ~baca.markup.XP_FB_flaut
+   ~baca.markup.XP_XFB
+   ~baca.markup.XP_XFB_flaut
+   ~baca.markup.XP_full_bow_strokes
+   ~baca.markup.XT
+   ~baca.markup.accent_changes_of_direction
+   ~baca.markup.airtone
+   ~baca.markup.allow_bowing_to_convey_accelerando
+   ~baca.markup.arco
+   ~baca.markup.arco_ordinario
+   ~baca.markup.attackless
+   ~baca.markup.markup
+   ~baca.markup.bow_on_tailpiece
+   ~baca.markup.bow_on_wooden_mute
+   ~baca.markup.boxed
+   ~baca.markup.boxed_lines
+   ~baca.markup.boxed_repeat_count
+   ~baca.markup.clicks_per_second
+   ~baca.markup.col_legno_battuto
+   ~baca.markup.crine
+   ~baca.markup.delicatiss
+   ~baca.markup.delicatissimo
+   ~baca.markup.directly_on_bridge_bow_diagonally
+   ~baca.markup.directly_on_bridge_very_slow_bow
+   ~baca.markup.divisi_1_plus_3
+   ~baca.markup.divisi_2_plus_4
+   ~baca.markup.edition
+   ~baca.markup.estr_sul_pont
+   ~baca.markup.ext_pont
+   ~baca.markup.final_markup
+   ~baca.markup.flaut
+   ~baca.markup.flaut_partial_2
+   ~baca.markup.fluttertongue
+   ~baca.markup.fractional_OB
+   ~baca.markup.fractional_scratch
+   ~baca.markup.full_bow_strokes
+   ~baca.markup.glissando_lentissimo
+   ~baca.markup.gridato_possibile
+   ~baca.markup.half_clt
+   ~baca.markup.instrument
+   ~baca.markup.kn_rasg
+   ~baca.markup.knuckle_rasg
+   ~baca.markup.leggieriss
+   ~baca.markup.leggierissimo
+   ~baca.markup.leggierissimo_off_string_bowing_on_staccati
+   ~baca.markup.lh_damp
+   ~baca.markup.lh_damp_plus_half_clt
+   ~baca.markup.lhd_plus_half_clt
+   ~baca.markup.lines
+   ~baca.markup.loure
+   ~baca.markup.lv_possibile
+   ~baca.markup.markup
+   ~baca.markup.molto_flautando
+   ~baca.markup.molto_flautando_e_pont
+   ~baca.markup.molto_gridato
+   ~baca.markup.molto_overpressure
+   ~baca.markup.molto_pont_plus_vib_molto
+   ~baca.markup.molto_scratch
+   ~baca.markup.nail_rasg
+   ~baca.markup.nail_rasgueado
+   ~baca.markup.non_div
+   ~baca.markup.non_flaut
+   ~baca.markup.non_flautando
+   ~baca.markup.non_flutt
+   ~baca.markup.non_spazz
+   ~baca.markup.nut
+   ~baca.markup.off_string_bowing_on_staccati
+   ~baca.markup.one_click_every
+   ~baca.markup.ord
+   ~baca.markup.ord_poco_scratch
+   ~baca.markup.ord_senza_scratch
+   ~baca.markup.ordinario
+   ~baca.markup.overblow
+   ~baca.markup.pP_XFB_flaut
+   ~baca.markup.pT_XFB_flaut
+   ~baca.markup.pizz
+   ~baca.markup.plus_statement
+   ~baca.markup.po_meno_scratch
+   ~baca.markup.pochiss_pont
+   ~baca.markup.pochiss_scratch
+   ~baca.markup.pochiss_vib
+   ~baca.markup.poco_overpressure
+   ~baca.markup.poco_pont_plus_non_vib
+   ~baca.markup.poco_pont_plus_sub_non_vib
+   ~baca.markup.poco_pont_plus_sub_vib_mod
+   ~baca.markup.poco_pont_plus_vib_mod
+   ~baca.markup.poco_rasp_partial_2
+   ~baca.markup.poco_scratch
+   ~baca.markup.pont
+   ~baca.markup.pont_XFB
+   ~baca.markup.pont_XFB_flaut
+   ~baca.markup.ponticello
+   ~baca.markup.pos_ord
+   ~baca.markup.pos_ord_XFB
+   ~baca.markup.pos_ord_XFB_flaut
+   ~baca.markup.pos_ord_poco_scratch
+   ~baca.markup.pos_ord_senza_vib
+   ~baca.markup.pos_ord_vib_poco
+   ~baca.markup.pres_de_la_table
+   ~baca.markup.put_reed_back_in
+   ~baca.markup.rasp
+   ~baca.markup.rasp_partial_2
+   ~baca.markup.remove_reed
+   ~baca.markup.remove_staple
+   ~baca.markup.scratch_moltiss
+   ~baca.markup.senza_pedale
+   ~baca.markup.senza_scratch
+   ~baca.markup.senza_vib
+   ~baca.markup.shakers
+   ~baca.markup.short_instrument
+   ~baca.markup.sparse_clicks
+   ~baca.markup.spazz
+   ~baca.markup.spazzolato
+   ~baca.markup.spazzolato_1_2_clt
+   ~baca.markup.still
+   ~baca.markup.string_number
+   ~baca.markup.string_numbers
+   ~baca.markup.subito_non_armonichi_e_non_gridato
+   ~baca.markup.subito_ordinario
+   ~baca.markup.tamb_tr
+   ~baca.markup.tasto
+   ~baca.markup.tasto_FB
+   ~baca.markup.tasto_FB_flaut
+   ~baca.markup.tasto_NBS
+   ~baca.markup.tasto_XFB
+   ~baca.markup.tasto_XFB_flaut
+   ~baca.markup.tasto_fractional_scratch
+   ~baca.markup.tasto_half_scratch
+   ~baca.markup.tasto_moltiss
+   ~baca.markup.tasto_plus_non_vib
+   ~baca.markup.tasto_plus_pochiss_scratch
+   ~baca.markup.tasto_plus_poco_scratch
+   ~baca.markup.tasto_plus_poco_vib
+   ~baca.markup.tasto_plus_scratch_moltiss
+   ~baca.markup.tasto_poss
+   ~baca.markup.tasto_senza_vib
+   ~baca.markup.tasto_slow_bow
+   ~baca.markup.terminate_abruptly
+   ~baca.markup.terminate_each_note_abruptly
+   ~baca.markup.trans
+   ~baca.markup.trem_flaut_tast
+   ~baca.markup.vib_moltiss
+   ~baca.markup.vib_pochiss
+   ~baca.markup.vib_poco

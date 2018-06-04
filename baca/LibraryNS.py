@@ -3,6 +3,7 @@ import baca
 import collections
 import typing
 from . import library
+from . import markup as baca_markup
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
@@ -14,7 +15,6 @@ from .DivisionSequenceExpression import DivisionSequenceExpression
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
-from .MarkupLibrary import MarkupLibrary
 from .NestingCommand import NestingCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
@@ -6342,7 +6342,7 @@ class LibraryNS(abjad.AbjadObject):
         Attaches start markup.
         """
         if isinstance(argument, (list, str)):
-            markup = MarkupLibrary.instrument(argument, hcenter_in=hcenter_in)
+            markup = baca_markup.instrument(argument, hcenter_in=hcenter_in)
             start_markup = abjad.StartMarkup(
                 context=context,
                 markup=markup,

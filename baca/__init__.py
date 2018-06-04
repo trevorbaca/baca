@@ -4,6 +4,9 @@ import abjad
 from .dynamicslib import *
 from .library import *
 
+# markup library
+from . import markup
+
 # classes
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
@@ -47,7 +50,6 @@ from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
 from .MapCommand import MapCommand
-from .MarkupLibrary import MarkupLibrary
 from .Matrix import Matrix
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
@@ -156,4 +158,3 @@ _import_static_methods(LibraryGM)
 _import_static_methods(LibraryNS)
 _import_static_methods(LibraryTZ)
 _publish_selectors(Selection)
-markup = MarkupLibrary()
