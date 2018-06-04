@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from abjadext import rmakers
+from . import library
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BowContactPointCommand import BowContactPointCommand
@@ -21,6 +22,7 @@ from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
+from .SchemeManifest import SchemeManifest
 from .SpannerCommand import SpannerCommand
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
@@ -1487,8 +1489,7 @@ class LibraryAF(abjad.AbjadObject):
         """
         Makes bar-extent zero suite.
         """
-        from .LibraryNS import LibraryNS
-        return LibraryNS.suite(
+        return library.suite(
             LibraryAF.bar_extent(
                 (0, 0),
                 after=True,
@@ -2929,8 +2930,6 @@ class LibraryAF(abjad.AbjadObject):
             Exception: score ends at measure 103 (not 109).
 
         """
-        from .LibraryGM import LibraryGM
-        from .LibraryNS import LibraryNS
         commands = abjad.OrderedDict()
         if not page_specifiers:
             return BreakMeasureMap(
@@ -2974,7 +2973,7 @@ class LibraryAF(abjad.AbjadObject):
                     indicators=[break_],
                     selector=selector,
                     )
-                lbsd = LibraryGM.lbsd(
+                lbsd = library.lbsd(
                     y_offset,
                     alignment_distances,
                     selector=selector,
@@ -4527,41 +4526,6 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dashed_arrow() -> abjad.ArrowLineSegment:
-        """
-        Makes dashed arrow line segment.
-        """
-        return abjad.ArrowLineSegment(
-            dash_fraction=0.25,
-            dash_period=1.5,
-            left_broken_text=False,
-            left_hspace=0.5,
-            right_broken_arrow=False,
-            right_broken_padding=0,
-            right_broken_text=False,
-            right_padding=0.5,
-            )
-
-    @staticmethod
-    def dashed_hook() -> abjad.LineSegment:
-        """
-        Makes dashed hook line segment.
-        """
-        return abjad.LineSegment(
-            dash_fraction=0.25,
-            dash_period=1.5,
-            left_broken_text=False,
-            left_hspace=0.5,
-            left_stencil_align_direction_y=0,
-            right_broken_arrow=False,
-            right_broken_padding=0,
-            right_broken_text=False,
-            # right padding to avoid last leaf in spanner
-            right_padding=1.25,
-            right_text=abjad.Markup.draw_line(0, -1),
-            )
-
-    @staticmethod
     def deviation(
         deviations: typing.List[Number],
         *,
@@ -5627,240 +5591,6 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic(
-        dynamic: str,
-        *,
-        selector: Selector = 'baca.phead(0)',
-        redundant: bool = None,
-        ) -> IndicatorCommand:
-        r"""
-        Attaches dynamic.
-
-        ..  container:: example
-
-            Attaches dynamic to pitched head 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('f'),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \f                                                                       %! IC
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches dynamic to pitched head 0 in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                \f                                                                       %! IC
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches effort dynamic to pitched head 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('"f"'),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                \effort_f                                                                %! IC
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        """
-        import baca
-        assert isinstance(dynamic, str), repr(dynamic)
-        if dynamic in baca.scheme.dynamics:
-            name = baca.scheme.dynamic_to_steady_state(dynamic)
-            command = '\\' + dynamic
-            first = dynamic.split('_')[0]
-            if first in ('sfz', 'sffz', 'sfffz'):
-                sforzando = True
-            else:
-                sforzando = False
-            name_is_textual = not(sforzando)
-            indicator = abjad.Dynamic(
-                name,
-                command=command,
-                name_is_textual=name_is_textual,
-                sforzando=sforzando,
-                )
-        elif dynamic.startswith('"'):
-            assert dynamic.endswith('"')
-            dynamic = dynamic.strip('"')
-            command = rf'\effort_{dynamic}'
-            indicator = abjad.Dynamic(f'{dynamic}', command=command)
-        else:
-            indicator = abjad.Dynamic(dynamic)
-        return IndicatorCommand(
-            context='Voice',
-            indicators=[indicator],
-            redundant=redundant,
-            selector=selector,
-            )
-
-    @staticmethod
     def dynamic_down(
         *,
         selector: Selector = 'baca.leaf(0)',
@@ -6192,7 +5922,6 @@ class LibraryAF(abjad.AbjadObject):
         """
         Overrides dynamic text self-alignment-X and dynamic text X-extent.
         """
-        from .LibraryNS import LibraryNS
         command_1 = OverrideCommand(
             attribute='self_alignment_X',
             value=abjad.Left,
@@ -6200,7 +5929,7 @@ class LibraryAF(abjad.AbjadObject):
             selector=selector,
             )
         command_2 = LibraryAF.dynamic_text_x_extent_zero()
-        return LibraryNS.suite(
+        return library.suite(
             command_1,
             command_2,
             selector=selector,
@@ -7273,7 +7002,6 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        from .LibraryNS import LibraryNS
         dynamics_: typing.List[abjad.Dynamic] = []
         for dynamic in dynamics:
             if isinstance(dynamic, (list, tuple)):
@@ -7282,7 +7010,7 @@ class LibraryAF(abjad.AbjadObject):
                 dynamics_.append(dynamic)
         for dynamic in dynamics_:
             assert isinstance(dynamic, abjad.Dynamic), repr(dynamic)
-        return LibraryNS.piecewise(
+        return library.piecewise(
             abjad.Hairpin(),
             dynamics_,
             pieces,
@@ -7698,8 +7426,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        from .LibraryNS import LibraryNS
-        return LibraryNS.suite(
+        return library.suite(
             SpannerCommand(
                 right_broken=right_broken,
                 selector=selector,

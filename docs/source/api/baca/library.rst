@@ -19,4 +19,26 @@ library
 .. rubric:: Functions
    :class: section-header
 
+.. autofunction:: dashed_arrow
+
+.. autofunction:: dashed_hook
+
+.. autofunction:: dynamic
+
+.. autofunction:: lbsd
+
+.. autofunction:: literal
+
 .. autofunction:: map
+
+.. autofunction:: piecewise
+
+.. autofunction:: pitches
+
+.. autofunction:: scope
+
+.. autofunction:: split_by_durations
+
+.. autofunction:: suite
+
+.. autofunction:: tag

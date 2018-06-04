@@ -2,6 +2,7 @@ import abjad
 import baca
 import typing
 from abjadext import rmakers
+from . import library
 from .GlobalFermataCommand import GlobalFermataCommand
 from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
@@ -16,6 +17,7 @@ from .OverrideCommand import OverrideCommand
 from .PitchCommand import PitchCommand
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope
+from .SchemeManifest import SchemeManifest
 from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
@@ -638,16 +640,15 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         """
-        import baca
-        from .LibraryAF import LibraryAF
+        scheme_manifest = SchemeManifest()
         if leak is not None:
             leak = bool(leak)
         start, shape, stop = abjad.Hairpin._parse_descriptor(string)
-        if start == 'niente' or start in baca.scheme.dynamics:
+        if start == 'niente' or start in scheme_manifest.dynamics:
             start_dynamic_is_textual = True
         else:
             start_dynamic_is_textual = False
-        if stop == 'niente' or stop in baca.scheme.dynamics:
+        if stop == 'niente' or stop in scheme_manifest.dynamics:
             stop_dynamic_is_textual = True
         else:
             stop_dynamic_is_textual = False
@@ -669,13 +670,13 @@ class LibraryGM(abjad.AbjadObject):
         if right_broken is True:
             right_broken = hairpin.shape_string
         if start is not None:
-            command_ = LibraryAF.dynamic(start)
+            command_ = library.dynamic(start)
             assert command_.indicators is not None
             start = command_.indicators[0]
             if start_ordinal is not None:
                 start = abjad.new(start, ordinal=start_ordinal)
         if stop is not None:
-            command_ = LibraryAF.dynamic(stop)
+            command_ = library.dynamic(stop)
             assert command_.indicators is not None
             stop = command_.indicators[0]
             if stop_ordinal is not None:
@@ -1336,42 +1337,6 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def lbsd(
-        y_offset: int,
-        alignment_distances: typing.Sequence,
-        *,
-        selector: Selector = 'baca.leaf(0)',
-        ) -> IndicatorCommand:
-        """
-        Makes line-break system details.
-        """
-        alignment_distances = baca.sequence(alignment_distances).flatten()
-        lbsd = LBSD(
-            alignment_distances=alignment_distances,
-            y_offset=y_offset,
-            )
-        return IndicatorCommand(
-            indicators=[lbsd],
-            selector=selector,
-            )
-
-    @staticmethod
-    def literal(
-        string: str,
-        *,
-        format_slot: str = 'before',
-        selector: Selector = 'baca.leaf(0)',
-        ) -> IndicatorCommand:
-        """
-        Attaches LilyPond literal.
-        """
-        literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
-        return IndicatorCommand(
-            indicators=[literal],
-            selector=selector,
-            )
-
-    @staticmethod
     def long_fermata(
         *,
         selector: Selector = 'baca.leaf(0)',
@@ -1521,9 +1486,8 @@ class LibraryGM(abjad.AbjadObject):
         """
         Loops ``pitches`` at ``intervals``.
         """
-        from .LibraryNS import LibraryNS
         loop = Loop(items=pitches, intervals=intervals)
-        return LibraryNS.pitches(loop)
+        return library.pitches(loop)
 
     @staticmethod
     def make_dynamics(string: str) -> typing.List[abjad.Dynamic]:
@@ -1654,7 +1618,6 @@ class LibraryGM(abjad.AbjadObject):
         """
         Makes repeated-duration notes; rewrites meter.
         """
-        from .LibraryNS import LibraryNS
         if division_mask is None:
             division_masks = None
         else:
@@ -1667,7 +1630,7 @@ class LibraryGM(abjad.AbjadObject):
         tie_specifier = rmakers.TieSpecifier(
             repeat_ties=True,
             )
-        division_expression = LibraryNS.split_by_durations(durations=durations)
+        division_expression = library.split_by_durations(durations=durations)
         return RhythmCommand(
             division_expression=division_expression,
             rewrite_meter=not(do_not_rewrite_meter),

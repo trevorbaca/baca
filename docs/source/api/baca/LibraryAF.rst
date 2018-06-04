@@ -114,10 +114,6 @@ LibraryAF
 
    .. automethod:: LibraryAF.cross_staff
 
-   .. automethod:: LibraryAF.dashed_arrow
-
-   .. automethod:: LibraryAF.dashed_hook
-
    .. automethod:: LibraryAF.deviation
 
    .. automethod:: LibraryAF.diatonic_clusters
@@ -139,8 +135,6 @@ LibraryAF
    .. automethod:: LibraryAF.down_arpeggio
 
    .. automethod:: LibraryAF.down_bow
-
-   .. automethod:: LibraryAF.dynamic
 
    .. automethod:: LibraryAF.dynamic_down
 

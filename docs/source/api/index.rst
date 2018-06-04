@@ -296,4 +296,15 @@ Bača API
 .. autosummary::
    :nosignatures:
 
+   ~baca.library.dashed_arrow
+   ~baca.library.dashed_hook
+   ~baca.library.dynamic
+   ~baca.library.lbsd
+   ~baca.library.literal
    ~baca.library.map
+   ~baca.library.piecewise
+   ~baca.library.pitches
+   ~baca.library.scope
+   ~baca.library.split_by_durations
+   ~baca.library.suite
+   ~baca.library.tag

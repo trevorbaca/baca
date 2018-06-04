@@ -74,11 +74,7 @@ LibraryNS
 
    .. automethod:: LibraryNS.parts
 
-   .. automethod:: LibraryNS.piecewise
-
    .. automethod:: LibraryNS.pitch
-
-   .. automethod:: LibraryNS.pitches
 
    .. automethod:: LibraryNS.possibile_dynamic
 
@@ -132,8 +128,6 @@ LibraryNS
 
    .. automethod:: LibraryNS.rhythm
 
-   .. automethod:: LibraryNS.scope
-
    .. automethod:: LibraryNS.scorewide_spacing
 
    .. automethod:: LibraryNS.script_color
@@ -176,8 +170,6 @@ LibraryNS
 
    .. automethod:: LibraryNS.span_bar_transparent
 
-   .. automethod:: LibraryNS.split_by_durations
-
    .. automethod:: LibraryNS.staccatissimo
 
    .. automethod:: LibraryNS.staccato
@@ -211,8 +203,6 @@ LibraryNS
    .. automethod:: LibraryNS.strict_quarter_divisions
 
    .. automethod:: LibraryNS.subito_dynamic
-
-   .. automethod:: LibraryNS.suite
 
    .. automethod:: LibraryNS.sustain_pedal
 

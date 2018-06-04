@@ -2,10 +2,10 @@ import abjad
 import baca
 import os
 import pathlib
-from abjadext import rmakers
 import sys
 import traceback
 import typing
+from . import library
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
 from .CommandWrapper import CommandWrapper
@@ -17,6 +17,7 @@ from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .Typing import Number
 from .Typing import NumberPair
+from abjadext import rmakers
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -684,7 +685,6 @@ class SegmentMaker(abjad.SegmentMaker):
             Exception: unknown voice name 'PercussionVoice'.
 
         """
-        from .LibraryNS import LibraryNS
         commands_ = []
         for command in commands:
             if isinstance(command, list):
@@ -701,7 +701,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (Scope, TimelineScope)
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
-            scope = LibraryNS.scope(voice_name)
+            scope = library.scope(voice_name)
             scopes = [scope]
         elif isinstance(scopes, tuple):
             scopes = self._unpack_scope_pair(scopes, abbreviations)
@@ -722,7 +722,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
-                scope_ = LibraryNS.scope(voice_name)
+                scope_ = library.scope(voice_name)
                 scopes_.append(scope_)
             elif isinstance(scope, tuple):
                 voice_name, stages = scope
@@ -730,10 +730,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(stages, list):
                     stages = self._unpack_stage_token_list(stages)
                     for stage_token in stages:
-                        scope_ = LibraryNS.scope(voice_name, stage_token)
+                        scope_ = library.scope(voice_name, stage_token)
                         scopes_.append(scope_)
                 else:
-                    scope_ = LibraryNS.scope(voice_name, stages)
+                    scope_ = library.scope(voice_name, stages)
                     scopes_.append(scope_)
             else:
                 scope_ = scope
@@ -2863,7 +2863,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
 
     def _unpack_scope_pair(self, scopes, abbreviations):
-        from .LibraryNS import LibraryNS
         assert isinstance(scopes, tuple), repr(scopes)
         assert len(scopes) == 2, repr(scopes)
         assert isinstance(scopes[0], (list, str)), repr(scopes)
@@ -2899,7 +2898,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice_name in voice_names:
             #voice_name = abbreviations.get(voice_name, voice_name)
             for stage_token in stage_tokens:
-                scope = LibraryNS.scope(voice_name, stage_token)
+                scope = library.scope(voice_name, stage_token)
                 scopes_.append(scope)
         return scopes_
 

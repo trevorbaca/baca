@@ -600,7 +600,7 @@ class MarkupLibrary(abjad.AbjadObject):
             only_parts = baca.markup(only_parts)
         assert isinstance(only_parts, IndicatorCommand)
         only_parts_ = LibraryNS.only_parts(only_parts)
-        return LibraryNS.suite(
+        return SuiteCommand(
             not_parts_,
             only_parts_,
             selector=selector,

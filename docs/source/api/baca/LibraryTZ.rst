@@ -32,8 +32,6 @@ LibraryTZ
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: LibraryTZ.tag
-
    .. automethod:: LibraryTZ.tenuto
 
    .. automethod:: LibraryTZ.text_script_color

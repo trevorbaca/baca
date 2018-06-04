@@ -1,10 +1,7 @@
 import abjad
 import typing
 
-# singletons
-from .SchemeManifest import SchemeManifest
-scheme = SchemeManifest()
-
+# library functions
 from .library import *
 
 # everything else
@@ -89,6 +86,7 @@ from .Registration import Registration
 from .RegistrationComponent import RegistrationComponent
 from .RestAffixSpecifier import RestAffixSpecifier
 from .RhythmCommand import RhythmCommand
+from .SchemeManifest import SchemeManifest
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
 from .SegmentMaker import SegmentMaker

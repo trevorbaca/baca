@@ -64,10 +64,6 @@ LibraryGM
 
    .. automethod:: LibraryGM.laissez_vibrer
 
-   .. automethod:: LibraryGM.lbsd
-
-   .. automethod:: LibraryGM.literal
-
    .. automethod:: LibraryGM.long_fermata
 
    .. automethod:: LibraryGM.loop

@@ -36,7 +36,8 @@ class SchemeManifest(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> for dynamic in baca.scheme.dynamics:
+            >>> scheme_manifest = baca.SchemeManifest()
+            >>> for dynamic in scheme_manifest.dynamics:
             ...     dynamic
             ...
             'appena_udibile'
@@ -59,7 +60,8 @@ class SchemeManifest(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.scheme.dynamic_to_steady_state('sfz_p')
+            >>> scheme_manifest = baca.SchemeManifest()
+            >>> scheme_manifest.dynamic_to_steady_state('sfz_p')
             'p'
 
         Returns string.

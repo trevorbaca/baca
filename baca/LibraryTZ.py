@@ -3,6 +3,7 @@ import baca
 import collections
 import typing
 from abjadext import rmakers
+from . import library
 from .Command import Command
 from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
@@ -37,45 +38,6 @@ class LibraryTZ(abjad.AbjadObject):
         )
 
     ### PUBLIC METHODS ###
-
-    @staticmethod
-    def tag(
-        tags: typing.Union[str, typing.List[str]],
-        command: Command,
-        *,
-        deactivate: bool = None,
-        tag_measure_number: bool = None,
-        ) -> Command:
-        """
-        Appends each tag in ``tags`` to ``command``.
-
-        Sorts ``command`` tags.
-
-        Returns ``command`` for in-place definition file application.
-        """
-        if isinstance(tags, str):
-            tags = [tags]
-        if not isinstance(tags, list):
-            message = f'tags must be string or list of strings'
-            message += ' (not {tags!r}).'
-            raise Exception(message)
-        assert Command._are_valid_tags(tags), repr(tags)
-        if isinstance(command, SuiteCommand):
-            for command_ in command.commands:
-                LibraryTZ.tag(
-                    tags,
-                    command_,
-                    deactivate=deactivate,
-                    tag_measure_number=tag_measure_number,
-                    )
-        else:
-            assert command._tags is not None
-            tags.sort()
-            tags_ = [abjad.Tag(_) for _ in tags]
-            command._tags.extend(tags_)
-            command._deactivate = deactivate
-            command.tag_measure_number = tag_measure_number
-        return command
 
     @staticmethod
     def tenuto(
@@ -1594,11 +1556,10 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
-        from .LibraryAF import LibraryAF
         if lilypond_id is not None:
             assert lilypond_id in (1, 2, 3), repr(lilypond_id)
         if line_segment is None:
-            line_segment = LibraryAF.dashed_hook()
+            line_segment = library.dashed_hook()
         if right_padding is not None:
             line_segment = abjad.new(line_segment, right_padding=right_padding)
         return TextSpannerCommand(
@@ -2323,7 +2284,6 @@ class LibraryTZ(abjad.AbjadObject):
         """
         Ties repeat pitches.
         """
-        from . import library
         return library.map(
             baca.select().ltqruns().nontrivial(),
             LibraryTZ.tie(),
@@ -2751,8 +2711,7 @@ class LibraryTZ(abjad.AbjadObject):
         """
         Makes timeline scope.
         """
-        from .LibraryNS import LibraryNS
-        scopes = [LibraryNS.scope(*_) for _ in scopes]
+        scopes = [library.scope(*_) for _ in scopes]
         return TimelineScope(scopes=scopes)
 
     @staticmethod
@@ -3163,21 +3122,19 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
-        from .LibraryAF import LibraryAF
-        from .LibraryNS import LibraryNS
         indicators: typing.List[typing.Union[abjad.Markup, tuple]] = []
         for markup in markups[:-1]:
-            pair = (markup, LibraryAF.dashed_arrow())
+            pair = (markup, library.dashed_arrow())
             indicators.append(pair)
         if do_not_bookend:
             indicators.append(markups[-1])
         else:
-            pair = (markups[-1], LibraryAF.dashed_arrow())
+            pair = (markups[-1], library.dashed_arrow())
             indicators.append(pair)
         if lilypond_id is not None:
             assert lilypond_id in (1, 2, 3), repr(lilypond_id)
         text_spanner = abjad.TextSpanner(lilypond_id=lilypond_id)
-        return LibraryNS.piecewise(
+        return library.piecewise(
             text_spanner,
             indicators,
             pieces,

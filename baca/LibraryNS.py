@@ -2,6 +2,7 @@ import abjad
 import baca
 import collections
 import typing
+from . import library
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
@@ -172,8 +173,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns ``command``.
         """
-        from .LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
+        return library.tag(
             '-PARTS',
             command,
             )
@@ -185,8 +185,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns ``command``.
         """
-        from .LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
+        return library.tag(
             '-SCORE',
             command,
             )
@@ -198,8 +197,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns ``command``.
         """
-        from .LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
+        return library.tag(
             '-SEGMENT',
             command,
             )
@@ -579,8 +577,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns ``command``.
         """
-        from .LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
+        return library.tag(
             '+PARTS',
             command,
             )
@@ -592,8 +589,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns ``command``.
         """
-        from .LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
+        return library.tag(
             '+SCORE',
             command,
             )
@@ -605,8 +601,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns ``command``.
         """
-        from .LibraryTZ import LibraryTZ
-        return LibraryTZ.tag(
+        return library.tag(
             '+SEGMENT',
             command,
             )
@@ -1076,29 +1071,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def piecewise(
-        spanner: abjad.Spanner,
-        indicators: typing.Iterable,
-        pieces: typing.Union[MapCommand, Selector],
-        *,
-        bookend: typing.Union[bool, int] = False,
-        selector: Selector = 'baca.leaves()',
-        tweaks: typing.List[typing.Tuple] = None,
-        ):
-        """
-        Makes piecewise command from ``spanner``, ``indicators`` and
-        indicator ``selector``.
-        """
-        return PiecewiseCommand(
-            bookend=bookend,
-            indicators=indicators,
-            pieces=pieces,
-            selector=selector,
-            spanner=spanner,
-            tweaks=tweaks,
-            )
-
-    @staticmethod
     def pitch(
         pitch,
         *,
@@ -1122,47 +1094,6 @@ class LibraryNS(abjad.AbjadObject):
             do_not_transpose=do_not_transpose,
             persist=persist,
             pitches=[pitch],
-            selector=selector,
-            )
-
-    @staticmethod
-    def pitches(
-        pitches: typing.Iterable,
-        *,
-        allow_octaves: bool = None,
-        allow_repeats: bool = None,
-        do_not_transpose: bool = None,
-        exact: bool = None,
-        ignore_incomplete: bool = None,
-        persist: str = None,
-        selector: Selector = 'baca.pleaves()',
-        ) -> PitchCommand:
-        """
-        Makes pitch command.
-        """
-        if do_not_transpose not in (None, True, False):
-            raise Exception('do_not_transpose must be boolean'
-                f' (not {do_not_transpose!r}).')
-        if bool(exact):
-            cyclic = False
-        else:
-            cyclic = True
-        if ignore_incomplete not in (None, True, False):
-            raise Exception('ignore_incomplete must be boolean'
-                f' (not {ignore_incomplete!r}).')
-        if ignore_incomplete is True and not persist:
-            raise Exception(f'ignore_incomplete is ignored'
-                ' when persist is not set.')
-        if persist is not None and not isinstance(persist, str):
-            raise Exception(f'persist name must be string (not {persist!r}).')
-        return PitchCommand(
-            allow_octaves=allow_octaves,
-            allow_repeats=allow_repeats,
-            cyclic=cyclic,
-            do_not_transpose=do_not_transpose,
-            ignore_incomplete=ignore_incomplete,
-            persist=persist,
-            pitches=pitches,
             selector=selector,
             )
 
@@ -2241,7 +2172,6 @@ class LibraryNS(abjad.AbjadObject):
         """
         Repeat-ties repeat pitches.
         """
-        from . import library
         return library.map(
             baca.select().ltqruns().nontrivial(),
             SpannerCommand(
@@ -3423,167 +3353,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def scope(
-        voice_name: str,
-        stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
-        ) -> Scope:
-        r"""
-        Scopes ``voice_name`` for ``stages``.
-
-        ..  container:: example
-
-            >>> baca.scope('HornVoiceI', 1)
-            Scope(stages=(1, 1), voice_name='HornVoiceI')
-
-            >>> baca.scope('HornVoiceI', (1, 8))
-            Scope(stages=(1, 8), voice_name='HornVoiceI')
-
-            >>> baca.scope('HornVoiceI', (4, -1))
-            Scope(stages=(4, -1), voice_name='HornVoiceI')
-
-            >>> baca.scope('HornVoiceI')
-            Scope(stages=(1, -1), voice_name='HornVoiceI')
-
-        ..  container:: example
-
-            Negative stage numbers are allowed:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 12)),
-            ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_repeated_duration_notes([(1, 8)]),
-            ...     )
-            >>> maker(
-            ...     ('MusicVoice', (-4, -3)),
-            ...     baca.pitch('D4'),
-            ...     )
-            >>> maker(
-            ...     ('MusicVoice', (-2, -1)),
-            ...     baca.pitch('E4'),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                d'8
-                <BLANKLINE>
-                                d'8
-                <BLANKLINE>
-                                d'8
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                d'8
-                <BLANKLINE>
-                                d'8
-                <BLANKLINE>
-                                d'8
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                e'8
-                <BLANKLINE>
-                                e'8
-                <BLANKLINE>
-                                e'8
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                e'8
-                <BLANKLINE>
-                                e'8
-                <BLANKLINE>
-                                e'8
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Raises exception when stages are other than nonzero integers:
-
-            >>> baca.scope('MusicVoice', 0)
-            Traceback (most recent call last):
-                ...
-            Exception: stages must be nonzero integer or pair of nonzero integers (not 0).
-
-            >>> baca.scope('MusicVoice', 'text')
-            Traceback (most recent call last):
-                ...
-            Exception: stages must be nonzero integer or pair of nonzero integers (not 'text').
-
-        """
-        message = 'stages must be nonzero integer or pair of nonzero integers'
-        message += f' (not {stages!r}).'
-        if isinstance(stages, int):
-            start, stop = stages, stages
-        elif isinstance(stages, tuple):
-            assert len(stages) == 2, repr(stages)
-            start, stop = stages
-        else:
-            raise Exception(message)
-        if (not isinstance(start, int) or
-            not isinstance(stop, int) or 
-            start == 0  or
-            stop == 0):
-            raise Exception(message)
-        stages = (start, stop)
-        return Scope(
-            stages=stages,
-            voice_name=voice_name,
-            )
-
-    @staticmethod
     def scorewide_spacing(
         path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
         fallback_duration: typing.Tuple[int, int],
@@ -4380,7 +4149,6 @@ class LibraryNS(abjad.AbjadObject):
         Shifts clef to left by width of clef.
         """
         from .LibraryAF import LibraryAF
-        from .LibraryTZ import LibraryTZ
         if isinstance(clef, str):
             clef = abjad.Clef(clef)
         if isinstance(clef, (int, float)):
@@ -4389,11 +4157,11 @@ class LibraryNS(abjad.AbjadObject):
             assert isinstance(clef, abjad.Clef)
             width = clef._to_width[clef.name]
             extra_offset_x = -width
-        command = LibraryNS.suite(
+        command = library.suite(
             LibraryAF.clef_x_extent_false(),
             LibraryAF.clef_extra_offset((extra_offset_x, 0)),
             )
-        LibraryTZ.tag(
+        library.tag(
             abjad.tags.SHIFTED_CLEF,
             command,
             tag_measure_number=True,
@@ -4413,7 +4181,7 @@ class LibraryNS(abjad.AbjadObject):
         dynamic = abjad.Dynamic(dynamic)
         width = dynamic._to_width[dynamic.name]
         extra_offset_x = -width
-        return LibraryNS.suite(
+        return library.suite(
             LibraryAF.dynamic_text_extra_offset((extra_offset_x, 0)),
             LibraryAF.dynamic_text_x_extent_zero(),
             )
@@ -4433,7 +4201,7 @@ class LibraryNS(abjad.AbjadObject):
         width = dynamic._to_width[dynamic.name]
         extra_offset_x = -width
         hairpin_shorten_left = width - 1.25
-        return LibraryNS.suite(
+        return library.suite(
             LibraryAF.dynamic_text_extra_offset((extra_offset_x, 0)),
             LibraryAF.dynamic_text_x_extent_zero(),
             LibraryGM.hairpin_shorten_pair((hairpin_shorten_left, 0)),
@@ -5769,51 +5537,6 @@ class LibraryNS(abjad.AbjadObject):
             grob='span_bar',
             selector=selector,
             )
-
-    @staticmethod
-    def split_by_durations(
-        durations: typing.Iterable,
-        remainder: abjad.HorizontalAlignment = abjad.Right,
-        ) -> DivisionSequenceExpression:
-        r"""
-        Splits divisions by ``durations``.
-
-        ..  container:: example
-
-            >>> expression = baca.split_by_durations([(3, 8)])
-
-            >>> for item in expression([(2, 8), (2, 8)]):
-            ...     item
-            ...
-            Division((3, 8))
-            Division((1, 8))
-
-            >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-            ...     item
-            ...
-            Division((3, 8))
-            Division((3, 8))
-
-            >>> for item in expression([(2, 8), (2, 8), (2, 8), (2, 8)]):
-            ...     item
-            ...
-            Division((3, 8))
-            Division((3, 8))
-            Division((2, 8))
-
-        """
-        expression = DivisionSequenceExpression()
-        expression = expression.division_sequence()
-        expression = expression.flatten(depth=-1)
-        expression = expression.sum()
-        expression = expression.division_sequence()
-        expression = expression.split_by_durations(
-            cyclic=True,
-            durations=durations,
-            remainder=remainder,
-            )
-        expression = expression.flatten(depth=-1)
-        return expression
 
     @staticmethod
     def staccatissimo(
@@ -7369,8 +7092,7 @@ class LibraryNS(abjad.AbjadObject):
         Eventually it will probably be necessary to model ``\stopTrillSpan``
         with a dedicated format slot.
         """
-        from .LibraryGM import LibraryGM
-        return LibraryGM.literal(
+        return library.literal(
             r'\stopTrillSpan',
             format_slot='closing',
             selector=selector,
@@ -7577,37 +7299,6 @@ class LibraryNS(abjad.AbjadObject):
             indicators=[indicator],
             selector=selector,
             )
-
-    @staticmethod
-    def suite(
-        *commands: Command,
-        selector: Selector = None,
-        ) -> SuiteCommand:
-        """
-        Makes suite.
-
-        ..  container:: example
-
-            Raises exception on noncommand:
-
-            >>> baca.suite(['Allegro'])
-            Traceback (most recent call last):
-                ...
-            Exception:
-              Commands must contain only commands.
-              Not list: ['Allegro'].
-
-        """
-        for command in commands:
-            if not isinstance(command, Command):
-                message = '\n  Commands must contain only commands.'
-                message += f'\n  Not {type(command).__name__}: {command!r}.'
-                raise Exception(message)
-        if not isinstance(selector, (str, abjad.Expression, type(None))):
-            message = f'\n  Must be selector, string or none:'
-            message += f'\n  Not {selector!r}.'
-            raise Exception(message)
-        return SuiteCommand(*commands, selector=selector)
 
     @staticmethod
     def sustain_pedal(
