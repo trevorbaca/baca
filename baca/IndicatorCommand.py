@@ -248,7 +248,7 @@ class IndicatorCommand(Command):
             assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
         self._tweaks = tweaks
         tags = tags or []
-        assert self._are_valid_tags(tags), repr(tags)
+        assert self._validate_tags(tags), repr(tags)
         self._tags = tags
 
     ### SPECIAL METHODS ###

@@ -43,7 +43,7 @@ class MetronomeMarkCommand(Command):
             redundant = bool(redundant)
         self._redundant = redundant
         tags = tags or []
-        assert self._are_valid_tags(tags), repr(tags)
+        assert self._validate_tags(tags), repr(tags)
         self._tags = tags
 
     ### SPECIAL METHODS ###

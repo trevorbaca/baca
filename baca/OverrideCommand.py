@@ -241,7 +241,7 @@ class OverrideCommand(Command):
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
         tags = tags or []
-        assert self._are_valid_tags(tags), repr(tags)
+        assert self._validate_tags(tags), repr(tags)
         self._tags = tags
         self._value = value
         if whitelist is not None:

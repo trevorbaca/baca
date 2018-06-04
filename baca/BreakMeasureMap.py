@@ -311,7 +311,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         tags: typing.List[str] = None,
         ) -> None:
         tags = tags or []
-        assert baca.Command._are_valid_tags(tags), repr(tags)
+        assert baca.Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)
         self._tags = tags
@@ -438,5 +438,5 @@ class BreakMeasureMap(abjad.AbjadObject):
         """
         Gets tags.
         """
-        assert Command._are_valid_tags(self._tags), repr(self._tags)
+        assert Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]

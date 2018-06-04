@@ -18,11 +18,11 @@ class Command(abjad.AbjadObject):
         '_deactivate',
         '_manifests',
         '_offset_to_measure_number',
+        '_previous_segment_voice_metadata',
         '_score_template',
         '_selector',
         '_tag_measure_number',
         '_tags',
-        '_previous_segment_voice_metadata',
         )
 
     _publish_storage_format = True
@@ -74,7 +74,7 @@ class Command(abjad.AbjadObject):
             setattr(manager, attribute, value)
 
     @staticmethod
-    def _are_valid_tags(tags):
+    def _validate_tags(tags):
         assert isinstance(tags, list), repr(tags)
         assert '' not in tags, repr(tags)
         assert not any(':' in _ for _ in tags), repr(tags)
@@ -140,6 +140,13 @@ class Command(abjad.AbjadObject):
                 message += ' expecting 1.\n\n'
                 raise Exception(message)
             return reapplied_indicators[0]
+
+    @staticmethod
+    def _validate_tweaks(tweaks):
+        if tweaks is None:
+            return
+        assert isinstance(tweaks, list), repr(tweaks)
+        assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
 
     ### PUBLIC PROPERTIES ###
 
@@ -252,7 +259,7 @@ class Command(abjad.AbjadObject):
         """
         Gets tags.
         """
-        assert self._are_valid_tags(self._tags)
+        assert self._validate_tags(self._tags)
         result: typing.List[abjad.Tag] = []
         if self._tags:
             result = self._tags[:]

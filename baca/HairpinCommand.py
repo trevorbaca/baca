@@ -127,7 +127,7 @@ class HairpinCommand(Command):
             assert isinstance(stop, abjad.Dynamic), repr(stop)
         self._stop = stop
         tags = tags or []
-        assert self._are_valid_tags(tags), repr(tags)
+        assert self._validate_tags(tags), repr(tags)
         self._tags = tags
 
     ### SPECIAL METHODS ###

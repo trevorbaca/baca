@@ -16,6 +16,7 @@ class BowContactPointCommand(Command):
     
     __slots__ = (
         '_bow_contact_points',
+        '_tweaks',
         )
 
     _default_bow_contact_points = [
@@ -32,11 +33,14 @@ class BowContactPointCommand(Command):
         *,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         selector: Selector = None,
+        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if bcps is None:
             bcps = BowContactPointCommand._default_bow_contact_points
         self._bow_contact_points = bcps
+        self._validate_tweaks(tweaks)
+        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
@@ -55,6 +59,7 @@ class BowContactPointCommand(Command):
         bcps = abjad.CyclicTuple(bcps)
         leaves = baca.select(argument).leaves()
         spanner = abjad.TextSpanner()
+        self._apply_tweaks(spanner)
         abjad.attach(spanner, leaves)
         lts = baca.select(argument).lts()
         total = len(lts)
@@ -136,3 +141,10 @@ class BowContactPointCommand(Command):
         Class constant.
         """
         return self._bow_contact_points
+
+    @property
+    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks

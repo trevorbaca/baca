@@ -69,3 +69,5 @@ BowContactPointCommand
    .. autoattribute:: BowContactPointCommand.tag
 
    .. autoattribute:: BowContactPointCommand.tags
+
+   .. autoattribute:: BowContactPointCommand.tweaks

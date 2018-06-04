@@ -31,6 +31,8 @@ Number = typing.Union[int, float]
 
 NumberPair = typing.Tuple[Number, Number]
 
+Pair = typing.Tuple[typing.Any, typing.Any]
+
 RhythmMakerTyping = typing.Union[
     rmakers.RhythmMaker,
     abjad.Selection,

@@ -213,11 +213,9 @@ class SpannerCommand(Command):
         self._right_broken = right_broken
         self._spanner = spanner
         tags = tags or []
-        assert self._are_valid_tags(tags), repr(tags)
+        assert self._validate_tags(tags), repr(tags)
         self._tags = tags
-        if tweaks is not None:
-            assert isinstance(tweaks, list), repr(tweaks)
-            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###

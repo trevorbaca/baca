@@ -13,6 +13,7 @@ from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
 from .SuiteCommand import SuiteCommand
+from .Typing import Pair
 from .Typing import Selector
 
 
@@ -131,7 +132,7 @@ def piecewise(
         tweaks=tweaks,
         )
 
-def pick(pattern, *commands) -> typing.List[typing.Tuple]:
+def pick(pattern, *commands) -> typing.List[Pair]:
     """
     Maps ``pattern`` to each command in ``commands``.
     """
@@ -435,7 +436,7 @@ def tag(
         message = f'tags must be string or list of strings'
         message += ' (not {tags!r}).'
         raise Exception(message)
-    assert Command._are_valid_tags(tags), repr(tags)
+    assert Command._validate_tags(tags), repr(tags)
     if isinstance(command, SuiteCommand):
         for command_ in command.commands:
             tag(

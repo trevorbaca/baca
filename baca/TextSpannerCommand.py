@@ -201,9 +201,7 @@ class TextSpannerCommand(Command):
             markup = text.indicators[0]
             assert isinstance(markup, abjad.Markup)
         self._text = markup
-        if tweaks is not None:
-            assert isinstance(tweaks, list), repr(tweaks)
-            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
