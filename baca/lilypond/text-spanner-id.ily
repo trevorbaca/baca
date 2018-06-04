@@ -220,3 +220,11 @@ stopTextSpanThree =
         \consists \alternateTextSpannerEngraver
     }
 }
+
+%%% ADDITIONAL BAČA TEXT SPANNER COMMANDS %%%
+
+startBCPTextSpan =
+#(make-music 'TextSpanEvent 'span-direction START 'spanner-id "BCP")
+
+stopBCPTextSpan =
+#(make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BCP")

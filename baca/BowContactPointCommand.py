@@ -58,7 +58,11 @@ class BowContactPointCommand(Command):
             assert len(bcp) == 2, repr(bcp)
         bcps = abjad.CyclicTuple(bcps)
         leaves = baca.select(argument).leaves()
-        spanner = abjad.TextSpanner()
+        start_command = r'\startBCPTextSpan'
+        stop_command = r'\stopBCPTextSpan'
+        spanner = abjad.TextSpanner(
+            commands=(start_command, stop_command),
+            )
         self._apply_tweaks(spanner)
         abjad.attach(spanner, leaves)
         lts = baca.select(argument).lts()
