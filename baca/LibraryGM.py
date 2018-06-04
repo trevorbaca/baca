@@ -19,7 +19,6 @@ from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope
-from .SchemeManifest import SchemeManifest
 from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,

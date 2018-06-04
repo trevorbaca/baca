@@ -2,6 +2,7 @@
 Dynamics library.
 """
 import abjad
+import baca
 import typing
 from . import library
 from .HairpinCommand import HairpinCommand

@@ -27,7 +27,6 @@ Bača API
    ~baca.LibraryGM.LibraryGM
    ~baca.LibraryNS.LibraryNS
    ~baca.LibraryTZ.LibraryTZ
-   ~baca.SchemeManifest.SchemeManifest
 
 .. raw:: html
 
@@ -155,6 +154,7 @@ Bača API
    ~baca.PitchTreeSpanner.PitchTreeSpanner
    ~baca.Registration.Registration
    ~baca.RegistrationComponent.RegistrationComponent
+   ~baca.SchemeManifest.SchemeManifest
    ~baca.Scope.Scope
    ~baca.ScoreTemplate.ScoreTemplate
    ~baca.Selection.Selection

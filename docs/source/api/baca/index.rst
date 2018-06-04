@@ -47,7 +47,6 @@ baca
    LibraryGM
    LibraryNS
    LibraryTZ
-   SchemeManifest
 
 .. autosummary::
    :nosignatures:
@@ -56,7 +55,6 @@ baca
    ~LibraryGM.LibraryGM
    ~LibraryNS.LibraryNS
    ~LibraryTZ.LibraryTZ
-   ~SchemeManifest.SchemeManifest
 
 .. raw:: html
 
@@ -247,6 +245,7 @@ baca
    PitchTreeSpanner
    Registration
    RegistrationComponent
+   SchemeManifest
    Scope
    ScoreTemplate
    Selection
@@ -302,6 +301,7 @@ baca
    ~PitchTreeSpanner.PitchTreeSpanner
    ~Registration.Registration
    ~RegistrationComponent.RegistrationComponent
+   ~SchemeManifest.SchemeManifest
    ~Scope.Scope
    ~ScoreTemplate.ScoreTemplate
    ~Selection.Selection

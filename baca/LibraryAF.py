@@ -22,7 +22,6 @@ from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
-from .SchemeManifest import SchemeManifest
 from .SpannerCommand import SpannerCommand
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
