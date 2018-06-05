@@ -89,8 +89,6 @@ markups
 
 .. autofunction:: attackless
 
-.. autofunction:: markup
-
 .. autofunction:: bow_on_tailpiece
 
 .. autofunction:: bow_on_wooden_mute
@@ -169,7 +167,7 @@ markups
 
 .. autofunction:: lv_possibile
 
-.. autofunction:: markup
+.. autofunction:: make_instrument_name_markup
 
 .. autofunction:: molto_flautando
 

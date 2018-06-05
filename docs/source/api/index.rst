@@ -520,6 +520,7 @@ Bača API
    ~baca.library.lbsd
    ~baca.library.literal
    ~baca.library.map
+   ~baca.library.markup
    ~baca.library.pick
    ~baca.library.piecewise
    ~baca.library.pitches
@@ -580,7 +581,6 @@ Bača API
    ~baca.markups.arco
    ~baca.markups.arco_ordinario
    ~baca.markups.attackless
-   ~baca.markups.markup
    ~baca.markups.bow_on_tailpiece
    ~baca.markups.bow_on_wooden_mute
    ~baca.markups.boxed
@@ -620,7 +620,7 @@ Bača API
    ~baca.markups.lines
    ~baca.markups.loure
    ~baca.markups.lv_possibile
-   ~baca.markups.markup
+   ~baca.markups.make_instrument_name_markup
    ~baca.markups.molto_flautando
    ~baca.markups.molto_flautando_e_pont
    ~baca.markups.molto_gridato

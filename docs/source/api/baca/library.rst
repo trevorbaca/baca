@@ -29,6 +29,8 @@ library
 
 .. autofunction:: map
 
+.. autofunction:: markup
+
 .. autofunction:: pick
 
 .. autofunction:: piecewise
