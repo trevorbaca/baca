@@ -89,21 +89,25 @@ markups
 
 .. autofunction:: attackless
 
+.. autofunction:: bass_drum
+
 .. autofunction:: bow_on_tailpiece
 
 .. autofunction:: bow_on_wooden_mute
 
-.. autofunction:: boxed
+.. autofunction:: bowed_crotales
 
-.. autofunction:: boxed_lines
-
-.. autofunction:: boxed_repeat_count
+.. autofunction:: castanets
 
 .. autofunction:: clicks_per_second
 
 .. autofunction:: col_legno_battuto
 
 .. autofunction:: crine
+
+.. autofunction:: crotales
+
+.. autofunction:: damp
 
 .. autofunction:: delicatiss
 
@@ -145,6 +149,8 @@ markups
 
 .. autofunction:: instrument
 
+.. autofunction:: keynoise
+
 .. autofunction:: kn_rasg
 
 .. autofunction:: knuckle_rasg
@@ -168,6 +174,8 @@ markups
 .. autofunction:: lv_possibile
 
 .. autofunction:: make_instrument_name_markup
+
+.. autofunction:: markup
 
 .. autofunction:: molto_flautando
 
@@ -267,7 +275,13 @@ markups
 
 .. autofunction:: rasp_partial_2
 
+.. autofunction:: ratchet
+
 .. autofunction:: remove_staple
+
+.. autofunction:: repeat_count
+
+.. autofunction:: scraped_slate
 
 .. autofunction:: scratch_moltiss
 
@@ -279,6 +293,8 @@ markups
 
 .. autofunction:: short_instrument
 
+.. autofunction:: snare_drum
+
 .. autofunction:: sparse_clicks
 
 .. autofunction:: spazz
@@ -286,6 +302,8 @@ markups
 .. autofunction:: spazzolato
 
 .. autofunction:: spazzolato_1_2_clt
+
+.. autofunction:: sponges
 
 .. autofunction:: still
 
@@ -296,6 +314,12 @@ markups
 .. autofunction:: subito_non_armonichi_e_non_gridato
 
 .. autofunction:: subito_ordinario
+
+.. autofunction:: suspended_cymbal
+
+.. autofunction:: tailpiece
+
+.. autofunction:: tam_tam
 
 .. autofunction:: tamb_tr
 
@@ -346,3 +370,7 @@ markups
 .. autofunction:: vib_pochiss
 
 .. autofunction:: vib_poco
+
+.. autofunction:: vibraphone
+
+.. autofunction:: xylophone

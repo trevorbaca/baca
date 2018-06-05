@@ -869,7 +869,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            if not isinstance(command, (list, Command)):
+            if not isinstance(command, (list, Command, abjad.Markup)):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
@@ -886,7 +886,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
-                    assert isinstance(command, (list, Command)), repr(command)
+                    assert isinstance(command, (list, Command, abjad.Markup)), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
                             continue
@@ -907,10 +907,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         raise Exception(message)
                 if isinstance(command, list):
                     for command_ in command:
+                        if isinstance(command_, abjad.Markup):
+                            command_ = library.markup(command_)
                         assert isinstance(command_, Command), repr(command_)
                         wrapper = CommandWrapper(command=command_, scope=scope)
                         self.wrappers.append(wrapper)
                 else:
+                    if isinstance(command, abjad.Markup):
+                        command = library.markup(command)
                     assert isinstance(command, Command), repr(command)
                     wrapper = CommandWrapper(command=command, scope=scope)
                     self.wrappers.append(wrapper)

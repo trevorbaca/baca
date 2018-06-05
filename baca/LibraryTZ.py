@@ -372,7 +372,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_color('red'),
             ...     )
 
@@ -577,7 +580,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_down()
             ...     )
 
@@ -620,7 +626,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_extra_offset((0, 2)),
             ...     )
 
@@ -848,7 +857,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_padding(2),
             ...     )
 
@@ -890,7 +902,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_parent_center()
             ...     )
 
@@ -1096,7 +1111,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_staff_padding(2)
             ...     )
 
@@ -1301,7 +1319,10 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markup(
+            ...         baca.markups.still().boxed(),
+            ...         selector=baca.leaf(1),
+            ...         ),
             ...     baca.text_script_up()
             ...     )
 
@@ -1367,6 +1388,7 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: forbid indicator command in favor of markup
     @staticmethod
     def text_spanner(
         text: typing.Union[str, abjad.Markup, IndicatorCommand],

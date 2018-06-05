@@ -43,6 +43,11 @@ def attackless():
         'attackless',
         )
 
+def bass_drum():
+    return Markup(
+        'bass drum',
+        )
+
 def bow_on_tailpiece():
     return Markup(
         'bow on tailpiece',
@@ -53,46 +58,47 @@ def bow_on_wooden_mute():
         'bow on wooden mute',
         )
 
-# TODO: selector
-def boxed(
-    string: str,
-    selector: Selector = 'baca.leaf(0)',
-    direction: abjad.VerticalAlignment = abjad.Up,
-    ) -> IndicatorCommand:
-    """
-    Makes boxed markup.
-    """
-    markup = abjad.Markup(string)
-    markup = markup.box().override(('box-padding', 0.5))
-    return library.markup(
-        markup,
-        selector=selector,
-        direction=direction,
+def bowed_crotales():
+    return Markup(
+        'bowed crotales',
         )
 
-# TODO: selector
-def boxed_lines(
-    strings: typing.List[str],
-    selector: Selector = 'baca.leaf(0)',
-    direction: abjad.VerticalAlignment = abjad.Up,
-    ) -> IndicatorCommand:
-    assert isinstance(strings, list), repr(strings)
-    markup = abjad.MarkupList(strings).column()
-    markup = markup.box().override(('box-padding', 0.5))
-    return library.markup(
-        markup,
-        selector=selector,
-        direction=direction,
-        )
+## TODO: selector
+#def boxed(
+#    string: str,
+#    selector: Selector = 'baca.leaf(0)',
+#    direction: abjad.VerticalAlignment = abjad.Up,
+#    ) -> IndicatorCommand:
+#    """
+#    Makes boxed markup.
+#    """
+#    markup = abjad.Markup(string)
+#    markup = markup.box().override(('box-padding', 0.5))
+#    return library.markup(
+#        markup,
+#        selector=selector,
+#        direction=direction,
+#        )
 
-def boxed_repeat_count(
-    count: int,
-    ) -> Markup:
-    string = f'x{count}'
-    markup = Markup(string)
-    markup = markup.sans().bold().fontsize(6)
-    markup = markup.box().override(('box-padding', 0.5))
-    return markup
+## TODO: selector
+#def boxed_lines(
+#    strings: typing.List[str],
+#    selector: Selector = 'baca.leaf(0)',
+#    direction: abjad.VerticalAlignment = abjad.Up,
+#    ) -> IndicatorCommand:
+#    assert isinstance(strings, list), repr(strings)
+#    markup = abjad.MarkupList(strings).column()
+#    markup = markup.box().override(('box-padding', 0.5))
+#    return library.markup(
+#        markup,
+#        selector=selector,
+#        direction=direction,
+#        )
+
+def castanets():
+    return Markup(
+        'castanets',
+        )
 
 def clicks_per_second(
     lower: int,
@@ -111,6 +117,16 @@ def col_legno_battuto():
 def crine():
     return Markup(
         'crine',
+        )
+
+def crotales():
+    return Markup(
+        'crotales',
+        )
+
+def damp():
+    return Markup(
+        'damp',
         )
 
 def delicatiss():
@@ -148,25 +164,25 @@ def divisi_2_plus_4():
         )
 
 def edition(
-    not_parts: typing.Union[str, IndicatorCommand],
-    only_parts: typing.Union[str, IndicatorCommand],
-    selector: Selector = 'baca.pleaf(0)',
+    not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
+    only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
+    #selector: Selector = 'baca.pleaf(0)',
     ) -> SuiteCommand:
     """
     Makes not-parts / only-parts markup suite.
     """
-    if isinstance(not_parts, str):
+    if isinstance(not_parts, (str, abjad.Markup)):
         not_parts = library.markup(not_parts)
     assert isinstance(not_parts, IndicatorCommand)
     not_parts_ = library.not_parts(not_parts)
-    if isinstance(only_parts, str):
+    if isinstance(only_parts, (str, abjad.Markup)):
         only_parts = library.markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
     only_parts_ = library.only_parts(only_parts)
     return SuiteCommand(
         not_parts_,
         only_parts_,
-        selector=selector,
+        #selector=selector,
         )
 
 def estr_sul_pont():
@@ -313,6 +329,11 @@ def instrument(
         column=column,
         )
 
+def keynoise():
+    return Markup(
+        'keynoise',
+        )
+
 def kn_rasg():
     return Markup(
         'kn. rasg.',
@@ -353,14 +374,12 @@ def lhd_plus_half_clt():
         'lhd + 1/2 clt',
         )
 
-# TODO: selector was baca.leaf(0)
-# TODO: old no_whiteout=False parameter
 def lines(
     items: typing.List,
-    selector: Selector = 'baca.leaf(0)',
-    direction: abjad.VerticalAlignment = abjad.Up,
-    no_whiteout: bool = False,
-    ) -> IndicatorCommand:
+    #selector: Selector = 'baca.leaf(0)',
+    #direction: abjad.VerticalAlignment = abjad.Up,
+    #no_whiteout: bool = False,
+    ) -> Markup:
     if not isinstance(items, list):
         message = f'items must be list (not {type(items).__name__}):'
         lines = ['    ' + _ for _ in format(items).split('\n')]
@@ -378,12 +397,14 @@ def lines(
             markup = item.indicators[0]
             items_.append(markup)
     markup = abjad.MarkupList(items_).column()
-    return library.markup(
-        markup,
-        selector=selector,
-        direction=direction,
-        whiteout=not(no_whiteout),
-        )
+#    return library.markup(
+#        markup,
+#        selector=selector,
+#        direction=direction,
+#        whiteout=not(no_whiteout),
+#        )
+    markup = Markup(contents=markup.contents)
+    return markup
 
 def loure():
     return Markup(
@@ -414,6 +435,11 @@ def make_instrument_name_markup(string, space, column=True):
         markup = markups.line()
         markup = markup.hcenter_in(space)
     return markup
+
+def markup(string):
+    return Markup(
+        string,
+        )
 
 def molto_flautando():
     return Markup(
@@ -791,9 +817,27 @@ def rasp_partial_2():
         'rasp (2°)',
         )
 
+def ratchet():
+    return Markup(
+        'ratchet'
+        )
+
 def remove_staple():
     return Markup(
         'remove staple',
+        )
+
+def repeat_count(
+    count: int,
+    ) -> Markup:
+    string = f'x{count}'
+    markup = Markup(string)
+    markup = markup.sans().bold().fontsize(6)
+    return markup
+
+def scraped_slate():
+    return Markup(
+        'scraped slate',
         )
 
 def scratch_moltiss():
@@ -871,6 +915,11 @@ def short_instrument(
         column=column,
         )
 
+def snare_drum():
+    return Markup(
+        'snare drum',
+        )
+
 def sparse_clicks():
     first_line = Markup(
         'sparse, individual clicks with extremely slow bow')
@@ -894,6 +943,11 @@ def spazzolato():
 def spazzolato_1_2_clt():
     return Markup(
         'spazzolato (1/2 clt)',
+        )
+
+def sponges():
+    return Markup(
+        'sponges',
         )
 
 def still():
@@ -938,6 +992,21 @@ def subito_non_armonichi_e_non_gridato():
 def subito_ordinario():
     return Markup(
         'subito ordinario',
+        )
+
+def suspended_cymbal():
+    return Markup(
+        'suspended cymbal',
+        )
+
+def tailpiece():
+    return Markup(
+        'tailpiece',
+        )
+
+def tam_tam():
+    return Markup(
+        'tam-tam'
         )
 
 def tamb_tr():
@@ -1081,6 +1150,11 @@ def vib_poco():
         'vib. poco.',
         )
 
+def vibraphone():
+    return Markup(
+        'vibraphone',
+        )
+
 def XFB():
     return Markup(
         'XFB',
@@ -1151,4 +1225,9 @@ def XP_XFB_flaut():
 def XT():
     return Markup(
         'XT',
+        )
+
+def xylophone():
+    return Markup(
+        'xylophone',
         )

@@ -588,14 +588,16 @@ Bača API
    ~baca.markups.arco
    ~baca.markups.arco_ordinario
    ~baca.markups.attackless
+   ~baca.markups.bass_drum
    ~baca.markups.bow_on_tailpiece
    ~baca.markups.bow_on_wooden_mute
-   ~baca.markups.boxed
-   ~baca.markups.boxed_lines
-   ~baca.markups.boxed_repeat_count
+   ~baca.markups.bowed_crotales
+   ~baca.markups.castanets
    ~baca.markups.clicks_per_second
    ~baca.markups.col_legno_battuto
    ~baca.markups.crine
+   ~baca.markups.crotales
+   ~baca.markups.damp
    ~baca.markups.delicatiss
    ~baca.markups.delicatissimo
    ~baca.markups.directly_on_bridge_bow_diagonally
@@ -616,6 +618,7 @@ Bača API
    ~baca.markups.gridato_possibile
    ~baca.markups.half_clt
    ~baca.markups.instrument
+   ~baca.markups.keynoise
    ~baca.markups.kn_rasg
    ~baca.markups.knuckle_rasg
    ~baca.markups.leggieriss
@@ -628,6 +631,7 @@ Bača API
    ~baca.markups.loure
    ~baca.markups.lv_possibile
    ~baca.markups.make_instrument_name_markup
+   ~baca.markups.markup
    ~baca.markups.molto_flautando
    ~baca.markups.molto_flautando_e_pont
    ~baca.markups.molto_gridato
@@ -677,21 +681,29 @@ Bača API
    ~baca.markups.put_reed_back_in
    ~baca.markups.rasp
    ~baca.markups.rasp_partial_2
+   ~baca.markups.ratchet
    ~baca.markups.remove_staple
+   ~baca.markups.repeat_count
+   ~baca.markups.scraped_slate
    ~baca.markups.scratch_moltiss
    ~baca.markups.senza_pedale
    ~baca.markups.senza_scratch
    ~baca.markups.senza_vib
    ~baca.markups.short_instrument
+   ~baca.markups.snare_drum
    ~baca.markups.sparse_clicks
    ~baca.markups.spazz
    ~baca.markups.spazzolato
    ~baca.markups.spazzolato_1_2_clt
+   ~baca.markups.sponges
    ~baca.markups.still
    ~baca.markups.string_number
    ~baca.markups.string_numbers
    ~baca.markups.subito_non_armonichi_e_non_gridato
    ~baca.markups.subito_ordinario
+   ~baca.markups.suspended_cymbal
+   ~baca.markups.tailpiece
+   ~baca.markups.tam_tam
    ~baca.markups.tamb_tr
    ~baca.markups.tasto
    ~baca.markups.tasto_FB
@@ -717,3 +729,5 @@ Bača API
    ~baca.markups.vib_moltiss
    ~baca.markups.vib_pochiss
    ~baca.markups.vib_poco
+   ~baca.markups.vibraphone
+   ~baca.markups.xylophone

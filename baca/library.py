@@ -8,6 +8,7 @@ from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
 from .MapCommand import MapCommand
+from .Markup import Markup
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
@@ -826,7 +827,7 @@ def suite(
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: Command,
+    command: typing.Union[Command, abjad.Markup],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
@@ -844,6 +845,8 @@ def tag(
         message = f'tags must be string or list of strings'
         message += ' (not {tags!r}).'
         raise Exception(message)
+    if isinstance(command, abjad.Markup):
+        command = markup(command)
     assert Command._validate_tags(tags), repr(tags)
     if isinstance(command, SuiteCommand):
         for command_ in command.commands:
