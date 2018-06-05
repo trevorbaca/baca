@@ -99,6 +99,8 @@ markups
 
 .. autofunction:: castanets
 
+.. autofunction:: circles
+
 .. autofunction:: clicks_per_second
 
 .. autofunction:: col_legno_battuto

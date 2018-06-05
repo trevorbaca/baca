@@ -111,6 +111,8 @@ def map(
             raise Exception(message)
     return MapCommand(selector, *commands_)
 
+# TODO: remove upright, whiteout keywords
+# TODO: keyword-only direction, literal
 def markup(
     argument: typing.Union[str, abjad.Markup],
     selector: Selector = 'baca.pleaf(0)',

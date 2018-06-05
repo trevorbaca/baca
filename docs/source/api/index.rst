@@ -410,6 +410,7 @@ Bača API
    ~baca.markups.bow_on_wooden_mute
    ~baca.markups.bowed_crotales
    ~baca.markups.castanets
+   ~baca.markups.circles
    ~baca.markups.clicks_per_second
    ~baca.markups.col_legno_battuto
    ~baca.markups.crine

@@ -63,41 +63,24 @@ def bowed_crotales():
         'bowed crotales',
         )
 
-## TODO: selector
-#def boxed(
-#    string: str,
-#    selector: Selector = 'baca.leaf(0)',
-#    direction: abjad.VerticalAlignment = abjad.Up,
-#    ) -> IndicatorCommand:
-#    """
-#    Makes boxed markup.
-#    """
-#    markup = abjad.Markup(string)
-#    markup = markup.box().override(('box-padding', 0.5))
-#    return library.markup(
-#        markup,
-#        selector=selector,
-#        direction=direction,
-#        )
-
-## TODO: selector
-#def boxed_lines(
-#    strings: typing.List[str],
-#    selector: Selector = 'baca.leaf(0)',
-#    direction: abjad.VerticalAlignment = abjad.Up,
-#    ) -> IndicatorCommand:
-#    assert isinstance(strings, list), repr(strings)
-#    markup = abjad.MarkupList(strings).column()
-#    markup = markup.box().override(('box-padding', 0.5))
-#    return library.markup(
-#        markup,
-#        selector=selector,
-#        direction=direction,
-#        )
-
 def castanets():
     return Markup(
         'castanets',
+        )
+
+def circles(m=None, n=None):
+    if m is None:
+        return Markup(
+            'circles',
+            )
+    assert isinstance(m, int), repr(m)
+    if n is None:
+        return Markup(
+            f'{m}” circles',
+            )
+    assert isinstance(n, int), repr(n)
+    return Markup(
+        f'{m}-{n}” circles',
         )
 
 def clicks_per_second(

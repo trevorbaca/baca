@@ -8,6 +8,7 @@ from .Command import Command
 from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
 from .MapCommand import MapCommand
+from .Markup import Markup
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .Selection import Selection
@@ -1388,10 +1389,9 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
-    # TODO: forbid indicator command in favor of markup
     @staticmethod
     def text_spanner(
-        text: typing.Union[str, abjad.Markup, IndicatorCommand],
+        text: typing.Union[str, abjad.Markup],
         *,
         leak: bool = None,
         line_segment: abjad.LineSegment = None,
@@ -1584,6 +1584,7 @@ class LibraryTZ(abjad.AbjadObject):
             line_segment = library.dashed_hook()
         if right_padding is not None:
             line_segment = abjad.new(line_segment, right_padding=right_padding)
+        assert isinstance(text, (str, abjad.Markup)), repr(text)
         return TextSpannerCommand(
             leak=leak,
             lilypond_id=lilypond_id,
@@ -2730,7 +2731,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def transition(
-        *markups: typing.Any,
+        *markups: typing.Iterable[typing.Union[str, abjad.Markup]],
         do_not_bookend: bool = False,
         lilypond_id: int = None,
         pieces: typing.Union[MapCommand, Selector] = 'baca.leaves().group()',
@@ -3125,6 +3126,13 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
+        markups_ = []
+        for markup in markups:
+            if isinstance(markup, str):
+                markup = Markup(markup)
+            assert isinstance(markup, abjad.Markup), repr(markup)
+            markups_.append(markup)
+        markups = markups_
         indicators: typing.List[typing.Union[abjad.Markup, tuple]] = []
         for markup in markups[:-1]:
             pair = (markup, library.dashed_arrow())

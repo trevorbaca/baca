@@ -172,7 +172,7 @@ class TextSpannerCommand(Command):
         lilypond_id: int = None,
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
-        text: typing.Union[str, abjad.Markup, IndicatorCommand] = None,
+        text: typing.Union[str, abjad.Markup] = None,
         tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
@@ -186,18 +186,14 @@ class TextSpannerCommand(Command):
             assert isinstance(line_segment, abjad.LineSegment)
         self._line_segment = line_segment
         self._tags = []
+        assert isinstance(text, (str, abjad.Markup)), repr(text)
         if isinstance(text, str):
             command = library.markup(text)
             assert command.indicators is not None
             markup = command.indicators[0]
-        elif isinstance(text, abjad.Markup):
-            markup = text
         else:
-            assert isinstance(text, IndicatorCommand), repr(text)
-            assert text.indicators is not None
-            assert len(text.indicators) == 1
-            markup = text.indicators[0]
-            assert isinstance(markup, abjad.Markup)
+            assert isinstance(text, abjad.Markup)
+            markup = text
         self._text = markup
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
