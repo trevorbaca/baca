@@ -1389,6 +1389,7 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: add no_upright=None keyword
     @staticmethod
     def text_spanner(
         text: typing.Union[str, abjad.Markup],
@@ -2729,6 +2730,7 @@ class LibraryTZ(abjad.AbjadObject):
         scopes = [library.scope(*_) for _ in scopes]
         return TimelineScope(scopes=scopes)
 
+    # TODO: add no_upright=None keyword
     @staticmethod
     def transition(
         *markups: typing.Iterable[typing.Union[str, abjad.Markup]],

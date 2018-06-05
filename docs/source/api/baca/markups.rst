@@ -135,6 +135,8 @@ markups
 
 .. autofunction:: flaut_partial_2
 
+.. autofunction:: flaut_possibile
+
 .. autofunction:: fluttertongue
 
 .. autofunction:: fractional_OB
@@ -144,6 +146,8 @@ markups
 .. autofunction:: full_bow_strokes
 
 .. autofunction:: glissando_lentissimo
+
+.. autofunction:: grid_possibile
 
 .. autofunction:: gridato_possibile
 

@@ -428,11 +428,13 @@ Bača API
    ~baca.markups.final_markup
    ~baca.markups.flaut
    ~baca.markups.flaut_partial_2
+   ~baca.markups.flaut_possibile
    ~baca.markups.fluttertongue
    ~baca.markups.fractional_OB
    ~baca.markups.fractional_scratch
    ~baca.markups.full_bow_strokes
    ~baca.markups.glissando_lentissimo
+   ~baca.markups.grid_possibile
    ~baca.markups.gridato_possibile
    ~baca.markups.half_clt
    ~baca.markups.instrument

@@ -214,6 +214,11 @@ def flaut_partial_2():
         'flaut. (2°)',
         )
 
+def flaut_possibile():
+    return Markup(
+        'flaut. possibile',
+        )
+
 def fluttertongue():
     return Markup(
         'fluttertongue',
@@ -246,6 +251,12 @@ def glissando_lentissimo():
     return Markup(
         'glissando lentissimo',
         )
+
+def grid_possibile():
+    return Markup(
+        'grid. possibile',
+        )
+
 
 def gridato_possibile():
     return Markup(
