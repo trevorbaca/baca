@@ -167,42 +167,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def not_parts(command: Command) -> Command:
-        """
-        Tags ``command`` with ``-PARTS``.
-
-        Returns ``command``.
-        """
-        return library.tag(
-            '-PARTS',
-            command,
-            )
-
-    @staticmethod
-    def not_score(command: Command) -> Command:
-        """
-        Tags ``command`` with ``-SCORE``.
-
-        Returns ``command``.
-        """
-        return library.tag(
-            '-SCORE',
-            command,
-            )
-
-    @staticmethod
-    def not_segment(command: Command) -> Command:
-        """
-        Tags ``command`` with ``-SEGMENT``.
-
-        Returns ``command``.
-        """
-        return library.tag(
-            '-SEGMENT',
-            command,
-            )
-
-    @staticmethod
     def note_column_shift(
         n: Number,
         *,
@@ -568,42 +532,6 @@ class LibraryNS(abjad.AbjadObject):
         return IndicatorCommand(
             indicators=[literal],
             selector=selector,
-            )
-
-    @staticmethod
-    def only_parts(command: Command) -> Command:
-        """
-        Tags ``command`` with ``+PARTS``.
-
-        Returns ``command``.
-        """
-        return library.tag(
-            '+PARTS',
-            command,
-            )
-
-    @staticmethod
-    def only_score(command: Command) -> Command:
-        """
-        Tags ``command`` with ``+SCORE``.
-
-        Returns ``command``.
-        """
-        return library.tag(
-            '+SCORE',
-            command,
-            )
-
-    @staticmethod
-    def only_segment(command: Command) -> Command:
-        """
-        Tags ``command`` with ``+SEGMENT``.
-
-        Returns ``command``.
-        """
-        return library.tag(
-            '+SEGMENT',
-            command,
             )
 
     @staticmethod

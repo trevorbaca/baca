@@ -176,15 +176,14 @@ def edition(
     """
     Makes not-parts / only-parts markup suite.
     """
-    from .LibraryNS import LibraryNS
     if isinstance(not_parts, str):
-        not_parts = markup(not_parts)
+        not_parts = library.markup(not_parts)
     assert isinstance(not_parts, IndicatorCommand)
-    not_parts_ = LibraryNS.not_parts(not_parts)
+    not_parts_ = library.not_parts(not_parts)
     if isinstance(only_parts, str):
-        only_parts = markup(only_parts)
+        only_parts = library.markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
-    only_parts_ = LibraryNS.only_parts(only_parts)
+    only_parts_ = library.only_parts(only_parts)
     return SuiteCommand(
         not_parts_,
         only_parts_,

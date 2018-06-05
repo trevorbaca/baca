@@ -658,6 +658,129 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            Coerces markups:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_even_divisions(),
+            ...     baca.Markup('Allegro'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            Allegro                                                      %! IC
+                                    }                                                                    %! IC
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                [
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                <BLANKLINE>
+                                \baca_unpitched_music_warning                                            %! SM24
+                                c'8
+                                ]
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
             Raises exception on noncommand input:
 
             >>> maker(
@@ -689,6 +812,9 @@ class SegmentMaker(abjad.SegmentMaker):
         for command in commands:
             if isinstance(command, list):
                 commands_.extend(command)
+            elif isinstance(command, abjad.Markup):
+                markup_command = library.markup(command)
+                commands_.append(markup_command)
             else:
                 commands_.append(command)
         commands = tuple(commands_)

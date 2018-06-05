@@ -470,6 +470,53 @@ def markup(
         selector=selector,
         )
 
+def not_parts(command: Command) -> Command:
+    """
+    Tags ``command`` with ``-PARTS``.
+
+    Returns ``command``.
+    """
+    return tag('-PARTS', command)
+
+def not_score(command: Command) -> Command:
+    """
+    Tags ``command`` with ``-SCORE``.
+
+    Returns ``command``.
+    """
+    return tag('-SCORE', command)
+
+def not_segment(command: Command) -> Command:
+    """
+    Tags ``command`` with ``-SEGMENT``.
+
+    Returns ``command``.
+    """
+    return tag('-SEGMENT', command)
+
+def only_parts(command: Command) -> Command:
+    """
+    Tags ``command`` with ``+PARTS``.
+
+    Returns ``command``.
+    """
+    return tag('+PARTS', command)
+
+def only_score(command: Command) -> Command:
+    """
+    Tags ``command`` with ``+SCORE``.
+
+    Returns ``command``.
+    """
+    return tag('+SCORE', command)
+
+def only_segment(command: Command) -> Command:
+    """
+    Tags ``command`` with ``+SEGMENT``.
+
+    Returns ``command``.
+    """
+    return tag('+SEGMENT', command)
 
 def piecewise(
     spanner: abjad.Spanner,

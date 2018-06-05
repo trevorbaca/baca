@@ -31,6 +31,18 @@ library
 
 .. autofunction:: markup
 
+.. autofunction:: not_parts
+
+.. autofunction:: not_score
+
+.. autofunction:: not_segment
+
+.. autofunction:: only_parts
+
+.. autofunction:: only_score
+
+.. autofunction:: only_segment
+
 .. autofunction:: pick
 
 .. autofunction:: piecewise

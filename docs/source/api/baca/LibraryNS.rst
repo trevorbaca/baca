@@ -38,12 +38,6 @@ LibraryNS
 
    .. automethod:: LibraryNS.no_ledgers
 
-   .. automethod:: LibraryNS.not_parts
-
-   .. automethod:: LibraryNS.not_score
-
-   .. automethod:: LibraryNS.not_segment
-
    .. automethod:: LibraryNS.note_column_shift
 
    .. automethod:: LibraryNS.note_head_color
@@ -57,12 +51,6 @@ LibraryNS
    .. automethod:: LibraryNS.note_head_transparent
 
    .. automethod:: LibraryNS.one_voice
-
-   .. automethod:: LibraryNS.only_parts
-
-   .. automethod:: LibraryNS.only_score
-
-   .. automethod:: LibraryNS.only_segment
 
    .. automethod:: LibraryNS.ottava
 

@@ -522,6 +522,12 @@ Bača API
    ~baca.library.literal
    ~baca.library.map
    ~baca.library.markup
+   ~baca.library.not_parts
+   ~baca.library.not_score
+   ~baca.library.not_segment
+   ~baca.library.only_parts
+   ~baca.library.only_score
+   ~baca.library.only_segment
    ~baca.library.pick
    ~baca.library.piecewise
    ~baca.library.pitches
