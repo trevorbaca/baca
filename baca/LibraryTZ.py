@@ -3128,21 +3128,22 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
-        markups_ = []
+        markups_: typing.List[Markup] = []
         for markup in markups:
             if isinstance(markup, str):
-                markup = Markup(markup)
-            assert isinstance(markup, abjad.Markup), repr(markup)
-            markups_.append(markup)
-        markups = markups_
-        indicators: typing.List[typing.Union[abjad.Markup, tuple]] = []
-        for markup in markups[:-1]:
-            pair = (markup, library.dashed_arrow())
+                markup_ = Markup(markup)
+                markups_.append(markup_)
+            else:
+                assert isinstance(markup, Markup), repr(markup)
+                markups_.append(markup)
+        indicators: typing.List[typing.Union[Markup, tuple]] = []
+        for markup_ in markups_[:-1]:
+            pair = (markup_, library.dashed_arrow())
             indicators.append(pair)
         if do_not_bookend:
-            indicators.append(markups[-1])
+            indicators.append(markups_[-1])
         else:
-            pair = (markups[-1], library.dashed_arrow())
+            pair = (markups_[-1], library.dashed_arrow())
             indicators.append(pair)
         if lilypond_id is not None:
             assert lilypond_id in (1, 2, 3), repr(lilypond_id)
