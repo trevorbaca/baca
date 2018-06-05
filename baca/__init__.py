@@ -51,6 +51,7 @@ from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
 from .MapCommand import MapCommand
+from .Markup import Markup
 from .Matrix import Matrix
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap

@@ -230,6 +230,7 @@ baca
    Interpolator
    LBSD
    Loop
+   Markup
    Matrix
    MetronomeMarkMeasureMap
    PageSpecifier
@@ -286,6 +287,7 @@ baca
    ~Interpolator.Interpolator
    ~LBSD.LBSD
    ~Loop.Loop
+   ~Markup.Markup
    ~Matrix.Matrix
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier

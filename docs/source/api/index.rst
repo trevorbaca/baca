@@ -137,6 +137,7 @@ Bača API
    ~baca.Interpolator.Interpolator
    ~baca.LBSD.LBSD
    ~baca.Loop.Loop
+   ~baca.Markup.Markup
    ~baca.Matrix.Matrix
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.PageSpecifier.PageSpecifier
