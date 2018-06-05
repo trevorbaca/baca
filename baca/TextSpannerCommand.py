@@ -1,6 +1,6 @@
 import abjad
 import typing
-from . import markup as baca_markup
+from . import markups as baca_markups
 from .Command import Command
 from .IndicatorCommand import IndicatorCommand
 from .Typing import Selector
@@ -21,7 +21,7 @@ class TextSpannerCommand(Command):
         >>> maker(
         ...     'MusicVoice',
         ...     baca.text_spanner(
-        ...         baca.markup.half_clt(),
+        ...         baca.markups.half_clt(),
         ...         selector=baca.leaves()[:4 + 1],
         ...         ),
         ...     baca.make_even_divisions(),
@@ -189,7 +189,7 @@ class TextSpannerCommand(Command):
         self._line_segment = line_segment
         self._tags = []
         if isinstance(text, str):
-            command = baca_markup.markup(text)
+            command = baca_markups.markup(text)
             assert command.indicators is not None
             markup = command.indicators[0]
         elif isinstance(text, abjad.Markup):

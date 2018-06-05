@@ -206,8 +206,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -286,8 +286,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -372,7 +372,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_color('red'),
             ...     )
 
@@ -411,8 +411,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -491,8 +491,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -577,7 +577,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_down()
             ...     )
 
@@ -620,7 +620,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_extra_offset((0, 2)),
             ...     )
 
@@ -682,8 +682,8 @@ class LibraryTZ(abjad.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup.markup('più mosso'),
-                ...     baca.markup.markup(
+                ...     baca.markups.markup('più mosso'),
+                ...     baca.markups.markup(
                 ...         'lo stesso tempo',
                 ...         baca.tuplets()[1:2].phead(0),
                 ...         ),
@@ -762,8 +762,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -848,7 +848,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_padding(2),
             ...     )
 
@@ -890,7 +890,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_parent_center()
             ...     )
 
@@ -930,8 +930,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -1010,8 +1010,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -1096,7 +1096,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_staff_padding(2)
             ...     )
 
@@ -1135,8 +1135,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -1215,8 +1215,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup.markup('più mosso'),
-            ...     baca.markup.markup(
+            ...     baca.markups.markup('più mosso'),
+            ...     baca.markups.markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -1301,7 +1301,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.markup.boxed('still', selector=baca.leaf(1)),
+            ...     baca.markups.boxed('still', selector=baca.leaf(1)),
             ...     baca.text_script_up()
             ...     )
 
@@ -1624,8 +1624,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
             ...     baca.transition(
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord(),
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -1733,8 +1733,8 @@ class LibraryTZ(abjad.AbjadObject):
             ...         ),
             ...     baca.text_script_staff_padding(6),
             ...     baca.transition(
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord(),
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
             ...         selector=baca.map(baca.tuplet(1), baca.tleaves()),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2739,10 +2739,10 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.transition(
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord(),
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord(),
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
             ...         do_not_bookend=True,
             ...         pieces=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
@@ -2955,8 +2955,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.transition(
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord(),
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
             ...         pieces=baca.leaves().enchain([8]),
             ...     ),
             ...     baca.make_even_divisions(),

@@ -284,7 +284,7 @@ def instrument(
 
         Makes instrument name markup in column:
 
-        >>> markup = baca.markup.instrument('Eng. horn')
+        >>> markup = baca.markups.instrument('Eng. horn')
 
         >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
@@ -301,7 +301,7 @@ def instrument(
 
         Makes instrument name markup in line:
 
-        >>> markup = baca.markup.instrument(
+        >>> markup = baca.markups.instrument(
         ...     'Violin 1',
         ...     column=False,
         ...     )
@@ -838,7 +838,7 @@ def short_instrument(
 
         Makes short instrument name markup in column:
 
-        >>> markup = baca.markup.short_instrument('Eng. hn.')
+        >>> markup = baca.markups.short_instrument('Eng. hn.')
 
         >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
@@ -855,7 +855,7 @@ def short_instrument(
 
         Makes short instrument name markup in line:
 
-        >>> markup = baca.markup.short_instrument(
+        >>> markup = baca.markups.short_instrument(
         ...     'Vn. 1',
         ...     column=False,
         ...     )

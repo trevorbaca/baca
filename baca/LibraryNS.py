@@ -3,7 +3,7 @@ import baca
 import collections
 import typing
 from . import library
-from . import markup as baca_markup
+from . import markups as baca_markups
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
@@ -6342,7 +6342,7 @@ class LibraryNS(abjad.AbjadObject):
         Attaches start markup.
         """
         if isinstance(argument, (list, str)):
-            markup = baca_markup.instrument(argument, hcenter_in=hcenter_in)
+            markup = baca_markups.instrument(argument, hcenter_in=hcenter_in)
             start_markup = abjad.StartMarkup(
                 context=context,
                 markup=markup,

@@ -1,16 +1,16 @@
-.. _baca--markup:
+.. _baca--markups:
 
-markup
-======
+markups
+=======
 
-.. automodule:: baca.markup
+.. automodule:: baca.markups
 
-.. currentmodule:: baca.markup
+.. currentmodule:: baca.markups
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.markup
+      :lineage: baca.markups
 
 .. raw:: html
 

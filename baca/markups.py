@@ -29,7 +29,7 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup.markup('più mosso'),
+        ...     baca.markups.markup('più mosso'),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -100,7 +100,7 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup.markup('più mosso', baca.tuplets()[1:2].phead(0)),
+        ...     baca.markups.markup('più mosso', baca.tuplets()[1:2].phead(0)),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -171,7 +171,7 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup.markup('*', baca.tuplets()[1:2].pheads()),
+        ...     baca.markups.markup('*', baca.tuplets()[1:2].pheads()),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -262,7 +262,7 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup.markup(r'\baca_triple_diamond_markup', literal=True),
+        ...     baca.markups.markup(r'\baca_triple_diamond_markup', literal=True),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -329,7 +329,7 @@ def markup(
 
         Raises exception on nonstring, nonmarkup ``argument``:
 
-        >>> baca.markup.markup(['Allegro', 'ma non troppo'])
+        >>> baca.markups.markup(['Allegro', 'ma non troppo'])
         Traceback (most recent call last):
             ...
         Exception: MarkupLibary.__call__():
@@ -692,7 +692,7 @@ def instrument(
 
         Makes instrument name markup in column:
 
-        >>> markup = baca.markup.instrument('Eng. horn')
+        >>> markup = baca.markups.instrument('Eng. horn')
 
         >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
@@ -709,7 +709,7 @@ def instrument(
 
         Makes instrument name markup in line:
 
-        >>> markup = baca.markup.instrument(
+        >>> markup = baca.markups.instrument(
         ...     'Violin 1',
         ...     column=False,
         ...     )
@@ -1333,7 +1333,7 @@ def short_instrument(
 
         Makes short instrument name markup in column:
 
-        >>> markup = baca.markup.short_instrument('Eng. hn.')
+        >>> markup = baca.markups.short_instrument('Eng. hn.')
 
         >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
@@ -1350,7 +1350,7 @@ def short_instrument(
 
         Makes short instrument name markup in line:
 
-        >>> markup = baca.markup.short_instrument(
+        >>> markup = baca.markups.short_instrument(
         ...     'Vn. 1',
         ...     column=False,
         ...     )
