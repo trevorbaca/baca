@@ -185,8 +185,6 @@ markups
 
 .. autofunction:: nail_rasgueado
 
-.. autofunction:: non_div
-
 .. autofunction:: non_flaut
 
 .. autofunction:: non_flautando
@@ -269,8 +267,6 @@ markups
 
 .. autofunction:: rasp_partial_2
 
-.. autofunction:: remove_reed
-
 .. autofunction:: remove_staple
 
 .. autofunction:: scratch_moltiss
@@ -280,8 +276,6 @@ markups
 .. autofunction:: senza_scratch
 
 .. autofunction:: senza_vib
-
-.. autofunction:: shakers
 
 .. autofunction:: short_instrument
 

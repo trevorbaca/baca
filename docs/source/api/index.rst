@@ -636,7 +636,6 @@ Bača API
    ~baca.markups.molto_scratch
    ~baca.markups.nail_rasg
    ~baca.markups.nail_rasgueado
-   ~baca.markups.non_div
    ~baca.markups.non_flaut
    ~baca.markups.non_flautando
    ~baca.markups.non_flutt
@@ -678,13 +677,11 @@ Bača API
    ~baca.markups.put_reed_back_in
    ~baca.markups.rasp
    ~baca.markups.rasp_partial_2
-   ~baca.markups.remove_reed
    ~baca.markups.remove_staple
    ~baca.markups.scratch_moltiss
    ~baca.markups.senza_pedale
    ~baca.markups.senza_scratch
    ~baca.markups.senza_vib
-   ~baca.markups.shakers
    ~baca.markups.short_instrument
    ~baca.markups.sparse_clicks
    ~baca.markups.spazz

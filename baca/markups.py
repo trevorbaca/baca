@@ -6,6 +6,7 @@ import baca
 import typing
 from . import library
 from .IndicatorCommand import IndicatorCommand
+from .Markup import Markup
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
 from .Typing import Selector
@@ -13,42 +14,42 @@ from .Typing import Selector
 
 def accent_changes_of_direction():
     string = 'accent changes of direction noticeably at each attack'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def airtone():
-    return baca.Markup(
+    return Markup(
         'airtone',
         )
 
 def allow_bowing_to_convey_accelerando():
-    return baca.Markup(
+    return Markup(
         'allow bowing to convey accelerando',
         )
 
 def arco():
-    return baca.Markup(
+    return Markup(
         'arco',
         )
 
 def arco_ordinario():
-    return baca.Markup(
+    return Markup(
         'arco ordinario',
         )
 
 def attackless():
-    return baca.Markup(
+    return Markup(
         'attackless',
         )
 
 def bow_on_tailpiece():
-    return baca.Markup(
+    return Markup(
         'bow on tailpiece',
         )
 
 def bow_on_wooden_mute():
-    return baca.Markup(
+    return Markup(
         'bow on wooden mute',
         )
 
@@ -84,72 +85,65 @@ def boxed_lines(
         direction=direction,
         )
 
-# TODO: selector
 def boxed_repeat_count(
     count: int,
-    selector: Selector = 'baca.leaf(0)',
-    direction: abjad.VerticalAlignment = abjad.Up,
-    ) -> IndicatorCommand:
+    ) -> Markup:
     string = f'x{count}'
-    markup = abjad.Markup(string)
+    markup = Markup(string)
     markup = markup.sans().bold().fontsize(6)
     markup = markup.box().override(('box-padding', 0.5))
-    return library.markup(
-        markup,
-        selector=selector,
-        direction=direction,
-        )
+    return markup
 
 def clicks_per_second(
     lower: int,
     upper: int,
     ):
     string = f'{lower}-{upper} clicks/sec.'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def col_legno_battuto():
-    return baca.Markup(
+    return Markup(
         'col legno battuto',
         )
 
 def crine():
-    return baca.Markup(
+    return Markup(
         'crine',
         )
 
 def delicatiss():
-    return baca.Markup(
+    return Markup(
         'delicatiss.',
         )
 
 def delicatissimo():
-    return baca.Markup(
+    return Markup(
         'delicatissimo',
         )
 
 def directly_on_bridge_bow_diagonally():
     string = 'directly on bridge:'
     string += ' bow diagonally to produce white noise w/ no pitch'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def directly_on_bridge_very_slow_bow():
     string = 'directly on bridge:'
     string += ' very slow bow, imperceptible bow changes'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def divisi_1_plus_3():
-    return baca.Markup(
+    return Markup(
         '1 + 3',
         )
 
 def divisi_2_plus_4():
-    return baca.Markup(
+    return Markup(
         '2 + 4',
         )
 
@@ -176,31 +170,29 @@ def edition(
         )
 
 def estr_sul_pont():
-    return baca.Markup(
+    return Markup(
         'estr. sul pont.',
         )
 
 def ext_pont():
-    return baca.Markup(
+    return Markup(
         'ext. pont.',
         )
 
 def FB():
-    return baca.Markup(
+    return Markup(
         'FB',
         )
 
 def FB_flaut():
-    return baca.Markup(
+    return Markup(
         'FB flaut.',
         )
 
-# TODO: selector
 def final_markup(
     places: typing.List[str],
     dates: typing.List[str],
-    selector: Selector = 'baca.leaf(-1)',
-    ) -> IndicatorCommand:
+    ) -> Markup:
     string = r' \hspace #0.75 – \hspace #0.75 '.join(places)
     places_ = abjad.Markup(string)
     places_ = abjad.Markup.line([places_])
@@ -210,24 +202,21 @@ def final_markup(
     markup = abjad.Markup.right_column([places_, dates_])
     markup = markup.with_color('black')
     markup = markup.override(('font-name', 'Palatino'))
-    return library.markup(
-        markup,
-        selector=selector,
-        direction=abjad.Down,
-        )
+    markup = Markup(contents=markup.contents)
+    return markup
 
 def flaut():
-    return baca.Markup(
+    return Markup(
         'flaut.',
         )
 
 def flaut_partial_2():
-    return baca.Markup(
+    return Markup(
         'flaut. (2°)',
         )
 
 def fluttertongue():
-    return baca.Markup(
+    return Markup(
         'fluttertongue',
         )
 
@@ -236,7 +225,7 @@ def fractional_OB(
     denominator: int,
     ):
     string = f'{numerator}/{denominator}OB'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
@@ -245,27 +234,27 @@ def fractional_scratch(
     denominator: int,
     ) :
     string = f'{numerator}/{denominator} scratch'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def full_bow_strokes():
-    return baca.Markup(
+    return Markup(
         'full bow strokes',
         )
 
 def glissando_lentissimo():
-    return baca.Markup(
+    return Markup(
         'glissando lentissimo',
         )
 
 def gridato_possibile():
-    return baca.Markup(
+    return Markup(
         'gridato possibile',
         )
 
 def half_clt():
-    return baca.Markup(
+    return Markup(
         '1/2 clt',
         )
 
@@ -325,42 +314,42 @@ def instrument(
         )
 
 def kn_rasg():
-    return baca.Markup(
+    return Markup(
         'kn. rasg.',
         )
 
 def knuckle_rasg():
-    return baca.Markup(
+    return Markup(
         'knuckle rasg.',
         )
 
 def leggieriss():
-    return baca.Markup(
+    return Markup(
         'leggieriss.',
         )
 
 def leggierissimo():
-    return baca.Markup(
+    return Markup(
         'leggierissimo',
         )
 
 def leggierissimo_off_string_bowing_on_staccati():
-    return baca.Markup(
+    return Markup(
         'leggierissimo: off-string bowing on staccati',
         )
 
 def lh_damp():
-    return baca.Markup(
+    return Markup(
         'lh damp',
         )
 
 def lh_damp_plus_half_clt():
-    return baca.Markup(
+    return Markup(
         'lh damp + 1/2 clt',
         )
 
 def lhd_plus_half_clt():
-    return baca.Markup(
+    return Markup(
         'lhd + 1/2 clt',
         )
 
@@ -397,15 +386,13 @@ def lines(
         )
 
 def loure():
-    return baca.Markup(
+    return Markup(
         'louré',
         )
 
-# TODO: selector
-def lv_possibile(selector='baca.ptail(0)'):
-    return library.markup(
+def lv_possibile():
+    return Markup(
         'l.v. possibile',
-        selector=selector,
         )
 
 def make_instrument_name_markup(string, space, column=True):
@@ -429,22 +416,22 @@ def make_instrument_name_markup(string, space, column=True):
     return markup
 
 def molto_flautando():
-    return baca.Markup(
+    return Markup(
         'molto flautando',
         )
 
 def molto_flautando_e_pont():
-    return baca.Markup(
+    return Markup(
         'molto flautando ed estr. sul pont.',
         )
 
 def molto_gridato():
-    return baca.Markup(
+    return Markup(
         'molto gridato ed estr. sul pont.',
         )
 
 def molto_overpressure():
-    return baca.Markup(
+    return Markup(
         'molto overpressure',
         )
 
@@ -460,125 +447,118 @@ def molto_pont_plus_vib_molto(
         )
 
 def molto_scratch():
-    return baca.Markup(
+    return Markup(
         'molto scratch',
         )
 
 def MP_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'MP + XFB flaut.',
         )
 
 def nail_rasg():
-    return baca.Markup(
+    return Markup(
         'nail rasg.',
         )
 
 def nail_rasgueado():
-    return baca.Markup(
+    return Markup(
         'nail rasgueado',
         )
 
-# TODO: selector was baca.leaf(0)
-def non_div(selector='baca.leaf(0)'):
-    return library.markup(
-        'non div.',
-        selector=selector,
-        )
-
 def non_flaut():
-    return baca.Markup(
+    return Markup(
         'non flaut.',
         )
 
 def non_flautando():
-    return baca.Markup(
+    return Markup(
         'non flautando',
         )
 
 def non_flutt():
-    return baca.Markup(
+    return Markup(
         'non flutt.',
         )
 
 def non_spazz():
-    return baca.Markup(
+    return Markup(
         'non spazz.',
         )
 
 def nut():
-    return baca.Markup(
+    return Markup(
         'nut',
         )
 
 def OB():
-    return baca.Markup(
+    return Markup(
         'OB',
         )
 
 def OB_full_bow_strokes():
-    return baca.Markup(
+    return Markup(
         'OB + full bow strokes',
         )
 
 def OB_no_pitch():
-    return baca.Markup(
+    return Markup(
         'OB (no pitch)',
         )
 
 def OB_terminate_abruptly():
-    return baca.Markup(
+    return Markup(
         'OB + terminate abruptly',
         )
 
 def OB_terminate_each_note_abruptly():
-    return baca.Markup(
+    return Markup(
         'OB + terminate each note abruptly',
         )
 
 def off_string_bowing_on_staccati():
-    return baca.Markup(
+    return Markup(
         'off-string bowing on staccati',
         )
 
 def one_click_every(lower, upper):
     string = f'1 click/{lower}-{upper} sec.'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def ord():
-    return baca.Markup(
+    return Markup(
         'ord.',
         )
 
 def ord_poco_scratch():
-    return baca.Markup(
+    return Markup(
         'ord. + poco scratch',
         )
 
 def ord_senza_scratch():
-    return baca.Markup(
+    return Markup(
         'ord. (senza scratch)',
         )
 
 def ordinario():
-    return baca.Markup(
+    return Markup(
         'ordinario',
         )
 
 def overblow():
-    return baca.Markup(
+    return Markup(
         'overblow',
         )
 
 def P_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'P + XFB flaut.',
         )
 
 def pizz():
-    return baca.Markup(
+    return Markup(
         'pizz.',
         )
 
@@ -596,27 +576,27 @@ def plus_statement(
         composite_string = f'{string_1} (+{string_2})'
     else:
         composite_string = f'{string_1} + {string_2}'
-    return baca.Markup(
+    return Markup(
         composite_string,
         )
 
 def PO():
-    return baca.Markup(
+    return Markup(
         'PO',
         )
 
 def PO_FB_flaut():
-    return baca.Markup(
+    return Markup(
         'PO + FB flaut.',
         )
 
 def po_meno_scratch():
-    return baca.Markup(
+    return Markup(
         "po' meno scratch",
         )
 
 def PO_NBS():
-    return baca.Markup(
+    return Markup(
         'PO + NBS',
         )
 
@@ -643,37 +623,37 @@ def PO_plus_poco_vib(
         )
 
 def PO_scratch():
-    return baca.Markup(
+    return Markup(
         'PO + scratch',
         )
 
 def PO_slow_bow():
-    return baca.Markup(
+    return Markup(
         'PO + slow bow (poco scratch)',
         )
 
 def PO_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'PO + XFB flaut.',
         )
 
 def pochiss_pont():
-    return baca.Markup(
+    return Markup(
         'pochiss. pont.',
         )
 
 def pochiss_scratch():
-    return baca.Markup(
+    return Markup(
         'pochiss. scratch',
         )
 
 def pochiss_vib():
-    return baca.Markup(
+    return Markup(
         'pochiss. vib.',
         )
 
 def poco_overpressure():
-    return baca.Markup(
+    return Markup(
         'poco overpressure',
         )
 
@@ -722,67 +702,67 @@ def poco_pont_plus_vib_mod(
         )
 
 def poco_rasp_partial_2():
-    return baca.Markup(
+    return Markup(
         'poco rasp (2°)',
         )
 
 def poco_scratch():
-    return baca.Markup(
+    return Markup(
         'poco scratch',
         )
 
 def pont():
-    return baca.Markup(
+    return Markup(
         'pont.',
         )
 
 def pont_XFB():
-    return baca.Markup(
+    return Markup(
         'pont. + XFB',
         )
 
 def pont_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'pont. + XFB flaut.',
         )
 
 def ponticello():
-    return baca.Markup(
+    return Markup(
         'ponticello',
         )
 
 def pos_ord():
-    return baca.Markup(
+    return Markup(
         'pos. ord.',
         )
 
 def pos_ord_poco_scratch():
-    return baca.Markup(
+    return Markup(
         'pos. ord. + poco scratch',
         )
 
 def pos_ord_senza_vib():
-    return baca.Markup(
+    return Markup(
         'pos. ord. + senza vib',
         )
 
 def pos_ord_vib_poco():
-    return baca.Markup(
+    return Markup(
         'pos. ord. + vib. poco',
         )
 
 def pos_ord_XFB():
-    return baca.Markup(
+    return Markup(
         'pos. ord. + XFB',
         )
 
 def pos_ord_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'pos. ord. + XFB flaut.',
         )
 
 def pP_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'pP + XFB flaut.',
         )
 
@@ -792,67 +772,48 @@ def pres_de_la_table():
         )
 
 def pT_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'pT + XFB flaut.',
         )
 
-
-# TODO: selector was baca.leaf(0)
-def put_reed_back_in(selector='baca.leaf(0)'):
-    return boxed(
+def put_reed_back_in():
+    return Markup(
         'put reed back in',
-        selector=selector,
         )
 
 def rasp():
-    return baca.Markup(
+    return Markup(
         'rasp',
         )
 
 def rasp_partial_2():
-    return baca.Markup(
+    return Markup(
         'rasp (2°)',
         )
 
-# TODO: selector was baca.leaf(0)
-def remove_reed(selector='baca.leaf(0)'):
-    return boxed(
-        'remove reed',
-        selector=selector,
-        )
-
-# TODO: selector was baca.leaf(0)
-def remove_staple(selector='baca.leaf(0)'):
-    return boxed(
+def remove_staple():
+    return Markup(
         'remove staple',
-        selector=selector,
         )
 
 def scratch_moltiss():
-    return baca.Markup(
+    return Markup(
         'scratch moltiss.',
         )
 
 def senza_pedale():
-    return baca.Markup(
+    return Markup(
         'senza pedale',
         )
 
 def senza_scratch():
-    return baca.Markup(
+    return Markup(
         'senza scratch',
         )
 
 def senza_vib():
-    return baca.Markup(
+    return Markup(
         'senza vib.',
-        )
-
-# TODO: selector was baca.leaf(0)
-def shakers(selector='baca.leaf(0)'):
-    return library.markup(
-        'shakers',
-        selector=selector,
         )
 
 def short_instrument(
@@ -911,35 +872,33 @@ def short_instrument(
         )
 
 def sparse_clicks():
-    first_line = baca.Markup(
+    first_line = Markup(
         'sparse, individual clicks with extremely slow bow')
     first_line = first_line.line()
-    second_line = baca.Markup('(1-2/sec. in irregular rhythm)').line()
-    markup = baca.Markup.column([first_line, second_line])
-    return baca.Markup(
+    second_line = Markup('(1-2/sec. in irregular rhythm)').line()
+    markup = Markup.column([first_line, second_line])
+    return Markup(
         markup,
         )
 
 def spazz():
-    return baca.Markup(
+    return Markup(
         'spazz.',
         )
 
 def spazzolato():
-    return baca.Markup(
+    return Markup(
         'spazzolato',
         )
 
 def spazzolato_1_2_clt():
-    return baca.Markup(
+    return Markup(
         'spazzolato (1/2 clt)',
         )
 
-# TODO: selector was baca.leaf(0)
-def still(selector='baca.leaf(0)'):
-    return library.markup(
+def still():
+    return Markup(
         'still',
-        selector=selector,
         )
 
 def string_number(n: int):
@@ -950,7 +909,7 @@ def string_number(n: int):
         4: 'IV',
         }
     string_number = to_roman_numeral[n]
-    return baca.Markup(
+    return Markup(
         string_number,
         direction=abjad.Down,
         )
@@ -966,38 +925,38 @@ def string_numbers(
         }
     string_numbers = [to_roman_numeral[_] for _ in numbers]
     string = '+'.join(string_numbers)
-    return baca.Markup(
+    return Markup(
         string,
         direction=abjad.Down,
         )
 
 def subito_non_armonichi_e_non_gridato():
-    return baca.Markup(
+    return Markup(
         'subito non armonichi e non gridato',
         )
 
 def subito_ordinario():
-    return baca.Markup(
+    return Markup(
         'subito ordinario',
         )
 
 def tamb_tr():
-    return baca.Markup(
+    return Markup(
         'tamb. tr.',
         )
 
 def tasto():
-    return baca.Markup(
+    return Markup(
         'tasto',
         )
 
 def tasto_FB():
-    return baca.Markup(
+    return Markup(
         'tasto + FB',
         )
 
 def tasto_FB_flaut():
-    return baca.Markup(
+    return Markup(
         'tasto + FB flaut.',
         )
 
@@ -1006,22 +965,22 @@ def tasto_fractional_scratch(
     denominator: int,
     ):
     string = f'tasto + {numerator}/{denominator} scratch'
-    return baca.Markup(
+    return Markup(
         string,
         )
 
 def tasto_half_scratch():
-    return baca.Markup(
+    return Markup(
         'tasto + 1/2 scratch',
         )
 
 def tasto_moltiss():
-    return baca.Markup(
+    return Markup(
         'tasto moltiss.',
         )
 
 def tasto_NBS():
-    return baca.Markup(
+    return Markup(
         'tasto + NBS',
         )
 
@@ -1037,12 +996,12 @@ def tasto_plus_non_vib(
         )
 
 def tasto_plus_pochiss_scratch():
-    return baca.Markup(
+    return Markup(
         'tasto + pochiss. scratch',
         )
 
 def tasto_plus_poco_scratch():
-    return baca.Markup(
+    return Markup(
         'tasto + poco scratch',
         )
 
@@ -1058,77 +1017,77 @@ def tasto_plus_poco_vib(
         )
 
 def tasto_plus_scratch_moltiss():
-    return baca.Markup(
+    return Markup(
         'tasto + scratch moltiss.',
         )
 
 def tasto_poss():
-    return baca.Markup(
+    return Markup(
         'tasto poss.',
         )
 
 def tasto_senza_vib():
-    return baca.Markup(
+    return Markup(
         'tasto + senza vib.',
         )
 
 def tasto_slow_bow():
-    return baca.Markup(
+    return Markup(
         'tasto + slow bow (poco scratch)',
         )
 
 def tasto_XFB():
-    return baca.Markup(
+    return Markup(
         'tasto + XFB',
         )
 
 def tasto_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'tasto + XFB flaut.',
         )
 
 def terminate_abruptly():
-    return baca.Markup(
+    return Markup(
         'terminate abruptly',
         )
 
 def terminate_each_note_abruptly():
-    return baca.Markup(
+    return Markup(
         'terminate each note abruptly',
         )
 
 def trans():
-    return baca.Markup(
+    return Markup(
         'trans.',
         )
 
 def trem_flaut_tast():
-    return baca.Markup(
+    return Markup(
         'trem. flaut. tast.',
         )
 
 def vib_moltiss():
-    return baca.Markup(
+    return Markup(
         'vib. moltiss.',
         )
 
 def vib_pochiss():
-    return baca.Markup(
+    return Markup(
         'vib. pochiss.',
         )
 
 def vib_poco():
-    return baca.Markup(
+    return Markup(
         'vib. poco.',
         )
 
 def XFB():
-    return baca.Markup(
+    return Markup(
         'XFB',
         )
 
 def XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'XFB flaut.',
         )
 
@@ -1155,41 +1114,41 @@ def XFB_plus_tasto(
         )
 
 def XFB_sempre():
-    return baca.Markup(
+    return Markup(
         'XFB sempre',
         )
 
 def XP():
-    return baca.Markup(
+    return Markup(
         'XP',
         )
 
 def XP_FB():
-    return baca.Markup(
+    return Markup(
         'XP + FB',
         )
 
 def XP_FB_flaut():
-    return baca.Markup(
+    return Markup(
         'XP + FB flaut.',
         )
 
 def XP_full_bow_strokes():
-    return baca.Markup(
+    return Markup(
         'XP + full bow strokes',
         )
 
 def XP_XFB():
-    return baca.Markup(
+    return Markup(
         'XP + XFB',
         )
 
 def XP_XFB_flaut():
-    return baca.Markup(
+    return Markup(
         'XP + XFB flaut.',
         )
 
 def XT():
-    return baca.Markup(
+    return Markup(
         'XT',
         )
