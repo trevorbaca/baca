@@ -9,7 +9,6 @@ from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
 from .SuiteCommand import SuiteCommand
 from .Typing import Number
-from .Typing import Selector
 
 
 def accent_changes_of_direction():
@@ -149,7 +148,6 @@ def divisi_2_plus_4():
 def edition(
     not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
     only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    #selector: Selector = 'baca.pleaf(0)',
     ) -> SuiteCommand:
     """
     Makes not-parts / only-parts markup suite.
@@ -165,7 +163,6 @@ def edition(
     return SuiteCommand(
         not_parts_,
         only_parts_,
-        #selector=selector,
         )
 
 def estr_sul_pont():
@@ -370,9 +367,6 @@ def lhd_plus_half_clt():
 
 def lines(
     items: typing.List,
-    #selector: Selector = 'baca.leaf(0)',
-    #direction: abjad.VerticalAlignment = abjad.Up,
-    #no_whiteout: bool = False,
     ) -> Markup:
     if not isinstance(items, list):
         message = f'items must be list (not {type(items).__name__}):'
@@ -391,12 +385,6 @@ def lines(
             markup = item.indicators[0]
             items_.append(markup)
     markup = abjad.MarkupList(items_).column()
-#    return library.markup(
-#        markup,
-#        selector=selector,
-#        direction=direction,
-#        whiteout=not(no_whiteout),
-#        )
     markup = Markup(contents=markup.contents)
     return markup
 
