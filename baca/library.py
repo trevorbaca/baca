@@ -111,15 +111,12 @@ def map(
             raise Exception(message)
     return MapCommand(selector, *commands_)
 
-# TODO: remove upright, whiteout keywords
-# TODO: keyword-only direction, literal
 def markup(
     argument: typing.Union[str, abjad.Markup],
     selector: Selector = 'baca.pleaf(0)',
+    *,
     direction: abjad.VerticalAlignment = abjad.Up,
     literal: bool = False,
-    upright: bool = True,
-    whiteout: bool = True,
     ) -> IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
@@ -158,11 +155,7 @@ def markup(
                             r8
                             c'16
                             [
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        "più mosso"                                                  %! IC
-                                }                                                                    %! IC
+                            ^ \markup { "più mosso" }                                                %! IC
                             d'16
                             ]
                             bf'4
@@ -240,11 +233,7 @@ def markup(
                         \times 9/10 {
                             fs''16
                             [
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        "più mosso"                                                  %! IC
-                                }                                                                    %! IC
+                            ^ \markup { "più mosso" }                                                %! IC
                             e''16
                             ]
                             ef''4
@@ -311,41 +300,21 @@ def markup(
                         \times 9/10 {
                             fs''16
                             [
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        *                                                            %! IC
-                                }                                                                    %! IC
+                            ^ \markup { * }                                                          %! IC
                             e''16
                             ]
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        *                                                            %! IC
-                                }                                                                    %! IC
+                            ^ \markup { * }                                                          %! IC
                             ef''4
                             ~
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        *                                                            %! IC
-                                }                                                                    %! IC
+                            ^ \markup { * }                                                          %! IC
                             ef''16
                             r16
                             af''16
                             [
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        *                                                            %! IC
-                                }                                                                    %! IC
+                            ^ \markup { * }                                                          %! IC
                             g''16
                             ]
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        *                                                            %! IC
-                                }                                                                    %! IC
+                            ^ \markup { * }                                                          %! IC
                         }
                         \times 4/5 {
                             a'16
@@ -391,11 +360,7 @@ def markup(
                             r8
                             c'16
                             [
-                            ^ \markup {                                                              %! IC
-                                \whiteout                                                            %! IC
-                                    \upright                                                         %! IC
-                                        \baca_triple_diamond_markup                                     %! IC
-                                }                                                                    %! IC
+                            ^ \markup { \baca_triple_diamond_markup }                                %! IC
                             d'16
                             ]
                             bf'4
@@ -464,10 +429,6 @@ def markup(
         message += f' (not {selector!r}).'
         raise Exception(message)
     selector = selector or 'baca.phead(0)'
-    if upright:
-        markup = markup.upright()
-    if whiteout:
-        markup = markup.whiteout()
     return IndicatorCommand(
         indicators=[markup],
         selector=selector,

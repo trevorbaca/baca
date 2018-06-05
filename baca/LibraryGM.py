@@ -1768,12 +1768,10 @@ class LibraryGM(abjad.AbjadObject):
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                                 ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            \override                                                    %! IC
-                                                #'(box-padding . 0.5)                                    %! IC
-                                                \box                                                     %! IC
-                                                    still                                                %! IC
+                                    \override                                                            %! IC
+                                        #'(box-padding . 0.5)                                            %! IC
+                                        \box                                                             %! IC
+                                            still                                                        %! IC
                                     }                                                                    %! IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
@@ -1899,12 +1897,10 @@ class LibraryGM(abjad.AbjadObject):
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                                 ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            \override                                                    %! IC
-                                                #'(box-padding . 0.5)                                    %! IC
-                                                \box                                                     %! IC
-                                                    still                                                %! IC
+                                    \override                                                            %! IC
+                                        #'(box-padding . 0.5)                                            %! IC
+                                        \box                                                             %! IC
+                                            still                                                        %! IC
                                     }                                                                    %! IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
@@ -2004,12 +2000,10 @@ class LibraryGM(abjad.AbjadObject):
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                                 ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            \override                                                    %! IC
-                                                #'(box-padding . 0.5)                                    %! IC
-                                                \box                                                     %! IC
-                                                    still                                                %! IC
+                                    \override                                                            %! IC
+                                        #'(box-padding . 0.5)                                            %! IC
+                                        \box                                                             %! IC
+                                            still                                                        %! IC
                                     }                                                                    %! IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
@@ -2108,12 +2102,10 @@ class LibraryGM(abjad.AbjadObject):
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                                 ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            \override                                                    %! IC
-                                                #'(box-padding . 0.5)                                    %! IC
-                                                \box                                                     %! IC
-                                                    still                                                %! IC
+                                    \override                                                            %! IC
+                                        #'(box-padding . 0.5)                                            %! IC
+                                        \box                                                             %! IC
+                                            still                                                        %! IC
                                     }                                                                    %! IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
@@ -2213,12 +2205,10 @@ class LibraryGM(abjad.AbjadObject):
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 R1 * 3/8
                                 ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            \override                                                    %! IC
-                                                #'(box-padding . 0.5)                                    %! IC
-                                                \box                                                     %! IC
-                                                    still                                                %! IC
+                                    \override                                                            %! IC
+                                        #'(box-padding . 0.5)                                            %! IC
+                                        \box                                                             %! IC
+                                            still                                                        %! IC
                                     }                                                                    %! IC
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4

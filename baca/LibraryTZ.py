@@ -237,11 +237,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -253,11 +249,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -319,11 +311,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -336,11 +324,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.color = #red                                        %! OC1
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -445,11 +429,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -461,11 +441,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -527,11 +503,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -544,11 +516,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.direction = #down                                   %! OC1
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -722,11 +690,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -738,11 +702,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -804,11 +764,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -821,11 +777,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.padding = #4                                        %! OC1
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -976,11 +928,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -992,11 +940,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -1058,11 +1002,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -1075,11 +1015,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.staff-padding = #4                                  %! OC1
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -1184,11 +1120,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -1200,11 +1132,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -1266,11 +1194,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "più mosso"                                                  %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "più mosso" }                                                %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -1283,11 +1207,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.direction = #up                                     %! OC1
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            "lo stesso tempo"                                            %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { "lo stesso tempo" }                                          %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -1488,9 +1408,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {
                                     \concat
                                         {
-                                            \whiteout
-                                                \upright
-                                                    "1/2 clt"
+                                            "1/2 clt"
                                             \hspace
                                                 #0.5
                                         }
@@ -1513,9 +1431,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {
                                     \concat
                                         {
-                                            \whiteout
-                                                \upright
-                                                    damp
+                                            damp
                                             \hspace
                                                 #0.5
                                         }
@@ -3130,7 +3046,9 @@ class LibraryTZ(abjad.AbjadObject):
         """
         markups_: typing.List[Markup] = []
         for markup in markups:
-            if isinstance(markup, str):
+            if markup is None:
+                markups_.append(markup)
+            elif isinstance(markup, str):
                 markup_ = Markup(markup)
                 markups_.append(markup_)
             else:

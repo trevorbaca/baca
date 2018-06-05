@@ -719,11 +719,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
                                 [
-                                ^ \markup {                                                              %! IC
-                                    \whiteout                                                            %! IC
-                                        \upright                                                         %! IC
-                                            Allegro                                                      %! IC
-                                    }                                                                    %! IC
+                                ^ \markup { Allegro }                                                    %! IC
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -4298,23 +4294,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                                 _ \markup {                                                              %! SCORE2
-                                    \whiteout                                                            %! SCORE2
-                                        \upright                                                         %! SCORE2
-                                            \override                                                    %! SCORE2
-                                                #'(font-name . "Palatino")                               %! SCORE2
-                                                \with-color                                              %! SCORE2
-                                                    #black                                               %! SCORE2
-                                                    \right-column                                        %! SCORE2
+                                    \override                                                            %! SCORE2
+                                        #'(font-name . "Palatino")                                       %! SCORE2
+                                        \with-color                                                      %! SCORE2
+                                            #black                                                       %! SCORE2
+                                            \right-column                                                %! SCORE2
+                                                {                                                        %! SCORE2
+                                                    \line                                                %! SCORE2
                                                         {                                                %! SCORE2
-                                                            \line                                        %! SCORE2
-                                                                {                                        %! SCORE2
-                                                                    "Madison, WI"                        %! SCORE2
-                                                                }                                        %! SCORE2
-                                                            \line                                        %! SCORE2
-                                                                {                                        %! SCORE2
-                                                                    "October 2016"                       %! SCORE2
-                                                                }                                        %! SCORE2
+                                                            "Madison, WI"                                %! SCORE2
                                                         }                                                %! SCORE2
+                                                    \line                                                %! SCORE2
+                                                        {                                                %! SCORE2
+                                                            "October 2016"                               %! SCORE2
+                                                        }                                                %! SCORE2
+                                                }                                                        %! SCORE2
                                     }                                                                    %! SCORE2
                 <BLANKLINE>
                             }
