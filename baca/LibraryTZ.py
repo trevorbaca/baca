@@ -1309,7 +1309,6 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
-    # TODO: add no_upright=None keyword
     @staticmethod
     def text_spanner(
         text: typing.Union[str, abjad.Markup],
@@ -1317,6 +1316,7 @@ class LibraryTZ(abjad.AbjadObject):
         leak: bool = None,
         line_segment: abjad.LineSegment = None,
         lilypond_id: int = None,
+        no_upright: bool = None,
         right_padding: typing.Optional[Number] = 1.25,
         selector: Selector = 'baca.leaves()',
         tweaks: typing.List[typing.Tuple] = None,
@@ -1408,7 +1408,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {
                                     \concat
                                         {
-                                            "1/2 clt"
+                                            \upright
+                                                "1/2 clt"
                                             \hspace
                                                 #0.5
                                         }
@@ -1431,7 +1432,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {
                                     \concat
                                         {
-                                            damp
+                                            \upright
+                                                damp
                                             \hspace
                                                 #0.5
                                         }
@@ -1501,13 +1503,22 @@ class LibraryTZ(abjad.AbjadObject):
             line_segment = library.dashed_hook()
         if right_padding is not None:
             line_segment = abjad.new(line_segment, right_padding=right_padding)
-        assert isinstance(text, (str, abjad.Markup)), repr(text)
+        if isinstance(text, abjad.Markup):
+            markup = text
+        else:
+            assert isinstance(text, str), repr(text)
+            markup = Markup(text)
+        if no_upright is not True:
+            string = format(markup)
+            if 'upright' in string:
+                raise Exception(f'markup already upright:\n  {markup}')
+            markup = markup.upright()
         return TextSpannerCommand(
             leak=leak,
             lilypond_id=lilypond_id,
             line_segment=line_segment,
             selector=selector,
-            text=text,
+            text=markup,
             tweaks=tweaks,
             )
 
@@ -1595,7 +1606,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {                               %! PWC1
                                     \concat                                                              %! PWC1
                                         {                                                                %! PWC1
-                                            pont.                                                        %! PWC1
+                                            \upright                                                     %! PWC1
+                                                pont.                                                    %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
@@ -1616,7 +1628,8 @@ class LibraryTZ(abjad.AbjadObject):
                                         {                                                                %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.0                                                     %! PWC1
-                                            ord.                                                         %! PWC1
+                                            \upright                                                     %! PWC1
+                                                ord.                                                     %! PWC1
                                         }                                                                %! PWC1
                                     }                                                                    %! PWC1
                                 \startTextSpan                                                           %! PWC1
@@ -1712,7 +1725,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {                               %! PWC1
                                     \concat                                                              %! PWC1
                                         {                                                                %! PWC1
-                                            pont.                                                        %! PWC1
+                                            \upright                                                     %! PWC1
+                                                pont.                                                    %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
@@ -1733,7 +1747,8 @@ class LibraryTZ(abjad.AbjadObject):
                                         {                                                                %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.0                                                     %! PWC1
-                                            ord.                                                         %! PWC1
+                                            \upright                                                     %! PWC1
+                                                ord.                                                     %! PWC1
                                         }                                                                %! PWC1
                                     }                                                                    %! PWC1
                                 \startTextSpan                                                           %! PWC1
@@ -2646,12 +2661,12 @@ class LibraryTZ(abjad.AbjadObject):
         scopes = [library.scope(*_) for _ in scopes]
         return TimelineScope(scopes=scopes)
 
-    # TODO: add no_upright=None keyword
     @staticmethod
     def transition(
         *markups: typing.Iterable[typing.Union[str, abjad.Markup]],
         do_not_bookend: bool = False,
         lilypond_id: int = None,
+        no_upright: bool = None,
         pieces: typing.Union[MapCommand, Selector] = 'baca.leaves().group()',
         selector: Selector = 'baca.tleaves()',
         tweaks: typing.List[typing.Tuple] = None
@@ -2744,7 +2759,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {                               %! PWC1
                                     \concat                                                              %! PWC1
                                         {                                                                %! PWC1
-                                            pont.                                                        %! PWC1
+                                            \upright                                                     %! PWC1
+                                                pont.                                                    %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
@@ -2777,7 +2793,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {                               %! PWC1
                                     \concat                                                              %! PWC1
                                         {                                                                %! PWC1
-                                            ord.                                                         %! PWC1
+                                            \upright                                                     %! PWC1
+                                                ord.                                                     %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
@@ -2808,7 +2825,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {                               %! PWC1
                                     \concat                                                              %! PWC1
                                         {                                                                %! PWC1
-                                            pont.                                                        %! PWC1
+                                            \upright                                                     %! PWC1
+                                                pont.                                                    %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.5                                                     %! PWC1
                                         }                                                                %! PWC1
@@ -2841,7 +2859,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 - \tweak bound-details.left.text \markup {                               %! PWC1
                                     \concat                                                              %! PWC1
                                         {                                                                %! PWC1
-                                            ord.                                                         %! PWC1
+                                            \upright                                                     %! PWC1
+                                                ord.                                                     %! PWC1
                                             \hspace                                                      %! PWC1
                                                 #0.25                                                    %! PWC1
                                         }                                                                %! PWC1
@@ -2880,8 +2899,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.transition(
-            ...         baca.markups.pont().upright(),
-            ...         baca.markups.ord().upright(),
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
             ...         pieces=baca.leaves().enchain([8]),
             ...     ),
             ...     baca.make_even_divisions(),
@@ -3050,9 +3069,17 @@ class LibraryTZ(abjad.AbjadObject):
                 markups_.append(markup)
             elif isinstance(markup, str):
                 markup_ = Markup(markup)
+                if no_upright is not True:
+                    if 'upright' in format(markup_):
+                        raise Exception(f'markup already upright:\n  {markup_}')
+                    markup_ = markup_.upright()
                 markups_.append(markup_)
             else:
                 assert isinstance(markup, Markup), repr(markup)
+                if no_upright is not True:
+                    if 'upright' in format(markup):
+                        raise Exception(f'markup already upright:\n  {markup}')
+                    markup = markup.upright()
                 markups_.append(markup)
         indicators: typing.List[typing.Union[Markup, tuple]] = []
         for markup_ in markups_[:-1]:

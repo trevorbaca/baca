@@ -89,7 +89,8 @@ class TextSpannerCommand(Command):
                             - \tweak bound-details.left.text \markup {
                                 \concat
                                     {
-                                        "1/2 clt"
+                                        \upright
+                                            "1/2 clt"
                                         \hspace
                                             #0.5
                                     }
