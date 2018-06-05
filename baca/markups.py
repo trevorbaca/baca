@@ -11,55 +11,48 @@ from .Typing import Number
 from .Typing import Selector
 
 
-def accent_changes_of_direction(selector='baca.pleaf(0)'):
+def accent_changes_of_direction():
     string = 'accent changes of direction noticeably at each attack'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def airtone(selector='baca.pleaf(0)'):
-    return library.markup(
+def airtone():
+    return baca.Markup(
         'airtone',
-        selector=selector,
         )
 
-def allow_bowing_to_convey_accelerando(selector='baca.pleaf(0)'):
-    return library.markup(
+def allow_bowing_to_convey_accelerando():
+    return baca.Markup(
         'allow bowing to convey accelerando',
-        selector=selector,
         )
 
-def arco(selector='baca.pleaf(0)'):
-    return library.markup(
+def arco():
+    return baca.Markup(
         'arco',
-        selector=selector,
         )
 
-def arco_ordinario(selector='baca.pleaf(0)'):
-    return library.markup(
+def arco_ordinario():
+    return baca.Markup(
         'arco ordinario',
-        selector=selector,
         )
 
-def attackless(selector='baca.pleaf(0)'):
-    return library.markup(
+def attackless():
+    return baca.Markup(
         'attackless',
-        selector=selector,
         )
 
-def bow_on_tailpiece(selector='baca.pleaf(0)'):
-    return library.markup(
+def bow_on_tailpiece():
+    return baca.Markup(
         'bow on tailpiece',
-        selector=selector,
         )
 
-def bow_on_wooden_mute(selector='baca.pleaf(0)'):
-    return library.markup(
+def bow_on_wooden_mute():
+    return baca.Markup(
         'bow on wooden mute',
-        selector=selector,
         )
 
+# TODO: selector
 def boxed(
     string: str,
     selector: Selector = 'baca.leaf(0)',
@@ -76,6 +69,7 @@ def boxed(
         direction=direction,
         )
 
+# TODO: selector
 def boxed_lines(
     strings: typing.List[str],
     selector: Selector = 'baca.leaf(0)',
@@ -90,6 +84,7 @@ def boxed_lines(
         direction=direction,
         )
 
+# TODO: selector
 def boxed_repeat_count(
     count: int,
     selector: Selector = 'baca.leaf(0)',
@@ -108,64 +103,54 @@ def boxed_repeat_count(
 def clicks_per_second(
     lower: int,
     upper: int,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     string = f'{lower}-{upper} clicks/sec.'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def col_legno_battuto(selector='baca.pleaf(0)'):
-    return library.markup(
+def col_legno_battuto():
+    return baca.Markup(
         'col legno battuto',
-        selector=selector,
         )
 
-def crine(selecgtor='baca.pleaf(0))'):
-    return library.markup(
+def crine():
+    return baca.Markup(
         'crine',
-        selector=selector,
         )
 
-def delicatiss(selector='baca.pleaf(0)'):
-    return library.markup(
+def delicatiss():
+    return baca.Markup(
         'delicatiss.',
-        selector=selector,
         )
 
-def delicatissimo(selector='baca.pleaf(0)'):
-    return library.markup(
+def delicatissimo():
+    return baca.Markup(
         'delicatissimo',
-        selector=selector,
         )
 
-def directly_on_bridge_bow_diagonally(selector='baca.pleaf(0)'):
+def directly_on_bridge_bow_diagonally():
     string = 'directly on bridge:'
     string += ' bow diagonally to produce white noise w/ no pitch'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def directly_on_bridge_very_slow_bow(selector='baca.pleaf(0)'):
+def directly_on_bridge_very_slow_bow():
     string = 'directly on bridge:'
     string += ' very slow bow, imperceptible bow changes'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def divisi_1_plus_3(selector='baca.pleaf(0)'):
-    return library.markup(
+def divisi_1_plus_3():
+    return baca.Markup(
         '1 + 3',
-        selector=selector,
         )
 
-def divisi_2_plus_4(selector='baca.pleaf(0)'):
-    return library.markup(
+def divisi_2_plus_4():
+    return baca.Markup(
         '2 + 4',
-        selector=selector,
         )
 
 def edition(
@@ -190,30 +175,27 @@ def edition(
         selector=selector,
         )
 
-def estr_sul_pont(selector='baca.pleaf(0)'):
-    return library.markup(
+def estr_sul_pont():
+    return baca.Markup(
         'estr. sul pont.',
-        selector=selector,
         )
 
-def ext_pont(selector='baca.pleaf(0)'):
-    return library.markup(
+def ext_pont():
+    return baca.Markup(
         'ext. pont.',
-        selector=selector,
         )
 
-def FB(selector='baca.pleaf(0)'):
-    return library.markup(
+def FB():
+    return baca.Markup(
         'FB',
-        selector=selector,
         )
 
-def FB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def FB_flaut():
+    return baca.Markup(
         'FB flaut.',
-        selector=selector,
         )
 
+# TODO: selector
 def final_markup(
     places: typing.List[str],
     dates: typing.List[str],
@@ -234,68 +216,57 @@ def final_markup(
         direction=abjad.Down,
         )
 
-def flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def flaut():
+    return baca.Markup(
         'flaut.',
-        selector=selector,
         )
 
-def flaut_partial_2(selector='baca.pleaf(0)'):
-    return library.markup(
+def flaut_partial_2():
+    return baca.Markup(
         'flaut. (2°)',
-        selector=selector,
         )
 
-def fluttertongue(selector='baca.pleaf(0)'):
-    return library.markup(
+def fluttertongue():
+    return baca.Markup(
         'fluttertongue',
-        selector=selector,
         )
 
 def fractional_OB(
     numerator: int,
     denominator: int,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     string = f'{numerator}/{denominator}OB'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
 def fractional_scratch(
     numerator: int,
     denominator: int,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ) :
     string = f'{numerator}/{denominator} scratch'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def full_bow_strokes(selector='baca.pleaf(0)'):
-    return library.markup(
+def full_bow_strokes():
+    return baca.Markup(
         'full bow strokes',
-        selector=selector,
         )
 
-def glissando_lentissimo(selector='baca.pleaf(0)'):
-    return library.markup(
+def glissando_lentissimo():
+    return baca.Markup(
         'glissando lentissimo',
-        selector=selector,
         )
 
-def gridato_possibile(selector='baca.pleaf(0)'):
-    return library.markup(
+def gridato_possibile():
+    return baca.Markup(
         'gridato possibile',
-        selector=selector,
         )
 
-def half_clt(selector='baca.pleaf(0)'):
-    return library.markup(
+def half_clt():
+    return baca.Markup(
         '1/2 clt',
-        selector=selector,
         )
 
 def instrument(
@@ -353,54 +324,48 @@ def instrument(
         column=column,
         )
 
-def kn_rasg(selector='baca.pleaf(0)'):
-    return library.markup(
+def kn_rasg():
+    return baca.Markup(
         'kn. rasg.',
-        selector=selector,
         )
 
-def knuckle_rasg(selector='baca.pleaf(0)'):
-    return library.markup(
+def knuckle_rasg():
+    return baca.Markup(
         'knuckle rasg.',
-        selector=selector,
         )
 
-def leggieriss(selector='baca.pleaf(0)'):
-    return library.markup(
+def leggieriss():
+    return baca.Markup(
         'leggieriss.',
-        selector=selector,
         )
 
-def leggierissimo(selector='baca.pleaf(0)'):
-    return library.markup(
+def leggierissimo():
+    return baca.Markup(
         'leggierissimo',
-        selector=selector,
         )
 
-def leggierissimo_off_string_bowing_on_staccati(selector='baca.pleaf(0)'):
-    return library.markup(
+def leggierissimo_off_string_bowing_on_staccati():
+    return baca.Markup(
         'leggierissimo: off-string bowing on staccati',
-        selector=selector,
         )
 
-def lh_damp(selector='baca.pleaf(0)'):
-    return library.markup(
+def lh_damp():
+    return baca.Markup(
         'lh damp',
-        selector=selector,
         )
 
-def lh_damp_plus_half_clt(selector='baca.pleaf(0)'):
-    return library.markup(
+def lh_damp_plus_half_clt():
+    return baca.Markup(
         'lh damp + 1/2 clt',
-        selector=selector,
         )
 
-def lhd_plus_half_clt(selector='baca.pleaf(0)'):
-    return library.markup(
+def lhd_plus_half_clt():
+    return baca.Markup(
         'lhd + 1/2 clt',
-        selector=selector,
         )
 
+# TODO: selector was baca.leaf(0)
+# TODO: old no_whiteout=False parameter
 def lines(
     items: typing.List,
     selector: Selector = 'baca.leaf(0)',
@@ -431,12 +396,12 @@ def lines(
         whiteout=not(no_whiteout),
         )
 
-def loure(selector='baca.pleaf(0)'):
-    return library.markup(
+def loure():
+    return baca.Markup(
         'louré',
-        selector=selector,
         )
 
+# TODO: selector
 def lv_possibile(selector='baca.ptail(0)'):
     return library.markup(
         'l.v. possibile',
@@ -463,186 +428,158 @@ def make_instrument_name_markup(string, space, column=True):
         markup = markup.hcenter_in(space)
     return markup
 
-def molto_flautando(selector='baca.pleaf(0)'):
-    return library.markup(
+def molto_flautando():
+    return baca.Markup(
         'molto flautando',
-        selector=selector,
         )
 
-def molto_flautando_e_pont(selector='baca.pleaf(0)'):
-    return library.markup(
+def molto_flautando_e_pont():
+    return baca.Markup(
         'molto flautando ed estr. sul pont.',
-        selector=selector,
         )
 
-def molto_gridato(selector='baca.pleaf(0)'):
-    return library.markup(
+def molto_gridato():
+    return baca.Markup(
         'molto gridato ed estr. sul pont.',
-        selector=selector,
         )
 
-def molto_overpressure(selector='baca.pleaf(0)'):
-    return library.markup(
+def molto_overpressure():
+    return baca.Markup(
         'molto overpressure',
-        selector=selector,
         )
 
 def molto_pont_plus_vib_molto(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'molto pont.',
         'vib. molto',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
-def molto_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def molto_scratch():
+    return baca.Markup(
         'molto scratch',
-        selector=selector,
         )
 
-def MP_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def MP_XFB_flaut():
+    return baca.Markup(
         'MP + XFB flaut.',
-        selector=selector,
         )
 
-def nail_rasg(selector='baca.pleaf(0)'):
-    return library.markup(
+def nail_rasg():
+    return baca.Markup(
         'nail rasg.',
-        selector=selector,
         )
 
-def nail_rasgueado(selector='baca.pleaf(0)'):
-    return library.markup(
+def nail_rasgueado():
+    return baca.Markup(
         'nail rasgueado',
-        selector=selector,
         )
 
+# TODO: selector was baca.leaf(0)
 def non_div(selector='baca.leaf(0)'):
     return library.markup(
         'non div.',
         selector=selector,
         )
 
-def non_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def non_flaut():
+    return baca.Markup(
         'non flaut.',
-        selector=selector,
         )
 
-def non_flautando(selector='baca.pleaf(0)'):
-    return library.markup(
+def non_flautando():
+    return baca.Markup(
         'non flautando',
-        selector=selector,
         )
 
-def non_flutt(selector='baca.pleaf(0)'):
-    return library.markup(
+def non_flutt():
+    return baca.Markup(
         'non flutt.',
-        selector=selector,
         )
 
-def non_spazz(selector='baca.pleaf(0)'):
-    return library.markup(
+def non_spazz():
+    return baca.Markup(
         'non spazz.',
-        selector=selector,
         )
 
-def nut(selector='baca.pleaf(0)'):
-    return library.markup(
+def nut():
+    return baca.Markup(
         'nut',
-        selector=selector,
         )
 
-def OB(selector='baca.pleaf(0)'):
-    return library.markup(
+def OB():
+    return baca.Markup(
         'OB',
-        selector=selector,
         )
 
-def OB_full_bow_strokes(selector='baca.pleaf(0)'):
-    return library.markup(
+def OB_full_bow_strokes():
+    return baca.Markup(
         'OB + full bow strokes',
-        selector=selector,
         )
 
-def OB_no_pitch(selector='baca.pleaf(0)'):
-    return library.markup(
+def OB_no_pitch():
+    return baca.Markup(
         'OB (no pitch)',
-        selector=selector,
         )
 
-def OB_terminate_abruptly(selector='baca.pleaf(0)'):
-    return library.markup(
+def OB_terminate_abruptly():
+    return baca.Markup(
         'OB + terminate abruptly',
-        selector=selector,
         )
 
-def OB_terminate_each_note_abruptly(selector='baca.pleaf(0)'):
-    return library.markup(
+def OB_terminate_each_note_abruptly():
+    return baca.Markup(
         'OB + terminate each note abruptly',
-        selector=selector,
         )
 
-def off_string_bowing_on_staccati(selector='baca.pleaf(0)'):
-    return library.markup(
+def off_string_bowing_on_staccati():
+    return baca.Markup(
         'off-string bowing on staccati',
-        selector=selector,
         )
 
-def one_click_every(lower, upper, selector='baca.pleaf(0)'):
+def one_click_every(lower, upper):
     string = f'1 click/{lower}-{upper} sec.'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def ord(selector='baca.pleaf(0)'):
-    return library.markup(
+def ord():
+    return baca.Markup(
         'ord.',
-        selector=selector,
         )
 
-def ord_poco_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def ord_poco_scratch():
+    return baca.Markup(
         'ord. + poco scratch',
-        selector=selector,
         )
 
-def ord_senza_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def ord_senza_scratch():
+    return baca.Markup(
         'ord. (senza scratch)',
-        selector=selector,
         )
 
-def ordinario(selector='baca.pleaf(0)'):
-    return library.markup(
+def ordinario():
+    return baca.Markup(
         'ordinario',
-        selector=selector,
         )
 
-def overblow(selector='baca.pleaf(0)'):
-    return library.markup(
+def overblow():
+    return baca.Markup(
         'overblow',
-        selector=selector,
         )
 
-def P_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def P_XFB_flaut():
+    return baca.Markup(
         'P + XFB flaut.',
-        selector=selector,
         )
 
-def pizz(selector='baca.pleaf(0)'):
-    return library.markup(
+def pizz():
+    return baca.Markup(
         'pizz.',
-        selector=selector,
         )
 
 def plus_statement(
@@ -650,7 +587,6 @@ def plus_statement(
     string_2: str,
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
     ):
     if parenthesize_first and parenthesize_last:
         composite_string = f'({string_1} + {string_2})'
@@ -660,299 +596,259 @@ def plus_statement(
         composite_string = f'{string_1} (+{string_2})'
     else:
         composite_string = f'{string_1} + {string_2}'
-    return library.markup(
+    return baca.Markup(
         composite_string,
-        selector=selector,
         )
 
-def PO(selector='baca.pleaf(0)'):
-    return library.markup(
+def PO():
+    return baca.Markup(
         'PO',
-        selector=selector,
         )
 
-def PO_FB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def PO_FB_flaut():
+    return baca.Markup(
         'PO + FB flaut.',
-        selector=selector,
         )
 
-def po_meno_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def po_meno_scratch():
+    return baca.Markup(
         "po' meno scratch",
-        selector=selector,
         )
 
-def PO_NBS(selector='baca.pleaf(0)'):
-    return library.markup(
+def PO_NBS():
+    return baca.Markup(
         'PO + NBS',
-        selector=selector,
         )
 
 def PO_plus_non_vib(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'PO',
         'non vib.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
 def PO_plus_poco_vib(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'PO',
         'poco vib.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
-def PO_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def PO_scratch():
+    return baca.Markup(
         'PO + scratch',
-        selector=selector,
         )
 
-def PO_slow_bow(selector='baca.pleaf(0)'):
-    return library.markup(
+def PO_slow_bow():
+    return baca.Markup(
         'PO + slow bow (poco scratch)',
-        selector=selector,
         )
 
-def PO_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def PO_XFB_flaut():
+    return baca.Markup(
         'PO + XFB flaut.',
-        selector=selector,
         )
 
-def pochiss_pont(selector='baca.pleaf(0)'):
-    return library.markup(
+def pochiss_pont():
+    return baca.Markup(
         'pochiss. pont.',
-        selector=selector,
         )
 
-def pochiss_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def pochiss_scratch():
+    return baca.Markup(
         'pochiss. scratch',
-        selector=selector,
         )
 
-def pochiss_vib(selector='baca.pleaf(0)'):
-    return library.markup(
+def pochiss_vib():
+    return baca.Markup(
         'pochiss. vib.',
-        selector=selector,
         )
 
-def poco_overpressure(selector='baca.pleaf(0)'):
-    return library.markup(
+def poco_overpressure():
+    return baca.Markup(
         'poco overpressure',
-        selector=selector,
         )
 
 def poco_pont_plus_non_vib(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'poco pont.',
         'non vib.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
 def poco_pont_plus_sub_non_vib(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'poco pont.',
         'sub. non vib.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
 def poco_pont_plus_sub_vib_mod(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'poco pont.',
         'sub. vib. mod.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
 def poco_pont_plus_vib_mod(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'poco pont.',
         'vib. mod.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
-def poco_rasp_partial_2(selector='baca.pleaf(0)'):
-    return library.markup(
+def poco_rasp_partial_2():
+    return baca.Markup(
         'poco rasp (2°)',
-        selector=selector,
         )
 
-def poco_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def poco_scratch():
+    return baca.Markup(
         'poco scratch',
-        selector=selector,
         )
 
-def pont(selector='baca.pleaf(0)'):
-    return library.markup(
+def pont():
+    return baca.Markup(
         'pont.',
-        selector=selector,
         )
 
-def pont_XFB(selector='baca.pleaf(0)'):
-    return library.markup(
+def pont_XFB():
+    return baca.Markup(
         'pont. + XFB',
-        selector=selector,
         )
 
-def pont_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def pont_XFB_flaut():
+    return baca.Markup(
         'pont. + XFB flaut.',
-        selector=selector,
         )
 
-def ponticello(selector='baca.pleaf(0)'):
-    return library.markup(
+def ponticello():
+    return baca.Markup(
         'ponticello',
-        selector=selector,
         )
 
-def pos_ord(selector='baca.pleaf(0)'):
-    return library.markup(
+def pos_ord():
+    return baca.Markup(
         'pos. ord.',
-        selector=selector,
         )
 
-def pos_ord_poco_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def pos_ord_poco_scratch():
+    return baca.Markup(
         'pos. ord. + poco scratch',
-        selector=selector,
         )
 
-def pos_ord_senza_vib(selector='baca.pleaf(0)'):
-    return library.markup(
+def pos_ord_senza_vib():
+    return baca.Markup(
         'pos. ord. + senza vib',
-        selector=selector,
         )
 
-def pos_ord_vib_poco(selector='baca.pleaf(0)'):
-    return library.markup(
+def pos_ord_vib_poco():
+    return baca.Markup(
         'pos. ord. + vib. poco',
-        selector=selector,
         )
 
-def pos_ord_XFB(selector='baca.pleaf(0)'):
-    return library.markup(
+def pos_ord_XFB():
+    return baca.Markup(
         'pos. ord. + XFB',
-        selector=selector,
         )
 
-def pos_ord_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def pos_ord_XFB_flaut():
+    return baca.Markup(
         'pos. ord. + XFB flaut.',
-        selector=selector,
         )
 
-def pP_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def pP_XFB_flaut():
+    return baca.Markup(
         'pP + XFB flaut.',
-        selector=selector,
         )
 
-def pres_de_la_table(selector='baca.pleaf(0)'):
+def pres_de_la_table():
     return boxed(
         'près de la table',
-        selector=selector,
         )
 
-def pT_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def pT_XFB_flaut():
+    return baca.Markup(
         'pT + XFB flaut.',
-        selector=selector,
         )
 
+
+# TODO: selector was baca.leaf(0)
 def put_reed_back_in(selector='baca.leaf(0)'):
     return boxed(
         'put reed back in',
         selector=selector,
         )
 
-def rasp(selector='baca.pleaf(0)'):
-    return library.markup(
+def rasp():
+    return baca.Markup(
         'rasp',
-        selector=selector,
         )
 
-def rasp_partial_2(selector='baca.pleaf(0)'):
-    return library.markup(
+def rasp_partial_2():
+    return baca.Markup(
         'rasp (2°)',
-        selector=selector,
         )
 
+# TODO: selector was baca.leaf(0)
 def remove_reed(selector='baca.leaf(0)'):
     return boxed(
         'remove reed',
         selector=selector,
         )
 
+# TODO: selector was baca.leaf(0)
 def remove_staple(selector='baca.leaf(0)'):
     return boxed(
         'remove staple',
         selector=selector,
         )
 
-def scratch_moltiss(selector='baca.pleaf(0)'):
-    return library.markup(
+def scratch_moltiss():
+    return baca.Markup(
         'scratch moltiss.',
-        selector=selector,
         )
 
-def senza_pedale(selector='baca.pleaf(0)'):
-    return library.markup(
+def senza_pedale():
+    return baca.Markup(
         'senza pedale',
-        selector=selector,
         )
 
-def senza_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def senza_scratch():
+    return baca.Markup(
         'senza scratch',
-        selector=selector,
         )
 
-def senza_vib(selector='baca.pleaf(0)'):
-    return library.markup(
+def senza_vib():
+    return baca.Markup(
         'senza vib.',
-        selector=selector,
         )
 
+# TODO: selector was baca.leaf(0)
 def shakers(selector='baca.leaf(0)'):
     return library.markup(
         'shakers',
@@ -963,7 +859,7 @@ def short_instrument(
     string: str,
     hcenter_in: Number = 10,
     column: bool = True,
-    ) -> IndicatorCommand:
+    ):
     r"""
     Makes short instrument name markup.
 
@@ -1014,45 +910,39 @@ def short_instrument(
         column=column,
         )
 
-def sparse_clicks(selector='baca.pleaf(0)'):
-    first_line = abjad.Markup(
+def sparse_clicks():
+    first_line = baca.Markup(
         'sparse, individual clicks with extremely slow bow')
     first_line = first_line.line()
-    second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
-    markup = abjad.Markup.column([first_line, second_line])
-    return library.markup(
+    second_line = baca.Markup('(1-2/sec. in irregular rhythm)').line()
+    markup = baca.Markup.column([first_line, second_line])
+    return baca.Markup(
         markup,
-        selector=selector,
         )
 
-def spazz(selector='baca.pleaf(0)'):
-    return library.markup(
+def spazz():
+    return baca.Markup(
         'spazz.',
-        selector=selector,
         )
 
-def spazzolato(selector='baca.pleaf(0)'):
-    return library.markup(
+def spazzolato():
+    return baca.Markup(
         'spazzolato',
-        selector=selector,
         )
 
-def spazzolato_1_2_clt(selector='baca.pleaf(0)'):
-    return library.markup(
+def spazzolato_1_2_clt():
+    return baca.Markup(
         'spazzolato (1/2 clt)',
-        selector=selector,
         )
 
+# TODO: selector was baca.leaf(0)
 def still(selector='baca.leaf(0)'):
     return library.markup(
         'still',
         selector=selector,
         )
 
-def string_number(
-    n: int,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+def string_number(n: int):
     to_roman_numeral = {
         1: 'I',
         2: 'II',
@@ -1060,16 +950,14 @@ def string_number(
         4: 'IV',
         }
     string_number = to_roman_numeral[n]
-    return library.markup(
+    return baca.Markup(
         string_number,
-        selector=selector,
         direction=abjad.Down,
         )
 
 def string_numbers(
     numbers: typing.List[int],
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     to_roman_numeral = {
         1: 'I',
         2: 'II',
@@ -1078,275 +966,230 @@ def string_numbers(
         }
     string_numbers = [to_roman_numeral[_] for _ in numbers]
     string = '+'.join(string_numbers)
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         direction=abjad.Down,
         )
 
-def subito_non_armonichi_e_non_gridato(selector='baca.pleaf(0)'):
-    return library.markup(
+def subito_non_armonichi_e_non_gridato():
+    return baca.Markup(
         'subito non armonichi e non gridato',
-        selector=selector,
         )
 
-def subito_ordinario(selector='baca.pleaf(0)'):
-    return library.markup(
+def subito_ordinario():
+    return baca.Markup(
         'subito ordinario',
-        selector=selector,
         )
 
-def tamb_tr(selector='baca.pleaf(0)'):
-    return library.markup(
+def tamb_tr():
+    return baca.Markup(
         'tamb. tr.',
-        selector=selector,
         )
 
-def tasto(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto():
+    return baca.Markup(
         'tasto',
-        selector=selector,
         )
 
-def tasto_FB(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_FB():
+    return baca.Markup(
         'tasto + FB',
-        selector=selector,
         )
 
-def tasto_FB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_FB_flaut():
+    return baca.Markup(
         'tasto + FB flaut.',
-        selector=selector,
         )
 
 def tasto_fractional_scratch(
     numerator: int,
     denominator: int,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     string = f'tasto + {numerator}/{denominator} scratch'
-    return library.markup(
+    return baca.Markup(
         string,
-        selector=selector,
         )
 
-def tasto_half_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_half_scratch():
+    return baca.Markup(
         'tasto + 1/2 scratch',
-        selector=selector,
         )
 
-def tasto_moltiss(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_moltiss():
+    return baca.Markup(
         'tasto moltiss.',
-        selector=selector,
         )
 
-def tasto_NBS(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_NBS():
+    return baca.Markup(
         'tasto + NBS',
-        selector=selector,
         )
 
 def tasto_plus_non_vib(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'tasto',
         'non vib.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
-def tasto_plus_pochiss_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_plus_pochiss_scratch():
+    return baca.Markup(
         'tasto + pochiss. scratch',
-        selector=selector,
         )
 
-def tasto_plus_poco_scratch(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_plus_poco_scratch():
+    return baca.Markup(
         'tasto + poco scratch',
-        selector=selector,
         )
 
 def tasto_plus_poco_vib(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'tasto',
         'poco vib.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
-def tasto_plus_scratch_moltiss(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_plus_scratch_moltiss():
+    return baca.Markup(
         'tasto + scratch moltiss.',
-        selector=selector,
         )
 
-def tasto_poss(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_poss():
+    return baca.Markup(
         'tasto poss.',
-        selector=selector,
         )
 
-def tasto_senza_vib(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_senza_vib():
+    return baca.Markup(
         'tasto + senza vib.',
-        selector=selector,
         )
 
-def tasto_slow_bow(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_slow_bow():
+    return baca.Markup(
         'tasto + slow bow (poco scratch)',
-        selector=selector,
         )
 
-def tasto_XFB(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_XFB():
+    return baca.Markup(
         'tasto + XFB',
-        selector=selector,
         )
 
-def tasto_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def tasto_XFB_flaut():
+    return baca.Markup(
         'tasto + XFB flaut.',
-        selector=selector,
         )
 
-def terminate_abruptly(selector='baca.pleaf(0)'):
-    return library.markup(
+def terminate_abruptly():
+    return baca.Markup(
         'terminate abruptly',
-        selector=selector,
         )
 
-def terminate_each_note_abruptly(selector='baca.pleaf(0)'):
-    return library.markup(
+def terminate_each_note_abruptly():
+    return baca.Markup(
         'terminate each note abruptly',
-        selector=selector,
         )
 
-def trans(selector='baca.pleaf(0)'):
-    return library.markup(
+def trans():
+    return baca.Markup(
         'trans.',
-        selector=selector,
         )
 
-def trem_flaut_tast(selector='baca.pleaf(0)'):
-    return library.markup(
+def trem_flaut_tast():
+    return baca.Markup(
         'trem. flaut. tast.',
-        selector=selector,
         )
 
-def vib_moltiss(selector='baca.pleaf(0)'):
-    return library.markup(
+def vib_moltiss():
+    return baca.Markup(
         'vib. moltiss.',
-        selector=selector,
         )
 
-def vib_pochiss(selector='baca.pleaf(0)'):
-    return library.markup(
+def vib_pochiss():
+    return baca.Markup(
         'vib. pochiss.',
-        selector=selector,
         )
 
-def vib_poco(selector='baca.pleaf(0)'):
-    return library.markup(
+def vib_poco():
+    return baca.Markup(
         'vib. poco.',
-        selector=selector,
         )
 
-def XFB(selector='baca.pleaf(0)'):
-    return library.markup(
+def XFB():
+    return baca.Markup(
         'XFB',
-        selector=selector,
         )
 
-def XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def XFB_flaut():
+    return baca.Markup(
         'XFB flaut.',
-        selector=selector,
         )
 
 def XFB_plus_pochiss_pont(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'XFB',
         'pochiss. pont.',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
 def XFB_plus_tasto(
     parenthesize_first: bool = False,
     parenthesize_last: bool = False,
-    selector: Selector = 'baca.pleaf(0)',
-    ) -> IndicatorCommand:
+    ):
     return plus_statement(
         'XFB',
         'tasto',
         parenthesize_first=parenthesize_first,
         parenthesize_last=parenthesize_last,
-        selector=selector,
         )
 
-def XFB_sempre(selector='baca.pleaf(0)'):
-    return library.markup(
+def XFB_sempre():
+    return baca.Markup(
         'XFB sempre',
-        selector=selector,
         )
 
-def XP(selector='baca.pleaf(0)'):
-    return library.markup(
+def XP():
+    return baca.Markup(
         'XP',
-        selector=selector,
         )
 
-def XP_FB(selector='baca.pleaf(0)'):
-    return library.markup(
+def XP_FB():
+    return baca.Markup(
         'XP + FB',
-        selector=selector,
         )
 
-def XP_FB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def XP_FB_flaut():
+    return baca.Markup(
         'XP + FB flaut.',
-        selector=selector,
         )
 
-def XP_full_bow_strokes(selector='baca.pleaf(0)'):
-    return library.markup(
+def XP_full_bow_strokes():
+    return baca.Markup(
         'XP + full bow strokes',
-        selector=selector,
         )
 
-def XP_XFB(selector='baca.pleaf(0)'):
-    return library.markup(
+def XP_XFB():
+    return baca.Markup(
         'XP + XFB',
-        selector=selector,
         )
 
-def XP_XFB_flaut(selector='baca.pleaf(0)'):
-    return library.markup(
+def XP_XFB_flaut():
+    return baca.Markup(
         'XP + XFB flaut.',
-        selector=selector,
         )
 
-def XT(selector='baca.pleaf(0)'):
-    return library.markup(
+def XT():
+    return baca.Markup(
         'XT',
-        selector=selector,
         )
