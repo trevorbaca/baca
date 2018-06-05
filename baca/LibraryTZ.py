@@ -1312,14 +1312,13 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner(
         text: typing.Union[str, abjad.Markup],
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         leak: bool = None,
         line_segment: abjad.LineSegment = None,
         lilypond_id: int = None,
         no_upright: bool = None,
         right_padding: typing.Optional[Number] = 1.25,
         selector: Selector = 'baca.leaves()',
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> TextSpannerCommand:
         r"""
         Makes text spanner command.
@@ -1336,14 +1335,14 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'MusicVoice',
             ...     baca.text_spanner(
             ...         '1/2 clt',
+            ...         abjad.tweak(4).staff_padding,
             ...         selector=baca.leaves()[:7 + 1],
-            ...         tweaks=[('staff-padding', 4)],
             ...         ),
             ...     baca.text_spanner(
             ...         'damp',
+            ...         abjad.tweak(6.5).staff_padding,
             ...         lilypond_id=1,
             ...         selector=baca.leaves()[:11 + 1],
-            ...         tweaks=[('staff-padding', 6.5)],
             ...         ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1514,12 +1513,12 @@ class LibraryTZ(abjad.AbjadObject):
                 raise Exception(f'markup already upright:\n  {markup}')
             markup = markup.upright()
         return TextSpannerCommand(
+            *tweaks,
             leak=leak,
             lilypond_id=lilypond_id,
             line_segment=line_segment,
             selector=selector,
             text=markup,
-            tweaks=tweaks,
             )
 
     @staticmethod
@@ -2669,7 +2668,7 @@ class LibraryTZ(abjad.AbjadObject):
         no_upright: bool = None,
         pieces: typing.Union[MapCommand, Selector] = 'baca.leaves().group()',
         selector: Selector = 'baca.tleaves()',
-        tweaks: typing.List[typing.Tuple] = None
+        tweaks: typing.List[abjad.LilyPondTweakManager] = None
         ) -> PiecewiseCommand:
         r"""
         Makes transition text spanner.
@@ -3093,13 +3092,14 @@ class LibraryTZ(abjad.AbjadObject):
         if lilypond_id is not None:
             assert lilypond_id in (1, 2, 3), repr(lilypond_id)
         text_spanner = abjad.TextSpanner(lilypond_id=lilypond_id)
+        tweaks = tweaks or []
         return library.piecewise(
             text_spanner,
             indicators,
             pieces,
+            *tweaks,
             bookend=not(do_not_bookend),
             selector=selector,
-            tweaks=tweaks,
             )
 
     @staticmethod

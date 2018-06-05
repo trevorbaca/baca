@@ -70,15 +70,10 @@ class Command(abjad.AbjadObject):
         if not self.tweaks:
             return
         manager = abjad.tweak(argument)
-        for attribute, value in self.tweaks:
-            setattr(manager, attribute, value)
-
-    @staticmethod
-    def _validate_tags(tags):
-        assert isinstance(tags, list), repr(tags)
-        assert '' not in tags, repr(tags)
-        assert not any(':' in _ for _ in tags), repr(tags)
-        return True
+        for manager_ in self.tweaks:
+            tuples = manager_._get_attribute_tuples()
+            for attribute, value in tuples:
+                setattr(manager, attribute, value)
 
     @staticmethod
     def _remove_reapplied_wrappers(leaf, indicator):
@@ -142,11 +137,20 @@ class Command(abjad.AbjadObject):
             return reapplied_indicators[0]
 
     @staticmethod
+    def _validate_tags(tags):
+        assert isinstance(tags, list), repr(tags)
+        assert '' not in tags, repr(tags)
+        assert not any(':' in _ for _ in tags), repr(tags)
+        return True
+
+    @staticmethod
     def _validate_tweaks(tweaks):
         if tweaks is None:
             return
-        assert isinstance(tweaks, list), repr(tweaks)
-        assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        assert isinstance(tweaks, tuple), repr(tweaks)
+        for tweak in tweaks:
+            if not isinstance(tweak, abjad.LilyPondTweakManager):
+                raise Exception(tweaks)
 
     ### PUBLIC PROPERTIES ###
 

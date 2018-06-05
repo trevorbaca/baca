@@ -168,13 +168,12 @@ class TextSpannerCommand(Command):
 
     def __init__(
         self,
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         leak: bool = None,
         lilypond_id: int = None,
         line_segment: abjad.LineSegment = None,
         selector: Selector = 'baca.leaves()',
         text: typing.Union[str, abjad.Markup] = None,
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if leak is not None:
@@ -265,7 +264,7 @@ class TextSpannerCommand(Command):
         return self._text
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
         """
         Gets tweaks.
         """

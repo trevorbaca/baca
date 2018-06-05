@@ -30,7 +30,9 @@ class MapCommand(Command):
         ...             baca.marcato(),
         ...             baca.staccato(),
         ...             ),
-        ...         baca.slur(tweaks=[('direction', 'down')]),
+        ...         baca.slur(
+        ...             abjad.tweak(abjad.Down).direction,
+        ...             ),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),

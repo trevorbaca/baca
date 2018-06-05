@@ -1536,9 +1536,8 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def rehearsal_mark(
         argument: typing.Union[int, str],
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         selector: Selector = 'baca.leaf(0)',
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> IndicatorCommand:
         """
         Attaches rehearsal mark.
@@ -1548,16 +1547,10 @@ class LibraryNS(abjad.AbjadObject):
         else:
             assert isinstance(argument, int)
             mark = abjad.RehearsalMark(number=argument)
-        if tweaks is not None:
-            assert isinstance(tweaks, list), tweaks
-            for tweak in tweaks:
-                assert isinstance(tweak, tuple), repr(tweak)
-                assert len(tweak) == 2, repr(tweak)
-                assert isinstance(tweak[0], str), repr(tweak)
         return IndicatorCommand(
+            *tweaks,
             indicators=[mark],
             selector=selector,
-            tweaks=tweaks,
             )
 
     @staticmethod
@@ -4430,9 +4423,8 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def slur(
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         selector: Selector = 'baca.tleaves()',
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> SpannerCommand:
         r"""
         Attaches slur.
@@ -4578,9 +4570,9 @@ class LibraryNS(abjad.AbjadObject):
 
         """
         return SpannerCommand(
+            *tweaks,
             selector=selector,
             spanner=abjad.Slur(),
-            tweaks=tweaks,
             )
 
     @staticmethod

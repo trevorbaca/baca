@@ -486,10 +486,9 @@ def piecewise(
     spanner: abjad.Spanner,
     indicators: typing.Iterable,
     pieces: typing.Union[MapCommand, Selector],
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = False,
     selector: Selector = 'baca.leaves()',
-    tweaks: typing.List[typing.Tuple] = None,
     ):
     """
     Makes piecewise command from ``spanner``, ``indicators`` and

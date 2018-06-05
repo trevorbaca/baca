@@ -30,10 +30,9 @@ class BowContactPointCommand(Command):
 
     def __init__(
         self,
-        *,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
+        *tweaks: abjad.LilyPondTweakManager,
         selector: Selector = None,
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if bcps is None:
@@ -147,7 +146,7 @@ class BowContactPointCommand(Command):
         return self._bow_contact_points
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
         """
         Gets tweaks.
         """

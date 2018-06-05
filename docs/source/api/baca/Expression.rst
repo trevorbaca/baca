@@ -114,6 +114,8 @@ Expression
 
    .. autoattribute:: Expression.is_postfix
 
+   .. autoattribute:: Expression.is_selector
+
    .. autoattribute:: Expression.keywords
 
    .. autoattribute:: Expression.lone

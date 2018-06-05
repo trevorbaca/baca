@@ -35,7 +35,7 @@ class PiecewiseCommand(Command):
         pieces: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         selector: Selector = 'baca.leaves()',
-        tweaks: typing.List[typing.Tuple] = None,
+        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = (),
         ) -> None:
         Command.__init__(self, selector=selector)
         if bookend is not None:
@@ -54,9 +54,7 @@ class PiecewiseCommand(Command):
             assert isinstance(spanner, (abjad.Spanner, SpannerCommand))
         self._spanner = spanner
         self._tags = []
-        if tweaks is not None:
-            assert isinstance(tweaks, list), repr(tweaks)
-            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -211,7 +209,7 @@ class PiecewiseCommand(Command):
         return self._spanner
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
         """
         Gets tweaks.
         """

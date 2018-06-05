@@ -191,7 +191,7 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         deactivate: bool = None,
         detach_first: bool = None,
         left_broken: bool = None,
@@ -199,7 +199,6 @@ class SpannerCommand(Command):
         selector: Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if detach_first is not None:
@@ -415,7 +414,7 @@ class SpannerCommand(Command):
         return self._spanner
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
         """
         Gets tweaks.
         """

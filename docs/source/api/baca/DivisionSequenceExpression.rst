@@ -118,6 +118,8 @@ DivisionSequenceExpression
 
    .. autoattribute:: DivisionSequenceExpression.is_postfix
 
+   .. autoattribute:: DivisionSequenceExpression.is_selector
+
    .. autoattribute:: DivisionSequenceExpression.keywords
 
    .. autoattribute:: DivisionSequenceExpression.lone

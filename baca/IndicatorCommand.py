@@ -220,14 +220,13 @@ class IndicatorCommand(Command):
 
     def __init__(
         self,
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         context: str = None,
         deactivate: bool = None,
         indicators: typing.List[typing.Any] = None,
         redundant: bool = None,
         selector: Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if context is not None:
@@ -243,9 +242,7 @@ class IndicatorCommand(Command):
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
-        if tweaks is not None:
-            assert isinstance(tweaks, list), repr(tweaks)
-            assert all(isinstance(_, tuple) for _ in tweaks), repr(tweaks)
+        self._validate_tweaks(tweaks)
         self._tweaks = tweaks
         tags = tags or []
         assert self._validate_tags(tags), repr(tags)
@@ -476,7 +473,7 @@ class IndicatorCommand(Command):
         return self._redundant
 
     @property
-    def tweaks(self) -> typing.Optional[typing.List[typing.Tuple]]:
+    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
         """
         Gets tweaks.
         """

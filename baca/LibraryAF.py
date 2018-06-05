@@ -2101,25 +2101,23 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bcps(
-        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
-        *,
+        bcps: typing.Iterable[typing.Tuple[int, int]],
+        *tweaks: abjad.LilyPondTweakManager,
         selector: Selector = 'baca.leaves()',
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> BowContactPointCommand:
         """
         Makes bow contact points.
         """
         return BowContactPointCommand(
-            bcps=bcps,
+            bcps,
+            *tweaks,
             selector=selector,
-            tweaks=tweaks,
             )
 
     @staticmethod
     def beam(
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         selector: Selector = 'baca.tleaves()',
-        tweaks: typing.List[typing.Tuple] = None,
         ) -> SpannerCommand:
         r"""
         Attaches beam.
@@ -2234,10 +2232,10 @@ class LibraryAF(abjad.AbjadObject):
 
         """
         return SpannerCommand(
+            *tweaks,
             detach_first=True,
             selector=selector,
             spanner=abjad.Beam(),
-            tweaks=tweaks,
             )
 
     @staticmethod
