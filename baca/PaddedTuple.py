@@ -121,6 +121,7 @@ class PaddedTuple(abjad.AbjadObject):
         if not self:
             raise IndexError(f'padded tuple is empty: {self!r}.')
         length = len(self)
+        assert isinstance(self.pad, int)
         if 0 <= argument < len(self):
             pass
         elif length <= argument:
