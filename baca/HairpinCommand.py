@@ -94,13 +94,14 @@ class HairpinCommand(Command):
         '_start',
         '_stop',
         '_tags',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        *,
+        *tweaks: abjad.LilyPondTweakManager,
         deactivate: bool = None,
         leak: bool = None,
         left_broken: str = None,
@@ -129,6 +130,8 @@ class HairpinCommand(Command):
         tags = tags or []
         assert self._validate_tags(tags), repr(tags)
         self._tags = tags
+        self._validate_tweaks(tweaks)
+        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
@@ -145,6 +148,7 @@ class HairpinCommand(Command):
             return
         leaves = abjad.select(argument).leaves()
         spanner = abjad.Hairpin(context='Voice', leak=self.leak)
+        self._apply_tweaks(spanner)
         abjad.attach(
             spanner,
             leaves,
@@ -230,3 +234,10 @@ class HairpinCommand(Command):
         Gets hairpin stop.
         """
         return self._stop
+
+    @property
+    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks

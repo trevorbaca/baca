@@ -1,4 +1,5 @@
 #(ly:set-option 'relative-includes #t)
+\include "flared-hairpin-for-trevor.ily"
 \include "text-spanner-id.ily"
 
 %%% ARTICULATIONS: MULTIPLE STACCATI %%%

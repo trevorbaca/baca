@@ -77,3 +77,5 @@ HairpinCommand
    .. autoattribute:: HairpinCommand.tag
 
    .. autoattribute:: HairpinCommand.tags
+
+   .. autoattribute:: HairpinCommand.tweaks

@@ -831,7 +831,7 @@ def dynamic_up(
 
 def hairpin(
     string: str = None,
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     leak: bool = None,
     left_broken: str = None,
     right_broken: str = None,
@@ -1094,6 +1094,7 @@ def hairpin(
         if stop_ordinal is not None:
             stop = abjad.new(stop, ordinal=stop_ordinal)
     command = HairpinCommand(
+        *tweaks,
         leak=leak,
         left_broken=left_broken,
         right_broken=right_broken,

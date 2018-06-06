@@ -265,6 +265,11 @@ def half_clt():
         '1/2 clt',
         )
 
+def hair():
+    return Markup(
+        'hair',
+        )
+
 def instrument(
     string: str,
     hcenter_in: typing.Optional[Number] = 16,

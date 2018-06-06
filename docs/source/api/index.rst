@@ -448,6 +448,7 @@ Bača API
    ~baca.markups.glissando_lentissimo
    ~baca.markups.grid_possibile
    ~baca.markups.gridato_possibile
+   ~baca.markups.hair
    ~baca.markups.half_clt
    ~baca.markups.instrument
    ~baca.markups.keynoise

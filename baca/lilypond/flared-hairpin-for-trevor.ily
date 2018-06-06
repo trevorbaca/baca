@@ -46,23 +46,3 @@
 
 #(define flared-hairpin-new
   (elbowed-hairpin-modified-for-trevor '((1.0 . 0.4) (0.5 . 1.0)) - #t))
-
-
-\relative c' {
-  \override Score.Hairpin.stencil = #flared-hairpin-old
-  a\< b c d |
-  e\f a a a |
-  a\< b c d |
-  a b c d |
-  a b c d |
-  a b c d |
-  e\f a a a | \break
-  \override Score.Hairpin.stencil = #flared-hairpin-new
-  a\< b c d |
-  e\f a a a |
-  a\< b c d |
-  a b c d |
-  a b c d |
-  a b c d |
-  e\f a a a |
-}

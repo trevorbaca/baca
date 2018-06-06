@@ -151,6 +151,8 @@ markups
 
 .. autofunction:: gridato_possibile
 
+.. autofunction:: hair
+
 .. autofunction:: half_clt
 
 .. autofunction:: instrument

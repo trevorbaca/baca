@@ -210,7 +210,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.text_script_color('red'),
@@ -282,7 +282,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
@@ -402,7 +402,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.text_script_down(),
@@ -474,7 +474,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
@@ -663,7 +663,7 @@ class LibraryTZ(abjad.AbjadObject):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.tuplets()[1:2].phead(0),
+                ...         selector=baca.tuplets()[1:2].phead(0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(4),
@@ -735,7 +735,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
@@ -901,7 +901,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.text_script_staff_padding(n=4),
@@ -973,7 +973,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(
@@ -1093,7 +1093,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.text_script_up(),
@@ -1165,7 +1165,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.markup('più mosso'),
             ...     baca.markup(
             ...         'lo stesso tempo',
-            ...         baca.tuplets()[1:2].phead(0),
+            ...         selector=baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.map(

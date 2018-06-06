@@ -64,3 +64,5 @@ PitchTreeSpanner
    .. autoattribute:: PitchTreeSpanner.leaves
 
    .. autoattribute:: PitchTreeSpanner.level
+
+   .. autoattribute:: PitchTreeSpanner.tweaks

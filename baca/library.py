@@ -113,9 +113,9 @@ def map(
 
 def markup(
     argument: typing.Union[str, abjad.Markup],
-    selector: Selector = 'baca.pleaf(0)',
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     direction: abjad.VerticalAlignment = abjad.Up,
+    selector: Selector = 'baca.pleaf(0)',
     literal: bool = False,
     ) -> IndicatorCommand:
     r"""
@@ -196,7 +196,10 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup('più mosso', baca.tuplets()[1:2].phead(0)),
+        ...     baca.markup(
+        ...         'più mosso',
+        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -263,7 +266,10 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup('*', baca.tuplets()[1:2].pheads()),
+        ...     baca.markup(
+        ...         '*',
+        ...         selector=baca.tuplets()[1:2].pheads(),
+        ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -334,7 +340,10 @@ def markup(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.markup(r'\baca_triple_diamond_markup', literal=True),
+        ...     baca.markup(
+        ...         r'\baca_triple_diamond_markup',
+        ...         literal=True,
+        ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -430,6 +439,7 @@ def markup(
         raise Exception(message)
     selector = selector or 'baca.phead(0)'
     return IndicatorCommand(
+        *tweaks,
         indicators=[markup],
         selector=selector,
         )
