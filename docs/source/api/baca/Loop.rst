@@ -37,20 +37,7 @@ Loop
 
    .. automethod:: Loop.__repr__
 
-   .. automethod:: Loop.__reversed__
-
    .. automethod:: Loop.__str__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. automethod:: Loop.count
-
-   .. automethod:: Loop.index
 
    .. raw:: html
 

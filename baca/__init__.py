@@ -61,6 +61,7 @@ from .MusicMaker import MusicMaker
 from .NestingCommand import NestingCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
+from .PaddedTuple import PaddedTuple
 from .PageSpecifier import PageSpecifier
 from .PartAssignmentCommand import PartAssignmentCommand
 from .Partial import Partial

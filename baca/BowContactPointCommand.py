@@ -16,6 +16,7 @@ class BowContactPointCommand(Command):
     
     __slots__ = (
         '_bow_contact_points',
+        '_helper',
         '_tweaks',
         )
 
@@ -32,12 +33,17 @@ class BowContactPointCommand(Command):
         self,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         *tweaks: abjad.LilyPondTweakManager,
+        helper: typing.Callable = None,
         selector: Selector = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if bcps is None:
             bcps = BowContactPointCommand._default_bow_contact_points
+        self._validate_bcps(bcps)
         self._bow_contact_points = bcps
+        if helper is not None:
+            assert callable(helper), repr(helper)
+        self._helper = helper
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 
@@ -51,11 +57,6 @@ class BowContactPointCommand(Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        bcps = baca.sequence(self.bow_contact_points)
-        for bcp in bcps:
-            assert isinstance(bcp, tuple), repr(bcp)
-            assert len(bcp) == 2, repr(bcp)
-        bcps = abjad.CyclicTuple(bcps)
         leaves = baca.select(argument).leaves()
         start_command = r'\startBCPTextSpan'
         stop_command = r'\stopBCPTextSpan'
@@ -64,6 +65,10 @@ class BowContactPointCommand(Command):
             )
         self._apply_tweaks(spanner)
         abjad.attach(spanner, leaves)
+        bcps = baca.sequence(self.bow_contact_points)
+        if self.helper:
+            bcps = self.helper(bcps, argument)
+        bcps = abjad.CyclicTuple(bcps)
         lts = baca.select(argument).lts()
         total = len(lts)
         previous_bcp = None
@@ -105,6 +110,16 @@ class BowContactPointCommand(Command):
                     abjad.attach(abjad.Articulation('downbow'), lt.head)
             previous_bcp = bcp
 
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _validate_bcps(bcps):
+        if bcps is None:
+            return
+        for bcp in bcps:
+            assert isinstance(bcp, tuple), repr(bcp)
+            assert len(bcp) == 2, repr(bcp)
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -144,6 +159,13 @@ class BowContactPointCommand(Command):
         Class constant.
         """
         return self._bow_contact_points
+
+    @property
+    def helper(self) -> typing.Optional[typing.Callable]:
+        """
+        Gets BCP helper.
+        """
+        return self._helper
 
     @property
     def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:

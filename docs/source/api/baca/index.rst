@@ -231,6 +231,7 @@ baca
    Markup
    Matrix
    MetronomeMarkMeasureMap
+   PaddedTuple
    PageSpecifier
    Partial
    PitchArray
@@ -288,6 +289,7 @@ baca
    ~Markup.Markup
    ~Matrix.Matrix
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
+   ~PaddedTuple.PaddedTuple
    ~PageSpecifier.PageSpecifier
    ~Partial.Partial
    ~PitchArray.PitchArray

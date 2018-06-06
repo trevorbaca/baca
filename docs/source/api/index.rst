@@ -140,6 +140,7 @@ Bača API
    ~baca.Markup.Markup
    ~baca.Matrix.Matrix
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
+   ~baca.PaddedTuple.PaddedTuple
    ~baca.PageSpecifier.PageSpecifier
    ~baca.Partial.Partial
    ~baca.PitchArray.PitchArray

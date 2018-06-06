@@ -64,6 +64,8 @@ BowContactPointCommand
 
    .. autoattribute:: BowContactPointCommand.deactivate
 
+   .. autoattribute:: BowContactPointCommand.helper
+
    .. autoattribute:: BowContactPointCommand.selector
 
    .. autoattribute:: BowContactPointCommand.tag

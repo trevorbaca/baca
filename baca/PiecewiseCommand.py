@@ -31,7 +31,7 @@ class PiecewiseCommand(Command):
         self,
         *,
         bookend: typing.Union[bool, int] = None,
-        indicators: typing.Iterable = None,
+        indicators: typing.Sequence = None,
         pieces: typing.Union[MapCommand, Selector] = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         selector: Selector = 'baca.leaves()',
@@ -41,9 +41,10 @@ class PiecewiseCommand(Command):
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
+        indicators_ = None
         if indicators is not None:
-            indicators = abjad.CyclicTuple(indicators)
-        self._indicators = indicators
+            indicators_ = abjad.CyclicTuple(indicators)
+        self._indicators = indicators_
         if isinstance(pieces, str):
             pieces = eval(pieces)
         if pieces is not None:

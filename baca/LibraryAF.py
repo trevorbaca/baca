@@ -2103,6 +2103,7 @@ class LibraryAF(abjad.AbjadObject):
     def bcps(
         bcps: typing.Iterable[typing.Tuple[int, int]],
         *tweaks: abjad.LilyPondTweakManager,
+        helper: typing.Callable = None,
         selector: Selector = 'baca.leaves()',
         ) -> BowContactPointCommand:
         """
@@ -2111,6 +2112,7 @@ class LibraryAF(abjad.AbjadObject):
         return BowContactPointCommand(
             bcps,
             *tweaks,
+            helper=helper,
             selector=selector,
             )
 

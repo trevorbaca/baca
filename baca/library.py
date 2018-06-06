@@ -484,15 +484,15 @@ def only_segment(command: Command) -> Command:
 
 def piecewise(
     spanner: abjad.Spanner,
-    indicators: typing.Iterable,
+    indicators: typing.Sequence,
     pieces: typing.Union[MapCommand, Selector],
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = False,
     selector: Selector = 'baca.leaves()',
     ):
     """
-    Makes piecewise command from ``spanner``, ``indicators`` and
-    indicator ``selector``.
+    Makes piecewise command from ``spanner``, ``indicators`` and indicator
+    ``selector``.
     """
     return PiecewiseCommand(
         bookend=bookend,
