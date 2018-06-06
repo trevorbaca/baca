@@ -313,6 +313,7 @@ Bača API
    ~baca.dynamicslib.dynamic_shift
    ~baca.dynamicslib.dynamic_text_extra_offset
    ~baca.dynamicslib.dynamic_text_left
+   ~baca.dynamicslib.dynamic_text_parent_alignment_x
    ~baca.dynamicslib.dynamic_text_stencil_false
    ~baca.dynamicslib.dynamic_text_transparent
    ~baca.dynamicslib.dynamic_text_x_extent_zero

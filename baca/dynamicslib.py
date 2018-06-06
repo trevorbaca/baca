@@ -608,6 +608,21 @@ def dynamic_text_left(
         selector=selector,
         )
 
+def dynamic_text_parent_alignment_x(
+    n: Number,
+    *,
+    selector: Selector = 'baca.pleaf(0)',
+    ) -> OverrideCommand:
+    """
+    Overrides dynamic text parent alignment X to ``n``.
+    """
+    return OverrideCommand(
+        attribute='parent_alignment_X',
+        value=n,
+        grob='dynamic_text',
+        selector=selector,
+        )
+
 def dynamic_text_stencil_false(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -828,6 +843,19 @@ def dynamic_up(
         indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
         selector=selector,
         )
+
+
+def dynamics(string: str) -> typing.List[abjad.Dynamic]:
+    r"""
+    Makes dynamics from ``string``.
+
+    ..  container::
+
+        >>> baca.dynamics('ff p f pp')
+        [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
+
+    """
+    return [abjad.Dynamic(_) for _ in string.split()]
 
 def hairpin(
     string: str = None,
@@ -2044,16 +2072,3 @@ def hairpin_transparent(
         grob='hairpin',
         selector=selector,
         )
-
-
-def dynamics(string: str) -> typing.List[abjad.Dynamic]:
-    r"""
-    Makes dynamics from ``string``.
-
-    ..  container::
-
-        >>> baca.dynamics('ff p f pp')
-        [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
-
-    """
-    return [abjad.Dynamic(_) for _ in string.split()]

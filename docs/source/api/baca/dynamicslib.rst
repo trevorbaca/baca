@@ -29,6 +29,8 @@ dynamicslib
 
 .. autofunction:: dynamic_text_left
 
+.. autofunction:: dynamic_text_parent_alignment_x
+
 .. autofunction:: dynamic_text_stencil_false
 
 .. autofunction:: dynamic_text_transparent
