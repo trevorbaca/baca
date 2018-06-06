@@ -231,7 +231,6 @@ baca
    Markup
    Matrix
    MetronomeMarkMeasureMap
-   PaddedTuple
    PageSpecifier
    Partial
    PitchArray
@@ -289,7 +288,6 @@ baca
    ~Markup.Markup
    ~Matrix.Matrix
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
-   ~PaddedTuple.PaddedTuple
    ~PageSpecifier.PageSpecifier
    ~Partial.Partial
    ~PitchArray.PitchArray
@@ -356,6 +354,23 @@ baca
    ~PartitionDivisionCallback.PartitionDivisionCallback
    ~SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
    ~SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: section-header
+
+.. toctree::
+   :hidden:
+
+   PaddedTuple
+
+.. autosummary::
+   :nosignatures:
+
+   ~PaddedTuple.PaddedTuple
 
 .. raw:: html
 

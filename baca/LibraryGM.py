@@ -1280,7 +1280,7 @@ class LibraryGM(abjad.AbjadObject):
         durations: typing.Iterable,
         *,
         beam_specifier: rmakers.BeamSpecifier = None,
-        division_mask: abjad.Pattern = None,
+        division_mask: rmakers.mask_typing = None,
         do_not_rewrite_meter: bool = None,
         ) -> RhythmCommand:
         """

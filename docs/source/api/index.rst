@@ -140,7 +140,6 @@ Bača API
    ~baca.Markup.Markup
    ~baca.Matrix.Matrix
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
-   ~baca.PaddedTuple.PaddedTuple
    ~baca.PageSpecifier.PageSpecifier
    ~baca.Partial.Partial
    ~baca.PitchArray.PitchArray
@@ -195,6 +194,18 @@ Bača API
    ~baca.PartitionDivisionCallback.PartitionDivisionCallback
    ~baca.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
    ~baca.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.PaddedTuple.PaddedTuple
 
 .. raw:: html
 

@@ -21,7 +21,19 @@ PaddedTuple
    .. rubric:: Special methods
       :class: class-header
 
+   .. automethod:: PaddedTuple.__contains__
+
+   .. automethod:: PaddedTuple.__eq__
+
    .. automethod:: PaddedTuple.__format__
+
+   .. automethod:: PaddedTuple.__getitem__
+
+   .. automethod:: PaddedTuple.__hash__
+
+   .. automethod:: PaddedTuple.__iter__
+
+   .. automethod:: PaddedTuple.__len__
 
    .. automethod:: PaddedTuple.__repr__
 
@@ -32,4 +44,6 @@ PaddedTuple
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PaddedTuple.argument
+   .. autoattribute:: PaddedTuple.items
+
+   .. autoattribute:: PaddedTuple.pad
