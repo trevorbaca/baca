@@ -175,6 +175,11 @@ def ext_pont():
         'ext. pont.',
         )
 
+def fast_whisked_ellipses():
+    return Markup(
+        'fast whisked ellipses',
+        )
+
 def FB():
     return Markup(
         'FB',
