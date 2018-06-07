@@ -67,19 +67,36 @@ def castanets():
         'castanets',
         )
 
-def circles(m=None, n=None):
+def cir(m=None, n=None):
+    string = 'cir.'
     if m is None:
         return Markup(
-            'circles',
+            string,
             )
     assert isinstance(m, int), repr(m)
     if n is None:
         return Markup(
-            f'{m}” circles',
+            f'{m}” {string}',
             )
     assert isinstance(n, int), repr(n)
     return Markup(
-        f'{m}-{n}” circles',
+        f'{m}-{n}” {string}',
+        )
+
+def circles(m=None, n=None):
+    string = 'circles'
+    if m is None:
+        return Markup(
+            string,
+            )
+    assert isinstance(m, int), repr(m)
+    if n is None:
+        return Markup(
+            f'{m}” {string}',
+            )
+    assert isinstance(n, int), repr(n)
+    return Markup(
+        f'{m}-{n}” {string}',
         )
 
 def clicks_per_second(
@@ -260,11 +277,15 @@ def glissando_lentissimo():
         'glissando lentissimo',
         )
 
+def golden_tone():
+    return Markup(
+        'golden tone',
+        )
+
 def grid_possibile():
     return Markup(
         'grid. possibile',
         )
-
 
 def gridato_possibile():
     return Markup(
