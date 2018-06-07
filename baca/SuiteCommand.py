@@ -25,6 +25,7 @@ class SuiteCommand(Command):
 
     ### INITIALIZER ###
 
+    # TODO: remove selector?
     def __init__(
         self,
         *commands: Command,

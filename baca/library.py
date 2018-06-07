@@ -767,6 +767,7 @@ def split_by_durations(
     expression = expression.flatten(depth=-1)
     return expression
 
+# TODO: remove selector?
 def suite(
     *commands: Command,
     selector: Selector = None,

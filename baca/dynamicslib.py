@@ -405,14 +405,43 @@ def dynamic_shift(
     selector: Selector = 'baca.leaf(0)',
     ) -> SuiteCommand:
     """
-    Shifts dynamic to left by width of dynamic.
+    Shifts dynamic to left by calculated width of dynamic.
     """
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[dynamic.name]
     extra_offset_x = -width
     return library.suite(
-        dynamic_text_extra_offset((extra_offset_x, 0)),
-        dynamic_text_x_extent_zero(),
+        dynamic_text_extra_offset(
+            (extra_offset_x, 0),
+            selector=selector,
+            ),
+        dynamic_text_x_extent_zero(
+            selector=selector,
+            ),
+        )
+
+# TODO: test and document?
+# TODO: appears not to do anything?
+def dynamic_text_center(
+    *,
+    selector: Selector = 'baca.pleaf(0)',
+    ) -> SuiteCommand:
+    """
+    Overrides dynamic text self-alignment-X and dynamic text X-extent.
+    """
+    command_1 = OverrideCommand(
+        attribute='self_alignment_X',
+        value=abjad.Center,
+        grob='dynamic_text',
+        selector=selector,
+        )
+    command_2 = dynamic_text_x_extent_zero(
+        selector=selector,
+        )
+    return library.suite(
+        command_1,
+        command_2,
+        #selector=selector,
         )
 
 def dynamic_text_extra_offset(
@@ -588,6 +617,8 @@ def dynamic_text_extra_offset(
         selector=selector,
         )
 
+# TODO: test and document?
+# TODO: appears not to do anything?
 def dynamic_text_left(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -601,11 +632,13 @@ def dynamic_text_left(
         grob='dynamic_text',
         selector=selector,
         )
-    command_2 = dynamic_text_x_extent_zero()
+    command_2 = dynamic_text_x_extent_zero(
+        selector=selector,
+        )
     return library.suite(
         command_1,
         command_2,
-        selector=selector,
+        #selector=selector,
         )
 
 def dynamic_text_parent_alignment_x(
@@ -621,6 +654,30 @@ def dynamic_text_parent_alignment_x(
         value=n,
         grob='dynamic_text',
         selector=selector,
+        )
+
+# TODO: test and document?
+# TODO: appears not to do anything?
+def dynamic_text_right(
+    *,
+    selector: Selector = 'baca.pleaf(0)',
+    ) -> SuiteCommand:
+    """
+    Overrides dynamic text self-alignment-X and dynamic text X-extent.
+    """
+    command_1 = OverrideCommand(
+        attribute='self_alignment_X',
+        value=abjad.Right,
+        grob='dynamic_text',
+        selector=selector,
+        )
+    command_2 = dynamic_text_x_extent_zero(
+        selector=selector,
+        )
+    return library.suite(
+        command_1,
+        command_2,
+        #selector=selector,
         )
 
 def dynamic_text_stencil_false(
