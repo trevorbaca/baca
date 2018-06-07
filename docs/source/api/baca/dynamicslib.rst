@@ -25,11 +25,15 @@ dynamicslib
 
 .. autofunction:: dynamic_shift
 
+.. autofunction:: dynamic_text_center
+
 .. autofunction:: dynamic_text_extra_offset
 
 .. autofunction:: dynamic_text_left
 
 .. autofunction:: dynamic_text_parent_alignment_x
+
+.. autofunction:: dynamic_text_right
 
 .. autofunction:: dynamic_text_stencil_false
 

@@ -96,6 +96,12 @@ def col_legno_battuto():
         'col legno battuto',
         )
 
+def column(*strings):
+    markup = abjad.MarkupList(strings).column()
+    return Markup(
+        contents=markup.contents,
+        )
+
 def crine():
     return Markup(
         'crine',

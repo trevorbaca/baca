@@ -105,6 +105,8 @@ markups
 
 .. autofunction:: col_legno_battuto
 
+.. autofunction:: column
+
 .. autofunction:: crine
 
 .. autofunction:: crotales
@@ -128,6 +130,8 @@ markups
 .. autofunction:: estr_sul_pont
 
 .. autofunction:: ext_pont
+
+.. autofunction:: fast_whisked_ellipses
 
 .. autofunction:: final_markup
 

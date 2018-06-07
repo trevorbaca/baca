@@ -311,9 +311,11 @@ Bača API
    ~baca.dynamicslib.dynamic
    ~baca.dynamicslib.dynamic_down
    ~baca.dynamicslib.dynamic_shift
+   ~baca.dynamicslib.dynamic_text_center
    ~baca.dynamicslib.dynamic_text_extra_offset
    ~baca.dynamicslib.dynamic_text_left
    ~baca.dynamicslib.dynamic_text_parent_alignment_x
+   ~baca.dynamicslib.dynamic_text_right
    ~baca.dynamicslib.dynamic_text_stencil_false
    ~baca.dynamicslib.dynamic_text_transparent
    ~baca.dynamicslib.dynamic_text_x_extent_zero
@@ -426,6 +428,7 @@ Bača API
    ~baca.markups.circles
    ~baca.markups.clicks_per_second
    ~baca.markups.col_legno_battuto
+   ~baca.markups.column
    ~baca.markups.crine
    ~baca.markups.crotales
    ~baca.markups.damp
@@ -438,6 +441,7 @@ Bača API
    ~baca.markups.edition
    ~baca.markups.estr_sul_pont
    ~baca.markups.ext_pont
+   ~baca.markups.fast_whisked_ellipses
    ~baca.markups.final_markup
    ~baca.markups.flaut
    ~baca.markups.flaut_partial_2
