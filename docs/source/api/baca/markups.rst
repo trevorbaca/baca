@@ -99,6 +99,8 @@ markups
 
 .. autofunction:: castanets
 
+.. autofunction:: cir
+
 .. autofunction:: circles
 
 .. autofunction:: clicks_per_second
@@ -150,6 +152,8 @@ markups
 .. autofunction:: full_bow_strokes
 
 .. autofunction:: glissando_lentissimo
+
+.. autofunction:: golden_tone
 
 .. autofunction:: grid_possibile
 
