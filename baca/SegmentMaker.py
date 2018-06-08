@@ -13,6 +13,7 @@ from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
+from .SkipRhythmMaker import SkipRhythmMaker
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .Typing import Number
@@ -1535,7 +1536,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
-                    maker = rmakers.SkipRhythmMaker()
+                    maker = SkipRhythmMaker()
                 else:
                     mask = rmakers.silence(
                         [0],

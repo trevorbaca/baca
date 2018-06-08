@@ -524,3 +524,20 @@ baca
 .. autofunction:: with_previous_leaf
 
 .. autofunction:: wleaves
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Rhythm-makers
+   :class: section-header
+
+.. toctree::
+   :hidden:
+
+   SkipRhythmMaker
+
+.. autosummary::
+   :nosignatures:
+
+   ~SkipRhythmMaker.SkipRhythmMaker

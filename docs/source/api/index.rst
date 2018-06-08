@@ -295,6 +295,18 @@ Bača API
 
    <hr/>
 
+.. rubric:: Rhythm-makers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.SkipRhythmMaker.SkipRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.dynamicslib <baca--dynamicslib>`
    :class: section-header
 

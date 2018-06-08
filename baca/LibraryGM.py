@@ -19,6 +19,7 @@ from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope
+from .SkipRhythmMaker import SkipRhythmMaker
 from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
@@ -1357,7 +1358,7 @@ class LibraryGM(abjad.AbjadObject):
         Makes skips.
         """
         return RhythmCommand(
-            rhythm_maker=rmakers.SkipRhythmMaker()
+            rhythm_maker=SkipRhythmMaker()
             )
 
     @staticmethod

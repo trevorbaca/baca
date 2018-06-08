@@ -98,6 +98,7 @@ from .Selection import Selection
 from .Sequence import Sequence
 from .SettingCommand import SettingCommand
 from .SingleStaffScoreTemplate import SingleStaffScoreTemplate
+from .SkipRhythmMaker import SkipRhythmMaker
 from .SpacingIndication import SpacingIndication
 from .SpacingSection import SpacingSection
 from .SpannerCommand import SpannerCommand
