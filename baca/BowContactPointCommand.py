@@ -153,16 +153,14 @@ class BowContactPointCommand(Command):
             ...     baca.bcps(abjad.tweak(5).staff_padding),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 F4'),
-            ...     )
-
-            >>> maker(
-            ...     ('MusicVoice', (1, 2)),
-            ...     baca.bcps(bcps=[(1, 5), (2, 5)]),
-            ...     )
-
-            >>> maker(
-            ...     ('MusicVoice', (3, 4)),
-            ...     baca.bcps(bcps=[(3, 5), (4, 5)]),
+            ...     baca.measures(
+            ...         (1, 2),
+            ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
+            ...         ),
+            ...     baca.measures(
+            ...         (3, 4),
+            ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
+            ...         ),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')

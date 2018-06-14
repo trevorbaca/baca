@@ -912,15 +912,18 @@ class SegmentMaker(abjad.SegmentMaker):
                         assert isinstance(command_, Command), repr(command_)
                         wrapper = CommandWrapper(command=command_, scope=scope)
                         self.wrappers.append(wrapper)
+                elif isinstance(command, MeasureWrapper):
+                    scope_ = abjad.new(
+                        scope,
+                        stages=command.measures,
+                        )
+                    command = command.command
+                    assert isinstance(command, Command), repr(command)
+                    wrapper = CommandWrapper(command=command, scope=scope_)
+                    self.wrappers.append(wrapper)
                 else:
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    elif isinstance(command, MeasureWrapper):
-                        scope = abjad.new(
-                            scope,
-                            stages=command.measures,
-                            )
-                        command = command.command
                     assert isinstance(command, Command), repr(command)
                     wrapper = CommandWrapper(command=command, scope=scope)
                     self.wrappers.append(wrapper)

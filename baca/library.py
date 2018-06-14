@@ -527,37 +527,30 @@ def measures(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            e'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            f'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            e'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            f'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            e'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            f'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'8
+                            e'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
-                            e'2
+                            f'2
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
-                            e'4.
+                            f'4.
                             \repeatTie
             <BLANKLINE>
                         }
