@@ -20,29 +20,22 @@ class BowContactPointCommand(Command):
         '_tweaks',
         )
 
-    _default_bow_contact_points = [
-        (0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7),
-        (7, 7), (0, 7), (7, 7), (0, 7), (7, 7),
-        (0, 7), (4, 7), (5, 7), (6, 7), (7, 7), (6, 7), (7, 7),
-        (0, 4), (1, 4), (2, 4), (1, 4),
-        ]
-
     start_command = r'\startBCPTextSpan'
+
     stop_command = r'\stopBCPTextSpan'
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         *tweaks: abjad.LilyPondTweakManager,
+        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         helper: typing.Callable = None,
         selector: Selector = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if bcps is None:
-            bcps = BowContactPointCommand._default_bow_contact_points
-        self._validate_bcps(bcps)
+            self._validate_bcps(bcps)
         self._bow_contact_points = bcps
         if helper is not None:
             assert callable(helper), repr(helper)
@@ -68,9 +61,9 @@ class BowContactPointCommand(Command):
                 )
             self._apply_tweaks(spanner)
             abjad.attach(spanner, leaves)
-        bcps = baca.sequence(self.bow_contact_points)
-        if not bcps:
+        if self.bow_contact_points is None:
             return
+        bcps = baca.sequence(self.bow_contact_points)
         if self.helper:
             bcps = self.helper(bcps, argument)
         bcps = abjad.CyclicTuple(bcps)
@@ -155,19 +148,19 @@ class BowContactPointCommand(Command):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.bcps([], abjad.tweak(5).staff_padding),
+            ...     baca.bcps(abjad.tweak(5).staff_padding),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 F4'),
             ...     )
 
             >>> maker(
             ...     ('MusicVoice', (1, 2)),
-            ...     baca.bcps([(1, 5), (2, 5)]),
+            ...     baca.bcps(bcps=[(1, 5), (2, 5)]),
             ...     )
 
             >>> maker(
             ...     ('MusicVoice', (3, 4)),
-            ...     baca.bcps([(3, 5), (4, 5)]),
+            ...     baca.bcps(bcps=[(3, 5), (4, 5)]),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
