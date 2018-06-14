@@ -18,6 +18,7 @@ from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .VoltaCommand import VoltaCommand
+from .Typing import IntegerPair
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
@@ -1831,6 +1832,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie(
         *,
+        repeat: typing.Union[bool, IntegerPair] = None,
         selector: Selector = 'baca.qrun(0)',
         ) -> SpannerCommand:
         r"""
@@ -1969,9 +1971,12 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
+        tie = abjad.Tie(
+            repeat=repeat,
+            )
         return SpannerCommand(
             selector=selector,
-            spanner=abjad.Tie(),
+            spanner=tie,
             )
 
     @staticmethod
