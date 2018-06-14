@@ -84,8 +84,6 @@ LibraryTZ
 
    .. automethod:: LibraryTZ.time_signature_transparent
 
-   .. automethod:: LibraryTZ.timeline
-
    .. automethod:: LibraryTZ.transition
 
    .. automethod:: LibraryTZ.tremolo_down

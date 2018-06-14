@@ -14,6 +14,7 @@ from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
 from .SuiteCommand import SuiteCommand
+from .TimelineScope import TimelineScope
 from .Typing import Pair
 from .Typing import Selector
 
@@ -837,3 +838,10 @@ def tag(
         command._deactivate = deactivate
         command.tag_measure_number = tag_measure_number
     return command
+
+def timeline(scopes) -> TimelineScope:
+    """
+    Makes timeline scope.
+    """
+    scopes = [scope(*_) for _ in scopes]
+    return TimelineScope(scopes=scopes)

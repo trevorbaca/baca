@@ -379,6 +379,7 @@ Bača API
    ~baca.library.split_by_durations
    ~baca.library.suite
    ~baca.library.tag
+   ~baca.library.timeline
 
 .. raw:: html
 

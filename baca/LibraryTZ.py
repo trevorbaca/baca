@@ -16,7 +16,6 @@ from .SpannerCommand import SpannerCommand
 from .SuiteCommand import SuiteCommand
 from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
-from .TimelineScope import TimelineScope
 from .VoltaCommand import VoltaCommand
 from .Typing import IntegerPair
 from .Typing import Number
@@ -2664,14 +2663,6 @@ class LibraryTZ(abjad.AbjadObject):
             grob='time_signature',
             selector=selector,
             )
-
-    @staticmethod
-    def timeline(scopes) -> TimelineScope:
-        """
-        Makes timeline scope.
-        """
-        scopes = [library.scope(*_) for _ in scopes]
-        return TimelineScope(scopes=scopes)
 
     @staticmethod
     def transition(

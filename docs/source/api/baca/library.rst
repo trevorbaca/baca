@@ -56,3 +56,5 @@ library
 .. autofunction:: suite
 
 .. autofunction:: tag
+
+.. autofunction:: timeline
