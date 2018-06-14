@@ -179,18 +179,21 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             pitch_classes = list(sorted(collection.to_pitch_classes()))
         else:
             pitch_classes = list(collection.to_pitch_classes())
-        bass, soprano = None, None
+        cardinality = len(pitch_classes)
+        bass, soprano, outer = None, None, []
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)
             if bass not in pitch_classes:
                 raise ValueError(f'bass pc {bass} not in {pitch_classes}.')
+            outer.append(bass)
         if self.soprano is not None:
             soprano = abjad.NumberedPitchClass(self.soprano)
             if soprano not in pitch_classes:
                 raise ValueError(f'soprano pc {bass} not in {pitch_classes}.')
+            outer.append(soprano)
         inner = []
         for pitch_class in pitch_classes:
-            if pitch_class not in (bass, soprano):
+            if pitch_class not in outer:
                 inner.append(pitch_class)
         pitch_classes = []
         pitches = []

@@ -66,8 +66,8 @@ class DiatonicClusterCommand(Command):
             width = self.widths[i]
             start = self._get_lowest_diatonic_pitch_number(plt)
             numbers = range(start, start + width)
-            class_ = abjad.PitchClass
-            change = class_._diatonic_pitch_class_number_to_pitch_class_number
+            module = abjad.pitch.constants
+            change = module._diatonic_pc_number_to_pitch_class_number
             numbers = [(12 * (x // 7)) + change[x % 7] for x in numbers]
             pitches = [abjad.NamedPitch(_) for _ in numbers]
             for pleaf in plt:

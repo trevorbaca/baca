@@ -162,7 +162,8 @@ class MicrotoneDeviationCommand(Command):
             return
         for pleaf in plt:
             pitch = pleaf.written_pitch
-            pitch = pitch.transpose_staff_position(0, deviation)
+            accidental = pitch.accidental.semitones + deviation
+            pitch = abjad.NamedPitch(pitch, accidental=accidental)
             pleaf.written_pitch = pitch
             annotation = {'color microtone': True}
             abjad.attach(annotation, pleaf)
