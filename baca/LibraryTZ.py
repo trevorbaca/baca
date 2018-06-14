@@ -1908,14 +1908,17 @@ class LibraryTZ(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches tie to equipitch run 0:
+            Attaches repeat-threshold ties to equipitch runs:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.map(
+            ...         baca.qruns(),
+            ...         baca.tie(repeat=(1, 8)),
+            ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.tie(),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1942,8 +1945,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 c'16
                                 ]
                                 bf'4
-                                ~
                                 bf'16
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1951,10 +1954,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 bf'16
                                 [
                                 e''16
+                                ~                                                                        %! SC
                                 ]
                                 e''4
-                                ~
                                 e''16
+                                \repeatTie                                                               %! SC
                                 r16
                                 fs''16
                                 [
