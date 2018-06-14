@@ -31,6 +31,8 @@ library
 
 .. autofunction:: markup
 
+.. autofunction:: measures
+
 .. autofunction:: not_parts
 
 .. autofunction:: not_score

@@ -230,6 +230,7 @@ baca
    Loop
    Markup
    Matrix
+   MeasureWrapper
    MetronomeMarkMeasureMap
    PageSpecifier
    Partial
@@ -287,6 +288,7 @@ baca
    ~Loop.Loop
    ~Markup.Markup
    ~Matrix.Matrix
+   ~MeasureWrapper.MeasureWrapper
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier
    ~Partial.Partial

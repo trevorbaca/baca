@@ -9,6 +9,7 @@ from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
 from .MapCommand import MapCommand
 from .Markup import Markup
+from .MeasureWrapper import MeasureWrapper
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
@@ -444,6 +445,135 @@ def markup(
         indicators=[markup],
         selector=selector,
         )
+
+def measures(
+    measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
+    *commands: Command,
+    ) -> typing.List[MeasureWrapper]:
+    r"""
+    Wraps each command in ``commands`` with ``measures``.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 16)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.measures(
+        ...         (1, 2),
+        ...         baca.make_even_divisions(),
+        ...         ),
+        ...     baca.measures(
+        ...         (3, 4),
+        ...         baca.make_repeat_tied_notes(),
+        ...         ),
+        ...     baca.pitches('E4 F4'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            [
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            [
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            e'4.
+                            \repeatTie
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    wrappers = []
+    for command in commands:
+        wrapper = MeasureWrapper(
+            command=command,
+            measures=measures,
+            )
+        wrappers.append(wrapper)
+    return wrappers
 
 def not_parts(command: Command) -> Command:
     """

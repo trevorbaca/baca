@@ -10,6 +10,7 @@ from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
 from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
+from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
@@ -866,7 +867,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            if not isinstance(command, (list, Command, abjad.Markup)):
+            fourway = (list, Command, MeasureWrapper, abjad.Markup)
+            if not isinstance(command, fourway):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
@@ -883,7 +885,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
-                    assert isinstance(command, (list, Command, abjad.Markup)), repr(command)
+                    threeway = (list, Command, abjad.Markup)
+                    assert isinstance(command, threeway), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
                             continue
@@ -912,6 +915,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
+                    elif isinstance(command, MeasureWrapper):
+                        scope = abjad.new(
+                            scope,
+                            stages=command.measures,
+                            )
+                        command = command.command
                     assert isinstance(command, Command), repr(command)
                     wrapper = CommandWrapper(command=command, scope=scope)
                     self.wrappers.append(wrapper)

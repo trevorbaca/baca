@@ -132,7 +132,9 @@ class BowContactPointCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bow_contact_points(self) -> typing.Iterable[typing.Tuple[int, int]]:
+    def bow_contact_points(self) -> typing.Optional[
+        typing.Iterable[typing.Tuple[int, int]]
+        ]:
         r"""
         Gets bow contact points.
 

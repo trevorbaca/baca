@@ -139,6 +139,7 @@ Bača API
    ~baca.Loop.Loop
    ~baca.Markup.Markup
    ~baca.Matrix.Matrix
+   ~baca.MeasureWrapper.MeasureWrapper
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.PageSpecifier.PageSpecifier
    ~baca.Partial.Partial
@@ -366,6 +367,7 @@ Bača API
    ~baca.library.literal
    ~baca.library.map
    ~baca.library.markup
+   ~baca.library.measures
    ~baca.library.not_parts
    ~baca.library.not_score
    ~baca.library.not_segment

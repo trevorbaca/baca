@@ -52,6 +52,7 @@ from .Loop import Loop
 from .MapCommand import MapCommand
 from .Markup import Markup
 from .Matrix import Matrix
+from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
