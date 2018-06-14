@@ -1832,7 +1832,11 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie(
         *,
-        repeat: typing.Union[bool, IntegerPair] = None,
+        repeat: typing.Union[
+            bool,
+            IntegerPair,
+            abjad.DurationInequality,
+            ] = None,
         selector: Selector = 'baca.qrun(0)',
         ) -> SpannerCommand:
         r"""
