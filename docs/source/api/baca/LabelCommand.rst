@@ -14,6 +14,16 @@ LabelCommand
 
 .. autoclass:: LabelCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      expression
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ LabelCommand
 
    .. automethod:: LabelCommand.__call__
 
-   .. automethod:: LabelCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: LabelCommand.__repr__
+      .. automethod:: LabelCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LabelCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ LabelCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: LabelCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: LabelCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ LabelCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: LabelCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: LabelCommand.offset_to_measure_number
+      .. autoattribute:: LabelCommand.manifests
 
-   .. autoattribute:: LabelCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: LabelCommand.score_template
+      .. autoattribute:: LabelCommand.offset_to_measure_number
 
-   .. autoattribute:: LabelCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ LabelCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: LabelCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.deactivate
 
    .. autoattribute:: LabelCommand.expression
 
-   .. autoattribute:: LabelCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: LabelCommand.tag
+      .. autoattribute:: LabelCommand.selector
 
-   .. autoattribute:: LabelCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tags

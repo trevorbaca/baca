@@ -14,6 +14,16 @@ SuiteCommand
 
 .. autoclass:: SuiteCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      commands
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ SuiteCommand
 
    .. automethod:: SuiteCommand.__call__
 
-   .. automethod:: SuiteCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: SuiteCommand.__repr__
+      .. automethod:: SuiteCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SuiteCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ SuiteCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: SuiteCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: SuiteCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ SuiteCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: SuiteCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: SuiteCommand.offset_to_measure_number
+      .. autoattribute:: SuiteCommand.manifests
 
-   .. autoattribute:: SuiteCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: SuiteCommand.score_template
+      .. autoattribute:: SuiteCommand.offset_to_measure_number
 
-   .. autoattribute:: SuiteCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,10 +88,18 @@ SuiteCommand
 
    .. autoattribute:: SuiteCommand.commands
 
-   .. autoattribute:: SuiteCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: SuiteCommand.selector
+      .. autoattribute:: SuiteCommand.deactivate
 
-   .. autoattribute:: SuiteCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: SuiteCommand.tags
+      .. autoattribute:: SuiteCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: SuiteCommand.tags

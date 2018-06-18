@@ -14,6 +14,16 @@ PartAssignmentCommand
 
 .. autoclass:: PartAssignmentCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      part_assignment
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ PartAssignmentCommand
 
    .. automethod:: PartAssignmentCommand.__call__
 
-   .. automethod:: PartAssignmentCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: PartAssignmentCommand.__repr__
+      .. automethod:: PartAssignmentCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PartAssignmentCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ PartAssignmentCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PartAssignmentCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: PartAssignmentCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ PartAssignmentCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: PartAssignmentCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: PartAssignmentCommand.offset_to_measure_number
+      .. autoattribute:: PartAssignmentCommand.manifests
 
-   .. autoattribute:: PartAssignmentCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: PartAssignmentCommand.score_template
+      .. autoattribute:: PartAssignmentCommand.offset_to_measure_number
 
-   .. autoattribute:: PartAssignmentCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ PartAssignmentCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PartAssignmentCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.deactivate
 
    .. autoattribute:: PartAssignmentCommand.part_assignment
 
-   .. autoattribute:: PartAssignmentCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: PartAssignmentCommand.tag
+      .. autoattribute:: PartAssignmentCommand.selector
 
-   .. autoattribute:: PartAssignmentCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.tags

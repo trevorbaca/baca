@@ -14,6 +14,17 @@ Loop
 
 .. autoclass:: Loop
 
+   .. autosummary::
+      :nosignatures:
+
+      intervals
+      items
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+
    .. raw:: html
 
       <hr/>
@@ -21,23 +32,39 @@ Loop
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Loop.__contains__
+   .. container:: inherited
 
-   .. automethod:: Loop.__eq__
+      .. automethod:: Loop.__contains__
 
-   .. automethod:: Loop.__format__
+   .. container:: inherited
+
+      .. automethod:: Loop.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__format__
 
    .. automethod:: Loop.__getitem__
 
-   .. automethod:: Loop.__hash__
+   .. container:: inherited
 
-   .. automethod:: Loop.__iter__
+      .. automethod:: Loop.__hash__
 
-   .. automethod:: Loop.__len__
+   .. container:: inherited
 
-   .. automethod:: Loop.__repr__
+      .. automethod:: Loop.__iter__
 
-   .. automethod:: Loop.__str__
+   .. container:: inherited
+
+      .. automethod:: Loop.__len__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__str__
 
    .. raw:: html
 

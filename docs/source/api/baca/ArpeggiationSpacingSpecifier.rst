@@ -14,6 +14,17 @@ ArpeggiationSpacingSpecifier
 
 .. autoclass:: ArpeggiationSpacingSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      direction
+      pattern
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +34,25 @@ ArpeggiationSpacingSpecifier
 
    .. automethod:: ArpeggiationSpacingSpecifier.__call__
 
-   .. automethod:: ArpeggiationSpacingSpecifier.__copy__
+   .. container:: inherited
 
-   .. automethod:: ArpeggiationSpacingSpecifier.__eq__
+      .. automethod:: ArpeggiationSpacingSpecifier.__copy__
 
-   .. automethod:: ArpeggiationSpacingSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: ArpeggiationSpacingSpecifier.__hash__
+      .. automethod:: ArpeggiationSpacingSpecifier.__eq__
 
-   .. automethod:: ArpeggiationSpacingSpecifier.__repr__
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__repr__
 
    .. raw:: html
 

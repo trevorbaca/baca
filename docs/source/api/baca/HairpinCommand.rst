@@ -14,6 +14,21 @@ HairpinCommand
 
 .. autoclass:: HairpinCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      leak
+      left_broken
+      right_broken
+      start
+      stop
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +38,13 @@ HairpinCommand
 
    .. automethod:: HairpinCommand.__call__
 
-   .. automethod:: HairpinCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: HairpinCommand.__repr__
+      .. automethod:: HairpinCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: HairpinCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +53,9 @@ HairpinCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: HairpinCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: HairpinCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +64,25 @@ HairpinCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: HairpinCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: HairpinCommand.offset_to_measure_number
+      .. autoattribute:: HairpinCommand.manifests
 
-   .. autoattribute:: HairpinCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: HairpinCommand.score_template
+      .. autoattribute:: HairpinCommand.offset_to_measure_number
 
-   .. autoattribute:: HairpinCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,7 +91,9 @@ HairpinCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: HairpinCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.deactivate
 
    .. autoattribute:: HairpinCommand.leak
 
@@ -68,14 +101,20 @@ HairpinCommand
 
    .. autoattribute:: HairpinCommand.right_broken
 
-   .. autoattribute:: HairpinCommand.selector
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.selector
 
    .. autoattribute:: HairpinCommand.start
 
    .. autoattribute:: HairpinCommand.stop
 
-   .. autoattribute:: HairpinCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: HairpinCommand.tags
+      .. autoattribute:: HairpinCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.tags
 
    .. autoattribute:: HairpinCommand.tweaks

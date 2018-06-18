@@ -14,6 +14,13 @@ DivisionSequence
 
 .. autoclass:: DivisionSequence
 
+   .. autosummary::
+      :nosignatures:
+
+      rotate
+      split_by_durations
+      split_by_rounded_ratios
+
    .. raw:: html
 
       <hr/>
@@ -21,29 +28,53 @@ DivisionSequence
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: DivisionSequence.__add__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.__contains__
+      .. automethod:: DivisionSequence.__add__
 
-   .. automethod:: DivisionSequence.__copy__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.__eq__
+      .. automethod:: DivisionSequence.__contains__
 
-   .. automethod:: DivisionSequence.__format__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.__getitem__
+      .. automethod:: DivisionSequence.__copy__
 
-   .. automethod:: DivisionSequence.__hash__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.__iter__
+      .. automethod:: DivisionSequence.__eq__
 
-   .. automethod:: DivisionSequence.__len__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.__radd__
+      .. automethod:: DivisionSequence.__format__
 
-   .. automethod:: DivisionSequence.__repr__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.__reversed__
+      .. automethod:: DivisionSequence.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__len__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__reversed__
 
    .. raw:: html
 
@@ -52,79 +83,147 @@ DivisionSequence
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: DivisionSequence.count
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.filter
+      .. automethod:: DivisionSequence.count
 
-   .. automethod:: DivisionSequence.flatten
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.group_by
+      .. automethod:: DivisionSequence.filter
 
-   .. automethod:: DivisionSequence.index
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.is_decreasing
+      .. automethod:: DivisionSequence.flatten
 
-   .. automethod:: DivisionSequence.is_increasing
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.is_permutation
+      .. automethod:: DivisionSequence.group_by
 
-   .. automethod:: DivisionSequence.is_repetition_free
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.join
+      .. automethod:: DivisionSequence.index
 
-   .. automethod:: DivisionSequence.map
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.nwise
+      .. automethod:: DivisionSequence.is_decreasing
 
-   .. automethod:: DivisionSequence.partition_by_counts
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.partition_by_ratio_of_lengths
+      .. automethod:: DivisionSequence.is_increasing
 
-   .. automethod:: DivisionSequence.partition_by_ratio_of_weights
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.partition_by_weights
+      .. automethod:: DivisionSequence.is_permutation
 
-   .. automethod:: DivisionSequence.permute
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.remove
+      .. automethod:: DivisionSequence.is_repetition_free
 
-   .. automethod:: DivisionSequence.remove_repeats
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.repeat
+      .. automethod:: DivisionSequence.join
 
-   .. automethod:: DivisionSequence.repeat_to_length
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.repeat_to_weight
+      .. automethod:: DivisionSequence.map
 
-   .. automethod:: DivisionSequence.replace
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.retain
+      .. automethod:: DivisionSequence.nwise
 
-   .. automethod:: DivisionSequence.retain_pattern
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.reverse
+      .. automethod:: DivisionSequence.partition_by_counts
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_ratio_of_lengths
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_ratio_of_weights
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_weights
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.permute
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.remove
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.remove_repeats
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.repeat
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.repeat_to_length
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.repeat_to_weight
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.replace
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.retain
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.retain_pattern
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.reverse
 
    .. automethod:: DivisionSequence.rotate
 
-   .. automethod:: DivisionSequence.select
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.sort
+      .. automethod:: DivisionSequence.select
 
-   .. automethod:: DivisionSequence.split
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.sort
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.split
 
    .. automethod:: DivisionSequence.split_by_durations
 
    .. automethod:: DivisionSequence.split_by_rounded_ratios
 
-   .. automethod:: DivisionSequence.sum
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.sum_by_sign
+      .. automethod:: DivisionSequence.sum
 
-   .. automethod:: DivisionSequence.truncate
+   .. container:: inherited
 
-   .. automethod:: DivisionSequence.weight
+      .. automethod:: DivisionSequence.sum_by_sign
 
-   .. automethod:: DivisionSequence.zip
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.truncate
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.weight
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.zip
 
    .. raw:: html
 
@@ -133,4 +232,6 @@ DivisionSequence
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: DivisionSequence.items
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequence.items

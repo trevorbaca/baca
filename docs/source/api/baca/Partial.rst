@@ -14,6 +14,14 @@ Partial
 
 .. autoclass:: Partial
 
+   .. autosummary::
+      :nosignatures:
+
+      approximation
+      deviation
+      fundamental
+      number
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +29,13 @@ Partial
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Partial.__format__
+   .. container:: inherited
 
-   .. automethod:: Partial.__repr__
+      .. automethod:: Partial.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Partial.__repr__
 
    .. raw:: html
 

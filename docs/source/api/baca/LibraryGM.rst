@@ -14,6 +14,50 @@ LibraryGM
 
 .. autoclass:: LibraryGM
 
+   .. autosummary::
+      :nosignatures:
+
+      mask_type
+
+   .. autosummary::
+      :nosignatures:
+
+      glissando
+      glissando_thickness
+      global_fermata
+      group_by_measures
+      group_notes_by_measures
+      helianthate
+      imbricate
+      instrument
+      interpolate_staff_positions
+      invisible_line_segment
+      label
+      laissez_vibrer
+      long_fermata
+      loop
+      make_even_divisions
+      make_fused_tuplet_monads
+      make_multimeasure_rests
+      make_notes
+      make_repeat_tied_notes
+      make_repeated_duration_notes
+      make_rests
+      make_rhythm
+      make_single_attack
+      make_skips
+      make_tied_notes
+      make_tied_repeated_durations
+      marcato
+      margin_markup
+      metronome_mark
+      minimum_duration
+      mmrest_text_color
+      mmrest_text_extra_offset
+      mmrest_text_padding
+      mmrest_text_parent_center
+      mmrest_text_staff_padding
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +65,13 @@ LibraryGM
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: LibraryGM.__format__
+   .. container:: inherited
 
-   .. automethod:: LibraryGM.__repr__
+      .. automethod:: LibraryGM.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LibraryGM.__repr__
 
    .. raw:: html
 

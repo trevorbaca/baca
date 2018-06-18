@@ -14,6 +14,11 @@ Coat
 
 .. autoclass:: Coat
 
+   .. autosummary::
+      :nosignatures:
+
+      argument
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +26,13 @@ Coat
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Coat.__format__
+   .. container:: inherited
 
-   .. automethod:: Coat.__repr__
+      .. automethod:: Coat.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Coat.__repr__
 
    .. raw:: html
 

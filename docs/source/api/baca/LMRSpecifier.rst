@@ -14,6 +14,27 @@ LMRSpecifier
 
 .. autoclass:: LMRSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      left_counts
+      left_cyclic
+      left_length
+      left_reversed
+      middle_counts
+      middle_cyclic
+      middle_reversed
+      priority
+      right_counts
+      right_cyclic
+      right_length
+      right_reversed
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +44,13 @@ LMRSpecifier
 
    .. automethod:: LMRSpecifier.__call__
 
-   .. automethod:: LMRSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: LMRSpecifier.__repr__
+      .. automethod:: LMRSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LMRSpecifier.__repr__
 
    .. raw:: html
 

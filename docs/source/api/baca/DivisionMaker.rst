@@ -14,6 +14,31 @@ DivisionMaker
 
 .. autoclass:: DivisionMaker
 
+   .. autosummary::
+      :nosignatures:
+
+      append_callback
+      flatten
+      fuse_by_counts
+      partition_by_counts
+      split_by_durations
+      split_by_rounded_ratios
+
+   .. autosummary::
+      :nosignatures:
+
+      callbacks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +48,25 @@ DivisionMaker
 
    .. automethod:: DivisionMaker.__call__
 
-   .. automethod:: DivisionMaker.__copy__
+   .. container:: inherited
 
-   .. automethod:: DivisionMaker.__eq__
+      .. automethod:: DivisionMaker.__copy__
 
-   .. automethod:: DivisionMaker.__format__
+   .. container:: inherited
 
-   .. automethod:: DivisionMaker.__hash__
+      .. automethod:: DivisionMaker.__eq__
 
-   .. automethod:: DivisionMaker.__repr__
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__repr__
 
    .. raw:: html
 

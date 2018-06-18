@@ -14,6 +14,16 @@ ColorFingeringCommand
 
 .. autoclass:: ColorFingeringCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      numbers
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ ColorFingeringCommand
 
    .. automethod:: ColorFingeringCommand.__call__
 
-   .. automethod:: ColorFingeringCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: ColorFingeringCommand.__repr__
+      .. automethod:: ColorFingeringCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ColorFingeringCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ ColorFingeringCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ColorFingeringCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: ColorFingeringCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ ColorFingeringCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: ColorFingeringCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: ColorFingeringCommand.offset_to_measure_number
+      .. autoattribute:: ColorFingeringCommand.manifests
 
-   .. autoattribute:: ColorFingeringCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: ColorFingeringCommand.score_template
+      .. autoattribute:: ColorFingeringCommand.offset_to_measure_number
 
-   .. autoattribute:: ColorFingeringCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ ColorFingeringCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ColorFingeringCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.deactivate
 
    .. autoattribute:: ColorFingeringCommand.numbers
 
-   .. autoattribute:: ColorFingeringCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: ColorFingeringCommand.tag
+      .. autoattribute:: ColorFingeringCommand.selector
 
-   .. autoattribute:: ColorFingeringCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tags

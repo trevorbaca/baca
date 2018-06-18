@@ -14,6 +14,19 @@ RegistrationComponent
 
 .. autoclass:: RegistrationComponent
 
+   .. autosummary::
+      :nosignatures:
+
+      source_pitch_range
+      target_octave_start_pitch
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __format__
+      __hash__
+
    .. raw:: html
 
       <hr/>
@@ -21,7 +34,9 @@ RegistrationComponent
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: RegistrationComponent.__copy__
+   .. container:: inherited
+
+      .. automethod:: RegistrationComponent.__copy__
 
    .. automethod:: RegistrationComponent.__eq__
 
@@ -29,7 +44,9 @@ RegistrationComponent
 
    .. automethod:: RegistrationComponent.__hash__
 
-   .. automethod:: RegistrationComponent.__repr__
+   .. container:: inherited
+
+      .. automethod:: RegistrationComponent.__repr__
 
    .. raw:: html
 

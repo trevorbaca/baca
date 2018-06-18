@@ -14,6 +14,11 @@ VoltaCommand
 
 .. autoclass:: VoltaCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +28,13 @@ VoltaCommand
 
    .. automethod:: VoltaCommand.__call__
 
-   .. automethod:: VoltaCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: VoltaCommand.__repr__
+      .. automethod:: VoltaCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: VoltaCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +43,9 @@ VoltaCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: VoltaCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: VoltaCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +54,25 @@ VoltaCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: VoltaCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: VoltaCommand.offset_to_measure_number
+      .. autoattribute:: VoltaCommand.manifests
 
-   .. autoattribute:: VoltaCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: VoltaCommand.score_template
+      .. autoattribute:: VoltaCommand.offset_to_measure_number
 
-   .. autoattribute:: VoltaCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,10 +81,18 @@ VoltaCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: VoltaCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: VoltaCommand.selector
+      .. autoattribute:: VoltaCommand.deactivate
 
-   .. autoattribute:: VoltaCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: VoltaCommand.tags
+      .. autoattribute:: VoltaCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.tags

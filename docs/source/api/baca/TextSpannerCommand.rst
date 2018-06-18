@@ -14,6 +14,20 @@ TextSpannerCommand
 
 .. autoclass:: TextSpannerCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      leak
+      lilypond_id
+      line_segment
+      text
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +37,13 @@ TextSpannerCommand
 
    .. automethod:: TextSpannerCommand.__call__
 
-   .. automethod:: TextSpannerCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: TextSpannerCommand.__repr__
+      .. automethod:: TextSpannerCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: TextSpannerCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +52,9 @@ TextSpannerCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: TextSpannerCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: TextSpannerCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +63,25 @@ TextSpannerCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: TextSpannerCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: TextSpannerCommand.offset_to_measure_number
+      .. autoattribute:: TextSpannerCommand.manifests
 
-   .. autoattribute:: TextSpannerCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: TextSpannerCommand.score_template
+      .. autoattribute:: TextSpannerCommand.offset_to_measure_number
 
-   .. autoattribute:: TextSpannerCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: TextSpannerCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: TextSpannerCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: TextSpannerCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,7 +90,9 @@ TextSpannerCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: TextSpannerCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: TextSpannerCommand.deactivate
 
    .. autoattribute:: TextSpannerCommand.leak
 
@@ -68,11 +100,17 @@ TextSpannerCommand
 
    .. autoattribute:: TextSpannerCommand.line_segment
 
-   .. autoattribute:: TextSpannerCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: TextSpannerCommand.tag
+      .. autoattribute:: TextSpannerCommand.selector
 
-   .. autoattribute:: TextSpannerCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: TextSpannerCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: TextSpannerCommand.tags
 
    .. autoattribute:: TextSpannerCommand.text
 

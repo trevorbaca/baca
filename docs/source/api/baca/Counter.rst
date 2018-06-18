@@ -14,6 +14,17 @@ Counter
 
 .. autoclass:: Counter
 
+   .. autosummary::
+      :nosignatures:
+
+      current
+      start
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ Counter
 
    .. automethod:: Counter.__call__
 
-   .. automethod:: Counter.__format__
+   .. container:: inherited
 
-   .. automethod:: Counter.__repr__
+      .. automethod:: Counter.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Counter.__repr__
 
    .. raw:: html
 

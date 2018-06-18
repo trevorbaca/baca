@@ -14,6 +14,26 @@ SplitByDurationsDivisionCallback
 
 .. autoclass:: SplitByDurationsDivisionCallback
 
+   .. autosummary::
+      :nosignatures:
+
+      compound_meter_multiplier
+      cyclic
+      durations
+      pattern_rotation_index
+      remainder
+      remainder_fuse_threshold
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +43,25 @@ SplitByDurationsDivisionCallback
 
    .. automethod:: SplitByDurationsDivisionCallback.__call__
 
-   .. automethod:: SplitByDurationsDivisionCallback.__copy__
+   .. container:: inherited
 
-   .. automethod:: SplitByDurationsDivisionCallback.__eq__
+      .. automethod:: SplitByDurationsDivisionCallback.__copy__
 
-   .. automethod:: SplitByDurationsDivisionCallback.__format__
+   .. container:: inherited
 
-   .. automethod:: SplitByDurationsDivisionCallback.__hash__
+      .. automethod:: SplitByDurationsDivisionCallback.__eq__
 
-   .. automethod:: SplitByDurationsDivisionCallback.__repr__
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__repr__
 
    .. raw:: html
 

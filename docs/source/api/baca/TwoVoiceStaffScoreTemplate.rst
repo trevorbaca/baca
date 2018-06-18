@@ -14,6 +14,11 @@ TwoVoiceStaffScoreTemplate
 
 .. autoclass:: TwoVoiceStaffScoreTemplate
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,17 +28,29 @@ TwoVoiceStaffScoreTemplate
 
    .. automethod:: TwoVoiceStaffScoreTemplate.__call__
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.__copy__
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.__eq__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__copy__
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.__format__
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.__hash__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__eq__
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.__repr__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__format__
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.__repr__
 
    .. raw:: html
 
@@ -42,21 +59,37 @@ TwoVoiceStaffScoreTemplate
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.allows_instrument
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.allows_part_assignment
+      .. automethod:: TwoVoiceStaffScoreTemplate.allows_instrument
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.attach_defaults
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.group_families
+      .. automethod:: TwoVoiceStaffScoreTemplate.allows_part_assignment
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.make_music_context
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.make_piano_staff
+      .. automethod:: TwoVoiceStaffScoreTemplate.attach_defaults
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.make_square_staff_group
+   .. container:: inherited
 
-   .. automethod:: TwoVoiceStaffScoreTemplate.make_staff_group
+      .. automethod:: TwoVoiceStaffScoreTemplate.group_families
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_music_context
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_piano_staff
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_square_staff_group
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_staff_group
 
    .. raw:: html
 
@@ -65,12 +98,22 @@ TwoVoiceStaffScoreTemplate
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: TwoVoiceStaffScoreTemplate.always_make_global_rests
+   .. container:: inherited
 
-   .. autoattribute:: TwoVoiceStaffScoreTemplate.defaults
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.always_make_global_rests
 
-   .. autoattribute:: TwoVoiceStaffScoreTemplate.do_not_require_margin_markup
+   .. container:: inherited
 
-   .. autoattribute:: TwoVoiceStaffScoreTemplate.part_manifest
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.defaults
 
-   .. autoattribute:: TwoVoiceStaffScoreTemplate.voice_abbreviations
+   .. container:: inherited
+
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.do_not_require_margin_markup
+
+   .. container:: inherited
+
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.part_manifest
+
+   .. container:: inherited
+
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.voice_abbreviations

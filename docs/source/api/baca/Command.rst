@@ -14,6 +14,33 @@ Command
 
 .. autoclass:: Command
 
+   .. autosummary::
+      :nosignatures:
+
+      get_tag
+
+   .. autosummary::
+      :nosignatures:
+
+      deactivate
+      selector
+      tag
+      tags
+
+   .. autosummary::
+      :nosignatures:
+
+      manifests
+      offset_to_measure_number
+      previous_segment_voice_metadata
+      score_template
+      tag_measure_number
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +50,13 @@ Command
 
    .. automethod:: Command.__call__
 
-   .. automethod:: Command.__format__
+   .. container:: inherited
 
-   .. automethod:: Command.__repr__
+      .. automethod:: Command.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Command.__repr__
 
    .. raw:: html
 

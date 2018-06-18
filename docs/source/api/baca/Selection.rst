@@ -14,6 +14,43 @@ Selection
 
 .. autoclass:: Selection
 
+   .. autosummary::
+      :nosignatures:
+
+      chead
+      cheads
+      enchain
+      group
+      lleak
+      lleaves
+      lt
+      ltqrun
+      ltqruns
+      ltrun
+      ltruns
+      lts
+      ntruns
+      phead
+      pheads
+      pleaf
+      pleaves
+      plt
+      plts
+      ptail
+      ptails
+      ptlt
+      ptlts
+      qrun
+      qruns
+      rleak
+      rleaves
+      rrun
+      rruns
+      skip
+      skips
+      tleaves
+      wleaves
+
    .. raw:: html
 
       <hr/>
@@ -21,31 +58,57 @@ Selection
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Selection.__add__
+   .. container:: inherited
 
-   .. automethod:: Selection.__contains__
+      .. automethod:: Selection.__add__
 
-   .. automethod:: Selection.__copy__
+   .. container:: inherited
 
-   .. automethod:: Selection.__eq__
+      .. automethod:: Selection.__contains__
 
-   .. automethod:: Selection.__format__
+   .. container:: inherited
 
-   .. automethod:: Selection.__getitem__
+      .. automethod:: Selection.__copy__
 
-   .. automethod:: Selection.__hash__
+   .. container:: inherited
 
-   .. automethod:: Selection.__illustrate__
+      .. automethod:: Selection.__eq__
 
-   .. automethod:: Selection.__iter__
+   .. container:: inherited
 
-   .. automethod:: Selection.__len__
+      .. automethod:: Selection.__format__
 
-   .. automethod:: Selection.__radd__
+   .. container:: inherited
 
-   .. automethod:: Selection.__repr__
+      .. automethod:: Selection.__getitem__
 
-   .. automethod:: Selection.__reversed__
+   .. container:: inherited
+
+      .. automethod:: Selection.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__len__
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__reversed__
 
    .. raw:: html
 
@@ -54,65 +117,113 @@ Selection
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: Selection.are_contiguous_logical_voice
+   .. container:: inherited
 
-   .. automethod:: Selection.are_contiguous_same_parent
+      .. automethod:: Selection.are_contiguous_logical_voice
 
-   .. automethod:: Selection.are_leaves
+   .. container:: inherited
 
-   .. automethod:: Selection.are_logical_voice
+      .. automethod:: Selection.are_contiguous_same_parent
+
+   .. container:: inherited
+
+      .. automethod:: Selection.are_leaves
+
+   .. container:: inherited
+
+      .. automethod:: Selection.are_logical_voice
 
    .. automethod:: Selection.chead
 
    .. automethod:: Selection.cheads
 
-   .. automethod:: Selection.chord
+   .. container:: inherited
 
-   .. automethod:: Selection.chords
+      .. automethod:: Selection.chord
 
-   .. automethod:: Selection.components
+   .. container:: inherited
 
-   .. automethod:: Selection.count
+      .. automethod:: Selection.chords
+
+   .. container:: inherited
+
+      .. automethod:: Selection.components
+
+   .. container:: inherited
+
+      .. automethod:: Selection.count
 
    .. automethod:: Selection.enchain
 
-   .. automethod:: Selection.filter
+   .. container:: inherited
 
-   .. automethod:: Selection.filter_duration
+      .. automethod:: Selection.filter
 
-   .. automethod:: Selection.filter_length
+   .. container:: inherited
 
-   .. automethod:: Selection.filter_pitches
+      .. automethod:: Selection.filter_duration
 
-   .. automethod:: Selection.filter_preprolated
+   .. container:: inherited
 
-   .. automethod:: Selection.flatten
+      .. automethod:: Selection.filter_length
+
+   .. container:: inherited
+
+      .. automethod:: Selection.filter_pitches
+
+   .. container:: inherited
+
+      .. automethod:: Selection.filter_preprolated
+
+   .. container:: inherited
+
+      .. automethod:: Selection.flatten
 
    .. automethod:: Selection.group
 
-   .. automethod:: Selection.group_by
+   .. container:: inherited
 
-   .. automethod:: Selection.group_by_contiguity
+      .. automethod:: Selection.group_by
 
-   .. automethod:: Selection.group_by_duration
+   .. container:: inherited
 
-   .. automethod:: Selection.group_by_length
+      .. automethod:: Selection.group_by_contiguity
 
-   .. automethod:: Selection.group_by_measure
+   .. container:: inherited
 
-   .. automethod:: Selection.group_by_pitch
+      .. automethod:: Selection.group_by_duration
 
-   .. automethod:: Selection.index
+   .. container:: inherited
 
-   .. automethod:: Selection.leaf
+      .. automethod:: Selection.group_by_length
 
-   .. automethod:: Selection.leaves
+   .. container:: inherited
+
+      .. automethod:: Selection.group_by_measure
+
+   .. container:: inherited
+
+      .. automethod:: Selection.group_by_pitch
+
+   .. container:: inherited
+
+      .. automethod:: Selection.index
+
+   .. container:: inherited
+
+      .. automethod:: Selection.leaf
+
+   .. container:: inherited
+
+      .. automethod:: Selection.leaves
 
    .. automethod:: Selection.lleak
 
    .. automethod:: Selection.lleaves
 
-   .. automethod:: Selection.logical_ties
+   .. container:: inherited
+
+      .. automethod:: Selection.logical_ties
 
    .. automethod:: Selection.lt
 
@@ -126,21 +237,35 @@ Selection
 
    .. automethod:: Selection.lts
 
-   .. automethod:: Selection.map
+   .. container:: inherited
 
-   .. automethod:: Selection.nontrivial
+      .. automethod:: Selection.map
 
-   .. automethod:: Selection.note
+   .. container:: inherited
 
-   .. automethod:: Selection.notes
+      .. automethod:: Selection.nontrivial
+
+   .. container:: inherited
+
+      .. automethod:: Selection.note
+
+   .. container:: inherited
+
+      .. automethod:: Selection.notes
 
    .. automethod:: Selection.ntruns
 
-   .. automethod:: Selection.partition_by_counts
+   .. container:: inherited
 
-   .. automethod:: Selection.partition_by_durations
+      .. automethod:: Selection.partition_by_counts
 
-   .. automethod:: Selection.partition_by_ratio
+   .. container:: inherited
+
+      .. automethod:: Selection.partition_by_durations
+
+   .. container:: inherited
+
+      .. automethod:: Selection.partition_by_ratio
 
    .. automethod:: Selection.phead
 
@@ -166,9 +291,13 @@ Selection
 
    .. automethod:: Selection.qruns
 
-   .. automethod:: Selection.rest
+   .. container:: inherited
 
-   .. automethod:: Selection.rests
+      .. automethod:: Selection.rest
+
+   .. container:: inherited
+
+      .. automethod:: Selection.rests
 
    .. automethod:: Selection.rleak
 
@@ -178,9 +307,13 @@ Selection
 
    .. automethod:: Selection.rruns
 
-   .. automethod:: Selection.run
+   .. container:: inherited
 
-   .. automethod:: Selection.runs
+      .. automethod:: Selection.run
+
+   .. container:: inherited
+
+      .. automethod:: Selection.runs
 
    .. automethod:: Selection.skip
 
@@ -188,15 +321,25 @@ Selection
 
    .. automethod:: Selection.tleaves
 
-   .. automethod:: Selection.top
+   .. container:: inherited
 
-   .. automethod:: Selection.tuplet
+      .. automethod:: Selection.top
 
-   .. automethod:: Selection.tuplets
+   .. container:: inherited
 
-   .. automethod:: Selection.with_next_leaf
+      .. automethod:: Selection.tuplet
 
-   .. automethod:: Selection.with_previous_leaf
+   .. container:: inherited
+
+      .. automethod:: Selection.tuplets
+
+   .. container:: inherited
+
+      .. automethod:: Selection.with_next_leaf
+
+   .. container:: inherited
+
+      .. automethod:: Selection.with_previous_leaf
 
    .. automethod:: Selection.wleaves
 
@@ -207,4 +350,6 @@ Selection
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Selection.items
+   .. container:: inherited
+
+      .. autoattribute:: Selection.items

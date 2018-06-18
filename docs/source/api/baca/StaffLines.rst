@@ -14,6 +14,19 @@ StaffLines
 
 .. autoclass:: StaffLines
 
+   .. autosummary::
+      :nosignatures:
+
+      context
+      hide
+      line_count
+      persistent
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +36,13 @@ StaffLines
 
    .. automethod:: StaffLines.__eq__
 
-   .. automethod:: StaffLines.__format__
+   .. container:: inherited
 
-   .. automethod:: StaffLines.__repr__
+      .. automethod:: StaffLines.__format__
+
+   .. container:: inherited
+
+      .. automethod:: StaffLines.__repr__
 
    .. raw:: html
 

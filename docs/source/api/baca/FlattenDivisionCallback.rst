@@ -14,6 +14,16 @@ FlattenDivisionCallback
 
 .. autoclass:: FlattenDivisionCallback
 
+   .. autosummary::
+      :nosignatures:
+
+      depth
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +33,25 @@ FlattenDivisionCallback
 
    .. automethod:: FlattenDivisionCallback.__call__
 
-   .. automethod:: FlattenDivisionCallback.__copy__
+   .. container:: inherited
 
-   .. automethod:: FlattenDivisionCallback.__eq__
+      .. automethod:: FlattenDivisionCallback.__copy__
 
-   .. automethod:: FlattenDivisionCallback.__format__
+   .. container:: inherited
 
-   .. automethod:: FlattenDivisionCallback.__hash__
+      .. automethod:: FlattenDivisionCallback.__eq__
 
-   .. automethod:: FlattenDivisionCallback.__repr__
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__repr__
 
    .. raw:: html
 

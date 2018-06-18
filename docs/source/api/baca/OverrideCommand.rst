@@ -14,6 +14,22 @@ OverrideCommand
 
 .. autoclass:: OverrideCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      after
+      attribute
+      blacklist
+      context
+      grob
+      value
+      whitelist
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +39,13 @@ OverrideCommand
 
    .. automethod:: OverrideCommand.__call__
 
-   .. automethod:: OverrideCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: OverrideCommand.__repr__
+      .. automethod:: OverrideCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: OverrideCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +54,9 @@ OverrideCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: OverrideCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: OverrideCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +65,25 @@ OverrideCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: OverrideCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: OverrideCommand.offset_to_measure_number
+      .. autoattribute:: OverrideCommand.manifests
 
-   .. autoattribute:: OverrideCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: OverrideCommand.score_template
+      .. autoattribute:: OverrideCommand.offset_to_measure_number
 
-   .. autoattribute:: OverrideCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tag_measure_number
 
    .. raw:: html
 
@@ -68,15 +100,23 @@ OverrideCommand
 
    .. autoattribute:: OverrideCommand.context
 
-   .. autoattribute:: OverrideCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.deactivate
 
    .. autoattribute:: OverrideCommand.grob
 
-   .. autoattribute:: OverrideCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: OverrideCommand.tag
+      .. autoattribute:: OverrideCommand.selector
 
-   .. autoattribute:: OverrideCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tags
 
    .. autoattribute:: OverrideCommand.value
 

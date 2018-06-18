@@ -14,6 +14,22 @@ StageMeasureMap
 
 .. autoclass:: StageMeasureMap
 
+   .. autosummary::
+      :nosignatures:
+
+      item_type
+
+   .. autosummary::
+      :nosignatures:
+
+      items
+      stage_count
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+
    .. raw:: html
 
       <hr/>
@@ -21,11 +37,15 @@ StageMeasureMap
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: StageMeasureMap.__format__
+   .. container:: inherited
+
+      .. automethod:: StageMeasureMap.__format__
 
    .. automethod:: StageMeasureMap.__getitem__
 
-   .. automethod:: StageMeasureMap.__repr__
+   .. container:: inherited
+
+      .. automethod:: StageMeasureMap.__repr__
 
    .. raw:: html
 

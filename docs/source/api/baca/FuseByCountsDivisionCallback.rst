@@ -14,6 +14,18 @@ FuseByCountsDivisionCallback
 
 .. autoclass:: FuseByCountsDivisionCallback
 
+   .. autosummary::
+      :nosignatures:
+
+      counts
+      cyclic
+      secondary_division_maker
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +35,25 @@ FuseByCountsDivisionCallback
 
    .. automethod:: FuseByCountsDivisionCallback.__call__
 
-   .. automethod:: FuseByCountsDivisionCallback.__copy__
+   .. container:: inherited
 
-   .. automethod:: FuseByCountsDivisionCallback.__eq__
+      .. automethod:: FuseByCountsDivisionCallback.__copy__
 
-   .. automethod:: FuseByCountsDivisionCallback.__format__
+   .. container:: inherited
 
-   .. automethod:: FuseByCountsDivisionCallback.__hash__
+      .. automethod:: FuseByCountsDivisionCallback.__eq__
 
-   .. automethod:: FuseByCountsDivisionCallback.__repr__
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__repr__
 
    .. raw:: html
 

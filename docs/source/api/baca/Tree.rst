@@ -14,6 +14,29 @@ Tree
 
 .. autoclass:: Tree
 
+   .. autosummary::
+      :nosignatures:
+
+      get_payload
+      iterate
+
+   .. autosummary::
+      :nosignatures:
+
+      item_class
+      items
+
+   .. autosummary::
+      :nosignatures:
+
+      __contains__
+      __eq__
+      __format__
+      __getitem__
+      __hash__
+      __len__
+      __repr__
+
    .. raw:: html
 
       <hr/>

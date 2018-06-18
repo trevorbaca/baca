@@ -14,6 +14,18 @@ StaffPositionCommand
 
 .. autoclass:: StaffPositionCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      allow_repeats
+      exact
+      numbers
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +35,13 @@ StaffPositionCommand
 
    .. automethod:: StaffPositionCommand.__call__
 
-   .. automethod:: StaffPositionCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: StaffPositionCommand.__repr__
+      .. automethod:: StaffPositionCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +50,9 @@ StaffPositionCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: StaffPositionCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: StaffPositionCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +61,25 @@ StaffPositionCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: StaffPositionCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionCommand.offset_to_measure_number
+      .. autoattribute:: StaffPositionCommand.manifests
 
-   .. autoattribute:: StaffPositionCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionCommand.score_template
+      .. autoattribute:: StaffPositionCommand.offset_to_measure_number
 
-   .. autoattribute:: StaffPositionCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,14 +90,22 @@ StaffPositionCommand
 
    .. autoattribute:: StaffPositionCommand.allow_repeats
 
-   .. autoattribute:: StaffPositionCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.deactivate
 
    .. autoattribute:: StaffPositionCommand.exact
 
    .. autoattribute:: StaffPositionCommand.numbers
 
-   .. autoattribute:: StaffPositionCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionCommand.tag
+      .. autoattribute:: StaffPositionCommand.selector
 
-   .. autoattribute:: StaffPositionCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tags

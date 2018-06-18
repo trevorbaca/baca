@@ -14,6 +14,17 @@ RegisterToOctaveCommand
 
 .. autoclass:: RegisterToOctaveCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      anchor
+      octave_number
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ RegisterToOctaveCommand
 
    .. automethod:: RegisterToOctaveCommand.__call__
 
-   .. automethod:: RegisterToOctaveCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: RegisterToOctaveCommand.__repr__
+      .. automethod:: RegisterToOctaveCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: RegisterToOctaveCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +49,9 @@ RegisterToOctaveCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: RegisterToOctaveCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: RegisterToOctaveCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +60,25 @@ RegisterToOctaveCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: RegisterToOctaveCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: RegisterToOctaveCommand.offset_to_measure_number
+      .. autoattribute:: RegisterToOctaveCommand.manifests
 
-   .. autoattribute:: RegisterToOctaveCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: RegisterToOctaveCommand.score_template
+      .. autoattribute:: RegisterToOctaveCommand.offset_to_measure_number
 
-   .. autoattribute:: RegisterToOctaveCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,12 +89,20 @@ RegisterToOctaveCommand
 
    .. autoattribute:: RegisterToOctaveCommand.anchor
 
-   .. autoattribute:: RegisterToOctaveCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.deactivate
 
    .. autoattribute:: RegisterToOctaveCommand.octave_number
 
-   .. autoattribute:: RegisterToOctaveCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: RegisterToOctaveCommand.tag
+      .. autoattribute:: RegisterToOctaveCommand.selector
 
-   .. autoattribute:: RegisterToOctaveCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.tags

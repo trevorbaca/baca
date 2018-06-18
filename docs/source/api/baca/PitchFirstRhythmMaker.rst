@@ -14,6 +14,29 @@ PitchFirstRhythmMaker
 
 .. autoclass:: PitchFirstRhythmMaker
 
+   .. autosummary::
+      :nosignatures:
+
+      acciaccatura_specifiers
+      beam_specifier
+      division_masks
+      duration_specifier
+      logical_tie_masks
+      talea
+      tie_specifier
+      time_treatments
+      tuplet_specifier
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
    .. raw:: html
 
       <hr/>
@@ -23,17 +46,29 @@ PitchFirstRhythmMaker
 
    .. automethod:: PitchFirstRhythmMaker.__call__
 
-   .. automethod:: PitchFirstRhythmMaker.__copy__
+   .. container:: inherited
 
-   .. automethod:: PitchFirstRhythmMaker.__eq__
+      .. automethod:: PitchFirstRhythmMaker.__copy__
 
-   .. automethod:: PitchFirstRhythmMaker.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchFirstRhythmMaker.__hash__
+      .. automethod:: PitchFirstRhythmMaker.__eq__
 
-   .. automethod:: PitchFirstRhythmMaker.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: PitchFirstRhythmMaker.__repr__
+      .. automethod:: PitchFirstRhythmMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__repr__
 
    .. raw:: html
 
@@ -61,9 +96,13 @@ PitchFirstRhythmMaker
 
    .. autoattribute:: PitchFirstRhythmMaker.logical_tie_masks
 
-   .. autoattribute:: PitchFirstRhythmMaker.previous_state
+   .. container:: inherited
 
-   .. autoattribute:: PitchFirstRhythmMaker.state
+      .. autoattribute:: PitchFirstRhythmMaker.previous_state
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.state
 
    .. autoattribute:: PitchFirstRhythmMaker.talea
 

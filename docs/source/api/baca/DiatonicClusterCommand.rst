@@ -14,6 +14,16 @@ DiatonicClusterCommand
 
 .. autoclass:: DiatonicClusterCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      widths
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ DiatonicClusterCommand
 
    .. automethod:: DiatonicClusterCommand.__call__
 
-   .. automethod:: DiatonicClusterCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: DiatonicClusterCommand.__repr__
+      .. automethod:: DiatonicClusterCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DiatonicClusterCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ DiatonicClusterCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: DiatonicClusterCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: DiatonicClusterCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ DiatonicClusterCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: DiatonicClusterCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: DiatonicClusterCommand.offset_to_measure_number
+      .. autoattribute:: DiatonicClusterCommand.manifests
 
-   .. autoattribute:: DiatonicClusterCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: DiatonicClusterCommand.score_template
+      .. autoattribute:: DiatonicClusterCommand.offset_to_measure_number
 
-   .. autoattribute:: DiatonicClusterCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ DiatonicClusterCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: DiatonicClusterCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: DiatonicClusterCommand.selector
+      .. autoattribute:: DiatonicClusterCommand.deactivate
 
-   .. autoattribute:: DiatonicClusterCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: DiatonicClusterCommand.tags
+      .. autoattribute:: DiatonicClusterCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tags
 
    .. autoattribute:: DiatonicClusterCommand.widths

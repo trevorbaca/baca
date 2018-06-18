@@ -14,6 +14,27 @@ TimeSignatureMaker
 
 .. autoclass:: TimeSignatureMaker
 
+   .. autosummary::
+      :nosignatures:
+
+      run
+
+   .. autosummary::
+      :nosignatures:
+
+      count
+      fermata_measures
+      metronome_mark_measure_map
+      repeat_count
+      rotation
+      stage_measure_map
+      time_signatures
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +44,13 @@ TimeSignatureMaker
 
    .. automethod:: TimeSignatureMaker.__call__
 
-   .. automethod:: TimeSignatureMaker.__format__
+   .. container:: inherited
 
-   .. automethod:: TimeSignatureMaker.__repr__
+      .. automethod:: TimeSignatureMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: TimeSignatureMaker.__repr__
 
    .. raw:: html
 

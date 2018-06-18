@@ -14,6 +14,11 @@ ColorCommand
 
 .. autoclass:: ColorCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +28,13 @@ ColorCommand
 
    .. automethod:: ColorCommand.__call__
 
-   .. automethod:: ColorCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: ColorCommand.__repr__
+      .. automethod:: ColorCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ColorCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +43,9 @@ ColorCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ColorCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: ColorCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +54,25 @@ ColorCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: ColorCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: ColorCommand.offset_to_measure_number
+      .. autoattribute:: ColorCommand.manifests
 
-   .. autoattribute:: ColorCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: ColorCommand.score_template
+      .. autoattribute:: ColorCommand.offset_to_measure_number
 
-   .. autoattribute:: ColorCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,10 +81,18 @@ ColorCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ColorCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: ColorCommand.selector
+      .. autoattribute:: ColorCommand.deactivate
 
-   .. autoattribute:: ColorCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: ColorCommand.tags
+      .. autoattribute:: ColorCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.tags

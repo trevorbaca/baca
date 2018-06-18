@@ -14,6 +14,13 @@ SystemSpecifier
 
 .. autoclass:: SystemSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      distances
+      measure
+      y_offset
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +28,13 @@ SystemSpecifier
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: SystemSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: SystemSpecifier.__repr__
+      .. automethod:: SystemSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SystemSpecifier.__repr__
 
    .. raw:: html
 

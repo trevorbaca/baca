@@ -14,6 +14,19 @@ RestAffixSpecifier
 
 .. autoclass:: RestAffixSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      pattern
+      prefix
+      skips_instead_of_rests
+      suffix
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +36,25 @@ RestAffixSpecifier
 
    .. automethod:: RestAffixSpecifier.__call__
 
-   .. automethod:: RestAffixSpecifier.__copy__
+   .. container:: inherited
 
-   .. automethod:: RestAffixSpecifier.__eq__
+      .. automethod:: RestAffixSpecifier.__copy__
 
-   .. automethod:: RestAffixSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: RestAffixSpecifier.__hash__
+      .. automethod:: RestAffixSpecifier.__eq__
 
-   .. automethod:: RestAffixSpecifier.__repr__
+   .. container:: inherited
+
+      .. automethod:: RestAffixSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: RestAffixSpecifier.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: RestAffixSpecifier.__repr__
 
    .. raw:: html
 

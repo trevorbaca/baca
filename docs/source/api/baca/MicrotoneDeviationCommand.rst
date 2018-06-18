@@ -14,6 +14,16 @@ MicrotoneDeviationCommand
 
 .. autoclass:: MicrotoneDeviationCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      deviations
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ MicrotoneDeviationCommand
 
    .. automethod:: MicrotoneDeviationCommand.__call__
 
-   .. automethod:: MicrotoneDeviationCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: MicrotoneDeviationCommand.__repr__
+      .. automethod:: MicrotoneDeviationCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MicrotoneDeviationCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ MicrotoneDeviationCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: MicrotoneDeviationCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: MicrotoneDeviationCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ MicrotoneDeviationCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: MicrotoneDeviationCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: MicrotoneDeviationCommand.offset_to_measure_number
+      .. autoattribute:: MicrotoneDeviationCommand.manifests
 
-   .. autoattribute:: MicrotoneDeviationCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: MicrotoneDeviationCommand.score_template
+      .. autoattribute:: MicrotoneDeviationCommand.offset_to_measure_number
 
-   .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ MicrotoneDeviationCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: MicrotoneDeviationCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.deactivate
 
    .. autoattribute:: MicrotoneDeviationCommand.deviations
 
-   .. autoattribute:: MicrotoneDeviationCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: MicrotoneDeviationCommand.tag
+      .. autoattribute:: MicrotoneDeviationCommand.selector
 
-   .. autoattribute:: MicrotoneDeviationCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tags

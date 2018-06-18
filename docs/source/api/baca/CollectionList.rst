@@ -14,6 +14,56 @@ CollectionList
 
 .. autoclass:: CollectionList
 
+   .. autosummary::
+      :nosignatures:
+
+      accumulate
+      arpeggiate_down
+      arpeggiate_up
+      bass_to_octave
+      center_to_octave
+      chords
+      cursor
+      flatten
+      has_duplicate_pitch_classes
+      has_duplicates
+      has_repeat_pitch_classes
+      has_repeats
+      helianthate
+      join
+      partition
+      read
+      remove
+      remove_duplicate_pitch_classes
+      remove_duplicates
+      remove_repeat_pitch_classes
+      remove_repeats
+      repeat
+      retain
+      soprano_to_octave
+      space_down
+      space_up
+      to_pitch_classes
+      to_pitches
+      transpose
+
+   .. autosummary::
+      :nosignatures:
+
+      collections
+      item_class
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __eq__
+      __format__
+      __getitem__
+      __illustrate__
+      __len__
+      __repr__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +73,13 @@ CollectionList
 
    .. automethod:: CollectionList.__add__
 
-   .. automethod:: CollectionList.__contains__
+   .. container:: inherited
 
-   .. automethod:: CollectionList.__copy__
+      .. automethod:: CollectionList.__contains__
+
+   .. container:: inherited
+
+      .. automethod:: CollectionList.__copy__
 
    .. automethod:: CollectionList.__eq__
 
@@ -35,13 +89,17 @@ CollectionList
 
    .. automethod:: CollectionList.__illustrate__
 
-   .. automethod:: CollectionList.__iter__
+   .. container:: inherited
+
+      .. automethod:: CollectionList.__iter__
 
    .. automethod:: CollectionList.__len__
 
    .. automethod:: CollectionList.__repr__
 
-   .. automethod:: CollectionList.__reversed__
+   .. container:: inherited
+
+      .. automethod:: CollectionList.__reversed__
 
    .. raw:: html
 
@@ -62,7 +120,9 @@ CollectionList
 
    .. automethod:: CollectionList.chords
 
-   .. automethod:: CollectionList.count
+   .. container:: inherited
+
+      .. automethod:: CollectionList.count
 
    .. automethod:: CollectionList.cursor
 
@@ -78,7 +138,9 @@ CollectionList
 
    .. automethod:: CollectionList.helianthate
 
-   .. automethod:: CollectionList.index
+   .. container:: inherited
+
+      .. automethod:: CollectionList.index
 
    .. automethod:: CollectionList.join
 

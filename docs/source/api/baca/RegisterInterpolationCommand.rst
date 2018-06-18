@@ -14,6 +14,18 @@ RegisterInterpolationCommand
 
 .. autoclass:: RegisterInterpolationCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      selector
+      start_pitch
+      stop_pitch
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +35,13 @@ RegisterInterpolationCommand
 
    .. automethod:: RegisterInterpolationCommand.__call__
 
-   .. automethod:: RegisterInterpolationCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: RegisterInterpolationCommand.__repr__
+      .. automethod:: RegisterInterpolationCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: RegisterInterpolationCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +50,9 @@ RegisterInterpolationCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: RegisterInterpolationCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: RegisterInterpolationCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +61,25 @@ RegisterInterpolationCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: RegisterInterpolationCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: RegisterInterpolationCommand.offset_to_measure_number
+      .. autoattribute:: RegisterInterpolationCommand.manifests
 
-   .. autoattribute:: RegisterInterpolationCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: RegisterInterpolationCommand.score_template
+      .. autoattribute:: RegisterInterpolationCommand.offset_to_measure_number
 
-   .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,7 +88,9 @@ RegisterInterpolationCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: RegisterInterpolationCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.deactivate
 
    .. autoattribute:: RegisterInterpolationCommand.selector
 
@@ -68,6 +98,10 @@ RegisterInterpolationCommand
 
    .. autoattribute:: RegisterInterpolationCommand.stop_pitch
 
-   .. autoattribute:: RegisterInterpolationCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: RegisterInterpolationCommand.tags
+      .. autoattribute:: RegisterInterpolationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.tags

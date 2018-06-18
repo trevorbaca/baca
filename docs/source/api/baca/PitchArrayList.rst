@@ -14,6 +14,11 @@ PitchArrayList
 
 .. autoclass:: PitchArrayList
 
+   .. autosummary::
+      :nosignatures:
+
+      to_score
+
    .. raw:: html
 
       <hr/>
@@ -21,29 +26,53 @@ PitchArrayList
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchArrayList.__contains__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.__delitem__
+      .. automethod:: PitchArrayList.__contains__
 
-   .. automethod:: PitchArrayList.__eq__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.__format__
+      .. automethod:: PitchArrayList.__delitem__
 
-   .. automethod:: PitchArrayList.__getitem__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.__hash__
+      .. automethod:: PitchArrayList.__eq__
 
-   .. automethod:: PitchArrayList.__iadd__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.__iter__
+      .. automethod:: PitchArrayList.__format__
 
-   .. automethod:: PitchArrayList.__len__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.__repr__
+      .. automethod:: PitchArrayList.__getitem__
 
-   .. automethod:: PitchArrayList.__reversed__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.__setitem__
+      .. automethod:: PitchArrayList.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.__iadd__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.__len__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.__reversed__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.__setitem__
 
    .. raw:: html
 
@@ -52,25 +81,45 @@ PitchArrayList
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchArrayList.append
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.clear
+      .. automethod:: PitchArrayList.append
 
-   .. automethod:: PitchArrayList.count
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.extend
+      .. automethod:: PitchArrayList.clear
 
-   .. automethod:: PitchArrayList.index
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.insert
+      .. automethod:: PitchArrayList.count
 
-   .. automethod:: PitchArrayList.pop
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.remove
+      .. automethod:: PitchArrayList.extend
 
-   .. automethod:: PitchArrayList.reverse
+   .. container:: inherited
 
-   .. automethod:: PitchArrayList.sort
+      .. automethod:: PitchArrayList.index
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.insert
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.pop
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.remove
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.reverse
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.sort
 
    .. automethod:: PitchArrayList.to_score
 
@@ -81,7 +130,9 @@ PitchArrayList
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: PitchArrayList.keep_sorted
+   .. container:: inherited
+
+      .. autoattribute:: PitchArrayList.keep_sorted
 
    .. raw:: html
 
@@ -90,6 +141,10 @@ PitchArrayList
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchArrayList.item_class
+   .. container:: inherited
 
-   .. autoattribute:: PitchArrayList.items
+      .. autoattribute:: PitchArrayList.item_class
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchArrayList.items

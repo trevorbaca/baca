@@ -14,6 +14,21 @@ SpannerCommand
 
 .. autoclass:: SpannerCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      detach_first
+      left_broken
+      right_broken
+      selector
+      spanner
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +38,13 @@ SpannerCommand
 
    .. automethod:: SpannerCommand.__call__
 
-   .. automethod:: SpannerCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: SpannerCommand.__repr__
+      .. automethod:: SpannerCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SpannerCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +53,9 @@ SpannerCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: SpannerCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: SpannerCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +64,25 @@ SpannerCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: SpannerCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: SpannerCommand.offset_to_measure_number
+      .. autoattribute:: SpannerCommand.manifests
 
-   .. autoattribute:: SpannerCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: SpannerCommand.score_template
+      .. autoattribute:: SpannerCommand.offset_to_measure_number
 
-   .. autoattribute:: SpannerCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,7 +91,9 @@ SpannerCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: SpannerCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.deactivate
 
    .. autoattribute:: SpannerCommand.detach_first
 
@@ -72,8 +105,12 @@ SpannerCommand
 
    .. autoattribute:: SpannerCommand.spanner
 
-   .. autoattribute:: SpannerCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: SpannerCommand.tags
+      .. autoattribute:: SpannerCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.tags
 
    .. autoattribute:: SpannerCommand.tweaks

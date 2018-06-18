@@ -14,6 +14,18 @@ AcciaccaturaSpecifier
 
 .. autoclass:: AcciaccaturaSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      durations
+      lmr_specifier
+      pattern
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +35,13 @@ AcciaccaturaSpecifier
 
    .. automethod:: AcciaccaturaSpecifier.__call__
 
-   .. automethod:: AcciaccaturaSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: AcciaccaturaSpecifier.__repr__
+      .. automethod:: AcciaccaturaSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: AcciaccaturaSpecifier.__repr__
 
    .. raw:: html
 

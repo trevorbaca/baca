@@ -14,6 +14,18 @@ AccidentalAdjustmentCommand
 
 .. autoclass:: AccidentalAdjustmentCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      cautionary
+      forced
+      parenthesized
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +35,13 @@ AccidentalAdjustmentCommand
 
    .. automethod:: AccidentalAdjustmentCommand.__call__
 
-   .. automethod:: AccidentalAdjustmentCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: AccidentalAdjustmentCommand.__repr__
+      .. automethod:: AccidentalAdjustmentCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: AccidentalAdjustmentCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +50,9 @@ AccidentalAdjustmentCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: AccidentalAdjustmentCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: AccidentalAdjustmentCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +61,25 @@ AccidentalAdjustmentCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: AccidentalAdjustmentCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: AccidentalAdjustmentCommand.offset_to_measure_number
+      .. autoattribute:: AccidentalAdjustmentCommand.manifests
 
-   .. autoattribute:: AccidentalAdjustmentCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: AccidentalAdjustmentCommand.score_template
+      .. autoattribute:: AccidentalAdjustmentCommand.offset_to_measure_number
 
-   .. autoattribute:: AccidentalAdjustmentCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,14 +90,22 @@ AccidentalAdjustmentCommand
 
    .. autoattribute:: AccidentalAdjustmentCommand.cautionary
 
-   .. autoattribute:: AccidentalAdjustmentCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.deactivate
 
    .. autoattribute:: AccidentalAdjustmentCommand.forced
 
    .. autoattribute:: AccidentalAdjustmentCommand.parenthesized
 
-   .. autoattribute:: AccidentalAdjustmentCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: AccidentalAdjustmentCommand.tag
+      .. autoattribute:: AccidentalAdjustmentCommand.selector
 
-   .. autoattribute:: AccidentalAdjustmentCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tags

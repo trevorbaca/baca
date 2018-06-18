@@ -14,6 +14,20 @@ PitchSpecifier
 
 .. autoclass:: PitchSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      expressions
+      remove_duplicate_pitch_classes
+      remove_duplicates
+      to_pitch_classes
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __repr__
+
    .. raw:: html
 
       <hr/>
@@ -23,7 +37,9 @@ PitchSpecifier
 
    .. automethod:: PitchSpecifier.__call__
 
-   .. automethod:: PitchSpecifier.__format__
+   .. container:: inherited
+
+      .. automethod:: PitchSpecifier.__format__
 
    .. automethod:: PitchSpecifier.__repr__
 

@@ -14,6 +14,19 @@ IndicatorCommand
 
 .. autoclass:: IndicatorCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      context
+      indicators
+      redundant
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +36,13 @@ IndicatorCommand
 
    .. automethod:: IndicatorCommand.__call__
 
-   .. automethod:: IndicatorCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: IndicatorCommand.__repr__
+      .. automethod:: IndicatorCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: IndicatorCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +51,9 @@ IndicatorCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: IndicatorCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: IndicatorCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +62,25 @@ IndicatorCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: IndicatorCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: IndicatorCommand.offset_to_measure_number
+      .. autoattribute:: IndicatorCommand.manifests
 
-   .. autoattribute:: IndicatorCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: IndicatorCommand.score_template
+      .. autoattribute:: IndicatorCommand.offset_to_measure_number
 
-   .. autoattribute:: IndicatorCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,16 +91,24 @@ IndicatorCommand
 
    .. autoattribute:: IndicatorCommand.context
 
-   .. autoattribute:: IndicatorCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.deactivate
 
    .. autoattribute:: IndicatorCommand.indicators
 
    .. autoattribute:: IndicatorCommand.redundant
 
-   .. autoattribute:: IndicatorCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: IndicatorCommand.tag
+      .. autoattribute:: IndicatorCommand.selector
 
-   .. autoattribute:: IndicatorCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tags
 
    .. autoattribute:: IndicatorCommand.tweaks

@@ -14,6 +14,16 @@ OctaveDisplacementCommand
 
 .. autoclass:: OctaveDisplacementCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      displacements
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ OctaveDisplacementCommand
 
    .. automethod:: OctaveDisplacementCommand.__call__
 
-   .. automethod:: OctaveDisplacementCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: OctaveDisplacementCommand.__repr__
+      .. automethod:: OctaveDisplacementCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: OctaveDisplacementCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ OctaveDisplacementCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: OctaveDisplacementCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: OctaveDisplacementCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ OctaveDisplacementCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: OctaveDisplacementCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: OctaveDisplacementCommand.offset_to_measure_number
+      .. autoattribute:: OctaveDisplacementCommand.manifests
 
-   .. autoattribute:: OctaveDisplacementCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: OctaveDisplacementCommand.score_template
+      .. autoattribute:: OctaveDisplacementCommand.offset_to_measure_number
 
-   .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ OctaveDisplacementCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: OctaveDisplacementCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.deactivate
 
    .. autoattribute:: OctaveDisplacementCommand.displacements
 
-   .. autoattribute:: OctaveDisplacementCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: OctaveDisplacementCommand.tag
+      .. autoattribute:: OctaveDisplacementCommand.selector
 
-   .. autoattribute:: OctaveDisplacementCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tags

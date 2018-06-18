@@ -14,6 +14,23 @@ SpacingSection
 
 .. autoclass:: SpacingSection
 
+   .. autosummary::
+      :nosignatures:
+
+      duration
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __hash__
+      __str__
+
+   .. autosummary::
+      :nosignatures:
+
+      from_string
+
    .. raw:: html
 
       <hr/>
@@ -23,11 +40,15 @@ SpacingSection
 
    .. automethod:: SpacingSection.__eq__
 
-   .. automethod:: SpacingSection.__format__
+   .. container:: inherited
+
+      .. automethod:: SpacingSection.__format__
 
    .. automethod:: SpacingSection.__hash__
 
-   .. automethod:: SpacingSection.__repr__
+   .. container:: inherited
+
+      .. automethod:: SpacingSection.__repr__
 
    .. automethod:: SpacingSection.__str__
 

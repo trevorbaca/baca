@@ -14,6 +14,35 @@ Division
 
 .. autoclass:: Division
 
+   .. autosummary::
+      :nosignatures:
+
+      yield_equivalent_durations
+
+   .. autosummary::
+      :nosignatures:
+
+      duration
+      payload
+      start_offset
+      stop_offset
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __copy__
+      __deepcopy__
+      __new__
+      __str__
+      __sub__
+
+   .. autosummary::
+      :nosignatures:
+
+      yield_durations
+      yield_nonreduced_fractions
+
    .. raw:: html
 
       <hr/>
@@ -21,85 +50,153 @@ Division
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Division.__abs__
+   .. container:: inherited
+
+      .. automethod:: Division.__abs__
 
    .. automethod:: Division.__add__
 
-   .. automethod:: Division.__bool__
+   .. container:: inherited
 
-   .. automethod:: Division.__ceil__
+      .. automethod:: Division.__bool__
 
-   .. automethod:: Division.__complex__
+   .. container:: inherited
+
+      .. automethod:: Division.__ceil__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__complex__
 
    .. automethod:: Division.__copy__
 
    .. automethod:: Division.__deepcopy__
 
-   .. automethod:: Division.__div__
+   .. container:: inherited
 
-   .. automethod:: Division.__divmod__
+      .. automethod:: Division.__div__
 
-   .. automethod:: Division.__eq__
+   .. container:: inherited
 
-   .. automethod:: Division.__float__
+      .. automethod:: Division.__divmod__
 
-   .. automethod:: Division.__floor__
+   .. container:: inherited
 
-   .. automethod:: Division.__floordiv__
+      .. automethod:: Division.__eq__
 
-   .. automethod:: Division.__format__
+   .. container:: inherited
 
-   .. automethod:: Division.__ge__
+      .. automethod:: Division.__float__
 
-   .. automethod:: Division.__gt__
+   .. container:: inherited
 
-   .. automethod:: Division.__hash__
+      .. automethod:: Division.__floor__
 
-   .. automethod:: Division.__le__
+   .. container:: inherited
 
-   .. automethod:: Division.__lt__
+      .. automethod:: Division.__floordiv__
 
-   .. automethod:: Division.__mod__
+   .. container:: inherited
 
-   .. automethod:: Division.__mul__
+      .. automethod:: Division.__format__
 
-   .. automethod:: Division.__neg__
+   .. container:: inherited
+
+      .. automethod:: Division.__ge__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__gt__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__le__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__lt__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__mod__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__mul__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__neg__
 
    .. automethod:: Division.__new__
 
-   .. automethod:: Division.__pos__
+   .. container:: inherited
 
-   .. automethod:: Division.__pow__
+      .. automethod:: Division.__pos__
 
-   .. automethod:: Division.__radd__
+   .. container:: inherited
 
-   .. automethod:: Division.__rdiv__
+      .. automethod:: Division.__pow__
 
-   .. automethod:: Division.__rdivmod__
+   .. container:: inherited
 
-   .. automethod:: Division.__repr__
+      .. automethod:: Division.__radd__
 
-   .. automethod:: Division.__rfloordiv__
+   .. container:: inherited
 
-   .. automethod:: Division.__rmod__
+      .. automethod:: Division.__rdiv__
 
-   .. automethod:: Division.__rmul__
+   .. container:: inherited
 
-   .. automethod:: Division.__round__
+      .. automethod:: Division.__rdivmod__
 
-   .. automethod:: Division.__rpow__
+   .. container:: inherited
 
-   .. automethod:: Division.__rsub__
+      .. automethod:: Division.__repr__
 
-   .. automethod:: Division.__rtruediv__
+   .. container:: inherited
+
+      .. automethod:: Division.__rfloordiv__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rmod__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rmul__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__round__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rpow__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rsub__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rtruediv__
 
    .. automethod:: Division.__str__
 
    .. automethod:: Division.__sub__
 
-   .. automethod:: Division.__truediv__
+   .. container:: inherited
 
-   .. automethod:: Division.__trunc__
+      .. automethod:: Division.__truediv__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__trunc__
 
    .. raw:: html
 
@@ -108,21 +205,37 @@ Division
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: Division.conjugate
+   .. container:: inherited
 
-   .. automethod:: Division.limit_denominator
+      .. automethod:: Division.conjugate
 
-   .. automethod:: Division.multiply
+   .. container:: inherited
 
-   .. automethod:: Division.multiply_with_cross_cancelation
+      .. automethod:: Division.limit_denominator
 
-   .. automethod:: Division.multiply_without_reducing
+   .. container:: inherited
 
-   .. automethod:: Division.reduce
+      .. automethod:: Division.multiply
 
-   .. automethod:: Division.with_denominator
+   .. container:: inherited
 
-   .. automethod:: Division.with_multiple_of_denominator
+      .. automethod:: Division.multiply_with_cross_cancelation
+
+   .. container:: inherited
+
+      .. automethod:: Division.multiply_without_reducing
+
+   .. container:: inherited
+
+      .. automethod:: Division.reduce
+
+   .. container:: inherited
+
+      .. automethod:: Division.with_denominator
+
+   .. container:: inherited
+
+      .. automethod:: Division.with_multiple_of_denominator
 
    .. automethod:: Division.yield_equivalent_durations
 
@@ -133,9 +246,13 @@ Division
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: Division.from_decimal
+   .. container:: inherited
 
-   .. automethod:: Division.from_float
+      .. automethod:: Division.from_decimal
+
+   .. container:: inherited
+
+      .. automethod:: Division.from_float
 
    .. automethod:: Division.yield_durations
 
@@ -148,19 +265,29 @@ Division
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Division.denominator
+   .. container:: inherited
+
+      .. autoattribute:: Division.denominator
 
    .. autoattribute:: Division.duration
 
-   .. autoattribute:: Division.imag
+   .. container:: inherited
 
-   .. autoattribute:: Division.numerator
+      .. autoattribute:: Division.imag
 
-   .. autoattribute:: Division.pair
+   .. container:: inherited
+
+      .. autoattribute:: Division.numerator
+
+   .. container:: inherited
+
+      .. autoattribute:: Division.pair
 
    .. autoattribute:: Division.payload
 
-   .. autoattribute:: Division.real
+   .. container:: inherited
+
+      .. autoattribute:: Division.real
 
    .. autoattribute:: Division.start_offset
 

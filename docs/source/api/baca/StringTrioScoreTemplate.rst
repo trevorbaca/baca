@@ -14,6 +14,11 @@ StringTrioScoreTemplate
 
 .. autoclass:: StringTrioScoreTemplate
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,17 +28,29 @@ StringTrioScoreTemplate
 
    .. automethod:: StringTrioScoreTemplate.__call__
 
-   .. automethod:: StringTrioScoreTemplate.__copy__
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.__eq__
+      .. automethod:: StringTrioScoreTemplate.__copy__
 
-   .. automethod:: StringTrioScoreTemplate.__format__
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.__hash__
+      .. automethod:: StringTrioScoreTemplate.__eq__
 
-   .. automethod:: StringTrioScoreTemplate.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.__repr__
+      .. automethod:: StringTrioScoreTemplate.__format__
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.__repr__
 
    .. raw:: html
 
@@ -42,21 +59,37 @@ StringTrioScoreTemplate
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: StringTrioScoreTemplate.allows_instrument
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.allows_part_assignment
+      .. automethod:: StringTrioScoreTemplate.allows_instrument
 
-   .. automethod:: StringTrioScoreTemplate.attach_defaults
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.group_families
+      .. automethod:: StringTrioScoreTemplate.allows_part_assignment
 
-   .. automethod:: StringTrioScoreTemplate.make_music_context
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.make_piano_staff
+      .. automethod:: StringTrioScoreTemplate.attach_defaults
 
-   .. automethod:: StringTrioScoreTemplate.make_square_staff_group
+   .. container:: inherited
 
-   .. automethod:: StringTrioScoreTemplate.make_staff_group
+      .. automethod:: StringTrioScoreTemplate.group_families
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.make_music_context
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.make_piano_staff
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.make_square_staff_group
+
+   .. container:: inherited
+
+      .. automethod:: StringTrioScoreTemplate.make_staff_group
 
    .. raw:: html
 
@@ -65,12 +98,22 @@ StringTrioScoreTemplate
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: StringTrioScoreTemplate.always_make_global_rests
+   .. container:: inherited
 
-   .. autoattribute:: StringTrioScoreTemplate.defaults
+      .. autoattribute:: StringTrioScoreTemplate.always_make_global_rests
 
-   .. autoattribute:: StringTrioScoreTemplate.do_not_require_margin_markup
+   .. container:: inherited
 
-   .. autoattribute:: StringTrioScoreTemplate.part_manifest
+      .. autoattribute:: StringTrioScoreTemplate.defaults
 
-   .. autoattribute:: StringTrioScoreTemplate.voice_abbreviations
+   .. container:: inherited
+
+      .. autoattribute:: StringTrioScoreTemplate.do_not_require_margin_markup
+
+   .. container:: inherited
+
+      .. autoattribute:: StringTrioScoreTemplate.part_manifest
+
+   .. container:: inherited
+
+      .. autoattribute:: StringTrioScoreTemplate.voice_abbreviations

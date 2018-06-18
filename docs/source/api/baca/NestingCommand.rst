@@ -14,6 +14,17 @@ NestingCommand
 
 .. autoclass:: NestingCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      lmr_specifier
+      time_treatments
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ NestingCommand
 
    .. automethod:: NestingCommand.__call__
 
-   .. automethod:: NestingCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: NestingCommand.__repr__
+      .. automethod:: NestingCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: NestingCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +49,9 @@ NestingCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: NestingCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: NestingCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +60,25 @@ NestingCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: NestingCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: NestingCommand.offset_to_measure_number
+      .. autoattribute:: NestingCommand.manifests
 
-   .. autoattribute:: NestingCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: NestingCommand.score_template
+      .. autoattribute:: NestingCommand.offset_to_measure_number
 
-   .. autoattribute:: NestingCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,14 +87,22 @@ NestingCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: NestingCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.deactivate
 
    .. autoattribute:: NestingCommand.lmr_specifier
 
-   .. autoattribute:: NestingCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: NestingCommand.tag
+      .. autoattribute:: NestingCommand.selector
 
-   .. autoattribute:: NestingCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.tags
 
    .. autoattribute:: NestingCommand.time_treatments

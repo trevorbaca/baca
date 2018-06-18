@@ -14,6 +14,21 @@ PartitionDivisionCallback
 
 .. autoclass:: PartitionDivisionCallback
 
+   .. autosummary::
+      :nosignatures:
+
+      append_remainder
+      counts
+      fuse_assignable_total_duration
+      remainder_direction
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __format__
+      __repr__
+
    .. raw:: html
 
       <hr/>
@@ -23,13 +38,19 @@ PartitionDivisionCallback
 
    .. automethod:: PartitionDivisionCallback.__call__
 
-   .. automethod:: PartitionDivisionCallback.__copy__
+   .. container:: inherited
 
-   .. automethod:: PartitionDivisionCallback.__eq__
+      .. automethod:: PartitionDivisionCallback.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: PartitionDivisionCallback.__eq__
 
    .. automethod:: PartitionDivisionCallback.__format__
 
-   .. automethod:: PartitionDivisionCallback.__hash__
+   .. container:: inherited
+
+      .. automethod:: PartitionDivisionCallback.__hash__
 
    .. automethod:: PartitionDivisionCallback.__repr__
 

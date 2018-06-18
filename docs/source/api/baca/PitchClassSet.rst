@@ -14,6 +14,17 @@ PitchClassSet
 
 .. autoclass:: PitchClassSet
 
+   .. autosummary::
+      :nosignatures:
+
+      to_pitch_classes
+      to_pitches
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+
    .. raw:: html
 
       <hr/>
@@ -21,45 +32,83 @@ PitchClassSet
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchClassSet.__and__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__contains__
+      .. automethod:: PitchClassSet.__and__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__contains__
 
    .. automethod:: PitchClassSet.__eq__
 
-   .. automethod:: PitchClassSet.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__ge__
+      .. automethod:: PitchClassSet.__format__
 
-   .. automethod:: PitchClassSet.__gt__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__illustrate__
+      .. automethod:: PitchClassSet.__ge__
 
-   .. automethod:: PitchClassSet.__iter__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__le__
+      .. automethod:: PitchClassSet.__gt__
 
-   .. automethod:: PitchClassSet.__len__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__lt__
+      .. automethod:: PitchClassSet.__illustrate__
 
-   .. automethod:: PitchClassSet.__or__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__rand__
+      .. automethod:: PitchClassSet.__iter__
 
-   .. automethod:: PitchClassSet.__repr__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__ror__
+      .. automethod:: PitchClassSet.__le__
 
-   .. automethod:: PitchClassSet.__rsub__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__rxor__
+      .. automethod:: PitchClassSet.__len__
 
-   .. automethod:: PitchClassSet.__str__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.__sub__
+      .. automethod:: PitchClassSet.__lt__
 
-   .. automethod:: PitchClassSet.__xor__
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__or__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__rand__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__ror__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__rsub__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__rxor__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__str__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__sub__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__xor__
 
    .. raw:: html
 
@@ -68,41 +117,73 @@ PitchClassSet
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchClassSet.copy
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.difference
+      .. automethod:: PitchClassSet.copy
 
-   .. automethod:: PitchClassSet.get_normal_order
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.get_prime_form
+      .. automethod:: PitchClassSet.difference
 
-   .. automethod:: PitchClassSet.intersection
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.invert
+      .. automethod:: PitchClassSet.get_normal_order
 
-   .. automethod:: PitchClassSet.is_transposed_subset
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.is_transposed_superset
+      .. automethod:: PitchClassSet.get_prime_form
 
-   .. automethod:: PitchClassSet.isdisjoint
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.issubset
+      .. automethod:: PitchClassSet.intersection
 
-   .. automethod:: PitchClassSet.issuperset
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.multiply
+      .. automethod:: PitchClassSet.invert
 
-   .. automethod:: PitchClassSet.order_by
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.symmetric_difference
+      .. automethod:: PitchClassSet.is_transposed_subset
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.is_transposed_superset
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.isdisjoint
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.issubset
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.issuperset
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.multiply
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.order_by
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.symmetric_difference
 
    .. automethod:: PitchClassSet.to_pitch_classes
 
    .. automethod:: PitchClassSet.to_pitches
 
-   .. automethod:: PitchClassSet.transpose
+   .. container:: inherited
 
-   .. automethod:: PitchClassSet.union
+      .. automethod:: PitchClassSet.transpose
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.union
 
    .. raw:: html
 
@@ -111,7 +192,9 @@ PitchClassSet
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: PitchClassSet.from_selection
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.from_selection
 
    .. raw:: html
 
@@ -120,8 +203,14 @@ PitchClassSet
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchClassSet.cardinality
+   .. container:: inherited
 
-   .. autoattribute:: PitchClassSet.item_class
+      .. autoattribute:: PitchClassSet.cardinality
 
-   .. autoattribute:: PitchClassSet.items
+   .. container:: inherited
+
+      .. autoattribute:: PitchClassSet.item_class
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchClassSet.items

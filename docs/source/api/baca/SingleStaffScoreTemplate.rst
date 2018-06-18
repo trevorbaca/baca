@@ -14,6 +14,11 @@ SingleStaffScoreTemplate
 
 .. autoclass:: SingleStaffScoreTemplate
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,17 +28,29 @@ SingleStaffScoreTemplate
 
    .. automethod:: SingleStaffScoreTemplate.__call__
 
-   .. automethod:: SingleStaffScoreTemplate.__copy__
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.__eq__
+      .. automethod:: SingleStaffScoreTemplate.__copy__
 
-   .. automethod:: SingleStaffScoreTemplate.__format__
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.__hash__
+      .. automethod:: SingleStaffScoreTemplate.__eq__
 
-   .. automethod:: SingleStaffScoreTemplate.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.__repr__
+      .. automethod:: SingleStaffScoreTemplate.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.__repr__
 
    .. raw:: html
 
@@ -42,21 +59,37 @@ SingleStaffScoreTemplate
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: SingleStaffScoreTemplate.allows_instrument
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.allows_part_assignment
+      .. automethod:: SingleStaffScoreTemplate.allows_instrument
 
-   .. automethod:: SingleStaffScoreTemplate.attach_defaults
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.group_families
+      .. automethod:: SingleStaffScoreTemplate.allows_part_assignment
 
-   .. automethod:: SingleStaffScoreTemplate.make_music_context
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.make_piano_staff
+      .. automethod:: SingleStaffScoreTemplate.attach_defaults
 
-   .. automethod:: SingleStaffScoreTemplate.make_square_staff_group
+   .. container:: inherited
 
-   .. automethod:: SingleStaffScoreTemplate.make_staff_group
+      .. automethod:: SingleStaffScoreTemplate.group_families
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.make_music_context
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.make_piano_staff
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.make_square_staff_group
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.make_staff_group
 
    .. raw:: html
 
@@ -65,12 +98,22 @@ SingleStaffScoreTemplate
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: SingleStaffScoreTemplate.always_make_global_rests
+   .. container:: inherited
 
-   .. autoattribute:: SingleStaffScoreTemplate.defaults
+      .. autoattribute:: SingleStaffScoreTemplate.always_make_global_rests
 
-   .. autoattribute:: SingleStaffScoreTemplate.do_not_require_margin_markup
+   .. container:: inherited
 
-   .. autoattribute:: SingleStaffScoreTemplate.part_manifest
+      .. autoattribute:: SingleStaffScoreTemplate.defaults
 
-   .. autoattribute:: SingleStaffScoreTemplate.voice_abbreviations
+   .. container:: inherited
+
+      .. autoattribute:: SingleStaffScoreTemplate.do_not_require_margin_markup
+
+   .. container:: inherited
+
+      .. autoattribute:: SingleStaffScoreTemplate.part_manifest
+
+   .. container:: inherited
+
+      .. autoattribute:: SingleStaffScoreTemplate.voice_abbreviations

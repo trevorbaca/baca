@@ -14,6 +14,18 @@ Matrix
 
 .. autoclass:: Matrix
 
+   .. autosummary::
+      :nosignatures:
+
+      columns
+      rows
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+      __repr__
+
    .. raw:: html
 
       <hr/>
@@ -21,7 +33,9 @@ Matrix
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Matrix.__format__
+   .. container:: inherited
+
+      .. automethod:: Matrix.__format__
 
    .. automethod:: Matrix.__getitem__
 

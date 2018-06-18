@@ -14,6 +14,24 @@ PitchCommand
 
 .. autoclass:: PitchCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      allow_octaves
+      allow_repeats
+      cyclic
+      do_not_transpose
+      ignore_incomplete
+      parameter
+      persist
+      pitches
+      state
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +41,13 @@ PitchCommand
 
    .. automethod:: PitchCommand.__call__
 
-   .. automethod:: PitchCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchCommand.__repr__
+      .. automethod:: PitchCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +56,9 @@ PitchCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: PitchCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +67,25 @@ PitchCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: PitchCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: PitchCommand.offset_to_measure_number
+      .. autoattribute:: PitchCommand.manifests
 
-   .. autoattribute:: PitchCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: PitchCommand.score_template
+      .. autoattribute:: PitchCommand.offset_to_measure_number
 
-   .. autoattribute:: PitchCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tag_measure_number
 
    .. raw:: html
 
@@ -66,7 +100,9 @@ PitchCommand
 
    .. autoattribute:: PitchCommand.cyclic
 
-   .. autoattribute:: PitchCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.deactivate
 
    .. autoattribute:: PitchCommand.do_not_transpose
 
@@ -78,10 +114,16 @@ PitchCommand
 
    .. autoattribute:: PitchCommand.pitches
 
-   .. autoattribute:: PitchCommand.selector
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.selector
 
    .. autoattribute:: PitchCommand.state
 
-   .. autoattribute:: PitchCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: PitchCommand.tags
+      .. autoattribute:: PitchCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tags

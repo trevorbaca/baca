@@ -14,6 +14,21 @@ GlobalFermataCommand
 
 .. autoclass:: GlobalFermataCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      description_to_command
+
+   .. autosummary::
+      :nosignatures:
+
+      description
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +38,13 @@ GlobalFermataCommand
 
    .. automethod:: GlobalFermataCommand.__call__
 
-   .. automethod:: GlobalFermataCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: GlobalFermataCommand.__repr__
+      .. automethod:: GlobalFermataCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: GlobalFermataCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +53,9 @@ GlobalFermataCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: GlobalFermataCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: GlobalFermataCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +64,25 @@ GlobalFermataCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: GlobalFermataCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: GlobalFermataCommand.offset_to_measure_number
+      .. autoattribute:: GlobalFermataCommand.manifests
 
-   .. autoattribute:: GlobalFermataCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: GlobalFermataCommand.score_template
+      .. autoattribute:: GlobalFermataCommand.offset_to_measure_number
 
-   .. autoattribute:: GlobalFermataCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +91,20 @@ GlobalFermataCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: GlobalFermataCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.deactivate
 
    .. autoattribute:: GlobalFermataCommand.description
 
-   .. autoattribute:: GlobalFermataCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: GlobalFermataCommand.tag
+      .. autoattribute:: GlobalFermataCommand.selector
 
-   .. autoattribute:: GlobalFermataCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.tags

@@ -14,6 +14,29 @@ MusicContribution
 
 .. autoclass:: MusicContribution
 
+   .. autosummary::
+      :nosignatures:
+
+      print_color_selector_result
+
+   .. autosummary::
+      :nosignatures:
+
+      anchor
+      color_selector
+      color_selector_result
+      figure_name
+      hide_time_signature
+      selections
+      state_manifest
+      time_signature
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+      __iter__
+
    .. raw:: html
 
       <hr/>
@@ -21,19 +44,29 @@ MusicContribution
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: MusicContribution.__copy__
+   .. container:: inherited
 
-   .. automethod:: MusicContribution.__eq__
+      .. automethod:: MusicContribution.__copy__
 
-   .. automethod:: MusicContribution.__format__
+   .. container:: inherited
+
+      .. automethod:: MusicContribution.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: MusicContribution.__format__
 
    .. automethod:: MusicContribution.__getitem__
 
-   .. automethod:: MusicContribution.__hash__
+   .. container:: inherited
+
+      .. automethod:: MusicContribution.__hash__
 
    .. automethod:: MusicContribution.__iter__
 
-   .. automethod:: MusicContribution.__repr__
+   .. container:: inherited
+
+      .. automethod:: MusicContribution.__repr__
 
    .. raw:: html
 

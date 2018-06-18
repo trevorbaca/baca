@@ -14,6 +14,19 @@ ClusterCommand
 
 .. autoclass:: ClusterCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      hide_flat_markup
+      selector
+      start_pitch
+      widths
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +36,13 @@ ClusterCommand
 
    .. automethod:: ClusterCommand.__call__
 
-   .. automethod:: ClusterCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: ClusterCommand.__repr__
+      .. automethod:: ClusterCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ClusterCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +51,9 @@ ClusterCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ClusterCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: ClusterCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +62,25 @@ ClusterCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: ClusterCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: ClusterCommand.offset_to_measure_number
+      .. autoattribute:: ClusterCommand.manifests
 
-   .. autoattribute:: ClusterCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: ClusterCommand.score_template
+      .. autoattribute:: ClusterCommand.offset_to_measure_number
 
-   .. autoattribute:: ClusterCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,7 +89,9 @@ ClusterCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ClusterCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.deactivate
 
    .. autoattribute:: ClusterCommand.hide_flat_markup
 
@@ -68,8 +99,12 @@ ClusterCommand
 
    .. autoattribute:: ClusterCommand.start_pitch
 
-   .. autoattribute:: ClusterCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: ClusterCommand.tags
+      .. autoattribute:: ClusterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tags
 
    .. autoattribute:: ClusterCommand.widths

@@ -14,6 +14,26 @@ MusicMaker
 
 .. autoclass:: MusicMaker
 
+   .. autosummary::
+      :nosignatures:
+
+      allow_repeats
+      color_unregistered_pitches
+      denominator
+      specifiers
+      thread
+      voice_names
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +43,13 @@ MusicMaker
 
    .. automethod:: MusicMaker.__call__
 
-   .. automethod:: MusicMaker.__format__
+   .. container:: inherited
 
-   .. automethod:: MusicMaker.__repr__
+      .. automethod:: MusicMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MusicMaker.__repr__
 
    .. raw:: html
 

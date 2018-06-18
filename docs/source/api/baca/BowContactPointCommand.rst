@@ -14,6 +14,24 @@ BowContactPointCommand
 
 .. autoclass:: BowContactPointCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      start_command
+      stop_command
+
+   .. autosummary::
+      :nosignatures:
+
+      bow_contact_points
+      helper
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +41,13 @@ BowContactPointCommand
 
    .. automethod:: BowContactPointCommand.__call__
 
-   .. automethod:: BowContactPointCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: BowContactPointCommand.__repr__
+      .. automethod:: BowContactPointCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: BowContactPointCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +56,9 @@ BowContactPointCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: BowContactPointCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: BowContactPointCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +67,25 @@ BowContactPointCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: BowContactPointCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: BowContactPointCommand.offset_to_measure_number
+      .. autoattribute:: BowContactPointCommand.manifests
 
-   .. autoattribute:: BowContactPointCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: BowContactPointCommand.score_template
+      .. autoattribute:: BowContactPointCommand.offset_to_measure_number
 
-   .. autoattribute:: BowContactPointCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: BowContactPointCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: BowContactPointCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: BowContactPointCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,14 +96,22 @@ BowContactPointCommand
 
    .. autoattribute:: BowContactPointCommand.bow_contact_points
 
-   .. autoattribute:: BowContactPointCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: BowContactPointCommand.deactivate
 
    .. autoattribute:: BowContactPointCommand.helper
 
-   .. autoattribute:: BowContactPointCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: BowContactPointCommand.tag
+      .. autoattribute:: BowContactPointCommand.selector
 
-   .. autoattribute:: BowContactPointCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: BowContactPointCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: BowContactPointCommand.tags
 
    .. autoattribute:: BowContactPointCommand.tweaks

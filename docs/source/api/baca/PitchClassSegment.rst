@@ -14,6 +14,26 @@ PitchClassSegment
 
 .. autoclass:: PitchClassSegment
 
+   .. autosummary::
+      :nosignatures:
+
+      alpha
+      arpeggiate_down
+      arpeggiate_up
+      chord
+      get_matching_transforms
+      get_transforms
+      has_duplicates
+      has_repeats
+      sequence
+      space_down
+      space_up
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+
    .. raw:: html
 
       <hr/>
@@ -21,33 +41,59 @@ PitchClassSegment
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchClassSegment.__add__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.__contains__
+      .. automethod:: PitchClassSegment.__add__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__contains__
 
    .. automethod:: PitchClassSegment.__eq__
 
-   .. automethod:: PitchClassSegment.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.__getitem__
+      .. automethod:: PitchClassSegment.__format__
 
-   .. automethod:: PitchClassSegment.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.__iter__
+      .. automethod:: PitchClassSegment.__getitem__
 
-   .. automethod:: PitchClassSegment.__len__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.__mul__
+      .. automethod:: PitchClassSegment.__illustrate__
 
-   .. automethod:: PitchClassSegment.__radd__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.__repr__
+      .. automethod:: PitchClassSegment.__iter__
 
-   .. automethod:: PitchClassSegment.__reversed__
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.__rmul__
+      .. automethod:: PitchClassSegment.__len__
 
-   .. automethod:: PitchClassSegment.__str__
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__mul__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__reversed__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__rmul__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__str__
 
    .. raw:: html
 
@@ -64,7 +110,9 @@ PitchClassSegment
 
    .. automethod:: PitchClassSegment.chord
 
-   .. automethod:: PitchClassSegment.count
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.count
 
    .. automethod:: PitchClassSegment.get_matching_transforms
 
@@ -74,19 +122,33 @@ PitchClassSegment
 
    .. automethod:: PitchClassSegment.has_repeats
 
-   .. automethod:: PitchClassSegment.index
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.invert
+      .. automethod:: PitchClassSegment.index
 
-   .. automethod:: PitchClassSegment.make_notes
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.multiply
+      .. automethod:: PitchClassSegment.invert
 
-   .. automethod:: PitchClassSegment.permute
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.retrograde
+      .. automethod:: PitchClassSegment.make_notes
 
-   .. automethod:: PitchClassSegment.rotate
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.multiply
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.permute
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.retrograde
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.rotate
 
    .. automethod:: PitchClassSegment.sequence
 
@@ -94,15 +156,25 @@ PitchClassSegment
 
    .. automethod:: PitchClassSegment.space_up
 
-   .. automethod:: PitchClassSegment.to_pitch_classes
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.to_pitches
+      .. automethod:: PitchClassSegment.to_pitch_classes
 
-   .. automethod:: PitchClassSegment.transpose
+   .. container:: inherited
 
-   .. automethod:: PitchClassSegment.voice_horizontally
+      .. automethod:: PitchClassSegment.to_pitches
 
-   .. automethod:: PitchClassSegment.voice_vertically
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.transpose
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.voice_horizontally
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.voice_vertically
 
    .. raw:: html
 
@@ -111,7 +183,9 @@ PitchClassSegment
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: PitchClassSegment.from_selection
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.from_selection
 
    .. raw:: html
 
@@ -120,6 +194,10 @@ PitchClassSegment
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchClassSegment.item_class
+   .. container:: inherited
 
-   .. autoattribute:: PitchClassSegment.items
+      .. autoattribute:: PitchClassSegment.item_class
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchClassSegment.items

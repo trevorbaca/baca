@@ -14,6 +14,23 @@ BreakMeasureMap
 
 .. autoclass:: BreakMeasureMap
 
+   .. autosummary::
+      :nosignatures:
+
+      bol_measure_numbers
+      commands
+      deactivate
+      first_measure_number
+      local_measure_numbers
+      partial_score
+      tag
+      tags
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +40,13 @@ BreakMeasureMap
 
    .. automethod:: BreakMeasureMap.__call__
 
-   .. automethod:: BreakMeasureMap.__format__
+   .. container:: inherited
 
-   .. automethod:: BreakMeasureMap.__repr__
+      .. automethod:: BreakMeasureMap.__format__
+
+   .. container:: inherited
+
+      .. automethod:: BreakMeasureMap.__repr__
 
    .. raw:: html
 

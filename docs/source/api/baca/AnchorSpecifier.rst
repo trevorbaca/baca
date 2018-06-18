@@ -14,6 +14,15 @@ AnchorSpecifier
 
 .. autoclass:: AnchorSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      figure_name
+      local_selector
+      remote_selector
+      remote_voice_name
+      use_remote_stop_offset
+
    .. raw:: html
 
       <hr/>
@@ -21,15 +30,25 @@ AnchorSpecifier
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: AnchorSpecifier.__copy__
+   .. container:: inherited
 
-   .. automethod:: AnchorSpecifier.__eq__
+      .. automethod:: AnchorSpecifier.__copy__
 
-   .. automethod:: AnchorSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: AnchorSpecifier.__hash__
+      .. automethod:: AnchorSpecifier.__eq__
 
-   .. automethod:: AnchorSpecifier.__repr__
+   .. container:: inherited
+
+      .. automethod:: AnchorSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: AnchorSpecifier.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: AnchorSpecifier.__repr__
 
    .. raw:: html
 

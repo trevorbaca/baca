@@ -14,6 +14,17 @@ StaffPositionInterpolationCommand
 
 .. autoclass:: StaffPositionInterpolationCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      start_pitch
+      stop_pitch
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ StaffPositionInterpolationCommand
 
    .. automethod:: StaffPositionInterpolationCommand.__call__
 
-   .. automethod:: StaffPositionInterpolationCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: StaffPositionInterpolationCommand.__repr__
+      .. automethod:: StaffPositionInterpolationCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionInterpolationCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +49,9 @@ StaffPositionInterpolationCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: StaffPositionInterpolationCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: StaffPositionInterpolationCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +60,25 @@ StaffPositionInterpolationCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: StaffPositionInterpolationCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionInterpolationCommand.offset_to_measure_number
+      .. autoattribute:: StaffPositionInterpolationCommand.manifests
 
-   .. autoattribute:: StaffPositionInterpolationCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionInterpolationCommand.score_template
+      .. autoattribute:: StaffPositionInterpolationCommand.offset_to_measure_number
 
-   .. autoattribute:: StaffPositionInterpolationCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,14 +87,22 @@ StaffPositionInterpolationCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: StaffPositionInterpolationCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionInterpolationCommand.selector
+      .. autoattribute:: StaffPositionInterpolationCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.selector
 
    .. autoattribute:: StaffPositionInterpolationCommand.start_pitch
 
    .. autoattribute:: StaffPositionInterpolationCommand.stop_pitch
 
-   .. autoattribute:: StaffPositionInterpolationCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: StaffPositionInterpolationCommand.tags
+      .. autoattribute:: StaffPositionInterpolationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.tags

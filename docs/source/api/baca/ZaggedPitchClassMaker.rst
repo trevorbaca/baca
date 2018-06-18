@@ -14,6 +14,20 @@ ZaggedPitchClassMaker
 
 .. autoclass:: ZaggedPitchClassMaker
 
+   .. autosummary::
+      :nosignatures:
+
+      division_ratios
+      grouping_counts
+      pc_cells
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __eq__
+      __hash__
+
    .. raw:: html
 
       <hr/>
@@ -25,11 +39,15 @@ ZaggedPitchClassMaker
 
    .. automethod:: ZaggedPitchClassMaker.__eq__
 
-   .. automethod:: ZaggedPitchClassMaker.__format__
+   .. container:: inherited
+
+      .. automethod:: ZaggedPitchClassMaker.__format__
 
    .. automethod:: ZaggedPitchClassMaker.__hash__
 
-   .. automethod:: ZaggedPitchClassMaker.__repr__
+   .. container:: inherited
+
+      .. automethod:: ZaggedPitchClassMaker.__repr__
 
    .. raw:: html
 

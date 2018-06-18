@@ -14,6 +14,25 @@ ScoreTemplate
 
 .. autoclass:: ScoreTemplate
 
+   .. autosummary::
+      :nosignatures:
+
+      voice_colors
+
+   .. autosummary::
+      :nosignatures:
+
+      group_families
+      make_music_context
+      make_piano_staff
+      make_square_staff_group
+      make_staff_group
+
+   .. autosummary::
+      :nosignatures:
+
+      defaults
+
    .. raw:: html
 
       <hr/>
@@ -21,19 +40,33 @@ ScoreTemplate
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ScoreTemplate.__call__
+   .. container:: inherited
 
-   .. automethod:: ScoreTemplate.__copy__
+      .. automethod:: ScoreTemplate.__call__
 
-   .. automethod:: ScoreTemplate.__eq__
+   .. container:: inherited
 
-   .. automethod:: ScoreTemplate.__format__
+      .. automethod:: ScoreTemplate.__copy__
 
-   .. automethod:: ScoreTemplate.__hash__
+   .. container:: inherited
 
-   .. automethod:: ScoreTemplate.__illustrate__
+      .. automethod:: ScoreTemplate.__eq__
 
-   .. automethod:: ScoreTemplate.__repr__
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.__repr__
 
    .. raw:: html
 
@@ -42,11 +75,17 @@ ScoreTemplate
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ScoreTemplate.allows_instrument
+   .. container:: inherited
 
-   .. automethod:: ScoreTemplate.allows_part_assignment
+      .. automethod:: ScoreTemplate.allows_instrument
 
-   .. automethod:: ScoreTemplate.attach_defaults
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.allows_part_assignment
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.attach_defaults
 
    .. automethod:: ScoreTemplate.group_families
 
@@ -65,12 +104,20 @@ ScoreTemplate
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ScoreTemplate.always_make_global_rests
+   .. container:: inherited
+
+      .. autoattribute:: ScoreTemplate.always_make_global_rests
 
    .. autoattribute:: ScoreTemplate.defaults
 
-   .. autoattribute:: ScoreTemplate.do_not_require_margin_markup
+   .. container:: inherited
 
-   .. autoattribute:: ScoreTemplate.part_manifest
+      .. autoattribute:: ScoreTemplate.do_not_require_margin_markup
 
-   .. autoattribute:: ScoreTemplate.voice_abbreviations
+   .. container:: inherited
+
+      .. autoattribute:: ScoreTemplate.part_manifest
+
+   .. container:: inherited
+
+      .. autoattribute:: ScoreTemplate.voice_abbreviations

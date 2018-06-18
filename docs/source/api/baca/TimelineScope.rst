@@ -14,6 +14,12 @@ TimelineScope
 
 .. autoclass:: TimelineScope
 
+   .. autosummary::
+      :nosignatures:
+
+      scopes
+      voice_name
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +27,13 @@ TimelineScope
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: TimelineScope.__format__
+   .. container:: inherited
 
-   .. automethod:: TimelineScope.__repr__
+      .. automethod:: TimelineScope.__format__
+
+   .. container:: inherited
+
+      .. automethod:: TimelineScope.__repr__
 
    .. raw:: html
 

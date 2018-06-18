@@ -14,6 +14,20 @@ ChordalSpacingSpecifier
 
 .. autoclass:: ChordalSpacingSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      bass
+      direction
+      minimum_semitones
+      pattern
+      soprano
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +37,25 @@ ChordalSpacingSpecifier
 
    .. automethod:: ChordalSpacingSpecifier.__call__
 
-   .. automethod:: ChordalSpacingSpecifier.__copy__
+   .. container:: inherited
 
-   .. automethod:: ChordalSpacingSpecifier.__eq__
+      .. automethod:: ChordalSpacingSpecifier.__copy__
 
-   .. automethod:: ChordalSpacingSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: ChordalSpacingSpecifier.__hash__
+      .. automethod:: ChordalSpacingSpecifier.__eq__
 
-   .. automethod:: ChordalSpacingSpecifier.__repr__
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__repr__
 
    .. raw:: html
 

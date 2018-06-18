@@ -14,6 +14,16 @@ SchemeManifest
 
 .. autoclass:: SchemeManifest
 
+   .. autosummary::
+      :nosignatures:
+
+      dynamic_to_steady_state
+
+   .. autosummary::
+      :nosignatures:
+
+      dynamics
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +31,13 @@ SchemeManifest
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: SchemeManifest.__format__
+   .. container:: inherited
 
-   .. automethod:: SchemeManifest.__repr__
+      .. automethod:: SchemeManifest.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SchemeManifest.__repr__
 
    .. raw:: html
 

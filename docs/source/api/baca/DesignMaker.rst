@@ -14,6 +14,17 @@ DesignMaker
 
 .. autoclass:: DesignMaker
 
+   .. autosummary::
+      :nosignatures:
+
+      partition
+      partition_cyclic
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ DesignMaker
 
    .. automethod:: DesignMaker.__call__
 
-   .. automethod:: DesignMaker.__format__
+   .. container:: inherited
 
-   .. automethod:: DesignMaker.__repr__
+      .. automethod:: DesignMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DesignMaker.__repr__
 
    .. raw:: html
 

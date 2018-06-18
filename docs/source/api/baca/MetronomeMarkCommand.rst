@@ -14,6 +14,17 @@ MetronomeMarkCommand
 
 .. autoclass:: MetronomeMarkCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      key
+      redundant
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ MetronomeMarkCommand
 
    .. automethod:: MetronomeMarkCommand.__call__
 
-   .. automethod:: MetronomeMarkCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: MetronomeMarkCommand.__repr__
+      .. automethod:: MetronomeMarkCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +49,9 @@ MetronomeMarkCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: MetronomeMarkCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +60,25 @@ MetronomeMarkCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: MetronomeMarkCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: MetronomeMarkCommand.offset_to_measure_number
+      .. autoattribute:: MetronomeMarkCommand.manifests
 
-   .. autoattribute:: MetronomeMarkCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: MetronomeMarkCommand.score_template
+      .. autoattribute:: MetronomeMarkCommand.offset_to_measure_number
 
-   .. autoattribute:: MetronomeMarkCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,14 +87,22 @@ MetronomeMarkCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: MetronomeMarkCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.deactivate
 
    .. autoattribute:: MetronomeMarkCommand.key
 
    .. autoattribute:: MetronomeMarkCommand.redundant
 
-   .. autoattribute:: MetronomeMarkCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: MetronomeMarkCommand.tag
+      .. autoattribute:: MetronomeMarkCommand.selector
 
-   .. autoattribute:: MetronomeMarkCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tags

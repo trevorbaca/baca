@@ -14,6 +14,21 @@ PiecewiseCommand
 
 .. autoclass:: PiecewiseCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      bookend
+      indicators
+      pieces
+      selector
+      spanner
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +38,13 @@ PiecewiseCommand
 
    .. automethod:: PiecewiseCommand.__call__
 
-   .. automethod:: PiecewiseCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: PiecewiseCommand.__repr__
+      .. automethod:: PiecewiseCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PiecewiseCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +53,9 @@ PiecewiseCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PiecewiseCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: PiecewiseCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +64,25 @@ PiecewiseCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: PiecewiseCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: PiecewiseCommand.offset_to_measure_number
+      .. autoattribute:: PiecewiseCommand.manifests
 
-   .. autoattribute:: PiecewiseCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: PiecewiseCommand.score_template
+      .. autoattribute:: PiecewiseCommand.offset_to_measure_number
 
-   .. autoattribute:: PiecewiseCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,7 +93,9 @@ PiecewiseCommand
 
    .. autoattribute:: PiecewiseCommand.bookend
 
-   .. autoattribute:: PiecewiseCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.deactivate
 
    .. autoattribute:: PiecewiseCommand.indicators
 
@@ -72,8 +105,12 @@ PiecewiseCommand
 
    .. autoattribute:: PiecewiseCommand.spanner
 
-   .. autoattribute:: PiecewiseCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: PiecewiseCommand.tags
+      .. autoattribute:: PiecewiseCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.tags
 
    .. autoattribute:: PiecewiseCommand.tweaks

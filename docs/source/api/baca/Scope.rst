@@ -14,6 +14,12 @@ Scope
 
 .. autoclass:: Scope
 
+   .. autosummary::
+      :nosignatures:
+
+      stages
+      voice_name
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +27,13 @@ Scope
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Scope.__format__
+   .. container:: inherited
 
-   .. automethod:: Scope.__repr__
+      .. automethod:: Scope.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Scope.__repr__
 
    .. raw:: html
 

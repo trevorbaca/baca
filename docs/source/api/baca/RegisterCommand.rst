@@ -14,6 +14,16 @@ RegisterCommand
 
 .. autoclass:: RegisterCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      registration
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ RegisterCommand
 
    .. automethod:: RegisterCommand.__call__
 
-   .. automethod:: RegisterCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: RegisterCommand.__repr__
+      .. automethod:: RegisterCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: RegisterCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ RegisterCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: RegisterCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: RegisterCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ RegisterCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: RegisterCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: RegisterCommand.offset_to_measure_number
+      .. autoattribute:: RegisterCommand.manifests
 
-   .. autoattribute:: RegisterCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: RegisterCommand.score_template
+      .. autoattribute:: RegisterCommand.offset_to_measure_number
 
-   .. autoattribute:: RegisterCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ RegisterCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: RegisterCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.deactivate
 
    .. autoattribute:: RegisterCommand.registration
 
-   .. autoattribute:: RegisterCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: RegisterCommand.tag
+      .. autoattribute:: RegisterCommand.selector
 
-   .. autoattribute:: RegisterCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.tags

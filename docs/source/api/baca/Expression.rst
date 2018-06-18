@@ -14,6 +14,13 @@ Expression
 
 .. autoclass:: Expression
 
+   .. autosummary::
+      :nosignatures:
+
+      pitch_class_segment
+      pitch_class_segments
+      select
+
    .. raw:: html
 
       <hr/>
@@ -21,31 +28,57 @@ Expression
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Expression.__add__
+   .. container:: inherited
 
-   .. automethod:: Expression.__call__
+      .. automethod:: Expression.__add__
 
-   .. automethod:: Expression.__copy__
+   .. container:: inherited
 
-   .. automethod:: Expression.__eq__
+      .. automethod:: Expression.__call__
 
-   .. automethod:: Expression.__format__
+   .. container:: inherited
 
-   .. automethod:: Expression.__getattr__
+      .. automethod:: Expression.__copy__
 
-   .. automethod:: Expression.__getitem__
+   .. container:: inherited
 
-   .. automethod:: Expression.__hash__
+      .. automethod:: Expression.__eq__
 
-   .. automethod:: Expression.__iadd__
+   .. container:: inherited
 
-   .. automethod:: Expression.__radd__
+      .. automethod:: Expression.__format__
 
-   .. automethod:: Expression.__repr__
+   .. container:: inherited
 
-   .. automethod:: Expression.__setitem__
+      .. automethod:: Expression.__getattr__
 
-   .. automethod:: Expression.__str__
+   .. container:: inherited
+
+      .. automethod:: Expression.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: Expression.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Expression.__iadd__
+
+   .. container:: inherited
+
+      .. automethod:: Expression.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: Expression.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Expression.__setitem__
+
+   .. container:: inherited
+
+      .. automethod:: Expression.__str__
 
    .. raw:: html
 
@@ -54,31 +87,51 @@ Expression
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: Expression.append_callback
+   .. container:: inherited
 
-   .. automethod:: Expression.color
+      .. automethod:: Expression.append_callback
 
-   .. automethod:: Expression.establish_equivalence
+   .. container:: inherited
 
-   .. automethod:: Expression.get_markup
+      .. automethod:: Expression.color
 
-   .. automethod:: Expression.get_string
+   .. container:: inherited
 
-   .. automethod:: Expression.label
+      .. automethod:: Expression.establish_equivalence
+
+   .. container:: inherited
+
+      .. automethod:: Expression.get_markup
+
+   .. container:: inherited
+
+      .. automethod:: Expression.get_string
+
+   .. container:: inherited
+
+      .. automethod:: Expression.label
 
    .. automethod:: Expression.pitch_class_segment
 
    .. automethod:: Expression.pitch_class_segments
 
-   .. automethod:: Expression.pitch_set
+   .. container:: inherited
 
-   .. automethod:: Expression.print
+      .. automethod:: Expression.pitch_set
+
+   .. container:: inherited
+
+      .. automethod:: Expression.print
 
    .. automethod:: Expression.select
 
-   .. automethod:: Expression.sequence
+   .. container:: inherited
 
-   .. automethod:: Expression.wrap_in_list
+      .. automethod:: Expression.sequence
+
+   .. container:: inherited
+
+      .. automethod:: Expression.wrap_in_list
 
    .. raw:: html
 
@@ -87,7 +140,9 @@ Expression
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: Expression.make_callback
+   .. container:: inherited
+
+      .. automethod:: Expression.make_callback
 
    .. raw:: html
 
@@ -96,50 +151,98 @@ Expression
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Expression.argument_count
+   .. container:: inherited
 
-   .. autoattribute:: Expression.argument_values
+      .. autoattribute:: Expression.argument_count
 
-   .. autoattribute:: Expression.callbacks
+   .. container:: inherited
 
-   .. autoattribute:: Expression.evaluation_template
+      .. autoattribute:: Expression.argument_values
 
-   .. autoattribute:: Expression.force_return
+   .. container:: inherited
 
-   .. autoattribute:: Expression.has_parentheses
+      .. autoattribute:: Expression.callbacks
 
-   .. autoattribute:: Expression.is_composite
+   .. container:: inherited
 
-   .. autoattribute:: Expression.is_initializer
+      .. autoattribute:: Expression.evaluation_template
 
-   .. autoattribute:: Expression.is_postfix
+   .. container:: inherited
 
-   .. autoattribute:: Expression.is_selector
+      .. autoattribute:: Expression.force_return
 
-   .. autoattribute:: Expression.keywords
+   .. container:: inherited
 
-   .. autoattribute:: Expression.lone
+      .. autoattribute:: Expression.has_parentheses
 
-   .. autoattribute:: Expression.map_operand
+   .. container:: inherited
 
-   .. autoattribute:: Expression.markup_maker_callback
+      .. autoattribute:: Expression.is_composite
 
-   .. autoattribute:: Expression.module_names
+   .. container:: inherited
 
-   .. autoattribute:: Expression.name
+      .. autoattribute:: Expression.is_initializer
 
-   .. autoattribute:: Expression.next_name
+   .. container:: inherited
 
-   .. autoattribute:: Expression.precedence
+      .. autoattribute:: Expression.is_postfix
 
-   .. autoattribute:: Expression.proxy_class
+   .. container:: inherited
 
-   .. autoattribute:: Expression.qualified_method_name
+      .. autoattribute:: Expression.is_selector
 
-   .. autoattribute:: Expression.string_template
+   .. container:: inherited
 
-   .. autoattribute:: Expression.subclass_hook
+      .. autoattribute:: Expression.keywords
 
-   .. autoattribute:: Expression.subexpressions
+   .. container:: inherited
 
-   .. autoattribute:: Expression.template
+      .. autoattribute:: Expression.lone
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.map_operand
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.markup_maker_callback
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.module_names
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.name
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.next_name
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.precedence
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.proxy_class
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.qualified_method_name
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.string_template
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.subclass_hook
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.subexpressions
+
+   .. container:: inherited
+
+      .. autoattribute:: Expression.template

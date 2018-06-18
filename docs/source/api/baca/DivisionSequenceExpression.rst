@@ -14,6 +14,20 @@ DivisionSequenceExpression
 
 .. autoclass:: DivisionSequenceExpression
 
+   .. autosummary::
+      :nosignatures:
+
+      division_sequence
+      split_by_durations
+      split_by_rounded_ratios
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __getitem__
+      __radd__
+
    .. raw:: html
 
       <hr/>
@@ -23,29 +37,49 @@ DivisionSequenceExpression
 
    .. automethod:: DivisionSequenceExpression.__add__
 
-   .. automethod:: DivisionSequenceExpression.__call__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.__copy__
+      .. automethod:: DivisionSequenceExpression.__call__
 
-   .. automethod:: DivisionSequenceExpression.__eq__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.__format__
+      .. automethod:: DivisionSequenceExpression.__copy__
 
-   .. automethod:: DivisionSequenceExpression.__getattr__
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__getattr__
 
    .. automethod:: DivisionSequenceExpression.__getitem__
 
-   .. automethod:: DivisionSequenceExpression.__hash__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.__iadd__
+      .. automethod:: DivisionSequenceExpression.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__iadd__
 
    .. automethod:: DivisionSequenceExpression.__radd__
 
-   .. automethod:: DivisionSequenceExpression.__repr__
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.__setitem__
+      .. automethod:: DivisionSequenceExpression.__repr__
 
-   .. automethod:: DivisionSequenceExpression.__str__
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__setitem__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__str__
 
    .. raw:: html
 
@@ -54,35 +88,59 @@ DivisionSequenceExpression
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: DivisionSequenceExpression.append_callback
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.color
+      .. automethod:: DivisionSequenceExpression.append_callback
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.color
 
    .. automethod:: DivisionSequenceExpression.division_sequence
 
-   .. automethod:: DivisionSequenceExpression.establish_equivalence
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.get_markup
+      .. automethod:: DivisionSequenceExpression.establish_equivalence
 
-   .. automethod:: DivisionSequenceExpression.get_string
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.label
+      .. automethod:: DivisionSequenceExpression.get_markup
 
-   .. automethod:: DivisionSequenceExpression.pitch_class_segment
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.pitch_set
+      .. automethod:: DivisionSequenceExpression.get_string
 
-   .. automethod:: DivisionSequenceExpression.print
+   .. container:: inherited
 
-   .. automethod:: DivisionSequenceExpression.select
+      .. automethod:: DivisionSequenceExpression.label
 
-   .. automethod:: DivisionSequenceExpression.sequence
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.pitch_class_segment
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.pitch_set
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.print
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.select
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.sequence
 
    .. automethod:: DivisionSequenceExpression.split_by_durations
 
    .. automethod:: DivisionSequenceExpression.split_by_rounded_ratios
 
-   .. automethod:: DivisionSequenceExpression.wrap_in_list
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.wrap_in_list
 
    .. raw:: html
 
@@ -91,7 +149,9 @@ DivisionSequenceExpression
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: DivisionSequenceExpression.make_callback
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.make_callback
 
    .. raw:: html
 
@@ -100,50 +160,98 @@ DivisionSequenceExpression
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: DivisionSequenceExpression.argument_count
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.argument_values
+      .. autoattribute:: DivisionSequenceExpression.argument_count
 
-   .. autoattribute:: DivisionSequenceExpression.callbacks
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.evaluation_template
+      .. autoattribute:: DivisionSequenceExpression.argument_values
 
-   .. autoattribute:: DivisionSequenceExpression.force_return
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.has_parentheses
+      .. autoattribute:: DivisionSequenceExpression.callbacks
 
-   .. autoattribute:: DivisionSequenceExpression.is_composite
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.is_initializer
+      .. autoattribute:: DivisionSequenceExpression.evaluation_template
 
-   .. autoattribute:: DivisionSequenceExpression.is_postfix
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.is_selector
+      .. autoattribute:: DivisionSequenceExpression.force_return
 
-   .. autoattribute:: DivisionSequenceExpression.keywords
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.lone
+      .. autoattribute:: DivisionSequenceExpression.has_parentheses
 
-   .. autoattribute:: DivisionSequenceExpression.map_operand
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.markup_maker_callback
+      .. autoattribute:: DivisionSequenceExpression.is_composite
 
-   .. autoattribute:: DivisionSequenceExpression.module_names
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.name
+      .. autoattribute:: DivisionSequenceExpression.is_initializer
 
-   .. autoattribute:: DivisionSequenceExpression.next_name
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.precedence
+      .. autoattribute:: DivisionSequenceExpression.is_postfix
 
-   .. autoattribute:: DivisionSequenceExpression.proxy_class
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.qualified_method_name
+      .. autoattribute:: DivisionSequenceExpression.is_selector
 
-   .. autoattribute:: DivisionSequenceExpression.string_template
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.subclass_hook
+      .. autoattribute:: DivisionSequenceExpression.keywords
 
-   .. autoattribute:: DivisionSequenceExpression.subexpressions
+   .. container:: inherited
 
-   .. autoattribute:: DivisionSequenceExpression.template
+      .. autoattribute:: DivisionSequenceExpression.lone
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.map_operand
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.markup_maker_callback
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.module_names
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.name
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.next_name
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.precedence
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.proxy_class
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.qualified_method_name
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.string_template
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.subclass_hook
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.subexpressions
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.template

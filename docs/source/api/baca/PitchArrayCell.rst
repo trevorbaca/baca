@@ -14,6 +14,41 @@ PitchArrayCell
 
 .. autoclass:: PitchArrayCell
 
+   .. autosummary::
+      :nosignatures:
+
+      append_pitch
+      matches_cell
+
+   .. autosummary::
+      :nosignatures:
+
+      column_indices
+      column_start_index
+      column_stop_index
+      indices
+      is_first_in_row
+      is_last_in_row
+      item
+      next
+      parent_array
+      parent_column
+      parent_row
+      previous
+      row_index
+      weight
+      width
+
+   .. autosummary::
+      :nosignatures:
+
+      pitches
+
+   .. autosummary::
+      :nosignatures:
+
+      __str__
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +56,13 @@ PitchArrayCell
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchArrayCell.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchArrayCell.__repr__
+      .. automethod:: PitchArrayCell.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayCell.__repr__
 
    .. automethod:: PitchArrayCell.__str__
 

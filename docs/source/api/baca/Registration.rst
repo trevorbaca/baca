@@ -14,6 +14,16 @@ Registration
 
 .. autoclass:: Registration
 
+   .. autosummary::
+      :nosignatures:
+
+      components
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +33,25 @@ Registration
 
    .. automethod:: Registration.__call__
 
-   .. automethod:: Registration.__copy__
+   .. container:: inherited
 
-   .. automethod:: Registration.__eq__
+      .. automethod:: Registration.__copy__
 
-   .. automethod:: Registration.__format__
+   .. container:: inherited
 
-   .. automethod:: Registration.__hash__
+      .. automethod:: Registration.__eq__
 
-   .. automethod:: Registration.__repr__
+   .. container:: inherited
+
+      .. automethod:: Registration.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Registration.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Registration.__repr__
 
    .. raw:: html
 

@@ -14,6 +14,11 @@ Markup
 
 .. autoclass:: Markup
 
+   .. autosummary::
+      :nosignatures:
+
+      boxed
+
    .. raw:: html
 
       <hr/>
@@ -21,25 +26,45 @@ Markup
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Markup.__add__
+   .. container:: inherited
 
-   .. automethod:: Markup.__copy__
+      .. automethod:: Markup.__add__
 
-   .. automethod:: Markup.__eq__
+   .. container:: inherited
 
-   .. automethod:: Markup.__format__
+      .. automethod:: Markup.__copy__
 
-   .. automethod:: Markup.__hash__
+   .. container:: inherited
 
-   .. automethod:: Markup.__illustrate__
+      .. automethod:: Markup.__eq__
 
-   .. automethod:: Markup.__lt__
+   .. container:: inherited
 
-   .. automethod:: Markup.__radd__
+      .. automethod:: Markup.__format__
 
-   .. automethod:: Markup.__repr__
+   .. container:: inherited
 
-   .. automethod:: Markup.__str__
+      .. automethod:: Markup.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Markup.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: Markup.__lt__
+
+   .. container:: inherited
+
+      .. automethod:: Markup.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: Markup.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Markup.__str__
 
    .. raw:: html
 
@@ -48,83 +73,159 @@ Markup
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: Markup.bold
+   .. container:: inherited
 
-   .. automethod:: Markup.box
+      .. automethod:: Markup.bold
+
+   .. container:: inherited
+
+      .. automethod:: Markup.box
 
    .. automethod:: Markup.boxed
 
-   .. automethod:: Markup.bracket
+   .. container:: inherited
 
-   .. automethod:: Markup.caps
+      .. automethod:: Markup.bracket
 
-   .. automethod:: Markup.center_align
+   .. container:: inherited
 
-   .. automethod:: Markup.circle
+      .. automethod:: Markup.caps
 
-   .. automethod:: Markup.dynamic
+   .. container:: inherited
 
-   .. automethod:: Markup.finger
+      .. automethod:: Markup.center_align
 
-   .. automethod:: Markup.fontsize
+   .. container:: inherited
 
-   .. automethod:: Markup.general_align
+      .. automethod:: Markup.circle
 
-   .. automethod:: Markup.halign
+   .. container:: inherited
 
-   .. automethod:: Markup.hcenter_in
+      .. automethod:: Markup.dynamic
 
-   .. automethod:: Markup.huge
+   .. container:: inherited
 
-   .. automethod:: Markup.italic
+      .. automethod:: Markup.finger
 
-   .. automethod:: Markup.larger
+   .. container:: inherited
 
-   .. automethod:: Markup.normal_text
+      .. automethod:: Markup.fontsize
 
-   .. automethod:: Markup.override
+   .. container:: inherited
 
-   .. automethod:: Markup.pad_around
+      .. automethod:: Markup.general_align
 
-   .. automethod:: Markup.pad_markup
+   .. container:: inherited
 
-   .. automethod:: Markup.pad_to_box
+      .. automethod:: Markup.halign
 
-   .. automethod:: Markup.parenthesize
+   .. container:: inherited
 
-   .. automethod:: Markup.raise_
+      .. automethod:: Markup.hcenter_in
 
-   .. automethod:: Markup.rotate
+   .. container:: inherited
 
-   .. automethod:: Markup.sans
+      .. automethod:: Markup.huge
 
-   .. automethod:: Markup.scale
+   .. container:: inherited
 
-   .. automethod:: Markup.small
+      .. automethod:: Markup.italic
 
-   .. automethod:: Markup.smaller
+   .. container:: inherited
 
-   .. automethod:: Markup.sub
+      .. automethod:: Markup.larger
 
-   .. automethod:: Markup.super
+   .. container:: inherited
 
-   .. automethod:: Markup.tiny
+      .. automethod:: Markup.normal_text
 
-   .. automethod:: Markup.translate
+   .. container:: inherited
 
-   .. automethod:: Markup.upright
+      .. automethod:: Markup.override
 
-   .. automethod:: Markup.vcenter
+   .. container:: inherited
 
-   .. automethod:: Markup.whiteout
+      .. automethod:: Markup.pad_around
 
-   .. automethod:: Markup.with_color
+   .. container:: inherited
 
-   .. automethod:: Markup.with_dimensions
+      .. automethod:: Markup.pad_markup
 
-   .. automethod:: Markup.with_dimensions_from
+   .. container:: inherited
 
-   .. automethod:: Markup.with_literal
+      .. automethod:: Markup.pad_to_box
+
+   .. container:: inherited
+
+      .. automethod:: Markup.parenthesize
+
+   .. container:: inherited
+
+      .. automethod:: Markup.raise_
+
+   .. container:: inherited
+
+      .. automethod:: Markup.rotate
+
+   .. container:: inherited
+
+      .. automethod:: Markup.sans
+
+   .. container:: inherited
+
+      .. automethod:: Markup.scale
+
+   .. container:: inherited
+
+      .. automethod:: Markup.small
+
+   .. container:: inherited
+
+      .. automethod:: Markup.smaller
+
+   .. container:: inherited
+
+      .. automethod:: Markup.sub
+
+   .. container:: inherited
+
+      .. automethod:: Markup.super
+
+   .. container:: inherited
+
+      .. automethod:: Markup.tiny
+
+   .. container:: inherited
+
+      .. automethod:: Markup.translate
+
+   .. container:: inherited
+
+      .. automethod:: Markup.upright
+
+   .. container:: inherited
+
+      .. automethod:: Markup.vcenter
+
+   .. container:: inherited
+
+      .. automethod:: Markup.whiteout
+
+   .. container:: inherited
+
+      .. automethod:: Markup.with_color
+
+   .. container:: inherited
+
+      .. automethod:: Markup.with_dimensions
+
+   .. container:: inherited
+
+      .. automethod:: Markup.with_dimensions_from
+
+   .. container:: inherited
+
+      .. automethod:: Markup.with_literal
 
    .. raw:: html
 
@@ -133,53 +234,101 @@ Markup
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: Markup.center_column
+   .. container:: inherited
 
-   .. automethod:: Markup.column
+      .. automethod:: Markup.center_column
 
-   .. automethod:: Markup.combine
+   .. container:: inherited
 
-   .. automethod:: Markup.concat
+      .. automethod:: Markup.column
 
-   .. automethod:: Markup.draw_circle
+   .. container:: inherited
 
-   .. automethod:: Markup.draw_line
+      .. automethod:: Markup.combine
 
-   .. automethod:: Markup.filled_box
+   .. container:: inherited
 
-   .. automethod:: Markup.flat
+      .. automethod:: Markup.concat
 
-   .. automethod:: Markup.fraction
+   .. container:: inherited
 
-   .. automethod:: Markup.from_literal
+      .. automethod:: Markup.draw_circle
 
-   .. automethod:: Markup.hspace
+   .. container:: inherited
 
-   .. automethod:: Markup.left_column
+      .. automethod:: Markup.draw_line
 
-   .. automethod:: Markup.line
+   .. container:: inherited
 
-   .. automethod:: Markup.make_improper_fraction_markup
+      .. automethod:: Markup.filled_box
 
-   .. automethod:: Markup.musicglyph
+   .. container:: inherited
 
-   .. automethod:: Markup.natural
+      .. automethod:: Markup.flat
 
-   .. automethod:: Markup.note_by_number
+   .. container:: inherited
 
-   .. automethod:: Markup.null
+      .. automethod:: Markup.fraction
 
-   .. automethod:: Markup.overlay
+   .. container:: inherited
 
-   .. automethod:: Markup.postscript
+      .. automethod:: Markup.from_literal
 
-   .. automethod:: Markup.right_column
+   .. container:: inherited
 
-   .. automethod:: Markup.sharp
+      .. automethod:: Markup.hspace
 
-   .. automethod:: Markup.triangle
+   .. container:: inherited
 
-   .. automethod:: Markup.vspace
+      .. automethod:: Markup.left_column
+
+   .. container:: inherited
+
+      .. automethod:: Markup.line
+
+   .. container:: inherited
+
+      .. automethod:: Markup.make_improper_fraction_markup
+
+   .. container:: inherited
+
+      .. automethod:: Markup.musicglyph
+
+   .. container:: inherited
+
+      .. automethod:: Markup.natural
+
+   .. container:: inherited
+
+      .. automethod:: Markup.note_by_number
+
+   .. container:: inherited
+
+      .. automethod:: Markup.null
+
+   .. container:: inherited
+
+      .. automethod:: Markup.overlay
+
+   .. container:: inherited
+
+      .. automethod:: Markup.postscript
+
+   .. container:: inherited
+
+      .. automethod:: Markup.right_column
+
+   .. container:: inherited
+
+      .. automethod:: Markup.sharp
+
+   .. container:: inherited
+
+      .. automethod:: Markup.triangle
+
+   .. container:: inherited
+
+      .. automethod:: Markup.vspace
 
    .. raw:: html
 
@@ -188,10 +337,18 @@ Markup
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Markup.contents
+   .. container:: inherited
 
-   .. autoattribute:: Markup.direction
+      .. autoattribute:: Markup.contents
 
-   .. autoattribute:: Markup.stack_priority
+   .. container:: inherited
 
-   .. autoattribute:: Markup.tweaks
+      .. autoattribute:: Markup.direction
+
+   .. container:: inherited
+
+      .. autoattribute:: Markup.stack_priority
+
+   .. container:: inherited
+
+      .. autoattribute:: Markup.tweaks

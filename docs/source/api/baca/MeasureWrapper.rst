@@ -14,6 +14,12 @@ MeasureWrapper
 
 .. autoclass:: MeasureWrapper
 
+   .. autosummary::
+      :nosignatures:
+
+      command
+      measures
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +27,13 @@ MeasureWrapper
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: MeasureWrapper.__format__
+   .. container:: inherited
 
-   .. automethod:: MeasureWrapper.__repr__
+      .. automethod:: MeasureWrapper.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MeasureWrapper.__repr__
 
    .. raw:: html
 

@@ -14,6 +14,29 @@ MusicAccumulator
 
 .. autoclass:: MusicAccumulator
 
+   .. autosummary::
+      :nosignatures:
+
+      assemble
+      populate_segment_maker
+
+   .. autosummary::
+      :nosignatures:
+
+      music_maker
+      score_template
+      time_signatures
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +46,13 @@ MusicAccumulator
 
    .. automethod:: MusicAccumulator.__call__
 
-   .. automethod:: MusicAccumulator.__format__
+   .. container:: inherited
 
-   .. automethod:: MusicAccumulator.__repr__
+      .. automethod:: MusicAccumulator.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MusicAccumulator.__repr__
 
    .. raw:: html
 

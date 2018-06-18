@@ -14,6 +14,19 @@ SpacingIndication
 
 .. autoclass:: SpacingIndication
 
+   .. autosummary::
+      :nosignatures:
+
+      normalized_spacing_duration
+      proportional_notation_duration
+      tempo_indication
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __hash__
+
    .. raw:: html
 
       <hr/>
@@ -21,15 +34,21 @@ SpacingIndication
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: SpacingIndication.__copy__
+   .. container:: inherited
+
+      .. automethod:: SpacingIndication.__copy__
 
    .. automethod:: SpacingIndication.__eq__
 
-   .. automethod:: SpacingIndication.__format__
+   .. container:: inherited
+
+      .. automethod:: SpacingIndication.__format__
 
    .. automethod:: SpacingIndication.__hash__
 
-   .. automethod:: SpacingIndication.__repr__
+   .. container:: inherited
+
+      .. automethod:: SpacingIndication.__repr__
 
    .. raw:: html
 

@@ -14,6 +14,16 @@ SplitByRoundedRatiosDivisionCallback
 
 .. autoclass:: SplitByRoundedRatiosDivisionCallback
 
+   .. autosummary::
+      :nosignatures:
+
+      ratios
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,15 +33,25 @@ SplitByRoundedRatiosDivisionCallback
 
    .. automethod:: SplitByRoundedRatiosDivisionCallback.__call__
 
-   .. automethod:: SplitByRoundedRatiosDivisionCallback.__copy__
+   .. container:: inherited
 
-   .. automethod:: SplitByRoundedRatiosDivisionCallback.__eq__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__copy__
 
-   .. automethod:: SplitByRoundedRatiosDivisionCallback.__format__
+   .. container:: inherited
 
-   .. automethod:: SplitByRoundedRatiosDivisionCallback.__hash__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__eq__
 
-   .. automethod:: SplitByRoundedRatiosDivisionCallback.__repr__
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__repr__
 
    .. raw:: html
 

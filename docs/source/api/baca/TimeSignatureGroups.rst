@@ -14,6 +14,16 @@ TimeSignatureGroups
 
 .. autoclass:: TimeSignatureGroups
 
+   .. autosummary::
+      :nosignatures:
+
+      groups
+
+   .. autosummary::
+      :nosignatures:
+
+      __illustrate__
+
    .. raw:: html
 
       <hr/>
@@ -21,11 +31,15 @@ TimeSignatureGroups
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: TimeSignatureGroups.__format__
+   .. container:: inherited
+
+      .. automethod:: TimeSignatureGroups.__format__
 
    .. automethod:: TimeSignatureGroups.__illustrate__
 
-   .. automethod:: TimeSignatureGroups.__repr__
+   .. container:: inherited
+
+      .. automethod:: TimeSignatureGroups.__repr__
 
    .. raw:: html
 

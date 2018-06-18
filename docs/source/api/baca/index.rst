@@ -381,6 +381,83 @@ baca
 .. rubric:: Functions
    :class: section-header
 
+.. autosummary::
+   :nosignatures:
+
+   ~are_contiguous_logical_voice
+   ~are_contiguous_same_parent
+   ~are_leaves
+   ~are_logical_voice
+   ~chead
+   ~cheads
+   ~chord
+   ~chords
+   ~components
+   ~count
+   ~enchain
+   ~filter
+   ~filter_duration
+   ~filter_length
+   ~filter_pitches
+   ~filter_preprolated
+   ~flatten
+   ~group
+   ~group_by
+   ~group_by_contiguity
+   ~group_by_duration
+   ~group_by_length
+   ~group_by_measure
+   ~group_by_pitch
+   ~index
+   ~items
+   ~leaf
+   ~leaves
+   ~lleak
+   ~lleaves
+   ~logical_ties
+   ~lt
+   ~ltqrun
+   ~ltqruns
+   ~ltrun
+   ~ltruns
+   ~lts
+   ~nontrivial
+   ~note
+   ~notes
+   ~ntruns
+   ~partition_by_counts
+   ~partition_by_durations
+   ~partition_by_ratio
+   ~phead
+   ~pheads
+   ~pleaf
+   ~pleaves
+   ~plt
+   ~plts
+   ~ptail
+   ~ptails
+   ~ptlt
+   ~ptlts
+   ~qrun
+   ~qruns
+   ~rest
+   ~rests
+   ~rleak
+   ~rleaves
+   ~rrun
+   ~rruns
+   ~run
+   ~runs
+   ~skip
+   ~skips
+   ~tleaves
+   ~top
+   ~tuplet
+   ~tuplets
+   ~with_next_leaf
+   ~with_previous_leaf
+   ~wleaves
+
 .. autofunction:: are_contiguous_logical_voice
 
 .. autofunction:: are_contiguous_same_parent

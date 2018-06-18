@@ -14,6 +14,19 @@ PersistentIndicatorTests
 
 .. autoclass:: PersistentIndicatorTests
 
+   .. autosummary::
+      :nosignatures:
+
+      clefs
+      dynamics
+      hidden_instruments
+      instruments
+      margin_markups
+      metronome_marks
+      persistent_overrides
+      staff_lines
+      tempo_trends
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +34,13 @@ PersistentIndicatorTests
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PersistentIndicatorTests.__format__
+   .. container:: inherited
 
-   .. automethod:: PersistentIndicatorTests.__repr__
+      .. automethod:: PersistentIndicatorTests.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PersistentIndicatorTests.__repr__
 
    .. raw:: html
 

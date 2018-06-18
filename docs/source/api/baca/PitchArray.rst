@@ -14,6 +14,61 @@ PitchArray
 
 .. autoclass:: PitchArray
 
+   .. autosummary::
+      :nosignatures:
+
+      from_counts
+      from_score
+
+   .. autosummary::
+      :nosignatures:
+
+      append_column
+      append_row
+      apply_pitches_by_row
+      copy_subarray
+      has_spanning_cell_over_index
+      list_nonspanning_subarrays
+      pad_to_depth
+      pad_to_width
+      pop_column
+      pop_row
+      remove_row
+      to_measures
+
+   .. autosummary::
+      :nosignatures:
+
+      cell_tokens_by_row
+      cell_widths_by_row
+      cells
+      columns
+      depth
+      dimensions
+      has_voice_crossing
+      is_rectangular
+      pitches
+      pitches_by_row
+      rows
+      size
+      voice_crossing_count
+      weight
+      width
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __contains__
+      __copy__
+      __eq__
+      __getitem__
+      __hash__
+      __iadd__
+      __ne__
+      __setitem__
+      __str__
+
    .. raw:: html
 
       <hr/>
@@ -29,7 +84,9 @@ PitchArray
 
    .. automethod:: PitchArray.__eq__
 
-   .. automethod:: PitchArray.__format__
+   .. container:: inherited
+
+      .. automethod:: PitchArray.__format__
 
    .. automethod:: PitchArray.__getitem__
 
@@ -39,7 +96,9 @@ PitchArray
 
    .. automethod:: PitchArray.__ne__
 
-   .. automethod:: PitchArray.__repr__
+   .. container:: inherited
+
+      .. automethod:: PitchArray.__repr__
 
    .. automethod:: PitchArray.__setitem__
 

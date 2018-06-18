@@ -14,6 +14,12 @@ CommandWrapper
 
 .. autoclass:: CommandWrapper
 
+   .. autosummary::
+      :nosignatures:
+
+      command
+      scope
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +27,13 @@ CommandWrapper
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: CommandWrapper.__format__
+   .. container:: inherited
 
-   .. automethod:: CommandWrapper.__repr__
+      .. automethod:: CommandWrapper.__format__
+
+   .. container:: inherited
+
+      .. automethod:: CommandWrapper.__repr__
 
    .. raw:: html
 

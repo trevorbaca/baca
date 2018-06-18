@@ -14,6 +14,20 @@ PitchTree
 
 .. autoclass:: PitchTree
 
+   .. autosummary::
+      :nosignatures:
+
+      has_repeats
+      invert
+      retrograde
+      rotate
+      transpose
+
+   .. autosummary::
+      :nosignatures:
+
+      __illustrate__
+
    .. raw:: html
 
       <hr/>
@@ -21,21 +35,35 @@ PitchTree
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchTree.__contains__
+   .. container:: inherited
 
-   .. automethod:: PitchTree.__eq__
+      .. automethod:: PitchTree.__contains__
 
-   .. automethod:: PitchTree.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchTree.__getitem__
+      .. automethod:: PitchTree.__eq__
 
-   .. automethod:: PitchTree.__hash__
+   .. container:: inherited
+
+      .. automethod:: PitchTree.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTree.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTree.__hash__
 
    .. automethod:: PitchTree.__illustrate__
 
-   .. automethod:: PitchTree.__len__
+   .. container:: inherited
 
-   .. automethod:: PitchTree.__repr__
+      .. automethod:: PitchTree.__len__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTree.__repr__
 
    .. raw:: html
 
@@ -44,13 +72,17 @@ PitchTree
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchTree.get_payload
+   .. container:: inherited
+
+      .. automethod:: PitchTree.get_payload
 
    .. automethod:: PitchTree.has_repeats
 
    .. automethod:: PitchTree.invert
 
-   .. automethod:: PitchTree.iterate
+   .. container:: inherited
+
+      .. automethod:: PitchTree.iterate
 
    .. automethod:: PitchTree.retrograde
 
@@ -65,6 +97,10 @@ PitchTree
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchTree.item_class
+   .. container:: inherited
 
-   .. autoattribute:: PitchTree.items
+      .. autoattribute:: PitchTree.item_class
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchTree.items

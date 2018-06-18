@@ -14,6 +14,30 @@ RhythmCommand
 
 .. autoclass:: RhythmCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      division_expression
+      division_maker
+      left_broken
+      multimeasure_rests
+      parameter
+      persist
+      reference_meters
+      repeat_ties
+      rewrite_meter
+      rewrite_rest_filled
+      rhythm_maker
+      right_broken
+      split_at_measure_boundaries
+      stages
+      state
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +47,13 @@ RhythmCommand
 
    .. automethod:: RhythmCommand.__call__
 
-   .. automethod:: RhythmCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: RhythmCommand.__repr__
+      .. automethod:: RhythmCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: RhythmCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +62,9 @@ RhythmCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: RhythmCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: RhythmCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +73,25 @@ RhythmCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: RhythmCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: RhythmCommand.offset_to_measure_number
+      .. autoattribute:: RhythmCommand.manifests
 
-   .. autoattribute:: RhythmCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: RhythmCommand.score_template
+      .. autoattribute:: RhythmCommand.offset_to_measure_number
 
-   .. autoattribute:: RhythmCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,7 +100,9 @@ RhythmCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: RhythmCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.deactivate
 
    .. autoattribute:: RhythmCommand.division_expression
 
@@ -86,7 +128,9 @@ RhythmCommand
 
    .. autoattribute:: RhythmCommand.right_broken
 
-   .. autoattribute:: RhythmCommand.selector
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.selector
 
    .. autoattribute:: RhythmCommand.split_at_measure_boundaries
 
@@ -94,6 +138,10 @@ RhythmCommand
 
    .. autoattribute:: RhythmCommand.state
 
-   .. autoattribute:: RhythmCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: RhythmCommand.tags
+      .. autoattribute:: RhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tags

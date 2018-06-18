@@ -14,6 +14,11 @@ InstrumentChangeCommand
 
 .. autoclass:: InstrumentChangeCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +28,13 @@ InstrumentChangeCommand
 
    .. automethod:: InstrumentChangeCommand.__call__
 
-   .. automethod:: InstrumentChangeCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: InstrumentChangeCommand.__repr__
+      .. automethod:: InstrumentChangeCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: InstrumentChangeCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +43,9 @@ InstrumentChangeCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: InstrumentChangeCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: InstrumentChangeCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +54,25 @@ InstrumentChangeCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: InstrumentChangeCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: InstrumentChangeCommand.offset_to_measure_number
+      .. autoattribute:: InstrumentChangeCommand.manifests
 
-   .. autoattribute:: InstrumentChangeCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: InstrumentChangeCommand.score_template
+      .. autoattribute:: InstrumentChangeCommand.offset_to_measure_number
 
-   .. autoattribute:: InstrumentChangeCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,18 +81,34 @@ InstrumentChangeCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: InstrumentChangeCommand.context
+   .. container:: inherited
 
-   .. autoattribute:: InstrumentChangeCommand.deactivate
+      .. autoattribute:: InstrumentChangeCommand.context
 
-   .. autoattribute:: InstrumentChangeCommand.indicators
+   .. container:: inherited
 
-   .. autoattribute:: InstrumentChangeCommand.redundant
+      .. autoattribute:: InstrumentChangeCommand.deactivate
 
-   .. autoattribute:: InstrumentChangeCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: InstrumentChangeCommand.tag
+      .. autoattribute:: InstrumentChangeCommand.indicators
 
-   .. autoattribute:: InstrumentChangeCommand.tags
+   .. container:: inherited
 
-   .. autoattribute:: InstrumentChangeCommand.tweaks
+      .. autoattribute:: InstrumentChangeCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tags
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tweaks

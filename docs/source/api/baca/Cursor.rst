@@ -14,6 +14,36 @@ Cursor
 
 .. autoclass:: Cursor
 
+   .. autosummary::
+      :nosignatures:
+
+      next
+      reset
+
+   .. autosummary::
+      :nosignatures:
+
+      cyclic
+      is_exhausted
+      position
+      singletons
+      source
+      suppress_exception
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __getitem__
+      __hash__
+      __iter__
+      __len__
+
+   .. autosummary::
+      :nosignatures:
+
+      from_pitch_class_segments
+
    .. raw:: html
 
       <hr/>
@@ -23,7 +53,9 @@ Cursor
 
    .. automethod:: Cursor.__eq__
 
-   .. automethod:: Cursor.__format__
+   .. container:: inherited
+
+      .. automethod:: Cursor.__format__
 
    .. automethod:: Cursor.__getitem__
 
@@ -33,7 +65,9 @@ Cursor
 
    .. automethod:: Cursor.__len__
 
-   .. automethod:: Cursor.__repr__
+   .. container:: inherited
+
+      .. automethod:: Cursor.__repr__
 
    .. raw:: html
 

@@ -14,6 +14,11 @@ Interpolator
 
 .. autoclass:: Interpolator
 
+   .. autosummary::
+      :nosignatures:
+
+      interpolate_linear
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +26,13 @@ Interpolator
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Interpolator.__format__
+   .. container:: inherited
 
-   .. automethod:: Interpolator.__repr__
+      .. automethod:: Interpolator.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Interpolator.__repr__
 
    .. raw:: html
 

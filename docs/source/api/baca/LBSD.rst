@@ -14,6 +14,12 @@ LBSD
 
 .. autoclass:: LBSD
 
+   .. autosummary::
+      :nosignatures:
+
+      alignment_distances
+      y_offset
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +27,13 @@ LBSD
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: LBSD.__format__
+   .. container:: inherited
 
-   .. automethod:: LBSD.__repr__
+      .. automethod:: LBSD.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LBSD.__repr__
 
    .. raw:: html
 

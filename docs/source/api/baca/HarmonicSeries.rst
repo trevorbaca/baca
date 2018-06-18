@@ -14,6 +14,21 @@ HarmonicSeries
 
 .. autoclass:: HarmonicSeries
 
+   .. autosummary::
+      :nosignatures:
+
+      partial
+
+   .. autosummary::
+      :nosignatures:
+
+      fundamental
+
+   .. autosummary::
+      :nosignatures:
+
+      __illustrate__
+
    .. raw:: html
 
       <hr/>
@@ -21,11 +36,15 @@ HarmonicSeries
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: HarmonicSeries.__format__
+   .. container:: inherited
+
+      .. automethod:: HarmonicSeries.__format__
 
    .. automethod:: HarmonicSeries.__illustrate__
 
-   .. automethod:: HarmonicSeries.__repr__
+   .. container:: inherited
+
+      .. automethod:: HarmonicSeries.__repr__
 
    .. raw:: html
 

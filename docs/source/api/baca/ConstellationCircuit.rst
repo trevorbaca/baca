@@ -14,6 +14,40 @@ ConstellationCircuit
 
 .. autoclass:: ConstellationCircuit
 
+   .. autosummary::
+      :nosignatures:
+
+      make_constellation_circuit_1
+
+   .. autosummary::
+      :nosignatures:
+
+      CC1
+
+   .. autosummary::
+      :nosignatures:
+
+      get
+      illustrate_colored_generator_chords
+      illustrate_colored_generator_chords_and_pivot_chords
+      illustrate_generator_chords
+      illustrate_generator_chords_and_pivot_chords
+      illustrate_pivot_chords
+
+   .. autosummary::
+      :nosignatures:
+
+      generator_chords
+      pitch_range
+      pivot_chords
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+      __len__
+      __repr__
+
    .. raw:: html
 
       <hr/>
@@ -21,7 +55,9 @@ ConstellationCircuit
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ConstellationCircuit.__format__
+   .. container:: inherited
+
+      .. automethod:: ConstellationCircuit.__format__
 
    .. automethod:: ConstellationCircuit.__getitem__
 

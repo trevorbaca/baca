@@ -311,6 +311,8 @@ Bača API
 .. rubric:: :ref:`baca.dynamicslib <baca--dynamicslib>`
    :class: section-header
 
+Dynamics library.
+
 .. raw:: html
 
    <hr/>
@@ -351,6 +353,8 @@ Bača API
 .. rubric:: :ref:`baca.library <baca--library>`
    :class: section-header
 
+Function library.
+
 .. raw:: html
 
    <hr/>
@@ -389,6 +393,8 @@ Bača API
 
 .. rubric:: :ref:`baca.markups <baca--markups>`
    :class: section-header
+
+Markup library.
 
 .. raw:: html
 

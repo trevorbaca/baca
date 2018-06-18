@@ -14,6 +14,58 @@ PitchArrayRow
 
 .. autoclass:: PitchArrayRow
 
+   .. autosummary::
+      :nosignatures:
+
+      append
+      apply_pitches
+      copy_subrow
+      empty_pitches
+      extend
+      has_spanning_cell_over_index
+      index
+      merge
+      pad_to_width
+      pop
+      remove
+      to_measure
+      withdraw
+
+   .. autosummary::
+      :nosignatures:
+
+      cell_tokens
+      cell_widths
+      cells
+      depth
+      dimensions
+      is_defective
+      is_in_range
+      parent_array
+      pitches
+      row_index
+      weight
+      width
+
+   .. autosummary::
+      :nosignatures:
+
+      pitch_range
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __copy__
+      __eq__
+      __getitem__
+      __hash__
+      __iadd__
+      __iter__
+      __len__
+      __ne__
+      __str__
+
    .. raw:: html
 
       <hr/>
@@ -27,7 +79,9 @@ PitchArrayRow
 
    .. automethod:: PitchArrayRow.__eq__
 
-   .. automethod:: PitchArrayRow.__format__
+   .. container:: inherited
+
+      .. automethod:: PitchArrayRow.__format__
 
    .. automethod:: PitchArrayRow.__getitem__
 
@@ -41,7 +95,9 @@ PitchArrayRow
 
    .. automethod:: PitchArrayRow.__ne__
 
-   .. automethod:: PitchArrayRow.__repr__
+   .. container:: inherited
+
+      .. automethod:: PitchArrayRow.__repr__
 
    .. automethod:: PitchArrayRow.__str__
 

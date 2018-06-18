@@ -14,6 +14,12 @@ PitchTreeSpanner
 
 .. autoclass:: PitchTreeSpanner
 
+   .. autosummary::
+      :nosignatures:
+
+      foo
+      level
+
    .. raw:: html
 
       <hr/>
@@ -21,21 +27,37 @@ PitchTreeSpanner
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchTreeSpanner.__contains__
+   .. container:: inherited
 
-   .. automethod:: PitchTreeSpanner.__copy__
+      .. automethod:: PitchTreeSpanner.__contains__
 
-   .. automethod:: PitchTreeSpanner.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchTreeSpanner.__getitem__
+      .. automethod:: PitchTreeSpanner.__copy__
 
-   .. automethod:: PitchTreeSpanner.__iter__
+   .. container:: inherited
 
-   .. automethod:: PitchTreeSpanner.__len__
+      .. automethod:: PitchTreeSpanner.__format__
 
-   .. automethod:: PitchTreeSpanner.__lt__
+   .. container:: inherited
 
-   .. automethod:: PitchTreeSpanner.__repr__
+      .. automethod:: PitchTreeSpanner.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.__len__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.__lt__
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.__repr__
 
    .. raw:: html
 
@@ -44,11 +66,17 @@ PitchTreeSpanner
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchTreeSpanner.index
+   .. container:: inherited
 
-   .. automethod:: PitchTreeSpanner.start_command
+      .. automethod:: PitchTreeSpanner.index
 
-   .. automethod:: PitchTreeSpanner.stop_command
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.start_command
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.stop_command
 
    .. raw:: html
 
@@ -59,10 +87,16 @@ PitchTreeSpanner
 
    .. autoattribute:: PitchTreeSpanner.foo
 
-   .. autoattribute:: PitchTreeSpanner.leak
+   .. container:: inherited
 
-   .. autoattribute:: PitchTreeSpanner.leaves
+      .. autoattribute:: PitchTreeSpanner.leak
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchTreeSpanner.leaves
 
    .. autoattribute:: PitchTreeSpanner.level
 
-   .. autoattribute:: PitchTreeSpanner.tweaks
+   .. container:: inherited
+
+      .. autoattribute:: PitchTreeSpanner.tweaks

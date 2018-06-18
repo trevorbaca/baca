@@ -21,6 +21,10 @@ ExpressionGallery
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ExpressionGallery.__format__
+   .. container:: inherited
 
-   .. automethod:: ExpressionGallery.__repr__
+      .. automethod:: ExpressionGallery.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ExpressionGallery.__repr__

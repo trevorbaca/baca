@@ -14,6 +14,24 @@ ImbricationCommand
 
 .. autoclass:: ImbricationCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      allow_unused_pitches
+      by_pitch_class
+      extend_beam
+      hocket
+      segment
+      selector
+      specifiers
+      truncate_ties
+      voice_name
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +41,13 @@ ImbricationCommand
 
    .. automethod:: ImbricationCommand.__call__
 
-   .. automethod:: ImbricationCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: ImbricationCommand.__repr__
+      .. automethod:: ImbricationCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ImbricationCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +56,9 @@ ImbricationCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ImbricationCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: ImbricationCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +67,25 @@ ImbricationCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: ImbricationCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: ImbricationCommand.offset_to_measure_number
+      .. autoattribute:: ImbricationCommand.manifests
 
-   .. autoattribute:: ImbricationCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: ImbricationCommand.score_template
+      .. autoattribute:: ImbricationCommand.offset_to_measure_number
 
-   .. autoattribute:: ImbricationCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.tag_measure_number
 
    .. raw:: html
 
@@ -64,7 +98,9 @@ ImbricationCommand
 
    .. autoattribute:: ImbricationCommand.by_pitch_class
 
-   .. autoattribute:: ImbricationCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.deactivate
 
    .. autoattribute:: ImbricationCommand.extend_beam
 
@@ -76,9 +112,13 @@ ImbricationCommand
 
    .. autoattribute:: ImbricationCommand.specifiers
 
-   .. autoattribute:: ImbricationCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: ImbricationCommand.tags
+      .. autoattribute:: ImbricationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.tags
 
    .. autoattribute:: ImbricationCommand.truncate_ties
 

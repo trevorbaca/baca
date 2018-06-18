@@ -14,6 +14,16 @@ MapCommand
 
 .. autoclass:: MapCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      commands
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ MapCommand
 
    .. automethod:: MapCommand.__call__
 
-   .. automethod:: MapCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: MapCommand.__repr__
+      .. automethod:: MapCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MapCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ MapCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: MapCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: MapCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ MapCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: MapCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: MapCommand.offset_to_measure_number
+      .. autoattribute:: MapCommand.manifests
 
-   .. autoattribute:: MapCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: MapCommand.score_template
+      .. autoattribute:: MapCommand.offset_to_measure_number
 
-   .. autoattribute:: MapCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,10 +88,18 @@ MapCommand
 
    .. autoattribute:: MapCommand.commands
 
-   .. autoattribute:: MapCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: MapCommand.selector
+      .. autoattribute:: MapCommand.deactivate
 
-   .. autoattribute:: MapCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: MapCommand.tags
+      .. autoattribute:: MapCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: MapCommand.tags

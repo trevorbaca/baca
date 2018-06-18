@@ -14,6 +14,42 @@ Constellation
 
 .. autoclass:: Constellation
 
+   .. autosummary::
+      :nosignatures:
+
+      get_chord
+      get_number_of_chord
+      make_chords
+      make_labeled_chords
+      make_labeled_colored_chords
+      show_colored_generator_chord
+      show_colored_generator_chord_and_pivot_chord
+      show_generator_chord
+      show_generator_chord_and_pivot_chord
+      show_pivot_chord
+
+   .. autosummary::
+      :nosignatures:
+
+      constellation_number
+      generator_chord
+      partitioned_generator_pitch_numbers
+      pitch_range
+      pivot_chord
+
+   .. autosummary::
+      :nosignatures:
+
+      __contains__
+      __getitem__
+      __len__
+      __repr__
+
+   .. autosummary::
+      :nosignatures:
+
+      constellate
+
    .. raw:: html
 
       <hr/>
@@ -23,7 +59,9 @@ Constellation
 
    .. automethod:: Constellation.__contains__
 
-   .. automethod:: Constellation.__format__
+   .. container:: inherited
+
+      .. automethod:: Constellation.__format__
 
    .. automethod:: Constellation.__getitem__
 

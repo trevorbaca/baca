@@ -14,6 +14,11 @@ ViolinSoloScoreTemplate
 
 .. autoclass:: ViolinSoloScoreTemplate
 
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,17 +28,29 @@ ViolinSoloScoreTemplate
 
    .. automethod:: ViolinSoloScoreTemplate.__call__
 
-   .. automethod:: ViolinSoloScoreTemplate.__copy__
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.__eq__
+      .. automethod:: ViolinSoloScoreTemplate.__copy__
 
-   .. automethod:: ViolinSoloScoreTemplate.__format__
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.__hash__
+      .. automethod:: ViolinSoloScoreTemplate.__eq__
 
-   .. automethod:: ViolinSoloScoreTemplate.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.__repr__
+      .. automethod:: ViolinSoloScoreTemplate.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.__repr__
 
    .. raw:: html
 
@@ -42,21 +59,37 @@ ViolinSoloScoreTemplate
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ViolinSoloScoreTemplate.allows_instrument
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.allows_part_assignment
+      .. automethod:: ViolinSoloScoreTemplate.allows_instrument
 
-   .. automethod:: ViolinSoloScoreTemplate.attach_defaults
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.group_families
+      .. automethod:: ViolinSoloScoreTemplate.allows_part_assignment
 
-   .. automethod:: ViolinSoloScoreTemplate.make_music_context
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.make_piano_staff
+      .. automethod:: ViolinSoloScoreTemplate.attach_defaults
 
-   .. automethod:: ViolinSoloScoreTemplate.make_square_staff_group
+   .. container:: inherited
 
-   .. automethod:: ViolinSoloScoreTemplate.make_staff_group
+      .. automethod:: ViolinSoloScoreTemplate.group_families
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.make_music_context
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.make_piano_staff
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.make_square_staff_group
+
+   .. container:: inherited
+
+      .. automethod:: ViolinSoloScoreTemplate.make_staff_group
 
    .. raw:: html
 
@@ -65,12 +98,22 @@ ViolinSoloScoreTemplate
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ViolinSoloScoreTemplate.always_make_global_rests
+   .. container:: inherited
 
-   .. autoattribute:: ViolinSoloScoreTemplate.defaults
+      .. autoattribute:: ViolinSoloScoreTemplate.always_make_global_rests
 
-   .. autoattribute:: ViolinSoloScoreTemplate.do_not_require_margin_markup
+   .. container:: inherited
 
-   .. autoattribute:: ViolinSoloScoreTemplate.part_manifest
+      .. autoattribute:: ViolinSoloScoreTemplate.defaults
 
-   .. autoattribute:: ViolinSoloScoreTemplate.voice_abbreviations
+   .. container:: inherited
+
+      .. autoattribute:: ViolinSoloScoreTemplate.do_not_require_margin_markup
+
+   .. container:: inherited
+
+      .. autoattribute:: ViolinSoloScoreTemplate.part_manifest
+
+   .. container:: inherited
+
+      .. autoattribute:: ViolinSoloScoreTemplate.voice_abbreviations

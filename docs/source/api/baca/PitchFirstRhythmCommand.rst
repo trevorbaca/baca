@@ -14,6 +14,17 @@ PitchFirstRhythmCommand
 
 .. autoclass:: PitchFirstRhythmCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      pattern
+      rhythm_maker
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +34,13 @@ PitchFirstRhythmCommand
 
    .. automethod:: PitchFirstRhythmCommand.__call__
 
-   .. automethod:: PitchFirstRhythmCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: PitchFirstRhythmCommand.__repr__
+      .. automethod:: PitchFirstRhythmCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +49,9 @@ PitchFirstRhythmCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: PitchFirstRhythmCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +60,25 @@ PitchFirstRhythmCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: PitchFirstRhythmCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: PitchFirstRhythmCommand.offset_to_measure_number
+      .. autoattribute:: PitchFirstRhythmCommand.manifests
 
-   .. autoattribute:: PitchFirstRhythmCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: PitchFirstRhythmCommand.score_template
+      .. autoattribute:: PitchFirstRhythmCommand.offset_to_measure_number
 
-   .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,14 +87,22 @@ PitchFirstRhythmCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchFirstRhythmCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.deactivate
 
    .. autoattribute:: PitchFirstRhythmCommand.pattern
 
    .. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
 
-   .. autoattribute:: PitchFirstRhythmCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: PitchFirstRhythmCommand.tag
+      .. autoattribute:: PitchFirstRhythmCommand.selector
 
-   .. autoattribute:: PitchFirstRhythmCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tags

@@ -19,6 +19,32 @@ dynamicslib
 .. rubric:: Functions
    :class: section-header
 
+.. autosummary::
+   :nosignatures:
+
+   ~dynamic
+   ~dynamic_down
+   ~dynamic_shift
+   ~dynamic_text_center
+   ~dynamic_text_extra_offset
+   ~dynamic_text_left
+   ~dynamic_text_parent_alignment_x
+   ~dynamic_text_right
+   ~dynamic_text_stencil_false
+   ~dynamic_text_transparent
+   ~dynamic_text_x_extent_zero
+   ~dynamic_text_x_offset
+   ~dynamic_text_y_offset
+   ~dynamic_up
+   ~dynamics
+   ~hairpin
+   ~hairpin_chain
+   ~hairpin_shorten_pair
+   ~hairpin_start_shift
+   ~hairpin_stencil_false
+   ~hairpin_swell
+   ~hairpin_transparent
+
 .. autofunction:: dynamic
 
 .. autofunction:: dynamic_down

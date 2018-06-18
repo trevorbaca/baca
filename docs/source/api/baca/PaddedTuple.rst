@@ -14,6 +14,22 @@ PaddedTuple
 
 .. autoclass:: PaddedTuple
 
+   .. autosummary::
+      :nosignatures:
+
+      items
+      pad
+
+   .. autosummary::
+      :nosignatures:
+
+      __contains__
+      __eq__
+      __getitem__
+      __hash__
+      __iter__
+      __len__
+
    .. raw:: html
 
       <hr/>
@@ -25,7 +41,9 @@ PaddedTuple
 
    .. automethod:: PaddedTuple.__eq__
 
-   .. automethod:: PaddedTuple.__format__
+   .. container:: inherited
+
+      .. automethod:: PaddedTuple.__format__
 
    .. automethod:: PaddedTuple.__getitem__
 
@@ -35,7 +53,9 @@ PaddedTuple
 
    .. automethod:: PaddedTuple.__len__
 
-   .. automethod:: PaddedTuple.__repr__
+   .. container:: inherited
+
+      .. automethod:: PaddedTuple.__repr__
 
    .. raw:: html
 

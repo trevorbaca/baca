@@ -14,6 +14,18 @@ TieCorrectionCommand
 
 .. autoclass:: TieCorrectionCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      direction
+      repeat
+      untie
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +35,13 @@ TieCorrectionCommand
 
    .. automethod:: TieCorrectionCommand.__call__
 
-   .. automethod:: TieCorrectionCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: TieCorrectionCommand.__repr__
+      .. automethod:: TieCorrectionCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: TieCorrectionCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +50,9 @@ TieCorrectionCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: TieCorrectionCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: TieCorrectionCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +61,25 @@ TieCorrectionCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: TieCorrectionCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: TieCorrectionCommand.offset_to_measure_number
+      .. autoattribute:: TieCorrectionCommand.manifests
 
-   .. autoattribute:: TieCorrectionCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: TieCorrectionCommand.score_template
+      .. autoattribute:: TieCorrectionCommand.offset_to_measure_number
 
-   .. autoattribute:: TieCorrectionCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,16 +88,24 @@ TieCorrectionCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: TieCorrectionCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.deactivate
 
    .. autoattribute:: TieCorrectionCommand.direction
 
    .. autoattribute:: TieCorrectionCommand.repeat
 
-   .. autoattribute:: TieCorrectionCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: TieCorrectionCommand.tag
+      .. autoattribute:: TieCorrectionCommand.selector
 
-   .. autoattribute:: TieCorrectionCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.tags
 
    .. autoattribute:: TieCorrectionCommand.untie

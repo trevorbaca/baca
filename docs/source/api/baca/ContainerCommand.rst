@@ -14,6 +14,16 @@ ContainerCommand
 
 .. autoclass:: ContainerCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      identifier
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +33,13 @@ ContainerCommand
 
    .. automethod:: ContainerCommand.__call__
 
-   .. automethod:: ContainerCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: ContainerCommand.__repr__
+      .. automethod:: ContainerCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ContainerCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +48,9 @@ ContainerCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: ContainerCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: ContainerCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +59,25 @@ ContainerCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: ContainerCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: ContainerCommand.offset_to_measure_number
+      .. autoattribute:: ContainerCommand.manifests
 
-   .. autoattribute:: ContainerCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: ContainerCommand.score_template
+      .. autoattribute:: ContainerCommand.offset_to_measure_number
 
-   .. autoattribute:: ContainerCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.tag_measure_number
 
    .. raw:: html
 
@@ -60,12 +86,20 @@ ContainerCommand
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ContainerCommand.deactivate
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.deactivate
 
    .. autoattribute:: ContainerCommand.identifier
 
-   .. autoattribute:: ContainerCommand.selector
+   .. container:: inherited
 
-   .. autoattribute:: ContainerCommand.tag
+      .. autoattribute:: ContainerCommand.selector
 
-   .. autoattribute:: ContainerCommand.tags
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.tags

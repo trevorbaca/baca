@@ -19,6 +19,31 @@ library
 .. rubric:: Functions
    :class: section-header
 
+.. autosummary::
+   :nosignatures:
+
+   ~dashed_arrow
+   ~dashed_hook
+   ~lbsd
+   ~literal
+   ~map
+   ~markup
+   ~measures
+   ~not_parts
+   ~not_score
+   ~not_segment
+   ~only_parts
+   ~only_score
+   ~only_segment
+   ~pick
+   ~piecewise
+   ~pitches
+   ~scope
+   ~split_by_durations
+   ~suite
+   ~tag
+   ~timeline
+
 .. autofunction:: dashed_arrow
 
 .. autofunction:: dashed_hook

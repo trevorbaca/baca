@@ -14,6 +14,18 @@ SettingCommand
 
 .. autoclass:: SettingCommand
 
+   .. autosummary::
+      :nosignatures:
+
+      context
+      setting
+      value
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +35,13 @@ SettingCommand
 
    .. automethod:: SettingCommand.__call__
 
-   .. automethod:: SettingCommand.__format__
+   .. container:: inherited
 
-   .. automethod:: SettingCommand.__repr__
+      .. automethod:: SettingCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SettingCommand.__repr__
 
    .. raw:: html
 
@@ -34,7 +50,9 @@ SettingCommand
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: SettingCommand.get_tag
+   .. container:: inherited
+
+      .. automethod:: SettingCommand.get_tag
 
    .. raw:: html
 
@@ -43,15 +61,25 @@ SettingCommand
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: SettingCommand.manifests
+   .. container:: inherited
 
-   .. autoattribute:: SettingCommand.offset_to_measure_number
+      .. autoattribute:: SettingCommand.manifests
 
-   .. autoattribute:: SettingCommand.previous_segment_voice_metadata
+   .. container:: inherited
 
-   .. autoattribute:: SettingCommand.score_template
+      .. autoattribute:: SettingCommand.offset_to_measure_number
 
-   .. autoattribute:: SettingCommand.tag_measure_number
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.previous_segment_voice_metadata
+
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.score_template
+
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.tag_measure_number
 
    .. raw:: html
 
@@ -62,14 +90,22 @@ SettingCommand
 
    .. autoattribute:: SettingCommand.context
 
-   .. autoattribute:: SettingCommand.deactivate
+   .. container:: inherited
 
-   .. autoattribute:: SettingCommand.selector
+      .. autoattribute:: SettingCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.selector
 
    .. autoattribute:: SettingCommand.setting
 
-   .. autoattribute:: SettingCommand.tag
+   .. container:: inherited
 
-   .. autoattribute:: SettingCommand.tags
+      .. autoattribute:: SettingCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: SettingCommand.tags
 
    .. autoattribute:: SettingCommand.value

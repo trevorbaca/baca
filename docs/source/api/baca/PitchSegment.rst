@@ -14,6 +14,17 @@ PitchSegment
 
 .. autoclass:: PitchSegment
 
+   .. autosummary::
+      :nosignatures:
+
+      bass_to_octave
+      center_to_octave
+      chord
+      soprano_to_octave
+      space_down
+      space_up
+      split
+
    .. raw:: html
 
       <hr/>
@@ -21,35 +32,65 @@ PitchSegment
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchSegment.__add__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__contains__
+      .. automethod:: PitchSegment.__add__
 
-   .. automethod:: PitchSegment.__eq__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__format__
+      .. automethod:: PitchSegment.__contains__
 
-   .. automethod:: PitchSegment.__getitem__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__hash__
+      .. automethod:: PitchSegment.__eq__
 
-   .. automethod:: PitchSegment.__illustrate__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__iter__
+      .. automethod:: PitchSegment.__format__
 
-   .. automethod:: PitchSegment.__len__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__mul__
+      .. automethod:: PitchSegment.__getitem__
 
-   .. automethod:: PitchSegment.__radd__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__repr__
+      .. automethod:: PitchSegment.__hash__
 
-   .. automethod:: PitchSegment.__reversed__
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.__rmul__
+      .. automethod:: PitchSegment.__illustrate__
 
-   .. automethod:: PitchSegment.__str__
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__len__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__mul__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__reversed__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__rmul__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.__str__
 
    .. raw:: html
 
@@ -64,21 +105,37 @@ PitchSegment
 
    .. automethod:: PitchSegment.chord
 
-   .. automethod:: PitchSegment.count
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.has_duplicates
+      .. automethod:: PitchSegment.count
 
-   .. automethod:: PitchSegment.index
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.invert
+      .. automethod:: PitchSegment.has_duplicates
 
-   .. automethod:: PitchSegment.make_notes
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.multiply
+      .. automethod:: PitchSegment.index
 
-   .. automethod:: PitchSegment.retrograde
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.rotate
+      .. automethod:: PitchSegment.invert
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.make_notes
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.multiply
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.retrograde
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.rotate
 
    .. automethod:: PitchSegment.soprano_to_octave
 
@@ -88,11 +145,17 @@ PitchSegment
 
    .. automethod:: PitchSegment.split
 
-   .. automethod:: PitchSegment.to_pitch_classes
+   .. container:: inherited
 
-   .. automethod:: PitchSegment.to_pitches
+      .. automethod:: PitchSegment.to_pitch_classes
 
-   .. automethod:: PitchSegment.transpose
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.to_pitches
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.transpose
 
    .. raw:: html
 
@@ -101,7 +164,9 @@ PitchSegment
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: PitchSegment.from_selection
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.from_selection
 
    .. raw:: html
 
@@ -110,14 +175,26 @@ PitchSegment
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchSegment.hertz
+   .. container:: inherited
 
-   .. autoattribute:: PitchSegment.inflection_point_count
+      .. autoattribute:: PitchSegment.hertz
 
-   .. autoattribute:: PitchSegment.item_class
+   .. container:: inherited
 
-   .. autoattribute:: PitchSegment.items
+      .. autoattribute:: PitchSegment.inflection_point_count
 
-   .. autoattribute:: PitchSegment.local_maxima
+   .. container:: inherited
 
-   .. autoattribute:: PitchSegment.local_minima
+      .. autoattribute:: PitchSegment.item_class
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchSegment.items
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchSegment.local_maxima
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchSegment.local_minima

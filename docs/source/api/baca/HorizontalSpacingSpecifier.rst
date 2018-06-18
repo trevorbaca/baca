@@ -14,6 +14,32 @@ HorizontalSpacingSpecifier
 
 .. autoclass:: HorizontalSpacingSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      override
+
+   .. autosummary::
+      :nosignatures:
+
+      bol_measure_numbers
+      breaks
+      eol_measure_numbers
+      fermata_measure_duration
+      fermata_measure_numbers
+      first_measure_number
+      last_measure_number
+      magic_lilypond_eol_adjustment
+      measure_count
+      measures
+      minimum_duration
+      multiplier
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
    .. raw:: html
 
       <hr/>
@@ -23,9 +49,13 @@ HorizontalSpacingSpecifier
 
    .. automethod:: HorizontalSpacingSpecifier.__call__
 
-   .. automethod:: HorizontalSpacingSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: HorizontalSpacingSpecifier.__repr__
+      .. automethod:: HorizontalSpacingSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: HorizontalSpacingSpecifier.__repr__
 
    .. raw:: html
 

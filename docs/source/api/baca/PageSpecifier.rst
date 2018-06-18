@@ -14,6 +14,12 @@ PageSpecifier
 
 .. autoclass:: PageSpecifier
 
+   .. autosummary::
+      :nosignatures:
+
+      number
+      systems
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +27,13 @@ PageSpecifier
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PageSpecifier.__format__
+   .. container:: inherited
 
-   .. automethod:: PageSpecifier.__repr__
+      .. automethod:: PageSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PageSpecifier.__repr__
 
    .. raw:: html
 

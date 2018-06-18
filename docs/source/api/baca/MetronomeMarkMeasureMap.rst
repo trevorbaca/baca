@@ -14,6 +14,16 @@ MetronomeMarkMeasureMap
 
 .. autoclass:: MetronomeMarkMeasureMap
 
+   .. autosummary::
+      :nosignatures:
+
+      items
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+
    .. raw:: html
 
       <hr/>
@@ -21,11 +31,15 @@ MetronomeMarkMeasureMap
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: MetronomeMarkMeasureMap.__format__
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkMeasureMap.__format__
 
    .. automethod:: MetronomeMarkMeasureMap.__getitem__
 
-   .. automethod:: MetronomeMarkMeasureMap.__repr__
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkMeasureMap.__repr__
 
    .. raw:: html
 

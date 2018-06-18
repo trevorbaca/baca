@@ -14,6 +14,72 @@ LibraryAF
 
 .. autoclass:: LibraryAF
 
+   .. autosummary::
+      :nosignatures:
+
+      accent
+      accidental_stencil_false
+      accidental_transparent
+      accidental_x_extent_false
+      allow_octaves
+      alternate_bow_strokes
+      anchor
+      anchor_after
+      anchor_to_figure
+      ancora_dynamic
+      apply
+      arpeggio
+      articulation
+      articulations
+      bar_extent
+      bar_extent_persistent
+      bar_extent_zero
+      bar_line_transparent
+      bass_to_octave
+      bcps
+      beam
+      beam_divisions
+      beam_everything
+      beam_positions
+      beam_runs
+      beam_stencil_false
+      beam_transparent
+      breaks
+      breathe
+      breathe_after
+      center_to_octave
+      clef
+      clef_extra_offset
+      clef_shift
+      clef_x_extent_false
+      clusters
+      coat
+      color
+      color_fingerings
+      compound_quarter_divisions
+      container
+      cross_staff
+      deviation
+      diatonic_clusters
+      displacement
+      dls_padding
+      dls_staff_padding
+      dls_up
+      dots_stencil_false
+      dots_transparent
+      double_staccato
+      down_arpeggio
+      down_bow
+      espressivo
+      fermata
+      finger_pressure_transition
+      flag_stencil_false
+      flag_transparent
+      flageolet
+      flags
+      force_accidental
+      fuse_compound_quarter_divisions
+
    .. raw:: html
 
       <hr/>
@@ -21,9 +87,13 @@ LibraryAF
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: LibraryAF.__format__
+   .. container:: inherited
 
-   .. automethod:: LibraryAF.__repr__
+      .. automethod:: LibraryAF.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LibraryAF.__repr__
 
    .. raw:: html
 
