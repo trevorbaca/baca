@@ -958,8 +958,8 @@ def hairpin(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \<                                                                       %! HC1
                             \p                                                                       %! HC1
+                            \<                                                                       %! HC1
                             [
                             d'16
                             ]
@@ -1038,8 +1038,8 @@ def hairpin(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \<                                                                       %! HC1
                             \p                                                                       %! HC1
+                            \<                                                                       %! HC1
                             [
                             e''16
                             ]
@@ -1096,8 +1096,8 @@ def hairpin(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \<                                                                       %! HC1
                             \p                                                                       %! HC1
+                            \<                                                                       %! HC1
                             [
                             d'16
                             ]
@@ -1110,8 +1110,8 @@ def hairpin(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \<                                                                       %! HC1
                             \p                                                                       %! HC1
+                            \<                                                                       %! HC1
                             [
                             e''16
                             ]
@@ -1192,6 +1192,7 @@ def hairpin(
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
+    leak: bool = None,
     pieces: typing.Union[MapCommand, Selector] = 'baca.tleaves().group()',
     selector: Selector = 'baca.tleaves()'
     ) -> PiecewiseCommand:
@@ -1279,8 +1280,8 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \<                                                                       %! PWC1
                             \p                                                                       %! PWC1
+                            \<                                                                       %! PWC1
                             [
             <BLANKLINE>
                             d''8
@@ -1416,8 +1417,8 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \<                                                                       %! PWC1
                             \p                                                                       %! PWC1
+                            \<                                                                       %! PWC1
                             [
             <BLANKLINE>
                             d''8
@@ -1556,8 +1557,8 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \<                                                                       %! PWC1
                             \p                                                                       %! PWC1
+                            \<                                                                       %! PWC1
                             [
             <BLANKLINE>
                             d''8
@@ -1701,8 +1702,8 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \<                                                                       %! PWC1
                             \p                                                                       %! PWC1
+                            \<                                                                       %! PWC1
                             [
             <BLANKLINE>
                             d''8
@@ -1831,8 +1832,8 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \<                                                                       %! PWC1
                             \p                                                                       %! PWC1
+                            \<                                                                       %! PWC1
                             [
             <BLANKLINE>
                             d''8
@@ -1964,8 +1965,8 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \<                                                                       %! PWC1
                             \p                                                                       %! PWC1
+                            \<                                                                       %! PWC1
                             [
             <BLANKLINE>
                             d''8
@@ -2036,8 +2037,11 @@ def hairpin_chain(
             dynamics_.append(dynamic)
     for dynamic in dynamics_:
         assert isinstance(dynamic, abjad.Dynamic), repr(dynamic)
+    spanner = abjad.Hairpin(
+        leak=leak,
+        )
     return library.piecewise(
-        abjad.Hairpin(),
+        spanner,
         dynamics_,
         pieces,
         bookend=bookend,
@@ -2095,6 +2099,7 @@ def hairpin_swell(
     peak: str,
     counts: typing.List[int],
     *,
+    leak: bool = None,
     pieces: typing.Union[MapCommand, Selector] = 'baca.leaves()',
     selector: Selector = 'baca.leaves()',
     ) -> PiecewiseCommand:
@@ -2112,6 +2117,7 @@ def hairpin_swell(
     return hairpin_chain(
         __dynamics(f'niente {peak} niente'),
         bookend=True,
+        leak=leak,
         pieces=pieces,
         selector=selector,
         )

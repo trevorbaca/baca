@@ -1447,8 +1447,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \<                                                                       %! HC1
                                 \p                                                                       %! HC1
+                                \<                                                                       %! HC1
                                 [
                                 d'16
                                 bf'16
@@ -1515,8 +1515,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \<                                                                       %! HC1
                                 \p                                                                       %! HC1
+                                \<                                                                       %! HC1
                                 [
                                 d'16
                                 bf'16
@@ -1527,8 +1527,8 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
-                                \<                                                                       %! HC1
                                 \p                                                                       %! HC1
+                                \<                                                                       %! HC1
                                 [
                                 b''16
                                 ]
@@ -1583,8 +1583,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \<                                                                       %! HC1
                                 \p                                                                       %! HC1
+                                \<                                                                       %! HC1
                                 [
                                 d'16
                                 bf'16
@@ -1601,8 +1601,8 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \>                                                                       %! HC1
                                 \f                                                                       %! HC1
+                                \>                                                                       %! HC1
                                 [
                                 cs''16
                                 a'16
@@ -1645,8 +1645,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \<                                                                       %! HC1
                                 \p                                                                       %! HC1
+                                \<                                                                       %! HC1
                                 [
                                 d'16
                                 bf'16
@@ -1663,8 +1663,8 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \>                                                                       %! HC1
                                 \f                                                                       %! HC1
+                                \>                                                                       %! HC1
                                 [
                                 cs''16
                                 a'16
