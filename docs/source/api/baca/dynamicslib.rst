@@ -42,7 +42,6 @@ dynamicslib
    ~hairpin_shorten_pair
    ~hairpin_start_shift
    ~hairpin_stencil_false
-   ~hairpin_swell
    ~hairpin_transparent
 
 .. autofunction:: dynamic
@@ -84,7 +83,5 @@ dynamicslib
 .. autofunction:: hairpin_start_shift
 
 .. autofunction:: hairpin_stencil_false
-
-.. autofunction:: hairpin_swell
 
 .. autofunction:: hairpin_transparent

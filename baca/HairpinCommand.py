@@ -113,7 +113,7 @@ class HairpinCommand(Command):
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if leak is not None:
-            leak = bool(leak)
+            assert isinstance(leak, abjad.Dynamic), repr(leak)
         self._leak = leak
         if left_broken is not None:
             assert left_broken in ('<', '>', 'niente'), repr(left_broken)
