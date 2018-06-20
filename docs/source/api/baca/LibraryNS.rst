@@ -39,7 +39,6 @@ LibraryNS
       rehearsal_mark
       rehearsal_mark_extra_offset
       rehearsal_mark_y_offset
-      reiterated_dynamic
       repeat_tie
       repeat_tie_down
       repeat_tie_from
@@ -163,8 +162,6 @@ LibraryNS
    .. automethod:: LibraryNS.rehearsal_mark_extra_offset
 
    .. automethod:: LibraryNS.rehearsal_mark_y_offset
-
-   .. automethod:: LibraryNS.reiterated_dynamic
 
    .. automethod:: LibraryNS.repeat_tie
 
