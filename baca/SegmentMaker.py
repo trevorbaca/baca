@@ -887,8 +887,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
-                    threeway = (list, Command, abjad.Markup)
-                    assert isinstance(command, threeway), repr(command)
+                    fourway = (list, Command, abjad.Markup, Suite)
+                    assert isinstance(command, fourway), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
                             continue
@@ -3200,7 +3200,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4685,19 +4684,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4855,19 +4851,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/16
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5995,12 +5988,10 @@ class SegmentMaker(abjad.SegmentMaker):
         # TODO: optimize by consolidating score iteration:
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-                #self._remove_redundant_time_signatures()
+                self._remove_redundant_time_signatures()
                 self._cache_fermata_measure_numbers()
                 self._shorten_long_repeat_ties()
                 self._treat_untreated_persistent_wrappers()
-                # TODO: move *BEFORE* _treat_untreated_persistent_wrappers:
-                self._remove_redundant_time_signatures()
                 self._transpose_score_()
                 self._add_final_bar_line()
                 self._add_final_markup()

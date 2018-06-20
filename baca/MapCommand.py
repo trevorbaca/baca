@@ -3,6 +3,7 @@ import baca
 import collections
 import typing
 from .Command import Command
+from .Suite import Suite
 from .Typing import Selector
 
 
@@ -118,9 +119,11 @@ class MapCommand(Command):
         *commands: typing.Union[abjad.Expression, Command],
         ) -> None:
         Command.__init__(self, selector=selector)
-        command_list: typing.List[typing.Union[abjad.Expression, Command]] = []
+        command_list: typing.List[
+            typing.Union[abjad.Expression, Command, Suite]
+            ] = []
         for command in commands:
-            if not isinstance(command, (abjad.Expression, Command)):
+            if not isinstance(command, (abjad.Expression, Command, Suite)):
                 message = '\n  Commands must contain only commands and expressions.'
                 message += f'\n  Not {type(command).__name__}: {command!r}.'
                 raise Exception(message)

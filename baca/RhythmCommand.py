@@ -818,25 +818,21 @@ class RhythmCommand(Command):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5

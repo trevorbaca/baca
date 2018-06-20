@@ -5579,25 +5579,21 @@ class LibraryNS(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5680,25 +5676,21 @@ class LibraryNS(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5782,25 +5774,21 @@ class LibraryNS(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5882,25 +5870,21 @@ class LibraryNS(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5988,25 +5972,21 @@ class LibraryNS(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5

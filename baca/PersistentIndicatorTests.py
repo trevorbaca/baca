@@ -75,7 +75,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -162,7 +161,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -261,7 +259,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -359,7 +356,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -445,7 +441,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -454,7 +449,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -562,7 +556,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -644,7 +637,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -725,7 +717,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -807,7 +798,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -877,7 +867,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -960,7 +949,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1028,7 +1016,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1111,7 +1098,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1222,7 +1208,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1291,7 +1276,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1357,7 +1341,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1440,7 +1423,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1509,7 +1491,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1575,7 +1556,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1670,7 +1650,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1740,7 +1719,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1807,7 +1785,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -1903,7 +1880,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -1973,7 +1949,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2040,7 +2015,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2131,7 +2105,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -2140,7 +2113,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2215,7 +2187,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -2224,7 +2195,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2296,7 +2266,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -2305,7 +2274,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2414,7 +2382,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2484,7 +2451,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2551,7 +2517,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2658,7 +2623,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2733,7 +2697,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2805,7 +2768,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -2894,7 +2856,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2969,7 +2930,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3041,7 +3001,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3142,7 +3101,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3218,7 +3176,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3291,7 +3248,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3393,7 +3349,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3469,7 +3424,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3542,7 +3496,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3639,7 +3592,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -3648,7 +3600,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3735,7 +3686,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -3744,7 +3694,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3828,7 +3777,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -3837,7 +3785,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -3958,7 +3905,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4034,7 +3980,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4107,7 +4052,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4228,7 +4172,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4307,7 +4250,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4383,7 +4325,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4476,7 +4417,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4555,7 +4495,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4631,7 +4570,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4736,7 +4674,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4816,7 +4753,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4893,7 +4829,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -4999,7 +4934,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5079,7 +5013,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5156,7 +5089,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5257,7 +5189,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -5266,7 +5197,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5361,7 +5291,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -5370,7 +5299,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5462,7 +5390,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                               %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
@@ -5471,7 +5398,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5600,7 +5526,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5680,7 +5605,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5757,7 +5681,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break %! IC:BREAK
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f %! SM5
@@ -5869,7 +5792,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -5877,7 +5799,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6059,7 +5980,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6201,7 +6121,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
@@ -6345,7 +6264,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
@@ -6525,7 +6443,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6667,7 +6584,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
@@ -6745,7 +6661,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6875,7 +6790,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6949,7 +6863,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7039,7 +6952,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7117,7 +7029,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7200,7 +7111,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7284,7 +7194,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7356,7 +7265,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7443,7 +7351,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7571,7 +7478,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -7695,7 +7601,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
@@ -7821,7 +7726,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
@@ -7936,7 +7840,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
@@ -7975,7 +7878,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -8102,7 +8004,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \newSpacingSection                                                           %! HSS1:SPACING
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! SM6:REDUNDANT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
                             \revert TextSpanner.staff-padding                                            %! OC2
