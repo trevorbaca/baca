@@ -46,7 +46,6 @@ LibraryAF
       beam_transparent
       breaks
       breathe
-      breathe_after
       center_to_octave
       clef
       clef_extra_offset
@@ -159,8 +158,6 @@ LibraryAF
    .. automethod:: LibraryAF.breaks
 
    .. automethod:: LibraryAF.breathe
-
-   .. automethod:: LibraryAF.breathe_after
 
    .. automethod:: LibraryAF.center_to_octave
 

@@ -2987,27 +2987,15 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def breathe(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: Selector = 'baca.pleaf(-1)',
         ) -> IndicatorCommand:
         """
-        Attaches LilyPond breathe command to before-slot.
+        Attaches LilyPond breathe command to pleaf -1.
         """
-        breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='before')
+        breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='after')
         return IndicatorCommand(
             indicators=[breathe],
             selector=selector,
-            )
-
-    # TODO: integrate <>
-    @staticmethod
-    def breathe_after() -> IndicatorCommand:
-        """
-        Attaches LilyPond breathe command to before-slot of
-        leaf-just-after-last.
-        """
-        breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='before')
-        return LibraryAF.breathe(
-            selector='baca.rleaves()[-1:]',
             )
 
     @staticmethod
