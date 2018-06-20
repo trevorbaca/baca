@@ -1,5 +1,7 @@
 import abjad
 import baca
+from .Command import Command
+from .Suite import Suite
 
 
 class CommandWrapper(abjad.AbjadObject):
@@ -105,7 +107,7 @@ class CommandWrapper(abjad.AbjadObject):
             assert isinstance(scope, prototype), format(scope)
         self._scope = scope
         if command is not None:
-            assert isinstance(command, baca.Command), format(command)
+            assert isinstance(command, (Command, Suite)), format(command)
         self._command = command
 
     ### PUBLIC PROPERTIES ###

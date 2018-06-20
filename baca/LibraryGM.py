@@ -24,7 +24,7 @@ from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
     )
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
@@ -1545,7 +1545,7 @@ class LibraryGM(abjad.AbjadObject):
         alert: IndicatorCommand = None,
         context: str = 'Staff',
         selector: Selector = 'baca.leaf(0)',
-        ) -> typing.Union[IndicatorCommand, SuiteCommand]:
+        ) -> typing.Union[IndicatorCommand, Suite]:
         r"""
         Attaches margin markup.
 
@@ -1660,7 +1660,7 @@ class LibraryGM(abjad.AbjadObject):
             )
         if bool(alert):
             assert isinstance(alert, IndicatorCommand), repr(alert)
-            return SuiteCommand(command, alert)
+            return Suite(command, alert)
         else:
             return command
 

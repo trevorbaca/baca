@@ -107,7 +107,6 @@ Bača API
    ~baca.SpannerCommand.SpannerCommand
    ~baca.StaffPositionCommand.StaffPositionCommand
    ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~baca.SuiteCommand.SuiteCommand
    ~baca.TextSpannerCommand.TextSpannerCommand
    ~baca.TieCorrectionCommand.TieCorrectionCommand
    ~baca.VoltaCommand.VoltaCommand
@@ -207,6 +206,7 @@ Bača API
    :nosignatures:
 
    ~baca.PaddedTuple.PaddedTuple
+   ~baca.Suite.Suite
 
 .. raw:: html
 

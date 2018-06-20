@@ -14,7 +14,7 @@ from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .TimelineScope import TimelineScope
 from .Typing import Pair
 from .Typing import Selector
@@ -568,7 +568,7 @@ def measures(
         wrappers.append(wrapper)
     return wrappers
 
-def not_parts(command: Command) -> Command:
+def not_parts(command: Command) -> typing.Union[Command, Suite]:
     """
     Tags ``command`` with ``-PARTS``.
 
@@ -576,7 +576,7 @@ def not_parts(command: Command) -> Command:
     """
     return tag('-PARTS', command)
 
-def not_score(command: Command) -> Command:
+def not_score(command: Command) -> typing.Union[Command, Suite]:
     """
     Tags ``command`` with ``-SCORE``.
 
@@ -584,7 +584,7 @@ def not_score(command: Command) -> Command:
     """
     return tag('-SCORE', command)
 
-def not_segment(command: Command) -> Command:
+def not_segment(command: Command) -> typing.Union[Command, Suite]:
     """
     Tags ``command`` with ``-SEGMENT``.
 
@@ -592,7 +592,7 @@ def not_segment(command: Command) -> Command:
     """
     return tag('-SEGMENT', command)
 
-def only_parts(command: Command) -> Command:
+def only_parts(command: Command) -> typing.Union[Command, Suite]:
     """
     Tags ``command`` with ``+PARTS``.
 
@@ -600,7 +600,7 @@ def only_parts(command: Command) -> Command:
     """
     return tag('+PARTS', command)
 
-def only_score(command: Command) -> Command:
+def only_score(command: Command) -> typing.Union[Command, Suite]:
     """
     Tags ``command`` with ``+SCORE``.
 
@@ -608,7 +608,7 @@ def only_score(command: Command) -> Command:
     """
     return tag('+SCORE', command)
 
-def only_segment(command: Command) -> Command:
+def only_segment(command: Command) -> typing.Union[Command, Suite]:
     """
     Tags ``command`` with ``+SEGMENT``.
 
@@ -891,11 +891,9 @@ def split_by_durations(
     expression = expression.flatten(depth=-1)
     return expression
 
-# TODO: remove selector?
 def suite(
     *commands: Command,
-    selector: Selector = None,
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Makes suite.
 
@@ -912,23 +910,19 @@ def suite(
 
     """
     for command in commands:
-        if not isinstance(command, Command):
+        if not isinstance(command, (Command, Suite)):
             message = '\n  Commands must contain only commands.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
-    if not isinstance(selector, (str, abjad.Expression, type(None))):
-        message = f'\n  Must be selector, string or none:'
-        message += f'\n  Not {selector!r}.'
-        raise Exception(message)
-    return SuiteCommand(*commands, selector=selector)
+    return Suite(*commands)
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, abjad.Markup],
+    command: typing.Union[Command, abjad.Markup, Suite],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> Command:
+    ) -> typing.Union[Command, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -945,7 +939,7 @@ def tag(
     if isinstance(command, abjad.Markup):
         command = markup(command)
     assert Command._validate_tags(tags), repr(tags)
-    if isinstance(command, SuiteCommand):
+    if isinstance(command, Suite):
         for command_ in command.commands:
             tag(
                 tags,

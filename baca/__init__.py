@@ -112,7 +112,7 @@ from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .SystemSpecifier import SystemSpecifier
 from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand

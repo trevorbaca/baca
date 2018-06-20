@@ -32,7 +32,7 @@ from .SettingCommand import SettingCommand
 from .SpannerCommand import SpannerCommand
 from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number

@@ -12,9 +12,11 @@ from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
 from .SkipRhythmMaker import SkipRhythmMaker
+from .Suite import Suite
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .Typing import Number
@@ -867,8 +869,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            fourway = (list, Command, MeasureWrapper, abjad.Markup)
-            if not isinstance(command, fourway):
+            fiveway = (abjad.Markup, Command, list, MeasureWrapper, Suite)
+            if not isinstance(command, fiveway):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
@@ -924,7 +926,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    assert isinstance(command, Command), repr(command)
+                    assert isinstance(command, (Command, Suite)), repr(command)
                     wrapper = CommandWrapper(command=command, scope=scope)
                     self.wrappers.append(wrapper)
 
@@ -1502,9 +1504,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def _call_commands(self):
         command_count = 0
         for wrapper in self.wrappers:
-            assert isinstance(wrapper, baca.CommandWrapper)
-            assert isinstance(wrapper.command, baca.Command)
-            if isinstance(wrapper.command, baca.RhythmCommand):
+            assert isinstance(wrapper, CommandWrapper)
+            assert isinstance(wrapper.command, (Command, Suite))
+            if isinstance(wrapper.command, RhythmCommand):
                 continue
             command_count += 1
             selection = self._scope_to_leaf_selection(wrapper)
@@ -1561,7 +1563,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             rhythms = []
             for wrapper in wrappers:
-                assert isinstance(wrapper, baca.CommandWrapper)
+                assert isinstance(wrapper, CommandWrapper)
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
@@ -3094,7 +3096,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _voice_to_rhythm_wrappers(self, voice):
         wrappers = []
         for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, baca.RhythmCommand):
+            if not isinstance(wrapper.command, RhythmCommand):
                 continue
             if wrapper.scope.voice_name == voice.name:
                 wrappers.append(wrapper)

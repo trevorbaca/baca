@@ -7,7 +7,7 @@ import typing
 from . import library
 from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .Typing import Number
 
 
@@ -171,7 +171,7 @@ def divisi_2_plus_4():
 def edition(
     not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
     only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
@@ -183,7 +183,7 @@ def edition(
         only_parts = library.markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
     only_parts_ = library.only_parts(only_parts)
-    return SuiteCommand(
+    return Suite(
         not_parts_,
         only_parts_,
         )

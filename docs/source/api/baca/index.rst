@@ -157,7 +157,6 @@ baca
    SpannerCommand
    StaffPositionCommand
    StaffPositionInterpolationCommand
-   SuiteCommand
    TextSpannerCommand
    TieCorrectionCommand
    VoltaCommand
@@ -198,7 +197,6 @@ baca
    ~SpannerCommand.SpannerCommand
    ~StaffPositionCommand.StaffPositionCommand
    ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~SuiteCommand.SuiteCommand
    ~TextSpannerCommand.TextSpannerCommand
    ~TieCorrectionCommand.TieCorrectionCommand
    ~VoltaCommand.VoltaCommand
@@ -368,11 +366,13 @@ baca
    :hidden:
 
    PaddedTuple
+   Suite
 
 .. autosummary::
    :nosignatures:
 
    ~PaddedTuple.PaddedTuple
+   ~Suite.Suite
 
 .. raw:: html
 

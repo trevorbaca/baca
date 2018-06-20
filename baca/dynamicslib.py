@@ -11,7 +11,7 @@ from .MapCommand import MapCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .SchemeManifest import SchemeManifest
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
@@ -403,7 +403,7 @@ def dynamic_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: Selector = 'baca.leaf(0)',
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Shifts dynamic to left by calculated width of dynamic.
     """
@@ -426,7 +426,7 @@ def dynamic_shift(
 def dynamic_text_center(
     *,
     selector: Selector = 'baca.pleaf(0)',
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -442,7 +442,6 @@ def dynamic_text_center(
     return library.suite(
         command_1,
         command_2,
-        #selector=selector,
         )
 
 def dynamic_text_extra_offset(
@@ -624,7 +623,7 @@ def dynamic_text_extra_offset(
 def dynamic_text_left(
     *,
     selector: Selector = 'baca.pleaf(0)',
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -640,7 +639,6 @@ def dynamic_text_left(
     return library.suite(
         command_1,
         command_2,
-        #selector=selector,
         )
 
 # TODO: change selector to baca.leaf(0) for niente dynamics
@@ -665,7 +663,7 @@ def dynamic_text_parent_alignment_x(
 def dynamic_text_right(
     *,
     selector: Selector = 'baca.pleaf(0)',
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -681,7 +679,6 @@ def dynamic_text_right(
     return library.suite(
         command_1,
         command_2,
-        #selector=selector,
         )
 
 # TODO: change selector to baca.leaf(0) for niente dynamics
@@ -2287,7 +2284,7 @@ def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: Selector = 'baca.leaf(0)',
-    ) -> SuiteCommand:
+    ) -> Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
     """

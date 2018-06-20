@@ -13,7 +13,7 @@ from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .VoltaCommand import VoltaCommand

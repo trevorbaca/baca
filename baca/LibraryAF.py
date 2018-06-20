@@ -23,7 +23,7 @@ from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SpannerCommand import SpannerCommand
-from .SuiteCommand import SuiteCommand
+from .Suite import Suite
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
@@ -1481,10 +1481,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def bar_extent_zero(
-        *,
-        selector: Selector = 'baca.leaves()',
-        ) -> SuiteCommand:
+    def bar_extent_zero() -> Suite:
         """
         Makes bar-extent zero suite.
         """
@@ -1499,7 +1496,6 @@ class LibraryAF(abjad.AbjadObject):
                 after=True,
                 selector='baca.leaf(-1)',
                 ),
-            selector=selector,
             )
 
     @staticmethod
@@ -3537,7 +3533,7 @@ class LibraryAF(abjad.AbjadObject):
         clef: typing.Union[str, abjad.Clef],
         *,
         selector: Selector = 'baca.leaf(0)',
-        ) -> SuiteCommand:
+        ) -> Suite:
         """
         Shifts clef to left by width of clef.
         """
@@ -5915,7 +5911,7 @@ class LibraryAF(abjad.AbjadObject):
         *,
         selector: Selector = 'baca.tleaves()',
         right_broken: bool = None,
-        ) -> SuiteCommand:
+        ) -> Suite:
         r"""
         Makes finger pressure transition glissando.
 
