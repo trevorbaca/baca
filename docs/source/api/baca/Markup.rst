@@ -347,8 +347,4 @@ Markup
 
    .. container:: inherited
 
-      .. autoattribute:: Markup.stack_priority
-
-   .. container:: inherited
-
       .. autoattribute:: Markup.tweaks

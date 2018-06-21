@@ -5824,23 +5824,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                            \line                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                                {                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                                    \with-color                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                                        #(x11-color 'blue)                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                                        [“I+II”]                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                                }                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        %@% \line                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        %@%     {                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        %@%         \with-color                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        %@%             #(x11-color 'blue)                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        %@%             [“III+IV”]                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        %@%     }                                                        %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        }
-                                    }
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@% ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%     \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%         #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%         [“III+IV”]                                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
+                            %@%     }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
                                 \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
                                 \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
