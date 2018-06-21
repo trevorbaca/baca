@@ -96,23 +96,17 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
         Returns pitch-class tree.
         """
-        pc_cells = baca.helianthate(
-            self.pc_cells,
-            -1,
-            1,
-            )
+        pc_cells = baca.sequence(self.pc_cells)
+        pc_cells = pc_cells.helianthate(-1, 1)
         prototype = (tuple, abjad.Ratio)
         if self.division_ratios is None:
             division_ratios = [[1]]
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = baca.helianthate(
-                self.division_ratios,
-                -1,
-                1,
-                )
-            division_ratios = baca.sequence(division_ratios).flatten(depth=1)
+            division_ratios = baca.sequence(self.division_ratios)
+            division_ratios = division_ratios.helianthate(-1, 1)
+            division_ratios = division_ratios.flatten(depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
         division_ratios = abjad.CyclicTuple(division_ratios)
         pc_cells_copy = pc_cells[:]

@@ -27,7 +27,6 @@ LibraryGM
       global_fermata
       group_by_measures
       group_notes_by_measures
-      helianthate
       imbricate
       instrument
       interpolate_staff_positions
@@ -89,8 +88,6 @@ LibraryGM
    .. automethod:: LibraryGM.group_by_measures
 
    .. automethod:: LibraryGM.group_notes_by_measures
-
-   .. automethod:: LibraryGM.helianthate
 
    .. automethod:: LibraryGM.imbricate
 
