@@ -1211,7 +1211,7 @@ class PitchTree(Tree):
                 leaves_with_skips = abjad.select(leaves_with_skips)
                 abjad.attach(spanner, leaves_with_skips)
                 if brackets:
-                    bracket = abjad.HorizontalBracketSpanner()
+                    bracket = abjad.HorizontalBracket()
                     abjad.attach(bracket, leaves_with_skips)
                 leaf_list_stack.pop()
         else:

@@ -138,7 +138,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):
             measure_group = self._make_measure_group(group)
-            spanner = abjad.HorizontalBracketSpanner()
+            spanner = abjad.HorizontalBracket()
             leaves = abjad.select(measure_group).leaves()
             abjad.attach(spanner, leaves)
             staff.extend(measure_group)
