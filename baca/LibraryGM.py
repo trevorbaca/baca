@@ -121,8 +121,8 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 e'8
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                 <BLANKLINE>
                                 d''8
                                 \glissando                                                               %! SC
@@ -136,8 +136,8 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 g'8
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                 <BLANKLINE>
                                 f''8
                                 \glissando                                                               %! SC
@@ -148,8 +148,8 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 d''8
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                 <BLANKLINE>
                                 f'8
                                 \glissando                                                               %! SC
@@ -163,8 +163,8 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 f''8
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                 <BLANKLINE>
                                 e'8
                                 \glissando                                                               %! SC
@@ -240,8 +240,8 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 e'8
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                 <BLANKLINE>
                                 d''8
                 <BLANKLINE>
@@ -330,8 +330,8 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                                 e''16
                                 ]
                                 \glissando                                                               %! SC
@@ -340,8 +340,8 @@ class LibraryGM(abjad.AbjadObject):
                                 ef''16
                                 r16
                                 af''16
-                                \glissando                                                               %! SC
                                 [
+                                \glissando                                                               %! SC
                                 g''16
                                 ]
                             }

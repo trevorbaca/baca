@@ -4827,9 +4827,9 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 d'16
                                 ]
                                 bf'4
@@ -4841,9 +4841,9 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 e''16
                                 ]
                                 ef''4
@@ -4853,8 +4853,8 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
-                                \f                                                                       %! HC1
                                 ]
+                                \f                                                                       %! HC1
                             }
                             \times 4/5 {
                                 a'16
@@ -4902,9 +4902,9 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 d'16
                                 ]
                                 bf'4
@@ -4917,9 +4917,9 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
                                 fs''16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 e''16
                                 ]
                                 ef''4
@@ -4929,8 +4929,8 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
-                                \f                                                                       %! HC1
                                 ]
+                                \f                                                                       %! HC1
                                 \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             }
                             \times 4/5 {
@@ -4995,9 +4995,9 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 d'16
                                 ]
                                 bf'4
@@ -5009,9 +5009,9 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 e''16
                                 ]
                                 ef''4
@@ -5021,8 +5021,8 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
-                                \f                                                                       %! HC1
                                 ]
+                                \f                                                                       %! HC1
                             }
                             \times 4/5 {
                                 a'16
@@ -5070,9 +5070,9 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 d'16
                                 ]
                                 bf'4
@@ -5085,9 +5085,9 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override DynamicLineSpanner.direction = #up                             %! OC1
                                 fs''16
+                                [
                                 \p                                                                       %! HC1
                                 \<                                                                       %! HC1
-                                [
                                 e''16
                                 ]
                                 ef''4
@@ -5097,8 +5097,8 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
-                                \f                                                                       %! HC1
                                 ]
+                                \f                                                                       %! HC1
                                 \revert DynamicLineSpanner.direction                                     %! OC2
                             }
                             \times 4/5 {

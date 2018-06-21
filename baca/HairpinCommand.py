@@ -54,9 +54,9 @@ class HairpinCommand(Command):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            [
                             \effort_p                                                                %! HC1
                             \<                                                                       %! HC1
-                            [
                             e''16
                             ]
                             ef''4
@@ -66,8 +66,8 @@ class HairpinCommand(Command):
                             af''16
                             [
                             g''16
-                            \effort_f                                                                %! HC1
                             ]
+                            \effort_f                                                                %! HC1
                         }
                         \times 4/5 {
                             a'16

@@ -964,9 +964,9 @@ def hairpin(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
+                            [
                             \p                                                                       %! HC1
                             \<                                                                       %! HC1
-                            [
                             d'16
                             ]
                             bf'4
@@ -1044,9 +1044,9 @@ def hairpin(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            [
                             \p                                                                       %! HC1
                             \<                                                                       %! HC1
-                            [
                             e''16
                             ]
                             ef''4
@@ -1056,8 +1056,8 @@ def hairpin(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! HC1
                             ]
+                            \f                                                                       %! HC1
                         }
                         \times 4/5 {
                             a'16
@@ -1102,9 +1102,9 @@ def hairpin(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
+                            [
                             \p                                                                       %! HC1
                             \<                                                                       %! HC1
-                            [
                             d'16
                             ]
                             bf'4
@@ -1116,9 +1116,9 @@ def hairpin(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            [
                             \p                                                                       %! HC1
                             \<                                                                       %! HC1
-                            [
                             e''16
                             ]
                             ef''4
@@ -1128,8 +1128,8 @@ def hairpin(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! HC1
                             ]
+                            \f                                                                       %! HC1
                         }
                         \times 4/5 {
                             a'16
@@ -1396,9 +1396,9 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
+                            [
                             \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
-                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -1406,8 +1406,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e''8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
                             \>                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
@@ -1418,8 +1418,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \p                                                                       %! PWC1
                             ]
+                            \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
@@ -1533,9 +1533,9 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
+                            [
                             \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
-                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -1543,8 +1543,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e''8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
                             \>                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
@@ -1555,8 +1555,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \p                                                                       %! PWC1
                             ]
+                            \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
@@ -1584,8 +1584,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
                         }
@@ -1673,9 +1673,9 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
+                            [
                             \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
-                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -1685,8 +1685,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e''8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
                             \>                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
@@ -1699,8 +1699,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \p                                                                       %! PWC1
                             ]
+                            \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
@@ -1732,8 +1732,8 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
                         }
@@ -1818,9 +1818,9 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
+                            [
                             \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
-                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -1833,8 +1833,8 @@ def hairpin_chain(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             g'8
                             \f                                                                       %! PWC1
-                            \>                                                                       %! PWC1
                             [
+                            \>                                                                       %! PWC1
             <BLANKLINE>
                             f''8
             <BLANKLINE>
@@ -1845,8 +1845,8 @@ def hairpin_chain(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
                             \p                                                                       %! PWC1
-                            \<                                                                       %! PWC1
                             [
+                            \<                                                                       %! PWC1
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -1948,9 +1948,9 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
+                            [
                             \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
-                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -1963,8 +1963,8 @@ def hairpin_chain(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             g'8
                             \f                                                                       %! PWC1
-                            \>                                                                       %! PWC1
                             [
+                            \>                                                                       %! PWC1
             <BLANKLINE>
                             f''8
             <BLANKLINE>
@@ -1975,8 +1975,8 @@ def hairpin_chain(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
                             \p                                                                       %! PWC1
-                            \<                                                                       %! PWC1
                             [
+                            \<                                                                       %! PWC1
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -1989,15 +1989,15 @@ def hairpin_chain(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             f''8
                             \f                                                                       %! PWC1
-                            \>                                                                       %! PWC1
                             [
+                            \>                                                                       %! PWC1
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
-                            \p                                                                       %! PWC1
                             ]
+                            \p                                                                       %! PWC1
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
                         }
@@ -2081,9 +2081,9 @@ def hairpin_chain(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
+                            [
                             \p                                                                       %! PWC1
                             \<                                                                       %! PWC1
-                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -2091,29 +2091,29 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e''8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             g'8
                             \f                                                                       %! PWC1
-                            \>                                                                       %! PWC1
                             [
+                            \>                                                                       %! PWC1
             <BLANKLINE>
                             f''8
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             e'8
-                            \p                                                                       %! PWC1
                             ]
+                            \p                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
                             \p                                                                       %! PWC1
-                            \<                                                                       %! PWC1
                             [
+                            \<                                                                       %! PWC1
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -2121,22 +2121,22 @@ def hairpin_chain(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             g'8
-                            \f                                                                       %! PWC1
                             ]
+                            \f                                                                       %! PWC1
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             f''8
                             \f                                                                       %! PWC1
-                            \>                                                                       %! PWC1
                             [
+                            \>                                                                       %! PWC1
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PWC3
                             d''8
-                            \p                                                                       %! PWC1
                             ]
+                            \p                                                                       %! PWC1
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
                         }

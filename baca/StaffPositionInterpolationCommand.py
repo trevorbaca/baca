@@ -106,8 +106,8 @@ class StaffPositionInterpolationCommand(Command):
                             \override Glissando.thickness = #'3                                      %! OC1
                             \clef "treble"                                                           %! IC
                             ef'16
-                            \glissando                                                               %! SC
                             [
+                            \glissando                                                               %! SC
                             \hide NoteHead                                                           %! SC
                             \override Accidental.stencil = ##f                                       %! SC
                             \override NoteColumn.glissando-skip = ##t                                %! SC
@@ -138,8 +138,8 @@ class StaffPositionInterpolationCommand(Command):
                         }
                         \scaleDurations #'(1 . 1) {
                             b'16
-                            \glissando                                                               %! SC
                             [
+                            \glissando                                                               %! SC
                             c''16
                             \glissando                                                               %! SC
                             c''16
