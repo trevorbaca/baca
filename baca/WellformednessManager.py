@@ -51,10 +51,6 @@ class WellformednessManager(abjad.WellformednessManager):
             ...     print(total)
             ...     print(violators)
             ...     print()
-            check_beamed_long_notes
-            4
-            []
-            <BLANKLINE>
             check_discontiguous_spanners
             0
             []
@@ -264,7 +260,6 @@ class WellformednessManager(abjad.WellformednessManager):
             >>> manager = baca.WellformednessManager()
             >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
-            0 /	4 beamed long notes
             0 /	0 discontiguous spanners
             0 /	5 duplicate ids
             0 /	1 empty containers
@@ -294,7 +289,6 @@ class WellformednessManager(abjad.WellformednessManager):
             >>> manager = baca.WellformednessManager()
             >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
-            0 /	4 beamed long notes
             0 /	0 discontiguous spanners
             0 /	5 duplicate ids
             0 /	1 empty containers

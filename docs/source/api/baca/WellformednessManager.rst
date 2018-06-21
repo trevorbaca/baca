@@ -56,10 +56,6 @@ WellformednessManager
 
    .. container:: inherited
 
-      .. automethod:: WellformednessManager.check_beamed_long_notes
-
-   .. container:: inherited
-
       .. automethod:: WellformednessManager.check_discontiguous_spanners
 
    .. container:: inherited
