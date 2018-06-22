@@ -2722,7 +2722,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set stemLeftBeamCount = 1
+                                \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 fs''16
                                 [
