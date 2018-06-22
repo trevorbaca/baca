@@ -205,6 +205,7 @@ Bača API
 .. autosummary::
    :nosignatures:
 
+   ~baca.MetronomeMarkSpanner.MetronomeMarkSpanner
    ~baca.PaddedTuple.PaddedTuple
    ~baca.Suite.Suite
 

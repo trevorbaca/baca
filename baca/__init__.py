@@ -55,6 +55,7 @@ from .Matrix import Matrix
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .MetronomeMarkSpanner import MetronomeMarkSpanner
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .MusicAccumulator import MusicAccumulator
 from .MusicContribution import MusicContribution

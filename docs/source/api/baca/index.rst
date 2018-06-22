@@ -365,12 +365,14 @@ baca
 .. toctree::
    :hidden:
 
+   MetronomeMarkSpanner
    PaddedTuple
    Suite
 
 .. autosummary::
    :nosignatures:
 
+   ~MetronomeMarkSpanner.MetronomeMarkSpanner
    ~PaddedTuple.PaddedTuple
    ~Suite.Suite
 

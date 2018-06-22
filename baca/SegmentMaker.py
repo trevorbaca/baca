@@ -1391,7 +1391,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
             right_padding = None
-        spanner = abjad.MetronomeMarkSpanner(
+        spanner = baca.MetronomeMarkSpanner(
             left_broken_padding=0,
             left_broken_text=False,
             parenthesize=False,
@@ -2604,7 +2604,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.Ritardando,
                     )
                 if isinstance(previous_indicator, prototype):
-                    spanner = abjad.MetronomeMarkSpanner
+                    spanner = baca.MetronomeMarkSpanner
                     spanner = abjad.inspect(leaf).get_spanner(spanner)
                     if status == 'reapplied':
                         wrapper = spanner.attach(
@@ -2747,7 +2747,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = tag.prepend('SM27')
             wrapper.deactivate = True
             wrapper.tag = tag
-            if isinstance(wrapper.spanner, abjad.MetronomeMarkSpanner):
+            if isinstance(wrapper.spanner, baca.MetronomeMarkSpanner):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
                 tag = getattr(abjad.tags, tag)

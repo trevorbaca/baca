@@ -71,7 +71,7 @@ class MetronomeMarkCommand(Command):
         if not argument:
             return
         leaf = baca.select(argument).leaf(0)
-        spanner = abjad.inspect(leaf).get_spanner(abjad.MetronomeMarkSpanner)
+        spanner = abjad.inspect(leaf).get_spanner(baca.MetronomeMarkSpanner)
         if spanner is None:
             raise Exception('can not find metronome mark spanner.')
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
