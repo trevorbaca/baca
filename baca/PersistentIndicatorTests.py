@@ -7401,7 +7401,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -7508,7 +7508,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -7522,7 +7522,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     abjad.Momento(
             ...         context='GlobalSkips',
             ...         prototype='abjad.MetronomeMark',
-            ...         value='abjad.Ritardando()',
+            ...         value='baca.Ritardando()',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1
@@ -7647,7 +7647,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     abjad.Momento(
             ...         context='GlobalSkips',
             ...         prototype='abjad.MetronomeMark',
-            ...         value='abjad.Accelerando()',
+            ...         value='baca.Accelerando()',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1
@@ -7759,9 +7759,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     baca.metronome_mark(
-            ...         abjad.Accelerando(),
+            ...         baca.Accelerando(),
             ...         selector=baca.leaf(1),
             ...         ),
             ...     )
@@ -7911,7 +7911,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(abjad.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -7925,7 +7925,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     abjad.Momento(
             ...         context='GlobalSkips',
             ...         prototype='abjad.MetronomeMark',
-            ...         value='abjad.Accelerando()',
+            ...         value='baca.Accelerando()',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1

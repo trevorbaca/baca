@@ -8,6 +8,7 @@ from .library import *
 from . import markups
 
 # classes
+from .Accelerando import Accelerando
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
@@ -92,6 +93,7 @@ from .Registration import Registration
 from .RegistrationComponent import RegistrationComponent
 from .RestAffixSpecifier import RestAffixSpecifier
 from .RhythmCommand import RhythmCommand
+from .Ritardando import Ritardando
 from .SchemeManifest import SchemeManifest
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate

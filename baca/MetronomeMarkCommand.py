@@ -1,6 +1,8 @@
 import abjad
 import baca
 import typing
+from .Accelerando import Accelerando
+from .Ritardando import Ritardando
 from .Command import Command
 from .Typing import Selector
 
@@ -30,14 +32,14 @@ class MetronomeMarkCommand(Command):
         self,
         *,
         deactivate: bool = None,
-        key: typing.Union[str, abjad.Accelerando, abjad.Ritardando] = None,
+        key: typing.Union[str, Accelerando, Ritardando] = None,
         redundant: bool = None,
         selector: Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
         if key is not None:
-            assert isinstance(key, (str, abjad.Accelerando, abjad.Ritardando))
+            assert isinstance(key, (str, Accelerando, Ritardando))
         self._key = key
         if redundant is not None:
             redundant = bool(redundant)
@@ -93,7 +95,7 @@ class MetronomeMarkCommand(Command):
 
     @property
     def key(self) -> typing.Optional[
-            typing.Union[str, abjad.Accelerando, abjad.Ritardando]
+            typing.Union[str, Accelerando, Ritardando]
             ]:
         """
         Gets metronome mark key.

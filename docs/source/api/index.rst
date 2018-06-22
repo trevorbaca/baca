@@ -205,8 +205,10 @@ Bača API
 .. autosummary::
    :nosignatures:
 
+   ~baca.Accelerando.Accelerando
    ~baca.MetronomeMarkSpanner.MetronomeMarkSpanner
    ~baca.PaddedTuple.PaddedTuple
+   ~baca.Ritardando.Ritardando
    ~baca.Suite.Suite
 
 .. raw:: html

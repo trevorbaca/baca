@@ -82,9 +82,9 @@ class Command(abjad.AbjadObject):
         if abjad.inspect(leaf).get_timespan().start_offset != 0:
             return
         tempo_prototype = (
-            abjad.Accelerando,
+            baca.Accelerando,
             abjad.MetronomeMark,
-            abjad.Ritardando,
+            baca.Ritardando,
             )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument

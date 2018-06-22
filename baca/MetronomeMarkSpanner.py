@@ -1,12 +1,10 @@
 import abjad
 import typing
 from abjad.enumerations import Center, Down
-from abjad.indicators.Accelerando import Accelerando
 from abjad.indicators.ArrowLineSegment import ArrowLineSegment
 from abjad.indicators.LineSegment import LineSegment
 from abjad.indicators.MetricModulation import MetricModulation
 from abjad.indicators.MetronomeMark import MetronomeMark
-from abjad.indicators.Ritardando import Ritardando
 from abjad.lilypondnames.LilyPondGrobOverride import LilyPondGrobOverride
 from abjad.markups import Markup
 from abjad.scheme import SchemeColor
@@ -16,6 +14,8 @@ from abjad.system.Wrapper import Wrapper
 from abjad.top.inspect import inspect
 from abjad.top.new import new
 from abjad.typings import Number
+from .Accelerando import Accelerando
+from .Ritardando import Ritardando
 abjad_tags = Tags()
 
 
@@ -186,7 +186,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
 
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[0])
-        >>> accelerando = abjad.Accelerando()
+        >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[0])
         >>> mark = abjad.MetronomeMark((1, 4), 90)
         >>> spanner.attach(mark, spanner[2])
@@ -346,7 +346,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[2])
         >>> mark = abjad.MetronomeMark((1, 4), 72)
         >>> spanner.attach(mark, spanner[3])
-        >>> ritardando = abjad.Ritardando()
+        >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
@@ -504,9 +504,9 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
-        >>> accelerando = abjad.Accelerando()
+        >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[0])
-        >>> ritardando = abjad.Ritardando()
+        >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[3])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -664,7 +664,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
-        >>> accelerando = abjad.Accelerando()
+        >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[0])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -807,7 +807,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
-        >>> ritardando = abjad.Ritardando()
+        >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[0])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -952,7 +952,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[2])
         >>> mark = abjad.MetronomeMark((1, 4), 120)
         >>> spanner.attach(mark, spanner[5])
-        >>> accelerando = abjad.Accelerando()
+        >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[3])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -1114,7 +1114,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[2])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
-        >>> ritardando = abjad.Ritardando()
+        >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[3])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -1274,7 +1274,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[2])
         >>> mark = abjad.MetronomeMark((1, 4), 90)
         >>> spanner.attach(mark, spanner[6])
-        >>> accelerando = abjad.Accelerando()
+        >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[2])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -1388,7 +1388,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[2])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[6])
-        >>> ritardando = abjad.Ritardando()
+        >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[2])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -1686,7 +1686,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         ...     right_rhythm=abjad.Note('c4'),
         ...     )
         >>> spanner.attach(metric_modulation, spanner[3])
-        >>> spanner.attach(abjad.Accelerando(), spanner[3])
+        >>> spanner.attach(baca.Accelerando(), spanner[3])
         >>> mark = abjad.MetronomeMark((3, 4), 90)
         >>> spanner.attach(mark, spanner[-1])
         >>> abjad.show(score) # doctest: +SKIP
@@ -2642,7 +2642,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[0])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[0])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -2854,7 +2854,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[0])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[0])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -3081,7 +3081,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[0])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[0])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -3338,7 +3338,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[2])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[2])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -3567,7 +3567,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[2])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[2])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -3812,7 +3812,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[2])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[2])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -4087,7 +4087,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[-1])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[-1])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -4366,7 +4366,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[-1])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[-1])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -4661,7 +4661,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_1).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[-1])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[-1])
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
@@ -5001,7 +5001,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[6])
-            >>> ritardando = abjad.Ritardando()
+            >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -5119,7 +5119,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[6])
-            >>> ritardando = abjad.Ritardando()
+            >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -5242,7 +5242,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[6])
-            >>> ritardando = abjad.Ritardando()
+            >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -5362,7 +5362,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[6])
-            >>> ritardando = abjad.Ritardando()
+            >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -5490,7 +5490,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[6])
-            >>> ritardando = abjad.Ritardando()
+            >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -5621,7 +5621,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 120)
             >>> spanner.attach(mark, spanner[5])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[3])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -5766,7 +5766,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> mark = abjad.MetronomeMark((1, 4), 120)
             >>> spanner.attach(mark, spanner[5])
-            >>> accelerando = abjad.Accelerando()
+            >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[3])
             >>> abjad.show(score) # doctest: +SKIP
 
@@ -6152,7 +6152,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
 
             >>> string = r'\large \upright accel.'
             >>> markup = abjad.Markup(string).with_color('blue')
-            >>> accelerando = abjad.Accelerando(markup=markup)
+            >>> accelerando = baca.Accelerando(markup=markup)
             >>> spanner.attach(accelerando, spanner[0])
 
             >>> mark = abjad.MetronomeMark((1, 4), 90)
@@ -6301,7 +6301,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
 
             >>> string = r'\large \upright rit.'
             >>> markup = abjad.Markup(string).with_color('blue')
-            >>> ritardando = abjad.Ritardando(markup=markup)
+            >>> ritardando = baca.Ritardando(markup=markup)
             >>> spanner.attach(ritardando, spanner[0])
 
             >>> mark = abjad.MetronomeMark((1, 4), 90)

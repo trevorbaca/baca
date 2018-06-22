@@ -231,7 +231,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
             >>> marks = baca.MetronomeMarkMeasureMap([
             ...     (1, abjad.MetronomeMark((1, 4), 90)),
-            ...     (1, abjad.Accelerando()),
+            ...     (1, baca.Accelerando()),
             ...     (4, abjad.MetronomeMark((1, 4), 120)),
             ...     ])
 
@@ -253,7 +253,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
             >>> marks = baca.MetronomeMarkMeasureMap([
             ...     (1, abjad.MetronomeMark((1, 4), 90)),
-            ...     (1, abjad.Accelerando()),
+            ...     (1, baca.Accelerando()),
             ...     (4, abjad.MetronomeMark((1, 4), 120)),
             ...     ])
 

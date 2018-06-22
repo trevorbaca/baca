@@ -1623,9 +1623,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _check_persistent_indicators_for_leaf(self, voice, leaf, i):
         prototype = (
-            abjad.Accelerando,
+            baca.Accelerando,
             abjad.MetronomeMark,
-            abjad.Ritardando,
+            baca.Ritardando,
             )
         mark = abjad.inspect(leaf).get_effective(prototype)
         if mark is None:
@@ -2202,7 +2202,7 @@ class SegmentMaker(abjad.SegmentMaker):
             key = indicator
         elif isinstance(indicator, baca.StaffLines):
             key = indicator.line_count
-        elif isinstance(indicator, (abjad.Accelerando, abjad.Ritardando)):
+        elif isinstance(indicator, (baca.Accelerando, baca.Ritardando)):
             key = f'abjad.{repr(indicator)}'
         else:
             key = str(indicator)
@@ -2486,7 +2486,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _momento_to_indicator(self, momento):
         if momento.value is None:
             return
-        if momento.value in ('abjad.Accelerando()', 'abjad.Ritardando()'):
+        if momento.value in ('baca.Accelerando()', 'baca.Ritardando()'):
             indicator = eval(momento.value)
             return indicator
         if momento.prototype in self._prototype_to_manifest_name:
@@ -2599,9 +2599,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                     continue
                 prototype = (
-                    abjad.Accelerando,
+                    baca.Accelerando,
                     abjad.MetronomeMark,
-                    abjad.Ritardando,
+                    baca.Ritardando,
                     )
                 if isinstance(previous_indicator, prototype):
                     spanner = baca.MetronomeMarkSpanner
@@ -2914,7 +2914,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         existing_tag = wrapper.tag
-        tempo_trend = (abjad.Accelerando, abjad.Ritardando)
+        tempo_trend = (baca.Accelerando, baca.Ritardando)
         if (wrapper.spanner and
             wrapper.spanner._is_trending(wrapper.component) and
             not isinstance(wrapper.indicator, tempo_trend)):
@@ -2975,9 +2975,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _treat_untreated_persistent_wrappers(self):
         tempo_prototype = (
-            abjad.Accelerando,
+            baca.Accelerando,
             abjad.MetronomeMark,
-            abjad.Ritardando,
+            baca.Ritardando,
             )
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():

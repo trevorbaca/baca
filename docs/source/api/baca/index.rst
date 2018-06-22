@@ -365,15 +365,19 @@ baca
 .. toctree::
    :hidden:
 
+   Accelerando
    MetronomeMarkSpanner
    PaddedTuple
+   Ritardando
    Suite
 
 .. autosummary::
    :nosignatures:
 
+   ~Accelerando.Accelerando
    ~MetronomeMarkSpanner.MetronomeMarkSpanner
    ~PaddedTuple.PaddedTuple
+   ~Ritardando.Ritardando
    ~Suite.Suite
 
 .. raw:: html
