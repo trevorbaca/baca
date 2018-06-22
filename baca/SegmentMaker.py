@@ -1918,7 +1918,7 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves = []
         all_leaves.extend(beam.leaves)
         durations = []
-        if hasattr(beam, 'durations'):
+        if beam.durations:
             durations.extend(beam.durations)
         else:
             duration = abjad.inspect(beam.leaves).get_duration()
@@ -1949,7 +1949,7 @@ class SegmentMaker(abjad.SegmentMaker):
             durations.append(duration)
         else:
             all_leaves.extend(beam.leaves)
-            if hasattr(beam, 'durations'):
+            if beam.durations:
                 durations.extend(beam.durations)
             else:
                 duration = abjad.inspect(beam.leaves).get_duration()
@@ -1957,7 +1957,7 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.detach(abjad.Beam, next_leaf)
         all_leaves = abjad.select(all_leaves)
         assert abjad.inspect(all_leaves).get_duration() == sum(durations)
-        beam = abjad.DuratedComplexBeam(beam_rests=True, durations=durations)
+        beam = abjad.Beam(beam_rests=True, durations=durations)
         abjad.attach(beam, all_leaves, tag='SM35')
 
     def _extend_beams(self):
