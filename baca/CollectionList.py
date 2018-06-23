@@ -430,16 +430,16 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                         {
                             \time 1/8
                             c''8
-                            \startGroup
                             ^ \markup { 0 }
+                            \startGroup
                             d''8
                             fs''8
                             f''8
                             \stopGroup
                             s8
                             e''8
-                            \startGroup
                             ^ \markup { 1 }
+                            \startGroup
                             af''8
                             g''8
                             \stopGroup

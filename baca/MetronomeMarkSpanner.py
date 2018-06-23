@@ -2138,12 +2138,12 @@ class MetronomeMarkSpanner(abjad.Spanner):
             strings.extend(self.start_command())
             if self._left_broken:
                 strings = self._tag_hide(strings)
-            bundle.right.spanner_starts.extend(strings)
+            bundle.after.spanner_starts.extend(strings)
         if leaf is self[-1]:
             strings = [self.stop_command()]
             if self._right_broken:
                 strings = self._tag_hide(strings)
-            bundle.right.spanner_stops.extend(strings)
+            bundle.after.spanner_stops.extend(strings)
         return bundle
 
     def _combine_metronome_mark_and_metric_modulation(
@@ -2263,24 +2263,24 @@ class MetronomeMarkSpanner(abjad.Spanner):
             if self._right_broken and leaf is self[-1]:
                 string = self.stop_command()
                 strings = self._tag_show([string])
-                bundle.right.spanner_stops.extend(strings)
-                bundle.right.spanner_stops.extend(tweaks)
+                bundle.after.spanner_stops.extend(strings)
+                bundle.after.spanner_stops.extend(tweaks)
                 strings = self.start_command()
                 strings = self._tag_show(strings)
-                bundle.right.spanner_stops.extend(strings)
+                bundle.after.spanner_stops.extend(strings)
             strings = [self.stop_command()]
-            bundle.right.spanner_stops.extend(strings)
+            bundle.after.spanner_stops.extend(strings)
         if (leaf is not self[-1] or (self._right_broken and leaf is self[-1])):
             if self._right_broken and leaf is self[-1]:
                 pass
             else:
-                bundle.right.spanner_starts.extend(tweaks)
+                bundle.after.spanner_starts.extend(tweaks)
                 strings = self.start_command()
-                bundle.right.spanner_starts.extend(strings)
+                bundle.after.spanner_starts.extend(strings)
             if self._left_broken and leaf is self[0]:
                 strings = [self.stop_command()]
                 strings = self._tag_show(strings)
-                bundle.right.spanner_starts.extend(strings)
+                bundle.after.spanner_starts.extend(strings)
         return bundle
 
     def _get_piecewise_wrappers(self, leaf):

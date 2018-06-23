@@ -363,7 +363,6 @@ class Selection(abjad.Selection):
                                         *
                                 }
                             <d' e'>4
-                            ~
                             ^ \markup {
                                 \bold
                                     \with-color
@@ -376,6 +375,7 @@ class Selection(abjad.Selection):
                                         #blue
                                         *
                                 }
+                            ~
                             <d' e'>16
                             _ \markup {
                                 \bold
@@ -420,13 +420,13 @@ class Selection(abjad.Selection):
                                         *
                                 }
                             <e' fs'>4
-                            ~
                             ^ \markup {
                                 \bold
                                     \with-color
                                         #red
                                         *
                                 }
+                            ~
                             <e' fs'>16
                             ^ \markup {
                                 \bold
@@ -472,7 +472,6 @@ class Selection(abjad.Selection):
                                         *
                                 }
                             <fs' gs'>4
-                            ~
                             ^ \markup {
                                 \bold
                                     \with-color
@@ -485,6 +484,7 @@ class Selection(abjad.Selection):
                                         #blue
                                         *
                                 }
+                            ~
                             <fs' gs'>16
                             ^ \markup {
                                 \bold

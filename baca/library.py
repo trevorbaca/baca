@@ -156,8 +156,8 @@ def markup(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            [
                             ^ \markup { "più mosso" }                                                %! IC
+                            [
                             d'16
                             ]
                             bf'4
@@ -237,8 +237,8 @@ def markup(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            [
                             ^ \markup { "più mosso" }                                                %! IC
+                            [
                             e''16
                             ]
                             ef''4
@@ -307,22 +307,22 @@ def markup(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            ^ \markup { * }                                                          %! IC
                             [
-                            ^ \markup { * }                                                          %! IC
                             e''16
+                            ^ \markup { * }                                                          %! IC
                             ]
-                            ^ \markup { * }                                                          %! IC
                             ef''4
-                            ~
                             ^ \markup { * }                                                          %! IC
+                            ~
                             ef''16
                             r16
                             af''16
+                            ^ \markup { * }                                                          %! IC
                             [
-                            ^ \markup { * }                                                          %! IC
                             g''16
-                            ]
                             ^ \markup { * }                                                          %! IC
+                            ]
                         }
                         \times 4/5 {
                             a'16
@@ -370,8 +370,8 @@ def markup(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            [
                             ^ \markup { \baca_triple_diamond_markup }                                %! IC
+                            [
                             d'16
                             ]
                             bf'4

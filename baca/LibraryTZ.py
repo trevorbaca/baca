@@ -236,8 +236,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -248,8 +248,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -310,8 +310,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -323,8 +323,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TextScript.color = #red                                        %! OC1
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -428,8 +428,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -440,8 +440,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -502,8 +502,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -515,8 +515,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TextScript.direction = #down                                   %! OC1
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -689,8 +689,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -701,8 +701,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -763,8 +763,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -776,8 +776,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TextScript.padding = #4                                        %! OC1
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -927,8 +927,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -939,8 +939,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -1001,8 +1001,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -1014,8 +1014,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TextScript.staff-padding = #4                                  %! OC1
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -1119,8 +1119,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -1131,8 +1131,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -1193,8 +1193,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { "più mosso" }                                                %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -1206,8 +1206,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TextScript.direction = #up                                     %! OC1
                                 fs''16
-                                [
                                 ^ \markup { "lo stesso tempo" }                                          %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4

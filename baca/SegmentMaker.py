@@ -455,8 +455,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 0 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -468,14 +468,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 3 }
+                                ]
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 4 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -483,14 +483,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 6 }
+                                ]
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 7 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -502,14 +502,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 10 }
+                                ]
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 11 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -517,8 +517,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 13 }
+                                ]
                 <BLANKLINE>
                             }
                         }
@@ -590,8 +590,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 0 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -603,14 +603,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 3 }
+                                ]
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 4 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -618,14 +618,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 6 }
+                                ]
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 7 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -637,14 +637,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 10 }
+                                ]
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { 11 }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -652,8 +652,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                ]
                                 ^ \markup { 13 }
+                                ]
                 <BLANKLINE>
                             }
                         }
@@ -722,8 +722,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
-                                [
                                 ^ \markup { Allegro }                                                    %! IC
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8
@@ -4306,7 +4306,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \once \override TextScript.extra-offset = #'(-9 . -2)
                                 c'8
-                                ]
                                 _ \markup {                                                              %! SCORE2
                                     \override                                                            %! SCORE2
                                         #'(font-name . "Palatino")                                       %! SCORE2
@@ -4324,6 +4323,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         }                                                %! SCORE2
                                                 }                                                        %! SCORE2
                                     }                                                                    %! SCORE2
+                                ]
                 <BLANKLINE>
                             }
                         }
@@ -5685,12 +5685,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:EXPLICIT_INSTRUMENT:IC
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 fs'!8
-                                [
                                 ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                     \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                         #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                         (“clarinet”)                                                     %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                     }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                [
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
                                 \set Staff.instrumentName = \markup { "Clarinet in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                                 \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
@@ -5805,12 +5805,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:EXPLICIT_INSTRUMENT:IC
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_INSTRUMENT_COLOR:IC
                                 e'8
-                                [
                                 ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                     \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                         #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                         (“clarinet”)                                                     %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                     }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                [
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_INSTRUMENT_COLOR:IC
                                 \set Staff.instrumentName = \markup { "Clarinet in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC
                                 \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }             %! SM8:REDRAWN_EXPLICIT_INSTRUMENT:SM34:IC

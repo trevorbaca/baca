@@ -867,12 +867,12 @@ class RhythmCommand(Command):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'16
-                                ~
                                 _ \markup {
                                     \fraction
                                         3
                                         16
                                     }
+                                ~
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 \baca_unpitched_music_warning                                            %! SM24
@@ -938,21 +938,21 @@ class RhythmCommand(Command):
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'8.
-                                [
                                 _ \markup {
                                     \fraction
                                         3
                                         16
                                     }
+                                [
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! SM24
                                 c'16
-                                ]
                                 _ \markup {
                                     \fraction
                                         1
                                         16
                                     }
+                                ]
                                 \revert TextScript.font-size                                             %! OC2
                                 \revert TextScript.staff-padding                                         %! OC2
                 <BLANKLINE>

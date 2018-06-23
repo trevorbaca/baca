@@ -36,7 +36,6 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <c' e' g'>16
-                            [
                             ^ \markup {
                                 \center-align
                                     \concat
@@ -45,6 +44,7 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
+                            [
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -69,7 +69,6 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <bf' d'' f''>16
-                            ]
                             ^ \markup {
                                 \center-align
                                     \concat
@@ -78,6 +77,7 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
+                            ]
                         }
                         \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
@@ -88,7 +88,6 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <fs'' a'' c''' e'''>16
-                            [
                             ^ \markup {
                                 \center-align
                                     \concat
@@ -97,6 +96,7 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
+                            [
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -153,7 +153,6 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <g'' b'' d''' f'''>16
-                            ]
                             ^ \markup {
                                 \center-align
                                     \concat
@@ -162,6 +161,7 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
+                            ]
                         }
                         \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
@@ -226,7 +226,6 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <fs'' a'' c'''>16
-                            [
                             ^ \markup {
                                 \center-align
                                     \concat
@@ -235,6 +234,7 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
+                            [
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -291,7 +291,6 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <g'' b'' d'''>16
-                            ]
                             ^ \markup {
                                 \center-align
                                     \concat
@@ -300,6 +299,7 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
+                            ]
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16

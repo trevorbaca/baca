@@ -651,36 +651,36 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                [
                                 ^ \markup { C4 }
+                                [
                                 d'16
-                                ]
                                 ^ \markup { D4 }
+                                ]
                                 bf'4
-                                ~
                                 ^ \markup { Bb4 }
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "F#5" }
+                                [
                                 e''16
-                                ]
                                 ^ \markup { E5 }
+                                ]
                                 ef''4
-                                ~
                                 ^ \markup { Eb5 }
+                                ~
                                 ef''16
                                 r16
                                 af''16
-                                [
                                 ^ \markup { Ab5 }
+                                [
                                 g''16
-                                ]
                                 ^ \markup { G5 }
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -737,22 +737,22 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
                                 ^ \markup { "F#5" }
+                                [
                                 e''16
-                                ]
                                 ^ \markup { E5 }
+                                ]
                                 ef''4
-                                ~
                                 ^ \markup { Eb5 }
+                                ~
                                 ef''16
                                 r16
                                 af''16
-                                [
                                 ^ \markup { Ab5 }
+                                [
                                 g''16
-                                ]
                                 ^ \markup { G5 }
+                                ]
                             }
                             \times 4/5 {
                                 a'16

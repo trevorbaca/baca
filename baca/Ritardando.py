@@ -152,7 +152,7 @@ class Ritardando(AbjadValueObject):
         markup = self._get_markup()
         markup = new(markup, direction=Up)
         markup_format_pieces = markup._get_format_pieces()
-        bundle.right.markup.extend(markup_format_pieces)
+        bundle.after.markup.extend(markup_format_pieces)
         return bundle
 
     def _get_markup(self):

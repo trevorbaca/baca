@@ -90,12 +90,12 @@ class TimeSignatureGroups(abjad.AbjadObject):
                     {   % measure
                         \time 3/8
                         r1 * 3/8
-                        \startGroup
                         ^ \markup {
                             \circle
                                 \smaller
                                     0
                             }
+                        \startGroup
                     }   % measure
                     {   % measure
                         \time 3/16
@@ -109,12 +109,12 @@ class TimeSignatureGroups(abjad.AbjadObject):
                     {   % measure
                         \time 5/8
                         r1 * 5/8
-                        \startGroup
                         ^ \markup {
                             \circle
                                 \smaller
                                     1
                             }
+                        \startGroup
                     }   % measure
                     {   % measure
                         \time 5/16
