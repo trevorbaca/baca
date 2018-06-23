@@ -17,7 +17,6 @@ HairpinCommand
    .. autosummary::
       :nosignatures:
 
-      leak
       left_broken
       right_broken
       start
@@ -94,8 +93,6 @@ HairpinCommand
    .. container:: inherited
 
       .. autoattribute:: HairpinCommand.deactivate
-
-   .. autoattribute:: HairpinCommand.leak
 
    .. autoattribute:: HairpinCommand.left_broken
 
