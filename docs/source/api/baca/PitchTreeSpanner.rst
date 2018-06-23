@@ -89,10 +89,6 @@ PitchTreeSpanner
 
    .. container:: inherited
 
-      .. autoattribute:: PitchTreeSpanner.leak
-
-   .. container:: inherited
-
       .. autoattribute:: PitchTreeSpanner.leaves
 
    .. autoattribute:: PitchTreeSpanner.level

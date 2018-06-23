@@ -101,10 +101,6 @@ MetronomeMarkSpanner
 
    .. container:: inherited
 
-      .. autoattribute:: MetronomeMarkSpanner.leak
-
-   .. container:: inherited
-
       .. autoattribute:: MetronomeMarkSpanner.leaves
 
    .. autoattribute:: MetronomeMarkSpanner.left_broken_padding
