@@ -348,6 +348,8 @@ Dynamics library.
    ~baca.dynamicslib.hairpin_start_shift
    ~baca.dynamicslib.hairpin_stencil_false
    ~baca.dynamicslib.hairpin_transparent
+   ~baca.dynamicslib.measure_swells
+   ~baca.dynamicslib.niente
 
 .. raw:: html
 
