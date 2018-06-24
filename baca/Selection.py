@@ -4821,7 +4821,6 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return super(Selection, self).leaves(trim=True, grace_notes=False)
 
-    # HERE
     def wleaf(self, n=0):
         r"""
         Selects leaf ``n`` from leaves leaked wide.
