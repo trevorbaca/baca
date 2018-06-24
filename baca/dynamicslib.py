@@ -911,6 +911,8 @@ def dynamic_up(
         selector=selector,
         )
 
+_local_dynamic = dynamic
+
 def dynamics(string: str) -> typing.List[abjad.Dynamic]:
     r"""
     Makes dynamics from ``string``.
@@ -2266,6 +2268,8 @@ def hairpin_start(
         selector=selector,
         )
 
+_local_hairpin_start = hairpin_start
+
 def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
@@ -2766,7 +2770,7 @@ def measure_swells(
     trough, peak = dynamics_
     if peak.ordinal <= trough.ordinal:
         raise Exception(f'trough ({trough}) must be less than peak ({peak}).')
-    selector = baca.tleaves()
+    selector = baca.select().tleaves()
     selector = selector.group_by_measure()
     selector = selector.partition_by_counts(
         counts,
@@ -2775,15 +2779,15 @@ def measure_swells(
         )
 
     commands = []
-    # every through and every crescendo
+    # every trough and every crescendo
     selector_ = selector[abjad.index([0], 2)]
-    selector_ = selector_.map(baca.leaf(0))
-    command = baca.dynamic(
+    selector_ = selector_.map(baca.select().leaf(0))
+    command = _local_dynamic(
         trough,
         selector=selector_
         )
     commands.append(command)
-    command = baca.hairpin_start(
+    command = _local_hairpin_start(
         '<',
         selector=selector_
         )
@@ -2791,8 +2795,8 @@ def measure_swells(
 
     # every peak
     selector_ = selector[abjad.index([1], 2)]
-    selector_ = selector_.map(baca.leaf(0))
-    command = baca.dynamic(
+    selector_ = selector_.map(baca.select().leaf(0))
+    command = _local_dynamic(
         peak,
         selector=selector_
         )
@@ -2801,8 +2805,8 @@ def measure_swells(
     # all but last decrescendo
     selector_ = selector[abjad.index([1], 2)]
     selector_ = selector_[:-1]
-    selector_ = selector_.map(baca.leaf(0))
-    command = baca.hairpin_start(
+    selector_ = selector_.map(baca.select().leaf(0))
+    command = _local_hairpin_start(
         '>',
         selector=selector_
         )
@@ -2811,18 +2815,25 @@ def measure_swells(
     # last decrescendo
     selector_ = selector[abjad.index([1], 2)]
     selector_ = selector_[-1:]
-    selector_ = selector_.map(baca.leaf(0))
+    selector_ = selector_.map(baca.select().leaf(0))
     if al_niente:
         shape = '>o'
     else:
         shape = '>'
-    command = baca.hairpin_start(
+    command = _local_hairpin_start(
         shape,
         selector=selector_
         )
     commands.append(command)
 
     return commands
+
+def new_hairpin(
+    descriptor: str,
+    start_selector: Selector = 'baca.tleaf(0)',
+    stop_selector: Selector = 'baca.tleaf(-1)',
+    ):
+    pass
 
 def niente():
     """
