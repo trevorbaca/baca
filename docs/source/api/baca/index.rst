@@ -456,6 +456,7 @@ baca
    ~runs
    ~skip
    ~skips
+   ~tleaf
    ~tleaves
    ~top
    ~tuplet
@@ -595,6 +596,8 @@ baca
 .. autofunction:: skip
 
 .. autofunction:: skips
+
+.. autofunction:: tleaf
 
 .. autofunction:: tleaves
 

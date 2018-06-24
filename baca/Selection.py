@@ -4220,6 +4220,102 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.components(abjad.Skip)
 
+    def tleaf(self, n=0):
+        r"""
+        Selects trimmed leaf ``n``.
+
+        ..  container:: example
+
+            Selects trimmed leaf 0:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> result = baca.select(staff).tleaf(0)
+
+                >>> result
+                Note("bf'16")
+
+            ..  container:: example expression
+
+                >>> selector = baca.tleaf(0)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Note("bf'16")
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    {   % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4
+                            ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4
+                            ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            <fs' gs'>4
+                            ~
+                            <fs' gs'>16
+                        }
+                    }   % measure
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.tleaves()[n]
+
     def tleaves(self):
         r"""
         Selects trimmed leaves.

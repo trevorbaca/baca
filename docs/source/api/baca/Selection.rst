@@ -48,6 +48,7 @@ Selection
       rruns
       skip
       skips
+      tleaf
       tleaves
       wleaves
 
@@ -318,6 +319,8 @@ Selection
    .. automethod:: Selection.skip
 
    .. automethod:: Selection.skips
+
+   .. automethod:: Selection.tleaf
 
    .. automethod:: Selection.tleaves
 
