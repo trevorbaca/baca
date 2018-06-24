@@ -915,9 +915,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         wrapper = CommandWrapper(command=command_, scope=scope)
                         self.wrappers.append(wrapper)
                 elif isinstance(command, MeasureWrapper):
+                    if isinstance(command.measures, int):
+                        stages = (command.measures, command.measures)
+                    else:
+                        stages = command.measures
+                    assert isinstance(stages, tuple), repr(stages)
                     scope_ = abjad.new(
                         scope,
-                        stages=command.measures,
+                        stages=stages,
                         )
                     command = command.command
                     assert isinstance(command, Command), repr(command)
