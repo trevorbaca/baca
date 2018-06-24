@@ -249,6 +249,7 @@ Bača API
    ~baca.items
    ~baca.leaf
    ~baca.leaves
+   ~baca.lleaf
    ~baca.lleak
    ~baca.lleaves
    ~baca.logical_ties
@@ -261,6 +262,7 @@ Bača API
    ~baca.nontrivial
    ~baca.note
    ~baca.notes
+   ~baca.ntrun
    ~baca.ntruns
    ~baca.partition_by_counts
    ~baca.partition_by_durations
@@ -279,6 +281,7 @@ Bača API
    ~baca.qruns
    ~baca.rest
    ~baca.rests
+   ~baca.rleaf
    ~baca.rleak
    ~baca.rleaves
    ~baca.rrun
@@ -294,6 +297,7 @@ Bača API
    ~baca.tuplets
    ~baca.with_next_leaf
    ~baca.with_previous_leaf
+   ~baca.wleaf
    ~baca.wleaves
 
 .. raw:: html

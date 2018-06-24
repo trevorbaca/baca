@@ -621,6 +621,100 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.group_by()
 
+    def lleaf(self, n=0):
+        r"""
+        Selects leaf ``n`` from leaves leaked to the left.
+
+        ..  container:: example
+
+            Selects leaf 0 from leaves (leaked to the left) in tuplet 1:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> baca.select(staff).tuplets()[1:2].lleaf(0)
+                Chord("<d' e'>16")
+
+            ..  container:: example expression
+
+                >>> selector = baca.tuplets()[1:2].lleaf(0)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Chord("<d' e'>16")
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    {   % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4
+                            ~
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4
+                            ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            <fs' gs'>4
+                            ~
+                            <fs' gs'>16
+                        }
+                    }   % measure
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.lleaves()[n]
+
     def lleak(self):
         r"""
         Leaks to the left.
@@ -1728,6 +1822,122 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(grace_notes=None)
+
+    def ntrun(self, n):
+        r"""
+        Selects nontrivial run ``n``.
+
+        ..  container:: example
+
+            Selects nontrivial run -1:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> result = baca.select(staff).ntrun(-1)
+
+                >>> result
+                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.ntrun(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    {   % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            c'16
+                            c'16
+                            c'16
+                            <d' e'>4
+                            ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            d'16
+                            d'16
+                            d'16
+                            <e' fs'>4
+                            ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            e'16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            e'16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            e'16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            <fs' gs'>4
+                            ~
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            <fs' gs'>16
+                        }
+                    }   % measure
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.ntruns()[n]
 
     def ntruns(self):
         r"""
@@ -3567,6 +3777,97 @@ class Selection(abjad.Selection):
         result = result.map(abjad.Run)
         return result
 
+    def rleaf(self, n=0):
+        r"""
+        Selects leaf ``n`` from leaves leaked to the right.
+
+        ..  container:: example
+
+            Selects leaf -1 from leaves (leaked to the right) in tuplet 1:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> baca.select(staff).tuplets()[1:2].rleaf(-1)
+                Rest('r16')
+
+            ..  container:: example expression
+
+                >>> selector = baca.tuplets()[1:2].rleaf(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Rest('r16')
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    {   % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4
+                            ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4
+                            ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            \once \override Dots.color = #green
+                            \once \override Rest.color = #green
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            <fs' gs'>4
+                            ~
+                            <fs' gs'>16
+                        }
+                    }   % measure
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.rleaves()[n]
+
     def rleak(self):
         r"""
         Leaks to the right.
@@ -4519,6 +4820,185 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super(Selection, self).leaves(trim=True, grace_notes=False)
+
+    # HERE
+    def wleaf(self, n=0):
+        r"""
+        Selects leaf ``n`` from leaves leaked wide.
+
+        ..  container:: example
+
+            Selects leaf 0 from leaves (leaked to both the left and right) in
+            tuplet 1:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> baca.select(staff).tuplets()[1:2].wleaf(0)
+                Chord("<d' e'>16")
+
+            ..  container:: example expression
+
+                >>> selector = baca.tuplets()[1:2].wleaf(0)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Chord("<d' e'>16")
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    {   % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4
+                            ~
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4
+                            ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            <fs' gs'>4
+                            ~
+                            <fs' gs'>16
+                        }
+                    }   % measure
+                }
+
+        ..  container:: example
+
+            Selects leaf -1 from leaves (leaked to both the left and right) in
+            tuplet 1:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> baca.select(staff).tuplets()[1:2].wleaf(-1)
+                Rest('r16')
+
+            ..  container:: example expression
+
+                >>> selector = baca.tuplets()[1:2].wleaf(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Rest('r16')
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    {   % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4
+                            ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4
+                            ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            \once \override Dots.color = #green
+                            \once \override Rest.color = #green
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            <fs' gs'>4
+                            ~
+                            <fs' gs'>16
+                        }
+                    }   % measure
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.wleaves()[n]
 
     def wleaves(self):
         r"""

@@ -418,6 +418,7 @@ baca
    ~items
    ~leaf
    ~leaves
+   ~lleaf
    ~lleak
    ~lleaves
    ~logical_ties
@@ -430,6 +431,7 @@ baca
    ~nontrivial
    ~note
    ~notes
+   ~ntrun
    ~ntruns
    ~partition_by_counts
    ~partition_by_durations
@@ -448,6 +450,7 @@ baca
    ~qruns
    ~rest
    ~rests
+   ~rleaf
    ~rleak
    ~rleaves
    ~rrun
@@ -463,6 +466,7 @@ baca
    ~tuplets
    ~with_next_leaf
    ~with_previous_leaf
+   ~wleaf
    ~wleaves
 
 .. autofunction:: are_contiguous_logical_voice
@@ -521,6 +525,8 @@ baca
 
 .. autofunction:: leaves
 
+.. autofunction:: lleaf
+
 .. autofunction:: lleak
 
 .. autofunction:: lleaves
@@ -544,6 +550,8 @@ baca
 .. autofunction:: note
 
 .. autofunction:: notes
+
+.. autofunction:: ntrun
 
 .. autofunction:: ntruns
 
@@ -581,6 +589,8 @@ baca
 
 .. autofunction:: rests
 
+.. autofunction:: rleaf
+
 .. autofunction:: rleak
 
 .. autofunction:: rleaves
@@ -610,6 +620,8 @@ baca
 .. autofunction:: with_next_leaf
 
 .. autofunction:: with_previous_leaf
+
+.. autofunction:: wleaf
 
 .. autofunction:: wleaves
 

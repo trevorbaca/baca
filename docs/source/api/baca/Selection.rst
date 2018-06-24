@@ -21,6 +21,7 @@ Selection
       cheads
       enchain
       group
+      lleaf
       lleak
       lleaves
       lt
@@ -29,6 +30,7 @@ Selection
       ltrun
       ltruns
       lts
+      ntrun
       ntruns
       phead
       pheads
@@ -42,6 +44,7 @@ Selection
       ptlts
       qrun
       qruns
+      rleaf
       rleak
       rleaves
       rrun
@@ -50,6 +53,7 @@ Selection
       skips
       tleaf
       tleaves
+      wleaf
       wleaves
 
    .. raw:: html
@@ -218,6 +222,8 @@ Selection
 
       .. automethod:: Selection.leaves
 
+   .. automethod:: Selection.lleaf
+
    .. automethod:: Selection.lleak
 
    .. automethod:: Selection.lleaves
@@ -253,6 +259,8 @@ Selection
    .. container:: inherited
 
       .. automethod:: Selection.notes
+
+   .. automethod:: Selection.ntrun
 
    .. automethod:: Selection.ntruns
 
@@ -300,6 +308,8 @@ Selection
 
       .. automethod:: Selection.rests
 
+   .. automethod:: Selection.rleaf
+
    .. automethod:: Selection.rleak
 
    .. automethod:: Selection.rleaves
@@ -343,6 +353,8 @@ Selection
    .. container:: inherited
 
       .. automethod:: Selection.with_previous_leaf
+
+   .. automethod:: Selection.wleaf
 
    .. automethod:: Selection.wleaves
 
