@@ -344,13 +344,13 @@ Dynamics library.
    ~baca.dynamicslib.dynamic_text_x_extent_zero
    ~baca.dynamicslib.dynamic_text_x_offset
    ~baca.dynamicslib.dynamic_text_y_offset
+   ~baca.dynamicslib.dynamic_trend
+   ~baca.dynamicslib.dynamic_trend_shift
    ~baca.dynamicslib.dynamic_up
    ~baca.dynamicslib.dynamics
    ~baca.dynamicslib.hairpin
    ~baca.dynamicslib.hairpin_chain
    ~baca.dynamicslib.hairpin_shorten_pair
-   ~baca.dynamicslib.hairpin_start
-   ~baca.dynamicslib.hairpin_start_shift
    ~baca.dynamicslib.hairpin_stencil_false
    ~baca.dynamicslib.hairpin_transparent
    ~baca.dynamicslib.measure_swells

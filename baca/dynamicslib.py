@@ -2077,8 +2077,8 @@ def hairpin_shorten_pair(
         selector=selector,
         )
 
-def hairpin_start(
-    hairpin_start: str,
+def dynamic_trend(
+    dynamic_trend: str,
     *,
     selector: Selector = 'baca.phead(0)',
     ) -> IndicatorCommand:
@@ -2104,7 +2104,7 @@ def hairpin_start(
         ...             overhang=True,
         ...             )[abjad.index([0], 2)].map(baca.leaf(0)),
         ...         ),
-        ...     baca.hairpin_start(
+        ...     baca.dynamic_trend(
         ...         '<',
         ...         selector=baca.leaves().partition_by_counts(
         ...             [4, 3],
@@ -2120,7 +2120,7 @@ def hairpin_start(
         ...             overhang=True,
         ...             )[abjad.index([1], 2)].map(baca.leaf(0)),
         ...         ),
-        ...     baca.hairpin_start(
+        ...     baca.dynamic_trend(
         ...         '>',
         ...         selector=baca.leaves().partition_by_counts(
         ...             [4, 3],
@@ -2128,7 +2128,7 @@ def hairpin_start(
         ...             overhang=True,
         ...             )[abjad.index([1], 2)][:-1].map(baca.leaf(0)),
         ...         ),
-        ...     baca.hairpin_start(
+        ...     baca.dynamic_trend(
         ...         '>o',
         ...         selector=baca.leaves().partition_by_counts(
         ...             [4, 3],
@@ -2259,20 +2259,20 @@ def hairpin_start(
             >>
 
     """
-    if isinstance(hairpin_start, str):
-        indicator = abjad.HairpinStart(hairpin_start)
+    if isinstance(dynamic_trend, str):
+        indicator = abjad.DynamicTrend(dynamic_trend)
     else:
-        indicator = hairpin_start
-    assert isinstance(indicator, abjad.HairpinStart), repr(indicator)
+        indicator = dynamic_trend
+    assert isinstance(indicator, abjad.DynamicTrend), repr(indicator)
     return IndicatorCommand(
         context='Voice',
         indicators=[indicator],
         selector=selector,
         )
 
-_local_hairpin_start = hairpin_start
+_local_dynamic_trend = dynamic_trend
 
-def hairpin_start_shift(
+def dynamic_trend_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: Selector = 'baca.leaf(0)',
@@ -2789,7 +2789,7 @@ def measure_swells(
         selector=selector_
         )
     commands.append(command)
-    command = _local_hairpin_start(
+    command = _local_dynamic_trend(
         '<',
         selector=selector_
         )
@@ -2808,7 +2808,7 @@ def measure_swells(
     selector_ = selector[abjad.index([1], 2)]
     selector_ = selector_[:-1]
     selector_ = selector_.map(baca.select().leaf(0))
-    command = _local_hairpin_start(
+    command = _local_dynamic_trend(
         '>',
         selector=selector_
         )
@@ -2822,7 +2822,7 @@ def measure_swells(
         shape = '>o'
     else:
         shape = '>'
-    command = _local_hairpin_start(
+    command = _local_dynamic_trend(
         shape,
         selector=selector_
         )
@@ -3470,7 +3470,7 @@ def new_hairpin(
         selector=start_selector,
         )
     commands.append(command)
-    command = _local_hairpin_start(
+    command = _local_dynamic_trend(
         shape,
         selector=start_selector,
         )
