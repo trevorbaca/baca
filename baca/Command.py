@@ -1,4 +1,3 @@
-import abc
 import abjad
 import baca
 import typing
@@ -50,7 +49,6 @@ class Command(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    @abc.abstractmethod
     def __call__(self, argument=None) -> None:
         """
         Calls command on ``argument``.

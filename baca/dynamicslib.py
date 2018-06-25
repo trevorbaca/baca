@@ -5,6 +5,7 @@ import abjad
 import baca
 import typing
 from . import library
+from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .HairpinCommand import HairpinCommand
@@ -2830,13 +2831,146 @@ def measure_swells(
 
     return commands
 
+
+class NewHairpinCommand(Command):
+    r""""
+    New hairpin command.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_dynamic_trend',
+        '_lone_dynamic',
+        '_start_dynamic',
+        '_start_selector',
+        '_stop_dynamic',
+        '_stop_selector',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        dynamic_trend: abjad.DynamicTrend,
+        *,
+        lone_dynamic: bool = True,
+        start_dynamic: abjad.Dynamic = None,
+        start_selector: Selector = 'baca.tleaf(0)',
+        stop_dynamic: abjad.Dynamic = None,
+        stop_selector: Selector = 'baca.tleaf(-1)',
+        ):
+        Command.__init__(self)
+        assert isinstance(dynamic_trend, abjad.DynamicTrend)
+        self._dynamic_trend = dynamic_trend
+        if lone_dynamic is not None:
+            lone_dynamic = bool(lone_dynamic)
+        self._lone_dynamic = lone_dynamic
+        if start_dynamic is not None:
+            assert isinstance(start_dynamic, abjad.Dynamic)
+        self._start_dynamic = start_dynamic
+        if start_selector is not None:
+            assert isinstance(start_selector, abjad.Expression)
+        self._start_selector = start_selector
+        if stop_dynamic is not None:
+            assert isinstance(stop_dynamic, abjad.Dynamic)
+        self._stop_dynamic = stop_dynamic
+        if stop_selector is not None:
+            assert isinstance(stop_selector, abjad.Expression)
+        self._stop_selector = stop_selector
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def dynamic_trend(self) -> abjad.DynamicTrend:
+        """
+        Gets dynamic trend.
+        """
+        return self._dynamic_trend
+
+    @property
+    def lone_dynamic(self) -> typing.Optional[bool]:
+        """
+        Is true when command attaches start dynamic to lone leaf.
+        """
+        return self._lone_dynamic
+
+    @property
+    def start_dynamic(self) -> typing.Optional[abjad.Dynamic]:
+        """
+        Gets start dynamic.
+        """
+        return self._start_dynamic
+
+    @property
+    def start_selector(self) -> typing.Optional[Selector]:
+        """
+        Gets start selector.
+        """
+        return self._start_selector
+
+    @property
+    def stop_dynamic(self) -> typing.Optional[abjad.Dynamic]:
+        """
+        Gets stop dynamic.
+        """
+        return self._stop_dynamic
+
+    @property
+    def stop_selector(self) -> typing.Optional[Selector]:
+        """
+        Gets stop selector.
+        """
+        return self._stop_selector
+
+    @property
+    def tag(self) -> str:
+        """
+        Gets tag.
+        """
+        return 'BACA_HAIRPIN'
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument: abjad.Selection) -> None:
+        """
+        Calls command.
+        """
+        leaves = baca.select(argument).leaves()
+        if len(leaves) == 1 and self.lone_dynamic is False:
+            return None
+        command = _local_dynamic(
+            self.start_dynamic,
+            selector=self.start_selector,
+            )
+        command.runtime = self.runtime
+        command(argument)
+        if len(leaves) == 1:
+            return
+        command = _local_dynamic_trend(
+            self.dynamic_trend,
+            selector=self.start_selector,
+            )
+        command.runtime = self.runtime
+        command(argument)
+        command = _local_dynamic(
+            self.stop_dynamic,
+            selector=self.stop_selector,
+            )
+        command.runtime = self.runtime
+        command(argument)
+
+
 def new_hairpin(
-    descriptor: str,
-    start_selector: Selector = 'baca.tleaves()[0]',
-    #stop_selector: Selector = 'baca.tleaves()[-1]',
-    stop_selector: Selector = 'baca.ntruns()[-1:].pleaves()[-1:]',
-    trend_selector: Selector = 'baca.ntruns()[:1].pleaves()[:1]',
-    ) -> typing.List[IndicatorCommand]:
+    descriptor: typing.Union[
+        str,
+        typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
+        ],
+    *,
+    lone_dynamic: bool = True,
+    start_selector: Selector = 'baca.tleaf(0)',
+    stop_selector: Selector = 'baca.tleaf(-1)',
+    ) -> Command:
     r"""
     Attaches hairpin indicators.
 
@@ -3348,7 +3482,6 @@ def new_hairpin(
         ...     baca.new_hairpin(
         ...         '"mf" |> "p"',
         ...         start_selector=baca.leaf(7),
-        ...         trend_selector=baca.leaf(7),
         ...         ),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
@@ -3480,7 +3613,7 @@ def new_hairpin(
         ...     baca.make_notes(),
         ...     baca.measures(
         ...         1,
-        ...         *baca.new_hairpin('p < f'),
+        ...         baca.new_hairpin('p < f'),
         ...         baca.pitch('E4'),
         ...         ),
         ...     )
@@ -3562,25 +3695,28 @@ def new_hairpin(
             >>
 
     """
-    assert isinstance(descriptor, str), repr(descriptor)
-    start, shape, stop = descriptor.split()
-    commands = []
-    command = _local_dynamic(
-        start,
-        selector=start_selector,
+    if isinstance(descriptor, str):
+        start, trend, stop = descriptor.split()
+        start_dynamic = _local_dynamic(start).indicators[0]
+        dynamic_trend = _local_dynamic_trend(trend).indicators[0]
+        stop_dynamic = _local_dynamic(stop).indicators[0]
+    else:
+        assert isinstance(descriptor, list), repr(descriptor)
+        assert len(descriptor) == 3, repr(descriptor)
+        start_dynamic, dynamic_trend, stop_dynamic = descriptor
+    if isinstance(start_selector, str):
+        start_selector = eval(start_selector)
+    if isinstance(stop_selector, str):
+        stop_selector = eval(stop_selector)
+    return NewHairpinCommand(
+        dynamic_trend,
+        lone_dynamic=lone_dynamic,
+        start_dynamic=start_dynamic,
+        start_selector=start_selector,
+        stop_dynamic=stop_dynamic,
+        stop_selector=stop_selector,
         )
-    commands.append(command)
-    command = _local_dynamic_trend(
-        shape,
-        selector=trend_selector,
-        )
-    commands.append(command)
-    command = _local_dynamic(
-        stop,
-        selector=stop_selector,
-        )
-    commands.append(command)
-    return commands
+
 
 def niente() -> abjad.Dynamic:
     """

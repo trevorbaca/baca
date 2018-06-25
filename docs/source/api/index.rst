@@ -354,6 +354,18 @@ Dynamics library.
 
    <hr/>
 
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.dynamicslib.NewHairpinCommand
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: Functions
    :class: subsection-header
 

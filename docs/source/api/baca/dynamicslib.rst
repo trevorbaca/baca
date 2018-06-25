@@ -16,6 +16,112 @@ dynamicslib
 
    <hr/>
 
+.. rubric:: (4) Commands
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~NewHairpinCommand
+
+.. autoclass:: NewHairpinCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      dynamic_trend
+      lone_dynamic
+      start_dynamic
+      start_selector
+      stop_dynamic
+      stop_selector
+      tag
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: NewHairpinCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: NewHairpinCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: NewHairpinCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: NewHairpinCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: NewHairpinCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: NewHairpinCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: NewHairpinCommand.deactivate
+
+   .. autoattribute:: NewHairpinCommand.dynamic_trend
+
+   .. autoattribute:: NewHairpinCommand.lone_dynamic
+
+   .. container:: inherited
+
+      .. autoattribute:: NewHairpinCommand.selector
+
+   .. autoattribute:: NewHairpinCommand.start_dynamic
+
+   .. autoattribute:: NewHairpinCommand.start_selector
+
+   .. autoattribute:: NewHairpinCommand.stop_dynamic
+
+   .. autoattribute:: NewHairpinCommand.stop_selector
+
+   .. autoattribute:: NewHairpinCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: NewHairpinCommand.tags
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: Functions
    :class: section-header
 
