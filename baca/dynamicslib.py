@@ -2943,6 +2943,7 @@ class NewHairpinCommand(Command):
             self.start_dynamic,
             selector=self.start_selector,
             )
+        library.tag(self.tag, command)
         command.runtime = self.runtime
         command(argument)
         if len(leaves) == 1:
@@ -2951,12 +2952,14 @@ class NewHairpinCommand(Command):
             self.dynamic_trend,
             selector=self.start_selector,
             )
+        library.tag(self.tag, command)
         command.runtime = self.runtime
         command(argument)
         command = _local_dynamic(
             self.stop_dynamic,
             selector=self.stop_selector,
             )
+        library.tag(self.tag, command)
         command.runtime = self.runtime
         command(argument)
 
@@ -3044,11 +3047,11 @@ def new_hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             [
-                            \<                                                                       %! IC
+                            \<                                                                       %! IC:BACA_HAIRPIN
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3083,9 +3086,9 @@ def new_hairpin(
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -3166,12 +3169,12 @@ def new_hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
-                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             [
-                            - \tweak circled-tip ##t                                                 %! IC
-                            \>                                                                       %! IC
+                            - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
+                            \>                                                                       %! IC:BACA_HAIRPIN
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3206,9 +3209,9 @@ def new_hairpin(
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -3287,12 +3290,12 @@ def new_hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             [
-                            - \tweak circled-tip ##t                                                 %! IC
-                            \<                                                                       %! IC
+                            - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
+                            \<                                                                       %! IC:BACA_HAIRPIN
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3327,9 +3330,9 @@ def new_hairpin(
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
-                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -3410,12 +3413,12 @@ def new_hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
-                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             [
-                            - \tweak stencil #constante-hairpin                                      %! IC
-                            \<                                                                       %! IC
+                            - \tweak stencil #constante-hairpin                                      %! IC:BACA_HAIRPIN
+                            \<                                                                       %! IC:BACA_HAIRPIN
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3450,9 +3453,9 @@ def new_hairpin(
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -3540,12 +3543,12 @@ def new_hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
-                            \effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             [
-                            - \tweak stencil #abjad-flared-hairpin                                   %! IC
-                            \<                                                                       %! IC
+                            - \tweak stencil #abjad-flared-hairpin                                   %! IC:BACA_HAIRPIN
+                            \<                                                                       %! IC:BACA_HAIRPIN
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3560,18 +3563,18 @@ def new_hairpin(
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
-                            \effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
-                            \effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             [
-                            - \tweak stencil #abjad-flared-hairpin                                   %! IC
-                            \>                                                                       %! IC
+                            - \tweak stencil #abjad-flared-hairpin                                   %! IC:BACA_HAIRPIN
+                            \>                                                                       %! IC:BACA_HAIRPIN
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -3586,9 +3589,9 @@ def new_hairpin(
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
-                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC
+                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -3672,9 +3675,9 @@ def new_hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'2
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
                             \baca_unpitched_music_warning                                            %! SM24

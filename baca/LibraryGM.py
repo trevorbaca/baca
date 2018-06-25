@@ -6,7 +6,6 @@ from . import library
 from .Command import Map
 from .Command import Suite
 from .GlobalFermataCommand import GlobalFermataCommand
-from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
