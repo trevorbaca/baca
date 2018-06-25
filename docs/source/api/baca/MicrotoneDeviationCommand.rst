@@ -61,19 +61,7 @@ MicrotoneDeviationCommand
 
    .. container:: inherited
 
-      .. autoattribute:: MicrotoneDeviationCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.score_template
+      .. autoattribute:: MicrotoneDeviationCommand.runtime
 
    .. container:: inherited
 

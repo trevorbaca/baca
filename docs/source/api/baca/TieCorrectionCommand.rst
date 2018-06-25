@@ -63,19 +63,7 @@ TieCorrectionCommand
 
    .. container:: inherited
 
-      .. autoattribute:: TieCorrectionCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.score_template
+      .. autoattribute:: TieCorrectionCommand.runtime
 
    .. container:: inherited
 

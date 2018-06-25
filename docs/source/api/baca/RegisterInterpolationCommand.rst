@@ -63,19 +63,7 @@ RegisterInterpolationCommand
 
    .. container:: inherited
 
-      .. autoattribute:: RegisterInterpolationCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.score_template
+      .. autoattribute:: RegisterInterpolationCommand.runtime
 
    .. container:: inherited
 

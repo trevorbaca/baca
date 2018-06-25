@@ -61,19 +61,7 @@ RegisterCommand
 
    .. container:: inherited
 
-      .. autoattribute:: RegisterCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterCommand.score_template
+      .. autoattribute:: RegisterCommand.runtime
 
    .. container:: inherited
 

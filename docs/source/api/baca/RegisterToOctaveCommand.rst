@@ -62,19 +62,7 @@ RegisterToOctaveCommand
 
    .. container:: inherited
 
-      .. autoattribute:: RegisterToOctaveCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.score_template
+      .. autoattribute:: RegisterToOctaveCommand.runtime
 
    .. container:: inherited
 

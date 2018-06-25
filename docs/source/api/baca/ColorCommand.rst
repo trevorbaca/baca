@@ -56,19 +56,7 @@ ColorCommand
 
    .. container:: inherited
 
-      .. autoattribute:: ColorCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorCommand.score_template
+      .. autoattribute:: ColorCommand.runtime
 
    .. container:: inherited
 

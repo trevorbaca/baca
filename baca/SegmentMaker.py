@@ -1440,6 +1440,17 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(component, prototype), repr(component)
         return not self._alive_during_previous_segment(component)
 
+    def _bundle_manifests(self, voice_name=None):
+        manifests = abjad.OrderedDict()
+        previous_segment_voice_metadata = \
+            self._get_previous_segment_voice_metadata(voice_name)
+        manifests['manifests'] = self.manifests
+        manifests['offset_to_measure_number'] = self._offset_to_measure_number
+        manifests['previous_segment_voice_metadata'
+            ] = previous_segment_voice_metadata
+        manifests['score_template'] = self.score_template
+        return manifests
+
     def _cache_fermata_measure_numbers(self):
         if 'GlobalRests' not in self.score:
             return
@@ -1519,26 +1530,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             command_count += 1
             selection = self._scope_to_leaf_selection(wrapper)
-            wrapper.command.manifests = self.manifests
-            dictionary = self._offset_to_measure_number
-            wrapper.command.offset_to_measure_number = dictionary
+            command = wrapper.command
             voice_name = wrapper.scope.voice_name
-            previous_segment_voice_metadata = \
-                self._get_previous_segment_voice_metadata(voice_name)
-            wrapper.command.previous_segment_voice_metadata = \
-                previous_segment_voice_metadata
-            wrapper.command.score_template = self.score_template
+            command.runtime = self._bundle_manifests(voice_name)
             try:
-                wrapper.command(selection)
+                command(selection)
             except:
                 print(f'Interpreting ...\n\n{format(wrapper)}\n')
                 raise
             self._handle_mutator(wrapper)
-            if getattr(wrapper.command, 'persist', None):
-                parameter = wrapper.command.parameter
-                state = wrapper.command.state
+            if getattr(command, 'persist', None):
+                parameter = command.parameter
+                state = command.state
                 assert 'name' not in state
-                state['name'] = wrapper.command.persist
+                state['name'] = command.persist
                 if voice_name not in self.voice_metadata:
                     self.voice_metadata[voice_name] = abjad.OrderedDict()
                 self.voice_metadata[voice_name][parameter] = state
@@ -1554,8 +1559,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice.name,
                 abjad.OrderedDict(),
                 )
-            previous_segment_voice_metadata = \
-                self._get_previous_segment_voice_metadata(voice.name)
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
@@ -1579,8 +1582,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 result = self._get_stage_time_signatures(
                     *wrapper.scope.stages)
                 start_offset, time_signatures = result
-                command.previous_segment_voice_metadata = \
-                    previous_segment_voice_metadata
+                command.runtime = self._bundle_manifests(voice.name)
                 try:
                     command(start_offset, time_signatures)
                 except:
@@ -1712,7 +1714,10 @@ class SegmentMaker(abjad.SegmentMaker):
             for leaf in abjad.iterate(staff).leaves():
                 margin_markup = abjad.inspect(leaf).get_effective(prototype)
                 if margin_markup is not None:
-                    key = self._indicator_to_key(margin_markup, self.manifests)
+                    key = self._indicator_to_key(
+                        margin_markup,
+                        self.manifests,
+                        )
                     dictionary[staff.name] = key
                     break
         return dictionary
@@ -2792,9 +2797,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 if measure_number is None:
                     continue
                 clef = wrapper.indicator
-                dictionary = self._offset_to_measure_number
                 command = baca.clef_shift(clef, selector=baca.leaf(0))
-                command.offset_to_measure_number = dictionary
+                command.runtime = self._bundle_manifests()
                 command(leaf)
 
     def _shorten_long_repeat_ties(self):

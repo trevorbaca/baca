@@ -61,19 +61,7 @@ LabelCommand
 
    .. container:: inherited
 
-      .. autoattribute:: LabelCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: LabelCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: LabelCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: LabelCommand.score_template
+      .. autoattribute:: LabelCommand.runtime
 
    .. container:: inherited
 

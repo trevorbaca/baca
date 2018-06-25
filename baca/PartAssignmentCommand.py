@@ -48,7 +48,7 @@ class PartAssignmentCommand(Command):
         parentage = abjad.inspect(first_leaf).get_parentage()
         voice = parentage.get_first(abjad.Voice)
         if voice is not None and self.part_assignment is not None:
-            if not self.score_template.allows_part_assignment(
+            if not self.runtime['score_template'].allows_part_assignment(
                 voice.name,
                 self.part_assignment,
                 ):

@@ -61,19 +61,7 @@ PartAssignmentCommand
 
    .. container:: inherited
 
-      .. autoattribute:: PartAssignmentCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: PartAssignmentCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: PartAssignmentCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: PartAssignmentCommand.score_template
+      .. autoattribute:: PartAssignmentCommand.runtime
 
    .. container:: inherited
 

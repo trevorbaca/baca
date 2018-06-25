@@ -62,19 +62,7 @@ PitchFirstRhythmCommand
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.score_template
+      .. autoattribute:: PitchFirstRhythmCommand.runtime
 
    .. container:: inherited
 

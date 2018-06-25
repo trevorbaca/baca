@@ -64,19 +64,7 @@ IndicatorCommand
 
    .. container:: inherited
 
-      .. autoattribute:: IndicatorCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: IndicatorCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: IndicatorCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: IndicatorCommand.score_template
+      .. autoattribute:: IndicatorCommand.runtime
 
    .. container:: inherited
 

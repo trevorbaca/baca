@@ -63,19 +63,7 @@ StaffPositionCommand
 
    .. container:: inherited
 
-      .. autoattribute:: StaffPositionCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.score_template
+      .. autoattribute:: StaffPositionCommand.runtime
 
    .. container:: inherited
 

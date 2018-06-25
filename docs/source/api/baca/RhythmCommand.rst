@@ -76,19 +76,7 @@ RhythmCommand
 
    .. container:: inherited
 
-      .. autoattribute:: RhythmCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.score_template
+      .. autoattribute:: RhythmCommand.runtime
 
    .. container:: inherited
 

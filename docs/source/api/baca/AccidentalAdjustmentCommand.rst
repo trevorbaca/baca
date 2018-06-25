@@ -63,19 +63,7 @@ AccidentalAdjustmentCommand
 
    .. container:: inherited
 
-      .. autoattribute:: AccidentalAdjustmentCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.score_template
+      .. autoattribute:: AccidentalAdjustmentCommand.runtime
 
    .. container:: inherited
 

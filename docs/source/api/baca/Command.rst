@@ -42,10 +42,7 @@ Command
    .. autosummary::
       :nosignatures:
 
-      manifests
-      offset_to_measure_number
-      previous_segment_voice_metadata
-      score_template
+      runtime
       tag_measure_number
 
    .. autosummary::
@@ -86,13 +83,7 @@ Command
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: Command.manifests
-
-   .. autoattribute:: Command.offset_to_measure_number
-
-   .. autoattribute:: Command.previous_segment_voice_metadata
-
-   .. autoattribute:: Command.score_template
+   .. autoattribute:: Command.runtime
 
    .. autoattribute:: Command.tag_measure_number
 
@@ -135,10 +126,7 @@ Command
    .. autosummary::
       :nosignatures:
 
-      manifests
-      offset_to_measure_number
-      previous_segment_voice_metadata
-      score_template
+      runtime
 
    .. autosummary::
       :nosignatures:
@@ -169,13 +157,7 @@ Command
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: Map.manifests
-
-   .. autoattribute:: Map.offset_to_measure_number
-
-   .. autoattribute:: Map.previous_segment_voice_metadata
-
-   .. autoattribute:: Map.score_template
+   .. autoattribute:: Map.runtime
 
    .. raw:: html
 
@@ -198,10 +180,7 @@ Command
    .. autosummary::
       :nosignatures:
 
-      manifests
-      offset_to_measure_number
-      previous_segment_voice_metadata
-      score_template
+      runtime
 
    .. autosummary::
       :nosignatures:
@@ -232,13 +211,7 @@ Command
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: Suite.manifests
-
-   .. autoattribute:: Suite.offset_to_measure_number
-
-   .. autoattribute:: Suite.previous_segment_voice_metadata
-
-   .. autoattribute:: Suite.score_template
+   .. autoattribute:: Suite.runtime
 
    .. raw:: html
 

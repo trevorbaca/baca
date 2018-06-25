@@ -514,7 +514,7 @@ class PitchCommand(Command):
         return items
 
     def _previous_pitches_consumed(self):
-        dictionary = self.previous_segment_voice_metadata
+        dictionary = self.runtime.get('previous_segment_voice_metadata', None)
         if not dictionary:
             return 0
         dictionary = dictionary.get(abjad.tags.PITCH, None)
@@ -528,7 +528,7 @@ class PitchCommand(Command):
         assert 1 <= pitches_consumed
         if self.ignore_incomplete:
             return pitches_consumed
-        dictionary = self.previous_segment_voice_metadata
+        dictionary = self.runtime['previous_segment_voice_metadata']
         dictionary = dictionary.get(abjad.tags.RHYTHM, None)
         if dictionary:
             if dictionary.get('incomplete_last_note', False):

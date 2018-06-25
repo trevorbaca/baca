@@ -62,19 +62,7 @@ NestingCommand
 
    .. container:: inherited
 
-      .. autoattribute:: NestingCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.score_template
+      .. autoattribute:: NestingCommand.runtime
 
    .. container:: inherited
 

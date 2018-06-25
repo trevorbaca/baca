@@ -62,19 +62,7 @@ StaffPositionInterpolationCommand
 
    .. container:: inherited
 
-      .. autoattribute:: StaffPositionInterpolationCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionInterpolationCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionInterpolationCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionInterpolationCommand.score_template
+      .. autoattribute:: StaffPositionInterpolationCommand.runtime
 
    .. container:: inherited
 

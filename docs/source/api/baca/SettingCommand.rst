@@ -63,19 +63,7 @@ SettingCommand
 
    .. container:: inherited
 
-      .. autoattribute:: SettingCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: SettingCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: SettingCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: SettingCommand.score_template
+      .. autoattribute:: SettingCommand.runtime
 
    .. container:: inherited
 

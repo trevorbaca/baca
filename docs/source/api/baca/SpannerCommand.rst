@@ -66,19 +66,7 @@ SpannerCommand
 
    .. container:: inherited
 
-      .. autoattribute:: SpannerCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.score_template
+      .. autoattribute:: SpannerCommand.runtime
 
    .. container:: inherited
 

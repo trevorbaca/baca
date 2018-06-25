@@ -67,19 +67,7 @@ OverrideCommand
 
    .. container:: inherited
 
-      .. autoattribute:: OverrideCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.score_template
+      .. autoattribute:: OverrideCommand.runtime
 
    .. container:: inherited
 

@@ -61,19 +61,7 @@ ContainerCommand
 
    .. container:: inherited
 
-      .. autoattribute:: ContainerCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: ContainerCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: ContainerCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: ContainerCommand.score_template
+      .. autoattribute:: ContainerCommand.runtime
 
    .. container:: inherited
 

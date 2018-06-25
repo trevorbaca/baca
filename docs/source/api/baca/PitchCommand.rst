@@ -69,19 +69,7 @@ PitchCommand
 
    .. container:: inherited
 
-      .. autoattribute:: PitchCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.score_template
+      .. autoattribute:: PitchCommand.runtime
 
    .. container:: inherited
 

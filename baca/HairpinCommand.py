@@ -171,7 +171,7 @@ class HairpinCommand(Command):
                 )
             if self.start == reapplied:
                 SegmentMaker._treat_persistent_wrapper(
-                    self.manifests,
+                    self.runtime['manifests'],
                     wrapper,
                     'redundant',
                     )
@@ -188,7 +188,7 @@ class HairpinCommand(Command):
                 )
             if self.stop == reapplied:
                 SegmentMaker._treat_persistent_wrapper(
-                    self.manifests,
+                    self.runtime['manifests'],
                     wrapper,
                     'redundant',
                     )

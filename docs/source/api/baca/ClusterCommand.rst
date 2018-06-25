@@ -64,19 +64,7 @@ ClusterCommand
 
    .. container:: inherited
 
-      .. autoattribute:: ClusterCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.score_template
+      .. autoattribute:: ClusterCommand.runtime
 
    .. container:: inherited
 

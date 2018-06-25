@@ -56,19 +56,7 @@ InstrumentChangeCommand
 
    .. container:: inherited
 
-      .. autoattribute:: InstrumentChangeCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: InstrumentChangeCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: InstrumentChangeCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: InstrumentChangeCommand.score_template
+      .. autoattribute:: InstrumentChangeCommand.runtime
 
    .. container:: inherited
 

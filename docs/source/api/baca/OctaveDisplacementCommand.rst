@@ -61,19 +61,7 @@ OctaveDisplacementCommand
 
    .. container:: inherited
 
-      .. autoattribute:: OctaveDisplacementCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.score_template
+      .. autoattribute:: OctaveDisplacementCommand.runtime
 
    .. container:: inherited
 

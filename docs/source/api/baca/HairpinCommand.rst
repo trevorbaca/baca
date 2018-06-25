@@ -65,19 +65,7 @@ HairpinCommand
 
    .. container:: inherited
 
-      .. autoattribute:: HairpinCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: HairpinCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: HairpinCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: HairpinCommand.score_template
+      .. autoattribute:: HairpinCommand.runtime
 
    .. container:: inherited
 

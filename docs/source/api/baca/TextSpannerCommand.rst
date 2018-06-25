@@ -65,19 +65,7 @@ TextSpannerCommand
 
    .. container:: inherited
 
-      .. autoattribute:: TextSpannerCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: TextSpannerCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: TextSpannerCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: TextSpannerCommand.score_template
+      .. autoattribute:: TextSpannerCommand.runtime
 
    .. container:: inherited
 

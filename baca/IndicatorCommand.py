@@ -285,7 +285,7 @@ class IndicatorCommand(Command):
                     else:
                         status = 'redundant'
                     SegmentMaker._treat_persistent_wrapper(
-                        self.manifests,
+                        self.runtime['manifests'],
                         wrapper,
                         status,
                         )

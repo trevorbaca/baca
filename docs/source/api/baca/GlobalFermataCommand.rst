@@ -66,19 +66,7 @@ GlobalFermataCommand
 
    .. container:: inherited
 
-      .. autoattribute:: GlobalFermataCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: GlobalFermataCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: GlobalFermataCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: GlobalFermataCommand.score_template
+      .. autoattribute:: GlobalFermataCommand.runtime
 
    .. container:: inherited
 

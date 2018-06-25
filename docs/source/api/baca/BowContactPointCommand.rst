@@ -69,19 +69,7 @@ BowContactPointCommand
 
    .. container:: inherited
 
-      .. autoattribute:: BowContactPointCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: BowContactPointCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: BowContactPointCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: BowContactPointCommand.score_template
+      .. autoattribute:: BowContactPointCommand.runtime
 
    .. container:: inherited
 

@@ -56,19 +56,7 @@ VoltaCommand
 
    .. container:: inherited
 
-      .. autoattribute:: VoltaCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.score_template
+      .. autoattribute:: VoltaCommand.runtime
 
    .. container:: inherited
 

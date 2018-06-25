@@ -69,19 +69,7 @@ ImbricationCommand
 
    .. container:: inherited
 
-      .. autoattribute:: ImbricationCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.score_template
+      .. autoattribute:: ImbricationCommand.runtime
 
    .. container:: inherited
 

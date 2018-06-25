@@ -16,9 +16,9 @@ class Command(abjad.AbjadObject):
 
     __slots__ = (
         '_deactivate',
-        '_manifests',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
+        '_runtime',
         '_score_template',
         '_selector',
         '_tag_measure_number',
@@ -37,6 +37,7 @@ class Command(abjad.AbjadObject):
         tag_measure_number: bool = None,
         ) -> None:
         self._deactivate = deactivate
+        self._runtime = abjad.OrderedDict()
         if isinstance(selector, str):
             selector_ = eval(selector)
         else:
@@ -45,10 +46,6 @@ class Command(abjad.AbjadObject):
             assert isinstance(selector_, abjad.Expression), repr(selector_)
         self._selector = selector_
         self._tags: typing.Optional[typing.List[abjad.Tag]] = None
-        self.manifests = None
-        self.offset_to_measure_number = None
-        self.score_template = None
-        self.previous_segment_voice_metadata = None
         self.tag_measure_number = tag_measure_number
 
     ### SPECIAL METHODS ###
@@ -158,66 +155,19 @@ class Command(abjad.AbjadObject):
         return self._deactivate
 
     @property
-    def manifests(self) -> typing.Optional[abjad.OrderedDict]:
+    def runtime(self) -> abjad.OrderedDict:
         """
-        Gets segment-maker manifests.
+        Gets segment-maker runtime dictionary.
         """
-        return self._manifests
+        return self._runtime
 
-    @manifests.setter
-    def manifests(self, argument):
-        prototype = (abjad.OrderedDict, type(None))
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._manifests = argument
-        for command in getattr(self, 'commands', []):
-            command._manifests = argument
-
-    @property
-    def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
+    @runtime.setter
+    def runtime(self, argument):
         """
-        Gets segment-maker offset-to-measure-number dictionary.
+        Gets segment-maker runtime dictionary.
         """
-        return self._offset_to_measure_number
-
-    @offset_to_measure_number.setter
-    def offset_to_measure_number(self, dictionary):
-        prototype = (dict, type(None))
-        assert isinstance(dictionary, prototype), repr(dictionary)
-        self._offset_to_measure_number = dictionary
-        for command in getattr(self, 'commands', []):
-            command._offset_to_measure_number = dictionary
-
-    @property
-    def previous_segment_voice_metadata(self) -> typing.Optional[
-        abjad.OrderedDict]:
-        """
-        Gets previous segment voice metadata.
-        """
-        return self._previous_segment_voice_metadata
-
-    @previous_segment_voice_metadata.setter
-    def previous_segment_voice_metadata(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._previous_segment_voice_metadata = argument
-        for command in getattr(self, 'commands', []):
-            command._previous_segment_voice_metadata = argument
-
-    @property
-    def score_template(self) -> abjad.ScoreTemplate:
-        """
-        Gets score template.
-        """
-        return self._score_template
-
-    @score_template.setter
-    def score_template(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.ScoreTemplate), repr(argument)
-        self._score_template = argument
-        for command in getattr(self, 'commands', []):
-            command._score_template = argument
+        assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._runtime = argument
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
@@ -270,12 +220,13 @@ class Command(abjad.AbjadObject):
     # TODO: replace in favor of self.tag(leaf)
     def get_tag(self, leaf: abjad.Leaf = None) -> typing.Optional[abjad.Tag]:
         """
-        Gets tag for `leaf`.
+        Gets tag for ``leaf``.
         """
         tags = self.tags[:]
         if self.tag_measure_number:
             start_offset = abjad.inspect(leaf).get_timespan().start_offset
-            measure_number = self._offset_to_measure_number.get(start_offset)
+            measure_number = self.runtime[
+                'offset_to_measure_number'].get(start_offset)
             if measure_number is not None:
                 tag = abjad.Tag(f'MEASURE_{measure_number}')
                 tags.append(tag)
@@ -389,9 +340,9 @@ class Map(abjad.AbjadObject):
 
     __slots__ = (
         '_commands',
-        '_manifests',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
+        '_runtime',
         '_score_template',
         '_selector',
         )
@@ -420,6 +371,7 @@ class Map(abjad.AbjadObject):
                 raise Exception(message)
             command_list.append(command)
         self._commands = tuple(command_list)
+        self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
 
@@ -455,66 +407,20 @@ class Map(abjad.AbjadObject):
         return self._commands
 
     @property
-    def manifests(self) -> typing.Optional[abjad.OrderedDict]:
+    def runtime(self) -> abjad.OrderedDict:
         """
-        Gets segment-maker manifests.
+        Gets segment-maker runtime dictionary.
         """
-        return self._manifests
+        return self._runtime
 
-    @manifests.setter
-    def manifests(self, argument):
-        prototype = (abjad.OrderedDict, type(None))
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._manifests = argument
-        for command in getattr(self, 'commands', []):
-            command._manifests = argument
-            
-    @property
-    def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
+    @runtime.setter
+    def runtime(self, argument):
         """
-        Gets segment-maker offset-to-measure-number dictionary.
+        Gets segment-maker runtime dictionary.
         """
-        return self._offset_to_measure_number
-
-    @offset_to_measure_number.setter
-    def offset_to_measure_number(self, dictionary):
-        prototype = (dict, type(None))
-        assert isinstance(dictionary, prototype), repr(dictionary)
-        self._offset_to_measure_number = dictionary
-        for command in getattr(self, 'commands', []):
-            command._offset_to_measure_number = dictionary
-
-    @property
-    def previous_segment_voice_metadata(self) -> typing.Optional[
-        abjad.OrderedDict]:
-        """
-        Gets previous segment voice metadata.
-        """
-        return self._previous_segment_voice_metadata
-
-    @previous_segment_voice_metadata.setter
-    def previous_segment_voice_metadata(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._previous_segment_voice_metadata = argument
-        for command in getattr(self, 'commands', []):
-            command._previous_segment_voice_metadata = argument
-
-    @property
-    def score_template(self) -> abjad.ScoreTemplate:
-        """
-        Gets score template.
-        """
-        return self._score_template
-
-    @score_template.setter
-    def score_template(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.ScoreTemplate), repr(argument)
-        self._score_template = argument
-        for command in getattr(self, 'commands', []):
-            command._score_template = argument
+        assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        for command in self.commands:
+            command.runtime = argument
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
@@ -539,10 +445,10 @@ class Suite(abjad.AbjadObject):
 
     __slots__ = (
         '_commands',
-        '_manifests',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_score_template',
+        '_runtime',
         )
 
     ### INITIALIZER ###
@@ -559,7 +465,7 @@ class Suite(abjad.AbjadObject):
                 raise Exception(message)
             command_list.append(command)
         self._commands = tuple(command_list)
-        self._manifests = None
+        self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
 
@@ -586,63 +492,17 @@ class Suite(abjad.AbjadObject):
         return self._commands
 
     @property
-    def manifests(self) -> typing.Optional[abjad.OrderedDict]:
+    def runtime(self) -> abjad.OrderedDict:
         """
-        Gets segment-maker manifests.
+        Gets segment-maker runtime.
         """
-        return self._manifests
+        return self._runtime
 
-    @manifests.setter
-    def manifests(self, argument):
-        prototype = (abjad.OrderedDict, type(None))
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._manifests = argument
-        for command in getattr(self, 'commands', []):
-            command._manifests = argument
-            
-    @property
-    def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
+    @runtime.setter
+    def runtime(self, argument):
         """
-        Gets segment-maker offset-to-measure-number dictionary.
+        Gets segment-maker runtime dictionary.
         """
-        return self._offset_to_measure_number
-
-    @offset_to_measure_number.setter
-    def offset_to_measure_number(self, dictionary):
-        prototype = (dict, type(None))
-        assert isinstance(dictionary, prototype), repr(dictionary)
-        self._offset_to_measure_number = dictionary
-        for command in getattr(self, 'commands', []):
-            command._offset_to_measure_number = dictionary
-
-    @property
-    def previous_segment_voice_metadata(self) -> typing.Optional[
-        abjad.OrderedDict]:
-        """
-        Gets previous segment voice metadata.
-        """
-        return self._previous_segment_voice_metadata
-
-    @previous_segment_voice_metadata.setter
-    def previous_segment_voice_metadata(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._previous_segment_voice_metadata = argument
-        for command in getattr(self, 'commands', []):
-            command._previous_segment_voice_metadata = argument
-
-    @property
-    def score_template(self) -> abjad.ScoreTemplate:
-        """
-        Gets score template.
-        """
-        return self._score_template
-
-    @score_template.setter
-    def score_template(self, argument):
-        if argument is not None:
-            assert isinstance(argument, abjad.ScoreTemplate), repr(argument)
-        self._score_template = argument
-        for command in getattr(self, 'commands', []):
-            command._score_template = argument
+        assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        for command in self.commands:
+            command.runtime = argument

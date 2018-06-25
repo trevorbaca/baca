@@ -66,19 +66,7 @@ PiecewiseCommand
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.score_template
+      .. autoattribute:: PiecewiseCommand.runtime
 
    .. container:: inherited
 

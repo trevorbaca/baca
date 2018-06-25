@@ -61,19 +61,7 @@ DiatonicClusterCommand
 
    .. container:: inherited
 
-      .. autoattribute:: DiatonicClusterCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.score_template
+      .. autoattribute:: DiatonicClusterCommand.runtime
 
    .. container:: inherited
 

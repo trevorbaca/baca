@@ -62,19 +62,7 @@ MetronomeMarkCommand
 
    .. container:: inherited
 
-      .. autoattribute:: MetronomeMarkCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: MetronomeMarkCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: MetronomeMarkCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: MetronomeMarkCommand.score_template
+      .. autoattribute:: MetronomeMarkCommand.runtime
 
    .. container:: inherited
 

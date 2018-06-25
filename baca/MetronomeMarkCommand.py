@@ -61,8 +61,8 @@ class MetronomeMarkCommand(Command):
             return
         if self.redundant is True:
             return
-        if isinstance(self.key, str) and self.manifests is not None:
-            metronome_marks = self.manifests['abjad.MetronomeMark']
+        if isinstance(self.key, str) and self.runtime['manifests'] is not None:
+            metronome_marks = self.runtime['manifests']['abjad.MetronomeMark']
             indicator = metronome_marks.get(self.key)
             if indicator is None:
                 raise Exception(f'can not find metronome mark {self.key!r}.')
@@ -86,7 +86,7 @@ class MetronomeMarkCommand(Command):
             )
         if indicator == reapplied:
             SegmentMaker._treat_persistent_wrapper(
-                self.manifests,
+                self.runtime['manifests'],
                 wrapper,
                 'redundant',
                 )

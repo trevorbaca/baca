@@ -61,19 +61,7 @@ ColorFingeringCommand
 
    .. container:: inherited
 
-      .. autoattribute:: ColorFingeringCommand.manifests
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.offset_to_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.previous_segment_voice_metadata
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.score_template
+      .. autoattribute:: ColorFingeringCommand.runtime
 
    .. container:: inherited
 

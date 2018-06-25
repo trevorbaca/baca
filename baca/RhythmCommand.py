@@ -193,6 +193,7 @@ class RhythmCommand(Command):
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
         ) -> None:
+        Command.__init__(self)
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
@@ -446,7 +447,7 @@ class RhythmCommand(Command):
 
     def _previous_segment_stop_state(self):
         previous_segment_stop_state = None
-        dictionary = self.previous_segment_voice_metadata
+        dictionary = self.runtime.get('previous_segment_voice_metadata')
         if dictionary:
             previous_segment_stop_state = dictionary.get(abjad.tags.RHYTHM)
             if previous_segment_stop_state.get('name') != self.persist:

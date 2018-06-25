@@ -28,7 +28,7 @@ class InstrumentChangeCommand(IndicatorCommand):
             staff = parentage.get_first(abjad.Staff)
             instrument = self.indicators[0]
             assert isinstance(instrument, abjad.Instrument), repr(instrument)
-            if not self.score_template.allows_instrument(
+            if not self.runtime['score_template'].allows_instrument(
                 staff.name,
                 instrument,
                 ):
