@@ -35,7 +35,6 @@ dynamicslib
       start_selector
       stop_dynamic
       stop_selector
-      tag
 
    .. autosummary::
       :nosignatures:
@@ -112,7 +111,9 @@ dynamicslib
 
    .. autoattribute:: NewHairpinCommand.stop_selector
 
-   .. autoattribute:: NewHairpinCommand.tag
+   .. container:: inherited
+
+      .. autoattribute:: NewHairpinCommand.tag
 
    .. container:: inherited
 
