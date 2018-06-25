@@ -22,6 +22,7 @@ baca
 .. toctree::
    :hidden:
 
+   Command
    dynamicslib
    library
    markups
@@ -29,6 +30,7 @@ baca
 .. autosummary::
    :nosignatures:
 
+   Command
    dynamicslib
    library
    markups
@@ -129,7 +131,6 @@ baca
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
-   Command
    CommandWrapper
    ContainerCommand
    DiatonicClusterCommand
@@ -139,7 +140,6 @@ baca
    IndicatorCommand
    InstrumentChangeCommand
    LabelCommand
-   MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
    NestingCommand
@@ -169,7 +169,6 @@ baca
    ~ClusterCommand.ClusterCommand
    ~ColorCommand.ColorCommand
    ~ColorFingeringCommand.ColorFingeringCommand
-   ~Command.Command
    ~CommandWrapper.CommandWrapper
    ~ContainerCommand.ContainerCommand
    ~DiatonicClusterCommand.DiatonicClusterCommand
@@ -179,7 +178,6 @@ baca
    ~IndicatorCommand.IndicatorCommand
    ~InstrumentChangeCommand.InstrumentChangeCommand
    ~LabelCommand.LabelCommand
-   ~MapCommand.MapCommand
    ~MetronomeMarkCommand.MetronomeMarkCommand
    ~MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~NestingCommand.NestingCommand
@@ -369,7 +367,6 @@ baca
    MetronomeMarkSpanner
    PaddedTuple
    Ritardando
-   Suite
 
 .. autosummary::
    :nosignatures:
@@ -378,7 +375,6 @@ baca
    ~MetronomeMarkSpanner.MetronomeMarkSpanner
    ~PaddedTuple.PaddedTuple
    ~Ritardando.Ritardando
-   ~Suite.Suite
 
 .. raw:: html
 

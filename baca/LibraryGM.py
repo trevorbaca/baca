@@ -3,6 +3,8 @@ import baca
 import typing
 from abjadext import rmakers
 from . import library
+from .Command import Map
+from .Command import Suite
 from .GlobalFermataCommand import GlobalFermataCommand
 from .HairpinCommand import HairpinCommand
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
@@ -12,7 +14,6 @@ from .InstrumentChangeCommand import InstrumentChangeCommand
 from .LabelCommand import LabelCommand
 from .LBSD import LBSD
 from .Loop import Loop
-from .MapCommand import MapCommand
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
@@ -24,7 +25,6 @@ from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
     )
-from .Suite import Suite
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector

@@ -22,6 +22,8 @@ from .CollectionList import CollectionList
 from .ColorCommand import ColorCommand
 from .ColorFingeringCommand import ColorFingeringCommand
 from .Command import Command
+from .Command import Map
+from .Command import Suite
 from .CommandWrapper import CommandWrapper
 from .Constellation import Constellation
 from .ConstellationCircuit import ConstellationCircuit
@@ -50,7 +52,6 @@ from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
-from .MapCommand import MapCommand
 from .Markup import Markup
 from .Matrix import Matrix
 from .MeasureWrapper import MeasureWrapper
@@ -115,7 +116,6 @@ from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
-from .Suite import Suite
 from .SystemSpecifier import SystemSpecifier
 from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand

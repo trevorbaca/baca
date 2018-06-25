@@ -5,9 +5,9 @@ import abjad
 import baca
 import typing
 from . import library
+from .Command import Suite
 from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
-from .Suite import Suite
 from .Typing import Number
 
 

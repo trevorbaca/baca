@@ -79,7 +79,6 @@ Bača API
    ~baca.ClusterCommand.ClusterCommand
    ~baca.ColorCommand.ColorCommand
    ~baca.ColorFingeringCommand.ColorFingeringCommand
-   ~baca.Command.Command
    ~baca.CommandWrapper.CommandWrapper
    ~baca.ContainerCommand.ContainerCommand
    ~baca.DiatonicClusterCommand.DiatonicClusterCommand
@@ -89,7 +88,6 @@ Bača API
    ~baca.IndicatorCommand.IndicatorCommand
    ~baca.InstrumentChangeCommand.InstrumentChangeCommand
    ~baca.LabelCommand.LabelCommand
-   ~baca.MapCommand.MapCommand
    ~baca.MetronomeMarkCommand.MetronomeMarkCommand
    ~baca.MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~baca.NestingCommand.NestingCommand
@@ -209,7 +207,6 @@ Bača API
    ~baca.MetronomeMarkSpanner.MetronomeMarkSpanner
    ~baca.PaddedTuple.PaddedTuple
    ~baca.Ritardando.Ritardando
-   ~baca.Suite.Suite
 
 .. raw:: html
 
@@ -316,6 +313,38 @@ Bača API
 
    <hr/>
 
+.. rubric:: :ref:`baca.Command <baca--Command>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.Command.Command
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.Command.Map
+   ~baca.Command.Suite
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.dynamicslib <baca--dynamicslib>`
    :class: section-header
 
@@ -345,12 +374,12 @@ Dynamics library.
    ~baca.dynamicslib.dynamic_text_x_offset
    ~baca.dynamicslib.dynamic_text_y_offset
    ~baca.dynamicslib.dynamic_trend
-   ~baca.dynamicslib.dynamic_trend_shift
    ~baca.dynamicslib.dynamic_up
    ~baca.dynamicslib.dynamics
    ~baca.dynamicslib.hairpin
    ~baca.dynamicslib.hairpin_chain
    ~baca.dynamicslib.hairpin_shorten_pair
+   ~baca.dynamicslib.hairpin_start_shift
    ~baca.dynamicslib.hairpin_stencil_false
    ~baca.dynamicslib.hairpin_transparent
    ~baca.dynamicslib.measure_swells

@@ -9,12 +9,13 @@ from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Command import Command
+from .Command import Map
+from .Command import Suite
 from .ContainerCommand import ContainerCommand
 from .DivisionMaker import DivisionMaker
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .IndicatorCommand import IndicatorCommand
-from .MapCommand import MapCommand
 from .NestingCommand import NestingCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
@@ -32,7 +33,6 @@ from .SettingCommand import SettingCommand
 from .SpannerCommand import SpannerCommand
 from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
-from .Suite import Suite
 from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
 from .Typing import Number
@@ -1930,7 +1930,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def repeat_tie_repeat_pitches() -> MapCommand:
+    def repeat_tie_repeat_pitches() -> Map:
         """
         Repeat-ties repeat pitches.
         """

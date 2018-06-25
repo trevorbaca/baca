@@ -161,6 +161,7 @@ class RhythmCommand(Command):
         '_division_expression',
         '_left_broken',
         '_multimeasure_rests',
+        '_payload',
         '_persist',
         '_reference_meters',
         '_rewrite_meter',
@@ -241,7 +242,7 @@ class RhythmCommand(Command):
         self,
         start_offset: abjad.Offset = None,
         time_signatures: typing.Iterable[abjad.TimeSignature] = None,
-        ) -> abjad.AnnotatedTimespan:
+        ) -> None:
         """
         Calls command on ``start_offset`` and ``time_signatures``.
         """
@@ -250,11 +251,12 @@ class RhythmCommand(Command):
         first_leaf = abjad.inspect(music).get_leaf(0)
         last_leaf = abjad.inspect(music).get_leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
-        return abjad.AnnotatedTimespan(
+        payload = abjad.AnnotatedTimespan(
             start_offset=start_offset,
             stop_offset=None,
             annotation=music,
             )
+        self._payload = payload
 
     ### PRIVATE METHODS ###
 
@@ -642,6 +644,13 @@ class RhythmCommand(Command):
 
         """
         return abjad.tags.RHYTHM
+
+    @property
+    def payload(self) -> abjad.AnnotatedTimespan:
+        """
+        Gets payload.
+        """
+        return self._payload
 
     @property
     def persist(self) -> typing.Optional[str]:

@@ -36,15 +36,13 @@ class Command(abjad.AbjadObject):
         selector: Selector = None,
         tag_measure_number: bool = None,
         ) -> None:
-        from .MapCommand import MapCommand
         self._deactivate = deactivate
         if isinstance(selector, str):
             selector_ = eval(selector)
         else:
             selector_ = selector
         if selector_ is not None:
-            prototype = (abjad.Expression, MapCommand)
-            assert isinstance(selector_, prototype), repr(selector_)
+            assert isinstance(selector_, abjad.Expression), repr(selector_)
         self._selector = selector_
         self._tags: typing.Optional[typing.List[abjad.Tag]] = None
         self.manifests = None
@@ -56,11 +54,9 @@ class Command(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     @abc.abstractmethod
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         pass
 
@@ -290,3 +286,363 @@ class Command(abjad.AbjadObject):
             return tag
         # TODO: return empty tag (instead of none)
         return None
+
+
+class Map(abjad.AbjadObject):
+    r"""
+    Map.
+
+    ..  container:: example
+
+        >>> baca.Map()
+        Map()
+
+    ..  container:: example
+
+        Attaches accents to pitched heads in tuplet 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.map(
+        ...         baca.tuplet(1),
+        ...         baca.apply(
+        ...             baca.pheads(),
+        ...             baca.marcato(),
+        ...             baca.staccato(),
+        ...             ),
+        ...         baca.slur(
+        ...             abjad.tweak(abjad.Down).direction,
+        ...             ),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
+                            [
+                            - \tweak direction #down                                                 %! SC
+                            (                                                                        %! SC
+                            e''16
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
+                            ]
+                            ef''4
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
+                            [
+                            g''16
+                            -\marcato                                                                %! IC
+                            -\staccato                                                               %! IC
+                            ]
+                            )                                                                        %! SC
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_commands',
+        '_manifests',
+        '_offset_to_measure_number',
+        '_previous_segment_voice_metadata',
+        '_score_template',
+        '_selector',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        selector: Selector = None,
+        *commands: typing.Union[Command, 'Map', 'Suite'],
+        ) -> None:
+        if isinstance(selector, str):
+            selector_ = eval(selector)
+        else:
+            selector_ = selector
+        if selector_ is not None:
+            assert isinstance(selector_, abjad.Expression), repr(selector_)
+        self._selector = selector_
+        command_list: typing.List[
+            typing.Union[Command, Map, Suite]
+            ] = []
+        for command in commands:
+            if not isinstance(command, (Command, Map, Suite)):
+                message = '\n  Must contain only commands and suites.'
+                message += f'\n  Not {type(command).__name__}: {command!r}.'
+                raise Exception(message)
+            command_list.append(command)
+        self._commands = tuple(command_list)
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument=None) -> typing.Optional[typing.List]:
+        """
+        Maps each command in ``commands`` to each item in output of selector
+        called on ``argument``.
+        """
+        if argument is None:
+            return None
+        if not self.commands:
+            return None
+        if self.selector is not None:
+            argument = self.selector(argument)
+            if self.selector._is_singular_get_item():
+                argument = [argument]
+        items_ = []
+        for command in self.commands:
+            for item in argument:
+                item_ = command(item)
+                items_.append(item_)
+        return items_
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def commands(self) -> typing.Tuple[
+        typing.Union[Command, 'Map', 'Suite'], ...,
+        ]:
+        """
+        Gets commands.
+        """
+        return self._commands
+
+    @property
+    def manifests(self) -> typing.Optional[abjad.OrderedDict]:
+        """
+        Gets segment-maker manifests.
+        """
+        return self._manifests
+
+    @manifests.setter
+    def manifests(self, argument):
+        prototype = (abjad.OrderedDict, type(None))
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._manifests = argument
+        for command in getattr(self, 'commands', []):
+            command._manifests = argument
+            
+    @property
+    def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
+        """
+        Gets segment-maker offset-to-measure-number dictionary.
+        """
+        return self._offset_to_measure_number
+
+    @offset_to_measure_number.setter
+    def offset_to_measure_number(self, dictionary):
+        prototype = (dict, type(None))
+        assert isinstance(dictionary, prototype), repr(dictionary)
+        self._offset_to_measure_number = dictionary
+        for command in getattr(self, 'commands', []):
+            command._offset_to_measure_number = dictionary
+
+    @property
+    def previous_segment_voice_metadata(self) -> typing.Optional[
+        abjad.OrderedDict]:
+        """
+        Gets previous segment voice metadata.
+        """
+        return self._previous_segment_voice_metadata
+
+    @previous_segment_voice_metadata.setter
+    def previous_segment_voice_metadata(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._previous_segment_voice_metadata = argument
+        for command in getattr(self, 'commands', []):
+            command._previous_segment_voice_metadata = argument
+
+    @property
+    def score_template(self) -> abjad.ScoreTemplate:
+        """
+        Gets score template.
+        """
+        return self._score_template
+
+    @score_template.setter
+    def score_template(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.ScoreTemplate), repr(argument)
+        self._score_template = argument
+        for command in getattr(self, 'commands', []):
+            command._score_template = argument
+
+    @property
+    def selector(self) -> typing.Optional[abjad.Expression]:
+        """
+        Gets selector.
+        """
+        return self._selector
+
+
+class Suite(abjad.AbjadObject):
+    """
+    Suite.
+
+    ..  container:: example
+
+        >>> baca.Suite()
+        Suite()
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_commands',
+        '_manifests',
+        '_offset_to_measure_number',
+        '_previous_segment_voice_metadata',
+        '_score_template',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *commands: typing.Union[Command, Map, 'Suite'],
+        ) -> None:
+        command_list: typing.List[typing.Union[Command, Map, Suite]] = []
+        for command in commands:
+            if not isinstance(command, (Command, Map, Suite)):
+                message = '\n  Must contain only commands, maps, suites.'
+                message += f'\n  Not {type(command).__name__}: {command!r}.'
+                raise Exception(message)
+            command_list.append(command)
+        self._commands = tuple(command_list)
+        self._manifests = None
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument=None) -> None:
+        """
+        Applies commands to ``argument``.
+        """
+        if argument is None:
+            return
+        if not self.commands:
+            return
+        for command in self.commands:
+            command(argument)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def commands(self) -> typing.Tuple[
+        typing.Union[Command, Map, 'Suite'], ...
+        ]:
+        """
+        Gets commands.
+        """
+        return self._commands
+
+    @property
+    def manifests(self) -> typing.Optional[abjad.OrderedDict]:
+        """
+        Gets segment-maker manifests.
+        """
+        return self._manifests
+
+    @manifests.setter
+    def manifests(self, argument):
+        prototype = (abjad.OrderedDict, type(None))
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._manifests = argument
+        for command in getattr(self, 'commands', []):
+            command._manifests = argument
+            
+    @property
+    def offset_to_measure_number(self) -> typing.Optional[abjad.OrderedDict]:
+        """
+        Gets segment-maker offset-to-measure-number dictionary.
+        """
+        return self._offset_to_measure_number
+
+    @offset_to_measure_number.setter
+    def offset_to_measure_number(self, dictionary):
+        prototype = (dict, type(None))
+        assert isinstance(dictionary, prototype), repr(dictionary)
+        self._offset_to_measure_number = dictionary
+        for command in getattr(self, 'commands', []):
+            command._offset_to_measure_number = dictionary
+
+    @property
+    def previous_segment_voice_metadata(self) -> typing.Optional[
+        abjad.OrderedDict]:
+        """
+        Gets previous segment voice metadata.
+        """
+        return self._previous_segment_voice_metadata
+
+    @previous_segment_voice_metadata.setter
+    def previous_segment_voice_metadata(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.OrderedDict), repr(argument)
+        self._previous_segment_voice_metadata = argument
+        for command in getattr(self, 'commands', []):
+            command._previous_segment_voice_metadata = argument
+
+    @property
+    def score_template(self) -> abjad.ScoreTemplate:
+        """
+        Gets score template.
+        """
+        return self._score_template
+
+    @score_template.setter
+    def score_template(self, argument):
+        if argument is not None:
+            assert isinstance(argument, abjad.ScoreTemplate), repr(argument)
+        self._score_template = argument
+        for command in getattr(self, 'commands', []):
+            command._score_template = argument

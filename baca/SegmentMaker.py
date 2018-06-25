@@ -8,6 +8,8 @@ import typing
 from . import library
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
+from .Command import Map
+from .Command import Suite
 from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MeasureWrapper import MeasureWrapper
@@ -16,7 +18,6 @@ from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
 from .SkipRhythmMaker import SkipRhythmMaker
-from .Suite import Suite
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 from .Typing import Number
@@ -869,8 +870,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            fiveway = (abjad.Markup, Command, list, MeasureWrapper, Suite)
-            if not isinstance(command, fiveway):
+            sixway = (abjad.Markup, Command, list, Map, MeasureWrapper, Suite)
+            if not isinstance(command, sixway):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
@@ -933,7 +934,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    assert isinstance(command, (Command, Suite)), repr(command)
+                    threeway = (Command, Map, Suite)
+                    assert isinstance(command, threeway), repr(command)
                     wrapper = CommandWrapper(command=command, scope=scope)
                     self.wrappers.append(wrapper)
 
@@ -1512,7 +1514,7 @@ class SegmentMaker(abjad.SegmentMaker):
         command_count = 0
         for wrapper in self.wrappers:
             assert isinstance(wrapper, CommandWrapper)
-            assert isinstance(wrapper.command, (Command, Suite))
+            assert isinstance(wrapper.command, (Command, Map, Suite))
             if isinstance(wrapper.command, RhythmCommand):
                 continue
             command_count += 1
@@ -1580,10 +1582,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 command.previous_segment_voice_metadata = \
                     previous_segment_voice_metadata
                 try:
-                    rhythm = command(start_offset, time_signatures)
+                    command(start_offset, time_signatures)
                 except:
                     print(f'Interpreting ...\n\n{format(wrapper)}\n')
                     raise
+                rhythm = command.payload
                 rhythms.append(rhythm)
                 if command.persist and command.state:
                     state = command.state

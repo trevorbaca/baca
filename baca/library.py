@@ -4,17 +4,17 @@ Function library.
 import abjad
 import typing
 from .Command import Command
+from .Command import Map
+from .Command import Suite
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
-from .MapCommand import MapCommand
 from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
-from .Suite import Suite
 from .TimelineScope import TimelineScope
 from .Typing import Pair
 from .Typing import Selector
@@ -89,8 +89,8 @@ def literal(
 
 def map(
     selector: typing.Union[abjad.Expression, str],
-    *commands: typing.Union[Command, abjad.Expression],
-    ) -> MapCommand:
+    *commands: typing.Union[Command, Map, Suite],
+    ) -> Map:
     """
     Maps ``selector`` to each command in ``commands``.
     """
@@ -107,11 +107,11 @@ def map(
         else:
             commands_.append(item)
     for command in commands_:
-        if not isinstance(command, (Command, abjad.Expression, Suite)):
-            message = '\n  Must be command or expression.'
+        if not isinstance(command, (Command, Map, Suite)):
+            message = '\n  Must be command, map, suite.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
-    return MapCommand(selector, *commands_)
+    return Map(selector, *commands_)
 
 def markup(
     argument: typing.Union[str, abjad.Markup],
@@ -568,7 +568,7 @@ def measures(
         wrappers.append(wrapper)
     return wrappers
 
-def not_parts(command: Command) -> typing.Union[Command, Suite]:
+def not_parts(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     Tags ``command`` with ``-PARTS``.
 
@@ -576,7 +576,7 @@ def not_parts(command: Command) -> typing.Union[Command, Suite]:
     """
     return tag('-PARTS', command)
 
-def not_score(command: Command) -> typing.Union[Command, Suite]:
+def not_score(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     Tags ``command`` with ``-SCORE``.
 
@@ -584,7 +584,7 @@ def not_score(command: Command) -> typing.Union[Command, Suite]:
     """
     return tag('-SCORE', command)
 
-def not_segment(command: Command) -> typing.Union[Command, Suite]:
+def not_segment(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     Tags ``command`` with ``-SEGMENT``.
 
@@ -592,7 +592,7 @@ def not_segment(command: Command) -> typing.Union[Command, Suite]:
     """
     return tag('-SEGMENT', command)
 
-def only_parts(command: Command) -> typing.Union[Command, Suite]:
+def only_parts(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     Tags ``command`` with ``+PARTS``.
 
@@ -600,7 +600,7 @@ def only_parts(command: Command) -> typing.Union[Command, Suite]:
     """
     return tag('+PARTS', command)
 
-def only_score(command: Command) -> typing.Union[Command, Suite]:
+def only_score(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     Tags ``command`` with ``+SCORE``.
 
@@ -608,7 +608,7 @@ def only_score(command: Command) -> typing.Union[Command, Suite]:
     """
     return tag('+SCORE', command)
 
-def only_segment(command: Command) -> typing.Union[Command, Suite]:
+def only_segment(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     Tags ``command`` with ``+SEGMENT``.
 
@@ -619,7 +619,7 @@ def only_segment(command: Command) -> typing.Union[Command, Suite]:
 def piecewise(
     spanner: abjad.Spanner,
     indicators: typing.Sequence,
-    pieces: typing.Union[MapCommand, Selector],
+    pieces: typing.Union[Map, Selector],
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = False,
     selector: Selector = 'baca.leaves()',
@@ -902,24 +902,24 @@ def suite(
         Traceback (most recent call last):
             ...
         Exception:
-            Commands must contain only commands.
+            Must contain only commands, maps, suites.
             Not list: ['Allegro'].
 
     """
     for command in commands:
-        if not isinstance(command, (Command, Suite)):
-            message = '\n  Commands must contain only commands.'
+        if not isinstance(command, (Command, Map, Suite)):
+            message = '\n  Must contain only commands, maps, suites.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
     return Suite(*commands)
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, abjad.Markup, Suite],
+    command: typing.Union[Command, Map, Suite, abjad.Markup],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> typing.Union[Command, Suite]:
+    ) -> typing.Union[Command, Map, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -936,7 +936,7 @@ def tag(
     if isinstance(command, abjad.Markup):
         command = markup(command)
     assert Command._validate_tags(tags), repr(tags)
-    if isinstance(command, Suite):
+    if isinstance(command, (Map, Suite)):
         for command_ in command.commands:
             tag(
                 tags,

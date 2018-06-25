@@ -5,13 +5,13 @@ import abjad
 import baca
 import typing
 from . import library
+from .Command import Map
+from .Command import Suite
 from .HairpinCommand import HairpinCommand
 from .IndicatorCommand import IndicatorCommand
-from .MapCommand import MapCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .SchemeManifest import SchemeManifest
-from .Suite import Suite
 from .Typing import Number
 from .Typing import NumberPair
 from .Typing import Selector
@@ -1209,7 +1209,7 @@ def hairpin(
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
-    pieces: typing.Union[MapCommand, Selector] = 'baca.tleaves().group()',
+    pieces: typing.Union[Map, Selector] = 'baca.tleaves().group()',
     selector: Selector = 'baca.tleaves()'
     ) -> PiecewiseCommand:
     r"""
@@ -2272,7 +2272,7 @@ def dynamic_trend(
 
 _local_dynamic_trend = dynamic_trend
 
-def dynamic_trend_shift(
+def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: Selector = 'baca.leaf(0)',

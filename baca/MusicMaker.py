@@ -2,6 +2,8 @@ import abjad
 import baca
 import copy
 from abjadext import rmakers
+from .Command import Command
+from .Command import Map
 
 
 class MusicMaker(abjad.AbjadObject):
@@ -814,7 +816,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         for specifier in specifiers:
             if not isinstance(specifier, rmakers.BeamSpecifier):
-                assert isinstance(specifier, baca.Command), format(specifier)
+                assert isinstance(specifier, (Command, Map)), format(specifier)
             specifier(selections)
 
     def _call_rhythm_commands(

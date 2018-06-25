@@ -5,15 +5,15 @@ import typing
 from abjadext import rmakers
 from . import library
 from .Command import Command
+from .Command import Map
+from .Command import Suite
 from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
-from .MapCommand import MapCommand
 from .Markup import Markup
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
-from .Suite import Suite
 from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .VoltaCommand import VoltaCommand
@@ -1683,7 +1683,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transition(
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
-            ...         selector=baca.map(baca.tuplet(1), baca.tleaves()),
+            ...         selector=baca.tuplets()[1:2].tleaves(),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2238,7 +2238,7 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tie_repeat_pitches() -> MapCommand:
+    def tie_repeat_pitches() -> Map:
         """
         Ties repeat pitches.
         """
@@ -2670,7 +2670,7 @@ class LibraryTZ(abjad.AbjadObject):
         do_not_bookend: bool = False,
         lilypond_id: int = None,
         no_upright: bool = None,
-        pieces: typing.Union[MapCommand, Selector] = 'baca.leaves().group()',
+        pieces: typing.Union[Map, Selector] = 'baca.leaves().group()',
         selector: Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None
         ) -> PiecewiseCommand:

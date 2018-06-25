@@ -22,6 +22,7 @@ RhythmCommand
       left_broken
       multimeasure_rests
       parameter
+      payload
       persist
       reference_meters
       repeat_ties
@@ -113,6 +114,8 @@ RhythmCommand
    .. autoattribute:: RhythmCommand.multimeasure_rests
 
    .. autoattribute:: RhythmCommand.parameter
+
+   .. autoattribute:: RhythmCommand.payload
 
    .. autoattribute:: RhythmCommand.persist
 
