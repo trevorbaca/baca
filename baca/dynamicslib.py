@@ -2855,12 +2855,13 @@ class NewHairpinCommand(Command):
         dynamic_trend: abjad.DynamicTrend,
         *,
         lone_dynamic: bool = True,
+        selector: Selector = 'baca.leaves()',
         start_dynamic: abjad.Dynamic = None,
         start_selector: Selector = 'baca.tleaf(0)',
         stop_dynamic: abjad.Dynamic = None,
         stop_selector: Selector = 'baca.tleaf(-1)',
         ) -> None:
-        Command.__init__(self)
+        Command.__init__(self, selector=selector)
         assert isinstance(dynamic_trend, abjad.DynamicTrend)
         self._dynamic_trend = dynamic_trend
         if lone_dynamic is not None:
@@ -2929,6 +2930,8 @@ class NewHairpinCommand(Command):
         """
         Calls command.
         """
+        if self.selector:
+            argument = self.selector(argument)
         leaves = baca.select(argument).leaves()
         tag = 'BACA_HAIRPIN'
         if len(leaves) == 1 and self.lone_dynamic is False:
@@ -2968,6 +2971,7 @@ def new_hairpin(
         ],
     *,
     lone_dynamic: bool = True,
+    selector: Selector = 'baca.leaves()',
     start_selector: Selector = 'baca.tleaf(0)',
     stop_selector: Selector = 'baca.tleaf(-1)',
     ) -> Command:
@@ -3710,6 +3714,8 @@ def new_hairpin(
         assert isinstance(descriptor, list), repr(descriptor)
         assert len(descriptor) == 3, repr(descriptor)
         start_dynamic, dynamic_trend, stop_dynamic = descriptor
+    if isinstance(selector, str):
+        selector = eval(selector)
     if isinstance(start_selector, str):
         start_selector = eval(start_selector)
     if isinstance(stop_selector, str):
@@ -3717,6 +3723,7 @@ def new_hairpin(
     return NewHairpinCommand(
         dynamic_trend,
         lone_dynamic=lone_dynamic,
+        selector=selector,
         start_dynamic=start_dynamic,
         start_selector=start_selector,
         stop_dynamic=stop_dynamic,
