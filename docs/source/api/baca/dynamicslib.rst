@@ -31,6 +31,7 @@ dynamicslib
 
       dynamic_trend
       lone_dynamic
+      right_broken
       start_dynamic
       start_selector
       stop_dynamic
@@ -98,6 +99,8 @@ dynamicslib
    .. autoattribute:: NewHairpinCommand.dynamic_trend
 
    .. autoattribute:: NewHairpinCommand.lone_dynamic
+
+   .. autoattribute:: NewHairpinCommand.right_broken
 
    .. container:: inherited
 
