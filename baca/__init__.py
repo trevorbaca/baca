@@ -41,7 +41,6 @@ from .ExpressionGallery import ExpressionGallery
 from .FlattenDivisionCallback import FlattenDivisionCallback
 from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
 from .GlobalFermataCommand import GlobalFermataCommand
-from .HairpinCommand import HairpinCommand
 from .HarmonicSeries import HarmonicSeries
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .ImbricationCommand import ImbricationCommand
