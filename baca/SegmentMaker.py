@@ -1149,6 +1149,8 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         if getattr(wrapper.indicator, 'hide', False) is True:
             return
+        if isinstance(wrapper.indicator, abjad.Instrument):
+            return
         if not getattr(wrapper.indicator, 'persistent', False):
             return
         if wrapper.indicator.persistent == 'abjad.MetronomeMark':

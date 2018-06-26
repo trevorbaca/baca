@@ -19,7 +19,6 @@ PersistentIndicatorTests
 
       clefs
       dynamics
-      hidden_instruments
       instruments
       margin_markups
       metronome_marks
@@ -52,8 +51,6 @@ PersistentIndicatorTests
    .. autoattribute:: PersistentIndicatorTests.clefs
 
    .. autoattribute:: PersistentIndicatorTests.dynamics
-
-   .. autoattribute:: PersistentIndicatorTests.hidden_instruments
 
    .. autoattribute:: PersistentIndicatorTests.instruments
 
