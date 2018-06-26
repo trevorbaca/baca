@@ -3115,6 +3115,17 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def rmleaves(count: int) -> abjad.Expression:
+        """
+        Selects all leaves in ``count`` measures, leaked one leaf to the right.
+        """
+        assert isinstance(count, int), repr(count)
+        selector = baca.select().leaves().group_by_measure()
+        selector = selector[:count].flatten().rleak()
+        return selector
+
+
+    @staticmethod
     def scorewide_spacing(
         path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
         fallback_duration: typing.Tuple[int, int],

@@ -58,6 +58,7 @@ LibraryNS
       resume
       resume_after
       rhythm
+      rmleaves
       scorewide_spacing
       script_color
       script_down
@@ -200,6 +201,8 @@ LibraryNS
    .. automethod:: LibraryNS.resume_after
 
    .. automethod:: LibraryNS.rhythm
+
+   .. automethod:: LibraryNS.rmleaves
 
    .. automethod:: LibraryNS.scorewide_spacing
 

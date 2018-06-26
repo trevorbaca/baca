@@ -1590,6 +1590,16 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def mleaves(count: int) -> abjad.Expression:
+        """
+        Selects all leaves in ``count`` measures.
+        """
+        assert isinstance(count, int), repr(count)
+        selector = baca.select().leaves().group_by_measure()
+        selector = selector[:count].flatten()
+        return selector
+
+    @staticmethod
     def mmrest_text_color(
         color: str = 'red',
         *,

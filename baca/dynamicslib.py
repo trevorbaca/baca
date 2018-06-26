@@ -2855,11 +2855,11 @@ class NewHairpinCommand(Command):
         dynamic_trend: abjad.DynamicTrend,
         *,
         lone_dynamic: bool = True,
-        selector: Selector = 'baca.leaves()',
+        selector: Selector = 'baca.teaves()',
         start_dynamic: abjad.Dynamic = None,
-        start_selector: Selector = 'baca.tleaf(0)',
+        start_selector: Selector = 'baca.leaf(0)',
         stop_dynamic: abjad.Dynamic = None,
-        stop_selector: Selector = 'baca.tleaf(-1)',
+        stop_selector: Selector = 'baca.leaf(-1)',
         ) -> None:
         Command.__init__(self, selector=selector)
         assert isinstance(dynamic_trend, abjad.DynamicTrend)
@@ -2971,9 +2971,9 @@ def new_hairpin(
         ],
     *,
     lone_dynamic: bool = True,
-    selector: Selector = 'baca.leaves()',
-    start_selector: Selector = 'baca.tleaf(0)',
-    stop_selector: Selector = 'baca.tleaf(-1)',
+    selector: Selector = 'baca.tleaves()',
+    start_selector: Selector = 'baca.leaf(0)',
+    stop_selector: Selector = 'baca.leaf(-1)',
     ) -> Command:
     r"""
     Attaches hairpin indicators.

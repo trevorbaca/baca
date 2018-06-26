@@ -51,6 +51,7 @@ LibraryGM
       margin_markup
       metronome_mark
       minimum_duration
+      mleaves
       mmrest_text_color
       mmrest_text_extra_offset
       mmrest_text_padding
@@ -136,6 +137,8 @@ LibraryGM
    .. automethod:: LibraryGM.metronome_mark
 
    .. automethod:: LibraryGM.minimum_duration
+
+   .. automethod:: LibraryGM.mleaves
 
    .. automethod:: LibraryGM.mmrest_text_color
 
