@@ -92,7 +92,6 @@ class HairpinCommand(Command):
         '_right_broken',
         '_start',
         '_stop',
-        '_tags',
         '_tweaks',
         )
 

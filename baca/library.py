@@ -931,7 +931,7 @@ def tag(
         tags = [tags]
     if not isinstance(tags, list):
         message = f'tags must be string or list of strings'
-        message += ' (not {tags!r}).'
+        message += f' (not {tags!r}).'
         raise Exception(message)
     if isinstance(command, abjad.Markup):
         command = markup(command)

@@ -2879,6 +2879,7 @@ class NewHairpinCommand(Command):
         if stop_selector is not None:
             assert isinstance(stop_selector, abjad.Expression)
         self._stop_selector = stop_selector
+        self._tags = [abjad.Tag('BACA_HAIRPIN')]
 
     ### PUBLIC PROPERTIES ###
 
@@ -2933,7 +2934,7 @@ class NewHairpinCommand(Command):
         if self.selector:
             argument = self.selector(argument)
         leaves = baca.select(argument).leaves()
-        tag = 'BACA_HAIRPIN'
+        #tag = 'BACA_HAIRPIN'
         if len(leaves) == 1 and self.lone_dynamic is False:
             return None
         if self.start_dynamic is not None:
@@ -2941,7 +2942,7 @@ class NewHairpinCommand(Command):
                 self.start_dynamic,
                 selector=self.start_selector,
                 )
-            library.tag(tag, command)
+            library.tag(self.tag.words, command)
             command.runtime = self.runtime
             command(argument)
         if len(leaves) == 1:
@@ -2950,7 +2951,7 @@ class NewHairpinCommand(Command):
             self.dynamic_trend,
             selector=self.start_selector,
             )
-        library.tag(tag, command)
+        library.tag(self.tag.words, command)
         command.runtime = self.runtime
         command(argument)
         if self.stop_dynamic is not None:
@@ -2959,7 +2960,7 @@ class NewHairpinCommand(Command):
                 self.stop_dynamic,
                 selector=self.stop_selector,
                 )
-            library.tag(tag, command)
+            library.tag(self.tag.words, command)
             command.runtime = self.runtime
             command(argument)
 
