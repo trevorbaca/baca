@@ -4802,7 +4802,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_staff_padding(4),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.new_hairpin('p < f'),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4827,23 +4827,23 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                \f                                                                       %! HC1
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 e''16
                                 ]
                                 ef''4
@@ -4853,12 +4853,12 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                             \times 4/5 {
                                 a'16
-                                \p                                                                       %! HC1
+                                \p                                                                       %! IC:BACA_HAIRPIN
                                 r4
                                 \revert DynamicLineSpanner.staff-padding                                 %! OC2
                                 \revert TupletBracket.staff-padding                                      %! OC2
@@ -4878,7 +4878,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_staff_padding(4, selector=baca.tuplet(1)),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.new_hairpin('p < f'),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4902,24 +4902,24 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                \f                                                                       %! HC1
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
                                 fs''16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 e''16
                                 ]
                                 ef''4
@@ -4929,13 +4929,13 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                                 \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             }
                             \times 4/5 {
                                 a'16
-                                \p                                                                       %! HC1
+                                \p                                                                       %! IC:BACA_HAIRPIN
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }
@@ -4970,7 +4970,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_up(),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.new_hairpin('p < f'),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4995,23 +4995,23 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                \f                                                                       %! HC1
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 e''16
                                 ]
                                 ef''4
@@ -5021,12 +5021,12 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                             \times 4/5 {
                                 a'16
-                                \p                                                                       %! HC1
+                                \p                                                                       %! IC:BACA_HAIRPIN
                                 r4
                                 \revert DynamicLineSpanner.direction                                     %! OC2
                                 \revert TupletBracket.staff-padding                                      %! OC2
@@ -5046,7 +5046,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_up(selector=baca.tuplet(1)),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.new_hairpin('p < f'),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5070,24 +5070,24 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                \f                                                                       %! HC1
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override DynamicLineSpanner.direction = #up                             %! OC1
                                 fs''16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 e''16
                                 ]
                                 ef''4
@@ -5097,13 +5097,13 @@ class LibraryAF(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                                 \revert DynamicLineSpanner.direction                                     %! OC2
                             }
                             \times 4/5 {
                                 a'16
-                                \p                                                                       %! HC1
+                                \p                                                                       %! IC:BACA_HAIRPIN
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC2
                             }

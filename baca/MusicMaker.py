@@ -1420,7 +1420,7 @@ class MusicMaker(abjad.AbjadObject):
             Hairpin specifier selects all leaves:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.hairpin('p < f'),
+            ...     baca.new_hairpin('p < f'),
             ...     )
 
             >>> collections = [
@@ -1449,9 +1449,9 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 bf'16
                                 fs''16
@@ -1470,8 +1470,8 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                         }
                     }
@@ -1487,7 +1487,7 @@ class MusicMaker(abjad.AbjadObject):
             ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
             ...     baca.map(
             ...         baca.runs(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.new_hairpin('p < f'),
             ...         ),
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.Pattern(
@@ -1517,21 +1517,21 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 bf'16
                                 fs''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                             \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 b''16
                                 ]
                             }
@@ -1541,8 +1541,8 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                         }
                     }
@@ -1558,11 +1558,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     baca.map(
             ...         baca.tuplet(0),
-            ...         baca.hairpin('p < f'),
+            ...         baca.new_hairpin('p < f'),
             ...         ),
             ...     baca.map(
             ...         baca.tuplet(-1),
-            ...         baca.hairpin('f > p'),
+            ...         baca.new_hairpin('f > p'),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -1585,14 +1585,14 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 bf'16
                                 fs''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
@@ -1603,14 +1603,14 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
+                                \>                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \f                                                                       %! HC1
-                                \>                                                                       %! HC1
                                 cs''16
                                 a'16
                                 af'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \p                                                                       %! HC1
                             }
                         }
                     }
@@ -1624,8 +1624,8 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.hairpin('p < f', selector=baca.tuplets()[:2]),
-            ...     baca.hairpin('f > p', selector=baca.tuplets()[-1:]),
+            ...     baca.new_hairpin('p < f', selector=baca.tuplets()[:2]),
+            ...     baca.new_hairpin('f > p', selector=baca.tuplets()[-1:]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
@@ -1647,9 +1647,9 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
+                                \<                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \p                                                                       %! HC1
-                                \<                                                                       %! HC1
                                 d'16
                                 bf'16
                                 fs''16
@@ -1660,19 +1660,19 @@ class MusicMaker(abjad.AbjadObject):
                                 [
                                 ef''16
                                 b''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \f                                                                       %! HC1
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
+                                \f                                                                       %! IC:BACA_HAIRPIN
+                                \>                                                                       %! IC:BACA_HAIRPIN
                                 [
-                                \f                                                                       %! HC1
-                                \>                                                                       %! HC1
                                 cs''16
                                 a'16
                                 af'16
+                                \p                                                                       %! IC:BACA_HAIRPIN
                                 ]
-                                \p                                                                       %! HC1
                             }
                         }
                     }
