@@ -428,7 +428,6 @@ def dynamic_shift(
 
 # TODO: test and document?
 # TODO: appears not to do anything?
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_center(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -625,7 +624,6 @@ def dynamic_text_extra_offset(
 
 # TODO: test and document?
 # TODO: appears not to do anything?
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_left(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -647,7 +645,6 @@ def dynamic_text_left(
         command_2,
         )
 
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_parent_alignment_x(
     n: Number,
     *,
@@ -665,7 +662,6 @@ def dynamic_text_parent_alignment_x(
 
 # TODO: test and document?
 # TODO: appears not to do anything?
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_right(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -687,7 +683,6 @@ def dynamic_text_right(
         command_2,
         )
 
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_stencil_false(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -702,7 +697,6 @@ def dynamic_text_stencil_false(
         selector=selector,
         )
 
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_transparent(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -717,7 +711,6 @@ def dynamic_text_transparent(
         selector=selector,
         )
 
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_x_extent_zero(
     *,
     selector: Selector = 'baca.pleaf(0)',
@@ -732,7 +725,6 @@ def dynamic_text_x_extent_zero(
         selector=selector,
         )
 
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_x_offset(
     n: Number,
     *,
@@ -748,7 +740,6 @@ def dynamic_text_x_offset(
         selector=selector,
         )
 
-# TODO: change selector to baca.leaf(0) for niente dynamics
 def dynamic_text_y_offset(
     n: Number,
     *,
@@ -1126,7 +1117,6 @@ def dynamics(string: str) -> typing.List[abjad.Dynamic]:
 _local_dynamics = dynamics
 
 # TODO: completely refactor;
-#       change selector to baca.leaves() because of niente dynamics;
 #       remove bookend keyword altogether;
 #       add left_broken, right_broken keywords;
 def hairpin_chain(
