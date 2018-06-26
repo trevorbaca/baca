@@ -1402,7 +1402,6 @@ def hairpin(
 #       change selector to baca.leaves() because of niente dynamics;
 #       remove bookend keyword altogether;
 #       add left_broken, right_broken keywords;
-#       maybe add start_ordinal, stop_ordinal keywords;
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
@@ -2879,7 +2878,6 @@ class NewHairpinCommand(Command):
         if stop_selector is not None:
             assert isinstance(stop_selector, abjad.Expression)
         self._stop_selector = stop_selector
-        #self._tags = [abjad.Tag('BACA_HAIRPIN')]
 
     ### PUBLIC PROPERTIES ###
 
