@@ -3167,7 +3167,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 d'16
                                 ]
                                 bf'4
@@ -3236,15 +3236,15 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 d'16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 bf'4
                                 ~
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 bf'16
                                 r16
                                 \stopTrillSpan                                                           %! SC
@@ -3253,30 +3253,30 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 e''16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 ef''4
                                 ~
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 ef''16
                                 r16
                                 \stopTrillSpan                                                           %! SC
                                 af''16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 g''16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                             }
                             \times 4/5 {
                                 a'16
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 r4
                                 \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC2
@@ -3321,7 +3321,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 d'16
                                 ]
                                 bf'4
@@ -3334,7 +3334,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 e''16
                                 ]
                                 ef''4
@@ -3344,7 +3344,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \stopTrillSpan                                                           %! SC
                                 af''16
                                 [
-                                \startTrillSpan                                                          %! SC
+                                \startTrillSpan
                                 g''16
                                 ]
                             }
@@ -3395,7 +3395,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \pitchedTrill                                                            %! SC
                                 c'16
                                 [
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 d'16
                                 ]
                                 \stopTrillSpan                                                           %! SC
@@ -3465,17 +3465,17 @@ class LibraryTZ(abjad.AbjadObject):
                                 \pitchedTrill                                                            %! SC
                                 c'16
                                 [
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 \pitchedTrill                                                            %! SC
                                 d'16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 \pitchedTrill                                                            %! SC
                                 bf'4
                                 ~
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 bf'16
                                 r16
                                 \stopTrillSpan                                                           %! SC
@@ -3485,35 +3485,35 @@ class LibraryTZ(abjad.AbjadObject):
                                 \pitchedTrill                                                            %! SC
                                 fs''16
                                 [
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 \pitchedTrill                                                            %! SC
                                 e''16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 \pitchedTrill                                                            %! SC
                                 ef''4
                                 ~
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 ef''16
                                 r16
                                 \stopTrillSpan                                                           %! SC
                                 \pitchedTrill                                                            %! SC
                                 af''16
                                 [
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 \pitchedTrill                                                            %! SC
                                 g''16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                             }
                             \times 4/5 {
                                 \pitchedTrill                                                            %! SC
                                 a'16
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan ef'                                                      %! SC
+                                \startTrillSpan ef'
                                 r4
                                 \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC2
@@ -3559,17 +3559,17 @@ class LibraryTZ(abjad.AbjadObject):
                                 \pitchedTrill                                                            %! SC
                                 c'16
                                 [
-                                \startTrillSpan d'                                                       %! SC
+                                \startTrillSpan d'
                                 \pitchedTrill                                                            %! SC
                                 d'16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan e'                                                       %! SC
+                                \startTrillSpan e'
                                 \pitchedTrill                                                            %! SC
                                 bf'4
                                 ~
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan c''                                                      %! SC
+                                \startTrillSpan c''
                                 bf'16
                                 r16
                                 \stopTrillSpan                                                           %! SC
@@ -3579,35 +3579,35 @@ class LibraryTZ(abjad.AbjadObject):
                                 \pitchedTrill                                                            %! SC
                                 fs''16
                                 [
-                                \startTrillSpan gs''                                                     %! SC
+                                \startTrillSpan gs''
                                 \pitchedTrill                                                            %! SC
                                 e''16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan fs''                                                     %! SC
+                                \startTrillSpan fs''
                                 \pitchedTrill                                                            %! SC
                                 ef''4
                                 ~
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan f''                                                      %! SC
+                                \startTrillSpan f''
                                 ef''16
                                 r16
                                 \stopTrillSpan                                                           %! SC
                                 \pitchedTrill                                                            %! SC
                                 af''16
                                 [
-                                \startTrillSpan bf''                                                     %! SC
+                                \startTrillSpan bf''
                                 \pitchedTrill                                                            %! SC
                                 g''16
                                 ]
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan a''                                                      %! SC
+                                \startTrillSpan a''
                             }
                             \times 4/5 {
                                 \pitchedTrill                                                            %! SC
                                 a'16
                                 \stopTrillSpan                                                           %! SC
-                                \startTrillSpan b'                                                       %! SC
+                                \startTrillSpan b'
                                 r4
                                 \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC2

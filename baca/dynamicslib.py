@@ -1040,8 +1040,8 @@ def dynamic_trend(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \ppp                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -1054,8 +1054,8 @@ def dynamic_trend(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             g'8
                             \pp                                                                      %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
@@ -1066,8 +1066,8 @@ def dynamic_trend(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
                             \ppp                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -1080,9 +1080,9 @@ def dynamic_trend(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             f''8
                             \pp                                                                      %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             - \tweak circled-tip ##t                                                 %! IC
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
@@ -2406,8 +2406,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -2420,8 +2420,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             g'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
@@ -2432,8 +2432,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -2446,8 +2446,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             f''8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
@@ -2552,8 +2552,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -2575,8 +2575,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -2589,8 +2589,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             f''8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
@@ -2612,8 +2612,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -2704,8 +2704,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -2718,8 +2718,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             g'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
@@ -2730,8 +2730,8 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC
+                            [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -2744,9 +2744,9 @@ def measure_swells(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             f''8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             - \tweak circled-tip ##t                                                 %! IC
                             \>                                                                       %! IC
+                            [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
@@ -3077,8 +3077,8 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             \<                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3199,9 +3199,9 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
                             \>                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3320,9 +3320,9 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
                             \<                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3443,9 +3443,9 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             - \tweak stencil #constante-hairpin                                      %! IC:BACA_HAIRPIN
                             \<                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3573,9 +3573,9 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             - \tweak stencil #abjad-flared-hairpin                                   %! IC:BACA_HAIRPIN
                             \<                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3599,9 +3599,9 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             d''8
                             \effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             - \tweak stencil #abjad-flared-hairpin                                   %! IC:BACA_HAIRPIN
                             \>                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
@@ -3807,8 +3807,8 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            [
                             \>                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -3830,8 +3830,8 @@ def new_hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
                             \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            [
                             \<                                                                       %! IC:BACA_HAIRPIN
+                            [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
