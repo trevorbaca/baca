@@ -2194,7 +2194,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(indicator, abjad.Clef):
             key = indicator.name
         elif isinstance(indicator, abjad.Dynamic):
-            key = indicator.command or indicator.name
+            if indicator.name == 'niente':
+                key = 'niente'
+            else:
+                key = indicator.command or indicator.name
         elif isinstance(indicator, abjad.Instrument):
             key = SegmentMaker._get_key(
                 manifests['abjad.Instrument'],

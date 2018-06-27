@@ -3764,7 +3764,9 @@ def hairpin_indicator_chain(
                 dynamic_trend = abjad.DynamicTrend(string)
                 indicators.append(dynamic_trend)
             else:
-                dynamic = _local_dynamic(string).indicators[0]
+                command = _local_dynamic(string)
+                assert command.indicators
+                dynamic = command.indicators[0]
                 assert isinstance(dynamic, abjad.Dynamic)
                 indicators.append(dynamic)
         for left, right in baca.sequence(indicators).nwise():
