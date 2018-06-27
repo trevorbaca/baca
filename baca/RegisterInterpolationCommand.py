@@ -1,9 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Number
-from .Typing import Selector
 
 
 class RegisterInterpolationCommand(Command):
@@ -976,9 +975,9 @@ class RegisterInterpolationCommand(Command):
     def __init__(
         self,
         *,
-        selector: Selector = 'baca.plts()',
-        start_pitch: typing.Union[Number, abjad.NumberedPitch] = 0,
-        stop_pitch: typing.Union[Number, abjad.NumberedPitch] = 0,
+        selector: typings.Selector = 'baca.plts()',
+        start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
+        stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         ) -> None:
         Command.__init__(self, selector=selector)
         start_pitch = abjad.NumberedPitch(start_pitch)

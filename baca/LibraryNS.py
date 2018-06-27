@@ -4,6 +4,7 @@ import collections
 import typing
 from . import library
 from . import markups
+from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
 from .BreakMeasureMap import BreakMeasureMap
@@ -35,10 +36,6 @@ from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
 from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
-from .Typing import Number
-from .Typing import NumberPair
-from .Typing import RhythmMakerTyping
-from .Typing import Selector
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -59,7 +56,7 @@ class LibraryNS(abjad.AbjadObject):
     def natural_clusters(
         widths: typing.Iterable[int],
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
         ) -> ClusterCommand:
         """
@@ -154,7 +151,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def no_ledgers(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides note-head no-ledgers.
@@ -168,9 +165,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def note_column_shift(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides note column force hshift.
@@ -186,7 +183,7 @@ class LibraryNS(abjad.AbjadObject):
     def note_head_color(
         color: str,
         *,
-        selector: Selector = 'baca.pleaves()',
+        selector: typings.Selector = 'baca.pleaves()',
         ) -> OverrideCommand:
         """
         Overrides note-head color.
@@ -201,7 +198,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def note_head_stencil_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides note-head stencil.
@@ -216,7 +213,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def note_head_style_cross(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides note-head style.
@@ -362,7 +359,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def note_head_style_harmonic(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides note-head style for ``selector`` output.
@@ -508,7 +505,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def note_head_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides note-head transparency.
@@ -523,7 +520,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def one_voice(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         """
         Makes LilyPond ``\oneVoice`` command.
@@ -537,7 +534,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def ottava(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> SpannerCommand:
         r"""
         Attaches ottava spanner.
@@ -616,7 +613,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def ottava_bassa(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> SpannerCommand:
         r"""
         Attaches ottava bassa spanner.
@@ -694,9 +691,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def ottava_bracket_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides ottava bracket staff padding.
@@ -744,7 +741,7 @@ class LibraryNS(abjad.AbjadObject):
     def parts(
         part_assignment: abjad.PartAssignment,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> PartAssignmentCommand:
         r"""
         Inserts ``selector`` output in container and sets part assignment.
@@ -936,7 +933,7 @@ class LibraryNS(abjad.AbjadObject):
     def pitch(
         pitch,
         *,
-        selector: Selector = 'baca.pleaves()',
+        selector: typings.Selector = 'baca.pleaves()',
         do_not_transpose: bool = None,
         persist: str = None,
         ) -> PitchCommand:
@@ -963,7 +960,7 @@ class LibraryNS(abjad.AbjadObject):
     def possibile_dynamic(
         dynamic: str,
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches possibile dynamic.
@@ -1135,7 +1132,7 @@ class LibraryNS(abjad.AbjadObject):
         start: int,
         stop: int = None,
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
         r"""
         Octave-transposes ``selector`` output.
@@ -1471,7 +1468,7 @@ class LibraryNS(abjad.AbjadObject):
     def rehearsal_mark(
         argument: typing.Union[int, str],
         *tweaks: abjad.LilyPondTweakManager,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         """
         Attaches rehearsal mark.
@@ -1489,9 +1486,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rehearsal_mark_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides rehearsal mark extra offset.
@@ -1506,9 +1503,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rehearsal_mark_y_offset(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides rehearsal mark Y offset.
@@ -1524,7 +1521,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie(
         *,
-        selector: Selector = 'baca.qrun(0)',
+        selector: typings.Selector = 'baca.qrun(0)',
         ) -> SpannerCommand:
         r"""
         Attaches repeat tie.
@@ -1606,7 +1603,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie_down(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides repeat tie direction.
@@ -1767,7 +1764,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie_from(
         *,
-        selector: Selector = 'baca.pleaf(-1)',
+        selector: typings.Selector = 'baca.pleaf(-1)',
         ) -> TieCorrectionCommand:
         r"""
         Repeat-ties from leaf.
@@ -1879,7 +1876,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie_stencil_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides repeat tie stencil.
@@ -1894,7 +1891,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie_to(
         *,
-        selector: Selector = 'baca.pleaf(0)',
+        selector: typings.Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:
         r"""
         Repeat-ties to leaf.
@@ -1994,7 +1991,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides repeat tie transparency.
@@ -2009,7 +2006,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def repeat_tie_up(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides repeat tie direction.
@@ -2170,7 +2167,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def rest_down(
         *,
-        selector: Selector = 'baca.rests()',
+        selector: typings.Selector = 'baca.rests()',
         ) -> OverrideCommand:
         r"""
         Overrides rest direction.
@@ -2317,9 +2314,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rest_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.rest(0)',
+        selector: typings.Selector = 'baca.rest(0)',
         ) -> OverrideCommand:
         """
         Overrides rest extra offset.
@@ -2341,9 +2338,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rest_position(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.rests()',
+        selector: typings.Selector = 'baca.rests()',
         ) -> OverrideCommand:
         r"""
         Overrides rest position.
@@ -2491,7 +2488,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def rest_transparent(
         *,
-        selector: Selector = 'baca.rests()',
+        selector: typings.Selector = 'baca.rests()',
         ) -> OverrideCommand:
         r"""
         Overrides rest transparency.
@@ -2639,7 +2636,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def rest_up(
         *,
-        selector: Selector = 'baca.rests()',
+        selector: typings.Selector = 'baca.rests()',
         ) -> OverrideCommand:
         r"""
         Overrides rest direction.
@@ -3016,7 +3013,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def rhythm(
-        rhythm_maker: RhythmMakerTyping,
+        rhythm_maker: typings.RhythmMakerTyping,
         *,
         division_maker: DivisionMaker = None,
         division_expression: abjad.Expression = None,
@@ -3142,7 +3139,7 @@ class LibraryNS(abjad.AbjadObject):
     def script_color(
         color: str = 'red',
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides script color.
@@ -3311,7 +3308,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def script_down(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides script direction.
@@ -3479,9 +3476,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def script_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
         Overrides script extra offset.
@@ -3647,9 +3644,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def script_padding(
-        number: Number,
+        number: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides script padding.
@@ -3663,9 +3660,9 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def script_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides script staff padding.
@@ -3680,7 +3677,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def script_up(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides script direction.
@@ -3849,7 +3846,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def short_fermata(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches short fermata.
@@ -4210,7 +4207,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def slur(
         *tweaks: abjad.LilyPondTweakManager,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> SpannerCommand:
         r"""
         Attaches slur.
@@ -4364,7 +4361,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def slur_down(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides slur direction.
@@ -4529,7 +4526,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def slur_up(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides slur direction.
@@ -4707,7 +4704,7 @@ class LibraryNS(abjad.AbjadObject):
     def soprano_to_octave(
         n: int,
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""
         Octave-transposes music.
@@ -5061,7 +5058,7 @@ class LibraryNS(abjad.AbjadObject):
         *,
         after: bool = None,
         context: str = 'Score',
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides span bar color.
@@ -5077,11 +5074,11 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def span_bar_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
         after: bool = None,
         context: str = 'Score',
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides span bar extra offset.
@@ -5098,7 +5095,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def span_bar_transparent(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
         Overrides span bar transparency.
@@ -5179,7 +5176,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def staccatissimo(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches staccatissimo.
@@ -5328,7 +5325,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def staccato(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches staccato.
@@ -5478,7 +5475,7 @@ class LibraryNS(abjad.AbjadObject):
     def staff_lines(
         n: int,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Makes staff line command.
@@ -5984,7 +5981,7 @@ class LibraryNS(abjad.AbjadObject):
     def staff_position(
         number: int,
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> StaffPositionCommand:
         """
         Makes staff position command; allows repeats.
@@ -6002,7 +5999,7 @@ class LibraryNS(abjad.AbjadObject):
         *,
         allow_repeats: bool = None,
         exact: bool = None,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> StaffPositionCommand:
         """
         Makes staff position command; does not allow repeats.
@@ -6021,8 +6018,8 @@ class LibraryNS(abjad.AbjadObject):
         argument: str,
         *,
         context: str = 'Staff',
-        hcenter_in: Number = None,
-        selector: Selector = 'baca.leaf(0)',
+        hcenter_in: typings.Number = None,
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         """
         Attaches start markup.
@@ -6059,7 +6056,7 @@ class LibraryNS(abjad.AbjadObject):
         color: str = 'red',
         *,
         context: str = None,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides stem color.
@@ -6209,7 +6206,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stem_down(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides stem direction.
@@ -6361,7 +6358,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stem_stencil_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides stem stencil.
@@ -6376,7 +6373,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stem_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides stem transparency.
@@ -6391,7 +6388,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stem_tremolo(
         *,
-        selector: Selector = 'baca.pleaf(0)',
+        selector: typings.Selector = 'baca.pleaf(0)',
         tremolo_flags:int = 32,
         ) -> IndicatorCommand:
         r"""
@@ -6542,7 +6539,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stem_up(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides stem direction.
@@ -6694,7 +6691,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stop_trill(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         """
         Attaches stop trill to closing-slot.
@@ -6719,7 +6716,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def stopped(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches stopped +-sign.
@@ -6797,7 +6794,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def strict_note_spacing_off(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides spacing spanner strict note spacing.
@@ -6906,7 +6903,7 @@ class LibraryNS(abjad.AbjadObject):
     def subito_dynamic(
         dynamic: str,
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         """
         Attaches subito dynamic.
@@ -6921,7 +6918,7 @@ class LibraryNS(abjad.AbjadObject):
     @staticmethod
     def sustain_pedal(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> SpannerCommand:
         r"""
         Attaches sustain pedal.
@@ -7525,10 +7522,10 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def sustain_pedal_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
         context: str = 'Staff',
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides sustain pedal staff padding.
@@ -7705,7 +7702,7 @@ class LibraryNS(abjad.AbjadObject):
     def system(
         *distances: typing.Any,
         measure: int = None,
-        y_offset: Number = None
+        y_offset: typings.Number = None
         ) -> SystemSpecifier:
         """
         Makes system specifier.

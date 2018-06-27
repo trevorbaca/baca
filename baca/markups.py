@@ -5,10 +5,10 @@ import abjad
 import baca
 import typing
 from . import library
+from . import typings
 from .Command import Suite
 from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
-from .Typing import Number
 
 
 def accent_changes_of_direction():
@@ -304,7 +304,7 @@ def hair():
 
 def instrument(
     string: str,
-    hcenter_in: typing.Optional[Number] = 16,
+    hcenter_in: typing.Optional[typings.Number] = 16,
     column: bool = True,
     ):
     r"""
@@ -881,7 +881,7 @@ def senza_vib():
 
 def short_instrument(
     string: str,
-    hcenter_in: Number = 10,
+    hcenter_in: typings.Number = 10,
     column: bool = True,
     ):
     r"""

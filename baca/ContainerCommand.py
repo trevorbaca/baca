@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class ContainerCommand(Command):
@@ -105,7 +105,7 @@ class ContainerCommand(Command):
         self,
         *,
         identifier: str = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
         if identifier is not None:

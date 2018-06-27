@@ -3,6 +3,7 @@ Function library.
 """
 import abjad
 import typing
+from . import typings
 from .Command import Command
 from .Command import Map
 from .Command import Suite
@@ -16,8 +17,6 @@ from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
 from .TimelineScope import TimelineScope
-from .Typing import Pair
-from .Typing import Selector
 
 
 def dashed_arrow() -> abjad.ArrowLineSegment:
@@ -57,7 +56,7 @@ def lbsd(
     y_offset: int,
     alignment_distances: typing.Sequence,
     *,
-    selector: Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.leaf(0)',
     ) -> IndicatorCommand:
     """
     Makes line-break system details.
@@ -76,7 +75,7 @@ def literal(
     string: str,
     *,
     format_slot: str = 'before',
-    selector: Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.leaf(0)',
     ) -> IndicatorCommand:
     """
     Attaches LilyPond literal.
@@ -117,7 +116,7 @@ def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.LilyPondTweakManager,
     direction: abjad.VerticalAlignment = abjad.Up,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     literal: bool = False,
     ) -> IndicatorCommand:
     r"""
@@ -619,10 +618,10 @@ def only_segment(command: Command) -> typing.Union[Command, Map, Suite]:
 def piecewise(
     spanner: abjad.Spanner,
     indicators: typing.Sequence,
-    pieces: typing.Union[Map, Selector],
+    pieces: typing.Union[Map, typings.Selector],
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = False,
-    selector: Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.leaves()',
     ):
     """
     Makes piecewise command from ``spanner``, ``indicators`` and indicator
@@ -637,7 +636,7 @@ def piecewise(
         tweaks=tweaks,
         )
 
-def pick(pattern, *commands) -> typing.List[Pair]:
+def pick(pattern, *commands) -> typing.List[typings.Pair]:
     """
     Maps ``pattern`` to each command in ``commands``.
     """
@@ -656,7 +655,7 @@ def pitches(
     exact: bool = None,
     ignore_incomplete: bool = None,
     persist: str = None,
-    selector: Selector = 'baca.pleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     ) -> PitchCommand:
     """
     Makes pitch command.

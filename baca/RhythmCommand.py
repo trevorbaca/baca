@@ -3,11 +3,9 @@ import baca
 import collections
 import typing
 from abjadext import rmakers
+from . import typings
 from .Command import Command
 from .DivisionMaker import DivisionMaker
-from .Typing import DivisionMakerTyping
-from .Typing import RhythmMakerTyping
-from .Typing import division_maker_type
 rhythm_maker_type = (
     rmakers.RhythmMaker,
     abjad.Selection,
@@ -188,7 +186,7 @@ class RhythmCommand(Command):
         reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
         rewrite_rest_filled: bool = None,
-        rhythm_maker: RhythmMakerTyping = None,
+        rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
@@ -199,7 +197,7 @@ class RhythmCommand(Command):
             message += f':\n{division_expression} {division_maker}.'
             raise Exception(message)
         if division_maker is not None:
-            assert isinstance(division_maker, division_maker_type), repr(division_maker)
+            assert isinstance(division_maker, typings.division_maker_type), repr(division_maker)
         self._division_maker = division_maker
         if division_expression is not None:
             assert isinstance(division_expression, abjad.Expression)
@@ -612,7 +610,7 @@ class RhythmCommand(Command):
         return self._division_expression
 
     @property
-    def division_maker(self) -> typing.Optional[DivisionMakerTyping]:
+    def division_maker(self) -> typing.Optional[typings.DivisionMakerTyping]:
         """
         Gets division-maker.
         """
@@ -762,7 +760,7 @@ class RhythmCommand(Command):
         return self._rewrite_rest_filled
 
     @property
-    def rhythm_maker(self) -> typing.Optional[RhythmMakerTyping]:
+    def rhythm_maker(self) -> typing.Optional[typings.RhythmMakerTyping]:
         r"""
         Gets rhythm-maker-or-selection or (rhythm-maker-or-selection, pattern)
         pairs.

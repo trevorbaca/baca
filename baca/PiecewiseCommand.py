@@ -3,10 +3,10 @@ import baca
 import collections
 import copy
 import typing
+from . import typings
 from .Command import Command
 from .Command import Map
 from .SpannerCommand import SpannerCommand
-from .Typing import Selector
 
 
 class PiecewiseCommand(Command):
@@ -32,9 +32,9 @@ class PiecewiseCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
-        pieces: typing.Union[Map, Selector] = 'baca.leaves()',
+        pieces: typing.Union[Map, typings.Selector] = 'baca.leaves()',
         spanner: abjad.Spanner = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = (),
         ) -> None:
         Command.__init__(self, selector=selector)

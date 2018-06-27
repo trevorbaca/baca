@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class SpannerCommand(Command):
@@ -196,7 +196,7 @@ class SpannerCommand(Command):
         detach_first: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
         ) -> None:

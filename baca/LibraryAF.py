@@ -3,6 +3,7 @@ import baca
 import typing
 from abjadext import rmakers
 from . import library
+from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BowContactPointCommand import BowContactPointCommand
@@ -24,9 +25,6 @@ from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SpannerCommand import SpannerCommand
-from .Typing import Number
-from .Typing import NumberPair
-from .Typing import Selector
 
 
 class LibraryAF(abjad.AbjadObject):
@@ -49,7 +47,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def accent(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches accent.
@@ -198,7 +196,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def accidental_stencil_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides accidental stencil.
@@ -213,7 +211,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def accidental_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides accidental transparency on.
@@ -228,7 +226,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def accidental_x_extent_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides accidental x-extent.
@@ -243,7 +241,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def allow_octaves(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> IndicatorCommand:
         """
         Attaches ALLOW_OCTAVE tag.
@@ -257,7 +255,7 @@ class LibraryAF(abjad.AbjadObject):
     def alternate_bow_strokes(
         *,
         downbow_first: bool = True,
-        selector: Selector = 'baca.pheads()',
+        selector: typings.Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         r"""
         Attaches alternate bow strokes.
@@ -493,8 +491,8 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def anchor(
         remote_voice_name: str,
-        remote_selector: Selector = None,
-        local_selector: Selector = None,
+        remote_selector: typings.Selector = None,
+        local_selector: typings.Selector = None,
         ) -> AnchorSpecifier:
         """
         Anchors music in this figure (filtered by ``local_selector``) to
@@ -516,8 +514,8 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def anchor_after(
         remote_voice_name: str,
-        remote_selector: Selector = None,
-        local_selector: Selector = None,
+        remote_selector: typings.Selector = None,
+        local_selector: typings.Selector = None,
         ) -> AnchorSpecifier:
         """
         Anchors music in this figure (filtered by ``local_selector``) to
@@ -551,7 +549,7 @@ class LibraryAF(abjad.AbjadObject):
     def ancora_dynamic(
         dynamic: str,
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches ancora dynamic.
@@ -697,7 +695,7 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def apply(
-        selector: Selector,
+        selector: typings.Selector,
         *commands: typing.Iterable[Command],
         ) -> typing.List[Command]:
         r"""
@@ -1025,7 +1023,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def arpeggio(
         *,
-        selector: Selector = 'baca.chead(0)',
+        selector: typings.Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches arpeggio.
@@ -1179,7 +1177,7 @@ class LibraryAF(abjad.AbjadObject):
     def articulation(
         articulation: str,
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         """
         Attaches ``articulation``.
@@ -1194,7 +1192,7 @@ class LibraryAF(abjad.AbjadObject):
     def articulations(
         articulations: typing.List,
         *,
-        selector: Selector = 'baca.pheads()',
+        selector: typings.Selector = 'baca.pheads()',
         ) -> IndicatorCommand:
         """
         Attaches ``articulations``.
@@ -1206,9 +1204,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bar_extent(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         after: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -1342,9 +1340,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def bar_extent_persistent(
-        pair: NumberPair = None,
+        pair: typings.NumberPair = None,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Makes persistent bar-extent override.
@@ -1501,7 +1499,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def bar_line_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides bar line transparency.
@@ -1747,7 +1745,7 @@ class LibraryAF(abjad.AbjadObject):
     def bass_to_octave(
         n: int,
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""
         Octave-transposes music.
@@ -2100,7 +2098,7 @@ class LibraryAF(abjad.AbjadObject):
         *tweaks: abjad.LilyPondTweakManager,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         helper: typing.Callable = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> BowContactPointCommand:
         """
         Makes bow contact points.
@@ -2115,7 +2113,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def beam(
         *tweaks: abjad.LilyPondTweakManager,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> SpannerCommand:
         r"""
         Attaches beam.
@@ -2239,7 +2237,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def beam_divisions(
         *,
-        stemlets: Number = None,
+        stemlets: typings.Number = None,
         ) -> rmakers.BeamSpecifier:
         r"""
         Beams divisions.
@@ -2359,7 +2357,7 @@ class LibraryAF(abjad.AbjadObject):
     def beam_everything(
         *,
         hide_nibs: bool = False,
-        stemlets: Number = None,
+        stemlets: typings.Number = None,
         ) -> rmakers.BeamSpecifier:
         r"""
         Beams everything.
@@ -2551,9 +2549,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def beam_positions(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides beam positions.
@@ -2832,7 +2830,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def beam_stencil_false(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides beam stencil.
@@ -2847,7 +2845,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def beam_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides beam transparency.
@@ -2987,7 +2985,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def breathe(
         *,
-        selector: Selector = 'baca.pleaf(-1)',
+        selector: typings.Selector = 'baca.pleaf(-1)',
         ) -> IndicatorCommand:
         """
         Attaches LilyPond breathe command to pleaf -1.
@@ -3002,7 +3000,7 @@ class LibraryAF(abjad.AbjadObject):
     def center_to_octave(
         n: int,
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> RegisterToOctaveCommand:
         r"""
         Octave-transposes music.
@@ -3354,7 +3352,7 @@ class LibraryAF(abjad.AbjadObject):
     def clef(
         clef: str = 'treble',
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         redundant: bool = None,
         ) -> IndicatorCommand:
         r"""
@@ -3501,9 +3499,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def clef_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides clef extra offset.
@@ -3520,7 +3518,7 @@ class LibraryAF(abjad.AbjadObject):
     def clef_shift(
         clef: typing.Union[str, abjad.Clef],
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> Suite:
         """
         Shifts clef to left by width of clef.
@@ -3547,7 +3545,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def clef_x_extent_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides clef x-extent.
@@ -3564,7 +3562,7 @@ class LibraryAF(abjad.AbjadObject):
     def clusters(
         widths: typing.List[int],
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
         ) -> ClusterCommand:
         """
@@ -3670,7 +3668,7 @@ class LibraryAF(abjad.AbjadObject):
         return Coat(pitch)
 
     @staticmethod
-    def color(*, selector: Selector = 'baca.leaves()') -> ColorCommand:
+    def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
         r"""
         Colors leaves.
 
@@ -3890,9 +3888,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def color_fingerings(
-        numbers: typing.List[Number],
+        numbers: typing.List[typings.Number],
         *,
-        selector: Selector = 'baca.pheads()',
+        selector: typings.Selector = 'baca.pheads()',
         ) -> ColorFingeringCommand:
         """
         Adds color fingerings.
@@ -3916,7 +3914,7 @@ class LibraryAF(abjad.AbjadObject):
     def container(
         identifier: str = None,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> ContainerCommand:
         r"""
         Makes container with ``identifier`` and extends container with
@@ -4012,7 +4010,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def cross_staff(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches cross-staff command.
@@ -4408,9 +4406,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def deviation(
-        deviations: typing.List[Number],
+        deviations: typing.List[typings.Number],
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> MicrotoneDeviationCommand:
         """
         Sets microtone ``deviations``.
@@ -4424,7 +4422,7 @@ class LibraryAF(abjad.AbjadObject):
     def diatonic_clusters(
         widths: typing.List[int],
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> DiatonicClusterCommand:
         """
         Makes diatonic clusters with ``widths``.
@@ -4438,7 +4436,7 @@ class LibraryAF(abjad.AbjadObject):
     def displacement(
         displacements: typing.List[int],
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> OctaveDisplacementCommand:
         r"""
         Octave-displaces ``selector`` output.
@@ -4636,9 +4634,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dls_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides dynamic line spanner padding.
@@ -4652,9 +4650,9 @@ class LibraryAF(abjad.AbjadObject):
 
     @staticmethod
     def dls_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides dynamic line spanner staff padding
@@ -4822,7 +4820,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dls_up(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides dynamic line spanner direction.
@@ -4990,7 +4988,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dots_stencil_false(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides dots stencil.
@@ -5005,7 +5003,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def dots_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides dots transparency.
@@ -5020,7 +5018,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def double_staccato(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches double-staccato.
@@ -5169,7 +5167,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def down_arpeggio(
         *,
-        selector: Selector = 'baca.chead(0)',
+        selector: typings.Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches down-arpeggio.
@@ -5325,7 +5323,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def down_bow(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches down-bow.
@@ -5474,7 +5472,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def espressivo(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches espressivo.
@@ -5623,7 +5621,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def fermata(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches fermata.
@@ -5765,7 +5763,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def finger_pressure_transition(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         right_broken: bool = None,
         ) -> Suite:
         r"""
@@ -5914,7 +5912,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def flag_stencil_false(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides flag stencil.
@@ -5929,7 +5927,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def flag_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ):
         """
         Overrides flag transparency.
@@ -5944,7 +5942,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def flageolet(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches flageolet.
@@ -6161,7 +6159,7 @@ class LibraryAF(abjad.AbjadObject):
     @staticmethod
     def force_accidental(
         *,
-        selector: Selector = 'baca.pleaf(0)',
+        selector: typings.Selector = 'baca.pleaf(0)',
         ) -> AccidentalAdjustmentCommand:
         r"""
         Forces accidental.

@@ -1,7 +1,7 @@
 import abjad
 import collections
 import typing
-from .Typing import Number
+from . import typings
 
 
 class SystemSpecifier(abjad.AbjadObject):
@@ -24,11 +24,11 @@ class SystemSpecifier(abjad.AbjadObject):
     def __init__(
         self,
         *,
-        distances: typing.Iterable[Number] = None,
+        distances: typing.Iterable[typings.Number] = None,
         measure: int = None,
-        y_offset: Number = None,
+        y_offset: typings.Number = None,
         ) -> None:
-        distances_: typing.Optional[typing.List[Number]] = None
+        distances_: typing.Optional[typing.List[typings.Number]] = None
         if distances is not None:
             assert isinstance(distances, collections.Iterable), repr(distances)
             for distance in distances:
@@ -47,7 +47,7 @@ class SystemSpecifier(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def distances(self) -> typing.Optional[typing.List[Number]]:
+    def distances(self) -> typing.Optional[typing.List[typings.Number]]:
         """
         Gets distances.
         """
@@ -61,7 +61,7 @@ class SystemSpecifier(abjad.AbjadObject):
         return self._measure
 
     @property
-    def y_offset(self) -> typing.Optional[Number]:
+    def y_offset(self) -> typing.Optional[typings.Number]:
         """
         Gets Y-offset.
         """

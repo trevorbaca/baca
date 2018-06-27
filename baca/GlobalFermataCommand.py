@@ -2,7 +2,7 @@ import abjad
 import baca
 import typing
 from .Command import Command
-from .Typing import Selector
+from . import typings
 
 
 class GlobalFermataCommand(Command):
@@ -35,7 +35,7 @@ class GlobalFermataCommand(Command):
         self,
         *,
         description: str = None,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> None:
         Command.__init__(self, selector=selector)
         if description is not None:

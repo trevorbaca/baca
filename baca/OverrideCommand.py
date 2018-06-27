@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class OverrideCommand(Command):
@@ -212,7 +212,7 @@ class OverrideCommand(Command):
         context: str = None,
         deactivate: bool = None,
         grob: str = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         tag_measure_number: bool = None,
         tags: typing.List = None,
         value: typing.Any = None,

@@ -5,6 +5,7 @@ import abjad
 import baca
 import typing
 from . import library
+from . import typings
 from .Command import Command
 from .Command import Map
 from .Command import Suite
@@ -12,16 +13,13 @@ from .IndicatorCommand import IndicatorCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseCommand import PiecewiseCommand
 from .SchemeManifest import SchemeManifest
-from .Typing import Number
-from .Typing import NumberPair
-from .Typing import Selector
 
 
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
     # TODO: add tweaks
     *,
-    selector: Selector = 'baca.phead(0)',
+    selector: typings.Selector = 'baca.phead(0)',
     redundant: bool = None,
     ) -> IndicatorCommand:
     r"""
@@ -258,7 +256,7 @@ def dynamic(
 
 def dynamic_down(
     *,
-    selector: Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.leaf(0)',
     ) -> IndicatorCommand:
     r"""
     Attaches dynamic-down command.
@@ -408,7 +406,7 @@ def dynamic_down(
 def dynamic_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
-    selector: Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.leaf(0)',
     ) -> Suite:
     """
     Shifts dynamic to left by calculated width of dynamic.
@@ -430,7 +428,7 @@ def dynamic_shift(
 # TODO: appears not to do anything?
 def dynamic_text_center(
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
@@ -450,9 +448,9 @@ def dynamic_text_center(
         )
 
 def dynamic_text_extra_offset(
-    pair: NumberPair,
+    pair: typings.NumberPair,
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     r"""
     Overrides dynamic text extra offset.
@@ -626,7 +624,7 @@ def dynamic_text_extra_offset(
 # TODO: appears not to do anything?
 def dynamic_text_left(
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
@@ -646,9 +644,9 @@ def dynamic_text_left(
         )
 
 def dynamic_text_parent_alignment_x(
-    n: Number,
+    n: typings.Number,
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     """
     Overrides dynamic text parent alignment X to ``n``.
@@ -664,7 +662,7 @@ def dynamic_text_parent_alignment_x(
 # TODO: appears not to do anything?
 def dynamic_text_right(
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
@@ -685,7 +683,7 @@ def dynamic_text_right(
 
 def dynamic_text_stencil_false(
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     """
     Overrides dynamic text stencil.
@@ -699,7 +697,7 @@ def dynamic_text_stencil_false(
 
 def dynamic_text_transparent(
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     """
     Overrides dynamic text transparency.
@@ -713,7 +711,7 @@ def dynamic_text_transparent(
 
 def dynamic_text_x_extent_zero(
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -726,9 +724,9 @@ def dynamic_text_x_extent_zero(
         )
 
 def dynamic_text_x_offset(
-    n: Number,
+    n: typings.Number,
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -741,9 +739,9 @@ def dynamic_text_x_offset(
         )
 
 def dynamic_text_y_offset(
-    n: Number,
+    n: typings.Number,
     *,
-    selector: Selector = 'baca.pleaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     ) -> OverrideCommand:
     """
     Overrides dynamic text Y-extent.
@@ -757,7 +755,7 @@ def dynamic_text_y_offset(
 
 def dynamic_up(
     *,
-    selector: Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.leaf(0)',
     ) -> IndicatorCommand:
     r"""
     Attaches dynamic-up command.
@@ -909,7 +907,7 @@ _local_dynamic = dynamic
 def dynamic_trend(
     dynamic_trend: typing.Union[str, abjad.DynamicTrend],
     *,
-    selector: Selector = 'baca.phead(0)',
+    selector: typings.Selector = 'baca.phead(0)',
     ) -> IndicatorCommand:
     r"""
     Attaches hairpin start.
@@ -1122,8 +1120,8 @@ _local_dynamics = dynamics
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
-    pieces: typing.Union[Map, Selector] = 'baca.tleaves().group()',
-    selector: Selector = 'baca.tleaves()'
+    pieces: typing.Union[Map, typings.Selector] = 'baca.tleaves().group()',
+    selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseCommand:
     r"""
     Makes enchained hairpin.
@@ -1976,9 +1974,9 @@ def hairpin_chain(
         )
 
 def hairpin_shorten_pair(
-    pair: NumberPair,
+    pair: typings.NumberPair,
     *,
-    selector: Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.leaves()',
     ) -> OverrideCommand:
     """
     Overrides hairpin shorten pair.
@@ -1993,7 +1991,7 @@ def hairpin_shorten_pair(
 def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
-    selector: Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.leaf(0)',
     ) -> Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
@@ -2010,7 +2008,7 @@ def hairpin_start_shift(
 
 def hairpin_stencil_false(
     *,
-    selector: Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.leaves()',
     ) -> OverrideCommand:
     """
     Overrides hairpin stencil.
@@ -2024,7 +2022,7 @@ def hairpin_stencil_false(
 
 def hairpin_transparent(
     *,
-    selector: Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.leaves()',
     ) -> OverrideCommand:
     """
     Overrides hairpin transparency.
@@ -2574,11 +2572,11 @@ class NewHairpinCommand(Command):
         *,
         lone_dynamic: bool = True,
         right_broken: bool = None,
-        selector: Selector = 'baca.teaves()',
+        selector: typings.Selector = 'baca.teaves()',
         start_dynamic: abjad.Dynamic = None,
-        start_selector: Selector = 'baca.leaf(0)',
+        start_selector: typings.Selector = 'baca.leaf(0)',
         stop_dynamic: abjad.Dynamic = None,
-        stop_selector: Selector = 'baca.leaf(-1)',
+        stop_selector: typings.Selector = 'baca.leaf(-1)',
         ) -> None:
         Command.__init__(self, selector=selector)
         assert isinstance(dynamic_trend, abjad.DynamicTrend)
@@ -2634,7 +2632,7 @@ class NewHairpinCommand(Command):
         return self._start_dynamic
 
     @property
-    def start_selector(self) -> Selector:
+    def start_selector(self) -> typings.Selector:
         """
         Gets start selector.
         """
@@ -2648,7 +2646,7 @@ class NewHairpinCommand(Command):
         return self._stop_dynamic
 
     @property
-    def stop_selector(self) -> typing.Optional[Selector]:
+    def stop_selector(self) -> typing.Optional[typings.Selector]:
         """
         Gets stop selector.
         """
@@ -2715,9 +2713,9 @@ def new_hairpin(
     left_broken: bool = None,
     lone_dynamic: bool = True,
     right_broken: bool = None,
-    selector: Selector = 'baca.tleaves()',
-    start_selector: Selector = 'baca.leaf(0)',
-    stop_selector: Selector = 'baca.leaf(-1)',
+    selector: typings.Selector = 'baca.tleaves()',
+    start_selector: typings.Selector = 'baca.leaf(0)',
+    stop_selector: typings.Selector = 'baca.leaf(-1)',
     ) -> Command:
     r"""
     Attaches hairpin indicators.

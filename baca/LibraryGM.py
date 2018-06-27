@@ -3,6 +3,7 @@ import baca
 import typing
 from abjadext import rmakers
 from . import library
+from . import typings
 from .Command import Map
 from .Command import Suite
 from .GlobalFermataCommand import GlobalFermataCommand
@@ -24,9 +25,6 @@ from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
     )
-from .Typing import Number
-from .Typing import NumberPair
-from .Typing import Selector
 
 
 class LibraryGM(abjad.AbjadObject):
@@ -51,7 +49,7 @@ class LibraryGM(abjad.AbjadObject):
         allow_repeats: bool = None,
         allow_ties: bool = None,
         right_broken: bool = None,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         stems: bool = None,
         style: str = None,
         ) -> SpannerCommand:
@@ -368,9 +366,9 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def glissando_thickness(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         """
         Overrides glissando thickness.
@@ -386,7 +384,7 @@ class LibraryGM(abjad.AbjadObject):
     def global_fermata(
         description: str = None,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> GlobalFermataCommand:
         """
         Attaches global fermata.
@@ -427,7 +425,7 @@ class LibraryGM(abjad.AbjadObject):
         by_pitch_class: bool = None,
         extend_beam: bool = None,
         hocket: bool = None,
-        selector: Selector = None,
+        selector: typings.Selector = None,
         truncate_ties: bool = None
         ):
         r"""
@@ -549,7 +547,7 @@ class LibraryGM(abjad.AbjadObject):
     def instrument(
         instrument: abjad.Instrument,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> InstrumentChangeCommand:
         """
         Makes instrument change command.
@@ -567,7 +565,7 @@ class LibraryGM(abjad.AbjadObject):
         start_pitch: typing.Union[str, abjad.NamedPitch],
         stop_pitch: typing.Union[str, abjad.NamedPitch],
         *,
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> StaffPositionInterpolationCommand:
         """
         Interpolates from staff position of ``start_pitch`` to staff
@@ -614,7 +612,7 @@ class LibraryGM(abjad.AbjadObject):
     def label(
         expression: abjad.Expression,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> LabelCommand:
         r"""
         Labels ``selector`` output with label ``expression``.
@@ -768,7 +766,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def laissez_vibrer(
         *,
-        selector: Selector  = 'baca.ptail(0)',
+        selector: typings.Selector  = 'baca.ptail(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches laissez vibrer.
@@ -917,7 +915,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def long_fermata(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches long fermata.
@@ -1288,7 +1286,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def marcato(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches marcato.
@@ -1440,7 +1438,7 @@ class LibraryGM(abjad.AbjadObject):
         *,
         alert: IndicatorCommand = None,
         context: str = 'Staff',
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> typing.Union[IndicatorCommand, Suite]:
         r"""
         Attaches margin markup.
@@ -1564,7 +1562,7 @@ class LibraryGM(abjad.AbjadObject):
     def metronome_mark(
         key: str,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         redundant: bool = None,
         ) -> typing.Optional[MetronomeMarkCommand]:
         """
@@ -1603,7 +1601,7 @@ class LibraryGM(abjad.AbjadObject):
     def mmrest_text_color(
         color: str = 'red',
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides multimeasure rest text color.
@@ -1730,9 +1728,9 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def mmrest_text_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides multimeasure rest text extra offset.
@@ -1833,9 +1831,9 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def mmrest_text_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides multimeasure rest text padding.
@@ -1937,7 +1935,7 @@ class LibraryGM(abjad.AbjadObject):
     @staticmethod
     def mmrest_text_parent_center(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides multimeasure rest text parent alignment X to center.
@@ -2038,9 +2036,9 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def mmrest_text_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides multimeasure rest text staff padding.

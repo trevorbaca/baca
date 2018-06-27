@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class TieCorrectionCommand(Command):
@@ -31,7 +31,7 @@ class TieCorrectionCommand(Command):
         *,
         direction: abjad.HorizontalAlignment = None,
         repeat: bool = None,
-        selector: Selector = 'baca.pleaf(-1)',
+        selector: typings.Selector = 'baca.pleaf(-1)',
         untie: bool = None,
         ) -> None:
         Command.__init__(self, selector=selector)

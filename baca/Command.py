@@ -1,7 +1,7 @@
 import abjad
 import baca
 import typing
-from .Typing import Selector
+from . import typings
 
 
 class Command(abjad.AbjadObject):
@@ -32,7 +32,7 @@ class Command(abjad.AbjadObject):
         self,
         *,
         deactivate: bool = None,
-        selector: Selector = None,
+        selector: typings.Selector = None,
         tag_measure_number: bool = None,
         ) -> None:
         self._deactivate = deactivate
@@ -349,7 +349,7 @@ class Map(abjad.AbjadObject):
 
     def __init__(
         self,
-        selector: Selector = None,
+        selector: typings.Selector = None,
         *commands: typing.Union[Command, 'Map', 'Suite'],
         ) -> None:
         if isinstance(selector, str):

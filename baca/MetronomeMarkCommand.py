@@ -1,10 +1,10 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Accelerando import Accelerando
 from .Ritardando import Ritardando
 from .Command import Command
-from .Typing import Selector
 
 
 class MetronomeMarkCommand(Command):
@@ -34,7 +34,7 @@ class MetronomeMarkCommand(Command):
         deactivate: bool = None,
         key: typing.Union[str, Accelerando, Ritardando] = None,
         redundant: bool = None,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)

@@ -1,9 +1,9 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
 from .PitchCommand import PitchCommand
-from .Typing import Selector
 
 
 class StaffPositionCommand(Command):
@@ -68,7 +68,7 @@ class StaffPositionCommand(Command):
         numbers,
         allow_repeats: bool = None,
         exact: bool = None, 
-        selector: Selector = 'baca.plts()',
+        selector: typings.Selector = 'baca.plts()',
         ) -> None:
         Command.__init__(self, selector=selector)
         if exact is not None:

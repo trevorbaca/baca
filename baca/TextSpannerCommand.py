@@ -1,9 +1,8 @@
 import abjad
 import typing
 from . import library
+from . import typings
 from .Command import Command
-from .IndicatorCommand import IndicatorCommand
-from .Typing import Selector
 
 
 class TextSpannerCommand(Command):
@@ -172,7 +171,7 @@ class TextSpannerCommand(Command):
         leak: bool = None,
         lilypond_id: int = None,
         line_segment: abjad.LineSegment = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         text: typing.Union[str, abjad.Markup] = None,
         ) -> None:
         Command.__init__(self, selector=selector)

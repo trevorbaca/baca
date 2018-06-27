@@ -2,8 +2,8 @@ import abjad
 import baca
 import collections
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class PitchCommand(Command):
@@ -379,7 +379,7 @@ class PitchCommand(Command):
         ignore_incomplete: bool = None,
         persist: str = None,
         pitches: typing.Iterable = None,
-        selector: Selector = None,
+        selector: typings.Selector = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if allow_octaves is not None:

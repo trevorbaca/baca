@@ -2,7 +2,6 @@ import abjad
 import baca
 import typing
 from .IndicatorCommand import IndicatorCommand
-from .Typing import Selector
 
 
 class InstrumentChangeCommand(IndicatorCommand):

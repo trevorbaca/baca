@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class PartAssignmentCommand(Command):
@@ -22,7 +22,7 @@ class PartAssignmentCommand(Command):
         self,
         *,
         part_assignment: abjad.PartAssignment = None,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
         if part_assignment is not None:

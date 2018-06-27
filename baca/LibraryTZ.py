@@ -4,6 +4,7 @@ import collections
 import typing
 from abjadext import rmakers
 from . import library
+from . import typings
 from .Command import Command
 from .Command import Map
 from .Command import Suite
@@ -17,10 +18,6 @@ from .SpannerCommand import SpannerCommand
 from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .VoltaCommand import VoltaCommand
-from .Typing import IntegerPair
-from .Typing import Number
-from .Typing import NumberPair
-from .Typing import Selector
 
 
 class LibraryTZ(abjad.AbjadObject):
@@ -43,7 +40,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tenuto(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches tenuto.
@@ -193,7 +190,7 @@ class LibraryTZ(abjad.AbjadObject):
     def text_script_color(
         color: str = 'red',
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -384,7 +381,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_down(
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         *,
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -576,9 +573,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -622,9 +619,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_font_size(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         """
@@ -644,9 +641,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -837,7 +834,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_parent_center(
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         *,
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -882,9 +879,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         r"""
@@ -1075,7 +1072,7 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_up(
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         *,
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
@@ -1267,9 +1264,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_x_offset(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         """
@@ -1289,9 +1286,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_script_y_offset(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         allow_mmrests: bool = False,
         ) -> OverrideCommand:
         """
@@ -1317,8 +1314,8 @@ class LibraryTZ(abjad.AbjadObject):
         line_segment: abjad.LineSegment = None,
         lilypond_id: int = None,
         no_upright: bool = None,
-        right_padding: typing.Optional[Number] = 1.25,
-        selector: Selector = 'baca.leaves()',
+        right_padding: typing.Optional[typings.Number] = 1.25,
+        selector: typings.Selector = 'baca.leaves()',
         ) -> TextSpannerCommand:
         r"""
         Makes text spanner command.
@@ -1523,9 +1520,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner_left_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides text spanner left padding.
@@ -1539,9 +1536,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner_right_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides text spanner right padding.
@@ -1555,9 +1552,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides text spanner staff padding.
@@ -1785,7 +1782,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner_stencil_false(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides text spanner stencil.
@@ -1800,7 +1797,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def text_spanner_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides text spanner transparent.
@@ -1814,9 +1811,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def text_spanner_y_offset(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides text spanner Y-offset.
@@ -1833,10 +1830,10 @@ class LibraryTZ(abjad.AbjadObject):
         *,
         repeat: typing.Union[
             bool,
-            IntegerPair,
+            typings.IntegerPair,
             abjad.DurationInequality,
             ] = None,
-        selector: Selector = 'baca.qrun(0)',
+        selector: typings.Selector = 'baca.qrun(0)',
         ) -> SpannerCommand:
         r"""
         Attaches tie.
@@ -1989,7 +1986,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_down(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides tie direction.
@@ -2150,7 +2147,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_from(
         *,
-        selector: Selector = 'baca.pleaf(-1)',
+        selector: typings.Selector = 'baca.pleaf(-1)',
         ) -> TieCorrectionCommand:
         r"""
         Ties from leaf.
@@ -2250,7 +2247,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_to(
         *,
-        selector: Selector = 'baca.pleaf(0)',
+        selector: typings.Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:
         r"""
         Ties to leaf.
@@ -2341,7 +2338,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_up(
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         r"""
         Overrides tie direction.
@@ -2501,9 +2498,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def time_signature_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
         Overrides time signature extra offset.
@@ -2585,7 +2582,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def time_signature_transparent(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides time signature transparency.
@@ -2670,8 +2667,8 @@ class LibraryTZ(abjad.AbjadObject):
         do_not_bookend: bool = False,
         lilypond_id: int = None,
         no_upright: bool = None,
-        pieces: typing.Union[Map, Selector] = 'baca.leaves().group()',
-        selector: Selector = 'baca.tleaves()',
+        pieces: typing.Union[Map, typings.Selector] = 'baca.leaves().group()',
+        selector: typings.Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None
         ) -> PiecewiseCommand:
         r"""
@@ -3108,9 +3105,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tremolo_down(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.tleaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> OverrideCommand:
         """
         Overrides stem tremolo extra offset.
@@ -3130,7 +3127,7 @@ class LibraryTZ(abjad.AbjadObject):
         harmonic: bool = None,
         left_broken: bool = None,
         right_broken: bool = None,
-        selector: Selector = 'baca.tleaves().with_next_leaf()',
+        selector: typings.Selector = 'baca.tleaves().with_next_leaf()',
         ) -> SpannerCommand:
         r"""
         Attaches trill spanner.
@@ -3640,9 +3637,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def trill_spanner_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.tleaves().with_next_leaf()',
+        selector: typings.Selector = 'baca.tleaves().with_next_leaf()',
         ) -> OverrideCommand:
         """
         Overrides trill spanner staff padding.
@@ -3657,7 +3654,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_bracket_down(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides tuplet bracket direction.
@@ -3805,9 +3802,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
         Overrides tuplet bracket extra offset.
@@ -3953,9 +3950,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_outside_staff_priority(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides tuplet bracket outside-staff-priority.
@@ -3969,9 +3966,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides tuplet bracket padding.
@@ -3985,9 +3982,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_shorten_pair(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         """
         Overrides tuplet bracket shorten pair.
@@ -4001,9 +3998,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_bracket_staff_padding(
-        n: Number,
+        n: typings.Number,
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides tuplet bracket staff padding.
@@ -4146,7 +4143,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_bracket_up(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r"""
         Overrides tuplet bracket direction.
@@ -4295,7 +4292,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tuplet_number_denominator(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         """
         Overrides tuplet number text.
@@ -4309,9 +4306,9 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def tuplet_number_extra_offset(
-        pair: NumberPair,
+        pair: typings.NumberPair,
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> OverrideCommand:
         r"""
         Overrides tuplet number extra offset.
@@ -4458,7 +4455,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def untie_to(
         *,
-        selector: Selector = 'baca.pleaf(0)',
+        selector: typings.Selector = 'baca.pleaf(0)',
         ) -> TieCorrectionCommand:
         r"""
         Unties to leaf.
@@ -4550,7 +4547,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def up_arpeggio(
         *,
-        selector: Selector = 'baca.chead(0)',
+        selector: typings.Selector = 'baca.chead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches up-arpeggio.
@@ -4708,7 +4705,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def up_bow(
         *,
-        selector: Selector = 'baca.phead(0)',
+        selector: typings.Selector = 'baca.phead(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches up-bow.
@@ -4857,7 +4854,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def very_long_fermata(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Attaches very long fermata.
@@ -5001,7 +4998,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def voice_four(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Makes LilyPond ``\voiceFour`` command.
@@ -5015,7 +5012,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def voice_one(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Makes LilyPond ``\voiceOne`` command.
@@ -5029,7 +5026,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def voice_three(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Makes LilyPond ``\voiceThree`` command.
@@ -5043,7 +5040,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def voice_two(
         *,
-        selector: Selector = 'baca.leaf(0)',
+        selector: typings.Selector = 'baca.leaf(0)',
         ) -> IndicatorCommand:
         r"""
         Makes LilyPond ``\voiceTwo`` command.
@@ -5057,7 +5054,7 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def volta(
         *,
-        selector: Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.leaves()',
         ) -> VoltaCommand:
         r"""
         Makes volta container and extends container with ``selector`` output.

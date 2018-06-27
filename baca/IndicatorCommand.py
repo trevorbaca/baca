@@ -2,9 +2,9 @@ import abjad
 import baca
 import collections
 import typing
+from . import typings
 from .Command import Command
 from .SegmentMaker import SegmentMaker
-from .Typing import Selector
 
 
 class IndicatorCommand(Command):
@@ -225,7 +225,7 @@ class IndicatorCommand(Command):
         deactivate: bool = None,
         indicators: typing.List[typing.Any] = None,
         redundant: bool = None,
-        selector: Selector = 'baca.pheads()',
+        selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)

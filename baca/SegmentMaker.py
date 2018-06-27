@@ -5,7 +5,9 @@ import pathlib
 import sys
 import traceback
 import typing
+from abjadext import rmakers
 from . import library
+from . import typings
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
 from .Command import Map
@@ -20,9 +22,6 @@ from .ScoreTemplate import ScoreTemplate
 from .SkipRhythmMaker import SkipRhythmMaker
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
-from .Typing import Number
-from .Typing import NumberPair
-from abjadext import rmakers
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -269,7 +268,7 @@ class SegmentMaker(abjad.SegmentMaker):
         fermata_measure_staff_line_count: int = None,
         final_bar_line: typing.Union[bool, str] = None,
         final_markup: tuple = None,
-        final_markup_extra_offset: NumberPair = None,
+        final_markup_extra_offset: typings.NumberPair = None,
         first_measure_number: int = None,
         first_segment: bool = None,
         ignore_out_of_range_pitches: bool = None,
@@ -286,12 +285,12 @@ class SegmentMaker(abjad.SegmentMaker):
         margin_markups: abjad.OrderedDict = None,
         measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
-        metronome_mark_stem_height: typing.Optional[Number] = 1,
+        metronome_mark_stem_height: typing.Optional[typings.Number] = 1,
         metronome_marks: abjad.OrderedDict = None,
         mmspanner_right_broken: bool = None,
         mmspanner_right_padding: typing.Union[
-            Number,
-            typing.Tuple[Number, abjad.Tag]
+            typings.Number,
+            typing.Tuple[typings.Number, abjad.Tag]
             ] = 0,
         score_template: ScoreTemplate = None,
         segment_directory: abjad.Path = None,
@@ -357,7 +356,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._midi: typing.Optional[bool] = None
         self._mmspanner_right_broken = mmspanner_right_broken
         self._mmspanner_right_padding: typing.Union[
-            Number, typing.Tuple[Number, abjad.Tag]
+            typings.Number, typing.Tuple[typings.Number, abjad.Tag]
             ] = mmspanner_right_padding
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
@@ -4274,7 +4273,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._final_markup
 
     @property
-    def final_markup_extra_offset(self) -> typing.Optional[NumberPair]:
+    def final_markup_extra_offset(self) -> typing.Optional[typings.NumberPair]:
         """
         Gets final markup extra offset.
         """
@@ -5291,7 +5290,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metronome_mark_measure_map
 
     @property
-    def metronome_mark_stem_height(self) -> typing.Optional[Number]:
+    def metronome_mark_stem_height(self) -> typing.Optional[typings.Number]:
         """
         Gets metronome mark stem height.
         """
@@ -5322,7 +5321,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def mmspanner_right_padding(
         self
         ) -> typing.Union[
-        Number, typing.Tuple[Number, abjad.Tag],
+        typings.Number, typing.Tuple[typings.Number, abjad.Tag],
         ]:
         """
         Gets metronome mark spanner right padding.

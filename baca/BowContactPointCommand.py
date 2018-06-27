@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import typings
 from .Command import Command
-from .Typing import Selector
 
 
 class BowContactPointCommand(Command):
@@ -31,7 +31,7 @@ class BowContactPointCommand(Command):
         *tweaks: abjad.LilyPondTweakManager,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         helper: typing.Callable = None,
-        selector: Selector = None,
+        selector: typings.Selector = None,
         ) -> None:
         Command.__init__(self, selector=selector)
         if bcps is None:
