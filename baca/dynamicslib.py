@@ -1980,7 +1980,7 @@ def hairpin_indicator_chain(
     bookend: typing.Union[bool, int] = False,
     pieces: typings.Selector = 'baca.tleaves().group()',
     selector: typings.Selector = 'baca.tleaves()'
-    ) -> PiecewiseCommand:
+    ) -> PiecewiseIndicatorCommand:
     r"""
     Makes enchained hairpin with indicators.
 
@@ -2063,14 +2063,18 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
@@ -2079,7 +2083,9 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             f''8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
@@ -2088,7 +2094,9 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             f'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
                             g'8
                             ]
@@ -2097,7 +2105,9 @@ def hairpin_indicator_chain(
                             f''8
                             [
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
                             d''8
                             ]
@@ -2186,14 +2196,18 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
@@ -2202,7 +2216,9 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             f''8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
@@ -2211,7 +2227,9 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             f'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
                             g'8
                             ]
@@ -2220,9 +2238,13 @@ def hairpin_indicator_chain(
                             f''8
                             [
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -2309,43 +2331,63 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f'8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
                             g'8
                             [
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f''8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
                             d''8
                             [
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f'8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
             <BLANKLINE>
                             g'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f''8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -2429,7 +2471,9 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -2440,7 +2484,9 @@ def hairpin_indicator_chain(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             g'8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f''8
@@ -2449,7 +2495,9 @@ def hairpin_indicator_chain(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f'8
@@ -2460,7 +2508,9 @@ def hairpin_indicator_chain(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             e'8
@@ -2548,7 +2598,9 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -2559,7 +2611,9 @@ def hairpin_indicator_chain(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             g'8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f''8
@@ -2568,7 +2622,9 @@ def hairpin_indicator_chain(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f'8
@@ -2579,12 +2635,16 @@ def hairpin_indicator_chain(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -2667,43 +2727,59 @@ def hairpin_indicator_chain(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             g'8
+                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             d''8
+                            \p                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
                             e''8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             g'8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
                             f''8
+                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -2721,16 +2797,9 @@ def hairpin_indicator_chain(
             dynamics_.append(dynamic)
     for dynamic in dynamics_:
         assert isinstance(dynamic, abjad.Dynamic), repr(dynamic)
-#    return library.piecewise(
-#        spanner,
-#        dynamics_,
-#        pieces,
-#        bookend=bookend,
-#        selector=selector,
-#        )
     return PiecewiseIndicatorCommand(
         bookend=bookend,
-        indicators=dynamics,
+        indicators=dynamics_,
         pieces=pieces,
         selector=selector,
         )

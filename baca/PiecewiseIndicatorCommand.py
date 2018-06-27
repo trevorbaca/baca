@@ -52,10 +52,6 @@ class PiecewiseIndicatorCommand(Command):
     def __call__(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        ..  note:: IMPORTANT: first-order ``selector`` applies before
-            ``pieces`` selector.
-
         """
         if argument is None:
             return
@@ -70,7 +66,6 @@ class PiecewiseIndicatorCommand(Command):
         else:
             pieces = argument
         assert pieces is not None
-        length = len(pieces)
         piece_count = len(pieces)
         if self.bookend in (False, None):
             pattern = abjad.Pattern()
