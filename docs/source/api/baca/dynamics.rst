@@ -37,6 +37,7 @@ dynamics
    ~dynamic_text_y_offset
    ~dynamic_trend
    ~dynamic_up
+   ~hairpin
    ~hairpin_chain
    ~hairpin_shorten_pair
    ~hairpin_start_shift
@@ -44,7 +45,6 @@ dynamics
    ~hairpin_transparent
    ~make_dynamics
    ~measure_swells
-   ~new_hairpin
    ~niente
 
 .. autofunction:: dynamic
@@ -77,6 +77,8 @@ dynamics
 
 .. autofunction:: dynamic_up
 
+.. autofunction:: hairpin
+
 .. autofunction:: hairpin_chain
 
 .. autofunction:: hairpin_shorten_pair
@@ -90,7 +92,5 @@ dynamics
 .. autofunction:: make_dynamics
 
 .. autofunction:: measure_swells
-
-.. autofunction:: new_hairpin
 
 .. autofunction:: niente

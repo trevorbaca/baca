@@ -376,6 +376,7 @@ Dynamics library.
    ~baca.dynamics.dynamic_text_y_offset
    ~baca.dynamics.dynamic_trend
    ~baca.dynamics.dynamic_up
+   ~baca.dynamics.hairpin
    ~baca.dynamics.hairpin_chain
    ~baca.dynamics.hairpin_shorten_pair
    ~baca.dynamics.hairpin_start_shift
@@ -383,7 +384,6 @@ Dynamics library.
    ~baca.dynamics.hairpin_transparent
    ~baca.dynamics.make_dynamics
    ~baca.dynamics.measure_swells
-   ~baca.dynamics.new_hairpin
    ~baca.dynamics.niente
 
 .. raw:: html
