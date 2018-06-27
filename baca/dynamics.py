@@ -1123,8 +1123,6 @@ def hairpin(
     lone_dynamic: bool = True,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
-    start_selector: typings.Selector = 'baca.leaf(0)',
-    stop_selector: typings.Selector = 'baca.leaf(-1)',
     ) -> Command:
     r"""
     Attaches hairpin indicators.
@@ -1633,11 +1631,11 @@ def hairpin(
         ...     baca.make_even_divisions(),
         ...     baca.hairpin(
         ...         '"mp" <| "f"',
-        ...         stop_selector=baca.leaf(6),
+        ...         selector=baca.leaves()[:7],
         ...         ),
         ...     baca.hairpin(
         ...         '"mf" |> "p"',
-        ...         start_selector=baca.leaf(7),
+        ...         selector=baca.leaves()[7:],
         ...         ),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
@@ -2033,10 +2031,6 @@ def hairpin(
         abjad.tweak(dynamic_trend).to_barline = True
     if isinstance(selector, str):
         selector = eval(selector)
-    if isinstance(start_selector, str):
-        start_selector = eval(start_selector)
-    if isinstance(stop_selector, str):
-        stop_selector = eval(stop_selector)
     if left_broken is not None:
         left_broken = bool(left_broken)
     if left_broken is True:
@@ -2052,9 +2046,7 @@ def hairpin(
         right_broken=right_broken,
         selector=selector,
         start_dynamic=start_dynamic,
-        start_selector=start_selector,
         stop_dynamic=stop_dynamic,
-        stop_selector=stop_selector,
         )
 
 # TODO: baca.hairpin() into baca.hairpin_chain()
@@ -3838,6 +3830,7 @@ def hairpin_chain(
     """
     dynamic_object_typing = typing.Union[
         abjad.Dynamic,
+        abjad.DynamicTrend,
         typing.Tuple[abjad.Dynamic, abjad.DynamicTrend],
         ]
     dynamics_: typing.List[dynamic_object_typing] = []

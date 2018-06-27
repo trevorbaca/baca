@@ -21,9 +21,7 @@ HairpinCommand
       lone_dynamic
       right_broken
       start_dynamic
-      start_selector
       stop_dynamic
-      stop_selector
 
    .. autosummary::
       :nosignatures:
@@ -96,11 +94,7 @@ HairpinCommand
 
    .. autoattribute:: HairpinCommand.start_dynamic
 
-   .. autoattribute:: HairpinCommand.start_selector
-
    .. autoattribute:: HairpinCommand.stop_dynamic
-
-   .. autoattribute:: HairpinCommand.stop_selector
 
    .. container:: inherited
 

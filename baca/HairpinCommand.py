@@ -18,9 +18,7 @@ class HairpinCommand(Command):
         '_lone_dynamic',
         '_right_broken',
         '_start_dynamic',
-        '_start_selector',
         '_stop_dynamic',
-        '_stop_selector',
         )
 
     ### INITIALIZER ###
@@ -33,9 +31,7 @@ class HairpinCommand(Command):
         right_broken: bool = None,
         selector: typings.Selector = 'baca.teaves()',
         start_dynamic: abjad.Dynamic = None,
-        start_selector: typings.Selector = 'baca.leaf(0)',
         stop_dynamic: abjad.Dynamic = None,
-        stop_selector: typings.Selector = 'baca.leaf(-1)',
         ) -> None:
         Command.__init__(self, selector=selector)
         assert isinstance(dynamic_trend, abjad.DynamicTrend)
@@ -49,15 +45,9 @@ class HairpinCommand(Command):
         if start_dynamic is not None:
             assert isinstance(start_dynamic, abjad.Dynamic)
         self._start_dynamic = start_dynamic
-        if start_selector is not None:
-            assert isinstance(start_selector, abjad.Expression)
-        self._start_selector = start_selector
         if stop_dynamic is not None:
             assert isinstance(stop_dynamic, abjad.Dynamic)
         self._stop_dynamic = stop_dynamic
-        if stop_selector is not None:
-            assert isinstance(stop_selector, abjad.Expression)
-        self._stop_selector = stop_selector
         self._tags = [abjad.Tag('BACA_HAIRPIN')]
 
     ### PUBLIC PROPERTIES ###
@@ -91,25 +81,11 @@ class HairpinCommand(Command):
         return self._start_dynamic
 
     @property
-    def start_selector(self) -> typings.Selector:
-        """
-        Gets start selector.
-        """
-        return self._start_selector
-
-    @property
     def stop_dynamic(self) -> typing.Optional[abjad.Dynamic]:
         """
         Gets stop dynamic.
         """
         return self._stop_dynamic
-
-    @property
-    def stop_selector(self) -> typing.Optional[typings.Selector]:
-        """
-        Gets stop selector.
-        """
-        return self._stop_selector
 
     ### SPECIAL METHODS ###
 
@@ -126,11 +102,10 @@ class HairpinCommand(Command):
             return None
         if self.right_broken is True:
             literal = abjad.LilyPondLiteral(r'\!')
-            assert isinstance(self.stop_selector, abjad.Expression)
             command = library.literal(
                 r'\!',
                 format_slot='after',
-                selector=self.stop_selector,
+                selector=baca.select().leaf(-1),
                 )
             words = self.tag.words
             words.append(str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS))
@@ -140,7 +115,7 @@ class HairpinCommand(Command):
         if self.start_dynamic is not None:
             command = _local_dynamic(
                 self.start_dynamic,
-                selector=self.start_selector,
+                selector=baca.select().leaf(0),
                 )
             library.tag(self.tag.words, command)
             command.runtime = self.runtime
@@ -149,16 +124,15 @@ class HairpinCommand(Command):
             return
         command = _local_dynamic_trend(
             self.dynamic_trend,
-            selector=self.start_selector,
+            selector=baca.select().leaf(0),
             )
         library.tag(self.tag.words, command)
         command.runtime = self.runtime
         command(argument)
         if self.stop_dynamic is not None:
-            assert isinstance(self.stop_selector, abjad.Expression)
             command = _local_dynamic(
                 self.stop_dynamic,
-                selector=self.stop_selector,
+                selector=baca.select().leaf(-1),
                 )
             library.tag(self.tag.words, command)
             command.runtime = self.runtime
