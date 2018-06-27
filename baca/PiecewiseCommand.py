@@ -5,7 +5,6 @@ import copy
 import typing
 from . import typings
 from .Command import Command
-from .Command import Map
 from .IndicatorCommand import IndicatorCommand
 from .SpannerCommand import SpannerCommand
 
@@ -33,7 +32,7 @@ class PiecewiseCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
-        pieces: typing.Union[Map, typings.Selector] = 'baca.leaves()',
+        pieces: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         selector: typings.Selector = 'baca.leaves()',
         tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = (),
@@ -49,8 +48,7 @@ class PiecewiseCommand(Command):
         if isinstance(pieces, str):
             pieces = eval(pieces)
         if pieces is not None:
-            prototype = (abjad.Expression, Map)
-            assert isinstance(pieces, prototype), repr(pieces)
+            assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, SpannerCommand))
@@ -188,9 +186,7 @@ class PiecewiseCommand(Command):
         return self._indicators
 
     @property
-    def pieces(self) -> typing.Optional[
-        typing.Union[abjad.Expression, Map]
-        ]:
+    def pieces(self) -> typing.Optional[abjad.Expression]:
         """
         Gets piece selector.
         """

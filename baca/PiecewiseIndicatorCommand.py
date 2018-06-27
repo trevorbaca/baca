@@ -5,7 +5,6 @@ import copy
 import typing
 from . import typings
 from .Command import Command
-from .Command import Map
 from .IndicatorCommand import IndicatorCommand
 
 

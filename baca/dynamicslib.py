@@ -1120,7 +1120,7 @@ _local_dynamics = dynamics
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
-    pieces: typing.Union[Map, typings.Selector] = 'baca.tleaves().group()',
+    pieces: typings.Selector = 'baca.tleaves().group()',
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseCommand:
     r"""
