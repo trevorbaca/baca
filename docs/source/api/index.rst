@@ -83,6 +83,7 @@ Bača API
    ~baca.ContainerCommand.ContainerCommand
    ~baca.DiatonicClusterCommand.DiatonicClusterCommand
    ~baca.GlobalFermataCommand.GlobalFermataCommand
+   ~baca.HairpinCommand.HairpinCommand
    ~baca.ImbricationCommand.ImbricationCommand
    ~baca.IndicatorCommand.IndicatorCommand
    ~baca.InstrumentChangeCommand.InstrumentChangeCommand
@@ -349,18 +350,6 @@ Bača API
    :class: section-header
 
 Dynamics library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (4) Commands
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.dynamics.NewHairpinCommand
 
 .. raw:: html
 
