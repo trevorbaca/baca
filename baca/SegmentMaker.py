@@ -2930,6 +2930,9 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper.spanner._is_trending(wrapper.component) and
             not isinstance(wrapper.indicator, tempo_trend)):
             status = 'explicit'
+        if (isinstance(wrapper.indicator, abjad.Dynamic) and
+            abjad.inspect(leaf).get_indicators(abjad.DynamicTrend)):
+            status = 'explicit'
         SegmentMaker._attach_color_literal(
             wrapper,
             status,
