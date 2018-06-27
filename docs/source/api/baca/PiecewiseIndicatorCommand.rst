@@ -20,6 +20,7 @@ PiecewiseIndicatorCommand
       bookend
       indicators
       pieces
+      right_open
       selector
 
    .. autosummary::
@@ -86,6 +87,8 @@ PiecewiseIndicatorCommand
    .. autoattribute:: PiecewiseIndicatorCommand.indicators
 
    .. autoattribute:: PiecewiseIndicatorCommand.pieces
+
+   .. autoattribute:: PiecewiseIndicatorCommand.right_open
 
    .. autoattribute:: PiecewiseIndicatorCommand.selector
 

@@ -19,6 +19,7 @@ class PiecewiseIndicatorCommand(Command):
         '_bookend',
         '_indicators',
         '_pieces',
+        '_right_open',
         '_selector',
         )
 
@@ -30,6 +31,7 @@ class PiecewiseIndicatorCommand(Command):
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
         pieces: typings.Selector = 'baca.leaves()',
+        right_open: bool = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
@@ -45,6 +47,9 @@ class PiecewiseIndicatorCommand(Command):
         if pieces is not None:
             assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
+        if right_open is not None:
+            right_open = bool(right_open)
+        self._right_open = right_open
         self._tags = []
 
     ### SPECIAL METHODS ###
@@ -68,40 +73,72 @@ class PiecewiseIndicatorCommand(Command):
         assert pieces is not None
         piece_count = len(pieces)
         if self.bookend in (False, None):
-            pattern = abjad.Pattern()
+            bookend_pattern = abjad.Pattern()
         elif self.bookend is True:
-            pattern = abjad.index([0], 1)
+            bookend_pattern = abjad.index([0], 1)
         else:
             assert isinstance(self.bookend, int)
-            pattern = abjad.index([self.bookend], period=piece_count)
+            bookend_pattern = abjad.index([self.bookend], period=piece_count)
         for i, piece in enumerate(pieces):
-            first_leaf = baca.select(piece).leaf(0)
-            indicator = self.indicators[i]
-            self._attach_indicators(indicator, first_leaf)
-            if not pattern.matches_index(i, piece_count):
-                continue
-            if len(piece) <= 1:
-                continue
-            last_leaf = baca.select(piece).leaf(-1)
-            indicator = self.indicators[i + 1]
-            self._attach_indicators(indicator, last_leaf)
+            if i == piece_count - 1:
+                is_last_piece = True
+            else:
+                is_last_piece = False
+            if (bookend_pattern.matches_index(i, piece_count) and
+                1 < len(piece)):
+                has_bookend = True
+            else:
+                has_bookend = False
+            start_leaf = baca.select(piece).leaf(0)
+            indicators = self.indicators[i]
+            self._attach_indicators(
+                indicators,
+                start_leaf,
+                has_bookend=has_bookend,
+                is_last_start_leaf=is_last_piece,
+                )
+            if has_bookend:
+                stop_leaf = baca.select(piece).leaf(-1)
+                indicators = self.indicators[i + 1]
+                self._attach_indicators(
+                    indicators,
+                    stop_leaf,
+                    has_bookend=has_bookend,
+                    is_last_stop_leaf=is_last_piece,
+                    )
 
     ### PRIVATE METHODS ###
 
-    def _attach_indicators(self, argument, leaf):
-        if not isinstance(argument, tuple):
-            argument = (argument,)
-        for argument_ in argument:
-            if argument_ is None:
+    def _attach_indicators(
+        self,
+        indicators,
+        leaf,
+        has_bookend=False,
+        is_last_start_leaf=False,
+        is_last_stop_leaf=False,
+        ):
+        if not isinstance(indicators, tuple):
+            indicators = (indicators,)
+        for indicator in indicators:
+            if indicator is None:
                 continue
-            reapplied = Command._remove_reapplied_wrappers(leaf, argument_)
+            if (is_last_start_leaf and
+                not has_bookend and
+                getattr(indicator, 'spanner_start', False) is True and
+                not self.right_open):
+                continue
+            if (is_last_stop_leaf and
+                getattr(indicator, 'spanner_start', False) is True and
+                not self.right_open):
+                continue
+            reapplied = Command._remove_reapplied_wrappers(leaf, indicator)
             wrapper = abjad.attach(
-                argument_,
+                indicator,
                 leaf,
                 tag=self.tag.prepend('PIC'),
                 wrapper=True,
                 )
-            if argument_ == reapplied:
+            if indicator == reapplied:
                 if (isinstance(indicator, abjad.Dynamic) and
                     indicator.sforzando):
                     status = 'explicit'
@@ -145,6 +182,13 @@ class PiecewiseIndicatorCommand(Command):
         Gets piece selector.
         """
         return self._pieces
+
+    @property
+    def right_open(self) -> typing.Optional[bool]:
+        """
+        Is true when command allows trend on last leaf.
+        """
+        return self._right_open
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
