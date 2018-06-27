@@ -44,7 +44,6 @@ dynamics
    ~hairpin_stencil_false
    ~hairpin_transparent
    ~make_dynamics
-   ~measure_swells
    ~niente
 
 .. autofunction:: dynamic
@@ -90,7 +89,5 @@ dynamics
 .. autofunction:: hairpin_transparent
 
 .. autofunction:: make_dynamics
-
-.. autofunction:: measure_swells
 
 .. autofunction:: niente
