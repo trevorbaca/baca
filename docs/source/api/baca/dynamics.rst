@@ -147,7 +147,7 @@ dynamics
    ~dynamic_text_y_offset
    ~dynamic_trend
    ~dynamic_up
-   ~hairpin_indicator_chain
+   ~hairpin_chain
    ~hairpin_shorten_pair
    ~hairpin_start_shift
    ~hairpin_stencil_false
@@ -187,7 +187,7 @@ dynamics
 
 .. autofunction:: dynamic_up
 
-.. autofunction:: hairpin_indicator_chain
+.. autofunction:: hairpin_chain
 
 .. autofunction:: hairpin_shorten_pair
 

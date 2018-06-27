@@ -387,7 +387,7 @@ Dynamics library.
    ~baca.dynamics.dynamic_text_y_offset
    ~baca.dynamics.dynamic_trend
    ~baca.dynamics.dynamic_up
-   ~baca.dynamics.hairpin_indicator_chain
+   ~baca.dynamics.hairpin_chain
    ~baca.dynamics.hairpin_shorten_pair
    ~baca.dynamics.hairpin_start_shift
    ~baca.dynamics.hairpin_stencil_false
