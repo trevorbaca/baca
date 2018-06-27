@@ -146,6 +146,7 @@ baca
    OverrideCommand
    PartAssignmentCommand
    PiecewiseCommand
+   PiecewiseIndicatorCommand
    PitchCommand
    PitchFirstRhythmCommand
    RegisterCommand
@@ -183,6 +184,7 @@ baca
    ~OverrideCommand.OverrideCommand
    ~PartAssignmentCommand.PartAssignmentCommand
    ~PiecewiseCommand.PiecewiseCommand
+   ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~PitchCommand.PitchCommand
    ~PitchFirstRhythmCommand.PitchFirstRhythmCommand
    ~RegisterCommand.RegisterCommand

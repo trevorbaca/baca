@@ -7,12 +7,11 @@ from . import typings
 from .Command import Command
 from .Command import Map
 from .IndicatorCommand import IndicatorCommand
-from .SpannerCommand import SpannerCommand
 
 
-class PiecewiseCommand(Command):
+class PiecewiseIndicatorCommand(Command):
     """
-    Piecewise command.
+    Piecewise indicator command.
     """
 
     ### CLASS VARIABLES ###
@@ -22,8 +21,6 @@ class PiecewiseCommand(Command):
         '_indicators',
         '_pieces',
         '_selector',
-        '_spanner',
-        '_tweaks',
         )
 
     ### INITIALIZER ###
@@ -33,10 +30,8 @@ class PiecewiseCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
-        pieces: typing.Union[Map, typings.Selector] = 'baca.leaves()',
-        spanner: abjad.Spanner = None,
+        pieces: typings.Selector = 'baca.leaves()',
         selector: typings.Selector = 'baca.leaves()',
-        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = (),
         ) -> None:
         Command.__init__(self, selector=selector)
         if bookend is not None:
@@ -49,15 +44,9 @@ class PiecewiseCommand(Command):
         if isinstance(pieces, str):
             pieces = eval(pieces)
         if pieces is not None:
-            prototype = (abjad.Expression, Map)
-            assert isinstance(pieces, prototype), repr(pieces)
+            assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
-        if spanner is not None:
-            assert isinstance(spanner, (abjad.Spanner, SpannerCommand))
-        self._spanner = spanner
         self._tags = []
-        self._validate_tweaks(tweaks)
-        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
@@ -65,32 +54,17 @@ class PiecewiseCommand(Command):
         """
         Calls command on ``argument``.
 
-        ..  note:: IMPORTANT: spanner ``selector`` applies before ``pieces``
-            selector.
+        ..  note:: IMPORTANT: first-order ``selector`` applies before
+            ``pieces`` selector.
 
         """
         if argument is None:
-            return
-        if self.spanner is None:
             return
         if not self.indicators:
             return
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
-        if isinstance(self.spanner, abjad.Spanner):
-            spanner = copy.copy(self.spanner)
-            leaves = abjad.select(argument).leaves()
-            abjad.attach(
-                spanner,
-                leaves,
-                tag=self.tag.prepend('PWC1'),
-                )
-        else:
-            assert isinstance(self.spanner, SpannerCommand)
-            spanner = self.spanner(argument)
-        self._apply_tweaks(spanner)
-        argument = abjad.select(spanner).leaves()
         if self.pieces is not None:
             assert not isinstance(self.pieces, str)
             pieces = self.pieces(argument)
@@ -98,11 +72,6 @@ class PiecewiseCommand(Command):
             pieces = argument
         assert pieces is not None
         length = len(pieces)
-        for leaf in abjad.select(pieces).leaves():
-            if leaf not in spanner:
-                message = f'\n  Leaf {leaf!s} not in {spanner!s}'
-                message += "\n  Do pieces contradict spanner selector?"
-                raise Exception(message)
         piece_count = len(pieces)
         if self.bookend in (False, None):
             pattern = abjad.Pattern()
@@ -114,52 +83,41 @@ class PiecewiseCommand(Command):
         for i, piece in enumerate(pieces):
             first_leaf = baca.select(piece).leaf(0)
             indicator = self.indicators[i]
-            self._attach_indicators(spanner, indicator, first_leaf)
+            self._attach_indicators(indicator, first_leaf)
             if not pattern.matches_index(i, piece_count):
                 continue
             if len(piece) <= 1:
                 continue
             last_leaf = baca.select(piece).leaf(-1)
-            if last_leaf not in spanner:
-                continue
             indicator = self.indicators[i + 1]
-            if i == length - 1:
-                last = True
-            else:
-                last = False
-            self._attach_indicators(spanner, indicator, last_leaf, last=last)
+            self._attach_indicators(indicator, last_leaf)
 
     ### PRIVATE METHODS ###
 
-    def _attach_indicators(self, spanner, argument, leaf, last=False):
+    def _attach_indicators(self, argument, leaf):
         if not isinstance(argument, tuple):
             argument = (argument,)
         for argument_ in argument:
             if argument_ is None:
-                pass
-            elif isinstance(argument_, abjad.ArrowLineSegment) and last:
-                pass
-            elif isinstance(argument_, IndicatorCommand):
-                for indicator in argument_.indicators:
-                    spanner.attach(
-                        indicator,
-                        leaf,
-                        tag=self.tag.prepend('PWC2'),
-                        )
-            else:
-                reapplied = Command._remove_reapplied_wrappers(leaf, argument_)
-                wrapper = spanner.attach(
-                    argument_,
-                    leaf,
-                    tag=self.tag.prepend('PWC3'),
-                    wrapper=True,
+                continue
+            reapplied = Command._remove_reapplied_wrappers(leaf, argument_)
+            wrapper = abjad.attach(
+                argument_,
+                leaf,
+                tag=self.tag.prepend('PIC'),
+                wrapper=True,
+                )
+            if argument_ == reapplied:
+                if (isinstance(indicator, abjad.Dynamic) and
+                    indicator.sforzando):
+                    status = 'explicit'
+                else:
+                    status = 'redundant'
+                baca.SegmentMaker._treat_persistent_wrapper(
+                    self.runtime['manifests'],
+                    wrapper,
+                    status,
                     )
-                if argument_ == reapplied:
-                    baca.SegmentMaker._treat_persistent_wrapper(
-                        self.runtime['manifests'],
-                        wrapper,
-                        'redundant',
-                        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -188,9 +146,7 @@ class PiecewiseCommand(Command):
         return self._indicators
 
     @property
-    def pieces(self) -> typing.Optional[
-        typing.Union[abjad.Expression, Map]
-        ]:
+    def pieces(self) -> typing.Optional[abjad.Expression]:
         """
         Gets piece selector.
         """
@@ -199,20 +155,6 @@ class PiecewiseCommand(Command):
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
         """
-        Gets spanner selector.
+        Gets (first-order) selector.
         """
         return self._selector
-
-    @property
-    def spanner(self) -> typing.Optional[abjad.Spanner]:
-        """
-        Gets spanner.
-        """
-        return self._spanner
-
-    @property
-    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
-        """
-        Gets tweaks.
-        """
-        return self._tweaks
