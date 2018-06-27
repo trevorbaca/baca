@@ -394,6 +394,7 @@ class LibraryGM(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: move to baca.Selection
     @staticmethod
     def group_by_measures(counts: typing.List[int] = [1]) -> abjad.Expression:
         """
@@ -404,6 +405,7 @@ class LibraryGM(abjad.AbjadObject):
         selector = selector.map(baca.select().flatten())
         return selector
 
+    # TODO: move to baca.Selection
     @staticmethod
     def group_notes_by_measures(
         counts: typing.List[int] = [1],

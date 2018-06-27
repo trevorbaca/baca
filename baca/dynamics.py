@@ -3749,16 +3749,24 @@ def hairpin_indicator_chain(
             >>
 
     """
-    dynamics_: typing.List[abjad.Dynamic] = []
+    dynamic_object_typing = typing.Union[
+        abjad.Dynamic,
+        typing.Tuple[abjad.Dynamic, abjad.DynamicTrend],
+        ]
+    dynamics_: typing.List[dynamic_object_typing] = []
     if isinstance(dynamics, str):
-        indicators = []
+        indicators: typing.List[
+            typing.Union[abjad.Dynamic, abjad.DynamicTrend]
+            ] = []
         known_shapes = abjad.DynamicTrend('<').known_shapes
         for string in dynamics.split():
             if string in known_shapes:
-                indicator = abjad.DynamicTrend(string)
+                dynamic_trend = abjad.DynamicTrend(string)
+                indicators.append(dynamic_trend)
             else:
-                indicator = abjad.Dynamic(string)
-            indicators.append(indicator)
+                dynamic = _local_dynamic(string).indicators[0]
+                assert isinstance(dynamic, abjad.Dynamic)
+                indicators.append(dynamic)
         for left, right in baca.sequence(indicators).nwise():
             if isinstance(left, abjad.DynamicTrend):
                 if isinstance(right, abjad.DynamicTrend):
@@ -3775,8 +3783,8 @@ def hairpin_indicator_chain(
     else:
         dynamics_ = dynamics
     prototype = (abjad.Dynamic, abjad.DynamicTrend, tuple)
-    for dynamic in dynamics_:
-        assert isinstance(dynamic, prototype), repr(dynamic)
+    for item in dynamics_:
+        assert isinstance(item, prototype), repr(dynamic)
     if right_open is not None:
         right_open = bool(right_open)
     return PiecewiseIndicatorCommand(
