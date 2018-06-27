@@ -23,7 +23,7 @@ baca
    :hidden:
 
    Command
-   dynamicslib
+   dynamics
    library
    markups
 
@@ -31,7 +31,7 @@ baca
    :nosignatures:
 
    Command
-   dynamicslib
+   dynamics
    library
    markups
 

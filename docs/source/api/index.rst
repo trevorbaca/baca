@@ -345,7 +345,7 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.dynamicslib <baca--dynamicslib>`
+.. rubric:: :ref:`baca.dynamics <baca--dynamics>`
    :class: section-header
 
 Dynamics library.
@@ -360,7 +360,7 @@ Dynamics library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.dynamicslib.NewHairpinCommand
+   ~baca.dynamics.NewHairpinCommand
 
 .. raw:: html
 
@@ -372,31 +372,31 @@ Dynamics library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.dynamicslib.dynamic
-   ~baca.dynamicslib.dynamic_down
-   ~baca.dynamicslib.dynamic_shift
-   ~baca.dynamicslib.dynamic_text_center
-   ~baca.dynamicslib.dynamic_text_extra_offset
-   ~baca.dynamicslib.dynamic_text_left
-   ~baca.dynamicslib.dynamic_text_parent_alignment_x
-   ~baca.dynamicslib.dynamic_text_right
-   ~baca.dynamicslib.dynamic_text_stencil_false
-   ~baca.dynamicslib.dynamic_text_transparent
-   ~baca.dynamicslib.dynamic_text_x_extent_zero
-   ~baca.dynamicslib.dynamic_text_x_offset
-   ~baca.dynamicslib.dynamic_text_y_offset
-   ~baca.dynamicslib.dynamic_trend
-   ~baca.dynamicslib.dynamic_up
-   ~baca.dynamicslib.hairpin_chain
-   ~baca.dynamicslib.hairpin_indicator_chain
-   ~baca.dynamicslib.hairpin_shorten_pair
-   ~baca.dynamicslib.hairpin_start_shift
-   ~baca.dynamicslib.hairpin_stencil_false
-   ~baca.dynamicslib.hairpin_transparent
-   ~baca.dynamicslib.make_dynamics
-   ~baca.dynamicslib.measure_swells
-   ~baca.dynamicslib.new_hairpin
-   ~baca.dynamicslib.niente
+   ~baca.dynamics.dynamic
+   ~baca.dynamics.dynamic_down
+   ~baca.dynamics.dynamic_shift
+   ~baca.dynamics.dynamic_text_center
+   ~baca.dynamics.dynamic_text_extra_offset
+   ~baca.dynamics.dynamic_text_left
+   ~baca.dynamics.dynamic_text_parent_alignment_x
+   ~baca.dynamics.dynamic_text_right
+   ~baca.dynamics.dynamic_text_stencil_false
+   ~baca.dynamics.dynamic_text_transparent
+   ~baca.dynamics.dynamic_text_x_extent_zero
+   ~baca.dynamics.dynamic_text_x_offset
+   ~baca.dynamics.dynamic_text_y_offset
+   ~baca.dynamics.dynamic_trend
+   ~baca.dynamics.dynamic_up
+   ~baca.dynamics.hairpin_chain
+   ~baca.dynamics.hairpin_indicator_chain
+   ~baca.dynamics.hairpin_shorten_pair
+   ~baca.dynamics.hairpin_start_shift
+   ~baca.dynamics.hairpin_stencil_false
+   ~baca.dynamics.hairpin_transparent
+   ~baca.dynamics.make_dynamics
+   ~baca.dynamics.measure_swells
+   ~baca.dynamics.new_hairpin
+   ~baca.dynamics.niente
 
 .. raw:: html
 

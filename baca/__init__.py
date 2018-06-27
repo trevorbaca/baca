@@ -1,7 +1,7 @@
 import abjad
 
 # functions
-from .dynamicslib import *
+from .dynamics import *
 from .library import *
 
 # markup library

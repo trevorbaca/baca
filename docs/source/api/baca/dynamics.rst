@@ -1,16 +1,16 @@
-.. _baca--dynamicslib:
+.. _baca--dynamics:
 
-dynamicslib
-===========
+dynamics
+========
 
-.. automodule:: baca.dynamicslib
+.. automodule:: baca.dynamics
 
-.. currentmodule:: baca.dynamicslib
+.. currentmodule:: baca.dynamics
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.dynamicslib
+      :lineage: baca.dynamics
 
 .. raw:: html
 
