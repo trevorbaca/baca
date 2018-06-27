@@ -1324,6 +1324,7 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
                             e'8
                             \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
+                            - \tweak to-barline ##t                                                  %! IC:BACA_HAIRPIN
                             - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
                             \>                                                                       %! IC:BACA_HAIRPIN
                             [
@@ -2028,6 +2029,8 @@ def hairpin(
         else:
             assert len(descriptor) == 3, repr(descriptor)
             start_dynamic, dynamic_trend, stop_dynamic = descriptor
+    if dynamic_trend.shape == '>o':
+        abjad.tweak(dynamic_trend).to_barline = True
     if isinstance(selector, str):
         selector = eval(selector)
     if isinstance(start_selector, str):
@@ -3846,6 +3849,8 @@ def hairpin_chain(
         for string in dynamics.split():
             if string in known_shapes:
                 dynamic_trend = abjad.DynamicTrend(string)
+                if dynamic_trend.shape == '>o':
+                    abjad.tweak(dynamic_trend).to_barline = True
                 indicators.append(dynamic_trend)
             else:
                 command = _local_dynamic(string)
