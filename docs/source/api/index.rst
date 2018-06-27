@@ -389,6 +389,7 @@ Dynamics library.
    ~baca.dynamicslib.dynamic_up
    ~baca.dynamicslib.dynamics
    ~baca.dynamicslib.hairpin_chain
+   ~baca.dynamicslib.hairpin_indicator_chain
    ~baca.dynamicslib.hairpin_shorten_pair
    ~baca.dynamicslib.hairpin_start_shift
    ~baca.dynamicslib.hairpin_stencil_false

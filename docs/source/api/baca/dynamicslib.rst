@@ -149,6 +149,7 @@ dynamicslib
    ~dynamic_up
    ~dynamics
    ~hairpin_chain
+   ~hairpin_indicator_chain
    ~hairpin_shorten_pair
    ~hairpin_start_shift
    ~hairpin_stencil_false
@@ -190,6 +191,8 @@ dynamicslib
 .. autofunction:: dynamics
 
 .. autofunction:: hairpin_chain
+
+.. autofunction:: hairpin_indicator_chain
 
 .. autofunction:: hairpin_shorten_pair
 
