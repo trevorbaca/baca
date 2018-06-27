@@ -1101,23 +1101,19 @@ def dynamic_trend(
 _local_dynamic_trend = dynamic_trend
 
 
-def dynamics(string: str) -> typing.List[abjad.Dynamic]:
+def make_dynamics(string: str) -> typing.List[abjad.Dynamic]:
     r"""
     Makes dynamics from ``string``.
 
     ..  container::
 
-        >>> baca.dynamics('ff p f pp')
+        >>> baca.make_dynamics('ff p f pp')
         [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
 
     """
     return [abjad.Dynamic(_) for _ in string.split()]
 
-_local_dynamics = dynamics
-
-# TODO: completely refactor;
-#       remove bookend keyword altogether;
-#       add left_broken, right_broken keywords;
+# TODO: remove in favor of hairpin_indicator_chain()
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
@@ -1141,7 +1137,7 @@ def hairpin_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         pieces=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
@@ -1277,7 +1273,7 @@ def hairpin_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=-1,
         ...         pieces=baca.leaves().partition_by_counts(
         ...             [3],
@@ -1417,7 +1413,7 @@ def hairpin_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=True,
         ...         pieces=baca.leaves().partition_by_counts(
         ...             [3],
@@ -1567,7 +1563,7 @@ def hairpin_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         pieces=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
@@ -1696,7 +1692,7 @@ def hairpin_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=-1,
         ...         pieces=baca.group_by_measures([1]),
         ...     ),
@@ -1829,7 +1825,7 @@ def hairpin_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=True,
         ...         pieces=baca.group_by_measures([1]),
         ...     ),
@@ -1999,7 +1995,7 @@ def hairpin_indicator_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         pieces=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
@@ -2271,7 +2267,7 @@ def hairpin_indicator_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=-1,
         ...         pieces=baca.leaves().partition_by_counts(
         ...             [3],
@@ -2549,7 +2545,7 @@ def hairpin_indicator_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=True,
         ...         pieces=baca.leaves().partition_by_counts(
         ...             [3],
@@ -2845,7 +2841,7 @@ def hairpin_indicator_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         pieces=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
@@ -3101,7 +3097,7 @@ def hairpin_indicator_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=-1,
         ...         pieces=baca.group_by_measures([1]),
         ...     ),
@@ -3366,7 +3362,7 @@ def hairpin_indicator_chain(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
-        ...         baca.dynamics('p f'),
+        ...         baca.make_dynamics('p f'),
         ...         bookend=True,
         ...         pieces=baca.group_by_measures([1]),
         ...     ),
@@ -4158,7 +4154,7 @@ def measure_swells(
     """
     assert all(isinstance(_, int) for _ in counts), repr(counts)
     if isinstance(dynamics, str):
-        dynamics_ = _local_dynamics(dynamics)
+        dynamics_ = make_dynamics(dynamics)
     else:
         dynamics_ = dynamics
     assert all(isinstance(_, abjad.Dynamic) for _ in dynamics_)

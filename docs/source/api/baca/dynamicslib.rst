@@ -147,13 +147,13 @@ dynamicslib
    ~dynamic_text_y_offset
    ~dynamic_trend
    ~dynamic_up
-   ~dynamics
    ~hairpin_chain
    ~hairpin_indicator_chain
    ~hairpin_shorten_pair
    ~hairpin_start_shift
    ~hairpin_stencil_false
    ~hairpin_transparent
+   ~make_dynamics
    ~measure_swells
    ~new_hairpin
    ~niente
@@ -188,8 +188,6 @@ dynamicslib
 
 .. autofunction:: dynamic_up
 
-.. autofunction:: dynamics
-
 .. autofunction:: hairpin_chain
 
 .. autofunction:: hairpin_indicator_chain
@@ -201,6 +199,8 @@ dynamicslib
 .. autofunction:: hairpin_stencil_false
 
 .. autofunction:: hairpin_transparent
+
+.. autofunction:: make_dynamics
 
 .. autofunction:: measure_swells
 
