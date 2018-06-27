@@ -95,7 +95,8 @@ class PiecewiseIndicatorCommand(Command):
                 indicators,
                 start_leaf,
                 has_bookend=has_bookend,
-                is_last_start_leaf=is_last_piece,
+                is_last_piece=is_last_piece,
+                is_start_leaf=True,
                 )
             if has_bookend:
                 stop_leaf = baca.select(piece).leaf(-1)
@@ -104,7 +105,8 @@ class PiecewiseIndicatorCommand(Command):
                     indicators,
                     stop_leaf,
                     has_bookend=has_bookend,
-                    is_last_stop_leaf=is_last_piece,
+                    is_last_piece=is_last_piece,
+                    is_stop_leaf=True,
                     )
 
     ### PRIVATE METHODS ###
@@ -114,20 +116,26 @@ class PiecewiseIndicatorCommand(Command):
         indicators,
         leaf,
         has_bookend=False,
-        is_last_start_leaf=False,
-        is_last_stop_leaf=False,
+        is_last_piece=False,
+        is_start_leaf=False,
+        is_stop_leaf=False,
         ):
         if not isinstance(indicators, tuple):
             indicators = (indicators,)
         for indicator in indicators:
             if indicator is None:
                 continue
-            if (is_last_start_leaf and
+            if (is_stop_leaf and
+                getattr(indicator, 'spanner_start', False) is True):
+                continue
+            if (is_last_piece and
+                is_start_leaf and
                 not has_bookend and
                 getattr(indicator, 'spanner_start', False) is True and
                 not self.right_open):
                 continue
-            if (is_last_stop_leaf and
+            if (is_last_piece and
+                is_stop_leaf and
                 getattr(indicator, 'spanner_start', False) is True and
                 not self.right_open):
                 continue
