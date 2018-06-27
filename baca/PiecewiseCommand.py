@@ -19,7 +19,7 @@ class PiecewiseCommand(Command):
     __slots__ = (
         '_bookend',
         '_indicators',
-        '_pieces',
+        '_piece_selector',
         '_selector',
         '_spanner',
         '_tweaks',
@@ -32,7 +32,7 @@ class PiecewiseCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
-        pieces: typings.Selector = 'baca.leaves()',
+        piece_selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         selector: typings.Selector = 'baca.leaves()',
         tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = (),
@@ -45,11 +45,12 @@ class PiecewiseCommand(Command):
         if indicators is not None:
             indicators_ = abjad.CyclicTuple(indicators)
         self._indicators = indicators_
-        if isinstance(pieces, str):
-            pieces = eval(pieces)
-        if pieces is not None:
-            assert isinstance(pieces, abjad.Expression), repr(pieces)
-        self._pieces = pieces
+        if isinstance(piece_selector, str):
+            piece_selector = eval(piece_selector)
+        if piece_selector is not None:
+            assert isinstance(piece_selector, abjad.Expression), repr(
+                piece_selector)
+        self._piece_selector = piece_selector
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, SpannerCommand))
         self._spanner = spanner
@@ -63,8 +64,8 @@ class PiecewiseCommand(Command):
         """
         Calls command on ``argument``.
 
-        ..  note:: IMPORTANT: spanner ``selector`` applies before ``pieces``
-            selector.
+        ..  note:: IMPORTANT: spanner ``selector`` applies before
+            ``piece_selector``.
 
         """
         if argument is None:
@@ -89,9 +90,9 @@ class PiecewiseCommand(Command):
             spanner = self.spanner(argument)
         self._apply_tweaks(spanner)
         argument = abjad.select(spanner).leaves()
-        if self.pieces is not None:
-            assert not isinstance(self.pieces, str)
-            pieces = self.pieces(argument)
+        if self.piece_selector is not None:
+            assert not isinstance(self.piece_selector, str)
+            pieces = self.piece_selector(argument)
         else:
             pieces = argument
         assert pieces is not None
@@ -99,7 +100,7 @@ class PiecewiseCommand(Command):
         for leaf in abjad.select(pieces).leaves():
             if leaf not in spanner:
                 message = f'\n  Leaf {leaf!s} not in {spanner!s}'
-                message += "\n  Do pieces contradict spanner selector?"
+                message += "\n  Does piece selector contradict spanner selector?"
                 raise Exception(message)
         piece_count = len(pieces)
         if self.bookend in (False, None):
@@ -186,11 +187,11 @@ class PiecewiseCommand(Command):
         return self._indicators
 
     @property
-    def pieces(self) -> typing.Optional[abjad.Expression]:
+    def piece_selector(self) -> typing.Optional[abjad.Expression]:
         """
         Gets piece selector.
         """
-        return self._pieces
+        return self._piece_selector
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:

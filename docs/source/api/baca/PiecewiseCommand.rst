@@ -19,7 +19,7 @@ PiecewiseCommand
 
       bookend
       indicators
-      pieces
+      piece_selector
       selector
       spanner
       tweaks
@@ -87,7 +87,7 @@ PiecewiseCommand
 
    .. autoattribute:: PiecewiseCommand.indicators
 
-   .. autoattribute:: PiecewiseCommand.pieces
+   .. autoattribute:: PiecewiseCommand.piece_selector
 
    .. autoattribute:: PiecewiseCommand.selector
 

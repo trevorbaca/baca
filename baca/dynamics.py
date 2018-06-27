@@ -1117,7 +1117,7 @@ def make_dynamics(string: str) -> typing.List[abjad.Dynamic]:
 def hairpin_chain(
     *dynamics: typing.Any,
     bookend: typing.Union[bool, int] = False,
-    pieces: typings.Selector = 'baca.tleaves().group()',
+    piece_selector: typings.Selector = 'baca.tleaves().group()',
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseCommand:
     r"""
@@ -1138,7 +1138,7 @@ def hairpin_chain(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
         ...         baca.make_dynamics('p f'),
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -1275,7 +1275,7 @@ def hairpin_chain(
         ...     baca.hairpin_chain(
         ...         baca.make_dynamics('p f'),
         ...         bookend=-1,
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -1415,7 +1415,7 @@ def hairpin_chain(
         ...     baca.hairpin_chain(
         ...         baca.make_dynamics('p f'),
         ...         bookend=True,
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -1564,7 +1564,7 @@ def hairpin_chain(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_chain(
         ...         baca.make_dynamics('p f'),
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1694,7 +1694,7 @@ def hairpin_chain(
         ...     baca.hairpin_chain(
         ...         baca.make_dynamics('p f'),
         ...         bookend=-1,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1827,7 +1827,7 @@ def hairpin_chain(
         ...     baca.hairpin_chain(
         ...         baca.make_dynamics('p f'),
         ...         bookend=True,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1965,7 +1965,7 @@ def hairpin_chain(
     return library.piecewise(
         spanner,
         dynamics_,
-        pieces,
+        piece_selector,
         bookend=bookend,
         selector=selector,
         )
@@ -1974,7 +1974,7 @@ def hairpin_chain(
 def hairpin_indicator_chain(
     dynamics: typing.Union[str, typing.List],
     bookend: typing.Union[bool, int] = False,
-    pieces: typings.Selector = 'baca.tleaves().group()',
+    piece_selector: typings.Selector = 'baca.tleaves().group()',
     right_open: bool = None,
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseIndicatorCommand:
@@ -1996,7 +1996,7 @@ def hairpin_indicator_chain(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
         ...         'p f',
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -2128,7 +2128,7 @@ def hairpin_indicator_chain(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
         ...         'p < f >',
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -2266,7 +2266,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p f',
         ...         bookend=-1,
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -2401,7 +2401,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p < f >',
         ...         bookend=-1,
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -2541,7 +2541,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p f',
         ...         bookend=True,
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -2684,7 +2684,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p < f >',
         ...         bookend=True,
-        ...         pieces=baca.leaves().partition_by_counts(
+        ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
         ...             overhang=True,
@@ -2833,7 +2833,7 @@ def hairpin_indicator_chain(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
         ...         'p f',
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2957,7 +2957,7 @@ def hairpin_indicator_chain(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin_indicator_chain(
         ...         'p < f >',
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3087,7 +3087,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p f',
         ...         bookend=-1,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3216,7 +3216,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p < f >',
         ...         bookend=-1,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3349,7 +3349,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p f',
         ...         bookend=True,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3484,7 +3484,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p < f >',
         ...         bookend=True,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3621,7 +3621,7 @@ def hairpin_indicator_chain(
         ...     baca.hairpin_indicator_chain(
         ...         'p -- f >',
         ...         bookend=True,
-        ...         pieces=baca.group_by_measures([1]),
+        ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3790,7 +3790,7 @@ def hairpin_indicator_chain(
     return PiecewiseIndicatorCommand(
         bookend=bookend,
         indicators=dynamics_,
-        pieces=pieces,
+        piece_selector=piece_selector,
         right_open=right_open,
         selector=selector,
         )

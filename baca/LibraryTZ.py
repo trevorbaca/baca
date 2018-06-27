@@ -2667,7 +2667,7 @@ class LibraryTZ(abjad.AbjadObject):
         do_not_bookend: bool = False,
         lilypond_id: int = None,
         no_upright: bool = None,
-        pieces: typings.Selector = 'baca.leaves().group()',
+        piece_selector: typings.Selector = 'baca.leaves().group()',
         selector: typings.Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None
         ) -> PiecewiseCommand:
@@ -2692,7 +2692,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
             ...         do_not_bookend=True,
-            ...         pieces=baca.leaves().enchain([5, 4, 5, 4]),
+            ...         piece_selector=baca.leaves().enchain([5, 4, 5, 4]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2901,7 +2901,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transition(
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
-            ...         pieces=baca.leaves().enchain([8]),
+            ...         piece_selector=baca.leaves().enchain([8]),
             ...     ),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3097,7 +3097,7 @@ class LibraryTZ(abjad.AbjadObject):
         return library.piecewise(
             text_spanner,
             indicators,
-            pieces,
+            piece_selector,
             *tweaks,
             bookend=not(do_not_bookend),
             selector=selector,

@@ -18,7 +18,7 @@ class PiecewiseIndicatorCommand(Command):
     __slots__ = (
         '_bookend',
         '_indicators',
-        '_pieces',
+        '_piece_selector',
         '_right_open',
         '_selector',
         )
@@ -30,7 +30,7 @@ class PiecewiseIndicatorCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
-        pieces: typings.Selector = 'baca.leaves()',
+        piece_selector: typings.Selector = 'baca.leaves()',
         right_open: bool = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
@@ -42,11 +42,12 @@ class PiecewiseIndicatorCommand(Command):
         if indicators is not None:
             indicators_ = abjad.CyclicTuple(indicators)
         self._indicators = indicators_
-        if isinstance(pieces, str):
-            pieces = eval(pieces)
-        if pieces is not None:
-            assert isinstance(pieces, abjad.Expression), repr(pieces)
-        self._pieces = pieces
+        if isinstance(piece_selector, str):
+            piece_selector = eval(piece_selector)
+        if piece_selector is not None:
+            assert isinstance(piece_selector, abjad.Expression), repr(
+                piece_selector)
+        self._piece_selector = piece_selector
         if right_open is not None:
             right_open = bool(right_open)
         self._right_open = right_open
@@ -65,9 +66,9 @@ class PiecewiseIndicatorCommand(Command):
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
-        if self.pieces is not None:
-            assert not isinstance(self.pieces, str)
-            pieces = self.pieces(argument)
+        if self.piece_selector is not None:
+            assert not isinstance(self.piece_selector, str)
+            pieces = self.piece_selector(argument)
         else:
             pieces = argument
         assert pieces is not None
@@ -185,11 +186,11 @@ class PiecewiseIndicatorCommand(Command):
         return self._indicators
 
     @property
-    def pieces(self) -> typing.Optional[abjad.Expression]:
+    def piece_selector(self) -> typing.Optional[abjad.Expression]:
         """
         Gets piece selector.
         """
-        return self._pieces
+        return self._piece_selector
 
     @property
     def right_open(self) -> typing.Optional[bool]:

@@ -618,7 +618,7 @@ def only_segment(command: Command) -> typing.Union[Command, Map, Suite]:
 def piecewise(
     spanner: abjad.Spanner,
     indicators: typing.Sequence,
-    pieces: typings.Selector,
+    piece_selector: typings.Selector,
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = False,
     selector: typings.Selector = 'baca.leaves()',
@@ -630,7 +630,7 @@ def piecewise(
     return PiecewiseCommand(
         bookend=bookend,
         indicators=indicators,
-        pieces=pieces,
+        piece_selector=piece_selector,
         selector=selector,
         spanner=spanner,
         tweaks=tweaks,
