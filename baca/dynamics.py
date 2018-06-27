@@ -3947,6 +3947,7 @@ def hairpin_transparent(
         selector=selector,
         )
 
+# TODO: replace in favor of baca.hairpin_chain()
 def measure_swells(
     dynamics: typing.Union[str, typing.List[abjad.Dynamic]],
     counts: typing.List[int] = [1],
