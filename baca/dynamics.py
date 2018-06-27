@@ -1123,7 +1123,7 @@ def hairpin(
     lone_dynamic: bool = True,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
-    ) -> Command:
+    ) -> HairpinCommand:
     r"""
     Attaches hairpin indicators.
 
@@ -3940,6 +3940,38 @@ def hairpin_transparent(
         value=True,
         grob='hairpin',
         selector=selector,
+        )
+
+def generalized_hairpin(
+    descriptor: typing.Union[
+        str,
+        typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
+        ],
+    *,
+    #left_broken: bool = None,
+    #lone_dynamic: bool = True,
+    #right_broken: bool = None,
+    selector: typings.Selector = 'baca.tleaves()',
+    ) -> HairpinCommand:
+    """
+    Generalized hairpin.
+    """
+    if isinstance(descriptor, str):
+        count = len(descriptor.split())
+    else:
+        count = len(descriptor)
+    if count == 3:
+        bookend = -1
+    else:
+        bookend = None
+    if isinstance(selector, str):
+        selector = eval(selector)
+    piece_selector = selector.group()
+    return hairpin_chain(
+        dynamics=descriptor,
+        bookend=bookend,
+        piece_selector=piece_selector,
+        selector=baca.select().leaves(),
         )
 
 def niente() -> abjad.Dynamic:

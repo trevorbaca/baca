@@ -37,6 +37,7 @@ dynamics
    ~dynamic_text_y_offset
    ~dynamic_trend
    ~dynamic_up
+   ~generalized_hairpin
    ~hairpin
    ~hairpin_chain
    ~hairpin_shorten_pair
@@ -75,6 +76,8 @@ dynamics
 .. autofunction:: dynamic_trend
 
 .. autofunction:: dynamic_up
+
+.. autofunction:: generalized_hairpin
 
 .. autofunction:: hairpin
 
