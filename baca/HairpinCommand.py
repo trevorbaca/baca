@@ -50,6 +50,56 @@ class HairpinCommand(Command):
         self._stop_dynamic = stop_dynamic
         self._tags = [abjad.Tag('BACA_HAIRPIN')]
 
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument: abjad.Selection = None) -> None:
+        """
+        Calls command.
+        """
+        from .dynamics import dynamic as _local_dynamic
+        from .dynamics import dynamic_trend as _local_dynamic_trend
+        if self.selector:
+            argument = self.selector(argument)
+        leaves = baca.select(argument).leaves()
+        if len(leaves) == 1 and self.lone_dynamic is False:
+            return None
+        if self.right_broken is True:
+            command = library.literal(
+                r'\!',
+                format_slot='after',
+                selector=baca.select().leaf(-1),
+                )
+            words = self.tag.words
+            words.append(str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS))
+            library.tag(words, command, deactivate=False)
+            command.runtime = self.runtime
+            command(argument)
+        if self.start_dynamic is not None:
+            command = _local_dynamic(
+                self.start_dynamic,
+                selector=baca.select().leaf(0),
+                )
+            library.tag(self.tag.words, command)
+            command.runtime = self.runtime
+            command(argument)
+        if len(leaves) == 1:
+            return
+        command = _local_dynamic_trend(
+            self.dynamic_trend,
+            selector=baca.select().leaf(0),
+            )
+        library.tag(self.tag.words, command)
+        command.runtime = self.runtime
+        command(argument)
+        if self.stop_dynamic is not None:
+            command = _local_dynamic(
+                self.stop_dynamic,
+                selector=baca.select().leaf(-1),
+                )
+            library.tag(self.tag.words, command)
+            command.runtime = self.runtime
+            command(argument)
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -86,54 +136,3 @@ class HairpinCommand(Command):
         Gets stop dynamic.
         """
         return self._stop_dynamic
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, argument: abjad.Selection = None) -> None:
-        """
-        Calls command.
-        """
-        from .dynamics import dynamic as _local_dynamic
-        from .dynamics import dynamic_trend as _local_dynamic_trend
-        if self.selector:
-            argument = self.selector(argument)
-        leaves = baca.select(argument).leaves()
-        if len(leaves) == 1 and self.lone_dynamic is False:
-            return None
-        if self.right_broken is True:
-            literal = abjad.LilyPondLiteral(r'\!')
-            command = library.literal(
-                r'\!',
-                format_slot='after',
-                selector=baca.select().leaf(-1),
-                )
-            words = self.tag.words
-            words.append(str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS))
-            library.tag(words, command, deactivate=False)
-            command.runtime = self.runtime
-            command(argument)
-        if self.start_dynamic is not None:
-            command = _local_dynamic(
-                self.start_dynamic,
-                selector=baca.select().leaf(0),
-                )
-            library.tag(self.tag.words, command)
-            command.runtime = self.runtime
-            command(argument)
-        if len(leaves) == 1:
-            return
-        command = _local_dynamic_trend(
-            self.dynamic_trend,
-            selector=baca.select().leaf(0),
-            )
-        library.tag(self.tag.words, command)
-        command.runtime = self.runtime
-        command(argument)
-        if self.stop_dynamic is not None:
-            command = _local_dynamic(
-                self.stop_dynamic,
-                selector=baca.select().leaf(-1),
-                )
-            library.tag(self.tag.words, command)
-            command.runtime = self.runtime
-            command(argument)

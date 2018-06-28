@@ -38,7 +38,6 @@ dynamics
    ~dynamic_trend
    ~dynamic_up
    ~generalized_hairpin
-   ~hairpin
    ~hairpin_chain
    ~hairpin_shorten_pair
    ~hairpin_start_shift
@@ -78,8 +77,6 @@ dynamics
 .. autofunction:: dynamic_up
 
 .. autofunction:: generalized_hairpin
-
-.. autofunction:: hairpin
 
 .. autofunction:: hairpin_chain
 

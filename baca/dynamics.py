@@ -16,6 +16,53 @@ from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .SchemeManifest import SchemeManifest
 
 
+# TODO: make public and document
+def _parse_descriptor(
+    descriptor: str
+    ):
+    assert isinstance(descriptor, str), repr(descriptor)
+    dynamic_object_typing = typing.Union[
+        abjad.Dynamic,
+        abjad.DynamicTrend,
+        typing.Tuple[abjad.Dynamic, abjad.DynamicTrend],
+        ]
+    dynamics_: typing.List[dynamic_object_typing] = []
+    indicators: typing.List[
+        typing.Union[abjad.Dynamic, abjad.DynamicTrend]
+        ] = []
+    known_shapes = abjad.DynamicTrend('<').known_shapes
+    for string in descriptor.split():
+        if string in known_shapes:
+            dynamic_trend = abjad.DynamicTrend(string)
+            if dynamic_trend.shape == '>o':
+                abjad.tweak(dynamic_trend).to_barline = True
+            indicators.append(dynamic_trend)
+        else:
+            command = _local_dynamic(string)
+            assert command.indicators
+            dynamic = command.indicators[0]
+            assert isinstance(dynamic, abjad.Dynamic)
+            indicators.append(dynamic)
+    if isinstance(indicators[0], abjad.DynamicTrend):
+        dynamics_.append(indicators.pop(0))
+    if len(indicators) == 1:
+        dynamics_.append(indicators[0])
+    for left, right in baca.sequence(indicators).nwise():
+        if (isinstance(left, abjad.DynamicTrend) and
+            isinstance(right, abjad.DynamicTrend)):
+            raise Exception('consecutive dynamic trends')
+        elif (isinstance(left, abjad.Dynamic) and
+            isinstance(right, abjad.Dynamic)):
+            dynamics_.append(left)
+        elif (isinstance(left, abjad.Dynamic) and
+            isinstance(right, abjad.DynamicTrend)):
+            pair = (left, right)
+            dynamics_.append(pair)
+    if indicators and isinstance(indicators[-1], abjad.Dynamic):
+        dynamics_.append(indicators[-1])
+    return dynamics_
+
+
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
     # TODO: add tweaks
@@ -1112,948 +1159,94 @@ def make_dynamics(string: str) -> typing.List[abjad.Dynamic]:
     """
     return [abjad.Dynamic(_) for _ in string.split()]
 
-# TODO: replace in favor of baca.hairpin_chain()
-def hairpin(
-    descriptor: typing.Union[
-        str,
-        typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
-        ],
-    *,
-    left_broken: bool = None,
-    lone_dynamic: bool = True,
-    right_broken: bool = None,
-    selector: typings.Selector = 'baca.tleaves()',
-    ) -> HairpinCommand:
-    r"""
-    Attaches hairpin indicators.
+#def hairpin(
+#    descriptor: typing.Union[
+#        str,
+#        typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
+#        ],
+#    *,
+#    left_broken: bool = None,
+#    lone_dynamic: bool = True,
+#    right_broken: bool = None,
+#    selector: typings.Selector = 'baca.tleaves()',
+#    ) -> HairpinCommand:
+#    r"""
+#    Attaches hairpin indicators.
+#    """
+#    if isinstance(descriptor, str):
+#        pieces = descriptor.split()
+#        if len(pieces) == 1:
+#            start, stop = None, None
+#            trend = pieces[0]
+#        elif len(pieces) == 2:
+#            if '>' in pieces[0] or '<' in pieces[0] or '--' in pieces[0]:
+#                start = None
+#                trend, stop = pieces
+#            else:
+#                stop = None
+#                start, trend = pieces
+#        else:
+#            assert len(pieces) == 3, repr(pieces)
+#            start, trend, stop = descriptor.split()
+#        if start is not None:
+#            command = _local_dynamic(start)
+#            assert command.indicators
+#            start_dynamic = command.indicators[0]
+#        else:
+#            start_dynamic = None
+#        command = _local_dynamic_trend(trend)
+#        assert command.indicators
+#        dynamic_trend = command.indicators[0]
+#        if stop is not None:
+#            command = _local_dynamic(stop)
+#            assert command.indicators
+#            stop_dynamic = command.indicators[0]
+#        else:
+#            stop_dynamic = None
+#    else:
+#        assert isinstance(descriptor, list), repr(descriptor)
+#        if len(descriptor) == 1:
+#            start_dynamic, stop_dynamic = None, None
+#            dynamic_trend = descriptor[0]
+#        elif len(descriptor) == 2:
+#            if isinstance(descriptor[0], abjad.DynamicTrend):
+#                start_dynamic = None
+#                dynamic_trend, stop_dynamic = descriptor
+#            else:
+#                stop_dynamic = None
+#                start_dynamic, dynamic_trend = descriptor
+#        else:
+#            assert len(descriptor) == 3, repr(descriptor)
+#            start_dynamic, dynamic_trend, stop_dynamic = descriptor
+#    if dynamic_trend.shape == '>o':
+#        abjad.tweak(dynamic_trend).to_barline = True
+#    if isinstance(selector, str):
+#        selector = eval(selector)
+#    if left_broken is not None:
+#        left_broken = bool(left_broken)
+#    if left_broken is True:
+#        assert start_dynamic is None, repr(start_dynamic)
+#        dynamic_trend = abjad.new(dynamic_trend, left_broken=True)
+#    if right_broken is not None:
+#        right_broken = bool(right_broken)
+#    if right_broken is True:
+#        assert stop_dynamic is None, repr(stop_dynamic)
+#    return HairpinCommand(
+#        dynamic_trend,
+#        lone_dynamic=lone_dynamic,
+#        right_broken=right_broken,
+#        selector=selector,
+#        start_dynamic=start_dynamic,
+#        stop_dynamic=stop_dynamic,
+#        )
 
-    ..  container:: example
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.make_even_divisions(),
-        ...     baca.hairpin('p < f'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            \<                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Effort dynamic al niente:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.make_even_divisions(),
-        ...     baca.hairpin('"ff" >o niente'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            - \tweak to-barline ##t                                                  %! IC:BACA_HAIRPIN
-                            - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
-                            \>                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        Effort dynamic dal niente:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.make_even_divisions(),
-        ...     baca.hairpin('niente o< "ff"'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            - \tweak circled-tip ##t                                                 %! IC:BACA_HAIRPIN
-                            \<                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Effort dynamic constante:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.make_even_divisions(),
-        ...     baca.hairpin('"p" -- f'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            - \tweak stencil #constante-hairpin                                      %! IC:BACA_HAIRPIN
-                            \<                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Effort dynamics crescendo subito, decrescendo subito:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.make_even_divisions(),
-        ...     baca.hairpin(
-        ...         '"mp" <| "f"',
-        ...         selector=baca.leaves()[:7],
-        ...         ),
-        ...     baca.hairpin(
-        ...         '"mf" |> "p"',
-        ...         selector=baca.leaves()[7:],
-        ...         ),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            - \tweak stencil #abjad-flared-hairpin                                   %! IC:BACA_HAIRPIN
-                            \<                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            - \tweak stencil #abjad-flared-hairpin                                   %! IC:BACA_HAIRPIN
-                            \>                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Attaches start dynamic without trend on lone leaf:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(4),
-        ...     baca.make_notes(),
-        ...     baca.measures(
-        ...         1,
-        ...         baca.hairpin('p < f'),
-        ...         baca.pitch('E4'),
-        ...         ),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'2
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'4.
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'2
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
-                            c'4.
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Implicit start and stop:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.make_even_divisions(),
-        ...     baca.measures(
-        ...         1,
-        ...         baca.hairpin('f >'),
-        ...         ),
-        ...     baca.measures(
-        ...         (3, 4),
-        ...         baca.dynamic(baca.niente()),
-        ...         baca.hairpin('< f'),
-        ...         ),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                                    %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            \>                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
-                            d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            \<                                                                       %! IC:BACA_HAIRPIN
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            c''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC:BACA_HAIRPIN
-                            d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC:BACA_HAIRPIN
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    """
-    if isinstance(descriptor, str):
-        pieces = descriptor.split()
-        if len(pieces) == 1:
-            start, stop = None, None
-            trend = pieces[0]
-        elif len(pieces) == 2:
-            if '>' in pieces[0] or '<' in pieces[0] or '--' in pieces[0]:
-                start = None
-                trend, stop = pieces
-            else:
-                stop = None
-                start, trend = pieces
-        else:
-            assert len(pieces) == 3, repr(pieces)
-            start, trend, stop = descriptor.split()
-        if start is not None:
-            command = _local_dynamic(start)
-            assert command.indicators
-            start_dynamic = command.indicators[0]
-        else:
-            start_dynamic = None
-        command = _local_dynamic_trend(trend)
-        assert command.indicators
-        dynamic_trend = command.indicators[0]
-        if stop is not None:
-            command = _local_dynamic(stop)
-            assert command.indicators
-            stop_dynamic = command.indicators[0]
-        else:
-            stop_dynamic = None
-    else:
-        assert isinstance(descriptor, list), repr(descriptor)
-        if len(descriptor) == 1:
-            start_dynamic, stop_dynamic = None, None
-            dynamic_trend = descriptor[0]
-        elif len(descriptor) == 2:
-            if isinstance(descriptor[0], abjad.DynamicTrend):
-                start_dynamic = None
-                dynamic_trend, stop_dynamic = descriptor
-            else:
-                stop_dynamic = None
-                start_dynamic, dynamic_trend = descriptor
-        else:
-            assert len(descriptor) == 3, repr(descriptor)
-            start_dynamic, dynamic_trend, stop_dynamic = descriptor
-    if dynamic_trend.shape == '>o':
-        abjad.tweak(dynamic_trend).to_barline = True
-    if isinstance(selector, str):
-        selector = eval(selector)
-    if left_broken is not None:
-        left_broken = bool(left_broken)
-    if left_broken is True:
-        assert start_dynamic is None, repr(start_dynamic)
-        dynamic_trend = abjad.new(dynamic_trend, left_broken=True)
-    if right_broken is not None:
-        right_broken = bool(right_broken)
-    if right_broken is True:
-        assert stop_dynamic is None, repr(stop_dynamic)
-    return HairpinCommand(
-        dynamic_trend,
-        lone_dynamic=lone_dynamic,
-        right_broken=right_broken,
-        selector=selector,
-        start_dynamic=start_dynamic,
-        stop_dynamic=stop_dynamic,
-        )
-
-# TODO: baca.hairpin() into baca.hairpin_chain()
+# TODO: move baca.generalized_hairpin() into baca.hairpin_chain()
 def hairpin_chain(
     dynamics: typing.Union[str, typing.List],
     bookend: typing.Union[bool, int] = False,
+    left_broken: bool = None,
     piece_selector: typings.Selector = 'baca.tleaves().group()',
+    right_broken: bool = None,
     right_open: bool = None,
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseIndicatorCommand:
@@ -2063,7 +1256,7 @@ def hairpin_chain(
     ..  container:: example
 
         Partitions leaves:
-        
+
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
@@ -2329,10 +1522,9 @@ def hairpin_chain(
                     }
                 >>
             >>
-            
 
         Bookends piece -1:
-        
+
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
@@ -2607,7 +1799,7 @@ def hairpin_chain(
             >>
 
         Bookends each piece:
-        
+
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
@@ -2900,7 +2092,7 @@ def hairpin_chain(
     ..  container:: example
 
         Groups leaves by measures:
-        
+
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
@@ -3153,7 +2345,7 @@ def hairpin_chain(
             >>
 
         Bookends piece -1:
-        
+
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
@@ -3415,7 +2607,7 @@ def hairpin_chain(
             >>
 
         Bookends each piece:
-        
+
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
@@ -3828,55 +3020,29 @@ def hairpin_chain(
             >>
 
     """
-    dynamic_object_typing = typing.Union[
-        abjad.Dynamic,
-        abjad.DynamicTrend,
-        typing.Tuple[abjad.Dynamic, abjad.DynamicTrend],
-        ]
-    dynamics_: typing.List[dynamic_object_typing] = []
     if isinstance(dynamics, str):
-        indicators: typing.List[
-            typing.Union[abjad.Dynamic, abjad.DynamicTrend]
-            ] = []
-        known_shapes = abjad.DynamicTrend('<').known_shapes
-        for string in dynamics.split():
-            if string in known_shapes:
-                dynamic_trend = abjad.DynamicTrend(string)
-                if dynamic_trend.shape == '>o':
-                    abjad.tweak(dynamic_trend).to_barline = True
-                indicators.append(dynamic_trend)
-            else:
-                command = _local_dynamic(string)
-                assert command.indicators
-                dynamic = command.indicators[0]
-                assert isinstance(dynamic, abjad.Dynamic)
-                indicators.append(dynamic)
-        if isinstance(indicators[0], abjad.DynamicTrend):
-            dynamics_.append(indicators.pop(0))
-        for left, right in baca.sequence(indicators).nwise():
-            if (isinstance(left, abjad.DynamicTrend) and
-                isinstance(right, abjad.DynamicTrend)):
-                raise Exception('consecutive dynamic trends')
-            elif (isinstance(left, abjad.Dynamic) and
-                isinstance(right, abjad.Dynamic)):
-                dynamics_.append(left)
-            elif (isinstance(left, abjad.Dynamic) and
-                isinstance(right, abjad.DynamicTrend)):
-                pair = (left, right)
-                dynamics_.append(pair)
-        if isinstance(indicators[-1], abjad.Dynamic):
-            dynamics_.append(indicators[-1])
+        dynamics_ = _parse_descriptor(dynamics)
     else:
         dynamics_ = dynamics
     prototype = (abjad.Dynamic, abjad.DynamicTrend, tuple)
     for item in dynamics_:
         assert isinstance(item, prototype), repr(dynamic)
+    if left_broken is not None:
+        left_broken = bool(left_broken)
+    if left_broken is True:
+        assert isinstance(dynamics_[0], abjad.DynamicTrend)
+        dynamic_trend = abjad.new(dynamics_[0], left_broken=True)
+        dynamics_[0] = dynamic_trend
+    right_broken_: typing.Any = False
+    if bool(right_broken) is True:
+        right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
     if right_open is not None:
         right_open = bool(right_open)
     return PiecewiseIndicatorCommand(
         bookend=bookend,
         indicators=dynamics_,
         piece_selector=piece_selector,
+        right_broken=right_broken_,
         right_open=right_open,
         selector=selector,
         )
@@ -3948,29 +3114,890 @@ def generalized_hairpin(
         typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
         ],
     *,
-    #left_broken: bool = None,
-    #lone_dynamic: bool = True,
-    #right_broken: bool = None,
+    left_broken: bool = None,
+    right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
     ) -> PiecewiseIndicatorCommand:
-    """
+    r"""
     Generalized hairpin.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.generalized_hairpin('p < f'),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Effort dynamic al niente:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.generalized_hairpin('"ff" >o niente'),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak to-barline ##t                                                  %! PIC
+                            - \tweak circled-tip ##t                                                 %! PIC
+                            \>                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+        Effort dynamic dal niente:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.generalized_hairpin('niente o< "ff"'),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak circled-tip ##t                                                 %! PIC
+                            \<                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Effort dynamic constante:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.generalized_hairpin('"p" -- f'),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #constante-hairpin                                      %! PIC
+                            \<                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Effort dynamics crescendo subito, decrescendo subito:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.generalized_hairpin(
+        ...         '"mp" <| "f"',
+        ...         selector=baca.leaves()[:7],
+        ...         ),
+        ...     baca.generalized_hairpin(
+        ...         '"mf" |> "p"',
+        ...         selector=baca.leaves()[7:],
+        ...         ),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #abjad-flared-hairpin                                   %! PIC
+                            \<                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #abjad-flared-hairpin                                   %! PIC
+                            \>                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Attaches start dynamic without trend on lone leaf:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(4),
+        ...     baca.make_notes(),
+        ...     baca.measures(
+        ...         1,
+        ...         baca.generalized_hairpin('p < f'),
+        ...         baca.pitch('E4'),
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'2
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'4.
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Implicit start and stop:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.measures(
+        ...         1,
+        ...         baca.generalized_hairpin('f >'),
+        ...         ),
+        ...     baca.measures(
+        ...         (3, 4),
+        ...         baca.dynamic(baca.niente()),
+        ...         baca.generalized_hairpin('< f'),
+        ...         ),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            d''8
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \<                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            c''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
     """
     if isinstance(descriptor, str):
-        count = len(descriptor.split())
+        dynamics = _parse_descriptor(descriptor)
     else:
-        count = len(descriptor)
+        dynamics = descriptor
     bookend: typing.Union[bool, int] = False
-    if count == 3:
+    if 1 < len(dynamics) and isinstance(dynamics[-1], abjad.Dynamic):
         bookend = -1
+    right_open: typing.Optional[bool] = None
+    if (isinstance(dynamics[-1], tuple) and
+        isinstance(dynamics[-1][-1], abjad.DynamicTrend)):
+        right_open = True
     if isinstance(selector, str):
         selector = eval(selector)
     assert isinstance(selector, abjad.Expression)
     piece_selector = selector.group()
     return hairpin_chain(
-        dynamics=descriptor,
+        dynamics=dynamics,
         bookend=bookend,
+        left_broken=left_broken,
         piece_selector=piece_selector,
+        right_broken=right_broken,
+        right_open=right_open,
         selector=baca.select().leaves(),
         )
 

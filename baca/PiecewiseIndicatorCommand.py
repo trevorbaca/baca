@@ -19,6 +19,7 @@ class PiecewiseIndicatorCommand(Command):
         '_bookend',
         '_indicators',
         '_piece_selector',
+        '_right_broken',
         '_right_open',
         '_selector',
         )
@@ -31,6 +32,7 @@ class PiecewiseIndicatorCommand(Command):
         bookend: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
         piece_selector: typings.Selector = 'baca.leaves()',
+        right_broken: typing.Any = None,
         right_open: bool = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
@@ -48,6 +50,7 @@ class PiecewiseIndicatorCommand(Command):
             assert isinstance(piece_selector, abjad.Expression), repr(
                 piece_selector)
         self._piece_selector = piece_selector
+        self._right_broken = right_broken
         if right_open is not None:
             right_open = bool(right_open)
         self._right_open = right_open
@@ -73,12 +76,13 @@ class PiecewiseIndicatorCommand(Command):
             pieces = argument
         assert pieces is not None
         piece_count = len(pieces)
+        assert 0 < piece_count, repr(piece_count)
         if self.bookend in (False, None):
             bookend_pattern = abjad.Pattern()
         elif self.bookend is True:
             bookend_pattern = abjad.index([0], 1)
         else:
-            assert isinstance(self.bookend, int)
+            assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
         for i, piece in enumerate(pieces):
             if i == piece_count - 1:
@@ -98,6 +102,7 @@ class PiecewiseIndicatorCommand(Command):
                 has_bookend=has_bookend,
                 is_last_piece=is_last_piece,
                 is_start_leaf=True,
+                tag='PIC',
                 )
             if has_bookend:
                 stop_leaf = baca.select(piece).leaf(-1)
@@ -108,6 +113,17 @@ class PiecewiseIndicatorCommand(Command):
                     has_bookend=has_bookend,
                     is_last_piece=is_last_piece,
                     is_stop_leaf=True,
+                    tag='PIC',
+                    )
+            if is_last_piece and self.right_broken:
+                stop_leaf = baca.select(piece).leaf(-1)
+                self._attach_indicators(
+                    self.right_broken,
+                    stop_leaf,
+                    has_bookend=True,
+                    is_last_piece=is_last_piece,
+                    is_stop_leaf=True,
+                    tag=str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
                     )
 
     ### PRIVATE METHODS ###
@@ -120,31 +136,34 @@ class PiecewiseIndicatorCommand(Command):
         is_last_piece=False,
         is_start_leaf=False,
         is_stop_leaf=False,
+        tag=None,
         ):
+        assert isinstance(tag, str), repr(tag)
         if not isinstance(indicators, tuple):
             indicators = (indicators,)
         for indicator in indicators:
             if indicator is None:
                 continue
-            if (is_stop_leaf and
+            if getattr(indicator, 'left_broken', False):
+                pass
+            elif (is_stop_leaf and
                 getattr(indicator, 'spanner_start', False) is True):
                 continue
-            if (is_last_piece and
+            elif (is_last_piece and
                 is_start_leaf and
-                not has_bookend and
                 getattr(indicator, 'spanner_start', False) is True and
-                not self.right_open):
+                not (has_bookend or self.right_broken or self.right_open)):
                 continue
-            if (is_last_piece and
+            elif (is_last_piece and
                 is_stop_leaf and
                 getattr(indicator, 'spanner_start', False) is True and
-                not self.right_open):
+                not (has_bookend or self.right_broken or self.right_open)):
                 continue
             reapplied = Command._remove_reapplied_wrappers(leaf, indicator)
             wrapper = abjad.attach(
                 indicator,
                 leaf,
-                tag=self.tag.prepend('PIC'),
+                tag=self.tag.prepend(tag),
                 wrapper=True,
                 )
             if indicator == reapplied:
@@ -191,6 +210,13 @@ class PiecewiseIndicatorCommand(Command):
         Gets piece selector.
         """
         return self._piece_selector
+
+    @property
+    def right_broken(self) -> typing.Optional[typing.Any]:
+        """
+        Gets right-broken indicator.
+        """
+        return self._right_broken
 
     @property
     def right_open(self) -> typing.Optional[bool]:
