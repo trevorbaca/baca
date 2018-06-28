@@ -68,8 +68,8 @@ from .PartAssignmentCommand import PartAssignmentCommand
 from .Partial import Partial
 from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PersistentIndicatorTests import PersistentIndicatorTests
-from .PiecewiseCommand import PiecewiseCommand
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
+from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .PitchArray import PitchArray
 from .PitchArrayCell import PitchArrayCell
 from .PitchArrayColumn import PitchArrayColumn

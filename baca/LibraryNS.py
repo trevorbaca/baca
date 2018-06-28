@@ -21,7 +21,7 @@ from .NestingCommand import NestingCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
 from .PartAssignmentCommand import PartAssignmentCommand
-from .PiecewiseCommand import PiecewiseCommand
+from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .PitchCommand import PitchCommand
 from .RegisterCommand import RegisterCommand
 from .RegisterInterpolationCommand import RegisterInterpolationCommand

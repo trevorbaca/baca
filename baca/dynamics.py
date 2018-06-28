@@ -3126,12 +3126,12 @@ def hairpins(
     for item in dynamics_:
         assert isinstance(item, prototype), repr(dynamic)
     last_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
-    if last_hairpin in (None, False):
+    if isinstance(last_hairpin, bool):
         last_hairpin_ = last_hairpin
-    else:
-        assert isinstance(last_hairpin, str), repr(last_hairpin)
-        last_hairpin_ = parse_descriptor(last)
-        assert isinstance(last_hairpin_, abjad.DynamicTrend)
+    elif isinstance(last_hairpin, str):
+        dynamic_trend = parse_descriptor(last_hairpin)
+        assert isinstance(dynamic_trend, abjad.DynamicTrend)
+        last_hairpin_ = dynamic_trend
     if left_broken is not None:
         left_broken = bool(left_broken)
     if left_broken is True:

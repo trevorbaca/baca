@@ -147,8 +147,8 @@ baca
    OctaveDisplacementCommand
    OverrideCommand
    PartAssignmentCommand
-   PiecewiseCommand
    PiecewiseIndicatorCommand
+   PiecewiseSpannerCommand
    PitchCommand
    PitchFirstRhythmCommand
    RegisterCommand
@@ -185,8 +185,8 @@ baca
    ~OctaveDisplacementCommand.OctaveDisplacementCommand
    ~OverrideCommand.OverrideCommand
    ~PartAssignmentCommand.PartAssignmentCommand
-   ~PiecewiseCommand.PiecewiseCommand
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
+   ~PiecewiseSpannerCommand.PiecewiseSpannerCommand
    ~PitchCommand.PitchCommand
    ~PitchFirstRhythmCommand.PitchFirstRhythmCommand
    ~RegisterCommand.RegisterCommand

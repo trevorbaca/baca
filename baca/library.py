@@ -12,7 +12,7 @@ from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
 from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
-from .PiecewiseCommand import PiecewiseCommand
+from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
@@ -627,7 +627,7 @@ def piecewise(
     Makes piecewise command from ``spanner``, ``indicators`` and indicator
     ``selector``.
     """
-    return PiecewiseCommand(
+    return PiecewiseSpannerCommand(
         bookend=bookend,
         indicators=indicators,
         piece_selector=piece_selector,

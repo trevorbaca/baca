@@ -12,7 +12,7 @@ from .Expression import Expression
 from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
 from .OverrideCommand import OverrideCommand
-from .PiecewiseCommand import PiecewiseCommand
+from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
 from .TextSpannerCommand import TextSpannerCommand
@@ -1598,37 +1598,37 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                pont.                                                    %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                - \tweak bound-details.right.text \markup {                              %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.0                                                     %! PWC1
-                                            \upright                                                     %! PWC1
-                                                ord.                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                pont.                                                    %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                - \tweak bound-details.right.text \markup {                              %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.0                                                     %! PSC1
+                                            \upright                                                     %! PSC1
+                                                ord.                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                \startTextSpan                                                           %! PSC1
                                 d'16
                                 ]
                                 bf'4
@@ -1653,7 +1653,7 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 r4
                                 \revert TextSpanner.staff-padding                                        %! OC2
                                 \revert TextScript.staff-padding                                         %! OC2
@@ -1717,37 +1717,37 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #6                                 %! OC1
                                 fs''16
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                pont.                                                    %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                - \tweak bound-details.right.text \markup {                              %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.0                                                     %! PWC1
-                                            \upright                                                     %! PWC1
-                                                ord.                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                pont.                                                    %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                - \tweak bound-details.right.text \markup {                              %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.0                                                     %! PSC1
+                                            \upright                                                     %! PSC1
+                                                ord.                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                \startTextSpan                                                           %! PSC1
                                 e''16
                                 ]
                                 ef''4
@@ -1758,7 +1758,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 \revert TextSpanner.staff-padding                                        %! OC2
                             }
                             \times 4/5 {
@@ -2670,7 +2670,7 @@ class LibraryTZ(abjad.AbjadObject):
         piece_selector: typings.Selector = 'baca.leaves().group()',
         selector: typings.Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None
-        ) -> PiecewiseCommand:
+        ) -> PiecewiseSpannerCommand:
         r"""
         Makes transition text spanner.
 
@@ -2755,28 +2755,28 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                pont.                                                    %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                pont.                                                    %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 d''8
                 <BLANKLINE>
@@ -2787,30 +2787,30 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 g'8
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                ord.                                                     %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                ord.                                                     %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 f''8
                 <BLANKLINE>
@@ -2819,30 +2819,30 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 d''8
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                pont.                                                    %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                pont.                                                    %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 f'8
                 <BLANKLINE>
@@ -2853,32 +2853,32 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 f''8
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                ord.                                                     %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.25                                                    %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak dash-period 0                                                   %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 1.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                ord.                                                     %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.25                                                    %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak dash-period 0                                                   %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 1.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 e'8
                 <BLANKLINE>
                                 d''8
                                 ]
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 \revert TextSpanner.staff-padding                                        %! OC2
                 <BLANKLINE>
                             }
@@ -2964,28 +2964,28 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                pont.                                                    %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                pont.                                                    %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 d''8
                 <BLANKLINE>
@@ -3005,39 +3005,39 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 d''8
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 [
-                                - \tweak Y-extent ##f                                                    %! PWC1
-                                - \tweak bound-details.left.text \markup {                               %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \upright                                                     %! PWC1
-                                                ord.                                                     %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.5                                                     %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                - \tweak arrow-width 0.25                                                %! PWC1
-                                - \tweak dash-fraction 0.25                                              %! PWC1
-                                - \tweak dash-period 1.5                                                 %! PWC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PWC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PWC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PWC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PWC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PWC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PWC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PWC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PWC1
-                                - \tweak bound-details.right.text \markup {                              %! PWC1
-                                    \concat                                                              %! PWC1
-                                        {                                                                %! PWC1
-                                            \hspace                                                      %! PWC1
-                                                #0.0                                                     %! PWC1
-                                            \upright                                                     %! PWC1
-                                                pont.                                                    %! PWC1
-                                        }                                                                %! PWC1
-                                    }                                                                    %! PWC1
-                                \startTextSpan                                                           %! PWC1
+                                - \tweak Y-extent ##f                                                    %! PSC1
+                                - \tweak bound-details.left.text \markup {                               %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \upright                                                     %! PSC1
+                                                ord.                                                     %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.5                                                     %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                - \tweak arrow-width 0.25                                                %! PSC1
+                                - \tweak dash-fraction 0.25                                              %! PSC1
+                                - \tweak dash-period 1.5                                                 %! PSC1
+                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
+                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
+                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
+                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
+                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
+                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
+                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                - \tweak bound-details.right.text \markup {                              %! PSC1
+                                    \concat                                                              %! PSC1
+                                        {                                                                %! PSC1
+                                            \hspace                                                      %! PSC1
+                                                #0.0                                                     %! PSC1
+                                            \upright                                                     %! PSC1
+                                                pont.                                                    %! PSC1
+                                        }                                                                %! PSC1
+                                    }                                                                    %! PSC1
+                                \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 f'8
                 <BLANKLINE>
@@ -3054,7 +3054,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 d''8
                                 ]
-                                \stopTextSpan                                                            %! PWC1
+                                \stopTextSpan                                                            %! PSC1
                                 \revert TextSpanner.staff-padding                                        %! OC2
                 <BLANKLINE>
                             }

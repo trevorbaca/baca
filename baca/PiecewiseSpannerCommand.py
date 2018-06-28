@@ -9,7 +9,7 @@ from .IndicatorCommand import IndicatorCommand
 from .SpannerCommand import SpannerCommand
 
 
-class PiecewiseCommand(Command):
+class PiecewiseSpannerCommand(Command):
     """
     Piecewise command.
     """
@@ -83,7 +83,7 @@ class PiecewiseCommand(Command):
             abjad.attach(
                 spanner,
                 leaves,
-                tag=self.tag.prepend('PWC1'),
+                tag=self.tag.prepend('PSC1'),
                 )
         else:
             assert isinstance(self.spanner, SpannerCommand)
@@ -143,14 +143,14 @@ class PiecewiseCommand(Command):
                     spanner.attach(
                         indicator,
                         leaf,
-                        tag=self.tag.prepend('PWC2'),
+                        tag=self.tag.prepend('PSC2'),
                         )
             else:
                 reapplied = Command._remove_reapplied_wrappers(leaf, argument_)
                 wrapper = spanner.attach(
                     argument_,
                     leaf,
-                    tag=self.tag.prepend('PWC3'),
+                    tag=self.tag.prepend('PSC3'),
                     wrapper=True,
                     )
                 if argument_ == reapplied:
