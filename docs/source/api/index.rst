@@ -364,6 +364,7 @@ Dynamics library.
    ~baca.dynamics.dynamic_trend
    ~baca.dynamics.hairpin
    ~baca.dynamics.hairpins
+   ~baca.dynamics.parse_descriptor
 
 .. raw:: html
 

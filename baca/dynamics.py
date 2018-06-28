@@ -15,10 +15,81 @@ from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .SchemeManifest import SchemeManifest
 
 
-# TODO: make public and document
-def _parse_descriptor(
+def parse_descriptor(
     descriptor: str
-    ):
+    ) -> typing.List:
+    r"""
+    Parses ``descriptor``.
+
+    ..  container:: example
+
+        >>> for item in baca.parse_descriptor('f'):
+        ...     item
+        Dynamic('f')
+        Dynamic('f')
+
+        >>> for item in baca.parse_descriptor('"f"'):
+        ...     item
+        Dynamic('f', command='\\effort_f')
+        Dynamic('f', command='\\effort_f')
+
+        >>> for item in baca.parse_descriptor('niente'):
+        ...     item
+        Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
+        Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
+
+        >>> for item in baca.parse_descriptor('<'):
+        ...     item
+        DynamicTrend(shape='<')
+
+        >>> for item in baca.parse_descriptor('o<|'):
+        ...     item
+        DynamicTrend(shape='o<|')
+
+        >>> for item in baca.parse_descriptor('--'):
+        ...     item
+        DynamicTrend(shape='--')
+
+        >>> for item in baca.parse_descriptor('< f'):
+        ...     item
+        DynamicTrend(shape='<')
+        Dynamic('f')
+        Dynamic('f')
+
+        >>> for item in baca.parse_descriptor('o< f'):
+        ...     item
+        DynamicTrend(shape='o<')
+        Dynamic('f')
+        Dynamic('f')
+
+        >>> for item in baca.parse_descriptor('niente o<| f'):
+        ...     item
+        (Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), DynamicTrend(shape='o<|'))
+        Dynamic('f')
+
+        >>> for item in baca.parse_descriptor('f >'):
+        ...     item
+        (Dynamic('f'), DynamicTrend(shape='>'))
+
+        >>> for item in baca.parse_descriptor('f >o'):
+        ...     item
+        (Dynamic('f'), DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
+
+        >>> for item in baca.parse_descriptor('p mp mf f'):
+        ...     item
+        Dynamic('p')
+        Dynamic('mp')
+        Dynamic('mf')
+        Dynamic('f')
+
+        >>> for item in baca.parse_descriptor('p < f f > p'):
+        ...     item
+        (Dynamic('p'), DynamicTrend(shape='<'))
+        Dynamic('f')
+        (Dynamic('f'), DynamicTrend(shape='>'))
+        Dynamic('p')
+
+    """
     assert isinstance(descriptor, str), repr(descriptor)
     dynamic_object_typing = typing.Union[
         abjad.Dynamic,
@@ -2278,7 +2349,7 @@ def hairpins(
 
     """
     if isinstance(dynamics, str):
-        dynamics_ = _parse_descriptor(dynamics)
+        dynamics_ = parse_descriptor(dynamics)
     else:
         dynamics_ = dynamics
     prototype = (abjad.Dynamic, abjad.DynamicTrend, tuple)
@@ -3173,7 +3244,7 @@ def hairpin(
 
     """
     if isinstance(descriptor, str):
-        dynamics = _parse_descriptor(descriptor)
+        dynamics = parse_descriptor(descriptor)
     else:
         dynamics = descriptor
     bookend: typing.Union[bool, int] = False

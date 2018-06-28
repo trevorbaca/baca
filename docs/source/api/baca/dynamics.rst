@@ -26,6 +26,7 @@ dynamics
    ~dynamic_trend
    ~hairpin
    ~hairpins
+   ~parse_descriptor
 
 .. autofunction:: dynamic
 
@@ -34,3 +35,5 @@ dynamics
 .. autofunction:: hairpin
 
 .. autofunction:: hairpins
+
+.. autofunction:: parse_descriptor
