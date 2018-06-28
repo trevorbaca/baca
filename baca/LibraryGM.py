@@ -1596,7 +1596,12 @@ class LibraryGM(abjad.AbjadObject):
         """
         assert isinstance(count, int), repr(count)
         selector = baca.select().leaves().group_by_measure()
-        selector = selector[:count].flatten()
+        if 0 < count:
+            selector = selector[:count].flatten()
+        elif count < 0:
+            selector = selector[-count:].flatten()
+        else:
+            raise Exception(count)
         return selector
 
     @staticmethod

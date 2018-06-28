@@ -26,16 +26,13 @@ def parse_descriptor(
         >>> for item in baca.parse_descriptor('f'):
         ...     item
         Dynamic('f')
-        Dynamic('f')
 
         >>> for item in baca.parse_descriptor('"f"'):
         ...     item
         Dynamic('f', command='\\effort_f')
-        Dynamic('f', command='\\effort_f')
 
         >>> for item in baca.parse_descriptor('niente'):
         ...     item
-        Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
         Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
 
         >>> for item in baca.parse_descriptor('<'):
@@ -91,15 +88,14 @@ def parse_descriptor(
 
     """
     assert isinstance(descriptor, str), repr(descriptor)
-    dynamic_object_typing = typing.Union[
+    dynamic_typing = typing.Union[
         abjad.Dynamic,
         abjad.DynamicTrend,
         typing.Tuple[abjad.Dynamic, abjad.DynamicTrend],
         ]
-    dynamics_: typing.List[dynamic_object_typing] = []
+    dynamics_: typing.List[dynamic_typing] = []
     indicators: typing.List[
-        typing.Union[abjad.Dynamic, abjad.DynamicTrend]
-        ] = []
+        typing.Union[abjad.Dynamic, abjad.DynamicTrend]] = []
     known_shapes = abjad.DynamicTrend('<').known_shapes
     for string in descriptor.split():
         if string in known_shapes:
@@ -113,6 +109,8 @@ def parse_descriptor(
             dynamic = command.indicators[0]
             assert isinstance(dynamic, abjad.Dynamic)
             indicators.append(dynamic)
+    if len(indicators) == 1:
+        return indicators
     if isinstance(indicators[0], abjad.DynamicTrend):
         dynamics_.append(indicators.pop(0))
     if len(indicators) == 1:
@@ -3111,7 +3109,7 @@ def hairpin(
 
     ..  container:: example
 
-        Implicit start and stop:
+        Works with lone dynamic:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -3123,15 +3121,7 @@ def hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.measures(
-        ...         1,
-        ...         baca.hairpin('f >'),
-        ...         ),
-        ...     baca.measures(
-        ...         (3, 4),
-        ...         baca.dynamic('niente'),
-        ...         baca.hairpin('< f'),
-        ...         ),
+        ...     baca.hairpin('f'),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -3192,7 +3182,6 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! PIC
                             [
             <BLANKLINE>
                             d''8
@@ -3212,10 +3201,7 @@ def hairpin(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            \<                                                                       %! PIC
                             [
             <BLANKLINE>
                             f'8
@@ -3231,9 +3217,7 @@ def hairpin(
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -3241,6 +3225,25 @@ def hairpin(
                     }
                 >>
             >>
+
+        TODO: Works with lone hairpin:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.hairpin('<'),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
     """
     if isinstance(descriptor, str):
