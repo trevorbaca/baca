@@ -23,14 +23,11 @@ dynamics
    :nosignatures:
 
    ~dynamic
-   ~dynamic_trend
    ~hairpin
    ~hairpins
    ~parse_descriptor
 
 .. autofunction:: dynamic
-
-.. autofunction:: dynamic_trend
 
 .. autofunction:: hairpin
 

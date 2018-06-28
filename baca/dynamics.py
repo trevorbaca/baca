@@ -332,54 +332,9 @@ def dynamic(
                 }
             >>
 
-    """
-    scheme_manifest = SchemeManifest()
-    if isinstance(dynamic, str):
-        if dynamic == 'niente':
-            indicator = abjad.Dynamic('niente', command=r'\!')
-        elif dynamic in scheme_manifest.dynamics:
-            name = scheme_manifest.dynamic_to_steady_state(dynamic)
-            command = '\\' + dynamic
-            first = dynamic.split('_')[0]
-            if first in ('sfz', 'sffz', 'sfffz'):
-                sforzando = True
-            else:
-                sforzando = False
-            name_is_textual = not(sforzando)
-            indicator = abjad.Dynamic(
-                name,
-                command=command,
-                name_is_textual=name_is_textual,
-                sforzando=sforzando,
-                )
-        elif dynamic.startswith('"'):
-            assert dynamic.endswith('"')
-            dynamic = dynamic.strip('"')
-            command = rf'\effort_{dynamic}'
-            indicator = abjad.Dynamic(f'{dynamic}', command=command)
-        else:
-            indicator = abjad.Dynamic(dynamic)
-    else:
-        assert isinstance(dynamic, abjad.Dynamic), repr(dynamic)
-        indicator = dynamic
-    return IndicatorCommand(
-        context='Voice',
-        indicators=[indicator],
-        redundant=redundant,
-        selector=selector,
-        )
-
-_local_dynamic = dynamic
-
-def dynamic_trend(
-    dynamic_trend: typing.Union[str, abjad.DynamicTrend],
-    *,
-    selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
-    r"""
-    Attaches dynamic trend.
-
     ..  container:: example
+
+        Works with dynamic trends:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -390,51 +345,10 @@ def dynamic_trend(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.dynamic(
-        ...         'ppp',
-        ...         selector=baca.leaves().partition_by_counts(
-        ...             [4, 3],
-        ...             cyclic=True,
-        ...             overhang=True,
-        ...             )[abjad.index([0], 2)].map(baca.leaf(0)),
-        ...         ),
-        ...     baca.dynamic_trend(
-        ...         '<',
-        ...         selector=baca.leaves().partition_by_counts(
-        ...             [4, 3],
-        ...             cyclic=True,
-        ...             overhang=True,
-        ...             )[abjad.index([0], 2)].map(baca.leaf(0)),
-        ...         ),
-        ...     baca.dynamic(
-        ...         'pp',
-        ...         selector=baca.leaves().partition_by_counts(
-        ...             [4, 3],
-        ...             cyclic=True,
-        ...             overhang=True,
-        ...             )[abjad.index([1], 2)].map(baca.leaf(0)),
-        ...         ),
-        ...     baca.dynamic_trend(
-        ...         '>',
-        ...         selector=baca.leaves().partition_by_counts(
-        ...             [4, 3],
-        ...             cyclic=True,
-        ...             overhang=True,
-        ...             )[abjad.index([1], 2)][:-1].map(baca.leaf(0)),
-        ...         ),
-        ...     baca.dynamic_trend(
-        ...         '>o',
-        ...         selector=baca.leaves().partition_by_counts(
-        ...             [4, 3],
-        ...             cyclic=True,
-        ...             overhang=True,
-        ...             )[abjad.index([1], 2)][-1:].map(baca.leaf(0)),
-        ...         ),
-        ...     baca.dynamic(
-        ...         abjad.Dynamic('niente', command=r'\!'),
-        ...         selector=baca.leaf(-1),
-        ...         ),
         ...     baca.make_even_divisions(),
+        ...     baca.dynamic('p'),
+        ...     baca.dynamic('<'),
+        ...     baca.dynamic('f', selector=baca.pleaf(-1)),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -494,7 +408,7 @@ def dynamic_trend(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
-                            \ppp                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                             \<                                                                       %! IC
                             [
             <BLANKLINE>
@@ -506,10 +420,7 @@ def dynamic_trend(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             g'8
-                            \pp                                                                      %! SM8:EXPLICIT_DYNAMIC:IC
-                            \>                                                                       %! IC
                             [
             <BLANKLINE>
                             f''8
@@ -518,10 +429,7 @@ def dynamic_trend(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
-                            \ppp                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
-                            \<                                                                       %! IC
                             [
             <BLANKLINE>
                             f'8
@@ -532,18 +440,14 @@ def dynamic_trend(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             f''8
-                            \pp                                                                      %! SM8:EXPLICIT_DYNAMIC:IC
-                            - \tweak circled-tip ##t                                                 %! IC
-                            \>                                                                       %! IC
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -553,18 +457,47 @@ def dynamic_trend(
             >>
 
     """
-    if isinstance(dynamic_trend, str):
-        indicator = abjad.DynamicTrend(dynamic_trend)
+    scheme_manifest = SchemeManifest()
+    known_shapes = abjad.DynamicTrend('<').known_shapes
+    if isinstance(dynamic, str):
+        if dynamic == 'niente':
+            indicator = abjad.Dynamic('niente', command=r'\!')
+        elif dynamic in scheme_manifest.dynamics:
+            name = scheme_manifest.dynamic_to_steady_state(dynamic)
+            command = '\\' + dynamic
+            first = dynamic.split('_')[0]
+            if first in ('sfz', 'sffz', 'sfffz'):
+                sforzando = True
+            else:
+                sforzando = False
+            name_is_textual = not(sforzando)
+            indicator = abjad.Dynamic(
+                name,
+                command=command,
+                name_is_textual=name_is_textual,
+                sforzando=sforzando,
+                )
+        elif dynamic.startswith('"'):
+            assert dynamic.endswith('"')
+            dynamic = dynamic.strip('"')
+            command = rf'\effort_{dynamic}'
+            indicator = abjad.Dynamic(f'{dynamic}', command=command)
+        elif dynamic in known_shapes:
+            indicator = abjad.DynamicTrend(dynamic)
+        else:
+            indicator = abjad.Dynamic(dynamic)
     else:
-        indicator = dynamic_trend
-    assert isinstance(indicator, abjad.DynamicTrend), repr(indicator)
+        prototype = (abjad.Dynamic, abjad.DynamicTrend)
+        assert isinstance(dynamic, prototype), repr(dynamic)
+        indicator = dynamic
     return IndicatorCommand(
         context='Voice',
         indicators=[indicator],
+        redundant=redundant,
         selector=selector,
         )
 
-_local_dynamic_trend = dynamic_trend
+_local_dynamic = dynamic
 
 def hairpin(
     descriptor: typing.Union[

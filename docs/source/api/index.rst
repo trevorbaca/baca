@@ -361,7 +361,6 @@ Dynamics library.
    :nosignatures:
 
    ~baca.dynamics.dynamic
-   ~baca.dynamics.dynamic_trend
    ~baca.dynamics.hairpin
    ~baca.dynamics.hairpins
    ~baca.dynamics.parse_descriptor
