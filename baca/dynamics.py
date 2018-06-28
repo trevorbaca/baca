@@ -3952,7 +3952,7 @@ def generalized_hairpin(
     #lone_dynamic: bool = True,
     #right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
-    ) -> HairpinCommand:
+    ) -> PiecewiseIndicatorCommand:
     """
     Generalized hairpin.
     """
@@ -3960,12 +3960,12 @@ def generalized_hairpin(
         count = len(descriptor.split())
     else:
         count = len(descriptor)
+    bookend: typing.Union[bool, int] = False
     if count == 3:
         bookend = -1
-    else:
-        bookend = None
     if isinstance(selector, str):
         selector = eval(selector)
+    assert isinstance(selector, abjad.Expression)
     piece_selector = selector.group()
     return hairpin_chain(
         dynamics=descriptor,
