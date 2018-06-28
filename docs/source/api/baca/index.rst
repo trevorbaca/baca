@@ -26,6 +26,7 @@ baca
    dynamics
    library
    markups
+   overrides
 
 .. autosummary::
    :nosignatures:
@@ -34,6 +35,7 @@ baca
    dynamics
    library
    markups
+   overrides
 
 .. raw:: html
 

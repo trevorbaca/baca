@@ -361,27 +361,9 @@ Dynamics library.
    :nosignatures:
 
    ~baca.dynamics.dynamic
-   ~baca.dynamics.dynamic_down
-   ~baca.dynamics.dynamic_shift
-   ~baca.dynamics.dynamic_text_center
-   ~baca.dynamics.dynamic_text_extra_offset
-   ~baca.dynamics.dynamic_text_left
-   ~baca.dynamics.dynamic_text_parent_alignment_x
-   ~baca.dynamics.dynamic_text_right
-   ~baca.dynamics.dynamic_text_stencil_false
-   ~baca.dynamics.dynamic_text_transparent
-   ~baca.dynamics.dynamic_text_x_extent_zero
-   ~baca.dynamics.dynamic_text_x_offset
-   ~baca.dynamics.dynamic_text_y_offset
    ~baca.dynamics.dynamic_trend
-   ~baca.dynamics.dynamic_up
    ~baca.dynamics.hairpin
-   ~baca.dynamics.hairpin_shorten_pair
-   ~baca.dynamics.hairpin_start_shift
-   ~baca.dynamics.hairpin_stencil_false
-   ~baca.dynamics.hairpin_transparent
    ~baca.dynamics.hairpins
-   ~baca.dynamics.make_dynamics
    ~baca.dynamics.niente
 
 .. raw:: html
@@ -630,3 +612,38 @@ Markup library.
    ~baca.markups.vib_poco
    ~baca.markups.vibraphone
    ~baca.markups.xylophone
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.overrides <baca--overrides>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.overrides.dynamic_down
+   ~baca.overrides.dynamic_shift
+   ~baca.overrides.dynamic_text_center
+   ~baca.overrides.dynamic_text_extra_offset
+   ~baca.overrides.dynamic_text_left
+   ~baca.overrides.dynamic_text_parent_alignment_x
+   ~baca.overrides.dynamic_text_right
+   ~baca.overrides.dynamic_text_stencil_false
+   ~baca.overrides.dynamic_text_transparent
+   ~baca.overrides.dynamic_text_x_extent_zero
+   ~baca.overrides.dynamic_text_x_offset
+   ~baca.overrides.dynamic_text_y_offset
+   ~baca.overrides.dynamic_up
+   ~baca.overrides.hairpin_shorten_pair
+   ~baca.overrides.hairpin_start_shift
+   ~baca.overrides.hairpin_stencil_false
+   ~baca.overrides.hairpin_transparent
