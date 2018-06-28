@@ -20,7 +20,6 @@ Selection
       chead
       cheads
       enchain
-      group
       lleaf
       lleak
       lleaves
@@ -184,7 +183,9 @@ Selection
 
       .. automethod:: Selection.flatten
 
-   .. automethod:: Selection.group
+   .. container:: inherited
+
+      .. automethod:: Selection.group
 
    .. container:: inherited
 
