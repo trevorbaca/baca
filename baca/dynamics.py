@@ -267,7 +267,7 @@ def dynamic(
     scheme_manifest = SchemeManifest()
     if isinstance(dynamic, str):
         if dynamic == 'niente':
-            indicator = _local_niente()
+            indicator = abjad.Dynamic('niente', command=r'\!')
         elif dynamic in scheme_manifest.dynamics:
             name = scheme_manifest.dynamic_to_steady_state(dynamic)
             command = '\\' + dynamic
@@ -3058,7 +3058,7 @@ def hairpin(
         ...         ),
         ...     baca.measures(
         ...         (3, 4),
-        ...         baca.dynamic(baca.niente()),
+        ...         baca.dynamic('niente'),
         ...         baca.hairpin('< f'),
         ...         ),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
@@ -3196,11 +3196,3 @@ def hairpin(
         right_open=right_open,
         selector=baca.select().leaves(),
         )
-
-def niente() -> abjad.Dynamic:
-    """
-    Makes niente stop dynamic with LilyPond ``\!`` output.
-    """
-    return abjad.Dynamic('niente', command=r'\!')
-
-_local_niente = niente

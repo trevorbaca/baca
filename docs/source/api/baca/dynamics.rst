@@ -26,7 +26,6 @@ dynamics
    ~dynamic_trend
    ~hairpin
    ~hairpins
-   ~niente
 
 .. autofunction:: dynamic
 
@@ -35,5 +34,3 @@ dynamics
 .. autofunction:: hairpin
 
 .. autofunction:: hairpins
-
-.. autofunction:: niente

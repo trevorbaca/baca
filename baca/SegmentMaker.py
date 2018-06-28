@@ -927,7 +927,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     command = command.command
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    assert isinstance(command, Command), repr(command)
+                    twoway = (Command, Map)
+                    assert isinstance(command, twoway), repr(command)
                     wrapper = CommandWrapper(command=command, scope=scope_)
                     self.wrappers.append(wrapper)
                 else:
