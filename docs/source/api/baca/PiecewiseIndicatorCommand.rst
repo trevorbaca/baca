@@ -18,7 +18,9 @@ PiecewiseIndicatorCommand
       :nosignatures:
 
       bookend
+      forbid_spanner_start
       indicators
+      last_piece_spanner
       piece_selector
       right_broken
       right_open
@@ -85,7 +87,11 @@ PiecewiseIndicatorCommand
 
       .. autoattribute:: PiecewiseIndicatorCommand.deactivate
 
+   .. autoattribute:: PiecewiseIndicatorCommand.forbid_spanner_start
+
    .. autoattribute:: PiecewiseIndicatorCommand.indicators
+
+   .. autoattribute:: PiecewiseIndicatorCommand.last_piece_spanner
 
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
 

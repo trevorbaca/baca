@@ -17,7 +17,9 @@ class PiecewiseIndicatorCommand(Command):
 
     __slots__ = (
         '_bookend',
+        '_forbid_spanner_start',
         '_indicators',
+        '_last_piece_spanner',
         '_piece_selector',
         '_right_broken',
         '_right_open',
@@ -30,7 +32,9 @@ class PiecewiseIndicatorCommand(Command):
         self,
         *,
         bookend: typing.Union[bool, int] = None,
+        forbid_spanner_start: typing.Union[bool, int] = None,
         indicators: typing.Sequence = None,
+        last_piece_spanner: typing.Any = None,
         piece_selector: typings.Selector = 'baca.leaves()',
         right_broken: typing.Any = None,
         right_open: bool = None,
@@ -40,10 +44,16 @@ class PiecewiseIndicatorCommand(Command):
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
+        if forbid_spanner_start is not None:
+            assert isinstance(forbid_spanner_start, (int, bool)), repr(forbid_spanner_start)
+        self._forbid_spanner_start = forbid_spanner_start
         indicators_ = None
         if indicators is not None:
             indicators_ = abjad.CyclicTuple(indicators)
         self._indicators = indicators_
+        if last_piece_spanner not in (None, False):
+            assert getattr(last_piece_spanner, 'spanner_start', False)
+        self._last_piece_spanner = last_piece_spanner
         if isinstance(piece_selector, str):
             piece_selector = eval(piece_selector)
         if piece_selector is not None:
@@ -85,45 +95,56 @@ class PiecewiseIndicatorCommand(Command):
             assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
         for i, piece in enumerate(pieces):
+            start_leaf = baca.select(piece).leaf(0)
+            stop_leaf = baca.select(piece).leaf(-1)
             if i == piece_count - 1:
                 is_last_piece = True
             else:
                 is_last_piece = False
-            if (bookend_pattern.matches_index(i, piece_count) and
-                1 < len(piece)):
-                has_bookend = True
-            else:
-                has_bookend = False
-            start_leaf = baca.select(piece).leaf(0)
-            indicators = self.indicators[i]
-            self._attach_indicators(
-                indicators,
-                start_leaf,
-                has_bookend=has_bookend,
-                is_last_piece=is_last_piece,
-                is_start_leaf=True,
-                tag='PIC',
-                )
-            if has_bookend:
-                stop_leaf = baca.select(piece).leaf(-1)
-                indicators = self.indicators[i + 1]
-                self._attach_indicators(
-                    indicators,
-                    stop_leaf,
-                    has_bookend=has_bookend,
-                    is_last_piece=is_last_piece,
-                    is_stop_leaf=True,
-                    tag='PIC',
-                    )
             if is_last_piece and self.right_broken:
-                stop_leaf = baca.select(piece).leaf(-1)
                 self._attach_indicators(
                     self.right_broken,
                     stop_leaf,
-                    has_bookend=True,
-                    is_last_piece=is_last_piece,
-                    is_stop_leaf=True,
                     tag=str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
+                    )
+            if (bookend_pattern.matches_index(i, piece_count) and
+                1 < len(piece)):
+                should_bookend = True
+            else:
+                should_bookend = False
+            indicators = self.indicators[i]
+            if len(piece) == 1 and isinstance(indicators, tuple):
+                assert len(indicators) == 2
+                indicator, spanner_start = indicators
+                if getattr(spanner_start, 'spanner_start', False) is not True:
+                    raise Exception(indicators)
+                indicators = indicator
+            if is_last_piece and isinstance(indicators, tuple):
+                assert len(indicators) == 2
+                indicator, spanner_start = indicators
+                if getattr(spanner_start, 'spanner_start', False) is not True:
+                    raise Exception(indicators)
+                if self.last_piece_spanner:
+                    indicators = (indicator, self.last_piece_spanner)
+                elif self.last_piece_spanner is False:
+                    indicators = indicator
+            self._attach_indicators(
+                indicators,
+                start_leaf,
+                tag='PIC',
+                )
+            if should_bookend:
+                indicators = self.indicators[i + 1]
+                if isinstance(indicators, tuple):
+                    assert len(indicators) == 2
+                    indicator, spanner_start = indicators
+                    if getattr(spanner_start, 'spanner_start', False) is not True:
+                        raise Exception(indicators)
+                    indicators = indicator
+                self._attach_indicators(
+                    indicators,
+                    stop_leaf,
+                    tag='PIC',
                     )
 
     ### PRIVATE METHODS ###
@@ -132,33 +153,13 @@ class PiecewiseIndicatorCommand(Command):
         self,
         indicators,
         leaf,
-        has_bookend=False,
-        is_last_piece=False,
-        is_start_leaf=False,
-        is_stop_leaf=False,
         tag=None,
         ):
         assert isinstance(tag, str), repr(tag)
         if not isinstance(indicators, tuple):
             indicators = (indicators,)
         for indicator in indicators:
-            if indicator is None:
-                continue
-            if getattr(indicator, 'left_broken', False):
-                pass
-            elif (is_stop_leaf and
-                getattr(indicator, 'spanner_start', False) is True):
-                continue
-            elif (is_last_piece and
-                is_start_leaf and
-                getattr(indicator, 'spanner_start', False) is True and
-                not (has_bookend or self.right_broken or self.right_open)):
-                continue
-            elif (is_last_piece and
-                is_stop_leaf and
-                getattr(indicator, 'spanner_start', False) is True and
-                not (has_bookend or self.right_broken or self.right_open)):
-                continue
+            assert indicator is not None
             reapplied = Command._remove_reapplied_wrappers(leaf, indicator)
             wrapper = abjad.attach(
                 indicator,
@@ -198,11 +199,25 @@ class PiecewiseIndicatorCommand(Command):
         return self._bookend
 
     @property
+    def forbid_spanner_start(self) -> typing.Optional[typing.Union[bool, int]]:
+        """
+        Gets forbid-spanner-start token.
+        """
+        return self._forbid_spanner_start
+
+    @property
     def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
         """
         Gets indicators.
         """
         return self._indicators
+
+    @property
+    def last_piece_spanner(self) -> typing.Optional[typing.Any]:
+        """
+        Gets last piece spanner start.
+        """
+        return self._last_piece_spanner
 
     @property
     def piece_selector(self) -> typing.Optional[abjad.Expression]:
