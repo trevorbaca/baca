@@ -578,6 +578,7 @@ def dynamic(
     """
     scheme_manifest = SchemeManifest()
     known_shapes = abjad.DynamicTrend('<').known_shapes
+    indicator: typing.Union[abjad.Dynamic, abjad.DynamicTrend]
     if isinstance(dynamic, str):
         if dynamic == 'niente':
             indicator = abjad.Dynamic('niente', command=r'\!')
