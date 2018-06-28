@@ -135,7 +135,6 @@ baca
    ContainerCommand
    DiatonicClusterCommand
    GlobalFermataCommand
-   HairpinCommand
    ImbricationCommand
    IndicatorCommand
    InstrumentChangeCommand
@@ -174,7 +173,6 @@ baca
    ~ContainerCommand.ContainerCommand
    ~DiatonicClusterCommand.DiatonicClusterCommand
    ~GlobalFermataCommand.GlobalFermataCommand
-   ~HairpinCommand.HairpinCommand
    ~ImbricationCommand.ImbricationCommand
    ~IndicatorCommand.IndicatorCommand
    ~InstrumentChangeCommand.InstrumentChangeCommand

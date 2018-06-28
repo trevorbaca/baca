@@ -37,12 +37,12 @@ dynamics
    ~dynamic_text_y_offset
    ~dynamic_trend
    ~dynamic_up
-   ~generalized_hairpin
-   ~hairpin_chain
+   ~hairpin
    ~hairpin_shorten_pair
    ~hairpin_start_shift
    ~hairpin_stencil_false
    ~hairpin_transparent
+   ~hairpins
    ~make_dynamics
    ~niente
 
@@ -76,9 +76,7 @@ dynamics
 
 .. autofunction:: dynamic_up
 
-.. autofunction:: generalized_hairpin
-
-.. autofunction:: hairpin_chain
+.. autofunction:: hairpin
 
 .. autofunction:: hairpin_shorten_pair
 
@@ -87,6 +85,8 @@ dynamics
 .. autofunction:: hairpin_stencil_false
 
 .. autofunction:: hairpin_transparent
+
+.. autofunction:: hairpins
 
 .. autofunction:: make_dynamics
 

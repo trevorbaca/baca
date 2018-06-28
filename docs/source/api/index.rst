@@ -83,7 +83,6 @@ Bača API
    ~baca.ContainerCommand.ContainerCommand
    ~baca.DiatonicClusterCommand.DiatonicClusterCommand
    ~baca.GlobalFermataCommand.GlobalFermataCommand
-   ~baca.HairpinCommand.HairpinCommand
    ~baca.ImbricationCommand.ImbricationCommand
    ~baca.IndicatorCommand.IndicatorCommand
    ~baca.InstrumentChangeCommand.InstrumentChangeCommand
@@ -376,12 +375,12 @@ Dynamics library.
    ~baca.dynamics.dynamic_text_y_offset
    ~baca.dynamics.dynamic_trend
    ~baca.dynamics.dynamic_up
-   ~baca.dynamics.generalized_hairpin
-   ~baca.dynamics.hairpin_chain
+   ~baca.dynamics.hairpin
    ~baca.dynamics.hairpin_shorten_pair
    ~baca.dynamics.hairpin_start_shift
    ~baca.dynamics.hairpin_stencil_false
    ~baca.dynamics.hairpin_transparent
+   ~baca.dynamics.hairpins
    ~baca.dynamics.make_dynamics
    ~baca.dynamics.niente
 

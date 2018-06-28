@@ -9,7 +9,6 @@ from . import typings
 from .Command import Command
 from .Command import Map
 from .Command import Suite
-from .HairpinCommand import HairpinCommand
 from .IndicatorCommand import IndicatorCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
@@ -1159,89 +1158,8 @@ def make_dynamics(string: str) -> typing.List[abjad.Dynamic]:
     """
     return [abjad.Dynamic(_) for _ in string.split()]
 
-#def hairpin(
-#    descriptor: typing.Union[
-#        str,
-#        typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
-#        ],
-#    *,
-#    left_broken: bool = None,
-#    lone_dynamic: bool = True,
-#    right_broken: bool = None,
-#    selector: typings.Selector = 'baca.tleaves()',
-#    ) -> HairpinCommand:
-#    r"""
-#    Attaches hairpin indicators.
-#    """
-#    if isinstance(descriptor, str):
-#        pieces = descriptor.split()
-#        if len(pieces) == 1:
-#            start, stop = None, None
-#            trend = pieces[0]
-#        elif len(pieces) == 2:
-#            if '>' in pieces[0] or '<' in pieces[0] or '--' in pieces[0]:
-#                start = None
-#                trend, stop = pieces
-#            else:
-#                stop = None
-#                start, trend = pieces
-#        else:
-#            assert len(pieces) == 3, repr(pieces)
-#            start, trend, stop = descriptor.split()
-#        if start is not None:
-#            command = _local_dynamic(start)
-#            assert command.indicators
-#            start_dynamic = command.indicators[0]
-#        else:
-#            start_dynamic = None
-#        command = _local_dynamic_trend(trend)
-#        assert command.indicators
-#        dynamic_trend = command.indicators[0]
-#        if stop is not None:
-#            command = _local_dynamic(stop)
-#            assert command.indicators
-#            stop_dynamic = command.indicators[0]
-#        else:
-#            stop_dynamic = None
-#    else:
-#        assert isinstance(descriptor, list), repr(descriptor)
-#        if len(descriptor) == 1:
-#            start_dynamic, stop_dynamic = None, None
-#            dynamic_trend = descriptor[0]
-#        elif len(descriptor) == 2:
-#            if isinstance(descriptor[0], abjad.DynamicTrend):
-#                start_dynamic = None
-#                dynamic_trend, stop_dynamic = descriptor
-#            else:
-#                stop_dynamic = None
-#                start_dynamic, dynamic_trend = descriptor
-#        else:
-#            assert len(descriptor) == 3, repr(descriptor)
-#            start_dynamic, dynamic_trend, stop_dynamic = descriptor
-#    if dynamic_trend.shape == '>o':
-#        abjad.tweak(dynamic_trend).to_barline = True
-#    if isinstance(selector, str):
-#        selector = eval(selector)
-#    if left_broken is not None:
-#        left_broken = bool(left_broken)
-#    if left_broken is True:
-#        assert start_dynamic is None, repr(start_dynamic)
-#        dynamic_trend = abjad.new(dynamic_trend, left_broken=True)
-#    if right_broken is not None:
-#        right_broken = bool(right_broken)
-#    if right_broken is True:
-#        assert stop_dynamic is None, repr(stop_dynamic)
-#    return HairpinCommand(
-#        dynamic_trend,
-#        lone_dynamic=lone_dynamic,
-#        right_broken=right_broken,
-#        selector=selector,
-#        start_dynamic=start_dynamic,
-#        stop_dynamic=stop_dynamic,
-#        )
-
-# TODO: move baca.generalized_hairpin() into baca.hairpin_chain()
-def hairpin_chain(
+# TODO: move baca.hairpin() into baca.hairpins()
+def hairpins(
     dynamics: typing.Union[str, typing.List],
     bookend: typing.Union[bool, int] = False,
     left_broken: bool = None,
@@ -1251,7 +1169,7 @@ def hairpin_chain(
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseIndicatorCommand:
     r"""
-    Makes enchained hairpin with indicators.
+    Attaches indicators for consecutive hairpins.
 
     ..  container:: example
 
@@ -1266,7 +1184,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p f',
         ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
@@ -1398,7 +1316,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p < f >',
         ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
@@ -1534,7 +1452,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p f',
         ...         bookend=-1,
         ...         piece_selector=baca.leaves().partition_by_counts(
@@ -1669,7 +1587,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p < f >',
         ...         bookend=-1,
         ...         piece_selector=baca.leaves().partition_by_counts(
@@ -1809,7 +1727,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p f',
         ...         bookend=True,
         ...         piece_selector=baca.leaves().partition_by_counts(
@@ -1952,7 +1870,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p < f >',
         ...         bookend=True,
         ...         piece_selector=baca.leaves().partition_by_counts(
@@ -2102,7 +2020,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p f',
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
@@ -2226,7 +2144,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p < f >',
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
@@ -2355,7 +2273,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p f',
         ...         bookend=-1,
         ...         piece_selector=baca.group_by_measures([1]),
@@ -2484,7 +2402,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p < f >',
         ...         bookend=-1,
         ...         piece_selector=baca.group_by_measures([1]),
@@ -2617,7 +2535,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p f',
         ...         bookend=True,
         ...         piece_selector=baca.group_by_measures([1]),
@@ -2752,7 +2670,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p < f >',
         ...         bookend=True,
         ...         piece_selector=baca.group_by_measures([1]),
@@ -2889,7 +2807,7 @@ def hairpin_chain(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin_chain(
+        ...     baca.hairpins(
         ...         'p -- f >',
         ...         bookend=True,
         ...         piece_selector=baca.group_by_measures([1]),
@@ -3108,7 +3026,7 @@ def hairpin_transparent(
         selector=selector,
         )
 
-def generalized_hairpin(
+def hairpin(
     descriptor: typing.Union[
         str,
         typing.List[typing.Union[abjad.Dynamic, abjad.DynamicTrend]],
@@ -3119,7 +3037,7 @@ def generalized_hairpin(
     selector: typings.Selector = 'baca.tleaves()',
     ) -> PiecewiseIndicatorCommand:
     r"""
-    Generalized hairpin.
+    Attaches hairpin indicators.
 
     ..  container:: example
 
@@ -3133,7 +3051,7 @@ def generalized_hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.generalized_hairpin('p < f'),
+        ...     baca.hairpin('p < f'),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -3255,7 +3173,7 @@ def generalized_hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.generalized_hairpin('"ff" >o niente'),
+        ...     baca.hairpin('"ff" >o niente'),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -3377,7 +3295,7 @@ def generalized_hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.generalized_hairpin('niente o< "ff"'),
+        ...     baca.hairpin('niente o< "ff"'),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -3500,7 +3418,7 @@ def generalized_hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.generalized_hairpin('"p" -- f'),
+        ...     baca.hairpin('"p" -- f'),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -3623,11 +3541,11 @@ def generalized_hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.generalized_hairpin(
+        ...     baca.hairpin(
         ...         '"mp" <| "f"',
         ...         selector=baca.leaves()[:7],
         ...         ),
-        ...     baca.generalized_hairpin(
+        ...     baca.hairpin(
         ...         '"mf" |> "p"',
         ...         selector=baca.leaves()[7:],
         ...         ),
@@ -3761,7 +3679,7 @@ def generalized_hairpin(
         ...     baca.make_notes(),
         ...     baca.measures(
         ...         1,
-        ...         baca.generalized_hairpin('p < f'),
+        ...         baca.hairpin('p < f'),
         ...         baca.pitch('E4'),
         ...         ),
         ...     )
@@ -3858,12 +3776,12 @@ def generalized_hairpin(
         ...     baca.make_even_divisions(),
         ...     baca.measures(
         ...         1,
-        ...         baca.generalized_hairpin('f >'),
+        ...         baca.hairpin('f >'),
         ...         ),
         ...     baca.measures(
         ...         (3, 4),
         ...         baca.dynamic(baca.niente()),
-        ...         baca.generalized_hairpin('< f'),
+        ...         baca.hairpin('< f'),
         ...         ),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
@@ -3991,7 +3909,7 @@ def generalized_hairpin(
         selector = eval(selector)
     assert isinstance(selector, abjad.Expression)
     piece_selector = selector.group()
-    return hairpin_chain(
+    return hairpins(
         dynamics=dynamics,
         bookend=bookend,
         left_broken=left_broken,

@@ -1420,7 +1420,7 @@ class MusicMaker(abjad.AbjadObject):
             Hairpin specifier selects all leaves:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.generalized_hairpin('p < f'),
+            ...     baca.hairpin('p < f'),
             ...     )
 
             >>> collections = [
@@ -1487,7 +1487,7 @@ class MusicMaker(abjad.AbjadObject):
             ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
             ...     baca.map(
             ...         baca.runs(),
-            ...         baca.generalized_hairpin('p < f'),
+            ...         baca.hairpin('p < f'),
             ...         ),
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.Pattern(
@@ -1558,11 +1558,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     baca.map(
             ...         baca.tuplet(0),
-            ...         baca.generalized_hairpin('p < f'),
+            ...         baca.hairpin('p < f'),
             ...         ),
             ...     baca.map(
             ...         baca.tuplet(-1),
-            ...         baca.generalized_hairpin('f > p'),
+            ...         baca.hairpin('f > p'),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -1626,11 +1626,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     baca.map(
             ...         baca.tuplets()[:2],
-            ...         baca.generalized_hairpin('p < f'),
+            ...         baca.hairpin('p < f'),
             ...         ),
             ...     baca.map(
             ...         baca.tuplet(-1),
-            ...         baca.generalized_hairpin('f > p'),
+            ...         baca.hairpin('f > p'),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
