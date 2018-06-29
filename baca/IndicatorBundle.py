@@ -12,8 +12,8 @@ class IndicatorBundle(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
-        '_dynamic',
-        '_dynamic_trend',
+        '_indicator',
+        '_spanner_start',
         )
 
     _publish_storage_format=True
@@ -22,82 +22,37 @@ class IndicatorBundle(abjad.AbjadObject):
 
     def __init__(
         self,
-        dynamic: typing.Union[abjad.Dynamic, abjad.LilyPondLiteral] = None,
-        dynamic_trend: abjad.DynamicTrend = None,
+        indicator: typing.Any = None,
+        spanner_start: typing.Any = None,
         ) -> None:
-        if dynamic is not None:
-            prototype = (abjad.Dynamic, abjad.LilyPondLiteral)
-            assert isinstance(dynamic, prototype), repr(dynamic)
-        self._dynamic = dynamic
-        if dynamic_trend is not None:
-            assert isinstance(dynamic_trend, abjad.DynamicTrend)
-        self._dynamic_trend = dynamic_trend
+        self._indicator = indicator
+        if (spanner_start is not None
+            and getattr(spanner_start, 'spanner_start', False) is not True):
+            raise Exception(f'must be spanner start (not {spanner_start}).')
+        self._spanner_start = spanner_start
 
     ### SPECIAL METHODS ###
+
+    def __iter__(self) -> typing.Iterator:
+        """
+        Iterates bundle.
+        """
+        return iter(self.indicators)
 
     def __len__(self) -> int:
         """
         Gets length.
         """
-        length = 0
-        if self.dynamic:
-            length += 1
-        if self.dynamic_trend:
-            length += 1
-        return length
+        return len(self.indicators)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def dynamic(self) -> typing.Optional[
-        typing.Union[abjad.Dynamic, abjad.LilyPondLiteral]
-        ]:
+    def indicator(self) -> typing.Optional[typing.Any]:
         """
-        Gets dynamic.
+        Gets indicator.
         """
-        return self._dynamic
-
-    @property
-    def dynamic_trend(self) -> typing.Optional[abjad.DynamicTrend]:
-        """
-        Gets dynamic trend.
-        """
-        return self._dynamic_trend
-
-    @property
-    def has_dynamic_only(self) -> bool:
-        """
-        Is true when bundle has dynamic only.
-        """
-        if self.dynamic and not self.dynamic_trend:
-            return True
-        return False
-
-    ### PUBLIC METHODS ###
-
-    def both(self) -> bool:
-        """
-        Is true when bundle has both indicator and trend.
-        """
-        return bool(self.dynamic) and bool(self.dynamic_trend)
-
-    def dynamic_only(self) -> 'IndicatorBundle':
-        """
-        Makes new bundle with dynamic only.
-        """
-        return type(self)(dynamic=self.dynamic)
-
-    @classmethod
-    def from_indicator(class_, indicator) -> 'IndicatorBundle':
-        """
-        Makes dynamic bundle from indicator.
-        """
-        if isinstance(indicator, (abjad.Dynamic, abjad.LilyPondLiteral)):
-            return class_(dynamic=indicator)
-        elif isinstance(indicator, abjad.DynamicTrend):
-            return class_(dynamic_trend=indicator)
-        else:
-            raise TypeError(indicator)
+        return self._indicator
 
     @property
     def indicators(self) -> typing.List:
@@ -105,8 +60,73 @@ class IndicatorBundle(abjad.AbjadObject):
         Gets indicators.
         """
         result: typing.List = []
-        if self.dynamic:
-            result.append(self.dynamic)
-        if self.dynamic_trend:
-            result.append(self.dynamic_trend)
+        if self.indicator:
+            result.append(self.indicator)
+        if self.spanner_start:
+            result.append(self.spanner_start)
         return result
+
+    @property
+    def spanner_start(self) -> typing.Optional[typing.Any]:
+        """
+        Gets spanner_start.
+        """
+        return self._spanner_start
+
+    ### PUBLIC METHODS ###
+
+    def compound(self) -> bool:
+        """
+        Is true when bundle has both indicator and spanner_start.
+        """
+        return bool(self.indicator) and bool(self.spanner_start)
+
+    @classmethod
+    def from_indicator(class_, indicator) -> 'IndicatorBundle':
+        """
+        Makes indicator bundle from indicator.
+        """
+        if getattr(indicator, 'spanner_start', False) is True:
+            return class_(spanner_start=indicator)
+        else:
+            return class_(indicator=indicator)
+
+    def indicator_only(self) -> bool:
+        """
+        Is true when bundle has indicator only.
+        """
+        if self.indicator and not self.spanner_start:
+            return True
+        return False
+
+    def simple(self) -> bool:
+        """
+        Is true when bundle has indicator or spanner start but not both.
+        """
+        return len(self) == 1
+
+    def spanner_start_only(self) -> bool:
+        """
+        Is true when bundle has spanner start only.
+        """
+        if not self.indicator and self.spanner_start:
+            return True
+        return False
+
+    def with_indicator(self, indicator) -> 'IndicatorBundle':
+        """
+        Makes new bundle with indicator.
+        """
+        return type(self)(
+            indicator=indicator,
+            spanner_start=self.spanner_start,
+            )
+
+    def with_spanner_start(self, spanner_start) -> 'IndicatorBundle':
+        """
+        Makes new bundle with spanner start.
+        """
+        return type(self)(
+            indicator=self.indicator,
+            spanner_start=spanner_start,
+            )

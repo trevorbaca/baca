@@ -22,20 +22,24 @@ IndicatorBundle
    .. autosummary::
       :nosignatures:
 
-      both
-      dynamic_only
+      compound
+      indicator_only
+      simple
+      spanner_start_only
+      with_indicator
+      with_spanner_start
 
    .. autosummary::
       :nosignatures:
 
-      dynamic
-      dynamic_trend
-      has_dynamic_only
+      indicator
       indicators
+      spanner_start
 
    .. autosummary::
       :nosignatures:
 
+      __iter__
       __len__
 
    .. raw:: html
@@ -48,6 +52,8 @@ IndicatorBundle
    .. container:: inherited
 
       .. automethod:: IndicatorBundle.__format__
+
+   .. automethod:: IndicatorBundle.__iter__
 
    .. automethod:: IndicatorBundle.__len__
 
@@ -62,9 +68,17 @@ IndicatorBundle
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: IndicatorBundle.both
+   .. automethod:: IndicatorBundle.compound
 
-   .. automethod:: IndicatorBundle.dynamic_only
+   .. automethod:: IndicatorBundle.indicator_only
+
+   .. automethod:: IndicatorBundle.simple
+
+   .. automethod:: IndicatorBundle.spanner_start_only
+
+   .. automethod:: IndicatorBundle.with_indicator
+
+   .. automethod:: IndicatorBundle.with_spanner_start
 
    .. raw:: html
 
@@ -82,10 +96,8 @@ IndicatorBundle
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: IndicatorBundle.dynamic
-
-   .. autoattribute:: IndicatorBundle.dynamic_trend
-
-   .. autoattribute:: IndicatorBundle.has_dynamic_only
+   .. autoattribute:: IndicatorBundle.indicator
 
    .. autoattribute:: IndicatorBundle.indicators
+
+   .. autoattribute:: IndicatorBundle.spanner_start
