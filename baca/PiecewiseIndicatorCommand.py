@@ -23,7 +23,6 @@ class PiecewiseIndicatorCommand(Command):
         '_last_piece_spanner',
         '_piece_selector',
         '_right_broken',
-        '_right_open',
         '_selector',
         )
 
@@ -38,7 +37,6 @@ class PiecewiseIndicatorCommand(Command):
         last_piece_spanner: typing.Any = None,
         piece_selector: typings.Selector = 'baca.leaves()',
         right_broken: typing.Any = None,
-        right_open: bool = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         Command.__init__(self, selector=selector)
@@ -62,9 +60,6 @@ class PiecewiseIndicatorCommand(Command):
                 piece_selector)
         self._piece_selector = piece_selector
         self._right_broken = right_broken
-        if right_open is not None:
-            right_open = bool(right_open)
-        self._right_open = right_open
         self._tags = []
 
     ### SPECIAL METHODS ###
@@ -219,13 +214,6 @@ class PiecewiseIndicatorCommand(Command):
         Gets right-broken indicator.
         """
         return self._right_broken
-
-    @property
-    def right_open(self) -> typing.Optional[bool]:
-        """
-        Is true when command allows trend on last leaf.
-        """
-        return self._right_open
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:

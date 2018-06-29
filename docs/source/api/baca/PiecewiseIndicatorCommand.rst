@@ -23,7 +23,6 @@ PiecewiseIndicatorCommand
       last_piece_spanner
       piece_selector
       right_broken
-      right_open
       selector
 
    .. autosummary::
@@ -96,8 +95,6 @@ PiecewiseIndicatorCommand
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
 
    .. autoattribute:: PiecewiseIndicatorCommand.right_broken
-
-   .. autoattribute:: PiecewiseIndicatorCommand.right_open
 
    .. autoattribute:: PiecewiseIndicatorCommand.selector
 

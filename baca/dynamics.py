@@ -618,6 +618,7 @@ def dynamic(
         selector=selector,
         )
 
+# TODO: move baca.hairpin() into baca.hairpins()
 def hairpin(
     descriptor: typing.Union[str, typing.List[IndicatorBundle]],
     *,
@@ -1500,9 +1501,6 @@ def hairpin(
     bookend: typing.Union[bool, int] = False
     if 1 < len(bundles) and bundles[-1].indicator_only():
         bookend = -1
-    right_open: typing.Optional[bool] = None
-    if bundles[-1].compound():
-        right_open = True
     if isinstance(selector, str):
         selector = eval(selector)
     assert isinstance(selector, abjad.Expression)
@@ -1513,11 +1511,9 @@ def hairpin(
         left_broken=left_broken,
         piece_selector=piece_selector,
         right_broken=right_broken,
-        right_open=right_open,
         selector=baca.select().leaves(),
         )
 
-# TODO: move baca.hairpin() into baca.hairpins()
 def hairpins(
     dynamics: typing.Union[str, typing.List],
     bookend: typing.Union[bool, int] = False,
@@ -1525,11 +1521,132 @@ def hairpins(
     left_broken: bool = None,
     piece_selector: typings.Selector = 'baca.tleaves().group()',
     right_broken: bool = None,
-    right_open: bool = None,
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseIndicatorCommand:
     r"""
     Attaches hairpin indicators for consecutive hairpins.
+
+    ..  container:: example
+
+        One hairpin:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.hairpins('p < f', bookend=True),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \newSpacingSection                                                           %! HSS1:SPACING
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            e'8
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            e''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            e''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            d''8
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
 
     ..  container:: example
 
@@ -3187,15 +3304,12 @@ def hairpins(
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
-    if right_open is not None:
-        right_open = bool(right_open)
     return PiecewiseIndicatorCommand(
         bookend=bookend,
         bundles=bundles,
         last_piece_spanner=final_hairpin_,
         piece_selector=piece_selector,
         right_broken=right_broken_,
-        right_open=right_open,
         selector=selector,
         )
 
