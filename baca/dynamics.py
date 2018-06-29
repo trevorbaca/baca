@@ -622,6 +622,7 @@ def dynamic(
 def hairpin(
     descriptor: typing.Union[str, typing.List[IndicatorBundle]],
     *,
+    bookend: typing.Union[bool, int] = -1,
     left_broken: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
@@ -1267,7 +1268,7 @@ def hairpin(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.hairpin('f'),
+        ...     baca.hairpin('f', bookend=False),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -1386,7 +1387,7 @@ def hairpin(
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     baca.suite(
-        ...         baca.hairpin('<'),
+        ...         baca.hairpin('<', bookend=False),
         ...         baca.dynamic('f', selector=baca.pleaf(-1)),
         ...         ),
         ...     )
@@ -1498,9 +1499,6 @@ def hairpin(
         bundles = parse_descriptor(descriptor)
     else:
         bundles = descriptor
-    bookend: typing.Union[bool, int] = False
-    if 1 < len(bundles) and bundles[-1].indicator_only():
-        bookend = -1
     if isinstance(selector, str):
         selector = eval(selector)
     assert isinstance(selector, abjad.Expression)
@@ -1539,7 +1537,7 @@ def hairpins(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpins('p < f', bookend=True),
+        ...     baca.hairpins('p < f', bookend=-1),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     )
