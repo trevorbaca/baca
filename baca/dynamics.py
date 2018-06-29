@@ -10,7 +10,6 @@ from .IndicatorCommand import IndicatorCommand
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .SchemeManifest import SchemeManifest
 
-# TODO: change last_hairpin to final_hairpin
 
 def ancora_dynamic(
     dynamic: str,
@@ -1522,7 +1521,7 @@ def hairpin(
 def hairpins(
     dynamics: typing.Union[str, typing.List],
     bookend: typing.Union[bool, int] = False,
-    last_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
+    final_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
     left_broken: bool = None,
     piece_selector: typings.Selector = 'baca.tleaves().group()',
     right_broken: bool = None,
@@ -1679,7 +1678,7 @@ def hairpins(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpins(
         ...         'p < f >',
-        ...         last_hairpin=False,
+        ...         final_hairpin=False,
         ...         piece_selector=baca.leaves().partition_by_counts(
         ...             [3],
         ...             cyclic=True,
@@ -2510,7 +2509,7 @@ def hairpins(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpins(
         ...         'p < f >',
-        ...         last_hairpin=False,
+        ...         final_hairpin=False,
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
@@ -3172,11 +3171,11 @@ def hairpins(
         bundles = dynamics
     for item in bundles:
         assert isinstance(item, IndicatorBundle), repr(dynamic)
-    last_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
-    if isinstance(last_hairpin, bool):
-        last_hairpin_ = last_hairpin
-    elif isinstance(last_hairpin, str):
-        last_hairpin_ = abjad.DynamicTrend(last_hairpin)
+    final_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
+    if isinstance(final_hairpin, bool):
+        final_hairpin_ = final_hairpin
+    elif isinstance(final_hairpin, str):
+        final_hairpin_ = abjad.DynamicTrend(final_hairpin)
     if left_broken is not None:
         left_broken = bool(left_broken)
     if left_broken is True:
@@ -3193,7 +3192,7 @@ def hairpins(
     return PiecewiseIndicatorCommand(
         bookend=bookend,
         bundles=bundles,
-        last_piece_spanner=last_hairpin_,
+        last_piece_spanner=final_hairpin_,
         piece_selector=piece_selector,
         right_broken=right_broken_,
         right_open=right_open,
