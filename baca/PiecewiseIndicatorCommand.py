@@ -109,6 +109,8 @@ class PiecewiseIndicatorCommand(Command):
                 should_bookend = True
             else:
                 should_bookend = False
+            if is_last_piece and self.right_broken:
+                should_bookend = False
             bundle = self.bundles[i]
             if len(piece) == 1 and bundle.compound():
                 bundle = bundle.with_spanner_start(None)
