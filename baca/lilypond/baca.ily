@@ -118,7 +118,7 @@ baca_pierre_damp = \markup {
 
 %%% DYNAMICS: ANCORA %%%
 
-ppp_ancora = #(
+baca_ppp_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -129,7 +129,7 @@ ppp_ancora = #(
         )
     )
 
-pp_ancora = #(
+baca_pp_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -140,7 +140,7 @@ pp_ancora = #(
         )
     )
 
-p_ancora = #(
+baca_p_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -151,7 +151,7 @@ p_ancora = #(
         )
     )
 
-mp_ancora = #(
+baca_mp_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -162,7 +162,7 @@ mp_ancora = #(
         )
     )
 
-mf_ancora = #(
+baca_mf_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -173,7 +173,7 @@ mf_ancora = #(
         )
     )
 
-f_ancora = #(
+baca_f_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -184,7 +184,7 @@ f_ancora = #(
         )
     )
 
-ff_ancora = #(
+baca_ff_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -195,7 +195,7 @@ ff_ancora = #(
         )
     )
 
-fff_ancora = #(
+baca_fff_ancora = #(
     make-dynamic-script
     (markup
         #:line (
@@ -208,7 +208,7 @@ fff_ancora = #(
 
 %%% DYNAMICS: EFFORT %%%
 
-effort_ppp = #(
+baca_effort_ppp = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -222,7 +222,7 @@ effort_ppp = #(
         )
     )
 
-effort_pp = #(
+baca_effort_pp = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -236,7 +236,7 @@ effort_pp = #(
         )
     )
 
-effort_p = #(
+baca_effort_p = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -250,7 +250,7 @@ effort_p = #(
         )
     )
 
-effort_mp = #(
+baca_effort_mp = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -264,7 +264,7 @@ effort_mp = #(
         )
     )
 
-effort_mf = #(
+baca_effort_mf = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -278,7 +278,7 @@ effort_mf = #(
         )
     )
 
-effort_f = #(
+baca_effort_f = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -292,7 +292,7 @@ effort_f = #(
         )
     )
 
-effort_ff = #(
+baca_effort_ff = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -306,7 +306,7 @@ effort_ff = #(
         )
     )
 
-effort_fff = #(
+baca_effort_fff = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -320,7 +320,7 @@ effort_fff = #(
         )
     )
 
-effort_sfz = #(
+baca_effort_sfz = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -334,7 +334,7 @@ effort_sfz = #(
         )
     )
 
-effort_sffz = #(
+baca_effort_sffz = #(
     make-dynamic-script
     (markup
         #:whiteout
@@ -350,12 +350,12 @@ effort_sffz = #(
 
 %%% DYNAMICS: FP %%%
 
-ffp = #(make-dynamic-script "ffp")
-fffp = #(make-dynamic-script "fffp")
+baca_ffp = #(make-dynamic-script "ffp")
+baca_fffp = #(make-dynamic-script "fffp")
 
 %%% DYNAMICS: POSSIBILE %%%
 
-ppp_poss = #(
+baca_ppp_poss = #(
     make-dynamic-script
     (markup
         #:line (
@@ -366,7 +366,7 @@ ppp_poss = #(
         )
     )
 
-pp_poss = #(
+baca_pp_poss = #(
     make-dynamic-script
     (markup
         #:line (
@@ -377,7 +377,7 @@ pp_poss = #(
         )
     )
 
-p_poss = #(
+baca_p_poss = #(
     make-dynamic-script
     (markup
         #:line (
@@ -388,7 +388,7 @@ p_poss = #(
         )
     )
 
-f_poss = #(
+baca_f_poss = #(
     make-dynamic-script
     (markup
         #:line (
@@ -399,7 +399,7 @@ f_poss = #(
         )
     )
 
-ff_poss = #(
+baca_ff_poss = #(
     make-dynamic-script
     (markup
         #:line (
@@ -410,7 +410,7 @@ ff_poss = #(
         )
     )
 
-fff_poss = #(
+baca_fff_poss = #(
     make-dynamic-script
     (markup
         #:line (
@@ -423,14 +423,14 @@ fff_poss = #(
 
 %%% DYNAMICS: SFORZANDO %%%
 
-sff = #(make-dynamic-script "sff")
-sffp = #(make-dynamic-script "sffp")
-sffpp = #(make-dynamic-script "sffpp")
-sfpp = #(make-dynamic-script "sfpp")
-sffz = #(make-dynamic-script "sffz")
-sfffz = #(make-dynamic-script "sfffz")
+baca_sff = #(make-dynamic-script "sff")
+baca_sffp = #(make-dynamic-script "sffp")
+baca_sffpp = #(make-dynamic-script "sffpp")
+baca_sfpp = #(make-dynamic-script "sfpp")
+baca_sffz = #(make-dynamic-script "sffz")
+baca_sfffz = #(make-dynamic-script "sfffz")
 
-sfz_f = #(
+baca_sfz_f = #(
     make-dynamic-script
     (markup
         #:line (
@@ -443,7 +443,7 @@ sfz_f = #(
         )
     )
 
-sfz_p = #(
+baca_sfz_p = #(
     make-dynamic-script
     (markup
         #:line (
@@ -458,7 +458,7 @@ sfz_p = #(
 
 %%% DYNAMICS: SUBITO %%%
 
-ppp_sub = 
+baca_ppp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -471,7 +471,7 @@ ppp_sub =
         )
     )
 
-pp_sub = 
+baca_pp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -484,7 +484,7 @@ pp_sub =
         )
     )
 
-p_sub = 
+baca_p_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -497,7 +497,7 @@ p_sub =
         )
     )
 
-mp_sub = 
+baca_mp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -510,7 +510,7 @@ mp_sub =
         )
     )
 
-mf_sub =
+baca_mf_sub =
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -523,7 +523,7 @@ mf_sub =
         )
     )
 
-f_sub =
+baca_f_sub =
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -536,7 +536,7 @@ f_sub =
         )
     )
 
-ff_sub =
+baca_ff_sub =
     #(make-dynamic-script
     (markup
         #:line (
@@ -547,7 +547,7 @@ ff_sub =
         )
     )
 
-fff_sub =
+baca_fff_sub =
     #(make-dynamic-script
     (markup
         #:line (
@@ -570,7 +570,7 @@ fff_sub =
     %%%
     %%% ... to avoid warnings in LilyPond log.
 
-appena_udibile = 
+baca_appena_udibile = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -603,7 +603,7 @@ niente = #(
     %%%
     %%% ... to avoid warnings in LilyPond log.
 
-p_sub_but_accents_continue_sffz = 
+baca_p_sub_but_accents_continue_sffz = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -619,7 +619,7 @@ p_sub_but_accents_continue_sffz =
         )
     )
 
-f_but_accents_sffz =
+baca_f_but_accents_sffz =
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
@@ -637,7 +637,7 @@ f_but_accents_sffz =
         )
     )
 
-f_sub_but_accents_continue_sffz =
+baca_f_sub_but_accents_continue_sffz =
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script

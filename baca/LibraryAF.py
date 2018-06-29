@@ -545,6 +545,7 @@ class LibraryAF(abjad.AbjadObject):
             figure_name=figure_name,
             )
 
+    # TODO: move to dynamics.py
     @staticmethod
     def ancora_dynamic(
         dynamic: str,
@@ -585,7 +586,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                \ff_ancora                                                               %! IC
+                                \baca_ff_ancora                                                               %! IC
                                 [
                                 d'16
                                 ]
@@ -663,7 +664,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \ff_ancora                                                               %! IC
+                                \baca_ff_ancora                                                               %! IC
                                 [
                                 e''16
                                 ]
@@ -686,7 +687,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        command = rf'\{dynamic}_ancora'
+        command = rf'\baca_{dynamic}_ancora'
         indicator = abjad.Dynamic(dynamic, command=command)
         return IndicatorCommand(
             indicators=[indicator],

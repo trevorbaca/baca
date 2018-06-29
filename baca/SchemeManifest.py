@@ -18,13 +18,21 @@ class SchemeManifest(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     _dynamics = (
-        ('appena_udibile', 'appena udibile'),
-        ('f_but_accents_sffz', 'f'),
-        ('f_sub_but_accents_continue_sffz', 'f'),
+        ('baca_appena_udibile', 'appena udibile'),
+        ('baca_f_but_accents_sffz', 'f'),
+        ('baca_f_sub_but_accents_continue_sffz', 'f'),
+        ('baca_ffp', 'p'),
+        ('baca_fffp', 'p'),
         ('niente', 'niente'),
-        ('p_sub_but_accents_continue_sffz', 'p'),
-        ('sfz_f', 'f'),
-        ('sfz_p', 'p'),
+        ('baca_p_sub_but_accents_continue_sffz', 'p'),
+        ('baca_sff', 'ff'),
+        ('baca_sffp', 'p'),
+        ('baca_sffpp', 'pp'),
+        ('baca_sfffz', 'fff'),
+        ('baca_sffz', 'ff'),
+        ('baca_sfpp', 'pp'),
+        ('baca_sfz_f', 'f'),
+        ('baca_sfz_p', 'p'),
         )
 
     ### PUBLIC PROPERTIES ###
@@ -40,13 +48,21 @@ class SchemeManifest(abjad.AbjadObject):
             >>> for dynamic in scheme_manifest.dynamics:
             ...     dynamic
             ...
-            'appena_udibile'
-            'f_but_accents_sffz'
-            'f_sub_but_accents_continue_sffz'
+            'baca_appena_udibile'
+            'baca_f_but_accents_sffz'
+            'baca_f_sub_but_accents_continue_sffz'
+            'baca_ffp'
+            'baca_fffp'
             'niente'
-            'p_sub_but_accents_continue_sffz'
-            'sfz_f'
-            'sfz_p'
+            'baca_p_sub_but_accents_continue_sffz'
+            'baca_sff'
+            'baca_sffp'
+            'baca_sffpp'
+            'baca_sfffz'
+            'baca_sffz'
+            'baca_sfpp'
+            'baca_sfz_f'
+            'baca_sfz_p'
 
         Returns list.
         """
@@ -68,5 +84,7 @@ class SchemeManifest(abjad.AbjadObject):
         """
         for dynamic_, steady_state in self._dynamics:
             if dynamic_ == dynamic:
+                return steady_state
+            if dynamic_ == 'baca_' + dynamic:
                 return steady_state
         raise KeyError(dynamic)

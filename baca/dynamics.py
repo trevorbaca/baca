@@ -32,7 +32,7 @@ def parse_descriptor(
 
         >>> for item in baca.parse_descriptor('"f"'):
         ...     item
-        DynamicBundle(dynamic=Dynamic('f', command='\\effort_f'))
+        DynamicBundle(dynamic=Dynamic('f', command='\\baca_effort_f'))
 
         >>> for item in baca.parse_descriptor('niente'):
         ...     item
@@ -338,7 +338,7 @@ def dynamic(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \effort_f                                                                %! IC
+                            \baca_effort_f                                                                %! IC
                             [
                             d'16
                             ]
@@ -622,11 +622,11 @@ def dynamic(
     if isinstance(dynamic, str):
         if dynamic == 'niente':
             indicator = abjad.Dynamic('niente', command=r'\!')
-        elif dynamic in scheme_manifest.dynamics:
+        elif 'baca_' + dynamic in scheme_manifest.dynamics:
             name = scheme_manifest.dynamic_to_steady_state(dynamic)
-            command = '\\' + dynamic
-            first = dynamic.split('_')[0]
-            if first in ('sfz', 'sffz', 'sfffz'):
+            command = '\\baca_' + dynamic
+            pieces = dynamic.split('_')
+            if pieces[0] in ('sfz', 'sffz', 'sfffz'):
                 sforzando = True
             else:
                 sforzando = False
@@ -640,7 +640,7 @@ def dynamic(
         elif dynamic.startswith('"'):
             assert dynamic.endswith('"')
             dynamic = dynamic.strip('"')
-            command = rf'\effort_{dynamic}'
+            command = rf'\baca_effort_{dynamic}'
             indicator = abjad.Dynamic(f'{dynamic}', command=command)
         elif dynamic in known_shapes:
             indicator = abjad.DynamicTrend(dynamic)
@@ -864,7 +864,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak to-barline ##t                                                  %! PIC
                             - \tweak circled-tip ##t                                                 %! PIC
                             \>                                                                       %! PIC
@@ -1026,7 +1026,7 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1109,7 +1109,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak stencil #constante-hairpin                                      %! PIC
                             \<                                                                       %! PIC
                             [
@@ -1239,7 +1239,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak stencil #abjad-flared-hairpin                                   %! PIC
                             \<                                                                       %! PIC
                             [
@@ -1259,13 +1259,13 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak stencil #abjad-flared-hairpin                                   %! PIC
                             \>                                                                       %! PIC
                             [
@@ -1285,7 +1285,7 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1543,8 +1543,6 @@ def hairpin(
     if 1 < len(bundles) and bundles[-1].has_dynamic_only:
         bookend = -1
     right_open: typing.Optional[bool] = None
-#    if (isinstance(dynamics[-1], tuple) and
-#        isinstance(dynamics[-1][-1], abjad.DynamicTrend)):
     if bundles[-1].both():
         right_open = True
     if isinstance(selector, str):
@@ -3213,7 +3211,6 @@ def hairpins(
         bundles = parse_descriptor(dynamics)
     else:
         bundles = dynamics
-    #raise Exception(bundles)
     for item in bundles:
         assert isinstance(item, DynamicBundle), repr(dynamic)
     last_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None

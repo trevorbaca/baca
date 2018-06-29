@@ -956,6 +956,7 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             )
 
+    # TODO: move to dynamics.py
     @staticmethod
     def possibile_dynamic(
         dynamic: str,
@@ -996,7 +997,7 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
-                                \ff_poss                                                                 %! IC
+                                \baca_ff_poss                                                                 %! IC
                                 [
                                 d'16
                                 ]
@@ -1074,7 +1075,7 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \ff_poss                                                                 %! IC
+                                \baca_ff_poss                                                                 %! IC
                                 [
                                 e''16
                                 ]
@@ -1097,7 +1098,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         """
-        command = rf'\{dynamic}_poss'
+        command = rf'\baca_{dynamic}_poss'
         indicator = abjad.Dynamic(dynamic, command=command)
         return IndicatorCommand(
             indicators=[indicator],
@@ -6899,6 +6900,7 @@ class LibraryNS(abjad.AbjadObject):
         expression = expression.flatten(depth=-1)
         return expression
 
+    # TODO: move to dynamics.py
     @staticmethod
     def subito_dynamic(
         dynamic: str,
@@ -6908,7 +6910,7 @@ class LibraryNS(abjad.AbjadObject):
         """
         Attaches subito dynamic.
         """
-        command = rf'\{dynamic}_sub'
+        command = rf'\baca_{dynamic}_sub'
         indicator = abjad.Dynamic(dynamic, command=command)
         return IndicatorCommand(
             indicators=[indicator],
