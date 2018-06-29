@@ -25,7 +25,6 @@ dynamics
    ~ancora_dynamic
    ~dynamic
    ~hairpin
-   ~hairpins
    ~make_dynamic
    ~parse_descriptor
    ~possibile_dynamic
@@ -36,8 +35,6 @@ dynamics
 .. autofunction:: dynamic
 
 .. autofunction:: hairpin
-
-.. autofunction:: hairpins
 
 .. autofunction:: make_dynamic
 

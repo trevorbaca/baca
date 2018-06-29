@@ -364,7 +364,6 @@ Dynamics library.
    ~baca.dynamics.ancora_dynamic
    ~baca.dynamics.dynamic
    ~baca.dynamics.hairpin
-   ~baca.dynamics.hairpins
    ~baca.dynamics.make_dynamic
    ~baca.dynamics.parse_descriptor
    ~baca.dynamics.possibile_dynamic
