@@ -22,14 +22,17 @@ class IndicatorBundle(abjad.AbjadObject):
 
     def __init__(
         self,
-        indicator: typing.Any = None,
-        spanner_start: typing.Any = None,
+        *arguments: typing.Any,
         ) -> None:
-        self._indicator = indicator
-        if (spanner_start is not None
-            and getattr(spanner_start, 'spanner_start', False) is not True):
-            raise Exception(f'must be spanner start (not {spanner_start}).')
-        self._spanner_start = spanner_start
+        assert len(arguments) <= 2, repr(arguments)
+        self._indicator = None
+        self._spanner_start = None
+        for argument in arguments:
+            if getattr(argument, 'spanner_start', False) is True:
+                self._spanner_start = argument
+            else:
+                self._indicator = argument
+
 
     ### SPECIAL METHODS ###
 
@@ -44,6 +47,14 @@ class IndicatorBundle(abjad.AbjadObject):
         Gets length.
         """
         return len(self.indicators)
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        class_ = type(self).__name__
+        string = ', '.join([repr(_) for _ in self.indicators])
+        return f'{class_}({string})'
 
     ### PUBLIC PROPERTIES ###
 
@@ -81,16 +92,6 @@ class IndicatorBundle(abjad.AbjadObject):
         """
         return bool(self.indicator) and bool(self.spanner_start)
 
-    @classmethod
-    def from_indicator(class_, indicator) -> 'IndicatorBundle':
-        """
-        Makes indicator bundle from indicator.
-        """
-        if getattr(indicator, 'spanner_start', False) is True:
-            return class_(spanner_start=indicator)
-        else:
-            return class_(indicator=indicator)
-
     def indicator_only(self) -> bool:
         """
         Is true when bundle has indicator only.
@@ -116,17 +117,45 @@ class IndicatorBundle(abjad.AbjadObject):
     def with_indicator(self, indicator) -> 'IndicatorBundle':
         """
         Makes new bundle with indicator.
+
+        ..  container:: example
+
+            >>> bundle = baca.IndicatorBundle(
+            ...     abjad.Dynamic('p'),
+            ...     abjad.DynamicTrend('<'),
+            ...     )
+
+            >>> bundle.with_indicator(abjad.Dynamic('f'))
+            IndicatorBundle(Dynamic('f'), DynamicTrend(shape='<'))
+
+            >>> bundle.with_indicator(None)
+            IndicatorBundle(DynamicTrend(shape='<'))
+
         """
-        return type(self)(
-            indicator=indicator,
-            spanner_start=self.spanner_start,
-            )
+        if indicator is None:
+            return type(self)(self.spanner_start)
+        return type(self)(indicator, self.spanner_start)
 
     def with_spanner_start(self, spanner_start) -> 'IndicatorBundle':
         """
         Makes new bundle with spanner start.
+
+        ..  container:: example
+
+            >>> bundle = baca.IndicatorBundle(
+            ...     abjad.Dynamic('p'),
+            ...     abjad.DynamicTrend('<'),
+            ...     )
+
+            >>> bundle.with_spanner_start(abjad.DynamicTrend('>'))
+            IndicatorBundle(Dynamic('p'), DynamicTrend(shape='>'))
+
+            >>> bundle.with_spanner_start(None)
+            IndicatorBundle(Dynamic('p'))
+
         """
-        return type(self)(
-            indicator=self.indicator,
-            spanner_start=spanner_start,
-            )
+        if spanner_start is None:
+            return type(self)(self.indicator)
+        if getattr(spanner_start, 'spanner_start', False) is not True:
+            raise Exception(spanner_start)
+        return type(self)(self.indicator, spanner_start)

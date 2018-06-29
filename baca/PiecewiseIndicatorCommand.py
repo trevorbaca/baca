@@ -103,7 +103,7 @@ class PiecewiseIndicatorCommand(Command):
             else:
                 is_last_piece = False
             if is_last_piece and self.right_broken:
-                bundle = IndicatorBundle.from_indicator(self.right_broken)
+                bundle = IndicatorBundle(self.right_broken)
                 self._attach_indicators(
                     bundle,
                     stop_leaf,

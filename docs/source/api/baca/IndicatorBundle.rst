@@ -17,11 +17,6 @@ IndicatorBundle
    .. autosummary::
       :nosignatures:
 
-      from_indicator
-
-   .. autosummary::
-      :nosignatures:
-
       compound
       indicator_only
       simple
@@ -41,6 +36,7 @@ IndicatorBundle
 
       __iter__
       __len__
+      __repr__
 
    .. raw:: html
 
@@ -57,9 +53,7 @@ IndicatorBundle
 
    .. automethod:: IndicatorBundle.__len__
 
-   .. container:: inherited
-
-      .. automethod:: IndicatorBundle.__repr__
+   .. automethod:: IndicatorBundle.__repr__
 
    .. raw:: html
 
@@ -79,15 +73,6 @@ IndicatorBundle
    .. automethod:: IndicatorBundle.with_indicator
 
    .. automethod:: IndicatorBundle.with_spanner_start
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: IndicatorBundle.from_indicator
 
    .. raw:: html
 
