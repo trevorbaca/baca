@@ -1,7 +1,6 @@
 import abjad
-
-from .dynamics import *
 from .library import *
+from .dynamics import *
 from .overrides import *
 from . import markups
 
