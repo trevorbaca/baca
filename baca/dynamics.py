@@ -3228,6 +3228,16 @@ def make_dynamic(string: str) -> typing.Union[
         >>> baca.make_dynamic('appena_udibile')
         Dynamic('appena udibile', command='\\baca_appena_udibile', name_is_textual=True, sforzando=False)
 
+    ..  container:: example
+
+        Al niente hairpins are special-cased to carry to-barline tweaks:
+
+        >>> baca.make_dynamic('>o')
+        DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True)))
+
+        >>> baca.make_dynamic('|>o')
+        DynamicTrend(shape='|>o', tweaks=LilyPondTweakManager(('to_barline', True)))
+
     """
     assert isinstance(string, str), repr(string)
     scheme_manifest = SchemeManifest()
@@ -3257,6 +3267,8 @@ def make_dynamic(string: str) -> typing.Union[
         indicator = abjad.Dynamic(f'{string}', command=command)
     elif string in known_shapes:
         indicator = abjad.DynamicTrend(string)
+        if string.endswith('>o'):
+            abjad.tweak(indicator).to_barline = True
     else:
         indicator = abjad.Dynamic(string)
     return indicator
@@ -3371,17 +3383,9 @@ def parse_descriptor(
     indicators: typing.List[
         typing.Union[abjad.Dynamic, abjad.DynamicTrend]] = []
     bundles: typing.List[IndicatorBundle] = []
-    known_shapes = abjad.DynamicTrend('<').known_shapes
     for string in descriptor.split():
-        if string in known_shapes:
-            dynamic_trend = abjad.DynamicTrend(string)
-            if dynamic_trend.shape == '>o':
-                abjad.tweak(dynamic_trend).to_barline = True
-            indicators.append(dynamic_trend)
-        else:
-            dynamic = make_dynamic(string)
-            assert isinstance(dynamic, abjad.Dynamic)
-            indicators.append(dynamic)
+        indicator = make_dynamic(string)
+        indicators.append(indicator)
     if len(indicators) == 1:
         bundle = IndicatorBundle.from_indicator(indicators[0])
         bundles.append(bundle)
