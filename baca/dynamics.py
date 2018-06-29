@@ -3305,18 +3305,14 @@ def parse_descriptor(
         ...     item
         IndicatorBundle(DynamicTrend(shape='--'))
 
-        TODO: fix extra terminal forte:
-        
         >>> for item in baca.parse_descriptor('< f'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='<'))
-        IndicatorBundle(Dynamic('f'))
         IndicatorBundle(Dynamic('f'))
 
         >>> for item in baca.parse_descriptor('o< f'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='o<'))
-        IndicatorBundle(Dynamic('f'))
         IndicatorBundle(Dynamic('f'))
 
         >>> for item in baca.parse_descriptor('niente o<| f'):
@@ -3366,6 +3362,7 @@ def parse_descriptor(
     if len(indicators) == 1:
         bundle = IndicatorBundle(indicators[0])
         bundles.append(bundle)
+        return bundles
     for left, right in baca.sequence(indicators).nwise():
         if (isinstance(left, abjad.DynamicTrend) and
             isinstance(right, abjad.DynamicTrend)):
