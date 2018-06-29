@@ -5,6 +5,7 @@ import copy
 import typing
 from . import typings
 from .Command import Command
+from .DynamicBundle import DynamicBundle
 from .IndicatorCommand import IndicatorCommand
 
 
@@ -17,8 +18,8 @@ class PiecewiseIndicatorCommand(Command):
 
     __slots__ = (
         '_bookend',
+        '_bundles',
         '_forbid_spanner_start',
-        '_indicators',
         '_last_piece_spanner',
         '_piece_selector',
         '_right_broken',
@@ -32,8 +33,8 @@ class PiecewiseIndicatorCommand(Command):
         self,
         *,
         bookend: typing.Union[bool, int] = None,
+        bundles: typing.List[DynamicBundle] = None,
         forbid_spanner_start: typing.Union[bool, int] = None,
-        indicators: typing.Sequence = None,
         last_piece_spanner: typing.Any = None,
         piece_selector: typings.Selector = 'baca.leaves()',
         right_broken: typing.Any = None,
@@ -47,10 +48,10 @@ class PiecewiseIndicatorCommand(Command):
         if forbid_spanner_start is not None:
             assert isinstance(forbid_spanner_start, (int, bool)), repr(forbid_spanner_start)
         self._forbid_spanner_start = forbid_spanner_start
-        indicators_ = None
-        if indicators is not None:
-            indicators_ = abjad.CyclicTuple(indicators)
-        self._indicators = indicators_
+        bundles_ = None
+        if bundles is not None:
+            bundles_ = abjad.CyclicTuple(bundles)
+        self._bundles = bundles_
         if last_piece_spanner not in (None, False):
             assert getattr(last_piece_spanner, 'spanner_start', False)
         self._last_piece_spanner = last_piece_spanner
@@ -74,7 +75,7 @@ class PiecewiseIndicatorCommand(Command):
         """
         if argument is None:
             return
-        if not self.indicators:
+        if not self.bundles:
             return
         if self.selector is not None:
             assert not isinstance(self.selector, str)
@@ -102,8 +103,10 @@ class PiecewiseIndicatorCommand(Command):
             else:
                 is_last_piece = False
             if is_last_piece and self.right_broken:
+                bundle = DynamicBundle.from_indicator(self.right_broken)
                 self._attach_indicators(
-                    self.right_broken,
+                    #self.right_broken,
+                    bundle,
                     stop_leaf,
                     tag=str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
                     )
@@ -112,37 +115,44 @@ class PiecewiseIndicatorCommand(Command):
                 should_bookend = True
             else:
                 should_bookend = False
-            indicators = self.indicators[i]
-            if len(piece) == 1 and isinstance(indicators, tuple):
-                assert len(indicators) == 2
-                indicator, spanner_start = indicators
-                if getattr(spanner_start, 'spanner_start', False) is not True:
-                    raise Exception(indicators)
-                indicators = indicator
-            if is_last_piece and isinstance(indicators, tuple):
-                assert len(indicators) == 2
-                indicator, spanner_start = indicators
-                if getattr(spanner_start, 'spanner_start', False) is not True:
-                    raise Exception(indicators)
+            bundle = self.bundles[i]
+            if len(piece) == 1 and bundle.both():
+                bundle = bundle.dynamic_only()
+            if is_last_piece and bundle.both():
+#                assert len(indicators) == 2
+#                indicator, spanner_start = indicators
+#                if getattr(spanner_start, 'spanner_start', False) is not True:
+#                    raise Exception(indicators)
                 if self.last_piece_spanner:
-                    indicators = (indicator, self.last_piece_spanner)
+                    #indicators = (indicator, self.last_piece_spanner)
+                    #bundle.dynamic_trend = self.last_piece_spanner
+                    bundle = abjad.new(
+                        bundle,
+                        dynamic_trend=self.last_piece_spanner,
+                        )
                 elif self.last_piece_spanner is False:
-                    indicators = indicator
+                    #indicators = indicator
+                    bundle = abjad.new(bundle, dynamic_trend=None)
             self._attach_indicators(
-                indicators,
+                #indicators,
+                bundle,
                 start_leaf,
                 tag='PIC',
                 )
             if should_bookend:
-                indicators = self.indicators[i + 1]
-                if isinstance(indicators, tuple):
-                    assert len(indicators) == 2
-                    indicator, spanner_start = indicators
-                    if getattr(spanner_start, 'spanner_start', False) is not True:
-                        raise Exception(indicators)
-                    indicators = indicator
+                #indicators = self.indicators[i + 1]
+                bundle = self.bundles[i + 1]
+                #if isinstance(indicators, tuple):
+                if bundle.both():
+#                    assert len(indicators) == 2
+#                    indicator, spanner_start = indicators
+#                    if getattr(spanner_start, 'spanner_start', False) is not True:
+#                        raise Exception(indicators)
+#                    indicators = indicator
+                    bundle = abjad.new(bundle, dynamic_trend=None)
                 self._attach_indicators(
-                    indicators,
+                    #indicators,
+                    bundle,
                     stop_leaf,
                     tag='PIC',
                     )
@@ -151,15 +161,13 @@ class PiecewiseIndicatorCommand(Command):
 
     def _attach_indicators(
         self,
-        indicators,
+        #indicators,
+        bundle,
         leaf,
         tag=None,
         ):
         assert isinstance(tag, str), repr(tag)
-        if not isinstance(indicators, tuple):
-            indicators = (indicators,)
-        for indicator in indicators:
-            assert indicator is not None
+        for indicator in bundle.indicators:
             reapplied = Command._remove_reapplied_wrappers(leaf, indicator)
             wrapper = abjad.attach(
                 indicator,
@@ -199,18 +207,18 @@ class PiecewiseIndicatorCommand(Command):
         return self._bookend
 
     @property
+    def bundles(self) -> typing.Optional[abjad.CyclicTuple]:
+        """
+        Gets bundles.
+        """
+        return self._bundles
+
+    @property
     def forbid_spanner_start(self) -> typing.Optional[typing.Union[bool, int]]:
         """
         Gets forbid-spanner-start token.
         """
         return self._forbid_spanner_start
-
-    @property
-    def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
-        """
-        Gets indicators.
-        """
-        return self._indicators
 
     @property
     def last_piece_spanner(self) -> typing.Optional[typing.Any]:

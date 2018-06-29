@@ -220,6 +220,7 @@ baca
    Cursor
    DesignMaker
    Division
+   DynamicBundle
    Expression
    ExpressionGallery
    HarmonicSeries
@@ -278,6 +279,7 @@ baca
    ~Cursor.Cursor
    ~DesignMaker.DesignMaker
    ~Division.Division
+   ~DynamicBundle.DynamicBundle
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
    ~HarmonicSeries.HarmonicSeries

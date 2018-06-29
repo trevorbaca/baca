@@ -34,6 +34,7 @@ from .Division import Division
 from .DivisionMaker import DivisionMaker
 from .DivisionSequence import DivisionSequence
 from .DivisionSequenceExpression import DivisionSequenceExpression
+from .DynamicBundle import DynamicBundle
 from .Expression import Expression
 from .ExpressionGallery import ExpressionGallery
 from .FlattenDivisionCallback import FlattenDivisionCallback

@@ -128,6 +128,7 @@ Bača API
    ~baca.Cursor.Cursor
    ~baca.DesignMaker.DesignMaker
    ~baca.Division.Division
+   ~baca.DynamicBundle.DynamicBundle
    ~baca.Expression.Expression
    ~baca.ExpressionGallery.ExpressionGallery
    ~baca.HarmonicSeries.HarmonicSeries

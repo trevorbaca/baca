@@ -18,8 +18,8 @@ PiecewiseIndicatorCommand
       :nosignatures:
 
       bookend
+      bundles
       forbid_spanner_start
-      indicators
       last_piece_spanner
       piece_selector
       right_broken
@@ -83,13 +83,13 @@ PiecewiseIndicatorCommand
 
    .. autoattribute:: PiecewiseIndicatorCommand.bookend
 
+   .. autoattribute:: PiecewiseIndicatorCommand.bundles
+
    .. container:: inherited
 
       .. autoattribute:: PiecewiseIndicatorCommand.deactivate
 
    .. autoattribute:: PiecewiseIndicatorCommand.forbid_spanner_start
-
-   .. autoattribute:: PiecewiseIndicatorCommand.indicators
 
    .. autoattribute:: PiecewiseIndicatorCommand.last_piece_spanner
 
