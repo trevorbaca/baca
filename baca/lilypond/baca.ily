@@ -582,7 +582,7 @@ baca_appena_udibile =
         )
     )
 
-niente = #(
+baca_niente = #(
     make-dynamic-script
     (markup
         #:whiteout
