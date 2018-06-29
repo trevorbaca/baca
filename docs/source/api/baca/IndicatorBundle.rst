@@ -1,18 +1,18 @@
-.. _baca--DynamicBundle:
+.. _baca--IndicatorBundle:
 
-DynamicBundle
-=============
+IndicatorBundle
+===============
 
-.. automodule:: baca.DynamicBundle
+.. automodule:: baca.IndicatorBundle
 
-.. currentmodule:: baca.DynamicBundle
+.. currentmodule:: baca.IndicatorBundle
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.DynamicBundle
+      :lineage: baca.IndicatorBundle
 
-.. autoclass:: DynamicBundle
+.. autoclass:: IndicatorBundle
 
    .. autosummary::
       :nosignatures:
@@ -47,13 +47,13 @@ DynamicBundle
 
    .. container:: inherited
 
-      .. automethod:: DynamicBundle.__format__
+      .. automethod:: IndicatorBundle.__format__
 
-   .. automethod:: DynamicBundle.__len__
+   .. automethod:: IndicatorBundle.__len__
 
    .. container:: inherited
 
-      .. automethod:: DynamicBundle.__repr__
+      .. automethod:: IndicatorBundle.__repr__
 
    .. raw:: html
 
@@ -62,9 +62,9 @@ DynamicBundle
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: DynamicBundle.both
+   .. automethod:: IndicatorBundle.both
 
-   .. automethod:: DynamicBundle.dynamic_only
+   .. automethod:: IndicatorBundle.dynamic_only
 
    .. raw:: html
 
@@ -73,7 +73,7 @@ DynamicBundle
    .. rubric:: Class & static methods
       :class: class-header
 
-   .. automethod:: DynamicBundle.from_indicator
+   .. automethod:: IndicatorBundle.from_indicator
 
    .. raw:: html
 
@@ -82,10 +82,10 @@ DynamicBundle
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: DynamicBundle.dynamic
+   .. autoattribute:: IndicatorBundle.dynamic
 
-   .. autoattribute:: DynamicBundle.dynamic_trend
+   .. autoattribute:: IndicatorBundle.dynamic_trend
 
-   .. autoattribute:: DynamicBundle.has_dynamic_only
+   .. autoattribute:: IndicatorBundle.has_dynamic_only
 
-   .. autoattribute:: DynamicBundle.indicators
+   .. autoattribute:: IndicatorBundle.indicators

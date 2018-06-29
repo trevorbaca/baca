@@ -26,7 +26,6 @@ LibraryAF
       anchor
       anchor_after
       anchor_to_figure
-      ancora_dynamic
       apply
       arpeggio
       articulation
@@ -118,8 +117,6 @@ LibraryAF
    .. automethod:: LibraryAF.anchor_after
 
    .. automethod:: LibraryAF.anchor_to_figure
-
-   .. automethod:: LibraryAF.ancora_dynamic
 
    .. automethod:: LibraryAF.apply
 

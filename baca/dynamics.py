@@ -9,7 +9,7 @@ from . import typings
 from .Command import Command
 from .Command import Map
 from .Command import Suite
-from .DynamicBundle import DynamicBundle
+from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
 from .OverrideCommand import OverrideCommand
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
@@ -20,7 +20,7 @@ from .SchemeManifest import SchemeManifest
 
 def parse_descriptor(
     descriptor: str
-    ) -> typing.List[DynamicBundle]:
+    ) -> typing.List[IndicatorBundle]:
     r"""
     Parses ``descriptor``.
 
@@ -28,57 +28,57 @@ def parse_descriptor(
 
         >>> for item in baca.parse_descriptor('f'):
         ...     item
-        DynamicBundle(dynamic=Dynamic('f'))
+        IndicatorBundle(dynamic=Dynamic('f'))
 
         >>> for item in baca.parse_descriptor('"f"'):
         ...     item
-        DynamicBundle(dynamic=Dynamic('f', command='\\baca_effort_f'))
+        IndicatorBundle(dynamic=Dynamic('f', command='\\baca_effort_f'))
 
         >>> for item in baca.parse_descriptor('niente'):
         ...     item
-        DynamicBundle(dynamic=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True))
+        IndicatorBundle(dynamic=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True))
 
         >>> for item in baca.parse_descriptor('<'):
         ...     item
-        DynamicBundle(dynamic_trend=DynamicTrend(shape='<'))
+        IndicatorBundle(dynamic_trend=DynamicTrend(shape='<'))
 
         >>> for item in baca.parse_descriptor('o<|'):
         ...     item
-        DynamicBundle(dynamic_trend=DynamicTrend(shape='o<|'))
+        IndicatorBundle(dynamic_trend=DynamicTrend(shape='o<|'))
 
         >>> for item in baca.parse_descriptor('--'):
         ...     item
-        DynamicBundle(dynamic_trend=DynamicTrend(shape='--'))
+        IndicatorBundle(dynamic_trend=DynamicTrend(shape='--'))
 
         TODO: fix extra terminal forte:
         
         >>> for item in baca.parse_descriptor('< f'):
         ...     item
-        DynamicBundle(dynamic_trend=DynamicTrend(shape='<'))
-        DynamicBundle(dynamic=Dynamic('f'))
-        DynamicBundle(dynamic=Dynamic('f'))
+        IndicatorBundle(dynamic_trend=DynamicTrend(shape='<'))
+        IndicatorBundle(dynamic=Dynamic('f'))
+        IndicatorBundle(dynamic=Dynamic('f'))
 
         >>> for item in baca.parse_descriptor('o< f'):
         ...     item
-        DynamicBundle(dynamic_trend=DynamicTrend(shape='o<'))
-        DynamicBundle(dynamic=Dynamic('f'))
-        DynamicBundle(dynamic=Dynamic('f'))
+        IndicatorBundle(dynamic_trend=DynamicTrend(shape='o<'))
+        IndicatorBundle(dynamic=Dynamic('f'))
+        IndicatorBundle(dynamic=Dynamic('f'))
 
         >>> for item in baca.parse_descriptor('niente o<| f'):
         ...     abjad.f(item)
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('niente', command='\\!', direction=Down, name_is_textual=True, ),
             dynamic_trend=abjad.DynamicTrend(
                 shape='o<|',
                 ),
             )
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('f'),
             )
 
         >>> for item in baca.parse_descriptor('f >'):
         ...     abjad.f(item)
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('f'),
             dynamic_trend=abjad.DynamicTrend(
                 shape='>',
@@ -87,7 +87,7 @@ def parse_descriptor(
 
         >>> for item in baca.parse_descriptor('f >o'):
         ...     abjad.f(item)
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('f'),
             dynamic_trend=abjad.DynamicTrend(
                 shape='>o',
@@ -97,29 +97,29 @@ def parse_descriptor(
 
         >>> for item in baca.parse_descriptor('p mp mf f'):
         ...     item
-        DynamicBundle(dynamic=Dynamic('p'))
-        DynamicBundle(dynamic=Dynamic('mp'))
-        DynamicBundle(dynamic=Dynamic('mf'))
-        DynamicBundle(dynamic=Dynamic('f'))
+        IndicatorBundle(dynamic=Dynamic('p'))
+        IndicatorBundle(dynamic=Dynamic('mp'))
+        IndicatorBundle(dynamic=Dynamic('mf'))
+        IndicatorBundle(dynamic=Dynamic('f'))
 
         >>> for item in baca.parse_descriptor('p < f f > p'):
         ...     abjad.f(item)
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('p'),
             dynamic_trend=abjad.DynamicTrend(
                 shape='<',
                 ),
             )
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('f'),
             )
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('f'),
             dynamic_trend=abjad.DynamicTrend(
                 shape='>',
                 ),
             )
-        baca.DynamicBundle(
+        baca.IndicatorBundle(
             dynamic=abjad.Dynamic('p'),
             )
 
@@ -127,7 +127,7 @@ def parse_descriptor(
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: typing.List[
         typing.Union[abjad.Dynamic, abjad.DynamicTrend]] = []
-    bundles: typing.List[DynamicBundle] = []
+    bundles: typing.List[IndicatorBundle] = []
     known_shapes = abjad.DynamicTrend('<').known_shapes
     for string in descriptor.split():
         if string in known_shapes:
@@ -142,16 +142,16 @@ def parse_descriptor(
             assert isinstance(dynamic, abjad.Dynamic)
             indicators.append(dynamic)
     if len(indicators) == 1:
-        bundle = DynamicBundle.from_indicator(indicators[0])
+        bundle = IndicatorBundle.from_indicator(indicators[0])
         bundles.append(bundle)
         return bundles
     if isinstance(indicators[0], abjad.DynamicTrend):
         result = indicators.pop(0)
         assert isinstance(result, abjad.DynamicTrend)
-        bundle = DynamicBundle(dynamic_trend=result)
+        bundle = IndicatorBundle(dynamic_trend=result)
         bundles.append(bundle)
     if len(indicators) == 1:
-        bundle = DynamicBundle.from_indicator(indicators[0])
+        bundle = IndicatorBundle.from_indicator(indicators[0])
         bundles.append(bundle)
     for left, right in baca.sequence(indicators).nwise():
         if (isinstance(left, abjad.DynamicTrend) and
@@ -159,14 +159,14 @@ def parse_descriptor(
             raise Exception('consecutive dynamic trends')
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.Dynamic)):
-            bundle = DynamicBundle.from_indicator(left)
+            bundle = IndicatorBundle.from_indicator(left)
             bundles.append(bundle)
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.DynamicTrend)):
-            bundle = DynamicBundle(dynamic=left, dynamic_trend=right)
+            bundle = IndicatorBundle(dynamic=left, dynamic_trend=right)
             bundles.append(bundle)
     if indicators and isinstance(indicators[-1], abjad.Dynamic):
-        bundle = DynamicBundle.from_indicator(indicators[-1])
+        bundle = IndicatorBundle.from_indicator(indicators[-1])
         bundles.append(bundle)
     return bundles
 
@@ -808,7 +808,7 @@ def dynamic(
 _local_dynamic = dynamic
 
 def hairpin(
-    descriptor: typing.Union[str, typing.List[DynamicBundle]],
+    descriptor: typing.Union[str, typing.List[IndicatorBundle]],
     *,
     left_broken: bool = None,
     right_broken: bool = None,
@@ -3359,7 +3359,7 @@ def hairpins(
     else:
         bundles = dynamics
     for item in bundles:
-        assert isinstance(item, DynamicBundle), repr(dynamic)
+        assert isinstance(item, IndicatorBundle), repr(dynamic)
     last_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
     if isinstance(last_hairpin, bool):
         last_hairpin_ = last_hairpin
@@ -3371,7 +3371,7 @@ def hairpins(
         bundle = bundles[0]
         assert bundle.dynamic_trend and not bundle.dynamic
         dynamic_trend = abjad.new(bundle.dynamic_trend, left_broken=True)
-        bundle = DynamicBundle(dynamic_trend=dynamic_trend)
+        bundle = IndicatorBundle(dynamic_trend=dynamic_trend)
         bundles[0] = bundle
     right_broken_: typing.Any = False
     if bool(right_broken) is True:

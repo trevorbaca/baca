@@ -220,10 +220,10 @@ baca
    Cursor
    DesignMaker
    Division
-   DynamicBundle
    Expression
    ExpressionGallery
    HarmonicSeries
+   IndicatorBundle
    Interpolator
    LBSD
    Loop
@@ -279,10 +279,10 @@ baca
    ~Cursor.Cursor
    ~DesignMaker.DesignMaker
    ~Division.Division
-   ~DynamicBundle.DynamicBundle
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
    ~HarmonicSeries.HarmonicSeries
+   ~IndicatorBundle.IndicatorBundle
    ~Interpolator.Interpolator
    ~LBSD.LBSD
    ~Loop.Loop

@@ -33,7 +33,6 @@ LibraryNS
       page
       parts
       pitch
-      possibile_dynamic
       previous_metadata
       register
       rehearsal_mark
@@ -93,7 +92,6 @@ LibraryNS
       stopped
       strict_note_spacing_off
       strict_quarter_divisions
-      subito_dynamic
       sustain_pedal
       sustain_pedal_staff_padding
       system
@@ -151,8 +149,6 @@ LibraryNS
    .. automethod:: LibraryNS.parts
 
    .. automethod:: LibraryNS.pitch
-
-   .. automethod:: LibraryNS.possibile_dynamic
 
    .. automethod:: LibraryNS.previous_metadata
 
@@ -271,8 +267,6 @@ LibraryNS
    .. automethod:: LibraryNS.strict_note_spacing_off
 
    .. automethod:: LibraryNS.strict_quarter_divisions
-
-   .. automethod:: LibraryNS.subito_dynamic
 
    .. automethod:: LibraryNS.sustain_pedal
 

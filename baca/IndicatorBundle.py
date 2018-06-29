@@ -2,9 +2,9 @@ import abjad
 import typing
 
 
-class DynamicBundle(abjad.AbjadObject):
+class IndicatorBundle(abjad.AbjadObject):
     """
-    DynamicBundle.
+    IndicatorBundle.
     """
 
     ### CLASS VARIABLES ###
@@ -81,14 +81,14 @@ class DynamicBundle(abjad.AbjadObject):
         """
         return bool(self.dynamic) and bool(self.dynamic_trend)
 
-    def dynamic_only(self) -> 'DynamicBundle':
+    def dynamic_only(self) -> 'IndicatorBundle':
         """
         Makes new bundle with dynamic only.
         """
         return type(self)(dynamic=self.dynamic)
 
     @classmethod
-    def from_indicator(class_, indicator) -> 'DynamicBundle':
+    def from_indicator(class_, indicator) -> 'IndicatorBundle':
         """
         Makes dynamic bundle from indicator.
         """

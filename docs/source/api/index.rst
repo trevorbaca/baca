@@ -128,10 +128,10 @@ Bača API
    ~baca.Cursor.Cursor
    ~baca.DesignMaker.DesignMaker
    ~baca.Division.Division
-   ~baca.DynamicBundle.DynamicBundle
    ~baca.Expression.Expression
    ~baca.ExpressionGallery.ExpressionGallery
    ~baca.HarmonicSeries.HarmonicSeries
+   ~baca.IndicatorBundle.IndicatorBundle
    ~baca.Interpolator.Interpolator
    ~baca.LBSD.LBSD
    ~baca.Loop.Loop
@@ -361,10 +361,13 @@ Dynamics library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.dynamics.ancora_dynamic
    ~baca.dynamics.dynamic
    ~baca.dynamics.hairpin
    ~baca.dynamics.hairpins
    ~baca.dynamics.parse_descriptor
+   ~baca.dynamics.possibile_dynamic
+   ~baca.dynamics.subito_dynamic
 
 .. raw:: html
 

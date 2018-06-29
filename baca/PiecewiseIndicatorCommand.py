@@ -5,7 +5,7 @@ import copy
 import typing
 from . import typings
 from .Command import Command
-from .DynamicBundle import DynamicBundle
+from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
 
 
@@ -33,7 +33,7 @@ class PiecewiseIndicatorCommand(Command):
         self,
         *,
         bookend: typing.Union[bool, int] = None,
-        bundles: typing.List[DynamicBundle] = None,
+        bundles: typing.List[IndicatorBundle] = None,
         forbid_spanner_start: typing.Union[bool, int] = None,
         last_piece_spanner: typing.Any = None,
         piece_selector: typings.Selector = 'baca.leaves()',
@@ -103,7 +103,7 @@ class PiecewiseIndicatorCommand(Command):
             else:
                 is_last_piece = False
             if is_last_piece and self.right_broken:
-                bundle = DynamicBundle.from_indicator(self.right_broken)
+                bundle = IndicatorBundle.from_indicator(self.right_broken)
                 self._attach_indicators(
                     #self.right_broken,
                     bundle,
