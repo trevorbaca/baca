@@ -1,3 +1,4 @@
+\include "/Users/trevorbaca/abjad/docs/source/_stylesheets/abjad.ily"
 \include "/Users/trevorbaca/abjad/docs/source/_stylesheets/flared-hairpin.ily"
 #(ly:set-option 'relative-includes #t)
 \include "flared-hairpin-for-trevor.ily"

@@ -2865,13 +2865,7 @@ class LibraryTZ(abjad.AbjadObject):
                                                 #0.25                                                    %! PSC1
                                         }                                                                %! PSC1
                                     }                                                                    %! PSC1
-                                - \tweak dash-period 0                                                   %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 1.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
+                                - \abjad_start_text_span_invisible                                       %! PSC1
                                 \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 e'8
