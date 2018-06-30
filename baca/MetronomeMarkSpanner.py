@@ -1,6 +1,6 @@
 import abjad
 import typing
-from abjad.enumerations import Center, Down
+from abjad.enums import Center, Down
 from abjad.indicators.ArrowLineSegment import ArrowLineSegment
 from abjad.indicators.LineSegment import LineSegment
 from abjad.indicators.MetricModulation import MetricModulation

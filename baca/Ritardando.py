@@ -1,6 +1,6 @@
 import typing
 from abjad.system.AbjadValueObject import AbjadValueObject
-from abjad.enumerations import Up
+from abjad.enums import Up
 from abjad.markups import Markup
 from abjad.system.LilyPondFormatBundle import LilyPondFormatBundle
 from abjad.top.new import new
