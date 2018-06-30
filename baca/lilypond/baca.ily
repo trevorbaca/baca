@@ -770,3 +770,19 @@ baca_slap_tongue_note_head =
   \revert NoteHead #'stencil
   \revert NoteHead #'extra-offset
 #})
+
+%%% SPANNERS: METRONOME MARK SPANNER SEGMENTS %%%
+
+% NOTE: only right padding differs to abjad_start_text_span_invisible
+% TODO: maybe possible to call abjad_start_text_span_invisible first?
+baca_invisible_line_segment = #(
+    define-music-function (parser location grob) (ly:music?)
+    #{
+    - \tweak dash-period 0
+    - \tweak bound-details.left.stencil-align-dir-y #center
+    - \tweak bound-details.right-broken.padding 0
+    - \tweak bound-details.right-broken.text ##f
+    - \tweak bound-details.right.padding 1
+    - \tweak bound-details.right.stencil-align-dir-y #center
+    $grob
+    #})

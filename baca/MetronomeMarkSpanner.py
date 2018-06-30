@@ -42,12 +42,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -76,12 +82,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -106,12 +108,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -135,12 +133,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {
                         \concat
                             {
@@ -194,12 +188,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -262,12 +262,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -291,12 +287,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {
                         \concat
                             {
@@ -350,12 +342,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(ritardando, spanner[3])
         >>> mark = abjad.MetronomeMark((1, 4), 60)
         >>> spanner.attach(mark, spanner[5])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -384,12 +382,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -414,12 +408,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -508,12 +498,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(accelerando, spanner[0])
         >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[3])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -576,12 +572,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -666,12 +658,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[5])
         >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[0])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -723,12 +721,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -752,12 +746,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {
                         \concat
                             {
@@ -809,12 +799,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[5])
         >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[0])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -866,12 +862,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -895,12 +887,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {
                         \concat
                             {
@@ -954,12 +942,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[5])
         >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[3])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -988,12 +982,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -1018,12 +1008,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -1116,12 +1102,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[5])
         >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[3])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -1150,12 +1142,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -1180,12 +1168,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -1276,12 +1260,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[6])
         >>> accelerando = baca.Accelerando()
         >>> spanner.attach(accelerando, spanner[2])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -1292,12 +1282,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \time 3/8
                     c'4.
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d'4.
                     e'4.
@@ -1358,12 +1344,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     c''4.
@@ -1390,12 +1372,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(mark, spanner[6])
         >>> ritardando = baca.Ritardando()
         >>> spanner.attach(ritardando, spanner[2])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -1406,12 +1394,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \time 3/8
                     c'4.
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d'4.
                     e'4.
@@ -1472,12 +1456,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     c''4.
@@ -1505,12 +1485,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         ...     right_rhythm=abjad.Note('c4'),
         ...     )
         >>> spanner.attach(metric_modulation, spanner[3])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -1539,12 +1525,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -1652,12 +1634,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     f'8.
@@ -1689,12 +1667,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> spanner.attach(baca.Accelerando(), spanner[3])
         >>> mark = abjad.MetronomeMark((3, 4), 90)
         >>> spanner.attach(mark, spanner[-1])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -1723,12 +1707,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -1891,12 +1871,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
         >>> abjad.override(staff).text_spanner.staff_padding = 3
         >>> mark = abjad.MetronomeMark((1, 4), 90)
         >>> spanner.attach(mark, spanner[-1])
+        >>> moment = abjad.SchemeMoment((1, 20))
+        >>> abjad.setting(score).proportional_notation_duration = moment
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -1907,12 +1893,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \time 3/8
                     c'8.
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {
                         \concat
                             {
@@ -2010,7 +1992,10 @@ class MetronomeMarkSpanner(abjad.Spanner):
         last_leaf_markup = last_leaf_metronome_mark._get_markup(
             stem_height=self.stem_height,
             )
-        right_hspace = line_segment.right_padding or 0
+        if line_segment is not None:
+            right_hspace = line_segment.right_padding or 0
+        else:
+            right_hspace = 1
         # optical correction to draw last markup left:
         right_hspace -= 0.5
         right_hspace = Markup.hspace(right_hspace)
@@ -2128,13 +2113,19 @@ class MetronomeMarkSpanner(abjad.Spanner):
             strings = []
             override = self._y_extent_false()
             strings.append(override.tweak_string())
-            line_segment = self._make_invisible_line_segment()
-            line_segment = new(
-                line_segment,
-                right_padding=self.right_padding,
+            strings.append(r'- \baca_invisible_line_segment')
+            override = LilyPondGrobOverride(
+                grob_name='TextSpanner',
+                property_path=(
+                    'bound-details',
+                    'right',
+                    'padding',
+                    ),
+                value=self.right_padding,
                 )
-            strings_ = line_segment._get_lilypond_grob_overrides(tweaks=True)
-            strings.extend(strings_)
+            string = override.tweak_string()
+            strings.append(string)
+
             strings.extend(self.start_command())
             if self._left_broken:
                 strings = self._tag_hide(strings)
@@ -2343,14 +2334,20 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     )
                 tweaks.extend(strings)
             if info['current_tempo_trend'] is None:
-                line_segment = self._make_invisible_line_segment()
-                line_segment = new(
-                    line_segment,
-                    right_padding=self.right_padding,
+                line_segment = None
+                strings = []
+                strings.append(r'- \baca_invisible_line_segment')
+                override = LilyPondGrobOverride(
+                    grob_name='TextSpanner',
+                    property_path=(
+                        'bound-details',
+                        'right',
+                        'padding',
+                        ),
+                    value=self.right_padding,
                     )
-                strings = line_segment._get_lilypond_grob_overrides(
-                    tweaks=True
-                    )
+                string = override.tweak_string()
+                strings.append(string)
                 if (leaf is self[0] and
                     self._left_broken and
                     not has_own_indicators):
@@ -2424,7 +2421,6 @@ class MetronomeMarkSpanner(abjad.Spanner):
         return ArrowLineSegment(
             dash_fraction=0.25,
             dash_period=1.5,
-            #left_broken_text=False,
             left_hspace=0.5,
             right_broken_arrow=False,
             right_broken_padding=0,
@@ -2436,19 +2432,6 @@ class MetronomeMarkSpanner(abjad.Spanner):
         return LineSegment(
             dash_fraction=0.25,
             dash_period=1.5,
-            #left_broken_text=False,
-            left_hspace=0.25,
-            left_stencil_align_direction_y=Center,
-            right_broken_padding=0,
-            right_broken_text=False,
-            right_padding=1.5,
-            right_stencil_align_direction_y=Center,
-            )
-
-    def _make_invisible_line_segment(self):
-        return LineSegment(
-            dash_period=0,
-            #left_broken_text=False,
             left_hspace=0.25,
             left_stencil_align_direction_y=Center,
             right_broken_padding=0,
@@ -2644,6 +2627,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[0])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[0])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -2699,6 +2684,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[0])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -2730,12 +2717,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                 %@% \stopTextSpan                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -2752,6 +2735,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2827,12 +2812,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         \stopTextSpan                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -2856,6 +2837,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[0])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[0])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -2911,6 +2894,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -2924,12 +2909,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     g'4
                     - \tweak Y-extent ##f                                   %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak dash-period 0                                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.padding 0           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.text ##f            %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    - \baca_invisible_line_segment                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     - \tweak bound-details.right.padding 1                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     \startTextSpan                                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     a'4
                     b'4
@@ -2953,12 +2934,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     c''4
@@ -2972,6 +2949,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3029,12 +3008,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         g'4
                     %%% - \tweak Y-extent ##f                     %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak dash-period 0                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.padding 0 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.text ##f %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%% - \baca_invisible_line_segment            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% - \tweak bound-details.right.padding 1    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% \startTextSpan                            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         a'4
                         b'4
@@ -3058,12 +3033,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         c''4
@@ -3083,6 +3054,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[0])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[0])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3145,6 +3118,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[-1])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3158,12 +3133,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     g'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0                                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.padding 0           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.text ##f            %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    - \baca_invisible_line_segment                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     - \tweak bound-details.right.padding 1                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak arrow-width 0.25                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak dash-fraction 0.25                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak dash-period 1.5                                %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -3214,6 +3185,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3278,12 +3251,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         g'4
                         - \tweak Y-extent ##f
-                    %%% - \tweak dash-period 0                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.padding 0 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.text ##f %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%% - \baca_invisible_line_segment            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% - \tweak bound-details.right.padding 1    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         - \tweak arrow-width 0.25                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak dash-fraction 0.25               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak dash-period 1.5                  %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -3340,6 +3309,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3353,12 +3324,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     c'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d'4
                     e'4
@@ -3404,6 +3371,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[0])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3435,12 +3404,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                 %@% \stopTextSpan                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -3457,6 +3422,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3471,12 +3438,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         c'4
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4
                         e'4
@@ -3541,12 +3504,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         \stopTextSpan                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -3569,6 +3528,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3582,12 +3543,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     c'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d'4
                     e'4
@@ -3633,6 +3590,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3646,12 +3605,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     g'4
                     - \tweak Y-extent ##f                                   %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak dash-period 0                                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.padding 0           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.text ##f            %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    - \baca_invisible_line_segment                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     - \tweak bound-details.right.padding 1                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     \startTextSpan                                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     a'4
                     b'4
@@ -3675,12 +3630,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     c''4
@@ -3694,6 +3645,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3708,12 +3661,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         c'4
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4
                         e'4
@@ -3760,12 +3709,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         g'4
                     %%% - \tweak Y-extent ##f                     %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak dash-period 0                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.padding 0 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.text ##f %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%% - \baca_invisible_line_segment            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% - \tweak bound-details.right.padding 1    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% \startTextSpan                            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         a'4
                         b'4
@@ -3789,12 +3734,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         c''4
@@ -3814,6 +3755,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[2])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3827,12 +3770,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     c'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d'4
                     e'4
@@ -3885,6 +3824,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[-1])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -3898,12 +3839,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     g'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0                                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.padding 0           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.text ##f            %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    - \baca_invisible_line_segment                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     - \tweak bound-details.right.padding 1                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak arrow-width 0.25                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak dash-fraction 0.25                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak dash-period 1.5                                %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -3954,6 +3891,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3968,12 +3907,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         c'4
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4
                         e'4
@@ -4027,12 +3962,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         g'4
                         - \tweak Y-extent ##f
-                    %%% - \tweak dash-period 0                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.padding 0 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.text ##f %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%% - \baca_invisible_line_segment            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% - \tweak bound-details.right.padding 1    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         - \tweak arrow-width 0.25                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak dash-fraction 0.25               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak dash-period 1.5                  %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -4089,6 +4020,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[-1])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[-1])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -4102,12 +4035,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     c'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {             %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         \concat                                             %! HIDE_TO_JOIN_BROKEN_SPANNERS
                             {                                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4178,6 +4107,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[0])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -4209,12 +4140,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                 %@% \stopTextSpan                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -4231,6 +4158,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4245,12 +4174,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         c'4
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                     %%% - \tweak bound-details.right.text \markup { %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%     \concat                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%         {                                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4340,12 +4265,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         \stopTextSpan                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -4368,6 +4289,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[-1])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[-1])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -4381,12 +4304,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     c'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {             %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         \concat                                             %! HIDE_TO_JOIN_BROKEN_SPANNERS
                             {                                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4457,6 +4376,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[-2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -4470,12 +4391,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     g'4
                     - \tweak Y-extent ##f                                   %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak dash-period 0                                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.padding 0           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.text ##f            %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    - \baca_invisible_line_segment                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     - \tweak bound-details.right.padding 1                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     \startTextSpan                                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     a'4
                     b'4
@@ -4499,12 +4416,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace
                             #1
                         }
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     c''4
@@ -4518,6 +4431,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4532,12 +4447,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         c'4
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                     %%% - \tweak bound-details.right.text \markup { %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%     \concat                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%         {                                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4609,12 +4520,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         g'4
                     %%% - \tweak Y-extent ##f                     %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak dash-period 0                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.padding 0 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.text ##f %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%% - \baca_invisible_line_segment            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% - \tweak bound-details.right.padding 1    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% \startTextSpan                            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         a'4
                         b'4
@@ -4638,12 +4545,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         c''4
@@ -4663,6 +4566,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[-1])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[-1])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_1, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -4676,12 +4581,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     c'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {             %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         \concat                                             %! HIDE_TO_JOIN_BROKEN_SPANNERS
                             {                                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4759,6 +4660,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> abjad.override(segment_2).text_spanner.staff_padding = 3
             >>> mark = abjad.MetronomeMark((1, 4), 90)
             >>> spanner.attach(mark, spanner[-1])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(segment_2, strict=60) # doctest: +SKIP
 
             ..  docs::
@@ -4772,12 +4675,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 {
                     g'4
                     - \tweak Y-extent ##f
-                    - \tweak dash-period 0                                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.padding 0           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right-broken.text ##f            %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    - \baca_invisible_line_segment                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     - \tweak bound-details.right.padding 1                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak arrow-width 0.25                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak dash-fraction 0.25                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak dash-period 1.5                                %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -4828,6 +4727,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> text = job()
             >>> lines = text.split('\n')
             >>> lilypond_file = abjad.LilyPondFile.new(lines)
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4842,12 +4743,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         c'4
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                     %%% - \tweak bound-details.right.text \markup { %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%     \concat                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%         {                                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4926,12 +4823,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     {
                         g'4
                         - \tweak Y-extent ##f
-                    %%% - \tweak dash-period 0                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.left.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.padding 0 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right-broken.text ##f %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%% - \baca_invisible_line_segment            %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%% - \tweak bound-details.right.padding 1    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%% - \tweak bound-details.right.stencil-align-dir-y #center %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         - \tweak arrow-width 0.25                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak dash-fraction 0.25               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak dash-period 1.5                  %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -5003,12 +4896,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[6])
             >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5019,12 +4918,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \time 3/8
                         c'4.
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4.
                         e'4.
@@ -5085,12 +4980,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         c''4.
@@ -5121,12 +5012,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[6])
             >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5137,12 +5034,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \time 3/8
                         c'4.
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4.
                         e'4.
@@ -5203,12 +5096,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         c''4.
@@ -5244,12 +5133,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[6])
             >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5260,12 +5155,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \time 3/8
                         c'4.
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4.
                         e'4.
@@ -5326,12 +5217,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         c''4.
@@ -5364,12 +5251,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[6])
             >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5380,12 +5273,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \time 3/8
                         c'4.
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4.
                         e'4.
@@ -5455,12 +5344,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         c''4.
                         \stopTextSpan
@@ -5492,12 +5377,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[6])
             >>> ritardando = baca.Ritardando()
             >>> spanner.attach(ritardando, spanner[2])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5508,12 +5399,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \time 3/8
                         c'4.
                         - \tweak Y-extent ##f
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'4.
                         e'4.
@@ -5574,12 +5461,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text \markup { "(slowing significantly)" }
                         \startTextSpan
                         c''4.
@@ -5623,12 +5506,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[5])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[3])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5657,12 +5546,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         d'8.
@@ -5687,12 +5572,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         g'8.
@@ -5768,12 +5649,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[5])
             >>> accelerando = baca.Accelerando()
             >>> spanner.attach(accelerando, spanner[3])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -5802,12 +5689,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         d'8.
@@ -5832,12 +5715,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         g'8.
@@ -5948,10 +5827,16 @@ class MetronomeMarkSpanner(abjad.Spanner):
             ...     spanner[0],
             ...     alternate=('DarkRed', 'METRONOME_MARK_WITH_COLOR:M2'),
             ...     )
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             >>> abjad.f(score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -6002,12 +5887,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 %@%                 #1                             %! METRONOME_MARK_WITH_COLOR:M2
                 %@%         }                                      %! METRONOME_MARK_WITH_COLOR:M2
                 %@%     }                                          %! METRONOME_MARK_WITH_COLOR:M2
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -6043,6 +5924,10 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> new_score = abjad.mutate(score).copy()
             >>> abjad.f(new_score)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -6093,12 +5978,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 %@%                 #1                             %! METRONOME_MARK_WITH_COLOR:M2
                 %@%         }                                      %! METRONOME_MARK_WITH_COLOR:M2
                 %@%     }                                          %! METRONOME_MARK_WITH_COLOR:M2
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -6161,12 +6042,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[3])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[5])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -6220,12 +6107,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         g'8.
@@ -6249,12 +6132,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.right.text \markup {
                             \concat
                                 {
@@ -6310,12 +6189,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[3])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[5])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -6369,12 +6254,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         g'8.
@@ -6398,12 +6279,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.right.text \markup {
                             \concat
                                 {
@@ -6473,12 +6350,18 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[3])
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[5])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(score)
                 \new Score
+                \with
+                {
+                    proportionalNotationDuration = #(ly:make-moment 1 20)
+                }
                 <<
                     \new Staff
                     \with
@@ -6507,12 +6390,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         d'8.
@@ -6537,12 +6416,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.left-broken.text ##f
                         \startTextSpan
                         g'8.
@@ -6566,12 +6441,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \hspace
                                 #1
                             }
-                        - \tweak dash-period 0
-                        - \tweak bound-details.left.stencil-align-dir-y #center
-                        - \tweak bound-details.right-broken.padding 0
-                        - \tweak bound-details.right-broken.text ##f
+                        - \baca_invisible_line_segment
                         - \tweak bound-details.right.padding 1
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \tweak bound-details.right.text \markup {
                             \concat
                                 {
@@ -6627,10 +6498,16 @@ class MetronomeMarkSpanner(abjad.Spanner):
             >>> spanner.attach(mark, spanner[3], deactivate=True, tag='YELLOW')
             >>> mark = abjad.MetronomeMark((1, 4), 60)
             >>> spanner.attach(mark, spanner[5])
+            >>> moment = abjad.SchemeMoment((1, 20))
+            >>> abjad.setting(score).proportional_notation_duration = moment
             >>> abjad.show(score) # doctest: +SKIP
 
             >>> abjad.f(score, strict=60)
             \new Score
+            \with
+            {
+                proportionalNotationDuration = #(ly:make-moment 1 20)
+            }
             <<
                 \new Staff
                 \with
@@ -6659,12 +6536,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace                                         %! RED:M1
                             #1                                          %! RED:M1
                         }                                               %! RED:M1
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     d'8.
@@ -6689,12 +6562,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \hspace                                         %! BLUE
                             #1                                          %! BLUE
                         }                                               %! BLUE
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.left-broken.text ##f
                     \startTextSpan
                     g'8.
@@ -6718,12 +6587,8 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 %@%     \hspace                                         %! YELLOW
                 %@%         #1                                          %! YELLOW
                 %@%     }                                               %! YELLOW
-                    - \tweak dash-period 0
-                    - \tweak bound-details.left.stencil-align-dir-y #center
-                    - \tweak bound-details.right-broken.padding 0
-                    - \tweak bound-details.right-broken.text ##f
+                    - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \tweak bound-details.right.text \markup {
                         \concat
                             {
