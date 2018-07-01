@@ -802,8 +802,8 @@ baca_dashed_line_segment = #(
     $grob
     #})
 
-% NOTE: only right padding differs to abjad_start_text_span_invisible
-% TODO: maybe possible to call abjad_start_text_span_invisible first?
+% NOTE: only right padding differs to abjad_invisible_line_segment;
+% TODO: maybe possible to call abjad_invisible_line_segment first?
 baca_invisible_line_segment = #(
     define-music-function (parser location grob) (ly:music?)
     #{

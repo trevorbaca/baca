@@ -2865,7 +2865,7 @@ class LibraryTZ(abjad.AbjadObject):
                                                 #0.25                                                    %! PSC1
                                         }                                                                %! PSC1
                                     }                                                                    %! PSC1
-                                - \abjad_start_text_span_invisible                                       %! PSC1
+                                - \abjad_invisible_line_segment                                       %! PSC1
                                 \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 e'8
