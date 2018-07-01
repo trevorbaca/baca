@@ -65,20 +65,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -91,20 +78,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -116,20 +90,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                72
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"72"
                         \hspace
                             #1
                         }
@@ -142,20 +103,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -211,20 +159,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -245,20 +180,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -270,20 +192,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                72
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"72"
                         \hspace
                             #1
                         }
@@ -296,20 +205,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -365,20 +261,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -391,20 +274,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -416,20 +286,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                72
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"72"
                         \hspace
                             #1
                         }
@@ -450,20 +307,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -521,20 +365,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -555,20 +386,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -580,20 +398,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                72
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"72"
                         \hspace
                             #1
                         }
@@ -614,20 +419,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -704,20 +496,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -729,20 +508,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                72
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"72"
                         \hspace
                             #1
                         }
@@ -755,20 +521,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -845,20 +598,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -870,20 +610,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                72
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"72"
                         \hspace
                             #1
                         }
@@ -896,20 +623,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -965,20 +679,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -991,20 +692,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -1021,20 +709,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \parenthesize
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                     }
                         \hspace
                             #1
@@ -1056,20 +731,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                120
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"120"
                                     }
                             }
                         }
@@ -1125,20 +787,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -1151,20 +800,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -1181,20 +817,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                             \parenthesize
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                     }
                         \hspace
                             #1
@@ -1216,20 +839,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
@@ -1290,20 +900,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -1327,20 +924,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -1402,20 +986,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -1439,20 +1010,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -1508,20 +1066,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #1
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #1 #1 #"90"
                         \hspace
                             #1
                         }
@@ -1535,20 +1080,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #1
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #1 #1 #"60"
                         \hspace
                             #0.5
                         \general-align
@@ -1690,20 +1222,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #1
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #1 #1 #"90"
                         \hspace
                             #1
                         }
@@ -1717,20 +1236,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #1
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #1 #1 #"60"
                         \hspace
                             #0.5
                         \general-align
@@ -1833,20 +1339,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #1
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #1 #1 #"90"
                                     }
                             }
                         }
@@ -1902,20 +1395,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                     }
                             }
                         }
@@ -2643,20 +2123,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'4
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -2700,20 +2167,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     g'4
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -2752,20 +2206,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         c'4
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -2795,20 +2236,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         g'4
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -2853,20 +2281,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'4
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -2917,20 +2332,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -2966,20 +2368,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         c'4
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -3016,20 +2405,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -3070,20 +2446,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'4
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -3152,20 +2515,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                     }
                             }
                         }
@@ -3202,20 +2552,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         c'4
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -3270,20 +2607,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    90
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                         }
                                 }
                             }
@@ -3332,20 +2656,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -3387,20 +2698,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     g'4
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -3446,20 +2744,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -3487,20 +2772,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         g'4
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -3551,20 +2823,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -3613,20 +2872,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -3669,20 +2915,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -3717,20 +2950,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -3778,20 +2998,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
@@ -3858,20 +3065,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                     }
                             }
                         }
@@ -3915,20 +3109,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -3981,20 +3162,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    90
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                         }
                                 }
                             }
@@ -4044,20 +3212,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5                                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                 \line                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                     {                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                        \fontsize                           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            #-6                             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            \general-align                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                #Y                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                #DOWN                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                \note-by-number             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #2                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #0                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #1                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                        \upright                            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            {                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                =                           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                60                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            }                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60" %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                     }                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
                             }                                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         }                                                   %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4069,20 +3224,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 %@% \stopTextSpan                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak Y-extent ##f                                   %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak bound-details.left.text \markup {              %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%     \fontsize                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         #-6                                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         \general-align                                  %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             #Y                                          %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             #DOWN                                       %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             \note-by-number                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #2                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #0                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #1                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%     \upright                                            %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         {                                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             =                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             60                                          %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         }                                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
+                %@%     \abjad-metronome-mark-markup #2 #0 #1 #"60"         %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%     \hspace                                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%         #1                                              %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%     }                                                   %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -4123,20 +3265,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     g'4
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -4183,20 +3312,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     %%%                 #0.5                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%             \line                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%                 {                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                     \fontsize             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         #-6               %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         \general-align    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             #Y            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             #DOWN         %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             \note-by-number %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #2        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #0        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #1        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                     \upright              %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         {                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             =             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             60            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         }                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%%                     \abjad-metronome-mark-markup #2 #0 #1 #"60" %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%                 }                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%         }                                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%     }                                     %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4208,20 +3324,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak Y-extent ##f                     %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak bound-details.left.text \markup { %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                            \fontsize                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                #-6                               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                \general-align                    %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    #Y                            %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    #DOWN                         %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    \note-by-number               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #2                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #0                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #1                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                            \upright                              %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                {                                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    =                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    60                            %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                }                                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60" %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                             \hspace                               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                                 #1                                %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                             }                                     %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -4248,20 +3351,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         g'4
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -4313,20 +3403,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5                                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                 \line                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                     {                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                        \fontsize                           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            #-6                             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            \general-align                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                #Y                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                #DOWN                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                \note-by-number             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #2                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #0                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #1                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                        \upright                            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            {                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                =                           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                60                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            }                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60" %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                     }                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
                             }                                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         }                                                   %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4338,20 +3415,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 %@% \stopTextSpan                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak Y-extent ##f                                   %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak bound-details.left.text \markup {              %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%     \fontsize                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         #-6                                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         \general-align                                  %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             #Y                                          %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             #DOWN                                       %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             \note-by-number                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #2                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #0                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #1                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%     \upright                                            %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         {                                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             =                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             60                                          %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         }                                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
+                %@%     \abjad-metronome-mark-markup #2 #0 #1 #"60"         %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%     \hspace                                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%         #1                                              %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%     }                                                   %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -4399,20 +3463,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                90
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                         \hspace
                             #1
                         }
@@ -4456,20 +3507,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     %%%                 #0.5                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%             \line                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%                 {                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                     \fontsize             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         #-6               %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         \general-align    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             #Y            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             #DOWN         %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             \note-by-number %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #2        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #0        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #1        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                     \upright              %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         {                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             =             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             60            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         }                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%%                     \abjad-metronome-mark-markup #2 #0 #1 #"60" %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%                 }                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%         }                                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%     }                                     %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4481,20 +3519,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak Y-extent ##f                     %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak bound-details.left.text \markup { %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                            \fontsize                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                #-6                               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                \general-align                    %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    #Y                            %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    #DOWN                         %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    \note-by-number               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #2                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #0                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #1                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                            \upright                              %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                {                                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    =                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    60                            %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                }                                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60" %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                             \hspace                               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                                 #1                                %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                             }                                     %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -4528,20 +3553,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -4590,20 +3602,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5                                    %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                 \line                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                     {                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                        \fontsize                           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            #-6                             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            \general-align                  %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                #Y                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                #DOWN                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                \note-by-number             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #2                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #0                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                    #1                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                        \upright                            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            {                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                =                           %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                                60                          %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                                            }                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60" %! HIDE_TO_JOIN_BROKEN_SPANNERS
                                     }                                       %! HIDE_TO_JOIN_BROKEN_SPANNERS
                             }                                               %! HIDE_TO_JOIN_BROKEN_SPANNERS
                         }                                                   %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4615,20 +3614,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                 %@% \stopTextSpan                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak Y-extent ##f                                   %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@% - \tweak bound-details.left.text \markup {              %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%     \fontsize                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         #-6                                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         \general-align                                  %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             #Y                                          %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             #DOWN                                       %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             \note-by-number                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #2                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #0                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%                 #1                                      %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%     \upright                                            %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         {                                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             =                                           %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%             60                                          %! SHOW_TO_JOIN_BROKEN_SPANNERS
-                %@%         }                                               %! SHOW_TO_JOIN_BROKEN_SPANNERS
+                %@%     \abjad-metronome-mark-markup #2 #0 #1 #"60"         %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%     \hspace                                             %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%         #1                                              %! SHOW_TO_JOIN_BROKEN_SPANNERS
                 %@%     }                                                   %! SHOW_TO_JOIN_BROKEN_SPANNERS
@@ -4694,20 +3680,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                90
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                     }
                             }
                         }
@@ -4752,20 +3725,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     %%%                 #0.5                      %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%             \line                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%                 {                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                     \fontsize             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         #-6               %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         \general-align    %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             #Y            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             #DOWN         %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             \note-by-number %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #2        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #0        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                                 #1        %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                     \upright              %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         {                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             =             %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                             60            %! HIDE_TO_JOIN_BROKEN_SPANNERS
-                    %%%                         }                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
+                    %%%                     \abjad-metronome-mark-markup #2 #0 #1 #"60" %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%                 }                         %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%         }                                 %! HIDE_TO_JOIN_BROKEN_SPANNERS
                     %%%     }                                     %! HIDE_TO_JOIN_BROKEN_SPANNERS
@@ -4777,20 +3737,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak Y-extent ##f                     %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                         - \tweak bound-details.left.text \markup { %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                            \fontsize                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                #-6                               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                \general-align                    %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    #Y                            %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    #DOWN                         %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    \note-by-number               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #2                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #0                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                        #1                        %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                            \upright                              %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                {                                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    =                             %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                    60                            %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
-                                }                                 %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60" %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                             \hspace                               %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                                 #1                                %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
                             }                                     %! SHOW_TO_JOIN_BROKEN_SPANNERS %@%
@@ -4842,20 +3789,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    90
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                         }
                                 }
                             }
@@ -4926,20 +3860,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -4963,20 +3884,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5042,20 +3950,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -5079,20 +3974,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5163,20 +4045,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -5200,20 +4069,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5281,20 +4137,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -5327,20 +4170,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5407,20 +4237,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -5444,20 +4261,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5529,20 +4333,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         c'8.
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5555,20 +4346,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -5603,20 +4381,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    120
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"120"
                                         }
                                 }
                             }
@@ -5672,20 +4437,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         c'8.
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -5698,20 +4450,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -5728,20 +4467,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                 \parenthesize
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    90
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                                         }
                             \hspace
                                 #1
@@ -5763,20 +4489,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    120
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"120"
                                         }
                                 }
                             }
@@ -5848,45 +4561,19 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
-                %@% - \tweak bound-details.left.text \markup {     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%     \with-color                                %! METRONOME_MARK_WITH_COLOR:M2
-                %@%         #(x11-color 'DarkRed)                  %! METRONOME_MARK_WITH_COLOR:M2
-                %@%         {                                      %! METRONOME_MARK_WITH_COLOR:M2
-                %@%             \fontsize                          %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 #-6                            %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 \general-align                 %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     #Y                         %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     #DOWN                      %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     \note-by-number            %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                         #2                     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                         #0                     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                         #1                     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%             \upright                           %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 {                              %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     =                          %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     60                         %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 }                              %! METRONOME_MARK_WITH_COLOR:M2
-                %@%             \hspace                            %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 #1                             %! METRONOME_MARK_WITH_COLOR:M2
-                %@%         }                                      %! METRONOME_MARK_WITH_COLOR:M2
-                %@%     }                                          %! METRONOME_MARK_WITH_COLOR:M2
+                %@% - \tweak bound-details.left.text \markup {                  %! METRONOME_MARK_WITH_COLOR:M2
+                %@%     \with-color                                             %! METRONOME_MARK_WITH_COLOR:M2
+                %@%         #(x11-color 'DarkRed)                               %! METRONOME_MARK_WITH_COLOR:M2
+                %@%         {                                                   %! METRONOME_MARK_WITH_COLOR:M2
+                %@%             \abjad-metronome-mark-markup #2 #0 #1 #"60"     %! METRONOME_MARK_WITH_COLOR:M2
+                %@%             \hspace                                         %! METRONOME_MARK_WITH_COLOR:M2
+                %@%                 #1                                          %! METRONOME_MARK_WITH_COLOR:M2
+                %@%         }                                                   %! METRONOME_MARK_WITH_COLOR:M2
+                %@%     }                                                       %! METRONOME_MARK_WITH_COLOR:M2
                     - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
                     - \tweak bound-details.left-broken.text ##f
@@ -5939,45 +4626,19 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {
-                        \fontsize
-                            #-6
-                            \general-align
-                                #Y
-                                #DOWN
-                                \note-by-number
-                                    #2
-                                    #0
-                                    #1
-                        \upright
-                            {
-                                =
-                                60
-                            }
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                         \hspace
                             #1
                         }
-                %@% - \tweak bound-details.left.text \markup {     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%     \with-color                                %! METRONOME_MARK_WITH_COLOR:M2
-                %@%         #(x11-color 'DarkRed)                  %! METRONOME_MARK_WITH_COLOR:M2
-                %@%         {                                      %! METRONOME_MARK_WITH_COLOR:M2
-                %@%             \fontsize                          %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 #-6                            %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 \general-align                 %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     #Y                         %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     #DOWN                      %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     \note-by-number            %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                         #2                     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                         #0                     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                         #1                     %! METRONOME_MARK_WITH_COLOR:M2
-                %@%             \upright                           %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 {                              %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     =                          %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                     60                         %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 }                              %! METRONOME_MARK_WITH_COLOR:M2
-                %@%             \hspace                            %! METRONOME_MARK_WITH_COLOR:M2
-                %@%                 #1                             %! METRONOME_MARK_WITH_COLOR:M2
-                %@%         }                                      %! METRONOME_MARK_WITH_COLOR:M2
-                %@%     }                                          %! METRONOME_MARK_WITH_COLOR:M2
+                %@% - \tweak bound-details.left.text \markup {                  %! METRONOME_MARK_WITH_COLOR:M2
+                %@%     \with-color                                             %! METRONOME_MARK_WITH_COLOR:M2
+                %@%         #(x11-color 'DarkRed)                               %! METRONOME_MARK_WITH_COLOR:M2
+                %@%         {                                                   %! METRONOME_MARK_WITH_COLOR:M2
+                %@%             \abjad-metronome-mark-markup #2 #0 #1 #"60"     %! METRONOME_MARK_WITH_COLOR:M2
+                %@%             \hspace                                         %! METRONOME_MARK_WITH_COLOR:M2
+                %@%                 #1                                          %! METRONOME_MARK_WITH_COLOR:M2
+                %@%         }                                                   %! METRONOME_MARK_WITH_COLOR:M2
+                %@%     }                                                       %! METRONOME_MARK_WITH_COLOR:M2
                     - \baca_invisible_line_segment
                     - \tweak bound-details.right.padding 1
                     - \tweak bound-details.left-broken.text ##f
@@ -6090,20 +4751,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -6115,20 +4763,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    72
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"72"
                             \hspace
                                 #1
                             }
@@ -6141,20 +4776,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    60
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                         }
                                 }
                             }
@@ -6237,20 +4859,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -6262,20 +4871,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    72
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"72"
                             \hspace
                                 #1
                             }
@@ -6288,20 +4884,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    60
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                         }
                                 }
                             }
@@ -6373,20 +4956,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         c'8.
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    60
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                             \hspace
                                 #1
                             }
@@ -6399,20 +4969,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    90
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"90"
                             \hspace
                                 #1
                             }
@@ -6424,20 +4981,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                         \stopTextSpan
                         - \tweak Y-extent ##f
                         - \tweak bound-details.left.text \markup {
-                            \fontsize
-                                #-6
-                                \general-align
-                                    #Y
-                                    #DOWN
-                                    \note-by-number
-                                        #2
-                                        #0
-                                        #1
-                            \upright
-                                {
-                                    =
-                                    72
-                                }
+                            \abjad-metronome-mark-markup #2 #0 #1 #"72"
                             \hspace
                                 #1
                             }
@@ -6450,20 +4994,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                         #0.5
                                     \line
                                         {
-                                            \fontsize
-                                                #-6
-                                                \general-align
-                                                    #Y
-                                                    #DOWN
-                                                    \note-by-number
-                                                        #2
-                                                        #0
-                                                        #1
-                                            \upright
-                                                {
-                                                    =
-                                                    60
-                                                }
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                         }
                                 }
                             }
@@ -6519,20 +5050,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     c'8.
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {          %! RED:M1
-                        \fontsize                                       %! RED:M1
-                            #-6                                         %! RED:M1
-                            \general-align                              %! RED:M1
-                                #Y                                      %! RED:M1
-                                #DOWN                                   %! RED:M1
-                                \note-by-number                         %! RED:M1
-                                    #2                                  %! RED:M1
-                                    #0                                  %! RED:M1
-                                    #1                                  %! RED:M1
-                        \upright                                        %! RED:M1
-                            {                                           %! RED:M1
-                                =                                       %! RED:M1
-                                60                                      %! RED:M1
-                            }                                           %! RED:M1
+                        \abjad-metronome-mark-markup #2 #0 #1 #"60"     %! RED:M1
                         \hspace                                         %! RED:M1
                             #1                                          %! RED:M1
                         }                                               %! RED:M1
@@ -6545,20 +5063,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                     - \tweak bound-details.left.text \markup {          %! BLUE
-                        \fontsize                                       %! BLUE
-                            #-6                                         %! BLUE
-                            \general-align                              %! BLUE
-                                #Y                                      %! BLUE
-                                #DOWN                                   %! BLUE
-                                \note-by-number                         %! BLUE
-                                    #2                                  %! BLUE
-                                    #0                                  %! BLUE
-                                    #1                                  %! BLUE
-                        \upright                                        %! BLUE
-                            {                                           %! BLUE
-                                =                                       %! BLUE
-                                90                                      %! BLUE
-                            }                                           %! BLUE
+                        \abjad-metronome-mark-markup #2 #0 #1 #"90"     %! BLUE
                         \hspace                                         %! BLUE
                             #1                                          %! BLUE
                         }                                               %! BLUE
@@ -6570,20 +5075,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                     \stopTextSpan
                     - \tweak Y-extent ##f
                 %@% - \tweak bound-details.left.text \markup {          %! YELLOW
-                %@%     \fontsize                                       %! YELLOW
-                %@%         #-6                                         %! YELLOW
-                %@%         \general-align                              %! YELLOW
-                %@%             #Y                                      %! YELLOW
-                %@%             #DOWN                                   %! YELLOW
-                %@%             \note-by-number                         %! YELLOW
-                %@%                 #2                                  %! YELLOW
-                %@%                 #0                                  %! YELLOW
-                %@%                 #1                                  %! YELLOW
-                %@%     \upright                                        %! YELLOW
-                %@%         {                                           %! YELLOW
-                %@%             =                                       %! YELLOW
-                %@%             72                                      %! YELLOW
-                %@%         }                                           %! YELLOW
+                %@%     \abjad-metronome-mark-markup #2 #0 #1 #"72"     %! YELLOW
                 %@%     \hspace                                         %! YELLOW
                 %@%         #1                                          %! YELLOW
                 %@%     }                                               %! YELLOW
@@ -6596,20 +5088,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                     #0.5
                                 \line
                                     {
-                                        \fontsize
-                                            #-6
-                                            \general-align
-                                                #Y
-                                                #DOWN
-                                                \note-by-number
-                                                    #2
-                                                    #0
-                                                    #1
-                                        \upright
-                                            {
-                                                =
-                                                60
-                                            }
+                                        \abjad-metronome-mark-markup #2 #0 #1 #"60"
                                     }
                             }
                         }
