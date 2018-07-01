@@ -962,7 +962,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).ltqrun(-1)
 
                 >>> result
-                Run([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             ..  container:: example expression
 
@@ -970,7 +970,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1065,12 +1065,12 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Run([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-                Run([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Run([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
-                Run([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Run([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
-                Run([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+                Selection([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
+                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
+                Selection([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
+                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             ..  container:: example expression
 
@@ -1078,12 +1078,12 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-                Run([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Run([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
-                Run([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Run([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
-                Run([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+                Selection([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
+                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
+                Selection([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
+                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1215,7 +1215,7 @@ class Selection(abjad.Selection):
         result = result.group_by_pitch()
         result = result.map(baca.group_by_contiguity())
         result = result.flatten(depth=1)
-        result = result.map(abjad.Run)
+        result = result.map(abjad.Selection)
         return result
 
     def ltrun(self, n):
@@ -1246,7 +1246,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).ltrun(-1)
 
                 >>> result
-                Run([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             ..  container:: example expression
 
@@ -1254,7 +1254,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1364,9 +1364,9 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Run([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Run([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Run([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
+                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             ..  container:: example expression
 
@@ -1374,9 +1374,9 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Run([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Run([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
+                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1505,7 +1505,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.logical_ties(pitched=True).group_by_contiguity()
-        return result.map(abjad.Run)
+        return result.map(abjad.Selection)
 
     def lts(self):
         r"""
@@ -1737,7 +1737,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).ntrun(-1)
 
                 >>> result
-                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -1745,7 +1745,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1855,9 +1855,9 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Run([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Run([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -1865,9 +1865,9 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Run([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3407,7 +3407,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).qrun(-1)
 
                 >>> result
-                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -3415,7 +3415,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3510,12 +3510,12 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Run([Note("c'16"), Note("c'16"), Note("c'16")])
-                Run([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Run([Note("d'16"), Note("d'16"), Note("d'16")])
-                Run([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Run([Note("e'16"), Note("e'16"), Note("e'16")])
-                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("c'16"), Note("c'16"), Note("c'16")])
+                Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16")])
+                Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16")])
+                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -3523,12 +3523,12 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([Note("c'16"), Note("c'16"), Note("c'16")])
-                Run([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Run([Note("d'16"), Note("d'16"), Note("d'16")])
-                Run([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Run([Note("e'16"), Note("e'16"), Note("e'16")])
-                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("c'16"), Note("c'16"), Note("c'16")])
+                Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16")])
+                Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16")])
+                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3660,7 +3660,7 @@ class Selection(abjad.Selection):
         result = result.group_by_pitch()
         result = result.map(baca.group_by_contiguity())
         result = result.flatten(depth=1)
-        result = result.map(abjad.Run)
+        result = result.map(abjad.Selection)
         return result
 
     def rleaf(self, n=0):
@@ -4011,7 +4011,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).rrun(1)
 
                 >>> result
-                Run([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
             ..  container:: example expression
 
@@ -4019,7 +4019,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4131,9 +4131,9 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Run([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
-                Run([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -4141,9 +4141,9 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Run([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
-                Run([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-                Run([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
+                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4276,7 +4276,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.runs().map(baca.with_next_leaf())
-        return result.map(abjad.Run)
+        return result.map(abjad.Selection)
 
     def skip(self, n):
         r"""
