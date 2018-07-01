@@ -773,6 +773,35 @@ baca_slap_tongue_note_head =
 
 %%% SPANNERS: METRONOME MARK SPANNER SEGMENTS %%%
 
+baca_dashed_arrow = #(
+    define-music-function (parser location grob) (ly:music?)
+    #{
+    - \tweak arrow-width 0.25
+    - \tweak dash-fraction 0.25
+    - \tweak dash-period 1.5
+    - \tweak bound-details.left.stencil-align-dir-y #center
+    - \tweak bound-details.right.arrow ##t
+    - \tweak bound-details.right-broken.arrow ##f
+    - \tweak bound-details.right-broken.padding 0
+    - \tweak bound-details.right-broken.text ##f
+    - \tweak bound-details.right.padding 0.5
+    - \tweak bound-details.right.stencil-align-dir-y #center
+    $grob
+    #})
+
+baca_dashed_line_segment = #(
+    define-music-function (parser location grob) (ly:music?)
+    #{
+    - \tweak dash-fraction 0.25
+    - \tweak dash-period 1.5
+    - \tweak bound-details.left.stencil-align-dir-y #center
+    - \tweak bound-details.right-broken.padding 0
+    - \tweak bound-details.right-broken.text ##f
+    - \tweak bound-details.right.padding 1.5
+    - \tweak bound-details.right.stencil-align-dir-y #center
+    $grob
+    #})
+
 % NOTE: only right padding differs to abjad_start_text_span_invisible
 % TODO: maybe possible to call abjad_start_text_span_invisible first?
 baca_invisible_line_segment = #(

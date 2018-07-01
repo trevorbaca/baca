@@ -5729,16 +5729,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                     }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                 }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak arrow-width 0.25                                                    %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-fraction 0.25                                                  %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-period 1.5                                                     %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.stencil-align-dir-y #center                      %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.arrow ##t                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.arrow ##f                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.padding 0                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.text ##f                                 %! SM29:METRONOME_MARK_SPANNER
+                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.stencil-align-dir-y #center                     %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
@@ -5852,16 +5844,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                     }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                 }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak arrow-width 0.25                                                    %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-fraction 0.25                                                  %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-period 1.5                                                     %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.stencil-align-dir-y #center                      %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.arrow ##t                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.arrow ##f                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.padding 0                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.text ##f                                 %! SM29:METRONOME_MARK_SPANNER
+                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.stencil-align-dir-y #center                     %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
@@ -5977,16 +5961,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #1                                                           %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
                                     }                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
                                 }                                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak arrow-width 0.25                                                    %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-fraction 0.25                                                  %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-period 1.5                                                     %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.stencil-align-dir-y #center                      %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.arrow ##t                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.arrow ##f                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.padding 0                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.text ##f                                 %! SM29:METRONOME_MARK_SPANNER
+                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.stencil-align-dir-y #center                     %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
@@ -6091,16 +6067,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                     }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                 }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak arrow-width 0.25                                                    %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-fraction 0.25                                                  %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-period 1.5                                                     %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.stencil-align-dir-y #center                      %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.arrow ##t                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.arrow ##f                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.padding 0                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.text ##f                                 %! SM29:METRONOME_MARK_SPANNER
+                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.stencil-align-dir-y #center                     %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
@@ -6129,16 +6097,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #1                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                     }                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                 }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak arrow-width 0.25                                                    %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-fraction 0.25                                                  %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-period 1.5                                                     %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.stencil-align-dir-y #center                      %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.arrow ##t                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.arrow ##f                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.padding 0                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.text ##f                                 %! SM29:METRONOME_MARK_SPANNER
+                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.stencil-align-dir-y #center                     %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
@@ -6255,16 +6215,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #1                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                     }                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
                                 }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak arrow-width 0.25                                                    %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-fraction 0.25                                                  %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak dash-period 1.5                                                     %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.stencil-align-dir-y #center                      %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.arrow ##t                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.arrow ##f                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.padding 0                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right-broken.text ##f                                 %! SM29:METRONOME_MARK_SPANNER
+                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.stencil-align-dir-y #center                     %! SM29:METRONOME_MARK_SPANNER
                             - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
