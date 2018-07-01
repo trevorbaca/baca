@@ -771,7 +771,15 @@ baca_slap_tongue_note_head =
   \revert NoteHead #'extra-offset
 #})
 
-%%% SPANNERS: METRONOME MARK SPANNER SEGMENTS %%%
+%%% TEXT SPANNERS: COMMANDS %%%
+
+bacaStartTextSpanBCP =
+#(make-music 'TextSpanEvent 'span-direction START 'spanner-id "BCP")
+
+bacaStopTextSpanBCP =
+#(make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BCP")
+
+%%% TEXT SPANNERS: TWEAKS %%%
 
 baca_dashed_arrow = #(
     define-music-function (parser location grob) (ly:music?)

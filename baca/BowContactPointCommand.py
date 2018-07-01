@@ -20,9 +20,9 @@ class BowContactPointCommand(Command):
         '_tweaks',
         )
 
-    start_command = r'\startBCPTextSpan'
+    start_command = r'\bacaStartTextSpanBCP'
 
-    stop_command = r'\stopBCPTextSpan'
+    stop_command = r'\bacaStopTextSpanBCP'
 
     ### INITIALIZER ###
 
@@ -239,11 +239,11 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
                                 -\upbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -264,11 +264,11 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
                                 -\downbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -289,12 +289,12 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
                                 -\upbow
                                 ]
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -315,12 +315,12 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 e'8
                                 -\downbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 [
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
@@ -342,11 +342,11 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
                                 -\upbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -367,12 +367,12 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
                                 -\downbow
                                 ]
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -393,12 +393,12 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 f'8
                                 -\downbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 [
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
@@ -420,11 +420,11 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
                                 -\upbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -445,11 +445,11 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
                                 -\downbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -470,12 +470,12 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
                                 -\upbow
                                 ]
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -496,12 +496,12 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 f'8
                                 -\downbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 [
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
@@ -523,11 +523,11 @@ class BowContactPointCommand(Command):
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
                                 -\upbow
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                                 - \tweak Y-extent ##f
                                 - \tweak bound-details.left.text \markup {
                                     \concat
@@ -558,12 +558,12 @@ class BowContactPointCommand(Command):
                                         }
                                     }
                                 - \tweak staff-padding #5
-                                \startBCPTextSpan
+                                \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
                                 -\downbow
                                 ]
-                                \stopBCPTextSpan
+                                \bacaStopTextSpanBCP
                 <BLANKLINE>
                             }
                         }
