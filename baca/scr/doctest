@@ -8,7 +8,11 @@ import io
 import os
 import pathlib
 import sys
-from abjadext import tonality
+try:
+    from abjadext import tonality
+except ImportError:
+    # ignore when running this script against scores on Travis
+    pass
 
 
 _colors = {
