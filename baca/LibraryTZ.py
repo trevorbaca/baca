@@ -1315,7 +1315,7 @@ class LibraryTZ(abjad.AbjadObject):
         lilypond_id: int = None,
         no_upright: bool = None,
         right_padding: typing.Optional[typings.Number] = 1.25,
-        selector: typings.Selector = 'baca.leaves()',
+        selector: typings.Selector = 'baca.tleaves()',
         ) -> TextSpannerCommand:
         r"""
         Makes text spanner command.
@@ -2667,7 +2667,7 @@ class LibraryTZ(abjad.AbjadObject):
         do_not_bookend: bool = False,
         lilypond_id: int = None,
         no_upright: bool = None,
-        piece_selector: typings.Selector = 'baca.leaves().group()',
+        piece_selector: typings.Selector = 'baca.group()',
         selector: typings.Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None
         ) -> PiecewiseSpannerCommand:
@@ -2865,7 +2865,7 @@ class LibraryTZ(abjad.AbjadObject):
                                                 #0.25                                                    %! PSC1
                                         }                                                                %! PSC1
                                     }                                                                    %! PSC1
-                                - \abjad_invisible_line_segment                                       %! PSC1
+                                - \abjad_invisible_line                                       %! PSC1
                                 \startTextSpan                                                           %! PSC1
                 <BLANKLINE>
                                 e'8
@@ -3096,6 +3096,58 @@ class LibraryTZ(abjad.AbjadObject):
             bookend=not(do_not_bookend),
             selector=selector,
             )
+
+#    def new_transition(
+#        dynamics: typing.Union[str, typing.List],
+#        *,
+#        bookend: typing.Union[bool, int] = -1,
+#        final_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
+#        left_broken: bool = None,
+#        piece_selector: typings.Selector = 'baca.group()',
+#        right_broken: bool = None,
+#        selector: typings.Selector = 'baca.tleaves()'
+#        ) -> PiecewiseIndicatorCommand:
+#        r"""
+#        """
+#        if isinstance(dynamics, str):
+#            bundles = parse_descriptor(dynamics)
+#        else:
+#            bundles = dynamics
+#        for item in bundles:
+#            assert isinstance(item, IndicatorBundle), repr(dynamic)
+#        final_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
+#        if isinstance(final_hairpin, bool):
+#            final_hairpin_ = final_hairpin
+#        elif isinstance(final_hairpin, str):
+#            final_hairpin_ = abjad.DynamicTrend(final_hairpin)
+#        if left_broken is not None:
+#            left_broken = bool(left_broken)
+#        if left_broken is True:
+#            bundle = bundles[0]
+#            assert bundle.spanner_start_only()
+#            dynamic_trend = abjad.new(bundle.spanner_start, left_broken=True)
+#            bundle = IndicatorBundle(dynamic_trend)
+#            bundles[0] = bundle
+#        right_broken_: typing.Any = False
+#        if bool(right_broken) is True:
+#            right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
+#        if piece_selector is None:
+#            if isinstance(selector, str):
+#                selector_ = eval(selector)
+#            else:
+#                selector_ = selector
+#            assert isinstance(selector_, abjad.Expression)
+#            piece_selector_ = selector_.group()
+#        else:
+#            piece_selector_ = piece_selector
+#        return PiecewiseIndicatorCommand(
+#            bookend=bookend,
+#            bundles=bundles,
+#            last_piece_spanner=final_hairpin_,
+#            piece_selector=piece_selector_,
+#            right_broken=right_broken_,
+#            selector=selector,
+#            )
 
     @staticmethod
     def tremolo_down(
