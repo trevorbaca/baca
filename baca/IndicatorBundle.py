@@ -12,6 +12,7 @@ class IndicatorBundle(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_bookended_spanner_start',
         '_enchained',
         '_indicator',
         '_spanner_start',
@@ -25,6 +26,7 @@ class IndicatorBundle(abjad.AbjadObject):
     def __init__(
         self,
         *arguments: typing.Any,
+        bookended_spanner_start: typing.Any = None,
         enchained: bool = None,
         ) -> None:
         assert len(arguments) <= 3, repr(arguments)
@@ -40,6 +42,7 @@ class IndicatorBundle(abjad.AbjadObject):
                 self._spanner_stop = argument
             else:
                 self._indicator = argument
+        self._bookended_spanner_start = bookended_spanner_start
         if enchained is not None:
             enchained = bool(enchained)
         self._enchained = enchained
@@ -67,6 +70,13 @@ class IndicatorBundle(abjad.AbjadObject):
         return f'{class_}({string})'
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def bookended_spanner_start(self) -> typing.Optional[typing.Any]:
+        """
+        Gets bookended start text span indicator.
+        """
+        return self._bookended_spanner_start
 
     @property
     def enchained(self) -> typing.Optional[bool]:
@@ -160,7 +170,13 @@ class IndicatorBundle(abjad.AbjadObject):
         """
         if indicator is None:
             return type(self)(self.spanner_start)
-        return type(self)(indicator, self.spanner_start)
+        return type(self)(
+            self.spanner_stop,
+            indicator,
+            self.spanner_start,
+            bookended_spanner_start=self.bookended_spanner_start,
+            enchained=self.enchained,
+            )
 
     def with_spanner_start(self, spanner_start) -> 'IndicatorBundle':
         """
@@ -198,7 +214,13 @@ class IndicatorBundle(abjad.AbjadObject):
         if (spanner_start is not None and
             getattr(spanner_start, 'spanner_start', False) is not True):
             raise Exception(spanner_start)
-        return type(self)(self.spanner_stop, self.indicator, spanner_start)
+        return type(self)(
+            self.spanner_stop,
+            self.indicator,
+            spanner_start,
+            bookended_spanner_start=self.bookended_spanner_start,
+            enchained=self.enchained,
+            )
 
     def with_spanner_stop(self, spanner_stop) -> 'IndicatorBundle':
         """
@@ -221,4 +243,10 @@ class IndicatorBundle(abjad.AbjadObject):
         if (spanner_stop is not None and
             getattr(spanner_stop, 'spanner_stop', False) is not True):
             raise Exception(spanner_stop)
-        return type(self)(spanner_stop, self.indicator, self.spanner_start)
+        return type(self)(
+            spanner_stop,
+            self.indicator,
+            self.spanner_start,
+            bookended_spanner_start=self.bookended_spanner_start,
+            enchained=self.enchained,
+            )

@@ -116,6 +116,10 @@ class PiecewiseIndicatorCommand(Command):
             if is_final_piece and self.right_broken:
                 should_bookend = False
             bundle = self.bundles[i]
+            if should_bookend and bundle.bookended_spanner_start:
+                bundle = bundle.with_spanner_start(
+                    bundle.bookended_spanner_start
+                    )
             if len(piece) == 1 and bundle.compound():
                 bundle = bundle.with_spanner_start(None)
             if is_final_piece and bundle.compound():
@@ -131,11 +135,13 @@ class PiecewiseIndicatorCommand(Command):
                 tag='PIC',
                 )
             if should_bookend:
-                bundle = self.bundles[i + 1]
-                if bundle.compound():
-                    bundle = bundle.with_spanner_start(None)
+                next_bundle = self.bundles[i + 1]
+                if bundle.bookended_spanner_start is not None:
+                    next_bundle = next_bundle.with_spanner_start(None)
+                if next_bundle.compound():
+                    next_bundle = next_bundle.with_spanner_start(None)
                 self._attach_indicators(
-                    bundle,
+                    next_bundle,
                     stop_leaf,
                     tag='PIC',
                     )

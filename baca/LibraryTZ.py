@@ -3091,6 +3091,7 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
+    @staticmethod
     def new_text_spanner(
         *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
         bookend: typing.Union[bool, int] = -1,
@@ -3103,12 +3104,10 @@ class LibraryTZ(abjad.AbjadObject):
         selector: typings.Selector = 'baca.tleaves()'
         ) -> PiecewiseIndicatorCommand:
         r"""
-        Attaches start and stop text spanner commands.
+        Attaches text span indicators.
 
         ..  container:: example
 
-            Without bookend:
-            
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 12)),
@@ -3132,7 +3131,115 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> # abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_dashed_line_with_arrow                                          %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        ord.                                                             %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
 
         """
         bundles = []
@@ -3140,27 +3247,43 @@ class LibraryTZ(abjad.AbjadObject):
             raise NotImplementedError('implement lone item')
         shape_to_style = abjad.StartTextSpan._shape_to_style
         stop_text_span = abjad.StopTextSpan(lilypond_id=lilypond_id)
-        for left, right in abjad.sequence(items).nwise():
-            if left in shape_to_style:
+        items = abjad.CyclicTuple(items)
+        for i, item in enumerate(items):
+            if item in shape_to_style:
                 continue
-            if isinstance(left, str):
-                left_markup = abjad.Markup(left)
+            if isinstance(item, str):
+                item_markup = abjad.Markup(item)
             else:
-                left_markup = left
-            assert isinstance(left_markup, abjad.Markup)
+                item_markup = item
+            assert isinstance(item_markup, abjad.Markup)
             if not no_upright:
-                left_markup = left_markup.upright()
+                item_markup = item_markup.upright()
             style = None
-            if right in shape_to_style:
-                style = shape_to_style[right]
+            if items[i + 1] in shape_to_style:
+                style = shape_to_style[items[i + 1]]
+                right_text = items[i + 2]
+            else:
+                right_text = items[i + 1]
+            if isinstance(right_text, str):
+                right_markup = abjad.Markup(right_text)
+            else:
+                assert isinstance(right_text, abjad.Markup)
+                right_markup = right_text
+            if not no_upright:
+                right_markup = right_markup.upright()
             start_text_span = abjad.StartTextSpan(
-                left_text=left_markup,
+                left_text=item_markup,
                 lilypond_id=lilypond_id,
                 style=style,
+                )
+            bookended_spanner_start = abjad.new(
+                start_text_span,
+                right_text=right_markup,
                 )
             bundle = IndicatorBundle(
                 stop_text_span,
                 start_text_span,
+                bookended_spanner_start=bookended_spanner_start,
                 enchained=True,
                 )
             bundles.append(bundle)

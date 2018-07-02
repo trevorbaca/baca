@@ -18,10 +18,6 @@ LibraryTZ
       :nosignatures:
 
       new_text_spanner
-
-   .. autosummary::
-      :nosignatures:
-
       tenuto
       text_script_color
       text_script_down
@@ -90,17 +86,10 @@ LibraryTZ
 
       <hr/>
 
-   .. rubric:: Methods
+   .. rubric:: Class & static methods
       :class: class-header
 
    .. automethod:: LibraryTZ.new_text_spanner
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
 
    .. automethod:: LibraryTZ.tenuto
 

@@ -28,6 +28,7 @@ IndicatorBundle
    .. autosummary::
       :nosignatures:
 
+      bookended_spanner_start
       enchained
       indicator
       indicators
@@ -85,6 +86,8 @@ IndicatorBundle
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: IndicatorBundle.bookended_spanner_start
 
    .. autoattribute:: IndicatorBundle.enchained
 
