@@ -12,8 +12,10 @@ class IndicatorBundle(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_enchained',
         '_indicator',
         '_spanner_start',
+        '_spanner_stop',
         )
 
     _publish_storage_format=True
@@ -23,15 +25,24 @@ class IndicatorBundle(abjad.AbjadObject):
     def __init__(
         self,
         *arguments: typing.Any,
+        enchained: bool = None,
         ) -> None:
-        assert len(arguments) <= 2, repr(arguments)
+        assert len(arguments) <= 3, repr(arguments)
         self._indicator = None
         self._spanner_start = None
+        self._spanner_stop = None
         for argument in arguments:
-            if getattr(argument, 'spanner_start', False) is True:
+            if argument is None:
+                continue
+            elif getattr(argument, 'spanner_start', False) is True:
                 self._spanner_start = argument
+            elif getattr(argument, 'spanner_stop', False) is True:
+                self._spanner_stop = argument
             else:
                 self._indicator = argument
+        if enchained is not None:
+            enchained = bool(enchained)
+        self._enchained = enchained
 
     ### SPECIAL METHODS ###
 
@@ -58,6 +69,13 @@ class IndicatorBundle(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def enchained(self) -> typing.Optional[bool]:
+        """
+        Is true when bundle contributes to enchained spanner.
+        """
+        return self._enchained
+
+    @property
     def indicator(self) -> typing.Optional[typing.Any]:
         """
         Gets indicator.
@@ -70,6 +88,8 @@ class IndicatorBundle(abjad.AbjadObject):
         Gets indicators.
         """
         result: typing.List = []
+        if self.spanner_stop:
+            result.append(self.spanner_stop)
         if self.indicator:
             result.append(self.indicator)
         if self.spanner_start:
@@ -79,9 +99,16 @@ class IndicatorBundle(abjad.AbjadObject):
     @property
     def spanner_start(self) -> typing.Optional[typing.Any]:
         """
-        Gets spanner_start.
+        Gets spanner start.
         """
         return self._spanner_start
+
+    @property
+    def spanner_stop(self) -> typing.Optional[typing.Any]:
+        """
+        Gets spanner stop.
+        """
+        return self._spanner_stop
 
     ### PUBLIC METHODS ###
 
@@ -152,9 +179,46 @@ class IndicatorBundle(abjad.AbjadObject):
             >>> bundle.with_spanner_start(None)
             IndicatorBundle(Dynamic('p'))
 
+        ..  container:: example
+
+            >>> bundle = baca.IndicatorBundle(
+            ...     abjad.StopTextSpan(),
+            ...     abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
+            ...     )
+
+            >>> bundle.with_spanner_start(
+            ...     abjad.StartTextSpan(lilypond_id=1),
+            ...     )
+            IndicatorBundle(StopTextSpan(), StartTextSpan(lilypond_id=1))
+
+            >>> bundle.with_spanner_start(None)
+            IndicatorBundle(StopTextSpan())
+
         """
-        if spanner_start is None:
-            return type(self)(self.indicator)
-        if getattr(spanner_start, 'spanner_start', False) is not True:
+        if (spanner_start is not None and
+            getattr(spanner_start, 'spanner_start', False) is not True):
             raise Exception(spanner_start)
-        return type(self)(self.indicator, spanner_start)
+        return type(self)(self.spanner_stop, self.indicator, spanner_start)
+
+    def with_spanner_stop(self, spanner_stop) -> 'IndicatorBundle':
+        """
+        Makes new bundle with spanner stop.
+
+        ..  container:: example
+
+            >>> bundle = baca.IndicatorBundle(
+            ...     abjad.StopTextSpan(),
+            ...     abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
+            ...     )
+
+            >>> bundle.with_spanner_stop(abjad.StopTextSpan(lilypond_id=1))
+            IndicatorBundle(StopTextSpan(lilypond_id=1), StartTextSpan(left_text=Markup(contents=['pont.'])))
+
+            >>> bundle.with_spanner_stop(None)
+            IndicatorBundle(StartTextSpan(left_text=Markup(contents=['pont.'])))
+
+        """
+        if (spanner_stop is not None and
+            getattr(spanner_stop, 'spanner_stop', False) is not True):
+            raise Exception(spanner_stop)
+        return type(self)(spanner_stop, self.indicator, self.spanner_start)

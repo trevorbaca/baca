@@ -23,13 +23,16 @@ IndicatorBundle
       spanner_start_only
       with_indicator
       with_spanner_start
+      with_spanner_stop
 
    .. autosummary::
       :nosignatures:
 
+      enchained
       indicator
       indicators
       spanner_start
+      spanner_stop
 
    .. autosummary::
       :nosignatures:
@@ -74,6 +77,8 @@ IndicatorBundle
 
    .. automethod:: IndicatorBundle.with_spanner_start
 
+   .. automethod:: IndicatorBundle.with_spanner_stop
+
    .. raw:: html
 
       <hr/>
@@ -81,8 +86,12 @@ IndicatorBundle
    .. rubric:: Read-only properties
       :class: class-header
 
+   .. autoattribute:: IndicatorBundle.enchained
+
    .. autoattribute:: IndicatorBundle.indicator
 
    .. autoattribute:: IndicatorBundle.indicators
 
    .. autoattribute:: IndicatorBundle.spanner_start
+
+   .. autoattribute:: IndicatorBundle.spanner_stop

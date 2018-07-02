@@ -3161,6 +3161,7 @@ class LibraryTZ(abjad.AbjadObject):
             bundle = IndicatorBundle(
                 stop_text_span,
                 start_text_span,
+                enchained=True,
                 )
             bundles.append(bundle)
         last_item = items[-1]
@@ -3180,6 +3181,7 @@ class LibraryTZ(abjad.AbjadObject):
             bundle = IndicatorBundle(
                 stop_text_span,
                 start_text_span,
+                enchained=True,
                 )
             bundles.append(bundle)
         #raise Exception(bundles)

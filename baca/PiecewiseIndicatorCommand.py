@@ -93,6 +93,10 @@ class PiecewiseIndicatorCommand(Command):
         for i, piece in enumerate(pieces):
             start_leaf = baca.select(piece).leaf(0)
             stop_leaf = baca.select(piece).leaf(-1)
+            if i == 0:
+                is_first_piece = True
+            else:
+                is_first_piece = False
             if i == piece_count - 1:
                 is_final_piece = True
             else:
@@ -119,6 +123,8 @@ class PiecewiseIndicatorCommand(Command):
                     bundle = bundle.with_spanner_start(self.final_piece_spanner)
                 elif self.final_piece_spanner is False:
                     bundle = bundle.with_spanner_start(None)
+            if is_first_piece:
+                bundle = bundle.with_spanner_stop(None)
             self._attach_indicators(
                 bundle,
                 start_leaf,
@@ -126,7 +132,6 @@ class PiecewiseIndicatorCommand(Command):
                 )
             if should_bookend:
                 bundle = self.bundles[i + 1]
-                #raise Exception(bundle)
                 if bundle.compound():
                     bundle = bundle.with_spanner_start(None)
                 self._attach_indicators(
