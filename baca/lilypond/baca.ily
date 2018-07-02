@@ -823,3 +823,14 @@ baca_invisible_line_segment = #(
     - \tweak bound-details.right.stencil-align-dir-y #center
     $grob
     #})
+
+%%% SPACING COMMANDS %%%
+
+baca_new_spacing_section = #(define-music-function
+    (parser location n d music) (number? number? ly:music?)
+    #{
+    \set Score.proportionalNotationDuration = #(ly:make-moment n d)
+    \newSpacingSection
+    $music
+    #}
+    )

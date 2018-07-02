@@ -145,15 +145,13 @@ class NestingCommand(Command):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                         \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                         \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/4

@@ -58,8 +58,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -70,8 +69,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -144,8 +142,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -156,8 +153,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -241,8 +237,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -254,8 +249,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -338,8 +332,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -351,8 +344,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -426,8 +418,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -438,14 +429,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -538,8 +527,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -551,8 +539,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -628,15 +615,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -707,16 +692,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -788,16 +771,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -858,15 +839,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -939,16 +918,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1007,15 +984,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1088,16 +1063,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1183,8 +1156,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -1195,8 +1167,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -1251,8 +1222,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1263,8 +1233,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1316,8 +1285,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1328,8 +1296,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1398,8 +1365,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -1410,8 +1376,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -1466,8 +1431,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1478,8 +1442,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1531,8 +1494,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1543,8 +1505,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1624,8 +1585,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -1637,8 +1597,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -1693,8 +1652,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1706,8 +1664,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1759,8 +1716,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1772,8 +1728,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1854,8 +1809,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -1867,8 +1821,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -1923,8 +1876,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -1936,8 +1888,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -1989,8 +1940,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2002,8 +1952,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2082,8 +2031,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -2094,14 +2042,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -2164,8 +2110,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2176,14 +2121,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2243,8 +2186,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2255,14 +2197,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2356,8 +2296,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -2369,8 +2308,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -2425,8 +2363,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2438,8 +2375,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2491,8 +2427,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2504,8 +2439,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2606,8 +2540,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -2618,8 +2551,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -2684,8 +2616,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2696,8 +2627,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2759,8 +2689,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2771,8 +2700,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -2851,8 +2779,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -2863,8 +2790,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -2929,8 +2855,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -2941,8 +2866,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3004,8 +2928,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3016,8 +2939,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3107,8 +3029,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -3120,8 +3041,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -3186,8 +3106,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3199,8 +3118,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3262,8 +3180,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3275,8 +3192,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3367,8 +3283,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -3380,8 +3295,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -3446,8 +3360,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3459,8 +3372,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3522,8 +3434,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3535,8 +3446,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3625,8 +3535,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -3637,14 +3546,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -3727,8 +3634,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3739,14 +3645,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3826,8 +3730,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -3838,14 +3741,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -3959,8 +3860,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -3972,8 +3872,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -4038,8 +3937,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -4051,8 +3949,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -4114,8 +4011,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
@@ -4127,8 +4023,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM4
-                            \newSpacingSection                                               %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
@@ -4226,8 +4121,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -4238,8 +4132,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
                             #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
@@ -4247,8 +4140,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -4360,8 +4252,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -4391,8 +4282,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -4469,8 +4359,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
@@ -4502,8 +4391,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -4582,8 +4470,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
@@ -4615,8 +4502,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -4683,8 +4569,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -4738,8 +4623,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -4816,8 +4700,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
@@ -4849,8 +4732,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -4920,15 +4802,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5048,16 +4928,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5122,15 +5000,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5210,16 +5086,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5288,15 +5162,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5369,16 +5241,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5452,16 +5322,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5524,15 +5392,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5609,16 +5475,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5700,8 +5564,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -5735,8 +5598,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -5813,8 +5675,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
@@ -5850,8 +5711,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -5930,8 +5790,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
@@ -5967,8 +5826,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -6038,8 +5896,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
@@ -6073,8 +5930,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -6103,8 +5959,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
@@ -6184,8 +6039,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
@@ -6221,8 +6075,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! HSS1:SPACING
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER

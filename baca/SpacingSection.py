@@ -16,8 +16,7 @@ class SpacingSection(abjad.AbjadObject):
             >>> abjad.f(staff)
             \new Staff
             {
-                \newSpacingSection
-                \set Score.proportionalNotationDuration = #(ly:make-moment 2 24)
+                \baca_new_spacing_section #2 #24
                 c'4
                 d'4
                 e'4
@@ -114,10 +113,13 @@ class SpacingSection(abjad.AbjadObject):
 
     def _get_lilypond_format_bundle(self, leaf=None):
         bundle = abjad.LilyPondFormatBundle()
-        moment = abjad.SchemeMoment(self.duration)
-        strings = [r'\newSpacingSection']
-        strings.append(rf'\set Score.proportionalNotationDuration = {moment}')
-        bundle.before.commands.extend(strings)
+        #moment = abjad.SchemeMoment(self.duration)
+        #strings = [r'\newSpacingSection']
+        #strings.append(rf'\set Score.proportionalNotationDuration = {moment}')
+        #bundle.before.commands.extend(strings)
+        numerator, denominator = self.duration.pair
+        string = rf'\baca_new_spacing_section #{numerator} #{denominator}'
+        bundle.before.commands.append(string)
         return bundle
 
     ### PUBLIC PROPERTIES ###

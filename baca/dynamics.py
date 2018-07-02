@@ -365,7 +365,7 @@ def dynamic(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     spacing=baca.minimum_duration((1, 13)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -393,29 +393,25 @@ def dynamic(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -515,29 +511,25 @@ def dynamic(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -663,29 +655,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -785,29 +773,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -827,7 +811,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \baca_effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak to-barline ##t                                                  %! PIC
                             - \tweak circled-tip ##t                                                 %! PIC
                             \>                                                                       %! PIC
@@ -909,29 +893,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -991,7 +971,7 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \baca_effort_ff                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1032,29 +1012,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1074,7 +1050,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \baca_effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak stencil #constante-hairpin                                      %! PIC
                             \<                                                                       %! PIC
                             [
@@ -1162,29 +1138,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1204,7 +1176,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \baca_effort_mp                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_mp                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak stencil #abjad-flared-hairpin                                   %! PIC
                             \<                                                                       %! PIC
                             [
@@ -1224,13 +1196,13 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
-                            \baca_effort_f                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_f                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \baca_effort_mf                                                               %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
                             - \tweak stencil #abjad-flared-hairpin                                   %! PIC
                             \>                                                                       %! PIC
                             [
@@ -1250,7 +1222,7 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
-                            \baca_effort_p                                                                %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1294,29 +1266,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1422,29 +1390,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1555,29 +1519,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1690,29 +1650,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1829,29 +1785,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
@@ -1951,29 +1903,25 @@ def hairpin(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
-                        \newSpacingSection                                                           %! HSS1:SPACING
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
