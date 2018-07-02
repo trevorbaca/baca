@@ -2625,20 +2625,11 @@ def hairpin(
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
-    if piece_selector is None:
-        if isinstance(selector, str):
-            selector_ = eval(selector)
-        else:
-            selector_ = selector
-        assert isinstance(selector_, abjad.Expression)
-        piece_selector_ = selector_.group()
-    else:
-        piece_selector_ = piece_selector
     return PiecewiseIndicatorCommand(
         bookend=bookend,
         bundles=bundles,
-        last_piece_spanner=final_hairpin_,
-        piece_selector=piece_selector_,
+        final_piece_spanner=final_hairpin_,
+        piece_selector=piece_selector,
         right_broken=right_broken_,
         selector=selector,
         )

@@ -19,8 +19,8 @@ class PiecewiseIndicatorCommand(Command):
     __slots__ = (
         '_bookend',
         '_bundles',
+        '_final_piece_spanner',
         '_forbid_spanner_start',
-        '_last_piece_spanner',
         '_piece_selector',
         '_right_broken',
         '_selector',
@@ -34,7 +34,7 @@ class PiecewiseIndicatorCommand(Command):
         bookend: typing.Union[bool, int] = None,
         bundles: typing.List[IndicatorBundle] = None,
         forbid_spanner_start: typing.Union[bool, int] = None,
-        last_piece_spanner: typing.Any = None,
+        final_piece_spanner: typing.Any = None,
         piece_selector: typings.Selector = 'baca.leaves()',
         right_broken: typing.Any = None,
         selector: typings.Selector = 'baca.leaves()',
@@ -50,9 +50,9 @@ class PiecewiseIndicatorCommand(Command):
         if bundles is not None:
             bundles_ = abjad.CyclicTuple(bundles)
         self._bundles = bundles_
-        if last_piece_spanner not in (None, False):
-            assert getattr(last_piece_spanner, 'spanner_start', False)
-        self._last_piece_spanner = last_piece_spanner
+        if final_piece_spanner not in (None, False):
+            assert getattr(final_piece_spanner, 'spanner_start', False)
+        self._final_piece_spanner = final_piece_spanner
         if isinstance(piece_selector, str):
             piece_selector = eval(piece_selector)
         if piece_selector is not None:
@@ -94,10 +94,10 @@ class PiecewiseIndicatorCommand(Command):
             start_leaf = baca.select(piece).leaf(0)
             stop_leaf = baca.select(piece).leaf(-1)
             if i == piece_count - 1:
-                is_last_piece = True
+                is_final_piece = True
             else:
-                is_last_piece = False
-            if is_last_piece and self.right_broken:
+                is_final_piece = False
+            if is_final_piece and self.right_broken:
                 bundle = IndicatorBundle(self.right_broken)
                 self._attach_indicators(
                     bundle,
@@ -109,15 +109,15 @@ class PiecewiseIndicatorCommand(Command):
                 should_bookend = True
             else:
                 should_bookend = False
-            if is_last_piece and self.right_broken:
+            if is_final_piece and self.right_broken:
                 should_bookend = False
             bundle = self.bundles[i]
             if len(piece) == 1 and bundle.compound():
                 bundle = bundle.with_spanner_start(None)
-            if is_last_piece and bundle.compound():
-                if self.last_piece_spanner:
-                    bundle = bundle.with_spanner_start(self.last_piece_spanner)
-                elif self.last_piece_spanner is False:
+            if is_final_piece and bundle.compound():
+                if self.final_piece_spanner:
+                    bundle = bundle.with_spanner_start(self.final_piece_spanner)
+                elif self.final_piece_spanner is False:
                     bundle = bundle.with_spanner_start(None)
             self._attach_indicators(
                 bundle,
@@ -126,6 +126,7 @@ class PiecewiseIndicatorCommand(Command):
                 )
             if should_bookend:
                 bundle = self.bundles[i + 1]
+                #raise Exception(bundle)
                 if bundle.compound():
                     bundle = bundle.with_spanner_start(None)
                 self._attach_indicators(
@@ -190,18 +191,18 @@ class PiecewiseIndicatorCommand(Command):
         return self._bundles
 
     @property
+    def final_piece_spanner(self) -> typing.Optional[typing.Any]:
+        """
+        Gets last piece spanner start.
+        """
+        return self._final_piece_spanner
+
+    @property
     def forbid_spanner_start(self) -> typing.Optional[typing.Union[bool, int]]:
         """
         Gets forbid-spanner-start token.
         """
         return self._forbid_spanner_start
-
-    @property
-    def last_piece_spanner(self) -> typing.Optional[typing.Any]:
-        """
-        Gets last piece spanner start.
-        """
-        return self._last_piece_spanner
 
     @property
     def piece_selector(self) -> typing.Optional[abjad.Expression]:

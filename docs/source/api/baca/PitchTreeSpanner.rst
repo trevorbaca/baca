@@ -17,7 +17,6 @@ PitchTreeSpanner
    .. autosummary::
       :nosignatures:
 
-      foo
       level
 
    .. raw:: html
@@ -84,8 +83,6 @@ PitchTreeSpanner
 
    .. rubric:: Read-only properties
       :class: class-header
-
-   .. autoattribute:: PitchTreeSpanner.foo
 
    .. container:: inherited
 

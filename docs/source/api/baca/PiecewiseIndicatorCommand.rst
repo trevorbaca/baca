@@ -19,8 +19,8 @@ PiecewiseIndicatorCommand
 
       bookend
       bundles
+      final_piece_spanner
       forbid_spanner_start
-      last_piece_spanner
       piece_selector
       right_broken
       selector
@@ -88,9 +88,9 @@ PiecewiseIndicatorCommand
 
       .. autoattribute:: PiecewiseIndicatorCommand.deactivate
 
-   .. autoattribute:: PiecewiseIndicatorCommand.forbid_spanner_start
+   .. autoattribute:: PiecewiseIndicatorCommand.final_piece_spanner
 
-   .. autoattribute:: PiecewiseIndicatorCommand.last_piece_spanner
+   .. autoattribute:: PiecewiseIndicatorCommand.forbid_spanner_start
 
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
 

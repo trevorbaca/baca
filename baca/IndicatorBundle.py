@@ -33,7 +33,6 @@ class IndicatorBundle(abjad.AbjadObject):
             else:
                 self._indicator = argument
 
-
     ### SPECIAL METHODS ###
 
     def __iter__(self) -> typing.Iterator:

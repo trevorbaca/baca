@@ -35,10 +35,3 @@ class PitchTreeSpanner(abjad.Spanner):
         Returns integer.
         """
         return self._level
-
-    @property
-    def foo(self):
-        """
-        Gets foo.
-        """
-        return 'foo'

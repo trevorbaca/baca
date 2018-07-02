@@ -17,6 +17,11 @@ LibraryTZ
    .. autosummary::
       :nosignatures:
 
+      new_text_spanner
+
+   .. autosummary::
+      :nosignatures:
+
       tenuto
       text_script_color
       text_script_down
@@ -80,6 +85,15 @@ LibraryTZ
    .. container:: inherited
 
       .. automethod:: LibraryTZ.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: LibraryTZ.new_text_spanner
 
    .. raw:: html
 

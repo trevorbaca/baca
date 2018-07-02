@@ -9,9 +9,11 @@ from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .Expression import Expression
+from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
 from .OverrideCommand import OverrideCommand
+from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
@@ -3057,7 +3059,7 @@ class LibraryTZ(abjad.AbjadObject):
                 markup_ = Markup(markup)
                 if no_upright is not True:
                     if 'upright' in format(markup_):
-                        raise Exception(f'markup already upright:\n  {markup_}')
+                        raise Exception(f'markup already upright:\n  {markup}')
                     markup_ = markup_.upright()
                 markups_.append(markup_)
             else:
@@ -3089,57 +3091,105 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
-#    def new_transition(
-#        dynamics: typing.Union[str, typing.List],
-#        *,
-#        bookend: typing.Union[bool, int] = -1,
-#        final_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
-#        left_broken: bool = None,
-#        piece_selector: typings.Selector = 'baca.group()',
-#        right_broken: bool = None,
-#        selector: typings.Selector = 'baca.tleaves()'
-#        ) -> PiecewiseIndicatorCommand:
-#        r"""
-#        """
-#        if isinstance(dynamics, str):
-#            bundles = parse_descriptor(dynamics)
-#        else:
-#            bundles = dynamics
-#        for item in bundles:
-#            assert isinstance(item, IndicatorBundle), repr(dynamic)
-#        final_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
-#        if isinstance(final_hairpin, bool):
-#            final_hairpin_ = final_hairpin
-#        elif isinstance(final_hairpin, str):
-#            final_hairpin_ = abjad.DynamicTrend(final_hairpin)
-#        if left_broken is not None:
-#            left_broken = bool(left_broken)
-#        if left_broken is True:
-#            bundle = bundles[0]
-#            assert bundle.spanner_start_only()
-#            dynamic_trend = abjad.new(bundle.spanner_start, left_broken=True)
-#            bundle = IndicatorBundle(dynamic_trend)
-#            bundles[0] = bundle
-#        right_broken_: typing.Any = False
-#        if bool(right_broken) is True:
-#            right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
-#        if piece_selector is None:
-#            if isinstance(selector, str):
-#                selector_ = eval(selector)
-#            else:
-#                selector_ = selector
-#            assert isinstance(selector_, abjad.Expression)
-#            piece_selector_ = selector_.group()
-#        else:
-#            piece_selector_ = piece_selector
-#        return PiecewiseIndicatorCommand(
-#            bookend=bookend,
-#            bundles=bundles,
-#            last_piece_spanner=final_hairpin_,
-#            piece_selector=piece_selector_,
-#            right_broken=right_broken_,
-#            selector=selector,
-#            )
+    def new_text_spanner(
+        *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
+        bookend: typing.Union[bool, int] = -1,
+        final_spanner: str = None,
+        #left_broken: bool = None,
+        lilypond_id: int = None,
+        no_upright: bool = None,
+        piece_selector: typings.Selector = 'baca.group()',
+        #right_broken: bool = None,
+        selector: typings.Selector = 'baca.tleaves()'
+        ) -> PiecewiseIndicatorCommand:
+        r"""
+        Attaches start and stop text spanner commands.
+
+        ..  container:: example
+
+            Without bookend:
+            
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.new_text_spanner(
+            ...         baca.markups.pont(),
+            ...         '=>',
+            ...         baca.markups.ord(),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> # abjad.f(lilypond_file[abjad.Score], strict=89)
+
+        """
+        bundles = []
+        if len(items) == 1:
+            raise NotImplementedError('implement lone item')
+        shape_to_style = abjad.StartTextSpan._shape_to_style
+        stop_text_span = abjad.StopTextSpan(lilypond_id=lilypond_id)
+        for left, right in abjad.sequence(items).nwise():
+            if left in shape_to_style:
+                continue
+            if isinstance(left, str):
+                left_markup = abjad.Markup(left)
+            else:
+                left_markup = left
+            assert isinstance(left_markup, abjad.Markup)
+            if not no_upright:
+                left_markup = left_markup.upright()
+            style = None
+            if right in shape_to_style:
+                style = shape_to_style[right]
+            start_text_span = abjad.StartTextSpan(
+                left_text=left_markup,
+                lilypond_id=lilypond_id,
+                style=style,
+                )
+            bundle = IndicatorBundle(
+                stop_text_span,
+                start_text_span,
+                )
+            bundles.append(bundle)
+        last_item = items[-1]
+        if last_item not in shape_to_style:
+            if isinstance(last_item, str):
+                last_markup = abjad.Markup(last_item)
+            else:
+                assert isinstance(last_item, abjad.Markup)
+                last_markup = last_item
+            if not no_upright:
+                last_markup = last_markup.upright()
+            start_text_span = abjad.StartTextSpan(
+                left_text=last_markup,
+                lilypond_id=lilypond_id,
+                style='invisible_line',
+                )
+            bundle = IndicatorBundle(
+                stop_text_span,
+                start_text_span,
+                )
+            bundles.append(bundle)
+        #raise Exception(bundles)
+        return PiecewiseIndicatorCommand(
+            bookend=bookend,
+            bundles=bundles,
+            final_piece_spanner=final_spanner,
+            piece_selector=piece_selector,
+            selector=selector,
+            )
 
     @staticmethod
     def tremolo_down(

@@ -2012,6 +2012,24 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_last_measure_number(self):
         return self._get_first_measure_number() + self.measure_count - 1
 
+    def _get_lilypond_includes(self):
+        if self.environment == 'docs':
+            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
+                return ['two-voice-staff.ily']
+            else:
+                return ['string-trio.ily']
+        elif self.environment == 'external':
+            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
+                return [self._absolute_two_voice_staff_stylesheet_path]
+            else:
+                return [self._absolute_string_trio_stylesheet_path]
+        includes = []
+        includes.append(self._score_package_stylesheet_path)
+        if (not self.first_segment or
+            self.nonfirst_segment_lilypond_include):
+            includes.append(self._score_package_nonfirst_segment_path)
+        return includes
+
     def _get_measure_number_tag(self, leaf):
         start_offset = abjad.inspect(leaf).get_timespan().start_offset
         measure_number = self._offset_to_measure_number.get(start_offset)
@@ -2119,24 +2137,6 @@ class SegmentMaker(abjad.SegmentMaker):
         pair = (start_stage, stop_stage)
         start_offset, stop_offset = self._get_stage_offsets(*pair)
         return start_offset, time_signatures
-
-    def _get_lilypond_includes(self):
-        if self.environment == 'docs':
-            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
-                return ['two-voice-staff.ily']
-            else:
-                return ['string-trio.ily']
-        elif self.environment == 'external':
-            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
-                return [self._absolute_two_voice_staff_stylesheet_path]
-            else:
-                return [self._absolute_string_trio_stylesheet_path]
-        includes = []
-        includes.append(self._score_package_stylesheet_path)
-        if (not self.first_segment or
-            self.nonfirst_segment_lilypond_include):
-            includes.append(self._score_package_nonfirst_segment_path)
-        return includes
 
     @staticmethod
     def _get_tag(status, stem, prefix=None, suffix=None):
