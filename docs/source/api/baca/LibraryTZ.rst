@@ -18,6 +18,7 @@ LibraryTZ
       :nosignatures:
 
       new_text_spanner
+      new_transition
       tenuto
       text_script_color
       text_script_down
@@ -90,6 +91,8 @@ LibraryTZ
       :class: class-header
 
    .. automethod:: LibraryTZ.new_text_spanner
+
+   .. automethod:: LibraryTZ.new_transition
 
    .. automethod:: LibraryTZ.tenuto
 
