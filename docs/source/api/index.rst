@@ -105,7 +105,6 @@ Bača API
    ~baca.SpannerCommand.SpannerCommand
    ~baca.StaffPositionCommand.StaffPositionCommand
    ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~baca.TextSpannerCommand.TextSpannerCommand
    ~baca.TieCorrectionCommand.TieCorrectionCommand
    ~baca.VoltaCommand.VoltaCommand
 
@@ -388,6 +387,7 @@ Function library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.library.apply_tweaks
    ~baca.library.dashed_arrow
    ~baca.library.dashed_hook
    ~baca.library.lbsd

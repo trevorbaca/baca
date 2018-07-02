@@ -2533,36 +2533,37 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             if isinstance(previous, prototype):
                 continue
+            should_parallelize = False
             spanners = abjad.inspect(previous).get_spanners(abjad.TextSpanner)
-            if not spanners:
-                continue
-            already_parallelized = False
             for spanner in spanners:
-                if not getattr(spanner, 'leak', False):
-                    continue
-                if already_parallelized:
-                    continue
-                parentage = abjad.inspect(previous).get_parentage()
-                voice = parentage.get_first(abjad.Voice)
-                multiplier = abjad.inspect(mmrest).get_indicator(
-                    abjad.Multiplier,
+                if getattr(spanner, 'leak', False) is True:
+                    should_parallelize = True
+            for indicator in abjad.inspect(previous).get_indicators(
+                abjad.StopTextSpan):
+                if indicator.leak is True:
+                    should_parallelize = True
+            if not should_parallelize:
+                continue
+            parentage = abjad.inspect(previous).get_parentage()
+            voice = parentage.get_first(abjad.Voice)
+            multiplier = abjad.inspect(mmrest).get_indicator(
+                abjad.Multiplier,
+                )
+            before = abjad.LilyPondLiteral(
+                [
+                    rf'\voices "{voice.name}", "MultimeasureRestVoice"',
+                    '<<',
+                    r'    \tweak NoteHead.no-ledgers ##t',
+                    r'    \tweak NoteHead.transparent ##t',
+                    r'    \tweak Dots.transparent ##t',
+                    rf"    c'1 * {multiplier!s}",
+                    r'\\',
+                    ],
+                    'before',
                     )
-                before = abjad.LilyPondLiteral(
-                    [
-                        rf'\voices "{voice.name}", "MultimeasureRestVoice"',
-                        '<<',
-                        r'    \tweak NoteHead.no-ledgers ##t',
-                        r'    \tweak NoteHead.transparent ##t',
-                        r'    \tweak Dots.transparent ##t',
-                        rf"    c'1 * {multiplier!s}",
-                        r'\\',
-                        ],
-                        'before',
-                        )
-                abjad.attach(before, mmrest)
-                after = abjad.LilyPondLiteral('>>', 'after')
-                abjad.attach(after, mmrest)
-                already_parallelized = True
+            abjad.attach(before, mmrest)
+            after = abjad.LilyPondLiteral('>>', 'after')
+            abjad.attach(after, mmrest)
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()

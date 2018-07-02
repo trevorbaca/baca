@@ -115,7 +115,6 @@ from .StaffPositionInterpolationCommand import \
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SystemSpecifier import SystemSpecifier
-from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups
 from .TimeSignatureMaker import TimeSignatureMaker

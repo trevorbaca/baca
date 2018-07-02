@@ -15,7 +15,6 @@ from .OverrideCommand import OverrideCommand
 from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
-from .TextSpannerCommand import TextSpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .VoltaCommand import VoltaCommand
 
@@ -1311,12 +1310,11 @@ class LibraryTZ(abjad.AbjadObject):
         text: typing.Union[str, abjad.Markup],
         *tweaks: abjad.LilyPondTweakManager,
         leak: bool = None,
-        line_segment: abjad.LineSegment = None,
         lilypond_id: int = None,
         no_upright: bool = None,
         right_padding: typing.Optional[typings.Number] = 1.25,
         selector: typings.Selector = 'baca.tleaves()',
-        ) -> TextSpannerCommand:
+        ) -> Suite:
         r"""
         Makes text spanner command.
 
@@ -1399,55 +1397,33 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 e'8
+                                - \abjad_dashed_line_with_hook                                           %! IC
+                                - \tweak bound-details.left.text \markup {                               %! IC
+                                    \concat                                                              %! IC
+                                        {                                                                %! IC
+                                            \upright                                                     %! IC
+                                                "1/2 clt"                                                %! IC
+                                            \hspace                                                      %! IC
+                                                #0.5                                                     %! IC
+                                        }                                                                %! IC
+                                    }                                                                    %! IC
+                                - \tweak bound-details.right.padding 1.25                                %! IC
+                                - \tweak staff-padding #4                                                %! IC
+                                \startTextSpan                                                           %! IC
+                                - \abjad_dashed_line_with_hook                                           %! IC
+                                - \tweak bound-details.left.text \markup {                               %! IC
+                                    \concat                                                              %! IC
+                                        {                                                                %! IC
+                                            \upright                                                     %! IC
+                                                damp                                                     %! IC
+                                            \hspace                                                      %! IC
+                                                #0.5                                                     %! IC
+                                        }                                                                %! IC
+                                    }                                                                    %! IC
+                                - \tweak bound-details.right.padding 1.25                                %! IC
+                                - \tweak staff-padding #6.5                                              %! IC
+                                \startTextSpanOne                                                        %! IC
                                 [
-                                - \tweak Y-extent ##f
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                "1/2 clt"
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                - \tweak dash-fraction 0.25
-                                - \tweak dash-period 1.5
-                                - \tweak bound-details.left-broken.text ##f
-                                - \tweak bound-details.left.stencil-align-dir-y 0
-                                - \tweak bound-details.right-broken.arrow ##f
-                                - \tweak bound-details.right-broken.padding 0
-                                - \tweak bound-details.right-broken.text ##f
-                                - \tweak bound-details.right.padding 1.25
-                                - \tweak bound-details.right.text \markup {
-                                    \draw-line
-                                        #'(0 . -1)
-                                    }
-                                - \tweak staff-padding #4
-                                \startTextSpan
-                                - \tweak Y-extent ##f
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                damp
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                - \tweak dash-fraction 0.25
-                                - \tweak dash-period 1.5
-                                - \tweak bound-details.left-broken.text ##f
-                                - \tweak bound-details.left.stencil-align-dir-y 0
-                                - \tweak bound-details.right-broken.arrow ##f
-                                - \tweak bound-details.right-broken.padding 0
-                                - \tweak bound-details.right-broken.text ##f
-                                - \tweak bound-details.right.padding 1.25
-                                - \tweak bound-details.right.text \markup {
-                                    \draw-line
-                                        #'(0 . -1)
-                                    }
-                                - \tweak staff-padding #6.5
-                                \startTextSpanOne
                 <BLANKLINE>
                                 d''8
                 <BLANKLINE>
@@ -1467,7 +1443,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 d''8
-                                \stopTextSpan
+                                \stopTextSpan                                                            %! IC
                                 [
                 <BLANKLINE>
                                 f'8
@@ -1479,7 +1455,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 f''8
-                                \stopTextSpanOne
+                                \stopTextSpanOne                                                         %! IC
                                 [
                 <BLANKLINE>
                                 e'8
@@ -1495,10 +1471,6 @@ class LibraryTZ(abjad.AbjadObject):
         """
         if lilypond_id is not None:
             assert lilypond_id in (1, 2, 3), repr(lilypond_id)
-        if line_segment is None:
-            line_segment = library.dashed_hook()
-        if right_padding is not None:
-            line_segment = abjad.new(line_segment, right_padding=right_padding)
         if isinstance(text, abjad.Markup):
             markup = text
         else:
@@ -1509,13 +1481,33 @@ class LibraryTZ(abjad.AbjadObject):
             if 'upright' in string:
                 raise Exception(f'markup already upright:\n  {markup}')
             markup = markup.upright()
-        return TextSpannerCommand(
-            *tweaks,
+        if isinstance(selector, str):
+            selector = eval(selector)
+        assert isinstance(selector, abjad.Expression)
+        start_text_span = abjad.StartTextSpan(
+            left_text=markup,
+            lilypond_id=lilypond_id,
+            right_padding=right_padding,
+            style='dashed_line_with_hook',
+            )
+        library.apply_tweaks(start_text_span, tweaks)
+        selector_ = selector.leaf(0)
+        start_command = IndicatorCommand(
+            indicators=[start_text_span],
+            selector=selector_,
+            )
+        stop_text_span = abjad.StopTextSpan(
             leak=leak,
             lilypond_id=lilypond_id,
-            line_segment=line_segment,
+            )
+        selector = selector.leaf(-1)
+        stop_command = IndicatorCommand(
+            indicators=[stop_text_span],
             selector=selector,
-            text=markup,
+            )
+        return library.suite(
+            start_command,
+            stop_command,
             )
 
     @staticmethod

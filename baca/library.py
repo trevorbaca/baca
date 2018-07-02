@@ -19,6 +19,18 @@ from .Sequence import Sequence
 from .TimelineScope import TimelineScope
 
 
+def apply_tweaks(argument, tweaks):
+    """
+    Applies ``tweaks`` to ``argument``.
+    """
+    if not tweaks:
+        return
+    manager = abjad.tweak(argument)
+    for manager_ in tweaks:
+        tuples = manager_._get_attribute_tuples()
+        for attribute, value in tuples:
+            setattr(manager, attribute, value)
+
 def dashed_arrow() -> abjad.ArrowLineSegment:
     """
     Makes dashed arrow line segment.

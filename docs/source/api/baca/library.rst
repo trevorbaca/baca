@@ -22,6 +22,7 @@ library
 .. autosummary::
    :nosignatures:
 
+   ~apply_tweaks
    ~dashed_arrow
    ~dashed_hook
    ~lbsd
@@ -43,6 +44,8 @@ library
    ~suite
    ~tag
    ~timeline
+
+.. autofunction:: apply_tweaks
 
 .. autofunction:: dashed_arrow
 

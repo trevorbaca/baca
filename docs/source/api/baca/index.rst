@@ -159,7 +159,6 @@ baca
    SpannerCommand
    StaffPositionCommand
    StaffPositionInterpolationCommand
-   TextSpannerCommand
    TieCorrectionCommand
    VoltaCommand
 
@@ -197,7 +196,6 @@ baca
    ~SpannerCommand.SpannerCommand
    ~StaffPositionCommand.StaffPositionCommand
    ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~TextSpannerCommand.TextSpannerCommand
    ~TieCorrectionCommand.TieCorrectionCommand
    ~VoltaCommand.VoltaCommand
 
