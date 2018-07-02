@@ -21,6 +21,7 @@ PiecewiseIndicatorCommand
       bundles
       final_piece_spanner
       forbid_spanner_start
+      leak
       piece_selector
       right_broken
       selector
@@ -91,6 +92,8 @@ PiecewiseIndicatorCommand
    .. autoattribute:: PiecewiseIndicatorCommand.final_piece_spanner
 
    .. autoattribute:: PiecewiseIndicatorCommand.forbid_spanner_start
+
+   .. autoattribute:: PiecewiseIndicatorCommand.leak
 
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
 

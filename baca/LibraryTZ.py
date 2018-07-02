@@ -3095,7 +3095,7 @@ class LibraryTZ(abjad.AbjadObject):
     def new_text_spanner(
         *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
         bookend: typing.Union[bool, int] = -1,
-        final_spanner: str = None,
+        leak: bool = None,
         #left_broken: bool = None,
         lilypond_id: int = None,
         no_upright: bool = None,
@@ -3247,8 +3247,8 @@ class LibraryTZ(abjad.AbjadObject):
             raise NotImplementedError('implement lone item')
         shape_to_style = abjad.StartTextSpan._shape_to_style
         stop_text_span = abjad.StopTextSpan(lilypond_id=lilypond_id)
-        items = abjad.CyclicTuple(items)
-        for i, item in enumerate(items):
+        items_ = abjad.CyclicTuple(items)
+        for i, item in enumerate(items_):
             if item in shape_to_style:
                 continue
             if isinstance(item, str):
@@ -3258,12 +3258,12 @@ class LibraryTZ(abjad.AbjadObject):
             assert isinstance(item_markup, abjad.Markup)
             if not no_upright:
                 item_markup = item_markup.upright()
-            style = None
-            if items[i + 1] in shape_to_style:
-                style = shape_to_style[items[i + 1]]
-                right_text = items[i + 2]
+            style = 'invisible_line'
+            if items_[i + 1] in shape_to_style:
+                style = shape_to_style[items_[i + 1]]
+                right_text = items_[i + 2]
             else:
-                right_text = items[i + 1]
+                right_text = items_[i + 1]
             if isinstance(right_text, str):
                 right_markup = abjad.Markup(right_text)
             else:
@@ -3287,31 +3287,11 @@ class LibraryTZ(abjad.AbjadObject):
                 enchained=True,
                 )
             bundles.append(bundle)
-        last_item = items[-1]
-        if last_item not in shape_to_style:
-            if isinstance(last_item, str):
-                last_markup = abjad.Markup(last_item)
-            else:
-                assert isinstance(last_item, abjad.Markup)
-                last_markup = last_item
-            if not no_upright:
-                last_markup = last_markup.upright()
-            start_text_span = abjad.StartTextSpan(
-                left_text=last_markup,
-                lilypond_id=lilypond_id,
-                style='invisible_line',
-                )
-            bundle = IndicatorBundle(
-                stop_text_span,
-                start_text_span,
-                enchained=True,
-                )
-            bundles.append(bundle)
-        #raise Exception(bundles)
+        #raise Exception(len(bundles), bundles)
         return PiecewiseIndicatorCommand(
             bookend=bookend,
             bundles=bundles,
-            final_piece_spanner=final_spanner,
+            leak=leak,
             piece_selector=piece_selector,
             selector=selector,
             )

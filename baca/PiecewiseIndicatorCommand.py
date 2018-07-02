@@ -21,6 +21,7 @@ class PiecewiseIndicatorCommand(Command):
         '_bundles',
         '_final_piece_spanner',
         '_forbid_spanner_start',
+        '_leak',
         '_piece_selector',
         '_right_broken',
         '_selector',
@@ -35,6 +36,7 @@ class PiecewiseIndicatorCommand(Command):
         bundles: typing.List[IndicatorBundle] = None,
         forbid_spanner_start: typing.Union[bool, int] = None,
         final_piece_spanner: typing.Any = None,
+        leak: bool = None,
         piece_selector: typings.Selector = 'baca.leaves()',
         right_broken: typing.Any = None,
         selector: typings.Selector = 'baca.leaves()',
@@ -53,6 +55,9 @@ class PiecewiseIndicatorCommand(Command):
         if final_piece_spanner not in (None, False):
             assert getattr(final_piece_spanner, 'spanner_start', False)
         self._final_piece_spanner = final_piece_spanner
+        if leak is not None:
+            leak = bool(leak)
+        self._leak = leak
         if isinstance(piece_selector, str):
             piece_selector = eval(piece_selector)
         if piece_selector is not None:
@@ -134,14 +139,24 @@ class PiecewiseIndicatorCommand(Command):
                 start_leaf,
                 tag='PIC',
                 )
+            next_bundle = self.bundles[i + 1]
             if should_bookend:
-                next_bundle = self.bundles[i + 1]
                 if bundle.bookended_spanner_start is not None:
                     next_bundle = next_bundle.with_spanner_start(None)
                 if next_bundle.compound():
                     next_bundle = next_bundle.with_spanner_start(None)
                 self._attach_indicators(
                     next_bundle,
+                    stop_leaf,
+                    tag='PIC',
+                    )
+            elif is_final_piece and next_bundle.spanner_stop:
+                spanner_stop = next_bundle.spanner_stop
+                if self.leak:
+                    spanner_stop = abjad.new(spanner_stop, leak=True)
+                bundle = IndicatorBundle(spanner_stop)
+                self._attach_indicators(
+                    bundle,
                     stop_leaf,
                     tag='PIC',
                     )
@@ -214,6 +229,13 @@ class PiecewiseIndicatorCommand(Command):
         Gets forbid-spanner-start token.
         """
         return self._forbid_spanner_start
+
+    @property
+    def leak(self) -> typing.Optional[bool]:
+        """
+        Is true when command leaks final spanner stop.
+        """
+        return self._leak
 
     @property
     def piece_selector(self) -> typing.Optional[abjad.Expression]:
