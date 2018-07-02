@@ -1707,6 +1707,8 @@ class LibraryTZ(abjad.AbjadObject):
                 lilypond_id=lilypond_id,
                 style=style,
                 )
+            if tweaks:
+                library.apply_tweaks(start_text_span, tweaks)
             # kerns bookended hook
             if 'hook' in style:
                 line = abjad.Markup.draw_line(0, -1)
@@ -1731,10 +1733,6 @@ class LibraryTZ(abjad.AbjadObject):
                 enchained=True,
                 )
             bundles.append(bundle)
-        # TODO: write tweak tests
-        if tweaks:
-            spanner_start = bundles[0].spanner_start
-            library.apply_tweaks(spanner_start, tweaks)
         return PiecewiseIndicatorCommand(
             bookend=bookend,
             bundles=bundles,
