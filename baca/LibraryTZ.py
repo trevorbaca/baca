@@ -3108,6 +3108,10 @@ class LibraryTZ(abjad.AbjadObject):
 
         ..  container:: example
 
+            Single-segment spanners.
+
+            Dashed line with arrow:
+
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 12)),
@@ -3195,6 +3199,8 @@ class LibraryTZ(abjad.AbjadObject):
                                     \upright                                                             %! PIC
                                         ord.                                                             %! PIC
                                     }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -3241,6 +3247,1523 @@ class LibraryTZ(abjad.AbjadObject):
                     >>
                 >>
 
+            Dashed line with hook:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.new_text_spanner(
+            ...         baca.markups.pont(),
+            ...         '=|',
+            ...         baca.markups.ord(),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_dashed_line_with_hook                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \raise                                                       %! PIC
+                                                #-1                                                      %! PIC
+                                                \draw-line                                               %! PIC
+                                                    #'(0 . -1)                                           %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.75                                                    %! PIC
+                                            \general-align                                               %! PIC
+                                                #Y                                                       %! PIC
+                                                #1                                                       %! PIC
+                                                \upright                                                 %! PIC
+                                                    ord.                                                 %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #1.25                               %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Solid line with arrow:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.new_text_spanner(
+            ...         baca.markups.pont(),
+            ...         '->',
+            ...         baca.markups.ord(),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        ord.                                                             %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Solid line with hook:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.new_text_spanner(
+            ...         baca.markups.pont(),
+            ...         '-|',
+            ...         baca.markups.ord(),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_solid_line_with_hook                                            %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \raise                                                       %! PIC
+                                                #-1                                                      %! PIC
+                                                \draw-line                                               %! PIC
+                                                    #'(0 . -1)                                           %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.75                                                    %! PIC
+                                            \general-align                                               %! PIC
+                                                #Y                                                       %! PIC
+                                                #1                                                       %! PIC
+                                                \upright                                                 %! PIC
+                                                    ord.                                                 %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #1.25                               %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Invisible lines:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.new_text_spanner(
+            ...         baca.markups.pont(),
+            ...         baca.markups.ord(),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        ord.                                                             %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Piece selector groups leaves by measures:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.dls_staff_padding(5),
+            ...     baca.new_text_spanner(
+            ...         'A',
+            ...         'B',
+            ...         piece_selector=baca.group_by_measures([1]),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        A                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            With spanners:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.dls_staff_padding(5),
+            ...     baca.new_text_spanner(
+            ...         'A',
+            ...         '->',
+            ...         'B',
+            ...         '->',
+            ...         piece_selector=baca.group_by_measures([1]),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        A                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Bookends each piece:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.dls_staff_padding(5),
+            ...     baca.new_text_spanner(
+            ...         'A',
+            ...         'B',
+            ...         bookend=True,
+            ...         piece_selector=baca.group_by_measures([1]),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        B                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        A                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        B                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_invisible_line                                                  %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        A                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            With spanners:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.dls_staff_padding(5),
+            ...     baca.new_text_spanner(
+            ...         'A',
+            ...         '->',
+            ...         'B',
+            ...         '->',
+            ...         bookend=True,
+            ...         piece_selector=baca.group_by_measures([1]),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        B                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        A                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        B                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_arrow                                           %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        A                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            REGRESSION. Bookended hooks are kerned:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.dls_staff_padding(5),
+            ...     baca.new_text_spanner(
+            ...         'A',
+            ...         '-|',
+            ...         'B',
+            ...         '-|',
+            ...         piece_selector=baca.group_by_measures([1]),
+            ...     ),
+            ...     baca.make_even_divisions(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.text_spanner_staff_padding(4.5),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM4
+                            \newSpacingSection                                                           %! HSS1:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                                \override TextSpanner.staff-padding = #4.5                               %! OC1
+                                e'8
+                                - \abjad_solid_line_with_hook                                            %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                d''8
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                g'8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_hook                                            %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f''8
+                <BLANKLINE>
+                                e'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! SM4
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_hook                                            %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                A                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                f'8
+                <BLANKLINE>
+                                e''8
+                <BLANKLINE>
+                                g'8
+                                ]
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! SM4
+                                f''8
+                                \stopTextSpan                                                            %! PIC
+                                - \abjad_solid_line_with_hook                                            %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                B                                                        %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \raise                                                       %! PIC
+                                                #-1                                                      %! PIC
+                                                \draw-line                                               %! PIC
+                                                    #'(0 . -1)                                           %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.75                                                    %! PIC
+                                            \general-align                                               %! PIC
+                                                #Y                                                       %! PIC
+                                                #1                                                       %! PIC
+                                                \upright                                                 %! PIC
+                                                    A                                                    %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #1.25                               %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
+                                [
+                <BLANKLINE>
+                                e'8
+                <BLANKLINE>
+                                d''8
+                                \stopTextSpan                                                            %! PIC
+                                ]
+                                \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                                \revert TextSpanner.staff-padding                                        %! OC2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         """
         bundles = []
         if len(items) == 1:
@@ -3276,10 +4799,23 @@ class LibraryTZ(abjad.AbjadObject):
                 lilypond_id=lilypond_id,
                 style=style,
                 )
+            # kerns bookended hook
+            if 'hook' in style:
+                line = abjad.Markup.draw_line(0, -1)
+                line = line.raise_(-1)
+                hspace = abjad.Markup.hspace(0.75)
+                right_markup = right_markup.general_align('Y', 1)
+                right_markup = abjad.Markup.concat([line, hspace, right_markup])
             bookended_spanner_start = abjad.new(
                 start_text_span,
                 right_text=right_markup,
                 )
+            manager = abjad.tweak(bookended_spanner_start)
+            manager.bound_details__right__stencil_align_dir_y = abjad.Center
+            if 'hook' in style:
+                manager.bound_details__right__padding = 1.25
+            else:
+                manager.bound_details__right__padding = 0.5
             bundle = IndicatorBundle(
                 stop_text_span,
                 start_text_span,
@@ -3287,7 +4823,6 @@ class LibraryTZ(abjad.AbjadObject):
                 enchained=True,
                 )
             bundles.append(bundle)
-        #raise Exception(len(bundles), bundles)
         return PiecewiseIndicatorCommand(
             bookend=bookend,
             bundles=bundles,
