@@ -69,7 +69,6 @@ from .Partial import Partial
 from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
-from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .PitchArray import PitchArray
 from .PitchArrayCell import PitchArrayCell
 from .PitchArrayColumn import PitchArrayColumn

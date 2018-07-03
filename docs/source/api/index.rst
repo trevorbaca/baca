@@ -94,7 +94,6 @@ Bača API
    ~baca.OverrideCommand.OverrideCommand
    ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
-   ~baca.PiecewiseSpannerCommand.PiecewiseSpannerCommand
    ~baca.PitchCommand.PitchCommand
    ~baca.PitchFirstRhythmCommand.PitchFirstRhythmCommand
    ~baca.RegisterCommand.RegisterCommand

@@ -12,7 +12,6 @@ from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
 from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
-from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
 from .Sequence import Sequence
