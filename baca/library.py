@@ -4,12 +4,14 @@ Function library.
 import abjad
 import typing
 from . import typings
+from .ArrowLineSegment import ArrowLineSegment
 from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
+from .LineSegment import LineSegment
 from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
 from .PitchCommand import PitchCommand
@@ -30,11 +32,11 @@ def apply_tweaks(argument, tweaks):
         for attribute, value in tuples:
             setattr(manager, attribute, value)
 
-def dashed_arrow() -> abjad.ArrowLineSegment:
+def dashed_arrow() -> ArrowLineSegment:
     """
     Makes dashed arrow line segment.
     """
-    return abjad.ArrowLineSegment(
+    return ArrowLineSegment(
         dash_fraction=0.25,
         dash_period=1.5,
         left_broken_text=False,
@@ -45,11 +47,11 @@ def dashed_arrow() -> abjad.ArrowLineSegment:
         right_padding=0.5,
         )
 
-def dashed_hook() -> abjad.LineSegment:
+def dashed_hook() -> LineSegment:
     """
     Makes dashed hook line segment.
     """
-    return abjad.LineSegment(
+    return LineSegment(
         dash_fraction=0.25,
         dash_period=1.5,
         left_broken_text=False,

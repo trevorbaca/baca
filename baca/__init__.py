@@ -10,6 +10,7 @@ from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
+from .ArrowLineSegment import ArrowLineSegment
 from .BowContactPointCommand import BowContactPointCommand
 from .BreakMeasureMap import BreakMeasureMap
 from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
@@ -48,6 +49,7 @@ from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
+from .LineSegment import LineSegment
 from .Loop import Loop
 from .Markup import Markup
 from .Matrix import Matrix

@@ -364,6 +364,8 @@ baca
    :hidden:
 
    Accelerando
+   ArrowLineSegment
+   LineSegment
    MetronomeMarkSpanner
    PaddedTuple
    Ritardando
@@ -372,6 +374,8 @@ baca
    :nosignatures:
 
    ~Accelerando.Accelerando
+   ~ArrowLineSegment.ArrowLineSegment
+   ~LineSegment.LineSegment
    ~MetronomeMarkSpanner.MetronomeMarkSpanner
    ~PaddedTuple.PaddedTuple
    ~Ritardando.Ritardando
