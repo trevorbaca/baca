@@ -16,6 +16,7 @@ from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .MetronomeMarkSpanner import MetronomeMarkSpanner
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
@@ -147,6 +148,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
+        '_do_not_attach_metronome_mark_spanner',
         '_do_not_check_persistence',
         '_do_not_include_layout_ly',
         '_duration',
@@ -263,6 +265,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
         color_repeat_pitch_classes: bool = True,
+        do_not_attach_metronome_mark_spanner: bool = None,
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
@@ -314,6 +317,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
+        self._do_not_attach_metronome_mark_spanner = \
+            do_not_attach_metronome_mark_spanner
         self._do_not_check_persistence = do_not_check_persistence
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration: typing.Optional[abjad.Duration] = None
@@ -1382,6 +1387,66 @@ class SegmentMaker(abjad.SegmentMaker):
             tag=tag.prepend('SM11'),
             )
 
+    def _attach_metronome_mark_text_span_indicators(self):
+        if not self.do_not_attach_metronome_mark_spanner:
+            return
+        for skip in baca.select(self.score['GlobalSkips']).skips():
+            inspector = abjad.inspect(skip)
+            metronome_mark = inspector.get_indicator(
+                abjad.MetronomeMark,
+                default=None,
+                )
+            accelerando = inspector.get_indicator(
+                baca.Accelerando,
+                default=None,
+                )
+            ritardando = inspector.get_indicator(
+                baca.Ritardando,
+                default=None,
+                )
+            if metronome_mark is not None:
+                metronome_mark._hide = True
+            if accelerando is not None:
+                accelerando._hide = True
+            if ritardando is not None:
+                ritardando._hide = True
+            has_trend = accelerando is not None or ritardando is not None
+            if metronome_mark is None and not has_trend:
+                continue
+            if metronome_mark is not None:
+                left_text = metronome_mark._get_markup()
+            elif accelerando is not None:
+                left_text = accelerando._get_markup()
+            elif ritardando is not None:
+                left_text = ritardando._get_markup()
+            if has_trend:
+                style = 'dashed_line_with_arrow'
+            else:
+                style = 'invisible_line'
+            stop_text_span = abjad.StopTextSpan()
+            abjad.attach(
+                stop_text_span,
+                skip,
+                tag='MMI1',
+                )
+            start_text_span = abjad.StartTextSpan(
+                left_broken_text=False,
+                left_text=left_text,
+                style=style,
+                )
+            abjad.attach(
+                start_text_span,
+                skip,
+                tag='MMI2',
+                )
+        last_skip = skip
+        stop_text_span = abjad.StopTextSpan()
+        abjad.attach(
+            stop_text_span,
+            last_skip,
+            tag='MMI3',
+            )
+
     def _attach_metronome_marks(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
         if isinstance(self.mmspanner_right_padding, tuple):
@@ -1402,7 +1467,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
             right_padding = None
-        spanner = baca.MetronomeMarkSpanner(
+        if self.do_not_attach_metronome_mark_spanner:
+            return
+        spanner = MetronomeMarkSpanner(
             left_broken_padding=0,
             left_broken_text=False,
             parenthesize=False,
@@ -2623,13 +2690,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(previous_indicator, prototype):
                     spanner = baca.MetronomeMarkSpanner
                     spanner = abjad.inspect(leaf).get_spanner(spanner)
+                    if spanner is None:
+                        assert self.do_not_attach_metronome_mark_spanner
                     if status == 'reapplied':
-                        wrapper = spanner.attach(
-                            previous_indicator,
-                            leaf,
-                            tag=edition.append('SM36'),
-                            wrapper=True,
-                            )
+                        if spanner is not None:
+                            wrapper = spanner.attach(
+                                previous_indicator,
+                                leaf,
+                                tag=edition.append('SM36'),
+                                wrapper=True,
+                                )
+                        else:
+                            wrapper = abjad.attach(
+                                previous_indicator,
+                                leaf,
+                                tag=edition.append('SM36'),
+                                wrapper=True,
+                                )
                         self._treat_persistent_wrapper(
                             self.manifests,
                             wrapper,
@@ -2935,6 +3012,9 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper.spanner._is_trending(wrapper.component) and
             not isinstance(wrapper.indicator, tempo_trend)):
             status = 'explicit'
+        if (isinstance(indicator, abjad.MetronomeMark) and
+            abjad.inspect(leaf).has_indicator(tempo_trend)):
+            status = 'explicit'
         if (isinstance(wrapper.indicator, abjad.Dynamic) and
             abjad.inspect(leaf).get_indicators(abjad.DynamicTrend)):
             status = 'explicit'
@@ -3010,6 +3090,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype = tempo_prototype
                 else:
                     prototype = type(wrapper.indicator)
+
                 previous_indicator = abjad.inspect(leaf).get_effective(
                     prototype,
                     n=-1,
@@ -3688,6 +3769,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns true, false or none.
         """
         return self._color_repeat_pitch_classes
+
+    @property
+    def do_not_attach_metronome_mark_spanner(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker does not attach metronome mark spanner.
+        """
+        return self._do_not_attach_metronome_mark_spanner
 
     @property
     def do_not_check_persistence(self) -> typing.Optional[bool]:
@@ -5879,6 +5967,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._cache_fermata_measure_numbers()
                 self._shorten_long_repeat_ties()
                 self._treat_untreated_persistent_wrappers()
+                self._attach_metronome_mark_text_span_indicators()
                 self._transpose_score_()
                 self._add_final_bar_line()
                 self._add_final_markup()

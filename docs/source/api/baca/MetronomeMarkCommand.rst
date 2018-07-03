@@ -18,6 +18,7 @@ MetronomeMarkCommand
       :nosignatures:
 
       key
+      new_style
       redundant
 
    .. autosummary::
@@ -80,6 +81,8 @@ MetronomeMarkCommand
       .. autoattribute:: MetronomeMarkCommand.deactivate
 
    .. autoattribute:: MetronomeMarkCommand.key
+
+   .. autoattribute:: MetronomeMarkCommand.new_style
 
    .. autoattribute:: MetronomeMarkCommand.redundant
 

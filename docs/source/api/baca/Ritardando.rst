@@ -18,6 +18,7 @@ Ritardando
       :nosignatures:
 
       context
+      hide
       markup
       persistent
       tweaks
@@ -64,6 +65,8 @@ Ritardando
       :class: class-header
 
    .. autoattribute:: Ritardando.context
+
+   .. autoattribute:: Ritardando.hide
 
    .. autoattribute:: Ritardando.markup
 

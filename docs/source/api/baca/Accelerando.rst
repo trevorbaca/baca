@@ -18,6 +18,7 @@ Accelerando
       :nosignatures:
 
       context
+      hide
       markup
       persistent
       tweaks
@@ -64,6 +65,8 @@ Accelerando
       :class: class-header
 
    .. autoattribute:: Accelerando.context
+
+   .. autoattribute:: Accelerando.hide
 
    .. autoattribute:: Accelerando.markup
 

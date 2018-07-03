@@ -45,6 +45,7 @@ class Accelerando(AbjadValueObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_hide',
         '_markup',
         )
 
@@ -57,8 +58,12 @@ class Accelerando(AbjadValueObject):
     def __init__(
         self,
         *,
+        hide: bool = None,
         markup: Markup = None,
         ) -> None:
+        if hide is not None:
+            hide = bool(hide)
+        self._hide = hide
         if markup is not None:
             assert isinstance(markup, Markup), repr(markup)
         self._markup = markup
@@ -117,10 +122,11 @@ class Accelerando(AbjadValueObject):
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = LilyPondFormatBundle()
-        markup = self._get_markup()
-        markup = new(markup, direction=Up)
-        markup_format_pieces = markup._get_format_pieces()
-        bundle.after.markup.extend(markup_format_pieces)
+        if not self.hide:
+            markup = self._get_markup()
+            markup = new(markup, direction=Up)
+            markup_format_pieces = markup._get_format_pieces()
+            bundle.after.markup.extend(markup_format_pieces)
         return bundle
 
     def _get_markup(self):
@@ -143,6 +149,13 @@ class Accelerando(AbjadValueObject):
         Override with ``abjad.attach(..., context='...')``.
         """
         return self._context
+
+    @property
+    def hide(self) -> typing.Optional[bool]:
+        """
+        Is true when accelerando generates no LilyPond input.
+        """
+        return self._hide
 
     @property
     def markup(self) -> typing.Optional[Markup]:

@@ -22,6 +22,7 @@ class MetronomeMarkCommand(Command):
 
     __slots__ = (
         '_key',
+        '_new_style',
         '_redundant',
         '_tags',
         )
@@ -33,6 +34,7 @@ class MetronomeMarkCommand(Command):
         *,
         deactivate: bool = None,
         key: typing.Union[str, Accelerando, Ritardando] = None,
+        new_style: bool = None,
         redundant: bool = None,
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
@@ -41,6 +43,9 @@ class MetronomeMarkCommand(Command):
         if key is not None:
             assert isinstance(key, (str, Accelerando, Ritardando))
         self._key = key
+        if new_style is not None:
+            new_style = bool(new_style)
+        self._new_style = new_style
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
@@ -75,15 +80,25 @@ class MetronomeMarkCommand(Command):
         leaf = baca.select(argument).leaf(0)
         spanner = abjad.inspect(leaf).get_spanner(baca.MetronomeMarkSpanner)
         if spanner is None:
-            raise Exception('can not find metronome mark spanner.')
+            assert self.new_style
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
-        wrapper = spanner.attach(
-            indicator,
-            leaf,
-            deactivate=self.deactivate,
-            tag=self.tag,
-            wrapper=True,
-            )
+        if spanner is not None:
+            wrapper = spanner.attach(
+                indicator,
+                leaf,
+                deactivate=self.deactivate,
+                tag=self.tag,
+                wrapper=True,
+                )
+        else:
+            assert self.new_style
+            wrapper = abjad.attach(
+                indicator,
+                leaf,
+                deactivate=self.deactivate,
+                tag=self.tag,
+                wrapper=True,
+                )
         if indicator == reapplied:
             SegmentMaker._treat_persistent_wrapper(
                 self.runtime['manifests'],
@@ -94,13 +109,18 @@ class MetronomeMarkCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def key(self) -> typing.Optional[
-            typing.Union[str, Accelerando, Ritardando]
-            ]:
+    def key(self) -> typing.Optional[typing.Union[str, Accelerando, Ritardando]]:
         """
         Gets metronome mark key.
         """
         return self._key
+
+    @property
+    def new_style(self) -> typing.Optional[bool]:
+        """
+        Is true when new style.
+        """
+        return self._new_style
 
     @property
     def redundant(self) -> typing.Optional[bool]:

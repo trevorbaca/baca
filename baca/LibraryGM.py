@@ -1580,6 +1580,25 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def metronome_mark_new(
+        key: str,
+        *,
+        redundant: bool = None,
+        selector: typings.Selector = 'baca.leaf(0)',
+        ) -> typing.Optional[MetronomeMarkCommand]:
+        """
+        Attaches metronome mark matching ``key`` metronome mark manifest.
+        """
+        if redundant is True:
+            return None
+        return MetronomeMarkCommand(
+            key=key,
+            new_style=True,
+            redundant=redundant,
+            selector=selector,
+            )
+
+    @staticmethod
     def minimum_duration(
         duration: typing.Union[tuple, abjad.Duration],
         ) -> HorizontalSpacingSpecifier:
