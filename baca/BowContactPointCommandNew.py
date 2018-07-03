@@ -64,15 +64,17 @@ class BowContactPointCommandNew(Command):
         lts = baca.select(argument).lts()
         total = len(lts)
 
-        if self.final_spanner:
-            add_right_text_to_me = None
-        else:
+        add_right_text_to_me = None
+        if not self.final_spanner:
             rest_count, nonrest_count = 0, 0
             for lt in reversed(lts):
                 if isinstance(lt.head, abjad.Rest):
                     rest_count += 1
                 else:
-                    if 0 < rest_count or 0 < nonrest_count:
+                    if 0 < rest_count and nonrest_count == 0:
+                        add_right_text_to_me = lt.head
+                        break
+                    if 0 < nonrest_count and rest_count == 0:
                         add_right_text_to_me = lt.head
                         break
                     nonrest_count += 1
