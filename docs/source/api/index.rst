@@ -76,6 +76,7 @@ Bača API
 
    ~baca.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
    ~baca.BowContactPointCommand.BowContactPointCommand
+   ~baca.BowContactPointCommandNew.BowContactPointCommandNew
    ~baca.ClusterCommand.ClusterCommand
    ~baca.ColorCommand.ColorCommand
    ~baca.ColorFingeringCommand.ColorFingeringCommand

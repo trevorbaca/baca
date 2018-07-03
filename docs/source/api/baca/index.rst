@@ -130,6 +130,7 @@ baca
 
    AccidentalAdjustmentCommand
    BowContactPointCommand
+   BowContactPointCommandNew
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
@@ -166,6 +167,7 @@ baca
 
    ~AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
    ~BowContactPointCommand.BowContactPointCommand
+   ~BowContactPointCommandNew.BowContactPointCommandNew
    ~ClusterCommand.ClusterCommand
    ~ColorCommand.ColorCommand
    ~ColorFingeringCommand.ColorFingeringCommand

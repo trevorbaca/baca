@@ -11,6 +11,7 @@ from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
 from .BowContactPointCommand import BowContactPointCommand
+from .BowContactPointCommandNew import BowContactPointCommandNew
 from .BreakMeasureMap import BreakMeasureMap
 from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .ClusterCommand import ClusterCommand

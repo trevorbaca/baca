@@ -7,6 +7,7 @@ from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BowContactPointCommand import BowContactPointCommand
+from .BowContactPointCommandNew import BowContactPointCommandNew
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
@@ -1945,22 +1946,26 @@ class LibraryAF(abjad.AbjadObject):
             selector=selector,
             )
 
-#    @staticmethod
-#    def bcps_new(
-#        *tweaks: abjad.LilyPondTweakManager,
-#        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
-#        helper: typing.Callable = None,
-#        selector: typings.Selector = 'baca.leaves()',
-#        ) -> BowContactPointCommand:
-#        """
-#        Makes bow contact points.
-#        """
-#        return BowContactPointCommandNew(
-#            *tweaks,
-#            bcps=bcps,
-#            helper=helper,
-#            selector=selector,
-#            )
+    @staticmethod
+    def bcps_new(
+        *tweaks: abjad.LilyPondTweakManager,
+        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
+        final_spanner: bool = None,
+        helper: typing.Callable = None,
+        selector: typings.Selector = 'baca.leaves()',
+        ) -> BowContactPointCommand:
+        """
+        Makes bow contact points.
+        """
+        if final_spanner is not None:
+            final_spanner = bool(final_spanner)
+        return BowContactPointCommandNew(
+            *tweaks,
+            bcps=bcps,
+            final_spanner=final_spanner,
+            helper=helper,
+            selector=selector,
+            )
 
     @staticmethod
     def beam(

@@ -36,6 +36,7 @@ LibraryAF
       bar_line_transparent
       bass_to_octave
       bcps
+      bcps_new
       beam
       beam_divisions
       beam_everything
@@ -137,6 +138,8 @@ LibraryAF
    .. automethod:: LibraryAF.bass_to_octave
 
    .. automethod:: LibraryAF.bcps
+
+   .. automethod:: LibraryAF.bcps_new
 
    .. automethod:: LibraryAF.beam
 
