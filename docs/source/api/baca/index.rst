@@ -129,7 +129,6 @@ baca
    :hidden:
 
    AccidentalAdjustmentCommand
-   BowContactPointCommand
    BowContactPointCommandNew
    ClusterCommand
    ColorCommand
@@ -166,7 +165,6 @@ baca
    :nosignatures:
 
    ~AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
-   ~BowContactPointCommand.BowContactPointCommand
    ~BowContactPointCommandNew.BowContactPointCommandNew
    ~ClusterCommand.ClusterCommand
    ~ColorCommand.ColorCommand
