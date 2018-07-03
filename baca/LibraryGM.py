@@ -16,7 +16,6 @@ from .LBSD import LBSD
 from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .OverrideCommand import OverrideCommand
-from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .PitchCommand import PitchCommand
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope

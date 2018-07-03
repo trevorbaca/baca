@@ -45,7 +45,6 @@ LibraryTZ
       tie_up
       time_signature_extra_offset
       time_signature_transparent
-      transition
       tremolo_down
       trill_spanner
       trill_spanner_staff_padding
@@ -145,8 +144,6 @@ LibraryTZ
    .. automethod:: LibraryTZ.time_signature_extra_offset
 
    .. automethod:: LibraryTZ.time_signature_transparent
-
-   .. automethod:: LibraryTZ.transition
 
    .. automethod:: LibraryTZ.tremolo_down
 

@@ -22,7 +22,6 @@ from .IndicatorCommand import IndicatorCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
-from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SpannerCommand import SpannerCommand
 

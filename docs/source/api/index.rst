@@ -402,7 +402,6 @@ Function library.
    ~baca.library.only_score
    ~baca.library.only_segment
    ~baca.library.pick
-   ~baca.library.piecewise
    ~baca.library.pitches
    ~baca.library.scope
    ~baca.library.split_by_durations

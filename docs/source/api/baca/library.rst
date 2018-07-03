@@ -37,7 +37,6 @@ library
    ~only_score
    ~only_segment
    ~pick
-   ~piecewise
    ~pitches
    ~scope
    ~split_by_durations
@@ -74,8 +73,6 @@ library
 .. autofunction:: only_segment
 
 .. autofunction:: pick
-
-.. autofunction:: piecewise
 
 .. autofunction:: pitches
 

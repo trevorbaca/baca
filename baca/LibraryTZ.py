@@ -14,7 +14,6 @@ from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
 from .OverrideCommand import OverrideCommand
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
-from .PiecewiseSpannerCommand import PiecewiseSpannerCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand
 from .TieCorrectionCommand import TieCorrectionCommand
@@ -3282,7 +3281,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition(
+            ...     baca.new_transition(
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
             ...         ),
@@ -3309,38 +3308,24 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC1
                                 r8
                                 c'16
+                                - \abjad_dashed_line_with_arrow                                          %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        ord.                                                             %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
                                 [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                pont.                                                    %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                - \tweak bound-details.right.text \markup {                              %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.0                                                     %! PSC1
-                                            \upright                                                     %! PSC1
-                                                ord.                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                \startTextSpan                                                           %! PSC1
                                 d'16
                                 ]
                                 bf'4
@@ -3365,7 +3350,7 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \stopTextSpan                                                            %! PSC1
+                                \stopTextSpan                                                            %! PIC
                                 r4
                                 \revert TextSpanner.staff-padding                                        %! OC2
                                 \revert TextScript.staff-padding                                         %! OC2
@@ -3389,7 +3374,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.text_spanner_staff_padding(6),
             ...         ),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition(
+            ...     baca.new_transition(
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
             ...         selector=baca.tuplets()[1:2].tleaves(),
@@ -3428,38 +3413,24 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TextSpanner.staff-padding = #6                                 %! OC1
                                 fs''16
+                                - \abjad_dashed_line_with_arrow                                          %! PIC
+                                - \tweak bound-details.left.text \markup {                               %! PIC
+                                    \concat                                                              %! PIC
+                                        {                                                                %! PIC
+                                            \upright                                                     %! PIC
+                                                pont.                                                    %! PIC
+                                            \hspace                                                      %! PIC
+                                                #0.5                                                     %! PIC
+                                        }                                                                %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.text \markup {                              %! PIC
+                                    \upright                                                             %! PIC
+                                        ord.                                                             %! PIC
+                                    }                                                                    %! PIC
+                                - \tweak bound-details.right.padding #0.5                                %! PIC
+                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
+                                \startTextSpan                                                           %! PIC
                                 [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                pont.                                                    %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                - \tweak bound-details.right.text \markup {                              %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.0                                                     %! PSC1
-                                            \upright                                                     %! PSC1
-                                                ord.                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                \startTextSpan                                                           %! PSC1
                                 e''16
                                 ]
                                 ef''4
@@ -3469,8 +3440,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 af''16
                                 [
                                 g''16
+                                \stopTextSpan                                                            %! PIC
                                 ]
-                                \stopTextSpan                                                            %! PSC1
                                 \revert TextSpanner.staff-padding                                        %! OC2
                             }
                             \times 4/5 {
@@ -4370,434 +4341,6 @@ class LibraryTZ(abjad.AbjadObject):
             value=True,
             context='Score',
             grob='time_signature',
-            selector=selector,
-            )
-
-    @staticmethod
-    def transition(
-        *markups: typing.Iterable[typing.Union[str, abjad.Markup]],
-        do_not_bookend: bool = False,
-        lilypond_id: int = None,
-        no_upright: bool = None,
-        piece_selector: typings.Selector = 'baca.group()',
-        selector: typings.Selector = 'baca.tleaves()',
-        tweaks: typing.List[abjad.LilyPondTweakManager] = None
-        ) -> PiecewiseSpannerCommand:
-        r"""
-        Makes transition text spanner.
-
-        ..  container:: example
-
-            Without bookend:
-            
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 12)),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.transition(
-            ...         baca.markups.pont(),
-            ...         baca.markups.ord(),
-            ...         baca.markups.pont(),
-            ...         baca.markups.ord(),
-            ...         do_not_bookend=True,
-            ...         piece_selector=baca.leaves().enchain([5, 4, 5, 4]),
-            ...     ),
-            ...     baca.make_even_divisions(),
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.text_spanner_staff_padding(4.5),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override TextSpanner.staff-padding = #4.5                               %! OC1
-                                e'8
-                                [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                pont.                                                    %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                \startTextSpan                                                           %! PSC1
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                <BLANKLINE>
-                                e''8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                g'8
-                                \stopTextSpan                                                            %! PSC1
-                                [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                ord.                                                     %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                \startTextSpan                                                           %! PSC1
-                <BLANKLINE>
-                                f''8
-                <BLANKLINE>
-                                e'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                d''8
-                                \stopTextSpan                                                            %! PSC1
-                                [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                pont.                                                    %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                \startTextSpan                                                           %! PSC1
-                <BLANKLINE>
-                                f'8
-                <BLANKLINE>
-                                e''8
-                <BLANKLINE>
-                                g'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                f''8
-                                \stopTextSpan                                                            %! PSC1
-                                [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                ord.                                                     %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.25                                                    %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \abjad_invisible_line                                                  %! PSC1
-                                \startTextSpan                                                           %! PSC1
-                <BLANKLINE>
-                                e'8
-                <BLANKLINE>
-                                d''8
-                                ]
-                                \stopTextSpan                                                            %! PSC1
-                                \revert TextSpanner.staff-padding                                        %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            With bookend:
-            
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 12)),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.transition(
-            ...         baca.markups.pont(),
-            ...         baca.markups.ord(),
-            ...         piece_selector=baca.leaves().enchain([8]),
-            ...     ),
-            ...     baca.make_even_divisions(),
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.text_spanner_staff_padding(4.5),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override TextSpanner.staff-padding = #4.5                               %! OC1
-                                e'8
-                                [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                pont.                                                    %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                \startTextSpan                                                           %! PSC1
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                <BLANKLINE>
-                                e''8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                g'8
-                                [
-                <BLANKLINE>
-                                f''8
-                <BLANKLINE>
-                                e'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                d''8
-                                \stopTextSpan                                                            %! PSC1
-                                [
-                                - \tweak Y-extent ##f                                                    %! PSC1
-                                - \tweak bound-details.left.text \markup {                               %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \upright                                                     %! PSC1
-                                                ord.                                                     %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.5                                                     %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                - \tweak arrow-width 0.25                                                %! PSC1
-                                - \tweak dash-fraction 0.25                                              %! PSC1
-                                - \tweak dash-period 1.5                                                 %! PSC1
-                                - \tweak bound-details.left-broken.text ##f                              %! PSC1
-                                - \tweak bound-details.left.stencil-align-dir-y #center                  %! PSC1
-                                - \tweak bound-details.right.arrow ##t                                   %! PSC1
-                                - \tweak bound-details.right-broken.arrow ##f                            %! PSC1
-                                - \tweak bound-details.right-broken.padding 0                            %! PSC1
-                                - \tweak bound-details.right-broken.text ##f                             %! PSC1
-                                - \tweak bound-details.right.padding 0.5                                 %! PSC1
-                                - \tweak bound-details.right.stencil-align-dir-y #center                 %! PSC1
-                                - \tweak bound-details.right.text \markup {                              %! PSC1
-                                    \concat                                                              %! PSC1
-                                        {                                                                %! PSC1
-                                            \hspace                                                      %! PSC1
-                                                #0.0                                                     %! PSC1
-                                            \upright                                                     %! PSC1
-                                                pont.                                                    %! PSC1
-                                        }                                                                %! PSC1
-                                    }                                                                    %! PSC1
-                                \startTextSpan                                                           %! PSC1
-                <BLANKLINE>
-                                f'8
-                <BLANKLINE>
-                                e''8
-                <BLANKLINE>
-                                g'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                f''8
-                                [
-                <BLANKLINE>
-                                e'8
-                <BLANKLINE>
-                                d''8
-                                ]
-                                \stopTextSpan                                                            %! PSC1
-                                \revert TextSpanner.staff-padding                                        %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        """
-        markups_: typing.List[Markup] = []
-        for markup in markups:
-            if markup is None:
-                markups_.append(markup)
-            elif isinstance(markup, str):
-                markup_ = Markup(markup)
-                if no_upright is not True:
-                    if 'upright' in format(markup_):
-                        raise Exception(f'markup already upright:\n  {markup}')
-                    markup_ = markup_.upright()
-                markups_.append(markup_)
-            else:
-                assert isinstance(markup, Markup), repr(markup)
-                if no_upright is not True:
-                    if 'upright' in format(markup):
-                        raise Exception(f'markup already upright:\n  {markup}')
-                    markup = markup.upright()
-                markups_.append(markup)
-        indicators: typing.List[typing.Union[Markup, tuple]] = []
-        for markup_ in markups_[:-1]:
-            pair = (markup_, library.dashed_arrow())
-            indicators.append(pair)
-        if do_not_bookend:
-            indicators.append(markups_[-1])
-        else:
-            pair = (markups_[-1], library.dashed_arrow())
-            indicators.append(pair)
-        if lilypond_id is not None:
-            assert lilypond_id in (1, 2, 3), repr(lilypond_id)
-        text_spanner = abjad.TextSpanner(lilypond_id=lilypond_id)
-        tweaks = tweaks or []
-        return library.piecewise(
-            text_spanner,
-            indicators,
-            piece_selector,
-            *tweaks,
-            bookend=not(do_not_bookend),
             selector=selector,
             )
 
