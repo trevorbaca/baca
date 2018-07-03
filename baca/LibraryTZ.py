@@ -1676,7 +1676,17 @@ class LibraryTZ(abjad.AbjadObject):
         if len(items) == 1:
             raise NotImplementedError('implement lone item')
         shape_to_style = abjad.StartTextSpan._shape_to_style
-        stop_text_span = abjad.StopTextSpan(lilypond_id=lilypond_id)
+        if lilypond_id is None:
+            command = r'\stopTextSpan'
+        elif lilypond_id == 1:
+            command = r'\stopTextSpanOne'
+        elif lilypond_id == 2:
+            command = r'\stopTextSpanTwo'
+        elif lilypond_id == 3:
+            command = r'\stopTextSpanThree'
+        else:
+            raise ValueError(lilypond_id)
+        stop_text_span = abjad.StopTextSpan(command=command)
         items_ = abjad.CyclicTuple(items)
         for i, item in enumerate(items_):
             if item in shape_to_style:
@@ -1701,9 +1711,19 @@ class LibraryTZ(abjad.AbjadObject):
                 right_markup = right_text
             if not no_upright:
                 right_markup = right_markup.upright()
+            if lilypond_id is None:
+                command = r'\startTextSpan'
+            elif lilypond_id == 1:
+                command = r'\startTextSpanOne'
+            elif lilypond_id == 2:
+                command = r'\startTextSpanTwo'
+            elif lilypond_id == 3:
+                command = r'\startTextSpanThree'
+            else:
+                raise ValueError(lilypond_id)
             start_text_span = abjad.StartTextSpan(
+                command=command,
                 left_text=item_markup,
-                lilypond_id=lilypond_id,
                 style=style,
                 )
             if tweaks:
@@ -3188,8 +3208,6 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
-        if lilypond_id is not None:
-            assert lilypond_id in (1, 2, 3), repr(lilypond_id)
         if isinstance(text, abjad.Markup):
             markup = text
         else:
@@ -3203,9 +3221,19 @@ class LibraryTZ(abjad.AbjadObject):
         if isinstance(selector, str):
             selector = eval(selector)
         assert isinstance(selector, abjad.Expression)
+        if lilypond_id is None:
+            command = r'\startTextSpan'
+        elif lilypond_id == 1:
+            command = r'\startTextSpanOne'
+        elif lilypond_id == 2:
+            command = r'\startTextSpanTwo'
+        elif lilypond_id == 3:
+            command = r'\startTextSpanThree'
+        else:
+            raise ValueError(lilypond_id)
         start_text_span = abjad.StartTextSpan(
+            command=command,
             left_text=markup,
-            lilypond_id=lilypond_id,
             right_padding=right_padding,
             style='dashed_line_with_hook',
             )
@@ -3215,9 +3243,19 @@ class LibraryTZ(abjad.AbjadObject):
             indicators=[start_text_span],
             selector=selector_,
             )
+        if lilypond_id is None:
+            command = r'\stopTextSpan'
+        elif lilypond_id == 1:
+            command = r'\stopTextSpanOne'
+        elif lilypond_id == 2:
+            command = r'\stopTextSpanTwo'
+        elif lilypond_id == 3:
+            command = r'\stopTextSpanThree'
+        else:
+            raise ValueError(lilypond_id)
         stop_text_span = abjad.StopTextSpan(
+            command=command,
             leak=leak,
-            lilypond_id=lilypond_id,
             )
         selector = selector.leaf(-1)
         stop_command = IndicatorCommand(

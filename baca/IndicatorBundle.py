@@ -203,12 +203,12 @@ class IndicatorBundle(abjad.AbjadObject):
             ...     )
 
             >>> bundle.with_spanner_start(
-            ...     abjad.StartTextSpan(lilypond_id=1),
+            ...     abjad.StartTextSpan(command=r'\startTextSpanOne')
             ...     )
-            IndicatorBundle(StopTextSpan(), StartTextSpan(lilypond_id=1))
+            IndicatorBundle(StopTextSpan(command='\\stopTextSpan'), StartTextSpan(command='\\startTextSpanOne'))
 
             >>> bundle.with_spanner_start(None)
-            IndicatorBundle(StopTextSpan())
+            IndicatorBundle(StopTextSpan(command='\\stopTextSpan'))
 
         """
         if (spanner_start is not None and
@@ -233,11 +233,12 @@ class IndicatorBundle(abjad.AbjadObject):
             ...     abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
             ...     )
 
-            >>> bundle.with_spanner_stop(abjad.StopTextSpan(lilypond_id=1))
-            IndicatorBundle(StopTextSpan(lilypond_id=1), StartTextSpan(left_text=Markup(contents=['pont.'])))
+            >>> string = r'\stopTextSpanOne'
+            >>> bundle.with_spanner_stop(abjad.StopTextSpan(command=string))
+            IndicatorBundle(StopTextSpan(command='\\stopTextSpanOne'), StartTextSpan(command='\\startTextSpan', left_text=Markup(contents=['pont.'])))
 
             >>> bundle.with_spanner_stop(None)
-            IndicatorBundle(StartTextSpan(left_text=Markup(contents=['pont.'])))
+            IndicatorBundle(StartTextSpan(command='\\startTextSpan', left_text=Markup(contents=['pont.'])))
 
         """
         if (spanner_stop is not None and
