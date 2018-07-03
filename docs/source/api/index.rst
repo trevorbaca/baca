@@ -75,7 +75,7 @@ Bača API
    :nosignatures:
 
    ~baca.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
-   ~baca.BowContactPointCommandNew.BowContactPointCommandNew
+   ~baca.BowContactPointCommand.BowContactPointCommand
    ~baca.ClusterCommand.ClusterCommand
    ~baca.ColorCommand.ColorCommand
    ~baca.ColorFingeringCommand.ColorFingeringCommand

@@ -129,7 +129,7 @@ baca
    :hidden:
 
    AccidentalAdjustmentCommand
-   BowContactPointCommandNew
+   BowContactPointCommand
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
@@ -165,7 +165,7 @@ baca
    :nosignatures:
 
    ~AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
-   ~BowContactPointCommandNew.BowContactPointCommandNew
+   ~BowContactPointCommand.BowContactPointCommand
    ~ClusterCommand.ClusterCommand
    ~ColorCommand.ColorCommand
    ~ColorFingeringCommand.ColorFingeringCommand

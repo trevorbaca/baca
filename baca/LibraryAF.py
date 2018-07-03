@@ -6,7 +6,7 @@ from . import library
 from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
-from .BowContactPointCommandNew import BowContactPointCommandNew
+from .BowContactPointCommand import BowContactPointCommand
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
@@ -1929,19 +1929,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def bcps_new(
+    def bcps(
         *tweaks: abjad.LilyPondTweakManager,
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
         selector: typings.Selector = 'baca.leaves()',
-        ) -> BowContactPointCommandNew:
+        ) -> BowContactPointCommand:
         """
         Makes bow contact points.
         """
         if final_spanner is not None:
             final_spanner = bool(final_spanner)
-        return BowContactPointCommandNew(
+        return BowContactPointCommand(
             *tweaks,
             bcps=bcps,
             final_spanner=final_spanner,

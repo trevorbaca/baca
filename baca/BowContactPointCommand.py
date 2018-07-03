@@ -5,7 +5,7 @@ from . import typings
 from .Command import Command
 
 
-class BowContactPointCommandNew(Command):
+class BowContactPointCommand(Command):
     """
     Bow contact point command.
     """
@@ -192,16 +192,16 @@ class BowContactPointCommandNew(Command):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.bcps_new(abjad.tweak(5).staff_padding),
+            ...     baca.bcps(abjad.tweak(5).staff_padding),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 F4'),
             ...     baca.measures(
             ...         (1, 2),
-            ...         baca.bcps_new(bcps=[(1, 5), (2, 5)]),
+            ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
             ...         ),
             ...     baca.measures(
             ...         (3, 4),
-            ...         baca.bcps_new(bcps=[(3, 5), (4, 5)]),
+            ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
             ...         ),
             ...     )
 
