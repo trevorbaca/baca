@@ -125,11 +125,14 @@ class PiecewiseIndicatorCommand(Command):
                 bundle = bundle.with_spanner_start(
                     bundle.bookended_spanner_start
                     )
+            # TODO: this two-line suite is wrong:
+            #       comment out; check Ikribu C; run over all scores; compare:
             if len(piece) == 1 and bundle.compound():
                 bundle = bundle.with_spanner_start(None)
             if is_final_piece and bundle.compound():
                 if self.final_piece_spanner:
-                    bundle = bundle.with_spanner_start(self.final_piece_spanner)
+                    bundle = bundle.with_spanner_start(
+                        self.final_piece_spanner)
                 elif self.final_piece_spanner is False:
                     bundle = bundle.with_spanner_start(None)
             if is_first_piece:
