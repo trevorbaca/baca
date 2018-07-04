@@ -4499,7 +4499,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_staff_padding(4),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.hairpin(
+            ...             'p < f',
+            ...             remove_length_1_spanner_start=True,
+            ...             ),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4575,7 +4578,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_staff_padding(4, selector=baca.tuplet(1)),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.hairpin(
+            ...             'p < f',
+            ...             remove_length_1_spanner_start=True,
+            ...             ),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4667,7 +4673,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_up(),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.hairpin(
+            ...             'p < f',
+            ...             remove_length_1_spanner_start=True,
+            ...             ),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4743,7 +4752,10 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.dls_up(selector=baca.tuplet(1)),
             ...     baca.map(
             ...         baca.tuplets(),
-            ...         baca.hairpin('p < f'),
+            ...         baca.hairpin(
+            ...             'p < f',
+            ...             remove_length_1_spanner_start=True,
+            ...             ),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),

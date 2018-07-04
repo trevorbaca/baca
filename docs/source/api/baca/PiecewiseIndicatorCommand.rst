@@ -20,9 +20,9 @@ PiecewiseIndicatorCommand
       bookend
       bundles
       final_piece_spanner
-      forbid_spanner_start
       leak
       piece_selector
+      remove_length_1_spanner_start
       right_broken
       selector
 
@@ -91,11 +91,11 @@ PiecewiseIndicatorCommand
 
    .. autoattribute:: PiecewiseIndicatorCommand.final_piece_spanner
 
-   .. autoattribute:: PiecewiseIndicatorCommand.forbid_spanner_start
-
    .. autoattribute:: PiecewiseIndicatorCommand.leak
 
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
+
+   .. autoattribute:: PiecewiseIndicatorCommand.remove_length_1_spanner_start
 
    .. autoattribute:: PiecewiseIndicatorCommand.right_broken
 

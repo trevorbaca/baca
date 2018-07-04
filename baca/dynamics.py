@@ -617,6 +617,7 @@ def hairpin(
     final_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
     left_broken: bool = None,
     piece_selector: typings.Selector = 'baca.group()',
+    remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseIndicatorCommand:
@@ -2007,6 +2008,8 @@ def hairpin(
         dynamic_trend = abjad.new(bundle.spanner_start, left_broken=True)
         bundle = IndicatorBundle(dynamic_trend)
         bundles[0] = bundle
+    if remove_length_1_spanner_start is not None:
+        remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
@@ -2015,6 +2018,7 @@ def hairpin(
         bundles=bundles,
         final_piece_spanner=final_hairpin_,
         piece_selector=piece_selector,
+        remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         selector=selector,
         )

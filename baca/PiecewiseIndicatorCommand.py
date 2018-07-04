@@ -20,9 +20,9 @@ class PiecewiseIndicatorCommand(Command):
         '_bookend',
         '_bundles',
         '_final_piece_spanner',
-        '_forbid_spanner_start',
         '_leak',
         '_piece_selector',
+        '_remove_length_1_spanner_start',
         '_right_broken',
         '_selector',
         )
@@ -34,10 +34,10 @@ class PiecewiseIndicatorCommand(Command):
         *,
         bookend: typing.Union[bool, int] = None,
         bundles: typing.List[IndicatorBundle] = None,
-        forbid_spanner_start: typing.Union[bool, int] = None,
         final_piece_spanner: typing.Any = None,
         leak: bool = None,
         piece_selector: typings.Selector = 'baca.leaves()',
+        remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
@@ -45,9 +45,6 @@ class PiecewiseIndicatorCommand(Command):
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
-        if forbid_spanner_start is not None:
-            assert isinstance(forbid_spanner_start, (int, bool)), repr(forbid_spanner_start)
-        self._forbid_spanner_start = forbid_spanner_start
         bundles_ = None
         if bundles is not None:
             bundles_ = abjad.CyclicTuple(bundles)
@@ -64,6 +61,9 @@ class PiecewiseIndicatorCommand(Command):
             assert isinstance(piece_selector, abjad.Expression), repr(
                 piece_selector)
         self._piece_selector = piece_selector
+        if remove_length_1_spanner_start is not None:
+            remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
+        self._remove_length_1_spanner_start = remove_length_1_spanner_start
         self._right_broken = right_broken
         self._tags = []
 
@@ -125,9 +125,9 @@ class PiecewiseIndicatorCommand(Command):
                 bundle = bundle.with_spanner_start(
                     bundle.bookended_spanner_start
                     )
-            # TODO: this two-line suite is wrong:
-            #       comment out; check Ikribu C; run over all scores; compare:
-            if len(piece) == 1 and bundle.compound():
+            if (len(piece) == 1 and
+                bundle.compound() and
+                self.remove_length_1_spanner_start):
                 bundle = bundle.with_spanner_start(None)
             if is_final_piece and bundle.compound():
                 if self.final_piece_spanner:
@@ -227,13 +227,6 @@ class PiecewiseIndicatorCommand(Command):
         return self._final_piece_spanner
 
     @property
-    def forbid_spanner_start(self) -> typing.Optional[typing.Union[bool, int]]:
-        """
-        Gets forbid-spanner-start token.
-        """
-        return self._forbid_spanner_start
-
-    @property
     def leak(self) -> typing.Optional[bool]:
         """
         Is true when command leaks final spanner stop.
@@ -246,6 +239,13 @@ class PiecewiseIndicatorCommand(Command):
         Gets piece selector.
         """
         return self._piece_selector
+
+    @property
+    def remove_length_1_spanner_start(self) -> typing.Optional[bool]:
+        """
+        Is true when command removes spanner start from length-1 pieces.
+        """
+        return self._remove_length_1_spanner_start
 
     @property
     def right_broken(self) -> typing.Optional[typing.Any]:
