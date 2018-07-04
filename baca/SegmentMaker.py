@@ -1433,10 +1433,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper = inspector.wrapper(baca.Accelerando)
             if metronome_mark is None and ritardando is not None:
                 wrapper = inspector.wrapper(baca.Ritardando)
-            tag = wrapper.tag
             has_trend = accelerando is not None or ritardando is not None
             if metronome_mark is None and not has_trend:
                 continue
+            tag = wrapper.tag
             if metronome_mark is not None:
                 left_text = metronome_mark._get_markup()
             elif accelerando is not None:
