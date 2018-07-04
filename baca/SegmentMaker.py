@@ -1412,6 +1412,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.MetronomeMark,
                 default=None,
                 )
+            metric_modulation = inspector.get_indicator(
+                abjad.MetricModulation,
+                default=None,
+                )
             accelerando = inspector.get_indicator(
                 baca.Accelerando,
                 default=None,
@@ -1423,22 +1427,35 @@ class SegmentMaker(abjad.SegmentMaker):
             if metronome_mark is not None:
                 metronome_mark._hide = True
                 wrapper = inspector.wrapper(abjad.MetronomeMark)
+            if metric_modulation is not None:
+                metric_modulation._hide = True
             if accelerando is not None:
                 accelerando._hide = True
             if ritardando is not None:
                 ritardando._hide = True
             if skip is skips[-1]:
                 break
+            if metronome_mark is None and metric_modulation is not None:
+                wrapper = inspector.wrapper(abjad.MetricModulation)
             if metronome_mark is None and accelerando is not None:
                 wrapper = inspector.wrapper(baca.Accelerando)
             if metronome_mark is None and ritardando is not None:
                 wrapper = inspector.wrapper(baca.Ritardando)
             has_trend = accelerando is not None or ritardando is not None
-            if metronome_mark is None and not has_trend:
+            if (metronome_mark is None and
+                metric_modulation is None and
+                not has_trend):
                 continue
             tag = wrapper.tag
             if metronome_mark is not None:
                 left_text = metronome_mark._get_markup()
+                if metric_modulation is not None:
+                    markup_ = metric_modulation._get_markup()
+                    markup_ = abjad.Markup.line([markup_])
+                    markup_ = markup_.parenthesize()
+                    hspace = abjad.Markup.hspace(2)
+                    markups = [left_text, hspace, markup_]
+                    left_text = abjad.Markup.concat(markups)
             elif accelerando is not None:
                 left_text = accelerando._get_markup()
             elif ritardando is not None:

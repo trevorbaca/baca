@@ -1009,77 +1009,73 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                 \parenthesize
                                     \line
                                         {
-                                            \scale
-                                                #'(0.5 . 0.5)
-                                                \score
+                                            \score
+                                                {
+                                                    \new Score
+                                                    \with
                                                     {
-                                                        \new Score
+                                                        \override SpacingSpanner.spacing-increment = #0.5
+                                                        proportionalNotationDuration = ##f
+                                                    }
+                                                    <<
+                                                        \new RhythmicStaff
                                                         \with
                                                         {
-                                                            \override SpacingSpanner.spacing-increment = #0.5
-                                                            proportionalNotationDuration = ##f
+                                                            \remove Time_signature_engraver
+                                                            \remove Staff_symbol_engraver
+                                                            \override Stem.direction = #up
+                                                            \override Stem.length = #5
+                                                            \override TupletBracket.bracket-visibility = ##t
+                                                            \override TupletBracket.direction = #up
+                                                            \override TupletBracket.padding = #1.25
+                                                            \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                            \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                                            tupletFullLength = ##t
                                                         }
-                                                        <<
-                                                            \new RhythmicStaff
-                                                            \with
-                                                            {
-                                                                \remove Time_signature_engraver
-                                                                \remove Staff_symbol_engraver
-                                                                \override Stem.direction = #up
-                                                                \override Stem.length = #5
-                                                                \override TupletBracket.bracket-visibility = ##t
-                                                                \override TupletBracket.direction = #up
-                                                                \override TupletBracket.padding = #1.25
-                                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                                tupletFullLength = ##t
-                                                            }
-                                                            {
-                                                                c4.
-                                                            }
-                                                        >>
-                                                        \layout {
-                                                            indent = #0
-                                                            ragged-right = ##t
+                                                        {
+                                                            c4.
                                                         }
+                                                    >>
+                                                    \layout {
+                                                        indent = #0
+                                                        ragged-right = ##t
                                                     }
+                                                }
                                             =
                                             \hspace
                                                 #-0.5
-                                            \scale
-                                                #'(0.5 . 0.5)
-                                                \score
+                                            \score
+                                                {
+                                                    \new Score
+                                                    \with
                                                     {
-                                                        \new Score
+                                                        \override SpacingSpanner.spacing-increment = #0.5
+                                                        proportionalNotationDuration = ##f
+                                                    }
+                                                    <<
+                                                        \new RhythmicStaff
                                                         \with
                                                         {
-                                                            \override SpacingSpanner.spacing-increment = #0.5
-                                                            proportionalNotationDuration = ##f
+                                                            \remove Time_signature_engraver
+                                                            \remove Staff_symbol_engraver
+                                                            \override Stem.direction = #up
+                                                            \override Stem.length = #5
+                                                            \override TupletBracket.bracket-visibility = ##t
+                                                            \override TupletBracket.direction = #up
+                                                            \override TupletBracket.padding = #1.25
+                                                            \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                            \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                                            tupletFullLength = ##t
                                                         }
-                                                        <<
-                                                            \new RhythmicStaff
-                                                            \with
-                                                            {
-                                                                \remove Time_signature_engraver
-                                                                \remove Staff_symbol_engraver
-                                                                \override Stem.direction = #up
-                                                                \override Stem.length = #5
-                                                                \override TupletBracket.bracket-visibility = ##t
-                                                                \override TupletBracket.direction = #up
-                                                                \override TupletBracket.padding = #1.25
-                                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                                tupletFullLength = ##t
-                                                            }
-                                                            {
-                                                                c4
-                                                            }
-                                                        >>
-                                                        \layout {
-                                                            indent = #0
-                                                            ragged-right = ##t
+                                                        {
+                                                            c4
                                                         }
+                                                    >>
+                                                    \layout {
+                                                        indent = #0
+                                                        ragged-right = ##t
                                                     }
+                                                }
                                         }
                         \hspace
                             #1
@@ -1165,77 +1161,73 @@ class MetronomeMarkSpanner(abjad.Spanner):
                                 \parenthesize
                                     \line
                                         {
-                                            \scale
-                                                #'(0.5 . 0.5)
-                                                \score
+                                            \score
+                                                {
+                                                    \new Score
+                                                    \with
                                                     {
-                                                        \new Score
+                                                        \override SpacingSpanner.spacing-increment = #0.5
+                                                        proportionalNotationDuration = ##f
+                                                    }
+                                                    <<
+                                                        \new RhythmicStaff
                                                         \with
                                                         {
-                                                            \override SpacingSpanner.spacing-increment = #0.5
-                                                            proportionalNotationDuration = ##f
+                                                            \remove Time_signature_engraver
+                                                            \remove Staff_symbol_engraver
+                                                            \override Stem.direction = #up
+                                                            \override Stem.length = #5
+                                                            \override TupletBracket.bracket-visibility = ##t
+                                                            \override TupletBracket.direction = #up
+                                                            \override TupletBracket.padding = #1.25
+                                                            \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                            \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                                            tupletFullLength = ##t
                                                         }
-                                                        <<
-                                                            \new RhythmicStaff
-                                                            \with
-                                                            {
-                                                                \remove Time_signature_engraver
-                                                                \remove Staff_symbol_engraver
-                                                                \override Stem.direction = #up
-                                                                \override Stem.length = #5
-                                                                \override TupletBracket.bracket-visibility = ##t
-                                                                \override TupletBracket.direction = #up
-                                                                \override TupletBracket.padding = #1.25
-                                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                                tupletFullLength = ##t
-                                                            }
-                                                            {
-                                                                c4.
-                                                            }
-                                                        >>
-                                                        \layout {
-                                                            indent = #0
-                                                            ragged-right = ##t
+                                                        {
+                                                            c4.
                                                         }
+                                                    >>
+                                                    \layout {
+                                                        indent = #0
+                                                        ragged-right = ##t
                                                     }
+                                                }
                                             =
                                             \hspace
                                                 #-0.5
-                                            \scale
-                                                #'(0.5 . 0.5)
-                                                \score
+                                            \score
+                                                {
+                                                    \new Score
+                                                    \with
                                                     {
-                                                        \new Score
+                                                        \override SpacingSpanner.spacing-increment = #0.5
+                                                        proportionalNotationDuration = ##f
+                                                    }
+                                                    <<
+                                                        \new RhythmicStaff
                                                         \with
                                                         {
-                                                            \override SpacingSpanner.spacing-increment = #0.5
-                                                            proportionalNotationDuration = ##f
+                                                            \remove Time_signature_engraver
+                                                            \remove Staff_symbol_engraver
+                                                            \override Stem.direction = #up
+                                                            \override Stem.length = #5
+                                                            \override TupletBracket.bracket-visibility = ##t
+                                                            \override TupletBracket.direction = #up
+                                                            \override TupletBracket.padding = #1.25
+                                                            \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                            \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                                            tupletFullLength = ##t
                                                         }
-                                                        <<
-                                                            \new RhythmicStaff
-                                                            \with
-                                                            {
-                                                                \remove Time_signature_engraver
-                                                                \remove Staff_symbol_engraver
-                                                                \override Stem.direction = #up
-                                                                \override Stem.length = #5
-                                                                \override TupletBracket.bracket-visibility = ##t
-                                                                \override TupletBracket.direction = #up
-                                                                \override TupletBracket.padding = #1.25
-                                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                                tupletFullLength = ##t
-                                                            }
-                                                            {
-                                                                c4
-                                                            }
-                                                        >>
-                                                        \layout {
-                                                            indent = #0
-                                                            ragged-right = ##t
+                                                        {
+                                                            c4
                                                         }
+                                                    >>
+                                                    \layout {
+                                                        indent = #0
+                                                        ragged-right = ##t
                                                     }
+                                                }
                                         }
                         \hspace
                             #1
@@ -1534,9 +1526,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
         ):
         assert metronome_mark is not None or metric_modulation is not None
         if metronome_mark is None:
-            return metric_modulation._get_markup(
-                music_scale_pair=(0.5, 0.5),
-                )
+            return metric_modulation._get_markup()
         if metric_modulation is None:
             return metronome_mark._get_markup(
                 stem_height=self.stem_height,
@@ -1546,9 +1536,7 @@ class MetronomeMarkSpanner(abjad.Spanner):
             )
         metronome_mark_markup = \
             metronome_mark_markup + metronome_mark_markup.hspace(0.5)
-        modulation_markup = metric_modulation._get_markup(
-            music_scale_pair=(0.5, 0.5),
-            )
+        modulation_markup = metric_modulation._get_markup()
         modulation_markup = modulation_markup.line([modulation_markup])
         modulation_markup = modulation_markup.parenthesize()
         modulation_markup = modulation_markup.override(('padding', 0.5))
