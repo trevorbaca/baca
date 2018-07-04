@@ -669,8 +669,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                                     \override Stem.length = #5
                                                     \override TupletBracket.bracket-visibility = ##t
                                                     \override TupletBracket.direction = #up
+                                                    \override TupletBracket.minimum-length = #4
                                                     \override TupletBracket.padding = #1.25
                                                     \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                                    \override TupletNumber.font-size = #0
                                                     \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                                     tupletFullLength = ##t
                                                 }
@@ -724,8 +727,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                                     \override Stem.length = #5
                                                     \override TupletBracket.bracket-visibility = ##t
                                                     \override TupletBracket.direction = #up
+                                                    \override TupletBracket.minimum-length = #4
                                                     \override TupletBracket.padding = #1.25
                                                     \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                                    \override TupletNumber.font-size = #0
                                                     \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                                     tupletFullLength = ##t
                                                 }
