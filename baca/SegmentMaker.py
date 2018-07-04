@@ -1450,11 +1450,15 @@ class SegmentMaker(abjad.SegmentMaker):
             if metronome_mark is not None:
                 left_text = metronome_mark._get_markup()
                 if metric_modulation is not None:
-                    markup_ = metric_modulation._get_markup()
-                    markup_ = abjad.Markup.line([markup_])
-                    markup_ = markup_.parenthesize()
-                    hspace = abjad.Markup.hspace(2)
-                    markups = [left_text, hspace, markup_]
+                    markups = []
+                    markups.append(left_text)
+                    markups.append(abjad.Markup.hspace(2))
+                    markups.append(abjad.Markup('[').upright())
+                    modulation = metric_modulation._get_markup()
+                    modulation = abjad.Markup.line([modulation])
+                    markups.append(modulation)
+                    markups.append(abjad.Markup.hspace(0.5))
+                    markups.append(abjad.Markup(']').upright())
                     left_text = abjad.Markup.concat(markups)
             elif accelerando is not None:
                 left_text = accelerando._get_markup()
