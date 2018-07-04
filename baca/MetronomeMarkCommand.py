@@ -60,6 +60,7 @@ class MetronomeMarkCommand(Command):
         Applies command to result of selector called on ``argument``.
         """
         from .SegmentMaker import SegmentMaker
+        assert self.new_style, repr(self)
         if argument is None:
             return
         if self.key is None:
@@ -78,27 +79,15 @@ class MetronomeMarkCommand(Command):
         if not argument:
             return
         leaf = baca.select(argument).leaf(0)
-        spanner = abjad.inspect(leaf).get_spanner(baca.MetronomeMarkSpanner)
-        if spanner is None:
-            assert self.new_style
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
-        if spanner is not None:
-            wrapper = spanner.attach(
-                indicator,
-                leaf,
-                deactivate=self.deactivate,
-                tag=self.tag,
-                wrapper=True,
-                )
-        else:
-            assert self.new_style
-            wrapper = abjad.attach(
-                indicator,
-                leaf,
-                deactivate=self.deactivate,
-                tag=self.tag,
-                wrapper=True,
-                )
+        assert self.new_style
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            deactivate=self.deactivate,
+            tag=self.tag,
+            wrapper=True,
+            )
         if indicator == reapplied:
             SegmentMaker._treat_persistent_wrapper(
                 self.runtime['manifests'],

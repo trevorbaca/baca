@@ -366,7 +366,6 @@ baca
    Accelerando
    ArrowLineSegment
    LineSegment
-   MetronomeMarkSpanner
    PaddedTuple
    Ritardando
 
@@ -376,7 +375,6 @@ baca
    ~Accelerando.Accelerando
    ~ArrowLineSegment.ArrowLineSegment
    ~LineSegment.LineSegment
-   ~MetronomeMarkSpanner.MetronomeMarkSpanner
    ~PaddedTuple.PaddedTuple
    ~Ritardando.Ritardando
 

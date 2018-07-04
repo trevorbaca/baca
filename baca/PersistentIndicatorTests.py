@@ -5592,35 +5592,41 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \large                                                           %! MMI2
+                        %@%                 \upright                                                     %! MMI2
+                        %@%                     accel.                                                   %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_dashed_line_with_arrow                                              %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \large                                                       %! MMI3
+                                                \upright                                                 %! MMI3
+                                                    accel.                                               %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5705,35 +5711,41 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \large                                                           %! MMI2
+                        %@%                 \upright                                                     %! MMI2
+                        %@%                     accel.                                                   %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_dashed_line_with_arrow                                              %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \large                                                       %! MMI3
+                                                \upright                                                 %! MMI3
+                                                    accel.                                               %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5820,35 +5832,41 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \large                                                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%         \upright                                                             %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%             accel.                                                           %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'green4)                                                 %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                        \large                                                           %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                            \upright                                                     %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                                accel.                                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \large                                                           %! MMI2
+                        %@%                 \upright                                                     %! MMI2
+                        %@%                     accel.                                                   %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_dashed_line_with_arrow                                              %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'green4)                                         %! MMI3
+                                            \large                                                       %! MMI3
+                                                \upright                                                 %! MMI3
+                                                    accel.                                               %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5924,64 +5942,75 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \large                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         \upright                                                             %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             accel.                                                           %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \large                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \upright                                                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                accel.                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \large                                                           %! MMI2
+                        %@%                 \upright                                                     %! MMI2
+                        %@%                     accel.                                                   %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_dashed_line_with_arrow                                              %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \large                                                       %! MMI3
+                                                \upright                                                 %! MMI3
+                                                    accel.                                               %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \large                                                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         \upright                                                             %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             accel.                                                           %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'DeepPink1)                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \large                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \upright                                                     %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                accel.                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \large                                                           %! MMI2
+                        %@%                 \upright                                                     %! MMI2
+                        %@%                     accel.                                                   %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_dashed_line_with_arrow                                              %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'DeepPink1)                                      %! MMI3
+                                            \large                                                       %! MMI3
+                                                \upright                                                 %! MMI3
+                                                    accel.                                               %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6069,35 +6098,41 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \large                                                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         \upright                                                             %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             accel.                                                           %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'DeepPink1)                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \large                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \upright                                                     %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                accel.                                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_dashed_arrow                                                         %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \large                                                           %! MMI2
+                        %@%                 \upright                                                     %! MMI2
+                        %@%                     accel.                                                   %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_dashed_line_with_arrow                                              %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'DeepPink1)                                      %! MMI3
+                                            \large                                                       %! MMI3
+                                                \upright                                                 %! MMI3
+                                                    accel.                                               %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5

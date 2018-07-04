@@ -16,7 +16,6 @@ from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
-from .MetronomeMarkSpanner import MetronomeMarkSpanner
 from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
@@ -265,7 +264,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
         color_repeat_pitch_classes: bool = True,
-        do_not_attach_metronome_mark_spanner: bool = None,
+        do_not_attach_metronome_mark_spanner: bool = True,
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
@@ -1390,6 +1389,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _attach_metronome_mark_text_span_indicators(self):
         if not self.do_not_attach_metronome_mark_spanner:
             return
+        indicator_count = 0
         skips = baca.select(self.score['GlobalSkips']).skips()
         last_leaf_metronome_mark = abjad.inspect(skips[-1]).get_indicator(
             abjad.MetronomeMark,
@@ -1446,6 +1446,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 metric_modulation is None and
                 not has_trend):
                 continue
+            indicator_count += 1
             tag = wrapper.tag
             if metronome_mark is not None:
                 left_text = metronome_mark._get_markup()
@@ -1540,13 +1541,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=False,
                 tag='MMI3',
                 )
-        last_skip = skip
-        stop_text_span = abjad.StopTextSpan()
-        abjad.attach(
-            stop_text_span,
-            last_skip,
-            tag='MMI4',
-            )
+        if indicator_count:
+            last_skip = skip
+            stop_text_span = abjad.StopTextSpan()
+            abjad.attach(
+                stop_text_span,
+                last_skip,
+                tag='MMI4',
+                )
 
     def _attach_metronome_marks(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
@@ -1568,34 +1570,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
             right_padding = None
-        if not self.do_not_attach_metronome_mark_spanner:
-            spanner = MetronomeMarkSpanner(
-                left_broken_padding=0,
-                left_broken_text=False,
-                parenthesize=False,
-                right_padding=right_padding,
-                stem_height=self.metronome_mark_stem_height,
-                )
-            tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER)
-            string = 'mmspanner_right_broken'
-            left_broken = self.previous_metadata.get(string)
-            abjad.attach(
-                spanner,
-                skips,
-                left_broken=left_broken,
-                right_broken=self.mmspanner_right_broken,
-                tag=tag.prepend('SM29'),
-                )
-            if left_broken:
-                literal = abjad.LilyPondLiteral(
-                    r'\stopTextSpan',
-                    format_slot='closing',
-                    )
-                abjad.attach(
-                    literal,
-                    skips[0],
-                    tag=abjad.Tag('-SEGMENT').prepend('SM39'),
-                    )
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -2797,25 +2771,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     baca.Ritardando,
                     )
                 if isinstance(previous_indicator, prototype):
-                    spanner = baca.MetronomeMarkSpanner
-                    spanner = abjad.inspect(leaf).get_spanner(spanner)
-                    if spanner is None:
-                        assert self.do_not_attach_metronome_mark_spanner
+                    assert self.do_not_attach_metronome_mark_spanner
                     if status == 'reapplied':
-                        if spanner is not None:
-                            wrapper = spanner.attach(
-                                previous_indicator,
-                                leaf,
-                                tag=edition.append('SM36'),
-                                wrapper=True,
-                                )
-                        else:
-                            wrapper = abjad.attach(
-                                previous_indicator,
-                                leaf,
-                                tag=edition.append('SM36'),
-                                wrapper=True,
-                                )
+                        wrapper = abjad.attach(
+                            previous_indicator,
+                            leaf,
+                            tag=edition.append('SM36'),
+                            wrapper=True,
+                            )
                         self._treat_persistent_wrapper(
                             self.manifests,
                             wrapper,
@@ -2823,9 +2786,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             )
                     else:
                         assert status in ('redundant', None), repr(status)
-                        if (status is None or
-                            (spanner is not None and
-                            spanner._is_trending(leaf))):
+                        if status is None:
                             status = 'explicit'
                         wrappers = abjad.inspect(leaf).wrappers(prototype)
                         # lone metronome mark or lone tempo trend:
@@ -2952,15 +2913,6 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = tag.prepend('SM27')
             wrapper.deactivate = True
             wrapper.tag = tag
-            if isinstance(wrapper.spanner, baca.MetronomeMarkSpanner):
-                color = SegmentMaker._status_to_color[status]
-                tag = f'{status.upper()}_{stem}_WITH_COLOR'
-                tag = getattr(abjad.tags, tag)
-                tag = abjad.Tag(tag)
-                if existing_tag:
-                    tag = existing_tag.prepend(tag)
-                alternate = (color, tag.prepend('SM15'))
-                wrapper._alternate = alternate
         else:
             tag = tag.prepend('SM8')
             wrapper.tag = tag
@@ -5353,25 +5305,31 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"90"                              %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK:SM30 %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR:SM30 %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_invisible_line_segment                                               %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_invisible_line                                                      %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_invisible_line                                                      %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"                  %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
@@ -5387,7 +5345,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>

@@ -205,7 +205,6 @@ Bača API
    ~baca.Accelerando.Accelerando
    ~baca.ArrowLineSegment.ArrowLineSegment
    ~baca.LineSegment.LineSegment
-   ~baca.MetronomeMarkSpanner.MetronomeMarkSpanner
    ~baca.PaddedTuple.PaddedTuple
    ~baca.Ritardando.Ritardando
 
