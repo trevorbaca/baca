@@ -4219,6 +4219,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Explicit metronome marks color blue:
 
             >>> maker = baca.SegmentMaker(
+            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4228,7 +4229,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark('112'),
+            ...     baca.metronome_mark_new('112'),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -4261,31 +4262,37 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_invisible_line_segment                                               %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_invisible_line                                                      %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_invisible_line                                                      %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4312,6 +4319,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even after a previous metronome mark:
 
             >>> maker = baca.SegmentMaker(
+            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4321,7 +4329,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark('112'),
+            ...     baca.metronome_mark_new('112'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -4370,31 +4378,37 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_invisible_line_segment                                               %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_invisible_line                                                      %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_invisible_line                                                      %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4424,6 +4438,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Reapplied metronome marks color green:
 
             >>> maker = baca.SegmentMaker(
+            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4481,31 +4496,37 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"90"                              %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:REAPPLIED_METRONOME_MARK:SM36 %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'green4)                                                 %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                        \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:REAPPLIED_METRONOME_MARK_WITH_COLOR:SM36 %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_invisible_line_segment                                               %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_invisible_line                                                      %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_invisible_line                                                      %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'green4)                                         %! MMI3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"                  %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4535,6 +4556,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Redundant metronome marks color pink:
 
             >>> maker = baca.SegmentMaker(
+            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4544,8 +4566,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark('112'),
-            ...     baca.metronome_mark('112', selector=baca.leaf(1)),
+            ...     baca.metronome_mark_new('112'),
+            ...     baca.metronome_mark_new('112', selector=baca.leaf(1)),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -4578,55 +4600,45 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:EXPLICIT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'blue)                                                   %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:EXPLICIT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_invisible_line_segment                                               %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.right.text \markup {                                  %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \concat                                                                  %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         {                                                                    %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             \hspace                                                          %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%                 #0.5                                                         %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%             \line                                                            %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%                 {                                                            %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%                     \abjad-metronome-mark-markup #2 #0 #1 #"112"             %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%                 }                                                            %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         }                                                                    %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.text \markup {                                  %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'DeepPink1)                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    \concat                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        {                                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \hspace                                                      %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                #0.5                                                     %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            \line                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                {                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                    \abjad-metronome-mark-markup #2 #0 #1 #"112"         %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                                }                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        }                                                                %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_invisible_line                                                      %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% - \tweak bound-details.right.text \markup {                                  %! MMI2
+                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_invisible_line                                                      %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'blue)                                           %! MMI3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            - \tweak bound-details.right.text \markup {                                  %! MMI3
+                                \with-color                                                              %! MMI3
+                                    #(x11-color 'DeepPink1)                                              %! MMI3
+                                    \abjad-metronome-mark-markup #2 #0 #1 #"112"                         %! MMI3
+                                }                                                                        %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4653,6 +4665,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
+            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4662,7 +4675,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark('112'),
+            ...     baca.metronome_mark_new('112'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -4711,31 +4724,37 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            - \tweak Y-extent ##f                                                        %! SM29:METRONOME_MARK_SPANNER
-                        %@% - \tweak bound-details.left.text \markup {                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     \hspace                                                                  %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%         #1                                                                   %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                        %@%     }                                                                        %! SM27:REDUNDANT_METRONOME_MARK %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left.text \markup {                                   %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                \with-color                                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    #(x11-color 'DeepPink1)                                              %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    {                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                        \hspace                                                          %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                            #1                                                           %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                    }                                                                    %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                                }                                                                        %! SM15:REDUNDANT_METRONOME_MARK_WITH_COLOR %! SM29:METRONOME_MARK_SPANNER
-                            - \baca_invisible_line_segment                                               %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.right.padding 0                                       %! SM29:METRONOME_MARK_SPANNER
-                            - \tweak bound-details.left-broken.text ##f                                  %! SM29:METRONOME_MARK_SPANNER
-                            \startTextSpan                                                               %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI1
+                        %@% - \abjad_invisible_line                                                      %! MMI2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
+                        %@%     \concat                                                                  %! MMI2
+                        %@%         {                                                                    %! MMI2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI2
+                        %@%             \hspace                                                          %! MMI2
+                        %@%                 #0.5                                                         %! MMI2
+                        %@%         }                                                                    %! MMI2
+                        %@%     }                                                                        %! MMI2
+                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
+                        %@% \startTextSpan                                                               %! MMI2
+                            - \abjad_invisible_line                                                      %! MMI3
+                            - \tweak bound-details.left.text \markup {                                   %! MMI3
+                                \concat                                                                  %! MMI3
+                                    {                                                                    %! MMI3
+                                        \with-color                                                      %! MMI3
+                                            #(x11-color 'DeepPink1)                                      %! MMI3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI3
+                                        \hspace                                                          %! MMI3
+                                            #0.5                                                         %! MMI3
+                                    }                                                                    %! MMI3
+                                }                                                                        %! MMI3
+                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
+                            \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! SM29:METRONOME_MARK_SPANNER
+                            \stopTextSpan                                                                %! MMI4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5540,7 +5559,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(baca.Accelerando()),
+            ...     baca.metronome_mark_new(baca.Accelerando()),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -5637,7 +5656,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(baca.Accelerando()),
+            ...     baca.metronome_mark_new(baca.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -5868,8 +5887,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(baca.Accelerando()),
-            ...     baca.metronome_mark(
+            ...     baca.metronome_mark_new(baca.Accelerando()),
+            ...     baca.metronome_mark_new(
             ...         baca.Accelerando(),
             ...         selector=baca.leaf(1),
             ...         ),
@@ -6001,7 +6020,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark(baca.Accelerando()),
+            ...     baca.metronome_mark_new(baca.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
