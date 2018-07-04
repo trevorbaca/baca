@@ -236,6 +236,10 @@ Markup
 
    .. container:: inherited
 
+      .. automethod:: Markup.abjad_metronome_mark
+
+   .. container:: inherited
+
       .. automethod:: Markup.center_column
 
    .. container:: inherited
