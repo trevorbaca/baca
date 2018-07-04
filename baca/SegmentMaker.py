@@ -1390,7 +1390,23 @@ class SegmentMaker(abjad.SegmentMaker):
     def _attach_metronome_mark_text_span_indicators(self):
         if not self.do_not_attach_metronome_mark_spanner:
             return
-        for skip in baca.select(self.score['GlobalSkips']).skips():
+        skips = baca.select(self.score['GlobalSkips']).skips()
+        last_leaf_metronome_mark = abjad.inspect(skips[-1]).get_indicator(
+            abjad.MetronomeMark,
+            default=None,
+            )
+        add_right_text_to_me = None
+        if last_leaf_metronome_mark:
+            tempo_prototype = (
+                abjad.MetronomeMark,
+                baca.Accelerando,
+                baca.Ritardando,
+                )
+            for skip in reversed(skips[:-1]):
+                if abjad.inspect(skip).has_indicator(tempo_prototype):
+                    add_right_text_to_me = skip
+                    break
+        for skip in skips:
             inspector = abjad.inspect(skip)
             metronome_mark = inspector.get_indicator(
                 abjad.MetronomeMark,
@@ -1406,10 +1422,18 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if metronome_mark is not None:
                 metronome_mark._hide = True
+                wrapper = inspector.wrapper(abjad.MetronomeMark)
             if accelerando is not None:
                 accelerando._hide = True
             if ritardando is not None:
                 ritardando._hide = True
+            if skip is skips[-1]:
+                break
+            if metronome_mark is None and accelerando is not None:
+                wrapper = inspector.wrapper(baca.Accelerando)
+            if metronome_mark is None and ritardando is not None:
+                wrapper = inspector.wrapper(baca.Ritardando)
+            tag = wrapper.tag
             has_trend = accelerando is not None or ritardando is not None
             if metronome_mark is None and not has_trend:
                 continue
@@ -1429,22 +1453,78 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 tag='MMI1',
                 )
+            if add_right_text_to_me is skip:
+                right_text = last_leaf_metronome_mark._get_markup()
+            else:
+                right_text = None
             start_text_span = abjad.StartTextSpan(
                 left_broken_text=False,
                 left_text=left_text,
+                right_text=right_text,
                 style=style,
                 )
             abjad.attach(
                 start_text_span,
                 skip,
+                deactivate=True,
                 tag='MMI2',
+                )
+            string = str(tag)
+            if 'DEFAULT' in string:
+                status = 'default'
+            elif 'EXPLICIT' in string:
+                status = 'explicit'
+            elif 'REAPPLIED' in str(tag):
+                status = 'reapplied'
+            elif 'REDUNDANT' in str(tag):
+                status = 'redundant'
+            else:
+                status = None
+            assert status is not None
+            color = self._status_to_color[status]
+            tag = f'{status.upper()}_METRONOME_MARK_WITH_COLOR'
+            tag = abjad.Tag(tag)
+            color = abjad.SchemeColor(color)
+            left_text_with_color = left_text.with_color(color)
+
+            if right_text:
+                wrapper = abjad.inspect(skips[-1]).wrapper(abjad.MetronomeMark)
+                tag = wrapper.tag
+                string = str(tag)
+                if 'DEFAULT' in string:
+                    status = 'default'
+                elif 'EXPLICIT' in string:
+                    status = 'explicit'
+                elif 'REAPPLIED' in str(tag):
+                    status = 'reapplied'
+                elif 'REDUNDANT' in str(tag):
+                    status = 'redundant'
+                else:
+                    status = None
+                assert status is not None
+                color = self._status_to_color[status]
+                color = abjad.SchemeColor(color)
+                right_text_with_color = right_text.with_color(color)
+            else:
+                right_text_with_color = None
+            start_text_span = abjad.StartTextSpan(
+                left_broken_text=False,
+                left_text=left_text_with_color,
+                right_text=right_text_with_color,
+                style=style,
+                )
+            abjad.attach(
+                start_text_span,
+                skip,
+                deactivate=False,
+                tag='MMI3',
                 )
         last_skip = skip
         stop_text_span = abjad.StopTextSpan()
         abjad.attach(
             stop_text_span,
             last_skip,
-            tag='MMI3',
+            tag='MMI4',
             )
 
     def _attach_metronome_marks(self):
