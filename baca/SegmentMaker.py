@@ -1581,6 +1581,8 @@ class SegmentMaker(abjad.SegmentMaker):
             self._assert_valid_stage_number(stage_number)
             start, _ = self._stage_number_to_measure_indices(stage_number)
             skip = skips[start]
+            if not isinstance(directive, abjad.MetronomeMark):
+                continue
             if self.do_not_attach_metronome_mark_spanner:
                 abjad.attach(
                     directive,
