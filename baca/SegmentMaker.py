@@ -2802,7 +2802,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             )
                     else:
                         assert status in ('redundant', None), repr(status)
-                        if status is None or spanner._is_trending(leaf):
+                        if (status is None or
+                            (spanner is not None and
+                            spanner._is_trending(leaf))):
                             status = 'explicit'
                         wrappers = abjad.inspect(leaf).wrappers(prototype)
                         # lone metronome mark or lone tempo trend:
