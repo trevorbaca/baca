@@ -1547,42 +1547,48 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
             right_padding = None
-        if self.do_not_attach_metronome_mark_spanner:
-            return
-        spanner = MetronomeMarkSpanner(
-            left_broken_padding=0,
-            left_broken_text=False,
-            parenthesize=False,
-            right_padding=right_padding,
-            stem_height=self.metronome_mark_stem_height,
-            )
-        tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER)
-        string = 'mmspanner_right_broken'
-        left_broken = self.previous_metadata.get(string)
-        abjad.attach(
-            spanner,
-            skips,
-            left_broken=left_broken,
-            right_broken=self.mmspanner_right_broken,
-            tag=tag.prepend('SM29'),
-            )
-        if left_broken:
-            literal = abjad.LilyPondLiteral(
-                r'\stopTextSpan',
-                format_slot='closing',
+        if not self.do_not_attach_metronome_mark_spanner:
+            spanner = MetronomeMarkSpanner(
+                left_broken_padding=0,
+                left_broken_text=False,
+                parenthesize=False,
+                right_padding=right_padding,
+                stem_height=self.metronome_mark_stem_height,
                 )
+            tag = abjad.Tag(abjad.tags.METRONOME_MARK_SPANNER)
+            string = 'mmspanner_right_broken'
+            left_broken = self.previous_metadata.get(string)
             abjad.attach(
-                literal,
-                skips[0],
-                tag=abjad.Tag('-SEGMENT').prepend('SM39'),
+                spanner,
+                skips,
+                left_broken=left_broken,
+                right_broken=self.mmspanner_right_broken,
+                tag=tag.prepend('SM29'),
                 )
+            if left_broken:
+                literal = abjad.LilyPondLiteral(
+                    r'\stopTextSpan',
+                    format_slot='closing',
+                    )
+                abjad.attach(
+                    literal,
+                    skips[0],
+                    tag=abjad.Tag('-SEGMENT').prepend('SM39'),
+                    )
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
             self._assert_valid_stage_number(stage_number)
             start, _ = self._stage_number_to_measure_indices(stage_number)
             skip = skips[start]
-            spanner.attach(directive, skip, tag='SM30')
+            if self.do_not_attach_metronome_mark_spanner:
+                abjad.attach(
+                    directive,
+                    skip,
+                    tag='SM43'
+                    )
+            else:
+                spanner.attach(directive, skip, tag='SM30')
 
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
