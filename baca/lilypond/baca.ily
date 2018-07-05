@@ -22,6 +22,16 @@ baca_staccati =
                   (ly:music-property script 'tweaks)))
      script))
 
+%%% BAR LINES %%%
+
+baca_bar_line_visible = #(define-music-function
+    (parser location music) (ly:music?)
+    #{
+    \once \override Score.BarLine.transparent = ##f
+    $music
+    #}
+    )
+
 %%% BAR NUMBERS: OVAL %%%
 
 #(define-markup-command (oval layout props arg)
@@ -831,6 +841,16 @@ baca_new_spacing_section = #(define-music-function
     #{
     \set Score.proportionalNotationDuration = #(ly:make-moment n d)
     \newSpacingSection
+    $music
+    #}
+    )
+
+%%% TIME SIGNATURE COMMANDS %%%
+
+baca_time_signature_color = #(define-music-function
+    (parser location color music) (symbol? ly:music?)
+    #{
+    \once \override Score.TimeSignature.color = #(x11-color #'color)
     $music
     #}
     )
