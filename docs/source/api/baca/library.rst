@@ -23,8 +23,6 @@ library
    :nosignatures:
 
    ~apply_tweaks
-   ~dashed_arrow
-   ~dashed_hook
    ~lbsd
    ~literal
    ~map
@@ -45,10 +43,6 @@ library
    ~timeline
 
 .. autofunction:: apply_tweaks
-
-.. autofunction:: dashed_arrow
-
-.. autofunction:: dashed_hook
 
 .. autofunction:: lbsd
 

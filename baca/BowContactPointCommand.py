@@ -63,12 +63,11 @@ class BowContactPointCommand(Command):
         bcps = abjad.CyclicTuple(bcps)
         lts = baca.select(argument).lts()
         total = len(lts)
-
         add_right_text_to_me = None
         if not self.final_spanner:
             rest_count, nonrest_count = 0, 0
             for lt in reversed(lts):
-                if isinstance(lt.head, abjad.Rest):
+                if self._is_rest(lt.head):
                     rest_count += 1
                 else:
                     if 0 < rest_count and nonrest_count == 0:
@@ -78,9 +77,8 @@ class BowContactPointCommand(Command):
                         add_right_text_to_me = lt.head
                         break
                     nonrest_count += 1
-
         if (self.final_spanner and
-            not isinstance(lts[-1], abjad.Rest) and
+            not self._is_rest(lts[-1]) and
             len(lts[-1]) == 1):
             next_leaf_after_argument = abjad.inspect(lts[-1][-1]).get_leaf(1)
             if next_leaf_after_argument is None:
@@ -88,7 +86,6 @@ class BowContactPointCommand(Command):
                     'can not attach final spanner:'
                     ' argument includes end of score.'
                     )
-
         previous_bcp = None
         i = 0
         for lt in lts:
@@ -97,15 +94,15 @@ class BowContactPointCommand(Command):
                 )
             if (not self.final_spanner and
                 lt is lts[-1] and
-                not isinstance(lt.head, abjad.Rest)):
+                not self._is_rest(lt.head)):
                 abjad.attach(stop_text_span, lt.head)
                 break
             previous_leaf = abjad.inspect(lt.head).get_leaf(-1)
-            if (isinstance(lt.head, abjad.Rest) and
-                isinstance(previous_leaf, (abjad.Rest, type(None)))):
+            if (self._is_rest(lt.head) and
+                (self._is_rest(previous_leaf) or previous_leaf is None)):
                 continue
             if (isinstance(lt.head, abjad.Note) and
-                isinstance(previous_leaf, abjad.Rest) and
+                self._is_rest(previous_leaf) and
                 previous_bcp is not None):
                 numerator, denominator = previous_bcp
             else:
@@ -113,7 +110,6 @@ class BowContactPointCommand(Command):
                 numerator, denominator = bcp
                 i += 1
                 next_bcp = bcps[i]
-
             markup = abjad.Markup.fraction(numerator, denominator).upright()
             if lt is lts[-1]:
                 if self.final_spanner:
@@ -130,7 +126,6 @@ class BowContactPointCommand(Command):
                 right_markup = right_markup.upright()
             else:
                 right_markup = None
-                
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
                 left_text=markup,
@@ -138,17 +133,15 @@ class BowContactPointCommand(Command):
                 style=style,
                 )
             abjad.attach(start_text_span, lt.head)
-
             if 0 < i:
                 abjad.attach(stop_text_span, lt.head)
             if lt is lts[-1] and self.final_spanner:
                 abjad.attach(stop_text_span, next_leaf_after_argument)
-            
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
-            if isinstance(lt.head, abjad.Rest):
+            if self._is_rest(lt.head):
                 pass
-            elif isinstance(previous_leaf, abjad.Rest) or previous_bcp is None:
+            elif self._is_rest(previous_leaf) or previous_bcp is None:
                 if bcp_fraction > next_bcp_fraction:
                     abjad.attach(abjad.Articulation('upbow'), lt.head)
                 elif bcp_fraction < next_bcp_fraction:
@@ -162,6 +155,17 @@ class BowContactPointCommand(Command):
             previous_bcp = bcp
 
     ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _is_rest(argument):
+        prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
+        if isinstance(argument, prototype):
+            return True
+        annotation = abjad.inspect(argument).get_annotation('is_sounding')
+        if annotation is False:
+            raise Exception('asdf')
+            return True
+        return False
 
     @staticmethod
     def _validate_bcps(bcps):

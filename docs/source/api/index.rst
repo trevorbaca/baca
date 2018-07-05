@@ -203,8 +203,6 @@ Bača API
    :nosignatures:
 
    ~baca.Accelerando.Accelerando
-   ~baca.ArrowLineSegment.ArrowLineSegment
-   ~baca.LineSegment.LineSegment
    ~baca.PaddedTuple.PaddedTuple
    ~baca.Ritardando.Ritardando
 
@@ -388,8 +386,6 @@ Function library.
    :nosignatures:
 
    ~baca.library.apply_tweaks
-   ~baca.library.dashed_arrow
-   ~baca.library.dashed_hook
    ~baca.library.lbsd
    ~baca.library.literal
    ~baca.library.map

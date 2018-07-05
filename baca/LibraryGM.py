@@ -12,7 +12,6 @@ from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
 from .InstrumentChangeCommand import InstrumentChangeCommand
 from .LabelCommand import LabelCommand
-from .LineSegment import LineSegment
 from .LBSD import LBSD
 from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
@@ -577,38 +576,6 @@ class LibraryGM(abjad.AbjadObject):
             start_pitch=start_pitch,
             stop_pitch=stop_pitch,
             selector=selector,
-            )
-
-    # TODO: move to library.py
-    @staticmethod
-    def invisible_line_segment() -> LineSegment:
-        r"""
-        Makes invisible line segment.
-
-        ..  container:: example
-
-            >>> abjad.f(baca.invisible_line_segment())
-            baca.LineSegment(
-                dash_period=0,
-                left_broken_text=False,
-                left_hspace=0.25,
-                left_stencil_align_direction_y=Center,
-                right_broken_padding=0,
-                right_broken_text=False,
-                right_padding=1.5,
-                right_stencil_align_direction_y=Center,
-                )
-
-        """
-        return LineSegment(
-            dash_period=0,
-            left_broken_text=False,
-            left_hspace=0.25,
-            left_stencil_align_direction_y=abjad.Center,
-            right_broken_padding=0,
-            right_broken_text=False,
-            right_padding=1.5,
-            right_stencil_align_direction_y=abjad.Center,
             )
 
     @staticmethod

@@ -364,8 +364,6 @@ baca
    :hidden:
 
    Accelerando
-   ArrowLineSegment
-   LineSegment
    PaddedTuple
    Ritardando
 
@@ -373,8 +371,6 @@ baca
    :nosignatures:
 
    ~Accelerando.Accelerando
-   ~ArrowLineSegment.ArrowLineSegment
-   ~LineSegment.LineSegment
    ~PaddedTuple.PaddedTuple
    ~Ritardando.Ritardando
 

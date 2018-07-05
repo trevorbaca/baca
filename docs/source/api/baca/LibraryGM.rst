@@ -30,7 +30,6 @@ LibraryGM
       imbricate
       instrument
       interpolate_staff_positions
-      invisible_line_segment
       label
       laissez_vibrer
       long_fermata
@@ -96,8 +95,6 @@ LibraryGM
    .. automethod:: LibraryGM.instrument
 
    .. automethod:: LibraryGM.interpolate_staff_positions
-
-   .. automethod:: LibraryGM.invisible_line_segment
 
    .. automethod:: LibraryGM.label
 

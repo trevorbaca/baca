@@ -4,14 +4,12 @@ Function library.
 import abjad
 import typing
 from . import typings
-from .ArrowLineSegment import ArrowLineSegment
 from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
-from .LineSegment import LineSegment
 from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
 from .PitchCommand import PitchCommand
@@ -31,39 +29,6 @@ def apply_tweaks(argument, tweaks):
         tuples = manager_._get_attribute_tuples()
         for attribute, value in tuples:
             setattr(manager, attribute, value)
-
-def dashed_arrow() -> ArrowLineSegment:
-    """
-    Makes dashed arrow line segment.
-    """
-    return ArrowLineSegment(
-        dash_fraction=0.25,
-        dash_period=1.5,
-        left_broken_text=False,
-        left_hspace=0.5,
-        right_broken_arrow=False,
-        right_broken_padding=0,
-        right_broken_text=False,
-        right_padding=0.5,
-        )
-
-def dashed_hook() -> LineSegment:
-    """
-    Makes dashed hook line segment.
-    """
-    return LineSegment(
-        dash_fraction=0.25,
-        dash_period=1.5,
-        left_broken_text=False,
-        left_hspace=0.5,
-        left_stencil_align_direction_y=0,
-        right_broken_arrow=False,
-        right_broken_padding=0,
-        right_broken_text=False,
-        # right padding to avoid last leaf in spanner
-        right_padding=1.25,
-        right_text=abjad.Markup.draw_line(0, -1),
-        )
 
 def lbsd(
     y_offset: int,
