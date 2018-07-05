@@ -608,6 +608,7 @@ class RhythmCommand(Command):
         """
         return self._division_maker
 
+    # TODO: remove?
     @property
     def left_broken(self) -> typing.Optional[bool]:
         """
@@ -976,6 +977,7 @@ class RhythmCommand(Command):
         """
         return self._rhythm_maker
 
+    # TODO: remove?
     @property
     def right_broken(self) -> typing.Optional[bool]:
         """

@@ -172,8 +172,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_margin_markups',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
-        '_mmspanner_right_broken',
-        '_mmspanner_right_padding',
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
@@ -289,11 +287,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
         metronome_mark_stem_height: typing.Optional[typings.Number] = 1,
         metronome_marks: abjad.OrderedDict = None,
-        mmspanner_right_broken: bool = None,
-        mmspanner_right_padding: typing.Union[
-            typings.Number,
-            typing.Tuple[typings.Number, abjad.Tag]
-            ] = 0,
         score_template: ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skip_wellformedness_checks: bool = None,
@@ -358,10 +351,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._metronome_mark_stem_height = metronome_mark_stem_height
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
-        self._mmspanner_right_broken = mmspanner_right_broken
-        self._mmspanner_right_padding: typing.Union[
-            typings.Number, typing.Tuple[typings.Number, abjad.Tag]
-            ] = mmspanner_right_padding
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
         self._score_template = score_template
@@ -1552,24 +1541,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_metronome_marks(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
-        if isinstance(self.mmspanner_right_padding, tuple):
-            right_padding, tag = self.mmspanner_right_padding
-        else:
-            right_padding, tag, = self.mmspanner_right_padding, None
-        if right_padding is not None:
-            assert isinstance(right_padding, (int, float)), repr(right_padding)
-        if tag is not None:
-            tag = abjad.Tag(tag).prepend('SM40')
-            string = r'\once \override'
-            string += ' TextSpanner.bound-details.right.padding'
-            string += rf' = {right_padding}'
-            literal = abjad.LilyPondLiteral(string)
-            abjad.attach(
-                literal,
-                skips[0],
-                tag=tag,
-                )
-            right_padding = None
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -1887,9 +1858,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
             metadata['last_measure_is_fermata'] = True
-        if self.mmspanner_right_broken:
-            metadata['mmspanner_right_broken'] = \
-                self.mmspanner_right_broken
         metadata['persistent_indicators'] = \
             self._collect_persistent_indicators()
         if self.segment_name is not None:
@@ -5417,24 +5385,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when segment-maker outputs MIDI.
         """
         return self._midi
-
-    @property
-    def mmspanner_right_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when metronome mark spanner is right-broken.
-        """
-        return self._mmspanner_right_broken
-
-    @property
-    def mmspanner_right_padding(
-        self
-        ) -> typing.Union[
-        typings.Number, typing.Tuple[typings.Number, abjad.Tag],
-        ]:
-        """
-        Gets metronome mark spanner right padding.
-        """
-        return self._mmspanner_right_padding
 
     @property
     def nonfirst_segment_lilypond_include(self) -> typing.Optional[bool]:

@@ -233,6 +233,10 @@ class SpannerCommand(Command):
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
+        if self.left_broken:
+            spanner = abjad.new(spanner, left_broken=self.left_broken)
+        if self.right_broken:
+            spanner = abjad.new(spanner, right_broken=self.right_broken)
         self._apply_tweaks(spanner)
         if self.detach_first:
             abjad.detach(
@@ -243,8 +247,6 @@ class SpannerCommand(Command):
             spanner,
             leaves,
             deactivate=self.deactivate,
-            left_broken=self.left_broken,
-            right_broken=self.right_broken,
             tag=self.tag.prepend('SC'),
             )
         return spanner

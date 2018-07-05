@@ -132,13 +132,12 @@ class TieCorrectionCommand(Command):
         new_leaves = abjad.select(new_leaves)
         for leaf in new_leaves:
             abjad.detach(abjad.Tie, leaf)
-        abjad.attach(
+        new_tie = abjad.new(
             new_tie,
-            new_leaves,
             left_broken=left_broken,
             right_broken=right_broken,
-            tag='TCC',
             )
+        abjad.attach(new_tie, new_leaves, tag='TCC')
 
     @staticmethod
     def _sever_tie(current_leaf, direction, repeat):

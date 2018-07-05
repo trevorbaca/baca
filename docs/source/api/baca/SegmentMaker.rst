@@ -54,8 +54,6 @@ SegmentMaker
       metronome_mark_stem_height
       metronome_marks
       midi
-      mmspanner_right_broken
-      mmspanner_right_padding
       nonfirst_segment_lilypond_include
       previous_metadata
       score_template
@@ -188,10 +186,6 @@ SegmentMaker
    .. autoattribute:: SegmentMaker.metronome_marks
 
    .. autoattribute:: SegmentMaker.midi
-
-   .. autoattribute:: SegmentMaker.mmspanner_right_broken
-
-   .. autoattribute:: SegmentMaker.mmspanner_right_padding
 
    .. autoattribute:: SegmentMaker.nonfirst_segment_lilypond_include
 
