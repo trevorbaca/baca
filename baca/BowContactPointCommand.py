@@ -116,7 +116,7 @@ class BowContactPointCommand(Command):
                     style = 'solid_line_with_arrow'
                 else:
                     style = 'invisible_line'
-            elif isinstance(lt.head, (abjad.Note, abjad.Chord)):
+            elif not self._is_rest(lt.head):
                 style = 'solid_line_with_arrow'
             else:
                 style = 'invisible_line'
@@ -163,7 +163,6 @@ class BowContactPointCommand(Command):
             return True
         annotation = abjad.inspect(argument).get_annotation('is_sounding')
         if annotation is False:
-            raise Exception('asdf')
             return True
         return False
 
