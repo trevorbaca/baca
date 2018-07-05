@@ -1761,7 +1761,7 @@ class LibraryTZ(abjad.AbjadObject):
             )
     
     @staticmethod
-    def new_transition(
+    def transition(
         *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
         selector: typings.Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None,
@@ -3319,7 +3319,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.new_transition(
+            ...     baca.transition(
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
             ...         ),
@@ -3412,7 +3412,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.text_spanner_staff_padding(6),
             ...         ),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.new_transition(
+            ...     baca.transition(
             ...         baca.markups.pont(),
             ...         baca.markups.ord(),
             ...         selector=baca.tuplets()[1:2].tleaves(),
