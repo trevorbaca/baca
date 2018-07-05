@@ -22,7 +22,6 @@ class MetronomeMarkCommand(Command):
 
     __slots__ = (
         '_key',
-        '_new_style',
         '_redundant',
         '_tags',
         )
@@ -34,7 +33,6 @@ class MetronomeMarkCommand(Command):
         *,
         deactivate: bool = None,
         key: typing.Union[str, Accelerando, Ritardando] = None,
-        new_style: bool = None,
         redundant: bool = None,
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
@@ -43,9 +41,6 @@ class MetronomeMarkCommand(Command):
         if key is not None:
             assert isinstance(key, (str, Accelerando, Ritardando))
         self._key = key
-        if new_style is not None:
-            new_style = bool(new_style)
-        self._new_style = new_style
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
@@ -60,7 +55,6 @@ class MetronomeMarkCommand(Command):
         Applies command to result of selector called on ``argument``.
         """
         from .SegmentMaker import SegmentMaker
-        assert self.new_style, repr(self)
         if argument is None:
             return
         if self.key is None:
@@ -80,7 +74,6 @@ class MetronomeMarkCommand(Command):
             return
         leaf = baca.select(argument).leaf(0)
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
-        assert self.new_style
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -103,13 +96,6 @@ class MetronomeMarkCommand(Command):
         Gets metronome mark key.
         """
         return self._key
-
-    @property
-    def new_style(self) -> typing.Optional[bool]:
-        """
-        Is true when new style.
-        """
-        return self._new_style
 
     @property
     def redundant(self) -> typing.Optional[bool]:
