@@ -128,6 +128,7 @@ class BowContactPointCommand(Command):
                 right_markup = None
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
+                left_broken_text=False,
                 left_text=markup,
                 right_text=right_markup,
                 style=style,
@@ -272,6 +273,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                                 [
                 <BLANKLINE>
@@ -290,6 +292,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -307,6 +310,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -325,6 +329,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
@@ -343,6 +348,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                                 [
                 <BLANKLINE>
@@ -361,6 +367,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 - \tweak bound-details.right.text \markup {
                                     \upright
                                         \fraction
@@ -389,6 +396,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                                 [
                 <BLANKLINE>
@@ -407,6 +415,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -424,6 +433,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -442,6 +452,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
@@ -460,6 +471,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 \bacaStartTextSpanBCP
                                 [
                 <BLANKLINE>
@@ -478,6 +490,7 @@ class BowContactPointCommand(Command):
                                                 #0.5
                                         }
                                     }
+                                - \tweak bound-details.left-broken.text ##f
                                 - \tweak bound-details.right.text \markup {
                                     \upright
                                         \fraction
