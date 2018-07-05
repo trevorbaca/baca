@@ -4219,7 +4219,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Explicit metronome marks color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4229,7 +4228,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new('112'),
+            ...     baca.metronome_mark('112'),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -4319,7 +4318,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even after a previous metronome mark:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4329,7 +4327,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new('112'),
+            ...     baca.metronome_mark('112'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -4438,7 +4436,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Reapplied metronome marks color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4556,7 +4553,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Redundant metronome marks color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4566,8 +4562,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new('112'),
-            ...     baca.metronome_mark_new('112', selector=baca.leaf(1)),
+            ...     baca.metronome_mark('112'),
+            ...     baca.metronome_mark('112', selector=baca.leaf(1)),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -4665,7 +4661,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_attach_metronome_mark_spanner=True,
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
@@ -4675,7 +4670,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new('112'),
+            ...     baca.metronome_mark('112'),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -5559,7 +5554,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new(baca.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     )
             >>> maker(
             ...     'MusicVoice',
@@ -5662,7 +5657,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new(baca.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
@@ -5905,8 +5900,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new(baca.Accelerando()),
-            ...     baca.metronome_mark_new(
+            ...     baca.metronome_mark(baca.Accelerando()),
+            ...     baca.metronome_mark(
             ...         baca.Accelerando(),
             ...         selector=baca.leaf(1),
             ...         ),
@@ -6049,7 +6044,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker(
             ...     'GlobalSkips',
-            ...     baca.metronome_mark_new(baca.Accelerando()),
+            ...     baca.metronome_mark(baca.Accelerando()),
             ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(

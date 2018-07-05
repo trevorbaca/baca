@@ -28,7 +28,6 @@ SegmentMaker
       color_octaves
       color_out_of_range_pitches
       color_repeat_pitch_classes
-      do_not_attach_metronome_mark_spanner
       do_not_check_persistence
       do_not_include_layout_ly
       fermata_measure_staff_line_count
@@ -130,8 +129,6 @@ SegmentMaker
    .. autoattribute:: SegmentMaker.color_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.color_repeat_pitch_classes
-
-   .. autoattribute:: SegmentMaker.do_not_attach_metronome_mark_spanner
 
    .. autoattribute:: SegmentMaker.do_not_check_persistence
 

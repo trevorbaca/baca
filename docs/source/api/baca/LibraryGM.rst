@@ -49,7 +49,6 @@ LibraryGM
       marcato
       margin_markup
       metronome_mark
-      metronome_mark_new
       minimum_duration
       mleaves
       mmrest_text_color
@@ -133,8 +132,6 @@ LibraryGM
    .. automethod:: LibraryGM.margin_markup
 
    .. automethod:: LibraryGM.metronome_mark
-
-   .. automethod:: LibraryGM.metronome_mark_new
 
    .. automethod:: LibraryGM.minimum_duration
 

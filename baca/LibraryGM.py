@@ -1532,24 +1532,6 @@ class LibraryGM(abjad.AbjadObject):
     def metronome_mark(
         key: str,
         *,
-        selector: typings.Selector = 'baca.leaf(0)',
-        redundant: bool = None,
-        ) -> typing.Optional[MetronomeMarkCommand]:
-        """
-        Attaches metronome mark matching ``key`` metronome mark manifest.
-        """
-        if redundant is True:
-            return None
-        return MetronomeMarkCommand(
-            key=key,
-            redundant=redundant,
-            selector=selector,
-            )
-
-    @staticmethod
-    def metronome_mark_new(
-        key: str,
-        *,
         redundant: bool = None,
         selector: typings.Selector = 'baca.leaf(0)',
         ) -> typing.Optional[MetronomeMarkCommand]:

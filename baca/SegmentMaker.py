@@ -147,7 +147,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
-        '_do_not_attach_metronome_mark_spanner',
         '_do_not_check_persistence',
         '_do_not_include_layout_ly',
         '_duration',
@@ -262,7 +261,6 @@ class SegmentMaker(abjad.SegmentMaker):
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
         color_repeat_pitch_classes: bool = True,
-        do_not_attach_metronome_mark_spanner: bool = True,
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
@@ -309,8 +307,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
-        self._do_not_attach_metronome_mark_spanner = \
-            do_not_attach_metronome_mark_spanner
         self._do_not_check_persistence = do_not_check_persistence
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration: typing.Optional[abjad.Duration] = None
@@ -1376,8 +1372,6 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _attach_metronome_mark_text_span_indicators(self):
-        if not self.do_not_attach_metronome_mark_spanner:
-            return
         indicator_count = 0
         skips = baca.select(self.score['GlobalSkips']).skips()
         last_leaf_metronome_mark = abjad.inspect(skips[-1]).get_indicator(
@@ -1547,16 +1541,13 @@ class SegmentMaker(abjad.SegmentMaker):
             self._assert_valid_stage_number(stage_number)
             start, _ = self._stage_number_to_measure_indices(stage_number)
             skip = skips[start]
-            if self.do_not_attach_metronome_mark_spanner:
-                if isinstance(directive, abjad.Fermata):
-                    continue
-                abjad.attach(
-                    directive,
-                    skip,
-                    tag='SM43'
-                    )
-            else:
-                spanner.attach(directive, skip, tag='SM30')
+            if isinstance(directive, abjad.Fermata):
+                continue
+            abjad.attach(
+                directive,
+                skip,
+                tag='SM43'
+                )
 
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
@@ -2739,7 +2730,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     baca.Ritardando,
                     )
                 if isinstance(previous_indicator, prototype):
-                    assert self.do_not_attach_metronome_mark_spanner
                     if status == 'reapplied':
                         wrapper = abjad.attach(
                             previous_indicator,
@@ -3791,13 +3781,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns true, false or none.
         """
         return self._color_repeat_pitch_classes
-
-    @property
-    def do_not_attach_metronome_mark_spanner(self) -> typing.Optional[bool]:
-        """
-        Is true when segment-maker does not attach metronome mark spanner.
-        """
-        return self._do_not_attach_metronome_mark_spanner
 
     @property
     def do_not_check_persistence(self) -> typing.Optional[bool]:
