@@ -2909,13 +2909,8 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         if wrapper.tag:
             tag = wrapper.tag.prepend(tag)
-        if wrapper.spanner is not None:
-            tag = tag.prepend('SM27')
-            wrapper.deactivate = True
-            wrapper.tag = tag
-        else:
-            tag = tag.prepend('SM8')
-            wrapper.tag = tag
+        tag = tag.prepend('SM8')
+        wrapper.tag = tag
 
     def _shift_clefs_into_fermata_measures(self):
         fermata_stop_offsets = self._fermata_stop_offsets[:]
@@ -3071,10 +3066,6 @@ class SegmentMaker(abjad.SegmentMaker):
         indicator = wrapper.indicator
         existing_tag = wrapper.tag
         tempo_trend = (baca.Accelerando, baca.Ritardando)
-        if (wrapper.spanner and
-            wrapper.spanner._is_trending(wrapper.component) and
-            not isinstance(wrapper.indicator, tempo_trend)):
-            status = 'explicit'
         if (isinstance(indicator, abjad.MetronomeMark) and
             abjad.inspect(leaf).has_indicator(tempo_trend)):
             status = 'explicit'
