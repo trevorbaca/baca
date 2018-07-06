@@ -146,7 +146,7 @@ class TieCorrectionCommand(Command):
             return
         if direction is None:
             direction = abjad.Right
-        leaf_index = current_tie.index(current_leaf)
+        leaf_index = current_tie.leaves.index(current_leaf)
         current_tie._fracture(leaf_index, direction=direction)
             
     ### PUBLIC PROPERTIES ###

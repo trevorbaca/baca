@@ -62,25 +62,6 @@ PitchTreeSpanner
 
       <hr/>
 
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.index
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.start_command
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.stop_command
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
