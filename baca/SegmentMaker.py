@@ -1462,7 +1462,6 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 right_text = None
             start_text_span = abjad.StartTextSpan(
-                left_broken_text=False,
                 left_text=left_text,
                 right_text=right_text,
                 style=style,
@@ -1512,7 +1511,6 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 right_text_with_color = None
             start_text_span = abjad.StartTextSpan(
-                left_broken_text=False,
                 left_text=left_text_with_color,
                 right_text=right_text_with_color,
                 style=style,
@@ -5256,7 +5254,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_invisible_line                                                      %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -5269,7 +5266,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4

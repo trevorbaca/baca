@@ -4271,7 +4271,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_invisible_line                                                      %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -4284,7 +4283,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -4386,7 +4384,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_invisible_line                                                      %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -4399,7 +4396,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -4503,7 +4499,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_invisible_line                                                      %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -4516,7 +4511,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -4606,7 +4600,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% - \tweak bound-details.right.text \markup {                                  %! MMI2
                         %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! MMI2
                         %@%     }                                                                        %! MMI2
@@ -4622,7 +4615,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             - \tweak bound-details.right.text \markup {                                  %! MMI3
                                 \with-color                                                              %! MMI3
                                     #(x11-color 'DeepPink1)                                              %! MMI3
@@ -4729,7 +4721,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_invisible_line                                                      %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -4742,7 +4733,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5599,7 +5589,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_dashed_line_with_arrow                                              %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -5614,7 +5603,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5718,7 +5706,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_dashed_line_with_arrow                                              %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -5733,7 +5720,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5839,7 +5825,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_dashed_line_with_arrow                                              %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -5854,7 +5839,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5949,7 +5933,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_dashed_line_with_arrow                                              %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -5964,7 +5947,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5983,7 +5965,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_dashed_line_with_arrow                                              %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -5998,7 +5979,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
@@ -6105,7 +6085,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! MMI2
                         %@%         }                                                                    %! MMI2
                         %@%     }                                                                        %! MMI2
-                        %@% - \tweak bound-details.left-broken.text ##f                                  %! MMI2
                         %@% \startTextSpan                                                               %! MMI2
                             - \abjad_dashed_line_with_arrow                                              %! MMI3
                             - \tweak bound-details.left.text \markup {                                   %! MMI3
@@ -6120,7 +6099,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! MMI3
                                     }                                                                    %! MMI3
                                 }                                                                        %! MMI3
-                            - \tweak bound-details.left-broken.text ##f                                  %! MMI3
                             \startTextSpan                                                               %! MMI3
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
