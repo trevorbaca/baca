@@ -1440,6 +1440,7 @@ class LibraryTZ(abjad.AbjadObject):
                 item_markup = abjad.LilyPondLiteral(string)
             else:
                 item_markup = item
+                assert isinstance(item_markup, abjad.Markup)
                 item_markup = item_markup.upright()
             prototype = (abjad.LilyPondLiteral, abjad.Markup)
             assert isinstance(item_markup, prototype)
@@ -1449,12 +1450,15 @@ class LibraryTZ(abjad.AbjadObject):
                 right_text = items_[i + 2]
             else:
                 right_text = items_[i + 1]
+            right_markup: typing.Union[abjad.LilyPondLiteral, abjad.Markup]
             if isinstance(right_text, str):
                 if 'hook' not in style:
                     string = rf'\markup \baca-right "{right_text}"'
                     right_markup = abjad.LilyPondLiteral(string)
                 else:
-                    right_markup = abjad.Markup(right_text).upright()
+                    right_markup = abjad.Markup(right_text)
+                    assert isinstance(right_markup, abjad.Markup)
+                    right_markup = right_markup.upright()
             else:
                 assert isinstance(right_text, abjad.Markup)
                 right_markup = right_text.upright()
@@ -1477,6 +1481,7 @@ class LibraryTZ(abjad.AbjadObject):
                 library.apply_tweaks(start_text_span, tweaks)
             # kerns bookended hook
             if 'hook' in style:
+                assert isinstance(right_markup, abjad.Markup)
                 line = abjad.Markup.draw_line(0, -1)
                 line = line.raise_(-1)
                 hspace = abjad.Markup.hspace(0.75)

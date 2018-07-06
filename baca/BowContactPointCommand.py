@@ -42,7 +42,7 @@ class BowContactPointCommand(Command):
             assert callable(helper), repr(helper)
         self._helper = helper
         self._validate_tweaks(tweaks)
-        self._tags = ['BACA_BCP_COMMAND']
+        self._tags = [abjad.Tag('BACA_BCP_COMMAND')]
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -126,12 +126,11 @@ class BowContactPointCommand(Command):
                 style = 'solid_line_with_arrow'
             else:
                 style = 'invisible_line'
+            right_literal = None
             if lt.head is add_right_text_to_me:
                 numerator, denominator = next_bcp
                 string = rf'\markup \baca-bcp-right #{numerator} #{denominator}'
                 right_literal = abjad.LilyPondLiteral(string)
-            else:
-                right_literal = None
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
                 left_text=left_literal,
@@ -431,7 +430,7 @@ class BowContactPointCommand(Command):
         return r'\bacaStopTextSpanBCP'
 
     @property
-    def tag(self) -> str:
+    def tag(self) -> abjad.Tag:
         """
         Gets tag.
 
