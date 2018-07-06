@@ -50,7 +50,6 @@ SegmentMaker
       measures_per_stage
       metadata
       metronome_mark_measure_map
-      metronome_mark_stem_height
       metronome_marks
       midi
       nonfirst_segment_lilypond_include
@@ -177,8 +176,6 @@ SegmentMaker
    .. autoattribute:: SegmentMaker.metadata
 
    .. autoattribute:: SegmentMaker.metronome_mark_measure_map
-
-   .. autoattribute:: SegmentMaker.metronome_mark_stem_height
 
    .. autoattribute:: SegmentMaker.metronome_marks
 

@@ -171,7 +171,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_margin_markups',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
-        '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
         '_nonfirst_segment_lilypond_include',
@@ -283,7 +282,6 @@ class SegmentMaker(abjad.SegmentMaker):
         margin_markups: abjad.OrderedDict = None,
         measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
-        metronome_mark_stem_height: typing.Optional[typings.Number] = 1,
         metronome_marks: abjad.OrderedDict = None,
         score_template: ScoreTemplate = None,
         segment_directory: abjad.Path = None,
@@ -344,7 +342,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 measures_per_stage = []
         self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
-        self._metronome_mark_stem_height = metronome_mark_stem_height
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
@@ -5349,13 +5346,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
         """
         return self._metronome_mark_measure_map
-
-    @property
-    def metronome_mark_stem_height(self) -> typing.Optional[typings.Number]:
-        """
-        Gets metronome mark stem height.
-        """
-        return self._metronome_mark_stem_height
 
     @property
     def metronome_marks(self) -> typing.Optional[abjad.OrderedDict]:

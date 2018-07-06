@@ -18,7 +18,6 @@ LibraryTZ
       :nosignatures:
 
       new_text_spanner
-      new_transition
       tenuto
       text_script_color
       text_script_down
@@ -45,6 +44,7 @@ LibraryTZ
       tie_up
       time_signature_extra_offset
       time_signature_transparent
+      transition
       tremolo_down
       trill_spanner
       trill_spanner_staff_padding
@@ -90,8 +90,6 @@ LibraryTZ
       :class: class-header
 
    .. automethod:: LibraryTZ.new_text_spanner
-
-   .. automethod:: LibraryTZ.new_transition
 
    .. automethod:: LibraryTZ.tenuto
 
@@ -144,6 +142,8 @@ LibraryTZ
    .. automethod:: LibraryTZ.time_signature_extra_offset
 
    .. automethod:: LibraryTZ.time_signature_transparent
+
+   .. automethod:: LibraryTZ.transition
 
    .. automethod:: LibraryTZ.tremolo_down
 
