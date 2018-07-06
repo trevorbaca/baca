@@ -1672,10 +1672,15 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
+        shape_to_style = {
+            '=>': 'dashed_line_with_arrow',
+            '=|': 'dashed_line_with_hook',
+            '->': 'solid_line_with_arrow',
+            '-|': 'solid_line_with_hook',
+            }
         bundles = []
         if len(items) == 1:
             raise NotImplementedError('implement lone item')
-        shape_to_style = abjad.StartTextSpan._shape_to_style
         if lilypond_id is None:
             command = r'\stopTextSpan'
         elif lilypond_id == 1:
