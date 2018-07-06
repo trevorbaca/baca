@@ -44,7 +44,6 @@ class LibraryTZ(abjad.AbjadObject):
         leak: bool = None,
         #left_broken: bool = None,
         lilypond_id: int = None,
-        no_upright: bool = None,
         piece_selector: typings.Selector = 'baca.group()',
         #right_broken: bool = None,
         selector: typings.Selector = 'baca.tleaves()',
@@ -1701,8 +1700,7 @@ class LibraryTZ(abjad.AbjadObject):
             else:
                 item_markup = item
             assert isinstance(item_markup, abjad.Markup)
-            if not no_upright:
-                item_markup = item_markup.upright()
+            item_markup = item_markup.upright()
             style = 'invisible_line'
             if items_[i + 1] in shape_to_style:
                 style = shape_to_style[items_[i + 1]]
@@ -1714,8 +1712,7 @@ class LibraryTZ(abjad.AbjadObject):
             else:
                 assert isinstance(right_text, abjad.Markup)
                 right_markup = right_text
-            if not no_upright:
-                right_markup = right_markup.upright()
+            right_markup = right_markup.upright()
             if lilypond_id is None:
                 command = r'\startTextSpan'
             elif lilypond_id == 1:
@@ -3059,7 +3056,6 @@ class LibraryTZ(abjad.AbjadObject):
         *tweaks: abjad.LilyPondTweakManager,
         leak: bool = None,
         lilypond_id: int = None,
-        no_upright: bool = None,
         right_padding: typing.Optional[typings.Number] = 1.25,
         selector: typings.Selector = 'baca.tleaves()',
         ) -> Suite:
@@ -3218,11 +3214,10 @@ class LibraryTZ(abjad.AbjadObject):
         else:
             assert isinstance(text, str), repr(text)
             markup = Markup(text)
-        if no_upright is not True:
-            string = format(markup)
-            if 'upright' in string:
-                raise Exception(f'markup already upright:\n  {markup}')
-            markup = markup.upright()
+        string = format(markup)
+        if 'upright' in string:
+            raise Exception(f'markup already upright:\n  {markup}')
+        markup = markup.upright()
         if isinstance(selector, str):
             selector = eval(selector)
         assert isinstance(selector, abjad.Expression)
