@@ -42,10 +42,8 @@ class LibraryTZ(abjad.AbjadObject):
         *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
         bookend: typing.Union[bool, int] = -1,
         leak: bool = None,
-        #left_broken: bool = None,
         lilypond_id: int = None,
         piece_selector: typings.Selector = 'baca.group()',
-        #right_broken: bool = None,
         selector: typings.Selector = 'baca.tleaves()',
         tweaks: typing.List[abjad.LilyPondTweakManager] = None,
         ) -> PiecewiseIndicatorCommand:
@@ -66,11 +64,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.new_text_spanner(
-            ...         baca.markups.pont(),
-            ...         '=>',
-            ...         baca.markups.ord(),
-            ...     ),
+            ...     baca.new_text_spanner('pont.', '=>', 'ord.'),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
@@ -128,19 +122,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_dashed_line_with_arrow                                          %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                pont.                                                    %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        ord.                                                             %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -199,11 +182,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.new_text_spanner(
-            ...         baca.markups.pont(),
-            ...         '=|',
-            ...         baca.markups.ord(),
-            ...     ),
+            ...     baca.new_text_spanner('pont.', '=|', 'ord.'),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
@@ -261,15 +240,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_dashed_line_with_hook                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                pont.                                                    %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
                                 - \tweak bound-details.right.text \markup {                              %! PIC
                                     \concat                                                              %! PIC
                                         {                                                                %! PIC
@@ -344,11 +315,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.new_text_spanner(
-            ...         baca.markups.pont(),
-            ...         '->',
-            ...         baca.markups.ord(),
-            ...     ),
+            ...     baca.new_text_spanner('pont.', '->', 'ord.'),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
@@ -406,19 +373,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                pont.                                                    %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        ord.                                                             %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -477,11 +433,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.new_text_spanner(
-            ...         baca.markups.pont(),
-            ...         '-|',
-            ...         baca.markups.ord(),
-            ...     ),
+            ...     baca.new_text_spanner('pont.', '-|', 'ord.'),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
@@ -539,15 +491,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_solid_line_with_hook                                            %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                pont.                                                    %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
                                 - \tweak bound-details.right.text \markup {                              %! PIC
                                     \concat                                                              %! PIC
                                         {                                                                %! PIC
@@ -622,10 +566,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> maker(
             ...     'MusicVoice',
-            ...     baca.new_text_spanner(
-            ...         baca.markups.pont(),
-            ...         baca.markups.ord(),
-            ...     ),
+            ...     baca.new_text_spanner('pont.', 'ord.'),
             ...     baca.make_even_divisions(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.text_spanner_staff_padding(4.5),
@@ -683,19 +624,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                pont.                                                    %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        ord.                                                             %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -820,15 +750,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -843,15 +765,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 g'8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -864,15 +778,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 d''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -887,19 +793,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        A                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -994,15 +889,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -1017,15 +904,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 g'8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -1038,15 +917,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 d''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -1061,19 +932,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        A                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1167,19 +1027,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        B                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1197,19 +1046,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 g'8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        A                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1225,19 +1063,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 d''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        B                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1255,19 +1082,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_invisible_line                                                  %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        A                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1363,19 +1179,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        B                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1393,19 +1198,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 g'8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        A                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1421,19 +1215,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 d''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        B                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1451,19 +1234,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_arrow                                           %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
-                                - \tweak bound-details.right.text \markup {                              %! PIC
-                                    \upright                                                             %! PIC
-                                        A                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
+                                - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
                                 - \tweak bound-details.right.padding #0.5                                %! PIC
                                 - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                                 \startTextSpan                                                           %! PIC
@@ -1560,15 +1332,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextSpanner.staff-padding = #4.5                               %! OC1
                                 e'8
                                 - \abjad_solid_line_with_hook                                            %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -1583,15 +1347,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 g'8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_hook                                            %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -1604,15 +1360,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 d''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_hook                                            %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                A                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
                                 \startTextSpan                                                           %! PIC
                                 [
                 <BLANKLINE>
@@ -1627,15 +1375,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 \stopTextSpan                                                            %! PIC
                                 - \abjad_solid_line_with_hook                                            %! PIC
-                                - \tweak bound-details.left.text \markup {                               %! PIC
-                                    \concat                                                              %! PIC
-                                        {                                                                %! PIC
-                                            \upright                                                     %! PIC
-                                                B                                                        %! PIC
-                                            \hspace                                                      %! PIC
-                                                #0.5                                                     %! PIC
-                                        }                                                                %! PIC
-                                    }                                                                    %! PIC
+                                - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
                                 - \tweak bound-details.right.text \markup {                              %! PIC
                                     \concat                                                              %! PIC
                                         {                                                                %! PIC
@@ -1696,11 +1436,13 @@ class LibraryTZ(abjad.AbjadObject):
             if item in shape_to_style:
                 continue
             if isinstance(item, str):
-                item_markup = abjad.Markup(item)
+                string = rf'\markup \baca-left "{item}"'
+                item_markup = abjad.LilyPondLiteral(string)
             else:
                 item_markup = item
-            assert isinstance(item_markup, abjad.Markup)
-            item_markup = item_markup.upright()
+                item_markup = item_markup.upright()
+            prototype = (abjad.LilyPondLiteral, abjad.Markup)
+            assert isinstance(item_markup, prototype)
             style = 'invisible_line'
             if items_[i + 1] in shape_to_style:
                 style = shape_to_style[items_[i + 1]]
@@ -1708,11 +1450,14 @@ class LibraryTZ(abjad.AbjadObject):
             else:
                 right_text = items_[i + 1]
             if isinstance(right_text, str):
-                right_markup = abjad.Markup(right_text)
+                if 'hook' not in style:
+                    string = rf'\markup \baca-right "{right_text}"'
+                    right_markup = abjad.LilyPondLiteral(string)
+                else:
+                    right_markup = abjad.Markup(right_text).upright()
             else:
                 assert isinstance(right_text, abjad.Markup)
-                right_markup = right_text
-            right_markup = right_markup.upright()
+                right_markup = right_text.upright()
             if lilypond_id is None:
                 command = r'\startTextSpan'
             elif lilypond_id == 1:
