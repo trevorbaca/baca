@@ -22,6 +22,7 @@ BowContactPointCommand
       helper
       start_command
       stop_command
+      tag
       tweaks
 
    .. autosummary::
@@ -97,9 +98,7 @@ BowContactPointCommand
 
    .. autoattribute:: BowContactPointCommand.stop_command
 
-   .. container:: inherited
-
-      .. autoattribute:: BowContactPointCommand.tag
+   .. autoattribute:: BowContactPointCommand.tag
 
    .. container:: inherited
 

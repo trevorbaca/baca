@@ -42,6 +42,7 @@ class BowContactPointCommand(Command):
             assert callable(helper), repr(helper)
         self._helper = helper
         self._validate_tweaks(tweaks)
+        self._tags = ['BACA_BCP_COMMAND']
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -95,7 +96,11 @@ class BowContactPointCommand(Command):
             if (not self.final_spanner and
                 lt is lts[-1] and
                 not self._is_rest(lt.head)):
-                abjad.attach(stop_text_span, lt.head)
+                abjad.attach(
+                    stop_text_span,
+                    lt.head,
+                    tag=self.tag,
+                    )
                 break
             previous_leaf = abjad.inspect(lt.head).get_leaf(-1)
             if (self._is_rest(lt.head) and
@@ -110,7 +115,8 @@ class BowContactPointCommand(Command):
                 numerator, denominator = bcp
                 i += 1
                 next_bcp = bcps[i]
-            markup = abjad.Markup.fraction(numerator, denominator).upright()
+            string = rf'\markup \baca-bcp-left #{numerator} #{denominator}'
+            left_literal = abjad.LilyPondLiteral(string)
             if lt is lts[-1]:
                 if self.final_spanner:
                     style = 'solid_line_with_arrow'
@@ -122,36 +128,64 @@ class BowContactPointCommand(Command):
                 style = 'invisible_line'
             if lt.head is add_right_text_to_me:
                 numerator, denominator = next_bcp
-                right_markup = abjad.Markup.fraction(numerator, denominator)
-                right_markup = right_markup.upright()
+                string = rf'\markup \baca-bcp-right #{numerator} #{denominator}'
+                right_literal = abjad.LilyPondLiteral(string)
             else:
-                right_markup = None
+                right_literal = None
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
-                left_text=markup,
-                right_text=right_markup,
+                left_text=left_literal,
+                right_text=right_literal,
                 style=style,
                 )
-            abjad.attach(start_text_span, lt.head)
+            abjad.attach(
+                start_text_span,
+                lt.head,
+                tag=self.tag,
+                )
             if 0 < i:
-                abjad.attach(stop_text_span, lt.head)
+                abjad.attach(
+                    stop_text_span,
+                    lt.head,
+                    tag=self.tag,
+                    )
             if lt is lts[-1] and self.final_spanner:
-                abjad.attach(stop_text_span, next_leaf_after_argument)
+                abjad.attach(
+                    stop_text_span,
+                    next_leaf_after_argument,
+                    tag=self.tag,
+                    )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
             if self._is_rest(lt.head):
                 pass
             elif self._is_rest(previous_leaf) or previous_bcp is None:
                 if bcp_fraction > next_bcp_fraction:
-                    abjad.attach(abjad.Articulation('upbow'), lt.head)
+                    abjad.attach(
+                        abjad.Articulation('upbow'),
+                        lt.head,
+                        tag=self.tag,
+                        )
                 elif bcp_fraction < next_bcp_fraction:
-                    abjad.attach(abjad.Articulation('downbow'), lt.head)
+                    abjad.attach(
+                        abjad.Articulation('downbow'),
+                        lt.head,
+                        tag=self.tag,
+                        )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
                 if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
-                    abjad.attach(abjad.Articulation('upbow'), lt.head)
+                    abjad.attach(
+                        abjad.Articulation('upbow'),
+                        lt.head,
+                        tag=self.tag,
+                        )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
-                    abjad.attach(abjad.Articulation('downbow'), lt.head)
+                    abjad.attach(
+                        abjad.Articulation('downbow'),
+                        lt.head,
+                        tag=self.tag,
+                        )
             previous_bcp = bcp
 
     ### PRIVATE METHODS ###
@@ -258,236 +292,106 @@ class BowContactPointCommand(Command):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! SM4
                                 e'8
-                                -\downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    1
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\downbow                                                                %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 f'8
-                                -\upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    2
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\upbow                                                                  %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 e'8
-                                -\downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    1
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\downbow                                                                %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 f'8
-                                -\upbow
-                                \bacaStopTextSpanBCP
+                                -\upbow                                                                  %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
                                 ]
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    2
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! SM4
                                 e'8
-                                -\downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    1
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\downbow                                                                %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 f'8
-                                -\upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    2
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                - \tweak bound-details.right.text \markup {
-                                    \upright
-                                        \fraction
-                                            1
-                                            5
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\upbow                                                                  %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BACA_BCP_COMMAND
+                                - \tweak bound-details.right.text \markup \baca-bcp-right #1 #5          %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 e'8
-                                \bacaStopTextSpanBCP
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! SM4
                                 f'8
-                                -\downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    3
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\downbow                                                                %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 e'8
-                                -\upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    4
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\upbow                                                                  %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 f'8
-                                -\downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    3
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\downbow                                                                %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 e'8
-                                -\upbow
-                                \bacaStopTextSpanBCP
+                                -\upbow                                                                  %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
                                 ]
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    4
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! SM4
                                 f'8
-                                -\downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    3
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\downbow                                                                %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 e'8
-                                -\upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad_solid_line_with_arrow
-                                - \tweak bound-details.left.text \markup {
-                                    \concat
-                                        {
-                                            \upright
-                                                \fraction
-                                                    4
-                                                    5
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                - \tweak bound-details.right.text \markup {
-                                    \upright
-                                        \fraction
-                                            3
-                                            5
-                                    }
-                                \bacaStartTextSpanBCP
+                                -\upbow                                                                  %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BACA_BCP_COMMAND
+                                - \tweak bound-details.right.text \markup \baca-bcp-right #3 #5          %! BACA_BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
                 <BLANKLINE>
                                 f'8
-                                \bacaStopTextSpanBCP
+                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
                                 ]
                 <BLANKLINE>
                             }
@@ -525,6 +429,19 @@ class BowContactPointCommand(Command):
         Gets ``'\bacaStopTextSpanBCP'``.
         """
         return r'\bacaStopTextSpanBCP'
+
+    @property
+    def tag(self) -> str:
+        """
+        Gets tag.
+
+        ..  container:: example
+
+            >>> baca.BowContactPointCommand().tag
+            Tag('BACA_BCP_COMMAND')
+
+        """
+        return super().tag
 
     @property
     def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:

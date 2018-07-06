@@ -806,6 +806,43 @@ bacaStartTextSpanBCP =
 bacaStopTextSpanBCP =
 #(make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BCP")
 
+%%% TEXT SPANNERS: EMBEDDED MARKUP %%%
+
+#(define-markup-command
+    (baca-bcp-left layout props n d) (number? number?)
+    (interpret-markup layout props
+    #{
+    \markup \concat {
+        \upright \fraction #(number->string n) #(number->string d)
+        \hspace #0.5
+        }
+    #})
+    )
+
+#(define-markup-command
+    (baca-bcp-right layout props n d) (number? number?)
+    (interpret-markup layout props
+    #{
+    \markup \upright \fraction #(number->string n) #(number->string d)
+    #})
+    )
+
+#(define-markup-command
+    (baca-left layout props text) (markup?)
+    (interpret-markup layout props
+    #{
+    \markup \concat { \upright #text \hspace #0.5 }
+    #})
+    )
+
+#(define-markup-command
+    (baca-right layout props text) (markup?)
+    (interpret-markup layout props
+    #{
+    \markup \upright #text
+    #})
+    )
+
 %%% SPACING COMMANDS %%%
 
 baca_new_spacing_section = #(define-music-function
