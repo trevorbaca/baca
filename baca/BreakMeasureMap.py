@@ -38,8 +38,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \autoPageBreaksOff                                                           %! BMM1:BREAK
                         \noBreak                                                                     %! BMM2:BREAK
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                        #'((Y-offset . 0) (alignment-distances . (10 20)))                           %! IC:BREAK
+                        \baca_lbsd #0 #'(10 20)                                                      %! IC:BREAK
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         \pageBreak                                                                   %! IC:BREAK

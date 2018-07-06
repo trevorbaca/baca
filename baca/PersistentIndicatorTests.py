@@ -61,8 +61,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -71,8 +70,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -145,8 +143,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -155,8 +152,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -240,8 +236,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -251,8 +246,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -335,8 +329,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -346,8 +339,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -421,8 +413,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -436,8 +427,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -530,8 +520,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -541,8 +530,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -1159,8 +1147,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -1169,8 +1156,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -1225,8 +1211,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -1235,8 +1220,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1288,8 +1272,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -1298,8 +1281,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1368,8 +1350,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -1378,8 +1359,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -1434,8 +1414,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -1444,8 +1423,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1497,8 +1475,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -1507,8 +1484,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1588,8 +1564,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -1599,8 +1574,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -1655,8 +1629,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -1666,8 +1639,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1719,8 +1691,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -1730,8 +1701,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1812,8 +1782,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -1823,8 +1792,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -1879,8 +1847,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -1890,8 +1857,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -1943,8 +1909,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -1954,8 +1919,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -2034,8 +1998,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -2049,8 +2012,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \baca_bar_line_visible                                                       %! SM5
@@ -2113,8 +2075,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -2128,8 +2089,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 1/2
                             \baca_bar_line_visible %! SM5
@@ -2189,8 +2149,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -2204,8 +2163,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 1/2
                             \baca_bar_line_visible %! SM5
@@ -2299,8 +2257,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -2310,8 +2267,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -2366,8 +2322,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -2377,8 +2332,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -2430,8 +2384,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -2441,8 +2394,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -2543,8 +2495,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -2553,8 +2504,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -2619,8 +2569,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -2629,8 +2578,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -2692,8 +2640,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -2702,8 +2649,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -2782,8 +2728,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -2792,8 +2737,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -2858,8 +2802,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -2868,8 +2811,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -2931,8 +2873,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -2941,8 +2882,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -3032,8 +2972,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3043,8 +2982,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -3109,8 +3047,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3120,8 +3057,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -3183,8 +3119,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3194,8 +3129,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -3286,8 +3220,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3297,8 +3230,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -3363,8 +3295,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3374,8 +3305,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -3437,8 +3367,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3448,8 +3377,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -3538,8 +3466,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -3553,8 +3480,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                             \baca_bar_line_visible                                                       %! SM5
@@ -3637,8 +3563,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -3652,8 +3577,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 1/2
                             \baca_bar_line_visible %! SM5
@@ -3733,8 +3657,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
@@ -3748,8 +3671,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 1/2
                             \baca_bar_line_visible %! SM5
@@ -3863,8 +3785,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3874,8 +3795,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible                                                       %! SM5
@@ -3940,8 +3860,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -3951,8 +3870,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -4014,8 +3932,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -4025,8 +3942,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2] %! SM4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
                             s1 * 3/8
                             \baca_bar_line_visible %! SM5
@@ -4124,8 +4040,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -4134,8 +4049,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -4255,8 +4169,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -4367,8 +4280,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -4482,8 +4394,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -4584,8 +4495,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -4704,8 +4614,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -5571,8 +5480,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -5687,8 +5595,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -5806,8 +5713,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
@@ -5915,8 +5821,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
@@ -6066,8 +5971,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \override TextSpanner.staff-padding = #4                                     %! OC1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! IC:BREAK
-                            #'((Y-offset . 4) (alignment-distances . (8)))                               %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1

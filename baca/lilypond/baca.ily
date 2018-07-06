@@ -49,6 +49,23 @@ baca_bar_line_visible = #(define-music-function
  (make-oval-markup
   (robust-bar-number-function barnum measure-pos alt-number context)))
 
+%%% BREAKS %%%
+
+baca_lbsd = #(define-music-function
+    (parser location y-offset distances)
+    (number? list?)
+    #{
+    \overrideProperty
+    Score.NonMusicalPaperColumn.
+    line-break-system-details.Y-offset
+    #y-offset
+    \overrideProperty
+    Score.NonMusicalPaperColumn.
+    line-break-system-details.alignment-distances
+    #distances
+    #}
+    )
+
 %%% COLOR: MARKUP %%%
 
 #(define-markup-command (baca-dark-cyan-markup layout props text) (markup?)
@@ -788,51 +805,6 @@ bacaStartTextSpanBCP =
 
 bacaStopTextSpanBCP =
 #(make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BCP")
-
-%%% TEXT SPANNERS: TWEAKS %%%
-
-baca_dashed_arrow = #(
-    define-music-function (parser location grob) (ly:music?)
-    #{
-    - \tweak arrow-width 0.25
-    - \tweak dash-fraction 0.25
-    - \tweak dash-period 1.5
-    - \tweak bound-details.left.stencil-align-dir-y #center
-    - \tweak bound-details.right.arrow ##t
-    - \tweak bound-details.right-broken.arrow ##f
-    - \tweak bound-details.right-broken.padding 0
-    - \tweak bound-details.right-broken.text ##f
-    - \tweak bound-details.right.padding 0.5
-    - \tweak bound-details.right.stencil-align-dir-y #center
-    $grob
-    #})
-
-baca_dashed_line_segment = #(
-    define-music-function (parser location grob) (ly:music?)
-    #{
-    - \tweak dash-fraction 0.25
-    - \tweak dash-period 1.5
-    - \tweak bound-details.left.stencil-align-dir-y #center
-    - \tweak bound-details.right-broken.padding 0
-    - \tweak bound-details.right-broken.text ##f
-    - \tweak bound-details.right.padding 1.5
-    - \tweak bound-details.right.stencil-align-dir-y #center
-    $grob
-    #})
-
-% NOTE: only right padding differs to abjad_invisible_line_segment;
-% TODO: maybe possible to call abjad_invisible_line_segment first?
-baca_invisible_line_segment = #(
-    define-music-function (parser location grob) (ly:music?)
-    #{
-    - \tweak dash-period 0
-    - \tweak bound-details.left.stencil-align-dir-y #center
-    - \tweak bound-details.right-broken.padding 0
-    - \tweak bound-details.right-broken.text ##f
-    - \tweak bound-details.right.padding 1
-    - \tweak bound-details.right.stencil-align-dir-y #center
-    $grob
-    #})
 
 %%% SPACING COMMANDS %%%
 
