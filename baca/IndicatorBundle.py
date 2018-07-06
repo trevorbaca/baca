@@ -205,7 +205,7 @@ class IndicatorBundle(abjad.AbjadObject):
             >>> bundle.with_spanner_start(
             ...     abjad.StartTextSpan(command=r'\startTextSpanOne')
             ...     )
-            IndicatorBundle(StopTextSpan(command='\\stopTextSpan'), StartTextSpan(command='\\startTextSpanOne'))
+            IndicatorBundle(StopTextSpan(command='\\stopTextSpan'), StartTextSpan(command='\\startTextSpanOne', left_hspace=0.5))
 
             >>> bundle.with_spanner_start(None)
             IndicatorBundle(StopTextSpan(command='\\stopTextSpan'))
@@ -235,10 +235,10 @@ class IndicatorBundle(abjad.AbjadObject):
 
             >>> string = r'\stopTextSpanOne'
             >>> bundle.with_spanner_stop(abjad.StopTextSpan(command=string))
-            IndicatorBundle(StopTextSpan(command='\\stopTextSpanOne'), StartTextSpan(command='\\startTextSpan', left_text=Markup(contents=['pont.'])))
+            IndicatorBundle(StopTextSpan(command='\\stopTextSpanOne'), StartTextSpan(command='\\startTextSpan', left_hspace=0.5, left_text=Markup(contents=['pont.'])))
 
             >>> bundle.with_spanner_stop(None)
-            IndicatorBundle(StartTextSpan(command='\\startTextSpan', left_text=Markup(contents=['pont.'])))
+            IndicatorBundle(StartTextSpan(command='\\startTextSpan', left_hspace=0.5, left_text=Markup(contents=['pont.'])))
 
         """
         if (spanner_stop is not None and
