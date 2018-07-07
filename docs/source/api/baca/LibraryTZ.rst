@@ -22,8 +22,8 @@ LibraryTZ
 .. autosummary::
    :nosignatures:
 
-   ~new_text_spanner
    ~tenuto
+   ~text_spanner
    ~tie
    ~tie_from
    ~tie_repeat_pitches
@@ -39,9 +39,9 @@ LibraryTZ
    ~voice_two
    ~volta
 
-.. autofunction:: new_text_spanner
-
 .. autofunction:: tenuto
+
+.. autofunction:: text_spanner
 
 .. autofunction:: tie
 

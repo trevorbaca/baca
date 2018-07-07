@@ -6713,7 +6713,7 @@ def text_spanner_staff_padding(
         ...     baca.rests_around([2], [4]),
         ...     baca.text_spanner_staff_padding(6),
         ...     baca.text_script_staff_padding(6),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         baca.markups.pont(),
         ...         '=>',
         ...         baca.markups.ord(),
@@ -6807,7 +6807,7 @@ def text_spanner_staff_padding(
         ...         baca.text_spanner_staff_padding(6),
         ...         ),
         ...     baca.text_script_staff_padding(6),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         baca.markups.pont(),
         ...         '=>',
         ...         baca.markups.ord(),

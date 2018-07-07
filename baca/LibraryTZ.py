@@ -21,7 +21,155 @@ from .VoltaCommand import VoltaCommand
 
 __documentation_section__ = '(1) Library'
 
-def new_text_spanner(
+def tenuto(
+    *,
+    selector: typings.Selector = 'baca.phead(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches tenuto.
+
+    ..  container:: example
+
+        Attaches tenuto to pitched head 0:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tenuto(),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            -\tenuto                                                                 %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Attaches tenuto to pitched heads in tuplet 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.map(
+        ...         baca.tuplet(1),
+        ...         baca.tenuto(selector=baca.pheads()),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            -\tenuto                                                                 %! IC
+                            [
+                            e''16
+                            -\tenuto                                                                 %! IC
+                            ]
+                            ef''4
+                            -\tenuto                                                                 %! IC
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            -\tenuto                                                                 %! IC
+                            [
+                            g''16
+                            -\tenuto                                                                 %! IC
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    """
+    return IndicatorCommand(
+        indicators=[abjad.Articulation('tenuto')],
+        selector=selector,
+        )
+
+def text_spanner(
     *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
     bookend: typing.Union[bool, int] = -1,
     leak: bool = None,
@@ -47,7 +195,7 @@ def new_text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.new_text_spanner('pont.', '=>', 'ord.'),
+        ...     baca.text_spanner('pont.', '=>', 'ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -165,7 +313,7 @@ def new_text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.new_text_spanner('pont.', '=|', 'ord.'),
+        ...     baca.text_spanner('pont.', '=|', 'ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -298,7 +446,7 @@ def new_text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.new_text_spanner('pont.', '->', 'ord.'),
+        ...     baca.text_spanner('pont.', '->', 'ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -416,7 +564,7 @@ def new_text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.new_text_spanner('pont.', '-|', 'ord.'),
+        ...     baca.text_spanner('pont.', '-|', 'ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -549,7 +697,7 @@ def new_text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.new_text_spanner('pont.', 'ord.'),
+        ...     baca.text_spanner('pont.', 'ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -670,7 +818,7 @@ def new_text_spanner(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         'A',
         ...         'B',
         ...         piece_selector=baca.group_by_measures([1]),
@@ -807,7 +955,7 @@ def new_text_spanner(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         'A',
         ...         '->',
         ...         'B',
@@ -946,7 +1094,7 @@ def new_text_spanner(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         'A',
         ...         'B',
         ...         bookend=True,
@@ -1096,7 +1244,7 @@ def new_text_spanner(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         'A',
         ...         '->',
         ...         'B',
@@ -1250,7 +1398,7 @@ def new_text_spanner(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
-        ...     baca.new_text_spanner(
+        ...     baca.text_spanner(
         ...         'A',
         ...         '-|',
         ...         'B',
@@ -1493,154 +1641,6 @@ def new_text_spanner(
         bundles=bundles,
         leak=leak,
         piece_selector=piece_selector,
-        selector=selector,
-        )
-
-def tenuto(
-    *,
-    selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
-    r"""
-    Attaches tenuto.
-
-    ..  container:: example
-
-        Attaches tenuto to pitched head 0:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tenuto(),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            -\tenuto                                                                 %! IC
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches tenuto to pitched heads in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
-        ...         baca.tenuto(selector=baca.pheads()),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            -\tenuto                                                                 %! IC
-                            [
-                            e''16
-                            -\tenuto                                                                 %! IC
-                            ]
-                            ef''4
-                            -\tenuto                                                                 %! IC
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            -\tenuto                                                                 %! IC
-                            [
-                            g''16
-                            -\tenuto                                                                 %! IC
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-    return IndicatorCommand(
-        indicators=[abjad.Articulation('tenuto')],
         selector=selector,
         )
 
