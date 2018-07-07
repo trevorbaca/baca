@@ -24,2090 +24,2043 @@ from .SpannerCommand import SpannerCommand
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
     )
+mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
+
+__documentation_section__ = '(1) Library'
 
 
-class LibraryGM(abjad.AbjadObject):
+def glissando(
+    *,
+    allow_repeats: bool = None,
+    allow_ties: bool = None,
+    right_broken: bool = None,
+    selector: typings.Selector = 'baca.tleaves()',
+    stems: bool = None,
+    style: str = None,
+    ) -> SpannerCommand:
+    r"""
+    Attaches glissando.
+
+    ..  container:: example
+
+        With segment-maker:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.glissando()
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            d''8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            f'8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            e''8
+                            ]
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            f''8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            e'8
+                            ]
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            f'8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            e''8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            g'8
+                            ]
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            e'8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            d''8
+                            ]
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        First and last PLTs:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.make_even_divisions(),
+        ...     baca.glissando(selector=baca.plts()[:2]),
+        ...     baca.glissando(selector=baca.plts()[-2:]),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            e''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            e''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+                            \glissando                                                               %! SC
+            <BLANKLINE>
+                            d''8
+                            ]
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        With music-maker:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.map(
+        ...         baca.tuplets()[1:2].runs(),
+        ...         baca.glissando(),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            \glissando                                                               %! SC
+                            e''16
+                            ]
+                            \glissando                                                               %! SC
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            \glissando                                                               %! SC
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
     """
-    Library G - M.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(1) Library'
-
-    __slots__ = (
+    glissando = abjad.Glissando(
+        allow_repeats=allow_repeats,
+        allow_ties=allow_ties,
+        stems=stems,
+        style=style,
+        )
+    return SpannerCommand(
+        right_broken=right_broken,
+        selector=selector,
+        spanner=glissando,
         )
 
-    mask_type = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
+def glissando_thickness(
+    n: typings.Number,
+    *,
+    selector: typings.Selector = 'baca.tleaves()',
+    ) -> OverrideCommand:
+    """
+    Overrides glissando thickness.
+    """
+    return OverrideCommand(
+        attribute='thickness',
+        value=str(n),
+        grob='glissando',
+        selector=selector,
+        )
 
-    ### PUBLIC METHODS ###
+def global_fermata(
+    description: str = None,
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> GlobalFermataCommand:
+    """
+    Attaches global fermata.
+    """
+    return GlobalFermataCommand(
+        description=description,
+        selector=selector,
+        )
 
-    @staticmethod
-    def glissando(
-        *,
-        allow_repeats: bool = None,
-        allow_ties: bool = None,
-        right_broken: bool = None,
-        selector: typings.Selector = 'baca.tleaves()',
-        stems: bool = None,
-        style: str = None,
-        ) -> SpannerCommand:
-        r"""
-        Attaches glissando.
+# TODO: move to baca.Selection
+def group_by_measures(counts: typing.List[int] = [1]) -> abjad.Expression:
+    """
+    Makes selector.
+    """
+    selector = baca.select().leaves().group_by_measure()
+    selector = selector.partition_by_counts(counts, cyclic=True)
+    selector = selector.map(baca.select().flatten())
+    return selector
 
-        ..  container:: example
+# TODO: move to baca.Selection
+def group_notes_by_measures(
+    counts: typing.List[int] = [1],
+    ) -> abjad.Expression:
+    """
+    Makes selector.
+    """
+    selector = baca.select().notes().group_by_measure()
+    selector = selector.partition_by_counts(counts, cyclic=True)
+    selector = selector.map(baca.select().flatten())
+    return selector
 
-            With segment-maker:
+def imbricate(
+    voice_name: str,
+    segment: typing.List,
+    *specifiers: typing.Any,
+    allow_unused_pitches: bool = None,
+    by_pitch_class: bool = None,
+    extend_beam: bool = None,
+    hocket: bool = None,
+    selector: typings.Selector = None,
+    truncate_ties: bool = None
+    ):
+    r"""
+    Imbricates ``segment`` in voice with ``voice_name``.
 
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+    ..  container:: example
 
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.glissando()
-            ...     )
+        Imbricates segment:
 
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.imbricate('Voice 2', [10, 20, 19]),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-            ..  docs::
+        ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                e'8
-                                [
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                d''8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                f'8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                e''8
-                                ]
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                g'8
-                                [
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                f''8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                e'8
-                                ]
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                d''8
-                                [
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                f'8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                e''8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                g'8
-                                ]
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                f''8
-                                [
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                e'8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                d''8
-                                ]
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            First and last PLTs:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.make_even_divisions(),
-            ...     baca.glissando(selector=baca.plts()[:2]),
-            ...     baca.glissando(selector=baca.plts()[-2:]),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                e'8
-                                [
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                d''8
-                <BLANKLINE>
-                                f'8
-                <BLANKLINE>
-                                e''8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                g'8
-                                [
-                <BLANKLINE>
-                                f''8
-                <BLANKLINE>
-                                e'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                d''8
-                                [
-                <BLANKLINE>
-                                f'8
-                <BLANKLINE>
-                                e''8
-                <BLANKLINE>
-                                g'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                f''8
-                                [
-                <BLANKLINE>
-                                e'8
-                                \glissando                                                               %! SC
-                <BLANKLINE>
-                                d''8
-                                ]
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            With music-maker:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(
-            ...         baca.tuplets()[1:2].runs(),
-            ...         baca.glissando(),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                \glissando                                                               %! SC
-                                e''16
-                                ]
-                                \glissando                                                               %! SC
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                \glissando                                                               %! SC
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                >>
-
-        """
-        glissando = abjad.Glissando(
-            allow_repeats=allow_repeats,
-            allow_ties=allow_ties,
-            stems=stems,
-            style=style,
-            )
-        return SpannerCommand(
-            right_broken=right_broken,
-            selector=selector,
-            spanner=glissando,
-            )
-
-    @staticmethod
-    def glissando_thickness(
-        n: typings.Number,
-        *,
-        selector: typings.Selector = 'baca.tleaves()',
-        ) -> OverrideCommand:
-        """
-        Overrides glissando thickness.
-        """
-        return OverrideCommand(
-            attribute='thickness',
-            value=str(n),
-            grob='glissando',
-            selector=selector,
-            )
-
-    @staticmethod
-    def global_fermata(
-        description: str = None,
-        *,
-        selector: typings.Selector = 'baca.leaf(0)',
-        ) -> GlobalFermataCommand:
-        """
-        Attaches global fermata.
-        """
-        return GlobalFermataCommand(
-            description=description,
-            selector=selector,
-            )
-
-    # TODO: move to baca.Selection
-    @staticmethod
-    def group_by_measures(counts: typing.List[int] = [1]) -> abjad.Expression:
-        """
-        Makes selector.
-        """
-        selector = baca.select().leaves().group_by_measure()
-        selector = selector.partition_by_counts(counts, cyclic=True)
-        selector = selector.map(baca.select().flatten())
-        return selector
-
-    # TODO: move to baca.Selection
-    @staticmethod
-    def group_notes_by_measures(
-        counts: typing.List[int] = [1],
-        ) -> abjad.Expression:
-        """
-        Makes selector.
-        """
-        selector = baca.select().notes().group_by_measure()
-        selector = selector.partition_by_counts(counts, cyclic=True)
-        selector = selector.map(baca.select().flatten())
-        return selector
-
-    @staticmethod
-    def imbricate(
-        voice_name: str,
-        segment: typing.List,
-        *specifiers: typing.Any,
-        allow_unused_pitches: bool = None,
-        by_pitch_class: bool = None,
-        extend_beam: bool = None,
-        hocket: bool = None,
-        selector: typings.Selector = None,
-        truncate_ties: bool = None
-        ):
-        r"""
-        Imbricates ``segment`` in voice with ``voice_name``.
-
-        ..  container:: example
-
-            Imbricates segment:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.imbricate('Voice 2', [10, 20, 19]),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+                }
+                \context Voice = "Voice 2"
+                {
+                    \voiceTwo
                     {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            s8
+                            s16
+                            s16
+                            bf'4
+                            ~
+                            bf'16
+                            s16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            s16
+                            s16
+                            s4
+                            s16
+                            s16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            s16
+                            s4
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                }
+            >>
+
+    """
+    return ImbricationCommand(
+        voice_name,
+        segment,
+        *specifiers,
+        allow_unused_pitches=allow_unused_pitches,
+        by_pitch_class=by_pitch_class,
+        extend_beam=extend_beam,
+        hocket=hocket,
+        selector=selector,
+        truncate_ties=truncate_ties,
+        )
+
+def instrument(
+    instrument: abjad.Instrument,
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> InstrumentChangeCommand:
+    """
+    Makes instrument change command.
+    """
+    if not isinstance(instrument, abjad.Instrument):
+        message = f'instrument must be instrument (not {instrument!r}).'
+        raise Exception(message)
+    return InstrumentChangeCommand(
+        indicators=[instrument],
+        selector=selector,
+        )
+
+def interpolate_staff_positions(
+    start_pitch: typing.Union[str, abjad.NamedPitch],
+    stop_pitch: typing.Union[str, abjad.NamedPitch],
+    *,
+    selector: typings.Selector = 'baca.plts()',
+    ) -> StaffPositionInterpolationCommand:
+    """
+    Interpolates from staff position of ``start_pitch`` to staff
+    position of ``stop_pitch``.
+    """
+    return StaffPositionInterpolationCommand(
+        start_pitch=start_pitch,
+        stop_pitch=stop_pitch,
+        selector=selector,
+        )
+
+def label(
+    expression: abjad.Expression,
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> LabelCommand:
+    r"""
+    Labels ``selector`` output with label ``expression``.
+
+    ..  container:: example
+
+        Labels pitch names:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.label(abjad.label().with_pitches(locale='us')),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            ^ \markup { C4 }
+                            [
+                            d'16
+                            ^ \markup { D4 }
+                            ]
+                            bf'4
+                            ^ \markup { Bb4 }
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            ^ \markup { "F#5" }
+                            [
+                            e''16
+                            ^ \markup { E5 }
+                            ]
+                            ef''4
+                            ^ \markup { Eb5 }
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            ^ \markup { Ab5 }
+                            [
+                            g''16
+                            ^ \markup { G5 }
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            ^ \markup { A4 }
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                    \context Voice = "Voice 2"
+                }
+            >>
+
+    ..  container:: example
+
+        Labels pitch names in tuplet 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.label(
+        ...         abjad.label().with_pitches(locale='us'),
+        ...         selector=baca.tuplet(1),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceTwo
-                        {
-                            \override TupletBracket.stencil = ##f
-                            \override TupletNumber.stencil = ##f
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                s8
-                                s16
-                                s16
-                                bf'4
-                                ~
-                                bf'16
-                                s16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                s16
-                                s16
-                                s4
-                                s16
-                                s16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                s16
-                                s4
-                            }
-                            \revert TupletBracket.stencil
-                            \revert TupletNumber.stencil
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            ^ \markup { "F#5" }
+                            [
+                            e''16
+                            ^ \markup { E5 }
+                            ]
+                            ef''4
+                            ^ \markup { Eb5 }
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            ^ \markup { Ab5 }
+                            [
+                            g''16
+                            ^ \markup { G5 }
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                >>
+                }
+            >>
 
-        """
-        return ImbricationCommand(
-            voice_name,
-            segment,
-            *specifiers,
-            allow_unused_pitches=allow_unused_pitches,
-            by_pitch_class=by_pitch_class,
-            extend_beam=extend_beam,
-            hocket=hocket,
-            selector=selector,
-            truncate_ties=truncate_ties,
-            )
+    """
+    return LabelCommand(expression=expression, selector=selector)
 
-    @staticmethod
-    def instrument(
-        instrument: abjad.Instrument,
-        *,
-        selector: typings.Selector = 'baca.leaf(0)',
-        ) -> InstrumentChangeCommand:
-        """
-        Makes instrument change command.
-        """
-        if not isinstance(instrument, abjad.Instrument):
-            message = f'instrument must be instrument (not {instrument!r}).'
-            raise Exception(message)
-        return InstrumentChangeCommand(
-            indicators=[instrument],
-            selector=selector,
-            )
+def laissez_vibrer(
+    *,
+    selector: typings.Selector  = 'baca.ptail(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches laissez vibrer.
 
-    @staticmethod
-    def interpolate_staff_positions(
-        start_pitch: typing.Union[str, abjad.NamedPitch],
-        stop_pitch: typing.Union[str, abjad.NamedPitch],
-        *,
-        selector: typings.Selector = 'baca.plts()',
-        ) -> StaffPositionInterpolationCommand:
-        """
-        Interpolates from staff position of ``start_pitch`` to staff
-        position of ``stop_pitch``.
-        """
-        return StaffPositionInterpolationCommand(
-            start_pitch=start_pitch,
-            stop_pitch=stop_pitch,
-            selector=selector,
-            )
+    ..  container:: example
 
-    @staticmethod
-    def label(
-        expression: abjad.Expression,
-        *,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> LabelCommand:
-        r"""
-        Labels ``selector`` output with label ``expression``.
+        Attaches laissez vibrer to PLT tail 0:
 
-        ..  container:: example
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.laissez_vibrer(),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-            Labels pitch names:
+        ..  docs:: 
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.label(abjad.label().with_pitches(locale='us')),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                ^ \markup { C4 }
-                                [
-                                d'16
-                                ^ \markup { D4 }
-                                ]
-                                bf'4
-                                ^ \markup { Bb4 }
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                ^ \markup { "F#5" }
-                                [
-                                e''16
-                                ^ \markup { E5 }
-                                ]
-                                ef''4
-                                ^ \markup { Eb5 }
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                ^ \markup { Ab5 }
-                                [
-                                g''16
-                                ^ \markup { G5 }
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                ^ \markup { A4 }
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            -\laissezVibrer                                                          %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                >>
+                }
+            >>
 
-        ..  container:: example
+    ..  container:: example
 
-            Labels pitch names in tuplet 1:
+        Attaches laissez vibrer to pitched tails in tuplet 1:
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.label(
-            ...         abjad.label().with_pitches(locale='us'),
-            ...         selector=baca.tuplet(1),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.map(
+        ...         baca.tuplet(1),
+        ...         baca.laissez_vibrer(selector=baca.ptails()),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-            ..  docs::
+        ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                ^ \markup { "F#5" }
-                                [
-                                e''16
-                                ^ \markup { E5 }
-                                ]
-                                ef''4
-                                ^ \markup { Eb5 }
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                ^ \markup { Ab5 }
-                                [
-                                g''16
-                                ^ \markup { G5 }
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            -\laissezVibrer                                                          %! IC
+                            [
+                            e''16
+                            -\laissezVibrer                                                          %! IC
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            -\laissezVibrer                                                          %! IC
+                            r16
+                            af''16
+                            -\laissezVibrer                                                          %! IC
+                            [
+                            g''16
+                            -\laissezVibrer                                                          %! IC
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                >>
+                }
+            >>
 
-        """
-        return LabelCommand(expression=expression, selector=selector)
+    """
+    return IndicatorCommand(
+        indicators=[abjad.Articulation('laissezVibrer')],
+        selector=selector,
+        )
 
-    @staticmethod
-    def laissez_vibrer(
-        *,
-        selector: typings.Selector  = 'baca.ptail(0)',
-        ) -> IndicatorCommand:
-        r"""
-        Attaches laissez vibrer.
+def long_fermata(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches long fermata.
 
-        ..  container:: example
+    ..  container:: example
 
-            Attaches laissez vibrer to PLT tail 0:
+        Attaches long fermata to first leaf:
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.laissez_vibrer(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.long_fermata(),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-            ..  docs:: 
+        ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                -\laissezVibrer                                                          %! IC
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            -\longfermata                                                            %! IC
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                >>
+                }
+            >>
 
-        ..  container:: example
+    ..  container:: example
 
-            Attaches laissez vibrer to pitched tails in tuplet 1:
+        Attaches long fermata to first leaf in tuplet 1:
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(
-            ...         baca.tuplet(1),
-            ...         baca.laissez_vibrer(selector=baca.ptails()),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.long_fermata(selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-            ..  docs::
+        ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                -\laissezVibrer                                                          %! IC
-                                [
-                                e''16
-                                -\laissezVibrer                                                          %! IC
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                -\laissezVibrer                                                          %! IC
-                                r16
-                                af''16
-                                -\laissezVibrer                                                          %! IC
-                                [
-                                g''16
-                                -\laissezVibrer                                                          %! IC
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            -\longfermata                                                            %! IC
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
                         }
                     }
-                >>
+                }
+            >>
 
-        """
-        return IndicatorCommand(
-            indicators=[abjad.Articulation('laissezVibrer')],
-            selector=selector,
-            )
+    """
+    return IndicatorCommand(
+        indicators=[abjad.Articulation('longfermata')],
+        selector=selector,
+        )
 
-    @staticmethod
-    def long_fermata(
-        *,
-        selector: typings.Selector = 'baca.leaf(0)',
-        ) -> IndicatorCommand:
-        r"""
-        Attaches long fermata.
+def loop(
+    pitches: typing.Iterable,
+    intervals: typing.Iterable,
+    ) -> PitchCommand:
+    """
+    Loops ``pitches`` at ``intervals``.
+    """
+    loop = Loop(items=pitches, intervals=intervals)
+    return library.pitches(loop)
 
-        ..  container:: example
-
-            Attaches long fermata to first leaf:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.long_fermata(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                -\longfermata                                                            %! IC
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches long fermata to first leaf in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.long_fermata(selector=baca.tuplets()[1:2].phead(0)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                -\longfermata                                                            %! IC
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
-                        }
-                    }
-                >>
-
-        """
-        return IndicatorCommand(
-            indicators=[abjad.Articulation('longfermata')],
-            selector=selector,
-            )
-
-    @staticmethod
-    def loop(
-        pitches: typing.Iterable,
-        intervals: typing.Iterable,
-        ) -> PitchCommand:
-        """
-        Loops ``pitches`` at ``intervals``.
-        """
-        loop = Loop(items=pitches, intervals=intervals)
-        return library.pitches(loop)
-
-    @staticmethod
-    def make_even_divisions() -> RhythmCommand:
-        """
-        Makes even divisions.
-        """
-        return RhythmCommand(
-            rhythm_maker=rmakers.EvenDivisionRhythmMaker(
-                tuplet_specifier=rmakers.TupletSpecifier(
-                    extract_trivial=True,
-                    ),
+def make_even_divisions() -> RhythmCommand:
+    """
+    Makes even divisions.
+    """
+    return RhythmCommand(
+        rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            tuplet_specifier=rmakers.TupletSpecifier(
+                extract_trivial=True,
                 ),
-            )
+            ),
+        )
 
-    @staticmethod
-    def make_fused_tuplet_monads(
-        tuplet_ratio: typing.Tuple[int] = None,
-        ) -> RhythmCommand:
-        """
-        Makes fused tuplet monads.
-        """
-        tuplet_ratios = []
-        if tuplet_ratio is None:
-            tuplet_ratios.append((1,))
-        else:
-            tuplet_ratios.append(tuplet_ratio)
-        return RhythmCommand(
-            division_expression=abjad.sequence()
-                .sum()
-                .sequence(),
-            rhythm_maker=rmakers.TupletRhythmMaker(
-                tie_specifier=rmakers.TieSpecifier(
-                    repeat_ties=True,
-                    ),
-                tuplet_ratios=tuplet_ratios,
-                tuplet_specifier=rmakers.TupletSpecifier(
-                    extract_trivial=True,
-                    rewrite_rest_filled=True,
-                    trivialize=True,
-                    ),
+def make_fused_tuplet_monads(
+    tuplet_ratio: typing.Tuple[int] = None,
+    ) -> RhythmCommand:
+    """
+    Makes fused tuplet monads.
+    """
+    tuplet_ratios = []
+    if tuplet_ratio is None:
+        tuplet_ratios.append((1,))
+    else:
+        tuplet_ratios.append(tuplet_ratio)
+    return RhythmCommand(
+        division_expression=abjad.sequence()
+            .sum()
+            .sequence(),
+        rhythm_maker=rmakers.TupletRhythmMaker(
+            tie_specifier=rmakers.TieSpecifier(
+                repeat_ties=True,
                 ),
-            )
-
-    @staticmethod
-    def make_multimeasure_rests() -> RhythmCommand:
-        """
-        Makes multimeasure rests.
-        """
-        mask = rmakers.SilenceMask(
-            pattern=abjad.index_all(),
-            use_multimeasure_rests=True,
-            )
-        return RhythmCommand(
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                division_masks=[mask],
+            tuplet_ratios=tuplet_ratios,
+            tuplet_specifier=rmakers.TupletSpecifier(
+                extract_trivial=True,
+                rewrite_rest_filled=True,
+                trivialize=True,
                 ),
-            )
+            ),
+        )
 
-    @staticmethod
-    def make_notes(
-        division_mask: mask_type = None,
-        repeat_ties: bool = False,
-        ) -> RhythmCommand:
-        """
-        Makes notes; rewrites meter.
-        """
-        if division_mask is None:
-            division_masks = None
-        else:
-            division_masks = [division_mask]
-        tie_specifier = None
-        if repeat_ties:
-            tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
-        return RhythmCommand(
-            rewrite_meter=True,
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                division_masks=division_masks,
-                tie_specifier=tie_specifier,
-                )
-            )
+def make_multimeasure_rests() -> RhythmCommand:
+    """
+    Makes multimeasure rests.
+    """
+    mask = rmakers.SilenceMask(
+        pattern=abjad.index_all(),
+        use_multimeasure_rests=True,
+        )
+    return RhythmCommand(
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            division_masks=[mask],
+            ),
+        )
 
-    @staticmethod
-    def make_repeat_tied_notes(
-        division_mask: mask_type = None,
-        do_not_rewrite_meter: bool = None,
-        ) -> RhythmCommand:
-        """
-        Makes repeat-tied notes; rewrites meter.
-        """
-        if division_mask is None:
-            division_masks = None
-        elif isinstance(division_mask, list):
-            division_masks = division_mask[:]
-        else:
-            division_masks = [division_mask]
-        return RhythmCommand(
-            rewrite_meter=not(do_not_rewrite_meter),
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                division_masks=division_masks,
-                tie_specifier=rmakers.TieSpecifier(
-                    tie_across_divisions=True,
-                    repeat_ties=True,
-                    ),
+def make_notes(
+    division_mask: mask_typing = None,
+    repeat_ties: bool = False,
+    ) -> RhythmCommand:
+    """
+    Makes notes; rewrites meter.
+    """
+    if division_mask is None:
+        division_masks = None
+    else:
+        division_masks = [division_mask]
+    tie_specifier = None
+    if repeat_ties:
+        tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
+    return RhythmCommand(
+        rewrite_meter=True,
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            division_masks=division_masks,
+            tie_specifier=tie_specifier,
+            )
+        )
+
+def make_repeat_tied_notes(
+    division_mask: mask_typing = None,
+    do_not_rewrite_meter: bool = None,
+    ) -> RhythmCommand:
+    """
+    Makes repeat-tied notes; rewrites meter.
+    """
+    if division_mask is None:
+        division_masks = None
+    elif isinstance(division_mask, list):
+        division_masks = division_mask[:]
+    else:
+        division_masks = [division_mask]
+    return RhythmCommand(
+        rewrite_meter=not(do_not_rewrite_meter),
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            division_masks=division_masks,
+            tie_specifier=rmakers.TieSpecifier(
+                tie_across_divisions=True,
+                repeat_ties=True,
                 ),
-            )
+            ),
+        )
 
-    @staticmethod
-    def make_repeated_duration_notes(
-        durations: typing.Iterable,
-        *,
-        beam_specifier: rmakers.BeamSpecifier = None,
-        division_mask: rmakers.Mask = None,
-        do_not_rewrite_meter: bool = None,
-        ) -> RhythmCommand:
-        """
-        Makes repeated-duration notes; rewrites meter.
-        """
-        if division_mask is None:
-            division_masks = None
-        else:
-            division_masks = [division_mask]
-        if isinstance(durations, abjad.Duration):
-            durations = [durations]
-        elif isinstance(durations, tuple):
-            assert len(durations) == 2
-            durations = [abjad.Duration(durations)]
-        tie_specifier = rmakers.TieSpecifier(
-            repeat_ties=True,
-            )
-        division_expression = library.split_by_durations(durations=durations)
-        return RhythmCommand(
-            division_expression=division_expression,
-            rewrite_meter=not(do_not_rewrite_meter),
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                beam_specifier=beam_specifier,
-                division_masks=division_masks,
-                tie_specifier=tie_specifier,
+def make_repeated_duration_notes(
+    durations: typing.Iterable,
+    *,
+    beam_specifier: rmakers.BeamSpecifier = None,
+    division_mask: rmakers.Mask = None,
+    do_not_rewrite_meter: bool = None,
+    ) -> RhythmCommand:
+    """
+    Makes repeated-duration notes; rewrites meter.
+    """
+    if division_mask is None:
+        division_masks = None
+    else:
+        division_masks = [division_mask]
+    if isinstance(durations, abjad.Duration):
+        durations = [durations]
+    elif isinstance(durations, tuple):
+        assert len(durations) == 2
+        durations = [abjad.Duration(durations)]
+    tie_specifier = rmakers.TieSpecifier(
+        repeat_ties=True,
+        )
+    division_expression = library.split_by_durations(durations=durations)
+    return RhythmCommand(
+        division_expression=division_expression,
+        rewrite_meter=not(do_not_rewrite_meter),
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            beam_specifier=beam_specifier,
+            division_masks=division_masks,
+            tie_specifier=tie_specifier,
+            ),
+        )
+
+def make_rests() -> RhythmCommand:
+    """
+    Makes rests.
+    """
+    return RhythmCommand(
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            division_masks=[rmakers.silence([0], 1)],
+            ),
+        )
+
+def make_rhythm(selection: abjad.Selection) -> RhythmCommand:
+    """
+    Sets rhythm to ``selection``.
+    """
+    assert isinstance(selection, abjad.Selection), repr(selection)
+    assert all(isinstance(_,  abjad.Component) for _ in selection)
+    return RhythmCommand(
+        rhythm_maker=selection,
+        )
+
+def make_single_attack(duration) -> RhythmCommand:
+    """
+    Makes single attacks with ``duration``.
+    """
+    duration = abjad.Duration(duration)
+    numerator, denominator = duration.pair
+    rhythm_maker = rmakers.IncisedRhythmMaker(
+        incise_specifier=rmakers.InciseSpecifier(
+            fill_with_notes=False,
+            outer_divisions_only=True,
+            prefix_talea=[numerator],
+            prefix_counts=[1],
+            talea_denominator=denominator,
+            ),
+        )
+    return RhythmCommand(
+        rhythm_maker=rhythm_maker,
+        )
+
+def make_skips() -> RhythmCommand:
+    """
+    Makes skips.
+    """
+    return RhythmCommand(
+        rhythm_maker=SkipRhythmMaker()
+        )
+
+def make_tied_notes() -> RhythmCommand:
+    """
+    Makes tied notes; rewrites meter.
+    """
+    return RhythmCommand(
+        rewrite_meter=True,
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            tie_specifier=rmakers.TieSpecifier(
+                tie_across_divisions=True,
                 ),
-            )
+            ),
+        )
 
-    @staticmethod
-    def make_rests() -> RhythmCommand:
-        """
-        Makes rests.
-        """
-        return RhythmCommand(
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                division_masks=[rmakers.silence([0], 1)],
-                ),
-            )
-    
-    @staticmethod
-    def make_rhythm(selection: abjad.Selection) -> RhythmCommand:
-        """
-        Sets rhythm to ``selection``.
-        """
-        assert isinstance(selection, abjad.Selection), repr(selection)
-        assert all(isinstance(_,  abjad.Component) for _ in selection)
-        return RhythmCommand(
-            rhythm_maker=selection,
-            )
+def make_tied_repeated_durations(
+    durations: typing.Iterable,
+    ) -> RhythmCommand:
+    """
+    Makes tied repeated durations; does not rewrite meter.
+    """
+    command = make_repeated_duration_notes(durations)
+    return abjad.new(
+        command,
+        rewrite_meter=False,
+        rhythm_maker__tie_specifier__tie_across_divisions=True,
+        )
 
-    @staticmethod
-    def make_single_attack(duration) -> RhythmCommand:
-        """
-        Makes single attacks with ``duration``.
-        """
-        duration = abjad.Duration(duration)
-        numerator, denominator = duration.pair
-        rhythm_maker = rmakers.IncisedRhythmMaker(
-            incise_specifier=rmakers.InciseSpecifier(
-                fill_with_notes=False,
-                outer_divisions_only=True,
-                prefix_talea=[numerator],
-                prefix_counts=[1],
-                talea_denominator=denominator,
-                ),
-            )
-        return RhythmCommand(
-            rhythm_maker=rhythm_maker,
-            )
+def marcato(
+    *,
+    selector: typings.Selector = 'baca.phead(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches marcato.
 
-    @staticmethod
-    def make_skips() -> RhythmCommand:
-        """
-        Makes skips.
-        """
-        return RhythmCommand(
-            rhythm_maker=SkipRhythmMaker()
-            )
+    ..  container:: example
 
-    @staticmethod
-    def make_tied_notes() -> RhythmCommand:
-        """
-        Makes tied notes; rewrites meter.
-        """
-        return RhythmCommand(
-            rewrite_meter=True,
-            rhythm_maker=rmakers.NoteRhythmMaker(
-                tie_specifier=rmakers.TieSpecifier(
-                    tie_across_divisions=True,
-                    ),
-                ),
-            )
+        Attaches marcato to pitched head 0:
 
-    @staticmethod
-    def make_tied_repeated_durations(
-        durations: typing.Iterable,
-        ) -> RhythmCommand:
-        """
-        Makes tied repeated durations; does not rewrite meter.
-        """
-        command = LibraryGM.make_repeated_duration_notes(durations)
-        return abjad.new(
-            command,
-            rewrite_meter=False,
-            rhythm_maker__tie_specifier__tie_across_divisions=True,
-            )
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.marcato(),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-    @staticmethod
-    def marcato(
-        *,
-        selector: typings.Selector = 'baca.phead(0)',
-        ) -> IndicatorCommand:
-        r"""
-        Attaches marcato.
+        ..  docs::
 
-        ..  container:: example
-
-            Attaches marcato to pitched head 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.marcato(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
                     {
-                        \voiceOne
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            -\marcato                                                                %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Attaches marcato to pitched heads in tuplet 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.map(
+        ...         baca.tuplet(1),
+        ...         baca.marcato(selector=baca.pheads()),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            -\marcato                                                                %! IC
+                            [
+                            e''16
+                            -\marcato                                                                %! IC
+                            ]
+                            ef''4
+                            -\marcato                                                                %! IC
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            -\marcato                                                                %! IC
+                            [
+                            g''16
+                            -\marcato                                                                %! IC
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    """
+    return IndicatorCommand(
+        indicators=[abjad.Articulation('marcato')],
+        selector=selector,
+        )
+
+def margin_markup(
+    argument: str,
+    *,
+    alert: IndicatorCommand = None,
+    context: str = 'Staff',
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> typing.Union[IndicatorCommand, Suite]:
+    r"""
+    Attaches margin markup.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.margin_markup('Fl.'),
+        ...     baca.pitches('E4 F4'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                -\marcato                                                                %! IC
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                            e'2
+                            ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                    [MarginMarkup]                                                   %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                                }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
+                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                            \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                            \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                            \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                            \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            f'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            e'2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f'4.
+            <BLANKLINE>
                         }
                     }
                 >>
+            >>
 
-        ..  container:: example
+    """
+    if isinstance(argument, (str, abjad.Markup)):
+        markup = abjad.Markup(argument)
+        margin_markup = abjad.MarginMarkup(
+            context=context,
+            markup=markup,
+            )
+    elif isinstance(argument, abjad.MarginMarkup):
+        margin_markup = abjad.new(
+            argument,
+            context=context,
+            )
+    else:
+        raise TypeError(argument)
+    assert isinstance(margin_markup, abjad.MarginMarkup)
+    command = IndicatorCommand(
+        indicators=[margin_markup],
+        selector=selector,
+        )
+    if bool(alert):
+        assert isinstance(alert, IndicatorCommand), repr(alert)
+        return Suite(command, alert)
+    else:
+        return command
 
-            Attaches marcato to pitched heads in tuplet 1:
+def metronome_mark(
+    key: str,
+    *,
+    redundant: bool = None,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> typing.Optional[MetronomeMarkCommand]:
+    """
+    Attaches metronome mark matching ``key`` metronome mark manifest.
+    """
+    if redundant is True:
+        return None
+    return MetronomeMarkCommand(
+        key=key,
+        redundant=redundant,
+        selector=selector,
+        )
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(
-            ...         baca.tuplet(1),
-            ...         baca.marcato(selector=baca.pheads()),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+def minimum_duration(
+    duration: typing.Union[tuple, abjad.Duration],
+    ) -> HorizontalSpacingSpecifier:
+    """
+    Makes horizontal spacing specifier with ``duration`` minimum width.
+    """
+    return HorizontalSpacingSpecifier(
+        minimum_duration=duration,
+        )
 
-            ..  docs::
+def mleaves(count: int) -> abjad.Expression:
+    """
+    Selects all leaves in ``count`` measures.
+    """
+    assert isinstance(count, int), repr(count)
+    selector = baca.select().leaves().group_by_measure()
+    if 0 < count:
+        selector = selector[:count].flatten()
+    elif count < 0:
+        selector = selector[-count:].flatten()
+    else:
+        raise Exception(count)
+    return selector
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+def mmrest_text_color(
+    color: str = 'red',
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest text color.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.markup(
+        ...         baca.markups.still().boxed(),
+        ...         selector=baca.leaf(1),
+        ...         ),
+        ...     baca.mmrest_text_color('red'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
                 <<
-                    \context Voice = "Voice 1"
+                    \context GlobalSkips = "GlobalSkips"
                     {
-                        \voiceOne
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                               %! OC1
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                -\marcato                                                                %! IC
-                                [
-                                e''16
-                                -\marcato                                                                %! IC
-                                ]
-                                ef''4
-                                -\marcato                                                                %! IC
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                -\marcato                                                                %! IC
-                                [
-                                g''16
-                                -\marcato                                                                %! IC
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                      %! OC2
-                            }
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override MultiMeasureRestText.color = #red                              %! OC1
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            R1 * 3/8
+                            ^ \markup {                                                              %! IC
+                                \override                                                            %! IC
+                                    #'(box-padding . 0.5)                                            %! IC
+                                    \box                                                             %! IC
+                                        still                                                        %! IC
+                                }                                                                    %! IC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            R1 * 3/8
+                            \revert MultiMeasureRestText.color                                       %! OC2
+            <BLANKLINE>
                         }
                     }
                 >>
+            >>
 
-        """
-        return IndicatorCommand(
-            indicators=[abjad.Articulation('marcato')],
-            selector=selector,
-            )
+    ..  container:: example
 
-    @staticmethod
-    def margin_markup(
-        argument: str,
-        *,
-        alert: IndicatorCommand = None,
-        context: str = 'Staff',
-        selector: typings.Selector = 'baca.leaf(0)',
-        ) -> typing.Union[IndicatorCommand, Suite]:
-        r"""
-        Attaches margin markup.
+        Raises exception when called on leaves other than multimeasure
+        rests:
 
-        ..  container:: example
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(),
+        ...     baca.markup(
+        ...         baca.markups.still().boxed(),
+        ...         selector=baca.leaf(1),
+        ...         ),
+        ...     baca.mmrest_text_color('red'),
+        ...     baca.pitches([2, 4]),
+        ...     )
 
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_notes(repeat_ties=True),
-            ...     baca.margin_markup('Fl.'),
-            ...     baca.pitches('E4 F4'),
-            ...     )
+        >>> lilypond_file = maker.run(environment='docs')
+        Traceback (most recent call last):
+            ...
+        Exception: only MultimeasureRest (not Note) allowed.
 
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+    """
+    return OverrideCommand(
+        attribute='color',
+        value=color,
+        grob='multi_measure_rest_text',
+        selector=selector,
+        whitelist=(abjad.MultimeasureRest,),
+        )
 
-            ..  docs::
+def mmrest_text_extra_offset(
+    pair: typings.NumberPair,
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest text extra offset.
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.markup(
+        ...         baca.markups.still().boxed(),
+        ...         selector=baca.leaf(1),
+        ...         ),
+        ...     baca.mmrest_text_extra_offset((0, 2)),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
                 <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                e'2
-                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [MarginMarkup]                                                   %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                f'4.
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                e'2
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                f'4.
-                <BLANKLINE>
-                            }
-                        }
-                    >>
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
                 >>
-
-        """
-        if isinstance(argument, (str, abjad.Markup)):
-            markup = abjad.Markup(argument)
-            margin_markup = abjad.MarginMarkup(
-                context=context,
-                markup=markup,
-                )
-        elif isinstance(argument, abjad.MarginMarkup):
-            margin_markup = abjad.new(
-                argument,
-                context=context,
-                )
-        else:
-            raise TypeError(argument)
-        assert isinstance(margin_markup, abjad.MarginMarkup)
-        command = IndicatorCommand(
-            indicators=[margin_markup],
-            selector=selector,
-            )
-        if bool(alert):
-            assert isinstance(alert, IndicatorCommand), repr(alert)
-            return Suite(command, alert)
-        else:
-            return command
-
-    @staticmethod
-    def metronome_mark(
-        key: str,
-        *,
-        redundant: bool = None,
-        selector: typings.Selector = 'baca.leaf(0)',
-        ) -> typing.Optional[MetronomeMarkCommand]:
-        """
-        Attaches metronome mark matching ``key`` metronome mark manifest.
-        """
-        if redundant is True:
-            return None
-        return MetronomeMarkCommand(
-            key=key,
-            redundant=redundant,
-            selector=selector,
-            )
-
-    @staticmethod
-    def minimum_duration(
-        duration: typing.Union[tuple, abjad.Duration],
-        ) -> HorizontalSpacingSpecifier:
-        """
-        Makes horizontal spacing specifier with ``duration`` minimum width.
-        """
-        return HorizontalSpacingSpecifier(
-            minimum_duration=duration,
-            )
-
-    @staticmethod
-    def mleaves(count: int) -> abjad.Expression:
-        """
-        Selects all leaves in ``count`` measures.
-        """
-        assert isinstance(count, int), repr(count)
-        selector = baca.select().leaves().group_by_measure()
-        if 0 < count:
-            selector = selector[:count].flatten()
-        elif count < 0:
-            selector = selector[-count:].flatten()
-        else:
-            raise Exception(count)
-        return selector
-
-    @staticmethod
-    def mmrest_text_color(
-        color: str = 'red',
-        *,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r"""
-        Overrides multimeasure rest text color.
-
-        ..  container:: example
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.markup(
-            ...         baca.markups.still().boxed(),
-            ...         selector=baca.leaf(1),
-            ...         ),
-            ...     baca.mmrest_text_color('red'),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
+                \context MusicContext = "MusicContext"
                 <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
                         {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OC1
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            R1 * 3/8
+                            ^ \markup {                                                              %! IC
+                                \override                                                            %! IC
+                                    #'(box-padding . 0.5)                                            %! IC
+                                    \box                                                             %! IC
+                                        still                                                        %! IC
+                                }                                                                    %! IC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            R1 * 3/8
+                            \revert MultiMeasureRestText.extra-offset                                %! OC2
+            <BLANKLINE>
                         }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override MultiMeasureRestText.color = #red                              %! OC1
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                R1 * 3/8
-                                ^ \markup {                                                              %! IC
-                                    \override                                                            %! IC
-                                        #'(box-padding . 0.5)                                            %! IC
-                                        \box                                                             %! IC
-                                            still                                                        %! IC
-                                    }                                                                    %! IC
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                R1 * 3/8
-                                \revert MultiMeasureRestText.color                                       %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
+                    }
                 >>
+            >>
 
-        ..  container:: example
+    """
+    return OverrideCommand(
+        attribute='extra_offset',
+        value=pair,
+        grob='multi_measure_rest_text',
+        selector=selector,
+        whitelist=(abjad.MultimeasureRest,),
+        )
 
-            Raises exception when called on leaves other than multimeasure
-            rests:
+def mmrest_text_padding(
+    n: typings.Number,
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest text padding.
 
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+    ..  container:: example
 
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_notes(),
-            ...     baca.markup(
-            ...         baca.markups.still().boxed(),
-            ...         selector=baca.leaf(1),
-            ...         ),
-            ...     baca.mmrest_text_color('red'),
-            ...     baca.pitches([2, 4]),
-            ...     )
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
-            Traceback (most recent call last):
-                ...
-            Exception: only MultimeasureRest (not Note) allowed.
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.markup(
+        ...         baca.markups.still().boxed(),
+        ...         selector=baca.leaf(1),
+        ...         ),
+        ...     baca.mmrest_text_padding(2),
+        ...     )
 
-        """
-        return OverrideCommand(
-            attribute='color',
-            value=color,
-            grob='multi_measure_rest_text',
-            selector=selector,
-            whitelist=(abjad.MultimeasureRest,),
-            )
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-    @staticmethod
-    def mmrest_text_extra_offset(
-        pair: typings.NumberPair,
-        *,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r"""
-        Overrides multimeasure rest text extra offset.
+        ..  docs::
 
-        ..  container:: example
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.markup(
-            ...         baca.markups.still().boxed(),
-            ...         selector=baca.leaf(1),
-            ...         ),
-            ...     baca.mmrest_text_extra_offset((0, 2)),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
                 <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OC1
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                R1 * 3/8
-                                ^ \markup {                                                              %! IC
-                                    \override                                                            %! IC
-                                        #'(box-padding . 0.5)                                            %! IC
-                                        \box                                                             %! IC
-                                            still                                                        %! IC
-                                    }                                                                    %! IC
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                R1 * 3/8
-                                \revert MultiMeasureRestText.extra-offset                                %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
                 >>
-
-        """
-        return OverrideCommand(
-            attribute='extra_offset',
-            value=pair,
-            grob='multi_measure_rest_text',
-            selector=selector,
-            whitelist=(abjad.MultimeasureRest,),
-            )
-
-    @staticmethod
-    def mmrest_text_padding(
-        n: typings.Number,
-        *,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r"""
-        Overrides multimeasure rest text padding.
-
-        ..  container:: example
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.markup(
-            ...         baca.markups.still().boxed(),
-            ...         selector=baca.leaf(1),
-            ...         ),
-            ...     baca.mmrest_text_padding(2),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
+                \context MusicContext = "MusicContext"
                 <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
                         {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override MultiMeasureRestText.padding = #2                              %! OC1
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            R1 * 3/8
+                            ^ \markup {                                                              %! IC
+                                \override                                                            %! IC
+                                    #'(box-padding . 0.5)                                            %! IC
+                                    \box                                                             %! IC
+                                        still                                                        %! IC
+                                }                                                                    %! IC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            R1 * 3/8
+                            \revert MultiMeasureRestText.padding                                     %! OC2
+            <BLANKLINE>
                         }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override MultiMeasureRestText.padding = #2                              %! OC1
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                R1 * 3/8
-                                ^ \markup {                                                              %! IC
-                                    \override                                                            %! IC
-                                        #'(box-padding . 0.5)                                            %! IC
-                                        \box                                                             %! IC
-                                            still                                                        %! IC
-                                    }                                                                    %! IC
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                R1 * 3/8
-                                \revert MultiMeasureRestText.padding                                     %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
+                    }
                 >>
+            >>
 
-        """
-        return OverrideCommand(
-            attribute='padding',
-            value=n,
-            grob='multi_measure_rest_text',
-            selector=selector,
-            whitelist=(abjad.MultimeasureRest,),
-            )
+    """
+    return OverrideCommand(
+        attribute='padding',
+        value=n,
+        grob='multi_measure_rest_text',
+        selector=selector,
+        whitelist=(abjad.MultimeasureRest,),
+        )
 
-    @staticmethod
-    def mmrest_text_parent_center(
-        *,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r"""
-        Overrides multimeasure rest text parent alignment X to center.
+def mmrest_text_parent_center(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest text parent alignment X to center.
 
-        ..  container:: example
+    ..  container:: example
 
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.markup(
-            ...         baca.markups.still().boxed(),
-            ...         selector=baca.leaf(1),
-            ...         ),
-            ...     baca.mmrest_text_parent_center(),
-            ...     )
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.markup(
+        ...         baca.markups.still().boxed(),
+        ...         selector=baca.leaf(1),
+        ...         ),
+        ...     baca.mmrest_text_parent_center(),
+        ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-            ..  docs::
+        ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
                 <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override MultiMeasureRestText.parent-alignment-X = #0                   %! OC1
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                R1 * 3/8
-                                ^ \markup {                                                              %! IC
-                                    \override                                                            %! IC
-                                        #'(box-padding . 0.5)                                            %! IC
-                                        \box                                                             %! IC
-                                            still                                                        %! IC
-                                    }                                                                    %! IC
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                R1 * 3/8
-                                \revert MultiMeasureRestText.parent-alignment-X                          %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
                 >>
-
-        """
-        return OverrideCommand(
-            attribute='parent_alignment_X',
-            value=0,
-            grob='multi_measure_rest_text',
-            selector=selector,
-            whitelist=(abjad.MultimeasureRest,),
-            )
-
-    @staticmethod
-    def mmrest_text_staff_padding(
-        n: typings.Number,
-        *,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> OverrideCommand:
-        r"""
-        Overrides multimeasure rest text staff padding.
-
-        ..  container:: example
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.markup(
-            ...         baca.markups.still().boxed(),
-            ...         selector=baca.leaf(1),
-            ...         ),
-            ...     baca.mmrest_text_staff_padding(2),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
+                \context MusicContext = "MusicContext"
                 <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
                         {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override MultiMeasureRestText.parent-alignment-X = #0                   %! OC1
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            R1 * 3/8
+                            ^ \markup {                                                              %! IC
+                                \override                                                            %! IC
+                                    #'(box-padding . 0.5)                                            %! IC
+                                    \box                                                             %! IC
+                                        still                                                        %! IC
+                                }                                                                    %! IC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            R1 * 3/8
+                            \revert MultiMeasureRestText.parent-alignment-X                          %! OC2
+            <BLANKLINE>
                         }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \override MultiMeasureRestText.staff-padding = #2                        %! OC1
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                R1 * 3/8
-                                ^ \markup {                                                              %! IC
-                                    \override                                                            %! IC
-                                        #'(box-padding . 0.5)                                            %! IC
-                                        \box                                                             %! IC
-                                            still                                                        %! IC
-                                    }                                                                    %! IC
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                R1 * 1/2
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                R1 * 3/8
-                                \revert MultiMeasureRestText.staff-padding                               %! OC2
-                <BLANKLINE>
-                            }
-                        }
-                    >>
+                    }
                 >>
+            >>
 
-        """
-        return OverrideCommand(
-            attribute='staff_padding',
-            value=n,
-            grob='multi_measure_rest_text',
-            selector=selector,
-            whitelist=(abjad.MultimeasureRest,),
-            )
+    """
+    return OverrideCommand(
+        attribute='parent_alignment_X',
+        value=0,
+        grob='multi_measure_rest_text',
+        selector=selector,
+        whitelist=(abjad.MultimeasureRest,),
+        )
+
+def mmrest_text_staff_padding(
+    n: typings.Number,
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest text staff padding.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.markup(
+        ...         baca.markups.still().boxed(),
+        ...         selector=baca.leaf(1),
+        ...         ),
+        ...     baca.mmrest_text_staff_padding(2),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override MultiMeasureRestText.staff-padding = #2                        %! OC1
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            R1 * 3/8
+                            ^ \markup {                                                              %! IC
+                                \override                                                            %! IC
+                                    #'(box-padding . 0.5)                                            %! IC
+                                    \box                                                             %! IC
+                                        still                                                        %! IC
+                                }                                                                    %! IC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            R1 * 1/2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            R1 * 3/8
+                            \revert MultiMeasureRestText.staff-padding                               %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return OverrideCommand(
+        attribute='staff_padding',
+        value=n,
+        grob='multi_measure_rest_text',
+        selector=selector,
+        whitelist=(abjad.MultimeasureRest,),
+        )

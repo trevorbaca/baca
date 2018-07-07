@@ -12,210 +12,193 @@ LibraryAF
    .. inheritance-diagram:: baca
       :lineage: baca.LibraryAF
 
-.. autoclass:: LibraryAF
-
-   .. autosummary::
-      :nosignatures:
-
-      accent
-      accidental_stencil_false
-      accidental_transparent
-      accidental_x_extent_false
-      allow_octaves
-      alternate_bow_strokes
-      anchor
-      anchor_after
-      anchor_to_figure
-      apply
-      arpeggio
-      articulation
-      articulations
-      bar_extent
-      bar_extent_persistent
-      bar_extent_zero
-      bar_line_transparent
-      bass_to_octave
-      bcps
-      beam
-      beam_divisions
-      beam_everything
-      beam_positions
-      beam_runs
-      beam_stencil_false
-      beam_transparent
-      breaks
-      breathe
-      center_to_octave
-      clef
-      clef_extra_offset
-      clef_shift
-      clef_x_extent_false
-      clusters
-      coat
-      color
-      color_fingerings
-      compound_quarter_divisions
-      container
-      cross_staff
-      deviation
-      diatonic_clusters
-      displacement
-      dls_padding
-      dls_staff_padding
-      dls_up
-      dots_stencil_false
-      dots_transparent
-      double_staccato
-      down_arpeggio
-      down_bow
-      espressivo
-      fermata
-      finger_pressure_transition
-      flag_stencil_false
-      flag_transparent
-      flageolet
-      flags
-      force_accidental
-      fuse_compound_quarter_divisions
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~accent
+   ~accidental_stencil_false
+   ~accidental_transparent
+   ~accidental_x_extent_false
+   ~allow_octaves
+   ~alternate_bow_strokes
+   ~anchor
+   ~anchor_after
+   ~anchor_to_figure
+   ~apply
+   ~arpeggio
+   ~articulation
+   ~articulations
+   ~bar_extent
+   ~bar_extent_persistent
+   ~bar_extent_zero
+   ~bar_line_transparent
+   ~bass_to_octave
+   ~bcps
+   ~beam
+   ~beam_divisions
+   ~beam_everything
+   ~beam_positions
+   ~beam_runs
+   ~beam_stencil_false
+   ~beam_transparent
+   ~breaks
+   ~breathe
+   ~center_to_octave
+   ~clef
+   ~clef_extra_offset
+   ~clef_shift
+   ~clef_x_extent_false
+   ~clusters
+   ~coat
+   ~color
+   ~color_fingerings
+   ~compound_quarter_divisions
+   ~container
+   ~cross_staff
+   ~deviation
+   ~diatonic_clusters
+   ~displacement
+   ~dls_padding
+   ~dls_staff_padding
+   ~dls_up
+   ~dots_stencil_false
+   ~dots_transparent
+   ~double_staccato
+   ~down_arpeggio
+   ~down_bow
+   ~espressivo
+   ~fermata
+   ~finger_pressure_transition
+   ~flag_stencil_false
+   ~flag_transparent
+   ~flageolet
+   ~flags
+   ~force_accidental
+   ~fuse_compound_quarter_divisions
 
-   .. raw:: html
+.. autofunction:: accent
 
-      <hr/>
+.. autofunction:: accidental_stencil_false
 
-   .. rubric:: Special methods
-      :class: class-header
+.. autofunction:: accidental_transparent
 
-   .. container:: inherited
+.. autofunction:: accidental_x_extent_false
 
-      .. automethod:: LibraryAF.__format__
+.. autofunction:: allow_octaves
 
-   .. container:: inherited
+.. autofunction:: alternate_bow_strokes
 
-      .. automethod:: LibraryAF.__repr__
+.. autofunction:: anchor
 
-   .. raw:: html
+.. autofunction:: anchor_after
 
-      <hr/>
+.. autofunction:: anchor_to_figure
 
-   .. rubric:: Class & static methods
-      :class: class-header
+.. autofunction:: apply
 
-   .. automethod:: LibraryAF.accent
+.. autofunction:: arpeggio
 
-   .. automethod:: LibraryAF.accidental_stencil_false
+.. autofunction:: articulation
 
-   .. automethod:: LibraryAF.accidental_transparent
+.. autofunction:: articulations
 
-   .. automethod:: LibraryAF.accidental_x_extent_false
+.. autofunction:: bar_extent
 
-   .. automethod:: LibraryAF.allow_octaves
+.. autofunction:: bar_extent_persistent
 
-   .. automethod:: LibraryAF.alternate_bow_strokes
+.. autofunction:: bar_extent_zero
 
-   .. automethod:: LibraryAF.anchor
+.. autofunction:: bar_line_transparent
 
-   .. automethod:: LibraryAF.anchor_after
+.. autofunction:: bass_to_octave
 
-   .. automethod:: LibraryAF.anchor_to_figure
+.. autofunction:: bcps
 
-   .. automethod:: LibraryAF.apply
+.. autofunction:: beam
 
-   .. automethod:: LibraryAF.arpeggio
+.. autofunction:: beam_divisions
 
-   .. automethod:: LibraryAF.articulation
+.. autofunction:: beam_everything
 
-   .. automethod:: LibraryAF.articulations
+.. autofunction:: beam_positions
 
-   .. automethod:: LibraryAF.bar_extent
+.. autofunction:: beam_runs
 
-   .. automethod:: LibraryAF.bar_extent_persistent
+.. autofunction:: beam_stencil_false
 
-   .. automethod:: LibraryAF.bar_extent_zero
+.. autofunction:: beam_transparent
 
-   .. automethod:: LibraryAF.bar_line_transparent
+.. autofunction:: breaks
 
-   .. automethod:: LibraryAF.bass_to_octave
+.. autofunction:: breathe
 
-   .. automethod:: LibraryAF.bcps
+.. autofunction:: center_to_octave
 
-   .. automethod:: LibraryAF.beam
+.. autofunction:: clef
 
-   .. automethod:: LibraryAF.beam_divisions
+.. autofunction:: clef_extra_offset
 
-   .. automethod:: LibraryAF.beam_everything
+.. autofunction:: clef_shift
 
-   .. automethod:: LibraryAF.beam_positions
+.. autofunction:: clef_x_extent_false
 
-   .. automethod:: LibraryAF.beam_runs
+.. autofunction:: clusters
 
-   .. automethod:: LibraryAF.beam_stencil_false
+.. autofunction:: coat
 
-   .. automethod:: LibraryAF.beam_transparent
+.. autofunction:: color
 
-   .. automethod:: LibraryAF.breaks
+.. autofunction:: color_fingerings
 
-   .. automethod:: LibraryAF.breathe
+.. autofunction:: compound_quarter_divisions
 
-   .. automethod:: LibraryAF.center_to_octave
+.. autofunction:: container
 
-   .. automethod:: LibraryAF.clef
+.. autofunction:: cross_staff
 
-   .. automethod:: LibraryAF.clef_extra_offset
+.. autofunction:: deviation
 
-   .. automethod:: LibraryAF.clef_shift
+.. autofunction:: diatonic_clusters
 
-   .. automethod:: LibraryAF.clef_x_extent_false
+.. autofunction:: displacement
 
-   .. automethod:: LibraryAF.clusters
+.. autofunction:: dls_padding
 
-   .. automethod:: LibraryAF.coat
+.. autofunction:: dls_staff_padding
 
-   .. automethod:: LibraryAF.color
+.. autofunction:: dls_up
 
-   .. automethod:: LibraryAF.color_fingerings
+.. autofunction:: dots_stencil_false
 
-   .. automethod:: LibraryAF.compound_quarter_divisions
+.. autofunction:: dots_transparent
 
-   .. automethod:: LibraryAF.container
+.. autofunction:: double_staccato
 
-   .. automethod:: LibraryAF.cross_staff
+.. autofunction:: down_arpeggio
 
-   .. automethod:: LibraryAF.deviation
+.. autofunction:: down_bow
 
-   .. automethod:: LibraryAF.diatonic_clusters
+.. autofunction:: espressivo
 
-   .. automethod:: LibraryAF.displacement
+.. autofunction:: fermata
 
-   .. automethod:: LibraryAF.dls_padding
+.. autofunction:: finger_pressure_transition
 
-   .. automethod:: LibraryAF.dls_staff_padding
+.. autofunction:: flag_stencil_false
 
-   .. automethod:: LibraryAF.dls_up
+.. autofunction:: flag_transparent
 
-   .. automethod:: LibraryAF.dots_stencil_false
+.. autofunction:: flageolet
 
-   .. automethod:: LibraryAF.dots_transparent
+.. autofunction:: flags
 
-   .. automethod:: LibraryAF.double_staccato
+.. autofunction:: force_accidental
 
-   .. automethod:: LibraryAF.down_arpeggio
-
-   .. automethod:: LibraryAF.down_bow
-
-   .. automethod:: LibraryAF.espressivo
-
-   .. automethod:: LibraryAF.fermata
-
-   .. automethod:: LibraryAF.finger_pressure_transition
-
-   .. automethod:: LibraryAF.flag_stencil_false
-
-   .. automethod:: LibraryAF.flag_transparent
-
-   .. automethod:: LibraryAF.flageolet
-
-   .. automethod:: LibraryAF.flags
-
-   .. automethod:: LibraryAF.force_accidental
-
-   .. automethod:: LibraryAF.fuse_compound_quarter_divisions
+.. autofunction:: fuse_compound_quarter_divisions

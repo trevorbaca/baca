@@ -12,137 +12,115 @@ LibraryGM
    .. inheritance-diagram:: baca
       :lineage: baca.LibraryGM
 
-.. autoclass:: LibraryGM
+.. raw:: html
 
-   .. autosummary::
-      :nosignatures:
+   <hr/>
 
-      mask_type
+.. rubric:: Functions
+   :class: section-header
 
-   .. autosummary::
-      :nosignatures:
+.. autosummary::
+   :nosignatures:
 
-      glissando
-      glissando_thickness
-      global_fermata
-      group_by_measures
-      group_notes_by_measures
-      imbricate
-      instrument
-      interpolate_staff_positions
-      label
-      laissez_vibrer
-      long_fermata
-      loop
-      make_even_divisions
-      make_fused_tuplet_monads
-      make_multimeasure_rests
-      make_notes
-      make_repeat_tied_notes
-      make_repeated_duration_notes
-      make_rests
-      make_rhythm
-      make_single_attack
-      make_skips
-      make_tied_notes
-      make_tied_repeated_durations
-      marcato
-      margin_markup
-      metronome_mark
-      minimum_duration
-      mleaves
-      mmrest_text_color
-      mmrest_text_extra_offset
-      mmrest_text_padding
-      mmrest_text_parent_center
-      mmrest_text_staff_padding
+   ~glissando
+   ~glissando_thickness
+   ~global_fermata
+   ~group_by_measures
+   ~group_notes_by_measures
+   ~imbricate
+   ~instrument
+   ~interpolate_staff_positions
+   ~label
+   ~laissez_vibrer
+   ~long_fermata
+   ~loop
+   ~make_even_divisions
+   ~make_fused_tuplet_monads
+   ~make_multimeasure_rests
+   ~make_notes
+   ~make_repeat_tied_notes
+   ~make_repeated_duration_notes
+   ~make_rests
+   ~make_rhythm
+   ~make_single_attack
+   ~make_skips
+   ~make_tied_notes
+   ~make_tied_repeated_durations
+   ~marcato
+   ~margin_markup
+   ~metronome_mark
+   ~minimum_duration
+   ~mleaves
+   ~mmrest_text_color
+   ~mmrest_text_extra_offset
+   ~mmrest_text_padding
+   ~mmrest_text_parent_center
+   ~mmrest_text_staff_padding
 
-   .. raw:: html
+.. autofunction:: glissando
 
-      <hr/>
+.. autofunction:: glissando_thickness
 
-   .. rubric:: Special methods
-      :class: class-header
+.. autofunction:: global_fermata
 
-   .. container:: inherited
+.. autofunction:: group_by_measures
 
-      .. automethod:: LibraryGM.__format__
+.. autofunction:: group_notes_by_measures
 
-   .. container:: inherited
+.. autofunction:: imbricate
 
-      .. automethod:: LibraryGM.__repr__
+.. autofunction:: instrument
 
-   .. raw:: html
+.. autofunction:: interpolate_staff_positions
 
-      <hr/>
+.. autofunction:: label
 
-   .. rubric:: Class & static methods
-      :class: class-header
+.. autofunction:: laissez_vibrer
 
-   .. automethod:: LibraryGM.glissando
+.. autofunction:: long_fermata
 
-   .. automethod:: LibraryGM.glissando_thickness
+.. autofunction:: loop
 
-   .. automethod:: LibraryGM.global_fermata
+.. autofunction:: make_even_divisions
 
-   .. automethod:: LibraryGM.group_by_measures
+.. autofunction:: make_fused_tuplet_monads
 
-   .. automethod:: LibraryGM.group_notes_by_measures
+.. autofunction:: make_multimeasure_rests
 
-   .. automethod:: LibraryGM.imbricate
+.. autofunction:: make_notes
 
-   .. automethod:: LibraryGM.instrument
+.. autofunction:: make_repeat_tied_notes
 
-   .. automethod:: LibraryGM.interpolate_staff_positions
+.. autofunction:: make_repeated_duration_notes
 
-   .. automethod:: LibraryGM.label
+.. autofunction:: make_rests
 
-   .. automethod:: LibraryGM.laissez_vibrer
+.. autofunction:: make_rhythm
 
-   .. automethod:: LibraryGM.long_fermata
+.. autofunction:: make_single_attack
 
-   .. automethod:: LibraryGM.loop
+.. autofunction:: make_skips
 
-   .. automethod:: LibraryGM.make_even_divisions
+.. autofunction:: make_tied_notes
 
-   .. automethod:: LibraryGM.make_fused_tuplet_monads
+.. autofunction:: make_tied_repeated_durations
 
-   .. automethod:: LibraryGM.make_multimeasure_rests
+.. autofunction:: marcato
 
-   .. automethod:: LibraryGM.make_notes
+.. autofunction:: margin_markup
 
-   .. automethod:: LibraryGM.make_repeat_tied_notes
+.. autofunction:: metronome_mark
 
-   .. automethod:: LibraryGM.make_repeated_duration_notes
+.. autofunction:: minimum_duration
 
-   .. automethod:: LibraryGM.make_rests
+.. autofunction:: mleaves
 
-   .. automethod:: LibraryGM.make_rhythm
+.. autofunction:: mmrest_text_color
 
-   .. automethod:: LibraryGM.make_single_attack
+.. autofunction:: mmrest_text_extra_offset
 
-   .. automethod:: LibraryGM.make_skips
+.. autofunction:: mmrest_text_padding
 
-   .. automethod:: LibraryGM.make_tied_notes
+.. autofunction:: mmrest_text_parent_center
 
-   .. automethod:: LibraryGM.make_tied_repeated_durations
-
-   .. automethod:: LibraryGM.marcato
-
-   .. automethod:: LibraryGM.margin_markup
-
-   .. automethod:: LibraryGM.metronome_mark
-
-   .. automethod:: LibraryGM.minimum_duration
-
-   .. automethod:: LibraryGM.mleaves
-
-   .. automethod:: LibraryGM.mmrest_text_color
-
-   .. automethod:: LibraryGM.mmrest_text_extra_offset
-
-   .. automethod:: LibraryGM.mmrest_text_padding
-
-   .. automethod:: LibraryGM.mmrest_text_parent_center
-
-   .. automethod:: LibraryGM.mmrest_text_staff_padding
+.. autofunction:: mmrest_text_staff_padding

@@ -23,6 +23,10 @@ baca
    :hidden:
 
    Command
+   LibraryAF
+   LibraryGM
+   LibraryNS
+   LibraryTZ
    dynamics
    library
    markups
@@ -32,33 +36,14 @@ baca
    :nosignatures:
 
    Command
-   dynamics
-   library
-   markups
-   overrides
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (1) Library
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
    LibraryAF
    LibraryGM
    LibraryNS
    LibraryTZ
-
-.. autosummary::
-   :nosignatures:
-
-   ~LibraryAF.LibraryAF
-   ~LibraryGM.LibraryGM
-   ~LibraryNS.LibraryNS
-   ~LibraryTZ.LibraryTZ
+   dynamics
+   library
+   markups
+   overrides
 
 .. raw:: html
 

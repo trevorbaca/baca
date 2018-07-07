@@ -12,264 +12,247 @@ LibraryNS
    .. inheritance-diagram:: baca
       :lineage: baca.LibraryNS
 
-.. autoclass:: LibraryNS
-
-   .. autosummary::
-      :nosignatures:
-
-      natural_clusters
-      nest
-      no_ledgers
-      note_column_shift
-      note_head_color
-      note_head_stencil_false
-      note_head_style_cross
-      note_head_style_harmonic
-      note_head_transparent
-      one_voice
-      ottava
-      ottava_bassa
-      ottava_bracket_staff_padding
-      page
-      parts
-      pitch
-      previous_metadata
-      register
-      rehearsal_mark
-      rehearsal_mark_extra_offset
-      rehearsal_mark_y_offset
-      repeat_tie
-      repeat_tie_down
-      repeat_tie_from
-      repeat_tie_repeat_pitches
-      repeat_tie_stencil_false
-      repeat_tie_to
-      repeat_tie_transparent
-      repeat_tie_up
-      rest_down
-      rest_extra_offset
-      rest_position
-      rest_transparent
-      rest_up
-      rests_after
-      rests_around
-      rests_before
-      resume
-      resume_after
-      rhythm
-      rmleaves
-      scorewide_spacing
-      script_color
-      script_down
-      script_extra_offset
-      script_padding
-      script_staff_padding
-      script_up
-      short_fermata
-      skips_after
-      skips_around
-      skips_before
-      slur
-      slur_down
-      slur_up
-      soprano_to_octave
-      span_bar_color
-      span_bar_extra_offset
-      span_bar_transparent
-      staccatissimo
-      staccato
-      staff_lines
-      staff_position
-      staff_positions
-      start_markup
-      stem_color
-      stem_down
-      stem_stencil_false
-      stem_transparent
-      stem_tremolo
-      stem_up
-      stop_trill
-      stopped
-      strict_note_spacing_off
-      strict_quarter_divisions
-      sustain_pedal
-      sustain_pedal_staff_padding
-      system
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~natural_clusters
+   ~nest
+   ~no_ledgers
+   ~note_column_shift
+   ~note_head_color
+   ~note_head_stencil_false
+   ~note_head_style_cross
+   ~note_head_style_harmonic
+   ~note_head_transparent
+   ~one_voice
+   ~ottava
+   ~ottava_bassa
+   ~ottava_bracket_staff_padding
+   ~page
+   ~parts
+   ~pitch
+   ~previous_metadata
+   ~register
+   ~rehearsal_mark
+   ~rehearsal_mark_extra_offset
+   ~rehearsal_mark_y_offset
+   ~repeat_tie
+   ~repeat_tie_down
+   ~repeat_tie_from
+   ~repeat_tie_repeat_pitches
+   ~repeat_tie_stencil_false
+   ~repeat_tie_to
+   ~repeat_tie_transparent
+   ~repeat_tie_up
+   ~rest_down
+   ~rest_extra_offset
+   ~rest_position
+   ~rest_transparent
+   ~rest_up
+   ~rests_after
+   ~rests_around
+   ~rests_before
+   ~resume
+   ~resume_after
+   ~rhythm
+   ~rmleaves
+   ~scorewide_spacing
+   ~script_color
+   ~script_down
+   ~script_extra_offset
+   ~script_padding
+   ~script_staff_padding
+   ~script_up
+   ~short_fermata
+   ~skips_after
+   ~skips_around
+   ~skips_before
+   ~slur
+   ~slur_down
+   ~slur_up
+   ~soprano_to_octave
+   ~span_bar_color
+   ~span_bar_extra_offset
+   ~span_bar_transparent
+   ~staccatissimo
+   ~staccato
+   ~staff_lines
+   ~staff_position
+   ~staff_positions
+   ~start_markup
+   ~stem_color
+   ~stem_down
+   ~stem_stencil_false
+   ~stem_transparent
+   ~stem_tremolo
+   ~stem_up
+   ~stop_trill
+   ~stopped
+   ~strict_note_spacing_off
+   ~strict_quarter_divisions
+   ~sustain_pedal
+   ~sustain_pedal_staff_padding
+   ~system
 
-   .. raw:: html
+.. autofunction:: natural_clusters
 
-      <hr/>
+.. autofunction:: nest
 
-   .. rubric:: Special methods
-      :class: class-header
+.. autofunction:: no_ledgers
 
-   .. container:: inherited
+.. autofunction:: note_column_shift
 
-      .. automethod:: LibraryNS.__format__
+.. autofunction:: note_head_color
 
-   .. container:: inherited
+.. autofunction:: note_head_stencil_false
 
-      .. automethod:: LibraryNS.__repr__
+.. autofunction:: note_head_style_cross
 
-   .. raw:: html
+.. autofunction:: note_head_style_harmonic
 
-      <hr/>
+.. autofunction:: note_head_transparent
 
-   .. rubric:: Class & static methods
-      :class: class-header
+.. autofunction:: one_voice
 
-   .. automethod:: LibraryNS.natural_clusters
+.. autofunction:: ottava
 
-   .. automethod:: LibraryNS.nest
+.. autofunction:: ottava_bassa
 
-   .. automethod:: LibraryNS.no_ledgers
+.. autofunction:: ottava_bracket_staff_padding
 
-   .. automethod:: LibraryNS.note_column_shift
+.. autofunction:: page
 
-   .. automethod:: LibraryNS.note_head_color
+.. autofunction:: parts
 
-   .. automethod:: LibraryNS.note_head_stencil_false
+.. autofunction:: pitch
 
-   .. automethod:: LibraryNS.note_head_style_cross
+.. autofunction:: previous_metadata
 
-   .. automethod:: LibraryNS.note_head_style_harmonic
+.. autofunction:: register
 
-   .. automethod:: LibraryNS.note_head_transparent
+.. autofunction:: rehearsal_mark
 
-   .. automethod:: LibraryNS.one_voice
+.. autofunction:: rehearsal_mark_extra_offset
 
-   .. automethod:: LibraryNS.ottava
+.. autofunction:: rehearsal_mark_y_offset
 
-   .. automethod:: LibraryNS.ottava_bassa
+.. autofunction:: repeat_tie
 
-   .. automethod:: LibraryNS.ottava_bracket_staff_padding
+.. autofunction:: repeat_tie_down
 
-   .. automethod:: LibraryNS.page
+.. autofunction:: repeat_tie_from
 
-   .. automethod:: LibraryNS.parts
+.. autofunction:: repeat_tie_repeat_pitches
 
-   .. automethod:: LibraryNS.pitch
+.. autofunction:: repeat_tie_stencil_false
 
-   .. automethod:: LibraryNS.previous_metadata
+.. autofunction:: repeat_tie_to
 
-   .. automethod:: LibraryNS.register
+.. autofunction:: repeat_tie_transparent
 
-   .. automethod:: LibraryNS.rehearsal_mark
+.. autofunction:: repeat_tie_up
 
-   .. automethod:: LibraryNS.rehearsal_mark_extra_offset
+.. autofunction:: rest_down
 
-   .. automethod:: LibraryNS.rehearsal_mark_y_offset
+.. autofunction:: rest_extra_offset
 
-   .. automethod:: LibraryNS.repeat_tie
+.. autofunction:: rest_position
 
-   .. automethod:: LibraryNS.repeat_tie_down
+.. autofunction:: rest_transparent
 
-   .. automethod:: LibraryNS.repeat_tie_from
+.. autofunction:: rest_up
 
-   .. automethod:: LibraryNS.repeat_tie_repeat_pitches
+.. autofunction:: rests_after
 
-   .. automethod:: LibraryNS.repeat_tie_stencil_false
+.. autofunction:: rests_around
 
-   .. automethod:: LibraryNS.repeat_tie_to
+.. autofunction:: rests_before
 
-   .. automethod:: LibraryNS.repeat_tie_transparent
+.. autofunction:: resume
 
-   .. automethod:: LibraryNS.repeat_tie_up
+.. autofunction:: resume_after
 
-   .. automethod:: LibraryNS.rest_down
+.. autofunction:: rhythm
 
-   .. automethod:: LibraryNS.rest_extra_offset
+.. autofunction:: rmleaves
 
-   .. automethod:: LibraryNS.rest_position
+.. autofunction:: scorewide_spacing
 
-   .. automethod:: LibraryNS.rest_transparent
+.. autofunction:: script_color
 
-   .. automethod:: LibraryNS.rest_up
+.. autofunction:: script_down
 
-   .. automethod:: LibraryNS.rests_after
+.. autofunction:: script_extra_offset
 
-   .. automethod:: LibraryNS.rests_around
+.. autofunction:: script_padding
 
-   .. automethod:: LibraryNS.rests_before
+.. autofunction:: script_staff_padding
 
-   .. automethod:: LibraryNS.resume
+.. autofunction:: script_up
 
-   .. automethod:: LibraryNS.resume_after
+.. autofunction:: short_fermata
 
-   .. automethod:: LibraryNS.rhythm
+.. autofunction:: skips_after
 
-   .. automethod:: LibraryNS.rmleaves
+.. autofunction:: skips_around
 
-   .. automethod:: LibraryNS.scorewide_spacing
+.. autofunction:: skips_before
 
-   .. automethod:: LibraryNS.script_color
+.. autofunction:: slur
 
-   .. automethod:: LibraryNS.script_down
+.. autofunction:: slur_down
 
-   .. automethod:: LibraryNS.script_extra_offset
+.. autofunction:: slur_up
 
-   .. automethod:: LibraryNS.script_padding
+.. autofunction:: soprano_to_octave
 
-   .. automethod:: LibraryNS.script_staff_padding
+.. autofunction:: span_bar_color
 
-   .. automethod:: LibraryNS.script_up
+.. autofunction:: span_bar_extra_offset
 
-   .. automethod:: LibraryNS.short_fermata
+.. autofunction:: span_bar_transparent
 
-   .. automethod:: LibraryNS.skips_after
+.. autofunction:: staccatissimo
 
-   .. automethod:: LibraryNS.skips_around
+.. autofunction:: staccato
 
-   .. automethod:: LibraryNS.skips_before
+.. autofunction:: staff_lines
 
-   .. automethod:: LibraryNS.slur
+.. autofunction:: staff_position
 
-   .. automethod:: LibraryNS.slur_down
+.. autofunction:: staff_positions
 
-   .. automethod:: LibraryNS.slur_up
+.. autofunction:: start_markup
 
-   .. automethod:: LibraryNS.soprano_to_octave
+.. autofunction:: stem_color
 
-   .. automethod:: LibraryNS.span_bar_color
+.. autofunction:: stem_down
 
-   .. automethod:: LibraryNS.span_bar_extra_offset
+.. autofunction:: stem_stencil_false
 
-   .. automethod:: LibraryNS.span_bar_transparent
+.. autofunction:: stem_transparent
 
-   .. automethod:: LibraryNS.staccatissimo
+.. autofunction:: stem_tremolo
 
-   .. automethod:: LibraryNS.staccato
+.. autofunction:: stem_up
 
-   .. automethod:: LibraryNS.staff_lines
+.. autofunction:: stop_trill
 
-   .. automethod:: LibraryNS.staff_position
+.. autofunction:: stopped
 
-   .. automethod:: LibraryNS.staff_positions
+.. autofunction:: strict_note_spacing_off
 
-   .. automethod:: LibraryNS.start_markup
+.. autofunction:: strict_quarter_divisions
 
-   .. automethod:: LibraryNS.stem_color
+.. autofunction:: sustain_pedal
 
-   .. automethod:: LibraryNS.stem_down
+.. autofunction:: sustain_pedal_staff_padding
 
-   .. automethod:: LibraryNS.stem_stencil_false
-
-   .. automethod:: LibraryNS.stem_transparent
-
-   .. automethod:: LibraryNS.stem_tremolo
-
-   .. automethod:: LibraryNS.stem_up
-
-   .. automethod:: LibraryNS.stop_trill
-
-   .. automethod:: LibraryNS.stopped
-
-   .. automethod:: LibraryNS.strict_note_spacing_off
-
-   .. automethod:: LibraryNS.strict_quarter_divisions
-
-   .. automethod:: LibraryNS.sustain_pedal
-
-   .. automethod:: LibraryNS.sustain_pedal_staff_padding
-
-   .. automethod:: LibraryNS.system
+.. autofunction:: system

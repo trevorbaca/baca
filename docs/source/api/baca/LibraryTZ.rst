@@ -12,177 +12,160 @@ LibraryTZ
    .. inheritance-diagram:: baca
       :lineage: baca.LibraryTZ
 
-.. autoclass:: LibraryTZ
+.. raw:: html
 
-   .. autosummary::
-      :nosignatures:
+   <hr/>
 
-      new_text_spanner
-      tenuto
-      text_script_color
-      text_script_down
-      text_script_extra_offset
-      text_script_font_size
-      text_script_padding
-      text_script_parent_center
-      text_script_staff_padding
-      text_script_up
-      text_script_x_offset
-      text_script_y_offset
-      text_spanner
-      text_spanner_left_padding
-      text_spanner_right_padding
-      text_spanner_staff_padding
-      text_spanner_stencil_false
-      text_spanner_transparent
-      text_spanner_y_offset
-      tie
-      tie_down
-      tie_from
-      tie_repeat_pitches
-      tie_to
-      tie_up
-      time_signature_extra_offset
-      time_signature_transparent
-      transition
-      tremolo_down
-      trill_spanner
-      trill_spanner_staff_padding
-      tuplet_bracket_down
-      tuplet_bracket_extra_offset
-      tuplet_bracket_outside_staff_priority
-      tuplet_bracket_padding
-      tuplet_bracket_shorten_pair
-      tuplet_bracket_staff_padding
-      tuplet_bracket_up
-      tuplet_number_denominator
-      tuplet_number_extra_offset
-      untie_to
-      up_arpeggio
-      up_bow
-      very_long_fermata
-      voice_four
-      voice_one
-      voice_three
-      voice_two
-      volta
+.. rubric:: Functions
+   :class: section-header
 
-   .. raw:: html
+.. autosummary::
+   :nosignatures:
 
-      <hr/>
+   ~new_text_spanner
+   ~tenuto
+   ~text_script_color
+   ~text_script_down
+   ~text_script_extra_offset
+   ~text_script_font_size
+   ~text_script_padding
+   ~text_script_parent_center
+   ~text_script_staff_padding
+   ~text_script_up
+   ~text_script_x_offset
+   ~text_script_y_offset
+   ~text_spanner
+   ~text_spanner_left_padding
+   ~text_spanner_right_padding
+   ~text_spanner_staff_padding
+   ~text_spanner_stencil_false
+   ~text_spanner_transparent
+   ~text_spanner_y_offset
+   ~tie
+   ~tie_down
+   ~tie_from
+   ~tie_repeat_pitches
+   ~tie_to
+   ~tie_up
+   ~time_signature_extra_offset
+   ~time_signature_transparent
+   ~transition
+   ~tremolo_down
+   ~trill_spanner
+   ~trill_spanner_staff_padding
+   ~tuplet_bracket_down
+   ~tuplet_bracket_extra_offset
+   ~tuplet_bracket_outside_staff_priority
+   ~tuplet_bracket_padding
+   ~tuplet_bracket_shorten_pair
+   ~tuplet_bracket_staff_padding
+   ~tuplet_bracket_up
+   ~tuplet_number_denominator
+   ~tuplet_number_extra_offset
+   ~untie_to
+   ~up_arpeggio
+   ~up_bow
+   ~very_long_fermata
+   ~voice_four
+   ~voice_one
+   ~voice_three
+   ~voice_two
+   ~volta
 
-   .. rubric:: Special methods
-      :class: class-header
+.. autofunction:: new_text_spanner
 
-   .. container:: inherited
+.. autofunction:: tenuto
 
-      .. automethod:: LibraryTZ.__format__
+.. autofunction:: text_script_color
 
-   .. container:: inherited
+.. autofunction:: text_script_down
 
-      .. automethod:: LibraryTZ.__repr__
+.. autofunction:: text_script_extra_offset
 
-   .. raw:: html
+.. autofunction:: text_script_font_size
 
-      <hr/>
+.. autofunction:: text_script_padding
 
-   .. rubric:: Class & static methods
-      :class: class-header
+.. autofunction:: text_script_parent_center
 
-   .. automethod:: LibraryTZ.new_text_spanner
+.. autofunction:: text_script_staff_padding
 
-   .. automethod:: LibraryTZ.tenuto
+.. autofunction:: text_script_up
 
-   .. automethod:: LibraryTZ.text_script_color
+.. autofunction:: text_script_x_offset
 
-   .. automethod:: LibraryTZ.text_script_down
+.. autofunction:: text_script_y_offset
 
-   .. automethod:: LibraryTZ.text_script_extra_offset
+.. autofunction:: text_spanner
 
-   .. automethod:: LibraryTZ.text_script_font_size
+.. autofunction:: text_spanner_left_padding
 
-   .. automethod:: LibraryTZ.text_script_padding
+.. autofunction:: text_spanner_right_padding
 
-   .. automethod:: LibraryTZ.text_script_parent_center
+.. autofunction:: text_spanner_staff_padding
 
-   .. automethod:: LibraryTZ.text_script_staff_padding
+.. autofunction:: text_spanner_stencil_false
 
-   .. automethod:: LibraryTZ.text_script_up
+.. autofunction:: text_spanner_transparent
 
-   .. automethod:: LibraryTZ.text_script_x_offset
+.. autofunction:: text_spanner_y_offset
 
-   .. automethod:: LibraryTZ.text_script_y_offset
+.. autofunction:: tie
 
-   .. automethod:: LibraryTZ.text_spanner
+.. autofunction:: tie_down
 
-   .. automethod:: LibraryTZ.text_spanner_left_padding
+.. autofunction:: tie_from
 
-   .. automethod:: LibraryTZ.text_spanner_right_padding
+.. autofunction:: tie_repeat_pitches
 
-   .. automethod:: LibraryTZ.text_spanner_staff_padding
+.. autofunction:: tie_to
 
-   .. automethod:: LibraryTZ.text_spanner_stencil_false
+.. autofunction:: tie_up
 
-   .. automethod:: LibraryTZ.text_spanner_transparent
+.. autofunction:: time_signature_extra_offset
 
-   .. automethod:: LibraryTZ.text_spanner_y_offset
+.. autofunction:: time_signature_transparent
 
-   .. automethod:: LibraryTZ.tie
+.. autofunction:: transition
 
-   .. automethod:: LibraryTZ.tie_down
+.. autofunction:: tremolo_down
 
-   .. automethod:: LibraryTZ.tie_from
+.. autofunction:: trill_spanner
 
-   .. automethod:: LibraryTZ.tie_repeat_pitches
+.. autofunction:: trill_spanner_staff_padding
 
-   .. automethod:: LibraryTZ.tie_to
+.. autofunction:: tuplet_bracket_down
 
-   .. automethod:: LibraryTZ.tie_up
+.. autofunction:: tuplet_bracket_extra_offset
 
-   .. automethod:: LibraryTZ.time_signature_extra_offset
+.. autofunction:: tuplet_bracket_outside_staff_priority
 
-   .. automethod:: LibraryTZ.time_signature_transparent
+.. autofunction:: tuplet_bracket_padding
 
-   .. automethod:: LibraryTZ.transition
+.. autofunction:: tuplet_bracket_shorten_pair
 
-   .. automethod:: LibraryTZ.tremolo_down
+.. autofunction:: tuplet_bracket_staff_padding
 
-   .. automethod:: LibraryTZ.trill_spanner
+.. autofunction:: tuplet_bracket_up
 
-   .. automethod:: LibraryTZ.trill_spanner_staff_padding
+.. autofunction:: tuplet_number_denominator
 
-   .. automethod:: LibraryTZ.tuplet_bracket_down
+.. autofunction:: tuplet_number_extra_offset
 
-   .. automethod:: LibraryTZ.tuplet_bracket_extra_offset
+.. autofunction:: untie_to
 
-   .. automethod:: LibraryTZ.tuplet_bracket_outside_staff_priority
+.. autofunction:: up_arpeggio
 
-   .. automethod:: LibraryTZ.tuplet_bracket_padding
+.. autofunction:: up_bow
 
-   .. automethod:: LibraryTZ.tuplet_bracket_shorten_pair
+.. autofunction:: very_long_fermata
 
-   .. automethod:: LibraryTZ.tuplet_bracket_staff_padding
+.. autofunction:: voice_four
 
-   .. automethod:: LibraryTZ.tuplet_bracket_up
+.. autofunction:: voice_one
 
-   .. automethod:: LibraryTZ.tuplet_number_denominator
+.. autofunction:: voice_three
 
-   .. automethod:: LibraryTZ.tuplet_number_extra_offset
+.. autofunction:: voice_two
 
-   .. automethod:: LibraryTZ.untie_to
-
-   .. automethod:: LibraryTZ.up_arpeggio
-
-   .. automethod:: LibraryTZ.up_bow
-
-   .. automethod:: LibraryTZ.very_long_fermata
-
-   .. automethod:: LibraryTZ.voice_four
-
-   .. automethod:: LibraryTZ.voice_one
-
-   .. automethod:: LibraryTZ.voice_three
-
-   .. automethod:: LibraryTZ.voice_two
-
-   .. automethod:: LibraryTZ.volta
+.. autofunction:: volta

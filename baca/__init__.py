@@ -124,12 +124,6 @@ from .VoltaCommand import VoltaCommand
 from .WellformednessManager import WellformednessManager
 from .ZaggedPitchClassMaker import ZaggedPitchClassMaker
 
-# library:
-from .LibraryAF import LibraryAF
-from .LibraryGM import LibraryGM
-from .LibraryNS import LibraryNS
-from .LibraryTZ import LibraryTZ
-
 # expression constructors
 from .PitchClassSegment import _pitch_class_segment as pitch_class_segment
 from .PitchClassSet import _pitch_class_set as pitch_class_set
@@ -137,13 +131,6 @@ from .PitchSegment import _pitch_segment as pitch_segment
 from .PitchSet import _pitch_set as pitch_set
 from .Selection import _select as select
 from .Sequence import _sequence as sequence
-
-def _import_static_methods(class_):
-    for name in dir(class_):
-        if name.startswith('_'):
-            continue
-        statement = f'{name} = {class_.__name__}.{name}'
-        exec(statement, globals())
 
 def _publish_selectors(class_):
     for name in dir(class_):
@@ -155,8 +142,9 @@ def _publish_selectors(class_):
             return select().{name}(*arguments, **keywords)"""
         exec(statement, globals())
 
-_import_static_methods(LibraryAF)
-_import_static_methods(LibraryGM)
-_import_static_methods(LibraryNS)
-_import_static_methods(LibraryTZ)
+from .LibraryAF import *
+from .LibraryGM import *
+from .LibraryNS import *
+from .LibraryTZ import *
+
 _publish_selectors(Selection)
