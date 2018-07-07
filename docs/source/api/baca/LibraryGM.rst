@@ -23,7 +23,6 @@ LibraryGM
    :nosignatures:
 
    ~glissando
-   ~glissando_thickness
    ~global_fermata
    ~imbricate
    ~instrument
@@ -49,15 +48,8 @@ LibraryGM
    ~metronome_mark
    ~minimum_duration
    ~mleaves
-   ~mmrest_text_color
-   ~mmrest_text_extra_offset
-   ~mmrest_text_padding
-   ~mmrest_text_parent_center
-   ~mmrest_text_staff_padding
 
 .. autofunction:: glissando
-
-.. autofunction:: glissando_thickness
 
 .. autofunction:: global_fermata
 
@@ -108,13 +100,3 @@ LibraryGM
 .. autofunction:: minimum_duration
 
 .. autofunction:: mleaves
-
-.. autofunction:: mmrest_text_color
-
-.. autofunction:: mmrest_text_extra_offset
-
-.. autofunction:: mmrest_text_padding
-
-.. autofunction:: mmrest_text_parent_center
-
-.. autofunction:: mmrest_text_staff_padding

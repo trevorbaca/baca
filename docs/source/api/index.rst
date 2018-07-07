@@ -344,9 +344,6 @@ Bača API
    :nosignatures:
 
    ~baca.LibraryAF.accent
-   ~baca.LibraryAF.accidental_stencil_false
-   ~baca.LibraryAF.accidental_transparent
-   ~baca.LibraryAF.accidental_x_extent_false
    ~baca.LibraryAF.allow_octaves
    ~baca.LibraryAF.alternate_bow_strokes
    ~baca.LibraryAF.anchor
@@ -356,26 +353,19 @@ Bača API
    ~baca.LibraryAF.arpeggio
    ~baca.LibraryAF.articulation
    ~baca.LibraryAF.articulations
-   ~baca.LibraryAF.bar_extent
    ~baca.LibraryAF.bar_extent_persistent
    ~baca.LibraryAF.bar_extent_zero
-   ~baca.LibraryAF.bar_line_transparent
    ~baca.LibraryAF.bass_to_octave
    ~baca.LibraryAF.bcps
    ~baca.LibraryAF.beam
    ~baca.LibraryAF.beam_divisions
    ~baca.LibraryAF.beam_everything
-   ~baca.LibraryAF.beam_positions
    ~baca.LibraryAF.beam_runs
-   ~baca.LibraryAF.beam_stencil_false
-   ~baca.LibraryAF.beam_transparent
    ~baca.LibraryAF.breaks
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.center_to_octave
    ~baca.LibraryAF.clef
-   ~baca.LibraryAF.clef_extra_offset
    ~baca.LibraryAF.clef_shift
-   ~baca.LibraryAF.clef_x_extent_false
    ~baca.LibraryAF.clusters
    ~baca.LibraryAF.coat
    ~baca.LibraryAF.color
@@ -386,19 +376,12 @@ Bača API
    ~baca.LibraryAF.deviation
    ~baca.LibraryAF.diatonic_clusters
    ~baca.LibraryAF.displacement
-   ~baca.LibraryAF.dls_padding
-   ~baca.LibraryAF.dls_staff_padding
-   ~baca.LibraryAF.dls_up
-   ~baca.LibraryAF.dots_stencil_false
-   ~baca.LibraryAF.dots_transparent
    ~baca.LibraryAF.double_staccato
    ~baca.LibraryAF.down_arpeggio
    ~baca.LibraryAF.down_bow
    ~baca.LibraryAF.espressivo
    ~baca.LibraryAF.fermata
    ~baca.LibraryAF.finger_pressure_transition
-   ~baca.LibraryAF.flag_stencil_false
-   ~baca.LibraryAF.flag_transparent
    ~baca.LibraryAF.flageolet
    ~baca.LibraryAF.flags
    ~baca.LibraryAF.force_accidental
@@ -422,7 +405,6 @@ Bača API
    :nosignatures:
 
    ~baca.LibraryGM.glissando
-   ~baca.LibraryGM.glissando_thickness
    ~baca.LibraryGM.global_fermata
    ~baca.LibraryGM.imbricate
    ~baca.LibraryGM.instrument
@@ -448,11 +430,6 @@ Bača API
    ~baca.LibraryGM.metronome_mark
    ~baca.LibraryGM.minimum_duration
    ~baca.LibraryGM.mleaves
-   ~baca.LibraryGM.mmrest_text_color
-   ~baca.LibraryGM.mmrest_text_extra_offset
-   ~baca.LibraryGM.mmrest_text_padding
-   ~baca.LibraryGM.mmrest_text_parent_center
-   ~baca.LibraryGM.mmrest_text_staff_padding
 
 .. raw:: html
 
@@ -473,38 +450,19 @@ Bača API
 
    ~baca.LibraryNS.natural_clusters
    ~baca.LibraryNS.nest
-   ~baca.LibraryNS.no_ledgers
-   ~baca.LibraryNS.note_column_shift
-   ~baca.LibraryNS.note_head_color
-   ~baca.LibraryNS.note_head_stencil_false
-   ~baca.LibraryNS.note_head_style_cross
-   ~baca.LibraryNS.note_head_style_harmonic
-   ~baca.LibraryNS.note_head_transparent
    ~baca.LibraryNS.one_voice
    ~baca.LibraryNS.ottava
    ~baca.LibraryNS.ottava_bassa
-   ~baca.LibraryNS.ottava_bracket_staff_padding
    ~baca.LibraryNS.page
    ~baca.LibraryNS.parts
    ~baca.LibraryNS.pitch
    ~baca.LibraryNS.previous_metadata
    ~baca.LibraryNS.register
    ~baca.LibraryNS.rehearsal_mark
-   ~baca.LibraryNS.rehearsal_mark_extra_offset
-   ~baca.LibraryNS.rehearsal_mark_y_offset
    ~baca.LibraryNS.repeat_tie
-   ~baca.LibraryNS.repeat_tie_down
    ~baca.LibraryNS.repeat_tie_from
    ~baca.LibraryNS.repeat_tie_repeat_pitches
-   ~baca.LibraryNS.repeat_tie_stencil_false
    ~baca.LibraryNS.repeat_tie_to
-   ~baca.LibraryNS.repeat_tie_transparent
-   ~baca.LibraryNS.repeat_tie_up
-   ~baca.LibraryNS.rest_down
-   ~baca.LibraryNS.rest_extra_offset
-   ~baca.LibraryNS.rest_position
-   ~baca.LibraryNS.rest_transparent
-   ~baca.LibraryNS.rest_up
    ~baca.LibraryNS.rests_after
    ~baca.LibraryNS.rests_around
    ~baca.LibraryNS.rests_before
@@ -513,41 +471,23 @@ Bača API
    ~baca.LibraryNS.rhythm
    ~baca.LibraryNS.rmleaves
    ~baca.LibraryNS.scorewide_spacing
-   ~baca.LibraryNS.script_color
-   ~baca.LibraryNS.script_down
-   ~baca.LibraryNS.script_extra_offset
-   ~baca.LibraryNS.script_padding
-   ~baca.LibraryNS.script_staff_padding
-   ~baca.LibraryNS.script_up
    ~baca.LibraryNS.short_fermata
    ~baca.LibraryNS.skips_after
    ~baca.LibraryNS.skips_around
    ~baca.LibraryNS.skips_before
    ~baca.LibraryNS.slur
-   ~baca.LibraryNS.slur_down
-   ~baca.LibraryNS.slur_up
    ~baca.LibraryNS.soprano_to_octave
-   ~baca.LibraryNS.span_bar_color
-   ~baca.LibraryNS.span_bar_extra_offset
-   ~baca.LibraryNS.span_bar_transparent
    ~baca.LibraryNS.staccatissimo
    ~baca.LibraryNS.staccato
    ~baca.LibraryNS.staff_lines
    ~baca.LibraryNS.staff_position
    ~baca.LibraryNS.staff_positions
    ~baca.LibraryNS.start_markup
-   ~baca.LibraryNS.stem_color
-   ~baca.LibraryNS.stem_down
-   ~baca.LibraryNS.stem_stencil_false
-   ~baca.LibraryNS.stem_transparent
    ~baca.LibraryNS.stem_tremolo
-   ~baca.LibraryNS.stem_up
    ~baca.LibraryNS.stop_trill
    ~baca.LibraryNS.stopped
-   ~baca.LibraryNS.strict_note_spacing_off
    ~baca.LibraryNS.strict_quarter_divisions
    ~baca.LibraryNS.sustain_pedal
-   ~baca.LibraryNS.sustain_pedal_staff_padding
    ~baca.LibraryNS.system
 
 .. raw:: html
@@ -569,44 +509,13 @@ Bača API
 
    ~baca.LibraryTZ.new_text_spanner
    ~baca.LibraryTZ.tenuto
-   ~baca.LibraryTZ.text_script_color
-   ~baca.LibraryTZ.text_script_down
-   ~baca.LibraryTZ.text_script_extra_offset
-   ~baca.LibraryTZ.text_script_font_size
-   ~baca.LibraryTZ.text_script_padding
-   ~baca.LibraryTZ.text_script_parent_center
-   ~baca.LibraryTZ.text_script_staff_padding
-   ~baca.LibraryTZ.text_script_up
-   ~baca.LibraryTZ.text_script_x_offset
-   ~baca.LibraryTZ.text_script_y_offset
    ~baca.LibraryTZ.text_spanner
-   ~baca.LibraryTZ.text_spanner_left_padding
-   ~baca.LibraryTZ.text_spanner_right_padding
-   ~baca.LibraryTZ.text_spanner_staff_padding
-   ~baca.LibraryTZ.text_spanner_stencil_false
-   ~baca.LibraryTZ.text_spanner_transparent
-   ~baca.LibraryTZ.text_spanner_y_offset
    ~baca.LibraryTZ.tie
-   ~baca.LibraryTZ.tie_down
    ~baca.LibraryTZ.tie_from
    ~baca.LibraryTZ.tie_repeat_pitches
    ~baca.LibraryTZ.tie_to
-   ~baca.LibraryTZ.tie_up
-   ~baca.LibraryTZ.time_signature_extra_offset
-   ~baca.LibraryTZ.time_signature_transparent
    ~baca.LibraryTZ.transition
-   ~baca.LibraryTZ.tremolo_down
    ~baca.LibraryTZ.trill_spanner
-   ~baca.LibraryTZ.trill_spanner_staff_padding
-   ~baca.LibraryTZ.tuplet_bracket_down
-   ~baca.LibraryTZ.tuplet_bracket_extra_offset
-   ~baca.LibraryTZ.tuplet_bracket_outside_staff_priority
-   ~baca.LibraryTZ.tuplet_bracket_padding
-   ~baca.LibraryTZ.tuplet_bracket_shorten_pair
-   ~baca.LibraryTZ.tuplet_bracket_staff_padding
-   ~baca.LibraryTZ.tuplet_bracket_up
-   ~baca.LibraryTZ.tuplet_number_denominator
-   ~baca.LibraryTZ.tuplet_number_extra_offset
    ~baca.LibraryTZ.untie_to
    ~baca.LibraryTZ.up_arpeggio
    ~baca.LibraryTZ.up_bow
@@ -906,6 +815,21 @@ Markup library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.overrides.accidental_stencil_false
+   ~baca.overrides.accidental_transparent
+   ~baca.overrides.accidental_x_extent_false
+   ~baca.overrides.bar_extent
+   ~baca.overrides.bar_line_transparent
+   ~baca.overrides.beam_positions
+   ~baca.overrides.beam_stencil_false
+   ~baca.overrides.beam_transparent
+   ~baca.overrides.clef_extra_offset
+   ~baca.overrides.clef_x_extent_false
+   ~baca.overrides.dls_padding
+   ~baca.overrides.dls_staff_padding
+   ~baca.overrides.dls_up
+   ~baca.overrides.dots_stencil_false
+   ~baca.overrides.dots_transparent
    ~baca.overrides.dynamic_down
    ~baca.overrides.dynamic_shift
    ~baca.overrides.dynamic_text_center
@@ -919,7 +843,83 @@ Markup library.
    ~baca.overrides.dynamic_text_x_offset
    ~baca.overrides.dynamic_text_y_offset
    ~baca.overrides.dynamic_up
+   ~baca.overrides.flag_stencil_false
+   ~baca.overrides.flag_transparent
+   ~baca.overrides.glissando_thickness
    ~baca.overrides.hairpin_shorten_pair
    ~baca.overrides.hairpin_start_shift
    ~baca.overrides.hairpin_stencil_false
    ~baca.overrides.hairpin_transparent
+   ~baca.overrides.mmrest_text_color
+   ~baca.overrides.mmrest_text_extra_offset
+   ~baca.overrides.mmrest_text_padding
+   ~baca.overrides.mmrest_text_parent_center
+   ~baca.overrides.mmrest_text_staff_padding
+   ~baca.overrides.no_ledgers
+   ~baca.overrides.note_column_shift
+   ~baca.overrides.note_head_color
+   ~baca.overrides.note_head_stencil_false
+   ~baca.overrides.note_head_style_cross
+   ~baca.overrides.note_head_style_harmonic
+   ~baca.overrides.note_head_transparent
+   ~baca.overrides.ottava_bracket_staff_padding
+   ~baca.overrides.rehearsal_mark_extra_offset
+   ~baca.overrides.rehearsal_mark_y_offset
+   ~baca.overrides.repeat_tie_down
+   ~baca.overrides.repeat_tie_stencil_false
+   ~baca.overrides.repeat_tie_transparent
+   ~baca.overrides.repeat_tie_up
+   ~baca.overrides.rest_down
+   ~baca.overrides.rest_extra_offset
+   ~baca.overrides.rest_position
+   ~baca.overrides.rest_transparent
+   ~baca.overrides.rest_up
+   ~baca.overrides.script_color
+   ~baca.overrides.script_down
+   ~baca.overrides.script_extra_offset
+   ~baca.overrides.script_padding
+   ~baca.overrides.script_staff_padding
+   ~baca.overrides.script_up
+   ~baca.overrides.slur_down
+   ~baca.overrides.slur_up
+   ~baca.overrides.span_bar_color
+   ~baca.overrides.span_bar_extra_offset
+   ~baca.overrides.span_bar_transparent
+   ~baca.overrides.stem_color
+   ~baca.overrides.stem_down
+   ~baca.overrides.stem_stencil_false
+   ~baca.overrides.stem_transparent
+   ~baca.overrides.stem_up
+   ~baca.overrides.strict_note_spacing_off
+   ~baca.overrides.sustain_pedal_staff_padding
+   ~baca.overrides.text_script_color
+   ~baca.overrides.text_script_down
+   ~baca.overrides.text_script_extra_offset
+   ~baca.overrides.text_script_font_size
+   ~baca.overrides.text_script_padding
+   ~baca.overrides.text_script_parent_center
+   ~baca.overrides.text_script_staff_padding
+   ~baca.overrides.text_script_up
+   ~baca.overrides.text_script_x_offset
+   ~baca.overrides.text_script_y_offset
+   ~baca.overrides.text_spanner_left_padding
+   ~baca.overrides.text_spanner_right_padding
+   ~baca.overrides.text_spanner_staff_padding
+   ~baca.overrides.text_spanner_stencil_false
+   ~baca.overrides.text_spanner_transparent
+   ~baca.overrides.text_spanner_y_offset
+   ~baca.overrides.tie_down
+   ~baca.overrides.tie_up
+   ~baca.overrides.time_signature_extra_offset
+   ~baca.overrides.time_signature_transparent
+   ~baca.overrides.tremolo_down
+   ~baca.overrides.trill_spanner_staff_padding
+   ~baca.overrides.tuplet_bracket_down
+   ~baca.overrides.tuplet_bracket_extra_offset
+   ~baca.overrides.tuplet_bracket_outside_staff_priority
+   ~baca.overrides.tuplet_bracket_padding
+   ~baca.overrides.tuplet_bracket_shorten_pair
+   ~baca.overrides.tuplet_bracket_staff_padding
+   ~baca.overrides.tuplet_bracket_up
+   ~baca.overrides.tuplet_number_denominator
+   ~baca.overrides.tuplet_number_extra_offset
