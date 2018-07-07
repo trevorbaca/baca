@@ -22,15 +22,10 @@ dynamics
 .. autosummary::
    :nosignatures:
 
-   ~ancora_dynamic
    ~dynamic
    ~hairpin
    ~make_dynamic
-   ~parse_descriptor
-   ~possibile_dynamic
-   ~subito_dynamic
-
-.. autofunction:: ancora_dynamic
+   ~parse_hairpin_descriptor
 
 .. autofunction:: dynamic
 
@@ -38,8 +33,4 @@ dynamics
 
 .. autofunction:: make_dynamic
 
-.. autofunction:: parse_descriptor
-
-.. autofunction:: possibile_dynamic
-
-.. autofunction:: subito_dynamic
+.. autofunction:: parse_hairpin_descriptor

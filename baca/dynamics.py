@@ -11,153 +11,6 @@ from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .SchemeManifest import SchemeManifest
 
 
-def ancora_dynamic(
-    dynamic: str,
-    *,
-    selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
-    r"""
-    Attaches ancora dynamic.
-
-    ..  container:: example
-
-        Attaches ancora dynamic to pitched head 0:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.ancora_dynamic('ff'),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            \baca_ff_ancora                                                               %! IC
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches ancora dynamic to pitched head 0 in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.ancora_dynamic(
-        ...         'ff',
-        ...         selector=baca.tuplets()[1:2].phead(0),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            \baca_ff_ancora                                                               %! IC
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-    command = rf'\baca_{dynamic}_ancora'
-    indicator = abjad.Dynamic(dynamic, command=command)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        )
-
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
     *tweaks: abjad.LilyPondTweakManager,
@@ -622,7 +475,7 @@ def hairpin(
     selector: typings.Selector = 'baca.tleaves()'
     ) -> PiecewiseIndicatorCommand:
     r"""
-    Attaches hairpin indicators.
+    Attaches hairpin.
 
     ..  container:: example
 
@@ -1990,7 +1843,7 @@ def hairpin(
 
     """
     if isinstance(dynamics, str):
-        bundles = parse_descriptor(dynamics)
+        bundles = parse_hairpin_descriptor(dynamics)
     else:
         bundles = dynamics
     for item in bundles:
@@ -2027,7 +1880,7 @@ def make_dynamic(string: str) -> typing.Union[
     abjad.Dynamic, abjad.DynamicTrend
     ]:
     r"""
-    Makes dynamic from ``string``.
+    Makes dynamic.
 
     ..  container:: example
 
@@ -2054,6 +1907,36 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Ancora dynamics:
+
+        >>> baca.make_dynamic('p_ancora')
+        Dynamic('p', command='\\baca_p_ancora')
+
+        >>> baca.make_dynamic('f_ancora')
+        Dynamic('f', command='\\baca_f_ancora')
+
+    ..  container:: example
+
+        Possibile dynamics:
+
+        >>> baca.make_dynamic('p_poss')
+        Dynamic('p', command='\\baca_p_poss')
+
+        >>> baca.make_dynamic('f_poss')
+        Dynamic('f', command='\\baca_f_poss')
+
+    ..  container:: example
+
+        Subito dynamics:
+
+        >>> baca.make_dynamic('p_sub')
+        Dynamic('p', command='\\baca_p_sub')
+
+        >>> baca.make_dynamic('f_sub')
+        Dynamic('f', command='\\baca_f_sub')
+
+    ..  container:: example
+
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic('>o')
@@ -2069,6 +1952,18 @@ def make_dynamic(string: str) -> typing.Union[
     indicator: typing.Union[abjad.Dynamic, abjad.DynamicTrend]
     if string == 'niente':
         indicator = abjad.Dynamic('niente', command=r'\!')
+    elif string.endswith('_ancora'):
+        dynamic = string.split('_')[0]
+        command = rf'\baca_{dynamic}_ancora'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith('_poss'):
+        dynamic = string.split('_')[0]
+        command = rf'\baca_{dynamic}_poss'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith('_sub'):
+        dynamic = string.split('_')[0]
+        command = rf'\baca_{dynamic}_sub'
+        indicator = abjad.Dynamic(dynamic, command=command)
     elif 'baca_' + string in scheme_manifest.dynamics:
         name = scheme_manifest.dynamic_to_steady_state(string)
         command = '\\baca_' + string
@@ -2097,69 +1992,69 @@ def make_dynamic(string: str) -> typing.Union[
         indicator = abjad.Dynamic(string)
     return indicator
 
-def parse_descriptor(
+def parse_hairpin_descriptor(
     descriptor: str
     ) -> typing.List[IndicatorBundle]:
     r"""
-    Parses ``descriptor``.
+    Parses hairpin descriptor.
 
     ..  container:: example
 
-        >>> for item in baca.parse_descriptor('f'):
+        >>> for item in baca.parse_hairpin_descriptor('f'):
         ...     item
         IndicatorBundle(Dynamic('f'))
 
-        >>> for item in baca.parse_descriptor('"f"'):
+        >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
         IndicatorBundle(Dynamic('f', command='\\baca_effort_f'))
 
-        >>> for item in baca.parse_descriptor('niente'):
+        >>> for item in baca.parse_hairpin_descriptor('niente'):
         ...     item
         IndicatorBundle(Dynamic('niente', command='\\!', direction=Down, name_is_textual=True))
 
-        >>> for item in baca.parse_descriptor('<'):
+        >>> for item in baca.parse_hairpin_descriptor('<'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='<'))
 
-        >>> for item in baca.parse_descriptor('o<|'):
+        >>> for item in baca.parse_hairpin_descriptor('o<|'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='o<|'))
 
-        >>> for item in baca.parse_descriptor('--'):
+        >>> for item in baca.parse_hairpin_descriptor('--'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='--'))
 
-        >>> for item in baca.parse_descriptor('< f'):
+        >>> for item in baca.parse_hairpin_descriptor('< f'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='<'))
         IndicatorBundle(Dynamic('f'))
 
-        >>> for item in baca.parse_descriptor('o< f'):
+        >>> for item in baca.parse_hairpin_descriptor('o< f'):
         ...     item
         IndicatorBundle(DynamicTrend(shape='o<'))
         IndicatorBundle(Dynamic('f'))
 
-        >>> for item in baca.parse_descriptor('niente o<| f'):
+        >>> for item in baca.parse_hairpin_descriptor('niente o<| f'):
         ...     item
         IndicatorBundle(Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), DynamicTrend(shape='o<|'))
         IndicatorBundle(Dynamic('f'))
 
-        >>> for item in baca.parse_descriptor('f >'):
+        >>> for item in baca.parse_hairpin_descriptor('f >'):
         ...     item
         IndicatorBundle(Dynamic('f'), DynamicTrend(shape='>'))
 
-        >>> for item in baca.parse_descriptor('f >o'):
+        >>> for item in baca.parse_hairpin_descriptor('f >o'):
         ...     item
         IndicatorBundle(Dynamic('f'), DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
 
-        >>> for item in baca.parse_descriptor('p mp mf f'):
+        >>> for item in baca.parse_hairpin_descriptor('p mp mf f'):
         ...     item
         IndicatorBundle(Dynamic('p'))
         IndicatorBundle(Dynamic('mp'))
         IndicatorBundle(Dynamic('mf'))
         IndicatorBundle(Dynamic('f'))
 
-        >>> for item in baca.parse_descriptor('p < f f > p'):
+        >>> for item in baca.parse_hairpin_descriptor('p < f f > p'):
         ...     item
         IndicatorBundle(Dynamic('p'), DynamicTrend(shape='<'))
         IndicatorBundle(Dynamic('f'))
@@ -2203,165 +2098,3 @@ def parse_descriptor(
         bundle = IndicatorBundle(indicators[-1])
         bundles.append(bundle)
     return bundles
-
-def possibile_dynamic(
-    dynamic: str,
-    *,
-    selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
-    r"""
-    Attaches possibile dynamic.
-
-    ..  container:: example
-
-        Attaches possibilie dynamic to pitched head 0:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.possibile_dynamic('ff'),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            \baca_ff_poss                                                                 %! IC
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches possibile dynamic to pitched head 0 of tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.possibile_dynamic(
-        ...         'ff',
-        ...         selector=baca.tuplets()[1:2].phead(0),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            \baca_ff_poss                                                                 %! IC
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-    command = rf'\baca_{dynamic}_poss'
-    indicator = abjad.Dynamic(dynamic, command=command)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        )
-
-def subito_dynamic(
-    dynamic: str,
-    *,
-    selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
-    """
-    Attaches subito dynamic.
-    """
-    command = rf'\baca_{dynamic}_sub'
-    indicator = abjad.Dynamic(dynamic, command=command)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        )

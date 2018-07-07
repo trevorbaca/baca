@@ -3,6 +3,7 @@ import baca
 import typing
 from abjadext import rmakers
 from . import library
+from . import overrides
 from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
@@ -1114,12 +1115,12 @@ def bar_extent_zero() -> Suite:
     Makes bar-extent zero suite.
     """
     return library.suite(
-        bar_extent(
+        overrides.bar_extent(
             (0, 0),
             after=True,
             selector='baca.leaves()',
             ),
-        bar_extent(
+        overrides.bar_extent(
             (0, 0),
             after=True,
             selector='baca.leaf(-1)',
@@ -2740,8 +2741,8 @@ def clef_shift(
         width = clef._to_width[clef.name]
         extra_offset_x = -width
     command = library.suite(
-        clef_x_extent_false(),
-        clef_extra_offset((extra_offset_x, 0)),
+        overrides.clef_x_extent_false(),
+        overrides.clef_extra_offset((extra_offset_x, 0)),
         )
     library.tag(
         abjad.tags.SHIFTED_CLEF,
