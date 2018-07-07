@@ -1,6 +1,7 @@
 import abjad
 import baca
 import inspect
+import typing
 
 
 class Selection(abjad.Selection):
@@ -506,6 +507,216 @@ class Selection(abjad.Selection):
             enchain=True,
             overhang=True,
             )
+
+    def group_by_measures(
+        self,
+        counts: typing.List[int] = [1],
+        ) -> typing.Union[abjad.Expression, 'Selection']:
+        r"""
+        Groups leaves by measures cyclically partitioned by ``counts``.
+
+        ..  container:: example
+
+            Groups leaves by pairs of measures:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).group_by_measures(counts=[2])
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().group_by_measures(counts=[2])
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \once \override Dots.color = #red
+                    \once \override Rest.color = #red
+                    \time 2/8
+                    r8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    d'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    e'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    f'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    \time 3/8
+                    g'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    a'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    b'8
+                    \once \override Dots.color = #blue
+                    \once \override Rest.color = #blue
+                    \time 1/8
+                    r8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.leaves()
+        result = result.group_by_measure()
+        result = result.partition_by_counts(counts, cyclic=True)
+        result = result.map(baca.select().flatten())
+        return result
+
+    def group_notes_by_measures(
+        self,
+        counts: typing.List[int] = [1],
+        ) -> typing.Union[abjad.Expression, 'Selection']:
+        r"""
+        Groups notes by measures cyclically partitioned by ``counts``.
+
+        ..  container:: example
+
+            Groups notes by pairs of measures:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).group_notes_by_measures(counts=[2])
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Note("d'8"), Note("e'8"), Note("f'8")])
+                Selection([Note("g'8"), Note("a'8"), Note("b'8")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().group_notes_by_measures(counts=[2])
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Note("d'8"), Note("e'8"), Note("f'8")])
+                Selection([Note("g'8"), Note("a'8"), Note("b'8")])
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \time 2/8
+                    r8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    d'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    e'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    f'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    \time 3/8
+                    g'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    a'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    b'8
+                    \time 1/8
+                    r8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.notes()
+        result = result.group_by_measure()
+        result = result.partition_by_counts(
+            counts,
+            cyclic=True,
+            overhang=True,
+            )
+        result = result.map(baca.select().flatten())
+        return result
 
     def lleaf(self, n=0):
         r"""
@@ -1215,7 +1426,7 @@ class Selection(abjad.Selection):
         result = result.group_by_pitch()
         result = result.map(baca.group_by_contiguity())
         result = result.flatten(depth=1)
-        result = result.map(abjad.Selection)
+        result = result.map(baca.Selection)
         return result
 
     def ltrun(self, n):
@@ -1505,7 +1716,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.logical_ties(pitched=True).group_by_contiguity()
-        return result.map(abjad.Selection)
+        return result.map(baca.Selection)
 
     def lts(self):
         r"""
@@ -3660,7 +3871,7 @@ class Selection(abjad.Selection):
         result = result.group_by_pitch()
         result = result.map(baca.group_by_contiguity())
         result = result.flatten(depth=1)
-        result = result.map(abjad.Selection)
+        result = result.map(baca.Selection)
         return result
 
     def rleaf(self, n=0):
@@ -4276,7 +4487,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.runs().map(baca.with_next_leaf())
-        return result.map(abjad.Selection)
+        return result.map(baca.Selection)
 
     def skip(self, n):
         r"""

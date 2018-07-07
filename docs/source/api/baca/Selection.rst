@@ -20,6 +20,8 @@ Selection
       chead
       cheads
       enchain
+      group_by_measures
+      group_notes_by_measures
       lleaf
       lleak
       lleaves
@@ -207,9 +209,13 @@ Selection
 
       .. automethod:: Selection.group_by_measure
 
+   .. automethod:: Selection.group_by_measures
+
    .. container:: inherited
 
       .. automethod:: Selection.group_by_pitch
+
+   .. automethod:: Selection.group_notes_by_measures
 
    .. container:: inherited
 

@@ -25,8 +25,6 @@ LibraryGM
    ~glissando
    ~glissando_thickness
    ~global_fermata
-   ~group_by_measures
-   ~group_notes_by_measures
    ~imbricate
    ~instrument
    ~interpolate_staff_positions
@@ -62,10 +60,6 @@ LibraryGM
 .. autofunction:: glissando_thickness
 
 .. autofunction:: global_fermata
-
-.. autofunction:: group_by_measures
-
-.. autofunction:: group_notes_by_measures
 
 .. autofunction:: imbricate
 

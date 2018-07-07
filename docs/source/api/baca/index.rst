@@ -392,7 +392,9 @@ baca
    ~group_by_duration
    ~group_by_length
    ~group_by_measure
+   ~group_by_measures
    ~group_by_pitch
+   ~group_notes_by_measures
    ~index
    ~items
    ~leaf
@@ -494,7 +496,11 @@ baca
 
 .. autofunction:: group_by_measure
 
+.. autofunction:: group_by_measures
+
 .. autofunction:: group_by_pitch
+
+.. autofunction:: group_notes_by_measures
 
 .. autofunction:: index
 

@@ -377,28 +377,6 @@ def global_fermata(
         selector=selector,
         )
 
-# TODO: move to baca.Selection
-def group_by_measures(counts: typing.List[int] = [1]) -> abjad.Expression:
-    """
-    Makes selector.
-    """
-    selector = baca.select().leaves().group_by_measure()
-    selector = selector.partition_by_counts(counts, cyclic=True)
-    selector = selector.map(baca.select().flatten())
-    return selector
-
-# TODO: move to baca.Selection
-def group_notes_by_measures(
-    counts: typing.List[int] = [1],
-    ) -> abjad.Expression:
-    """
-    Makes selector.
-    """
-    selector = baca.select().notes().group_by_measure()
-    selector = selector.partition_by_counts(counts, cyclic=True)
-    selector = selector.map(baca.select().flatten())
-    return selector
-
 def imbricate(
     voice_name: str,
     segment: typing.List,
