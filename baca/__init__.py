@@ -10,7 +10,7 @@ from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
-from .BowContactPointCommand import BowContactPointCommand
+from .BCPCommand import BCPCommand
 from .BreakMeasureMap import BreakMeasureMap
 from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .ClusterCommand import ClusterCommand

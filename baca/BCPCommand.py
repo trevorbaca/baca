@@ -5,7 +5,7 @@ from . import typings
 from .Command import Command
 
 
-class BowContactPointCommand(Command):
+class BCPCommand(Command):
     """
     Bow contact point command.
     """
@@ -436,7 +436,7 @@ class BowContactPointCommand(Command):
 
         ..  container:: example
 
-            >>> baca.BowContactPointCommand().tag
+            >>> baca.BCPCommand().tag
             Tag('BACA_BCP_COMMAND')
 
         """

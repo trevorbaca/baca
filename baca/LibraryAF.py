@@ -6,7 +6,7 @@ from . import library
 from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
-from .BowContactPointCommand import BowContactPointCommand
+from .BCPCommand import BCPCommand
 from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
@@ -1483,13 +1483,13 @@ def bcps(
     final_spanner: bool = None,
     helper: typing.Callable = None,
     selector: typings.Selector = 'baca.leaves()',
-    ) -> BowContactPointCommand:
+    ) -> BCPCommand:
     """
     Makes bow contact points.
     """
     if final_spanner is not None:
         final_spanner = bool(final_spanner)
-    return BowContactPointCommand(
+    return BCPCommand(
         *tweaks,
         bcps=bcps,
         final_spanner=final_spanner,
