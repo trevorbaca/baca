@@ -21,7 +21,6 @@ from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
-from .OverrideCommand import OverrideCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .SpannerCommand import SpannerCommand
 
@@ -4626,36 +4625,28 @@ def finger_pressure_transition(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! SM4
-                            \override Glissando.arrow-length = #'2                                   %! OC1
-                            \override Glissando.arrow-width = #'0.5                                  %! OC1
-                            \override Glissando.bound-details.right.arrow = ##t                      %! OC1
-                            \override Glissando.thickness = #'3                                      %! OC1
                             \once \override NoteHead.style = #'harmonic                              %! OC1
                             c''2
+                            - \tweak arrow-length #2                                                 %! SC
+                            - \tweak arrow-width #0.5                                                %! SC
+                            - \tweak bound-details.right.arrow ##t                                   %! SC
+                            - \tweak thickness #3                                                    %! SC
                             \glissando                                                               %! SC
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! SM4
                             c''4.
-                            \revert Glissando.arrow-length                                           %! OC2
-                            \revert Glissando.arrow-width                                            %! OC2
-                            \revert Glissando.bound-details.right.arrow                              %! OC2
-                            \revert Glissando.thickness                                              %! OC2
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! SM4
-                            \override Glissando.arrow-length = #'2                                   %! OC1
-                            \override Glissando.arrow-width = #'0.5                                  %! OC1
-                            \override Glissando.bound-details.right.arrow = ##t                      %! OC1
-                            \override Glissando.thickness = #'3                                      %! OC1
                             \once \override NoteHead.style = #'harmonic                              %! OC1
                             c''2
+                            - \tweak arrow-length #2                                                 %! SC
+                            - \tweak arrow-width #0.5                                                %! SC
+                            - \tweak bound-details.right.arrow ##t                                   %! SC
+                            - \tweak thickness #3                                                    %! SC
                             \glissando                                                               %! SC
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
                             c''4.
-                            \revert Glissando.arrow-length                                           %! OC2
-                            \revert Glissando.arrow-width                                            %! OC2
-                            \revert Glissando.bound-details.right.arrow                              %! OC2
-                            \revert Glissando.thickness                                              %! OC2
             <BLANKLINE>
                         }
                     }
@@ -4663,36 +4654,14 @@ def finger_pressure_transition(
             >>
 
     """
-    return library.suite(
-        SpannerCommand(
-            right_broken=right_broken,
-            selector=selector,
-            spanner=abjad.Glissando(allow_repeats=True),
-            ),
-        OverrideCommand(
-            attribute='arrow_length',
-            value='2',
-            grob='glissando',
-            selector=selector,
-            ),
-        OverrideCommand(
-            attribute='arrow_width',
-            value='0.5',
-            grob='glissando',
-            selector=selector,
-            ),
-        OverrideCommand(
-            attribute='bound_details__right__arrow',
-            value=True,
-            grob='glissando',
-            selector=selector,
-            ),
-        OverrideCommand(
-            attribute='thickness',
-            value='3',
-            grob='glissando',
-            selector=selector,
-            ),
+    return SpannerCommand(
+        abjad.tweak(2).arrow_length,
+        abjad.tweak(0.5).arrow_width,
+        abjad.tweak(True).bound_details__right__arrow,
+        abjad.tweak(3).thickness,
+        right_broken=right_broken,
+        selector=selector,
+        spanner=abjad.Glissando(allow_repeats=True),
         )
 
 def flageolet(
