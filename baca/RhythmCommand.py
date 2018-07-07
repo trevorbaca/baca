@@ -608,11 +608,12 @@ class RhythmCommand(Command):
         """
         return self._division_maker
 
-    # TODO: remove?
     @property
     def left_broken(self) -> typing.Optional[bool]:
         """
         Is true when rhythm is left-broken.
+
+        Talea rhythm-maker knows how to tag incomplete last notes.
         """
         return self._left_broken
 
@@ -977,11 +978,12 @@ class RhythmCommand(Command):
         """
         return self._rhythm_maker
 
-    # TODO: remove?
     @property
     def right_broken(self) -> typing.Optional[bool]:
         """
         Is true when rhythm is right-broken.
+
+        Talea rhythm-maker knows how to tag incomplete last notes.
         """
         return self._right_broken
 
