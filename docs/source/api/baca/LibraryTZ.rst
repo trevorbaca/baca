@@ -29,7 +29,6 @@ LibraryTZ
    ~tie_from
    ~tie_repeat_pitches
    ~tie_to
-   ~transition
    ~trill_spanner
    ~untie_to
    ~up_arpeggio
@@ -54,8 +53,6 @@ LibraryTZ
 .. autofunction:: tie_repeat_pitches
 
 .. autofunction:: tie_to
-
-.. autofunction:: transition
 
 .. autofunction:: trill_spanner
 

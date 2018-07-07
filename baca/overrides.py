@@ -6713,8 +6713,9 @@ def text_spanner_staff_padding(
         ...     baca.rests_around([2], [4]),
         ...     baca.text_spanner_staff_padding(6),
         ...     baca.text_script_staff_padding(6),
-        ...     baca.transition(
+        ...     baca.new_text_spanner(
         ...         baca.markups.pont(),
+        ...         '=>',
         ...         baca.markups.ord(),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -6806,8 +6807,9 @@ def text_spanner_staff_padding(
         ...         baca.text_spanner_staff_padding(6),
         ...         ),
         ...     baca.text_script_staff_padding(6),
-        ...     baca.transition(
+        ...     baca.new_text_spanner(
         ...         baca.markups.pont(),
+        ...         '=>',
         ...         baca.markups.ord(),
         ...         selector=baca.tuplets()[1:2].tleaves(),
         ...         ),

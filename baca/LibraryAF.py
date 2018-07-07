@@ -4555,7 +4555,7 @@ def finger_pressure_transition(
     *,
     selector: typings.Selector = 'baca.tleaves()',
     right_broken: bool = None,
-    ) -> Suite:
+    ) -> SpannerCommand:
     r"""
     Makes finger pressure transition glissando.
 

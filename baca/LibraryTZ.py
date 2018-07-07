@@ -1495,24 +1495,6 @@ def new_text_spanner(
         selector=selector,
         )
 
-def transition(
-    *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
-    selector: typings.Selector = 'baca.tleaves()',
-    tweaks: typing.List[abjad.LilyPondTweakManager] = None,
-    ):
-    """
-    Attaches text span indicators.
-    """
-    items_ = []
-    for item in items:
-        items_.append(item)
-        items_.append('=>')
-    return new_text_spanner(
-        *items_,
-        selector=selector,
-        tweaks=tweaks,
-        )
-
 def tenuto(
     *,
     selector: typings.Selector = 'baca.phead(0)',

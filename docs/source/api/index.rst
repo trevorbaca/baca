@@ -514,7 +514,6 @@ Bača API
    ~baca.LibraryTZ.tie_from
    ~baca.LibraryTZ.tie_repeat_pitches
    ~baca.LibraryTZ.tie_to
-   ~baca.LibraryTZ.transition
    ~baca.LibraryTZ.trill_spanner
    ~baca.LibraryTZ.untie_to
    ~baca.LibraryTZ.up_arpeggio
