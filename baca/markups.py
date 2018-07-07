@@ -83,21 +83,20 @@ def cir(m=None, n=None):
         f'{m}-{n}” {string}',
         )
 
-def circles(m=None, n=None):
+def circles(m=None, n=None, as_string=False):
     string = 'circles'
     if m is None:
-        return Markup(
-            string,
-            )
-    assert isinstance(m, int), repr(m)
-    if n is None:
-        return Markup(
-            f'{m}” {string}',
-            )
-    assert isinstance(n, int), repr(n)
-    return Markup(
-        f'{m}-{n}” {string}',
-        )
+        pass
+    elif n is None:
+        assert isinstance(m, int), repr(m)
+        string = f'{m}” {string}'
+    else:
+        assert isinstance(n, int), repr(n)
+        string = f'{m}-{n}” {string}'
+    if as_string:
+        return string
+    else:
+        return Markup(string)
 
 def clicks_per_second(
     lower: int,
