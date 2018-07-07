@@ -509,7 +509,6 @@ Bača API
 
    ~baca.LibraryTZ.new_text_spanner
    ~baca.LibraryTZ.tenuto
-   ~baca.LibraryTZ.text_spanner
    ~baca.LibraryTZ.tie
    ~baca.LibraryTZ.tie_from
    ~baca.LibraryTZ.tie_repeat_pitches
