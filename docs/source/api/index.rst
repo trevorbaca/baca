@@ -75,9 +75,6 @@ Bača API
    ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~baca.PitchCommand.PitchCommand
-   ~baca.RegisterCommand.RegisterCommand
-   ~baca.RegisterInterpolationCommand.RegisterInterpolationCommand
-   ~baca.RegisterToOctaveCommand.RegisterToOctaveCommand
    ~baca.SpannerCommand.SpannerCommand
    ~baca.StaffPositionCommand.StaffPositionCommand
    ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
@@ -110,8 +107,6 @@ Bača API
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.PageSpecifier.PageSpecifier
    ~baca.Partial.Partial
-   ~baca.Registration.Registration
-   ~baca.RegistrationComponent.RegistrationComponent
    ~baca.SchemeManifest.SchemeManifest
    ~baca.Scope.Scope
    ~baca.Selection.Selection
@@ -292,7 +287,6 @@ Bača API
    ~baca.LibraryAF.articulation
    ~baca.LibraryAF.articulations
    ~baca.LibraryAF.bar_extent_persistent
-   ~baca.LibraryAF.bass_to_octave
    ~baca.LibraryAF.bcps
    ~baca.LibraryAF.beam
    ~baca.LibraryAF.beam_divisions
@@ -300,7 +294,6 @@ Bača API
    ~baca.LibraryAF.beam_runs
    ~baca.LibraryAF.breaks
    ~baca.LibraryAF.breathe
-   ~baca.LibraryAF.center_to_octave
    ~baca.LibraryAF.clef
    ~baca.LibraryAF.clusters
    ~baca.LibraryAF.coat
@@ -382,7 +375,6 @@ Bača API
    ~baca.LibraryNS.parts
    ~baca.LibraryNS.pitch
    ~baca.LibraryNS.previous_metadata
-   ~baca.LibraryNS.register
    ~baca.LibraryNS.rehearsal_mark
    ~baca.LibraryNS.repeat_tie
    ~baca.LibraryNS.repeat_tie_from
@@ -400,7 +392,6 @@ Bača API
    ~baca.LibraryNS.skips_around
    ~baca.LibraryNS.skips_before
    ~baca.LibraryNS.slur
-   ~baca.LibraryNS.soprano_to_octave
    ~baca.LibraryNS.staccatissimo
    ~baca.LibraryNS.staccato
    ~baca.LibraryNS.staff_lines
@@ -980,6 +971,55 @@ Markup library.
    ~baca.pitchlib.PitchTree
    ~baca.pitchlib.PitchTreeSpanner
    ~baca.pitchlib.ZaggedPitchClassMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.registerlib <baca--registerlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.registerlib.RegisterCommand
+   ~baca.registerlib.RegisterInterpolationCommand
+   ~baca.registerlib.RegisterToOctaveCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.registerlib.Registration
+   ~baca.registerlib.RegistrationComponent
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.registerlib.bass_to_octave
+   ~baca.registerlib.center_to_octave
+   ~baca.registerlib.register
+   ~baca.registerlib.soprano_to_octave
 
 .. raw:: html
 

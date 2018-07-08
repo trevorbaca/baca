@@ -33,7 +33,6 @@ LibraryAF
    ~articulation
    ~articulations
    ~bar_extent_persistent
-   ~bass_to_octave
    ~bcps
    ~beam
    ~beam_divisions
@@ -41,7 +40,6 @@ LibraryAF
    ~beam_runs
    ~breaks
    ~breathe
-   ~center_to_octave
    ~clef
    ~clusters
    ~coat
@@ -87,8 +85,6 @@ LibraryAF
 
 .. autofunction:: bar_extent_persistent
 
-.. autofunction:: bass_to_octave
-
 .. autofunction:: bcps
 
 .. autofunction:: beam
@@ -102,8 +98,6 @@ LibraryAF
 .. autofunction:: breaks
 
 .. autofunction:: breathe
-
-.. autofunction:: center_to_octave
 
 .. autofunction:: clef
 

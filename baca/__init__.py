@@ -6,6 +6,7 @@ from .markuplib import Markup
 from .overridelib import *
 from .pitcharraylib import *
 from .pitchlib import *
+from .registerlib import *
 from .rhythmlib import *
 from .settinglib import *
 from .templatelib import *
@@ -61,11 +62,6 @@ from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .PitchCommand import PitchCommand
 from .PitchSpecifier import PitchSpecifier
-from .RegisterCommand import RegisterCommand
-from .RegisterInterpolationCommand import RegisterInterpolationCommand
-from .RegisterToOctaveCommand import RegisterToOctaveCommand
-from .Registration import Registration
-from .RegistrationComponent import RegistrationComponent
 from .RestAffixSpecifier import RestAffixSpecifier
 from .Ritardando import Ritardando
 from .SchemeManifest import SchemeManifest

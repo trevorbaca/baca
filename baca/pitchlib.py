@@ -1,9 +1,9 @@
 import abjad
 import collections as collections_module
 import inspect
+from . import registerlib
 from .Cursor import Cursor
 from .Expression import Expression
-from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .Sequence import Sequence
 from .Tree import Tree
 
@@ -5263,7 +5263,9 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
-        command = RegisterToOctaveCommand(
+        # TODO: remove reference to RegisterToOctaveCommand;
+        #       implement as segment-only operation
+        command = registerlib.RegisterToOctaveCommand(
             anchor=abjad.Down,
             octave_number=n,
             )
@@ -5345,7 +5347,9 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
-        command = RegisterToOctaveCommand(
+        # TODO: remove reference to RegisterToOctaveCommand;
+        #       implement as segment-only operation
+        command = registerlib.RegisterToOctaveCommand(
             anchor=abjad.Center,
             octave_number=n,
             )
@@ -5469,7 +5473,9 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
-        command = RegisterToOctaveCommand(
+        # TODO: remove reference to RegisterToOctaveCommand;
+        #       implement as segment-only operation
+        command = registerlib.RegisterToOctaveCommand(
             anchor=abjad.Up,
             octave_number=n,
             )

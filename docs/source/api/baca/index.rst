@@ -34,6 +34,7 @@ baca
    overridelib
    pitcharraylib
    pitchlib
+   registerlib
    rhythmlib
    settinglib
    templatelib
@@ -53,6 +54,7 @@ baca
    overridelib
    pitcharraylib
    pitchlib
+   registerlib
    rhythmlib
    settinglib
    templatelib
@@ -137,9 +139,6 @@ baca
    PartAssignmentCommand
    PiecewiseIndicatorCommand
    PitchCommand
-   RegisterCommand
-   RegisterInterpolationCommand
-   RegisterToOctaveCommand
    SpannerCommand
    StaffPositionCommand
    StaffPositionInterpolationCommand
@@ -169,9 +168,6 @@ baca
    ~PartAssignmentCommand.PartAssignmentCommand
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~PitchCommand.PitchCommand
-   ~RegisterCommand.RegisterCommand
-   ~RegisterInterpolationCommand.RegisterInterpolationCommand
-   ~RegisterToOctaveCommand.RegisterToOctaveCommand
    ~SpannerCommand.SpannerCommand
    ~StaffPositionCommand.StaffPositionCommand
    ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
@@ -204,8 +200,6 @@ baca
    MetronomeMarkMeasureMap
    PageSpecifier
    Partial
-   Registration
-   RegistrationComponent
    SchemeManifest
    Scope
    Selection
@@ -240,8 +234,6 @@ baca
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier
    ~Partial.Partial
-   ~Registration.Registration
-   ~RegistrationComponent.RegistrationComponent
    ~SchemeManifest.SchemeManifest
    ~Scope.Scope
    ~Selection.Selection

@@ -31,7 +31,6 @@ LibraryNS
    ~parts
    ~pitch
    ~previous_metadata
-   ~register
    ~rehearsal_mark
    ~repeat_tie
    ~repeat_tie_from
@@ -49,7 +48,6 @@ LibraryNS
    ~skips_around
    ~skips_before
    ~slur
-   ~soprano_to_octave
    ~staccatissimo
    ~staccato
    ~staff_lines
@@ -79,8 +77,6 @@ LibraryNS
 .. autofunction:: pitch
 
 .. autofunction:: previous_metadata
-
-.. autofunction:: register
 
 .. autofunction:: rehearsal_mark
 
@@ -115,8 +111,6 @@ LibraryNS
 .. autofunction:: skips_before
 
 .. autofunction:: slur
-
-.. autofunction:: soprano_to_octave
 
 .. autofunction:: staccatissimo
 
