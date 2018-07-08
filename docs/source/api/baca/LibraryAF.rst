@@ -34,7 +34,6 @@ LibraryAF
    ~articulations
    ~bar_extent_persistent
    ~bcps
-   ~beam
    ~beam_divisions
    ~beam_everything
    ~beam_runs
@@ -58,7 +57,6 @@ LibraryAF
    ~edition
    ~espressivo
    ~fermata
-   ~finger_pressure_transition
    ~flageolet
    ~flags
    ~force_accidental
@@ -86,8 +84,6 @@ LibraryAF
 .. autofunction:: bar_extent_persistent
 
 .. autofunction:: bcps
-
-.. autofunction:: beam
 
 .. autofunction:: beam_divisions
 
@@ -134,8 +130,6 @@ LibraryAF
 .. autofunction:: espressivo
 
 .. autofunction:: fermata
-
-.. autofunction:: finger_pressure_transition
 
 .. autofunction:: flageolet
 

@@ -22,7 +22,6 @@ LibraryGM
 .. autosummary::
    :nosignatures:
 
-   ~glissando
    ~global_fermata
    ~imbricate
    ~instrument
@@ -36,8 +35,6 @@ LibraryGM
    ~metronome_mark
    ~minimum_duration
    ~mleaves
-
-.. autofunction:: glissando
 
 .. autofunction:: global_fermata
 

@@ -25,16 +25,12 @@ LibraryNS
    ~natural_clusters
    ~nest
    ~one_voice
-   ~ottava
-   ~ottava_bassa
    ~page
    ~parts
    ~pitch
    ~previous_metadata
    ~rehearsal_mark
-   ~repeat_tie
    ~repeat_tie_from
-   ~repeat_tie_repeat_pitches
    ~repeat_tie_to
    ~rests_after
    ~rests_around
@@ -47,7 +43,6 @@ LibraryNS
    ~skips_after
    ~skips_around
    ~skips_before
-   ~slur
    ~staccatissimo
    ~staccato
    ~staff_lines
@@ -57,7 +52,6 @@ LibraryNS
    ~stem_tremolo
    ~stop_trill
    ~stopped
-   ~sustain_pedal
    ~system
 
 .. autofunction:: natural_clusters
@@ -65,10 +59,6 @@ LibraryNS
 .. autofunction:: nest
 
 .. autofunction:: one_voice
-
-.. autofunction:: ottava
-
-.. autofunction:: ottava_bassa
 
 .. autofunction:: page
 
@@ -80,11 +70,7 @@ LibraryNS
 
 .. autofunction:: rehearsal_mark
 
-.. autofunction:: repeat_tie
-
 .. autofunction:: repeat_tie_from
-
-.. autofunction:: repeat_tie_repeat_pitches
 
 .. autofunction:: repeat_tie_to
 
@@ -110,8 +96,6 @@ LibraryNS
 
 .. autofunction:: skips_before
 
-.. autofunction:: slur
-
 .. autofunction:: staccatissimo
 
 .. autofunction:: staccato
@@ -129,7 +113,5 @@ LibraryNS
 .. autofunction:: stop_trill
 
 .. autofunction:: stopped
-
-.. autofunction:: sustain_pedal
 
 .. autofunction:: system

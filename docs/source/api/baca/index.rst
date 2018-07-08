@@ -29,6 +29,7 @@ baca
    LibraryTZ
    divisionlib
    dynamiclib
+   indicatorlib
    library
    markuplib
    overridelib
@@ -37,6 +38,7 @@ baca
    registerlib
    rhythmlib
    settinglib
+   spannerlib
    templatelib
 
 .. autosummary::
@@ -49,6 +51,7 @@ baca
    LibraryTZ
    divisionlib
    dynamiclib
+   indicatorlib
    library
    markuplib
    overridelib
@@ -57,6 +60,7 @@ baca
    registerlib
    rhythmlib
    settinglib
+   spannerlib
    templatelib
 
 .. raw:: html
@@ -139,7 +143,6 @@ baca
    PartAssignmentCommand
    PiecewiseIndicatorCommand
    PitchCommand
-   SpannerCommand
    StaffPositionCommand
    StaffPositionInterpolationCommand
    TieCorrectionCommand
@@ -168,7 +171,6 @@ baca
    ~PartAssignmentCommand.PartAssignmentCommand
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~PitchCommand.PitchCommand
-   ~SpannerCommand.SpannerCommand
    ~StaffPositionCommand.StaffPositionCommand
    ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
    ~TieCorrectionCommand.TieCorrectionCommand
@@ -194,7 +196,6 @@ baca
    HarmonicSeries
    IndicatorBundle
    Interpolator
-   LBSD
    Loop
    MeasureWrapper
    MetronomeMarkMeasureMap
@@ -206,7 +207,6 @@ baca
    Sequence
    SpacingIndication
    SpacingSection
-   StaffLines
    StageMeasureMap
    SystemSpecifier
    TimeSignatureGroups
@@ -228,7 +228,6 @@ baca
    ~HarmonicSeries.HarmonicSeries
    ~IndicatorBundle.IndicatorBundle
    ~Interpolator.Interpolator
-   ~LBSD.LBSD
    ~Loop.Loop
    ~MeasureWrapper.MeasureWrapper
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
@@ -240,7 +239,6 @@ baca
    ~Sequence.Sequence
    ~SpacingIndication.SpacingIndication
    ~SpacingSection.SpacingSection
-   ~StaffLines.StaffLines
    ~StageMeasureMap.StageMeasureMap
    ~SystemSpecifier.SystemSpecifier
    ~TimeSignatureGroups.TimeSignatureGroups
@@ -259,16 +257,12 @@ baca
 .. toctree::
    :hidden:
 
-   Accelerando
    PaddedTuple
-   Ritardando
 
 .. autosummary::
    :nosignatures:
 
-   ~Accelerando.Accelerando
    ~PaddedTuple.PaddedTuple
-   ~Ritardando.Ritardando
 
 .. raw:: html
 

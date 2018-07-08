@@ -24,11 +24,8 @@ LibraryTZ
 
    ~tenuto
    ~text_spanner
-   ~tie
    ~tie_from
-   ~tie_repeat_pitches
    ~tie_to
-   ~trill_spanner
    ~untie_to
    ~up_arpeggio
    ~up_bow
@@ -43,15 +40,9 @@ LibraryTZ
 
 .. autofunction:: text_spanner
 
-.. autofunction:: tie
-
 .. autofunction:: tie_from
 
-.. autofunction:: tie_repeat_pitches
-
 .. autofunction:: tie_to
-
-.. autofunction:: trill_spanner
 
 .. autofunction:: untie_to
 

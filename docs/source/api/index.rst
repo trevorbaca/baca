@@ -75,7 +75,6 @@ Bača API
    ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~baca.PitchCommand.PitchCommand
-   ~baca.SpannerCommand.SpannerCommand
    ~baca.StaffPositionCommand.StaffPositionCommand
    ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
    ~baca.TieCorrectionCommand.TieCorrectionCommand
@@ -101,7 +100,6 @@ Bača API
    ~baca.HarmonicSeries.HarmonicSeries
    ~baca.IndicatorBundle.IndicatorBundle
    ~baca.Interpolator.Interpolator
-   ~baca.LBSD.LBSD
    ~baca.Loop.Loop
    ~baca.MeasureWrapper.MeasureWrapper
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
@@ -113,7 +111,6 @@ Bača API
    ~baca.Sequence.Sequence
    ~baca.SpacingIndication.SpacingIndication
    ~baca.SpacingSection.SpacingSection
-   ~baca.StaffLines.StaffLines
    ~baca.StageMeasureMap.StageMeasureMap
    ~baca.SystemSpecifier.SystemSpecifier
    ~baca.TimeSignatureGroups.TimeSignatureGroups
@@ -132,9 +129,7 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.Accelerando.Accelerando
    ~baca.PaddedTuple.PaddedTuple
-   ~baca.Ritardando.Ritardando
 
 .. raw:: html
 
@@ -288,7 +283,6 @@ Bača API
    ~baca.LibraryAF.articulations
    ~baca.LibraryAF.bar_extent_persistent
    ~baca.LibraryAF.bcps
-   ~baca.LibraryAF.beam
    ~baca.LibraryAF.beam_divisions
    ~baca.LibraryAF.beam_everything
    ~baca.LibraryAF.beam_runs
@@ -312,7 +306,6 @@ Bača API
    ~baca.LibraryAF.edition
    ~baca.LibraryAF.espressivo
    ~baca.LibraryAF.fermata
-   ~baca.LibraryAF.finger_pressure_transition
    ~baca.LibraryAF.flageolet
    ~baca.LibraryAF.flags
    ~baca.LibraryAF.force_accidental
@@ -334,7 +327,6 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.LibraryGM.glissando
    ~baca.LibraryGM.global_fermata
    ~baca.LibraryGM.imbricate
    ~baca.LibraryGM.instrument
@@ -369,16 +361,12 @@ Bača API
    ~baca.LibraryNS.natural_clusters
    ~baca.LibraryNS.nest
    ~baca.LibraryNS.one_voice
-   ~baca.LibraryNS.ottava
-   ~baca.LibraryNS.ottava_bassa
    ~baca.LibraryNS.page
    ~baca.LibraryNS.parts
    ~baca.LibraryNS.pitch
    ~baca.LibraryNS.previous_metadata
    ~baca.LibraryNS.rehearsal_mark
-   ~baca.LibraryNS.repeat_tie
    ~baca.LibraryNS.repeat_tie_from
-   ~baca.LibraryNS.repeat_tie_repeat_pitches
    ~baca.LibraryNS.repeat_tie_to
    ~baca.LibraryNS.rests_after
    ~baca.LibraryNS.rests_around
@@ -391,7 +379,6 @@ Bača API
    ~baca.LibraryNS.skips_after
    ~baca.LibraryNS.skips_around
    ~baca.LibraryNS.skips_before
-   ~baca.LibraryNS.slur
    ~baca.LibraryNS.staccatissimo
    ~baca.LibraryNS.staccato
    ~baca.LibraryNS.staff_lines
@@ -401,7 +388,6 @@ Bača API
    ~baca.LibraryNS.stem_tremolo
    ~baca.LibraryNS.stop_trill
    ~baca.LibraryNS.stopped
-   ~baca.LibraryNS.sustain_pedal
    ~baca.LibraryNS.system
 
 .. raw:: html
@@ -423,11 +409,8 @@ Bača API
 
    ~baca.LibraryTZ.tenuto
    ~baca.LibraryTZ.text_spanner
-   ~baca.LibraryTZ.tie
    ~baca.LibraryTZ.tie_from
-   ~baca.LibraryTZ.tie_repeat_pitches
    ~baca.LibraryTZ.tie_to
-   ~baca.LibraryTZ.trill_spanner
    ~baca.LibraryTZ.untie_to
    ~baca.LibraryTZ.up_arpeggio
    ~baca.LibraryTZ.up_bow
@@ -516,6 +499,39 @@ Dynamic library.
    ~baca.dynamiclib.hairpin
    ~baca.dynamiclib.make_dynamic
    ~baca.dynamiclib.parse_hairpin_descriptor
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.indicatorlib <baca--indicatorlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.indicatorlib.LBSD
+   ~baca.indicatorlib.StaffLines
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.indicatorlib.Accelerando
+   ~baca.indicatorlib.Ritardando
 
 .. raw:: html
 
@@ -1133,6 +1149,48 @@ Setting library.
    :nosignatures:
 
    ~baca.settinglib.SettingCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.spannerlib <baca--spannerlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.spannerlib.SpannerCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.spannerlib.beam
+   ~baca.spannerlib.finger_pressure_transition
+   ~baca.spannerlib.glissando
+   ~baca.spannerlib.ottava
+   ~baca.spannerlib.ottava_bassa
+   ~baca.spannerlib.repeat_tie
+   ~baca.spannerlib.repeat_tie_repeat_pitches
+   ~baca.spannerlib.slur
+   ~baca.spannerlib.sustain_pedal
+   ~baca.spannerlib.tie
+   ~baca.spannerlib.tie_repeat_pitches
+   ~baca.spannerlib.trill_spanner
 
 .. raw:: html
 

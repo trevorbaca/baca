@@ -1,16 +1,28 @@
-.. _baca--SpannerCommand:
+.. _baca--spannerlib:
 
-SpannerCommand
-==============
+spannerlib
+==========
 
-.. automodule:: baca.SpannerCommand
+.. automodule:: baca.spannerlib
 
-.. currentmodule:: baca.SpannerCommand
+.. currentmodule:: baca.spannerlib
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.SpannerCommand
+      :lineage: baca.spannerlib
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~SpannerCommand
 
 .. autoclass:: SpannerCommand
 
@@ -102,3 +114,50 @@ SpannerCommand
       .. autoattribute:: SpannerCommand.tags
 
    .. autoattribute:: SpannerCommand.tweaks
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~beam
+   ~finger_pressure_transition
+   ~glissando
+   ~ottava
+   ~ottava_bassa
+   ~repeat_tie
+   ~repeat_tie_repeat_pitches
+   ~slur
+   ~sustain_pedal
+   ~tie
+   ~tie_repeat_pitches
+   ~trill_spanner
+
+.. autofunction:: beam
+
+.. autofunction:: finger_pressure_transition
+
+.. autofunction:: glissando
+
+.. autofunction:: ottava
+
+.. autofunction:: ottava_bassa
+
+.. autofunction:: repeat_tie
+
+.. autofunction:: repeat_tie_repeat_pitches
+
+.. autofunction:: slur
+
+.. autofunction:: sustain_pedal
+
+.. autofunction:: tie
+
+.. autofunction:: tie_repeat_pitches
+
+.. autofunction:: trill_spanner

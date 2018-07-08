@@ -2,6 +2,7 @@ import abjad
 import baca
 import copy
 from abjadext import rmakers
+from . import spannerlib
 from .Command import Command
 from .Command import Map
 
@@ -871,7 +872,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if (isinstance(specifier, baca.SpannerCommand) and
+            if (isinstance(specifier, spannerlib.SpannerCommand) and
                 isinstance(specifier.spanner, abjad.Tie)):
                 specifier(selections)
             else:

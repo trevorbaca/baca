@@ -10,6 +10,7 @@ from .pitchlib import *
 from .registerlib import *
 from .rhythmlib import *
 from .settinglib import *
+from .spannerlib import *
 from .templatelib import *
 from . import markuplib
 
@@ -69,7 +70,6 @@ from .Selection import Selection
 from .Sequence import Sequence
 from .SpacingIndication import SpacingIndication
 from .SpacingSection import SpacingSection
-from .SpannerCommand import SpannerCommand
 from .StaffPositionCommand import StaffPositionCommand
 from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand
