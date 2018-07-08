@@ -33,6 +33,7 @@ baca
    markups
    overridelib
    pitcharraylib
+   pitchlib
    rhythmlib
 
 .. autosummary::
@@ -49,6 +50,7 @@ baca
    markups
    overridelib
    pitcharraylib
+   pitchlib
    rhythmlib
 
 .. raw:: html
@@ -192,7 +194,6 @@ baca
 
    BreakMeasureMap
    Coat
-   CollectionList
    Constellation
    ConstellationCircuit
    Counter
@@ -211,12 +212,6 @@ baca
    MetronomeMarkMeasureMap
    PageSpecifier
    Partial
-   PitchClassSegment
-   PitchClassSet
-   PitchSegment
-   PitchSet
-   PitchTree
-   PitchTreeSpanner
    Registration
    RegistrationComponent
    SchemeManifest
@@ -238,14 +233,12 @@ baca
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate
    WellformednessManager
-   ZaggedPitchClassMaker
 
 .. autosummary::
    :nosignatures:
 
    ~BreakMeasureMap.BreakMeasureMap
    ~Coat.Coat
-   ~CollectionList.CollectionList
    ~Constellation.Constellation
    ~ConstellationCircuit.ConstellationCircuit
    ~Counter.Counter
@@ -264,12 +257,6 @@ baca
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier
    ~Partial.Partial
-   ~PitchClassSegment.PitchClassSegment
-   ~PitchClassSet.PitchClassSet
-   ~PitchSegment.PitchSegment
-   ~PitchSet.PitchSet
-   ~PitchTree.PitchTree
-   ~PitchTreeSpanner.PitchTreeSpanner
    ~Registration.Registration
    ~RegistrationComponent.RegistrationComponent
    ~SchemeManifest.SchemeManifest
@@ -291,7 +278,6 @@ baca
    ~TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate
    ~ViolinSoloScoreTemplate.ViolinSoloScoreTemplate
    ~WellformednessManager.WellformednessManager
-   ~ZaggedPitchClassMaker.ZaggedPitchClassMaker
 
 .. raw:: html
 

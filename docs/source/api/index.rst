@@ -100,7 +100,6 @@ Bača API
 
    ~baca.BreakMeasureMap.BreakMeasureMap
    ~baca.Coat.Coat
-   ~baca.CollectionList.CollectionList
    ~baca.Constellation.Constellation
    ~baca.ConstellationCircuit.ConstellationCircuit
    ~baca.Counter.Counter
@@ -119,12 +118,6 @@ Bača API
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.PageSpecifier.PageSpecifier
    ~baca.Partial.Partial
-   ~baca.PitchClassSegment.PitchClassSegment
-   ~baca.PitchClassSet.PitchClassSet
-   ~baca.PitchSegment.PitchSegment
-   ~baca.PitchSet.PitchSet
-   ~baca.PitchTree.PitchTree
-   ~baca.PitchTreeSpanner.PitchTreeSpanner
    ~baca.Registration.Registration
    ~baca.RegistrationComponent.RegistrationComponent
    ~baca.SchemeManifest.SchemeManifest
@@ -146,7 +139,6 @@ Bača API
    ~baca.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate
    ~baca.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate
    ~baca.WellformednessManager.WellformednessManager
-   ~baca.ZaggedPitchClassMaker.ZaggedPitchClassMaker
 
 .. raw:: html
 
@@ -948,6 +940,32 @@ Markup library.
    ~baca.pitcharraylib.PitchArrayColumn
    ~baca.pitcharraylib.PitchArrayList
    ~baca.pitcharraylib.PitchArrayRow
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.pitchlib <baca--pitchlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchlib.CollectionList
+   ~baca.pitchlib.PitchClassSegment
+   ~baca.pitchlib.PitchClassSet
+   ~baca.pitchlib.PitchSegment
+   ~baca.pitchlib.PitchSet
+   ~baca.pitchlib.PitchTree
+   ~baca.pitchlib.PitchTreeSpanner
+   ~baca.pitchlib.ZaggedPitchClassMaker
 
 .. raw:: html
 

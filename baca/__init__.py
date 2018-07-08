@@ -4,6 +4,7 @@ from .divisionlib import *
 from .dynamiclib import *
 from .overridelib import *
 from .pitcharraylib import *
+from .pitchlib import *
 from .rhythmlib import *
 from . import markups
 
@@ -18,7 +19,6 @@ from .BreakMeasureMap import BreakMeasureMap
 from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
-from .CollectionList import CollectionList
 from .ColorCommand import ColorCommand
 from .ColorFingeringCommand import ColorFingeringCommand
 from .Command import Command
@@ -63,14 +63,8 @@ from .PartAssignmentCommand import PartAssignmentCommand
 from .Partial import Partial
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
-from .PitchClassSegment import PitchClassSegment
-from .PitchClassSet import PitchClassSet
 from .PitchCommand import PitchCommand
-from .PitchSegment import PitchSegment
-from .PitchSet import PitchSet
 from .PitchSpecifier import PitchSpecifier
-from .PitchTree import PitchTree
-from .PitchTreeSpanner import PitchTreeSpanner
 from .RegisterCommand import RegisterCommand
 from .RegisterInterpolationCommand import RegisterInterpolationCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
@@ -105,13 +99,12 @@ from .TwoVoiceStaffScoreTemplate import TwoVoiceStaffScoreTemplate
 from .ViolinSoloScoreTemplate import ViolinSoloScoreTemplate
 from .VoltaCommand import VoltaCommand
 from .WellformednessManager import WellformednessManager
-from .ZaggedPitchClassMaker import ZaggedPitchClassMaker
 
 # expression constructors
-from .PitchClassSegment import _pitch_class_segment as pitch_class_segment
-from .PitchClassSet import _pitch_class_set as pitch_class_set
-from .PitchSegment import _pitch_segment as pitch_segment
-from .PitchSet import _pitch_set as pitch_set
+from .pitchlib import _pitch_class_segment as pitch_class_segment
+from .pitchlib import _pitch_class_set as pitch_class_set
+from .pitchlib import _pitch_set as pitch_set
+from .pitchlib import _pitch_segment as pitch_segment
 from .Selection import _select as select
 from .Sequence import _sequence as sequence
 
