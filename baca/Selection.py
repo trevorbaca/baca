@@ -1,7 +1,7 @@
 import abjad
-import baca
 import inspect
 import typing
+from .Expression import Expression
 
 
 class Selection(abjad.Selection):
@@ -610,7 +610,7 @@ class Selection(abjad.Selection):
         result = self.leaves()
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, cyclic=True)
-        result = result.map(baca.select().flatten())
+        result = result.map(_select().flatten())
         return result
 
     def group_notes_by_measures(
@@ -715,7 +715,7 @@ class Selection(abjad.Selection):
             cyclic=True,
             overhang=True,
             )
-        result = result.map(baca.select().flatten())
+        result = result.map(_select().flatten())
         return result
 
     def lleaf(self, n=0):
@@ -1424,9 +1424,9 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.plts()
         result = result.group_by_pitch()
-        result = result.map(baca.group_by_contiguity())
+        result = result.map(_select().group_by_contiguity())
         result = result.flatten(depth=1)
-        result = result.map(baca.Selection)
+        result = result.map(Selection)
         return result
 
     def ltrun(self, n):
@@ -1716,7 +1716,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.logical_ties(pitched=True).group_by_contiguity()
-        return result.map(baca.Selection)
+        return result.map(Selection)
 
     def lts(self):
         r"""
@@ -2477,7 +2477,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts().map(baca.select()[0])
+        return self.plts().map(_select()[0])
 
     def pleaf(self, n):
         r"""
@@ -3334,7 +3334,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts().map(baca.select()[-1])
+        return self.plts().map(_select()[-1])
 
     def ptlt(self, n):
         r"""
@@ -3869,9 +3869,9 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.pleaves()
         result = result.group_by_pitch()
-        result = result.map(baca.group_by_contiguity())
+        result = result.map(_select().group_by_contiguity())
         result = result.flatten(depth=1)
-        result = result.map(baca.Selection)
+        result = result.map(Selection)
         return result
 
     def rleaf(self, n=0):
@@ -4486,8 +4486,8 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.runs().map(baca.with_next_leaf())
-        return result.map(baca.Selection)
+        result = self.runs().map(_select().with_next_leaf())
+        return result.map(Selection)
 
     def skip(self, n):
         r"""
@@ -5240,5 +5240,5 @@ class Selection(abjad.Selection):
 
 def _select(items=None):
     if items is None:
-        return baca.Expression().select()
-    return baca.Selection(items=items)
+        return Expression().select()
+    return Selection(items=items)

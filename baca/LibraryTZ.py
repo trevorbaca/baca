@@ -1,5 +1,4 @@
 import abjad
-import baca
 import collections
 import typing
 from abjadext import rmakers

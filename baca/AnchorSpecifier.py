@@ -1,5 +1,4 @@
 import abjad
-import baca
 
 
 class AnchorSpecifier(abjad.AbjadValueObject):

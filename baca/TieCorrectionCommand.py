@@ -1,8 +1,8 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
+from .Selection import Selection
 
 
 class TieCorrectionCommand(Command):
@@ -55,7 +55,7 @@ class TieCorrectionCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = baca.select(argument).leaves()
+        leaves = Selection(argument).leaves()
         for leaf in leaves:
             if self.untie is True:
                 self._sever_tie(leaf, self.direction, self.repeat)

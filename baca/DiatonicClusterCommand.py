@@ -1,6 +1,6 @@
 import abjad
-import baca
 from .Command import Command
+from .Selection import Selection
 
 
 class DiatonicClusterCommand(Command):
@@ -62,7 +62,7 @@ class DiatonicClusterCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        for i, plt in enumerate(baca.select(argument).plts()):
+        for i, plt in enumerate(Selection(argument).plts()):
             width = self.widths[i]
             start = self._get_lowest_diatonic_pitch_number(plt)
             numbers = range(start, start + width)

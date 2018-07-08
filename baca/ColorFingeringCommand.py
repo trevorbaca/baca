@@ -1,6 +1,6 @@
 import abjad
-import baca
 from .Command import Command
+from .Selection import Selection
 
 
 class ColorFingeringCommand(Command):
@@ -143,7 +143,7 @@ class ColorFingeringCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        for i, phead in enumerate(baca.select(argument).pheads()):
+        for i, phead in enumerate(Selection(argument).pheads()):
             number = self.numbers[i]
             if number != 0:
                 fingering = abjad.ColorFingering(number)

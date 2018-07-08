@@ -1,9 +1,10 @@
 import abjad
-import baca
 import collections
 import typing
 from . import typings
 from .Command import Command
+from .Loop import Loop
+from .Selection import Selection
 
 
 class PitchCommand(Command):
@@ -421,7 +422,7 @@ class PitchCommand(Command):
         if not argument:
             return
         plts = []
-        for pleaf in baca.select(argument).pleaves():
+        for pleaf in Selection(argument).pleaves():
             plt = abjad.inspect(pleaf).get_logical_tie()
             if plt.head is pleaf:
                 plts.append(plt)
@@ -481,7 +482,7 @@ class PitchCommand(Command):
             else:
                 item = abjad.NamedPitch(item)
             items.append(item)
-        if isinstance(pitches, baca.Loop):
+        if isinstance(pitches, Loop):
             pitches = type(pitches)(items=items, intervals=pitches.intervals)
         else:
             pitches = abjad.CyclicTuple(items)

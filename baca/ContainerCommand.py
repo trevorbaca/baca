@@ -1,8 +1,8 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
+from .Selection import Selection
 
 
 class ContainerCommand(Command):
@@ -132,7 +132,7 @@ class ContainerCommand(Command):
         else:
             identifier = f'%*% {self.identifier}'
         container = abjad.Container(identifier=identifier)
-        components = baca.select(argument).leaves().top()
+        components = Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
     ### PUBLIC PROPERTIES ###

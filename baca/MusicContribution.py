@@ -1,5 +1,5 @@
 import abjad
-import baca
+from .AnchorSpecifier import AnchorSpecifier
 
 
 class MusicContribution(abjad.AbjadValueObject):
@@ -43,7 +43,7 @@ class MusicContribution(abjad.AbjadValueObject):
         time_signature=None,
         ):
         if (anchor is not None and
-            not isinstance(anchor, baca.AnchorSpecifier)):
+            not isinstance(anchor, AnchorSpecifier)):
             raise TypeError(f'anchor specifier only: {anchor!r}.')
         self._anchor = anchor
         self._color_selector = color_selector

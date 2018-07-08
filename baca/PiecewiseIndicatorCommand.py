@@ -1,5 +1,4 @@
 import abjad
-import baca
 import collections
 import copy
 import typing
@@ -7,6 +6,7 @@ from . import typings
 from .Command import Command
 from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
+from .Selection import Selection
 
 
 class PiecewiseIndicatorCommand(Command):
@@ -41,6 +41,8 @@ class PiecewiseIndicatorCommand(Command):
         right_broken: typing.Any = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
+        # for selector evaluation
+        import baca
         Command.__init__(self, selector=selector)
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
@@ -96,8 +98,8 @@ class PiecewiseIndicatorCommand(Command):
             assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
         for i, piece in enumerate(pieces):
-            start_leaf = baca.select(piece).leaf(0)
-            stop_leaf = baca.select(piece).leaf(-1)
+            start_leaf = Selection(piece).leaf(0)
+            stop_leaf = Selection(piece).leaf(-1)
             if i == 0:
                 is_first_piece = True
             else:

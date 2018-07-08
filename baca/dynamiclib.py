@@ -2,13 +2,13 @@
 Dynamic library.
 """
 import abjad
-import baca
 import typing
 from . import typings
 from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .SchemeManifest import SchemeManifest
+from .Sequence import Sequence
 
 
 def dynamic(
@@ -2082,7 +2082,7 @@ def parse_hairpin_descriptor(
         bundle = IndicatorBundle(indicators[0])
         bundles.append(bundle)
         return bundles
-    for left, right in baca.sequence(indicators).nwise():
+    for left, right in Sequence(indicators).nwise():
         if (isinstance(left, abjad.DynamicTrend) and
             isinstance(right, abjad.DynamicTrend)):
             raise Exception('consecutive dynamic trends')

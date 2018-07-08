@@ -1,5 +1,6 @@
 import abjad
-import baca
+from . import pitchlib
+from .Sequence import Sequence
 
 
 class PitchSpecifier(abjad.AbjadObject):
@@ -176,7 +177,7 @@ class PitchSpecifier(abjad.AbjadObject):
         """
         if collections is None:
             return
-        collections = baca.CollectionList(collections=collections)
+        collections = pitchlib.CollectionList(collections=collections)
         if self.to_pitch_classes:
             collections = collections.to_pitch_classes()
         collections = self._remove_duplicates_(collections)
@@ -200,7 +201,7 @@ class PitchSpecifier(abjad.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _apply_expressions(self, collections):
-        sequence = baca.Sequence(items=collections)
+        sequence = Sequence(items=collections)
         for expression in self.expressions or []:
             assert isinstance(expression, abjad.Expression), repr(expression)
             sequence = expression(sequence)

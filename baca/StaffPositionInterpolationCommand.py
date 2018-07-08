@@ -1,9 +1,9 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
 from .PitchCommand import PitchCommand
+from .Selection import _select
 
 
 class StaffPositionInterpolationCommand(Command):
@@ -207,7 +207,7 @@ class StaffPositionInterpolationCommand(Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        plts = baca.select(argument).plts()
+        plts = _select(argument).plts()
         if not plts:
             return
         count = len(plts)

@@ -1,8 +1,8 @@
 import abjad
-import baca
 import collections
 import numbers
 from .Command import Command
+from .Selection import Selection
 
 
 class MicrotoneDeviationCommand(Command):
@@ -150,7 +150,7 @@ class MicrotoneDeviationCommand(Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        for i, plt in enumerate(baca.select(argument).plts()):
+        for i, plt in enumerate(Selection(argument).plts()):
             deviation = self.deviations[i]
             self._adjust_pitch(plt, deviation)
             

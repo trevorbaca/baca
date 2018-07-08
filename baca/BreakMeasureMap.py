@@ -1,8 +1,8 @@
 import abjad
-import baca
 import typing
 from . import indicatorlib
 from .Command import Command
+from .Selection import Selection
 
 
 class BreakMeasureMap(abjad.AbjadObject):
@@ -244,7 +244,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         tags: typing.List[str] = None,
         ) -> None:
         tags = tags or []
-        assert baca.Command._validate_tags(tags), repr(tags)
+        assert Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)
         self._tags = tags
@@ -278,7 +278,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         """
         if context is None:
             return
-        skips = baca.select(context).skips()
+        skips = Selection(context).skips()
         measure_count = self.partial_score or len(skips)
         last_measure_number = self.first_measure_number + measure_count - 1
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')

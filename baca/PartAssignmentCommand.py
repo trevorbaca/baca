@@ -1,8 +1,8 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
+from .Selection import Selection
 
 
 class PartAssignmentCommand(Command):
@@ -58,7 +58,7 @@ class PartAssignmentCommand(Command):
                 raise Exception(message)
         identifier = f'%*% {self.part_assignment!s}'
         container = abjad.Container(identifier=identifier)
-        components = baca.select(argument).leaves().top()
+        components = Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
     ### PUBLIC PROPERTIES ###

@@ -1,6 +1,6 @@
 import abjad
-import baca
 from .Command import Command
+from .Selection import Selection
 
 
 class OctaveDisplacementCommand(Command):
@@ -151,7 +151,7 @@ class OctaveDisplacementCommand(Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        for i, plt in enumerate(baca.select(argument).plts()):
+        for i, plt in enumerate(Selection(argument).plts()):
             displacement = self.displacements[i]
             interval = abjad.NumberedInterval(12 * displacement)
             for pleaf in plt:

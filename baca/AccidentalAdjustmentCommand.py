@@ -1,8 +1,8 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
+from .Selection import Selection
 
 
 class AccidentalAdjustmentCommand(Command):
@@ -136,7 +136,7 @@ class AccidentalAdjustmentCommand(Command):
                 raise Exception(f'tag must have edition: {self.tag!r}.')
             alternative_tag = self.tag.prepend('AJC')
             primary_tag = alternative_tag.invert_edition_tags()
-        for pleaf in baca.select(argument).pleaves():
+        for pleaf in Selection(argument).pleaves():
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]
             else:

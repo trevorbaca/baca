@@ -1,5 +1,4 @@
 import abjad
-import baca
 import collections
 import copy
 import inspect
@@ -758,7 +757,7 @@ class Sequence(abjad.Sequence):
                 subclass_hook='_evaluate_accumulate',
                 map_operand=operands,
                 )
-        operands = operands or [baca.Expression()]
+        operands = operands or [Expression()]
         if not isinstance(operands, list):
             operands = [operands]
         items = [self]
@@ -1794,7 +1793,7 @@ def _sequence(items=None, **keywords):
     if items is not None:
         return Sequence(items=items, **keywords)
     name = keywords.pop('name', None)
-    expression = baca.Expression(name=name)
+    expression = Expression(name=name)
     callback = expression._make_initializer_callback(
         Sequence,
         module_names=['baca'],

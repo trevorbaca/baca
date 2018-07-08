@@ -1,6 +1,6 @@
 import abjad
-import baca
 from .Command import Command
+from .Selection import Selection
 
 
 class ClusterCommand(Command):
@@ -550,10 +550,10 @@ class ClusterCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaf = baca.select(argument).leaf(0)
+        leaf = Selection(argument).leaf(0)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for i, plt in enumerate(baca.select(argument).plts()):
+            for i, plt in enumerate(Selection(argument).plts()):
                 width = self.widths[i]
                 self._make_cluster(plt, width)
 

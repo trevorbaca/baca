@@ -1,6 +1,6 @@
 import abjad
-import baca
 import typing
+from .Selection import Selection
 
 
 class WellformednessManager(abjad.WellformednessManager):
@@ -214,7 +214,7 @@ class WellformednessManager(abjad.WellformednessManager):
 
         Returns violators and total.
         """
-        total = len(baca.select(argument).plts())
+        total = len(Selection(argument).plts())
         violators = WellformednessManager._find_repeat_pitch_classes(argument)
         return violators, total
 

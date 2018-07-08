@@ -1,5 +1,4 @@
 import abjad
-import baca
 import functools
 import typing
 from .Scope import Scope
@@ -68,8 +67,8 @@ class TimelineScope(abjad.AbjadObject):
             assert isinstance(scopes, (tuple, list))
             scopes_ = []
             for scope in scopes:
-                if not isinstance(scope, baca.Scope):
-                    scope = baca.Scope(*scope)
+                if not isinstance(scope, Scope):
+                    scope = Scope(*scope)
                 scopes_.append(scope)
             scopes = scopes_
             scopes = tuple(scopes)

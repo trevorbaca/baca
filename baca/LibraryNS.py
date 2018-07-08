@@ -1,5 +1,4 @@
 import abjad
-import baca
 import collections
 import typing
 from . import indicatorlib
@@ -22,6 +21,9 @@ from .PartAssignmentCommand import PartAssignmentCommand
 from .PitchCommand import PitchCommand
 from .RestAffixSpecifier import RestAffixSpecifier
 from .Scope import Scope
+from .Selection import Selection
+from .Selection import _select
+from .Sequence import Sequence
 from .StaffPositionCommand import StaffPositionCommand
 from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
@@ -838,12 +840,13 @@ def resume_after(remote_voice_name) -> AnchorSpecifier:
         use_remote_stop_offset=True,
         )
 
+# TODO: move to baca.Selection
 def rmleaves(count: int) -> abjad.Expression:
     """
     Selects all leaves in ``count`` measures, leaked one leaf to the right.
     """
     assert isinstance(count, int), repr(count)
-    selector = baca.select().leaves().group_by_measure()
+    selector = _select().leaves().group_by_measure()
     selector = selector[:count].flatten().rleak()
     return selector
 
@@ -2388,7 +2391,7 @@ def system(
     """
     Makes system specifier.
     """
-    distances_ = baca.sequence(distances).flatten()
+    distances_ = Sequence(distances).flatten()
     return SystemSpecifier(
         distances=distances_,
         measure=measure,

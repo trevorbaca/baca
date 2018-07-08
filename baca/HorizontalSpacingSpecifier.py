@@ -1,8 +1,8 @@
 import abjad
-import baca
 import collections
 import typing
 from .BreakMeasureMap import BreakMeasureMap
+from .Selection import Selection
 from .SpacingSection import SpacingSection
 
 
@@ -849,7 +849,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Calls command on ``segment_maker``.
         """
         score = segment_maker.score
-        skips = baca.select(score['GlobalSkips']).skips()
+        skips = Selection(score['GlobalSkips']).skips()
         programmatic = True
         if self.measures and len(self.measures) == len(skips):
             programmatic = False

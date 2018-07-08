@@ -1,5 +1,4 @@
 import abjad
-import baca
 import typing
 from abjadext import rmakers
 from . import library
@@ -16,6 +15,7 @@ from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .PitchCommand import PitchCommand
 from .Scope import Scope
+from .Selection import _select
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
     )
@@ -947,12 +947,13 @@ def minimum_duration(
         minimum_duration=duration,
         )
 
+# TODO: move to baca.Selection
 def mleaves(count: int) -> abjad.Expression:
     """
     Selects all leaves in ``count`` measures.
     """
     assert isinstance(count, int), repr(count)
-    selector = baca.select().leaves().group_by_measure()
+    selector = _select().leaves().group_by_measure()
     if 0 < count:
         selector = selector[:count].flatten()
     elif count < 0:

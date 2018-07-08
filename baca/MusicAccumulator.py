@@ -1,8 +1,9 @@
 import abjad
-import baca
 import typing
 from abjadext import rmakers
+from . import rhythmlib
 from .MusicMaker import MusicMaker
+from .Selection import _select
 
 
 class MusicAccumulator(abjad.AbjadObject):
@@ -188,7 +189,7 @@ class MusicAccumulator(abjad.AbjadObject):
             return self._current_offset
         if anchored and remote_voice_name is None:
             return self._score_stop_offset
-        remote_selector = remote_selector or baca.leaf(0)
+        remote_selector = remote_selector or _select().leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
@@ -254,8 +255,8 @@ class MusicAccumulator(abjad.AbjadObject):
             rmakers.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.PitchFirstRhythmCommand(
-                rhythm_maker=baca.PitchFirstRhythmMaker(
+            rhythmlib.PitchFirstRhythmCommand(
+                rhythm_maker=rhythmlib.PitchFirstRhythmMaker(
                     talea=rmakers.Talea(
                         counts=[1],
                         denominator=16,
@@ -318,7 +319,7 @@ class MusicAccumulator(abjad.AbjadObject):
             if selection:
                 segment_maker(
                     (voice_name, 1),
-                    baca.make_rhythm(selection)
+                    rhythmlib.make_rhythm(selection)
                     )
 
     @staticmethod

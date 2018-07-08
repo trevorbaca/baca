@@ -1,8 +1,9 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
+from .Selection import Selection
+from .Sequence import Sequence
 
 
 class BCPCommand(Command):
@@ -57,12 +58,12 @@ class BCPCommand(Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        leaves = baca.select(argument).leaves()
-        bcps = baca.sequence(self.bow_contact_points)
+        leaves = Selection(argument).leaves()
+        bcps_ = Sequence(self.bow_contact_points)
         if self.helper:
-            bcps = self.helper(bcps, argument)
-        bcps = abjad.CyclicTuple(bcps)
-        lts = baca.select(argument).lts()
+            bcps_ = self.helper(bcps_, argument)
+        bcps = abjad.CyclicTuple(bcps_)
+        lts = Selection(argument).lts()
         total = len(lts)
         add_right_text_to_me = None
         if not self.final_spanner:

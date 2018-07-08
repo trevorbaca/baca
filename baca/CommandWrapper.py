@@ -1,8 +1,9 @@
 import abjad
-import baca
 from .Command import Command
 from .Command import Map
 from .Command import Suite
+from .Scope import Scope
+from .TimelineScope import TimelineScope
 
 
 class CommandWrapper(abjad.AbjadObject):
@@ -104,7 +105,7 @@ class CommandWrapper(abjad.AbjadObject):
         scope=None,
         ):
         if scope is not None:
-            prototype = (baca.Scope, baca.TimelineScope)
+            prototype = (Scope, TimelineScope)
             assert isinstance(scope, prototype), format(scope)
         self._scope = scope
         if command is not None:

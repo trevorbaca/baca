@@ -2,7 +2,6 @@
 Markup library.
 """
 import abjad
-import baca
 import typing
 from . import library
 from . import typings
@@ -469,10 +468,11 @@ def make_instrument_name_markup(string, space, column=True):
         markup = markup.hcenter_in(space)
     return markup
 
-def markup(string):
-    return Markup(
-        string,
-        )
+# TODO: remove
+#def markup(string):
+#    return Markup(
+#        string,
+#        )
 
 def molto_flautando():
     return Markup(

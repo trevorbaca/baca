@@ -1,7 +1,7 @@
 import abjad
-import baca
 import typing
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .Sequence import Sequence
 from .StageMeasureMap import StageMeasureMap
 
 
@@ -82,14 +82,14 @@ class TimeSignatureMaker(abjad.AbjadObject):
     def __call__(self) -> typing.Tuple[
         typing.List[int],
         MetronomeMarkMeasureMap,
-        typing.List[abjad.TimeSignature],
+        Sequence,
         ]:
         """
         Calls time-signature-maker.
         """
         if not self.stage_measure_map:
             raise Exception('try TimeSignatureMaker.run() instead.')
-        time_signatures = baca.sequence(self.time_signatures)
+        time_signatures = Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         items_: typing.List[StageMeasureMap.item_type] = []
@@ -104,7 +104,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
             time_signatures,
             )
         measures_per_stage = [len(_) for _ in time_signature_groups]
-        time_signatures = baca.sequence(time_signature_groups).flatten(depth=1)
+        time_signatures = Sequence(time_signature_groups).flatten(depth=1)
         fermata_entries = self.stage_measure_map._make_fermata_entries()
         if self.metronome_mark_measure_map:
             items = self.metronome_mark_measure_map.items
@@ -226,7 +226,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         if self.repeat_count:
             raise Exception('repeat count must be zero with run().')
         result = []
-        time_signatures = baca.sequence(self.time_signatures)
+        time_signatures = Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         i = 0

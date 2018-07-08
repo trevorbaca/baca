@@ -1,8 +1,13 @@
 import abjad
-import baca
 import copy
 from abjadext import rmakers
+from . import rhythmlib
+from .Coat import Coat
 from .Command import Command
+from .Cursor import Cursor
+from .NestingCommand import NestingCommand
+from .Selection import Selection
+from .Sequence import Sequence
 
 
 class ImbricationCommand(Command):
@@ -1344,10 +1349,10 @@ class ImbricationCommand(Command):
         container = copy.deepcopy(container)
         abjad.override(container).tuplet_bracket.stencil = False
         abjad.override(container).tuplet_number.stencil = False
-        segment = baca.sequence(self.segment).flatten(depth=-1)
+        segment = Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
-        cursor = baca.Cursor(
+        cursor = Cursor(
             singletons=True,
             source=segment,
             suppress_exception=True,
@@ -1380,7 +1385,7 @@ class ImbricationCommand(Command):
             elif isinstance(logical_tie.head, abjad.Skip):
                 pass
             elif self._matches_pitch(logical_tie.head, pitch_number):
-                if isinstance(pitch_number, baca.Coat):
+                if isinstance(pitch_number, Coat):
                     for leaf in logical_tie:
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
@@ -1414,7 +1419,7 @@ class ImbricationCommand(Command):
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
         selection = abjad.select(container)
         if not self.hocket:
-            for pleaf in baca.select(container).pleaves():
+            for pleaf in Selection(container).pleaves():
                 abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
@@ -1426,15 +1431,15 @@ class ImbricationCommand(Command):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.PitchFirstRhythmCommand):
+            if isinstance(specifier, rhythmlib.PitchFirstRhythmCommand):
                 continue
-            if isinstance(specifier, baca.RhythmCommand):
+            if isinstance(specifier, rhythmlib.RhythmCommand):
                 continue
-            if isinstance(specifier, baca.ImbricationCommand):
+            if isinstance(specifier, ImbricationCommand):
                 continue
             if isinstance(specifier, rmakers.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            if isinstance(specifier, baca.NestingCommand):
+            if isinstance(specifier, NestingCommand):
                 nested_selections = specifier(selections)
             else:
                 specifier(selections)
@@ -1444,7 +1449,7 @@ class ImbricationCommand(Command):
 
     @staticmethod
     def _matches_pitch(pitched_leaf, pitch_object):
-        if isinstance(pitch_object, baca.Coat):
+        if isinstance(pitch_object, Coat):
             pitch_object = pitch_object.argument
         if pitch_object is None:
             return False

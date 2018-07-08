@@ -1,9 +1,9 @@
 import abjad
-import baca
 import typing
 from . import typings
 from .Command import Command
 from .PitchCommand import PitchCommand
+from .Selection import Selection
 
 
 class StaffPositionCommand(Command):
@@ -95,7 +95,7 @@ class StaffPositionCommand(Command):
         if self.selector:
             argument = self.selector(argument)
         plt_count = 0
-        for i, plt in enumerate(baca.select(argument).plts()):
+        for i, plt in enumerate(Selection(argument).plts()):
             clef = abjad.inspect(plt.head).get_effective(
                 abjad.Clef,
                 default=abjad.Clef('treble'),

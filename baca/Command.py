@@ -1,6 +1,6 @@
 import abjad
-import baca
 import typing
+from . import indicatorlib
 from . import typings
 
 
@@ -35,6 +35,8 @@ class Command(abjad.AbjadObject):
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
         ) -> None:
+        # for selector evaluation
+        import baca
         self._deactivate = deactivate
         self._runtime = abjad.OrderedDict()
         if isinstance(selector, str):
@@ -73,9 +75,9 @@ class Command(abjad.AbjadObject):
         if abjad.inspect(leaf).get_timespan().start_offset != 0:
             return
         tempo_prototype = (
-            baca.Accelerando,
             abjad.MetronomeMark,
-            baca.Ritardando,
+            indicatorlib.Accelerando,
+            indicatorlib.Ritardando,
             )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument

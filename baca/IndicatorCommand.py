@@ -1,10 +1,10 @@
 import abjad
-import baca
 import collections
 import typing
 from . import typings
 from .Command import Command
 from .SegmentMaker import SegmentMaker
+from .Selection import _select
 
 
 class IndicatorCommand(Command):
@@ -264,7 +264,7 @@ class IndicatorCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        for i, leaf in enumerate(baca.select(argument).leaves()):
+        for i, leaf in enumerate(_select(argument).leaves()):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:

@@ -1,9 +1,9 @@
 import abjad
-import baca
 import typing
 from . import indicatorlib
 from . import typings
 from .Command import Command
+from .Selection import Selection
 
 
 class MetronomeMarkCommand(Command):
@@ -75,7 +75,7 @@ class MetronomeMarkCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaf = baca.select(argument).leaf(0)
+        leaf = Selection(argument).leaf(0)
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
             indicator,

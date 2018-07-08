@@ -1,6 +1,6 @@
 import abjad
-import baca
 from .Command import Command
+from .Selection import Selection
 
 
 class VoltaCommand(Command):
@@ -29,7 +29,7 @@ class VoltaCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = baca.select(argument).leaves()
+        leaves = Selection(argument).leaves()
         container = abjad.Container()
         abjad.mutate(leaves).wrap(container)
         abjad.attach(abjad.Repeat(), container)

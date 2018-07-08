@@ -687,7 +687,6 @@ Markup library.
    ~baca.markuplib.loure
    ~baca.markuplib.lv_possibile
    ~baca.markuplib.make_instrument_name_markup
-   ~baca.markuplib.markup
    ~baca.markuplib.molto_flautando
    ~baca.markuplib.molto_flautando_e_pont
    ~baca.markuplib.molto_gridato

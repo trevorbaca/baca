@@ -1,6 +1,7 @@
 import abjad
-import baca
+from . import rhythmlib
 from .Command import Command
+from .LMRSpecifier import LMRSpecifier
 
 
 class NestingCommand(Command):
@@ -255,12 +256,12 @@ class NestingCommand(Command):
         time_treatments=None,
         ):
         if lmr_specifier is not None:
-            prototype = baca.LMRSpecifier
+            prototype = LMRSpecifier
             assert isinstance(lmr_specifier, prototype)
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
-            is_time_treatment = baca.PitchFirstRhythmMaker._is_time_treatment
+            is_time_treatment = rhythmlib.PitchFirstRhythmMaker._is_time_treatment
             for time_treatment in time_treatments:
                 assert is_time_treatment(time_treatment), repr(time_treatment)
         self._time_treatments = time_treatments
