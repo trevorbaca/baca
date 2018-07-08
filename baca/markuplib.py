@@ -7,8 +7,44 @@ import typing
 from . import library
 from . import typings
 from .Command import Suite
-from .Markup import Markup
 
+
+### CLASSES ###
+
+class Markup(abjad.Markup):
+    """
+    Markup subclass.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(5) Utilities'
+
+    ### PUBLIC METHODS ###
+
+    def boxed(self):
+        r"""
+        Makes boxed markup.
+        
+        ..  container:: example
+
+            >>> markup = baca.Markup('Allegro assai')
+            >>> markup = markup.boxed()
+            >>> abjad.f(markup)
+            \markup {
+                \override
+                    #'(box-padding . 0.5)
+                    \box
+                        "Allegro assai"
+                }
+
+            >>> abjad.show(markup) # doctest: +SKIP
+
+        Sets box-padding to 0.5.
+        """
+        return self.box().override(('box-padding', 0.5))
+
+### FACTORY FUNCTIONS ###
 
 def accent_changes_of_direction():
     string = 'accent changes of direction noticeably at each attack'
@@ -292,7 +328,7 @@ def instrument(
 
         Makes instrument name markup in column:
 
-        >>> markup = baca.markups.instrument('Eng. horn')
+        >>> markup = baca.markuplib.instrument('Eng. horn')
 
         >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
@@ -309,7 +345,7 @@ def instrument(
 
         Makes instrument name markup in line:
 
-        >>> markup = baca.markups.instrument(
+        >>> markup = baca.markuplib.instrument(
         ...     'Violin 1',
         ...     column=False,
         ...     )
@@ -869,7 +905,7 @@ def short_instrument(
 
         Makes short instrument name markup in column:
 
-        >>> markup = baca.markups.short_instrument('Eng. hn.')
+        >>> markup = baca.markuplib.short_instrument('Eng. hn.')
 
         >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
@@ -886,7 +922,7 @@ def short_instrument(
 
         Makes short instrument name markup in line:
 
-        >>> markup = baca.markups.short_instrument(
+        >>> markup = baca.markuplib.short_instrument(
         ...     'Vn. 1',
         ...     column=False,
         ...     )

@@ -2,13 +2,14 @@ import abjad
 from .library import *
 from .divisionlib import *
 from .dynamiclib import *
+from .markuplib import Markup
 from .overridelib import *
 from .pitcharraylib import *
 from .pitchlib import *
 from .rhythmlib import *
 from .settinglib import *
 from .templatelib import *
-from . import markups
+from . import markuplib
 
 # classes
 from .Accelerando import Accelerando
@@ -43,7 +44,6 @@ from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
-from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap

@@ -11,7 +11,6 @@ from .Command import Suite
 from .Expression import Expression
 from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
-from .Markup import Markup
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .Selection import Selection
 from .SpannerCommand import SpannerCommand

@@ -3,7 +3,7 @@ import baca
 import collections
 import typing
 from . import library
-from . import markups
+from . import markuplib
 from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
@@ -3197,7 +3197,7 @@ def start_markup(
     Attaches start markup.
     """
     if isinstance(argument, (list, str)):
-        markup = markups.instrument(argument, hcenter_in=hcenter_in)
+        markup = markuplib.instrument(argument, hcenter_in=hcenter_in)
         start_markup = abjad.StartMarkup(
             context=context,
             markup=markup,

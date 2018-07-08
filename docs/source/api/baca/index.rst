@@ -30,7 +30,7 @@ baca
    divisionlib
    dynamiclib
    library
-   markups
+   markuplib
    overridelib
    pitcharraylib
    pitchlib
@@ -49,7 +49,7 @@ baca
    divisionlib
    dynamiclib
    library
-   markups
+   markuplib
    overridelib
    pitcharraylib
    pitchlib
@@ -200,7 +200,6 @@ baca
    Interpolator
    LBSD
    Loop
-   Markup
    MeasureWrapper
    MetronomeMarkMeasureMap
    PageSpecifier
@@ -237,7 +236,6 @@ baca
    ~Interpolator.Interpolator
    ~LBSD.LBSD
    ~Loop.Loop
-   ~Markup.Markup
    ~MeasureWrapper.MeasureWrapper
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier

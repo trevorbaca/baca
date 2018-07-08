@@ -4,13 +4,13 @@ Function library.
 import abjad
 import typing
 from . import typings
+from . import markuplib
 from .Command import Command
 from .Command import Map
 from .Command import Suite
 #from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
-from .Markup import Markup
 from .MeasureWrapper import MeasureWrapper
 from .PitchCommand import PitchCommand
 from .Scope import Scope

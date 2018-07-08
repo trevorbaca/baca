@@ -1,7 +1,7 @@
 import abjad
 import roman # type: ignore
 import typing
-from . import markups
+from . import markuplib
 
 
 ### CLASSES ###
@@ -482,8 +482,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
-            markup=markups.instrument('Violin', hcenter_in=10),
-            short_markup=markups.short_instrument(
+            markup=markuplib.instrument('Violin', hcenter_in=10),
+            short_markup=markuplib.short_instrument(
                 'Vn.',
                 hcenter_in=10,
                 ),
@@ -514,8 +514,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             viola_music_staff,
             'default_instrument',
             abjad.Viola(
-                markup=markups.instrument('Viola', hcenter_in=10),
-                short_markup=markups.short_instrument(
+                markup=markuplib.instrument('Viola', hcenter_in=10),
+                short_markup=markuplib.short_instrument(
                     'Va.',
                     hcenter_in=10,
                     ),
@@ -542,8 +542,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             cello_music_staff,
             'default_instrument',
             abjad.Cello(
-                markup=markups.instrument('Cello', hcenter_in=10),
-                short_markup=markups.short_instrument(
+                markup=markuplib.instrument('Cello', hcenter_in=10),
+                short_markup=markuplib.short_instrument(
                     'Vc.',
                     hcenter_in=10,
                     ),
@@ -822,8 +822,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
-            markup=markups.instrument('Violin'),
-            short_markup=markups.short_instrument('Vn.'),
+            markup=markuplib.instrument('Violin'),
+            short_markup=markuplib.short_instrument('Vn.'),
             )
         abjad.annotate(
             violin_music_staff,

@@ -7,6 +7,7 @@ import traceback
 import typing
 from abjadext import rmakers
 from . import library
+from . import markuplib
 from . import rhythmlib
 from . import templatelib
 from . import typings
@@ -945,7 +946,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.final_markup is None:
             return
         command = baca.markup(
-            baca.markups.final_markup(*self.final_markup),
+            markuplib.final_markup(*self.final_markup),
             selector=baca.leaf(-1),
             direction=abjad.Down,
             )
