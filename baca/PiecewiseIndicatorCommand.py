@@ -2,14 +2,14 @@ import abjad
 import collections
 import copy
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
 from .Selection import Selection
 
 
-class PiecewiseIndicatorCommand(Command):
+class PiecewiseIndicatorCommand(commandlib.Command):
     """
     Piecewise indicator command.
     """
@@ -43,7 +43,7 @@ class PiecewiseIndicatorCommand(Command):
         ) -> None:
         # for selector evaluation
         import baca
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
@@ -176,7 +176,10 @@ class PiecewiseIndicatorCommand(Command):
         ):
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
-            reapplied = Command._remove_reapplied_wrappers(leaf, indicator)
+            reapplied = commandlib.Command._remove_reapplied_wrappers(
+                leaf,
+                indicator,
+                )
             wrapper = abjad.attach(
                 indicator,
                 leaf,

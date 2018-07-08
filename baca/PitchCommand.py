@@ -1,13 +1,13 @@
 import abjad
 import collections
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .Loop import Loop
 from .Selection import Selection
 
 
-class PitchCommand(Command):
+class PitchCommand(commandlib.Command):
     r"""
     Pitch command.
 
@@ -382,7 +382,7 @@ class PitchCommand(Command):
         pitches: typing.Iterable = None,
         selector: typings.Selector = None,
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if allow_octaves is not None:
             allow_octaves = bool(allow_octaves)
         self._allow_octaves = allow_octaves

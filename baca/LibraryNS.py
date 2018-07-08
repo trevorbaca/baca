@@ -1,6 +1,7 @@
 import abjad
 import collections
 import typing
+from . import commandlib
 from . import indicatorlib
 from . import library
 from . import markuplib
@@ -8,16 +9,12 @@ from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
 from .ClusterCommand import ClusterCommand
-from .Command import Command
-from .Command import Map
-from .Command import Suite
 from .ContainerCommand import ContainerCommand
 from .IndicatorCommand import IndicatorCommand
 from .NestingCommand import NestingCommand
 from .PartAssignmentCommand import PartAssignmentCommand
 from .PitchCommand import PitchCommand
 from .RestAffixSpecifier import RestAffixSpecifier
-from .Scope import Scope
 from .Selection import Selection
 from .Selection import _select
 from .Sequence import Sequence

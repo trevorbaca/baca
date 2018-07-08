@@ -1,16 +1,16 @@
 import abjad
 import copy
 from abjadext import rmakers
+from . import commandlib
 from . import rhythmlib
 from .Coat import Coat
-from .Command import Command
 from .Cursor import Cursor
 from .NestingCommand import NestingCommand
 from .Selection import Selection
 from .Sequence import Sequence
 
 
-class ImbricationCommand(Command):
+class ImbricationCommand(commandlib.Command):
     r"""
     Imbrication command.
 

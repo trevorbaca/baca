@@ -1,6 +1,7 @@
 import abjad
 import typing
 from abjadext import rmakers
+from . import commandlib
 from . import library
 from . import registerlib
 from . import typings
@@ -11,9 +12,6 @@ from .ClusterCommand import ClusterCommand
 from .Coat import Coat
 from .ColorCommand import ColorCommand
 from .ColorFingeringCommand import ColorFingeringCommand
-from .Command import Command
-from .Command import Map
-from .Command import Suite
 from .ContainerCommand import ContainerCommand
 from .DiatonicClusterCommand import DiatonicClusterCommand
 from .IndicatorCommand import IndicatorCommand
@@ -475,8 +473,8 @@ def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
 
 def apply(
     selector: typings.Selector,
-    *commands: typing.Iterable[Command],
-    ) -> typing.List[Command]:
+    *commands: typing.Iterable[commandlib.Command],
+    ) -> typing.List[commandlib.Command]:
     r"""
     Applies ``selector`` to each command in ``commands``.
 
@@ -784,9 +782,9 @@ def apply(
         message = '\n  Selector must be str or expression.'
         message += f'\n  Not {selector!r}.'
         raise Exception(message)
-    commands_: typing.List[Command] = []
+    commands_: typing.List[commandlib.Command] = []
     for command in commands:
-        assert isinstance(command, Command), repr(command)
+        assert isinstance(command, commandlib.Command), repr(command)
         command_ = abjad.new(command, selector=selector)
         commands_.append(command_)
     return commands_
@@ -3557,7 +3555,7 @@ def dynamic_up(
 def edition(
     not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
     only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
@@ -3569,7 +3567,7 @@ def edition(
         only_parts = library.markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
     only_parts_ = library.only_parts(only_parts)
-    return Suite(
+    return commandlib.Suite(
         not_parts_,
         only_parts_,
         )

@@ -1,12 +1,12 @@
 import abjad
 import typing
+from . import commandlib
 from . import indicatorlib
 from . import typings
-from .Command import Command
 from .Selection import Selection
 
 
-class MetronomeMarkCommand(Command):
+class MetronomeMarkCommand(commandlib.Command):
     """
     Metronome mark command.
 
@@ -39,7 +39,11 @@ class MetronomeMarkCommand(Command):
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        Command.__init__(self, deactivate=deactivate, selector=selector)
+        commandlib.Command.__init__(
+            self,
+            deactivate=deactivate,
+            selector=selector,
+            )
         prototype = (str, indicatorlib.Accelerando, indicatorlib.Ritardando)
         if key is not None:
             assert isinstance(key, prototype), repr(key)

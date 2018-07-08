@@ -5,7 +5,6 @@ import abjad
 import typing
 from . import library
 from . import typings
-from .Command import Suite
 
 
 ### CLASSES ###

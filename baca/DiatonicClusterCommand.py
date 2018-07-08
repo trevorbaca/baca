@@ -1,9 +1,9 @@
 import abjad
-from .Command import Command
+from . import commandlib
 from .Selection import Selection
 
 
-class DiatonicClusterCommand(Command):
+class DiatonicClusterCommand(commandlib.Command):
     r"""
     Diatonic cluster command.
 
@@ -41,7 +41,7 @@ class DiatonicClusterCommand(Command):
         widths,
         selector='baca.plts()',
         ):
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
         self._widths = widths

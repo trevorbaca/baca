@@ -1,15 +1,14 @@
 import abjad
 import typing
+from . import commandlib
 from . import library
 from . import typings
-from .Command import Command
-from .Command import Map
 from .Selection import _select
 
 
 ### CLASSES ###
 
-class SpannerCommand(Command):
+class SpannerCommand(commandlib.Command):
     r"""
     Spanner command.
 
@@ -204,7 +203,7 @@ class SpannerCommand(Command):
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        Command.__init__(self, deactivate=deactivate, selector=selector)
+        commandlib.Command.__init__(self, deactivate=deactivate, selector=selector)
         if detach_first is not None:
             detach_first = bool(detach_first)
         self._detach_first = detach_first
@@ -1218,7 +1217,7 @@ def repeat_tie(
         spanner=abjad.Tie(repeat=True),
         )
 
-def repeat_tie_repeat_pitches() -> Map:
+def repeat_tie_repeat_pitches() -> commandlib.Map:
     """
     Repeat-ties repeat pitches.
     """
@@ -2144,7 +2143,7 @@ def tie(
         spanner=tie,
         )
 
-def tie_repeat_pitches() -> Map:
+def tie_repeat_pitches() -> commandlib.Map:
     """
     Ties repeat pitches.
     """

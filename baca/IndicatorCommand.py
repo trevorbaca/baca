@@ -1,13 +1,13 @@
 import abjad
 import collections
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .SegmentMaker import SegmentMaker
 from .Selection import _select
 
 
-class IndicatorCommand(Command):
+class IndicatorCommand(commandlib.Command):
     r"""
     Indicator command.
 
@@ -228,7 +228,11 @@ class IndicatorCommand(Command):
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        Command.__init__(self, deactivate=deactivate, selector=selector)
+        commandlib.Command.__init__(
+            self,
+            deactivate=deactivate,
+            selector=selector,
+            )
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context

@@ -1,11 +1,11 @@
 import abjad
 import typing
 from . import typings
-from .Command import Command
+from . import commandlib
 from .Selection import Selection
 
 
-class AccidentalAdjustmentCommand(Command):
+class AccidentalAdjustmentCommand(commandlib.Command):
     r"""
     Accidental adjustment command.
 
@@ -109,7 +109,7 @@ class AccidentalAdjustmentCommand(Command):
         parenthesized: bool = None,
         selector: typings.Selector = 'baca.pleaf(0)',
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if cautionary is not None:
             cautionary = bool(cautionary)
         self._cautionary = cautionary

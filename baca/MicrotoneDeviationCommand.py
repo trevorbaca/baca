@@ -1,11 +1,11 @@
 import abjad
 import collections
 import numbers
-from .Command import Command
+from . import commandlib
 from .Selection import Selection
 
 
-class MicrotoneDeviationCommand(Command):
+class MicrotoneDeviationCommand(commandlib.Command):
     r"""
     Microtone deviation command.
 
@@ -130,7 +130,7 @@ class MicrotoneDeviationCommand(Command):
         deviations=None,
         selector='baca.plts()',
         ):
-        Command.__init__(self)
+        commandlib.Command.__init__(self)
         if deviations is not None:
             assert isinstance(deviations, collections.Iterable)
             assert all(isinstance(_, numbers.Number) for _ in deviations)

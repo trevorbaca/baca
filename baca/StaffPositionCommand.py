@@ -1,12 +1,12 @@
 import abjad
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .PitchCommand import PitchCommand
 from .Selection import Selection
 
 
-class StaffPositionCommand(Command):
+class StaffPositionCommand(commandlib.Command):
     r"""
     Staff position command.
 
@@ -70,7 +70,7 @@ class StaffPositionCommand(Command):
         exact: bool = None, 
         selector: typings.Selector = 'baca.plts()',
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if exact is not None:
             exact = bool(exact)
         self._exact = exact

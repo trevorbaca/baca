@@ -1,9 +1,9 @@
 import abjad
-from .Command import Command
+from . import commandlib
 from .Selection import Selection
 
 
-class ColorFingeringCommand(Command):
+class ColorFingeringCommand(commandlib.Command):
     r"""
     Color fingering command.
 
@@ -121,7 +121,7 @@ class ColorFingeringCommand(Command):
         numbers=None,
         selector='baca.pheads()',
         ):
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if numbers is not None:
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)

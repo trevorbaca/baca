@@ -4,14 +4,14 @@ Register library.
 import abjad
 import copy
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .Selection import Selection
 
 
 ### CLASSES ###
 
-class RegisterCommand(Command):
+class RegisterCommand(commandlib.Command):
     r"""
     Register command.
 
@@ -327,7 +327,7 @@ class RegisterCommand(Command):
         registration=None,
         selector='baca.plts()',
         ):
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if registration is not None:
             prototype = Registration
             assert isinstance(registration, prototype), repr(registration)
@@ -396,7 +396,7 @@ class RegisterCommand(Command):
         """
         return self._registration
 
-class RegisterInterpolationCommand(Command):
+class RegisterInterpolationCommand(commandlib.Command):
     r"""
     Register interpolation command.
 
@@ -1370,7 +1370,7 @@ class RegisterInterpolationCommand(Command):
         start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch: abjad.NumberedPitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
@@ -1863,7 +1863,7 @@ class RegisterInterpolationCommand(Command):
         """
         return self._stop_pitch
 
-class RegisterToOctaveCommand(Command):
+class RegisterToOctaveCommand(commandlib.Command):
     r"""
     Register-to-octave command.
 
@@ -2175,7 +2175,7 @@ class RegisterToOctaveCommand(Command):
         octave_number=None,
         selector='baca.plts()',
         ):
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if anchor is not None:
             prototype = (abjad.Center, abjad.Down, abjad.Up)
             assert anchor in prototype, repr(anchor)

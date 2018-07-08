@@ -4,9 +4,6 @@ import typing
 from abjadext import rmakers
 from . import library
 from . import typings
-from .Command import Command
-from .Command import Map
-from .Command import Suite
 from .Expression import Expression
 from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand

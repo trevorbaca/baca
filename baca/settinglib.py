@@ -2,12 +2,12 @@
 Setting library.
 """
 import abjad
-from .Command import Command
+from . import commandlib
 
 
 ### CLASSES ###
 
-class SettingCommand(Command):
+class SettingCommand(commandlib.Command):
     """
     Setting command.
 
@@ -36,7 +36,7 @@ class SettingCommand(Command):
         setting=None,
         value=None,
         ):
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context

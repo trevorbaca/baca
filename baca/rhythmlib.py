@@ -6,9 +6,9 @@ import collections
 import inspect
 import math
 import typing
+from . import commandlib
 from . import typings
 from . import divisionlib
-from .Command import Command
 from .LMRSpecifier import LMRSpecifier
 from .Sequence import Sequence
 from abjadext import rmakers
@@ -1107,7 +1107,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         """
         return self._pattern
 
-class PitchFirstRhythmCommand(Command):
+class PitchFirstRhythmCommand(commandlib.Command):
     """
     Pitch-first rhythm command.
 
@@ -4003,7 +4003,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             time_signatures=time_signatures,
             )
 
-class RhythmCommand(Command):
+class RhythmCommand(commandlib.Command):
     r"""
     Rhythm command.
 
@@ -4178,7 +4178,7 @@ class RhythmCommand(Command):
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
         ) -> None:
-        Command.__init__(self)
+        commandlib.Command.__init__(self)
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'

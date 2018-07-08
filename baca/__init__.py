@@ -1,5 +1,6 @@
 import abjad
 from .library import *
+from .commandlib import *
 from .divisionlib import *
 from .dynamiclib import *
 from .indicatorlib import *
@@ -23,10 +24,6 @@ from .ClusterCommand import ClusterCommand
 from .Coat import Coat
 from .ColorCommand import ColorCommand
 from .ColorFingeringCommand import ColorFingeringCommand
-from .Command import Command
-from .Command import Map
-from .Command import Suite
-from .CommandWrapper import CommandWrapper
 from .ContainerCommand import ContainerCommand
 from .Counter import Counter
 from .Cursor import Cursor
@@ -42,7 +39,6 @@ from .Interpolator import Interpolator
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
-from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .MusicAccumulator import MusicAccumulator
@@ -58,7 +54,6 @@ from .PitchCommand import PitchCommand
 from .PitchSpecifier import PitchSpecifier
 from .RestAffixSpecifier import RestAffixSpecifier
 from .SchemeManifest import SchemeManifest
-from .Scope import Scope
 from .SegmentMaker import SegmentMaker
 from .SegmentMaker import WellformednessManager
 from .Selection import Selection
@@ -68,7 +63,6 @@ from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups
-from .TimelineScope import TimelineScope
 from .Tree import Tree
 from .VoltaCommand import VoltaCommand
 

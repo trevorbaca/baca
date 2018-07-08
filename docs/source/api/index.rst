@@ -58,7 +58,6 @@ Bača API
    ~baca.ClusterCommand.ClusterCommand
    ~baca.ColorCommand.ColorCommand
    ~baca.ColorFingeringCommand.ColorFingeringCommand
-   ~baca.CommandWrapper.CommandWrapper
    ~baca.ContainerCommand.ContainerCommand
    ~baca.DiatonicClusterCommand.DiatonicClusterCommand
    ~baca.GlobalFermataCommand.GlobalFermataCommand
@@ -96,13 +95,10 @@ Bača API
    ~baca.IndicatorBundle.IndicatorBundle
    ~baca.Interpolator.Interpolator
    ~baca.Loop.Loop
-   ~baca.MeasureWrapper.MeasureWrapper
    ~baca.SchemeManifest.SchemeManifest
-   ~baca.Scope.Scope
    ~baca.Selection.Selection
    ~baca.Sequence.Sequence
    ~baca.TimeSignatureGroups.TimeSignatureGroups
-   ~baca.TimelineScope.TimelineScope
    ~baca.Tree.Tree
 
 .. raw:: html
@@ -207,38 +203,6 @@ Bača API
    ~baca.with_previous_leaf
    ~baca.wleaf
    ~baca.wleaves
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.Command <baca--Command>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (4) Commands
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.Command.Command
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.Command.Map
-   ~baca.Command.Suite
 
 .. raw:: html
 
@@ -437,6 +401,77 @@ Bača API
 
    <hr/>
 
+.. rubric:: :ref:`baca.commandlib <baca--commandlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.Command
+   ~baca.commandlib.CommandWrapper
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.MeasureWrapper
+   ~baca.commandlib.Scope
+   ~baca.commandlib.TimelineScope
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.Map
+   ~baca.commandlib.Suite
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.map
+   ~baca.commandlib.measures
+   ~baca.commandlib.not_parts
+   ~baca.commandlib.not_score
+   ~baca.commandlib.not_segment
+   ~baca.commandlib.only_parts
+   ~baca.commandlib.only_score
+   ~baca.commandlib.only_segment
+   ~baca.commandlib.pick
+   ~baca.commandlib.scope
+   ~baca.commandlib.suite
+   ~baca.commandlib.tag
+   ~baca.commandlib.timeline
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.divisionlib <baca--divisionlib>`
    :class: section-header
 
@@ -568,21 +603,8 @@ Function library.
    ~baca.library.apply_tweaks
    ~baca.library.lbsd
    ~baca.library.literal
-   ~baca.library.map
    ~baca.library.markup
-   ~baca.library.measures
-   ~baca.library.not_parts
-   ~baca.library.not_score
-   ~baca.library.not_segment
-   ~baca.library.only_parts
-   ~baca.library.only_score
-   ~baca.library.only_segment
-   ~baca.library.pick
    ~baca.library.pitches
-   ~baca.library.scope
-   ~baca.library.suite
-   ~baca.library.tag
-   ~baca.library.timeline
 
 .. raw:: html
 

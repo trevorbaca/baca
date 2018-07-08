@@ -25,21 +25,8 @@ library
    ~apply_tweaks
    ~lbsd
    ~literal
-   ~map
    ~markup
-   ~measures
-   ~not_parts
-   ~not_score
-   ~not_segment
-   ~only_parts
-   ~only_score
-   ~only_segment
-   ~pick
    ~pitches
-   ~scope
-   ~suite
-   ~tag
-   ~timeline
 
 .. autofunction:: apply_tweaks
 
@@ -47,32 +34,6 @@ library
 
 .. autofunction:: literal
 
-.. autofunction:: map
-
 .. autofunction:: markup
 
-.. autofunction:: measures
-
-.. autofunction:: not_parts
-
-.. autofunction:: not_score
-
-.. autofunction:: not_segment
-
-.. autofunction:: only_parts
-
-.. autofunction:: only_score
-
-.. autofunction:: only_segment
-
-.. autofunction:: pick
-
 .. autofunction:: pitches
-
-.. autofunction:: scope
-
-.. autofunction:: suite
-
-.. autofunction:: tag
-
-.. autofunction:: timeline

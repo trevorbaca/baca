@@ -22,12 +22,12 @@ baca
 .. toctree::
    :hidden:
 
-   Command
    LibraryAF
    LibraryGM
    LibraryNS
    LibraryTZ
    SegmentMaker
+   commandlib
    divisionlib
    dynamiclib
    indicatorlib
@@ -46,12 +46,12 @@ baca
 .. autosummary::
    :nosignatures:
 
-   Command
    LibraryAF
    LibraryGM
    LibraryNS
    LibraryTZ
    SegmentMaker
+   commandlib
    divisionlib
    dynamiclib
    indicatorlib
@@ -128,7 +128,6 @@ baca
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
-   CommandWrapper
    ContainerCommand
    DiatonicClusterCommand
    GlobalFermataCommand
@@ -156,7 +155,6 @@ baca
    ~ClusterCommand.ClusterCommand
    ~ColorCommand.ColorCommand
    ~ColorFingeringCommand.ColorFingeringCommand
-   ~CommandWrapper.CommandWrapper
    ~ContainerCommand.ContainerCommand
    ~DiatonicClusterCommand.DiatonicClusterCommand
    ~GlobalFermataCommand.GlobalFermataCommand
@@ -194,13 +192,10 @@ baca
    IndicatorBundle
    Interpolator
    Loop
-   MeasureWrapper
    SchemeManifest
-   Scope
    Selection
    Sequence
    TimeSignatureGroups
-   TimelineScope
    Tree
 
 .. autosummary::
@@ -214,13 +209,10 @@ baca
    ~IndicatorBundle.IndicatorBundle
    ~Interpolator.Interpolator
    ~Loop.Loop
-   ~MeasureWrapper.MeasureWrapper
    ~SchemeManifest.SchemeManifest
-   ~Scope.Scope
    ~Selection.Selection
    ~Sequence.Sequence
    ~TimeSignatureGroups.TimeSignatureGroups
-   ~TimelineScope.TimelineScope
    ~Tree.Tree
 
 .. raw:: html

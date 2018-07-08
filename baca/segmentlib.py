@@ -1,10 +1,10 @@
 import abjad
 import collections
 import typing
+from . import commandlib
 from . import indicatorlib
 from . import library
 from . import typings
-from .Command import Command
 from .Selection import Selection
 from .Sequence import Sequence
 
@@ -250,7 +250,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         tags: typing.List[str] = None,
         ) -> None:
         tags = tags or []
-        assert Command._validate_tags(tags), repr(tags)
+        assert commandlib.Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)
         self._tags = tags
@@ -377,7 +377,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         """
         Gets tags.
         """
-        assert Command._validate_tags(self._tags), repr(self._tags)
+        assert commandlib.Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):

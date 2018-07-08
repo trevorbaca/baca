@@ -1,12 +1,12 @@
 import abjad
 import typing
 from . import typings
-from .Command import Command
+from . import commandlib
 from .Selection import Selection
 from .Sequence import Sequence
 
 
-class BCPCommand(Command):
+class BCPCommand(commandlib.Command):
     """
     Bow contact point command.
     """
@@ -32,7 +32,7 @@ class BCPCommand(Command):
         helper: typing.Callable = None,
         selector: typings.Selector = None,
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if bcps is None:
             self._validate_bcps(bcps)
         self._bow_contact_points = bcps

@@ -5,6 +5,7 @@ import sys
 import traceback
 import typing
 from abjadext import rmakers
+from . import commandlib
 from . import indicatorlib
 from . import library
 from . import markuplib
@@ -13,16 +14,9 @@ from . import rhythmlib
 from . import segmentlib
 from . import templatelib
 from . import typings
-from .Command import Command
-from .Command import Map
-from .Command import Suite
-from .CommandWrapper import CommandWrapper
-from .MeasureWrapper import MeasureWrapper
-from .Scope import Scope
 from .Selection import Selection
 from .Sequence import Sequence
 from .TieCorrectionCommand import TieCorrectionCommand
-from .TimelineScope import TimelineScope
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -370,7 +364,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._validate_stage_count = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
-        self._wrappers: typing.List[CommandWrapper] = []
+        self._wrappers: typing.List[commandlib.CommandWrapper] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
@@ -811,10 +805,10 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
-        prototype = (Scope, TimelineScope)
+        prototype = (commandlib.Scope, commandlib.TimelineScope)
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
-            scope = library.scope(voice_name)
+            scope = commandlib.scope(voice_name)
             scopes = [scope]
         elif isinstance(scopes, tuple):
             scopes = self._unpack_scope_pair(scopes, abbreviations)
@@ -835,7 +829,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
-                scope_ = library.scope(voice_name)
+                scope_ = commandlib.scope(voice_name)
                 scopes_.append(scope_)
             elif isinstance(scope, tuple):
                 voice_name, stages = scope
@@ -843,10 +837,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(stages, list):
                     stages = self._unpack_stage_token_list(stages)
                     for stage_token in stages:
-                        scope_ = library.scope(voice_name, stage_token)
+                        scope_ = commandlib.scope(voice_name, stage_token)
                         scopes_.append(scope_)
                 else:
-                    scope_ = library.scope(voice_name, stages)
+                    scope_ = commandlib.scope(voice_name, stages)
                     scopes_.append(scope_)
             else:
                 scope_ = scope
@@ -856,7 +850,14 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            sixway = (abjad.Markup, Command, list, Map, MeasureWrapper, Suite)
+            sixway = (
+                list,
+                abjad.Markup,
+                commandlib.Command,
+                commandlib.Map,
+                commandlib.MeasureWrapper,
+                commandlib.Suite,
+                )
             if not isinstance(command, sixway):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
@@ -865,7 +866,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for i, scope in enumerate(scopes_):
             if self._voice_names and scope.voice_name not in self._voice_names:
                 raise Exception(f'unknown voice name {scope.voice_name!r}.')
-            if isinstance(scope, TimelineScope):
+            if isinstance(scope, commandlib.TimelineScope):
                 for scope_ in scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
@@ -874,7 +875,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
-                    fourway = (list, Command, abjad.Markup, Suite)
+                    fourway = (
+                        list,
+                        abjad.Markup,
+                        commandlib.Command,
+                        commandlib.Suite,
+                        )
                     assert isinstance(command, fourway), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
@@ -899,9 +905,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         if isinstance(command_, abjad.Markup):
                             command_ = library.markup(command_)
                         assert isinstance(command_, Command), repr(command_)
-                        wrapper = CommandWrapper(command=command_, scope=scope)
+                        wrapper = commandlib.CommandWrapper(
+                            command=command_,
+                            scope=scope,
+                            )
                         self.wrappers.append(wrapper)
-                elif isinstance(command, MeasureWrapper):
+                elif isinstance(command, commandlib.MeasureWrapper):
                     if isinstance(command.measures, int):
                         stages = (command.measures, command.measures)
                     else:
@@ -914,16 +923,26 @@ class SegmentMaker(abjad.SegmentMaker):
                     command = command.command
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    twoway = (Command, Map)
+                    twoway = (commandlib.Command, commandlib.Map)
                     assert isinstance(command, twoway), repr(command)
-                    wrapper = CommandWrapper(command=command, scope=scope_)
+                    wrapper = commandlib.CommandWrapper(
+                        command=command,
+                        scope=scope_,
+                        )
                     self.wrappers.append(wrapper)
                 else:
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    threeway = (Command, Map, Suite)
+                    threeway = (
+                        commandlib.Command,
+                        commandlib.Map,
+                        commandlib.Suite,
+                        )
                     assert isinstance(command, threeway), repr(command)
-                    wrapper = CommandWrapper(command=command, scope=scope)
+                    wrapper = commandlib.CommandWrapper(
+                        command=command,
+                        scope=scope,
+                        )
                     self.wrappers.append(wrapper)
 
     ### PRIVATE METHODS ###
@@ -1636,8 +1655,13 @@ class SegmentMaker(abjad.SegmentMaker):
     def _call_commands(self):
         command_count = 0
         for wrapper in self.wrappers:
-            assert isinstance(wrapper, CommandWrapper)
-            assert isinstance(wrapper.command, (Command, Map, Suite))
+            assert isinstance(wrapper, commandlib.CommandWrapper)
+            threeway = (
+                commandlib.Command,
+                commandlib.Map,
+                commandlib.Suite,
+                )
+            assert isinstance(wrapper.command, threeway)
             if isinstance(wrapper.command, rhythmlib.RhythmCommand):
                 continue
             command_count += 1
@@ -1687,7 +1711,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             rhythms = []
             for wrapper in wrappers:
-                assert isinstance(wrapper, CommandWrapper)
+                assert isinstance(wrapper, commandlib.CommandWrapper)
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
@@ -2825,17 +2849,17 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
-        if isinstance(wrapper.scope, TimelineScope):
+        if isinstance(wrapper.scope, commandlib.TimelineScope):
             selection = wrapper.scope._sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):
         if self._cache is None:
             self._cache_leaves()
-        if isinstance(scope, Scope):
+        if isinstance(scope, commandlib.Scope):
             scopes = [scope]
         else:
-            assert isinstance(scope, TimelineScope)
+            assert isinstance(scope, commandlib.TimelineScope)
             scopes = list(scope.scopes)
         leaf_selections = []
         for scope in scopes:
@@ -3158,7 +3182,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice_name in voice_names:
             #voice_name = abbreviations.get(voice_name, voice_name)
             for stage_token in stage_tokens:
-                scope = library.scope(voice_name, stage_token)
+                scope = commandlib.scope(voice_name, stage_token)
                 scopes_.append(scope)
         return scopes_
 
@@ -5856,7 +5880,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._voice_metadata
 
     @property
-    def wrappers(self) -> typing.List[CommandWrapper]:
+    def wrappers(self) -> typing.List[commandlib.CommandWrapper]:
         """
         Gets wrappers.
         """

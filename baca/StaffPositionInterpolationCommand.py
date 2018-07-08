@@ -1,12 +1,12 @@
 import abjad
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .PitchCommand import PitchCommand
 from .Selection import _select
 
 
-class StaffPositionInterpolationCommand(Command):
+class StaffPositionInterpolationCommand(commandlib.Command):
     r"""
     Staff position interpolation command.
 
@@ -191,7 +191,7 @@ class StaffPositionInterpolationCommand(Command):
         start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch: abjad.NamedPitch = start_pitch
         stop_pitch = abjad.NamedPitch(stop_pitch)

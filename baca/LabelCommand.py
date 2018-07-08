@@ -1,8 +1,8 @@
 import abjad
-from .Command import Command
+from . import commandlib
 
 
-class LabelCommand(Command):
+class LabelCommand(commandlib.Command):
     r"""
     Label command.
 
@@ -194,7 +194,7 @@ class LabelCommand(Command):
         expression=None,
         selector='baca.leaves()',
         ):
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
         self._expression = expression

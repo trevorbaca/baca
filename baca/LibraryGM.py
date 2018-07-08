@@ -1,10 +1,9 @@
 import abjad
 import typing
 from abjadext import rmakers
+from . import commandlib
 from . import library
 from . import typings
-from .Command import Map
-from .Command import Suite
 from .GlobalFermataCommand import GlobalFermataCommand
 from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
@@ -13,7 +12,6 @@ from .LabelCommand import LabelCommand
 from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .PitchCommand import PitchCommand
-from .Scope import Scope
 from .Selection import _select
 from .StaffPositionInterpolationCommand import (
     StaffPositionInterpolationCommand,
@@ -800,7 +798,7 @@ def margin_markup(
     alert: IndicatorCommand = None,
     context: str = 'Staff',
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> typing.Union[IndicatorCommand, Suite]:
+    ) -> typing.Union[IndicatorCommand, commandlib.Suite]:
     r"""
     Attaches margin markup.
 
@@ -915,7 +913,7 @@ def margin_markup(
         )
     if bool(alert):
         assert isinstance(alert, IndicatorCommand), repr(alert)
-        return Suite(command, alert)
+        return commandlib.Suite(command, alert)
     else:
         return command
 

@@ -1,11 +1,11 @@
 import abjad
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .Selection import Selection
 
 
-class PartAssignmentCommand(Command):
+class PartAssignmentCommand(commandlib.Command):
     """
     Part assignment command.
     """
@@ -24,7 +24,7 @@ class PartAssignmentCommand(Command):
         part_assignment: abjad.PartAssignment = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if part_assignment is not None:
             if not isinstance(part_assignment, abjad.PartAssignment):
                 message = 'part_assignment must be part assignment'

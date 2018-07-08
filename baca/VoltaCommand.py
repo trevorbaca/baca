@@ -1,9 +1,9 @@
 import abjad
-from .Command import Command
+from . import commandlib
 from .Selection import Selection
 
 
-class VoltaCommand(Command):
+class VoltaCommand(commandlib.Command):
     """
     Volta command.
 

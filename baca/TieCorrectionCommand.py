@@ -1,11 +1,11 @@
 import abjad
 import typing
+from . import commandlib
 from . import typings
-from .Command import Command
 from .Selection import Selection
 
 
-class TieCorrectionCommand(Command):
+class TieCorrectionCommand(commandlib.Command):
     """
     Tie correction command.
 
@@ -34,7 +34,7 @@ class TieCorrectionCommand(Command):
         selector: typings.Selector = 'baca.pleaf(-1)',
         untie: bool = None,
         ) -> None:
-        Command.__init__(self, selector=selector)
+        commandlib.Command.__init__(self, selector=selector)
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction

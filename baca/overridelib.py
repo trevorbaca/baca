@@ -3,15 +3,14 @@ Override library.
 """
 import abjad
 import typing
+from . import commandlib
 from . import library
 from . import typings
-from .Command import Command
-from .Command import Suite
 
 
 ### CLASSES ###
 
-class OverrideCommand(Command):
+class OverrideCommand(commandlib.Command):
     r"""
     Override command.
 
@@ -224,7 +223,7 @@ class OverrideCommand(Command):
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
         ) -> None:
-        Command.__init__(
+        commandlib.Command.__init__(
             self,
             deactivate=deactivate,
             selector=selector,
@@ -562,7 +561,7 @@ def bar_extent(
         value=pair,
         )
 
-def bar_extent_zero() -> Suite:
+def bar_extent_zero() -> commandlib.Suite:
     """
     Makes bar-extent zero suite.
     """
@@ -989,7 +988,7 @@ def clef_shift(
     clef: typing.Union[str, abjad.Clef],
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Shifts clef to left by width of clef.
     """
@@ -1421,7 +1420,7 @@ def dynamic_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Shifts dynamic to left by calculated width of dynamic.
     """
@@ -1443,7 +1442,7 @@ def dynamic_shift(
 def dynamic_text_center(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -1639,7 +1638,7 @@ def dynamic_text_extra_offset(
 def dynamic_text_left(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -1677,7 +1676,7 @@ def dynamic_text_parent_alignment_x(
 def dynamic_text_right(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -1831,7 +1830,7 @@ def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> Suite:
+    ) -> commandlib.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
     """
