@@ -7,7 +7,6 @@ from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BCPCommand import BCPCommand
-from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
 from .ColorCommand import ColorCommand
@@ -1596,130 +1595,6 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
         beam_rests=False,
         hide_nibs=hide_nibs,
         )
-
-def breaks(
-    *page_specifiers: typing.Any,
-    local_measure_numbers: bool = None,
-    partial_score: typing.Optional[int] = None,
-    ) -> BreakMeasureMap:
-    r"""
-    Makes breaks.
-
-    ..  container:: example
-
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         [1, 20, [15, 20, 20]], 
-        ...         [13, 140, [15, 20, 20]], 
-        ...         ),
-        ...     baca.page(
-        ...         [23, 20, [15, 20, 20]],
-        ...         ),
-        ...     )
-
-    Set ``partial_score`` when rendering only the first measures of a
-    score; leave ``partial_score`` set to none when rendering a complete
-    score.
-
-    ..  container:: example
-
-        Raises exception on misnumbered pages:
-
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         [1, 20, [15, 20, 20]], 
-        ...         [13, 140, [15, 20, 20]], 
-        ...         number=1,
-        ...         ),
-        ...     baca.page(
-        ...         [23, 20, [15, 20, 20]],
-        ...         number=9,
-        ...         ),
-        ...     )
-        Traceback (most recent call last):
-            ... 
-        Exception: page number (9) is not 2.
-
-    ..  container:: example
-
-        Raises exception on too few measures:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.StringTrioScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-        ...     breaks=baca.breaks(
-        ...         baca.page([99, 0, (10, 20,)]),
-        ...         baca.page([109, 0, (10, 20,)]),
-        ...         ),
-        ...     )
-
-        >>> maker(
-        ...     'ViolinMusicVoice',
-        ...     baca.make_even_divisions(),
-        ...     baca.pitch('E4'),
-        ...     )
-        >>> lilypond_file = maker.run(environment='docs')
-        Traceback (most recent call last):
-            ...
-        Exception: score ends at measure 103 (not 109).
-
-    """
-    commands = abjad.OrderedDict()
-    if not page_specifiers:
-        return BreakMeasureMap(
-            commands=commands,
-            partial_score=partial_score,
-            )
-    first_system = page_specifiers[0].systems[0]
-    if hasattr(first_system, 'measure'):
-        first_measure_number = first_system.measure
-    else:
-        first_measure_number = first_system[0]
-    bol_measure_numbers = []
-    for i, page_specifier in enumerate(page_specifiers):
-        page_number = i + 1
-        if page_specifier.number is not None:
-            if page_specifier.number != page_number:
-                message = f'page number ({page_specifier.number})'
-                message += f' is not {page_number}.'
-                raise Exception(message)
-        for j, system in enumerate(page_specifier.systems):
-            if hasattr(system, 'measure'):
-                measure_number = system.measure
-            else:
-                measure_number = system[0]
-            bol_measure_numbers.append(measure_number)
-            skip_index = measure_number - first_measure_number
-            if hasattr(system, 'y_offset'):
-                y_offset = system.y_offset
-            else:
-                y_offset = system[1]
-            if hasattr(system, 'distances'):
-                alignment_distances = system.distances
-            else:
-                alignment_distances = system[2]
-            selector = f'baca.skip({skip_index})'
-            if j == 0:
-                break_ = abjad.LilyPondLiteral(r'\pageBreak')
-            else:
-                break_ = abjad.LilyPondLiteral(r'\break')
-            command = IndicatorCommand(
-                indicators=[break_],
-                selector=selector,
-                )
-            lbsd = library.lbsd(
-                y_offset,
-                alignment_distances,
-                selector=selector,
-                )
-            commands[measure_number] = [command, lbsd]
-    breaks = BreakMeasureMap(
-        commands=commands,
-        local_measure_numbers=local_measure_numbers,
-        partial_score=partial_score,
-        )
-    breaks._bol_measure_numbers.extend(bol_measure_numbers)
-    return breaks
 
 def breathe(
     *,

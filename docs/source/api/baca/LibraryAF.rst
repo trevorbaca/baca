@@ -37,7 +37,6 @@ LibraryAF
    ~beam_divisions
    ~beam_everything
    ~beam_runs
-   ~breaks
    ~breathe
    ~clef
    ~clusters
@@ -90,8 +89,6 @@ LibraryAF
 .. autofunction:: beam_everything
 
 .. autofunction:: beam_runs
-
-.. autofunction:: breaks
 
 .. autofunction:: breathe
 

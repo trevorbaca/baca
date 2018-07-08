@@ -27,7 +27,6 @@ Bača API
    ~baca.MusicContribution.MusicContribution
    ~baca.MusicMaker.MusicMaker
    ~baca.PersistentIndicatorTests.PersistentIndicatorTests
-   ~baca.SegmentMaker.SegmentMaker
 
 .. raw:: html
 
@@ -40,7 +39,6 @@ Bača API
    :nosignatures:
 
    ~baca.AnchorSpecifier.AnchorSpecifier
-   ~baca.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier
    ~baca.LMRSpecifier.LMRSpecifier
    ~baca.PitchSpecifier.PitchSpecifier
    ~baca.RestAffixSpecifier.RestAffixSpecifier
@@ -90,34 +88,22 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.BreakMeasureMap.BreakMeasureMap
    ~baca.Coat.Coat
    ~baca.Counter.Counter
    ~baca.Cursor.Cursor
-   ~baca.DesignMaker.DesignMaker
    ~baca.Expression.Expression
    ~baca.ExpressionGallery.ExpressionGallery
-   ~baca.HarmonicSeries.HarmonicSeries
    ~baca.IndicatorBundle.IndicatorBundle
    ~baca.Interpolator.Interpolator
    ~baca.Loop.Loop
    ~baca.MeasureWrapper.MeasureWrapper
-   ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
-   ~baca.PageSpecifier.PageSpecifier
-   ~baca.Partial.Partial
    ~baca.SchemeManifest.SchemeManifest
    ~baca.Scope.Scope
    ~baca.Selection.Selection
    ~baca.Sequence.Sequence
-   ~baca.SpacingIndication.SpacingIndication
-   ~baca.SpacingSection.SpacingSection
-   ~baca.StageMeasureMap.StageMeasureMap
-   ~baca.SystemSpecifier.SystemSpecifier
    ~baca.TimeSignatureGroups.TimeSignatureGroups
-   ~baca.TimeSignatureMaker.TimeSignatureMaker
    ~baca.TimelineScope.TimelineScope
    ~baca.Tree.Tree
-   ~baca.WellformednessManager.WellformednessManager
 
 .. raw:: html
 
@@ -286,7 +272,6 @@ Bača API
    ~baca.LibraryAF.beam_divisions
    ~baca.LibraryAF.beam_everything
    ~baca.LibraryAF.beam_runs
-   ~baca.LibraryAF.breaks
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.clef
    ~baca.LibraryAF.clusters
@@ -338,7 +323,6 @@ Bača API
    ~baca.LibraryGM.marcato
    ~baca.LibraryGM.margin_markup
    ~baca.LibraryGM.metronome_mark
-   ~baca.LibraryGM.minimum_duration
    ~baca.LibraryGM.mleaves
 
 .. raw:: html
@@ -361,7 +345,6 @@ Bača API
    ~baca.LibraryNS.natural_clusters
    ~baca.LibraryNS.nest
    ~baca.LibraryNS.one_voice
-   ~baca.LibraryNS.page
    ~baca.LibraryNS.parts
    ~baca.LibraryNS.pitch
    ~baca.LibraryNS.previous_metadata
@@ -374,7 +357,6 @@ Bača API
    ~baca.LibraryNS.resume
    ~baca.LibraryNS.resume_after
    ~baca.LibraryNS.rmleaves
-   ~baca.LibraryNS.scorewide_spacing
    ~baca.LibraryNS.short_fermata
    ~baca.LibraryNS.skips_after
    ~baca.LibraryNS.skips_around
@@ -388,7 +370,6 @@ Bača API
    ~baca.LibraryNS.stem_tremolo
    ~baca.LibraryNS.stop_trill
    ~baca.LibraryNS.stopped
-   ~baca.LibraryNS.system
 
 .. raw:: html
 
@@ -420,6 +401,37 @@ Bača API
    ~baca.LibraryTZ.voice_three
    ~baca.LibraryTZ.voice_two
    ~baca.LibraryTZ.volta
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.SegmentMaker <baca--SegmentMaker>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (2) Makers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.SegmentMaker.SegmentMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.SegmentMaker.WellformednessManager
 
 .. raw:: html
 
@@ -518,6 +530,7 @@ Dynamic library.
    :nosignatures:
 
    ~baca.indicatorlib.LBSD
+   ~baca.indicatorlib.SpacingSection
    ~baca.indicatorlib.StaffLines
 
 .. raw:: html
@@ -987,6 +1000,9 @@ Pitch library.
    ~baca.pitchlib.CollectionList
    ~baca.pitchlib.Constellation
    ~baca.pitchlib.ConstellationCircuit
+   ~baca.pitchlib.DesignMaker
+   ~baca.pitchlib.HarmonicSeries
+   ~baca.pitchlib.Partial
    ~baca.pitchlib.PitchClassSegment
    ~baca.pitchlib.PitchClassSet
    ~baca.pitchlib.PitchSegment
@@ -1127,6 +1143,58 @@ Rhythm library.
    :nosignatures:
 
    ~baca.rhythmlib.SkipRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.segmentlib <baca--segmentlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (3) Specifiers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.segmentlib.HorizontalSpacingSpecifier
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.segmentlib.BreakMeasureMap
+   ~baca.segmentlib.MetronomeMarkMeasureMap
+   ~baca.segmentlib.PageSpecifier
+   ~baca.segmentlib.StageMeasureMap
+   ~baca.segmentlib.SystemSpecifier
+   ~baca.segmentlib.TimeSignatureMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.segmentlib.breaks
+   ~baca.segmentlib.minimum_duration
+   ~baca.segmentlib.page
+   ~baca.segmentlib.scorewide_spacing
+   ~baca.segmentlib.system
 
 .. raw:: html
 

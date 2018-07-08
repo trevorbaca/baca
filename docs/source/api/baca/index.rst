@@ -27,6 +27,7 @@ baca
    LibraryGM
    LibraryNS
    LibraryTZ
+   SegmentMaker
    divisionlib
    dynamiclib
    indicatorlib
@@ -37,6 +38,7 @@ baca
    pitchlib
    registerlib
    rhythmlib
+   segmentlib
    settinglib
    spannerlib
    templatelib
@@ -49,6 +51,7 @@ baca
    LibraryGM
    LibraryNS
    LibraryTZ
+   SegmentMaker
    divisionlib
    dynamiclib
    indicatorlib
@@ -59,6 +62,7 @@ baca
    pitchlib
    registerlib
    rhythmlib
+   segmentlib
    settinglib
    spannerlib
    templatelib
@@ -77,7 +81,6 @@ baca
    MusicContribution
    MusicMaker
    PersistentIndicatorTests
-   SegmentMaker
 
 .. autosummary::
    :nosignatures:
@@ -86,7 +89,6 @@ baca
    ~MusicContribution.MusicContribution
    ~MusicMaker.MusicMaker
    ~PersistentIndicatorTests.PersistentIndicatorTests
-   ~SegmentMaker.SegmentMaker
 
 .. raw:: html
 
@@ -99,7 +101,6 @@ baca
    :hidden:
 
    AnchorSpecifier
-   HorizontalSpacingSpecifier
    LMRSpecifier
    PitchSpecifier
    RestAffixSpecifier
@@ -108,7 +109,6 @@ baca
    :nosignatures:
 
    ~AnchorSpecifier.AnchorSpecifier
-   ~HorizontalSpacingSpecifier.HorizontalSpacingSpecifier
    ~LMRSpecifier.LMRSpecifier
    ~PitchSpecifier.PitchSpecifier
    ~RestAffixSpecifier.RestAffixSpecifier
@@ -186,66 +186,42 @@ baca
 .. toctree::
    :hidden:
 
-   BreakMeasureMap
    Coat
    Counter
    Cursor
-   DesignMaker
    Expression
    ExpressionGallery
-   HarmonicSeries
    IndicatorBundle
    Interpolator
    Loop
    MeasureWrapper
-   MetronomeMarkMeasureMap
-   PageSpecifier
-   Partial
    SchemeManifest
    Scope
    Selection
    Sequence
-   SpacingIndication
-   SpacingSection
-   StageMeasureMap
-   SystemSpecifier
    TimeSignatureGroups
-   TimeSignatureMaker
    TimelineScope
    Tree
-   WellformednessManager
 
 .. autosummary::
    :nosignatures:
 
-   ~BreakMeasureMap.BreakMeasureMap
    ~Coat.Coat
    ~Counter.Counter
    ~Cursor.Cursor
-   ~DesignMaker.DesignMaker
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
-   ~HarmonicSeries.HarmonicSeries
    ~IndicatorBundle.IndicatorBundle
    ~Interpolator.Interpolator
    ~Loop.Loop
    ~MeasureWrapper.MeasureWrapper
-   ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
-   ~PageSpecifier.PageSpecifier
-   ~Partial.Partial
    ~SchemeManifest.SchemeManifest
    ~Scope.Scope
    ~Selection.Selection
    ~Sequence.Sequence
-   ~SpacingIndication.SpacingIndication
-   ~SpacingSection.SpacingSection
-   ~StageMeasureMap.StageMeasureMap
-   ~SystemSpecifier.SystemSpecifier
    ~TimeSignatureGroups.TimeSignatureGroups
-   ~TimeSignatureMaker.TimeSignatureMaker
    ~TimelineScope.TimelineScope
    ~Tree.Tree
-   ~WellformednessManager.WellformednessManager
 
 .. raw:: html
 

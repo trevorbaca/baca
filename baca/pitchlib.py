@@ -4,6 +4,8 @@ Pitch library.
 import abjad
 import collections as collections_module
 import inspect
+import math
+import typing
 from . import registerlib
 from .Cursor import Cursor
 from .Expression import Expression
@@ -3857,6 +3859,458 @@ class ConstellationCircuit(abjad.AbjadObject):
         Returns constellation circuit.
         """
         return class_(class_.CC1, abjad.PitchRange('[A0, C8]'))
+
+class DesignMaker(abjad.AbjadObject):
+    """
+    Design-maker.
+
+    ..  container:: example
+
+        Initializes design-maker:
+
+        >>> baca.DesignMaker()
+        DesignMaker()
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(5) Utilities'
+
+    __slots__ = (
+        '_result',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(self):
+        self._result = []
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self):
+        """
+        Calls design-maker.
+
+        Returns pitch-class tree.
+        """
+        design = baca.PitchTree(items=self._result)
+        self._check_duplicate_pitch_classes(design)
+        return design
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _apply_operator(segment, operator):
+        assert isinstance(segment, baca.PitchClassSegment)
+        assert isinstance(operator, str), repr(operator)
+        if operator.startswith('T'):
+            index = int(operator[1:])
+            segment = segment.transpose(index)
+        elif operator == 'I':
+            segment = segment.invert()
+        elif operator.startswith('M'):
+            index = int(operator[1:])
+            segment = segment.multiply(index)
+        elif operator == 'alpha':
+            segment = segment.alpha()
+        else:
+            raise Exception(f'unrecognized operator: {operator!r}.')
+        return segment
+
+    @staticmethod
+    def _check_duplicate_pitch_classes(design):
+        leaves = design.get_payload()
+        for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
+            if leaf_1 == leaf_2:
+                raise Exception(f'duplicate {leaf_1!r}.')
+
+    ### PUBLIC METHODS ###
+
+    def partition(self, cursor, number, counts, operators=None):
+        """
+        Partitions next ``number`` cells in ``cursor`` by ``counts``.
+
+        Appies optional ``operators`` to resulting parts of partition.
+
+        Returns none.
+        """
+        cells = cursor.next(number)
+        list_ = []
+        for cell in cells:
+            list_.extend(cell)
+        segment = baca.PitchClassSegment(items=list_)
+        operators = operators or []
+        for operator in operators:
+            segment = self._apply_operator(segment, operator)
+        sequence = abjad.sequence(segment)
+        parts = sequence.partition_by_counts(counts, overhang=True)
+        parts = [baca.PitchClassSegment(_) for _ in parts]
+        self._result.extend(parts)
+
+    def partition_cyclic(self, cursor, number, counts, operators=None):
+        """
+        Partitions next `number` cells in `cursor` cyclically by `counts`.
+
+        Applies optional `operators` to parts in resulting partition.
+
+        Returns none.
+        """
+        cells = cursor.next(number)
+        list_ = []
+        for cell in cells:
+            list_.extend(cell)
+        segment = baca.PitchClassSegment(items=list_)
+        operators = operators or []
+        for operator in operators:
+            segment = self._apply_operator(segment, operator)
+        sequence = abjad.sequence(segment)
+        parts = sequence.partition_by_counts(
+            counts,
+            cyclic=True,
+            overhang=True,
+            )
+        parts = [baca.PitchClassSegment(_) for _ in parts]
+        self._result.extend(parts)
+
+class HarmonicSeries(abjad.AbjadObject):
+    r"""
+    Harmonic series.
+
+    ..  container:: example
+
+        >>> harmonic_series = baca.HarmonicSeries('C2')
+        >>> abjad.show(harmonic_series) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> lilypond_file = harmonic_series.__illustrate__()
+            >>> abjad.f(lilypond_file[abjad.Staff])
+            \new Staff
+            \with
+            {
+                \override BarLine.stencil = ##f
+                \override Stem.transparent = ##t
+                \override TextScript.font-size = #-1
+                \override TextScript.staff-padding = #6
+                \override TimeSignature.stencil = ##f
+            }
+            {
+                \clef "bass"
+                c,4 _ \markup { 1 }
+                c4 _ \markup { 2 }
+                g4
+                    ^ \markup { +2 }
+                    _ \markup { 3 }
+                \clef "treble"
+                c'4 _ \markup { 4 }
+                e'4
+                    ^ \markup { -14 }
+                    _ \markup { 5 }
+                g'4
+                    ^ \markup { +2 }
+                    _ \markup { 6 }
+                bf'4
+                    ^ \markup { -31 }
+                    _ \markup { 7 }
+                c''4 _ \markup { 8 }
+                d''4
+                    ^ \markup { +4 }
+                    _ \markup { 9 }
+                e''4
+                    ^ \markup { -14 }
+                    _ \markup { 10 }
+                fqs''4
+                    ^ \markup { +1 }
+                    _ \markup { 11 }
+                g''4
+                    ^ \markup { +2 }
+                    _ \markup { 12 }
+                aqf''4
+                    ^ \markup { -9 }
+                    _ \markup { 13 }
+                bf''4
+                    ^ \markup { -31 }
+                    _ \markup { 14 }
+                b''4
+                    ^ \markup { -12 }
+                    _ \markup { 15 }
+                c'''4 _ \markup { 16 }
+                cs'''4
+                    ^ \markup { +5 }
+                    _ \markup { 17 }
+                d'''4
+                    ^ \markup { +4 }
+                    _ \markup { 18 }
+                ef'''4
+                    ^ \markup { -2 }
+                    _ \markup { 19 }
+                e'''4
+                    ^ \markup { -14 }
+                    _ \markup { 20 }
+            }
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(5) Utilities'
+
+    __slots__ = (
+        '_fundamental',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        fundamental: typing.Union[str, abjad.NamedPitch] = 'C1',
+        ) -> None:
+        fundamental = abjad.NamedPitch(fundamental)
+        self._fundamental = fundamental
+
+    ### SPECIAL METHODS ###
+
+    def __illustrate__(self) -> abjad.LilyPondFile:
+        r"""
+        Illustrates harmonic series.
+
+        ..  container:: example
+
+            >>> harmonic_series = baca.HarmonicSeries('A1')
+            >>> abjad.show(harmonic_series) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> lilypond_file = harmonic_series.__illustrate__()
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override Stem.transparent = ##t
+                    \override TextScript.font-size = #-1
+                    \override TextScript.staff-padding = #6
+                    \override TimeSignature.stencil = ##f
+                }
+                {
+                    \clef "bass"
+                    a,,4 _ \markup { 1 }
+                    a,4 _ \markup { 2 }
+                    e4
+                        ^ \markup { +2 }
+                        _ \markup { 3 }
+                    a4 _ \markup { 4 }
+                    \clef "treble"
+                    cs'4
+                        ^ \markup { -14 }
+                        _ \markup { 5 }
+                    e'4
+                        ^ \markup { +2 }
+                        _ \markup { 6 }
+                    g'4
+                        ^ \markup { -31 }
+                        _ \markup { 7 }
+                    a'4 _ \markup { 8 }
+                    b'4
+                        ^ \markup { +4 }
+                        _ \markup { 9 }
+                    cs''4
+                        ^ \markup { -14 }
+                        _ \markup { 10 }
+                    dqs''4
+                        ^ \markup { +1 }
+                        _ \markup { 11 }
+                    e''4
+                        ^ \markup { +2 }
+                        _ \markup { 12 }
+                    fqs''4
+                        ^ \markup { -9 }
+                        _ \markup { 13 }
+                    g''4
+                        ^ \markup { -31 }
+                        _ \markup { 14 }
+                    af''4
+                        ^ \markup { -12 }
+                        _ \markup { 15 }
+                    a''4 _ \markup { 16 }
+                    bf''4
+                        ^ \markup { +5 }
+                        _ \markup { 17 }
+                    b''4
+                        ^ \markup { +4 }
+                        _ \markup { 18 }
+                    c'''4
+                        ^ \markup { -2 }
+                        _ \markup { 19 }
+                    cs'''4
+                        ^ \markup { -14 }
+                        _ \markup { 20 }
+                }
+
+        """
+        staff = abjad.Staff()
+        for n in range(1, 20 + 1):
+            partial = self.partial(n)
+            pitch = partial.approximation
+            note = abjad.Note.from_pitch_and_duration(pitch, (1, 4))
+            staff.append(note)
+            deviation = partial.deviation
+            if 0 < deviation:
+                markup = abjad.Markup(f'+{deviation}', direction=abjad.Up)
+                abjad.attach(markup, note)
+            elif deviation < 0:
+                markup = abjad.Markup(deviation, direction=abjad.Up)
+                abjad.attach(markup, note)
+            markup = abjad.Markup(n, direction=abjad.Down)
+            abjad.attach(markup, note)
+        notes = abjad.select(staff).notes()
+        if notes[0].written_pitch < abjad.NamedPitch('C4'):
+            abjad.attach(abjad.Clef('bass'), staff[0])
+            for note in notes[1:]:
+                if abjad.NamedPitch('C4') <= note.written_pitch:
+                    abjad.attach(abjad.Clef('treble'), note)
+                    break
+        abjad.override(staff).bar_line.stencil = False
+        abjad.override(staff).stem.transparent = True
+        abjad.override(staff).text_script.font_size = -1
+        abjad.override(staff).text_script.staff_padding = 6
+        abjad.override(staff).time_signature.stencil = False
+        score = abjad.Score([staff])
+        moment = abjad.SchemeMoment((1, 8))
+        abjad.setting(score).proportional_notation_duration = moment
+        lilypond_file = abjad.LilyPondFile.new(score)
+        return lilypond_file
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def fundamental(self) -> abjad.NamedPitch:
+        """
+        Gets fundamental.
+
+        ..  container:: example
+
+            >>> baca.HarmonicSeries('C2').fundamental
+            NamedPitch('c,')
+
+        """
+        return self._fundamental
+
+    ### PUBLIC METHODS ###
+
+    def partial(self, n: int) -> 'Partial':
+        """
+        Gets partial ``n``.
+
+        ..  container:: example
+
+            >>> baca.HarmonicSeries('C2').partial(7)
+            Partial(fundamental=NamedPitch('c,'), number=7)
+
+        """
+        return Partial(
+            fundamental=self.fundamental,
+            number=n,
+            )
+
+class Partial(abjad.AbjadObject):
+    """
+    Partial.
+
+    ..  container:: example
+
+        >>> baca.Partial('C1', 7)
+        Partial(fundamental=NamedPitch('c,,'), number=7)
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(5) Utilities'
+
+    __slots__ = (
+        '_approximation',
+        '_deviation',
+        '_fundamental',
+        '_number',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        fundamental: typing.Union[str, abjad.NamedPitch] = 'C1',
+        number: int = 1,
+        ) -> None:
+        fundamental = abjad.NamedPitch(fundamental)
+        self._fundamental = fundamental
+        assert isinstance(number, int), repr(number)
+        assert 1 <= number, repr(number)
+        self._number = number
+        hertz = number * fundamental.hertz
+        approximation = abjad.NamedPitch.from_hertz(hertz)
+        self._approximation = approximation
+        deviation_multiplier = hertz / approximation.hertz
+        semitone_base = 2 ** abjad.Fraction(1, 12)
+        deviation_semitones = math.log(deviation_multiplier, semitone_base)
+        deviation_cents = 100 * deviation_semitones
+        deviation = round(deviation_cents)
+        self._deviation = deviation
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def approximation(self) -> abjad.NamedPitch:
+        """
+        Gets approximation.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).approximation
+            NamedPitch('bf')
+
+        """
+        return self._approximation
+
+    @property
+    def deviation(self) -> int:
+        """
+        Gets deviation in cents.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).deviation
+            -31
+
+        """
+        return self._deviation
+
+    @property
+    def fundamental(self) -> abjad.NamedPitch:
+        """
+        Gets fundamental.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).fundamental
+            NamedPitch('c,,')
+
+        """
+        return self._fundamental
+
+    @property
+    def number(self) -> int:
+        """
+        Gets number.
+
+        ..  container:: example
+
+            >>> baca.Partial('C1', 7).number
+            7
+
+        """
+        return self._number
 
 class PitchClassSegment(abjad.PitchClassSegment):
     r"""

@@ -25,7 +25,6 @@ LibraryNS
    ~natural_clusters
    ~nest
    ~one_voice
-   ~page
    ~parts
    ~pitch
    ~previous_metadata
@@ -38,7 +37,6 @@ LibraryNS
    ~resume
    ~resume_after
    ~rmleaves
-   ~scorewide_spacing
    ~short_fermata
    ~skips_after
    ~skips_around
@@ -52,15 +50,12 @@ LibraryNS
    ~stem_tremolo
    ~stop_trill
    ~stopped
-   ~system
 
 .. autofunction:: natural_clusters
 
 .. autofunction:: nest
 
 .. autofunction:: one_voice
-
-.. autofunction:: page
 
 .. autofunction:: parts
 
@@ -85,8 +80,6 @@ LibraryNS
 .. autofunction:: resume_after
 
 .. autofunction:: rmleaves
-
-.. autofunction:: scorewide_spacing
 
 .. autofunction:: short_fermata
 
@@ -113,5 +106,3 @@ LibraryNS
 .. autofunction:: stop_trill
 
 .. autofunction:: stopped
-
-.. autofunction:: system

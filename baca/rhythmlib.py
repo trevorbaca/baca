@@ -5397,4 +5397,3 @@ def rhythm(
         split_at_measure_boundaries=split_at_measure_boundaries,
         stages=stages,
         )
-

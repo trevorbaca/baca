@@ -153,6 +153,9 @@ pitchlib
    ~CollectionList
    ~Constellation
    ~ConstellationCircuit
+   ~DesignMaker
+   ~HarmonicSeries
+   ~Partial
    ~PitchClassSegment
    ~PitchClassSet
    ~PitchSegment
@@ -537,6 +540,139 @@ pitchlib
    .. autoattribute:: ConstellationCircuit.pitch_range
 
    .. autoattribute:: ConstellationCircuit.pivot_chords
+
+.. autoclass:: DesignMaker
+
+   .. autosummary::
+      :nosignatures:
+
+      partition
+      partition_cyclic
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DesignMaker.__call__
+
+   .. container:: inherited
+
+      .. automethod:: DesignMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DesignMaker.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: DesignMaker.partition
+
+   .. automethod:: DesignMaker.partition_cyclic
+
+.. autoclass:: HarmonicSeries
+
+   .. autosummary::
+      :nosignatures:
+
+      partial
+
+   .. autosummary::
+      :nosignatures:
+
+      fundamental
+
+   .. autosummary::
+      :nosignatures:
+
+      __illustrate__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: HarmonicSeries.__format__
+
+   .. automethod:: HarmonicSeries.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: HarmonicSeries.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: HarmonicSeries.partial
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: HarmonicSeries.fundamental
+
+.. autoclass:: Partial
+
+   .. autosummary::
+      :nosignatures:
+
+      approximation
+      deviation
+      fundamental
+      number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Partial.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Partial.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Partial.approximation
+
+   .. autoattribute:: Partial.deviation
+
+   .. autoattribute:: Partial.fundamental
+
+   .. autoattribute:: Partial.number
 
 .. autoclass:: PitchClassSegment
 

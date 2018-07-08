@@ -33,7 +33,6 @@ LibraryGM
    ~marcato
    ~margin_markup
    ~metronome_mark
-   ~minimum_duration
    ~mleaves
 
 .. autofunction:: global_fermata
@@ -57,7 +56,5 @@ LibraryGM
 .. autofunction:: margin_markup
 
 .. autofunction:: metronome_mark
-
-.. autofunction:: minimum_duration
 
 .. autofunction:: mleaves

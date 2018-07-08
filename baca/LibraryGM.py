@@ -6,7 +6,6 @@ from . import typings
 from .Command import Map
 from .Command import Suite
 from .GlobalFermataCommand import GlobalFermataCommand
-from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
 from .InstrumentChangeCommand import InstrumentChangeCommand
@@ -935,16 +934,6 @@ def metronome_mark(
         key=key,
         redundant=redundant,
         selector=selector,
-        )
-
-def minimum_duration(
-    duration: typing.Union[tuple, abjad.Duration],
-    ) -> HorizontalSpacingSpecifier:
-    """
-    Makes horizontal spacing specifier with ``duration`` minimum width.
-    """
-    return HorizontalSpacingSpecifier(
-        minimum_duration=duration,
         )
 
 # TODO: move to baca.Selection

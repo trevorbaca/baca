@@ -7,16 +7,13 @@ from . import markuplib
 from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
-from .BreakMeasureMap import BreakMeasureMap
 from .ClusterCommand import ClusterCommand
 from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .ContainerCommand import ContainerCommand
-from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .IndicatorCommand import IndicatorCommand
 from .NestingCommand import NestingCommand
-from .PageSpecifier import PageSpecifier
 from .PartAssignmentCommand import PartAssignmentCommand
 from .PitchCommand import PitchCommand
 from .RestAffixSpecifier import RestAffixSpecifier
@@ -25,7 +22,6 @@ from .Selection import Selection
 from .Selection import _select
 from .Sequence import Sequence
 from .StaffPositionCommand import StaffPositionCommand
-from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
 
 
@@ -137,36 +133,6 @@ def one_voice(
         indicators=[literal],
         selector=selector,
         )
-
-def page(
-    *systems: typing.Any,
-    number: int = None
-    ) -> PageSpecifier:
-    r"""
-    Makes page specifier.
-
-    ..  container:: example
-        
-        Raises exception when systems overlap at Y-offset:
-
-        >>> baca.page(
-        ...     [1, 60, (20, 20,)],
-        ...     [4, 60, (20, 20,)],
-        ...     )
-        Traceback (most recent call last):
-            ...
-        Exception: systems overlap at Y-offset 60.
-
-    """
-    if systems is None:
-        systems_ = None
-    else:
-        systems_ = []
-        prototype = (list, SystemSpecifier)
-        for system in systems:
-            assert isinstance(system, prototype), repr(system)
-            systems_.append(system)
-    return PageSpecifier(number=number, systems=systems_)
 
 def parts(
     part_assignment: abjad.PartAssignment,
@@ -849,84 +815,6 @@ def rmleaves(count: int) -> abjad.Expression:
     selector = _select().leaves().group_by_measure()
     selector = selector[:count].flatten().rleak()
     return selector
-
-def scorewide_spacing(
-    path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
-    fallback_duration: typing.Tuple[int, int],
-    breaks: BreakMeasureMap = None,
-    fermata_measure_duration: typing.Tuple[int, int] = (1, 4),
-    ) -> HorizontalSpacingSpecifier:
-    r"""
-    Makes scorewide spacing.
-
-    :param path: path from which first measure number, measure count,
-        and fermata measure numbers metadata will be read;
-        triple may be passed directly for tests.
-
-    :param fallback_duration: spacing for measures without override.
-
-    :param breaks: break measure map giving beginning-of-line and
-        end-of-line measure numbers.
-
-    :param fermata_measure_duration: spacing for measures found in fermata
-        measure numbers path metadata.
-
-    ..  container:: example
-
-        >>> breaks = baca.breaks(
-        ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-        ...     )
-        >>> spacing = baca.scorewide_spacing(
-        ...     (95, 18, [105, 107]),
-        ...     breaks=breaks,
-        ...     fallback_duration=(1, 20),
-        ...     )
-
-        >>> spacing.bol_measure_numbers
-        [95, 103]
-
-        >>> spacing.eol_measure_numbers
-        [102, 112]
-
-        >>> spacing.fermata_measure_numbers
-        [105, 107]
-
-        >>> spacing.first_measure_number
-        95
-
-        >>> spacing.last_measure_number
-        112
-
-        >>> spacing.measure_count
-        18
-
-        >>> len(spacing.measures)
-        18
-
-    """
-    if isinstance(path, tuple):
-        assert len(path) == 3, repr(path)
-        first_measure_number, measure_count, fermata_measure_numbers = path
-    else:
-        path = abjad.Path(path)
-        first_measure_number, measure_count, fermata_measure_numbers = \
-            path.get_measure_profile_metadata()
-        first_measure_number = first_measure_number or 1
-    fallback_fraction = abjad.NonreducedFraction(fallback_duration)
-    measures = abjad.OrderedDict()
-    last_measure_number = first_measure_number + measure_count - 1
-    for n in range(first_measure_number, last_measure_number + 1):
-        measures[n] = fallback_fraction
-    specifier = HorizontalSpacingSpecifier(
-        breaks=breaks,
-        fermata_measure_duration=fermata_measure_duration,
-        fermata_measure_numbers=fermata_measure_numbers,
-        first_measure_number=first_measure_number,
-        measure_count=measure_count,
-        measures=measures,
-        )
-    specifier._forbid_segment_maker_adjustments = True
-    return specifier
 
 def short_fermata(
     *,
@@ -2381,19 +2269,4 @@ def stopped(
     return IndicatorCommand(
         indicators=[abjad.Articulation('stopped')],
         selector=selector,
-        )
-
-def system(
-    *distances: typing.Any,
-    measure: int = None,
-    y_offset: typings.Number = None
-    ) -> SystemSpecifier:
-    """
-    Makes system specifier.
-    """
-    distances_ = Sequence(distances).flatten()
-    return SystemSpecifier(
-        distances=distances_,
-        measure=measure,
-        y_offset=y_offset,
         )
