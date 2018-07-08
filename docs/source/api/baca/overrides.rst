@@ -16,6 +16,116 @@ overrides
 
    <hr/>
 
+.. rubric:: (4) Commands
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~OverrideCommand
+
+.. autoclass:: OverrideCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      after
+      attribute
+      blacklist
+      context
+      grob
+      value
+      whitelist
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: OverrideCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: OverrideCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: OverrideCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: OverrideCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: OverrideCommand.after
+
+   .. autoattribute:: OverrideCommand.attribute
+
+   .. autoattribute:: OverrideCommand.blacklist
+
+   .. autoattribute:: OverrideCommand.context
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.deactivate
+
+   .. autoattribute:: OverrideCommand.grob
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tags
+
+   .. autoattribute:: OverrideCommand.value
+
+   .. autoattribute:: OverrideCommand.whitelist
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: Functions
    :class: section-header
 
@@ -37,7 +147,6 @@ overrides
    ~dls_up
    ~dots_stencil_false
    ~dots_transparent
-   ~dynamic_down
    ~dynamic_shift
    ~dynamic_text_center
    ~dynamic_text_extra_offset
@@ -49,7 +158,6 @@ overrides
    ~dynamic_text_x_extent_zero
    ~dynamic_text_x_offset
    ~dynamic_text_y_offset
-   ~dynamic_up
    ~flag_stencil_false
    ~flag_transparent
    ~glissando_thickness
@@ -161,8 +269,6 @@ overrides
 
 .. autofunction:: dots_transparent
 
-.. autofunction:: dynamic_down
-
 .. autofunction:: dynamic_shift
 
 .. autofunction:: dynamic_text_center
@@ -184,8 +290,6 @@ overrides
 .. autofunction:: dynamic_text_x_offset
 
 .. autofunction:: dynamic_text_y_offset
-
-.. autofunction:: dynamic_up
 
 .. autofunction:: flag_stencil_false
 

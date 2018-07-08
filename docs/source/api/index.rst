@@ -76,7 +76,6 @@ Bača API
    ~baca.MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~baca.NestingCommand.NestingCommand
    ~baca.OctaveDisplacementCommand.OctaveDisplacementCommand
-   ~baca.OverrideCommand.OverrideCommand
    ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~baca.PitchCommand.PitchCommand
@@ -379,6 +378,8 @@ Bača API
    ~baca.LibraryAF.double_staccato
    ~baca.LibraryAF.down_arpeggio
    ~baca.LibraryAF.down_bow
+   ~baca.LibraryAF.dynamic_down
+   ~baca.LibraryAF.dynamic_up
    ~baca.LibraryAF.espressivo
    ~baca.LibraryAF.fermata
    ~baca.LibraryAF.finger_pressure_transition
@@ -804,6 +805,18 @@ Markup library.
 
    <hr/>
 
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.overrides.OverrideCommand
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: Functions
    :class: subsection-header
 
@@ -825,7 +838,6 @@ Markup library.
    ~baca.overrides.dls_up
    ~baca.overrides.dots_stencil_false
    ~baca.overrides.dots_transparent
-   ~baca.overrides.dynamic_down
    ~baca.overrides.dynamic_shift
    ~baca.overrides.dynamic_text_center
    ~baca.overrides.dynamic_text_extra_offset
@@ -837,7 +849,6 @@ Markup library.
    ~baca.overrides.dynamic_text_x_extent_zero
    ~baca.overrides.dynamic_text_x_offset
    ~baca.overrides.dynamic_text_y_offset
-   ~baca.overrides.dynamic_up
    ~baca.overrides.flag_stencil_false
    ~baca.overrides.flag_transparent
    ~baca.overrides.glissando_thickness

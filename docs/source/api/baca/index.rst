@@ -130,7 +130,6 @@ baca
    MicrotoneDeviationCommand
    NestingCommand
    OctaveDisplacementCommand
-   OverrideCommand
    PartAssignmentCommand
    PiecewiseIndicatorCommand
    PitchCommand
@@ -166,7 +165,6 @@ baca
    ~MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~NestingCommand.NestingCommand
    ~OctaveDisplacementCommand.OctaveDisplacementCommand
-   ~OverrideCommand.OverrideCommand
    ~PartAssignmentCommand.PartAssignmentCommand
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~PitchCommand.PitchCommand

@@ -58,6 +58,8 @@ LibraryAF
    ~double_staccato
    ~down_arpeggio
    ~down_bow
+   ~dynamic_down
+   ~dynamic_up
    ~espressivo
    ~fermata
    ~finger_pressure_transition
@@ -137,6 +139,10 @@ LibraryAF
 .. autofunction:: down_arpeggio
 
 .. autofunction:: down_bow
+
+.. autofunction:: dynamic_down
+
+.. autofunction:: dynamic_up
 
 .. autofunction:: espressivo
 
