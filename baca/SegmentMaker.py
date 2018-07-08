@@ -9,6 +9,7 @@ from . import commandlib
 from . import indicatorlib
 from . import library
 from . import markuplib
+from . import overridelib
 from . import pitchlib
 from . import rhythmlib
 from . import segmentlib
@@ -2918,7 +2919,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if measure_number is None:
                     continue
                 clef = wrapper.indicator
-                command = baca.clef_shift(clef, selector='baca.leaf(0)')
+                command = overridelib.clef_shift(clef, selector='baca.leaf(0)')
                 command.runtime = self._bundle_manifests()
                 command(leaf)
 

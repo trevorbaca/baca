@@ -565,7 +565,7 @@ def bar_extent_zero() -> commandlib.Suite:
     """
     Makes bar-extent zero suite.
     """
-    return library.suite(
+    return commandlib.suite(
         bar_extent(
             (0, 0),
             after=True,
@@ -1000,11 +1000,11 @@ def clef_shift(
         assert isinstance(clef, abjad.Clef)
         width = clef._to_width[clef.name]
         extra_offset_x = -width
-    command = library.suite(
+    command = commandlib.suite(
         clef_x_extent_false(),
         clef_extra_offset((extra_offset_x, 0)),
         )
-    library.tag(
+    commandlib.tag(
         abjad.tags.SHIFTED_CLEF,
         command,
         tag_measure_number=True,
@@ -1427,7 +1427,7 @@ def dynamic_shift(
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[dynamic.name]
     extra_offset_x = -width
-    return library.suite(
+    return commandlib.suite(
         dynamic_text_extra_offset(
             (extra_offset_x, 0),
             selector=selector,
@@ -1455,7 +1455,7 @@ def dynamic_text_center(
     command_2 = dynamic_text_x_extent_zero(
         selector=selector,
         )
-    return library.suite(
+    return commandlib.suite(
         command_1,
         command_2,
         )
@@ -1651,7 +1651,7 @@ def dynamic_text_left(
     command_2 = dynamic_text_x_extent_zero(
         selector=selector,
         )
-    return library.suite(
+    return commandlib.suite(
         command_1,
         command_2,
         )
@@ -1689,7 +1689,7 @@ def dynamic_text_right(
     command_2 = dynamic_text_x_extent_zero(
         selector=selector,
         )
-    return library.suite(
+    return commandlib.suite(
         command_1,
         command_2,
         )
@@ -1838,7 +1838,7 @@ def hairpin_start_shift(
     width = dynamic._to_width[dynamic.name]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
-    return library.suite(
+    return commandlib.suite(
         dynamic_text_extra_offset((extra_offset_x, 0)),
         dynamic_text_x_extent_zero(),
         hairpin_shorten_pair((hairpin_shorten_left, 0)),
@@ -6835,11 +6835,7 @@ def text_spanner_staff_padding(
         ...     baca.rests_around([2], [4]),
         ...     baca.text_spanner_staff_padding(6),
         ...     baca.text_script_staff_padding(6),
-        ...     baca.text_spanner(
-        ...         baca.markuplib.pont(),
-        ...         '=>',
-        ...         baca.markuplib.ord(),
-        ...         ),
+        ...     baca.text_spanner('pont. => ord.'),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
@@ -6864,19 +6860,8 @@ def text_spanner_staff_padding(
                             r8
                             c'16
                             - \abjad_dashed_line_with_arrow                                          %! PIC
-                            - \tweak bound-details.left.text \markup {                               %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \upright                                                     %! PIC
-                                            pont.                                                    %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.5                                                     %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \upright                                                             %! PIC
-                                    ord.                                                             %! PIC
-                                }                                                                    %! PIC
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
                             - \tweak bound-details.right.padding #0.5                                %! PIC
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                             \startTextSpan                                                           %! PIC
@@ -6930,9 +6915,7 @@ def text_spanner_staff_padding(
         ...         ),
         ...     baca.text_script_staff_padding(6),
         ...     baca.text_spanner(
-        ...         baca.markuplib.pont(),
-        ...         '=>',
-        ...         baca.markuplib.ord(),
+        ...        'pont. => ord.',
         ...         selector=baca.tuplets()[1:2].tleaves(),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -6970,19 +6953,8 @@ def text_spanner_staff_padding(
                             \override TextSpanner.staff-padding = #6                                 %! OC1
                             fs''16
                             - \abjad_dashed_line_with_arrow                                          %! PIC
-                            - \tweak bound-details.left.text \markup {                               %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \upright                                                     %! PIC
-                                            pont.                                                    %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.5                                                     %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \upright                                                             %! PIC
-                                    ord.                                                             %! PIC
-                                }                                                                    %! PIC
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
                             - \tweak bound-details.right.padding #0.5                                %! PIC
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
                             \startTextSpan                                                           %! PIC

@@ -164,7 +164,8 @@ def tenuto(
         )
 
 def text_spanner(
-    *items: typing.Iterable[typing.Union[str, abjad.Markup, None]],
+    items: typing.Union[str, typing.List],
+    *,
     bookend: typing.Union[bool, int] = -1,
     leak: bool = None,
     lilypond_id: int = None,
@@ -189,7 +190,7 @@ def text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.text_spanner('pont.', '=>', 'ord.'),
+        ...     baca.text_spanner('pont. => ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -307,7 +308,7 @@ def text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.text_spanner('pont.', '=|', 'ord.'),
+        ...     baca.text_spanner('pont. =| ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -440,7 +441,7 @@ def text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.text_spanner('pont.', '->', 'ord.'),
+        ...     baca.text_spanner('pont. -> ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -558,7 +559,7 @@ def text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.text_spanner('pont.', '-|', 'ord.'),
+        ...     baca.text_spanner('pont. -| ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -691,7 +692,7 @@ def text_spanner(
 
         >>> maker(
         ...     'MusicVoice',
-        ...     baca.text_spanner('pont.', 'ord.'),
+        ...     baca.text_spanner('pont. || ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.text_spanner_staff_padding(4.5),
@@ -813,8 +814,7 @@ def text_spanner(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A',
-        ...         'B',
+        ...         'A || B',
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
@@ -950,10 +950,7 @@ def text_spanner(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A',
-        ...         '->',
-        ...         'B',
-        ...         '->',
+        ...         'A -> B ->',
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
@@ -1089,8 +1086,7 @@ def text_spanner(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A',
-        ...         'B',
+        ...         'A || B',
         ...         bookend=True,
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
@@ -1239,10 +1235,7 @@ def text_spanner(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A',
-        ...         '->',
-        ...         'B',
-        ...         '->',
+        ...         'A -> B ->',
         ...         bookend=True,
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
@@ -1393,10 +1386,7 @@ def text_spanner(
         ...     'MusicVoice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A',
-        ...         '-|',
-        ...         'B',
-        ...         '-|',
+        ...         'A -| B -|',
         ...         piece_selector=baca.group_by_measures([1]),
         ...     ),
         ...     baca.make_even_divisions(),
@@ -1539,9 +1529,25 @@ def text_spanner(
     shape_to_style = {
         '=>': 'dashed_line_with_arrow',
         '=|': 'dashed_line_with_hook',
+        '||': 'invisible_line',
         '->': 'solid_line_with_arrow',
         '-|': 'solid_line_with_hook',
         }
+    if isinstance(items, str):
+        items_, current_item = [], []
+        for word in items.split():
+            if word in shape_to_style:
+                if current_item:
+                    item_ = ' '.join(current_item)
+                    items_.append(item_)
+                    current_item = []
+                items_.append(word)
+            else:
+                current_item.append(word)
+        if current_item:
+            item_ = ' '.join(current_item)
+            items_.append(item_)
+        items = items_
     bundles = []
     if len(items) == 1:
         raise NotImplementedError('implement lone item')
