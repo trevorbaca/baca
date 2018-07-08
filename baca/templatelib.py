@@ -1,3 +1,6 @@
+"""
+Score template library.
+"""
 import abjad
 import roman # type: ignore
 import typing

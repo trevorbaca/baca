@@ -1,3 +1,6 @@
+"""
+Override library.
+"""
 import abjad
 import typing
 from . import library

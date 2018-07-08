@@ -1,3 +1,6 @@
+"""
+Division library.
+"""
 import abjad
 import collections
 import inspect
@@ -546,7 +549,6 @@ class Division(abjad.NonreducedFraction):
             )
 
     def _to_timespan(self):
-        import abjad
         if self.start_offset is None:
             raise Exception(f'division must have start offset: {self!r}.')
         stop_offset = self.start_offset + self

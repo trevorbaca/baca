@@ -1,5 +1,5 @@
 """
-Dynamics library.
+Dynamic library.
 """
 import abjad
 import baca

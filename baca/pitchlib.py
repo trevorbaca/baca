@@ -1,3 +1,6 @@
+"""
+Pitch library.
+"""
 import abjad
 import collections as collections_module
 import inspect

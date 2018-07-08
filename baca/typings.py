@@ -1,3 +1,6 @@
+"""
+Typing library.
+"""
 import abjad
 import typing
 from abjadext import rmakers

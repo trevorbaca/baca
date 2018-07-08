@@ -4,6 +4,7 @@ import collections
 import copy
 import inspect
 import itertools
+from .Expression import Expression
 
 
 class Sequence(abjad.Sequence):
@@ -179,7 +180,6 @@ class Sequence(abjad.Sequence):
 
     @staticmethod
     def _make_accumulate_markup(markup, operands=None, count=None):
-        import abjad
         if count is None:
             count = abjad.Exact
         markup_list = abjad.MarkupList()
@@ -231,8 +231,7 @@ class Sequence(abjad.Sequence):
         map_operand=None,
         subclass_hook=None,
         ):
-        import baca
-        callback = baca.Expression._frame_to_callback(
+        callback = Expression._frame_to_callback(
             frame,
             evaluation_template=evaluation_template,
             map_operand=map_operand,

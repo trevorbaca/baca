@@ -1,3 +1,6 @@
+"""
+Register library.
+"""
 import abjad
 import copy
 import typing

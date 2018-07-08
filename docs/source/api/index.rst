@@ -445,6 +445,8 @@ Bača API
 .. rubric:: :ref:`baca.divisionlib <baca--divisionlib>`
    :class: section-header
 
+Division library.
+
 .. raw:: html
 
    <hr/>
@@ -498,7 +500,7 @@ Bača API
 .. rubric:: :ref:`baca.dynamiclib <baca--dynamiclib>`
    :class: section-header
 
-Dynamics library.
+Dynamic library.
 
 .. raw:: html
 
@@ -777,6 +779,8 @@ Markup library.
 .. rubric:: :ref:`baca.overridelib <baca--overridelib>`
    :class: section-header
 
+Override library.
+
 .. raw:: html
 
    <hr/>
@@ -915,6 +919,8 @@ Markup library.
 .. rubric:: :ref:`baca.pitcharraylib <baca--pitcharraylib>`
    :class: section-header
 
+Pitch array library.
+
 .. raw:: html
 
    <hr/>
@@ -937,6 +943,8 @@ Markup library.
 
 .. rubric:: :ref:`baca.pitchlib <baca--pitchlib>`
    :class: section-header
+
+Pitch library.
 
 .. raw:: html
 
@@ -978,6 +986,8 @@ Markup library.
 
 .. rubric:: :ref:`baca.registerlib <baca--registerlib>`
    :class: section-header
+
+Register library.
 
 .. raw:: html
 
@@ -1027,6 +1037,8 @@ Markup library.
 
 .. rubric:: :ref:`baca.rhythmlib <baca--rhythmlib>`
    :class: section-header
+
+Rhythm library.
 
 .. raw:: html
 
@@ -1108,6 +1120,8 @@ Markup library.
 .. rubric:: :ref:`baca.settinglib <baca--settinglib>`
    :class: section-header
 
+Setting library.
+
 .. raw:: html
 
    <hr/>
@@ -1126,6 +1140,8 @@ Markup library.
 
 .. rubric:: :ref:`baca.templatelib <baca--templatelib>`
    :class: section-header
+
+Score template library.
 
 .. raw:: html
 

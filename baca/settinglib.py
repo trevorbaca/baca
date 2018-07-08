@@ -1,3 +1,6 @@
+"""
+Setting library.
+"""
 import abjad
 from .Command import Command
 

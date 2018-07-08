@@ -1,5 +1,6 @@
 import abjad
 import fractions
+import numbers
 
 
 class Interpolator(abjad.AbjadObject):
@@ -75,7 +76,6 @@ class Interpolator(abjad.AbjadObject):
 
         Returns list of numbers.
         """
-        import numbers
         assert isinstance(start, numbers.Number), repr(start)
         assert isinstance(stop, numbers.Number), repr(stop)
         assert isinstance(count, int), repr(count)

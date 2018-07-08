@@ -1,3 +1,6 @@
+"""
+Pitch array library.
+"""
 import abjad
 import copy
 import numbers
@@ -265,7 +268,6 @@ class PitchArray(abjad.AbjadObject):
 
     @staticmethod
     def _get_leaf_offsets(argment):
-        import abjad
         offsets = []
         for leaf in abjad.iterate(argment).leaves():
             start_offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -3013,7 +3015,6 @@ class PitchArrayRow(abjad.AbjadObject):
 
         Returns measure.
         """
-        import abjad
         pair = (self.width, cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
         measure = abjad.Measure(time_signature, [])

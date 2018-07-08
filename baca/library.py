@@ -8,7 +8,6 @@ from . import markuplib
 from .Command import Command
 from .Command import Map
 from .Command import Suite
-#from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
 from .MeasureWrapper import MeasureWrapper

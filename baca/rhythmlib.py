@@ -1,3 +1,6 @@
+"""
+Rhythm library.
+"""
 import abjad
 import collections
 import inspect
