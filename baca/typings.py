@@ -1,31 +1,6 @@
 import abjad
 import typing
 from abjadext import rmakers
-from .DivisionMaker import DivisionMaker
-from .FlattenDivisionCallback import FlattenDivisionCallback
-from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
-from .PartitionDivisionCallback import PartitionDivisionCallback
-from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback
-from .SplitByRoundedRatiosDivisionCallback import \
-    SplitByRoundedRatiosDivisionCallback
-
-division_maker_type = (
-    DivisionMaker,
-    FlattenDivisionCallback,
-    FuseByCountsDivisionCallback,
-    PartitionDivisionCallback,
-    SplitByDurationsDivisionCallback,
-    SplitByRoundedRatiosDivisionCallback,
-    )
-
-DivisionMakerTyping = typing.Union[
-    DivisionMaker,
-    FlattenDivisionCallback,
-    FuseByCountsDivisionCallback,
-    PartitionDivisionCallback,
-    SplitByDurationsDivisionCallback,
-    SplitByRoundedRatiosDivisionCallback,
-    ]
 
 IntegerPair = typing.Tuple[int, int]
 

@@ -559,6 +559,23 @@ def bar_extent(
         value=pair,
         )
 
+def bar_extent_zero() -> Suite:
+    """
+    Makes bar-extent zero suite.
+    """
+    return library.suite(
+        bar_extent(
+            (0, 0),
+            after=True,
+            selector='baca.leaves()',
+            ),
+        bar_extent(
+            (0, 0),
+            after=True,
+            selector='baca.leaf(-1)',
+            ),
+        )
+
 def bar_line_transparent(
     *,
     selector: typings.Selector = 'baca.leaves()',
@@ -964,6 +981,33 @@ def clef_extra_offset(
         selector=selector,
         value=pair,
         )
+
+def clef_shift(
+    clef: typing.Union[str, abjad.Clef],
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> Suite:
+    """
+    Shifts clef to left by width of clef.
+    """
+    if isinstance(clef, str):
+        clef = abjad.Clef(clef)
+    if isinstance(clef, (int, float)):
+        extra_offset_x = clef
+    else:
+        assert isinstance(clef, abjad.Clef)
+        width = clef._to_width[clef.name]
+        extra_offset_x = -width
+    command = library.suite(
+        clef_x_extent_false(),
+        clef_extra_offset((extra_offset_x, 0)),
+        )
+    library.tag(
+        abjad.tags.SHIFTED_CLEF,
+        command,
+        tag_measure_number=True,
+        )
+    return command
 
 def clef_x_extent_false(
     *,

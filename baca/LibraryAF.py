@@ -3,7 +3,6 @@ import baca
 import typing
 from abjadext import rmakers
 from . import library
-from . import overrides
 from . import typings
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
@@ -18,7 +17,6 @@ from .Command import Map
 from .Command import Suite
 from .ContainerCommand import ContainerCommand
 from .DiatonicClusterCommand import DiatonicClusterCommand
-from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
@@ -1108,23 +1106,6 @@ def bar_extent_persistent(
     return IndicatorCommand(
         indicators=[override],
         selector=selector,
-        )
-
-def bar_extent_zero() -> Suite:
-    """
-    Makes bar-extent zero suite.
-    """
-    return library.suite(
-        overrides.bar_extent(
-            (0, 0),
-            after=True,
-            selector='baca.leaves()',
-            ),
-        overrides.bar_extent(
-            (0, 0),
-            after=True,
-            selector='baca.leaf(-1)',
-            ),
         )
 
 def bass_to_octave(
@@ -2724,33 +2705,6 @@ def clef(
         selector=selector,
         )
 
-def clef_shift(
-    clef: typing.Union[str, abjad.Clef],
-    *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    ) -> Suite:
-    """
-    Shifts clef to left by width of clef.
-    """
-    if isinstance(clef, str):
-        clef = abjad.Clef(clef)
-    if isinstance(clef, (int, float)):
-        extra_offset_x = clef
-    else:
-        assert isinstance(clef, abjad.Clef)
-        width = clef._to_width[clef.name]
-        extra_offset_x = -width
-    command = library.suite(
-        overrides.clef_x_extent_false(),
-        overrides.clef_extra_offset((extra_offset_x, 0)),
-        )
-    library.tag(
-        abjad.tags.SHIFTED_CLEF,
-        command,
-        tag_measure_number=True,
-        )
-    return command
-
 def clusters(
     widths: typing.List[int],
     *,
@@ -3085,18 +3039,6 @@ def color_fingerings(
     Adds color fingerings.
     """
     return ColorFingeringCommand(numbers=numbers, selector=selector)
-
-def compound_quarter_divisions() -> DivisionSequenceExpression:
-    """
-    Makes compound quarter divisions.
-    """
-    expression = DivisionSequenceExpression()
-    expression = expression.split_by_durations(
-        compound_meter_multiplier=abjad.Multiplier((3, 2)),
-        durations=[abjad.Duration(1, 4)],
-        )
-    expression = expression.flatten(depth=-1)
-    return expression
 
 def container(
     identifier: str = None,
@@ -5269,66 +5211,3 @@ def force_accidental(
         forced=True,
         selector=selector,
         )
-
-def fuse_compound_quarter_divisions(
-    counts: typing.List[int],
-    ) -> DivisionSequenceExpression:
-    r"""
-    Fuses compound quarter divisions.
-
-    ..  container:: example
-
-        >>> expression = baca.fuse_compound_quarter_divisions([1])
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-
-        >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((1, 8))
-        Division((1, 4))
-        Division((1, 8))
-        Division((1, 4))
-        Division((1, 8))
-
-    ..  container:: example
-
-        >>> expression = baca.fuse_compound_quarter_divisions([2])
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((2, 4))
-        Division((1, 4))
-
-        >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-        ...     item
-        ...
-        Division((3, 8))
-        Division((3, 8))
-        Division((3, 8))
-
-    """
-    if not all(isinstance(_, int) for _ in counts):
-        raise Exception(counts)
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
-    expression = expression.split_by_durations(
-        compound_meter_multiplier=abjad.Multiplier((3, 2)),
-        durations=[abjad.Duration(1, 4)],
-        )
-    expression = expression.flatten(depth=-1)
-    expression = expression.partition_by_counts(
-        counts=counts,
-        cyclic=True,
-        overhang=True,
-        )
-    expression = expression.map(baca.sequence().sum())
-    expression = expression.flatten(depth=-1)
-    return expression

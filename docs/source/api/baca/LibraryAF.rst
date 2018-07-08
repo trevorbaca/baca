@@ -33,7 +33,6 @@ LibraryAF
    ~articulation
    ~articulations
    ~bar_extent_persistent
-   ~bar_extent_zero
    ~bass_to_octave
    ~bcps
    ~beam
@@ -44,12 +43,10 @@ LibraryAF
    ~breathe
    ~center_to_octave
    ~clef
-   ~clef_shift
    ~clusters
    ~coat
    ~color
    ~color_fingerings
-   ~compound_quarter_divisions
    ~container
    ~cross_staff
    ~deviation
@@ -66,7 +63,6 @@ LibraryAF
    ~flageolet
    ~flags
    ~force_accidental
-   ~fuse_compound_quarter_divisions
 
 .. autofunction:: accent
 
@@ -90,8 +86,6 @@ LibraryAF
 
 .. autofunction:: bar_extent_persistent
 
-.. autofunction:: bar_extent_zero
-
 .. autofunction:: bass_to_octave
 
 .. autofunction:: bcps
@@ -112,8 +106,6 @@ LibraryAF
 
 .. autofunction:: clef
 
-.. autofunction:: clef_shift
-
 .. autofunction:: clusters
 
 .. autofunction:: coat
@@ -121,8 +113,6 @@ LibraryAF
 .. autofunction:: color
 
 .. autofunction:: color_fingerings
-
-.. autofunction:: compound_quarter_divisions
 
 .. autofunction:: container
 
@@ -155,5 +145,3 @@ LibraryAF
 .. autofunction:: flags
 
 .. autofunction:: force_accidental
-
-.. autofunction:: fuse_compound_quarter_divisions

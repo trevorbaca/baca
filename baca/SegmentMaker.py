@@ -7,6 +7,7 @@ import traceback
 import typing
 from abjadext import rmakers
 from . import library
+from . import rhythmlib
 from . import typings
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
@@ -16,10 +17,8 @@ from .CommandWrapper import CommandWrapper
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
-from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
-from .SkipRhythmMaker import SkipRhythmMaker
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 
@@ -1637,7 +1636,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for wrapper in self.wrappers:
             assert isinstance(wrapper, CommandWrapper)
             assert isinstance(wrapper.command, (Command, Map, Suite))
-            if isinstance(wrapper.command, RhythmCommand):
+            if isinstance(wrapper.command, rhythmlib.RhythmCommand):
                 continue
             command_count += 1
             selection = self._scope_to_leaf_selection(wrapper)
@@ -1673,7 +1672,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
-                    maker = SkipRhythmMaker()
+                    maker = rhythmlib.SkipRhythmMaker()
                 else:
                     mask = rmakers.silence(
                         [0],
@@ -3205,7 +3204,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _voice_to_rhythm_wrappers(self, voice):
         wrappers = []
         for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, RhythmCommand):
+            if not isinstance(wrapper.command, rhythmlib.RhythmCommand):
                 continue
             if wrapper.scope.voice_name == voice.name:
                 wrappers.append(wrapper)

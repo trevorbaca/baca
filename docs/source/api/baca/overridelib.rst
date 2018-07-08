@@ -1,16 +1,16 @@
-.. _baca--overrides:
+.. _baca--overridelib:
 
-overrides
-=========
+overridelib
+===========
 
-.. automodule:: baca.overrides
+.. automodule:: baca.overridelib
 
-.. currentmodule:: baca.overrides
+.. currentmodule:: baca.overridelib
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.overrides
+      :lineage: baca.overridelib
 
 .. raw:: html
 
@@ -136,11 +136,13 @@ overrides
    ~accidental_transparent
    ~accidental_x_extent_false
    ~bar_extent
+   ~bar_extent_zero
    ~bar_line_transparent
    ~beam_positions
    ~beam_stencil_false
    ~beam_transparent
    ~clef_extra_offset
+   ~clef_shift
    ~clef_x_extent_false
    ~dls_padding
    ~dls_staff_padding
@@ -247,6 +249,8 @@ overrides
 
 .. autofunction:: bar_extent
 
+.. autofunction:: bar_extent_zero
+
 .. autofunction:: bar_line_transparent
 
 .. autofunction:: beam_positions
@@ -256,6 +260,8 @@ overrides
 .. autofunction:: beam_transparent
 
 .. autofunction:: clef_extra_offset
+
+.. autofunction:: clef_shift
 
 .. autofunction:: clef_x_extent_false
 

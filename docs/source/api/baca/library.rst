@@ -37,7 +37,6 @@ library
    ~pick
    ~pitches
    ~scope
-   ~split_by_durations
    ~suite
    ~tag
    ~timeline
@@ -71,8 +70,6 @@ library
 .. autofunction:: pitches
 
 .. autofunction:: scope
-
-.. autofunction:: split_by_durations
 
 .. autofunction:: suite
 

@@ -42,7 +42,6 @@ LibraryNS
    ~rests_before
    ~resume
    ~resume_after
-   ~rhythm
    ~rmleaves
    ~scorewide_spacing
    ~short_fermata
@@ -60,7 +59,6 @@ LibraryNS
    ~stem_tremolo
    ~stop_trill
    ~stopped
-   ~strict_quarter_divisions
    ~sustain_pedal
    ~system
 
@@ -104,8 +102,6 @@ LibraryNS
 
 .. autofunction:: resume_after
 
-.. autofunction:: rhythm
-
 .. autofunction:: rmleaves
 
 .. autofunction:: scorewide_spacing
@@ -139,8 +135,6 @@ LibraryNS
 .. autofunction:: stop_trill
 
 .. autofunction:: stopped
-
-.. autofunction:: strict_quarter_divisions
 
 .. autofunction:: sustain_pedal
 

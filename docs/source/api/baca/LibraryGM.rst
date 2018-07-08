@@ -31,18 +31,6 @@ LibraryGM
    ~laissez_vibrer
    ~long_fermata
    ~loop
-   ~make_even_divisions
-   ~make_fused_tuplet_monads
-   ~make_multimeasure_rests
-   ~make_notes
-   ~make_repeat_tied_notes
-   ~make_repeated_duration_notes
-   ~make_rests
-   ~make_rhythm
-   ~make_single_attack
-   ~make_skips
-   ~make_tied_notes
-   ~make_tied_repeated_durations
    ~marcato
    ~margin_markup
    ~metronome_mark
@@ -66,30 +54,6 @@ LibraryGM
 .. autofunction:: long_fermata
 
 .. autofunction:: loop
-
-.. autofunction:: make_even_divisions
-
-.. autofunction:: make_fused_tuplet_monads
-
-.. autofunction:: make_multimeasure_rests
-
-.. autofunction:: make_notes
-
-.. autofunction:: make_repeat_tied_notes
-
-.. autofunction:: make_repeated_duration_notes
-
-.. autofunction:: make_rests
-
-.. autofunction:: make_rhythm
-
-.. autofunction:: make_single_attack
-
-.. autofunction:: make_skips
-
-.. autofunction:: make_tied_notes
-
-.. autofunction:: make_tied_repeated_durations
 
 .. autofunction:: marcato
 

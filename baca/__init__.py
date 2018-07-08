@@ -1,7 +1,9 @@
 import abjad
 from .library import *
-from .dynamics import *
-from .overrides import *
+from .divisionlib import *
+from .dynamiclib import *
+from .overridelib import *
+from .rhythmlib import *
 from . import markups
 
 # classes
@@ -29,15 +31,9 @@ from .Counter import Counter
 from .Cursor import Cursor
 from .DesignMaker import DesignMaker
 from .DiatonicClusterCommand import DiatonicClusterCommand
-from .Division import Division
-from .DivisionMaker import DivisionMaker
-from .DivisionSequence import DivisionSequence
-from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorBundle import IndicatorBundle
 from .Expression import Expression
 from .ExpressionGallery import ExpressionGallery
-from .FlattenDivisionCallback import FlattenDivisionCallback
-from .FuseByCountsDivisionCallback import FuseByCountsDivisionCallback
 from .GlobalFermataCommand import GlobalFermataCommand
 from .HarmonicSeries import HarmonicSeries
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
@@ -64,7 +60,6 @@ from .PaddedTuple import PaddedTuple
 from .PageSpecifier import PageSpecifier
 from .PartAssignmentCommand import PartAssignmentCommand
 from .Partial import Partial
-from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .PitchArray import PitchArray
@@ -75,8 +70,6 @@ from .PitchArrayRow import PitchArrayRow
 from .PitchClassSegment import PitchClassSegment
 from .PitchClassSet import PitchClassSet
 from .PitchCommand import PitchCommand
-from .PitchFirstRhythmCommand import PitchFirstRhythmCommand
-from .PitchFirstRhythmMaker import PitchFirstRhythmMaker
 from .PitchSegment import PitchSegment
 from .PitchSet import PitchSet
 from .PitchSpecifier import PitchSpecifier
@@ -88,7 +81,6 @@ from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .Registration import Registration
 from .RegistrationComponent import RegistrationComponent
 from .RestAffixSpecifier import RestAffixSpecifier
-from .RhythmCommand import RhythmCommand
 from .Ritardando import Ritardando
 from .SchemeManifest import SchemeManifest
 from .Scope import Scope
@@ -98,13 +90,9 @@ from .Selection import Selection
 from .Sequence import Sequence
 from .SettingCommand import SettingCommand
 from .SingleStaffScoreTemplate import SingleStaffScoreTemplate
-from .SkipRhythmMaker import SkipRhythmMaker
 from .SpacingIndication import SpacingIndication
 from .SpacingSection import SpacingSection
 from .SpannerCommand import SpannerCommand
-from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback
-from .SplitByRoundedRatiosDivisionCallback import \
-    SplitByRoundedRatiosDivisionCallback
 from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
 from .StaffPositionInterpolationCommand import \

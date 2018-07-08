@@ -7,7 +7,7 @@ from . import typings
 from .Command import Command
 from .Command import Map
 from .Command import Suite
-from .DivisionSequenceExpression import DivisionSequenceExpression
+#from .DivisionSequenceExpression import DivisionSequenceExpression
 from .IndicatorCommand import IndicatorCommand
 from .LBSD import LBSD
 from .Markup import Markup
@@ -791,50 +791,6 @@ def scope(
         stages=stages,
         voice_name=voice_name,
         )
-
-def split_by_durations(
-    durations: typing.Iterable,
-    remainder: abjad.HorizontalAlignment = abjad.Right,
-    ) -> DivisionSequenceExpression:
-    r"""
-    Splits divisions by ``durations``.
-
-    ..  container:: example
-
-        >>> expression = baca.split_by_durations([(3, 8)])
-
-        >>> for item in expression([(2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((3, 8))
-        Division((1, 8))
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((3, 8))
-        Division((3, 8))
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((3, 8))
-        Division((3, 8))
-        Division((2, 8))
-
-    """
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
-    expression = expression.flatten(depth=-1)
-    expression = expression.sum()
-    expression = expression.division_sequence()
-    expression = expression.split_by_durations(
-        cyclic=True,
-        durations=durations,
-        remainder=remainder,
-        )
-    expression = expression.flatten(depth=-1)
-    return expression
 
 def suite(
     *commands: Command,

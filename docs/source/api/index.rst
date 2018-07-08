@@ -27,7 +27,6 @@ Bača API
    ~baca.MusicContribution.MusicContribution
    ~baca.MusicMaker.MusicMaker
    ~baca.PersistentIndicatorTests.PersistentIndicatorTests
-   ~baca.PitchFirstRhythmMaker.PitchFirstRhythmMaker
    ~baca.SegmentMaker.SegmentMaker
 
 .. raw:: html
@@ -79,11 +78,9 @@ Bača API
    ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~baca.PitchCommand.PitchCommand
-   ~baca.PitchFirstRhythmCommand.PitchFirstRhythmCommand
    ~baca.RegisterCommand.RegisterCommand
    ~baca.RegisterInterpolationCommand.RegisterInterpolationCommand
    ~baca.RegisterToOctaveCommand.RegisterToOctaveCommand
-   ~baca.RhythmCommand.RhythmCommand
    ~baca.SettingCommand.SettingCommand
    ~baca.SpannerCommand.SpannerCommand
    ~baca.StaffPositionCommand.StaffPositionCommand
@@ -109,7 +106,6 @@ Bača API
    ~baca.Counter.Counter
    ~baca.Cursor.Cursor
    ~baca.DesignMaker.DesignMaker
-   ~baca.Division.Division
    ~baca.Expression.Expression
    ~baca.ExpressionGallery.ExpressionGallery
    ~baca.HarmonicSeries.HarmonicSeries
@@ -156,25 +152,6 @@ Bača API
    ~baca.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate
    ~baca.WellformednessManager.WellformednessManager
    ~baca.ZaggedPitchClassMaker.ZaggedPitchClassMaker
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (6) Divisions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.DivisionMaker.DivisionMaker
-   ~baca.DivisionSequence.DivisionSequence
-   ~baca.DivisionSequenceExpression.DivisionSequenceExpression
-   ~baca.FlattenDivisionCallback.FlattenDivisionCallback
-   ~baca.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback
-   ~baca.PartitionDivisionCallback.PartitionDivisionCallback
-   ~baca.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
-   ~baca.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
 
 .. raw:: html
 
@@ -285,18 +262,6 @@ Bača API
 
    <hr/>
 
-.. rubric:: Rhythm-makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.SkipRhythmMaker.SkipRhythmMaker
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.Command <baca--Command>`
    :class: section-header
 
@@ -353,7 +318,6 @@ Bača API
    ~baca.LibraryAF.articulation
    ~baca.LibraryAF.articulations
    ~baca.LibraryAF.bar_extent_persistent
-   ~baca.LibraryAF.bar_extent_zero
    ~baca.LibraryAF.bass_to_octave
    ~baca.LibraryAF.bcps
    ~baca.LibraryAF.beam
@@ -364,12 +328,10 @@ Bača API
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.center_to_octave
    ~baca.LibraryAF.clef
-   ~baca.LibraryAF.clef_shift
    ~baca.LibraryAF.clusters
    ~baca.LibraryAF.coat
    ~baca.LibraryAF.color
    ~baca.LibraryAF.color_fingerings
-   ~baca.LibraryAF.compound_quarter_divisions
    ~baca.LibraryAF.container
    ~baca.LibraryAF.cross_staff
    ~baca.LibraryAF.deviation
@@ -386,7 +348,6 @@ Bača API
    ~baca.LibraryAF.flageolet
    ~baca.LibraryAF.flags
    ~baca.LibraryAF.force_accidental
-   ~baca.LibraryAF.fuse_compound_quarter_divisions
 
 .. raw:: html
 
@@ -414,18 +375,6 @@ Bača API
    ~baca.LibraryGM.laissez_vibrer
    ~baca.LibraryGM.long_fermata
    ~baca.LibraryGM.loop
-   ~baca.LibraryGM.make_even_divisions
-   ~baca.LibraryGM.make_fused_tuplet_monads
-   ~baca.LibraryGM.make_multimeasure_rests
-   ~baca.LibraryGM.make_notes
-   ~baca.LibraryGM.make_repeat_tied_notes
-   ~baca.LibraryGM.make_repeated_duration_notes
-   ~baca.LibraryGM.make_rests
-   ~baca.LibraryGM.make_rhythm
-   ~baca.LibraryGM.make_single_attack
-   ~baca.LibraryGM.make_skips
-   ~baca.LibraryGM.make_tied_notes
-   ~baca.LibraryGM.make_tied_repeated_durations
    ~baca.LibraryGM.marcato
    ~baca.LibraryGM.margin_markup
    ~baca.LibraryGM.metronome_mark
@@ -469,7 +418,6 @@ Bača API
    ~baca.LibraryNS.rests_before
    ~baca.LibraryNS.resume
    ~baca.LibraryNS.resume_after
-   ~baca.LibraryNS.rhythm
    ~baca.LibraryNS.rmleaves
    ~baca.LibraryNS.scorewide_spacing
    ~baca.LibraryNS.short_fermata
@@ -487,7 +435,6 @@ Bača API
    ~baca.LibraryNS.stem_tremolo
    ~baca.LibraryNS.stop_trill
    ~baca.LibraryNS.stopped
-   ~baca.LibraryNS.strict_quarter_divisions
    ~baca.LibraryNS.sustain_pedal
    ~baca.LibraryNS.system
 
@@ -529,7 +476,60 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.dynamics <baca--dynamics>`
+.. rubric:: :ref:`baca.divisionlib <baca--divisionlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.divisionlib.Division
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (6) Divisions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.divisionlib.DivisionMaker
+   ~baca.divisionlib.DivisionSequence
+   ~baca.divisionlib.DivisionSequenceExpression
+   ~baca.divisionlib.FlattenDivisionCallback
+   ~baca.divisionlib.FuseByCountsDivisionCallback
+   ~baca.divisionlib.PartitionDivisionCallback
+   ~baca.divisionlib.SplitByDurationsDivisionCallback
+   ~baca.divisionlib.SplitByRoundedRatiosDivisionCallback
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.divisionlib.compound_quarter_divisions
+   ~baca.divisionlib.fuse_compound_quarter_divisions
+   ~baca.divisionlib.split_by_durations
+   ~baca.divisionlib.strict_quarter_divisions
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.dynamiclib <baca--dynamiclib>`
    :class: section-header
 
 Dynamics library.
@@ -544,10 +544,10 @@ Dynamics library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.dynamics.dynamic
-   ~baca.dynamics.hairpin
-   ~baca.dynamics.make_dynamic
-   ~baca.dynamics.parse_hairpin_descriptor
+   ~baca.dynamiclib.dynamic
+   ~baca.dynamiclib.hairpin
+   ~baca.dynamiclib.make_dynamic
+   ~baca.dynamiclib.parse_hairpin_descriptor
 
 .. raw:: html
 
@@ -583,7 +583,6 @@ Function library.
    ~baca.library.pick
    ~baca.library.pitches
    ~baca.library.scope
-   ~baca.library.split_by_durations
    ~baca.library.suite
    ~baca.library.tag
    ~baca.library.timeline
@@ -798,7 +797,7 @@ Markup library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.overrides <baca--overrides>`
+.. rubric:: :ref:`baca.overridelib <baca--overridelib>`
    :class: section-header
 
 .. raw:: html
@@ -811,7 +810,7 @@ Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.overrides.OverrideCommand
+   ~baca.overridelib.OverrideCommand
 
 .. raw:: html
 
@@ -823,109 +822,179 @@ Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.overrides.accidental_stencil_false
-   ~baca.overrides.accidental_transparent
-   ~baca.overrides.accidental_x_extent_false
-   ~baca.overrides.bar_extent
-   ~baca.overrides.bar_line_transparent
-   ~baca.overrides.beam_positions
-   ~baca.overrides.beam_stencil_false
-   ~baca.overrides.beam_transparent
-   ~baca.overrides.clef_extra_offset
-   ~baca.overrides.clef_x_extent_false
-   ~baca.overrides.dls_padding
-   ~baca.overrides.dls_staff_padding
-   ~baca.overrides.dls_up
-   ~baca.overrides.dots_stencil_false
-   ~baca.overrides.dots_transparent
-   ~baca.overrides.dynamic_shift
-   ~baca.overrides.dynamic_text_center
-   ~baca.overrides.dynamic_text_extra_offset
-   ~baca.overrides.dynamic_text_left
-   ~baca.overrides.dynamic_text_parent_alignment_x
-   ~baca.overrides.dynamic_text_right
-   ~baca.overrides.dynamic_text_stencil_false
-   ~baca.overrides.dynamic_text_transparent
-   ~baca.overrides.dynamic_text_x_extent_zero
-   ~baca.overrides.dynamic_text_x_offset
-   ~baca.overrides.dynamic_text_y_offset
-   ~baca.overrides.flag_stencil_false
-   ~baca.overrides.flag_transparent
-   ~baca.overrides.glissando_thickness
-   ~baca.overrides.hairpin_shorten_pair
-   ~baca.overrides.hairpin_start_shift
-   ~baca.overrides.hairpin_stencil_false
-   ~baca.overrides.hairpin_transparent
-   ~baca.overrides.mmrest_text_color
-   ~baca.overrides.mmrest_text_extra_offset
-   ~baca.overrides.mmrest_text_padding
-   ~baca.overrides.mmrest_text_parent_center
-   ~baca.overrides.mmrest_text_staff_padding
-   ~baca.overrides.no_ledgers
-   ~baca.overrides.note_column_shift
-   ~baca.overrides.note_head_color
-   ~baca.overrides.note_head_stencil_false
-   ~baca.overrides.note_head_style_cross
-   ~baca.overrides.note_head_style_harmonic
-   ~baca.overrides.note_head_transparent
-   ~baca.overrides.ottava_bracket_staff_padding
-   ~baca.overrides.rehearsal_mark_extra_offset
-   ~baca.overrides.rehearsal_mark_y_offset
-   ~baca.overrides.repeat_tie_down
-   ~baca.overrides.repeat_tie_stencil_false
-   ~baca.overrides.repeat_tie_transparent
-   ~baca.overrides.repeat_tie_up
-   ~baca.overrides.rest_down
-   ~baca.overrides.rest_extra_offset
-   ~baca.overrides.rest_position
-   ~baca.overrides.rest_transparent
-   ~baca.overrides.rest_up
-   ~baca.overrides.script_color
-   ~baca.overrides.script_down
-   ~baca.overrides.script_extra_offset
-   ~baca.overrides.script_padding
-   ~baca.overrides.script_staff_padding
-   ~baca.overrides.script_up
-   ~baca.overrides.slur_down
-   ~baca.overrides.slur_up
-   ~baca.overrides.span_bar_color
-   ~baca.overrides.span_bar_extra_offset
-   ~baca.overrides.span_bar_transparent
-   ~baca.overrides.stem_color
-   ~baca.overrides.stem_down
-   ~baca.overrides.stem_stencil_false
-   ~baca.overrides.stem_transparent
-   ~baca.overrides.stem_up
-   ~baca.overrides.strict_note_spacing_off
-   ~baca.overrides.sustain_pedal_staff_padding
-   ~baca.overrides.text_script_color
-   ~baca.overrides.text_script_down
-   ~baca.overrides.text_script_extra_offset
-   ~baca.overrides.text_script_font_size
-   ~baca.overrides.text_script_padding
-   ~baca.overrides.text_script_parent_center
-   ~baca.overrides.text_script_staff_padding
-   ~baca.overrides.text_script_up
-   ~baca.overrides.text_script_x_offset
-   ~baca.overrides.text_script_y_offset
-   ~baca.overrides.text_spanner_left_padding
-   ~baca.overrides.text_spanner_right_padding
-   ~baca.overrides.text_spanner_staff_padding
-   ~baca.overrides.text_spanner_stencil_false
-   ~baca.overrides.text_spanner_transparent
-   ~baca.overrides.text_spanner_y_offset
-   ~baca.overrides.tie_down
-   ~baca.overrides.tie_up
-   ~baca.overrides.time_signature_extra_offset
-   ~baca.overrides.time_signature_transparent
-   ~baca.overrides.tremolo_down
-   ~baca.overrides.trill_spanner_staff_padding
-   ~baca.overrides.tuplet_bracket_down
-   ~baca.overrides.tuplet_bracket_extra_offset
-   ~baca.overrides.tuplet_bracket_outside_staff_priority
-   ~baca.overrides.tuplet_bracket_padding
-   ~baca.overrides.tuplet_bracket_shorten_pair
-   ~baca.overrides.tuplet_bracket_staff_padding
-   ~baca.overrides.tuplet_bracket_up
-   ~baca.overrides.tuplet_number_denominator
-   ~baca.overrides.tuplet_number_extra_offset
+   ~baca.overridelib.accidental_stencil_false
+   ~baca.overridelib.accidental_transparent
+   ~baca.overridelib.accidental_x_extent_false
+   ~baca.overridelib.bar_extent
+   ~baca.overridelib.bar_extent_zero
+   ~baca.overridelib.bar_line_transparent
+   ~baca.overridelib.beam_positions
+   ~baca.overridelib.beam_stencil_false
+   ~baca.overridelib.beam_transparent
+   ~baca.overridelib.clef_extra_offset
+   ~baca.overridelib.clef_shift
+   ~baca.overridelib.clef_x_extent_false
+   ~baca.overridelib.dls_padding
+   ~baca.overridelib.dls_staff_padding
+   ~baca.overridelib.dls_up
+   ~baca.overridelib.dots_stencil_false
+   ~baca.overridelib.dots_transparent
+   ~baca.overridelib.dynamic_shift
+   ~baca.overridelib.dynamic_text_center
+   ~baca.overridelib.dynamic_text_extra_offset
+   ~baca.overridelib.dynamic_text_left
+   ~baca.overridelib.dynamic_text_parent_alignment_x
+   ~baca.overridelib.dynamic_text_right
+   ~baca.overridelib.dynamic_text_stencil_false
+   ~baca.overridelib.dynamic_text_transparent
+   ~baca.overridelib.dynamic_text_x_extent_zero
+   ~baca.overridelib.dynamic_text_x_offset
+   ~baca.overridelib.dynamic_text_y_offset
+   ~baca.overridelib.flag_stencil_false
+   ~baca.overridelib.flag_transparent
+   ~baca.overridelib.glissando_thickness
+   ~baca.overridelib.hairpin_shorten_pair
+   ~baca.overridelib.hairpin_start_shift
+   ~baca.overridelib.hairpin_stencil_false
+   ~baca.overridelib.hairpin_transparent
+   ~baca.overridelib.mmrest_text_color
+   ~baca.overridelib.mmrest_text_extra_offset
+   ~baca.overridelib.mmrest_text_padding
+   ~baca.overridelib.mmrest_text_parent_center
+   ~baca.overridelib.mmrest_text_staff_padding
+   ~baca.overridelib.no_ledgers
+   ~baca.overridelib.note_column_shift
+   ~baca.overridelib.note_head_color
+   ~baca.overridelib.note_head_stencil_false
+   ~baca.overridelib.note_head_style_cross
+   ~baca.overridelib.note_head_style_harmonic
+   ~baca.overridelib.note_head_transparent
+   ~baca.overridelib.ottava_bracket_staff_padding
+   ~baca.overridelib.rehearsal_mark_extra_offset
+   ~baca.overridelib.rehearsal_mark_y_offset
+   ~baca.overridelib.repeat_tie_down
+   ~baca.overridelib.repeat_tie_stencil_false
+   ~baca.overridelib.repeat_tie_transparent
+   ~baca.overridelib.repeat_tie_up
+   ~baca.overridelib.rest_down
+   ~baca.overridelib.rest_extra_offset
+   ~baca.overridelib.rest_position
+   ~baca.overridelib.rest_transparent
+   ~baca.overridelib.rest_up
+   ~baca.overridelib.script_color
+   ~baca.overridelib.script_down
+   ~baca.overridelib.script_extra_offset
+   ~baca.overridelib.script_padding
+   ~baca.overridelib.script_staff_padding
+   ~baca.overridelib.script_up
+   ~baca.overridelib.slur_down
+   ~baca.overridelib.slur_up
+   ~baca.overridelib.span_bar_color
+   ~baca.overridelib.span_bar_extra_offset
+   ~baca.overridelib.span_bar_transparent
+   ~baca.overridelib.stem_color
+   ~baca.overridelib.stem_down
+   ~baca.overridelib.stem_stencil_false
+   ~baca.overridelib.stem_transparent
+   ~baca.overridelib.stem_up
+   ~baca.overridelib.strict_note_spacing_off
+   ~baca.overridelib.sustain_pedal_staff_padding
+   ~baca.overridelib.text_script_color
+   ~baca.overridelib.text_script_down
+   ~baca.overridelib.text_script_extra_offset
+   ~baca.overridelib.text_script_font_size
+   ~baca.overridelib.text_script_padding
+   ~baca.overridelib.text_script_parent_center
+   ~baca.overridelib.text_script_staff_padding
+   ~baca.overridelib.text_script_up
+   ~baca.overridelib.text_script_x_offset
+   ~baca.overridelib.text_script_y_offset
+   ~baca.overridelib.text_spanner_left_padding
+   ~baca.overridelib.text_spanner_right_padding
+   ~baca.overridelib.text_spanner_staff_padding
+   ~baca.overridelib.text_spanner_stencil_false
+   ~baca.overridelib.text_spanner_transparent
+   ~baca.overridelib.text_spanner_y_offset
+   ~baca.overridelib.tie_down
+   ~baca.overridelib.tie_up
+   ~baca.overridelib.time_signature_extra_offset
+   ~baca.overridelib.time_signature_transparent
+   ~baca.overridelib.tremolo_down
+   ~baca.overridelib.trill_spanner_staff_padding
+   ~baca.overridelib.tuplet_bracket_down
+   ~baca.overridelib.tuplet_bracket_extra_offset
+   ~baca.overridelib.tuplet_bracket_outside_staff_priority
+   ~baca.overridelib.tuplet_bracket_padding
+   ~baca.overridelib.tuplet_bracket_shorten_pair
+   ~baca.overridelib.tuplet_bracket_staff_padding
+   ~baca.overridelib.tuplet_bracket_up
+   ~baca.overridelib.tuplet_number_denominator
+   ~baca.overridelib.tuplet_number_extra_offset
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.rhythmlib <baca--rhythmlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (2) Makers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.rhythmlib.PitchFirstRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.rhythmlib.PitchFirstRhythmCommand
+   ~baca.rhythmlib.RhythmCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.rhythmlib.make_even_divisions
+   ~baca.rhythmlib.make_fused_tuplet_monads
+   ~baca.rhythmlib.make_multimeasure_rests
+   ~baca.rhythmlib.make_notes
+   ~baca.rhythmlib.make_repeat_tied_notes
+   ~baca.rhythmlib.make_repeated_duration_notes
+   ~baca.rhythmlib.make_rests
+   ~baca.rhythmlib.make_rhythm
+   ~baca.rhythmlib.make_single_attack
+   ~baca.rhythmlib.make_skips
+   ~baca.rhythmlib.make_tied_notes
+   ~baca.rhythmlib.make_tied_repeated_durations
+   ~baca.rhythmlib.rhythm
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Rhythm-makers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.rhythmlib.SkipRhythmMaker

@@ -1,0 +1,489 @@
+.. _baca--rhythmlib:
+
+rhythmlib
+=========
+
+.. automodule:: baca.rhythmlib
+
+.. currentmodule:: baca.rhythmlib
+
+.. container:: svg-container
+
+   .. inheritance-diagram:: baca
+      :lineage: baca.rhythmlib
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (2) Makers
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~PitchFirstRhythmMaker
+
+.. autoclass:: PitchFirstRhythmMaker
+
+   .. autosummary::
+      :nosignatures:
+
+      acciaccatura_specifiers
+      beam_specifier
+      division_masks
+      duration_specifier
+      logical_tie_masks
+      talea
+      tie_specifier
+      time_treatments
+      tuplet_specifier
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PitchFirstRhythmMaker.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: PitchFirstRhythmMaker.show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
+
+   .. autoattribute:: PitchFirstRhythmMaker.beam_specifier
+
+   .. autoattribute:: PitchFirstRhythmMaker.division_masks
+
+   .. autoattribute:: PitchFirstRhythmMaker.duration_specifier
+
+   .. autoattribute:: PitchFirstRhythmMaker.logical_tie_masks
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.previous_state
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.state
+
+   .. autoattribute:: PitchFirstRhythmMaker.talea
+
+   .. autoattribute:: PitchFirstRhythmMaker.tie_specifier
+
+   .. autoattribute:: PitchFirstRhythmMaker.time_treatments
+
+   .. autoattribute:: PitchFirstRhythmMaker.tuplet_specifier
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~PitchFirstRhythmCommand
+   ~RhythmCommand
+
+.. autoclass:: PitchFirstRhythmCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      pattern
+      rhythm_maker
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PitchFirstRhythmCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.deactivate
+
+   .. autoattribute:: PitchFirstRhythmCommand.pattern
+
+   .. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tags
+
+.. autoclass:: RhythmCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      division_expression
+      division_maker
+      left_broken
+      multimeasure_rests
+      parameter
+      payload
+      persist
+      reference_meters
+      repeat_ties
+      rewrite_meter
+      rewrite_rest_filled
+      rhythm_maker
+      right_broken
+      split_at_measure_boundaries
+      stages
+      state
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: RhythmCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: RhythmCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: RhythmCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: RhythmCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.deactivate
+
+   .. autoattribute:: RhythmCommand.division_expression
+
+   .. autoattribute:: RhythmCommand.division_maker
+
+   .. autoattribute:: RhythmCommand.left_broken
+
+   .. autoattribute:: RhythmCommand.multimeasure_rests
+
+   .. autoattribute:: RhythmCommand.parameter
+
+   .. autoattribute:: RhythmCommand.payload
+
+   .. autoattribute:: RhythmCommand.persist
+
+   .. autoattribute:: RhythmCommand.reference_meters
+
+   .. autoattribute:: RhythmCommand.repeat_ties
+
+   .. autoattribute:: RhythmCommand.rewrite_meter
+
+   .. autoattribute:: RhythmCommand.rewrite_rest_filled
+
+   .. autoattribute:: RhythmCommand.rhythm_maker
+
+   .. autoattribute:: RhythmCommand.right_broken
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.selector
+
+   .. autoattribute:: RhythmCommand.split_at_measure_boundaries
+
+   .. autoattribute:: RhythmCommand.stages
+
+   .. autoattribute:: RhythmCommand.state
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tags
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~make_even_divisions
+   ~make_fused_tuplet_monads
+   ~make_multimeasure_rests
+   ~make_notes
+   ~make_repeat_tied_notes
+   ~make_repeated_duration_notes
+   ~make_rests
+   ~make_rhythm
+   ~make_single_attack
+   ~make_skips
+   ~make_tied_notes
+   ~make_tied_repeated_durations
+   ~rhythm
+
+.. autofunction:: make_even_divisions
+
+.. autofunction:: make_fused_tuplet_monads
+
+.. autofunction:: make_multimeasure_rests
+
+.. autofunction:: make_notes
+
+.. autofunction:: make_repeat_tied_notes
+
+.. autofunction:: make_repeated_duration_notes
+
+.. autofunction:: make_rests
+
+.. autofunction:: make_rhythm
+
+.. autofunction:: make_single_attack
+
+.. autofunction:: make_skips
+
+.. autofunction:: make_tied_notes
+
+.. autofunction:: make_tied_repeated_durations
+
+.. autofunction:: rhythm
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Rhythm-makers
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~SkipRhythmMaker
+
+.. autoclass:: SkipRhythmMaker
+
+   .. autosummary::
+      :nosignatures:
+
+      tuplet_specifier
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __format__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: SkipRhythmMaker.__call__
+
+   .. container:: inherited
+
+      .. automethod:: SkipRhythmMaker.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: SkipRhythmMaker.__eq__
+
+   .. automethod:: SkipRhythmMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SkipRhythmMaker.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: SkipRhythmMaker.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: SkipRhythmMaker.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.beam_specifier
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.division_masks
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.duration_specifier
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.logical_tie_masks
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.previous_state
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.state
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.tie_specifier
+
+   .. autoattribute:: SkipRhythmMaker.tuplet_specifier

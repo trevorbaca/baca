@@ -13,8 +13,6 @@ from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .ContainerCommand import ContainerCommand
-from .DivisionMaker import DivisionMaker
-from .DivisionSequenceExpression import DivisionSequenceExpression
 from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .IndicatorCommand import IndicatorCommand
 from .NestingCommand import NestingCommand
@@ -26,7 +24,6 @@ from .RegisterInterpolationCommand import RegisterInterpolationCommand
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .Registration import Registration
 from .RestAffixSpecifier import RestAffixSpecifier
-from .RhythmCommand import RhythmCommand
 from .Scope import Scope
 from .SettingCommand import SettingCommand
 from .SpannerCommand import SpannerCommand
@@ -1430,39 +1427,6 @@ def resume_after(remote_voice_name) -> AnchorSpecifier:
         remote_selector='baca.leaf(-1)',
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
-        )
-
-def rhythm(
-    rhythm_maker: typings.RhythmMakerTyping,
-    *,
-    division_maker: DivisionMaker = None,
-    division_expression: abjad.Expression = None,
-    left_broken: bool = None,
-    multimeasure_rests: bool = None,
-    persist: str = None,
-    reference_meters: typing.Iterable[abjad.Meter] = None,
-    rewrite_meter: bool = None,
-    rewrite_rest_filled: bool = None,
-    right_broken: bool = None,
-    split_at_measure_boundaries: bool = None,
-    stages: typing.Tuple[int, int] = None,
-    ) -> RhythmCommand:
-    """
-    Makes rhythm command.
-    """
-    return RhythmCommand(
-        division_maker=division_maker,
-        division_expression=division_expression,
-        left_broken=left_broken,
-        multimeasure_rests=multimeasure_rests,
-        persist=persist,
-        reference_meters=reference_meters,
-        rewrite_meter=rewrite_meter,
-        rewrite_rest_filled=rewrite_rest_filled,
-        rhythm_maker=rhythm_maker,
-        right_broken=right_broken,
-        split_at_measure_boundaries=split_at_measure_boundaries,
-        stages=stages,
         )
 
 def rmleaves(count: int) -> abjad.Expression:
@@ -3510,31 +3474,6 @@ def stopped(
         indicators=[abjad.Articulation('stopped')],
         selector=selector,
         )
-
-def strict_quarter_divisions() -> DivisionSequenceExpression:
-    """
-    Makes strict quarter divisions.
-
-    ..  container:: example
-
-        >>> expression = baca.strict_quarter_divisions()
-        >>> for item in expression([(2, 4), (2, 4)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-
-    """
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
-    expression = expression.split_by_durations(
-        durations=[abjad.Duration(1, 4)]
-        )
-    expression = expression.sequence()
-    expression = expression.flatten(depth=-1)
-    return expression
 
 def sustain_pedal(
     *,

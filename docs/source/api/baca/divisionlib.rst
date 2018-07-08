@@ -1,0 +1,1201 @@
+.. _baca--divisionlib:
+
+divisionlib
+===========
+
+.. automodule:: baca.divisionlib
+
+.. currentmodule:: baca.divisionlib
+
+.. container:: svg-container
+
+   .. inheritance-diagram:: baca
+      :lineage: baca.divisionlib
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~Division
+
+.. autoclass:: Division
+
+   .. autosummary::
+      :nosignatures:
+
+      yield_equivalent_durations
+
+   .. autosummary::
+      :nosignatures:
+
+      duration
+      payload
+      start_offset
+      stop_offset
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __copy__
+      __deepcopy__
+      __new__
+      __str__
+      __sub__
+
+   .. autosummary::
+      :nosignatures:
+
+      yield_durations
+      yield_nonreduced_fractions
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Division.__abs__
+
+   .. automethod:: Division.__add__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__bool__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__ceil__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__complex__
+
+   .. automethod:: Division.__copy__
+
+   .. automethod:: Division.__deepcopy__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__div__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__divmod__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__float__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__floor__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__floordiv__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__ge__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__gt__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__le__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__lt__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__mod__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__mul__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__neg__
+
+   .. automethod:: Division.__new__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__pos__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__pow__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rdiv__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rdivmod__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rfloordiv__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rmod__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rmul__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__round__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rpow__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rsub__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__rtruediv__
+
+   .. automethod:: Division.__str__
+
+   .. automethod:: Division.__sub__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__truediv__
+
+   .. container:: inherited
+
+      .. automethod:: Division.__trunc__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Division.conjugate
+
+   .. container:: inherited
+
+      .. automethod:: Division.limit_denominator
+
+   .. container:: inherited
+
+      .. automethod:: Division.multiply
+
+   .. container:: inherited
+
+      .. automethod:: Division.multiply_with_cross_cancelation
+
+   .. container:: inherited
+
+      .. automethod:: Division.multiply_without_reducing
+
+   .. container:: inherited
+
+      .. automethod:: Division.reduce
+
+   .. container:: inherited
+
+      .. automethod:: Division.with_denominator
+
+   .. container:: inherited
+
+      .. automethod:: Division.with_multiple_of_denominator
+
+   .. automethod:: Division.yield_equivalent_durations
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Division.from_decimal
+
+   .. container:: inherited
+
+      .. automethod:: Division.from_float
+
+   .. automethod:: Division.yield_durations
+
+   .. automethod:: Division.yield_nonreduced_fractions
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: Division.denominator
+
+   .. autoattribute:: Division.duration
+
+   .. container:: inherited
+
+      .. autoattribute:: Division.imag
+
+   .. container:: inherited
+
+      .. autoattribute:: Division.numerator
+
+   .. container:: inherited
+
+      .. autoattribute:: Division.pair
+
+   .. autoattribute:: Division.payload
+
+   .. container:: inherited
+
+      .. autoattribute:: Division.real
+
+   .. autoattribute:: Division.start_offset
+
+   .. autoattribute:: Division.stop_offset
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (6) Divisions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~DivisionMaker
+   ~DivisionSequence
+   ~DivisionSequenceExpression
+   ~FlattenDivisionCallback
+   ~FuseByCountsDivisionCallback
+   ~PartitionDivisionCallback
+   ~SplitByDurationsDivisionCallback
+   ~SplitByRoundedRatiosDivisionCallback
+
+.. autoclass:: DivisionMaker
+
+   .. autosummary::
+      :nosignatures:
+
+      append_callback
+      flatten
+      fuse_by_counts
+      partition_by_counts
+      split_by_durations
+      split_by_rounded_ratios
+
+   .. autosummary::
+      :nosignatures:
+
+      callbacks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DivisionMaker.__call__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionMaker.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: DivisionMaker.append_callback
+
+   .. automethod:: DivisionMaker.flatten
+
+   .. automethod:: DivisionMaker.fuse_by_counts
+
+   .. automethod:: DivisionMaker.partition_by_counts
+
+   .. automethod:: DivisionMaker.split_by_durations
+
+   .. automethod:: DivisionMaker.split_by_rounded_ratios
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: DivisionMaker.show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: DivisionMaker.callbacks
+
+.. autoclass:: DivisionSequence
+
+   .. autosummary::
+      :nosignatures:
+
+      rotate
+      split_by_durations
+      split_by_rounded_ratios
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__add__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__contains__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__len__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__reversed__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.count
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.filter
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.flatten
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.group_by
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.index
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.is_decreasing
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.is_increasing
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.is_permutation
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.is_repetition_free
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.join
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.map
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.nwise
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_counts
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_ratio_of_lengths
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_ratio_of_weights
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.partition_by_weights
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.permute
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.remove
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.remove_repeats
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.repeat
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.repeat_to_length
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.repeat_to_weight
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.replace
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.retain
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.retain_pattern
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.reverse
+
+   .. automethod:: DivisionSequence.rotate
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.select
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.sort
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.split
+
+   .. automethod:: DivisionSequence.split_by_durations
+
+   .. automethod:: DivisionSequence.split_by_rounded_ratios
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.sum
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.sum_by_sign
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.truncate
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.weight
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.zip
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequence.items
+
+.. autoclass:: DivisionSequenceExpression
+
+   .. autosummary::
+      :nosignatures:
+
+      division_sequence
+      split_by_durations
+      split_by_rounded_ratios
+
+   .. autosummary::
+      :nosignatures:
+
+      __add__
+      __getitem__
+      __radd__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DivisionSequenceExpression.__add__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__call__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__getattr__
+
+   .. automethod:: DivisionSequenceExpression.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__iadd__
+
+   .. automethod:: DivisionSequenceExpression.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__setitem__
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__str__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.append_callback
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.color
+
+   .. automethod:: DivisionSequenceExpression.division_sequence
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.establish_equivalence
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.get_markup
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.get_string
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.label
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.pitch_class_segment
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.pitch_set
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.print
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.select
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.sequence
+
+   .. automethod:: DivisionSequenceExpression.split_by_durations
+
+   .. automethod:: DivisionSequenceExpression.split_by_rounded_ratios
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.wrap_in_list
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.make_callback
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.argument_count
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.argument_values
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.callbacks
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.evaluation_template
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.force_return
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.has_parentheses
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.is_composite
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.is_initializer
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.is_postfix
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.is_selector
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.keywords
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.lone
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.map_operand
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.markup_maker_callback
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.module_names
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.name
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.next_name
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.precedence
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.proxy_class
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.qualified_method_name
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.string_template
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.subclass_hook
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.subexpressions
+
+   .. container:: inherited
+
+      .. autoattribute:: DivisionSequenceExpression.template
+
+.. autoclass:: FlattenDivisionCallback
+
+   .. autosummary::
+      :nosignatures:
+
+      depth
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: FlattenDivisionCallback.__call__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: FlattenDivisionCallback.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: FlattenDivisionCallback.depth
+
+.. autoclass:: FuseByCountsDivisionCallback
+
+   .. autosummary::
+      :nosignatures:
+
+      counts
+      cyclic
+      secondary_division_maker
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: FuseByCountsDivisionCallback.__call__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: FuseByCountsDivisionCallback.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: FuseByCountsDivisionCallback.counts
+
+   .. autoattribute:: FuseByCountsDivisionCallback.cyclic
+
+   .. autoattribute:: FuseByCountsDivisionCallback.secondary_division_maker
+
+.. autoclass:: PartitionDivisionCallback
+
+   .. autosummary::
+      :nosignatures:
+
+      append_remainder
+      counts
+      fuse_assignable_total_duration
+      remainder_direction
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __format__
+      __repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PartitionDivisionCallback.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PartitionDivisionCallback.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: PartitionDivisionCallback.__eq__
+
+   .. automethod:: PartitionDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PartitionDivisionCallback.__hash__
+
+   .. automethod:: PartitionDivisionCallback.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PartitionDivisionCallback.append_remainder
+
+   .. autoattribute:: PartitionDivisionCallback.counts
+
+   .. autoattribute:: PartitionDivisionCallback.fuse_assignable_total_duration
+
+   .. autoattribute:: PartitionDivisionCallback.remainder_direction
+
+.. autoclass:: SplitByDurationsDivisionCallback
+
+   .. autosummary::
+      :nosignatures:
+
+      compound_meter_multiplier
+      cyclic
+      durations
+      pattern_rotation_index
+      remainder
+      remainder_fuse_threshold
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. autosummary::
+      :nosignatures:
+
+      show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: SplitByDurationsDivisionCallback.__call__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByDurationsDivisionCallback.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: SplitByDurationsDivisionCallback.show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: SplitByDurationsDivisionCallback.compound_meter_multiplier
+
+   .. autoattribute:: SplitByDurationsDivisionCallback.cyclic
+
+   .. autoattribute:: SplitByDurationsDivisionCallback.durations
+
+   .. autoattribute:: SplitByDurationsDivisionCallback.pattern_rotation_index
+
+   .. autoattribute:: SplitByDurationsDivisionCallback.remainder
+
+   .. autoattribute:: SplitByDurationsDivisionCallback.remainder_fuse_threshold
+
+.. autoclass:: SplitByRoundedRatiosDivisionCallback
+
+   .. autosummary::
+      :nosignatures:
+
+      ratios
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: SplitByRoundedRatiosDivisionCallback.__call__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__format__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: SplitByRoundedRatiosDivisionCallback.ratios
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~compound_quarter_divisions
+   ~fuse_compound_quarter_divisions
+   ~split_by_durations
+   ~strict_quarter_divisions
+
+.. autofunction:: compound_quarter_divisions
+
+.. autofunction:: fuse_compound_quarter_divisions
+
+.. autofunction:: split_by_durations
+
+.. autofunction:: strict_quarter_divisions

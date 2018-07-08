@@ -27,10 +27,12 @@ baca
    LibraryGM
    LibraryNS
    LibraryTZ
-   dynamics
+   divisionlib
+   dynamiclib
    library
    markups
-   overrides
+   overridelib
+   rhythmlib
 
 .. autosummary::
    :nosignatures:
@@ -40,10 +42,12 @@ baca
    LibraryGM
    LibraryNS
    LibraryTZ
-   dynamics
+   divisionlib
+   dynamiclib
    library
    markups
-   overrides
+   overridelib
+   rhythmlib
 
 .. raw:: html
 
@@ -59,7 +63,6 @@ baca
    MusicContribution
    MusicMaker
    PersistentIndicatorTests
-   PitchFirstRhythmMaker
    SegmentMaker
 
 .. autosummary::
@@ -69,7 +72,6 @@ baca
    ~MusicContribution.MusicContribution
    ~MusicMaker.MusicMaker
    ~PersistentIndicatorTests.PersistentIndicatorTests
-   ~PitchFirstRhythmMaker.PitchFirstRhythmMaker
    ~SegmentMaker.SegmentMaker
 
 .. raw:: html
@@ -133,11 +135,9 @@ baca
    PartAssignmentCommand
    PiecewiseIndicatorCommand
    PitchCommand
-   PitchFirstRhythmCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
-   RhythmCommand
    SettingCommand
    SpannerCommand
    StaffPositionCommand
@@ -168,11 +168,9 @@ baca
    ~PartAssignmentCommand.PartAssignmentCommand
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~PitchCommand.PitchCommand
-   ~PitchFirstRhythmCommand.PitchFirstRhythmCommand
    ~RegisterCommand.RegisterCommand
    ~RegisterInterpolationCommand.RegisterInterpolationCommand
    ~RegisterToOctaveCommand.RegisterToOctaveCommand
-   ~RhythmCommand.RhythmCommand
    ~SettingCommand.SettingCommand
    ~SpannerCommand.SpannerCommand
    ~StaffPositionCommand.StaffPositionCommand
@@ -198,7 +196,6 @@ baca
    Counter
    Cursor
    DesignMaker
-   Division
    Expression
    ExpressionGallery
    HarmonicSeries
@@ -257,7 +254,6 @@ baca
    ~Counter.Counter
    ~Cursor.Cursor
    ~DesignMaker.DesignMaker
-   ~Division.Division
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
    ~HarmonicSeries.HarmonicSeries
@@ -304,37 +300,6 @@ baca
    ~ViolinSoloScoreTemplate.ViolinSoloScoreTemplate
    ~WellformednessManager.WellformednessManager
    ~ZaggedPitchClassMaker.ZaggedPitchClassMaker
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (6) Divisions
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   DivisionMaker
-   DivisionSequence
-   DivisionSequenceExpression
-   FlattenDivisionCallback
-   FuseByCountsDivisionCallback
-   PartitionDivisionCallback
-   SplitByDurationsDivisionCallback
-   SplitByRoundedRatiosDivisionCallback
-
-.. autosummary::
-   :nosignatures:
-
-   ~DivisionMaker.DivisionMaker
-   ~DivisionSequence.DivisionSequence
-   ~DivisionSequenceExpression.DivisionSequenceExpression
-   ~FlattenDivisionCallback.FlattenDivisionCallback
-   ~FuseByCountsDivisionCallback.FuseByCountsDivisionCallback
-   ~PartitionDivisionCallback.PartitionDivisionCallback
-   ~SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
-   ~SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
 
 .. raw:: html
 
@@ -607,20 +572,3 @@ baca
 .. autofunction:: wleaf
 
 .. autofunction:: wleaves
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Rhythm-makers
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   SkipRhythmMaker
-
-.. autosummary::
-   :nosignatures:
-
-   ~SkipRhythmMaker.SkipRhythmMaker
