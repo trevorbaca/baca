@@ -16,6 +16,134 @@ pitchlib
 
    <hr/>
 
+.. rubric:: (3) Specifiers
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~ArpeggiationSpacingSpecifier
+   ~ChordalSpacingSpecifier
+
+.. autoclass:: ArpeggiationSpacingSpecifier
+
+   .. autosummary::
+      :nosignatures:
+
+      direction
+      pattern
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ArpeggiationSpacingSpecifier.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: ArpeggiationSpacingSpecifier.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: ArpeggiationSpacingSpecifier.direction
+
+   .. autoattribute:: ArpeggiationSpacingSpecifier.pattern
+
+.. autoclass:: ChordalSpacingSpecifier
+
+   .. autosummary::
+      :nosignatures:
+
+      bass
+      direction
+      minimum_semitones
+      pattern
+      soprano
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ChordalSpacingSpecifier.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__copy__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: ChordalSpacingSpecifier.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: ChordalSpacingSpecifier.bass
+
+   .. autoattribute:: ChordalSpacingSpecifier.direction
+
+   .. autoattribute:: ChordalSpacingSpecifier.minimum_semitones
+
+   .. autoattribute:: ChordalSpacingSpecifier.pattern
+
+   .. autoattribute:: ChordalSpacingSpecifier.soprano
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: (5) Utilities
    :class: section-header
 
@@ -23,6 +151,8 @@ pitchlib
    :nosignatures:
 
    ~CollectionList
+   ~Constellation
+   ~ConstellationCircuit
    ~PitchClassSegment
    ~PitchClassSet
    ~PitchSegment
@@ -203,6 +333,210 @@ pitchlib
    .. autoattribute:: CollectionList.collections
 
    .. autoattribute:: CollectionList.item_class
+
+.. autoclass:: Constellation
+
+   .. autosummary::
+      :nosignatures:
+
+      get_chord
+      get_number_of_chord
+      make_chords
+      make_labeled_chords
+      make_labeled_colored_chords
+      show_colored_generator_chord
+      show_colored_generator_chord_and_pivot_chord
+      show_generator_chord
+      show_generator_chord_and_pivot_chord
+      show_pivot_chord
+
+   .. autosummary::
+      :nosignatures:
+
+      constellation_number
+      generator_chord
+      partitioned_generator_pitch_numbers
+      pitch_range
+      pivot_chord
+
+   .. autosummary::
+      :nosignatures:
+
+      __contains__
+      __getitem__
+      __len__
+      __repr__
+
+   .. autosummary::
+      :nosignatures:
+
+      constellate
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Constellation.__contains__
+
+   .. container:: inherited
+
+      .. automethod:: Constellation.__format__
+
+   .. automethod:: Constellation.__getitem__
+
+   .. automethod:: Constellation.__len__
+
+   .. automethod:: Constellation.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: Constellation.get_chord
+
+   .. automethod:: Constellation.get_number_of_chord
+
+   .. automethod:: Constellation.make_chords
+
+   .. automethod:: Constellation.make_labeled_chords
+
+   .. automethod:: Constellation.make_labeled_colored_chords
+
+   .. automethod:: Constellation.show_colored_generator_chord
+
+   .. automethod:: Constellation.show_colored_generator_chord_and_pivot_chord
+
+   .. automethod:: Constellation.show_generator_chord
+
+   .. automethod:: Constellation.show_generator_chord_and_pivot_chord
+
+   .. automethod:: Constellation.show_pivot_chord
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: Constellation.constellate
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Constellation.constellation_number
+
+   .. autoattribute:: Constellation.generator_chord
+
+   .. autoattribute:: Constellation.partitioned_generator_pitch_numbers
+
+   .. autoattribute:: Constellation.pitch_range
+
+   .. autoattribute:: Constellation.pivot_chord
+
+.. autoclass:: ConstellationCircuit
+
+   .. autosummary::
+      :nosignatures:
+
+      make_constellation_circuit_1
+
+   .. autosummary::
+      :nosignatures:
+
+      CC1
+
+   .. autosummary::
+      :nosignatures:
+
+      get
+      illustrate_colored_generator_chords
+      illustrate_colored_generator_chords_and_pivot_chords
+      illustrate_generator_chords
+      illustrate_generator_chords_and_pivot_chords
+      illustrate_pivot_chords
+
+   .. autosummary::
+      :nosignatures:
+
+      generator_chords
+      pitch_range
+      pivot_chords
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+      __len__
+      __repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: ConstellationCircuit.__format__
+
+   .. automethod:: ConstellationCircuit.__getitem__
+
+   .. automethod:: ConstellationCircuit.__len__
+
+   .. automethod:: ConstellationCircuit.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: ConstellationCircuit.get
+
+   .. automethod:: ConstellationCircuit.illustrate_colored_generator_chords
+
+   .. automethod:: ConstellationCircuit.illustrate_colored_generator_chords_and_pivot_chords
+
+   .. automethod:: ConstellationCircuit.illustrate_generator_chords
+
+   .. automethod:: ConstellationCircuit.illustrate_generator_chords_and_pivot_chords
+
+   .. automethod:: ConstellationCircuit.illustrate_pivot_chords
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: ConstellationCircuit.make_constellation_circuit_1
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: ConstellationCircuit.generator_chords
+
+   .. autoattribute:: ConstellationCircuit.pitch_range
+
+   .. autoattribute:: ConstellationCircuit.pivot_chords
 
 .. autoclass:: PitchClassSegment
 

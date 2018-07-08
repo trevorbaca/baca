@@ -10,13 +10,10 @@ from . import markups
 
 # classes
 from .Accelerando import Accelerando
-from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
-from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
 from .BCPCommand import BCPCommand
 from .BreakMeasureMap import BreakMeasureMap
-from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
 from .ColorCommand import ColorCommand
@@ -25,8 +22,6 @@ from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .CommandWrapper import CommandWrapper
-from .Constellation import Constellation
-from .ConstellationCircuit import ConstellationCircuit
 from .ContainerCommand import ContainerCommand
 from .Counter import Counter
 from .Cursor import Cursor
@@ -47,7 +42,6 @@ from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
 from .Markup import Markup
-from .Matrix import Matrix
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap

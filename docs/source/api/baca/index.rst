@@ -88,10 +88,7 @@ baca
 .. toctree::
    :hidden:
 
-   AcciaccaturaSpecifier
    AnchorSpecifier
-   ArpeggiationSpacingSpecifier
-   ChordalSpacingSpecifier
    HorizontalSpacingSpecifier
    LMRSpecifier
    PitchSpecifier
@@ -100,10 +97,7 @@ baca
 .. autosummary::
    :nosignatures:
 
-   ~AcciaccaturaSpecifier.AcciaccaturaSpecifier
    ~AnchorSpecifier.AnchorSpecifier
-   ~ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier
-   ~ChordalSpacingSpecifier.ChordalSpacingSpecifier
    ~HorizontalSpacingSpecifier.HorizontalSpacingSpecifier
    ~LMRSpecifier.LMRSpecifier
    ~PitchSpecifier.PitchSpecifier
@@ -194,8 +188,6 @@ baca
 
    BreakMeasureMap
    Coat
-   Constellation
-   ConstellationCircuit
    Counter
    Cursor
    DesignMaker
@@ -207,7 +199,6 @@ baca
    LBSD
    Loop
    Markup
-   Matrix
    MeasureWrapper
    MetronomeMarkMeasureMap
    PageSpecifier
@@ -239,8 +230,6 @@ baca
 
    ~BreakMeasureMap.BreakMeasureMap
    ~Coat.Coat
-   ~Constellation.Constellation
-   ~ConstellationCircuit.ConstellationCircuit
    ~Counter.Counter
    ~Cursor.Cursor
    ~DesignMaker.DesignMaker
@@ -252,7 +241,6 @@ baca
    ~LBSD.LBSD
    ~Loop.Loop
    ~Markup.Markup
-   ~Matrix.Matrix
    ~MeasureWrapper.MeasureWrapper
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier

@@ -39,10 +39,7 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.AcciaccaturaSpecifier.AcciaccaturaSpecifier
    ~baca.AnchorSpecifier.AnchorSpecifier
-   ~baca.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier
-   ~baca.ChordalSpacingSpecifier.ChordalSpacingSpecifier
    ~baca.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier
    ~baca.LMRSpecifier.LMRSpecifier
    ~baca.PitchSpecifier.PitchSpecifier
@@ -100,8 +97,6 @@ Bača API
 
    ~baca.BreakMeasureMap.BreakMeasureMap
    ~baca.Coat.Coat
-   ~baca.Constellation.Constellation
-   ~baca.ConstellationCircuit.ConstellationCircuit
    ~baca.Counter.Counter
    ~baca.Cursor.Cursor
    ~baca.DesignMaker.DesignMaker
@@ -113,7 +108,6 @@ Bača API
    ~baca.LBSD.LBSD
    ~baca.Loop.Loop
    ~baca.Markup.Markup
-   ~baca.Matrix.Matrix
    ~baca.MeasureWrapper.MeasureWrapper
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.PageSpecifier.PageSpecifier
@@ -952,6 +946,19 @@ Markup library.
 
    <hr/>
 
+.. rubric:: (3) Specifiers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchlib.ArpeggiationSpacingSpecifier
+   ~baca.pitchlib.ChordalSpacingSpecifier
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: (5) Utilities
    :class: subsection-header
 
@@ -959,6 +966,8 @@ Markup library.
    :nosignatures:
 
    ~baca.pitchlib.CollectionList
+   ~baca.pitchlib.Constellation
+   ~baca.pitchlib.ConstellationCircuit
    ~baca.pitchlib.PitchClassSegment
    ~baca.pitchlib.PitchClassSet
    ~baca.pitchlib.PitchSegment
@@ -985,6 +994,18 @@ Markup library.
    :nosignatures:
 
    ~baca.rhythmlib.PitchFirstRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (3) Specifiers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.rhythmlib.AcciaccaturaSpecifier
 
 .. raw:: html
 

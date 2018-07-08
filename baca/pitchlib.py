@@ -1,8 +1,6 @@
 import abjad
 import collections as collections_module
 import inspect
-from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
-from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .Cursor import Cursor
 from .Expression import Expression
 from .RegisterToOctaveCommand import RegisterToOctaveCommand
@@ -11,6 +9,747 @@ from .Tree import Tree
 
 
 ### CLASSES ###
+
+class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
+    """
+    Arpeggiation spacing specifier.
+
+    ..  container:: example
+
+        >>> specifier = baca.ArpeggiationSpacingSpecifier()
+        >>> specifier([[6, 0, 4, 5, 8]])
+        CollectionList([<6, 12, 16, 17, 20>])
+
+    ..  container:: example
+
+        >>> specifier = baca.ArpeggiationSpacingSpecifier()
+        >>> specifier([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        CollectionList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
+
+    ..  container:: example
+
+        >>> baca.ArpeggiationSpacingSpecifier()
+        ArpeggiationSpacingSpecifier()
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(3) Specifiers'
+
+    __slots__ = (
+        '_direction',
+        '_pattern',
+        )
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        direction=None,
+        pattern=None,
+        ):
+        if direction is not None:
+            assert direction in (abjad.Up, abjad.Down), repr(direction)
+        self._direction = direction
+        if pattern is not None:
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
+        self._pattern = pattern
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, collections=None):
+        """
+        Calls specifier on ``collections``.
+
+        ..  container:: example
+
+            >>> specifier = baca.ArpeggiationSpacingSpecifier()
+            >>> specifier([])
+            PitchSegment([])
+
+        ..  container:: example
+
+            >>> specifier = baca.ArpeggiationSpacingSpecifier()
+            >>> specifier() is None
+            True
+
+        Returns collection list or none.
+        """
+        if collections is None:
+            return
+        if collections == []:
+            return PitchSegment(item_class=abjad.NumberedPitch)
+        if not isinstance(collections, CollectionList):
+            collections = CollectionList(collections)
+        pitch_class_collections = collections.to_pitch_classes()
+        pattern = self.pattern or abjad.index_all()
+        collections_ = []
+        total_length = len(collections)
+        class_ = ChordalSpacingSpecifier
+        direction = self.direction or abjad.Up
+        for i in range(total_length):
+            if pattern.matches_index(i, total_length):
+                pitch_class_collection = pitch_class_collections[i]
+                if isinstance(pitch_class_collection, abjad.Set):
+                    pitch_classes = list(sorted(pitch_class_collection))
+                else:
+                    pitch_classes = list(pitch_class_collection)
+                if direction == abjad.Up:
+                    pitches = class_._to_tightly_spaced_pitches_ascending(
+                        pitch_classes,
+                        )
+                else:
+                    pitches = class_._to_tightly_spaced_pitches_descending(
+                        pitch_classes,
+                        )
+                if isinstance(pitch_class_collection, abjad.Set):
+                    collection_ = PitchSet(items=pitches)
+                else:
+                    collection_ = PitchSegment(items=pitches)
+                collections_.append(collection_)
+            else:
+                collections_.append(collections[i])
+        return CollectionList(collections_)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def direction(self):
+        r"""
+        Gets direction.
+
+        ..  container:: example
+
+            >>> music_maker = baca.MusicMaker()
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.ArpeggiationSpacingSpecifier(
+            ...         direction=abjad.Up,
+            ...         ),
+            ...     baca.bass_to_octave(2),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \scaleDurations #'(1 . 1) {
+                                c,16
+                                [
+                                d,16
+                                bf,16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                fs,16
+                                [
+                                e16
+                                ef'16
+                                af'16
+                                g''16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a,16
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            >>> music_maker = baca.MusicMaker()
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.ArpeggiationSpacingSpecifier(
+            ...         direction=abjad.Down,
+            ...         ),
+            ...     baca.bass_to_octave(2),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
+                    {
+                        \voiceOne
+                        {
+                            \scaleDurations #'(1 . 1) {
+                                c'16
+                                [
+                                d16
+                                bf,16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                fs16
+                                [
+                                e16
+                                ef16
+                                af,16
+                                g,16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a,16
+                            }
+                        }
+                    }
+                >>
+
+
+        Set to up, down or none.
+
+        Returns up, down or none.
+        """
+        return self._direction
+
+    @property
+    def pattern(self):
+        """
+        Gets pattern.
+
+        Set to pattern or none.
+
+        Returns pattern or none.
+        """
+        return self._pattern
+
+class ChordalSpacingSpecifier(abjad.AbjadValueObject):
+    """
+    Chordal spacing specifier.
+
+    ..  container:: example
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=7,
+        ...     )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 9, 11, 17, 19>])
+
+    ..  container:: example
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     direction=abjad.Down,
+        ...     soprano=7,
+        ...     )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<19, 17, 11, 9, 6>])
+
+    ..  container:: example
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=11,
+        ...     direction=abjad.Down,
+        ...     soprano=7,
+        ...     )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<31, 30, 29, 21, 11>])
+
+    ..  container:: example
+
+        >>> specifier = baca.ChordalSpacingSpecifier()
+        >>> specifier([[0, 1, 2]])
+        CollectionList([<0, 1, 2>])
+
+        >>> specifier([[0, 2, 1]])
+        CollectionList([<0, 1, 2>])
+
+        >>> specifier([[1, 0, 2]])
+        CollectionList([<1, 2, 12>])
+
+        >>> specifier([[1, 2, 0]])
+        CollectionList([<1, 2, 12>])
+
+        >>> specifier([[2, 0, 1]])
+        CollectionList([<2, 12, 13>])
+
+        >>> specifier([[2, 1, 0]])
+        CollectionList([<2, 12, 13>])
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(3) Specifiers'
+
+    __slots__ = (
+        '_bass',
+        '_direction',
+        '_minimum_semitones',
+        '_pattern',
+        '_soprano',
+        )
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        bass=None,
+        direction=None,
+        minimum_semitones=None,
+        pattern=None,
+        soprano=None,
+        ):
+        self._bass = bass
+        if direction is not None:
+            assert direction in (abjad.Up, abjad.Down)
+        self._direction = direction
+        if minimum_semitones is not None:
+            assert isinstance(minimum_semitones, int)
+            assert 1 <= minimum_semitones
+        self._minimum_semitones = minimum_semitones
+        if pattern is not None:
+            assert isinstance(pattern, abjad.Pattern)
+        self._pattern = pattern
+        self._soprano = soprano
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, collections=None):
+        """
+        Calls specifier on ``collections``.
+
+        ..  container:: example
+
+            >>> specifier = baca.ChordalSpacingSpecifier()
+            >>> specifier() is None
+            True
+
+        Returns pitch collection or none.
+        """
+        if collections is None:
+            return
+        if not isinstance(collections, CollectionList):
+            collections = CollectionList(collections)
+        pattern = self.pattern or abjad.index_all()
+        collections_ = []
+        total_length = len(collections)
+        for i in range(total_length):
+            if not pattern.matches_index(i, total_length):
+                collections_.append(collections[i])
+            else:
+                collection = collections[i]
+                collection_ = self._space_collection(collection)
+                collections_.append(collection_)
+        return CollectionList(collections_)
+
+    ### PRIVATE METHODS ###
+
+    def _sort_pitch_classes_ascending(self, start, pitch_classes):
+        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
+        if self.minimum_semitones is not None:
+            candidate = start + self.minimum_semitones
+        else:
+            candidate = start + 1
+        while pitch_classes:
+            if candidate in pitch_classes:
+                pitch_classes_.append(candidate)
+                pitch_classes.remove(candidate)
+                if self.minimum_semitones is not None:
+                    candidate += self.minimum_semitones
+            else:
+                candidate += 1
+            if 999 <= iterations:
+                message = 'stuck in while-loop.'
+                raise Exception(message)
+            iterations += 1
+        assert not pitch_classes, repr(pitch_classes)
+        return pitch_classes_
+
+    def _sort_pitch_classes_descending(self, start, pitch_classes):
+        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
+        if self.minimum_semitones is not None:
+            candidate = abjad.NumberedPitchClass(
+                start.number - self.minimum_semitones
+                )
+        else:
+            candidate = abjad.NumberedPitchClass(start.number - 1)
+        while pitch_classes:
+            if candidate in pitch_classes:
+                pitch_classes_.append(candidate)
+                pitch_classes.remove(candidate)
+                if self.minimum_semitones is not None:
+                    candidate = abjad.NumberedPitchClass(
+                        candidate.number - self.minimum_semitones
+                        )
+            else:
+                candidate = abjad.NumberedPitchClass(candidate.number - 1)
+            if 999 <= iterations:
+                raise Exception('stuck in while-loop.')
+            iterations += 1
+        assert not pitch_classes, repr(pitch_classes)
+        return pitch_classes_
+
+    def _space_collection(self, collection):
+        original_collection = collection
+        if isinstance(collection, abjad.Set):
+            pitch_classes = list(sorted(collection.to_pitch_classes()))
+        else:
+            pitch_classes = list(collection.to_pitch_classes())
+        cardinality = len(pitch_classes)
+        bass, soprano, outer = None, None, []
+        if self.bass is not None:
+            bass = abjad.NumberedPitchClass(self.bass)
+            if bass not in pitch_classes:
+                raise ValueError(f'bass pc {bass} not in {pitch_classes}.')
+            outer.append(bass)
+        if self.soprano is not None:
+            soprano = abjad.NumberedPitchClass(self.soprano)
+            if soprano not in pitch_classes:
+                raise ValueError(f'soprano pc {bass} not in {pitch_classes}.')
+            outer.append(soprano)
+        inner = []
+        for pitch_class in pitch_classes:
+            if pitch_class not in outer:
+                inner.append(pitch_class)
+        pitch_classes = []
+        pitches = []
+        direction = self.direction or abjad.Up
+        if direction is abjad.Up:
+            if bass is not None:
+                pitch_classes.append(bass)
+            elif inner:
+                pitch_classes.append(inner.pop(0))
+            elif soprano:
+                pitch_classes.append(soprano)
+                soprano = None
+            start = pitch_classes[0]
+            inner = self._sort_pitch_classes_ascending(start, inner)
+            pitch_classes.extend(inner)
+            if soprano:
+                pitch_classes.append(soprano)
+            pitches = self._to_tightly_spaced_pitches_ascending(pitch_classes)
+        else:
+            if soprano is not None:
+                pitch_classes.append(soprano)
+            elif inner:
+                pitch_classes.append(inner.pop(0))
+            elif bass:
+                pitch_classes.append(bass)
+                bass = None
+            start = pitch_classes[0]
+            inner = self._sort_pitch_classes_descending(start, inner)
+            pitch_classes.extend(inner)
+            if bass:
+                pitch_classes.append(bass)
+            pitches = self._to_tightly_spaced_pitches_descending(pitch_classes)
+        if isinstance(original_collection, abjad.Set):
+            return PitchSet(pitches)
+        else:
+            return PitchSegment(pitches)
+
+    @staticmethod
+    def _to_tightly_spaced_pitches_ascending(pitch_classes):
+        pitches = []
+        pitch_class = pitch_classes[0]
+        pitch = abjad.NumberedPitch((pitch_class, 4))
+        pitches.append(pitch)
+        for pitch_class in pitch_classes[1:]:
+            candidate_octave = pitches[-1].octave.number
+            candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
+            if pitches[-1] <= candidate:
+                pitches.append(candidate)
+            else:
+                octave = candidate_octave + 1
+                pitch = abjad.NumberedPitch((pitch_class, octave))
+                assert pitches[-1] <= pitch
+                pitches.append(pitch)
+        return pitches
+
+    @staticmethod
+    def _to_tightly_spaced_pitches_descending(pitch_classes):
+        pitches = []
+        pitch_class = pitch_classes[0]
+        pitch = abjad.NumberedPitch((pitch_class, 4))
+        pitches.append(pitch)
+        for pitch_class in pitch_classes[1:]:
+            candidate_octave = pitches[-1].octave.number
+            candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
+            if candidate <= pitches[-1]:
+                pitches.append(candidate)
+            else:
+                octave = candidate_octave - 1
+                pitch = abjad.NumberedPitch((pitch_class, octave))
+                assert pitch <= pitches[-1]
+                pitches.append(pitch)
+        collection = PitchSegment(pitches)
+        while collection[-1].octave.number < 4:
+            collection = collection.transpose(n=12)
+        return collection
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def bass(self):
+        """
+        Gets bass.
+
+        ..  container:: example
+
+            Up-directed bass specification:
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=None,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 11, 17>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 11, 17>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=7,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<7, 9, 11, 17, 18>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=9,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<9, 11, 17, 18, 19>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=11,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<11, 17, 18, 19, 21>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=5,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<5, 6, 7, 9, 11>])
+
+        Returns pitch-class or none.
+        """
+        return self._bass
+
+    @property
+    def direction(self):
+        """
+        Gets direction.
+
+        ..  container:: example
+
+            Up-directed joint control:
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 9, 11, 17, 19>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=9,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 11, 17, 21>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=11,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 17, 23>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=5
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 11, 17>])
+
+        Returns up, down or none.
+        """
+        return self._direction
+
+    @property
+    def minimum_semitones(self):
+        """
+        Gets minimum semitones.
+
+        ..  container:: example
+
+            Up-directed spacing with semitone constraints.
+
+            First three examples give the same spacing:
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 11, 17, 19>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     minimum_semitones=1,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 11, 17, 19>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     minimum_semitones=2,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 11, 17, 19>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     minimum_semitones=3,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 17, 23, 31>])
+
+        ..  container:: example
+
+            Down-directed spacing with semitone constraints.
+
+            First three examples give the same spacing:
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<19, 17, 11, 9, 6>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     minimum_semitones=1,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<19, 17, 11, 9, 6>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     minimum_semitones=2,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<19, 17, 11, 9, 6>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     minimum_semitones=3,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<31, 23, 17, 9, 6>])
+
+        Set to positive integer or none.
+
+        Returns positive integer or none.
+        """
+        return self._minimum_semitones
+
+    @property
+    def pattern(self):
+        """
+        Gets pattern.
+
+        Set to pattern or none.
+
+        Returns pattern or none.
+        """
+        return self._pattern
+
+    @property
+    def soprano(self):
+        """
+        Gets soprano.
+
+        ..  container:: example
+
+            Down-directed soprano control:
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=None,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<18, 17, 11, 9, 7>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=6,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<18, 17, 11, 9, 7>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=5,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<17, 11, 9, 7, 6>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=11,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<11, 9, 7, 6, 5>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=9,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<21, 19, 18, 17, 11>])
+
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<19, 18, 17, 11, 9>])
+
+        Returns pitch-class or none.
+        """
+        return self._soprano
 
 class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     """
@@ -2097,6 +2836,1024 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             collection_ = collection.transpose(n)
             collections_.append(collection_)
         return abjad.new(self, collections=collections_)
+
+class Constellation(abjad.AbjadObject):
+    """
+    Constellation.
+
+    ..  container:: example
+
+        >>> cells = [
+        ...     [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
+        ...     [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
+        ...     [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
+        ...     [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
+        ...     [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
+        ...     [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
+        ...     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
+        ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
+        ...     ]
+        >>> range_ = abjad.PitchRange('[A0, C8]')
+        >>> constellation_circuit = baca.ConstellationCircuit(
+        ...     cells,
+        ...     range_,
+        ...     )
+
+        >>> for constellation in constellation_circuit:
+        ...     constellation
+        Constellation(180)
+        Constellation(140)
+        Constellation(80)
+        Constellation(100)
+        Constellation(180)
+        Constellation(150)
+        Constellation(120)
+        Constellation(108)
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(5) Utilities'
+
+    ### INITIALIZER ###
+
+    def __init__(self, circuit, partitioned_generator_pitch_numbers):
+        self._circuit = circuit
+        self._partitioned_generator_pitch_numbers = \
+            partitioned_generator_pitch_numbers
+        self._constellate_partitioned_generator_pitch_numbers()
+        self._chord_duration = abjad.Duration(1, 4)
+        self._chords = []
+
+    ### SPECIAL METHODS ###
+
+    def __contains__(self, pitch_set):
+        """
+        Is true when constellation contains ``pitch_set``.
+
+        ..  container:: example
+
+            >>> pitch_numbers = [
+            ...     -38, -36, -34, -29, -28, -25,
+            ...     -21, -20, -19, -18, -15, -11,
+            ...     ]
+            >>> pitch_set = baca.Sequence(items=pitch_numbers)
+            >>> constellation = constellation_circuit[0]
+            >>> pitch_set in constellation
+            True
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> [-38] in constellation
+            False
+
+        Returns true or false.
+        """
+        return pitch_set in self._pitch_number_lists
+
+    def __getitem__(self, argument):
+        """
+        Gets item or slice identified by ``argument``.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> constellation[0]
+            Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
+
+        Returns list.
+        """
+        return self._pitch_number_lists.__getitem__(argument)
+
+    def __len__(self):
+        """
+        Gets length of constellation.
+
+        ..  container::
+
+            >>> constellation = constellation_circuit[0]
+            >>> len(constellation)
+            180
+
+        Returns nonnegative integer.
+        """
+        return len(self._pitch_number_lists)
+
+    def __repr__(self):
+        """
+        Gets interpreter representation of constellation.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> constellation
+            Constellation(180)
+
+        """
+        return f'{type(self).__name__}({len(self)})'
+
+    ### PRIVATE PROPERTIES ###
+
+    @property
+    def _color_map(self):
+        pitches = self._partitioned_generator_pitch_numbers
+        colors = ['red', 'blue', 'green']
+        return abjad.ColorMap(colors=colors, pitch_iterables=pitches)
+
+    @property
+    def _colored_generator(self):
+        generator_chord = self.generator_chord
+        abjad.label(generator_chord).color_note_heads(self._color_map)
+        return generator_chord
+
+    @property
+    def _constellation_number(self):
+        constellation_index = self._circuit._constellations.index(self)
+        constellation_number = constellation_index + 1
+        return constellation_number
+
+    @property
+    def _generator_chord_number(self):
+        return self.get_number_of_chord(self.generator_chord)
+
+    @property
+    def _generator_pitch_numbers(self):
+        result = self._partitioned_generator_pitch_numbers
+        result = Sequence(result).flatten(depth=-1)
+        return list(sorted(result))
+
+    @property
+    def _next(self):
+        return self._advance(1)
+
+    @property
+    def _pivot_chord_number(self):
+        pivot = self.pivot_chord
+        return self.get_number_of_chord(pivot)
+
+    @property
+    def _prev(self):
+        return self._advance(-1)
+
+    ### PRIVATE METHODS ###
+
+    def _advance(self, i):
+        my_idx = self._circuit._constellations.index(self)
+        len_circuit = len(self._circuit)
+        next_idx = (my_idx + i) % len_circuit
+        next_constellation = self._circuit._constellations[next_idx]
+        return next_constellation
+
+    def _constellate_partitioned_generator_pitch_numbers(self):
+        self._pitch_number_lists = self.constellate(
+            self._partitioned_generator_pitch_numbers,
+            self.pitch_range,
+            )
+
+    def _label_chord(self, chord):
+        chord_number = self.get_number_of_chord(chord)
+        label = f'{self._constellation_number}-{chord_number}'
+        markup = abjad.Markup(label)
+        abjad.attach(markup, chord)
+
+    def _make_lilypond_file_and_score_from_chords(self, chords):
+        score, treble, bass = abjad.Score.make_piano_score(
+            leaves=chords,
+            sketch=True,
+            )
+        score.override.text_script.staff_padding = 10
+        score.set.proportional_notation_duration = abjad.SchemeMoment((1, 30))
+        lilypond_file = abjad.LilyPondFile.new(score)
+        lilypond_file.default_paper_size = 'letter', 'landscape'
+        lilypond_file.global_staff_size = 18
+        lilypond_file.layout_block.indent = 0
+        lilypond_file.layout_block.ragged_right = True
+        lilypond_file.paper_block.system_system_spacing = abjad.SchemeVector(
+            abjad.SchemePair('basic_distance', 0),
+            abjad.SchemePair('minimum_distance', 0),
+            abjad.SchemePair('padding', 12),
+            abjad.SchemePair('stretchability', 0),
+            )
+        lilypond_file.paper_block.top_margin = 24
+        return lilypond_file, score
+
+    def _show_chords(self, chords):
+        lilypond_file, score = \
+            self._make_lilypond_file_and_score_from_chords(chords)
+        abjad.show(lilypond_file, strict=89)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def constellation_number(self):
+        """
+        Gets constellation number.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> constellation.constellation_number
+            1
+
+        Returns positive integer.
+        """
+        return self._circuit._constellations.index(self) + 1
+
+    @property
+    def generator_chord(self):
+        r"""
+        Gets generator chord.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> abjad.show(constellation.generator_chord, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(constellation.generator_chord, strict=89)
+                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                - \markup { 1-80 }
+
+        """
+        pitch_numbers = self._generator_pitch_numbers
+        generator_chord = abjad.Chord(pitch_numbers, (1, 4))
+        self._label_chord(generator_chord)
+        return generator_chord
+
+    @property
+    def partitioned_generator_pitch_numbers(self):
+        """
+        Gets partitioned generator pitch numbers.
+
+        ..  container:: example
+
+            >>> for constellation in constellation_circuit:
+            ...     constellation.partitioned_generator_pitch_numbers
+            [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+            [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
+            [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
+            [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]]
+            [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]]
+            [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]]
+            [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
+            [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
+
+        Returns list of lists.
+        """
+        return self._partitioned_generator_pitch_numbers
+
+    @property
+    def pitch_range(self):
+        """
+        Gets pitch range of constellation.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> constellation.pitch_range
+            PitchRange('[A0, C8]')
+
+        """
+        return self._circuit.pitch_range
+
+    @property
+    def pivot_chord(self):
+        r"""
+        Gets pivot chord.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> abjad.show(constellation.pivot_chord, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(constellation.pivot_chord, strict=89)
+                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                - \markup { 1-80 }
+
+        """
+        next_pitch_number_list = self._next._generator_pitch_numbers
+        pivot_chord = abjad.Chord(next_pitch_number_list, (1, 4))
+        self._label_chord(pivot_chord)
+        return pivot_chord
+
+    ### PUBLIC METHODS ###
+
+    @staticmethod
+    def constellate(cells, range):
+        """
+        Constellates ``cells``.
+
+        ..  container:: example
+
+            >>> pitches = [[0, 2, 10], [16, 19, 20]]
+            >>> range_ = abjad.PitchRange('[C4, C#7]')
+            >>> segments = baca.Constellation.constellate(pitches, range_)
+            >>> for segment in segments:
+            ...     segment
+            Sequence([0, 2, 4, 7, 8, 10])
+            Sequence([0, 2, 10, 16, 19, 20])
+            Sequence([0, 2, 10, 28, 31, 32])
+            Sequence([4, 7, 8, 12, 14, 22])
+            Sequence([12, 14, 16, 19, 20, 22])
+            Sequence([12, 14, 22, 28, 31, 32])
+            Sequence([4, 7, 8, 24, 26, 34])
+            Sequence([16, 19, 20, 24, 26, 34])
+            Sequence([24, 26, 28, 31, 32, 34])
+
+        ..  container:: example
+
+            >>> pitches = [[4, 8, 11], [7, 15, 17]]
+            >>> range_ = abjad.PitchRange('[C4, C#7]')
+            >>> segments = baca.Constellation.constellate(pitches, range_)
+            >>> for segment in segments:
+            ...     segment
+            Sequence([4, 7, 8, 11, 15, 17])
+            Sequence([4, 8, 11, 19, 27, 29])
+            Sequence([7, 15, 16, 17, 20, 23])
+            Sequence([16, 19, 20, 23, 27, 29])
+            Sequence([7, 15, 17, 28, 32, 35])
+            Sequence([19, 27, 28, 29, 32, 35])
+
+        Returns outer product of octave transpositions of ``cells`` in
+        ``range``.
+        """
+        if not isinstance(range, abjad.PitchRange):
+            raise TypeError(f'pitch range only: {range!r}.')
+        transposition_list = []
+        for cell in cells:
+            transpositions = range.list_octave_transpositions(cell)
+            transposition_list.append(transpositions)
+        enumerator = abjad.Enumerator(transposition_list)
+        result = enumerator.yield_outer_product()
+        result = list(result)
+        for i, part in enumerate(result):
+            result[i] = Sequence(part).flatten(depth=-1)
+        for i, cell in enumerate(result[:]):
+            result[i] = cell.sort()
+        return result
+
+    def get_chord(self, chord_number):
+        """
+        Gets chord with 1-indexed chord number.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> constellation.get_chord(1)
+            Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
+
+        Returns list of numbers.
+        """
+        assert 1 <= chord_number
+        chord_index = chord_number - 1
+        return self._pitch_number_lists[chord_index]
+
+    def get_number_of_chord(self, chord):
+        """
+        Gets number of chord.
+
+        ..  container:: example
+
+            >>> constellation = constellation_circuit[0]
+            >>> chord = constellation.get_chord(17)
+            >>> constellation.get_number_of_chord(chord)
+            17
+
+        Returns positive integer.
+        """
+        chord = abjad.Chord(chord, (1, 4))
+        pitch_numbers = [_.number for _ in chord.written_pitches]
+        pitch_numbers = Sequence(items=pitch_numbers)
+        for i, pitch_number_list in enumerate(self):
+            if pitch_number_list == pitch_numbers:
+                return i + 1
+        raise ValueError(f'{chord} not in {self}')
+
+    def make_chords(self):
+        result = []
+        for pitch_number_list in self._pitch_number_lists:
+            chord = abjad.Chord(pitch_number_list, self._chord_duration)
+            result.append(chord)
+        return result
+
+    def make_labeled_chords(self):
+        result = self.make_chords()
+        for chord in result:
+            self._label_chord(chord)
+        return result
+
+    def make_labeled_colored_chords(self):
+        result = self.make_labeled_chords()
+        for chord in result:
+            abjad.label(chord).color_note_heads(self._color_map)
+        return result
+
+    def show_colored_generator_chord(self):
+        colored_generator = self._colored_generator
+        self._label_chord(colored_generator)
+        self._show_chords([colored_generator])
+
+    def show_colored_generator_chord_and_pivot_chord(self):
+        colored_generator = self._colored_generator
+        self._label_chord(colored_generator)
+        pivot = self.pivot_chord
+        self._label_chord(pivot)
+        self._show_chords([colored_generator, pivot])
+
+    def show_generator_chord(self):
+        generator = self.generator_chord
+        self._label_chord(generator)
+        self._show_chords([generator])
+
+    def show_generator_chord_and_pivot_chord(self):
+        generator = self.generator_chord
+        self._label_chord(generator)
+        pivot = self.pivot_chord
+        self._label_chord(pivot)
+        self._show_chords([generator, pivot])
+
+    def show_pivot_chord(self):
+        pivot = self.pivot_chord
+        self._label_chord(pivot)
+        self._show_chords([pivot])
+
+class ConstellationCircuit(abjad.AbjadObject):
+    """
+    Constellation circuit.
+
+    ..  container:: example
+
+        >>> range_ = abjad.PitchRange('[A0, C8]')
+        >>> constellation_circuit = baca.ConstellationCircuit(
+        ...     baca.ConstellationCircuit.CC1,
+        ...     range_,
+        ...     )
+
+        >>> for constellation in constellation_circuit:
+        ...     constellation
+        Constellation(180)
+        Constellation(140)
+        Constellation(80)
+        Constellation(100)
+        Constellation(180)
+        Constellation(150)
+        Constellation(120)
+        Constellation(108)
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = '(5) Utilities'
+
+    CC1 = [
+        [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
+        [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
+        [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
+        [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
+        [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
+        [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
+        [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
+        [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
+        ]
+
+    ### INITIALIZER ###
+
+    def __init__(self, partitioned_generator_pnls, pitch_range):
+        self._partitioned_generator_pnls = partitioned_generator_pnls
+        self._pitch_range = pitch_range
+        self._constellate_partitioned_generator_pnls()
+
+    ### SPECIAL METHODS ###
+
+    def __getitem__(self, argument):
+        """
+        Gets item or slice identified by ``argument``.
+
+        ..  container:: example
+
+            >>> constellation_circuit[-1]
+            Constellation(108)
+
+        Returns constellation.
+        """
+        return self._constellations.__getitem__(argument)
+
+    def __len__(self):
+        """
+        Gets length of circuit.
+
+        ..  container:: example
+
+            >>> len(constellation_circuit)
+            8
+
+        """
+        return len(self._constellations)
+
+    def __repr__(self):
+        """
+        Gets interpreter representation of circuit.
+
+        ..  container:: example
+
+            >>> constellation_circuit
+            ConstellationCircuit(8)
+
+        Returns string.
+        """
+        return f'{type(self).__name__}({len(self)})'
+
+    ### PRIVATE PROPERTIES ###
+
+    # FIXME
+    @property
+    def _colored_generator_chords(self):
+        result = []
+        for constellation in self:
+            result.append(constellation._colored_generator)
+        return result
+
+    @property
+    def _generator_chord_numbers(self):
+        result = []
+        for constellation in self:
+            result.append(constellation._generator_chord_number)
+        return result
+
+    @property
+    def _pivot_chord_numbers(self):
+        result = []
+        for constellation in self:
+            result.append(constellation._pivot_chord_number)
+        return result
+
+    ### PRIVATE METHODS ###
+
+    def _constellate_partitioned_generator_pnls(self):
+        self._constellations = []
+        enumeration = enumerate(self._partitioned_generator_pnls)
+        for i, partitioned_generator_pnl in enumeration:
+            constellation = Constellation(
+                self,
+                partitioned_generator_pnl,
+                )
+            self._constellations.append(constellation)
+
+    def _illustrate_chords(self, chords):
+        result = abjad.Score.make_piano_score(leaves=chords, sketch=True)
+        score, treble, bass = result
+        abjad.override(score).text_script.staff_padding = 10
+        moment = abjad.SchemeMoment((1, 30))
+        abjad.setting(score).proportional_notation_duration = moment
+        lilypond_file = abjad.LilyPondFile.new(
+            score,
+            global_staff_size=18,
+            )
+        lilypond_file.layout_block.indent = 0
+        lilypond_file.layout_block.ragged_right = True
+        vector = abjad.SpacingVector(0, 0, 12, 0)
+        lilypond_file.paper_block.system_system_spacing = vector
+        lilypond_file.paper_block.top_margin = 24
+        return lilypond_file
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def generator_chords(self):
+        """
+        Gets generator chords.
+
+        ..  container:: example
+
+            >>> for chord in constellation_circuit.generator_chords:
+            ...     chord
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
+            Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
+            Chord("<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4")
+            Chord("<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4")
+            Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
+            Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
+
+        Returns list of chords.
+        """
+        result = []
+        for constellation in self:
+            result.append(constellation.generator_chord)
+        return result
+
+    @property
+    def pitch_range(self):
+        """
+        Gets pitch range.
+
+        ..  container:: example
+
+            >>> constellation_circuit.pitch_range
+            PitchRange('[A0, C8]')
+
+        Returns pitch range.
+        """
+        return self._pitch_range
+
+    @property
+    def pivot_chords(self):
+        """
+        Gets pivot chords.
+
+        ..  container:: example
+
+            >>> for chord in constellation_circuit.pivot_chords:
+            ...     chord
+            ...
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
+            Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
+            Chord("<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4")
+            Chord("<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4")
+            Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
+            Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+
+        Returns list of chords.
+        """
+        result = []
+        for constellation in self:
+            result.append(constellation.pivot_chord)
+        return result
+
+    ### PUBLIC METHODS ###
+
+    def get(self, *arguments):
+        """
+        Gets constellation in circuit.
+
+        ..  container:: example
+
+            >>> constellation_circuit.get(8)
+            Constellation(108)
+
+        ..  container:: example
+
+            >>> constellation_circuit.get(8, 108)
+            Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
+
+        Returns constellation or list.
+        """
+        if len(arguments) == 1:
+            constellation_number = arguments[0]
+            constellation_index = constellation_number - 1
+            return self._constellations[constellation_index]
+        elif len(arguments) == 2:
+            constellation_number, chord_number = arguments
+            constellation_index = constellation_number - 1
+            constellation = self._constellations[constellation_index]
+            return constellation.get_chord(chord_number)
+
+    def illustrate_colored_generator_chords(self):
+        r"""
+        Illustrates colored generator chords.
+
+        ..  container:: example
+
+            >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TextScript.staff-padding = #10
+                    \override TimeSignature.stencil = ##f
+                    proportionalNotationDuration = #(ly:make-moment 1 30)
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                        }
+                        \context Staff = "Bass Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            <c d bf>4
+                            e4
+                            e4
+                            <c ef>4
+                            <d g bf>4
+                            <d bf>4
+                            c4
+                        }
+                    >>
+                >>
+
+        Returns LilyPond file.
+        """
+        return self._illustrate_chords(self._colored_generator_chords)
+
+    def illustrate_colored_generator_chords_and_pivot_chords(self):
+        r"""
+        Illustrates colored generator chords and pivot chords.
+
+        ..  container:: example
+
+            >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TextScript.staff-padding = #10
+                    \override TimeSignature.stencil = ##f
+                    proportionalNotationDuration = #(ly:make-moment 1 30)
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            <c d bf>4
+                            <c d bf>4
+                            e4
+                            e4
+                            e4
+                            e4
+                            <c ef>4
+                            <c ef>4
+                            <d g bf>4
+                            <d g bf>4
+                            <d bf>4
+                            <d bf>4
+                            c4
+                            c4
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
+        Returns LilyPond file.
+        """
+        chords = list(zip(self._colored_generator_chords, self.pivot_chords))
+        chords = Sequence(chords).flatten(depth=1)
+        return self._illustrate_chords(chords)
+
+    def illustrate_generator_chords(self):
+        r"""
+        Illustrates generator chords.
+
+        ..  container:: example
+
+            >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TextScript.staff-padding = #10
+                    \override TimeSignature.stencil = ##f
+                    proportionalNotationDuration = #(ly:make-moment 1 30)
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                        }
+                        \context Staff = "Bass Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            <c d bf>4
+                            e4
+                            e4
+                            <c ef>4
+                            <d g bf>4
+                            <d bf>4
+                            c4
+                        }
+                    >>
+                >>
+
+        Returns LilyPond file.
+        """
+        return self._illustrate_chords(self.generator_chords)
+
+    def illustrate_generator_chords_and_pivot_chords(self):
+        r"""
+        Illustrates generator chords and pivot chords.
+
+        ..  container:: example
+
+            >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TextScript.staff-padding = #10
+                    \override TimeSignature.stencil = ##f
+                    proportionalNotationDuration = #(ly:make-moment 1 30)
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            <c d bf>4
+                            <c d bf>4
+                            e4
+                            e4
+                            e4
+                            e4
+                            <c ef>4
+                            <c ef>4
+                            <d g bf>4
+                            <d g bf>4
+                            <d bf>4
+                            <d bf>4
+                            c4
+                            c4
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
+        Returns LilyPond file.
+        """
+        chords = list(zip(self.generator_chords, self.pivot_chords))
+        chords = Sequence(chords).flatten(depth=1)
+        return self._illustrate_chords(chords)
+
+    def illustrate_pivot_chords(self):
+        r"""
+        Illustrates pivot chords.
+
+        ..  container:: example
+
+            >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TextScript.staff-padding = #10
+                    \override TimeSignature.stencil = ##f
+                    proportionalNotationDuration = #(ly:make-moment 1 30)
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            e4
+                            e4
+                            <c ef>4
+                            <d g bf>4
+                            <d bf>4
+                            c4
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
+        Returns LilyPond file.
+        """
+        return self._illustrate_chords(self.pivot_chords)
+
+    @classmethod
+    def make_constellation_circuit_1(class_):
+        """
+        Makes constellation circuit 1.
+
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
+            >>> for constellation in constellation_circuit:
+            ...     constellation
+            Constellation(180)
+            Constellation(140)
+            Constellation(80)
+            Constellation(100)
+            Constellation(180)
+            Constellation(150)
+            Constellation(120)
+            Constellation(108)
+
+        Returns constellation circuit.
+        """
+        return class_(class_.CC1, abjad.PitchRange('[A0, C8]'))
 
 class PitchClassSegment(abjad.PitchClassSegment):
     r"""
