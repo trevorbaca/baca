@@ -2,6 +2,7 @@ import abjad
 import baca
 import collections
 import typing
+from . import indicatorlib
 from . import library
 from . import markuplib
 from . import typings
@@ -22,7 +23,6 @@ from .PitchCommand import PitchCommand
 from .RestAffixSpecifier import RestAffixSpecifier
 from .Scope import Scope
 from .SpannerCommand import SpannerCommand
-from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
 from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
@@ -2457,7 +2457,7 @@ def staff_lines(
 
     """
     return IndicatorCommand(
-        indicators=[StaffLines(line_count=n)],
+        indicators=[indicatorlib.StaffLines(line_count=n)],
         selector=selector,
         )
 

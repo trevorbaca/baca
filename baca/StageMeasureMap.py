@@ -1,7 +1,6 @@
 import abjad
 import typing
-from .Accelerando import Accelerando
-from .Ritardando import Ritardando
+from . import indicatorlib
 
 
 class StageMeasureMap(abjad.AbjadObject):
@@ -67,10 +66,10 @@ class StageMeasureMap(abjad.AbjadObject):
 
     item_type = typing.Union[
         int,
-        Accelerando,
         abjad.Fermata,
-        Ritardando,
         abjad.TimeSignature, 
+        indicatorlib.Accelerando,
+        indicatorlib.Ritardando,
         ]
 
     def __init__(

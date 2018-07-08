@@ -2,6 +2,7 @@ import abjad
 from .library import *
 from .divisionlib import *
 from .dynamiclib import *
+from .indicatorlib import *
 from .markuplib import Markup
 from .overridelib import *
 from .pitcharraylib import *
@@ -13,7 +14,6 @@ from .templatelib import *
 from . import markuplib
 
 # classes
-from .Accelerando import Accelerando
 from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
 from .BCPCommand import BCPCommand
@@ -41,7 +41,6 @@ from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
 from .InstrumentChangeCommand import InstrumentChangeCommand
 from .Interpolator import Interpolator
-from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
 from .Loop import Loop
@@ -63,7 +62,6 @@ from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .PitchCommand import PitchCommand
 from .PitchSpecifier import PitchSpecifier
 from .RestAffixSpecifier import RestAffixSpecifier
-from .Ritardando import Ritardando
 from .SchemeManifest import SchemeManifest
 from .Scope import Scope
 from .SegmentMaker import SegmentMaker
@@ -72,7 +70,6 @@ from .Sequence import Sequence
 from .SpacingIndication import SpacingIndication
 from .SpacingSection import SpacingSection
 from .SpannerCommand import SpannerCommand
-from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand
 from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand

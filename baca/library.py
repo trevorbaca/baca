@@ -4,12 +4,12 @@ Function library.
 import abjad
 import typing
 from . import typings
+from . import indicatorlib
 from . import markuplib
 from .Command import Command
 from .Command import Map
 from .Command import Suite
 from .IndicatorCommand import IndicatorCommand
-from .LBSD import LBSD
 from .MeasureWrapper import MeasureWrapper
 from .PitchCommand import PitchCommand
 from .Scope import Scope
@@ -39,7 +39,7 @@ def lbsd(
     Makes line-break system details.
     """
     alignment_distances = Sequence(alignment_distances).flatten()
-    lbsd = LBSD(
+    lbsd = indicatorlib.LBSD(
         alignment_distances=alignment_distances,
         y_offset=y_offset,
         )

@@ -1,8 +1,8 @@
 import abjad
 import baca
 import typing
+from . import indicatorlib
 from .Command import Command
-from .LBSD import LBSD
 
 
 class BreakMeasureMap(abjad.AbjadObject):
@@ -289,7 +289,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             tag=self.tag.prepend('BMM1'),
             )
         for skip in skips[:measure_count]:
-            if not abjad.inspect(skip).has_indicator(LBSD):
+            if not abjad.inspect(skip).has_indicator(indicatorlib.LBSD):
                 literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
                 abjad.attach(
                     literal,

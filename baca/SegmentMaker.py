@@ -2690,6 +2690,8 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _prototype_string(class_):
         parts = class_.__module__.split('.')
+        if parts[-1] != class_.__name__:
+            parts.append(class_.__name__)
         return f'{parts[0]}.{parts[-1]}'
 
     def _reapply_persistent_indicators(self):

@@ -12,7 +12,6 @@ from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
 from .InstrumentChangeCommand import InstrumentChangeCommand
 from .LabelCommand import LabelCommand
-from .LBSD import LBSD
 from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .PitchCommand import PitchCommand
