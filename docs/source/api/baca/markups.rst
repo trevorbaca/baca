@@ -76,7 +76,6 @@ markups
    ~directly_on_bridge_very_slow_bow
    ~divisi_1_plus_3
    ~divisi_2_plus_4
-   ~edition
    ~estr_sul_pont
    ~ext_pont
    ~fast_whisked_ellipses
@@ -316,8 +315,6 @@ markups
 .. autofunction:: divisi_1_plus_3
 
 .. autofunction:: divisi_2_plus_4
-
-.. autofunction:: edition
 
 .. autofunction:: estr_sul_pont
 

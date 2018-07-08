@@ -1,16 +1,28 @@
-.. _baca--SettingCommand:
+.. _baca--settinglib:
 
-SettingCommand
-==============
+settinglib
+==========
 
-.. automodule:: baca.SettingCommand
+.. automodule:: baca.settinglib
 
-.. currentmodule:: baca.SettingCommand
+.. currentmodule:: baca.settinglib
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.SettingCommand
+      :lineage: baca.settinglib
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~SettingCommand
 
 .. autoclass:: SettingCommand
 

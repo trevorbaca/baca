@@ -78,7 +78,6 @@ Bača API
    ~baca.RegisterCommand.RegisterCommand
    ~baca.RegisterInterpolationCommand.RegisterInterpolationCommand
    ~baca.RegisterToOctaveCommand.RegisterToOctaveCommand
-   ~baca.SettingCommand.SettingCommand
    ~baca.SpannerCommand.SpannerCommand
    ~baca.StaffPositionCommand.StaffPositionCommand
    ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
@@ -116,22 +115,17 @@ Bača API
    ~baca.RegistrationComponent.RegistrationComponent
    ~baca.SchemeManifest.SchemeManifest
    ~baca.Scope.Scope
-   ~baca.ScoreTemplate.ScoreTemplate
    ~baca.Selection.Selection
    ~baca.Sequence.Sequence
-   ~baca.SingleStaffScoreTemplate.SingleStaffScoreTemplate
    ~baca.SpacingIndication.SpacingIndication
    ~baca.SpacingSection.SpacingSection
    ~baca.StaffLines.StaffLines
    ~baca.StageMeasureMap.StageMeasureMap
-   ~baca.StringTrioScoreTemplate.StringTrioScoreTemplate
    ~baca.SystemSpecifier.SystemSpecifier
    ~baca.TimeSignatureGroups.TimeSignatureGroups
    ~baca.TimeSignatureMaker.TimeSignatureMaker
    ~baca.TimelineScope.TimelineScope
    ~baca.Tree.Tree
-   ~baca.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate
-   ~baca.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate
    ~baca.WellformednessManager.WellformednessManager
 
 .. raw:: html
@@ -323,6 +317,7 @@ Bača API
    ~baca.LibraryAF.down_bow
    ~baca.LibraryAF.dynamic_down
    ~baca.LibraryAF.dynamic_up
+   ~baca.LibraryAF.edition
    ~baca.LibraryAF.espressivo
    ~baca.LibraryAF.fermata
    ~baca.LibraryAF.finger_pressure_transition
@@ -641,7 +636,6 @@ Markup library.
    ~baca.markups.directly_on_bridge_very_slow_bow
    ~baca.markups.divisi_1_plus_3
    ~baca.markups.divisi_2_plus_4
-   ~baca.markups.edition
    ~baca.markups.estr_sul_pont
    ~baca.markups.ext_pont
    ~baca.markups.fast_whisked_ellipses
@@ -1055,3 +1049,45 @@ Markup library.
    :nosignatures:
 
    ~baca.rhythmlib.SkipRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.settinglib <baca--settinglib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.settinglib.SettingCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.templatelib <baca--templatelib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.templatelib.ScoreTemplate
+   ~baca.templatelib.SingleStaffScoreTemplate
+   ~baca.templatelib.StringTrioScoreTemplate
+   ~baca.templatelib.TwoVoiceStaffScoreTemplate
+   ~baca.templatelib.ViolinSoloScoreTemplate

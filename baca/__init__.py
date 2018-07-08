@@ -6,6 +6,8 @@ from .overridelib import *
 from .pitcharraylib import *
 from .pitchlib import *
 from .rhythmlib import *
+from .settinglib import *
+from .templatelib import *
 from . import markups
 
 # classes
@@ -68,12 +70,9 @@ from .RestAffixSpecifier import RestAffixSpecifier
 from .Ritardando import Ritardando
 from .SchemeManifest import SchemeManifest
 from .Scope import Scope
-from .ScoreTemplate import ScoreTemplate
 from .SegmentMaker import SegmentMaker
 from .Selection import Selection
 from .Sequence import Sequence
-from .SettingCommand import SettingCommand
-from .SingleStaffScoreTemplate import SingleStaffScoreTemplate
 from .SpacingIndication import SpacingIndication
 from .SpacingSection import SpacingSection
 from .SpannerCommand import SpannerCommand
@@ -82,15 +81,12 @@ from .StaffPositionCommand import StaffPositionCommand
 from .StaffPositionInterpolationCommand import \
     StaffPositionInterpolationCommand
 from .StageMeasureMap import StageMeasureMap
-from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SystemSpecifier import SystemSpecifier
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups
 from .TimeSignatureMaker import TimeSignatureMaker
 from .TimelineScope import TimelineScope
 from .Tree import Tree
-from .TwoVoiceStaffScoreTemplate import TwoVoiceStaffScoreTemplate
-from .ViolinSoloScoreTemplate import ViolinSoloScoreTemplate
 from .VoltaCommand import VoltaCommand
 from .WellformednessManager import WellformednessManager
 

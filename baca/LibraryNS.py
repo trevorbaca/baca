@@ -25,7 +25,6 @@ from .RegisterToOctaveCommand import RegisterToOctaveCommand
 from .Registration import Registration
 from .RestAffixSpecifier import RestAffixSpecifier
 from .Scope import Scope
-from .SettingCommand import SettingCommand
 from .SpannerCommand import SpannerCommand
 from .StaffLines import StaffLines
 from .StaffPositionCommand import StaffPositionCommand

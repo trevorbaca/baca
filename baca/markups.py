@@ -7,7 +7,6 @@ import typing
 from . import library
 from . import typings
 from .Command import Suite
-from .IndicatorCommand import IndicatorCommand
 from .Markup import Markup
 
 
@@ -165,26 +164,6 @@ def divisi_1_plus_3():
 def divisi_2_plus_4():
     return Markup(
         '2 + 4',
-        )
-
-def edition(
-    not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    ) -> Suite:
-    """
-    Makes not-parts / only-parts markup suite.
-    """
-    if isinstance(not_parts, (str, abjad.Markup)):
-        not_parts = library.markup(not_parts)
-    assert isinstance(not_parts, IndicatorCommand)
-    not_parts_ = library.not_parts(not_parts)
-    if isinstance(only_parts, (str, abjad.Markup)):
-        only_parts = library.markup(only_parts)
-    assert isinstance(only_parts, IndicatorCommand)
-    only_parts_ = library.only_parts(only_parts)
-    return Suite(
-        not_parts_,
-        only_parts_,
         )
 
 def estr_sul_pont():
@@ -415,7 +394,7 @@ def lines(
         if isinstance(item, (str, abjad.Markup)):
             items_.append(item)
         else:
-            assert isinstance(item, IndicatorCommand)
+            # indicator command
             assert item.indicators is not None
             assert len(item.indicators) == 1
             markup = item.indicators[0]

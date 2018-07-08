@@ -35,6 +35,8 @@ baca
    pitcharraylib
    pitchlib
    rhythmlib
+   settinglib
+   templatelib
 
 .. autosummary::
    :nosignatures:
@@ -52,6 +54,8 @@ baca
    pitcharraylib
    pitchlib
    rhythmlib
+   settinglib
+   templatelib
 
 .. raw:: html
 
@@ -136,7 +140,6 @@ baca
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
-   SettingCommand
    SpannerCommand
    StaffPositionCommand
    StaffPositionInterpolationCommand
@@ -169,7 +172,6 @@ baca
    ~RegisterCommand.RegisterCommand
    ~RegisterInterpolationCommand.RegisterInterpolationCommand
    ~RegisterToOctaveCommand.RegisterToOctaveCommand
-   ~SettingCommand.SettingCommand
    ~SpannerCommand.SpannerCommand
    ~StaffPositionCommand.StaffPositionCommand
    ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
@@ -207,22 +209,17 @@ baca
    RegistrationComponent
    SchemeManifest
    Scope
-   ScoreTemplate
    Selection
    Sequence
-   SingleStaffScoreTemplate
    SpacingIndication
    SpacingSection
    StaffLines
    StageMeasureMap
-   StringTrioScoreTemplate
    SystemSpecifier
    TimeSignatureGroups
    TimeSignatureMaker
    TimelineScope
    Tree
-   TwoVoiceStaffScoreTemplate
-   ViolinSoloScoreTemplate
    WellformednessManager
 
 .. autosummary::
@@ -249,22 +246,17 @@ baca
    ~RegistrationComponent.RegistrationComponent
    ~SchemeManifest.SchemeManifest
    ~Scope.Scope
-   ~ScoreTemplate.ScoreTemplate
    ~Selection.Selection
    ~Sequence.Sequence
-   ~SingleStaffScoreTemplate.SingleStaffScoreTemplate
    ~SpacingIndication.SpacingIndication
    ~SpacingSection.SpacingSection
    ~StaffLines.StaffLines
    ~StageMeasureMap.StageMeasureMap
-   ~StringTrioScoreTemplate.StringTrioScoreTemplate
    ~SystemSpecifier.SystemSpecifier
    ~TimeSignatureGroups.TimeSignatureGroups
    ~TimeSignatureMaker.TimeSignatureMaker
    ~TimelineScope.TimelineScope
    ~Tree.Tree
-   ~TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate
-   ~ViolinSoloScoreTemplate.ViolinSoloScoreTemplate
    ~WellformednessManager.WellformednessManager
 
 .. raw:: html

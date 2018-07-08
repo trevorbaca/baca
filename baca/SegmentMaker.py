@@ -8,6 +8,7 @@ import typing
 from abjadext import rmakers
 from . import library
 from . import rhythmlib
+from . import templatelib
 from . import typings
 from .BreakMeasureMap import BreakMeasureMap
 from .Command import Command
@@ -18,7 +19,6 @@ from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
 from .MeasureWrapper import MeasureWrapper
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .Scope import Scope
-from .ScoreTemplate import ScoreTemplate
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimelineScope import TimelineScope
 
@@ -282,7 +282,7 @@ class SegmentMaker(abjad.SegmentMaker):
         measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
         metronome_marks: abjad.OrderedDict = None,
-        score_template: ScoreTemplate = None,
+        score_template: templatelib.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,

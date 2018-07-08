@@ -57,6 +57,7 @@ LibraryAF
    ~down_bow
    ~dynamic_down
    ~dynamic_up
+   ~edition
    ~espressivo
    ~fermata
    ~finger_pressure_transition
@@ -133,6 +134,8 @@ LibraryAF
 .. autofunction:: dynamic_down
 
 .. autofunction:: dynamic_up
+
+.. autofunction:: edition
 
 .. autofunction:: espressivo
 
