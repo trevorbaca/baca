@@ -119,11 +119,6 @@ Bača API
    ~baca.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.PageSpecifier.PageSpecifier
    ~baca.Partial.Partial
-   ~baca.PitchArray.PitchArray
-   ~baca.PitchArrayCell.PitchArrayCell
-   ~baca.PitchArrayColumn.PitchArrayColumn
-   ~baca.PitchArrayList.PitchArrayList
-   ~baca.PitchArrayRow.PitchArrayRow
    ~baca.PitchClassSegment.PitchClassSegment
    ~baca.PitchClassSet.PitchClassSet
    ~baca.PitchSegment.PitchSegment
@@ -930,6 +925,29 @@ Markup library.
    ~baca.overridelib.tuplet_bracket_up
    ~baca.overridelib.tuplet_number_denominator
    ~baca.overridelib.tuplet_number_extra_offset
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.pitcharraylib <baca--pitcharraylib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitcharraylib.PitchArray
+   ~baca.pitcharraylib.PitchArrayCell
+   ~baca.pitcharraylib.PitchArrayColumn
+   ~baca.pitcharraylib.PitchArrayList
+   ~baca.pitcharraylib.PitchArrayRow
 
 .. raw:: html
 

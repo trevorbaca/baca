@@ -32,6 +32,7 @@ baca
    library
    markups
    overridelib
+   pitcharraylib
    rhythmlib
 
 .. autosummary::
@@ -47,6 +48,7 @@ baca
    library
    markups
    overridelib
+   pitcharraylib
    rhythmlib
 
 .. raw:: html
@@ -209,11 +211,6 @@ baca
    MetronomeMarkMeasureMap
    PageSpecifier
    Partial
-   PitchArray
-   PitchArrayCell
-   PitchArrayColumn
-   PitchArrayList
-   PitchArrayRow
    PitchClassSegment
    PitchClassSet
    PitchSegment
@@ -267,11 +264,6 @@ baca
    ~MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~PageSpecifier.PageSpecifier
    ~Partial.Partial
-   ~PitchArray.PitchArray
-   ~PitchArrayCell.PitchArrayCell
-   ~PitchArrayColumn.PitchArrayColumn
-   ~PitchArrayList.PitchArrayList
-   ~PitchArrayRow.PitchArrayRow
    ~PitchClassSegment.PitchClassSegment
    ~PitchClassSet.PitchClassSet
    ~PitchSegment.PitchSegment

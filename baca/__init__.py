@@ -3,6 +3,7 @@ from .library import *
 from .divisionlib import *
 from .dynamiclib import *
 from .overridelib import *
+from .pitcharraylib import *
 from .rhythmlib import *
 from . import markups
 
@@ -62,11 +63,6 @@ from .PartAssignmentCommand import PartAssignmentCommand
 from .Partial import Partial
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
-from .PitchArray import PitchArray
-from .PitchArrayCell import PitchArrayCell
-from .PitchArrayColumn import PitchArrayColumn
-from .PitchArrayList import PitchArrayList
-from .PitchArrayRow import PitchArrayRow
 from .PitchClassSegment import PitchClassSegment
 from .PitchClassSet import PitchClassSet
 from .PitchCommand import PitchCommand
