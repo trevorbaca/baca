@@ -3894,7 +3894,7 @@ class DesignMaker(abjad.AbjadObject):
 
         Returns pitch-class tree.
         """
-        design = baca.PitchTree(items=self._result)
+        design = PitchTree(items=self._result)
         self._check_duplicate_pitch_classes(design)
         return design
 
@@ -3902,7 +3902,7 @@ class DesignMaker(abjad.AbjadObject):
 
     @staticmethod
     def _apply_operator(segment, operator):
-        assert isinstance(segment, baca.PitchClassSegment)
+        assert isinstance(segment, PitchClassSegment)
         assert isinstance(operator, str), repr(operator)
         if operator.startswith('T'):
             index = int(operator[1:])
@@ -3939,13 +3939,13 @@ class DesignMaker(abjad.AbjadObject):
         list_ = []
         for cell in cells:
             list_.extend(cell)
-        segment = baca.PitchClassSegment(items=list_)
+        segment = PitchClassSegment(items=list_)
         operators = operators or []
         for operator in operators:
             segment = self._apply_operator(segment, operator)
         sequence = abjad.sequence(segment)
         parts = sequence.partition_by_counts(counts, overhang=True)
-        parts = [baca.PitchClassSegment(_) for _ in parts]
+        parts = [PitchClassSegment(_) for _ in parts]
         self._result.extend(parts)
 
     def partition_cyclic(self, cursor, number, counts, operators=None):
@@ -3960,7 +3960,7 @@ class DesignMaker(abjad.AbjadObject):
         list_ = []
         for cell in cells:
             list_.extend(cell)
-        segment = baca.PitchClassSegment(items=list_)
+        segment = PitchClassSegment(items=list_)
         operators = operators or []
         for operator in operators:
             segment = self._apply_operator(segment, operator)
@@ -3970,7 +3970,7 @@ class DesignMaker(abjad.AbjadObject):
             cyclic=True,
             overhang=True,
             )
-        parts = [baca.PitchClassSegment(_) for _ in parts]
+        parts = [PitchClassSegment(_) for _ in parts]
         self._result.extend(parts)
 
 class HarmonicSeries(abjad.AbjadObject):
