@@ -8,37 +8,17 @@ from . import markuplib
 from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
-from .ClusterCommand import ClusterCommand
 from .ContainerCommand import ContainerCommand
 from .IndicatorCommand import IndicatorCommand
 from .NestingCommand import NestingCommand
 from .PartAssignmentCommand import PartAssignmentCommand
-from .PitchCommand import PitchCommand
 from .RestAffixSpecifier import RestAffixSpecifier
 from .Selection import Selection
 from .Selection import _select
 from .Sequence import Sequence
-from .StaffPositionCommand import StaffPositionCommand
-from .TieCorrectionCommand import TieCorrectionCommand
 
 
 __documentation_section__ = '(1) Library'
-
-def natural_clusters(
-    widths: typing.Iterable[int],
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
-    ) -> ClusterCommand:
-    """
-    Makes natural clusters with ``widths`` and ``start_pitch``.
-    """
-    return ClusterCommand(
-        hide_flat_markup=True,
-        selector=selector,
-        start_pitch=start_pitch,
-        widths=widths,
-        )
 
 def nest(
     time_treatments: typing.Iterable = None,
@@ -322,32 +302,6 @@ def parts(
         part_assignment=part_assignment,
         )
 
-def pitch(
-    pitch,
-    *,
-    selector: typings.Selector = 'baca.pleaves()',
-    do_not_transpose: bool = None,
-    persist: str = None,
-    ) -> PitchCommand:
-    """
-    Makes pitch command.
-    """
-    if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
-        raise Exception(f'one-note chord {pitch!r}?')
-    if do_not_transpose not in (None, True, False):
-        raise Exception('do_not_transpose must be boolean'
-            f' (not {do_not_transpose!r}).')
-    if persist is not None and not isinstance(persist, str):
-        raise Exception(f'persist name must be string (not {persist!r}).')
-    return PitchCommand(
-        allow_repeats=True,
-        cyclic=True,
-        do_not_transpose=do_not_transpose,
-        persist=persist,
-        pitches=[pitch],
-        selector=selector,
-        )
-
 def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
     """
     Gets previous segment metadata before ``path``.
@@ -386,195 +340,6 @@ def rehearsal_mark(
     return IndicatorCommand(
         *tweaks,
         indicators=[mark],
-        selector=selector,
-        )
-
-def repeat_tie_from(
-    *,
-    selector: typings.Selector = 'baca.pleaf(-1)',
-    ) -> TieCorrectionCommand:
-    r"""
-    Repeat-ties from leaf.
-
-    ..  container:: example
-
-        >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.make_notes(),
-        ...     baca.repeat_tie_from(selector=baca.leaf(1)),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            c'2
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            c'4.
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            c'2
-                            \repeatTie                                                               %! TCC
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            c'4.
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    """
-    return TieCorrectionCommand(
-        repeat=True,
-        selector=selector,
-        )
-
-def repeat_tie_to(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> TieCorrectionCommand:
-    r"""
-    Repeat-ties to leaf.
-
-    ..  container:: example
-
-        >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.make_notes(),
-        ...     baca.repeat_tie_to(selector=baca.leaf(2)),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            c'2
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            c'4.
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            c'2
-                            \repeatTie                                                               %! TCC
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            c'4.
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    """
-    return TieCorrectionCommand(
-        direction=abjad.Left,
-        repeat=True,
         selector=selector,
         )
 
@@ -1945,40 +1710,6 @@ def staff_lines(
         indicators=[indicatorlib.StaffLines(line_count=n)],
         selector=selector,
         )
-
-def staff_position(
-    number: int,
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    ) -> StaffPositionCommand:
-    """
-    Makes staff position command; allows repeats.
-    """
-    assert isinstance(number, int), repr(number)
-    return StaffPositionCommand(
-        allow_repeats=True,
-        numbers=[number],
-        selector=selector,
-        ) 
-
-def staff_positions(
-    numbers,
-    *,
-    allow_repeats: bool = None,
-    exact: bool = None,
-    selector: typings.Selector = 'baca.plts()',
-    ) -> StaffPositionCommand:
-    """
-    Makes staff position command; does not allow repeats.
-    """
-    if allow_repeats is None and len(numbers) == 1:
-        allow_repeats = True
-    return StaffPositionCommand(
-        allow_repeats=allow_repeats,
-        exact=exact,
-        numbers=numbers,
-        selector=selector,
-        ) 
 
 def start_markup(
     argument: str,

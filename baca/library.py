@@ -3,11 +3,8 @@ Function library.
 """
 import abjad
 import typing
-from . import indicatorlib
-from . import markuplib
 from . import typings
 from .IndicatorCommand import IndicatorCommand
-from .PitchCommand import PitchCommand
 from .Sequence import Sequence
 
 
@@ -22,25 +19,6 @@ def apply_tweaks(argument, tweaks):
         tuples = manager_._get_attribute_tuples()
         for attribute, value in tuples:
             setattr(manager, attribute, value)
-
-def lbsd(
-    y_offset: int,
-    alignment_distances: typing.Sequence,
-    *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
-    """
-    Makes line-break system details.
-    """
-    alignment_distances = Sequence(alignment_distances).flatten()
-    lbsd = indicatorlib.LBSD(
-        alignment_distances=alignment_distances,
-        y_offset=y_offset,
-        )
-    return IndicatorCommand(
-        indicators=[lbsd],
-        selector=selector,
-        )
 
 def literal(
     string: str,
@@ -387,45 +365,5 @@ def markup(
     return IndicatorCommand(
         *tweaks,
         indicators=[markup],
-        selector=selector,
-        )
-
-def pitches(
-    pitches: typing.Iterable,
-    *,
-    allow_octaves: bool = None,
-    allow_repeats: bool = None,
-    do_not_transpose: bool = None,
-    exact: bool = None,
-    ignore_incomplete: bool = None,
-    persist: str = None,
-    selector: typings.Selector = 'baca.pleaves()',
-    ) -> PitchCommand:
-    """
-    Makes pitch command.
-    """
-    if do_not_transpose not in (None, True, False):
-        raise Exception('do_not_transpose must be boolean'
-            f' (not {do_not_transpose!r}).')
-    if bool(exact):
-        cyclic = False
-    else:
-        cyclic = True
-    if ignore_incomplete not in (None, True, False):
-        raise Exception('ignore_incomplete must be boolean'
-            f' (not {ignore_incomplete!r}).')
-    if ignore_incomplete is True and not persist:
-        raise Exception(f'ignore_incomplete is ignored'
-            ' when persist is not set.')
-    if persist is not None and not isinstance(persist, str):
-        raise Exception(f'persist name must be string (not {persist!r}).')
-    return PitchCommand(
-        allow_octaves=allow_octaves,
-        allow_repeats=allow_repeats,
-        cyclic=cyclic,
-        do_not_transpose=do_not_transpose,
-        ignore_incomplete=ignore_incomplete,
-        persist=persist,
-        pitches=pitches,
         selector=selector,
         )

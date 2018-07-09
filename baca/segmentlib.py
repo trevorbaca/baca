@@ -5,6 +5,7 @@ from . import evallib
 from . import indicatorlib
 from . import library
 from . import typings
+from .IndicatorCommand import IndicatorCommand
 from .Selection import Selection
 from .Sequence import Sequence
 
@@ -293,7 +294,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             tag=self.tag.prepend('BMM1'),
             )
         for skip in skips[:measure_count]:
-            if not abjad.inspect(skip).has_indicator(indicatorlib.LBSD):
+            if not abjad.inspect(skip).has_indicator(LBSD):
                 literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
                 abjad.attach(
                     literal,
@@ -1775,6 +1776,62 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             message = f'measures must be int, pair or list (not {measures!r}).'
             raise TypeError(message)
 
+class LBSD(abjad.AbjadObject):
+    """
+    Line-break system details.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_alignment_distances',
+        '_y_offset',
+        )
+
+    _override = r'\overrideProperty'
+    _override += ' Score.NonMusicalPaperColumn.line-break-system-details'
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        y_offset=None,
+        alignment_distances=None,
+        ):
+        self._y_offset = y_offset
+        if alignment_distances is not None:
+            assert isinstance(alignment_distances, collections.Iterable)
+            alignment_distances = tuple(alignment_distances)
+        self._alignment_distances = alignment_distances
+
+    ### PRIVATE METHODS ###
+
+    def _get_lilypond_format_bundle(self, component=None):
+        bundle = abjad.LilyPondFormatBundle()
+        alignment_distances = ' '.join(
+            str(_) for _ in self.alignment_distances
+            )
+        string = rf"\baca_lbsd #{self.y_offset} #'({alignment_distances})"
+        bundle.before.commands.append(string)
+        return bundle
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def alignment_distances(self):
+        """
+        Gets alignment distances.
+        """
+        return self._alignment_distances
+
+    @property
+    def y_offset(self):
+        """
+        Gets Y offset.
+        """
+        return self._y_offset
+
 class MetronomeMarkMeasureMap(abjad.AbjadObject):
     r"""
     Metronome mark measure map.
@@ -2602,12 +2659,17 @@ def breaks(
                 indicators=[break_],
                 selector=selector,
                 )
-            lbsd = library.lbsd(
-                y_offset,
-                alignment_distances,
+            alignment_distances = Sequence(alignment_distances).flatten()
+            lbsd = LBSD(
+                alignment_distances=alignment_distances,
+                y_offset=y_offset,
+                )
+            lbsd_command = IndicatorCommand(
+                indicators=[lbsd],
                 selector=selector,
                 )
-            commands[measure_number] = [command, lbsd]
+
+            commands[measure_number] = [command, lbsd_command]
     breaks = BreakMeasureMap(
         commands=commands,
         local_measure_numbers=local_measure_numbers,

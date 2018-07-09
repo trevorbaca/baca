@@ -5,18 +5,11 @@ from . import evallib
 from . import library
 from . import registerlib
 from . import typings
-from .AccidentalAdjustmentCommand import AccidentalAdjustmentCommand
 from .AnchorSpecifier import AnchorSpecifier
-from .BCPCommand import BCPCommand
-from .ClusterCommand import ClusterCommand
 from .Coat import Coat
 from .ColorCommand import ColorCommand
-from .ColorFingeringCommand import ColorFingeringCommand
 from .ContainerCommand import ContainerCommand
-from .DiatonicClusterCommand import DiatonicClusterCommand
 from .IndicatorCommand import IndicatorCommand
-from .MicrotoneDeviationCommand import MicrotoneDeviationCommand
-from .OctaveDisplacementCommand import OctaveDisplacementCommand
 
 
 __documentation_section__ = '(1) Library'
@@ -1103,26 +1096,6 @@ def bar_extent_persistent(
         selector=selector,
         )
 
-def bcps(
-    *tweaks: abjad.LilyPondTweakManager,
-    bcps: typing.Iterable[typing.Tuple[int, int]] = None,
-    final_spanner: bool = None,
-    helper: typing.Callable = None,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> BCPCommand:
-    """
-    Makes bow contact points.
-    """
-    if final_spanner is not None:
-        final_spanner = bool(final_spanner)
-    return BCPCommand(
-        *tweaks,
-        bcps=bcps,
-        final_spanner=final_spanner,
-        helper=helper,
-        selector=selector,
-        )
-
 def beam_divisions(
     *,
     stemlets: typings.Number = None,
@@ -1755,21 +1728,6 @@ def clef(
         selector=selector,
         )
 
-def clusters(
-    widths: typing.List[int],
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
-    ) -> ClusterCommand:
-    """
-    Makes clusters with ``widths`` and ``start_pitch``.
-    """
-    return ClusterCommand(
-        selector=selector,
-        start_pitch=start_pitch,
-        widths=widths,
-        )
-
 def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     r"""
     Coats ``pitch``.
@@ -2079,16 +2037,6 @@ def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
 
     """
     return ColorCommand(selector=selector)
-
-def color_fingerings(
-    numbers: typing.List[typings.Number],
-    *,
-    selector: typings.Selector = 'baca.pheads()',
-    ) -> ColorFingeringCommand:
-    """
-    Adds color fingerings.
-    """
-    return ColorFingeringCommand(numbers=numbers, selector=selector)
 
 def container(
     identifier: str = None,
@@ -2575,231 +2523,6 @@ def cross_staff(
     """
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
-        selector=selector,
-        )
-
-def deviation(
-    deviations: typing.List[typings.Number],
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    ) -> MicrotoneDeviationCommand:
-    """
-    Sets microtone ``deviations``.
-    """
-    return MicrotoneDeviationCommand(
-        deviations=deviations,
-        selector=selector,
-        )
-
-def diatonic_clusters(
-    widths: typing.List[int],
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    ) -> DiatonicClusterCommand:
-    """
-    Makes diatonic clusters with ``widths``.
-    """
-    return DiatonicClusterCommand(
-        selector=selector,
-        widths=widths,
-        )
-
-def displacement(
-    displacements: typing.List[int],
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    ) -> OctaveDisplacementCommand:
-    r"""
-    Octave-displaces ``selector`` output.
-
-    ..  container:: example
-
-        Octave-displaces PLTs:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     3 * [[0, 2, 3]],
-        ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            ef4
-                            ~
-                            ef16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            c16
-                            [
-                            d''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 11/12 {
-                            c'16
-                            [
-                            d'16
-                            ]
-                            ef4
-                            ~
-                            ef16
-                            r16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Octave-displaces chords:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     6 * [{0, 2, 3}],
-        ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-        ...     baca.rests_around([2], [4]),
-        ...     counts=[4],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                            <c' d' ef'>4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            <c' d' ef'>4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            <c d ef>4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            <c d ef>4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            <c'' d'' ef''>4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            <c'' d'' ef''>4
-                            r4
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Octave-displaces last six pitched logical ties:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     3 * [[0, 2, 3]],
-        ...     baca.displacement(
-        ...         [0, 0, -1, -1, 1, 1],
-        ...         selector=baca.plts()[-6:],
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            ef'4
-                            ~
-                            ef'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            c'16
-                            [
-                            d'16
-                            ]
-                            ef4
-                            ~
-                            ef16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 11/12 {
-                            c16
-                            [
-                            d''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-    return OctaveDisplacementCommand(
-        displacements=displacements,
         selector=selector,
         )
 
@@ -4074,96 +3797,4 @@ def flags() -> rmakers.BeamSpecifier:
     return rmakers.BeamSpecifier(
         beam_divisions_together=False,
         beam_each_division=False,
-        )
-
-def force_accidental(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> AccidentalAdjustmentCommand:
-    r"""
-    Forces accidental.
-
-    ..  container:: example
-
-        Inverts edition-specific tags:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.not_parts(baca.force_accidental(selector=baca.pleaves()[:2])),
-        ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches('E4 F4'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            e'2                                                                      %! AJC:+PARTS
-                        %@% e'!2                                                                     %! AJC:-PARTS
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            f'4.                                                                     %! AJC:+PARTS
-                        %@% f'!4.                                                                    %! AJC:-PARTS
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            e'2
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f'4.
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    """
-    return AccidentalAdjustmentCommand(
-        forced=True,
-        selector=selector,
         )

@@ -1,0 +1,924 @@
+.. _baca--pitchcommands:
+
+pitchcommands
+=============
+
+.. automodule:: baca.pitchcommands
+
+.. currentmodule:: baca.pitchcommands
+
+.. container:: svg-container
+
+   .. inheritance-diagram:: baca
+      :lineage: baca.pitchcommands
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~Loop
+
+.. autoclass:: Loop
+
+   .. autosummary::
+      :nosignatures:
+
+      intervals
+      items
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__contains__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__format__
+
+   .. automethod:: Loop.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__len__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__str__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Loop.intervals
+
+   .. autoattribute:: Loop.items
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~AccidentalAdjustmentCommand
+   ~ClusterCommand
+   ~ColorFingeringCommand
+   ~DiatonicClusterCommand
+   ~MicrotoneDeviationCommand
+   ~OctaveDisplacementCommand
+   ~PitchCommand
+   ~StaffPositionCommand
+   ~StaffPositionInterpolationCommand
+
+.. autoclass:: AccidentalAdjustmentCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      cautionary
+      forced
+      parenthesized
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: AccidentalAdjustmentCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: AccidentalAdjustmentCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: AccidentalAdjustmentCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: AccidentalAdjustmentCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: AccidentalAdjustmentCommand.cautionary
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.deactivate
+
+   .. autoattribute:: AccidentalAdjustmentCommand.forced
+
+   .. autoattribute:: AccidentalAdjustmentCommand.parenthesized
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tags
+
+.. autoclass:: ClusterCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      hide_flat_markup
+      selector
+      start_pitch
+      widths
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ClusterCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ClusterCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ClusterCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: ClusterCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.deactivate
+
+   .. autoattribute:: ClusterCommand.hide_flat_markup
+
+   .. autoattribute:: ClusterCommand.selector
+
+   .. autoattribute:: ClusterCommand.start_pitch
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tags
+
+   .. autoattribute:: ClusterCommand.widths
+
+.. autoclass:: ColorFingeringCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      numbers
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ColorFingeringCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ColorFingeringCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ColorFingeringCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: ColorFingeringCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.deactivate
+
+   .. autoattribute:: ColorFingeringCommand.numbers
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tags
+
+.. autoclass:: DiatonicClusterCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      widths
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DiatonicClusterCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: DiatonicClusterCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DiatonicClusterCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DiatonicClusterCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tags
+
+   .. autoattribute:: DiatonicClusterCommand.widths
+
+.. autoclass:: MicrotoneDeviationCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      deviations
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: MicrotoneDeviationCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: MicrotoneDeviationCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MicrotoneDeviationCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: MicrotoneDeviationCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.deactivate
+
+   .. autoattribute:: MicrotoneDeviationCommand.deviations
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tags
+
+.. autoclass:: OctaveDisplacementCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      displacements
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: OctaveDisplacementCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: OctaveDisplacementCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: OctaveDisplacementCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: OctaveDisplacementCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.deactivate
+
+   .. autoattribute:: OctaveDisplacementCommand.displacements
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tags
+
+.. autoclass:: PitchCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      allow_octaves
+      allow_repeats
+      cyclic
+      do_not_transpose
+      ignore_incomplete
+      parameter
+      persist
+      pitches
+      state
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PitchCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PitchCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: PitchCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PitchCommand.allow_octaves
+
+   .. autoattribute:: PitchCommand.allow_repeats
+
+   .. autoattribute:: PitchCommand.cyclic
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.deactivate
+
+   .. autoattribute:: PitchCommand.do_not_transpose
+
+   .. autoattribute:: PitchCommand.ignore_incomplete
+
+   .. autoattribute:: PitchCommand.parameter
+
+   .. autoattribute:: PitchCommand.persist
+
+   .. autoattribute:: PitchCommand.pitches
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.selector
+
+   .. autoattribute:: PitchCommand.state
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tags
+
+.. autoclass:: StaffPositionCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      allow_repeats
+      exact
+      numbers
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: StaffPositionCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: StaffPositionCommand.allow_repeats
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.deactivate
+
+   .. autoattribute:: StaffPositionCommand.exact
+
+   .. autoattribute:: StaffPositionCommand.numbers
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tags
+
+.. autoclass:: StaffPositionInterpolationCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      start_pitch
+      stop_pitch
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: StaffPositionInterpolationCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionInterpolationCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionInterpolationCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: StaffPositionInterpolationCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.selector
+
+   .. autoattribute:: StaffPositionInterpolationCommand.start_pitch
+
+   .. autoattribute:: StaffPositionInterpolationCommand.stop_pitch
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.tags
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~clusters
+   ~color_fingerings
+   ~deviation
+   ~diatonic_clusters
+   ~displacement
+   ~force_accidental
+   ~interpolate_staff_positions
+   ~loop
+   ~natural_clusters
+   ~pitch
+   ~pitches
+   ~staff_position
+   ~staff_positions
+
+.. autofunction:: clusters
+
+.. autofunction:: color_fingerings
+
+.. autofunction:: deviation
+
+.. autofunction:: diatonic_clusters
+
+.. autofunction:: displacement
+
+.. autofunction:: force_accidental
+
+.. autofunction:: interpolate_staff_positions
+
+.. autofunction:: loop
+
+.. autofunction:: natural_clusters
+
+.. autofunction:: pitch
+
+.. autofunction:: pitches
+
+.. autofunction:: staff_position
+
+.. autofunction:: staff_positions

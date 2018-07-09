@@ -17,7 +17,6 @@ from . import templatelib
 from . import typings
 from .Selection import Selection
 from .Sequence import Sequence
-from .TieCorrectionCommand import TieCorrectionCommand
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -1046,14 +1045,14 @@ class SegmentMaker(abjad.SegmentMaker):
         for current_leaf in abjad.iterate(voice).leaves():
             inspection = abjad.inspect(current_leaf)
             if inspection.has_indicator(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO):
-                TieCorrectionCommand._add_tie(
+                rhythmlib.TieCorrectionCommand._add_tie(
                     current_leaf,
                     direction=abjad.Left,
                     repeat=True,
                     )
                 continue
             elif inspection.has_indicator(abjad.tags.RIGHT_BROKEN_TIE_FROM):
-                TieCorrectionCommand._add_tie(
+                rhythmlib.TieCorrectionCommand._add_tie(
                     current_leaf,
                     direction=abjad.Right,
                     repeat=False,

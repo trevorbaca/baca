@@ -10,6 +10,7 @@ from . import evallib
 from . import typings
 from . import divisionlib
 from .LMRSpecifier import LMRSpecifier
+from .Selection import Selection
 from .Sequence import Sequence
 from abjadext import rmakers
 mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
@@ -5151,6 +5152,175 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         """
         return super(SkipRhythmMaker, self).tuplet_specifier
 
+class TieCorrectionCommand(evallib.Command):
+    """
+    Tie correction command.
+
+    ..  container:: example
+
+        >>> baca.TieCorrectionCommand()
+        TieCorrectionCommand(selector=baca.pleaf(-1))
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_direction',
+        '_repeat',
+        '_untie',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        direction: abjad.HorizontalAlignment = None,
+        repeat: bool = None,
+        selector: typings.Selector = 'baca.pleaf(-1)',
+        untie: bool = None,
+        ) -> None:
+        evallib.Command.__init__(self, selector=selector)
+        if direction is not None:
+            assert direction in (abjad.Right, abjad.Left, None)
+        self._direction = direction
+        if repeat is not None:
+            repeat = bool(repeat)
+        self._repeat = repeat
+        if untie is not None:
+            untie = bool(untie)
+        self._untie = untie
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument=None) -> None:
+        """
+        Applies command to result of selector called on ``argument``.
+        """
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        leaves = Selection(argument).leaves()
+        for leaf in leaves:
+            if self.untie is True:
+                self._sever_tie(leaf, self.direction, self.repeat)
+            else:
+                self._add_tie(leaf, self.direction, self.repeat)
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _add_tie(current_leaf, direction, repeat):
+        assert direction in (abjad.Left, abjad.Right, None), repr(direction)
+        left_broken, right_broken = None, None
+        if direction is None:
+            direction = abjad.Right
+        current_tie = abjad.inspect(current_leaf).get_spanner(abjad.Tie)
+        if direction == abjad.Right:
+            next_leaf = abjad.inspect(current_leaf).get_leaf(1)
+            if next_leaf is None:
+                right_broken = True
+                if current_tie is not None:
+                    new_leaves = list(current_tie.leaves)
+                    new_tie = abjad.new(current_tie)
+                else:
+                    new_leaves = [current_leaf]
+                    new_tie = abjad.Tie(repeat=repeat)
+            else:
+                next_tie = abjad.inspect(next_leaf).get_spanner(abjad.Tie)
+                if current_tie is not None and next_tie is not None:
+                    if current_tie is next_tie:
+                        return
+                    else:
+                        new_leaves = list(current_tie) + list(next_tie)
+                        new_tie = abjad.new(current_tie)
+                elif current_tie is not None and next_tie is None:
+                    new_leaves = list(current_tie) + [next_leaf]
+                    new_tie = abjad.new(current_tie)
+                elif current_tie is None and next_tie is not None:
+                    new_leaves = [current_leaf] + list(next_tie)
+                    new_tie = abjad.Tie(repeat=repeat)
+                else:
+                    assert current_tie is None and next_tie is None
+                    new_leaves = [current_leaf, next_leaf]
+                    new_tie = abjad.Tie(repeat=repeat)
+        else:
+            assert direction == abjad.Left
+            previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
+            if previous_leaf is None:
+                left_broken = True
+                if current_tie is not None:
+                    new_leaves = list(current_tie.leaves)
+                    new_tie = abjad.new(current_tie, repeat=repeat)
+                else:
+                    new_leaves = [current_leaf]
+                    new_tie = abjad.Tie(repeat=repeat)
+            else:
+                previous_tie = abjad.inspect(previous_leaf).get_spanner(
+                    abjad.Tie)
+                if previous_tie is not None and current_tie is not None:
+                    if previous_tie is current_tie:
+                        return
+                    else:
+                        new_leaves = list(previous_tie) + list(current_tie)
+                        new_tie = abjad.new(previous_tie)
+                elif previous_tie is not None and current_tie is None:
+                    new_leaves = list(previous_tie) + [current_leaf]
+                    new_tie = abjad.new(previous_tie)
+                elif previous_tie is None and current_tie is not None:
+                    new_leaves = [previous_leaf] + list(current_tie)
+                    new_tie = abjad.Tie(repeat=repeat)
+                else:
+                    assert previous_tie is None and current_tie is None
+                    new_leaves = [previous_leaf, current_leaf]
+                    new_tie = abjad.Tie(repeat=repeat)
+        new_leaves = abjad.select(new_leaves)
+        for leaf in new_leaves:
+            abjad.detach(abjad.Tie, leaf)
+        new_tie = abjad.new(
+            new_tie,
+            left_broken=left_broken,
+            right_broken=right_broken,
+            )
+        abjad.attach(new_tie, new_leaves, tag='TCC')
+
+    @staticmethod
+    def _sever_tie(current_leaf, direction, repeat):
+        current_tie = abjad.inspect(current_leaf).get_spanner(abjad.Tie)
+        if current_tie is None:
+            return
+        if direction is None:
+            direction = abjad.Right
+        leaf_index = current_tie.leaves.index(current_leaf)
+        current_tie._fracture(leaf_index, direction=direction)
+            
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def direction(self) -> typing.Optional[abjad.HorizontalAlignment]:
+        """
+        Gets direction.
+
+        Interprets none equal to right.
+        """
+        return self._direction
+
+    @property
+    def repeat(self) -> typing.Optional[bool]:
+        """
+        Is true when newly created ties should be repeat ties.
+        """
+        return self._repeat
+
+    @property
+    def untie(self) -> typing.Optional[bool]:
+        """
+        Is true when command severs tie instead of creating tie.
+        """
+        return self._untie
+
 ### FACTORY FUNCTIONS ###
 
 def make_even_divisions() -> RhythmCommand:
@@ -5359,6 +5529,195 @@ def make_tied_repeated_durations(
         rhythm_maker__tie_specifier__tie_across_divisions=True,
         )
 
+def repeat_tie_from(
+    *,
+    selector: typings.Selector = 'baca.pleaf(-1)',
+    ) -> TieCorrectionCommand:
+    r"""
+    Repeat-ties from leaf.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_unpitched_notes=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(),
+        ...     baca.repeat_tie_from(selector=baca.leaf(1)),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            c'2
+                            \repeatTie                                                               %! TCC
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return TieCorrectionCommand(
+        repeat=True,
+        selector=selector,
+        )
+
+def repeat_tie_to(
+    *,
+    selector: typings.Selector = 'baca.pleaf(0)',
+    ) -> TieCorrectionCommand:
+    r"""
+    Repeat-ties to leaf.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_unpitched_notes=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(),
+        ...     baca.repeat_tie_to(selector=baca.leaf(2)),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            c'2
+                            \repeatTie                                                               %! TCC
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return TieCorrectionCommand(
+        direction=abjad.Left,
+        repeat=True,
+        selector=selector,
+        )
+
 def rhythm(
     rhythm_maker: typings.RhythmMakerTyping,
     *,
@@ -5390,4 +5749,274 @@ def rhythm(
         right_broken=right_broken,
         split_at_measure_boundaries=split_at_measure_boundaries,
         stages=stages,
+        )
+
+def tie_from(
+    *,
+    selector: typings.Selector = 'baca.pleaf(-1)',
+    ) -> TieCorrectionCommand:
+    r"""
+    Ties from leaf.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_unpitched_notes=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(),
+        ...     baca.tie_from(selector=baca.leaf(1)),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            c'4.
+                            ~                                                                        %! TCC
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return TieCorrectionCommand(
+        repeat=False,
+        selector=selector,
+        )
+
+def tie_to(
+    *,
+    selector: typings.Selector = 'baca.pleaf(0)',
+    ) -> TieCorrectionCommand:
+    r"""
+    Ties to leaf.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_unpitched_notes=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(),
+        ...     baca.tie_to(selector=baca.leaf(1)),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'2
+                            ~                                                                        %! TCC
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return TieCorrectionCommand(
+        direction=abjad.Left,
+        repeat=False,
+        selector=selector,
+        )
+
+def untie_to(
+    *,
+    selector: typings.Selector = 'baca.pleaf(0)',
+    ) -> TieCorrectionCommand:
+    r"""
+    Unties to leaf.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_unpitched_notes=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_tied_notes(),
+        ...     baca.untie_to(selector=baca.leaf(2)),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            c'2
+                            ~
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            c'2
+                            ~
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return TieCorrectionCommand(
+        direction=abjad.Left,
+        selector=selector,
+        untie=True,
         )

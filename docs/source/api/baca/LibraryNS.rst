@@ -22,15 +22,11 @@ LibraryNS
 .. autosummary::
    :nosignatures:
 
-   ~natural_clusters
    ~nest
    ~one_voice
    ~parts
-   ~pitch
    ~previous_metadata
    ~rehearsal_mark
-   ~repeat_tie_from
-   ~repeat_tie_to
    ~rests_after
    ~rests_around
    ~rests_before
@@ -44,14 +40,10 @@ LibraryNS
    ~staccatissimo
    ~staccato
    ~staff_lines
-   ~staff_position
-   ~staff_positions
    ~start_markup
    ~stem_tremolo
    ~stop_trill
    ~stopped
-
-.. autofunction:: natural_clusters
 
 .. autofunction:: nest
 
@@ -59,15 +51,9 @@ LibraryNS
 
 .. autofunction:: parts
 
-.. autofunction:: pitch
-
 .. autofunction:: previous_metadata
 
 .. autofunction:: rehearsal_mark
-
-.. autofunction:: repeat_tie_from
-
-.. autofunction:: repeat_tie_to
 
 .. autofunction:: rests_after
 
@@ -94,10 +80,6 @@ LibraryNS
 .. autofunction:: staccato
 
 .. autofunction:: staff_lines
-
-.. autofunction:: staff_position
-
-.. autofunction:: staff_positions
 
 .. autofunction:: start_markup
 

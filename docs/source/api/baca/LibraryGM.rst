@@ -25,11 +25,9 @@ LibraryGM
    ~global_fermata
    ~imbricate
    ~instrument
-   ~interpolate_staff_positions
    ~label
    ~laissez_vibrer
    ~long_fermata
-   ~loop
    ~marcato
    ~margin_markup
    ~metronome_mark
@@ -41,15 +39,11 @@ LibraryGM
 
 .. autofunction:: instrument
 
-.. autofunction:: interpolate_staff_positions
-
 .. autofunction:: label
 
 .. autofunction:: laissez_vibrer
 
 .. autofunction:: long_fermata
-
-.. autofunction:: loop
 
 .. autofunction:: marcato
 

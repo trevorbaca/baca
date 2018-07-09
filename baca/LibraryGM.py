@@ -9,13 +9,8 @@ from .ImbricationCommand import ImbricationCommand
 from .IndicatorCommand import IndicatorCommand
 from .InstrumentChangeCommand import InstrumentChangeCommand
 from .LabelCommand import LabelCommand
-from .Loop import Loop
 from .MetronomeMarkCommand import MetronomeMarkCommand
-from .PitchCommand import PitchCommand
 from .Selection import _select
-from .StaffPositionInterpolationCommand import (
-    StaffPositionInterpolationCommand,
-    )
 
 __documentation_section__ = '(1) Library'
 
@@ -172,22 +167,6 @@ def instrument(
         raise Exception(message)
     return InstrumentChangeCommand(
         indicators=[instrument],
-        selector=selector,
-        )
-
-def interpolate_staff_positions(
-    start_pitch: typing.Union[str, abjad.NamedPitch],
-    stop_pitch: typing.Union[str, abjad.NamedPitch],
-    *,
-    selector: typings.Selector = 'baca.plts()',
-    ) -> StaffPositionInterpolationCommand:
-    """
-    Interpolates from staff position of ``start_pitch`` to staff
-    position of ``stop_pitch``.
-    """
-    return StaffPositionInterpolationCommand(
-        start_pitch=start_pitch,
-        stop_pitch=stop_pitch,
         selector=selector,
         )
 
@@ -633,16 +612,6 @@ def long_fermata(
         indicators=[abjad.Articulation('longfermata')],
         selector=selector,
         )
-
-def loop(
-    pitches: typing.Iterable,
-    intervals: typing.Iterable,
-    ) -> PitchCommand:
-    """
-    Loops ``pitches`` at ``intervals``.
-    """
-    loop = Loop(items=pitches, intervals=intervals)
-    return library.pitches(loop)
 
 def marcato(
     *,

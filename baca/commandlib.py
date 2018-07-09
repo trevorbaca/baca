@@ -3,8 +3,11 @@ import typing
 from . import typings
 from . import evallib
 from .Selection import Selection
+from .Selection import _select
 from .Sequence import Sequence
 
+
+### CLASSES ###
 
 class BCPCommand(evallib.Command):
     """
@@ -449,3 +452,305 @@ class BCPCommand(evallib.Command):
         Gets tweaks.
         """
         return self._tweaks
+
+class VoltaCommand(evallib.Command):
+    """
+    Volta command.
+
+    ..  container:: example
+
+        >>> baca.VoltaCommand()
+        VoltaCommand()
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        )
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument=None) -> None:
+        """
+        Applies command to result of selector called on ``argument``.
+        """
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        leaves = Selection(argument).leaves()
+        container = abjad.Container()
+        abjad.mutate(leaves).wrap(container)
+        abjad.attach(abjad.Repeat(), container)
+
+### FACTORY FUNCTIONS ###
+
+def bcps(
+    *tweaks: abjad.LilyPondTweakManager,
+    bcps: typing.Iterable[typing.Tuple[int, int]] = None,
+    final_spanner: bool = None,
+    helper: typing.Callable = None,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> BCPCommand:
+    """
+    Makes bow contact points.
+    """
+    if final_spanner is not None:
+        final_spanner = bool(final_spanner)
+    return BCPCommand(
+        *tweaks,
+        bcps=bcps,
+        final_spanner=final_spanner,
+        helper=helper,
+        selector=selector,
+        )
+
+def volta(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> VoltaCommand:
+    r"""
+    Makes volta container and extends container with ``selector`` output.
+
+    ..  container:: example
+
+        Wraps stage 1 (global skips 1 and 2) in volta container:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.RhythmCommand(
+        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...             talea=rmakers.Talea(
+        ...                 counts=[1, 1, 1, -1],
+        ...                 denominator=8,
+        ...                 ),
+        ...             ),
+        ...         ),
+        ...     )
+
+        >>> maker(
+        ...     'GlobalSkips',
+        ...     baca.volta(selector=baca.skips()[1:3]),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+                        \repeat volta 2
+                        {
+            <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                %! SM4
+                            \time 3/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \baca_time_signature_color #'blue                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+            <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                %! SM4
+                            \time 4/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \baca_time_signature_color #'blue                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                        }
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+                            ]
+            <BLANKLINE>
+                            r8
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e''8
+                            [
+            <BLANKLINE>
+                            g'8
+            <BLANKLINE>
+                            f''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            r8
+            <BLANKLINE>
+                            e'8
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            r8
+            <BLANKLINE>
+                            e''8
+                            [
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Wraps stage 2 global skips in volta container:
+
+        >>> maker = baca.SegmentMaker(
+        ...     measures_per_stage=[1, 2, 1],
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     ('MusicVoice', (1, 3)),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.RhythmCommand(
+        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...             talea=rmakers.Talea(
+        ...                 counts=[1, 1, 1, -1],
+        ...                 denominator=8,
+        ...                 ),
+        ...             ),
+        ...         ),
+        ...     )
+
+        >>> maker(
+        ...     ('GlobalSkips', 2),
+        ...     baca.volta(),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+                        \repeat volta 2
+                        {
+            <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                %! SM4
+                            \time 3/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \baca_time_signature_color #'blue                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+            <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                %! SM4
+                            \time 4/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \baca_time_signature_color #'blue                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 1/2
+                        }
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            e'8
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+                            ]
+            <BLANKLINE>
+                            r8
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            e''8
+                            [
+            <BLANKLINE>
+                            g'8
+            <BLANKLINE>
+                            f''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            r8
+            <BLANKLINE>
+                            e'8
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            r8
+            <BLANKLINE>
+                            e''8
+                            [
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    return VoltaCommand(selector=selector)

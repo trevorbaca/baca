@@ -3,7 +3,6 @@ import collections
 import typing
 from . import evallib
 from . import typings
-from .SegmentMaker import SegmentMaker
 from .Selection import _select
 
 
@@ -258,6 +257,8 @@ class IndicatorCommand(evallib.Command):
         """
         Calls command on ``argument``.
         """
+        # TODO: externalize late import
+        from .SegmentMaker import SegmentMaker
         if argument is None:
             return
         if self.indicators is None:

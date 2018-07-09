@@ -2,12 +2,12 @@ import abjad
 import copy
 from abjadext import rmakers
 from . import evallib
+from . import pitchcommands
 from . import pitchlib
 from . import registerlib
 from . import rhythmlib
 from . import spannerlib
 from .AnchorSpecifier import AnchorSpecifier
-from .ClusterCommand import ClusterCommand
 from .ColorCommand import ColorCommand
 from .ImbricationCommand import ImbricationCommand
 from .MusicContribution import MusicContribution
@@ -768,7 +768,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if isinstance(specifier, ClusterCommand):
+            if isinstance(specifier, pitchcommands.ClusterCommand):
                 specifier(selections)
             else:
                 specifiers_.append(specifier)

@@ -33,21 +33,15 @@ LibraryAF
    ~articulation
    ~articulations
    ~bar_extent_persistent
-   ~bcps
    ~beam_divisions
    ~beam_everything
    ~beam_runs
    ~breathe
    ~clef
-   ~clusters
    ~coat
    ~color
-   ~color_fingerings
    ~container
    ~cross_staff
-   ~deviation
-   ~diatonic_clusters
-   ~displacement
    ~double_staccato
    ~down_arpeggio
    ~down_bow
@@ -58,7 +52,6 @@ LibraryAF
    ~fermata
    ~flageolet
    ~flags
-   ~force_accidental
 
 .. autofunction:: accent
 
@@ -82,8 +75,6 @@ LibraryAF
 
 .. autofunction:: bar_extent_persistent
 
-.. autofunction:: bcps
-
 .. autofunction:: beam_divisions
 
 .. autofunction:: beam_everything
@@ -94,23 +85,13 @@ LibraryAF
 
 .. autofunction:: clef
 
-.. autofunction:: clusters
-
 .. autofunction:: coat
 
 .. autofunction:: color
 
-.. autofunction:: color_fingerings
-
 .. autofunction:: container
 
 .. autofunction:: cross_staff
-
-.. autofunction:: deviation
-
-.. autofunction:: diatonic_clusters
-
-.. autofunction:: displacement
 
 .. autofunction:: double_staccato
 
@@ -131,5 +112,3 @@ LibraryAF
 .. autofunction:: flageolet
 
 .. autofunction:: flags
-
-.. autofunction:: force_accidental

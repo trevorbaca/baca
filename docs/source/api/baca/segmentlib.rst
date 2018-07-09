@@ -24,6 +24,7 @@ segmentlib
 
    ~BreakMeasureMap
    ~HorizontalSpacingSpecifier
+   ~LBSD
    ~MetronomeMarkMeasureMap
    ~PageSpecifier
    ~StageMeasureMap
@@ -173,6 +174,40 @@ segmentlib
    .. autoattribute:: HorizontalSpacingSpecifier.minimum_duration
 
    .. autoattribute:: HorizontalSpacingSpecifier.multiplier
+
+.. autoclass:: LBSD
+
+   .. autosummary::
+      :nosignatures:
+
+      alignment_distances
+      y_offset
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: LBSD.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LBSD.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: LBSD.alignment_distances
+
+   .. autoattribute:: LBSD.y_offset
 
 .. autoclass:: MetronomeMarkMeasureMap
 

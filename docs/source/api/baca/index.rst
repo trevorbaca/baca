@@ -27,6 +27,7 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
+   commandlib
    divisionlib
    dynamiclib
    evallib
@@ -35,6 +36,7 @@ baca
    markuplib
    overridelib
    pitcharraylib
+   pitchcommands
    pitchlib
    registerlib
    rhythmlib
@@ -51,6 +53,7 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
+   commandlib
    divisionlib
    dynamiclib
    evallib
@@ -59,6 +62,7 @@ baca
    markuplib
    overridelib
    pitcharraylib
+   pitchcommands
    pitchlib
    registerlib
    rhythmlib
@@ -117,23 +121,6 @@ baca
 
    <hr/>
 
-.. rubric:: (4) Commands
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   BCPCommand
-
-.. autosummary::
-   :nosignatures:
-
-   ~BCPCommand.BCPCommand
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: (5) Utilities
    :class: section-header
 
@@ -147,7 +134,6 @@ baca
    ExpressionGallery
    IndicatorBundle
    Interpolator
-   Loop
    SchemeManifest
    Selection
    Sequence
@@ -164,7 +150,6 @@ baca
    ~ExpressionGallery.ExpressionGallery
    ~IndicatorBundle.IndicatorBundle
    ~Interpolator.Interpolator
-   ~Loop.Loop
    ~SchemeManifest.SchemeManifest
    ~Selection.Selection
    ~Sequence.Sequence
@@ -181,56 +166,34 @@ baca
 .. toctree::
    :hidden:
 
-   AccidentalAdjustmentCommand
-   ClusterCommand
    ColorCommand
-   ColorFingeringCommand
    ContainerCommand
-   DiatonicClusterCommand
    GlobalFermataCommand
    ImbricationCommand
    IndicatorCommand
    InstrumentChangeCommand
    LabelCommand
    MetronomeMarkCommand
-   MicrotoneDeviationCommand
    NestingCommand
-   OctaveDisplacementCommand
    PaddedTuple
    PartAssignmentCommand
    PiecewiseIndicatorCommand
-   PitchCommand
-   StaffPositionCommand
-   StaffPositionInterpolationCommand
-   TieCorrectionCommand
-   VoltaCommand
 
 .. autosummary::
    :nosignatures:
 
-   ~AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
-   ~ClusterCommand.ClusterCommand
    ~ColorCommand.ColorCommand
-   ~ColorFingeringCommand.ColorFingeringCommand
    ~ContainerCommand.ContainerCommand
-   ~DiatonicClusterCommand.DiatonicClusterCommand
    ~GlobalFermataCommand.GlobalFermataCommand
    ~ImbricationCommand.ImbricationCommand
    ~IndicatorCommand.IndicatorCommand
    ~InstrumentChangeCommand.InstrumentChangeCommand
    ~LabelCommand.LabelCommand
    ~MetronomeMarkCommand.MetronomeMarkCommand
-   ~MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~NestingCommand.NestingCommand
-   ~OctaveDisplacementCommand.OctaveDisplacementCommand
    ~PaddedTuple.PaddedTuple
    ~PartAssignmentCommand.PartAssignmentCommand
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
-   ~PitchCommand.PitchCommand
-   ~StaffPositionCommand.StaffPositionCommand
-   ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~TieCorrectionCommand.TieCorrectionCommand
-   ~VoltaCommand.VoltaCommand
 
 .. raw:: html
 

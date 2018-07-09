@@ -47,18 +47,6 @@ Bača API
 
    <hr/>
 
-.. rubric:: (4) Commands
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.BCPCommand.BCPCommand
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: (5) Utilities
    :class: subsection-header
 
@@ -72,7 +60,6 @@ Bača API
    ~baca.ExpressionGallery.ExpressionGallery
    ~baca.IndicatorBundle.IndicatorBundle
    ~baca.Interpolator.Interpolator
-   ~baca.Loop.Loop
    ~baca.SchemeManifest.SchemeManifest
    ~baca.Selection.Selection
    ~baca.Sequence.Sequence
@@ -89,29 +76,18 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
-   ~baca.ClusterCommand.ClusterCommand
    ~baca.ColorCommand.ColorCommand
-   ~baca.ColorFingeringCommand.ColorFingeringCommand
    ~baca.ContainerCommand.ContainerCommand
-   ~baca.DiatonicClusterCommand.DiatonicClusterCommand
    ~baca.GlobalFermataCommand.GlobalFermataCommand
    ~baca.ImbricationCommand.ImbricationCommand
    ~baca.IndicatorCommand.IndicatorCommand
    ~baca.InstrumentChangeCommand.InstrumentChangeCommand
    ~baca.LabelCommand.LabelCommand
    ~baca.MetronomeMarkCommand.MetronomeMarkCommand
-   ~baca.MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~baca.NestingCommand.NestingCommand
-   ~baca.OctaveDisplacementCommand.OctaveDisplacementCommand
    ~baca.PaddedTuple.PaddedTuple
    ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
-   ~baca.PitchCommand.PitchCommand
-   ~baca.StaffPositionCommand.StaffPositionCommand
-   ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~baca.TieCorrectionCommand.TieCorrectionCommand
-   ~baca.VoltaCommand.VoltaCommand
 
 .. raw:: html
 
@@ -232,21 +208,15 @@ Bača API
    ~baca.LibraryAF.articulation
    ~baca.LibraryAF.articulations
    ~baca.LibraryAF.bar_extent_persistent
-   ~baca.LibraryAF.bcps
    ~baca.LibraryAF.beam_divisions
    ~baca.LibraryAF.beam_everything
    ~baca.LibraryAF.beam_runs
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.clef
-   ~baca.LibraryAF.clusters
    ~baca.LibraryAF.coat
    ~baca.LibraryAF.color
-   ~baca.LibraryAF.color_fingerings
    ~baca.LibraryAF.container
    ~baca.LibraryAF.cross_staff
-   ~baca.LibraryAF.deviation
-   ~baca.LibraryAF.diatonic_clusters
-   ~baca.LibraryAF.displacement
    ~baca.LibraryAF.double_staccato
    ~baca.LibraryAF.down_arpeggio
    ~baca.LibraryAF.down_bow
@@ -257,7 +227,6 @@ Bača API
    ~baca.LibraryAF.fermata
    ~baca.LibraryAF.flageolet
    ~baca.LibraryAF.flags
-   ~baca.LibraryAF.force_accidental
 
 .. raw:: html
 
@@ -279,11 +248,9 @@ Bača API
    ~baca.LibraryGM.global_fermata
    ~baca.LibraryGM.imbricate
    ~baca.LibraryGM.instrument
-   ~baca.LibraryGM.interpolate_staff_positions
    ~baca.LibraryGM.label
    ~baca.LibraryGM.laissez_vibrer
    ~baca.LibraryGM.long_fermata
-   ~baca.LibraryGM.loop
    ~baca.LibraryGM.marcato
    ~baca.LibraryGM.margin_markup
    ~baca.LibraryGM.metronome_mark
@@ -306,15 +273,11 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.LibraryNS.natural_clusters
    ~baca.LibraryNS.nest
    ~baca.LibraryNS.one_voice
    ~baca.LibraryNS.parts
-   ~baca.LibraryNS.pitch
    ~baca.LibraryNS.previous_metadata
    ~baca.LibraryNS.rehearsal_mark
-   ~baca.LibraryNS.repeat_tie_from
-   ~baca.LibraryNS.repeat_tie_to
    ~baca.LibraryNS.rests_after
    ~baca.LibraryNS.rests_around
    ~baca.LibraryNS.rests_before
@@ -328,8 +291,6 @@ Bača API
    ~baca.LibraryNS.staccatissimo
    ~baca.LibraryNS.staccato
    ~baca.LibraryNS.staff_lines
-   ~baca.LibraryNS.staff_position
-   ~baca.LibraryNS.staff_positions
    ~baca.LibraryNS.start_markup
    ~baca.LibraryNS.stem_tremolo
    ~baca.LibraryNS.stop_trill
@@ -354,9 +315,6 @@ Bača API
 
    ~baca.LibraryTZ.tenuto
    ~baca.LibraryTZ.text_spanner
-   ~baca.LibraryTZ.tie_from
-   ~baca.LibraryTZ.tie_to
-   ~baca.LibraryTZ.untie_to
    ~baca.LibraryTZ.up_arpeggio
    ~baca.LibraryTZ.up_bow
    ~baca.LibraryTZ.very_long_fermata
@@ -364,7 +322,6 @@ Bača API
    ~baca.LibraryTZ.voice_one
    ~baca.LibraryTZ.voice_three
    ~baca.LibraryTZ.voice_two
-   ~baca.LibraryTZ.volta
 
 .. raw:: html
 
@@ -396,6 +353,50 @@ Bača API
    :nosignatures:
 
    ~baca.SegmentMaker.WellformednessManager
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.commandlib <baca--commandlib>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (4) Commands
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.BCPCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.VoltaCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.commandlib.bcps
+   ~baca.commandlib.volta
 
 .. raw:: html
 
@@ -532,7 +533,6 @@ Dynamic library.
    :nosignatures:
 
    ~baca.indicatorlib.Accelerando
-   ~baca.indicatorlib.LBSD
    ~baca.indicatorlib.Ritardando
    ~baca.indicatorlib.SpacingSection
    ~baca.indicatorlib.StaffLines
@@ -557,10 +557,8 @@ Function library.
    :nosignatures:
 
    ~baca.library.apply_tweaks
-   ~baca.library.lbsd
    ~baca.library.literal
    ~baca.library.markup
-   ~baca.library.pitches
 
 .. raw:: html
 
@@ -948,6 +946,69 @@ Pitch array library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.pitchcommands <baca--pitchcommands>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchcommands.Loop
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchcommands.AccidentalAdjustmentCommand
+   ~baca.pitchcommands.ClusterCommand
+   ~baca.pitchcommands.ColorFingeringCommand
+   ~baca.pitchcommands.DiatonicClusterCommand
+   ~baca.pitchcommands.MicrotoneDeviationCommand
+   ~baca.pitchcommands.OctaveDisplacementCommand
+   ~baca.pitchcommands.PitchCommand
+   ~baca.pitchcommands.StaffPositionCommand
+   ~baca.pitchcommands.StaffPositionInterpolationCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchcommands.clusters
+   ~baca.pitchcommands.color_fingerings
+   ~baca.pitchcommands.deviation
+   ~baca.pitchcommands.diatonic_clusters
+   ~baca.pitchcommands.displacement
+   ~baca.pitchcommands.force_accidental
+   ~baca.pitchcommands.interpolate_staff_positions
+   ~baca.pitchcommands.loop
+   ~baca.pitchcommands.natural_clusters
+   ~baca.pitchcommands.pitch
+   ~baca.pitchcommands.pitches
+   ~baca.pitchcommands.staff_position
+   ~baca.pitchcommands.staff_positions
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.pitchlib <baca--pitchlib>`
    :class: section-header
 
@@ -1052,6 +1113,7 @@ Rhythm library.
    ~baca.rhythmlib.AcciaccaturaSpecifier
    ~baca.rhythmlib.PitchFirstRhythmCommand
    ~baca.rhythmlib.RhythmCommand
+   ~baca.rhythmlib.TieCorrectionCommand
 
 .. raw:: html
 
@@ -1075,7 +1137,12 @@ Rhythm library.
    ~baca.rhythmlib.make_skips
    ~baca.rhythmlib.make_tied_notes
    ~baca.rhythmlib.make_tied_repeated_durations
+   ~baca.rhythmlib.repeat_tie_from
+   ~baca.rhythmlib.repeat_tie_to
    ~baca.rhythmlib.rhythm
+   ~baca.rhythmlib.tie_from
+   ~baca.rhythmlib.tie_to
+   ~baca.rhythmlib.untie_to
 
 .. raw:: html
 
@@ -1109,6 +1176,7 @@ Rhythm library.
 
    ~baca.segmentlib.BreakMeasureMap
    ~baca.segmentlib.HorizontalSpacingSpecifier
+   ~baca.segmentlib.LBSD
    ~baca.segmentlib.MetronomeMarkMeasureMap
    ~baca.segmentlib.PageSpecifier
    ~baca.segmentlib.StageMeasureMap

@@ -23,17 +23,11 @@ library
    :nosignatures:
 
    ~apply_tweaks
-   ~lbsd
    ~literal
    ~markup
-   ~pitches
 
 .. autofunction:: apply_tweaks
-
-.. autofunction:: lbsd
 
 .. autofunction:: literal
 
 .. autofunction:: markup
-
-.. autofunction:: pitches

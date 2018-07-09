@@ -24,9 +24,6 @@ LibraryTZ
 
    ~tenuto
    ~text_spanner
-   ~tie_from
-   ~tie_to
-   ~untie_to
    ~up_arpeggio
    ~up_bow
    ~very_long_fermata
@@ -34,17 +31,10 @@ LibraryTZ
    ~voice_one
    ~voice_three
    ~voice_two
-   ~volta
 
 .. autofunction:: tenuto
 
 .. autofunction:: text_spanner
-
-.. autofunction:: tie_from
-
-.. autofunction:: tie_to
-
-.. autofunction:: untie_to
 
 .. autofunction:: up_arpeggio
 
@@ -59,5 +49,3 @@ LibraryTZ
 .. autofunction:: voice_three
 
 .. autofunction:: voice_two
-
-.. autofunction:: volta
