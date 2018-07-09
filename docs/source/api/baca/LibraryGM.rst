@@ -22,14 +22,11 @@ LibraryGM
 .. autosummary::
    :nosignatures:
 
-   ~imbricate
    ~laissez_vibrer
    ~long_fermata
    ~marcato
    ~margin_markup
    ~mleaves
-
-.. autofunction:: imbricate
 
 .. autofunction:: laissez_vibrer
 

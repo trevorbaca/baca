@@ -34,6 +34,7 @@ baca
    indicators
    library
    markups
+   musicmaker
    overrides
    pitcharray
    pitchclasses
@@ -59,6 +60,7 @@ baca
    indicators
    library
    markups
+   musicmaker
    overrides
    pitcharray
    pitchclasses
@@ -79,38 +81,18 @@ baca
 .. toctree::
    :hidden:
 
-   AnchorSpecifier
-   Coat
    Expression
    ExpressionGallery
-   ImbricationCommand
-   LMRSpecifier
-   MusicAccumulator
-   MusicContribution
-   MusicMaker
-   NestingCommand
    PersistentIndicatorTests
-   PitchSpecifier
-   RestAffixSpecifier
    SchemeManifest
    Sequence
 
 .. autosummary::
    :nosignatures:
 
-   ~AnchorSpecifier.AnchorSpecifier
-   ~Coat.Coat
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
-   ~ImbricationCommand.ImbricationCommand
-   ~LMRSpecifier.LMRSpecifier
-   ~MusicAccumulator.MusicAccumulator
-   ~MusicContribution.MusicContribution
-   ~MusicMaker.MusicMaker
-   ~NestingCommand.NestingCommand
    ~PersistentIndicatorTests.PersistentIndicatorTests
-   ~PitchSpecifier.PitchSpecifier
-   ~RestAffixSpecifier.RestAffixSpecifier
    ~SchemeManifest.SchemeManifest
    ~Sequence.Sequence
 

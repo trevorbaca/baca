@@ -25,9 +25,6 @@ LibraryAF
    ~accent
    ~allow_octaves
    ~alternate_bow_strokes
-   ~anchor
-   ~anchor_after
-   ~anchor_to_figure
    ~apply
    ~arpeggio
    ~articulation
@@ -38,7 +35,6 @@ LibraryAF
    ~beam_runs
    ~breathe
    ~clef
-   ~coat
    ~cross_staff
    ~double_staccato
    ~down_arpeggio
@@ -56,12 +52,6 @@ LibraryAF
 .. autofunction:: allow_octaves
 
 .. autofunction:: alternate_bow_strokes
-
-.. autofunction:: anchor
-
-.. autofunction:: anchor_after
-
-.. autofunction:: anchor_to_figure
 
 .. autofunction:: apply
 
@@ -82,8 +72,6 @@ LibraryAF
 .. autofunction:: breathe
 
 .. autofunction:: clef
-
-.. autofunction:: coat
 
 .. autofunction:: cross_staff
 

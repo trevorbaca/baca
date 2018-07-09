@@ -23,19 +23,9 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.AnchorSpecifier.AnchorSpecifier
-   ~baca.Coat.Coat
    ~baca.Expression.Expression
    ~baca.ExpressionGallery.ExpressionGallery
-   ~baca.ImbricationCommand.ImbricationCommand
-   ~baca.LMRSpecifier.LMRSpecifier
-   ~baca.MusicAccumulator.MusicAccumulator
-   ~baca.MusicContribution.MusicContribution
-   ~baca.MusicMaker.MusicMaker
-   ~baca.NestingCommand.NestingCommand
    ~baca.PersistentIndicatorTests.PersistentIndicatorTests
-   ~baca.PitchSpecifier.PitchSpecifier
-   ~baca.RestAffixSpecifier.RestAffixSpecifier
    ~baca.SchemeManifest.SchemeManifest
    ~baca.Sequence.Sequence
 
@@ -162,9 +152,6 @@ Bača API
    ~baca.LibraryAF.accent
    ~baca.LibraryAF.allow_octaves
    ~baca.LibraryAF.alternate_bow_strokes
-   ~baca.LibraryAF.anchor
-   ~baca.LibraryAF.anchor_after
-   ~baca.LibraryAF.anchor_to_figure
    ~baca.LibraryAF.apply
    ~baca.LibraryAF.arpeggio
    ~baca.LibraryAF.articulation
@@ -175,7 +162,6 @@ Bača API
    ~baca.LibraryAF.beam_runs
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.clef
-   ~baca.LibraryAF.coat
    ~baca.LibraryAF.cross_staff
    ~baca.LibraryAF.double_staccato
    ~baca.LibraryAF.down_arpeggio
@@ -205,7 +191,6 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.LibraryGM.imbricate
    ~baca.LibraryGM.laissez_vibrer
    ~baca.LibraryGM.long_fermata
    ~baca.LibraryGM.marcato
@@ -229,20 +214,11 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.LibraryNS.nest
    ~baca.LibraryNS.one_voice
    ~baca.LibraryNS.previous_metadata
    ~baca.LibraryNS.rehearsal_mark
-   ~baca.LibraryNS.rests_after
-   ~baca.LibraryNS.rests_around
-   ~baca.LibraryNS.rests_before
-   ~baca.LibraryNS.resume
-   ~baca.LibraryNS.resume_after
    ~baca.LibraryNS.rmleaves
    ~baca.LibraryNS.short_fermata
-   ~baca.LibraryNS.skips_after
-   ~baca.LibraryNS.skips_around
-   ~baca.LibraryNS.skips_before
    ~baca.LibraryNS.staccatissimo
    ~baca.LibraryNS.staccato
    ~baca.LibraryNS.staff_lines
@@ -715,6 +691,73 @@ Markup library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.musicmaker <baca--musicmaker>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.musicmaker.AcciaccaturaSpecifier
+   ~baca.musicmaker.AnchorSpecifier
+   ~baca.musicmaker.Coat
+   ~baca.musicmaker.ImbricationCommand
+   ~baca.musicmaker.LMRSpecifier
+   ~baca.musicmaker.MusicAccumulator
+   ~baca.musicmaker.MusicContribution
+   ~baca.musicmaker.MusicMaker
+   ~baca.musicmaker.NestingCommand
+   ~baca.musicmaker.PitchFirstRhythmCommand
+   ~baca.musicmaker.PitchSpecifier
+   ~baca.musicmaker.RestAffixSpecifier
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.musicmaker.anchor
+   ~baca.musicmaker.anchor_after
+   ~baca.musicmaker.anchor_to_figure
+   ~baca.musicmaker.coat
+   ~baca.musicmaker.imbricate
+   ~baca.musicmaker.nest
+   ~baca.musicmaker.rests_after
+   ~baca.musicmaker.rests_around
+   ~baca.musicmaker.rests_before
+   ~baca.musicmaker.resume
+   ~baca.musicmaker.resume_after
+   ~baca.musicmaker.skips_after
+   ~baca.musicmaker.skips_around
+   ~baca.musicmaker.skips_before
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Rhythm-makers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.musicmaker.PitchFirstRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.overrides <baca--overrides>`
    :class: section-header
 
@@ -991,8 +1034,6 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.rhythmcommands.AcciaccaturaSpecifier
-   ~baca.rhythmcommands.PitchFirstRhythmCommand
    ~baca.rhythmcommands.RhythmCommand
    ~baca.rhythmcommands.TieCorrectionCommand
 
@@ -1035,7 +1076,6 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.rhythmcommands.PitchFirstRhythmMaker
    ~baca.rhythmcommands.SkipRhythmMaker
 
 .. raw:: html

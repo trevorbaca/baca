@@ -6,7 +6,7 @@ from .divisions import *
 from .dynamics import *
 from .indicators import *
 from .markups import Markup
-from .mmaker import *
+from .musicmaker import *
 from .overrides import *
 from .pitcharray import *
 from .pitchcommands import *
