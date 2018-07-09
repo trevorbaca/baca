@@ -3562,11 +3562,11 @@ def edition(
     if isinstance(not_parts, (str, abjad.Markup)):
         not_parts = library.markup(not_parts)
     assert isinstance(not_parts, IndicatorCommand)
-    not_parts_ = library.not_parts(not_parts)
+    not_parts_ = commandlib.not_parts(not_parts)
     if isinstance(only_parts, (str, abjad.Markup)):
         only_parts = library.markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
-    only_parts_ = library.only_parts(only_parts)
+    only_parts_ = commandlib.only_parts(only_parts)
     return commandlib.Suite(
         not_parts_,
         only_parts_,
