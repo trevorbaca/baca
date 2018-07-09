@@ -1221,7 +1221,7 @@ def repeat_tie_repeat_pitches() -> commandlib.Map:
     """
     Repeat-ties repeat pitches.
     """
-    return library.map(
+    return commandlib.map(
         _select().ltqruns().nontrivial(),
         SpannerCommand(
             selector='baca.qrun(0)',
@@ -2147,7 +2147,7 @@ def tie_repeat_pitches() -> commandlib.Map:
     """
     Ties repeat pitches.
     """
-    return library.map(
+    return commandlib.map(
         _select().ltqruns().nontrivial(),
         tie(),
         )

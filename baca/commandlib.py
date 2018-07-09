@@ -1,6 +1,7 @@
 import abjad
 import functools
 import typing
+from . import library
 from . import indicatorlib
 from . import typings
 
@@ -1298,7 +1299,7 @@ def tag(
         message += f' (not {tags!r}).'
         raise Exception(message)
     if isinstance(command, abjad.Markup):
-        command = markup(command)
+        command = library.markup(command)
     assert Command._validate_tags(tags), repr(tags)
     if isinstance(command, (Map, Suite)):
         for command_ in command.commands:
