@@ -298,6 +298,7 @@ class Expression(abjad.Expression):
                             }
                     }
                 }
+
     """
 
     ### CLASS VARIABLES ###

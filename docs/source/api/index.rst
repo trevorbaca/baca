@@ -431,6 +431,7 @@ Dynamic library.
    :nosignatures:
 
    ~baca.indicators.Accelerando
+   ~baca.indicators.Markup
    ~baca.indicators.Ritardando
    ~baca.indicators.SpacingSection
    ~baca.indicators.StaffLines
@@ -465,19 +466,7 @@ Function library.
 .. rubric:: :ref:`baca.markups <baca--markups>`
    :class: section-header
 
-Markup library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.markups.Markup
+indicators.Markup library.
 
 .. raw:: html
 

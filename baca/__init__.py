@@ -5,7 +5,6 @@ from .commands import *
 from .divisions import *
 from .dynamics import *
 from .indicators import *
-from .markups import Markup
 from .musicmaker import *
 from .overrides import *
 from .pitcharray import *
