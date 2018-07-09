@@ -1,11 +1,11 @@
 import abjad
 import collections
 import typing
-from . import scoping
+from . import commands as baca_commands
 from . import indicators
 from . import library
+from . import scoping
 from . import typings
-from .IndicatorCommand import IndicatorCommand
 from .Selection import Selection
 from .Sequence import Sequence
 
@@ -2615,7 +2615,6 @@ def breaks(
         Exception: score ends at measure 103 (not 109).
 
     """
-    from .IndicatorCommand import IndicatorCommand
     commands = abjad.OrderedDict()
     if not page_specifiers:
         return BreakMeasureMap(
@@ -2655,7 +2654,7 @@ def breaks(
                 break_ = abjad.LilyPondLiteral(r'\pageBreak')
             else:
                 break_ = abjad.LilyPondLiteral(r'\break')
-            command = IndicatorCommand(
+            command = baca_commands.IndicatorCommand(
                 indicators=[break_],
                 selector=selector,
                 )
@@ -2664,11 +2663,10 @@ def breaks(
                 alignment_distances=alignment_distances,
                 y_offset=y_offset,
                 )
-            lbsd_command = IndicatorCommand(
+            lbsd_command = baca_commands.IndicatorCommand(
                 indicators=[lbsd],
                 selector=selector,
                 )
-
             commands[measure_number] = [command, lbsd_command]
     breaks = BreakMeasureMap(
         commands=commands,

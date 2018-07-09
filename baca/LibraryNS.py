@@ -1,17 +1,15 @@
 import abjad
 import collections
 import typing
-from . import scoping
+from . import commands
 from . import indicators
 from . import library
 from . import markups
+from . import scoping
 from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
-from .ContainerCommand import ContainerCommand
-from .IndicatorCommand import IndicatorCommand
 from .NestingCommand import NestingCommand
-from .PartAssignmentCommand import PartAssignmentCommand
 from .RestAffixSpecifier import RestAffixSpecifier
 from .Selection import Selection
 from .Selection import _select
@@ -99,205 +97,14 @@ def nest(
 def one_voice(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Makes LilyPond ``\oneVoice`` command.
     """
     literal = abjad.LilyPondLiteral(r'\oneVoice')
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        )
-
-def parts(
-    part_assignment: abjad.PartAssignment,
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> PartAssignmentCommand:
-    r"""
-    Inserts ``selector`` output in container and sets part assignment.
-
-    ..  container:: example
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.StringTrioScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'ViolinMusicVoice',
-        ...     baca.make_notes(),
-        ...     baca.parts(abjad.PartAssignment('Violin')),
-        ...     baca.pitch('E4'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-        \context Score = "Score"
-        <<
-            \context GlobalContext = "GlobalContext"
-            <<
-                \context GlobalSkips = "GlobalSkips"
-                {
-        <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! SM4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! SM4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 3/8
-        <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! SM4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! SM4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 3/8
-                    \baca_bar_line_visible                                                       %! SM5
-                    \bar "|"                                                                     %! SM5
-        <BLANKLINE>
-                }
-            >>
-            \context MusicContext = "MusicContext"
-            <<
-                \context StringSectionStaffGroup = "String Section Staff Group"
-                <<
-                    \tag Violin                                                                  %! ST4
-                    \context ViolinMusicStaff = "ViolinMusicStaff"
-                    {
-                        \context ViolinMusicVoice = "ViolinMusicVoice"
-                        {
-                            {   %*% PartAssignment('Violin')
-        <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                   %! SM4
-                                \clef "treble"                                                   %! SM8:DEFAULT_CLEF:ST3
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                            %@% \override ViolinMusicStaff.Clef.color = ##f                      %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                \set ViolinMusicStaff.forceClef = ##t                            %! SM8:DEFAULT_CLEF:SM33:ST3
-                                e'2
-                                ^ \markup {                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    \with-color                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        #(x11-color 'DarkViolet)                                 %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        (Violin)                                                 %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    }                                                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
-        <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                   %! SM4
-                                e'4.
-        <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                   %! SM4
-                                e'2
-        <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                   %! SM4
-                                e'4.
-        <BLANKLINE>
-                            }   %*% PartAssignment('Violin')
-                        }
-                    }
-                    \tag Viola                                                                   %! ST4
-                    \context ViolaMusicStaff = "ViolaMusicStaff"
-                    {
-                        \context ViolaMusicVoice = "ViolaMusicVoice"
-                        {
-        <BLANKLINE>
-                            % [ViolaMusicVoice measure 1]                                        %! SM4
-                            \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST3
-                            \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                        %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                            \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
-                            R1 * 1/2
-                            ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
-        <BLANKLINE>
-                            % [ViolaMusicVoice measure 2]                                        %! SM4
-                            R1 * 3/8
-        <BLANKLINE>
-                            % [ViolaMusicVoice measure 3]                                        %! SM4
-                            R1 * 1/2
-        <BLANKLINE>
-                            % [ViolaMusicVoice measure 4]                                        %! SM4
-                            R1 * 3/8
-        <BLANKLINE>
-                        }
-                    }
-                    \tag Cello                                                                   %! ST4
-                    \context CelloMusicStaff = "CelloMusicStaff"
-                    {
-                        \context CelloMusicVoice = "CelloMusicVoice"
-                        {
-        <BLANKLINE>
-                            % [CelloMusicVoice measure 1]                                        %! SM4
-                            \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST3
-                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                        %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                            \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
-                            R1 * 1/2
-                            ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
-        <BLANKLINE>
-                            % [CelloMusicVoice measure 2]                                        %! SM4
-                            R1 * 3/8
-        <BLANKLINE>
-                            % [CelloMusicVoice measure 3]                                        %! SM4
-                            R1 * 1/2
-        <BLANKLINE>
-                            % [CelloMusicVoice measure 4]                                        %! SM4
-                            R1 * 3/8
-        <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-        >>
-
-    ..  container:: example
-
-        Raises exception when voice does not allow part assignment:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.StringTrioScoreTemplate(),
-        ...     test_container_identifiers=True,
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> part_assignment = abjad.PartAssignment('Flute')
-
-        >>> maker(
-        ...     'ViolinMusicVoice',
-        ...     baca.make_notes(),
-        ...     baca.parts(part_assignment),
-        ...     baca.pitches('E4 F4'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        Traceback (most recent call last):
-            ...
-        Exception: ViolinMusicVoice does not allow Flute part assignment:
-            abjad.PartAssignment('Flute')
-
-    """
-    if not isinstance(part_assignment, abjad.PartAssignment):
-        message = 'part_assignment must be part assignment'
-        message += f' (not {part_assignment!r}).'
-        raise Exception(message)
-    return PartAssignmentCommand(
-        part_assignment=part_assignment,
         )
 
 def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
@@ -326,7 +133,7 @@ def rehearsal_mark(
     argument: typing.Union[int, str],
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches rehearsal mark.
     """
@@ -335,7 +142,7 @@ def rehearsal_mark(
     else:
         assert isinstance(argument, int)
         mark = abjad.RehearsalMark(number=argument)
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         *tweaks,
         indicators=[mark],
         selector=selector,
@@ -579,7 +386,7 @@ def rmleaves(count: int) -> abjad.Expression:
 def short_fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches short fermata.
 
@@ -714,7 +521,7 @@ def short_fermata(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('shortfermata')],
         selector=selector,
         )
@@ -936,7 +743,7 @@ def skips_before(
 def staccatissimo(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches staccatissimo.
 
@@ -1076,7 +883,7 @@ def staccatissimo(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('staccatissimo')],
         selector=selector,
         )
@@ -1084,7 +891,7 @@ def staccatissimo(
 def staccato(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches staccato.
 
@@ -1224,7 +1031,7 @@ def staccato(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('staccato')],
         selector=selector,
         )
@@ -1233,7 +1040,7 @@ def staff_lines(
     n: int,
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Makes staff line command.
 
@@ -1704,7 +1511,7 @@ def staff_lines(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[indicators.StaffLines(line_count=n)],
         selector=selector,
         )
@@ -1715,7 +1522,7 @@ def start_markup(
     context: str = 'Staff',
     hcenter_in: typings.Number = None,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches start markup.
     """
@@ -1739,7 +1546,7 @@ def start_markup(
     else:
         raise TypeError(argument)
     assert isinstance(start_markup, abjad.StartMarkup)
-    command = IndicatorCommand(
+    command = commands.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
         tags=[abjad.Tag('STMK'), abjad.Tag('-PARTS')],
@@ -1750,7 +1557,7 @@ def stem_tremolo(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
     tremolo_flags:int = 32,
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches stem tremolo.
 
@@ -1891,7 +1698,7 @@ def stem_tremolo(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
         selector=selector,
         )
@@ -1899,7 +1706,7 @@ def stem_tremolo(
 def stop_trill(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches stop trill to closing-slot.
 
@@ -1923,7 +1730,7 @@ def stop_trill(
 def stopped(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
 
@@ -1992,7 +1799,7 @@ def stopped(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('stopped')],
         selector=selector,
         )

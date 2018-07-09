@@ -4,9 +4,9 @@ Dynamic library.
 import abjad
 import typing
 from . import typings
-from .IndicatorBundle import IndicatorBundle
-from .IndicatorCommand import IndicatorCommand
-from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
+from .commands import IndicatorBundle
+from .commands import IndicatorCommand
+from .commands import PiecewiseIndicatorCommand
 from .SchemeManifest import SchemeManifest
 from .Sequence import Sequence
 

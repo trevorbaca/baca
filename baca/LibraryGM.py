@@ -1,30 +1,13 @@
 import abjad
 import typing
 from abjadext import rmakers
-from . import scoping
+from . import commands
 from . import library
+from . import scoping
 from . import typings
-from .GlobalFermataCommand import GlobalFermataCommand
 from .ImbricationCommand import ImbricationCommand
-from .IndicatorCommand import IndicatorCommand
-from .InstrumentChangeCommand import InstrumentChangeCommand
-from .LabelCommand import LabelCommand
-from .MetronomeMarkCommand import MetronomeMarkCommand
 from .Selection import _select
 
-
-def global_fermata(
-    description: str = None,
-    *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    ) -> GlobalFermataCommand:
-    """
-    Attaches global fermata.
-    """
-    return GlobalFermataCommand(
-        description=description,
-        selector=selector,
-        )
 
 def imbricate(
     voice_name: str,
@@ -152,180 +135,10 @@ def imbricate(
         truncate_ties=truncate_ties,
         )
 
-def instrument(
-    instrument: abjad.Instrument,
-    *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    ) -> InstrumentChangeCommand:
-    """
-    Makes instrument change command.
-    """
-    if not isinstance(instrument, abjad.Instrument):
-        message = f'instrument must be instrument (not {instrument!r}).'
-        raise Exception(message)
-    return InstrumentChangeCommand(
-        indicators=[instrument],
-        selector=selector,
-        )
-
-def label(
-    expression: abjad.Expression,
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> LabelCommand:
-    r"""
-    Labels ``selector`` output with label ``expression``.
-
-    ..  container:: example
-
-        Labels pitch names:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.label(abjad.label().with_pitches(locale='us')),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            ^ \markup { C4 }
-                            [
-                            d'16
-                            ^ \markup { D4 }
-                            ]
-                            bf'4
-                            ^ \markup { Bb4 }
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            ^ \markup { "F#5" }
-                            [
-                            e''16
-                            ^ \markup { E5 }
-                            ]
-                            ef''4
-                            ^ \markup { Eb5 }
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            ^ \markup { Ab5 }
-                            [
-                            g''16
-                            ^ \markup { G5 }
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            ^ \markup { A4 }
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Labels pitch names in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.label(
-        ...         abjad.label().with_pitches(locale='us'),
-        ...         selector=baca.tuplet(1),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            ^ \markup { "F#5" }
-                            [
-                            e''16
-                            ^ \markup { E5 }
-                            ]
-                            ef''4
-                            ^ \markup { Eb5 }
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            ^ \markup { Ab5 }
-                            [
-                            g''16
-                            ^ \markup { G5 }
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-    return LabelCommand(expression=expression, selector=selector)
-
 def laissez_vibrer(
     *,
     selector: typings.Selector  = 'baca.ptail(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
 
@@ -465,7 +278,7 @@ def laissez_vibrer(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('laissezVibrer')],
         selector=selector,
         )
@@ -473,7 +286,7 @@ def laissez_vibrer(
 def long_fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches long fermata.
 
@@ -606,7 +419,7 @@ def long_fermata(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('longfermata')],
         selector=selector,
         )
@@ -614,7 +427,7 @@ def long_fermata(
 def marcato(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches marcato.
 
@@ -754,7 +567,7 @@ def marcato(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('marcato')],
         selector=selector,
         )
@@ -762,10 +575,10 @@ def marcato(
 def margin_markup(
     argument: str,
     *,
-    alert: IndicatorCommand = None,
+    alert: commands.IndicatorCommand = None,
     context: str = 'Staff',
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> typing.Union[IndicatorCommand, scoping.Suite]:
+    ) -> typing.Union[commands.IndicatorCommand, scoping.Suite]:
     r"""
     Attaches margin markup.
 
@@ -874,32 +687,15 @@ def margin_markup(
     else:
         raise TypeError(argument)
     assert isinstance(margin_markup, abjad.MarginMarkup)
-    command = IndicatorCommand(
+    command = commands.IndicatorCommand(
         indicators=[margin_markup],
         selector=selector,
         )
     if bool(alert):
-        assert isinstance(alert, IndicatorCommand), repr(alert)
+        assert isinstance(alert, commands.IndicatorCommand), repr(alert)
         return scoping.Suite(command, alert)
     else:
         return command
-
-def metronome_mark(
-    key: str,
-    *,
-    redundant: bool = None,
-    selector: typings.Selector = 'baca.leaf(0)',
-    ) -> typing.Optional[MetronomeMarkCommand]:
-    """
-    Attaches metronome mark matching ``key`` metronome mark manifest.
-    """
-    if redundant is True:
-        return None
-    return MetronomeMarkCommand(
-        key=key,
-        redundant=redundant,
-        selector=selector,
-        )
 
 # TODO: move to baca.Selection
 def mleaves(count: int) -> abjad.Expression:

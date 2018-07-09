@@ -1,20 +1,18 @@
 import abjad
 import typing
 from abjadext import rmakers
-from . import scoping
+from . import commands
 from . import library
+from . import scoping
 from . import typings
 from .AnchorSpecifier import AnchorSpecifier
 from .Coat import Coat
-from .ColorCommand import ColorCommand
-from .ContainerCommand import ContainerCommand
-from .IndicatorCommand import IndicatorCommand
 
 
 def accent(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches accent.
 
@@ -154,7 +152,7 @@ def accent(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('>')],
         selector=selector,
         )
@@ -162,11 +160,11 @@ def accent(
 def allow_octaves(
     *,
     selector: typings.Selector = 'baca.leaves()',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE tag.
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.tags.ALLOW_OCTAVE],
         selector=selector,
         )
@@ -175,7 +173,7 @@ def alternate_bow_strokes(
     *,
     downbow_first: bool = True,
     selector: typings.Selector = 'baca.pheads()',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
 
@@ -402,7 +400,7 @@ def alternate_bow_strokes(
     else:
         strings = ['upbow', 'downbow']
     indicators = [abjad.Articulation(_) for _ in strings]
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=indicators,
         selector=selector,
         )
@@ -782,7 +780,7 @@ def apply(
 def arpeggio(
     *,
     selector: typings.Selector = 'baca.chead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches arpeggio.
 
@@ -926,7 +924,7 @@ def arpeggio(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('arpeggio')],
         selector=selector,
         )
@@ -935,12 +933,12 @@ def articulation(
     articulation: str,
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches ``articulation``.
     """
     articulation_ = abjad.Articulation(articulation)
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[articulation_],
         selector=selector,
         )
@@ -949,11 +947,11 @@ def articulations(
     articulations: typing.List,
     *,
     selector: typings.Selector = 'baca.pheads()',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches ``articulations``.
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=articulations,
         selector=selector,
         )
@@ -962,7 +960,7 @@ def bar_extent_persistent(
     pair: typings.NumberPair = None,
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Makes persistent bar-extent override.
 
@@ -1088,7 +1086,7 @@ def bar_extent_persistent(
         grob='bar_line',
         value=pair,
         )
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[override],
         selector=selector,
         )
@@ -1567,12 +1565,12 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
 def breathe(
     *,
     selector: typings.Selector = 'baca.pleaf(-1)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     """
     Attaches LilyPond breathe command to pleaf -1.
     """
     breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='after')
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[breathe],
         selector=selector,
         )
@@ -1582,7 +1580,7 @@ def clef(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
     redundant: bool = None,
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches clef.
 
@@ -1719,7 +1717,7 @@ def clef(
 
     """
     indicator = abjad.Clef(clef)
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
@@ -1817,324 +1815,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     """
     return Coat(pitch)
 
-def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
-    r"""
-    Colors leaves.
-
-    ..  container:: example
-
-        Colors all leaves:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.color(),
-        ...     baca.flags(),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
-                            r8
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            bf'4
-                            ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            bf'16
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            fs''16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            e''16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            ef''4
-                            ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            ef''16
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
-                            r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            af''16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            g''16
-                        }
-                        \times 4/5 {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            a'16
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Colors leaves in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.color(selector=baca.tuplets()[1:2].leaves()),
-        ...     baca.flags(),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            d'16
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            fs''16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            e''16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            ef''4
-                            ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            ef''16
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
-                            r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
-                            af''16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
-                            g''16
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-    return ColorCommand(selector=selector)
-
-def container(
-    identifier: str = None,
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> ContainerCommand:
-    r"""
-    Makes container with ``identifier`` and extends container with
-    ``selector`` output.
-
-    ..  container:: example
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.container('ViolinI', selector=baca.leaves()[:2]),
-        ...     baca.container('ViolinII', selector=baca.leaves()[2:]),
-        ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches('E4 F4'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-
-        >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-        \context Score = "Score"
-        <<
-            \context GlobalContext = "GlobalContext"
-            <<
-                \context GlobalSkips = "GlobalSkips"
-                {
-        <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! SM4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! SM4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 3/8
-        <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! SM4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! SM4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                    \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                    s1 * 3/8
-                    \baca_bar_line_visible                                                       %! SM5
-                    \bar "|"                                                                     %! SM5
-        <BLANKLINE>
-                }
-            >>
-            \context MusicContext = "MusicContext"
-            <<
-                \context Staff = "MusicStaff"
-                {
-                    \context Voice = "MusicVoice"
-                    {
-                        {   %*% ViolinI
-        <BLANKLINE>
-                            % [MusicVoice measure 1]                                             %! SM4
-                            e'2
-        <BLANKLINE>
-                            % [MusicVoice measure 2]                                             %! SM4
-                            f'4.
-                        }   %*% ViolinI
-                        {   %*% ViolinII
-        <BLANKLINE>
-                            % [MusicVoice measure 3]                                             %! SM4
-                            e'2
-        <BLANKLINE>
-                            % [MusicVoice measure 4]                                             %! SM4
-                            f'4.
-        <BLANKLINE>
-                        }   %*% ViolinII
-                    }
-                }
-            >>
-        >>
-
-    """
-    if identifier is not None:
-        if not isinstance(identifier, str):
-            message = f'identifier must be string (not {identifier!r}).'
-            raise Exception(message)
-    return ContainerCommand(
-        identifier=identifier,
-        selector=selector,
-        )
-
 def cross_staff(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches cross-staff command.
 
@@ -2518,7 +2202,7 @@ def cross_staff(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
         selector=selector,
         )
@@ -2526,7 +2210,7 @@ def cross_staff(
 def double_staccato(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches double-staccato.
 
@@ -2666,7 +2350,7 @@ def double_staccato(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('baca_staccati #2')],
         selector=selector,
         )
@@ -2674,7 +2358,7 @@ def double_staccato(
 def down_arpeggio(
     *,
     selector: typings.Selector = 'baca.chead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
 
@@ -2821,7 +2505,7 @@ def down_arpeggio(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Down)],
         selector=selector,
         )
@@ -2829,7 +2513,7 @@ def down_arpeggio(
 def down_bow(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches down-bow.
 
@@ -2969,7 +2653,7 @@ def down_bow(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('downbow')],
         selector=selector,
         )
@@ -2977,7 +2661,7 @@ def down_bow(
 def dynamic_down(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches dynamic-down command.
 
@@ -3118,7 +2802,7 @@ def dynamic_down(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
         selector=selector,
         )
@@ -3126,7 +2810,7 @@ def dynamic_down(
 def dynamic_up(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches dynamic-up command.
 
@@ -3267,25 +2951,25 @@ def dynamic_up(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
         selector=selector,
         )
 
 def edition(
-    not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
+    not_parts: typing.Union[str, abjad.Markup, commands.IndicatorCommand],
+    only_parts: typing.Union[str, abjad.Markup, commands.IndicatorCommand],
     ) -> scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
     if isinstance(not_parts, (str, abjad.Markup)):
         not_parts = library.markup(not_parts)
-    assert isinstance(not_parts, IndicatorCommand)
+    assert isinstance(not_parts, commands.IndicatorCommand)
     not_parts_ = scoping.not_parts(not_parts)
     if isinstance(only_parts, (str, abjad.Markup)):
         only_parts = library.markup(only_parts)
-    assert isinstance(only_parts, IndicatorCommand)
+    assert isinstance(only_parts, commands.IndicatorCommand)
     only_parts_ = scoping.only_parts(only_parts)
     return scoping.Suite(
         not_parts_,
@@ -3295,7 +2979,7 @@ def edition(
 def espressivo(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches espressivo.
 
@@ -3435,7 +3119,7 @@ def espressivo(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('espressivo')],
         selector=selector,
         )
@@ -3443,7 +3127,7 @@ def espressivo(
 def fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches fermata.
 
@@ -3576,7 +3260,7 @@ def fermata(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('fermata')],
         selector=selector,
         )
@@ -3584,7 +3268,7 @@ def fermata(
 def flageolet(
     *,
     selector: typings.Selector = 'baca.phead(0)',
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches flageolet.
 
@@ -3724,7 +3408,7 @@ def flageolet(
             >>
 
     """
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         indicators=[abjad.Articulation('flageolet')],
         selector=selector,
         )

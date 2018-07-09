@@ -4,7 +4,7 @@ Function library.
 import abjad
 import typing
 from . import typings
-from .IndicatorCommand import IndicatorCommand
+from .commands import IndicatorCommand
 from .Sequence import Sequence
 
 

@@ -1,13 +1,13 @@
 import abjad
 import copy
 from abjadext import rmakers
-from . import scoping
+from . import commands
 from . import pitchcommands
 from . import pitchclasses
 from . import rhythmcommands
+from . import scoping
 from . import spannercommands
 from .AnchorSpecifier import AnchorSpecifier
-from .ColorCommand import ColorCommand
 from .ImbricationCommand import ImbricationCommand
 from .MusicContribution import MusicContribution
 from .NestingCommand import NestingCommand
@@ -776,7 +776,7 @@ class MusicMaker(abjad.AbjadObject):
         specifiers_ = []
         color_selector, color_selector_result = None, None
         for specifier in specifiers:
-            if isinstance(specifier, ColorCommand):
+            if isinstance(specifier, commands.ColorCommand):
                 color_selector = specifier.selector
                 color_selector_result = specifier(selections)
             else:
