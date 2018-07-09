@@ -10,10 +10,8 @@ from .overridelib import *
 from .pitcharray import *
 from .pitchcommands import *
 from .pitchclasses import *
-from .registerlib import *
 from .rhythmlib import *
 from .segmentlib import *
-from .settinglib import *
 from .spannerlib import *
 from .templatelib import *
 from . import markuplib

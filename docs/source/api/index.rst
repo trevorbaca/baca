@@ -986,6 +986,8 @@ Pitch library.
    ~baca.pitchclasses.PitchSegment
    ~baca.pitchclasses.PitchSet
    ~baca.pitchclasses.PitchTreeSpanner
+   ~baca.pitchclasses.Registration
+   ~baca.pitchclasses.RegistrationComponent
    ~baca.pitchclasses.ZaggedPitchClassMaker
 
 .. raw:: html
@@ -1024,6 +1026,9 @@ Pitch library.
    ~baca.pitchcommands.MicrotoneDeviationCommand
    ~baca.pitchcommands.OctaveDisplacementCommand
    ~baca.pitchcommands.PitchCommand
+   ~baca.pitchcommands.RegisterCommand
+   ~baca.pitchcommands.RegisterInterpolationCommand
+   ~baca.pitchcommands.RegisterToOctaveCommand
    ~baca.pitchcommands.StaffPositionCommand
    ~baca.pitchcommands.StaffPositionInterpolationCommand
 
@@ -1037,6 +1042,8 @@ Pitch library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.pitchcommands.bass_to_octave
+   ~baca.pitchcommands.center_to_octave
    ~baca.pitchcommands.clusters
    ~baca.pitchcommands.color_fingerings
    ~baca.pitchcommands.deviation
@@ -1048,48 +1055,10 @@ Pitch library.
    ~baca.pitchcommands.natural_clusters
    ~baca.pitchcommands.pitch
    ~baca.pitchcommands.pitches
+   ~baca.pitchcommands.register
+   ~baca.pitchcommands.soprano_to_octave
    ~baca.pitchcommands.staff_position
    ~baca.pitchcommands.staff_positions
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.registerlib <baca--registerlib>`
-   :class: section-header
-
-Register library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.registerlib.RegisterCommand
-   ~baca.registerlib.RegisterInterpolationCommand
-   ~baca.registerlib.RegisterToOctaveCommand
-   ~baca.registerlib.Registration
-   ~baca.registerlib.RegistrationComponent
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.registerlib.bass_to_octave
-   ~baca.registerlib.center_to_octave
-   ~baca.registerlib.register
-   ~baca.registerlib.soprano_to_octave
 
 .. raw:: html
 
@@ -1198,27 +1167,6 @@ Rhythm library.
    ~baca.segmentlib.page
    ~baca.segmentlib.scorewide_spacing
    ~baca.segmentlib.system
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.settinglib <baca--settinglib>`
-   :class: section-header
-
-Setting library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.settinglib.SettingCommand
 
 .. raw:: html
 

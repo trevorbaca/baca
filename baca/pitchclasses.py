@@ -6,7 +6,6 @@ import collections as collections_module
 import inspect
 import math
 import typing
-from . import registerlib
 from .Cursor import Cursor
 from .Expression import Expression
 from .Sequence import Sequence
@@ -5698,9 +5697,10 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
+        from .pitchcommands import RegisterToOctaveCommand
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
-        command = registerlib.RegisterToOctaveCommand(
+        command = RegisterToOctaveCommand(
             anchor=abjad.Down,
             octave_number=n,
             )
@@ -5782,9 +5782,10 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
+        from .pitchcommands import RegisterToOctaveCommand
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
-        command = registerlib.RegisterToOctaveCommand(
+        command = RegisterToOctaveCommand(
             anchor=abjad.Center,
             octave_number=n,
             )
@@ -5908,9 +5909,10 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
+        from .pitchcommands import RegisterToOctaveCommand
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
-        command = registerlib.RegisterToOctaveCommand(
+        command = RegisterToOctaveCommand(
             anchor=abjad.Up,
             octave_number=n,
             )
@@ -9172,6 +9174,252 @@ class PitchTreeSpanner(abjad.Spanner):
         Returns integer.
         """
         return self._level
+
+class Registration(abjad.AbjadValueObject):
+    """
+    Registration.
+
+    ..  container:: example
+
+        Registration in two parts:
+
+        >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+        >>> registration = baca.Registration(components)
+
+        >>> abjad.f(registration, strict=89)
+        baca.Registration(
+            components=[
+                baca.RegistrationComponent(
+                    source_pitch_range=abjad.PitchRange('[A0, C4)'),
+                    target_octave_start_pitch=abjad.NumberedPitch(15),
+                    ),
+                baca.RegistrationComponent(
+                    source_pitch_range=abjad.PitchRange('[C4, C8)'),
+                    target_octave_start_pitch=abjad.NumberedPitch(27),
+                    ),
+                ],
+            )
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_components',
+        )
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        components=None,
+        ):
+        components_ = []
+        for component in components or []:
+            if isinstance(component, RegistrationComponent):
+                components_.append(component)
+            else:
+                component_ = RegistrationComponent(*component)
+                components_.append(component_)
+        self._components = components_ or None
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, pitches):
+        r"""
+        Calls registration on ``pitches``.
+
+        ..  container:: example
+
+            Transposes four pitches:
+
+            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> registration = baca.Registration(components)
+            >>> pitches = registration([-24, -22, -23, -21])
+            >>> for pitch in pitches:
+            ...     pitch
+            ...
+            NamedPitch("c'''")
+            NamedPitch("d'''")
+            NamedPitch("cs'''")
+            NamedPitch("ef''")
+
+        ..  container:: example
+
+            Transposes four other pitches:
+
+            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> registration = baca.Registration(components)
+            >>> pitches = registration([0, 2, 1, 3])
+            >>> for pitch in pitches:
+            ...     pitch
+            ...
+            NamedPitch("c''''")
+            NamedPitch("d''''")
+            NamedPitch("cs''''")
+            NamedPitch("ef'''")
+
+        ..  container:: example
+
+            Transposes four quartertones:
+
+            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> registration = baca.Registration(components)
+            >>> pitches = registration([0.5, 2.5, 1.5, 3.5])
+            >>> for pitch in pitches:
+            ...     pitch
+            ...
+            NamedPitch("cqs''''")
+            NamedPitch("dqs''''")
+            NamedPitch("dqf''''")
+            NamedPitch("eqf'''")
+
+        Returns list of new pitches.
+        """
+        return [self._transpose_pitch(_) for _ in pitches]
+
+    ### PRIVATE METHODS ###
+
+    def _transpose_pitch(self, pitch):
+        pitch = abjad.NamedPitch(pitch)
+        for component in self.components:
+            if pitch in component.source_pitch_range:
+                start_pitch = component.target_octave_start_pitch
+                stop_pitch = start_pitch + 12
+                if start_pitch <= pitch < stop_pitch:
+                    return pitch
+                elif pitch < start_pitch:
+                    while pitch < start_pitch:
+                        pitch += 12
+                    return pitch
+                elif stop_pitch <= pitch:
+                    while stop_pitch <= pitch:
+                        pitch -= 12
+                    return pitch
+                else:
+                    raise ValueError(pitch, self)
+        else:
+            raise ValueError(f'{pitch!r} not in {self!r}.')
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def components(self):
+        """
+        Gets components.
+
+        Returns list or none.
+        """
+        return self._components
+
+class RegistrationComponent(abjad.AbjadValueObject):
+    """
+    Registration component.
+
+    ..  container:: example
+
+        Initializes a registration component that specifies that all pitches
+        from A0 up to and including C8 should be transposed to the octave
+        starting at Eb5 (numbered pitch 15):
+
+        >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+        >>> component
+        RegistrationComponent(source_pitch_range=PitchRange('[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_source_pitch_range',
+        '_target_octave_start_pitch',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        source_pitch_range='[A0, C8]',
+        target_octave_start_pitch=0,
+        ):
+        if isinstance(source_pitch_range, abjad.PitchRange):
+            source_pitch_range = copy.copy(source_pitch_range)
+        else:
+            source_pitch_range = abjad.PitchRange(source_pitch_range)
+        target_octave_start_pitch = abjad.NumberedPitch(
+            target_octave_start_pitch)
+        self._source_pitch_range = source_pitch_range
+        self._target_octave_start_pitch = target_octave_start_pitch
+
+    ### SPECIAL METHODS ###
+
+    def __eq__(self, argument):
+        """
+        Is true when ``argument`` is a registration component with source pitch
+        range and target octave start pitch equal to those of this registration
+        component.
+
+        Returns true or false.
+        """
+        return super(RegistrationComponent, self).__eq__(argument)
+
+    def __format__(self, format_specification=''):
+        """
+        Formats registration component.
+
+        Returns string.
+        """
+        if format_specification in ('', 'storage'):
+            return abjad.StorageFormatManager(self).get_storage_format()
+        return str(self)
+
+    def __hash__(self):
+        """
+        Hashes registration component.
+
+        Required to be explicitly redefined on Python 3 if __eq__ changes.
+
+        Returns integer.
+        """
+        return super(RegistrationComponent, self).__hash__()
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def source_pitch_range(self):
+        """
+        Gets source pitch range of registration component.
+
+        ..  container:: example
+
+            Gets source pitch range of example component:
+
+            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+            >>> component.source_pitch_range
+            PitchRange('[A0, C8]')
+
+        Returns pitch range or none.
+        """
+        return self._source_pitch_range
+
+    @property
+    def target_octave_start_pitch(self):
+        """
+        Gets target octave start pitch of registration component.
+
+        ..  container:: example
+
+            Gets target octave start pitch of example component:
+
+            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+            >>> component.target_octave_start_pitch
+            NumberedPitch(15)
+
+        Returns numbered pitch or none.
+        """
+        return self._target_octave_start_pitch
 
 class ZaggedPitchClassMaker(abjad.AbjadObject):
     r"""

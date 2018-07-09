@@ -3,7 +3,6 @@ import typing
 from abjadext import rmakers
 from . import evallib
 from . import library
-from . import registerlib
 from . import typings
 from .AnchorSpecifier import AnchorSpecifier
 from .Coat import Coat

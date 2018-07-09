@@ -38,10 +38,8 @@ baca
    pitcharray
    pitchclasses
    pitchcommands
-   registerlib
    rhythmlib
    segmentlib
-   settinglib
    spannerlib
    templatelib
 
@@ -64,10 +62,8 @@ baca
    pitcharray
    pitchclasses
    pitchcommands
-   registerlib
    rhythmlib
    segmentlib
-   settinglib
    spannerlib
    templatelib
 

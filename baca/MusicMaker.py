@@ -4,7 +4,6 @@ from abjadext import rmakers
 from . import evallib
 from . import pitchcommands
 from . import pitchclasses
-from . import registerlib
 from . import rhythmlib
 from . import spannerlib
 from .AnchorSpecifier import AnchorSpecifier
@@ -811,9 +810,9 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         prototype = (
-            registerlib.RegisterCommand,
-            registerlib.RegisterInterpolationCommand,
-            registerlib.RegisterToOctaveCommand,
+            pitchcommands.RegisterCommand,
+            pitchcommands.RegisterInterpolationCommand,
+            pitchcommands.RegisterToOctaveCommand,
             )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
