@@ -2272,7 +2272,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             assert abjad.mathtools.all_are_positive_integers(counts)
             self._counts = counts
         if secondary_division_maker is not None:
-            prototype = (baca.SplitByDurationsDivisionCallback,)
+            prototype = (SplitByDurationsDivisionCallback,)
             assert isinstance(secondary_division_maker, prototype)
         self._secondary_division_maker = secondary_division_maker
 
