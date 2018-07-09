@@ -50,7 +50,6 @@ indicatorcommands
    ~stop_trill
    ~stopped
    ~tenuto
-   ~text_spanner
    ~up_arpeggio
    ~up_bow
    ~very_long_fermata
@@ -110,8 +109,6 @@ indicatorcommands
 .. autofunction:: stopped
 
 .. autofunction:: tenuto
-
-.. autofunction:: text_spanner
 
 .. autofunction:: up_arpeggio
 

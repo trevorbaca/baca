@@ -2,12 +2,12 @@ import abjad
 from .classes import *
 from .commands import *
 from .divisions import *
-from .dynamics import *
 from .indicatorcommands import *
 from .indicators import *
 from .musicmaker import *
 from .overrides import *
 from .persistence import *
+from .piecewise import *
 from .pitcharray import *
 from .pitchcommands import *
 from .pitchclasses import *

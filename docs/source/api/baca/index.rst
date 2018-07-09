@@ -25,13 +25,13 @@ baca
    classes
    commands
    divisions
-   dynamics
    indicatorcommands
    indicators
    markups
    musicmaker
    overrides
    persistence
+   piecewise
    pitcharray
    pitchclasses
    pitchcommands
@@ -48,13 +48,13 @@ baca
    classes
    commands
    divisions
-   dynamics
    indicatorcommands
    indicators
    markups
    musicmaker
    overrides
    persistence
+   piecewise
    pitcharray
    pitchclasses
    pitchcommands

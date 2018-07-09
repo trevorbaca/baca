@@ -166,13 +166,11 @@ Bača API
    ~baca.commands.ColorCommand
    ~baca.commands.ContainerCommand
    ~baca.commands.GlobalFermataCommand
-   ~baca.commands.IndicatorBundle
    ~baca.commands.IndicatorCommand
    ~baca.commands.InstrumentChangeCommand
    ~baca.commands.LabelCommand
    ~baca.commands.MetronomeMarkCommand
    ~baca.commands.PartAssignmentCommand
-   ~baca.commands.PiecewiseIndicatorCommand
    ~baca.commands.VoltaCommand
 
 .. raw:: html
@@ -256,30 +254,6 @@ Division library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.dynamics <baca--dynamics>`
-   :class: section-header
-
-Dynamic library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.dynamics.dynamic
-   ~baca.dynamics.hairpin
-   ~baca.dynamics.make_dynamic
-   ~baca.dynamics.parse_hairpin_descriptor
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.indicatorcommands <baca--indicatorcommands>`
    :class: section-header
 
@@ -321,7 +295,6 @@ Dynamic library.
    ~baca.indicatorcommands.stop_trill
    ~baca.indicatorcommands.stopped
    ~baca.indicatorcommands.tenuto
-   ~baca.indicatorcommands.text_spanner
    ~baca.indicatorcommands.up_arpeggio
    ~baca.indicatorcommands.up_bow
    ~baca.indicatorcommands.very_long_fermata
@@ -779,6 +752,44 @@ Override library.
    :nosignatures:
 
    ~baca.persistence.PersistentIndicatorTests
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.piecewise <baca--piecewise>`
+   :class: section-header
+
+Piecewise library.
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.piecewise.IndicatorBundle
+   ~baca.piecewise.PiecewiseIndicatorCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.piecewise.dynamic
+   ~baca.piecewise.hairpin
+   ~baca.piecewise.make_dynamic
+   ~baca.piecewise.parse_hairpin_descriptor
+   ~baca.piecewise.text_spanner
 
 .. raw:: html
 
