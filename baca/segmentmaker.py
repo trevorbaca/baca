@@ -854,7 +854,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.Markup,
                 scoping.Command,
                 scoping.Map,
-                scoping.MeasureWrapper,
+                scoping.Measures,
                 scoping.Suite,
                 )
             if not isinstance(command, sixway):
@@ -909,7 +909,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             scope=scope,
                             )
                         self.wrappers.append(wrapper)
-                elif isinstance(command, scoping.MeasureWrapper):
+                elif isinstance(command, scoping.Measures):
                     if isinstance(command.measures, int):
                         stages = (command.measures, command.measures)
                     else:

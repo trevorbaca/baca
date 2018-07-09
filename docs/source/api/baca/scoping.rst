@@ -25,7 +25,7 @@ scoping
    ~Command
    ~CommandWrapper
    ~Map
-   ~MeasureWrapper
+   ~Measures
    ~Scope
    ~Suite
    ~TimelineScope
@@ -197,7 +197,7 @@ scoping
 
    .. autoattribute:: Map.selector
 
-.. autoclass:: MeasureWrapper
+.. autoclass:: Measures
 
    .. autosummary::
       :nosignatures:
@@ -218,15 +218,15 @@ scoping
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: MeasureWrapper.__call__
+   .. automethod:: Measures.__call__
 
    .. container:: inherited
 
-      .. automethod:: MeasureWrapper.__format__
+      .. automethod:: Measures.__format__
 
    .. container:: inherited
 
-      .. automethod:: MeasureWrapper.__repr__
+      .. automethod:: Measures.__repr__
 
    .. raw:: html
 
@@ -235,11 +235,11 @@ scoping
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: MeasureWrapper.command
+   .. autoattribute:: Measures.command
 
-   .. autoattribute:: MeasureWrapper.commands
+   .. autoattribute:: Measures.commands
 
-   .. autoattribute:: MeasureWrapper.measures
+   .. autoattribute:: Measures.measures
 
 .. autoclass:: Scope
 

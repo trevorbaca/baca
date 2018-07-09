@@ -455,12 +455,12 @@ class Suite(abjad.AbjadObject):
 
     def __init__(
         self,
-        *commands: typing.Union[Command, Map, 'MeasureWrapper', 'Suite'],
+        *commands: typing.Union[Command, Map, 'Measures', 'Suite'],
         ) -> None:
         command_list: typing.List[
-            typing.Union[Command, Map, MeasureWrapper, Suite]] = []
+            typing.Union[Command, Map, Measures, Suite]] = []
         for command in commands:
-            if isinstance(command, (Command, Map, MeasureWrapper, Suite)):
+            if isinstance(command, (Command, Map, Measures, Suite)):
                 command_list.append(command)
                 continue
             message = '\n  Must contain only commands, maps, measure wrappers,'
@@ -487,7 +487,7 @@ class Suite(abjad.AbjadObject):
 
     @property
     def commands(self) -> typing.Tuple[
-        typing.Union[Command, Map, 'MeasureWrapper', 'Suite'], ...
+        typing.Union[Command, Map, 'Measures', 'Suite'], ...
         ]:
         """
         Gets commands.
@@ -681,7 +681,7 @@ class CommandWrapper(abjad.AbjadObject):
         """
         return self._scope
 
-class MeasureWrapper(abjad.AbjadObject):
+class Measures(abjad.AbjadObject):
     """
     Measure wrapper.
     """
@@ -1272,7 +1272,7 @@ def map(
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
     *commands: Command,
-    ) -> typing.List[MeasureWrapper]:
+    ) -> typing.List[Measures]:
     r"""
     Wraps each command in ``commands`` with ``measures``.
 
@@ -1380,14 +1380,14 @@ def measures(
     """
     wrappers = []
     for command in commands:
-        wrapper = MeasureWrapper(
+        wrapper = Measures(
             command=command,
             measures=measures,
             )
         wrappers.append(wrapper)
     return wrappers
 
-_command_typing = typing.Union[Command, Map, MeasureWrapper, Suite]
+_command_typing = typing.Union[Command, Map, Measures, Suite]
 
 def not_parts(command: Command) -> _command_typing:
     """
@@ -1623,7 +1623,7 @@ def suite(
 
     """
     for command in commands:
-        if isinstance(command, (Command, Map, MeasureWrapper, Suite)):
+        if isinstance(command, (Command, Map, Measures, Suite)):
             continue
         message = '\n  Must contain only commands, maps, measure wrappers,'
         message += ' suites.'
@@ -1634,11 +1634,11 @@ def suite(
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, Map, MeasureWrapper, Suite],
+    command: typing.Union[Command, Map, Measures, Suite],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> typing.Union[Command, Map, MeasureWrapper, Suite]:
+    ) -> typing.Union[Command, Map, Measures, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -1653,9 +1653,9 @@ def tag(
         message += f' (not {tags!r}).'
         raise Exception(message)
     assert Command._validate_tags(tags), repr(tags)
-    if not isinstance(command, (Command, Map, MeasureWrapper, Suite)):
+    if not isinstance(command, (Command, Map, Measures, Suite)):
         raise Exception('can only tag command, map, wrapper, suite.')
-    if isinstance(command, (Map, MeasureWrapper, Suite)):
+    if isinstance(command, (Map, Measures, Suite)):
         for command_ in command.commands:
             tag(
                 tags,

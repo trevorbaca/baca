@@ -999,7 +999,7 @@ Rhythm library.
    ~baca.scoping.Command
    ~baca.scoping.CommandWrapper
    ~baca.scoping.Map
-   ~baca.scoping.MeasureWrapper
+   ~baca.scoping.Measures
    ~baca.scoping.Scope
    ~baca.scoping.Suite
    ~baca.scoping.TimelineScope
