@@ -18,8 +18,6 @@ from .Selection import _select
 from .Sequence import Sequence
 
 
-__documentation_section__ = '(1) Library'
-
 def nest(
     time_treatments: typing.Iterable = None,
     ) -> NestingCommand:

@@ -12,8 +12,6 @@ from .LabelCommand import LabelCommand
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .Selection import _select
 
-__documentation_section__ = '(1) Library'
-
 
 def global_fermata(
     description: str = None,

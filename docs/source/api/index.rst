@@ -17,77 +17,43 @@ Bača API
 
    <hr/>
 
-.. rubric:: (2) Makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.MusicAccumulator.MusicAccumulator
-   ~baca.MusicContribution.MusicContribution
-   ~baca.MusicMaker.MusicMaker
-   ~baca.PersistentIndicatorTests.PersistentIndicatorTests
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (3) Specifiers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.AnchorSpecifier.AnchorSpecifier
-   ~baca.LMRSpecifier.LMRSpecifier
-   ~baca.PitchSpecifier.PitchSpecifier
-   ~baca.RestAffixSpecifier.RestAffixSpecifier
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.Coat.Coat
-   ~baca.Counter.Counter
-   ~baca.Cursor.Cursor
-   ~baca.Expression.Expression
-   ~baca.ExpressionGallery.ExpressionGallery
-   ~baca.IndicatorBundle.IndicatorBundle
-   ~baca.Interpolator.Interpolator
-   ~baca.SchemeManifest.SchemeManifest
-   ~baca.Selection.Selection
-   ~baca.Sequence.Sequence
-   ~baca.TimeSignatureGroups.TimeSignatureGroups
-   ~baca.Tree.Tree
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
+   ~baca.AnchorSpecifier.AnchorSpecifier
+   ~baca.Coat.Coat
    ~baca.ColorCommand.ColorCommand
    ~baca.ContainerCommand.ContainerCommand
+   ~baca.Counter.Counter
+   ~baca.Cursor.Cursor
+   ~baca.Expression.Expression
+   ~baca.ExpressionGallery.ExpressionGallery
    ~baca.GlobalFermataCommand.GlobalFermataCommand
    ~baca.ImbricationCommand.ImbricationCommand
+   ~baca.IndicatorBundle.IndicatorBundle
    ~baca.IndicatorCommand.IndicatorCommand
    ~baca.InstrumentChangeCommand.InstrumentChangeCommand
+   ~baca.Interpolator.Interpolator
+   ~baca.LMRSpecifier.LMRSpecifier
    ~baca.LabelCommand.LabelCommand
    ~baca.MetronomeMarkCommand.MetronomeMarkCommand
+   ~baca.MusicAccumulator.MusicAccumulator
+   ~baca.MusicContribution.MusicContribution
+   ~baca.MusicMaker.MusicMaker
    ~baca.NestingCommand.NestingCommand
    ~baca.PaddedTuple.PaddedTuple
    ~baca.PartAssignmentCommand.PartAssignmentCommand
+   ~baca.PersistentIndicatorTests.PersistentIndicatorTests
    ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
+   ~baca.PitchSpecifier.PitchSpecifier
+   ~baca.RestAffixSpecifier.RestAffixSpecifier
+   ~baca.SchemeManifest.SchemeManifest
+   ~baca.Sequence.Sequence
+   ~baca.TimeSignatureGroups.TimeSignatureGroups
+   ~baca.Tree.Tree
 
 .. raw:: html
 
@@ -179,6 +145,18 @@ Bača API
    ~baca.with_previous_leaf
    ~baca.wleaf
    ~baca.wleaves
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Selections
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.Selection.Selection
 
 .. raw:: html
 
@@ -334,25 +312,25 @@ Bača API
 
    <hr/>
 
-.. rubric:: (2) Makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.SegmentMaker.SegmentMaker
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
+.. rubric:: Managers
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
    ~baca.SegmentMaker.WellformednessManager
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Segment-makers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.SegmentMaker.SegmentMaker
 
 .. raw:: html
 
@@ -365,24 +343,13 @@ Bača API
 
    <hr/>
 
-.. rubric:: (4) Commands
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.commands.BCPCommand
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
+   ~baca.commands.BCPCommand
    ~baca.commands.VoltaCommand
 
 .. raw:: html
@@ -906,18 +873,6 @@ Pitch library.
 
    <hr/>
 
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.pitchclasses.PitchTree
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Classes
    :class: subsection-header
 
@@ -936,6 +891,7 @@ Pitch library.
    ~baca.pitchclasses.PitchClassSet
    ~baca.pitchclasses.PitchSegment
    ~baca.pitchclasses.PitchSet
+   ~baca.pitchclasses.PitchTree
    ~baca.pitchclasses.PitchTreeSpanner
    ~baca.pitchclasses.Registration
    ~baca.pitchclasses.RegistrationComponent
@@ -952,18 +908,6 @@ Pitch library.
 
    <hr/>
 
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.pitchcommands.Loop
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Classes
    :class: subsection-header
 
@@ -974,6 +918,7 @@ Pitch library.
    ~baca.pitchcommands.ClusterCommand
    ~baca.pitchcommands.ColorFingeringCommand
    ~baca.pitchcommands.DiatonicClusterCommand
+   ~baca.pitchcommands.Loop
    ~baca.pitchcommands.MicrotoneDeviationCommand
    ~baca.pitchcommands.OctaveDisplacementCommand
    ~baca.pitchcommands.PitchCommand

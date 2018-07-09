@@ -14,8 +14,6 @@ class AnchorSpecifier(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(3) Specifiers'
-
     __slots__ = (
         '_figure_name',
         '_local_selector',

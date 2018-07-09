@@ -51,8 +51,6 @@ class LMRSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(3) Specifiers'
-
     __slots__ = (
         '_left_counts',
         '_left_cyclic',

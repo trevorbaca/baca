@@ -16,8 +16,6 @@ class BCPCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(4) Commands'
-    
     __slots__ = (
         '_bow_contact_points',
         '_final_spanner',

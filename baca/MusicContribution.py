@@ -15,8 +15,6 @@ class MusicContribution(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(2) Makers'
-
     __slots__ = (
         '_anchor',
         '_color_selector',

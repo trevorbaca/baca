@@ -27,10 +27,6 @@ class Interpolator(abjad.AbjadObject):
 
     """
 
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
-
     ### PUBLIC METHODS ###
 
     @staticmethod

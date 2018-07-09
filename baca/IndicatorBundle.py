@@ -9,8 +9,6 @@ class IndicatorBundle(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_bookended_spanner_start',
         '_enchained',

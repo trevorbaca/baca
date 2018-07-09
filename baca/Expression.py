@@ -8,8 +8,6 @@ class Expression(abjad.Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     ### PRIVATE METHODS ###
 
     def _evaluate_accumulate(self, *arguments):

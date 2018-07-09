@@ -131,8 +131,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = '(2) Makers'
-
     __slots__ = (
         '_allow_empty_selections',
         '_breaks',
@@ -6039,10 +6037,6 @@ class WellformednessManager(abjad.WellformednessManager):
         WellformednessManager()
 
     """
-
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     ### INITIALIZER ###
 

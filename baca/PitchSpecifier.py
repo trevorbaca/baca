@@ -120,8 +120,6 @@ class PitchSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(3) Specifiers'
-
     __slots__ = (
         '_expressions',
         '_remove_duplicate_pitch_classes',

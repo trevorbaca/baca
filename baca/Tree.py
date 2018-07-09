@@ -121,8 +121,6 @@ class Tree(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_children',
         '_item_class',

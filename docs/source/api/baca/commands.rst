@@ -16,13 +16,14 @@ commands
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::
    :nosignatures:
 
    ~BCPCommand
+   ~VoltaCommand
 
 .. autoclass:: BCPCommand
 
@@ -117,18 +118,6 @@ commands
       .. autoattribute:: BCPCommand.tags
 
    .. autoattribute:: BCPCommand.tweaks
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~VoltaCommand
 
 .. autoclass:: VoltaCommand
 

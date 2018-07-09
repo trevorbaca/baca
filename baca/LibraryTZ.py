@@ -11,8 +11,6 @@ from .PiecewiseIndicatorCommand import PiecewiseIndicatorCommand
 from .Selection import Selection
 
 
-__documentation_section__ = '(1) Library'
-
 def tenuto(
     *,
     selector: typings.Selector = 'baca.phead(0)',

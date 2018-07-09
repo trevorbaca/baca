@@ -145,8 +145,6 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(3) Specifiers'
-
     __slots__ = (
         '_pattern',
         '_prefix',

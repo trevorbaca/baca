@@ -19,8 +19,6 @@ class Selection(abjad.Selection):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         )
 

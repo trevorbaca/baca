@@ -11,8 +11,6 @@ from .ContainerCommand import ContainerCommand
 from .IndicatorCommand import IndicatorCommand
 
 
-__documentation_section__ = '(1) Library'
-
 def accent(
     *,
     selector: typings.Selector = 'baca.phead(0)',

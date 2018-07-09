@@ -8,8 +8,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(2) Makers'
-
     __slots__ = (
         )
 

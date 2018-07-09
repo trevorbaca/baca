@@ -16,83 +16,6 @@ pitchcommands
 
    <hr/>
 
-.. rubric:: (5) Utilities
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~Loop
-
-.. autoclass:: Loop
-
-   .. autosummary::
-      :nosignatures:
-
-      intervals
-      items
-
-   .. autosummary::
-      :nosignatures:
-
-      __getitem__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__contains__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__format__
-
-   .. automethod:: Loop.__getitem__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__iter__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__len__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__repr__
-
-   .. container:: inherited
-
-      .. automethod:: Loop.__str__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: Loop.intervals
-
-   .. autoattribute:: Loop.items
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Classes
    :class: section-header
 
@@ -103,6 +26,7 @@ pitchcommands
    ~ClusterCommand
    ~ColorFingeringCommand
    ~DiatonicClusterCommand
+   ~Loop
    ~MicrotoneDeviationCommand
    ~OctaveDisplacementCommand
    ~PitchCommand
@@ -442,6 +366,71 @@ pitchcommands
       .. autoattribute:: DiatonicClusterCommand.tags
 
    .. autoattribute:: DiatonicClusterCommand.widths
+
+.. autoclass:: Loop
+
+   .. autosummary::
+      :nosignatures:
+
+      intervals
+      items
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__contains__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__format__
+
+   .. automethod:: Loop.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__len__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__str__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Loop.intervals
+
+   .. autoattribute:: Loop.items
 
 .. autoclass:: MicrotoneDeviationCommand
 

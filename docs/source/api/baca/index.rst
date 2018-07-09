@@ -71,67 +71,40 @@ baca
 
    <hr/>
 
-.. rubric:: (2) Makers
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   MusicAccumulator
-   MusicContribution
-   MusicMaker
-   PersistentIndicatorTests
-
-.. autosummary::
-   :nosignatures:
-
-   ~MusicAccumulator.MusicAccumulator
-   ~MusicContribution.MusicContribution
-   ~MusicMaker.MusicMaker
-   ~PersistentIndicatorTests.PersistentIndicatorTests
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (3) Specifiers
+.. rubric:: Classes
    :class: section-header
 
 .. toctree::
    :hidden:
 
    AnchorSpecifier
-   LMRSpecifier
-   PitchSpecifier
-   RestAffixSpecifier
-
-.. autosummary::
-   :nosignatures:
-
-   ~AnchorSpecifier.AnchorSpecifier
-   ~LMRSpecifier.LMRSpecifier
-   ~PitchSpecifier.PitchSpecifier
-   ~RestAffixSpecifier.RestAffixSpecifier
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
    Coat
+   ColorCommand
+   ContainerCommand
    Counter
    Cursor
    Expression
    ExpressionGallery
+   GlobalFermataCommand
+   ImbricationCommand
    IndicatorBundle
+   IndicatorCommand
+   InstrumentChangeCommand
    Interpolator
+   LMRSpecifier
+   LabelCommand
+   MetronomeMarkCommand
+   MusicAccumulator
+   MusicContribution
+   MusicMaker
+   NestingCommand
+   PaddedTuple
+   PartAssignmentCommand
+   PersistentIndicatorTests
+   PiecewiseIndicatorCommand
+   PitchSpecifier
+   RestAffixSpecifier
    SchemeManifest
-   Selection
    Sequence
    TimeSignatureGroups
    Tree
@@ -139,57 +112,37 @@ baca
 .. autosummary::
    :nosignatures:
 
+   ~AnchorSpecifier.AnchorSpecifier
    ~Coat.Coat
+   ~ColorCommand.ColorCommand
+   ~ContainerCommand.ContainerCommand
    ~Counter.Counter
    ~Cursor.Cursor
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
-   ~IndicatorBundle.IndicatorBundle
-   ~Interpolator.Interpolator
-   ~SchemeManifest.SchemeManifest
-   ~Selection.Selection
-   ~Sequence.Sequence
-   ~TimeSignatureGroups.TimeSignatureGroups
-   ~Tree.Tree
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   ColorCommand
-   ContainerCommand
-   GlobalFermataCommand
-   ImbricationCommand
-   IndicatorCommand
-   InstrumentChangeCommand
-   LabelCommand
-   MetronomeMarkCommand
-   NestingCommand
-   PaddedTuple
-   PartAssignmentCommand
-   PiecewiseIndicatorCommand
-
-.. autosummary::
-   :nosignatures:
-
-   ~ColorCommand.ColorCommand
-   ~ContainerCommand.ContainerCommand
    ~GlobalFermataCommand.GlobalFermataCommand
    ~ImbricationCommand.ImbricationCommand
+   ~IndicatorBundle.IndicatorBundle
    ~IndicatorCommand.IndicatorCommand
    ~InstrumentChangeCommand.InstrumentChangeCommand
+   ~Interpolator.Interpolator
+   ~LMRSpecifier.LMRSpecifier
    ~LabelCommand.LabelCommand
    ~MetronomeMarkCommand.MetronomeMarkCommand
+   ~MusicAccumulator.MusicAccumulator
+   ~MusicContribution.MusicContribution
+   ~MusicMaker.MusicMaker
    ~NestingCommand.NestingCommand
    ~PaddedTuple.PaddedTuple
    ~PartAssignmentCommand.PartAssignmentCommand
+   ~PersistentIndicatorTests.PersistentIndicatorTests
    ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
+   ~PitchSpecifier.PitchSpecifier
+   ~RestAffixSpecifier.RestAffixSpecifier
+   ~SchemeManifest.SchemeManifest
+   ~Sequence.Sequence
+   ~TimeSignatureGroups.TimeSignatureGroups
+   ~Tree.Tree
 
 .. raw:: html
 
@@ -441,3 +394,20 @@ baca
 .. autofunction:: wleaf
 
 .. autofunction:: wleaves
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Selections
+   :class: section-header
+
+.. toctree::
+   :hidden:
+
+   Selection
+
+.. autosummary::
+   :nosignatures:
+
+   ~Selection.Selection

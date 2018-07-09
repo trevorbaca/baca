@@ -50,8 +50,6 @@ class Cursor(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_cyclic',
         '_lone_items',
